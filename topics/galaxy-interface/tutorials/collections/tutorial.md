@@ -175,7 +175,7 @@ We will now convert VCF datasets into tab delimited format as it will be easier 
 > ### {% icon hands_on %} Hands-on: Create table of variants
 >
 > Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `Call variants on collection...` (output of **Call variants with lofreq** {% icon tool %})
 >    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4`
 >    - *"One effect per line"*: `Yes`
 >
@@ -710,7 +710,7 @@ If you have a collection with three elements (image below), merging it on the fi
 
 ### Collapse collection 
 
-{% icon tool %} **Collapse collection** merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the **Prepend File name** option as shown in the figure below (we used option **A** in the last step of this tutorial):
+{% icon tool %} **Collapse collection** merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the **Prepend File name** option as shown in the figure below (we used option **A** in the last step of this tutorial). **A** = `Same line and each line in dataset`; **B** = `Same line and only once per dataset`; **C** =  `Line above`
 
 ![Collapse collection](../../images/collections/collapse_collection.svg)
 
