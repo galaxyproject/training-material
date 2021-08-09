@@ -245,8 +245,8 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 > 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} the intervals of two datasets side-by-side:
 >
->    Enter the word `join` in the search bar of the tool panel, and select the
->    tool named `Join - the intervals of two datasets side-by-side`
+>    Enter the word `intersect` in the search bar of the tool panel, and select the
+>    tool named `bedtools Intersect intervals`
 >
 >    - *"File A to intersect with B"*: Select `Exons`
 >    - *"Combined or separate output files"*: Select `One output file per 'input B' file"`
@@ -272,7 +272,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 > > ### {% icon comment %} If things didn't work...
 > >
-> > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
+> > Did the Intersect tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 > >
 > >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
 > >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
@@ -329,7 +329,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > How many exons are there in total in your file?
 >
 > > ### {% icon solution %} Solution
-> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,242 lines, which is equal to the number of exons.
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,242 lines, which is equal to the number of exons overlapped by at least one SNP.
 > >
 > {: .solution }
 {: .question}
@@ -344,8 +344,8 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 >
 >    - *"Sort Dataset"*: Output from **Group** {% icon tool %}
 >    - *"on column"*: `Column: 2`
->    - *"with flavor"*: `Numeric sort`
->    - *"everythin in"*: `Descneding order`
+>    - *"with flavor"*: `Numerical sort`
+>    - *"everything in"*: `Descending order`
 >
 > 2. Click **Execute**
 >
