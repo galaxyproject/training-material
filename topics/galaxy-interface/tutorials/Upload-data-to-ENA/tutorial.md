@@ -55,7 +55,7 @@ Submission of raw SARS-CoV-2 reads to public repositories allows reuse of data a
 The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this introductory deck of [slides](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/Upload-data-to-ENA/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
 
 
-In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit SARS-CoV-2 raw sequencing reads and its associated metadata to ENA. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server.
+In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit SARS-CoV-2 raw sequencing reads and its associated metadata to ENA {% cite Roncoroni2021 %}. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server.
 Specifically, we will use one ONT sequencing file to demonstrate interactive metadata input and two sets of PE Illumina reads to demonstrate how to use the metadata template. Data will be submitted to ENA's test server and will not be public.
 
 > ### {% icon comment %} Nature of the input data
