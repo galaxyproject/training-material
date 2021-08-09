@@ -293,7 +293,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > > ---- | ----------
 > > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 2
 > > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 2
-> > `ENST00000343518.11_cds_0_0_chr22_15690078_f` | 5
+> > `ENST00000343518.11_cds_0_0_chr22_15690078_f` | 4
 > {: .solution}
 {: .question}
 
