@@ -329,7 +329,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > How many exons are there in total in your file?
 >
 > > ### {% icon solution %} Solution
-> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,242 lines, which is equal to the number of exons.
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,242 lines, which is equal to the number of exons overlapped by at least one SNP.
 > >
 > {: .solution }
 {: .question}
@@ -344,8 +344,8 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 >
 >    - *"Sort Dataset"*: Output from **Group** {% icon tool %}
 >    - *"on column"*: `Column: 2`
->    - *"with flavor"*: `Numeric sort`
->    - *"everythin in"*: `Descneding order`
+>    - *"with flavor"*: `Numerical sort`
+>    - *"everything in"*: `Descending order`
 >
 > 2. Click **Execute**
 >
