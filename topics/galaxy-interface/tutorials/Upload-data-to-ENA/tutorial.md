@@ -52,7 +52,7 @@ contributors:
 Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 Submission of raw SARS-CoV-2 reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and [intrahost variation]{% cite Maier2021 %}.
 
-The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this introductory deck of [slides](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/Upload-data-to-ENA/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
+The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/Upload-data-to-ENA/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
 
 
 In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit SARS-CoV-2 raw sequencing reads and its associated metadata to ENA {% cite Roncoroni2021 %}. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server.
@@ -90,7 +90,7 @@ In order to submit data to ENA, you need to have a valid Webin account. If you d
 
 # Option 1: submitting to ENA using interactive metadata generator
 
-In this first example you will submit one ONT sequence file using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %} interactive metadata forms. This method is only convenient for small submissions. For bulk submissions, we recommend you use the metadata template described below in Option 2.
+In this first example, you will submit one ONT sequence file using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %} interactive metadata forms. This method is only convenient for small submissions. For bulk submissions, we recommend you use the metadata template described below in Option 2.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -107,7 +107,7 @@ In this first example you will submit one ONT sequence file using {% tool [ENA U
 >
 {: .hands_on}
 
-Once the data is uploaded we fill the metadata using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %}'. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments.
+Once the data is uploaded, we fill the metadata using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %}'. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments.
 
 We recommend always submitting to the test server before submitting to the public one.
 After you confirm that all the data and metadata looks ok, you can go ahead and submit to the public ENA server.
@@ -149,7 +149,7 @@ Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket 
 
 # Option 2: submitting to ENA using the metadata template
 
-For larger submissions, interactive metadata input can be tedious and not practical. In the second example you will submit two sets of Illumina PE sequence files and input metadata using a [template spreadsheet](https://drive.google.com/file/d/1Gx78GKh58PmRjdmJ05DBbpObAL-3oUFX/view?usp=sharing). For this exercise we provide you with a pre-filled template and encourage you to explore it.
+For larger submissions, interactive metadata input can be tedious and not practical. In the second example, you will submit two sets of Illumina PE sequence files and input metadata using a [template spreadsheet](https://drive.google.com/file/d/1Gx78GKh58PmRjdmJ05DBbpObAL-3oUFX/view?usp=sharing). For this exercise, we provide you with a pre-filled template and encourage you to explore it.
 
 > ### {% icon hands_on %} Hands-on: Upload and inspect data
 >
