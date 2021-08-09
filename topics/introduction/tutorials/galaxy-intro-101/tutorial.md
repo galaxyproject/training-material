@@ -245,8 +245,8 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 > 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} the intervals of two datasets side-by-side:
 >
->    Enter the word `join` in the search bar of the tool panel, and select the
->    tool named `Join - the intervals of two datasets side-by-side`
+>    Enter the word `intersect` in the search bar of the tool panel, and select the
+>    tool named `bedtools Intersect intervals`
 >
 >    - *"File A to intersect with B"*: Select `Exons`
 >    - *"Combined or separate output files"*: Select `One output file per 'input B' file"`
@@ -272,7 +272,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 > > ### {% icon comment %} If things didn't work...
 > >
-> > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
+> > Did the Intersect tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 > >
 > >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
 > >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
@@ -293,7 +293,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > > ---- | ----------
 > > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 2
 > > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 2
-> > `ENST00000343518.11_cds_0_0_chr22_15690078_f` | 4
+> > `ENST00000343518.11_cds_0_0_chr22_15690078_f` | 5
 > {: .solution}
 {: .question}
 
