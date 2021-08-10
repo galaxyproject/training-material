@@ -101,7 +101,7 @@ In this first example, you will submit one ONT sequence file using {% tool [ENA 
 >    The URL for our example data is this:
 >
 >    ```
->    https://zenodo.org/api/files/feff876b-15b5-4664-82e7-8bc454d5f7c3/SRR10902284_ONT.fq.gz
+>    https://zenodo.org/record/5176347/files/SRR10902284_ONT.fq.gz
 >    ```
 >
 >
@@ -156,11 +156,11 @@ For larger submissions, interactive metadata input can be tedious and not practi
 > 1. Upload the ONT data from Zenodo via URLs:
 >
 >    ```
->    https://zenodo.org/api/files/feff876b-15b5-4664-82e7-8bc454d5f7c3/GTN_tutorial_mock_metadata.xlsx
->    https://zenodo.org/api/files/feff876b-15b5-4664-82e7-8bc454d5f7c3/SRR10903401_1.fastq.gz
->    https://zenodo.org/api/files/feff876b-15b5-4664-82e7-8bc454d5f7c3/SRR10903401_2.fastq.gz
->    https://zenodo.org/api/files/feff876b-15b5-4664-82e7-8bc454d5f7c3/SRR10903402_1.fastq.gz
->    https://zenodo.org/api/files/feff876b-15b5-4664-82e7-8bc454d5f7c3/SRR10903402_2.fastq.gz
+>    https://zenodo.org/record/5176347/files/GTN_tutorial_mock_metadata_template.xlsx
+>    https://zenodo.org/record/5176347/files/SRR10903401_1.fastq.gz
+>    https://zenodo.org/record/5176347/files/SRR10903401_2.fastq.gz
+>    https://zenodo.org/record/5176347/files/SRR10903402_1.fastq.gz
+>    https://zenodo.org/record/5176347/files/SRR10903402_2.fastq.gz
 >    ```
 > 2. Arrange the data into a paired dataset collection
 >
