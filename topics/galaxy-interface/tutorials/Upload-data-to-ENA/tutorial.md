@@ -84,7 +84,7 @@ In order to submit data to ENA, you need to have a valid Webin account. If you d
 > 2. Navigate to *"User"* > *"Preferences"* on the top menu
 >   - Click on <i class="fa fa-user" aria-hidden="true"></i> **Manage Information**
 >     - Scroll down to *"Your ENA Webin account details"* and fill in your ***ENA Webin ID*** and ***Password***
->![A textual description of the image](../../images/ENA-credentials.png "ENA Webin Account details ")
+>![ENA Webin Account details in Galaxy](../../images/ENA-credentials.png "ENA Webin Account details")
 {: .hands_on}
 
 
