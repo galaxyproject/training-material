@@ -1,0 +1,175 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Submitting SARS-CoV-2 sequences to ENA",
+    "format-version": "0.1",
+    "name": "GTN_ENA_upload_workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "ENA Upload tool",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                },
+                {
+                    "name": "studies_table_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "samples_table_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "experiments_table_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "runs_table_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 656.2166748046875,
+                "height": 318.7166748046875,
+                "left": 701.25,
+                "right": 861.25,
+                "top": 337.5,
+                "width": 160,
+                "x": 701.25,
+                "y": 337.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
+            "tool_shed_repository": {
+                "changeset_revision": "9e2df763086c",
+                "name": "ena_upload",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action_options\": {\"action\": \"add\", \"__current_case__\": 0, \"test_submit_parameters\": {\"submit_dev\": \"true\", \"dry_run\": \"true\"}, \"test_submit\": \"False\", \"input_format_conditional\": {\"input_format\": \"build_tables\", \"__current_case__\": 2, \"conditional_viral_metadata\": {\"viral_sample\": \"false\", \"__current_case__\": 1, \"rep_study\": [{\"__index__\": 0, \"study_title\": \"\", \"study_abstract\": \"\", \"study_type\": \"Whole Genome Sequencing\", \"study_pubmed_id\": \"\", \"rep_sample\": [{\"__index__\": 0, \"sample_title\": \"\", \"sample_description\": \"\", \"scientific_name\": \"\", \"tax_id\": \"\", \"rep_experiment\": [{\"__index__\": 0, \"experiment_title\": \"\", \"experiment_design\": \"\", \"library_strategy\": \"WGS\", \"library_source\": \"GENOMIC\", \"library_selection\": \"RANDOM\", \"library_layout\": \"SINGLE\", \"insert_size\": \"0\", \"library_construction_protocol\": \"\", \"platform\": \"ILLUMINA\", \"instrument_model\": \"minION\", \"rep_runs\": [{\"__index__\": 0, \"run_base_name\": \"\", \"upload_files\": {\"__class__\": \"RuntimeValue\"}}]}]}]}]}}, \"center\": \"ELIXIR_BE\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2",
+            "type": "tool",
+            "uuid": "40e72cfd-122f-4bef-a4ed-064ff7e14009",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "f04d309c-8267-432b-8e43-769c51e8f96a"
+                },
+                {
+                    "label": null,
+                    "output_name": "runs_table_out",
+                    "uuid": "33795505-1bfa-4a96-995e-1a989fa5e404"
+                },
+                {
+                    "label": null,
+                    "output_name": "experiments_table_out",
+                    "uuid": "b140a301-fac3-4be5-b1bc-652862fb2b3b"
+                },
+                {
+                    "label": null,
+                    "output_name": "samples_table_out",
+                    "uuid": "6285b2f0-2646-404d-9711-a94288c11140"
+                },
+                {
+                    "label": null,
+                    "output_name": "studies_table_out",
+                    "uuid": "54f2d83c-8dd8-4d3a-be1c-e40f6e567053"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "ENA Upload tool",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                },
+                {
+                    "name": "studies_table_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "samples_table_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "experiments_table_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "runs_table_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 595.183349609375,
+                "height": 261.433349609375,
+                "left": 1172.5,
+                "right": 1332.5,
+                "top": 333.75,
+                "width": 160,
+                "x": 1172.5,
+                "y": 333.75
+            },
+            "post_job_actions": {
+                "HideDatasetActionexperiments_table_out": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "experiments_table_out"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionruns_table_out": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "runs_table_out"
+                },
+                "HideDatasetActionsamples_table_out": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "samples_table_out"
+                },
+                "HideDatasetActionstudies_table_out": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "studies_table_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
+            "tool_shed_repository": {
+                "changeset_revision": "9e2df763086c",
+                "name": "ena_upload",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action_options\": {\"action\": \"add\", \"__current_case__\": 0, \"test_submit_parameters\": {\"submit_dev\": \"true\", \"dry_run\": \"false\"}, \"test_submit\": \"False\", \"input_format_conditional\": {\"input_format\": \"excel_tables\", \"__current_case__\": 0, \"viral_submission\": \"true\", \"xlsx_file\": {\"__class__\": \"RuntimeValue\"}, \"run_input_format_conditional\": {\"run_input_format\": \"paired_list\", \"__current_case__\": 1, \"paired_end_collection\": {\"__class__\": \"RuntimeValue\"}}}, \"center\": \"ELIXIR_BE\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2",
+            "type": "tool",
+            "uuid": "05b248b5-5875-4853-b071-afead4767676",
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "galaxy-interface"
+    ],
+    "uuid": "ca7ab1f9-ce4a-4e18-b7d5-9ae5a03aa990",
+    "version": 1
+}
