@@ -34,7 +34,7 @@ requirements:
     type: "internal"
     topic_name: galaxy-interface
     tutorials:
-      - Upload-data-to-ENA
+      - upload-data-to-ena
 tags:
   - covid19
 
@@ -52,7 +52,7 @@ contributors:
 Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 Submission of raw SARS-CoV-2 reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and [intrahost variation]{% cite Maier2021 %}.
 
-The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/Upload-data-to-ENA/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
+The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
 
 
 In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit SARS-CoV-2 raw sequencing reads and its associated metadata to ENA {% cite Roncoroni2021 %}. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server.
@@ -84,7 +84,7 @@ In order to submit data to ENA, you need to have a valid Webin account. If you d
 > 2. Navigate to *"User"* > *"Preferences"* on the top menu
 >   - Click on <i class="fa fa-user" aria-hidden="true"></i> **Manage Information**
 >     - Scroll down to *"Your ENA Webin account details"* and fill in your ***ENA Webin ID*** and ***Password***
->![ENA Webin Account details in Galaxy](../../images/ENA-credentials.png "ENA Webin Account details")
+>![ENA Webin Account details in Galaxy](../../images/upload-data-to-ena/ENA-credentials.png "ENA Webin Account details")
 {: .hands_on}
 
 
