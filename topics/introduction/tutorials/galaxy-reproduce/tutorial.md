@@ -124,7 +124,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 >
 {: .hands_on}
 
-> ### {% icon comment %} Different types of datasets
+> ### {% icon details %} Working with different types of datasets
 > Some input datasets might need more specialized treatment than explained here.
 > A few data types contain more than one subfile. These are uploaded via the composite data function, which is a new tab on the right of regular upload. Then at the bottom set "composite type" to your file format. For each subfile a select box will appear with a description next to it, about which subfile has to be selected where.
 > Some workflows require input files as dataset collections, in such cases "Input dataset collection" are shown as input when editing or viewing the workflow in the workflow menu. Collections contain several single dataset of the same type tied together. In case a workflow input requires a collection, you’ll need to build a collection out of your files after uploading them.
@@ -133,7 +133,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1).
-{: .comment}
+{: .details}
 
 
 # Import and run a Galaxy workflow
@@ -285,7 +285,7 @@ Often not only workflows and raw data are published, but also the full Galaxy hi
 
 The `diamonds` dataset comes from the well-known [ggplot2](https://ggplot2.tidyverse.org/reference/diamonds.html) package developed by Hadley Wickham and was initially collected from the Diamond Search Engine in 2008.
 The original dataset consists of 53940 specimen of diamonds, for which it lists the prices and various properties.
-For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained.
+For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained. The same workflow as before was used to re-analysis this second dataset and create the analysis history, which highlights the re-usability of workflows across inputs. 
 
 > ### {% icon comment %} The 4 Cs of diamond grading
 > According to the [GIA's (Gemological Institute of America) diamond grading system](https://4cs.gia.edu/wp-content/uploads/2013/03/All-Scales.jpg)
