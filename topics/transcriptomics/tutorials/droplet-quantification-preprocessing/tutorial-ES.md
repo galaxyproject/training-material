@@ -69,7 +69,7 @@ Debido a la enorme cantidad de datos, hemos reducido la resolución de los archi
 
 # Generar una matriz
 
-En esta sección te mostraremos los principios de la fase inicial del análisis de Secuenciación de ARN de células únicas, que se basa en generar mediciones de expresión en una matriz. Por simplicidad nos referiremos a este análisis por sus siglas en inglés scRNA-Seq (single-cell RNA-Seq). Nos concentramos en la metodología basada en goteo (en lugar de las metodologías basadas en placas), ya que es el proceso con más diferencias con respecto a los enfoques convencionales desarrollados para secuenciación de ARN general.
+En esta sección te mostraremos los principios de la fase inicial del análisis de Secuenciación de ARN de células únicas, que se basa en generar mediciones de expresión en una matriz. Por simplicidad, nos referiremos a este análisis por sus siglas en inglés scRNA-Seq (single-cell RNA-Seq). Nos concentramos en la metodología basada en goteo (en lugar de las metodologías basadas en placas), ya que es el proceso con más diferencias con respecto a los enfoques convencionales desarrollados para secuenciación de ARN general.
 
 Los datos provenientes de metodologías de goteo están constituidos por tres componentes: códigos de barras, identificadores únicos moleculares (Unique molecular Identifier, o UMIs por sus siglas en inglés) y lecturas de ADN codificante (proveniente de ADN complementario o cDNA). Para poder generar cuantificaciones a nivel celula necesitaremos:
 
