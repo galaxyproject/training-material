@@ -85,7 +85,7 @@ Los datos provenientes de metodologías de goteo están constituidos por tres co
  * [Kallisto/ bustools](https://www.kallistobus.tools/) - desarrollado por los creadores del método de cuantificación de transcriptoma, Kallisto.
  * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - otro método de análisis de transcriptoma desarrollado por los autores de la herramienta ‘Salmon’.
 
-Utilizaremos Alevin {% cite article-Alevin %} con propósitos demostrativos, sin embargo no avalamos algún método en específico.
+Utilizaremos Alevin {% cite article-Alevin %} con propósitos demostrativos, sin embargo no avalamos ningún método en particular.
 
 > ### {% icon comment %} Comentario
 > - Notas sobre la traducción y uso de términos técnicos
