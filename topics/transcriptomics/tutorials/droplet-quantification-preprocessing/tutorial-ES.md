@@ -75,7 +75,7 @@ Los datos provenientes de metodologías de goteo están constituidos por tres co
 
 
  * Procesar los códigos de barras, identificar cuáles corresponden a células ‘reales’, cuáles son meros artefactos, y posiblemente corregir códigos de barras que pudiesen ser producto de errores de secuenciación por medio de comparaciones con secuencias de mayor frecuencia.
- * Mapear secuencias biológicas a su genoma o transcriptoma de referencia
+ * Mapear secuencias biológicas a su genoma o transcriptoma de referencia.
  * Eliminar duplicados usando UMIs.
 
  Este solía ser un proceso complejo que involucraba múltiples algoritmos, o que se realizaba con métodos dedicados a tecnologías específicas (como la herramienta ‘Cellranger’ para 10X); pero ahora el proceso es más simple gracias al surgimiento de otros métodos. En el momento de seleccionar una metodología para tu proyecto podrías considerar las siguientes herramientas:
