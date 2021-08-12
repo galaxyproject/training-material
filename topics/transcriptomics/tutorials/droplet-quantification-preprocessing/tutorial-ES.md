@@ -90,7 +90,7 @@ Utilizaremos Alevin {% cite article-Alevin %} con propósitos demostrativos, sin
 > ### {% icon comment %} Comentario
 > - Notas sobre la traducción y uso de términos técnicos
 En este tutorial manejaremos algunos términos en el idioma original ya que simplificará la búsqueda posterior de información sobre el tema. Estas notas aparecerán en este tipo de recuadros y los términos estarán listados con la viñeta “•”.
-> * scRNA-Seq,	Secuenciación de ARN de células únicas
+> * scRNA-Seq,	secuenciación de ARN de células únicas
 > * dscRNA-Sea, secuenciación de ARN de células únicas
 > * basados en técnicas de goteos
 > * RNA-Seq,	Secuenciación de ARN
