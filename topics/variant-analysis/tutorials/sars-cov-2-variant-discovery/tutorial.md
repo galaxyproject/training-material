@@ -381,7 +381,7 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >      - {% icon param-collection %} *"1: Paired Collection (fastqsanger)"*: paired collection created for the input datasets
 >      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
 >
->    - For **Illumina RNAseq PE** workflow (named **COVID-19: variation analysis on WGS SE data**)
+>    - For **Illumina RNAseq SE** workflow (named **COVID-19: variation analysis on WGS SE data**)
 >      - {% icon param-collection %} *"1: Input dataset collection"*: dataset collection created for the input datasets
 >      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
 >
@@ -504,14 +504,14 @@ The three key results datasets produced by the Reporting workflow are:
    >
    > > ### {% icon solution %} Solution
    > >
-   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 853 lines for the example datasets. The first line is the header of the table. Then 852 AVs.
+   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 868 lines for the example datasets. The first line is the header of the table. Then 867 AVs.
    > >
    > > 2. We can filter the table to get only the AVs for the first sample {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
    > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Sample`
    > >    - *"With following condition*": `c1=='ERR5931005'` (to adapt with the sample name)
    > >    - *"Number of header lines to skip*": `1`
    > >
-   > >    We got then only the AVs for the selected sample (46 for ERR5931005).
+   > >    We got then only the AVs for the selected sample (48 for ERR5931005).
    > >
    > > 3. To get the number of AVs for each sample, we can run {% tool [Group data](Grouping1) %} with the following parameters:
    > >    - {% icon param-file %} *"Select data"*: `Combined Variant Report by Sample`
@@ -521,7 +521,7 @@ The three key results datasets produced by the Reporting workflow are:
    > >        - *"Type"*: `Count`
    > >        - *"On column"*: `Column: 2`
    > >    
-   > >    With our example datasets, it seems that samples have between 41 and 56 AVs. 
+   > >    With our example datasets, it seems that samples have between 42 and 56 AVs. 
    > {: .solution}
    {: .question}
 
@@ -557,7 +557,7 @@ The three key results datasets produced by the Reporting workflow are:
    >
    > > ### {% icon solution %} Solution
    > >
-   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 191 lines for the example datasets. The first line is the header of the table. Then 190 AVs.
+   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 184 lines for the example datasets. The first line is the header of the table. Then 183 AVs.
    > >
    > > 2. The different impacts of the AVs are HIGH, MODERATE and LOW.
    > >
@@ -570,9 +570,9 @@ The three key results datasets produced by the Reporting workflow are:
    > >        - *"On column"*: `Column: 1`
    > >    
    > >    With our example datasets, we find:
-   > >    - 18 AVs with no impact
-   > >    - 51 LOW AVs
-   > >    - 118 MODERATE AVs
+   > >    - 11 AVs with no predicted impact
+   > >    - 52 LOW AVs
+   > >    - 111 MODERATE AVs
    > >    - 9 HIGH AVs
    > >
    > > 3. We can filter the table to get only the AVs with HIGH impact by running {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
@@ -649,7 +649,7 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 >
 >        {% snippet faqs/galaxy/workflows_import.md %}
 >
-> 2. Run **COVID-19: variation analysis reporting** {% icon workflow %} using the following parameters:
+> 2. Run **COVID-19: consensus construction** {% icon workflow %} using the following parameters:
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -664,7 +664,7 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 >
 >    - *"3: min-AF for failed variants"*: `0.25`
 >
->       Variant calls with an AF higher than this value, but lower than the AF threshold for consensus variants will be considered questionable and the respective sites be masked (with Ns) in the consensus sequence.
+>       Variant calls with an AF higher than this value, but lower than the AF threshold for consensus variants will be considered questionable and the respective sites be masked (with Ns) in the consensus sequence. Variants with an AF below this threshold will be ignored.
 >
 >    - *"4: aligned reads data for depth calculation"*: `Fully processed reads for variant calling`
 >
