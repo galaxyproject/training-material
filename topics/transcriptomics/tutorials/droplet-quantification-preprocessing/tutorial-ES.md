@@ -766,7 +766,7 @@ Es posible que desees hacer esto con distintos tipos de metadatos - qué laborat
 >    - *"Number of top genes"*: `50`
 {: .hands_on}
 
-{% icon congratulations %} ¡Bien hecho! Te sugiero encarecidamente que juegues un poco e inspecciones tu objeto **Inspect AnnData** {% icon tool %} final preprocesado de AnnData (`Pre-processed object`) para que puedas ver la gran cantidad de información que ha sido agregada. ¡Ahora estás listo para continuar con el filtrado! Sin embargo, hay un truco que puede ahorrarte tiempo en el futuro...
+{% icon congratulations %} ¡Bien hecho! Te sugiero encarecidamente que juegues un poco e inspecciones tu objeto **Inspect AnnData** {% icon tool %} final preprocesado de AnnData (`Pre-processed object`) para que puedas ver la gran cantidad de información que ha sido agregada. ¡Ya está todo listo para continuar con el filtrado! Sin embargo, hay un truco que puede ahorrarte tiempo en el futuro...
 
 # Extraer datos de secuenciación de ARN de células únicas desde bases de datos públicas
 
