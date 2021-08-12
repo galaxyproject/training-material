@@ -55,7 +55,7 @@ Este tutorial te ayudará a pasar de datos crudos de secuenciación en archivos 
 
 De momento, en tus archivos de secuenciación tienes un montón de cadenas del tipo `ATGGGCTT`, etc. y lo que necesitas saber es cuántas células tienes y qué genes aparecen en ellas. En la segunda parte de este tutorial abordaremos la combinación de archivos FASTQ y el cómo añadir metadatos (por ejemplo, SEXO o GENOTIPO) para análisis posteriores. Estos son los pasos que requieren más recursos computacionales en los análisis de células únicas, ya que partimos de cientos de millones de lecturas, cada una de ellas con cuatro líneas de texto. Posteriormente, en el análisis, estos datos se convertirán en simples conteos de genes, por ejemplo ‘La célula A tiene 4 GAPDHs’ (‘Cell A has 4 GAPDHs’), que es mucho más sencillo de almacenar.
 
-Debido a la enorme cantidad de datos contenidos hemos reducido la resolución de los archivos FASTQ para poder hacer el análisis un poco más rápido. Una vez que hemos aclarado este punto, todavía tienes que mapear enormes cantidades de lecturas al inmenso genoma murino, así que ¡ve por una taza de café y prepárate para iniciar el análisis!
+Debido a la enorme cantidad de datos, hemos reducido la resolución de los archivos FASTQ para poder acelerar el análisis. Una vez que hemos aclarado este punto, todavía tienes que mapear enormes cantidades de lecturas al inmenso genoma murino, así que ¡ve por una taza de café y prepárate para iniciar el análisis!
 
 
 > ### Agenda
