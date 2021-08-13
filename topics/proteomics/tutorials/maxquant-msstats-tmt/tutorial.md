@@ -151,8 +151,8 @@ We start the MaxQuant run with TMT parameters for MS2 based reporter quantitatio
 
 # MSstatsTMT analysis
 
-The protein groups and evidence files of MaxQuant can directly be used as an input for MSstatsTMT. MSstatsTMT automatically removes all proteins that are labelled as contaminants (‘+’ sign in the column ‘potential contaminant’ of both MaxQuant outputs). In case you want to prevent this step either run MaxQuant with "Include Contaminants: No" or remove the '+' sign from the MaxQuant files as described in the [label-free MSstats training]({{site.baseurl}}/topics/proteomics/tutorials/mmaxquant-msstats-dda-lfq/tutorial.html). Additionally, MSstatsTMT will combine all quantitations according to the annotation file, which you have to provide (e.g all fractions of the same mixture are combined).
-For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as this is a straightforward two group comparison. If you have more than two groups, you may consider using the comparison matrix option of MSstatsTMT (for more information see [label-free MSstats training]({{site.baseurl}}/topics/proteomics/tutorials/mmaxquant-msstats-dda-lfq/tutorial.html)).
+The protein groups and evidence files of MaxQuant can directly be used as an input for MSstatsTMT. MSstatsTMT automatically removes all proteins that are labelled as contaminants (‘+’ sign in the column ‘potential contaminant’ of both MaxQuant outputs). In case you want to prevent this step either run MaxQuant with "Include Contaminants: No" or remove the '+' sign from the MaxQuant files as described in the [label-free MSstats training]({{site.baseurl}}/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html). Additionally, MSstatsTMT will combine all quantitations according to the annotation file, which you have to provide (e.g all fractions of the same mixture are combined).
+For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as this is a straightforward two group comparison. If you have more than two groups, you may consider using the comparison matrix option of MSstatsTMT (for more information see [label-free MSstats training]({{site.baseurl}}/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html)).
 
 
 > ### {% icon hands_on %} Hands-on: MSstatsTMT analysis
@@ -257,7 +257,7 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
 > The solution can be found on [Zenodo](https://zenodo.org/record/5195800/files/annotation_exercise.txt).
 {: .tip}
 
-For more information on MSstats parameters and ideas on how to follow up with your MSstatsTMT results visit the [label-free MSstats training]({{site.baseurl}}/topics/proteomics/tutorials/mmaxquant-msstats-dda-lfq/tutorial.html). 
+For more information on MSstats parameters and ideas on how to follow up with your MSstatsTMT results visit the [label-free MSstats training]({{site.baseurl}}/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html). 
 
 # Follow up on MSstatsTMT results
 
