@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>MaxQuant and MSstats for the analysis of TMT data</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: MaxQuant and MSstats for the analysis of TMT data" />
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Proteomics
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/proteomics/faqs/" title="Check our FAQs for the Proteomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmaxquant-msstats-tmt%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "MaxQuant and MSstats for the analysis of TMT data",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Proteomics",
+    "description": "Training material for proteomics workflows in Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+  },
+  "courseCode": "proteomics / maxquant-msstats-tmt / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'MaxQuant and MSstats for the analysis of TMT data' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "DDA, TMT",
+  "description": "The questions this  addresses are:\n - How to analyze tandem-mass-tag (TMT) labelled shotgun (DDA) data analysis in MaxQuant and MSstats?\n - Which proteins are differentially abundant between KMT9α knock-down and control cells?\n\n\\nThe objectives are:\n - Learn how to use MaxQuant and MSstats for the analysis of TMT labelled shotgun (DDA) data\n - Learn how to create an experimental design template for fractionated data in MaxQuant\n - Learn how to create an annotation file for MSstatsTMT\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Klemens Fröhlich"
+    },
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    },
+    {
+      "@type": "Person",
+      "name": "Matthias Fahrner"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Klemens Fröhlich"
+    },
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    },
+    {
+      "@type": "Person",
+      "name": "Matthias Fahrner"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Proteomics",
+      "description": "Training material for proteomics workflows in Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0121",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-proteomics">
+    <h1 data-toc-skip>MaxQuant and MSstats for the analysis of TMT data</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/KlemensFroehlich/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/KlemensFroehlich" alt="Avatar">Klemens Fröhlich</a> <a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Avatar">Melanie Föll</a> <a href="/training-material/hall-of-fame/matthias313/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/matthias313" alt="Avatar">Matthias Fahrner</a>
+
+</div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How to analyze tandem-mass-tag (TMT) labelled shotgun (DDA) data analysis in MaxQuant and MSstats?</p>
+</li>
+        
+        <li><p>Which proteins are differentially abundant between KMT9α knock-down and control cells?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Learn how to use MaxQuant and MSstats for the analysis of TMT labelled shotgun (DDA) data</p>
+</li>
+        
+        <li><p>Learn how to create an experimental design template for fractionated data in MaxQuant</p>
+</li>
+        
+        <li><p>Learn how to create an annotation file for MSstatsTMT</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/proteomics/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/proteomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 13, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
+
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>In this training we will cover the full analysis <span class="notranslate">workflow</span> from tandem mass tag (TMT) labeled samples using MaxQuant in conjunction with MSstatsTMT.</p>
+
+<p>The training dataset consists of a dataset from a <a href="https://doi.org/10.1186/s12935-020-1141-2">study</a> which investigates the effects of a recently discovered histone methyltransferase, lysine methyl transferase 9 (KMT9α) in A549 cells. High KMT9α <span class="notranslate">expression</span> in lung cancer correlates with poor patient survival. Therefore,  KMT9α is a very interesting research target in light of the fact that lung cancer survival rates could not be improved over the last 15 years. The example dataset consists of 4 cell culture samples from KMT9α knock-down cells and 4 cell culture samples from control (Ctrl) cells. In order to increase the proteome coverage the TMT experiment was pre-fractionated using offline high pH reverse phase chromatography resulting in 12 MS runs.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#maxquant-analysis" id="markdown-toc-maxquant-analysis">MaxQuant analysis</a></li>
+  <li><a href="#msstatstmt-analysis" id="markdown-toc-msstatstmt-analysis">MSstatsTMT analysis</a></li>
+  <li><a href="#follow-up-on-msstatstmt-results" id="markdown-toc-follow-up-on-msstatstmt-results">Follow up on MSstatsTMT results</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="get-data">Get data</h2>
+
+<p>The raw data is available via the PRIDE repository under the ID: <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD014145">PXD014145</a>. The MaxQuant experimental design template file, MSstatsTMT annotation file and FASTA file for this training are deposited at Zenodo(https://zenodo.org/record/5195800). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible, we recommend using the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a meaningful name</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+    </li>
+    <li>
+      <p>Import the FASTA database, experimental design template, and annotation file <a href="https://zenodo.org/record/5195800">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5195800/files/protein_database.fasta
+https://zenodo.org/record/5195800/files/MaxQuant%20experimental%20design%20template.tabular
+https://zenodo.org/record/5195800/files/MSstatsTMT%20annotation%20file.tabular
+</code></pre></div>      </div>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Once the files are green, rename the fasta file into ‘protein database’, the experimental design template into ‘experimental design template’, and the annotation file into ‘annotation file’.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p>To run MaxQuant, import the raw data from <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD014145">PRIDE</a>.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
+ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Rename the raw datasets into ‘MFA380.raw’, ‘MFA381.raw’, etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Control that the data type of the raw files is ‘thermo.raw’ otherwise change the datatype into ‘thermo.raw’</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">thermo.raw</code></li>  <li>Click the <strong>Change datatype</strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Generate a collection for all raw files and name it ‘raw_files’, hide the individual raw files</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="maxquant-analysis">MaxQuant analysis</h1>
+
+<p>We start the MaxQuant run with TMT parameters for MS2 based reporter quantitation. A quality control report will be generated with the <a href="https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780">PTXQC functionality</a> that is directly implemented in the MaxQuant <span class="notranslate">Galaxy</span> tool. For more information about MaxQuant and its parameter please have a look at the <a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">Label-free data analysis using MaxQuant tutorial</a>. To continue with statistical analysis in MSstatsTMT, the Protein Groups and the Evidence files are needed from MaxQuant. The run time of MaxQuant depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a while, but the training can be directly continued with the MaxQuant result files from Zenodo.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MaxQuant analysis</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy2"><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/maxquant/maxquant/1.6.17.0+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Input Options”</em>:
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTA files”</em>: <code class="language-plaintext highlighter-rouge">protein database</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Search Options”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an experimental design template”</em>: <code class="language-plaintext highlighter-rouge">experimental design template</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Parameter Group”</em>:
+          <ul>
+            <li><em>“Quantitation Methods”</em>: <code class="language-plaintext highlighter-rouge">reporter ion MS2</code>
+              <ul>
+                <li><em>“isobaric labeling”</em>: <code class="language-plaintext highlighter-rouge">TMT11plex</code></li>
+                <li><em>“Filter by PIF”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Generate PTXQC (proteomics quality control pipeline) report? (experimental setting)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Select the desired outputs.”</em>: <code class="language-plaintext highlighter-rouge">Protein Groups</code> <code class="language-plaintext highlighter-rouge">mqpar.xml</code> <code class="language-plaintext highlighter-rouge">Evidence</code> <code class="language-plaintext highlighter-rouge">MaxQuant and PTXQC log</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-continue-with-results-from-zenodo"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Continue with results from Zenodo</h3>
+
+        <p>Because the MaxQuant run takes quite a while, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial</p>
+        <ol>
+          <li>Import the files from <a href="https://zenodo.org/record/5195800">Zenodo</a></li>
+        </ol>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5195800/files/MaxQuant%20Result%20evidence.tabular
+https://zenodo.org/record/5195800/files/MaxQuant%20Result%20protein%20groups.tabular
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many protein groups were found with MaxQuant?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>6911 (numbers might slightly vary with different MaxQuant versions); number of lines minus header line in the MaxQuant protein groups output</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-pif-parameter-for-tmt-data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: PIF parameter for TMT data</h3>
+  <p>Co-isolation of multiple peptides can lead to inaccurate TMT signals, as not only one peptide is fragmented but multiple different peptides are fragmented and the TMT signals cannot be distinguished anymore. MaxQuant can “check” the MS1 scans to predict, whether multiple different peptides were cofragmented. Precursor Intensity Filtering (PIF) allows you to implement a cutoff how high the purity of fragmentation was (1 = no coisolation, 0.75 = default).</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-preparing-an-maxquant-experimental-design-template-for-your-own-analysis"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Preparing an MaxQuant experimental design template for your own analysis</h3>
+  <p>For this tutorial all files needed for the analysis are provided. Nevertheless here are some guidelines for the generation of the experimental design template for MaxQuant for your own data analyses.
+For thermo.raw files, “.raw” is considered a part of the filename. Therefore, file names should be ‘Filename1.raw’, ‘Filename2.raw’ etc.. Please pay special attention to your experimental design, since MaxQuant will summarize peptide and protein intensities differently depending on this input. In brief, MaxQuant will summarize the protein intensities within each specified experiment. Often, TMT experiments are not measured in one MS run, but in multiple runs (either as so called fractions, or as replicates). Over the last years, high pH prefractionation has become the standard for fractionating TMT samples. Alte<span class="notranslate">rna</span>tively, SCX or HILIC fractionations can be employed. Although you fractionated your samples prior to measurement you still want MaxQuant to group all samples which belong to “one” TMT experiment. Since the fractions originate from one sample the experimental design template allows to map multiple measurements to one experiment (= Sample). Additionally, it is possible to have a more complex experimental setup including multiple TMT experiments, possibly containing multiple fractions per experiment. All MS files which are labeled with the same “Experiment” name are summarized in the proteinGroups and peptides output of MaxQuant.</p>
+</blockquote>
+
+<h1 id="msstatstmt-analysis">MSstatsTMT analysis</h1>
+
+<p>The protein groups and evidence files of MaxQuant can directly be used as an input for MSstatsTMT. MSstatsTMT automatically removes all proteins that are labelled as contaminants (‘+’ sign in the column ‘potential contaminant’ of both MaxQuant outputs). In case you want to prevent this step either run MaxQuant with “Include Contaminants: No” or remove the ‘+’ sign from the MaxQuant files as described in the <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html">label-free MSstats training</a>. Additionally, MSstatsTMT will combine all quantitations according to the annotation file, which you have to provide (e.g all fractions of the same mixture are combined).
+For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as this is a straightforward two group comparison. If you have more than two groups, you may consider using the comparison matrix option of MSstatsTMT (for more information see <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html">label-free MSstats training</a>).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-msstatstmt-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MSstatsTMT analysis</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy0"><strong>MSstatsTMT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/msstatstmt/msstatstmt/2.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Input Source”</em>: <code class="language-plaintext highlighter-rouge">MaxQuant</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“evidence.txt - feature-level data”</em>: <code class="language-plaintext highlighter-rouge">evidence</code> (output of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“proteinGroups.txt”</em>: <code class="language-plaintext highlighter-rouge">proteinGroups</code> (output of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“annotation.txt”</em>: <code class="language-plaintext highlighter-rouge">annotation file</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Plot Output Options”</em>:
+          <ul>
+            <li><em>“Select protein IDs to draw plots”</em>: <code class="language-plaintext highlighter-rouge">generate all plots for each protein</code></li>
+          </ul>
+        </li>
+        <li><em>“Compare Groups”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li>In <em>“Comparison Plot Options”</em>:
+              <ul>
+                <li><em>“Display protein names in Volcano Plot.”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Select Outputs”</em>: <code class="language-plaintext highlighter-rouge">QC Plot</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Question1?</li>
+    <li>Question2?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Answer for question1</li>
+      <li>Answer for question2</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-preparing-an-msstatstmt-annotation-file-for-your-own-analysis"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Preparing an MSstatsTMT annotation file for your own analysis</h3>
+
+  <p>For this tutorial all files needed for the analysis are provided. Nevertheless here are some guidelines for the generation of annotation file for MSstatsTMT for your own data analyses.
+As MSstatsTMT has to perform statistical analyses, you have to provide the following basic information: Which quantitation channel in every sample corresponds to which original biological sample and which biological condition (e.g WT or knock-down) does this sample belong to? To fully automate the process of choosing an appropriate statistical model for analysis, MSstatsTMT needs an annotation matrix that is extremely powerful because it can deal with any experimental setup.</p>
+
+  <p>The annotation file contains the following columns:</p>
+  <ul>
+    <li><strong>Run</strong> corresponds to your MS file names. Please note that MaxQuant in <span class="notranslate">Galaxy</span> will add a “.thermo” to your raw file name as it appears in your history. Since we first analyse the data with MaxQuant, MSstatsTMT needs this additional extension for this annotation file. The correct run names can be found after MaxQuant is finished in the evidence file in the column ‘Raw file’.</li>
+    <li><strong>Fraction</strong> corresponds to the aforementioned optional pre-fractionation fraction of your samples (e.g high pH RP, or SCX)</li>
+    <li><strong>TechRepMixture</strong> corresponds to the n-th time this fraction was measured. If you measured the first Fraction of your first sample twice, Fraction would stay the same, but the TechRepMixture would have to differ.</li>
+    <li><strong>Channel</strong> corresponds to the TMT channel which was used in your Experiments.We recommend to always include all channels in your searches and your annotations, even when these channels are empty. So if you only used 9 of 11 channels in your TMT experiments, add the last 2 channels anyway and just label them as “Empty” in the Condition column. In <span class="notranslate">Galaxy</span> the channel names need to be named ‘channel.X’, with X being the number of the channel.</li>
+    <li><strong>Condition</strong> represents the biological condition, which the observation belongs to (e.g Ctrl). Normalization Channel are labeled as “Norm”. Empty Channels as “Empty”</li>
+    <li><strong>Mixture</strong> corresponds to the “TMT experiment” mentioned above.</li>
+    <li><strong>BioReplicate</strong> corresponds to the biological specimen this observation derives from.
+On first glance this might sound overwhelming, but used correctly, this annotation matrix can describe very complex experimental setups in a definitive way.</li>
+  </ul>
+
+  <p>An example:</p>
+
+  <p>Consider you perform a study on the difference between primary liver tumors and liver tumor metastases. It makes a very big difference whether all your samples derive from different patients, or whether you were able to obtain some primary tumors and metastases samples from the same patient. The samples obtained from the same patient are expected to be related to each other (they are not independent observations and this must be considered during statistical testing).
+A short illustration: 
+You measured 2 different samples of one patient (metastasis and primary tumor sample).This patient would be considered patient 1 and you would label the primary tumor with the first channel of a TMT-11 plex kit (126) and you would label the metastasis with the second channel (127N). After labeling you combine both samples in one Mixture and measure them in one MS run.</p>
+
+  <p>Your annotation file for this case would look like this:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Run</th>
+        <th>Fraction</th>
+        <th>TechRepMixture</th>
+        <th>Channel</th>
+        <th>Condition</th>
+        <th>Mixture</th>
+        <th>BioReplicate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.1</td>
+        <td>primary</td>
+        <td>mixture1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.2</td>
+        <td>metastasis</td>
+        <td>mixture1</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Let us assume you now have 10 primary tumors and 10 metastases (from 20 different patients). Since you do not have 20plex capabilities, you have to divide your samples into two experiments / mixtures. For simplicity, after labeling and combining all channels belonging to the same experiments, the mixtures are directly measured ( 1 fraction per Mixture). To avoid batch effects due to allocation you use randomization. In order to be able to normalize all quantitations you use a reference sample, which you add to each experiment (this is referred to as “Normalization Channel”). The reference sample is ideally a mixture of all your samples.</p>
+
+  <p>The annotation matrix would now look like this:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Run</th>
+        <th>Fraction</th>
+        <th>TechRepMixture</th>
+        <th>Channel</th>
+        <th>Condition</th>
+        <th>Mixture</th>
+        <th>BioReplicate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.1</td>
+        <td>primary</td>
+        <td>mixture1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.2</td>
+        <td>metastasis</td>
+        <td>mixture1</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.3</td>
+        <td>primary</td>
+        <td>mixture1</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.4</td>
+        <td>metastasis</td>
+        <td>mixture1</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.5</td>
+        <td>primary</td>
+        <td>mixture1</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.6</td>
+        <td>metastasis</td>
+        <td>mixture1</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.7</td>
+        <td>primary</td>
+        <td>mixture1</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.8</td>
+        <td>metastasis</td>
+        <td>mixture1</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.9</td>
+        <td>primary</td>
+        <td>mixture1</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.10</td>
+        <td>metastasis</td>
+        <td>mixture1</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>File1.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.11</td>
+        <td>Norm</td>
+        <td>mixture1</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.1</td>
+        <td>primary</td>
+        <td>mixture2</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.2</td>
+        <td>metastasis</td>
+        <td>mixture2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.3</td>
+        <td>primary</td>
+        <td>mixture2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.4</td>
+        <td>metastasis</td>
+        <td>mixture2</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.5</td>
+        <td>primary</td>
+        <td>mixture2</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.6</td>
+        <td>metastasis</td>
+        <td>mixture2</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.7</td>
+        <td>primary</td>
+        <td>mixture2</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.8</td>
+        <td>metastasis</td>
+        <td>mixture2</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.9</td>
+        <td>primary</td>
+        <td>mixture2</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.10</td>
+        <td>metastasis</td>
+        <td>mixture2</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>File2.thermo.raw</td>
+        <td>1</td>
+        <td>1</td>
+        <td>channel.11</td>
+        <td>Norm</td>
+        <td>mixture2</td>
+        <td>100</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Normalization Channels are always labeled as “Norm” in Condition and get an arbitrary BioReplicate number. Since we want the Normalization channel to be a reference, it always has to be the same sample and therefore also should have the same BioReplicate number.
+If you have empty channels, label them as “Empty” in the Condition column and also give them an arbitrary BioReplicate number.</p>
+
+  <p>Exercise:</p>
+
+  <p>How would the annotation file look like for the following experiment:
+27 samples (12 primary, 12 metastases samples from different patients + 3 reference samples) over 3 TMT experiments / mixtures. 
+You use Channels 1-8 in Exp1, 2-9 in Exp2 and 3-11 in Exp3. Your first used channel is always taken for the reference channel (Exp1: Channel1 = Norm, Exp2: Channel2 = Norm etc). 
+You fractionate all 3 experiments / mixtures into 3 fractions each and measure every MS sample twice (resulting in 18 measurements / raw files total).</p>
+
+  <p>The solution can be found on <a href="https://zenodo.org/record/5195800/files/annotation_exercise.txt">Zenodo</a>.</p>
+</blockquote>
+
+<p>For more information on MSstats parameters and ideas on how to follow up with your MSstatsTMT results visit the <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html">label-free MSstats training</a>.</p>
+
+<h1 id="follow-up-on-msstatstmt-results">Follow up on MSstatsTMT results</h1>
+
+<p>We obtain several output files from MSstatsTMT. MSstats log file contains the MSstats report with warnings and information about the analysis steps. 
+The QC report allows to visualize protein abundance of conditions for all proteins (first page) or for each individual protein (following pages).</p>
+
+<figure id="figure-1"><img src="../../images/maxquant-msstats-tmt/QC_plot.png" alt="QC report" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
+
+<p>The MSstatsTMT Group Comparison Plot is a very convenient pdf, which you can search for your favorite proteins of interest to check whether these are dysregulated between the conditions. The red error bar gives you a confidence interval of the fold change.</p>
+
+<figure id="figure-2"><img src="../../images/maxquant-msstats-tmt/example_protein.png" alt="Group comparison plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Group comparison plot for the protein A5YKK6 (CCR4-NOT transcription complex subunit 1)</figcaption></figure>
+
+<p>The volcano plot plots the negative log10 of the adjusted P Value derived from statistical testing over the log2 fold change between the conditions you compared. A value of 3 on the y axis corresponds to an adjusted P Value of 0.001, whereas a value of 1 on the x axis corresponds to a ratio of 2 meaning that the protein is twice as high in condition 1 than condition 2..
+Please bear in mind that TMT quantitation suffers from ratio compression. There are ways to calculate more accurate fold changes from measured data (or alte<span class="notranslate">rna</span>tively you can use MS3 quantitation on some machines). However, even with ratio compression, MS2 TMT is an excellent quantitation strategy to detect differentially regulated proteins. Just bear in mind that the reported fold chances of proteins are almost always smaller than the real fold changes between your conditions.</p>
+
+<figure id="figure-3"><img src="../../images/maxquant-msstats-tmt/volcano_plot.png" alt="Volcano plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Volcano plot QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
+
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>MaxQuant in combination with MSstatsTMT enables quantitative analysis of TMT data.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/proteomics/faqs/">FAQ page for the Proteomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=MaxQuant and MSstats for the analysis of TMT data (Proteomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Klemens Fröhlich, Melanie Föll, Matthias Fahrner, 2021 <b>MaxQuant and MSstats for the analysis of TMT data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{proteomics-maxquant-msstats-tmt,
+author = "Klemens Fröhlich and Melanie Föll and Matthias Fahrner",
+title = "MaxQuant and MSstats for the analysis of TMT data (Galaxy Training Materials)",
+year = "2021",
+month = "08",
+day = "13"
+url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
