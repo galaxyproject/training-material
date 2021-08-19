@@ -22,7 +22,7 @@ key_points:
 
 ## Introduction
 
-In this tutorial we are going to demonstrate how to integer an extrenal interactive environment as a Galaxy Interactive Tool (GxIT). Galaxy Interactive Tools (GxIT) are accessible on the Galaxy tool panel as any Galaxy tool. This functionality has been used to integer notably JupyterLab or RStudio server as some R Shiny apps. To see Galaxy Interactive Tools example, you can have a look at the "live subdomain" European Galaxy instance https://live.usegalaxy.eu/.
+In this tutorial we are going to demonstrate how to integer a Galaxy Interactive Tool (GxIT). Galaxy Interactive Tools (GxIT) are accessible on the Galaxy tool panel as any Galaxy tool. This functionality has been used to integer notably JupyterLab or RStudio server as some R Shiny apps. To see Galaxy Interactive Tools example, you can have a look at the "live subdomain" European Galaxy instance https://live.usegalaxy.eu/.
 
 In this tutorial, we will look at a concrete example, an app named `HeatMap`. This Galaxy interactive tool is composed of 4 elements:
   - a [dockerfile](https://raw.githubusercontent.com/workflow4metabolomics/gie-shiny-heatmap/master/Dockerfile)
@@ -31,7 +31,12 @@ In this tutorial, we will look at a concrete example, an app named `HeatMap`. Th
   - The original [R script](https://raw.githubusercontent.com/workflow4metabolomics/gie-shiny-heatmap/master/app.R) responsible to launch the R shiny app inside the container.
 
 
+## Technical development Stack
 
+
+## GxIT Overview
+
+### Dockerfile
 
 At first let's discover the Dockerfile of this amazing `HeatMap` Galaxy Interactive Tool (GxIT)!
 
@@ -93,8 +98,10 @@ The default port of dockerized RShiny app is 3838
 
 The environment_variables would be needed to retrieve data from Galaxy History. In the example, this is therefore not necessary.
 
+### Tool script
 
-### "A first bunch of code!" (XML + conf)
+
+### XML Wrapper + a bit of configuration
 
 Create your first Galaxy Interactive Tool using an existing Docker image!
 
@@ -163,8 +170,11 @@ Create your first Galaxy Interactive Tool using an existing Docker image!
 ![chronometre](https://i.imgur.com/pXWdClv.png)
 
 
+## Testing locally
 
-### Distributing your GxIT
+## Installing on a Galaxy production instance (set up with Ansible)
+
+## Distributing your GxIT
 
 Two types of materials have to be distributed:
 - the Galaxy tool xml
@@ -173,6 +183,9 @@ Two types of materials have to be distributed:
 Here we are focusing on the Galaxy tool but the Docker image must be available on Dockerhub. 
 If planemo and toolshed supported it, it looks like you need to deposit on iuc. In the meantime we can say to put it in https://github.com/galaxyproject/galaxy/? https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive
 
+## Other examples
 
+## Final Notes
+Is it the same as Conclusion?
 
 ## Conclusion
