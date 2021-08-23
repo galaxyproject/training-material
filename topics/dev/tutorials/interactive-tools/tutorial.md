@@ -3,26 +3,47 @@ layout: tutorial_hands_on
 
 title: "Galaxy Interactive Tools"
 questions:
-  - "What are Galaxy Interactive Tools (GxIT)"
-  - "How to create them?"
+  - "What is an Interactive Tool on Galaxy (GxIT)"
+  - "How do GxIT work?"
+  - "How do I build an GxIT?"
+  - "How do I debug an GxIT?"
+  - "How do I deploy an GxIT?"
 objectives:
   - "Discover what Galaxy Interactive Tools (GxIT) are"
-  - "Be able to create Galaxy Interactive Tools (GxIT)"
-  - "Be able to add a Galaxy Interactive Tools (GxIT) in a Galaxy instance"
+  - "Understand when a GxIT is appropriate"
+  - "Understand how GxITs are structured"
+  - "Be able to wrap a dockerised application as a GxIT"
+  - "Be able to install the new GxIT to an existing Galaxy instance"
+requirements:
+  -
+    type: "internal"
+    topic_name: Galaxy tool development
+    tutorials:
+      - tool-from-scratch
+  -
+    title: "Docker basics"
+    type: "none"
+  -
+    title: "A Galaxy instance configured to serve interactive tools"
+    type: "None"
 time_estimation: '1h'
-contributors:
- - eancelet
- - yvanlebras
+subtopic: tooldev
 key_points:
-  - "A Galaxy Interactive Tools (GxIT) provides an easy way to integer external interactive tools into Galaxy"
-  - "Galaxy Interactive Tools (GxIT) can be for example Jupyter notebooks, RStudio or R Shiny apps"
-  - "Galaxy Interactive Tools (GxIT) are intensively using containers technology, notamment Docker"
-  - "With a minimal amount of code you can integrate external tools into Galaxy if already containerized"
+  - "Galaxy Interactive Tools (GxIT) provides an easy way to integrate external interactive tools into Galaxy"
+  - "Example GxITs are Jupyter notebooks, RStudio or R Shiny apps"
+  - "GxITs rely heavily on container technologies like Docker"
+  - "If a tool is already containerized, it can be integrated rapidly into Galaxy as a GxIT"
+  - "In theory, any containerized web application can be wrapped as a GxIT"
+contributors:
+  - eancelet
+  - yvanlebras
+  - neoformit
+
 ---
 
 ## Introduction
 
-In this tutorial we are going to demonstrate how to integer a Galaxy Interactive Tool (GxIT). Galaxy Interactive Tools (GxIT) are accessible on the Galaxy tool panel as any Galaxy tool. This functionality has been used to integer notably JupyterLab or RStudio server as some R Shiny apps. To see Galaxy Interactive Tools example, you can have a look at the "live subdomain" European Galaxy instance https://live.usegalaxy.eu/.
+In this tutorial we will demonstrate how to build and deploy a Galaxy Interactive Tool (GxIT). Installed GxITs are accessible through the Galaxy tool panel like any Galaxy tool. To see some example GxITs, take a look at the "live" subdomain of Galaxy EU: https://live.usegalaxy.eu/.
 
 In this tutorial, we will look at a concrete example, an app named `HeatMap`. This Galaxy interactive tool is composed of 4 elements:
   - a [dockerfile](https://raw.githubusercontent.com/workflow4metabolomics/gie-shiny-heatmap/master/Dockerfile)
@@ -31,10 +52,23 @@ In this tutorial, we will look at a concrete example, an app named `HeatMap`. Th
   - The original [R script](https://raw.githubusercontent.com/workflow4metabolomics/gie-shiny-heatmap/master/app.R) responsible to launch the R shiny app inside the container.
 
 
+## How do interactive tools work?
+
+Interactive tools are a special breed of Galaxy tool which have seen relatively
+little air time.
+They enable the user to run an entire web application through Galaxy, which
+opens as a new tab in the browser. This allows users to explore and manipulate
+data in a rich interface, such as Jupyter notebooks and RStudio.
+Interactive tool development builds on the canonical tool-wrapping process.
+Instead of running a command, the tool feeds user input to a docker container
+which can then be accessed through a unique subdomain. The user opens their
+interactive, makes the observations or manipulations that they require and then
+terminates the tool. On termination, the docker container is stopped and
+removed.
+
 ## Technical development Stack
 
-
-## GxIT Overview
+> Not sure what goes here? Tech requirements?
 
 ### Dockerfile
 
@@ -55,14 +89,11 @@ A docker image is not a VM.
 A container on a linux machine can only run native programs.
 A docker file is used to build a filesystem with the necessary resources to perform the defined actions
 
-
-
-
 ```
 
 ```txt
 
-### our based Docker image 
+### our based Docker image
 FROM quay.io/workflow4metabolomics/gie-shiny:latest
 
 # Installing packages needed for check traffic on the container and kill if none
@@ -86,7 +117,7 @@ COPY ./static/css/styles.css /srv/shiny-server/samples/heatmap/styles.css
 ```
 
 
-**Notes :** 
+**Notes :**
 
 Recommendations for version numbering
 
@@ -111,7 +142,7 @@ Create your first Galaxy Interactive Tool using an existing Docker image!
 >
 >    > ### {% icon tip %} Tip: some Galaxy and XML related tips
 >    >
->    > * You can take inspiration from [xml d'askomics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml)
+>    > * You can take inspiration from [the askomics tool XML](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml)
 >    > * To check the xml syntax https://www.xmlvalidation.com/ or https://www.w3schools.com/xml/xml_validator.asp
 >    >
 >    {: .tip}
@@ -142,7 +173,7 @@ Create your first Galaxy Interactive Tool using an existing Docker image!
 >    > >        cp '$infile' /srv/shiny-server/samples/heatmap/inputdata.tsv &&
 >    > >        cd /srv/shiny-server/samples/heatmap/ &&
 >    > >        Rscript app.R > '$outfile'
->    > > 
+>    > >
 >    > >    ]]>
 >    > >    </command>
 >    > >    <inputs>
@@ -180,7 +211,7 @@ Two types of materials have to be distributed:
 - the Galaxy tool xml
 - the Docker image
 
-Here we are focusing on the Galaxy tool but the Docker image must be available on Dockerhub. 
+Here we are focusing on the Galaxy tool but the Docker image must be available on Dockerhub.
 If planemo and toolshed supported it, it looks like you need to deposit on iuc. In the meantime we can say to put it in https://github.com/galaxyproject/galaxy/? https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive
 
 ## Other examples
