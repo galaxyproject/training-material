@@ -36,11 +36,11 @@ contributors:
 - Functions: ribosome biogenesis and cell cycle regulation
 
 .image-55[
-  ![](../../images/tutorial-CP/img_dna_channel.png)
+  ![image of four cells, one is dividing, and red arrows point to the 5 nucleii](../../images/tutorial-CP/img_dna_channel.png)
 ]
 
 ???
-In the DNA channel, the nucleoli is shown as the absence of DNA (red arrows). 
+In the DNA channel, the nucleoli is shown as the absence of DNA (red arrows).
 ---
 
 
@@ -49,7 +49,7 @@ In the DNA channel, the nucleoli is shown as the absence of DNA (red arrows).
 - The data can be downloaded from the Image Data Resource ([IDR](http://idr.openmicroscopy.org/))
 
 .image-65[
-  ![](../../images/tutorial-CP/IDR_interface.jpg)
+  ![screenshot of a complex tool interface showing an array of images (1) and then two selected images below it (2) and a configuration panel on the right (3)](../../images/tutorial-CP/IDR_interface.jpg)
 ]
 
 ???
@@ -66,7 +66,7 @@ You can also bring your images by uploading the DNA channel of your images to yo
   - Background detection
   - Feature extraction of the images and objects
 
-![high_level_view_wf](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
+![screenshot of a galaxy workflow with four sections highlighted by boxes reading nuclei, nucleoli, background, and feature extraction.](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
 
 ???
 - Segmentation of the nucleoli: since there is no staining for the nucleoli, the holes need to be detected and segmented.
@@ -77,7 +77,7 @@ You can also bring your images by uploading the DNA channel of your images to yo
 
 ### 1) Segment nuclei
 
-  ![](../../images/tutorial-CP/subwf_nuclei.jpg)
+  ![Inset to the first portion of the above overview image showing nuclei with 5 steps, starting modules, segment complete nuclei, segmentation mask complete nuclei, label nuclei, and save labelled nuclei.](../../images/tutorial-CP/subwf_nuclei.jpg)
 
 ???
 Every CellProfiler pipeline needs to start by processing the metadata with the tool "Starting modules".
@@ -89,7 +89,7 @@ Every CellProfiler pipeline needs to start by processing the metadata with the t
 
 ### Segmentation and labelling of the nuclei
 
-![identified_nuclei_with_labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels")
+![a photo of cells in black and white, several cells have red numbers written atop them.](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels")
 
 ???
 Resulting image after the first logical step of the workflow in which the nuclei were segmented and labelled.
@@ -98,11 +98,11 @@ Resulting image after the first logical step of the workflow in which the nuclei
 
 ### 2) Segment nucleoli
 
-![](../../images/tutorial-CP/subwf_nucleoli.jpg)
+![Inset of the nucleoli portion of the workflow with the following steps: detect dark holes in nuclei, segment nucleoli that fall inside nuclei, segment nucleoli, convert the segmented nucleoli into an image, combine masks (nuclei+nucleoli), and finally save combined segmentation masks.](../../images/tutorial-CP/subwf_nucleoli.jpg)
 
 
 ???
-To identify the nucleoli the first step is to enhance the dark holes so that they can be segmented. 
+To identify the nucleoli the first step is to enhance the dark holes so that they can be segmented.
 The segmentation of the dark holes will take place only when the dark holes fall inside a nucleus. This is to avoid the detection of wrong objects outside the cell.
 At this step, the segmentation of the nucleoli can be performed.
 It will be useful for visual exploration that the masks of the nuclei and nucleoli are saved together into one segmentation mask.
@@ -111,7 +111,7 @@ It will be useful for visual exploration that the masks of the nuclei and nucleo
 
 ### Combined mask: nuclei + nucleoli
 
-![combined_mask_nuclei_nucleoli](../../images/tutorial-CP/img_combined_masks.png "Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.")
+![image of the cells again, but now cells are blue and nuclei/nucleoli are red.](../../images/tutorial-CP/img_combined_masks.png "Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.")
 
 ???
 The combination of both masks gives an image with the nuclei in blue and the nucleoli in magenta.
@@ -120,18 +120,20 @@ The combination of both masks gives an image with the nuclei in blue and the nuc
 
 ### Background extraction
 
-![](../../images/tutorial-CP/subwf_background.jpg)
+![third inset workflow, background extraction, with steps segment all nuclei, segmentation mask nucleoli including cells touching borders, and extract background.](../../images/tutorial-CP/subwf_background.jpg)
 
 ???
+
 The extraction of the background can be useful to measure features that indicate that the images are artefacts.
 To get the background we first select the foreground and subtract it from the original image.
 We have partially detected the foreground in the nuclei segmentation in previous steps. However, that mask only included just those objects within a max and a min pixel size. We also discarded the images touching the borders. Here, we get rid of the constraints and segment all the nuclei.
+
 ---
 
 
 ### Feature extraction
 
-![](../../images/tutorial-CP/subwf_feature_extraction.jpg)
+![The final inset, feature extraction with very small steps.](../../images/tutorial-CP/subwf_feature_extraction.jpg)
 
 - **Important:** Relate nucleoli and parent nucleus
 
