@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>How to reproduce published Galaxy analyses</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a scientific workflow, data integration, and da..." />
+        <meta property="og:title" content="Galaxy Training: How to reproduce published Galaxy analyses" />
+        <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and da..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/introduction" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Introduction to Galaxy Analyses
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/introduction/faqs/" title="Check our FAQs for the Introduction to Galaxy Analyses topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/introduction/tutorials/galaxy-reproduce/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/tutorials/galaxy-reproduce/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/tutorials/galaxy-reproduce/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/tutorials/galaxy-reproduce/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/tutorials/galaxy-reproduce/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/tutorials/galaxy-reproduce/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fintroduction%2Ftutorials%2Fgalaxy-reproduce%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/introduction/tutorials/galaxy-reproduce/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/introduction/tutorials/galaxy-reproduce/tutorial.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/introduction/tutorials/galaxy-reproduce/tutorial.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "How to reproduce published Galaxy analyses",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Introduction to Galaxy Analyses",
+    "description": "Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ",
+    "url": "https://training.galaxyproject.org//training-material/topics/introduction/"
+  },
+  "courseCode": "introduction / galaxy-reproduce / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'How to reproduce published Galaxy analyses' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - How to reproduce published Galaxy results (workflows and histories)\n\n\\nThe objectives are:\n - Learn how to load published data into Galaxy\n - Learn how to run a published Galaxy workflow\n - Learn how histories can be inspected and re-used.\n\n",
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    },
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    },
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+</script>
+
+<section class="tutorial topic-introduction">
+    <h1 data-toc-skip>How to reproduce published Galaxy analyses</h1>
+    
+
+    <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Avatar">Melanie Föll</a> <a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Avatar">Anne Fouilloux</a>
+
+</div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How to reproduce published Galaxy results (workflows and histories)</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Learn how to load published data into Galaxy</p>
+</li>
+        
+        <li><p>Learn how to run a published Galaxy workflow</p>
+</li>
+        
+        <li><p>Learn how histories can be inspected and re-used.</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+         Introductory 
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/introduction/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/1319069/files/iris.csv">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-reproduce/workflows/" title="Workflows" alt="How to reproduce published Galaxy analyses workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+            
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/introduction/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
+            Metagenomics
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.migale.inra.fr/" title="Migale">
+            Migale
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
+            Plant Anaylsis Workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 10, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
+
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This training will demonstrate how to reproduce analyses performed in the <span class="notranslate">Galaxy</span> framework. Before we start with the hands-on part, we would like to give you some information about <span class="notranslate">Galaxy</span>.</p>
+
+<p><span class="notranslate">Galaxy</span> is a scientific <span class="notranslate">workflow</span>, data integration and data analysis and publishing platform. <span class="notranslate">Galaxy</span> is an open-source platform for accessible, reproducible, and transparent computational research. While <span class="notranslate">Galaxy</span> was started to allow non-bioinformaticians to analyze <span class="notranslate">DNA</span> sequencing data, it nowadays enables analysis tasks of many different domains including machine learning, ecology, climate science and  omics-type of analyses. <span class="notranslate">Galaxy</span> is easy to use because it is accessible via a web-browser and provides a graphical user interface which enables access to pre-installed tools and large computational resources. In <span class="notranslate">Galaxy</span>, all analyses are stored in so-called histories. The history keeps track of all the tools, tool versions and parameters that were used in the analysis. From such a history, a <span class="notranslate">workflow</span> can be extracted; this <span class="notranslate">workflow</span> can be used to easily repeat the analysis on different data. Both, histories and workflows, can either be shared privately with colleagues or publicly, for example as part of a published manuscript.</p>
+
+<p>For more background information about <span class="notranslate">Galaxy</span>, have a look into the <span class="notranslate">Galaxy</span> publication (<a class="citation" href="#Afgan_2018">Afgan <i>et al.</i> 2018</a>). In depth technical details about technologies that enable reproducible analyses within <span class="notranslate">Galaxy</span> are described in <a class="citation" href="#Gr_ning_2018">Grüning <i>et al.</i> 2018</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#what-does-galaxy-look-like" id="markdown-toc-what-does-galaxy-look-like">What does <span class="notranslate">Galaxy</span> look like?</a></li>
+  <li><a href="#create-a-history-and-load-data-into-it" id="markdown-toc-create-a-history-and-load-data-into-it">Create a history and load data into it</a></li>
+  <li><a href="#import-and-run-a-galaxy-workflow" id="markdown-toc-import-and-run-a-galaxy-workflow">Import and run a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></a></li>
+  <li><a href="#inspecting-the-analysis-history" id="markdown-toc-inspecting-the-analysis-history">Inspecting the analysis history</a></li>
+  <li><a href="#manipulating-the-analysis" id="markdown-toc-manipulating-the-analysis">Manipulating the analysis</a></li>
+  <li><a href="#additional-exercise-import-a-published-analysis-history-and-explore-it" id="markdown-toc-additional-exercise-import-a-published-analysis-history-and-explore-it">Additional Exercise: Import a published analysis history and explore it</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="what-does-galaxy-look-like">What does <span class="notranslate">Galaxy</span> look like?</h1>
+
+<p>Many different <span class="notranslate">Galaxy</span> servers exist. Some are public, some are private, some focus on a specific topic and others like the use<span class="notranslate">galaxy</span>.* servers cover a broad range of tools. To reproduce published results it is highly recommended to use the same <span class="notranslate">Galaxy</span> server that was used in the original study. In the case that this was a private server that is not accessible to you, you might want to use one of the main <span class="notranslate">Galaxy</span> servers: <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a>, <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>, <a href="https://usegalaxy.org.au">use<span class="notranslate">galaxy</span>.org.au</a>. To learn more about the different <span class="notranslate">Galaxy</span> servers visit the <a href="/training-material/topics/introduction/tutorials/options-for-using-galaxy/slides.html#1">slides: options for using <span class="notranslate">Galaxy</span></a>. The particular <span class="notranslate">Galaxy</span> server that you are using may look slightly different than the one shown in this training. <span class="notranslate">Galaxy</span> instance administrators can choose the exact version of <span class="notranslate">Galaxy</span> they would like to offer and can customize its look to some extent. The basic functionality will be rather similar across instances, so don’t worry! In this training we will use the European <span class="notranslate">Galaxy</span> server on which the original analysis was performed and shared.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-log-in-or-register"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Log in or register</h3>
+  <ol>
+    <li>Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)</li>
+    <li>Browse to the <a href="https://usegalaxy.eu/"><span class="notranslate">Galaxy</span> Europe instance</a> (recommended) or to a <span class="notranslate">Galaxy</span> instance of your choosing</li>
+    <li>Choose <em>Login or Register</em> from the navigation bar at the top of the page</li>
+    <li>
+      <p>If you have previously registered an account with this particular instance of <span class="notranslate">Galaxy</span> (user accounts are <em>not</em> shared between public servers!), proceed by logging in with your registered <em>public name</em>, or email address, and your password.</p>
+
+      <p>If you need to create a new account, click on <em>Register here</em> instead.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The <span class="notranslate">Galaxy</span> interface consists of three main parts:</p>
+
+<ol>
+  <li>The available tools are listed on the left</li>
+  <li>Your analysis history is recorded on the right</li>
+  <li>The central panel will let you run analyses and view outputs</li>
+</ol>
+
+<p><img src="/training-material/shared/images/galaxy_interface.png" alt="Galaxy interface with tools panel on left, main panel in center, and history panel on the right." loading="lazy" /></p>
+
+<h1 id="create-a-history-and-load-data-into-it">Create a history and load data into it</h1>
+
+<p>Each analysis in <span class="notranslate">Galaxy</span> starts by creating a new analysis history and loading data into it. <span class="notranslate">Galaxy</span> supports a huge variety of data types and data sources. Different ways of bringing data into <span class="notranslate">Galaxy</span> are explained <a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1">here</a>. To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create history</h3>
+
+  <ol>
+    <li>
+      <p>Make sure you start from an empty analysis history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+    </li>
+    <li>
+      <p><strong>Rename your history</strong> to be meaningful and easy to find. For instance, you can choose <strong>Reproduction of published <span class="notranslate">Galaxy</span> results</strong> as the name of your new history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>  <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>  <li>Type the new name: <code class="language-plaintext highlighter-rouge">Reproduction of published <span class="notranslate">Galaxy</span> results</code></li>  <li>Press <kbd>Enter</kbd></li></ol></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-background-about-the-dataset"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background about the dataset</h3>
+  <p>The Iris flower data set, also known as Fisher’s or Anderson’s Iris data set, is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (<a class="citation" href="#Fisher1936">Fisher 1936</a>).
+Each row of the table represents an iris flower sample, describing its species and the dimensions in centimeters of its botanical parts, the sepals and petals.
+You can find more detailed information about this dataset on its dedicated <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia page</a>.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the file <code class="language-plaintext highlighter-rouge">iris.csv</code> from <a href="https://zenodo.org/record/1319069/files/iris.csv">Zenodo</a> or from the data library (ask your instructor)</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1319069/files/iris.csv
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">iris</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li>Check the <strong>datatype</strong>
+      <ul>
+        <li>Click on the history item to expand it to get more information.</li>
+        <li>The datatype of the iris dataset should be <code class="language-plaintext highlighter-rouge">csv</code>.</li>
+        <li><strong>Change</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datatype <em>if</em> it is different than <code class="language-plaintext highlighter-rouge">csv</code>.
+          <ul>
+            <li>Option 1: Datatypes can be <strong>autodetected</strong></li>
+            <li>Option 2: Datatypes can be <strong>manually set</strong></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-detecting-the-datatype-file-format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Detecting the datatype (file format)</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Click the <strong>Detect datatype</strong> button to have <span class="notranslate">Galaxy</span> try to autodetect it.</li></ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">csv</code></li>  <li>Click the <strong>Change datatype</strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Add an <code class="language-plaintext highlighter-rouge">#iris</code> tag <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> to the dataset</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>  <li>Click on the dataset</li>  <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>  <li>    <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>    <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>  </li>  <li>Check that the tag is appearing below the dataset name</li></ul></blockquote>
+
+      <p>Make sure the tag starts with a hash symbol (<code class="language-plaintext highlighter-rouge">#</code>), which will make the tag stick not only to this dataset, but also to any results derived from it.
+This will help you make sense of your history.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-working-with-different-types-of-datasets"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Working with different types of datasets</h3>
+  <p>Some input datasets might need more specialized treatment than explained here.
+A few data types contain more than one subfile. These are uploaded via the composite data function, which is a new tab on the right of regular upload. Then at the bottom set “composite type” to your file format. For each subfile a select box will appear with a description next to it, about which subfile has to be selected where.
+Some workflows require input files as dataset collections, in such cases “Input dataset collection” are shown as input when editing or viewing the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> menu. Collections contain several single dataset of the same type tied together. In case a <span class="notranslate">workflow</span> input requires a collection, you’ll need to build a collection out of your files after uploading them.
+<a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">A specialized training explains how to use collections</a>.</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+
+  <p>In case you want to run a published <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> on your own data, you can find explanations about the options to upload your own data <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1">here</a>.</p>
+</blockquote>
+
+<h1 id="import-and-run-a-galaxy-workflow">Import and run a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></h1>
+
+<p><span class="notranslate">Galaxy</span> workflows may be published either directly via the <span class="notranslate">Galaxy</span> server or on public <span class="notranslate">workflow</span> repositories such as <a href="https://workflowhub.eu/">WorkflowHub</a>. Thus the <span class="notranslate">workflow</span> may be present in one of the three ways:</p>
+
+<ol>
+  <li>As a .ga file or url link, which needs to be imported into <span class="notranslate">Galaxy</span></li>
+  <li>As a link from a personal <span class="notranslate">Galaxy</span> server account that needs to be added to the own <span class="notranslate">Galaxy</span> account</li>
+  <li>as a link that directly starts running the <span class="notranslate">workflow</span> in a specific <span class="notranslate">Galaxy</span> server, which is possible via the WorkflowHub website.</li>
+</ol>
+
+<p>This tutorial follows option 1, but options 2 and 3 are no more difficult</p>
+
+<blockquote class="tip">
+  <h3 id="tip-how-to-run-workflows-via-options-2-and-3"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How to run workflows via options 2 and 3</h3>
+  <p>This is not part of the training, but information in case you received a <span class="notranslate">workflow</span> of interest via way 2) or 3).</p>
+
+  <p><strong>Link from a personal <span class="notranslate">Galaxy</span></strong>:
+In case you received a link from a personal <span class="notranslate">Galaxy</span> user account</p>
+  <ol>
+    <li>you need to log into exactly the same <span class="notranslate">Galaxy</span> server from where the <span class="notranslate">workflow</span> link is shared, which should be clear from the start of the link, e.g. “https://use<span class="notranslate">galaxy</span>.eu/…”</li>
+    <li>Click on the link and on the upper right on to the plus symbol (import <span class="notranslate">workflow</span>)</li>
+    <li>Continue with Step 2 of the following hands-on box</li>
+  </ol>
+
+  <p><strong>Link from WorkflowHub</strong>:
+In WorkflowHub there is an option to directly run a <span class="notranslate">workflow</span>.</p>
+  <ol>
+    <li>Make sure that you prepared your input data on the same server as specified in the run button.</li>
+    <li>Click on “Run on use<span class="notranslate">galaxy</span>.eu”</li>
+    <li>select inputs</li>
+    <li>“Run <span class="notranslate">workflow</span>”</li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-import-and-run-workflow-available-as-ga-file-or-link"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Import and run <span class="notranslate">workflow</span> available as .ga file or link</h3>
+
+  <ol>
+    <li>
+      <p><strong>Import</strong> the <span class="notranslate">workflow</span> either via url directly from <a href="https://doi.org/10.5281/zenodo.5090049">Zenodo</a> or by uploading the .ga file</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5090049/files/main_<span class="notranslate">workflow</span>.ga
+</code></pre></div>      </div>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>  <li>Provide your <span class="notranslate">workflow</span>    <ul>      <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>      <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>    </ul>  </li>  <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p><strong>Start</strong> the <span class="notranslate">workflow</span> by clicking on the run symbol on the last column in the <span class="notranslate">workflow</span> overview list</p>
+    </li>
+    <li>
+      <p>Select the <code class="language-plaintext highlighter-rouge">iris</code> dataset as the input dataset.</p>
+    </li>
+    <li>
+      <p><strong>Run</strong> the <span class="notranslate">workflow</span> by clicking on <code class="language-plaintext highlighter-rouge">run <span class="notranslate">workflow</span></code></p>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How many history items do you have after running the <span class="notranslate">workflow</span>?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>12, out of which 4 are shown and 8 hidden (at top of history right ander the history name)</p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-hidden-datasets-in-history"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Hidden datasets in history</h3>
+  <p>Some <span class="notranslate">workflow</span> outputs might be considered as not very important intermediate results and are thus marked as getting hidden in the analysis history after they turned green. This makes the history easier to navigate through the main results which are visible in the history. Hidden datasets can be made visible individually by clicking on “hidden” on top of the history and then clicking “unhide” for the individual datasets. To unhide many dataset at once, click “operations on multiple datasets” at the top right of the history; then select all hidden datasets that you would like to unhide, then click “For all selected… unhide dataset”.</p>
+</blockquote>
+
+<p>By starting the <span class="notranslate">workflow</span> all jobs are sent to the <span class="notranslate">Galaxy</span> cluster for analysis. Sometimes it can take a bit until the datasets show up in your history. The jobs are processed one after the other or in parallel if the same input is used for several steps. Grey means waiting to run, yellow means running and green means finished. Red means there was an error.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-troubleshooting-errors"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Troubleshooting errors</h3>  <p>When someting goes wrong in <span class="notranslate">Galaxy</span>, there are a number of things you can do to find out what it was. Error messages can help you figure out whether it was a problem with one of the settings of the tool, or with the input data, or maybe there is a bug in the tool itself and the problem should be reported. Below are the steps you can follow to troubleshoot your <span class="notranslate">Galaxy</span> errors.</p>  <ol>  <li><strong>Expand</strong> the red history dataset by clicking on it.    <ul>      <li>Sometime you can already see an error message here</li>    </ul>  </li>  <li>    <p><strong>View the error message</strong> by clicking on the <strong>bug icon</strong> <i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-bug</span></p>  </li>  <li><strong>Check the logs.</strong> Output (stdout) and error logs (stderr) of the tool are available:    <ul>      <li>Expand the history item</li>      <li>Click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> icon</li>      <li>Scroll down to the <strong>Job Information</strong> section to view the 2 logs:        <ul>          <li>Tool Standard Output</li>          <li>Tool Standard Error</li>        </ul>      </li>    </ul>  </li>  <li><strong>Submit a bug report!</strong> If you are still unsure what the problem is.    <ul>      <li>Click on the bug icon <i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-bug</span></li>      <li>Write down any information you think might help solve the problem        <ul>          <li>See <a href="/training-material/faqs/gtn/issues_galaxy.html">this FAQ</a> on how to write good bug reports</li>        </ul>      </li>      <li>Click <strong><i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-bug</span> Report</strong> button</li>      <li>In the meantime, you can ask for help in the <a href="https://gitter.im/galaxyproject/Lobby"><span class="notranslate">Galaxy</span> Gitter Channel</a> or the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a>, or you can browse the <a href="https://help.galaxyproject.org/"><span class="notranslate">Galaxy</span> Help Forum</a> to see if others have encountered the same problem before.</li>    </ul>  </li></ol></blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-the-tool-stays-grey"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> The tool stays grey</h3>
+  <p>This scenario will likely not happen with this training analysis, but might happen with a real <span class="notranslate">workflow</span>. The tool runs are scheduled on the computing infrastructures according to their consumption of cores and memory. Thus, tools that are assigned lots of cores and/or memory need to wait until an appropriate computing spot is available. Several <span class="notranslate">Galaxy</span> server display the current computational load which gives you an idea how busy it currently is.</p>
+</blockquote>
+
+<p>Each dataset that turns green can already be inspected even though later datasets are still running. The second part of the training will focus on how to inspect datasets in a history.</p>
+
+<h1 id="inspecting-the-analysis-history">Inspecting the analysis history</h1>
+
+<p>Each history item represents one file or dataset, except when collections are used. History items are numbered, duplicates are not possible because any type of dataset manipulation will automatically generate a separate dataset in the history. Some tools produce several output files and therefore the number of history items can be larger than the number of steps in a <span class="notranslate">workflow</span>. Dataset names in the analysis history are not relevant for the tool run, therefore they can be adjusted in order to make the history easier to understand. The default name of a history item is composed of the tool name that was run and the history item number(s) of the input file(s), e.g. ‘Unique on data 5’</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-inspect-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Inspect history</h3>
+
+  <ol>
+    <li>
+      <p><strong>Vizualize</strong> the two scatter plots by clicking on their eye icons (view data)</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-using-the-scratchbook-to-view-multiple-datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using the Scratchbook to view multiple datasets</h3>  <p>If you would like to view two or more datasets at once, you can use the <strong>Scratchbook</strong> feature in <span class="notranslate">Galaxy</span>:</p>  <ol>  <li><strong>Click</strong> on the <em>Scratchbook</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu bar.    <ul>      <li>You should see a little checkmark on the icon now</li>    </ul>  </li>  <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the output    <ul>      <li>You should see the output in a window overlayed over <span class="notranslate">Galaxy</span></li>      <li>You can resize this window by dragging the bottom-right corner</li>    </ul>  </li>  <li><strong>Click</strong> outside the file to exit the Scratchbook</li>  <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a second dataset from your history    <ul>      <li>You should now see a second window with the new dataset</li>      <li>This makes it easier to compare the two outputs</li>    </ul>  </li>  <li>Repeat this for as many files as you would like to compare</li>  <li>You can turn off the <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> by clicking on the icon again</li></ol></blockquote>
+    </li>
+    <li>
+      <p><strong>Show</strong> all datasets by clicking on <code class="language-plaintext highlighter-rouge">hidden</code> on top of your history, right below the history name</p>
+    </li>
+    <li>
+      <p><strong>Compare</strong> the <code class="language-plaintext highlighter-rouge">Convert csv to tabular</code> file with the <code class="language-plaintext highlighter-rouge">Datamash</code> file side by side using the scratchbook</p>
+    </li>
+    <li>
+      <p><strong>Track</strong> how the <code class="language-plaintext highlighter-rouge">Datamash</code> results where obtained by clicking on the <code class="language-plaintext highlighter-rouge">Datamash</code> item in the history and then on its <code class="language-plaintext highlighter-rouge">i</code> icon (view details). The performed operations can be found in the section <code class="language-plaintext highlighter-rouge">Tool parameters</code></p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What are the different Iris species?</li>
+          <li>How many lines has the <code class="language-plaintext highlighter-rouge">Convert csv to tabular</code> file?</li>
+          <li>Which column was grouped in during the Datamash operation?</li>
+          <li>Which column of the <code class="language-plaintext highlighter-rouge">Remove beginning</code> file contains sepal length and which petal length?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>The 3 different Iris species are:
+              <ul>
+                <li>setosa</li>
+                <li>versicolor</li>
+                <li>virginica</li>
+              </ul>
+            </li>
+            <li>
+              <p>151 lines (by clicking on the file one can see the line count under its name)</p>
+            </li>
+            <li>
+              <p>Column 5 (details of Datamash tool: Group by fields - 5)</p>
+            </li>
+            <li>Column 1 and 3 (the dataset was generated by removing the header line from data 2, thus the content of the columns is the same as in data file 2)</li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If you got the same answers as written in the above solution box, then congratulations! You have imported and fully reproduced the results of a previous analysis.</p>
+
+<p>However, sometimes you may wish to do more, like…</p>
+
+<h1 id="manipulating-the-analysis">Manipulating the analysis</h1>
+
+<p>Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the <span class="notranslate">workflow</span> editor, which makes it easy to change many parameters at once (training on <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html">Using <span class="notranslate">Workflow</span> Parameters</a>) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the <span class="notranslate">Galaxy</span> history with the <code class="language-plaintext highlighter-rouge">re-run</code> option.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-manipulate-the-analysis-steps"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Manipulate the analysis steps</h3>
+
+  <ol>
+    <li>
+      <p><strong>Rerun</strong> the Scatterplot to plot Sepal length vs. Petal length</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-re-running-a-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Re-running a tool</h3>  <ol>  <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>  <li><strong>Click</strong> re-run <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li></ol>  <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p></blockquote>
+    </li>
+  </ol>
+
+  <ul>
+    <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+    <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+  </ul>
+
+</blockquote>
+
+<h1 id="additional-exercise-import-a-published-analysis-history-and-explore-it">Additional Exercise: Import a published analysis history and explore it</h1>
+
+<p>Often not only workflows and raw data are published, but also the full <span class="notranslate">Galaxy</span> histories. These histories can either be inspected via their provided link, or imported in order to enable manipulating them in your own <span class="notranslate">Galaxy</span> account.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-importing-a-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Importing a history</h3>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  a published history shared via an EU Server account</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://use<span class="notranslate">galaxy</span>.eu/u/annefou/h/<span class="notranslate">galaxy</span>101-for-everyone-diamond-dataset
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-import-an-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Import an history</h3>  <ol>  <li>Open the link to the shared history</li>  <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>  <li>Enter a title for the new history</li>  <li>Click on <strong>Import</strong></li></ol></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">diamonds</code> dataset comes from the well-known <a href="https://ggplot2.tidyverse.org/reference/diamonds.html">ggplot2</a> package developed by Hadley Wickham and was initially collected from the Diamond Search Engine in 2008.
+The original dataset consists of 53940 specimen of diamonds, for which it lists the prices and various properties.
+For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained. The same <span class="notranslate">workflow</span> as before was used to re-analysis this second dataset and create the analysis history, which highlights the re-usability of workflows across inputs.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-the-4-cs-of-diamond-grading"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> The 4 Cs of diamond grading</h3>
+  <p>According to the <a href="https://4cs.gia.edu/wp-content/uploads/2013/03/All-Scales.jpg">GIA’s (Gemological Institute of America) diamond grading system</a></p>
+  <ul>
+    <li><strong>Carat</strong> refers to the weight of the diamond when measured on a scale</li>
+    <li><strong>Cut</strong> refers to the quality of the cut and can take the grades <em>Fair</em>, <em>Good</em>, <em>Very Good</em>, <em>Premium</em> and <em>Ideal</em></li>
+    <li><strong>Color</strong> describes the overall tint, or lack thereof, of the diamond from colorless/white to yellow and is given on a letter scale ranging from D to Z (D being the best, known as colorless).</li>
+    <li><strong>Clarity</strong> describes the amount and location of naturally occuring “inclusions” found in nearly all diamonds on a scale of eleven grades ranging from <em>Flawless</em> (the ideal situation) to <em>I3</em> (Included level 3, the worst quality).</li>
+  </ul>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What are the different Cut categories?</li>
+    <li>How many lines has the <code class="language-plaintext highlighter-rouge">diamonds.csv</code> file?</li>
+    <li>Is the color an important factor for the Diamond price?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The 5 different Cut categories are:
+        <ul>
+          <li>Fair</li>
+          <li>Good</li>
+          <li>Ideal</li>
+          <li>Premium</li>
+          <li>Very Good</li>
+        </ul>
+      </li>
+      <li>
+        <p>53940 lines (by clicking on the file one can see the line count under its name)</p>
+      </li>
+      <li>We can create a new scatter plot and use color as a factor (Advanced, column differentiating the different groups: 3). Then, holding carat weight constant, we see on
+the scatter plot that color is linked to the price of the diamond. So color also explains a lot of the variance found in price!
+<img src="../../images/reproduce-diamond-colour.png" alt="price-diamond-color-dependence" loading="lazy" /></li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just reproduced your first analysis in <span class="notranslate">Galaxy</span>.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Galaxy provides an easy way to load published data into a Galaxy history</p>
+</li>
+                        
+                        <li><p>Galaxy allows to re-run a published Galaxy workflow!</p>
+</li>
+                        
+                        <li><p>Galaxy provides ways to inspect and re-use Galaxy histories</p>
+</li>
+                        
+                        <li><p>Galaxy provides an easy way to re-run tasks from histories</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/introduction/faqs/">FAQ page for the Introduction to Galaxy Analyses topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Fisher1936">Fisher, R. A., 1936 <b>The use of multiple measurements in taxonomic problems</b>. Annals of Eugenics 7: 179–188.</span>
+    
+    
+    <a href="https://doi.org/10.1111/j.1469-1809.1936.tb02137.x">10.1111/j.1469-1809.1936.tb02137.x</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1469-1809.1936.tb02137.x">https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1469-1809.1936.tb02137.x</a>
+      
+    
+
+</li>
+<li><span id="Afgan_2018">Afgan, E., D. Baker, B. Batut, M. van den Beek, D. Bouvier <i>et al.</i>, 2018 <b>The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2018 update</b>. Nucleic Acids Research 46: W537–W544.</span>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gky379">10.1093/nar/gky379</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Gr_ning_2018">Grüning, B., J. Chilton, J. Köster, R. Dale, N. Soranzo <i>et al.</i>, 2018 <b>Practical Computational Reproducibility in the Life Sciences</b>. Cell Systems 6: 631–635.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.cels.2018.03.014">10.1016/j.cels.2018.03.014</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=How to reproduce published Galaxy analyses (Introduction to Galaxy Analyses)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Melanie Föll, Anne Fouilloux, 2021 <b>How to reproduce published Galaxy analyses (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{introduction-galaxy-reproduce,
+author = "Melanie Föll and Anne Fouilloux",
+title = "How to reproduce published Galaxy analyses (Galaxy Training Materials)",
+year = "2021",
+month = "08",
+day = "10"
+url = "\url{https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
