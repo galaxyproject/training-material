@@ -1073,7 +1073,7 @@
         </ul>
         
 
-        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 2, 2021 </div>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 6, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
     </blockquote>
@@ -1117,14 +1117,14 @@ resources, thus reducing queue times on the day of the training.</p>
     <li>
       <p>In your <code class="language-plaintext highlighter-rouge">requirements.yml</code> add the TIaaS ansible role:</p>
 
-      <div data-commit="Add grafana requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+      <div data-commit="Add tiaas2 requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
 </span><span class="p">@@ -34,3 +34,5 @@</span>
    version: 0.14.2
  - src: dj-wasabi.telegraf
    version: 0.12.0
 <span class="gi">+- src: use<span class="notranslate">galaxy</span>_eu.tiaas2
-+  version: 0.0.6
++  version: 0.0.8
 </span>   
 </code></pre></div>      </div>
 
@@ -1170,7 +1170,7 @@ resources, thus reducing queue times on the day of the training.</p>
 </span> postgresql_objects_databases:
    - name: <span class="notranslate">galaxy</span>
      owner: <span class="notranslate">galaxy</span>
-<span class="p">@@ -16,6 +17,22 @@</span> postgresql_objects_privileges:
+<span class="p">@@ -16,6 +17,27 @@</span> postgresql_objects_privileges:
      roles: telegraf
      privs: SELECT
      objs: ALL_IN_SCHEMA
@@ -1186,6 +1186,11 @@ resources, thus reducing queue times on the day of the training.</p>
 +    privs: SELECT,INSERT
 +  - database: <span class="notranslate">galaxy</span>
 +    roles: tiaas
++    objs: group_role_association
++    type: table
++    privs: DELETE
++  - database: <span class="notranslate">galaxy</span>
++    roles: tiaas
 +    objs: role_id_seq,<span class="notranslate">galaxy</span>_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 +    type: sequence
 +    privs: USAGE,SELECT
@@ -1195,6 +1200,18 @@ resources, thus reducing queue times on the day of the training.</p>
  postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
    
 </code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-why-does-tiaas-get-delete-privileges-on-galaxys-database"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why does TIaaS get <code class="language-plaintext highlighter-rouge">DELETE</code> privileges on <span class="notranslate">Galaxy</span>’s Database?</h3>
+        <p>The <code class="language-plaintext highlighter-rouge">DELETE</code> privilege is limited in scope to one table: <code class="language-plaintext highlighter-rouge">group_role_association</code>. This allows TIaaS to
+disassociate training groups from roles in the <span class="notranslate">Galaxy</span> database after the training event date has passed, so that
+users who participated in a training return to using normal (non-training) resources after the training ends.</p>
+
+        <p>The <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role will create a <a href="https://manpages.debian.org/stable/cron/cron.8.en.html">cron</a> job
+to perform this process every night at midnight. You can control when this runs (or disable it) using
+<a href="https://github.com/usegalaxy-eu/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20">the tiaas_disassociate_training_roles variable</a>.</p>
+
+      </blockquote>
     </li>
     <li>
       <p>We need to add the <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role to the end of the playbook (<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>)</p>
@@ -1439,7 +1456,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Add to list of deployed rules" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -135,6 +135,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
+</span><span class="p">@@ -140,6 +140,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
  <span class="notranslate">galaxy</span>_dynamic_job_rules:
  - my_rules.py
  - map_resources.py
@@ -1592,8 +1609,8 @@ resources, thus reducing queue times on the day of the training.</p>
 author = "Helena Rasche and Saskia Hiltemann",
 title = "Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)",
 year = "2021",
-month = "07",
-day = "02"
+month = "08",
+day = "06"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
