@@ -68,10 +68,10 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
 >    +- src: usegalaxy_eu.tiaas2
->    +  version: 0.0.6
+>    +  version: 0.0.8
 >    {% endraw %}
 >    ```
->    {: data-commit="Add grafana requirement"}
+>    {: data-commit="Add tiaas2 requirement"}
 >
 >    And run the install step:
 >
@@ -119,7 +119,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >     postgresql_objects_databases:
 >       - name: galaxy
 >         owner: galaxy
->    @@ -16,6 +17,22 @@ postgresql_objects_privileges:
+>    @@ -16,6 +17,27 @@ postgresql_objects_privileges:
 >         roles: telegraf
 >         privs: SELECT
 >         objs: ALL_IN_SCHEMA
@@ -135,6 +135,11 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    privs: SELECT,INSERT
 >    +  - database: galaxy
 >    +    roles: tiaas
+>    +    objs: group_role_association
+>    +    type: table
+>    +    privs: DELETE
+>    +  - database: galaxy
+>    +    roles: tiaas
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +    type: sequence
 >    +    privs: USAGE,SELECT
@@ -146,6 +151,16 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
 >
+>    > ### {% icon tip %} Why does TIaaS get `DELETE` privileges on Galaxy's Database?
+>    > The `DELETE` privilege is limited in scope to one table: `group_role_association`. This allows TIaaS to
+>    > disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
+>    > users who participated in a training return to using normal (non-training) resources after the training ends.
+>    >
+>    > The `usegalaxy_eu.tiaas2` role will create a [cron](https://manpages.debian.org/stable/cron/cron.8.en.html) job
+>    > to perform this process every night at midnight. You can control when this runs (or disable it) using
+>    > [the tiaas_disassociate_training_roles variable](https://github.com/usegalaxy-eu/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20).
+>    >
+>    {: .tip}
 >
 > 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook (`galaxy.yml`)
 >    {% raw %}
@@ -333,7 +348,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -135,6 +135,7 @@ galaxy_local_tools:
+>    @@ -140,6 +140,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
