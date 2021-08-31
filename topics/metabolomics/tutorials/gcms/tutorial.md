@@ -263,7 +263,7 @@ When you have process **all or only needed** steps described before, you can con
 > 
 > You may have notice that the XCMS tools generate **output names that contain the different XCMS steps you used**, allowing easy traceability while browsing your history. Hence, we highly recommend you to rename it **with something short**, e.g. "xset", "XCMSSetObject", or anything not too long that you may find convenient.
 > {: .text-justify}
-> {% include snippets/rename_dataset.md %}
+> {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .comment}
 
