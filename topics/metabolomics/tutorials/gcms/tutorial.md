@@ -1,5 +1,6 @@
 --- 
 layout : tutorial_hands_on
+enable: false
 
 title : 'Mass spectrometry : GC-MS analysis with metaMS package'
 level : Introductory
