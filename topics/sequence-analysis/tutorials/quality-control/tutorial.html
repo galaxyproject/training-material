@@ -313,7 +313,7 @@
   "name": "Hands-on for 'Quality Control' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
   "timeRequired": "PT1H30M",
-  "description": "The questions this  addresses are:\n - How to perform quality control of NGS raw data (FASTQ)?\n - What are the quality parameters to check for a dataset?\n - How to improve the quality of a dataset?\n\n\\nThe objectives are:\n - Manipulate FASTQ files\n - Assess quality from a FASTQ file\n - Use FastQC tool\n - Understand FastQC output\n - Use tools for quality correction\n - Use a tool to aggregate FastQC output\n - Process single-end and paired-end data\n\n",
+  "description": "The questions this  addresses are:\n - How to perform quality control of NGS raw data (FASTQ)?\n - What are the quality parameters to check for a dataset?\n - How to improve the quality of a dataset?\n\n\\nThe objectives are:\n - Assess FASTQ quality using FASTQE 🧬😎 and FastQC\n - Perform quality correction with Cutadapt\n - Summarise quality metrics MultiQC\n - Process single-end and paired-end data\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -335,12 +335,20 @@
     {
       "@type": "Person",
       "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
     }
   ],
   "about": [
@@ -361,7 +369,7 @@
 
     <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a>
+ <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a> <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Avatar">Maria Doyle</a>
 
 </div>
 
@@ -385,22 +393,13 @@
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
         <ul>
         
-        <li><p>Manipulate FASTQ files</p>
+        <li><p>Assess FASTQ quality using FASTQE 🧬😎 and FastQC</p>
 </li>
         
-        <li><p>Assess quality from a FASTQ file</p>
+        <li><p>Perform quality correction with Cutadapt</p>
 </li>
         
-        <li><p>Use FastQC tool</p>
-</li>
-        
-        <li><p>Understand FastQC output</p>
-</li>
-        
-        <li><p>Use tools for quality correction</p>
-</li>
-        
-        <li><p>Use a tool to aggregate FastQC output</p>
+        <li><p>Summarise quality metrics MultiQC</p>
 </li>
         
         <li><p>Process single-end and paired-end data</p>
@@ -725,7 +724,7 @@
         </ul>
         
 
-        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2021 </div>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 1, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
     </blockquote>
@@ -753,7 +752,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 <ol id="markdown-toc">
   <li><a href="#inspect-a-raw-sequence-file" id="markdown-toc-inspect-a-raw-sequence-file">Inspect a raw sequence file</a></li>
-  <li><a href="#assess-the-read-quality" id="markdown-toc-assess-the-read-quality">Assess the Read Quality</a>    <ol>
+  <li><a href="#assess-quality-with-fastqe-" id="markdown-toc-assess-quality-with-fastqe-">Assess quality with FASTQE 🧬😎</a></li>
+  <li><a href="#assess-quality-with-fastqc" id="markdown-toc-assess-quality-with-fastqc">Assess quality with FastQC</a>    <ol>
       <li><a href="#per-base-sequence-quality" id="markdown-toc-per-base-sequence-quality">Per base sequence quality</a></li>
       <li><a href="#per-sequence-quality-scores" id="markdown-toc-per-sequence-quality-scores">Per sequence quality scores</a></li>
       <li><a href="#per-base-sequence-content" id="markdown-toc-per-base-sequence-content">Per base sequence content</a></li>
@@ -762,8 +762,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
       <li><a href="#over-represented-sequences" id="markdown-toc-over-represented-sequences">Over-represented sequences</a></li>
     </ol>
   </li>
-  <li><a href="#filter-and-trim" id="markdown-toc-filter-and-trim">Filter and Trim</a></li>
-  <li><a href="#process-paired-end-data" id="markdown-toc-process-paired-end-data">Process paired-end data</a></li>
+  <li><a href="#trim-and-filter" id="markdown-toc-trim-and-filter">Trim and filter</a></li>
+  <li><a href="#processing-multiple-datasets" id="markdown-toc-processing-multiple-datasets">Processing multiple datasets</a>    <ol>
+      <li><a href="#process-paired-end-data" id="markdown-toc-process-paired-end-data">Process paired-end data</a></li>
+    </ol>
+  </li>
 </ol>
 
 </blockquote>
@@ -783,23 +786,16 @@ Sequence quality control is therefore an essential first step in your analysis. 
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>  <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>  <li>Type the new name</li>  <li>Press <kbd>Enter</kbd></li></ol></blockquote>
     </li>
     <li>
-      <p>Import <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_1.fastq</code> from <a href="https://zenodo.org/record/61771">Zenodo</a> or from the data library (ask your instructor)</p>
+      <p>Import the file <code class="language-plaintext highlighter-rouge">female_oral2.fastq-4143.gz</code> from <a href="https://zenodo.org/record/3977236">Zenodo</a> or from the data library (ask your instructor)
+This is a microbiome sample from a snake <a class="citation" href="#StJacques2021">Jacques <i>et al.</i> 2021</a>.</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3977236/files/female_oral2.fastq-4143.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
-
-      <p>As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
-    </li>
-    <li>
-      <p>Rename the file to <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code></p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
     </li>
   </ol>
 
@@ -849,13 +845,13 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 <p>So for example, the first sequence in our file is:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-GTGGATATGGATATCCAAATTATATTTGCATAATTTG
-+SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@M00970:337:000000000-BR5KF:1:1102:17745:1557 1:N:0:CGCAGAAC+ACAGAGTT
+GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTATGCCGTCTTCTGCTTGAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAGAAGCAAATGACGATTCAAGAAAGAAAAAAACACAGAATACTAACAATAAGTCATAAACATCATCAACATAAAAAAGGAAATACACTTACAACACATATCAATATCTAAAATAAATGATCAGCACACAACATGACGATTACCACACATGTGTACTACAAGTCAACTA
++
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGGGGGGGGFGGGGGGGGGGGGGGFGGG+38+35*311*6,,31=******441+++0+0++0+*1*2++2++0*+*2*02*/***1*+++0+0++38++00++++++++++0+0+2++*+*+*+*+*****+0**+0**+***+)*.***1**//*)***)/)*)))*)))*),)0(((-((((-.(4(,,))).,(())))))).)))))))-))-(
 </code></pre></div></div>
 
-<p>It means that the fragment named <code class="language-plaintext highlighter-rouge">SRR031716.1</code> corresponds to the <span class="notranslate">DNA</span> sequence <code class="language-plaintext highlighter-rouge">GTGGATATGGATATCCAAATTATATTTGCATAATTTG</code> and this sequence has been sequenced with a quality <code class="language-plaintext highlighter-rouge">IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII</code>.</p>
+<p>It means that the fragment named <code class="language-plaintext highlighter-rouge">@M00970</code> corresponds to the <span class="notranslate">DNA</span> sequence <code class="language-plaintext highlighter-rouge">GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTATGCCGTCTTCTGCTTGAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAGAAGCAAATGACGATTCAAGAAAGAAAAAAACACAGAATACTAACAATAAGTCATAAACATCATCAACATAAAAAAGGAAATACACTTACAACACATATCAATATCTAAAATAAATGATCAGCACACAACATGACGATTACCACACATGTGTACTACAAGTCAACTA</code> and this sequence has been sequenced with a quality <code class="language-plaintext highlighter-rouge">GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGGGGGGGGFGGGGGGGGGGGGGGFGGG+38+35*311*6,,31=******441+++0+0++0+*1*2++2++0*+*2*02*/***1*+++0+0++38++00++++++++++0+0+2++*+*+*+*+*****+0**+0**+***+)*.***1**//*)***)/)*)))*)))*),)0(((-((((-.(4(,,))).,(())))))).)))))))-))-(</code>.</p>
 
 <p>But what does this quality score mean?</p>
 
@@ -919,9 +915,9 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The worst Phred score is the smallest one, so 0. For Illumina, it corresponds to the <code class="language-plaintext highlighter-rouge">!</code> character.</li>
-      <li>The 3rd nucleotide of the 1st sequence has a ASCII character <code class="language-plaintext highlighter-rouge">I</code>, which correspond to a score of 40.</li>
-      <li>The corresponding nucleotide <code class="language-plaintext highlighter-rouge">G</code> has an accuracy of 99.99%</li>
+      <li>The worst Phred score is the smallest one, so 0. For Illumina 1.8+, it corresponds to the <code class="language-plaintext highlighter-rouge">!</code> character.</li>
+      <li>The 3rd nucleotide of the 1st sequence has a ASCII character <code class="language-plaintext highlighter-rouge">G</code>, which correspond to a score of 38.</li>
+      <li>The corresponding nucleotide <code class="language-plaintext highlighter-rouge">G</code> has an accuracy of almost 99.99%</li>
     </ol>
 
   </blockquote>
@@ -929,58 +925,200 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-  <p>The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, the tool we will use in the next step, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ).</p>
+  <p>The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, a tool we will use later in this tutorial, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ).</p>
 </blockquote>
 
-<p>When looking at the file in <span class="notranslate">Galaxy</span>, it looks like most the nucleotides have a high score (<code class="language-plaintext highlighter-rouge">I</code> corresponding to a score 40). Is it true for all sequences? And along the full sequence length?</p>
+<p>When looking at the file in <span class="notranslate">Galaxy</span>, it looks like most the nucleotides have a high score (<code class="language-plaintext highlighter-rouge">G</code> corresponding to a score 38). Is it true for all sequences? And along the full sequence length?</p>
 
-<h1 id="assess-the-read-quality">Assess the Read Quality</h1>
+<h1 id="assess-quality-with-fastqe-">Assess quality with FASTQE 🧬😎</h1>
 
-<p>To estimate sequence quality along all sequences, we now use <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>. It is an open-source tool that provides a simple way to quality control raw sequence data. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.</p>
+<p>To take a look at sequence quality along all sequences, we can use <a href="https://fastqe.com/">FASTQE</a>. It is an open-source tool that provides a simple and fun way to quality control raw sequence data and print them as emoji. You can use it to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality check</h3>
 
   <ol>
-    <li>Run <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2"><strong>FASTQE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters
       <ul>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQ data”</em>: <code class="language-plaintext highlighter-rouge">female_oral2.fastq-4143.gz</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Score types to show”</em>: <code class="language-plaintext highlighter-rouge">Mean</code></li>
       </ul>
     </li>
-    <li>Inspect the generated HTML files</li>
+    <li>Inspect the generated HTML file</li>
+  </ol>
+
+</blockquote>
+
+<p>Rather than looking at quality scores for each individual read, FASTQE looks at quality collectively across all <span class="notranslate">reads</span> within a sample and can calculate the mean for each nucleotide position along the length of the <span class="notranslate">reads</span>. Below shows the mean values for this dataset.</p>
+
+<figure id="figure-1"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> FASTQE mean scores</figcaption></figure>
+
+<p>You can see the score for each emoji <a href="https://github.com/fastqe/fastqe#scale">here</a>. The emojis below, with Phred scores less than 20, are the ones we hope we don’t see much.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Phred Quality Score</th>
+      <th>ASCII code</th>
+      <th>Emoji</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>!</td>
+      <td>🚫</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>”</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>#</td>
+      <td>👺</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>$</td>
+      <td>💔</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>%</td>
+      <td>🙅</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>&amp;</td>
+      <td>👾</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>’</td>
+      <td>👿</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>(</td>
+      <td>💀</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>)</td>
+      <td>👻</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>*</td>
+      <td>🙈</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>+</td>
+      <td>🙉</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>,</td>
+      <td>🙊</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>-</td>
+      <td>🐵</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>.</td>
+      <td>😿</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>/</td>
+      <td>😾</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0</td>
+      <td>🙀</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>1</td>
+      <td>💣</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2</td>
+      <td>🔥</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>3</td>
+      <td>😡</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>4</td>
+      <td>💩</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What is the lowest mean score in this dataset?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The lowest score in this dataset is 😿 13.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="assess-quality-with-fastqc">Assess quality with FastQC</h1>
+
+<p>An additional or alte<span class="notranslate">rna</span>tive way we can check sequence quality is with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>. It provides a modular set of analyses which you can use to check whether your data has any problems of which you should be aware before doing any further analysis.  We can use it, for example, to assess whether there are known adapters present in the data. We’ll run it on the FASTQ file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-check-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality check</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FASTQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">Cutadapt Read 1 Output</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated HTML file</li>
   </ol>
 
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Which Phred encoding is used in the FASTQ file for these sequences?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>The Phred scores are encoded using <code class="language-plaintext highlighter-rouge">Sanger / Illumina 1.9</code> (<code class="language-plaintext highlighter-rouge">Encoding</code> in the top table).</p>
   </blockquote>
 </blockquote>
 
 <h2 id="per-base-sequence-quality">Per base sequence quality</h2>
 
-<p>Rather than looking at quality scores for each individual read, FastQC looks at quality collectively across all <span class="notranslate">reads</span> within a sample:</p>
+<p>With FastQC we can use the per base sequence quality plot to check the base quality of the <span class="notranslate">reads</span>, similar to what we did with FASTQE.</p>
 
-<figure id="figure-1"><img src="../../images/quality-control/per_base_sequence_quality.png" alt="Per base sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Per base sequence quality</figcaption></figure>
+<figure id="figure-2"><img src="../../images/quality-control/per_base_sequence_quality-before.png" alt="Per base sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Per base sequence quality</figcaption></figure>
 
-<p>On the x-axis are the base position in the read. In this example, the sample contains <span class="notranslate">reads</span> that are 37 bp long.</p>
+<p>On the x-axis are the base position in the read. In this example, the sample contains <span class="notranslate">reads</span> that are up to 296 bp long.</p>
 
 <blockquote class="details">
   <h3 id="details-non-uniform-x-axis"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Non uniform x-axis</h3>
 
-  <p>The x-axis is not always uniform. When you have long <span class="notranslate">reads</span>, some binning is applied to keep things compact:</p>
-
-  <figure id="figure-2"><img src="../../images/quality-control/per_base_sequence_quality_binned.png" alt="Per base sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Per base sequence quality with binned <span class="notranslate">reads</span></figcaption></figure>
-
-  <p>It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. Data binning means grouping and is a data pre-processing technique used to reduce the effects of minor observation errors. The number of base positions binned together depends on the length of the read. With 150 bp <span class="notranslate">reads</span>, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter <span class="notranslate">reads</span> will have smaller windows and longer <span class="notranslate">reads</span> larger windows.</p>
-
-  <p>Binning can be removed when running FastQC</p>
+  <p>The x-axis is not always uniform. When you have long <span class="notranslate">reads</span>, some binning is applied to keep things compact. We can see that in our sample. It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. Data binning means grouping and is a data pre-processing technique used to reduce the effects of minor observation errors. The number of base positions binned together depends on the length of the read. With <span class="notranslate">reads</span> &gt;50bp, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter <span class="notranslate">reads</span> will have smaller windows and longer <span class="notranslate">reads</span> larger windows. Binning can be removed when running FastQC by setting the paramter “Disable grouping of bases for <span class="notranslate">reads</span> &gt;50bp” to Yes.</p>
 </blockquote>
 
 <p>For each position, a boxplot is drawn with:</p>
@@ -992,7 +1130,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
   <li>the mean quality, represented by the blue line</li>
 </ul>
 
-<p>The y-axis shows the quality scores. The higher the score, the better the base call. The background of the  graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and <span class="notranslate">reads</span> of poor quality (red).</p>
+<p>The y-axis shows the quality scores. The higher the score, the better the base call. The background of the graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and <span class="notranslate">reads</span> of poor quality (red).</p>
 
 <p>It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of <span class="notranslate">reads</span> on most platforms will drop at the end of the read. This is often due to signal decay or phasing during the sequencing run. The recent developments in chemistry applied to sequencing has improved this somewhat, but <span class="notranslate">reads</span> are now longer than ever.</p>
 
@@ -1020,7 +1158,9 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 </blockquote>
 
 <blockquote class="details">
-  <h3 id="details-some-other-sequencing-error-profiles-that-you-could-see"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Some other sequencing error profiles that you could see</h3>
+  <h3 id="details-other-sequence-quality-profiles"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other sequence quality profiles</h3>
+
+  <p>These are some per base sequence quality profiles that can indicate issues with the sequencing.</p>
 
   <ul>
     <li>
@@ -1058,57 +1198,93 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>How is the mean score changing along the sequence?</li>
+    <li>How does the mean quality score change along the sequence?</li>
     <li>Is this tendency seen in all sequences?</li>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The mean score over the sequence is dropping at the end of the sequences. This is very common: the sequencers are incorporating more incorrect nucleotides at the end. But the overall score stays good: over 28.</li>
-      <li>The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.</li>
+      <li>The mean quality score (blue line) drops about midway though these sequences. It is common for the mean quality to drop towards the end of the sequences, as the sequencers are incorporating more incorrect nucleotides at the end. However, in this sample there is a very large drop in quality from the middle onwards.</li>
+      <li>The box plots are getting wider from position ~100.  It means a lot of sequences have their score dropping from the middle of the sequence. After 100 nucleotides, more than 10% of the sequences have scores below 20.</li>
     </ol>
 
   </blockquote>
 </blockquote>
 
-<p>When the median quality is below a Phred score of ~20, we should consider trimming away bad quality bases from the sequence. We will explain that process in the next section.</p>
+<p>When the median quality is below a Phred score of ~20, we should consider trimming away bad quality bases from the sequence. We will explain that process in the Trim and filter section.</p>
 
-<p>FastQC produces other diagnostic plots to assess sample quality.</p>
+<h4 id="adapter-content">Adapter Content</h4>
+
+<figure id="figure-3"><img src="../../images/quality-control/adapter_content-before.png" alt="Adapter Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Adapter Content</figcaption></figure>
+
+<p>The plot shows the cumulative percentage of <span class="notranslate">reads</span> with the different adapter sequences at each position. Once an adapter sequence is seen in a read it  is counted as being present right through to the end of the read so the percentage increases with the read length. FastQC can detect some adapters by default (e.g. Illumina, Nextera), for others we could provide a contaminants file as an input to the FastQC tool.</p>
+
+<p>Ideally Illumina sequence data should not have any adapter sequence present. But with long <span class="notranslate">reads</span>, some of the library inserts are shorter than the read length resulting in read-through to the adapter at the 3’ end of the read. This microbiome sample has relatively long <span class="notranslate">reads</span> and we can see Nextera dapater has been detected.</p>
+
+<blockquote class="details">
+  <h3 id="details-other-adapter-content-profiles"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other adapter content profiles</h3>
+
+  <p>Adapter content may also be detected with <span class="notranslate">RNA</span>-Seq libraries where the distribution of library insert sizes is varied and likely to include some short inserts.</p>
+
+  <p><img src="../../images/quality-control/adapter_content_rna_seq.png" alt="Adapter Content" loading="lazy" /></p>
+
+</blockquote>
+
+<p>We can run an trimming tool such as Cutadapt to remove this adapter. We will explain that process in the filter and trim section.</p>
 
 <blockquote class="comment">
   <h3 id="tip-take-a-shortcut"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Take a shortcut</h3>
 
-  <p>The following sections go into detail about some of the other plots generated by FastQC.
+  <p>The following sections go into detail about some of the other plots generated by FastQC. Note that some plots/modules may give warnings but be normal
+for the type of data you’re working with, as discussed below and <a href="https://rtsf.natsci.msu.edu/genomics/tech-notes/fastqc-tutorial-and-faq/">here</a>.
+The other plots give us information to more deeply understand the quality of the data, and to see if changes could be made in the lab to get higher-quality data in the future.
 These sections are <strong>optional</strong>, and if you would like to skip these you can:</p>
   <ul>
-    <li>Jump straight to the <a href="#filter-and-trim">next section</a> to continue with filtering and trimming of your dataset</li>
+    <li>Jump straight to the <a href="#trim-and-filter">next section</a> to learn about trimming paired-end data</li>
   </ul>
+</blockquote>
+
+<h4 id="per-tile-sequence-quality">Per tile sequence quality</h4>
+
+<p>This plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell. The plot shows the deviation from the average quality for each flowcell tile. The hotter colours indicate that <span class="notranslate">reads</span> in the given tile have worse qualities for that position than <span class="notranslate">reads</span> in other tiles. With this sample, you can see that certain tiles show consistently poor quality, especially from ~100bp onwards. A good plot should be blue all over.</p>
+
+<figure id="figure-4"><img src="../../images/quality-control/per_tile_sequence_quality-before.png" alt="Per tile sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per tile sequence quality</figcaption></figure>
+
+<p>This plot will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came.</p>
+
+<blockquote class="details">
+  <h3 id="details-other-tile-quality-profiles"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other tile quality profiles</h3>
+
+  <p>In some cases, the chemicals used during sequencing becoming a bit exhausted over the time and the last tiles got worst chemicals which makes the sequencing reactions a bit error-prone. The “Per tile sequence quality” graph will then have some horizontal lines like this:</p>
+
+  <p><img src="../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png" alt="Per tile sequence quality with horizontal lines" loading="lazy" /></p>
+
 </blockquote>
 
 <h2 id="per-sequence-quality-scores">Per sequence quality scores</h2>
 
 <p>It plots the average quality score over the full length of all <span class="notranslate">reads</span> on the x-axis and gives the total number of <span class="notranslate">reads</span> with this score on the y-axis:</p>
 
-<figure id="figure-3"><img src="../../images/quality-control/per_sequence_quality_scores.png" alt="Per sequence quality scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Per sequence quality scores</figcaption></figure>
+<figure id="figure-5"><img src="../../images/quality-control/per_sequence_quality_scores-before.png" alt="Per sequence quality scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per sequence quality scores</figcaption></figure>
 
 <p>The distribution of average read quality should be tight peak in the upper range of the plot. It can also report if a subset of the sequences have universally low quality values: it can happen because some sequences are poorly imaged (on the edge of the field of view etc), however these should represent only a small percentage of the total sequences.</p>
 
 <h2 id="per-base-sequence-content">Per base sequence content</h2>
 
-<figure id="figure-4"><img src="../../images/quality-control/per_base_sequence_content.png" alt="Per base sequence content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per base sequence content for a <span class="notranslate">DNA</span> library</figcaption></figure>
+<figure id="figure-6"><img src="../../images/quality-control/per_base_sequence_content-before.png" alt="Per base sequence content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Per base sequence content for a <span class="notranslate">DNA</span> library</figcaption></figure>
 
 <p>“Per Base Sequence Content” plots the percentage of each of the four nucleotides (T, C, A, G) at each position across all <span class="notranslate">reads</span> in the input sequence file. As for the per base sequence quality, the x-axis is non-uniform.</p>
 
-<p>In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with <code class="language-plaintext highlighter-rouge">%A=%T</code> and <code class="language-plaintext highlighter-rouge">%G=%C</code>, and the lines in this plot should run parallel with each other.</p>
+<p>In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with <code class="language-plaintext highlighter-rouge">%A=%T</code> and <code class="language-plaintext highlighter-rouge">%G=%C</code>, and the lines in this plot should run parallel with each other. This is amplicon data, where 16S <span class="notranslate">DNA</span> is PCR amplified and sequenced, so we’d expect this plot to have some bias and not show a random distribution.</p>
 
 <blockquote class="details">
   <h3 id="details-biases-by-library-type"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Biases by library type</h3>
 
-  <p>It’s worth noting that some library types will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all <span class="notranslate">RNA</span>-Seq libraries as in the previous plot), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which <span class="notranslate">reads</span> start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5’ end of the <span class="notranslate">reads</span>. Whilst this is a true technical bias, it isn’t something which can be corrected by trimming and in most cases doesn’t seem to adversely affect the <span class="notranslate">downstream</span> analysis. It will, however, produce a warning or error in this module.</p>
+  <p>It’s worth noting that some library types will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all <span class="notranslate">RNA</span>-Seq libraries), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which <span class="notranslate">reads</span> start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5’ end of the <span class="notranslate">reads</span>. Whilst this is a true technical bias, it isn’t something which can be corrected by trimming and in most cases doesn’t seem to adversely affect the <span class="notranslate">downstream</span> analysis. It will, however, produce a warning or error in this module.</p>
 
   <p><img src="../../images/quality-control/per_base_sequence_content_rnaseq.png" alt="Per base sequence content for RNA-seq data" loading="lazy" /></p>
 
@@ -1120,19 +1296,20 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Why is there a warning for the per-base sequence content graphs?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal, as expected for <span class="notranslate">RNA</span>-seq data (see the detail box before)</p>
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal, as expected for 16S amplicon data.</p>
+
   </blockquote>
 </blockquote>
 
 <h2 id="per-sequence-gc-content">Per sequence GC content</h2>
 
-<figure id="figure-5"><img src="../../images/quality-control/per_sequence_gc_content.png" alt="Per sequence GC content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per sequence GC content</figcaption></figure>
+<figure id="figure-7"><img src="../../images/quality-control/per_sequence_gc_content-before.png" alt="Per sequence GC content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Per sequence GC content</figcaption></figure>
 
 <p>This plot displays the number of <span class="notranslate">reads</span> vs. percentage of bases G and C per read. It is compared to a theoretical distribution assuming an uniform GC content for all <span class="notranslate">reads</span>, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.</p>
 
@@ -1141,21 +1318,29 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 <p>But there are also other situations in which an unusually-shaped distribution may occur. For example, with <span class="notranslate">RNA</span> sequencing there may be a greater or lesser distribution of mean GC content among transcripts causing the observed plot to be wider or narrower than an ideal normal distribution.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>Why is there a warning for the per sequence GC content graphs?</p>
+  <p>Why is there a fail for the per sequence GC content graphs?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>The distribution is slightly shifted on the left, and too high.</p>
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>There are multiple peaks. This can be indicative of unexpected contamination, such as adapter, r<span class="notranslate">RNA</span> or overrepresented sequences. Or it may be normal if it is amplicon data or you have highly abundant <span class="notranslate">RNA</span>-seq transcripts.</p>
   </blockquote>
 </blockquote>
+
+<h4 id="sequence-length-distribution">Sequence length distribution</h4>
+
+<p>This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment. Our plot shows variable length as we trimmed the data. The biggest peak is at 296bp but there is a second large peak at ~100bp. So even though our sequences range up to 296bp in length, a lot of the good-quality sequences are shorter. This corresponds with the drop we saw in the sequence quality at ~100bp and the red stripes starting at this position in the per tile sequence quality plot.</p>
+
+<figure id="figure-8"><img src="../../images/quality-control/sequence_length_distribution-before.png" alt="Sequence length distribution" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Sequence length distribution</figcaption></figure>
+
+<p>Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain <span class="notranslate">reads</span> of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.</p>
 
 <h2 id="sequence-duplication-levels">Sequence Duplication Levels</h2>
 
 <p>The graph shows in blue the percentage of <span class="notranslate">reads</span> of a given sequence in the file which are present a given number of times in the file:</p>
 
-<figure id="figure-6"><img src="../../images/quality-control/sequence_duplication_levels.png" alt="Sequence Duplication Levels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-9"><img src="../../images/quality-control/sequence_duplication_levels-before.png" alt="Sequence Duplication Levels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequence Duplication Levels</figcaption></figure>
 
 <p>In a diverse library most sequences will occur only once in the final set. A low level of duplication may indicate a very high level of coverage of the target sequence, but a high level of duplication is more likely to indicate some kind of enrichment bias.</p>
 
@@ -1167,25 +1352,30 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
     <p>It is a concern because PCR duplicates misrepresent the true proportion of sequences in the input.</p>
   </li>
   <li>
-    <p>Truly over-represented sequences such as very abundant transcripts in an <span class="notranslate">RNA</span>-Seq library</p>
+    <p>Truly over-represented sequences such as very abundant transcripts in an <span class="notranslate">RNA</span>-Seq library or in amplicon data (like this sample)</p>
 
     <p>It is an expected case and not of concern because it does faithfully represent the input.</p>
   </li>
 </ul>
 
-<p>FastQC counts the degree of duplication for every sequence in a library and creates a plot showing the relative number of sequences with different degrees of duplication. There are two lines on the plot:</p>
-<ul>
-  <li>Blue line: distribution of the duplication levels for the full sequence set</li>
-  <li>Red line: distribution for the de-duplicated sequences with the proportions of the deduplicated set which come from different duplication levels in the original data.</li>
-</ul>
+<blockquote class="details">
+  <h3 id="details-more-details-about-duplication"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details about duplication</h3>
 
-<p>For whole genome shotgun data it is expected that nearly 100% of your <span class="notranslate">reads</span> will be unique (appearing only 1 time in the sequence data). Most sequences should fall into the far left of the plot in both the red and blue lines. This indicates a highly diverse library that was not over sequenced. If the sequencing depth is extremely high (e.g. &gt; 100x the size of the genome) some inevitable sequence duplication can appear: there are in theory only a finite number of completely unique sequence <span class="notranslate">reads</span> which can be obtained from any given input <span class="notranslate">DNA</span> sample.</p>
+  <p>FastQC counts the degree of duplication for every sequence in a library and creates a plot showing the relative number of sequences with different degrees of duplication. There are two lines on the plot:</p>
+  <ul>
+    <li>Blue line: distribution of the duplication levels for the full sequence set</li>
+    <li>Red line: distribution for the de-duplicated sequences with the proportions of the deduplicated set which come from different duplication levels in the original data.</li>
+  </ul>
 
-<p>More specific enrichments of subsets, or the presence of low complexity contaminants will tend to produce spikes towards the right of the plot. These high duplication peaks will most often appear in the blue trace as they make up a high proportion of the original library, but usually disappear in the red trace as they make up an insignificant proportion of the deduplicated set. If peaks persist in the red trace then this suggests that there are a large number of different highly duplicated sequences which might indicate either a contaminant set or a very severe technical duplication.</p>
+  <p>For whole genome shotgun data it is expected that nearly 100% of your <span class="notranslate">reads</span> will be unique (appearing only 1 time in the sequence data). Most sequences should fall into the far left of the plot in both the red and blue lines. This indicates a highly diverse library that was not over sequenced. If the sequencing depth is extremely high (e.g. &gt; 100x the size of the genome) some inevitable sequence duplication can appear: there are in theory only a finite number of completely unique sequence <span class="notranslate">reads</span> which can be obtained from any given input <span class="notranslate">DNA</span> sample.</p>
 
-<p>It is usually the case for <span class="notranslate">RNA</span> sequencing where there is some very highly abundant transcripts and some lowly abundant. It is expected that duplicate <span class="notranslate">reads</span> will be observed for high abundance transcripts:</p>
+  <p>More specific enrichments of subsets, or the presence of low complexity contaminants will tend to produce spikes towards the right of the plot. These high duplication peaks will most often appear in the blue trace as they make up a high proportion of the original library, but usually disappear in the red trace as they make up an insignificant proportion of the deduplicated set. If peaks persist in the red trace then this suggests that there are a large number of different highly duplicated sequences which might indicate either a contaminant set or a very severe technical duplication.</p>
 
-<p><img src="../../images/quality-control/sequence_duplication_levels_rna_seq.png" alt="Sequence Duplication Levels for RNA-seq" loading="lazy" /></p>
+  <p>It is usually the case for <span class="notranslate">RNA</span> sequencing where there is some very highly abundant transcripts and some lowly abundant. It is expected that duplicate <span class="notranslate">reads</span> will be observed for high abundance transcripts:</p>
+
+  <p><img src="../../images/quality-control/sequence_duplication_levels_rna_seq.png" alt="Sequence Duplication Levels for RNA-seq" loading="lazy" /></p>
+
+</blockquote>
 
 <h2 id="over-represented-sequences">Over-represented sequences</h2>
 
@@ -1193,26 +1383,30 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>FastQC lists all of the sequence which make up more than 0.1% of the total. For each over-represented sequence FastQC will look for matches in a database of common contaminants and will report the best hit it finds. Hits must be at least 20bp in length and have no more than 1 mismatch. Finding a hit doesn’t necessarily mean that this is the source of the contamination, but may point you in the right direction. It’s also worth pointing out that many adapter sequences are very similar to each other so you may get a hit reported which isn’t technically correct, but which has a very similar sequence to the actual match.</p>
 
-<p>With <span class="notranslate">DNA</span> sequencing data no single sequence should be present at a high enough frequency to be listed, but we can sometimes see a small percentage of adapter <span class="notranslate">reads</span>. <span class="notranslate">RNA</span> sequencing data may have some transcripts that are so abundant that they register as over-represented sequence.</p>
+<p><span class="notranslate">RNA</span> sequencing data may have some transcripts that are so abundant that they register as over-represented sequence. With <span class="notranslate">DNA</span> sequencing data no single sequence should be present at a high enough frequency to be listed, but we can sometimes see a small percentage of adapter <span class="notranslate">reads</span>.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How could we find out what the overrepreseented sequences are?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We can BLAST overrepresented sequences to see what they are. In this case, if we take the top overrepresented sequence</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;overrep_seq1
+GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
+</code></pre></div>    </div>
+    <p>and use <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">blastn</a> against the default Nucleotide (nr/nt) database we don’t get any hits. But if we use <a href="https://www.ncbi.nlm.nih.gov/tools/vecscreen/">VecScreen</a> we see it is the Nextera adapter.</p>
+    <figure id="figure-10"><img src="../../images/quality-control/vecscreen-nextera.png" alt="VecScreen" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Nextera adapter</figcaption></figure>
+  </blockquote>
+</blockquote>
 
 <blockquote class="details">
   <h3 id="details-more-details-about-other-fastqc-plots"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details about other FastQC plots</h3>
 
-  <h4 id="per-tile-sequence-quality">Per tile sequence quality</h4>
-
-  <figure id="figure-7"><img src="../../images/quality-control/per_tile_sequence_quality.png" alt="Per tile sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Per tile sequence quality</figcaption></figure>
-
-  <p>This plot will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came. The plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell.</p>
-
-  <p>The plot shows the deviation from the average quality for each tile. The hotter colours indicate that <span class="notranslate">reads</span> in the given tile have worse qualities for that position than <span class="notranslate">reads</span> in other tiles. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.</p>
-
-  <p>In some cases, the chemicals used during sequencing becoming a bit exhausted over the time and the last tiles got worst chemicals which makes the sequencing reactions a bit error-prone. The “Per tile sequence quality” graph will then have some horizontal lines like this:</p>
-
-  <p><img src="../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png" alt="Per tile sequence quality with horizontal lines" loading="lazy" /></p>
-
   <h4 id="per-base-n-content">Per base N content</h4>
 
-  <figure id="figure-8"><img src="../../images/quality-control/per_base_n_content.png" alt="Per base N content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Per base N content</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/quality-control/per_base_n_content-before.png" alt="Per base N content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Per base N content</figcaption></figure>
 
   <p>If a sequencer is unable to make a base call with sufficient confidence, it will write an “N” instead of a conventional base call. This plot displays the percentage of base calls at each position or bin for which an N was called.</p>
 
@@ -1220,35 +1414,17 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
   <p><img src="../../images/quality-control/per_base_n_content_error.png" alt="Per base N content" loading="lazy" /></p>
 
-  <h4 id="sequence-length-distribution">Sequence length distribution</h4>
-
-  <figure id="figure-9"><img src="../../images/quality-control/sequence_length_distribution.png" alt="Sequence length distribution" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequence length distribution</figcaption></figure>
-
-  <p>Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain <span class="notranslate">reads</span> of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.</p>
-
-  <p>This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.</p>
-
-  <h4 id="adapter-content">Adapter Content</h4>
-
-  <figure id="figure-10"><img src="../../images/quality-control/adapter_content.png" alt="Adapter Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Adapter Content</figcaption></figure>
-
-  <p>The plot shows the cumulative percentage of <span class="notranslate">reads</span> with the different adapter sequences at each position. Once an adapter sequence is seen in a read it is counted as being present right through to the end of the read so the percentages increases with the read length. Only adapters specific to the library type are searched.</p>
-
-  <p>Ideally Illumina sequence data should not have any adapter sequence present. But with when using long read, some of the library inserts are shorter than the read length resulting in read-through to the adapter at the 3’ end of the read. This is more likely to occur with <span class="notranslate">RNA</span>-Seq libraries where the distribution of library insert sizes is more varied and likely to include some short inserts. In the example below, a high quality <span class="notranslate">RNA</span>-Seq library have a small percentage of the library with inserts smaller than 150bp:</p>
-
-  <p><img src="../../images/quality-control/adapter_content_rna_seq.png" alt="Adapter Content" loading="lazy" /></p>
-
   <h4 id="kmer-content">Kmer Content</h4>
 
-  <p>FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your <span class="notranslate">reads</span>. Any given kmer should be evenly represented across the length of the read.</p>
+  <p>This plot not output by default. As stated in the tool form, if you want this module it needs to be enabled using a custom Submodule and limits file. With this module, FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your <span class="notranslate">reads</span>. Any given kmer should be evenly represented across the length of the read.</p>
 
   <p>FastQC will report the list of kmers which appear at specific positions with a greater frequency than expected. This can be due to different sources of bias in the library, including the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer from these sequences. Any biased kmer due to other interesting biases may be then diluted and not easy to see.</p>
 
   <p>The following example is from a high-quality <span class="notranslate">DNA</span>-Seq library. The biased kmers nearby the start of the read likely are due to slight sequence dependent efficiency of <span class="notranslate">DNA</span> shearing or a result of random priming:</p>
 
-  <figure id="figure-11"><img src="../../images/quality-control/kmer_content.png" alt="Adapter Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Kmer content</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/quality-control/kmer_content.png" alt="Kmer Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Kmer content</figcaption></figure>
 
-  <p>This module can be very difficult to interpret. <span class="notranslate">RNA</span>-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html">FastQC Kmer Content documentation</a>.</p>
+  <p>This module can be very difficult to interpret. The adapter content plot and overrepesented sequences table are easier to interpret and may give you enough information without needing this plot. <span class="notranslate">RNA</span>-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html">FastQC Kmer Content documentation</a>.</p>
 
 </blockquote>
 
@@ -1304,12 +1480,19 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 </blockquote>
 
-<h1 id="filter-and-trim">Filter and Trim</h1>
+<blockquote class="comment">
+  <h3 id="comment-bad-quality-sequences"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Bad quality sequences</h3>
+  <p>If the quality of the <span class="notranslate">reads</span> is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data).</p>
 
-<p>The quality of the sequences drops at the end of the sequences. This could cause bias in <span class="notranslate">downstream</span> analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in <span class="notranslate">downstream</span> analysis. In general, quality treatments include:</p>
+  <p>You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding <span class="notranslate">reads</span> then will be filtered out and you lose them.</p>
+</blockquote>
+
+<h1 id="trim-and-filter">Trim and filter</h1>
+
+<p>The quality drops in the middle of these sequences. This could cause bias in <span class="notranslate">downstream</span> analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in <span class="notranslate">downstream</span> analysis. Trimming can help to increase the number of <span class="notranslate">reads</span> the aligner or assembler are able to succesfully use, reducing the number of <span class="notranslate">reads</span> that are unmapped or unassembled. In general, quality treatments include:</p>
 
 <ol>
-  <li>Cutting/Trimming/masking sequences
+  <li>Trimming/cutting/masking sequences
     <ul>
       <li>from low quality score regions</li>
       <li>beginning/end of sequence</li>
@@ -1325,112 +1508,78 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
   </li>
 </ol>
 
-<p>To accomplish this task we will use <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a>, a tool that enhances sequence quality by automating adapter trimming as well as quality control.</p>
+<p>To accomplish this task we will use <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> <a class="citation" href="#marcel2011cutadapt">Marcel 2011</a>, a tool that enhances sequence quality by automating adapter trimming as well as quality control.  We will:</p>
+
+<ul>
+  <li>Trim low-quality bases from the ends. Quality trimming is done before any adapter trimming. We will set the quality threshold as 20, a commonly used threshold, see more <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531872-Phred-scaled-quality-scores">here</a>.</li>
+  <li>Trim adapter with Cutadapt. For that we need to supply the sequence of the adapter. In this sample, Nextera is the adapter that was detected. We can find the sequence of the Nextera adapter on the <a href="https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">Illumina website here</a> <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCT</code>. We will trim that sequence from the 3’ end of the <span class="notranslate">reads</span>.</li>
+  <li>Filter out sequences with length &lt; 20 after trimming</li>
+</ul>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-improvement-of-sequence-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Improvement of sequence quality</h3>
 
   <ol>
-    <li>Run <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters
       <ul>
         <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li>
-              <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code> (Input dataset)</p>
+              <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">female_oral2.fastq-4143.gz</code> (Input dataset)</p>
 
               <blockquote class="tip">
                 <h3 id="tip-tip-files-not-selectable"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Files not selectable?</h3>
-                <p>If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (<code class="language-plaintext highlighter-rouge">fastqsanger</code>). You can edit the data type by clicking on the pencil symbol.</p>
+                <p>If your FASTQ file cannot be selected, you might check whether the format is FASTQ with Sanger-scaled quality values (<code class="language-plaintext highlighter-rouge">fastqsanger.gz</code>). You can edit the data type by clicking on the pencil symbol.</p>
               </blockquote>
             </li>
-            <li>
-              <p>In <em>Read 1 Options</em></p>
-
-              <blockquote class="comment">
-                <h3 id="comment-know-adapters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Know adapters</h3>
-                <p>In this dataset, no adapters were found as we saw in FastQC report. They were already removed.
-If you see or know which adapter sequences were used during library preparation, provide their sequences there.</p>
-              </blockquote>
+          </ul>
+        </li>
+        <li>In <em>“Read 1 Options”</em>:
+          <ul>
+            <li><em>“Insert 3’ (End) Adapters”</em>:
+              <ul>
+                <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom sequence</code></li>
+                <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCT</code></li>
+              </ul>
             </li>
           </ul>
         </li>
         <li>In <em>“Filter Options”</em>
           <ul>
-            <li>
-              <p><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></p>
-
-              <p>It will remove <span class="notranslate">reads</span> that are shorter than 20 bp, after trimming of adapters and bad regions.</p>
-            </li>
+            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li>In <em>“Read Modification Options”</em>
           <ul>
-            <li>
-              <p><em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></p>
-
-              <p>After adapter removal (if any), we choose to remove ends ( 5’ and/or 3’) with low-quality, here below 20 in quality).</p>
-            </li>
+            <li><em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
-        <li>In <em>“Output Options”</em>
-          <ul>
-            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-          </ul>
-        </li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Outputs selector”</em>: <code class="language-plaintext highlighter-rouge">Report</code></li>
       </ul>
     </li>
     <li>
       <p>Inspect the generated txt file (<code class="language-plaintext highlighter-rouge">Report</code>)</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <ol>
-          <li>How many <span class="notranslate">reads</span> have been found with adapters?</li>
-          <li>How many basepairs have been removed from the <span class="notranslate">reads</span> because of bad quality?</li>
-          <li>How many sequence pairs have been removed because they were too short?</li>
+          <li>What % <span class="notranslate">reads</span> contain adapter?</li>
+          <li>What % <span class="notranslate">reads</span> have been trimmed because of bad quality?</li>
+          <li>What % <span class="notranslate">reads</span> have been removed because they were too short?</li>
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>0 <span class="notranslate">reads</span> with adapters</li>
-            <li>44,164 bp (1.2%) (<code class="language-plaintext highlighter-rouge">Quality-trimmed:</code>)</li>
-            <li>322 sequences</li>
-          </ol>
-        </blockquote>
-      </blockquote>
-    </li>
-    <li>
-      <p>(Optional) <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-run <strong>FastQC</strong> on the quality-controlled data, and inspect the new FastQC report</p>
-
-      <blockquote class="question">
-        <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-        <ol>
-          <li>How many sequences have been removed?</li>
-          <li>Has sequence quality been improved?</li>
-        </ol>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <ol>
-            <li>Before Cutadapt, the dataset comprised 100,000 sequences. After Cutadapt, there are 99,678 sequences</li>
-            <li>The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation</li>
+            <li>58.6% <span class="notranslate">reads</span> contain adapter (<code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> with adapters:</code>)</li>
+            <li>35.1% <span class="notranslate">reads</span> have been trimmed because of bad quality (<code class="language-plaintext highlighter-rouge">Quality-trimmed:</code>)</li>
+            <li>0 % <span class="notranslate">reads</span> were removed because they were too short</li>
           </ol>
         </blockquote>
       </blockquote>
     </li>
   </ol>
-</blockquote>
-
-<p>The quality of the previous dataset was pretty good from the beginning and we improved it with with trimming and filtering step (in a reasonable way to not lose too much information)</p>
-
-<blockquote class="comment">
-  <h3 id="comment-bad-quality-sequences"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Bad quality sequences</h3>
-  <p>If the quality of the <span class="notranslate">reads</span> is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data).</p>
-
-  <p>You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding <span class="notranslate">reads</span> then will be filtered out and you loose them.</p>
 </blockquote>
 
 <blockquote class="details">
@@ -1477,7 +1626,7 @@ If you see or know which adapter sequences were used during library preparation,
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 40 26 27
 </code></pre></div>  </div>
 
-  <p>Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.</p>
+  <p>Note that therefore, positions with a quality value larger than the chosen threshold are also removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.</p>
 
   <p>Alte<span class="notranslate">rna</span>tives to this procedure would be:</p>
 
@@ -1491,7 +1640,126 @@ If you see or know which adapter sequences were used during library preparation,
   </ul>
 </blockquote>
 
-<h1 id="process-paired-end-data">Process paired-end data</h1>
+<p>We can examine our trimmed data with FASTQE and/or FastQC.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-checking-quality-after-trimming"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Checking quality after trimming</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2"><strong>FASTQE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+<span class="notranslate">galaxy</span>2</span></span> : Re-run <strong>FASTQE</strong> with the following parameters
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQ data”</em>: <code class="language-plaintext highlighter-rouge">Cutadapt Read 1 Output</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Score types to show”</em>: <code class="language-plaintext highlighter-rouge">Mean</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the new FASTQE report</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>Compare the FASTQE output to the previous one before trimming above. Has sequence quality been improved?</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-using-the-scratchbook-to-view-multiple-datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using the Scratchbook to view multiple datasets</h3>  <p>If you would like to view two or more datasets at once, you can use the <strong>Scratchbook</strong> feature in <span class="notranslate">Galaxy</span>:</p>  <ol>  <li><strong>Click</strong> on the <em>Scratchbook</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu bar.    <ul>      <li>You should see a little checkmark on the icon now</li>    </ul>  </li>  <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the output    <ul>      <li>You should see the output in a window overlayed over <span class="notranslate">Galaxy</span></li>      <li>You can resize this window by dragging the bottom-right corner</li>    </ul>  </li>  <li><strong>Click</strong> outside the file to exit the Scratchbook</li>  <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a second dataset from your history    <ul>      <li>You should now see a second window with the new dataset</li>      <li>This makes it easier to compare the two outputs</li>    </ul>  </li>  <li>Repeat this for as many files as you would like to compare</li>  <li>You can turn off the <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> by clicking on the icon again</li></ol></blockquote>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>Yes, the quality score emojis look better (happier) now.</p>
+
+          <figure id="figure-13"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Before trimming</figcaption></figure>
+
+          <figure id="figure-14"><img src="../../images/quality-control/fastqe-mean-after.png" alt="FASTQE after" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> After trimming</figcaption></figure>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>With FASTQE we can see we improved the quality of the bases in the dataset.</p>
+
+<p>We can also, or instead, check the quality-controlled data with FastQC.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-checking-quality-after-trimming-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Checking quality after trimming</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FASTQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">Cutadapt Read 1 Output</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated HTML file</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <ol>
+    <li>Does the per base sequence quality look better?</li>
+    <li>Is the adapter gone?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>Yes. The vast majority of the bases have a quality score above 20 now.</li>
+    </ol>
+    <figure id="figure-15"><img src="../../images/quality-control/per_base_sequence_quality-after.png" alt="Per base sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Per base sequence quality</figcaption></figure>
+
+    <ol>
+      <li>Yes. No adapter is detected now.
+<img src="../../images/quality-control/adapter_content-after.png" alt="Adapter Content" loading="lazy" /></li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>With FastQC we can see we improved the quality of the bases in the dataset and removed the adapter.</p>
+
+<blockquote class="details">
+  <h3 id="details-other-fastqc-plots-after-trimming"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other FastQC plots after trimming</h3>
+
+  <p><img src="../../images/quality-control/per_tile_sequence_quality-after.png" alt="Per tile sequence quality" loading="lazy" />
+We have some red stripes as we’ve trimmed those regions from the <span class="notranslate">reads</span>.</p>
+
+  <p><img src="../../images/quality-control/per_sequence_quality_scores-after.png" alt="Per sequence quality scores" loading="lazy" />
+We now have one peak of high quality instead of one high and one lower quality that we had previously.</p>
+
+  <p><img src="../../images/quality-control/per_base_sequence_content-after.png" alt="Per base sequence content" loading="lazy" />
+We don’t have equal representation of the bases as before as this is amplicon data.</p>
+
+  <p><img src="../../images/quality-control/per_sequence_gc_content-after.png" alt="Per sequence GC content" loading="lazy" />
+We now have a single main GC peak due to removing the adapter.</p>
+
+  <p><img src="../../images/quality-control/per_base_n_content-after.png" alt="Per base N content" loading="lazy" />
+This is the same as before as we don’t have any Ns in these <span class="notranslate">reads</span>.</p>
+
+  <p><img src="../../images/quality-control/sequence_length_distribution-after.png" alt="Sequence length distribution" loading="lazy" />
+We now have multiple peaks and a range of lengths, instead of the single peak with had before trimming when all sequences were the same length.</p>
+
+  <p><img src="../../images/quality-control/sequence_duplication_levels-after.png" alt="Sequence Duplication Levels" loading="lazy" /></p>
+  <blockquote class="question">
+    <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>What does the top overrepresented sequence <code class="language-plaintext highlighter-rouge">GTGTCAGCCGCCGCGGTAGTCCGACGTGG</code> correspond to?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>If we take the top overrepresented sequence</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;overrep_seq1_after
+GTGTCAGCCGCCGCGGTAGTCCGACGTGG
+</code></pre></div>      </div>
+      <p>and use <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">blastn</a> against the default Nucleotide (nr/nt) database we see the top hits are to 16S r<span class="notranslate">RNA</span> genes. This makes sense as this is 16S amplicon data, where the 16S gene is PCR amplified.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h1 id="processing-multiple-datasets">Processing multiple datasets</h1>
+
+<h2 id="process-paired-end-data">Process paired-end data</h2>
 
 <p>With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two <span class="notranslate">reads</span> per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. With this technique, we have the advantage to get more information about each <span class="notranslate">DNA</span> fragment compared to <span class="notranslate">reads</span> sequenced by only single-end sequencing:</p>
 
@@ -1511,21 +1779,26 @@ If you see or know which adapter sequences were used during library preparation,
 
 <p>Usually we recognize these two files which belong to one sample by the name which has the same identifier for the <span class="notranslate">reads</span> but a different extension, e.g. <code class="language-plaintext highlighter-rouge">sampleA_R1.fastq</code> for the forward <span class="notranslate">reads</span> and <code class="language-plaintext highlighter-rouge">sampleA_R2.fastq</code> for the reverse <span class="notranslate">reads</span>. It can also be <code class="language-plaintext highlighter-rouge">_f</code> or <code class="language-plaintext highlighter-rouge">_1</code> for the forward <span class="notranslate">reads</span> and <code class="language-plaintext highlighter-rouge">_r</code> or <code class="language-plaintext highlighter-rouge">_2</code> for the reverse <span class="notranslate">reads</span>.</p>
 
-<p>The data we analyzed in the previous step was not single-end data but the forward <span class="notranslate">reads</span> of paired-end data. We will now do the quality control on the reverse <span class="notranslate">reads</span>.</p>
+<p>The data we analyzed in the previous step was single-end data so we will import a paired-end <span class="notranslate">RNA</span>-seq dataset to use. We will run FastQC and aggregate the two reports with MultiQC <a class="citation" href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assessing-the-quality-of-paired-end-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assessing the quality of paired-end <span class="notranslate">reads</span></h3>
 
   <ol>
     <li>
-      <p>Import the reverse read <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_2.fastq</code> from <a href="https://zenodo.org/record/61771">Zenodo</a> or from the data library (ask your instructor)</p>
+      <p>Import the paired-end <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_1.fastq</code> and <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_2.fastq</code> from <a href="https://zenodo.org/record/61771">Zenodo</a> or from the data library (ask your instructor)</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
 </code></pre></div>      </div>
     </li>
-    <li>Rename the file to <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_2</code></li>
-    <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the reverse <span class="notranslate">reads</span></li>
-    <li><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports of both forward and reverse <span class="notranslate">reads</span>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FASTQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with both datasets</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-select-multiple-datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Select multiple datasets</h3>  <ol>  <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>  <li>Select several files by keeping the <kbd>Ctrl</kbd> (or<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li></ol></blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters to aggregate the FastQC reports of both forward and reverse <span class="notranslate">reads</span>
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -1539,9 +1812,6 @@ If you see or know which adapter sequences were used during library preparation,
           </ul>
         </li>
       </ul>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-select-multiple-datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Select multiple datasets</h3>  <ol>  <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>  <li>Select several files by keeping the <kbd>Ctrl</kbd> (or<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li></ol></blockquote>
     </li>
     <li>Inspect the webpage output from MultiQC</li>
   </ol>
@@ -1549,7 +1819,7 @@ If you see or know which adapter sequences were used during library preparation,
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What do you think about the quality of the sequences?</li>
@@ -1557,7 +1827,7 @@ If you see or know which adapter sequences were used during library preparation,
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>The quality of the sequences seems worse for the reverse <span class="notranslate">reads</span> than for the forward <span class="notranslate">reads</span>:
@@ -1582,20 +1852,20 @@ If you see or know which adapter sequences were used during library preparation,
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-improving-the-quality-of-paired-end-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Improving the quality of paired-end data</h3>
   <ol>
-    <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters
       <ul>
         <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #1”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #1”</em>: <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_1.fastq</code> (Input dataset)</li>
             <li>
-              <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #2”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_2</code> (Input dataset)</p>
+              <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #2”</em>: <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_2.fastq</code> (Input dataset)</p>
 
               <p>The order is important here!</p>
             </li>
             <li>
               <p>In <em>Read 1 Options</em> or <em>Read 2 Options</em></p>
 
-              <p>As before, no adapters were found in these datasets. When you process your own data and you know which adapter sequences were used during library preparation, you should provide their sequences here.</p>
+              <p>No adapters were found in these datasets. When you process your own data and you know which adapter sequences were used during library preparation, you should provide their sequences here.</p>
             </li>
           </ul>
         </li>
@@ -1620,7 +1890,7 @@ If you see or know which adapter sequences were used during library preparation,
       <p>Inspect the generated txt file (<code class="language-plaintext highlighter-rouge">Report</code>)</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <ol>
           <li>How many basepairs has been removed from the <span class="notranslate">reads</span> because of bad quality?</li>
@@ -1628,7 +1898,7 @@ If you see or know which adapter sequences were used during library preparation,
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
             <li>44,164 bp (<code class="language-plaintext highlighter-rouge">Quality-trimmed:</code>) for the forward <span class="notranslate">reads</span> and 138,638 bp for the reverse <span class="notranslate">reads</span>.</li>
             <li>1,376 sequences have been removed because at least one read was shorter than the length cutoff (322 when only the forward <span class="notranslate">reads</span> were analyzed).</li>
@@ -1649,7 +1919,7 @@ If you see or know which adapter sequences were used during library preparation,
 <p>These datasets can be used for the <span class="notranslate">downstream</span> analysis, e.g. <span class="notranslate">mapping</span>.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What kind of alignment is used for finding adapters in <span class="notranslate">reads</span>?</li>
@@ -1657,7 +1927,7 @@ If you see or know which adapter sequences were used during library preparation,
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Semi-global alignment, i.e., only the overlapping part of the read and the adapter sequence is used for scoring.</li>
@@ -1669,10 +1939,10 @@ If you see or know which adapter sequences were used during library preparation,
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we checked the quality of two FASTQ files to ensure that their data looks good before inferring any further information. This step is the usual first step for analyses such as <span class="notranslate">RNA</span>-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:</p>
+<p>In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information. This step is the usual first step for analyses such as <span class="notranslate">RNA</span>-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:</p>
 
 <ul>
-  <li>Quality assessment with a tool like <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+  <li>Quality assessment with tools like <strong>FASTQE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
   <li>Trimming and filtering with a tool like <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
 </ul>
 
@@ -1682,13 +1952,16 @@ If you see or know which adapter sequences were used during library preparation,
                     <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
                     <ul>
                         
-                        <li><p>Run quality control on every dataset before running any other bioinformatics analysis</p>
+                        <li><p>Perform quality control on every dataset before running any other bioinformatics analysis</p>
 </li>
                         
-                        <li><p>Take care of the parameters used to improve the sequence quality</p>
+                        <li><p>Assess the quality metrics and improve quality if necessary</p>
 </li>
                         
-                        <li><p>Re-run FastQC to check the impact of the quality control</p>
+                        <li><p>Check the impact of the quality control</p>
+</li>
+                        
+                        <li><p>Different tools are available to provide additional quality metrics</p>
 </li>
                         
                         <li><p>For paired-end reads analyze the forward and reverse reads together</p>
@@ -1708,6 +1981,41 @@ If you see or know which adapter sequences were used during library preparation,
                 <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/sequence-analysis#references">here</a>.</p>
                 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17:</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a>
+      
+    
+
+</li>
+<li><span id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a>
+      
+    
+
+</li>
+<li><span id="StJacques2021">Jacques, R. M. S., W. M. Maza, S. D. Robertson, A. Lonsdale, C. S. Murray <i>et al.</i>, 2021 <b>A Fun Introductory Command Line Lesson: Next Generation Sequencing Quality Analysis with Emoji!</b> CourseSource 8:</span>
+    
+    
+    <a href="https://doi.org/10.24918/cs.2021.17">10.24918/cs.2021.17</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
                 
 
                 
@@ -1748,7 +2056,7 @@ If you see or know which adapter sequences were used during library preparation,
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Bérénice Batut, 2021 <b>Quality Control (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Bérénice Batut, Maria Doyle, 2021 <b>Quality Control (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1763,11 +2071,11 @@ If you see or know which adapter sequences were used during library preparation,
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{sequence-analysis-quality-control,
-author = "Bérénice Batut",
+author = "Bérénice Batut and Maria Doyle",
 title = "Quality Control (Galaxy Training Materials)",
 year = "2021",
-month = "07",
-day = "09"
+month = "09",
+day = "01"
 url = "\url{https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
