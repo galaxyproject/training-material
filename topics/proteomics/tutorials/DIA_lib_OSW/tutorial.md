@@ -1,7 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: Library Generation for DIA Analysis
 zenodo_link: 'https://zenodo.org/record/4293493'
 level: Intermediate
@@ -147,8 +145,8 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >
 >
 > > ### {% icon solution %} Solution
-> > 1. Approximately 5370 proteins were found (see ProteinGroups output)
-> > 2. Approximately 34970 peptides were found (see Peptides output)
+> > 1. Approximately 5,370 proteins were found (see ProteinGroups output)
+> > 2. Approximately 34,970 peptides were found (see Peptides output)
 > >
 > {: .solution}
 >
@@ -181,7 +179,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. ~100.000 lines in the evidence and ~98.000 lines in the msms.
+> > 1. ~100,000 lines in the evidence and ~98,000 lines in the msms.
 > >
 > {: .solution}
 >
@@ -230,7 +228,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >    - *"MZ threshold in Thomson for precursor ion selection"*: `0.015`
 >    - *"upper MZ limit for precursor ions"*: `1000.0`
 >    - *"MZ threshold in Thomson for fragment ion annotation"*: `0.015`
->    - *"Advanced Options"*: `Show Advanced Options`
+
 >
 >    > ### {% icon comment %} Comment: Adjustment of the Spectral library
 >    >The spectral library coming from **diapysef library generation** contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.
@@ -245,7 +243,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The refined library contains ~170.000 lines, and almost 700.000 lines were removed.
+> > 1. The refined library contains ~170,000 lines, and almost 700,000 lines were removed.
 > >
 > {: .solution}
 >
@@ -257,6 +255,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >
 > 1. {% tool [OpenSwathDecoyGenerator](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0) %} with the following parameters:
 >    - *"Output file type -- default: determined from file extension or content"*: `tabular (tsv)`
+>    - *"Advanced Options"*: `Show Advanced Options`
 >        - *"MZ threshold in Thomson for fragment ion annotation"*: `0.015`
 >
 >    > ### {% icon comment %} Comment: *Decoy* transitions
@@ -272,7 +271,7 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. We expect double the amount of lines, since we generate one *decoy* (non-observed) per *target* (observed) sequence.
+> > 1. We expect double the amount of lines (~340,000), since we generate one *decoy* (non-observed) per *target* (observed) sequence.
 > >
 > {: .solution}
 >
@@ -299,8 +298,8 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The final spectral library contains 56.789 peptides covering 10.232 proteins.
-> > 2. Since we added equal numbers of *decoy* sequences we expect to have only half of the peptides and proteins (~28.000 and ~5.100) which are real targets.
+> > 1. The final spectral library contains over 56,000 peptides covering over 10,200 proteins.
+> > 2. Since we added equal numbers of *decoy* sequences we expect to have only half of the peptides and proteins (~28,000 and ~5,100) which are real targets.
 > >
 > {: .solution}
 >

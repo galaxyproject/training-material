@@ -1,10 +1,10 @@
 {% if include.material.hands_on == "external" %}
-<a class="topic-icon" href="{{ include.material.hands_on_url }}">
-    {% icon tutorial %}
+<a class="topic-icon" href="{{ include.material.hands_on_url }}" title="Link to external materials">
+    {% icon tutorial aria=false %}
 </a>
 {% elsif include.material.hands_on == "github" %}
-<a href="{{ site.github_repository }}/tree/main/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md">
-    {% icon tutorial %}
+<a href="{{ site.github_repository }}/tree/main/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md" title="Materials on github">
+    {% icon tutorial aria=false %}
 </a>
 {% elsif include.material.hands_on %}
     <span class="btn-group">

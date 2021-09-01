@@ -5,9 +5,11 @@ box_type: tip
 layout: faq
 ---
 
-
 * Copy the link location
 * Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
+{% if include.reset_form %}
+* Click **Reset** button at the bottom of the form. If the button is greyed out -> skip to the next step.
+{% endif %}
 {% if include.collection %}
 * Click on **Collection** on the top
 {% endif %}
@@ -23,7 +25,7 @@ layout: faq
   `{{ include.link2 }}`
 {% endif %}
 {% if include.format %}
-* Change **Type** from "Auto-detect" to `{{ include.format }}`
+* Change **Type (set all):** from "Auto-detect" to `{{ include.format }}`
 {% endif %}
 {% if include.genome %}
 * Change **Genome** to `{{ include.genome }}`

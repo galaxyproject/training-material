@@ -171,7 +171,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy to use Singularity
 >
-> 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_files` entry:
+> 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templatets` entry:
 >
 >    {% raw %}
 >    ```diff
@@ -186,16 +186,14 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    @@ -89,6 +91,12 @@ galaxy_config:
+>    @@ -89,6 +91,10 @@ galaxy_config:
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->    +
->    +galaxy_config_files:
->    +- src: files/galaxy/config/dependency_resolvers_conf.xml
->    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
+>    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     # systemd
 >     galaxy_manage_systemd: yes
@@ -203,21 +201,21 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}
 >
-> 2. Create the `files/galaxy/config` directory if it doesn't exist:
+> 2. Create the `templates/galaxy/config` directory if it doesn't exist:
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > mkdir -p files/galaxy/config
+>    > mkdir -p templates/galaxy/config
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 3. Create the new file `files/galaxy/config/dependency_resolvers_conf.xml`. This will not enable any dependency resolvers like the legacy toolshed packages or Galaxy packages, and instead everything will be resolved through Singularity.
+> 3. Create the new file `templates/galaxy/config/dependency_resolvers_conf.xml`. This will not enable any dependency resolvers like the legacy toolshed packages or Galaxy packages, and instead everything will be resolved through Singularity.
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/config/dependency_resolvers_conf.xml
+>    +++ b/templates/galaxy/config/dependency_resolvers_conf.xml
 >    @@ -0,0 +1,2 @@
 >    +<dependency_resolvers>
 >    +</dependency_resolvers>
@@ -338,6 +336,24 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 > When a container has been resolved through Singularity, you'll see something like this:
 > ![Image of a table entry with minimap2 having requirements minimap2+singularity, a resolved column with a green checkmark next to via singularity, the resolver is mulled_singularity, and a container column with a path to /srv/galaxy/var/cache/singularity/mulled and some long hash.](../../images/singularity-resolved.png)
 {: .comment}
+
+> ### {% icon tip %} Singularity, Conda, something else?
+> We often hear
+>
+> > What would be the best practice, use conda or Singularity?
+> {: .quote}
+>
+> Many of us are moving towards Singularity. Conda environments can resolve differently if they were installed at different times, which isn't great for reproducibility. Singularity images are never updated after generation which makes them fantastic. Also the isolation that's there by default is an incredible improvement for less-trustworthy binaries.
+{: .tip}
+
+> ### {% icon tip %} Does Singularity fix issues with Conda dependencies resolution?
+> Yes and no. Singularity images are built from conda environments. Only now you are no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The Galaxy project uses a system called "mulling" to bring together multiple conda dependencies together in a single environment, and Singularity images are produced for these dependencies as well. That said, complex or unresolvable conda environments are not solved by Singularity, because Singularity is really just packaging conda's environment into a single binary file.
+{: .tip}
+
+
+
+
+
 
 
 <!--
