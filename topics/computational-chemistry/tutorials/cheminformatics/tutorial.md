@@ -243,12 +243,6 @@ A processing step now needs to be applied to the protein structure and the docki
 
 Further, docking requires the coordinates of a binding site to be defined. Effectively, this defines a 'box' in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in Galaxy which can be used to automatically create a configuration file for docking when ligand coordinates are already known.
 
-> ### {% icon details %} How to find the binding site of an apoprotein?
->
-> If the structure contains no ligand in complex with the protein (i.e. apoprotein), identifying the binding site is not trivial. There are software available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, try out the fpocket tool  ({% cite LeGuilloux2009 %}) on the Hsp90 structure.
->
-{: .details}
-
 > ### {% icon hands_on %} Hands-on: Generate PDBQT and config files for docking
 >
 > 1. **Prepare receptor** {% icon tool %} with the following parameters:
@@ -260,14 +254,44 @@ Further, docking requires the coordinates of a binding site to be defined. Effec
 >    - Leave all other options unchanged.
 >    - Rename to 'Prepared ligands'
 > 3. **Calculate the box parameters for an AutoDock Vina job** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input ligand"*: 'Ligand (MOL) file.
+>    - {% icon param-file %} *"Input ligand or pocket"*: `Ligand (MOL)` file.
 >    - {% icon param-file %} *"x-axis buffer"*: `5`
 >    - {% icon param-file %} *"y-axis buffer"*: `5`
 >    - {% icon param-file %} *"z-axis buffer"*: `5`
 >    - {% icon param-file %} *"Exhaustiveness"*: `1`
 >    - The 'Random seed' parameter should be left empty.
->    - Rename to 'Docking config file'
+>    - Rename to 'Docking config file'.
 {: .hands_on}
+
+Perhaps you are interested in a system which does not have a ligand within the binding site (an apoprotein). In this case you need to run the fpocket tool to identify potential binding sites in the protein structure - take a look at the following (optional) section.
+
+
+> ### {% icon details %} How to find the binding site of an apoprotein?
+>
+> If the structure contains no ligand in complex with the protein (i.e. apoprotein), there is an additional step of identifying the binding site. Software is available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, let's try out the fpocket tool ({% cite LeGuilloux2009 %}) on the Hsp90 structure, imagining we don't have access to the file containing the ligand coordinates.
+> > ### {% icon hands_on %} Hands-on: Finding binding sites using fpocket
+> >
+> > 1. **fpocket** {% icon tool %} with the following parameters:
+> >   - {% icon param-file %} *"Input file"*: `Protein (PDB)` file.
+> >   - {% icon param-file %} *"Type of pocket to detect"*: `Small molecule binding sites`
+> >   - {% icon param-file %} *"Output files"*: select `PDB files containing the atoms in contact with each pocket`, `Log file containing pocket properties`.
+> >
+> > 2. **Calculate the box parameters for an AutoDock Vina job** {% icon tool %} with the following parameters:
+> >    - {% icon param-file %} *"Input ligand or pocket"*: `pocket2` PDB file from the `Atoms in contact with each pocket` collection.
+> >    - {% icon param-file %} *"x-axis buffer"*: `5`
+> >    - {% icon param-file %} *"y-axis buffer"*: `5`
+> >    - {% icon param-file %} *"z-axis buffer"*: `5`
+> >    - {% icon param-file %} *"Exhaustiveness"*: `1`
+> >    - The 'Random seed' parameter can be left empty.
+> >    - Rename to 'Docking config file derived from pocket'.
+> >
+> >  The fpocket tool generates two different outputs: a `Pocket properties` log file containing details of all the pockets which fpocket found in the protein. The second output is a collection (a list) containing one PDB file for each of the pockets. Each of the PDB files contains only the atoms in contact with that particular pocket. Note that fpocket assigns a score to each pocket, but you should not assume that the top scoring one is the only one where compounds can bind! For example, the pocket where the ligand in the `2brc` PDB file binds is ranked as the second-best according to fpocket.
+> {: .hands_on}
+>
+> You can compare the config file generated with the one generated from the ligand directly - if you picked the right pocket (`pocket2`) the coordinates should be pretty similar.
+>
+{: .details}
+
 
 # Docking
 
