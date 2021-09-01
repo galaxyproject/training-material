@@ -903,7 +903,7 @@
         </ul>
         
 
-        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 26, 2021 </div>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
     </blockquote>
@@ -1123,7 +1123,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
             <li>
               <p>Everything seems good for 3 of the files. The <code class="language-plaintext highlighter-rouge">GSM461177</code> have 10.3 millions of sequences and <code class="language-plaintext highlighter-rouge">GSM461180</code> 12.3 millions of sequences. But in <code class="language-plaintext highlighter-rouge">GSM461180_2</code> (reverse <span class="notranslate">reads</span> of GSM461180) the quality decreases quite a lot at the end of the sequences.</p>
 
-              <p>All files except <code class="language-plaintext highlighter-rouge">GSM461180_2</code> have a high proportion of duplicated <span class="notranslate">reads</span> (expected in <span class="notranslate">RNA</span>-Seq data)</p>
+              <p>All files except <code class="language-plaintext highlighter-rouge">GSM461180_2</code> have a high proportion of duplicated <span class="notranslate">reads</span> (expected in <span class="notranslate">RNA</span>-Seq data).</p>
 
               <figure id="figure-1"><img src="../../images/ref-based/fastqc_sequence_counts_plot.png" alt="Sequence Counts" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequence Counts</figcaption></figure>
 
@@ -1131,15 +1131,15 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
               <figure id="figure-2"><img src="../../images/ref-based/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequence Quality</figcaption></figure>
 
-              <p>The mean quality score over the <span class="notranslate">reads</span> is quite high, but the distribution is slightly different for <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
+              <p>The mean quality score over the <span class="notranslate">reads</span> is quite high, but the distribution is slightly different for <code class="language-plaintext highlighter-rouge">GSM461180_2</code>.</p>
 
               <figure id="figure-3"><img src="../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Per Sequence Quality Scores</figcaption></figure>
 
-              <p><span class="notranslate">Reads</span> are not really following a normal distribution of GC content, except <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
+              <p><span class="notranslate">Reads</span> do not really follow a normal distribution of GC content, except for <code class="language-plaintext highlighter-rouge">GSM461180_2</code>.</p>
 
               <figure id="figure-4"><img src="../../images/ref-based/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per Sequence GC Content</figcaption></figure>
 
-              <p>Few N in the <span class="notranslate">reads</span></p>
+              <p>The proportion of N in the <span class="notranslate">reads</span> (bases which could not be called) is low.</p>
 
               <figure id="figure-5"><img src="../../images/ref-based/fastqc_per_base_n_content_plot.png" alt="Per base N content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per base N content</figcaption></figure>
 
@@ -1147,14 +1147,14 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
               <figure id="figure-6"><img src="../../images/ref-based/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Duplication Levels</figcaption></figure>
 
-              <p>Almost no known adapters and overrepresented sequences</p>
+              <p>There are almost no known adapters and overrepresented sequences.</p>
             </li>
             <li>
-              <p>If the quality of the <span class="notranslate">reads</span> is not good, we should:</p>
+              <p>If the quality of the <span class="notranslate">reads</span> is poor, we should:</p>
               <ol>
-                <li>Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)</li>
+                <li>Check what is wrong and think about possible reasons for the poor read quality: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data)</li>
                 <li>Ask the sequencing facility about it</li>
-                <li>Perform some quality treatment (in a reasonable way to not lose too much information) with some trimming or removal of bad <span class="notranslate">reads</span></li>
+                <li>Perform some quality treatment (taking care not to lose too much information) with some trimming or removal of bad <span class="notranslate">reads</span></li>
               </ol>
             </li>
           </ol>
@@ -1256,14 +1256,14 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
         <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <ol>
-          <li>How many basepairs has been removed from the forwards <span class="notranslate">reads</span> because of bad quality? And from the reverse <span class="notranslate">reads</span>?</li>
+          <li>How many basepairs have been removed from the forward <span class="notranslate">reads</span> because of bad quality? And from the reverse <span class="notranslate">reads</span>?</li>
           <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
         </ol>
 
         <blockquote class="solution">
           <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>For <code class="language-plaintext highlighter-rouge">GSM461177</code>, 5,072,810 bp has been trimmed for the forward <span class="notranslate">reads</span> (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For <code class="language-plaintext highlighter-rouge">GSM461180</code>, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the <span class="notranslate">reads</span> the quality was dropping more for the reverse <span class="notranslate">reads</span> than for the forward <span class="notranslate">reads</span>, especially for <code class="language-plaintext highlighter-rouge">GSM461180</code>.</li>
+            <li>For <code class="language-plaintext highlighter-rouge">GSM461177</code>, 5,072,810 bp have been trimmed from the forward <span class="notranslate">reads</span> (read 1) and 8,648,619 bp from the reverse <span class="notranslate">reads</span> (read 2) because of quality. For <code class="language-plaintext highlighter-rouge">GSM461180</code>, 10,224,537 bp from the forward <span class="notranslate">reads</span> and 51,746,850 bp from the reverse <span class="notranslate">reads</span>. This is not a surprise; we saw that at the end of the <span class="notranslate">reads</span> the quality was dropping more for the reverse <span class="notranslate">reads</span> than for the forward <span class="notranslate">reads</span>, especially for <code class="language-plaintext highlighter-rouge">GSM461180</code>.</li>
             <li>147,810 (1.4%) <span class="notranslate">reads</span> were too short for <code class="language-plaintext highlighter-rouge">GSM461177</code> and 1,101,875 (9%) for <code class="language-plaintext highlighter-rouge">GSM461180</code>.</li>
           </ol>
         </blockquote>
@@ -1282,7 +1282,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
   <p>Do you want to learn more about the principles behind <span class="notranslate">mapping</span>? Follow our <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">training</a>.</p>
 </blockquote>
 
-<p>In this study, the authors used <em>Drosophila melanogaster</em> cells. We should then map the quality-controlled sequences to the reference genome of <em>Drosophila melanogaster</em>.</p>
+<p>In this study, the authors used <em>Drosophila melanogaster</em> cells. We should therefore map the quality-controlled sequences to the reference genome of <em>Drosophila melanogaster</em>.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1410,7 +1410,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
         <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <ol>
-          <li>What percentage of <span class="notranslate">reads</span> mapped exactly once for both samples?</li>
+          <li>What percentage of <span class="notranslate">reads</span> are mapped exactly once for both samples?</li>
           <li>What are the other available statistics?</li>
         </ol>
 
@@ -1571,7 +1571,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
       <blockquote class="comment">
         <h3 id="comment-comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
 
-        <p>In order for this step to work, you will need to have either IGV or <a href="https://www.java.com/en/download/faq/java_webstart.xml">Java web start</a>
+        <p>In order for this step to work, you will need to have either IGV or <a href="https://www.java.com/en/download/faq/java_webstart.xml">Java Web Start</a>
 installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.</p>
 
         <p>Check the <a href="https://software.broadinstitute.org/software/igv/AlignmentData">IGV documentation</a> for more information.</p>
@@ -1620,7 +1620,7 @@ installed on your machine. However, the questions in this section can also be an
         <figure id="figure-15"><img src="../../images/star_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
 
         <ol>
-          <li>What does the vertical red bar graph represent? And the arcs with numbers?</li>
+          <li>What does the vertical red bar graph represent? What about the arcs with numbers?</li>
           <li>What do the numbers on the arcs mean?</li>
           <li>Why do we observe different stacked groups of blue linked boxes at the bottom?</li>
         </ol>
@@ -1629,9 +1629,9 @@ installed on your machine. However, the questions in this section can also be an
           <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <ol>
-            <li>The coverage for each alignment track is plotted as a red bar graph. Arcs represent observed splice junctions, <em>i.e.</em>, <span class="notranslate">reads</span> spanning introns</li>
+            <li>The coverage for each alignment track is plotted as a red bar graph. Arcs represent observed splice junctions, <em>i.e.</em>, <span class="notranslate">reads</span> spanning introns.</li>
             <li>The numbers refer to the number of observed junction <span class="notranslate">reads</span>.</li>
-            <li>The different groups of linked boxes on the bottom represent the different transcripts from the genes at this location, that are present in the GTF file.</li>
+            <li>The different groups of linked boxes on the bottom represent the different transcripts from the genes at this location which are present in the GTF file.</li>
           </ol>
 
         </blockquote>
@@ -1702,11 +1702,11 @@ installed on your machine. However, the questions in this section can also be an
     </ol>
   </blockquote>
 
-  <p>In general, up to 50% of duplication can be consider normal to obtain. So both our samples are good.</p>
+  <p>In general, obtaining up to 50% duplicated <span class="notranslate">reads</span> is considered normal. So both our samples are fine.</p>
 
   <h4 id="number-of-reads-mapped-to-each-chromosome">Number of <span class="notranslate">reads</span> mapped to each chromosome</h4>
 
-  <p>To assess the sample quality (e.g. excess of mitochondrial contamination), check the sex of samples, or see if any chromosome have highly expressed genes, we can check the numbers of <span class="notranslate">reads</span> mapped to each chromosome using <strong>IdxStats</strong> from the <strong>Samtools</strong> suite.</p>
+  <p>To assess the sample quality (e.g. excess of mitochondrial contamination), we can check the sex of samples, or to see if any chromosomes have highly expressed genes, we can check the numbers of <span class="notranslate">reads</span> mapped to each chromosome using <strong>IdxStats</strong> from the <strong>Samtools</strong> suite.</p>
 
   <blockquote class="notranslate hands_on">
     <h3 id="hands_on-hands-on-check-the-number-of-reads-mapped-to-each-chromosome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check the number of <span class="notranslate">reads</span> mapped to each chromosome</h3>
@@ -1747,9 +1747,9 @@ installed on your machine. However, the questions in this section can also be an
             <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
             <ol>
               <li>The genome of <em>Drosophila</em> has 4 pairs of chromosomes: X/Y, 2, 3, and 4.</li>
-              <li>The <span class="notranslate">reads</span> mapped mostly to chromosome 2 (chr2L and chr2R), 3 (chr3L and chr3R) and X. Only some <span class="notranslate">reads</span> mapped to chromosome 4, which is expected given this chromosome is very small.</li>
+              <li>The <span class="notranslate">reads</span> mapped mostly to chromosome 2 (chr2L and chr2R), 3 (chr3L and chr3R) and X. Only a few <span class="notranslate">reads</span> mapped to chromosome 4, which is expected given that this chromosome is very small.</li>
               <li>
-                <p>From the percentage of X+Y <span class="notranslate">reads</span>, most of the <span class="notranslate">reads</span> map to X and only few to Y. So only few genes may be on Y. So the samples are probably both female.</p>
+                <p>Judging from the percentage of X+Y <span class="notranslate">reads</span>, most of the <span class="notranslate">reads</span> map to X and only a few to Y. This indicates there are probably not many genes on Y, so the samples are probably both female.</p>
 
                 <p><img src="../../images/ref-based/samtools-idxstats-xy-plot.png" alt="Samtools idxstats" loading="lazy" /></p>
               </li>
@@ -1762,7 +1762,7 @@ installed on your machine. However, the questions in this section can also be an
 
   <h4 id="gene-body-coverage">Gene body coverage</h4>
 
-  <p>The gene body is the different regions of a gene. It is important to check if <span class="notranslate">reads</span> coverage is uniform over gene body or if there is any 5’/3’ bias. For example, a bias towards the 5’ end of genes could indicate degradation of the <span class="notranslate">RNA</span>. Alte<span class="notranslate">rna</span>tively, a 3’ bias could indicate that the data is from a 3’ assay. To assess this, we can use the <strong>Gene Body Coverage</strong> tool from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of <span class="notranslate">reads</span> covering each nucleotide position.</p>
+  <p>The gene body is the different regions of a gene. It is important to check if read coverage is uniform over gene body or if there is any 5’/3’ bias. For example, a bias towards the 5’ end of genes could indicate degradation of the <span class="notranslate">RNA</span>. Alte<span class="notranslate">rna</span>tively, a 3’ bias could indicate that the data is from a 3’ assay. To assess this, we can use the <strong>Gene Body Coverage</strong> tool from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of <span class="notranslate">reads</span> covering each nucleotide position.</p>
 
   <blockquote class="notranslate hands_on">
     <h3 id="hands_on-hands-on-check-gene-body-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check gene body coverage</h3>
@@ -1780,7 +1780,7 @@ installed on your machine. However, the questions in this section can also be an
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input .bam file”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> files (outputs of <strong><span class="notranslate">RNA</span> STAR</strong>)</li>
             </ul>
           </li>
-          <li><em>“Reference gene model”</em>: <span class="notranslate">BED</span>12 file (output <strong>Convert GTF to <span class="notranslate">BED</span>12</strong>)</li>
+          <li><em>“Reference gene model”</em>: <span class="notranslate">BED</span>12 file (output of <strong>Convert GTF to <span class="notranslate">BED</span>12</strong>)</li>
         </ul>
       </li>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7</span></span>  to aggregate the idxstats logs:
@@ -1856,7 +1856,7 @@ installed on your machine. However, the questions in this section can also be an
           <blockquote class="solution">
             <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-            <p>Most of the <span class="notranslate">reads</span> are mapped to exons (&gt;80%), only ~2% to introns and ~5% to intergenic regions. It confirms that our data are <span class="notranslate">RNA</span>-Seq data and that <span class="notranslate">mapping</span> worked.</p>
+            <p>Most of the <span class="notranslate">reads</span> are mapped to exons (&gt;80%), only ~2% to introns and ~5% to intergenic regions, which is what we expect. It confirms that our data are <span class="notranslate">RNA</span>-Seq data and that <span class="notranslate">mapping</span> was successful.</p>
           </blockquote>
         </blockquote>
       </li>
@@ -1866,7 +1866,7 @@ installed on your machine. However, the questions in this section can also be an
   <p>Now that we have checked the results of the read <span class="notranslate">mapping</span>, we can proceed to the next phase of the analysis.</p>
 </blockquote>
 
-<p>After the <span class="notranslate">mapping</span>, we have now the information on where the <span class="notranslate">reads</span> are located on the reference genome and how well they were mapped. The next step in <span class="notranslate">RNA</span>-Seq data analysis is quantification of the number of <span class="notranslate">reads</span> mapped to genomic features (genes, transcripts, exons, …).</p>
+<p>After the <span class="notranslate">mapping</span>, we now have the information on where the <span class="notranslate">reads</span> are located on the reference genome and how well they were mapped. The next step in <span class="notranslate">RNA</span>-Seq data analysis is quantification of the number of <span class="notranslate">reads</span> mapped to genomic features (genes, transcripts, exons, …).</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1874,7 +1874,7 @@ installed on your machine. However, the questions in this section can also be an
   <p>The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the <span class="notranslate">mapping</span> (e.g. <code class="language-plaintext highlighter-rouge">dm6</code> here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.</p>
 </blockquote>
 
-<p>Here we will focus on the genes as we would like to identify the ones that are differentially expressed because of the Pasilla gene knockdown.</p>
+<p>Here we will focus on the genes, as we would like to identify the ones that are differentially expressed because of the Pasilla gene knockdown.</p>
 
 <h1 id="counting-the-number-of-reads-per-annotated-gene">Counting the number of <span class="notranslate">reads</span> per annotated gene</h1>
 
@@ -1931,13 +1931,13 @@ installed on your machine. However, the questions in this section can also be an
         </table>
       </li>
       <li>
-        <p>The gene1 has 4 <span class="notranslate">reads</span>, not 5 (gene1 - exon1 + gene1 - exon2) because of the splicing of the last read. Gene2: 6 (3 spliced <span class="notranslate">reads</span>)</p>
+        <p>gene1 has 4 <span class="notranslate">reads</span>, not 5, because of the splicing of the last read (gene1 - exon1 + gene1 - exon2). gene2 has 6 <span class="notranslate">reads</span>, 3 of which are spliced.</p>
       </li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>Two main tools could be used for that: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html"><strong>HTSeq-count</strong></a> (<a class="citation" href="#anders2015htseq">Anders <i>et al.</i> 2015</a>) or <strong>featureCounts</strong> (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>). <strong>featureCounts</strong> is considerably faster and requires far less computational resources, so we will use it here.</p>
+<p>Two main tools are available for read counting: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html"><strong>HTSeq-count</strong></a> (<a class="citation" href="#anders2015htseq">Anders <i>et al.</i> 2015</a>) or <strong>featureCounts</strong> (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>). <strong>featureCounts</strong> is considerably faster and requires far less computational resources, so we will use it here.</p>
 
 <p>In principle, the counting of <span class="notranslate">reads</span> overlapping with genomic features is a fairly simple task. But there are some details that need to be given to <strong>featureCounts</strong>, e.g. the strandness.</p>
 
@@ -1947,7 +1947,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <figure id="figure-18"><img src="../../images/ref-based/strandness_why.png" alt="Why strandness?" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Read1 will be assigned to gene1 located on the forward strand but Read2 could be assigned to gene1 (forward strand) or gene2 (reverse strand) depending if the strandness information is conserved.</figcaption></figure>
 
-<p>Some library preparation protocols create so called <em>stranded</em> <span class="notranslate">RNA</span>-Seq libraries that preserve the strand information (an excellent overview in <a class="citation" href="#levin2010comprehensive">Levin <i>et al.</i> 2010</a>). In practice, with Illumina paired-end <span class="notranslate">RNA</span>-Seq protocols you are unlikely to encounter many of these possibilities. You will most likely deal with either:</p>
+<p>Some library preparation protocols create so-called <em>stranded</em> <span class="notranslate">RNA</span>-Seq libraries that preserve the strand information (<a class="citation" href="#levin2010comprehensive">Levin <i>et al.</i> 2010</a> provides an excellent overview). In practice, with Illumina paired-end <span class="notranslate">RNA</span>-Seq protocols you are unlikely to encounter many of these possibilities. You will most likely deal with either:</p>
 
 <ul>
   <li>Unstranded <span class="notranslate">RNA</span>-Seq data</li>
@@ -1977,16 +1977,13 @@ installed on your machine. However, the questions in this section can also be an
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-determining-the-library-strandness"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Determining the library strandness</h3>
 
+  <p>We use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span>12</code> file which we already converted from the <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code> dataset earlier.</p>
+
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357"><strong>Convert GTF to <span class="notranslate">BED</span>12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</span></span>  to convert the GTF file to <span class="notranslate">BED</span>:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
-      </ul>
-    </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1" title="Tested with toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1"><strong>Infer Experiment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1</span></span>  to determine the library strandness with:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input .bam file”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> files (outputs of <strong><span class="notranslate">RNA</span> STAR</strong>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <span class="notranslate">BED</span>12 file (output <strong>Convert GTF to <span class="notranslate">BED</span>12</strong>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <span class="notranslate">BED</span>12 file (output of the <strong>Convert GTF to <span class="notranslate">BED</span>12</strong> tool)</li>
         <li><em>“Number of <span class="notranslate">reads</span> sampled from SAM/BAM file (default = 200000)”</em>: <code class="language-plaintext highlighter-rouge">200000</code></li>
       </ul>
     </li>
@@ -2174,7 +2171,7 @@ Fraction of <span class="notranslate">reads</span> explained by "1+-,1-+,2++,2--
 
               <figure id="figure-23"><img src="../../images/ref-based/featureCounts_assignment_plot.png" alt="featureCounts assignment" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Assignments with featureCounts</figcaption></figure>
 
-              <p>Some <span class="notranslate">reads</span> are not assigned because multi-mapped and other assigned to no features or ambiguous ones.</p>
+              <p>Some <span class="notranslate">reads</span> are not assigned because they were multi-mapped; others were assigned to no features or to ambiguous ones.</p>
             </li>
             <li>
               <p>If the percentage is below 50%, you should investigate where your <span class="notranslate">reads</span> are <span class="notranslate">mapping</span> (inside genes or not, with IGV) and check that the annotation corresponds to the correct reference genome version.</p>
@@ -2330,11 +2327,11 @@ https://zenodo.org/record/4541751/files/GSM461181_treat_paired.counts
 https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
 </code></pre></div>      </div>
     </li>
-    <li>Rename the datasets</li>
+    <li>As before, rename the datasets according to the name of the sample, e.g. <code class="language-plaintext highlighter-rouge">GSM461182_untreat_single</code>, check the datatype (<code class="language-plaintext highlighter-rouge">tabular</code>) and add a different tag for each sample (e.g. <code class="language-plaintext highlighter-rouge">GSM461182_untreat_single</code>).</li>
   </ol>
 </blockquote>
 
-<p>We could compare the files directly and calculate the extent of differential gene <span class="notranslate">expression</span>. But it is not so simple.</p>
+<p>You might think We can just compare the count values in the files directly and calculate the extent of differential gene <span class="notranslate">expression</span>. However, it is not that simple.</p>
 
 <p>Let’s imagine we have <span class="notranslate">RNA</span>-Seq counts from 3 samples for a genome with 4 genes:</p>
 
@@ -2375,9 +2372,9 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
   </tbody>
 </table>
 
-<p>Sample 3 has more <span class="notranslate">reads</span> than the other replicates, regardless of the gene. It has a higher sequencing depth than the other replicates. Gene B is twice as long as gene A: it might explain why it has twice as many <span class="notranslate">reads</span>, regardless of replicates</p>
+<p>Sample 3 has more <span class="notranslate">reads</span> than the other replicates, regardless of the gene. It has a higher sequencing depth than the other replicates. Gene B is twice as long as gene A: it might explain why it has twice as many <span class="notranslate">reads</span>, regardless of replicates.</p>
 
-<p>The number of sequenced <span class="notranslate">reads</span> mapped to a gene depends then on:</p>
+<p>The number of sequenced <span class="notranslate">reads</span> mapped to a gene therefore depends on:</p>
 
 <ul>
   <li>
@@ -2408,7 +2405,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
   <p>For <strong>RPKM</strong> (<span class="notranslate">Reads</span> Per Kilobase Million),</p>
   <ol>
     <li>
-      <p>Compute the “per million” scaling factor: sum up the total <span class="notranslate">reads</span> in a sample and divide that number by 1,000,000</p>
+      <p>Compute the “per million” scaling factor: sum up the total <span class="notranslate">reads</span> in a sample and divide that number by 1,000,000.</p>
 
       <table>
         <thead>
@@ -2459,7 +2456,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
         </tbody>
       </table>
 
-      <p><em>Because of the small values in the example, we are scoring using a factor of 10.</em></p>
+      <p><em>Because of the small values in the example, we are scoring using a factor of 10.</em> <!-- confusing --></p>
     </li>
     <li>
       <p>Divide the read counts by the “per million” scaling factor</p>
@@ -2504,7 +2501,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
       </table>
     </li>
     <li>
-      <p>Divide the RPM values by the length of the gene, in kilobases</p>
+      <p>Divide the RPM values by the length of the gene, in kilobases.</p>
 
       <table>
         <thead>
@@ -2545,7 +2542,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
     </li>
   </ol>
 
-  <p><strong>FPKM</strong> (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is for single-end <span class="notranslate">RNA</span>-seq and FPKM for paired-end <span class="notranslate">RNA</span>-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end <span class="notranslate">RNA</span>-seq, two <span class="notranslate">reads</span> of a pair are mapped from a single fragment, or if one read in the pair did not map, one read can correspond to a single fragment (in case we decided to keep these). FPKM keeps tracks of fragments so that one fragment with 2 <span class="notranslate">reads</span> is counted only once.</p>
+  <p><strong>FPKM</strong> (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is used for single-end <span class="notranslate">RNA</span>-seq, while FPKM is used for paired-end <span class="notranslate">RNA</span>-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end <span class="notranslate">RNA</span>-seq, two <span class="notranslate">reads</span> of a pair are mapped from a single fragment, or if one read in the pair did not map, one read can correspond to a single fragment (in case we decided to keep these). FPKM keeps tracks of fragments so that one fragment with 2 <span class="notranslate">reads</span> is counted only once.</p>
 
   <p><strong>TPM</strong> (Transcripts Per Kilobase Million) is very similar to RPKM and FPKM, except the order of the operation</p>
 
@@ -2688,9 +2685,9 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
     </li>
   </ol>
 
-  <p>Contrary to RPKM and FPKM, when calculating TPM, we normalize for gene length first, and then normalize for sequencing depth second. However, the effects of this difference are quite profound, as we could already see with the example.</p>
+  <p>Unlike RPKM and FPKM, when calculating TPM, we normalize for gene length first, and then normalize for sequencing depth second. However, the effects of this difference are quite profound, as we already saw with the example.</p>
 
-  <p>The sums of each colum are very different:</p>
+  <p>The sums of each column are very different:</p>
 
   <table>
     <thead>
@@ -2787,11 +2784,11 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
   <p>Since <span class="notranslate">RNA</span>-Seq is all about comparing relative proportion of <span class="notranslate">reads</span>, TPM seems more appropriate than RPKM/FPKM.</p>
 </blockquote>
 
-<p><span class="notranslate">RNA</span>-Seq is often used to compare one tissue type to another. For example, muscle vs epithelial tissue. And it could be that there are a lot of muscle specific genes transcribed in muscle but not in the epithelial tissue. We call that a <strong>difference in library composition</strong>.</p>
+<p><span class="notranslate">RNA</span>-Seq is often used to compare one tissue type to another, for example, muscle vs. epithelial tissue. And it could be that there are a lot of muscle specific genes transcribed in muscle but not in the epithelial tissue. We call this a <strong>difference in library composition</strong>.</p>
 
 <p>It is also possible to see a difference in library composition in the same tissue type after the knock out of a transcription factor.</p>
 
-<p>Let’s imagine we have <span class="notranslate">RNA</span>-Seq counts from 2 samples (same library size: 635 <span class="notranslate">reads</span>), for a genome with 6 genes. The genes have the same <span class="notranslate">expression</span> in both sample, except one: only Sample 1 transcribe gene D, at a high level (563 <span class="notranslate">reads</span>). This means that the 563 <span class="notranslate">reads</span> used by D in Sample 1 will be distributed to other genes in Sample 2.</p>
+<p>Let’s imagine we have <span class="notranslate">RNA</span>-Seq counts from 2 samples (same library size: 635 <span class="notranslate">reads</span>), for a genome with 6 genes. The genes have the same <span class="notranslate">expression</span> in both samples, except one: only Sample 1 transcribes gene D, at a high level (563 <span class="notranslate">reads</span>). As the library size is the same for both samples, sample 2 has 563 extra <span class="notranslate">reads</span> to be distributed over genes A, B, C, E and F.</p>
 
 <table>
   <thead>
@@ -2840,11 +2837,11 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
   </tbody>
 </table>
 
-<p>The read count for all genes except for gene C and D is really high in Sample 2. But the only differentially expressed gene is gene D.</p>
+<p>As a result, the read count for all genes except for genes C and D is really high in Sample 2. Nonetheless, the only differentially expressed gene is gene D.</p>
 
-<p>TPM, RPKM or FPKM do not deal with these differences in library composition in normalization, but more complex tools, like DESeq2, do.</p>
+<p>TPM, RPKM or FPKM do not deal with these differences in library composition during normalization, but more complex tools, like DESeq2, do.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> (<a class="citation" href="#love2014moderated">Love <i>et al.</i> 2014</a>) is a great tool for dealing with <span class="notranslate">RNA</span>-seq data and running Differential Gene <span class="notranslate">Expression</span> (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for <strong>sequencing depth</strong> and <strong>library composition</strong>. Gene length normalization does not need to be accounted for because we are comparing the counts between sample groups for the same gene.</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> (<a class="citation" href="#love2014moderated">Love <i>et al.</i> 2014</a>) is a great tool for dealing with <span class="notranslate">RNA</span>-seq data and running Differential Gene <span class="notranslate">Expression</span> (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for <strong>sequencing depth</strong> and <strong>library composition</strong>. We do not need to account for gene length normalization does because we are comparing the counts between sample groups for the same gene.</p>
 
 <blockquote class="details">
   <h3 id="details-normalization-in-deseq2"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Normalization in DESeq2</h3>
@@ -2880,11 +2877,11 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
     </tbody>
   </table>
 
-  <p>The goal is to calculate a scaling factor for each sample, that takes read depth and library composition into account.</p>
+  <p>The goal is to calculate a scaling factor for each sample, which takes read depth and library composition into account.</p>
 
   <ol>
     <li>
-      <p>Take the log\(_e\) of all the values</p>
+      <p>Take the log\(_e\) of all the values:</p>
 
       <table>
         <tbody>
@@ -2916,7 +2913,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
       </table>
     </li>
     <li>
-      <p>Average each row</p>
+      <p>Average each row:</p>
 
       <table>
         <tbody>
@@ -2939,10 +2936,10 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
         </tbody>
       </table>
 
-      <p>Average of log values (also call geometric average) is used here because it is not easily impacted by outliers (e.g. gene C with its outlier for Sample 3)</p>
+      <p>The average of the log values (also known as the geometric average) is used here because it is not easily impacted by outliers (e.g. gene C with its outlier for Sample 3).</p>
     </li>
     <li>
-      <p>Filter out genes with infinity</p>
+      <p>Filter out genes with which have infinity as a value.</p>
 
       <table>
         <tbody>
@@ -2965,10 +2962,10 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
         </tbody>
       </table>
 
-      <p>It filters out genes with no read counts in at least 1 sample, e.g. genes only transcribed in one tissue as gene D in the previous example. It helps to focus the scaling factors on genes transcribed at similar levels regardless of the condition.</p>
+      <p>Here we filter out genes with no read counts in at least 1 sample, e.g. genes only transcribed in one tissue like gene D in the previous example. This helps to focus the scaling factors on genes transcribed at similar levels, regardless of the condition.</p>
     </li>
     <li>
-      <p>Substract the average log value from the log counts</p>
+      <p>Subtract the average log value from the log counts:</p>
 
       <table>
         <tbody>
@@ -3004,7 +3001,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
       <p>This step compares the ratio of the counts in each sample to the average across all samples.</p>
     </li>
     <li>
-      <p>Calculate the median of the ratios for each sample</p>
+      <p>Calculate the median of the ratios for each sample:</p>
 
       <table>
         <tbody>
@@ -3044,7 +3041,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
       <p>The median is used here to avoid extreme genes (most likely rare ones) from swaying the value too much in one direction. It helps to put more emphasis on moderately expressed genes.</p>
     </li>
     <li>
-      <p>Compute the scaling factor by taking the exponential of the medians</p>
+      <p>Compute the scaling factor by taking the exponential of the medians:</p>
 
       <table>
         <tbody>
@@ -3070,7 +3067,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
       </table>
     </li>
     <li>
-      <p>Compute the normalized counts: divide the original counts by the scaling factors</p>
+      <p>Compute the normalized counts: divide the original counts by the scaling factors:</p>
 
       <table>
         <tbody>
@@ -3103,11 +3100,11 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
     </li>
   </ol>
 
-  <p><em>This explanation is a transcription and adaptation of the <a href="https://www.youtube.com/watch?v=UFB993xufUU&amp;t=35s">StatQuest video explaining Library Normalization in DESEq2</a></em></p>
+  <p><em>This explanation is a transcription and adaptation of the <a href="https://www.youtube.com/watch?v=UFB993xufUU&amp;t=35s">StatQuest video explaining Library Normalization in DESEq2</a></em>.</p>
 
 </blockquote>
 
-<p>DESeq2 also runs the Differential Gene <span class="notranslate">Expression</span> (DGE) analysis, whose two basic tasks are:</p>
+<p>DESeq2 also runs the Differential Gene <span class="notranslate">Expression</span> (DGE) analysis, which has two basic tasks:</p>
 
 <ul>
   <li>Estimate the biological variance using the replicates for each condition</li>
@@ -3202,14 +3199,14 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
         <p>If you have a large number of samples, or a complex experimental design, manually selecting files for each factor level
 may be a lot of work. In these situations, <strong>group tags</strong> can make your life a lot easier.</p>
 
-        <p>For more information about setting and using group tags, please see <a href="/training-material/topics/galaxy-interface/tutorials/group-tags/tutorial.html">this tutorial</a></p>
+        <p>For more information about setting and using group tags, please see <a href="/training-material/topics/galaxy-interface/tutorials/group-tags/tutorial.html">this tutorial</a>.</p>
       </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<p><strong>DESeq2</strong> generated 3 outputs</p>
+<p><strong>DESeq2</strong> generated 3 outputs:</p>
 
 <ul>
   <li>A table with the normalized counts for each gene (rows) in the samples (columns)</li>
@@ -3218,12 +3215,12 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
 
     <ol>
       <li>
-        <p>Plot with the first 2 dimensions from a principal component analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>) run on the normalized counts of the samples</p>
+        <p>A plot of the first 2 dimensions from a principal component analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>), run on the normalized counts of the samples</p>
 
         <blockquote class="details">
           <h3 id="details-what-is-a-pca"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What is a PCA?</h3>
 
-          <p>Let’s imagine we have some beer bottles standing here on the table. We can describe each beer by its colour,its foam, by how strong it is, and so on. We can compose a whole list of different characteristics of each beer in a beer shop. But many of them will measure related properties and so will be redundant. If so, we should be able to summarize each beer with fewer characteristics. This is what PCA or principal component analysis does.</p>
+          <p>Let’s imagine we have some beer bottles standing here on the table. We can describe each beer by its colour, its foam, by how strong it is, and so on. We can compose a whole list of different characteristics of each beer in a beer shop. But many of them will measure related properties and so will be redundant. If so, we should be able to summarize each beer with fewer characteristics. This is what PCA or principal component analysis does.</p>
 
           <p>With PCA, we do not just select some interesting characteristics and discard the others. Instead, we construct some new characteristics that summarize our list of beers well. These new characteristics are constructed using the old ones. For example, a new characteristic might be computed, e.g. foam size minus beer pH. They are linear combinations.</p>
 
@@ -3231,7 +3228,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
 
           <p>Going back to read counts, the PCA is run on the normalized counts for all the samples. Here, we would like to describe the samples based on the <span class="notranslate">expression</span> of the genes. So the characteristics are the number of <span class="notranslate">reads</span> mapped on each genes. We use them and linear combinations of them to represent the samples and their similarities.</p>
 
-          <p><em>The beer analogy has been adapted from <a href="https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues">an answer on StackExchange</a></em></p>
+          <p><em>The beer analogy has been adapted from <a href="https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues">an answer on StackExchange</a></em>.</p>
 
         </blockquote>
 
@@ -3252,15 +3249,15 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
             <h3 id="solution-solution-19"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
             <ol>
-              <li>The first dimension is separating the treated samples from the untreated sample</li>
-              <li>The second dimension is separating the single-end datasets from the paired-end datasets</li>
-              <li>The datasets are grouped following the levels of the two factors. No hidden effect seems to be present on the data. If there is unwanted variation present in the data (e.g. batch effects) it is always recommend to correct for this, which can be accommodated in DESeq2 by including in the design any known batch variables</li>
+              <li>The first dimension is separating the treated samples from the untreated sample.</li>
+              <li>The second dimension is separating the single-end datasets from the paired-end datasets.</li>
+              <li>The datasets are grouped following the levels of the two factors. No hidden effect seems to be present on the data. If there is unwanted variation present in the data (e.g. batch effects), it is always recommended to correct for this, which can be achieved in DESeq2 by including in the design any known batch variables.</li>
             </ol>
           </blockquote>
         </blockquote>
       </li>
       <li>
-        <p>Heatmap of the sample-to-sample distance matrix (with clustering) based on the normalized counts</p>
+        <p>Heatmap of the sample-to-sample distance matrix (with clustering) based on the normalized counts.</p>
 
         <p>The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts.</p>
 
@@ -3287,14 +3284,14 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
         <p>Histogram of <em>p</em>-values for the genes in the comparison between the 2 levels of the 1st factor</p>
       </li>
       <li>
-        <p><a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a></p>
+        <p>An <a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a>:</p>
 
-        <p>It displays the global view of the relationship between the <span class="notranslate">expression</span> change of conditions (log ratios, M), the average <span class="notranslate">expression</span> strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene <span class="notranslate">expression</span>. The genes that passed the significance threshold (adjusted p-value &lt; 0.1) are colored in red.</p>
+        <p>This displays the global view of the relationship between the <span class="notranslate">expression</span> change of conditions (log ratios, M), the average <span class="notranslate">expression</span> strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene <span class="notranslate">expression</span>. The genes that passed the significance threshold (adjusted p-value &lt; 0.1) are colored in red.</p>
       </li>
     </ol>
   </li>
   <li>
-    <p>A summary file with the following values for each gene</p>
+    <p>A summary file with the following values for each gene:</p>
 
     <ol>
       <li>Gene identifiers</li>
@@ -3312,7 +3309,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
   </li>
 </ul>
 
-<p>For more information about <strong>DESeq2</strong> and its outputs, you can have a look at <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf"><strong>DESeq2</strong> documentation</a>.</p>
+<p>For more information about <strong>DESeq2</strong> and its outputs, you can have a look at the <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf"><strong>DESeq2</strong> documentation</a>.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3345,6 +3342,15 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </blockquote>
 </blockquote>
 
+<blockquote class="tip">
+  <h3 id="tip-tip-what-are-p-values-and-what-are-they-used-for"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: What are p-values and what are they used for?</h3>
+  <p>The p-value is a measure often used to determine whether or not a particular observation possesses statistical significance. Strictly speaking, the p-value is the probability that the data could have arisen randomly, assuming that the null hypothesis is correct. In the concrete case of <span class="notranslate">RNA</span>-Seq, the null hypothesis is that there is no differential gene <span class="notranslate">expression</span>. So a p-value of 0.13 for a particular gene indicates that, for that gene, assuming it is not differentially expressed, there is a 13% chance that any apparent differential <span class="notranslate">expression</span> could simply be produced by random variation in the experimental data.</p>
+
+  <p>13% is still quite high, so we cannot really be confident differential gene <span class="notranslate">expression</span> is taking place. The most common way that scientists use p-values is to set a threshold (commonly 0.05, sometimes other values such as 0.01) and reject the null hypothesis only for p-values below this value. Thus, for genes with p-values less than 0.05, we can feel safe stating that differential gene <span class="notranslate">expression</span> plays a role. It should be noted that any such threshold is arbitrary and there is no meaningful difference between a p-value of 0.049 and 0.051, even if we only reject the null hypothesis in the first case.</p>
+
+  <p>Unfortunately, p-values are often heavily misused in scientific research, enough so that Wikipedia provides a <a href="https://en.wikipedia.org/wiki/Misuse_of_p-values">dedicated article</a> on the subject. See also <a href="https://fivethirtyeight.com/features/not-even-scientists-can-easily-explain-p-values/">this article</a> (aimed at a general, non-scientific audience).</p>
+</blockquote>
+
 <h2 id="extraction-and-annotation-of-differentially-expressed-genes">Extraction and annotation of differentially expressed genes</h2>
 
 <p>Now we would like to extract the most differentially expressed genes due to the treatment and with an absolute fold change &gt; 2.</p>
@@ -3360,7 +3366,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </ul>
     </li>
     <li>
-      <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code></p>
+      <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code>.</p>
 
       <blockquote class="question">
         <h3 id="question-question-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -3378,10 +3384,10 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <blockquote class="comment">
         <h3 id="comment-comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>The file with the independent filtered results can be used for further <span class="notranslate">downstream</span> analysis as it excludes genes with only few read counts as these genes will not be considered as significantly differentially expressed.</p>
+        <p>The file with the independently filtered results can be used for further <span class="notranslate">downstream</span> analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.</p>
       </blockquote>
 
-      <p>We will now select only the genes with an absolute fold change (FC) &gt; 2</p>
+      <p>We will now select only the genes with an absolute fold change (FC) &gt; 2. Note that the DESeq2 output file contains \(log_{2} FC\), rather than FC itself, so we filter for \(abs(log_{2} FC) &gt; 1\) (which implies FC &gt; 2).</p>
     </li>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  to extract genes with an \(abs(log_{2} FC) &gt; 1\):
       <ul>
@@ -3397,7 +3403,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <blockquote class="solution">
           <h3 id="solution-solution-23"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <p>130, the 11.92% of the significantly differentially expressed genes.</p>
+          <p>130, or 11.92% of the significantly differentially expressed genes.</p>
 
         </blockquote>
       </blockquote>
@@ -3463,12 +3469,12 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
     <ol>
       <li>FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.</li>
-      <li>From the table, we got the gene symbol: Ant2. After some search on the <a href="https://www.ncbi.nlm.nih.gov/gene/32008">online biological databases</a>, we can found that Ant2 corresponds to adenine nucleotide translocase 2.</li>
+      <li>From the table, we got the gene symbol: Ant2. After some search on the <a href="https://www.ncbi.nlm.nih.gov/gene/32008">online biological databases</a>, we find that Ant2 corresponds to adenine nucleotide translocase 2.</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>The column names may not be precise so we would like to add them before going further.</p>
+<p>The annotated table contains no column names, which makes it difficult to read. We would like to add them before going further.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-add-column-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add column names</h3>
@@ -3548,7 +3554,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the joined dataset (output of <strong>Join two Datasets</strong>)</li>
       </ul>
     </li>
-    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Normalized counts for the most differentially expressed genes</code></li>
+    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Normalized counts for the most differentially expressed genes</code>.</li>
   </ol>
 </blockquote>
 
@@ -3579,8 +3585,9 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
+    <li>What does the X-axis of the heatmap represent? What about the Y axis?</li>
     <li>Do you observe anything in the clustering of the samples and the genes?</li>
-    <li>What changes if you regenerate the heatmap and select <code class="language-plaintext highlighter-rouge">Plot the data as it is</code> in <em>“Advanced - log transformation”</em>/<em>“Data transformation”</em>?</li>
+    <li>What changes if you regenerate the heatmap, this time selecting <code class="language-plaintext highlighter-rouge">Plot the data as it is</code> in <em>“Advanced - log transformation”</em>/<em>“Data transformation”</em>?</li>
     <li>How could you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change &gt; 2?</li>
   </ol>
 
@@ -3588,9 +3595,10 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <h3 id="solution-solution-25"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
+      <li>The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their patterns of gene <span class="notranslate">expression</span>. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the patterns of gene <span class="notranslate">expression</span>. <!-- hope this is correct --></li>
       <li>The samples are clustering by treatment.</li>
       <li>The scale changes and the differences between the genes are not visible anymore.</li>
-      <li>Extract the genes with \(log_{2} FC\) &gt; 1 (filter for genes with <code class="language-plaintext highlighter-rouge">c3&gt;1</code> on the summary of the differentially expressed genes) and run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1"><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1</span></span>  on the generated table.</li>
+      <li>Extract the genes with \(log_{2} FC\) &gt; 1 (filter for genes with <code class="language-plaintext highlighter-rouge">c3&gt;1</code> on the summary of the differentially expressed genes) and run <strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the generated table.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -3769,12 +3777,12 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </ul>
     </li>
     <li>
-      <p>Rename the output to <code class="language-plaintext highlighter-rouge">Gene IDs and differentially <span class="notranslate">expression</span></code></p>
+      <p>Rename the output to <code class="language-plaintext highlighter-rouge">Gene IDs and differential <span class="notranslate">expression</span></code>.</p>
 
       <p>We just generated the first input for <strong>goseq</strong>. As second input for <strong>goseq</strong> we need the gene lengths. We can use here the gene lengths generated by <strong>featureCounts</strong> and format the gene IDs.</p>
     </li>
     <li>
-      <p>Drag and drop one of the feature length datasets generated by <strong>featureCounts</strong> into this history using the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>
+      <p>Drag and drop one of the feature length datasets generated by <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> into this history using the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong>.</p>
     </li>
     <li><span class="tool" data-tool="ChangeCase" title="Tested with ChangeCase"><strong>Change Case</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: ChangeCase</span></span>  with
       <ul>
@@ -3796,7 +3804,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.36.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.36.0+galaxy0"><strong>goseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.36.0+<span class="notranslate">galaxy</span>0</span></span>  with
       <ul>
-        <li><em>“Differentially expressed genes file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and differentially <span class="notranslate">expression</span></code></li>
+        <li><em>“Differentially expressed genes file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and differential <span class="notranslate">expression</span></code></li>
         <li><em>“Gene lengths file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and length</code></li>
         <li><em>“Gene categories”</em>: <code class="language-plaintext highlighter-rouge">Get categories</code>
           <ul>
@@ -3841,7 +3849,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <h3 id="question-questions-15"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
       <ol>
-        <li>How many GO terms are over-represented with an adjusted P-value &lt; 0.05? Under-represented?</li>
+        <li>How many GO terms are over-represented with an adjusted P-value &lt; 0.05? How many are under-represented?</li>
         <li>How are the over-represented GO terms divided into MF, CC and BP? And for under-represented GO terms?</li>
       </ol>
 
@@ -3850,7 +3858,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
         <ol>
           <li>
-            <p>31 GO terms (0.27%) are over-represented and 83 (0.72%) under-represented</p>
+            <p>31 GO terms (0.27%) are over-represented and 83 (0.72%) under-represented.</p>
 
             <p><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)</p>
           </li>
@@ -3890,14 +3898,14 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <blockquote class="comment">
   <h3 id="comment-advanced-tutorial-on-enrichment-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Advanced tutorial on enrichment analysis</h3>
 
-  <p>In this tutorial, we covered GO enrichment analysis with <strong>goseq</strong>. To learn other gene set enrichment analysis, please have a look at the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">“<span class="notranslate">RNA</span>-Seq genes to pathways”</a> tutorial.</p>
+  <p>In this tutorial, we covered GO enrichment analysis with <strong>goseq</strong>. To learn other methods and tools for gene set enrichment analysis, please have a look at the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">“<span class="notranslate">RNA</span>-Seq genes to pathways”</a> tutorial.</p>
 </blockquote>
 
 <h2 id="kegg-pathways-analysis">KEGG pathways analysis</h2>
 
-<p><strong>goseq</strong> can also be used to identify interesting KEGG pathways. The KEGG pathway database is a collection of pathway maps representing the current knowledge on the molecular interaction, reaction and relation networks. A map can integrate many entities including genes, proteins, <span class="notranslate">RNA</span>s, chemical compounds, glycans, and chemical reactions, as well as disease genes and drug targets.</p>
+<p><strong>goseq</strong> can also be used to identify interesting KEGG pathways. The KEGG pathway database is a collection of pathway maps representing current knowledge of molecular interaction, reaction and relation networks. A map can integrate many entities including genes, proteins, <span class="notranslate">RNA</span>s, chemical compounds, glycans, and chemical reactions, as well as disease genes and drug targets.</p>
 
-<p>For example, the pathway <code class="language-plaintext highlighter-rouge">dme00010</code> represents the Glycolysis process (conversion of glucose into pyruvate with generation of small amounts of ATP and NADH) for Drosophila melanogaster:</p>
+<p>For example, the pathway <code class="language-plaintext highlighter-rouge">dme00010</code> represents the glycolysis process (conversion of glucose into pyruvate with generation of small amounts of ATP and NADH) for Drosophila melanogaster:</p>
 
 <p><img src="../../images/ref-based/dme00010_empty.png" alt="dme00010 KEGG pathway" loading="lazy" /></p>
 
@@ -3907,7 +3915,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.36.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.36.0+galaxy0"><strong>goseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.36.0+<span class="notranslate">galaxy</span>0</span></span>  with
       <ul>
-        <li><em>“Differentially expressed genes file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and differentially <span class="notranslate">expression</span></code></li>
+        <li><em>“Differentially expressed genes file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and differential <span class="notranslate">expression</span></code></li>
         <li><em>“Gene lengths file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and length</code></li>
         <li><em>“Gene categories”</em>: <code class="language-plaintext highlighter-rouge">Get categories</code>
           <ul>
@@ -3932,7 +3940,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <ol>
   <li>
-    <p>A big table with the KEGG terms and some statistics</p>
+    <p>A large table with the KEGG terms and some statistics</p>
 
     <blockquote class="question">
       <h3 id="question-questions-17"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3957,13 +3965,13 @@ correction for the variability due to the 2nd factor. In our current case, treat
     </blockquote>
   </li>
   <li>
-    <p>A table with the differentially expressed genes (from the list we provided) associated to the KEGG pathways (<code class="language-plaintext highlighter-rouge">DE genes for categories (GO/KEGG terms)</code>)</p>
+    <p>A table with the differentially expressed genes (from the list we provided) associated with the KEGG pathways (<code class="language-plaintext highlighter-rouge">DE genes for categories (GO/KEGG terms)</code>)</p>
   </li>
 </ol>
 
-<p>We could investigate which genes are involved in which pathways by looking at the second file generated by <strong>goseq</strong>. But it can be cumbersome and we would like to see the pathways as represented in the previous image. <strong>Pathview</strong> (<a class="citation" href="#luo2013pathview">Luo and Brouwer 2013</a>) can help to generate automatically similar images as the previous one but also add extra information about the genes (e.g. <span class="notranslate">expression</span>) in our study.</p>
+<p>We could investigate which genes are involved in which pathways by looking at the second file generated by <strong>goseq</strong>. However, this can be cumbersome and we would like to see the pathways as represented in the previous image. <strong>Pathview</strong> (<a class="citation" href="#luo2013pathview">Luo and Brouwer 2013</a>) can help to automatically generate similar images to the previous one, while also adding extra information about the genes (e.g. <span class="notranslate">expression</span>) in our study.</p>
 
-<p>This tool needs 2 main information as inputs:</p>
+<p>This tool needs 2 main inputs:</p>
 
 <ul>
   <li>Pathway ID(s) to plot, either as just one ID or as a file with one column with the pathway IDs</li>
@@ -3973,13 +3981,13 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <li>
         <p>some information about the genes</p>
 
-        <p>It can be for example a p-value or a fold change. This information will be added to the pathway plot: the node of the corresponding gene will be colored given the value. If there are different columns, the different information will be plotted side by side on the node.</p>
+        <p>This can be for example a p-value or a fold change. This information will be added to the pathway plot: the node of the corresponding gene will be colored given the value. If there are different columns, the different information will be plotted side by side on the node.</p>
       </li>
     </ul>
   </li>
 </ul>
 
-<p>Here we would like to visualize the 2 KEGG pathways: the over-represented <code class="language-plaintext highlighter-rouge">00010</code> (Glycolysis / Gluconeogenesis) and the under-represented <code class="language-plaintext highlighter-rouge">03040</code> (Spliceosome). We would like that the gene nodes are colored by Log2 Fold Change for the differentially expressed genes because of the treatment.</p>
+<p>Here we would like to visualize the 2 KEGG pathways: the over-represented <code class="language-plaintext highlighter-rouge">00010</code> (Glycolysis / Gluconeogenesis) and the under-represented <code class="language-plaintext highlighter-rouge">03040</code> (Spliceosome). We would like the gene nodes to be colored by Log2 Fold Change for the differentially expressed genes because of the treatment.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-kegg-enrichment-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform KEGG enrichment analysis</h3>
@@ -4342,8 +4350,8 @@ correction for the variability due to the 2nd factor. In our current case, treat
 author = "Bérénice Batut and Mallory Freeberg and Mo Heydarian and Anika Erxleben and Pavankumar Videm and Clemens Blank and Maria Doyle and Nicola Soranzo and Peter van Heusden",
 title = "Reference-based RNA-Seq data analysis (Galaxy Training Materials)",
 year = "2021",
-month = "05",
-day = "26"
+month = "07",
+day = "09"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
