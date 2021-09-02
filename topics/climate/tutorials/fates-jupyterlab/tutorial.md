@@ -43,6 +43,8 @@ key_points:
 - Galaxy Climate JupyterLab
 - CLM-FATES
 - Model analysis
+tags:
+  - interactive-tools
 contributors:
 - annefou
 
