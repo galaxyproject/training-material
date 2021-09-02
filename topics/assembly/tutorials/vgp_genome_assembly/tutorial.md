@@ -95,7 +95,7 @@ The high-throughput chromosome conformation capture (Hi-C) technology is based o
 
 # Data quality assessment
 
-To begin our analysis we will carry out the evaluation and pre-processing of our data, in order to evaluate potential inconsistencies and other anomalies in the data, and if identified, correct them. In order to obtain a general overview of our datasets, we are going to use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an open-source tool that provides a simple way to quality control raw sequence data.
+To begin our analysis we will carry out the evaluation and pre-processing of our data, in order to identify potential inconsistencies and other anomalies in the data, and if identified, correct them. In order to obtain a general overview of our datasets, we are going to use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an open-source tool that provides a simple way to quality control raw sequence data.
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
