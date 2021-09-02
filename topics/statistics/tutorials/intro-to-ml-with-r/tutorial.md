@@ -41,6 +41,8 @@ objectives:
 - Interpret and visualize the results obtained from ML analyses on omics datasets
 - Apply the ML techniques to analyse their own datasets
 time_estimation: 3H
+tags:
+- interactive-tools
 key_points:
 - To be added
 contributors:

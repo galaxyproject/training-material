@@ -29,6 +29,8 @@ objectives:
 - Creating multi-case scenarios.
 - Composing, executing and publishing CML-FATES workflow.
 time_estimation: 4H
+tags:
+- interactive-tools
 key_points:
 - CLM-FATES is a numerical terrestrial ecosystem model used in climate models
 - Panoply is a quick visualization tools for plotting your results

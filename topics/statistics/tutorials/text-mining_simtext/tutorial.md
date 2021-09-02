@@ -17,6 +17,8 @@ key_points:
 - The SimText toolset allows large-scale literature analysis of a set of biomedical entities such as genes or diseases
 - The similarities among the biomedical entities can be explored interactively
 - The litertaure based grouping can be compared to an existing grouping to discover similarities/ relationships hidden in the literature
+tags:
+- interactive-tools
 contributors:
 - mgramm1
 - dlalgroup
@@ -99,9 +101,9 @@ Next, we extract the 100 most frequent 'Disease' and 'Gene' terms (PubTator anno
 >    - *"Number of most frequent terms/IDs to extract."*: `100`
 >
 >    > ### {% icon comment %} PubTator
->    > PubTator annotates terms of the following categories: Gene, Disease, Mutation, Species and Chemical. 
+>    > PubTator annotates terms of the following categories: Gene, Disease, Mutation, Species and Chemical.
 >    > In this example we chose to only extract gene and disease terms but you can also select other categories if you are interested in those.
->    > 
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -123,7 +125,7 @@ The following features are generated:
 >    - {% icon param-file %} *"Input file"*: initial input file with genes and pre-existing grouping
 >    - {% icon param-file %} *"Matrix file"*: output of **PMIDs to PubTator** {% icon tool %}
 >
-> 2. Open interactive tool 
+> 2. Open interactive tool
 >
 >    {% snippet faqs/galaxy/interactive_tools_open.md tool="SimText app" %}
 >

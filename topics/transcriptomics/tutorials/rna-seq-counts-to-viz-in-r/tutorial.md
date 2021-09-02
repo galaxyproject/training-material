@@ -29,6 +29,8 @@ objectives:
 - Describe the role of data, aesthetics, geoms, and layers in `ggplot` functions.
 - Customize plot scales, titles, subtitles, themes, fonts, layout, and orientation.
 time_estimation: 1H
+tags:
+  - interactive-tools
 key_points:
 - When creating plots with `ggplot2`, think about the graphics in layers (aesthetics, geometry, statistics, scale transformation, and grouping).
 contributors:
