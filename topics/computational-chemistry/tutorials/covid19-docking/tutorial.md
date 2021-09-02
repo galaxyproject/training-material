@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring
+title: Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring
 level: Intermediate
 zenodo_link: 'https://zenodo.org/record/3730474'
 questions:
@@ -34,7 +34,7 @@ contributors:
 
 This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [here](https://covid19.galaxyproject.org/cheminformatics).
 
-In this tutorial, you will perform protein-ligand docking to MPro using rDock ({% cite rdock %}) and score the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
+In this tutorial, you will perform protein-ligand docking to MPro using rxDock ({% cite rdock %}), a version of the popular rDock software, and score the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
 
 > ### Agenda
 >
@@ -52,7 +52,7 @@ Early in March 2020, the Diamond Light Source completed a successful fragment sc
 An initial list of 41,000 candidate molecules was assembled by using the Fragalysis fragment network to elaborate from the initial fragment hits, as described [here](https://diamondlightsource.atlassian.net/wiki/spaces/FRAG/pages/8323192/The+Astex+Fragment+network). These were used as inputs for the docking and scoring workflow. The workflow consists of the following steps, each of which was carried out using tools installed on the European Galaxy server:
 1. Charge enumeration of the 41,000 candidate molecules selected based on the fragment hits.
 2. Generation of 3D conformations based on SMILES strings of the candidate molecules.
-3. Docking of molecules into each of the MPro structures using rDock.
+3. Docking of molecules into each of the MPro structures using rxDock.
 4. Evaluation of the docking poses using a TransFS, a deep learning approach ({% cite transfs %}) developed by the XChem group and collaborators, and SuCOS scoring ({% cite sucos %}), which compares the poses with the structures of the original fragment hits.
 
 The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the workflow with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to original Galaxy histories, with notes to explain where and why things were done differently to the tutorial.
@@ -123,7 +123,7 @@ Many of the compounds may contain functional groups which can exist in multiple 
 
 > ### {% icon hands_on %} Hands-on: Charge enumeration
 >
-> 1. **Enumerate changes** {% icon tool %} with the following parameters:
+> 1. {% tool [Enumerate charges](toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0) %} with the following parameters:
 >    - *"Input molecule data"*: `Candidate SMILES`
 >    - *"Minimum pH"*: `4.4`
 >    - *"Maximum pH"*: `10.4`
@@ -146,7 +146,7 @@ If you are not familiar with SMILES and SDF formats, consult the introductory [p
 
 > ### {% icon hands_on %} Hands-on: Convert to SDF format
 >
-> 1. **Compound conversion** {% icon tool %} with the following parameters:
+> 1. {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
 >    - *"Molecular input file"*: `Enumerated candidates` dataset.
 >    - *"Output format"*: `MDL MOL format (sdf, mol)`
 >        - *"Generate 3D coordinates"*: `Yes`
@@ -170,7 +170,7 @@ The next stage is to split the SD-file with the candidate ligands into a set of 
 >
 > > ### {% icon solution %} Solution
 > >
-> > The rDock tool performs one docking at a time (more technically: the task is not parallelized, as it uses only a single CPU). Therefore, splitting the large SD-file into many small files allows the work to be carried out by multiple Galaxy jobs in parallel, so it completes faster.
+> > The rxDock tool performs one docking at a time (more technically: the task is not parallelized, as it uses only a single CPU). Therefore, splitting the large SD-file into many small files allows the work to be carried out by multiple Galaxy jobs in parallel, so it completes faster.
 > >
 > > In the original study, this kind of parallelization was absolutely essential because of the enormous dataset; at some points, there were 5,000 docking jobs running concurrently on the European Galaxy server. Even on the much smaller scale of this tutorial, we can speed things up considerably using this trick.
 > >
@@ -179,7 +179,7 @@ The next stage is to split the SD-file with the candidate ligands into a set of 
 
 > ### {% icon hands_on %} Hands-on: Split the SD-files
 >
-> 1. **Split file to dataset collection** {% icon tool %} with the following parameters:
+> 1. {% tool [Split file to dataset collection](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0) %} with the following parameters:
 >    - *"Select the file type to split"*: `SD-files`
 >    - *"SD-file to split"*: `Enumerated candidates SDF`
 >        - *"Specify number of output files or number of records per file?"*: `Number of output files`
@@ -200,11 +200,11 @@ The active site also needs to be prepared for docking, using the following steps
 
 ## Convert protein structure to MOL2 format
 
-The receptor file we are using is in PDB format, but the rDock tool we use for docking requires an input in MOL2 format. Therefore, we first convert the file.
+The receptor file we are using is in PDB format, but the rxDock tool we use for docking requires an input in MOL2 format. Therefore, we first convert the file.
 
 > ### {% icon hands_on %} Hands-on: Conversion to MOL2 format
 >
-> 1. **Compound conversion** {% icon tool %} with the following parameters:
+> 1. {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
 >    - *"Molecular input file"*: `Receptor PDB` dataset.
 >    - *"Output format"*: `Sybyl Mol2 format (mol2)`
 > 2. Rename the output file `Receptor MOL2`.
@@ -214,7 +214,7 @@ The receptor file we are using is in PDB format, but the rDock tool we use for d
 
 ## Generate Frankenstein ligand
 
-For docking with rDock, a file needs to be created defining the active site. This requires two input files - one for the protein and one for the ligand. We want an active site generation that takes into account the features of all 17 fragments, and therefore need to generate a 'Frankenstein ligand' which possesses the properties of all the fragments. A very simple Galaxy tool is available for this.
+For docking with rxDock, a file needs to be created defining the active site. This requires two input files - one for the protein and one for the ligand. We want an active site generation that takes into account the features of all 17 fragments, and therefore need to generate a 'Frankenstein ligand' which possesses the properties of all the fragments. A very simple Galaxy tool is available for this.
 
 > ### {% icon question %} Questions
 >
@@ -230,7 +230,7 @@ For docking with rDock, a file needs to be created defining the active site. Thi
 
 > ### {% icon hands_on %} Hands-on: Generate Frankenstein ligand
 >
-> 1. **Create Frankenstein ligand** {% icon tool %} with the following parameters:
+> 1. {% tool [Create Frankenstein ligand](toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0) %} with the following parameters:
 >    - *"Input file"*: `Hits SDF`
 > 2. Rename the file to `Frankstein SDF`.
 >
@@ -242,7 +242,7 @@ The active site can now be generated using the **rbcavity** {% icon tool %} tool
 
 > ### {% icon hands_on %} Hands-on: Active site preparation
 >
-> 1. **rDock cavity definition** {% icon tool %} with the following parameters:
+> 1. {% tool [rxDock cavity definition](toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5) %} with the following parameters:
 >    - *"Receptor"*: `Receptor MOL2`
 >    - *"Reference ligand"*: `Frankenstein SDF`
 >    - *"Mapper sphere radius"*: `3.0`
@@ -262,7 +262,7 @@ The active site can now be generated using the **rbcavity** {% icon tool %} tool
 
 # Docking and scoring
 
-Docking and scoring are now performed, using the following steps: 1) docking using rDock, 2) recombining the results into a single SDF file, 3) TransFS scoring, and 4) SuCOS scoring.
+Docking and scoring are now performed, using the following steps: 1) docking using rxDock, 2) recombining the results into a single SDF file, 3) TransFS scoring, and 4) SuCOS scoring.
 
 > ### {% icon details %} Differences with the original study
 >
@@ -274,11 +274,11 @@ Docking and scoring are now performed, using the following steps: 1) docking usi
 > See [here](https://covid19.galaxyproject.org/cheminformatics/3-Docking/) and [here](https://covid19.galaxyproject.org/cheminformatics/3-Docking/) for more details. A full list of Galaxy histories generated is listed [here](https://covid19.galaxyproject.org/cheminformatics/Histories/).
 {: .details}
 
-## Docking with rDock
+## Docking with rxDock
 
 > ### {% icon hands_on %} Hands-on: Docking
 >
-> 1. **rDock docking** {% icon tool %} with the following parameters:
+> 1. {% tool [rxDock docking](toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5) %} with the following parameters:
 >    - *"Receptor"*: `Receptor MOL2`
 >    - *"Active site"*: `Active site`
 >    - *"Ligands"*: `Split file` collection
@@ -287,7 +287,7 @@ Docking and scoring are now performed, using the following steps: 1) docking usi
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > For more information about docking, check out the [introductory tutorial](../cheminformatics/tutorial.html). It uses a different tool, AutoDock Vina, rather than rDock, but the general principles are the same.
+>    > For more information about docking, check out the [introductory tutorial](../cheminformatics/tutorial.html). It uses a different tool, AutoDock Vina, rather than rxDock, but the general principles are the same.
 >    {: .comment}
 >
 {: .hands_on}
@@ -298,7 +298,7 @@ Having created a collection to parallelize the docking procedure, we can now rec
 
 > ### {% icon hands_on %} Hands-on: Collapse collection
 >
-> 1. **Collapse Collection** {% icon tool %} with the following parameters:
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
 >    - *"Collection of files to collapse into single dataset"*: Output of docking step
 > 2. Rename to `Docked poses SDF`.
 >
@@ -314,7 +314,7 @@ The TransFS scoring returns a value (saved as `<TransFSScore>` in the SDF file) 
 
 > ### {% icon hands_on %} Hands-on: TransFS scoring
 >
-> 1. **XChem TransFS pose scoring** {% icon tool %} with the following parameters:
+> 1. {% tool [XChem TransFS pose scoring](toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0) %} with the following parameters:
 >    - *"Receptor"*: `Receptor PDB`
 >    - *"Ligands"*: `Docked poses SDF`
 >    - *"Distance to waters"*: `2`
@@ -329,7 +329,7 @@ SuCOS scoring returns a value (saved as `<Max_SuCOS_Score>` in the SDF file) bet
 
 > ### {% icon hands_on %} Hands-on: SuCOS scoring
 >
-> 1. **Max SuCOS score** {% icon tool %} with the following parameters:
+> 1. {% tool [Max SuCOS score](toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0) %} with the following parameters:
 >    - *"Ligands to be scored"*: Output of the TransFS step
 >    - *"Set of clusters to score against"*: `Hits SDF`
 > 2. Rename the output file to `Scored poses`.
