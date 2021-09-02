@@ -511,8 +511,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -599,12 +597,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
-            UseGalaxy.be
-        </a>
-        
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
             UseGalaxy.eu
         </a>
@@ -640,7 +632,7 @@
         </ul>
         
 
-        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 7, 2021 </div>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 1, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
     </blockquote>
@@ -921,13 +913,6 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>Further, docking requires the coordinates of a binding site to be defined. Effectively, this defines a ‘box’ in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in <span class="notranslate">Galaxy</span> which can be used to automatically create a configuration file for docking when ligand coordinates are already known.</p>
 
-<blockquote class="details">
-  <h3 id="details-how-to-find-the-binding-site-of-an-apoprotein"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> How to find the binding site of an apoprotein?</h3>
-
-  <p>If the structure contains no ligand in complex with the protein (i.e. apoprotein), identifying the binding site is not trivial. There are software available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, try out the fpocket tool  (<a class="citation" href="#LeGuilloux2009">Le Guilloux <i>et al.</i> 2009</a>) on the Hsp90 structure.</p>
-
-</blockquote>
-
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generate-pdbqt-and-config-files-for-docking"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate PDBQT and config files for docking</h3>
 
@@ -948,16 +933,53 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
     </li>
     <li><strong>Calculate the box parameters for an AutoDock Vina job</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ligand”</em>: ‘Ligand (MOL) file.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ligand or pocket”</em>: <code class="language-plaintext highlighter-rouge">Ligand (MOL)</code> file.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“x-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“y-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“z-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exhaustiveness”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>The ‘Random seed’ parameter should be left empty.</li>
-        <li>Rename to ‘Docking config file’</li>
+        <li>Rename to ‘Docking config file’.</li>
       </ul>
     </li>
   </ol>
+</blockquote>
+
+<p>Perhaps you are interested in a system which does not have a ligand within the binding site (an apoprotein). In this case you need to run the fpocket tool to identify potential binding sites in the protein structure - take a look at the following (optional) section.</p>
+
+<blockquote class="details">
+  <h3 id="details-how-to-find-the-binding-site-of-an-apoprotein"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> How to find the binding site of an apoprotein?</h3>
+
+  <p>If the structure contains no ligand in complex with the protein (i.e. apoprotein), there is an additional step of identifying the binding site. Software is available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, let’s try out the fpocket tool (<a class="citation" href="#LeGuilloux2009">Le Guilloux <i>et al.</i> 2009</a>) on the Hsp90 structure, imagining we don’t have access to the file containing the ligand coordinates.</p>
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-finding-binding-sites-using-fpocket"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Finding binding sites using fpocket</h3>
+
+    <ol>
+      <li><strong>fpocket</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Protein (PDB)</code> file.</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Type of pocket to detect”</em>: <code class="language-plaintext highlighter-rouge">Small molecule binding sites</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output files”</em>: select <code class="language-plaintext highlighter-rouge">PDB files containing the atoms in contact with each pocket</code>, <code class="language-plaintext highlighter-rouge">Log file containing pocket properties</code>.</li>
+        </ul>
+      </li>
+      <li><strong>Calculate the box parameters for an AutoDock Vina job</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ligand or pocket”</em>: <code class="language-plaintext highlighter-rouge">pocket2</code> PDB file from the <code class="language-plaintext highlighter-rouge">Atoms in contact with each pocket</code> collection.</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“x-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“y-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“z-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exhaustiveness”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>The ‘Random seed’ parameter can be left empty.</li>
+          <li>Rename to ‘Docking config file derived from pocket’.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>The fpocket tool generates two different outputs: a <code class="language-plaintext highlighter-rouge">Pocket properties</code> log file containing details of all the pockets which fpocket found in the protein. The second output is a collection (a list) containing one PDB file for each of the pockets. Each of the PDB files contains only the atoms in contact with that particular pocket. Note that fpocket assigns a score to each pocket, but you should not assume that the top scoring one is the only one where compounds can bind! For example, the pocket where the ligand in the <code class="language-plaintext highlighter-rouge">2brc</code> PDB file binds is ranked as the second-best according to fpocket.</p>
+  </blockquote>
+
+  <p>You can compare the config file generated with the one generated from the ligand directly - if you picked the right pocket (<code class="language-plaintext highlighter-rouge">pocket2</code>) the coordinates should be pretty similar.</p>
+
 </blockquote>
 
 <h1 id="docking">Docking</h1>
@@ -1309,8 +1331,8 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 author = "Simon Bray",
 title = "Protein-ligand docking (Galaxy Training Materials)",
 year = "2021",
-month = "04",
-day = "07"
+month = "09",
+day = "01"
 url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
