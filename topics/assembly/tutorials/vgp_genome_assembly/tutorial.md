@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: VGP assembly pipeline
 zenodo_link: ''
-enable: true
+enable: false
 questions:
 - what combination of tools can produce the highest quality assembly of vertebrate genomes?
 - How can we evaluate how good it is? 
