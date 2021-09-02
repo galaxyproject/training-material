@@ -73,7 +73,7 @@ They are compatible with the whole data analysis solution maintained by the W4M 
 > This training material can be followed running it on any Galaxy instance holding the Galaxy modules needed.
 > Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
 > you can find the entire history in the 'published histories' section:
-> [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****)
+> [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing)
 >
 {: .comment}
 
@@ -130,11 +130,8 @@ To perform the different exercices of this tutorial, you need to create a new hi
 >
 > > ### {% icon tip %} Comment to W4M users
 > >
-> > If you happen to be a W4M user, please note that you can find at the following link a ready-to-start history:
-> > [GTN_LCMSprocessing_start](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****).
-> >
-> > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets ****TOUPDATE****.
+> > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 1 to 3.
 > {: .tip}
 >
 {: .hands_on}
@@ -182,8 +179,8 @@ We can then use this column to filter the dataset.
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 4 to 6.
 >    {: .tip}
 >
 {: .hands_on}
@@ -252,8 +249,8 @@ The mean fold change ("fold") for each ion can be calculated using the **Intensi
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 7 and 8.
 >    {: .tip}
 >
 {: .hands_on}
@@ -292,7 +289,7 @@ to be resulting from relevant compounds.
 > 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
 >    - {% icon param-file %} *"Data Matrix file"*: `GF_dataMatrix` (output of the previous **Generic Filter** {% icon tool %} job)
 >    - {% icon param-file %} *"Sample metadata file"*: `GF_sampleMetadata` (output of the previous **Generic Filter** {% icon tool %} job)
->    - {% icon param-file %} *"Variable metadata file"*: `IC_variableMetadata` (output of the previous **Intensity Check** {% icon tool %} job)
+>    - {% icon param-file %} *"Variable metadata file"*: `IC_GF_variableMetadata` (output of the previous **Intensity Check** {% icon tool %} job)
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - In *"Identify the parameter to filter "*:
 >            - *"1: Insert Identify the parameter to filter "*
@@ -305,8 +302,8 @@ to be resulting from relevant compounds.
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 9 to 11.
 >    {: .tip}
 >
 {: .hands_on}
@@ -315,7 +312,7 @@ As for the previous use of **Generic Filter**, we now have a dataset filtered fr
 
 > ### {% icon question %} Questions
 >
-> What is the current stage of our trining dataset?
+> What is the current stage of our training dataset?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -340,17 +337,17 @@ Here, we will use a tool that is called **Quality Metrics** to have an overview 
 > ### {% icon hands_on %} Hands-on: Using **Quality Metrics** to get an overview of the dataset
 >
 > 1. {% tool [Quality Metrics](toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8) %} with the following parameters:
->    - {% icon param-file %} *"Data matrix file"*: `GF_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
->    - {% icon param-file %} *"Sample metadata file"*: `GF_sampleMetadata` (output of the last **Generic Filter** {% icon tool %} job)
->    - {% icon param-file %} *"Variable metadata file"*: `GF_variableMetadata` (output of the last **Generic Filter** {% icon tool %} job)
+>    - {% icon param-file %} *"Data matrix file"*: `GF_GF_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
+>    - {% icon param-file %} *"Sample metadata file"*: `GF_GF_sampleMetadata` (output of the last **Generic Filter** {% icon tool %} job)
+>    - {% icon param-file %} *"Variable metadata file"*: `GF_IC_GF_variableMetadata` (output of the last **Generic Filter** {% icon tool %} job)
 >    - *"Coefficient of Variation"*: `no`
 >    - *"Advanced parameters"*: `Use default`
 >
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 12 to 15.
 >    {: .tip}
 >
 {: .hands_on}
@@ -376,9 +373,9 @@ Again, this can be done running the **Generic Filter** {% icon tool %} tool, usi
 > ### {% icon hands_on %} Hands-on: Using **Generic_filter** to remove blank samples from the dataset
 >
 > 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
->    - {% icon param-file %} *"Data Matrix file"*: `GF_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
->    - {% icon param-file %} *"Sample metadata file"*: `GF_sampleMetadata` (output of the last **Generic Filter** {% icon tool %} job)
->    - {% icon param-file %} *"Variable metadata file"*: `GF_variableMetadata` (output of the last **Generic Filter** {% icon tool %} job)
+>    - {% icon param-file %} *"Data Matrix file"*: `GF_GF_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
+>    - {% icon param-file %} *"Sample metadata file"*: `GF_GF_sampleMetadata` (output of the last **Generic Filter** {% icon tool %} job)
+>    - {% icon param-file %} *"Variable metadata file"*: `GF_IC_GF_variableMetadata` (output of the last **Generic Filter** {% icon tool %} job)
 >    - *"Deleting samples and/or variables according to Numerical values"*: `no`
 >    - *"Deleting samples and/or variables according to Qualitative values"*: `yes`
 >        - In *"Removing a level in factor"*:
@@ -394,8 +391,8 @@ This is why what we use as input here are the outputs from the last **Generic Fi
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 16 to 18.
 >    {: .tip}
 >
 {: .hands_on}
@@ -465,8 +462,8 @@ Since the plot box size by default is tiny, this enhances the readability of the
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 19 to 22.
 >    {: .tip}
 >
 {: .hands_on}
@@ -512,7 +509,7 @@ With the given formula, we can correct the signal drift.
 > This work has to be done for each batch. 
 Thus, if your sequence is divided into several batches, the idea is to obtain something similar to the following picture:
 >
-> ![A before/after plot showing an example of intensities before correction, with clear signal drift and batch effects, and after correction where the effects have been erased thanks to the correction process*](../../images/lcms_BC_theo2.png "Before/after picture")
+> ![A before/after plot showing an example of intensities before correction, with clear signal drift and batch effects, and after correction, where the effects have been erased thanks to the correction process](../../images/lcms_BC_theo2.png "Before/after picture")
 >
 {: .details}
 
@@ -533,11 +530,16 @@ We can then use the **Batch correction** {% icon tool %} tool to perform the cor
 >        - *"Factor of interest "*: `Group`
 >        - *"Level of details for plots "*: `complete`
 >
+>    > ### {% icon comment %} Comment
+>    >
+>    > The tabular outputs of the previous **Multivariate** job are not needed here.
+This is why what we use as input here are the outputs from the last **Generic Filter** job.
+>    {: .comment}
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 23 to 25.
 >    {: .tip}
 >
 {: .hands_on}
@@ -625,9 +627,9 @@ Thus, for these two cindicators the tool can be run without specific parameters 
 > ### {% icon hands_on %} Hands-on: Using **Quality Metrics** to compute the CV indicators
 >
 > 1. {% tool [Quality Metrics](toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8) %} with the following parameters:
->    - {% icon param-file %} *"Data matrix file"*: `BC_linear_dataMatrix` (output of the **Batch_correction** {% icon tool %} job)
+>    - {% icon param-file %} *"Data matrix file"*: `BC_linear_RT_blank_Filter_dataMatrix` (output of the **Batch_correction** {% icon tool %} job)
 >    - {% icon param-file %} *"Sample metadata file"*: `RT_blank_Filter_sampleMetadata` (output of the last **Generic Filter** {% icon tool %} job)
->    - {% icon param-file %} *"Variable metadata file"*: `BC_linear_variableMetadata` (output of the **Batch_correction** {% icon tool %} job)
+>    - {% icon param-file %} *"Variable metadata file"*: `BC_linear_RT_blank_Filter_variableMetadata` (output of the **Batch_correction** {% icon tool %} job)
 >    - *"Coefficient of Variation"*: `no`
 >    - *"Advanced parameters"*: `Use default`
 >
@@ -642,8 +644,8 @@ Note that what we are going to use this time is the tabular output, but while yo
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 26 to 29.
 >    {: .tip}
 >
 {: .hands_on}
@@ -658,9 +660,9 @@ This means that we will need to set two distinct thresholds, and to add two nume
 > ### {% icon hands_on %} Hands-on: Using **Generic Filter** to filter the dataset
 >
 > 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
->    - {% icon param-file %} *"Data Matrix file"*: `BC_linear_dataMatrix` (output of the **Batch_correction** {% icon tool %} job)
->    - {% icon param-file %} *"Sample metadata file"*: `QM_RT_blank_Filter_sampleMetadata` (output of the **Quality Metrics** {% icon tool %} job)
->    - {% icon param-file %} *"Variable metadata file"*: `QM_BC_linear_variableMetadata` (output of the **Quality Metrics** {% icon tool %} job)
+>    - {% icon param-file %} *"Data Matrix file"*: `BC_linear_RT_blank_Filter_dataMatrix` (output of the **Batch_correction** {% icon tool %} job)
+>    - {% icon param-file %} *"Sample metadata file"*: `QM_RT_blank_Filter_sampleMetadata` (output of the last **Quality Metrics** {% icon tool %} job)
+>    - {% icon param-file %} *"Variable metadata file"*: `QM_BC_linear_RT_blank_Filter_variableMetadata` (output of the last **Quality Metrics** {% icon tool %} job)
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - In *"Identify the parameter to filter "*:
 >            - *"1: Insert Identify the parameter to filter "*
@@ -683,7 +685,7 @@ This means that we will need to set two distinct thresholds, and to add two nume
 >    > ### {% icon comment %} Comment
 >    >
 >    > Here, we took the opportunity of this filter to remove the pools from the dataset. 
-Indeed, pools will be no longer used in this tutorial's steps, so we can filter them. 
+Indeed, pools will be no longer used in this tutorial's steps, so we can remove them from the dataset. 
 >    {: .comment}
 >
 >
@@ -694,8 +696,8 @@ Indeed, pools will be no longer used in this tutorial's steps, so we can filter 
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 30 to 32.
 >    {: .tip}
 >
 {: .hands_on}
@@ -779,8 +781,8 @@ Let's try to colour the PCA score plots according to that variable. For this, we
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 33 to 36.
 >    {: .tip}
 >
 {: .hands_on}
@@ -839,8 +841,8 @@ In our example, what we are interested in is a normalisation based on the *Osmo*
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 37 and 38.
 >    {: .tip}
 >
 {: .hands_on}
@@ -874,8 +876,8 @@ Thus, we can compute a similar PCA using the normalised intensities and see whet
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 39 to 42.
 >    {: .tip}
 >
 {: .hands_on}
@@ -903,11 +905,16 @@ Let's see how theses groups are projected on the final PCA we have.
 >        - *"Amount by which plotting text should be magnified relative to the default"*: `0.4`
 >    - *"Advanced computational parameters"*: `Use default`
 >
+>    > ### {% icon comment %} Comment
+>    >
+>    > To run this exercice, you can choose to re-run the previous one and simply change the *"Sample colors"* parameter
+from `Osmo` to`Group`.
+>    {: .comment}
 >
 >    > ### {% icon tip %} Comment to W4M users
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/****TOUPDATE****) history,
-this step corresponds to the datasets number ****TOUPDATE****.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
+this step corresponds to the datasets number 43 to 46.
 >    {: .tip}
 >
 {: .hands_on}
@@ -944,7 +951,3 @@ In particular, the removing of "trash" signals, the signal drift and batch effec
 are common aspects to consider when dealing with LC-MS data. 
 Remember that depending on your context (type of samples, protocol specificities...) specific filters/normalisations may be needed, independently of standards ones. 
 Once you complete your customed processing procedure, your tables are ready for biologically-oriented exploration!
-
-
-
-**NOTTOFORGET** Links and numbers from the reference history; requesting the GTN category for the Zenodo repo
