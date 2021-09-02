@@ -1,9 +1,13 @@
 require 'json'
 
-
 module Jekyll
   module JsonldFilter
     def to_jsonld(material, topic, site)
+      langCodeMap = {
+        'en': "English",
+        'es': "Español",
+      }
+
       gtn = {
         "@type": "Organization",
         "email": "#{site['email']}",
@@ -69,9 +73,9 @@ module Jekyll
         #"correction":,
         #"creator":,
         #"dateCreated":,
-        #"dateModified":,
+        "dateModified": Time.at(material['last_modified_at'].to_s.to_i),
         #"datePublished":,
-        "discussionUrl": "#{site["gitter_url"]}",
+        "discussionUrl": site["gitter_url"],
         #"editor":,
         #"educationalAlignment":,
         #"educationalUse":,
@@ -83,20 +87,15 @@ module Jekyll
         #"genre":,
         #"hasPart" described below
         "headline": "#{material['title']}",
-        "inLanguage": {
-            "@type": "Language",
-            "name": "English",
-            "alternateName": "en"
-        },
         #"interactionStatistic":,
         "interactivityType": "mixed",
         "isAccessibleForFree": true,
         #"isBasedOn":,
-        #"isFamilyFriendly":,
+        "isFamilyFriendly": true,
         #"isPartOf" described below
         #"keywords": described below
         #"learningResourceType" described below
-        "license": "#{site['github_repository']}/blob/#{site['github_repository_branch']}/LICENSE.md",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
         #"locationCreated":,
         #"mainEntity":,
         #"material":,
@@ -204,6 +203,20 @@ module Jekyll
         end
       end
       data['description'] = description.join('\n')
+
+      if material.key?("lang") then
+        data['inLanguage'] = {
+          "@type": "Language",
+          "name": langCodeMap[material['lang']],
+          "alternateName": material['lang']
+        }
+      else
+        data['inLanguage'] = {
+          "@type": "Language",
+          "name": "English",
+          "alternateName": "en"
+        }
+      end
 
       # Course requirements (material + topic)
       reqs = []
