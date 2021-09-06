@@ -431,6 +431,7 @@ our new Docker container as a Galaxy tool.
 >    >     </entry_points>
 >    >
 >    >     <environment_variables>
+>    >         <!-- These will be accessible as environment variables inside the Docker container -->
 >    >         <environment_variable name="HISTORY_ID">$__history_id__</environment_variable>
 >    >         <environment_variable name="REMOTE_HOST">$__galaxy_url__</environment_variable>
 >    >         <environment_variable name="GALAXY_WEB_PORT">8080</environment_variable>
@@ -624,20 +625,31 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 
 ---
 
-# Additional components
+# Additional components - TODO
 Some extra complexity that comes up GxIT development - not necessary for all GxITs
 
 ## Galaxy history interaction
 We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user's Galaxy history? For example, if the user creates a file within the application. That's where the environment variables created in the tool XML become useful.
 
+> ### {% icon tip %} Access histories in R
+> From the [R-Studio]() GxIT we can see that there is an R library that allows us to communicate with Galaxy histories:
+>
+> "The convenience functions `gx_put()` and `gx_get()` are available to you to interact with your current Galaxy history. You can save your workspace with `gx_save()`"
+>
+>
+{: .tip}
+
 ## Self-destruct script
 To watch container HTTP traffic and kill the container process when the connection to Galaxy is lost - this is good practice to prevent "zombie" containers that hang around after the user has stopped or deleted the tool run.
 
 ## Run script
-A clean interface for the container application that our tool XML can call easily.
+In the case of our `Tabulator` application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML. However, some web apps might require more elaborate commands to be run. In this situation there are a number of solutions demonstrated in the `<command>` section of [existing GxITs](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive):
+- [Guacamole Desktop](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_guacamole_desktop.xml): application startup with `startup.sh`
+- [HiCBrowser](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_hicbrowser.xml): application startup with `supervisord`
+- [AskOmics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml): configuration with Python and Bash scripts, followed by `start_all.sh` to run the application.
 
 ## Templated config files
-Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the applcation by templating a run script or configuration file to be read by the application.
+Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the applcation by templating a run script or configuration file to be read by the application. In this application for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
 
 ---
 
