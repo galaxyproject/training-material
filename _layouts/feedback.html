@@ -154,6 +154,10 @@ layout: base
     {% for tun in fdbk_by_tutorial %}
         {% assign tuto_metadata = tutorials | where: "title",tun.name | first %}
         {% assign tuto_name = tuto_metadata['dir'] | split: "/" | last %}
+        {% if tuto_metadata['name'] != 'tutorial.md' %}
+            {% assign lang = tuto_metadata['name'] | split: "." | first | split: "-" | last %}
+            {% assign tuto_name = tuto_name | append: lang %}
+        {% endif %}
         {% if tuto_name != '' %}
             {% assign fdbk_by_month = tun.items | group_by: 'month' %}
             {% assign fdbk_over_time = "" | split: ',' %}
@@ -283,6 +287,10 @@ layout: base
                             <p>Tutorial "{{ tun.name }}" is not available anymore.</p>
                         </div>
                     {% else %}
+                        {% if tuto_metadata['name'] != 'tutorial.md' %}
+                            {% assign lang = tuto_metadata['name'] | split: "." | first %}
+                            {% assign tuto_name = tuto_name | append: lang %}
+                        {% endif %}
                         <div class="accordion-card card" id="tutorial-{{ tuto_name }}">
                             <div class="card-header" id="heading-{{ tuto_name }}">
                                 <div class="mb-0">
