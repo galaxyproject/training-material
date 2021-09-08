@@ -3,26 +3,19 @@ layout: tutorial_hands_on
 
 title: Introduction to Python
 level: Introductory
-zenodo_link: ""
-requirements: ""
-follow_up_training:""
+zenodo_link:  https://zenodo.org/record/3477564
+requirements:  []
+follow_up_training:  []
 
 questions:
 - How can I run Python programs using Galaxy?
-- How can I manipulate data using Python?
-- How can I plot my data using Python?
 
 objectives:
-- Launch JupyterLab in Galaxy
 - Learn the fundamentals of programming in Python
 - Use the scientific libraries pandas, numpy and matplolib to explore tabular datasets
 
-time_estimation: ""
-key_points:""
-
-supporting_material:
-- [Dataset](https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular)
-
+time_estimation:  8H
+key_points: []
 subtopic: python
 contributors:
   - mcmaniou
