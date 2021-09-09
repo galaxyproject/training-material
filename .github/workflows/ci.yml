@@ -1,5 +1,9 @@
 name: Lint Broken Links
 
+concurrency:
+  group: ci-${{ github.head_ref }}
+  cancel-in-progress: true
+
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on:
   pull_request:
