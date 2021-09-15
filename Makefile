@@ -229,10 +229,11 @@ video: ## Build all videos
 	bash bin/ari-make.sh
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
-	${ACTIVATE_ENV} && \
-	bash bin/workflow_to_tool_yaml.sh && \
-	python bin/add_galaxy_instance_annotations.py && \
-	python bin/add_galaxy_instance_badges.py
+	@echo "Temporarily disabled pending Hub2 updates"
+	#${ACTIVATE_ENV} && \
+	#bash bin/workflow_to_tool_yaml.sh && \
+	#python bin/add_galaxy_instance_annotations.py && \
+	#python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index
