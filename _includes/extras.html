@@ -9,13 +9,27 @@
           {% icon github %} Edit on GitHub
         </a>
 
-        <a class="dropdown-item" href="{% link stats.md %}" title="Show view statistics about this rrepository">
+        <a class="dropdown-item" href="{% link stats.md %}" title="Show view statistics about this repository">
             {% icon galaxy-barchart %} GTN statistics
         </a>
 
         <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page={{site.baseurl}}{{ page.url }}" title="Show view statistics of this page">
             {% icon galaxy-barchart %} Page Metrics
         </a>
+
+        {% if page.layout == 'topic' and site.data['feedback'].topic contains page.topic_name %}
+            <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
+                {% icon galaxy-barchart %} Topic feedback 
+            </a>
+        {% elsif page.layout == 'tutorial_hands_on' and site.data['feedback'].tutorial contains page.tutorial_name %}
+            <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
+                {% icon galaxy-barchart %} Tutorial feedback
+            </a>
+        {% else %}
+            <a class="dropdown-item" href="{% link feedback.md %}" title="Show feedback statistics about this repository">
+                {% icon galaxy-barchart %} GTN feedback
+            </a>
+        {% endif %}
 
         <div class="dropdown-item">
             <div>
@@ -61,6 +75,9 @@
                 <label data-value="rainbow" class="btn btn-secondary">
                     <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
                 </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
                 <label data-value="halloween" class="btn btn-secondary">
                     <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
                 </label>
@@ -70,5 +87,21 @@
             </div>
 
         </div>
+
+        <div class="dropdown-item">
+            <div>
+                {% icon galaxy-rulebuilder-history %} Previous Versions
+            </div>
+
+            {% assign taglist = site.git_tags | sort | reverse | slice: 0, 3 %}
+            <div id="archive-selector">
+            {% for tag in taglist %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}" title="Version {{tag}}">{{ tag }}</a>
+            {% endfor %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
     </div>
 </li>

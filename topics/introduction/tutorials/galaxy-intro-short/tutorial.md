@@ -51,7 +51,7 @@ contributors:
 > 2. Browse to your Galaxy instance
 > 3. Log in or register
 >
-> ![login](../../images/galaxy-login.png)
+> ![Screenshot of Galaxy Australia with the register or login button highlighted](../../images/galaxy-login.png)
 >
 >   > ### {% icon comment %} Different Galaxy servers
 >   >  This is an image of Galaxy Australia, located at [usegalaxy.org.au](https://usegalaxy.org.au/)
@@ -69,7 +69,7 @@ The Galaxy homepage is divided into three panels:
 * Viewing panel in the middle
 * History of analysis and files on the right
 
-![galaxy overview screenshot](../../images/galaxy_interface.png)
+![Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right.](../../images/galaxy_interface.png)
 
 The first time you use Galaxy, there will be no files in your history panel.
 
@@ -83,7 +83,7 @@ Your "History" is in the panel at the right.
 > 1. Go to the **History** panel (on the right)
 > 2. Click on the history name (which by default is "Unnamed history")
 >
->    ![name history](../../../../shared/images/rename_history.png){:width="320px"}
+>    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history.png){:width="320px"}
 >
 > 3. Type in a new name, for example, "My-Analysis"
 > 4. Press <kbd>Enter</kbd> on your keyboard to save it
@@ -297,7 +297,7 @@ Where is your first history, called "my-analysis"?
 >
 >    This makes a copy of the dataset in the new history (without actually using additional disk space).
 >
-> 3. Click on **Analyze Data** in the top panel to go back to your analysis window
+> 3. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older versions of Galaxy) in the top panel to go back to your analysis window
 >
 > ![Copy a dataset between histories](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
 >

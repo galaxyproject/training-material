@@ -68,10 +68,10 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
 >    +- src: usegalaxy_eu.tiaas2
->    +  version: 0.0.6
+>    +  version: 0.0.8
 >    {% endraw %}
 >    ```
->    {: data-commit="Add grafana requirement"}
+>    {: data-commit="Add tiaas2 requirement"}
 >
 >    And run the install step:
 >
@@ -88,7 +88,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -216,3 +216,11 @@ telegraf_plugins_extra:
+>    @@ -214,3 +214,12 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -100,6 +100,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +tiaas_version: master
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
+>    +tiaas_listen_url: "127.0.0.1:6000"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure tiaas"}
@@ -118,7 +119,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >     postgresql_objects_databases:
 >       - name: galaxy
 >         owner: galaxy
->    @@ -16,6 +17,22 @@ postgresql_objects_privileges:
+>    @@ -16,6 +17,27 @@ postgresql_objects_privileges:
 >         roles: telegraf
 >         privs: SELECT
 >         objs: ALL_IN_SCHEMA
@@ -134,6 +135,11 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    privs: SELECT,INSERT
 >    +  - database: galaxy
 >    +    roles: tiaas
+>    +    objs: group_role_association
+>    +    type: table
+>    +    privs: DELETE
+>    +  - database: galaxy
+>    +    roles: tiaas
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +    type: sequence
 >    +    privs: USAGE,SELECT
@@ -145,6 +151,16 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
 >
+>    > ### {% icon tip %} Why does TIaaS get `DELETE` privileges on Galaxy's Database?
+>    > The `DELETE` privilege is limited in scope to one table: `group_role_association`. This allows TIaaS to
+>    > disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
+>    > users who participated in a training return to using normal (non-training) resources after the training ends.
+>    >
+>    > The `usegalaxy_eu.tiaas2` role will create a [cron](https://manpages.debian.org/stable/cron/cron.8.en.html) job
+>    > to perform this process every night at midnight. You can control when this runs (or disable it) using
+>    > [the tiaas_disassociate_training_roles variable](https://github.com/usegalaxy-eu/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20).
+>    >
+>    {: .tip}
 >
 > 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook (`galaxy.yml`)
 >    {% raw %}
@@ -169,9 +185,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    @@ -61,4 +61,19 @@ server {
 >             proxy_pass http://127.0.0.1:3000/;
 >         }
->
+>     
 >    +    location /tiaas {
->    +        uwsgi_pass 127.0.0.1:5000;
+>    +        uwsgi_pass {{ tiaas_listen_url }};
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
 >    +        include uwsgi_params;
 >    +    }
@@ -181,7 +197,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    }
 >    +
 >    +    location /join-training {
->    +        uwsgi_pass 127.0.0.1:5000;
+>    +        uwsgi_pass {{ tiaas_listen_url }};
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
 >    +        include uwsgi_params;
 >    +    }
@@ -294,12 +310,12 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
 >
-> 1. Create and open `files/galaxy/dynamic_job_rules/hogwarts.py`
+> 1. Create and open `templates/galaxy/dynamic_job_rules/hogwarts.py`
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/dynamic_job_rules/hogwarts.py
+>    +++ b/templates/galaxy/dynamic_job_rules/hogwarts.py
 >    @@ -0,0 +1,19 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -332,19 +348,19 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -137,6 +137,7 @@ galaxy_local_tools:
+>    @@ -140,6 +140,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
 >    +- hogwarts.py
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
 >
-> 3. We next need to configure this plugin in our job configuration (`files/galaxy/config/job_conf.xml.j2`):
+> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.xml.j2`):
 >
 >    {% raw %}
 >    ```diff

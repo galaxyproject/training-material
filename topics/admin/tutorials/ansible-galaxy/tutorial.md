@@ -111,16 +111,16 @@ Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook
 
 {% raw %}
 ```yaml
-galaxy_config_files:
-  - src: files/galaxy/config/builds.txt
+galaxy_config_templates:
+  - src: templates/galaxy/config/builds.txt
     dest: "{{ galaxy_config.galaxy.builds_file_path }}"
-  - src: files/galaxy/config/data_manager_conf.xml
+  - src: templates/galaxy/config/data_manager_conf.xml
     dest: "{{ galaxy_config.galaxy.data_manager_config_file }}"
-  - src: files/galaxy/config/datatypes_conf.xml
+  - src: templates/galaxy/config/datatypes_conf.xml
     dest: "{{ galaxy_config.galaxy.datatypes_config_file }}"
-  - src: files/galaxy/config/dependency_resolvers_conf.xml
+  - src: templates/galaxy/config/dependency_resolvers_conf.xml
     dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
-  - src: files/galaxy/config/disposable_email_blocklist.conf
+  - src: templates/galaxy/config/disposable_email_blocklist.conf
     dest: "{{ galaxy_config.galaxy.blocklist_file }}"
 ```
 {% endraw %}
@@ -136,7 +136,7 @@ galaxy_config:
 ```
 {% endraw %}
 
-So the references in `galaxy_config_files` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
+So the references in `galaxy_config_templates` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
 
 > ### {% icon tip %} Define once, reference many times
 > Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.
@@ -1489,7 +1489,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    - Galaxy has been deployed to `/srv/galaxy/server`
 >    - The configuration lives in `/srv/galaxy/config/galaxy.yml` - be sure to look through it to see what options have been set for you
->    - Note the permissions of the contents of `/srv/galaxy`
+>    - Note the ownership and permissions of the contents of `/srv/galaxy`
 >    - Some config files that Galaxy maintains itself, such as `shed_tool_conf.xml`, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in `/srv/galaxy/var/config`
 >    - A Python virtualenv - an isolated Python environment - with all of the Galaxy framework's dependencies has been installed in `/srv/galaxy/venv`
 >
@@ -1666,6 +1666,24 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon tip %} Did this fail?
+>    > ```
+>    > ● galaxy.service - Galaxy
+>    >      Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabl>
+>    >      Active: failed (Result: exit-code) since Mon 2021-06-28 17:07:58 CEST; 18min ago
+>    >     Process: 521705 ExecStart=/srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/gal>
+>    >    Main PID: 521705 (code=exited, status=1/FAILURE)
+>    >         CPU: 21ms
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Schedu>
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Stopped Galaxy.
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Start >
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Failed>
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Failed to start Galaxy.
+>    > ```
+>    >
+>    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. One possible cause here is the `uwsgi` subsection of `galaxy_config` was omitted and instead it used the default port and failed.
+>    {: .tip}
+>
 > 6. Some things to note:
 >
 >    1. Later, after NGINX is set up and we're ready to connect to Galaxy, refreshing the page while Galaxy is restarting will wait (spin) until the process is ready rather than produce an error message, a nice feature of uWSGI
@@ -1729,7 +1747,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -65,3 +65,33 @@ galaxy_config:
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    +
@@ -2006,7 +2024,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_20.09/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
+One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/master/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
 
 The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
@@ -2110,14 +2128,14 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,10 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->
+>     
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
 >     galaxy_manage_systemd: yes
->
+>     
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job conf to config dir"}
@@ -2198,7 +2216,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    # NFS workarounds
 >    +    retry_job_output_collection: 3
 >    +    # Debugging
->    +    cleanup_job: onerror
+>    +    cleanup_job: onsuccess
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
@@ -2210,7 +2228,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    {: data-commit="Add production facing vars"}
 >
 >    > ### {% icon tip %} What do these do?
->    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/config.html#configuration-options), but we'll discuss a couple briefly:
+>    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options), but we'll discuss a couple briefly:
 >    > - `nginx_x_accel_redirect_base`: This is required to have NGINX serve user files. You don't want Galaxy to waste time reading a 100GB fastq file a user has asked for, so you offload that to NGINX. The request is passed through to Galaxy, so permissions checks still occur, but Galaxy instead replies to NGINX just the path to the file that it should send to the requesting user.
 >    > - `enable_quotas`: You definitely want to set a default quota for your users!
 >    > - `expose_user_name`: This exposes usernames in the history and dataset sharing forms which makes life easier for your users.
@@ -2245,7 +2263,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    {: data-commit="Add nginx x-accel-redir and g-i-g webhook config to nginx"}
 >
 >    > ### {% icon tip %} What do these do?
->    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
+>    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/master/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
 >    {: .tip}
 >
 > 3. Run the playbook
@@ -2329,7 +2347,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_19.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_20.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 
@@ -2339,7 +2357,7 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
-
+ 
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
 +galaxy_commit_id: 'release_19.09'
@@ -2399,6 +2417,17 @@ But what about your other software, things that are deployed along with Galaxy? 
 You can write roles for that! Sometimes they are really ugly roles, but it at least keeps it documented + in place. E.g. UseGalaxy.eu has a custom role for rewriting users and it’s ugly and untested and should not be used by anyone else in case it breaks their site. But it's one of these manual tricks or bits of glue code, but we can encapsulate it as ansible. You can include tarballs in your role to be deployed and so on.
 
 It may seem daunting to use ansible, but you don't have to do everything in ansible! You can just do a little bit, for managing just Galaxy, and manage the rest of your stack separately. Whatever fits best for your deployment.
+
+# Loving Ansible? Convert your own servers!
+
+A common question we get is:
+
+> Is it possible to transform a Galaxy server which was installed by hand, into an ansible-managed one?
+{: .quote}
+
+Because of the great variance between sites and deployments it is not really possible to produce a guide for doing so. However, if you back your current deployment up and set all of the variables that control paths appropriately, it can be done!
+
+It's very possible to do this piecemeal, taking one component at a time to ansibilise. nginx is a very easy place to start, the database is as well. Galaxy can be rebuilt in a new location, many of us ran a hand-managed galaxy setup somewhere like `/home/janedoe/work/projects/galaxy` that suddenly became a permanent project, this is a good chance to keep that but rebuild an identical one in `/srv/galaxy` or similar, and then switch over the traffic to that new, production Galaxy. Relocating data is a bit tougher and can require rewriting entries in the database.
 
 # Final Notes
 

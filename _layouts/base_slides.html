@@ -84,6 +84,20 @@ class: center, middle, inverse
 </div>
 {% endif %}
 
+<div class="footnote" style="bottom: 3em;">{% icon last_modification %} Updated: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
 {% if topic.requirements or page.requirements %}
 
 ---
@@ -97,18 +111,6 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 {% endif %}
 
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
-
-Press `C` to create a new window where the same presentation will be displayed.
-This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
-
 ---
 
 {{ content | xml_escape }}
@@ -117,7 +119,7 @@ slide to change on the other. Useful when presenting.
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
 
 {% if tutorial.contributors %}
 <div class="contributors-line">
@@ -145,7 +147,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
     <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript">
-      var slideshow = remark.create({navigation: {scroll: false,}});
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
       var hljs = remark.highlighter.engine;
       var snippets = document.querySelectorAll('code.remark-code');
         [].forEach.call(snippets,function(snippet){

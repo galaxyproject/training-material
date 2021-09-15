@@ -68,15 +68,7 @@ The process for dealing with runtime errors will be somewhat different, since th
 
 ## Contributing to Galaxy
 
-To contribute to galaxy, a GitHub account is required. Changes are proposed via a [pull request](https://docs.github.com/en/github/collaborating-with-pull-requests). This allows the project maintainers to review the changes and suggest improvements.
-
-The general steps are as follows:
-
-1. Fork the Galaxy repository
-2. Clone your fork
-3. Make changes in a new branch
-4. Commit your changes, push branch to your fork
-5. Open a pull request for this branch in the upstream Galaxy repository
+{% snippet topics/dev/faqs/contributing.md %}
 
 In this tutorial, instead of cloning Galaxy's default branch, we will clone a branch that has been created for this tutorial and contains several bugs that you'll need to identify and fix. Also, we won't be opening a pull request in the upstream Galaxy repository.
 
@@ -98,21 +90,15 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >
 >    Note: In the future, when you contribute to Galaxy, you'll need to clone the `dev` branch, which is the default, so you don't need to specify the `-b` option in the `git clone` command).
 >
-> 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. First, let's create a virtual environment:
+> 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the `common_startup.sh` script:
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > virtualenv .venv
+>    > bash scripts/common_startup.sh --dev-wheels
 >    > ```
 >    {: .code-in}
 >
->    Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `-p` option:
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > virtualenv -p PATH-TO-PYTHON-INTERPETER .venv
->    > ```
->    {: .code-in}
+>    Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
 >
 > 4. Activate your new virtual environment:
 >
@@ -122,15 +108,9 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >    > ```
 >    {: .code-in}
 >
->    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
+>    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`.
 >
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > pip install -r lib/galaxy/dependencies/dev-requirements.txt
->    > ```
->    {: .code-in}
->
-> 6. Finally, let's create a new branch for your edits:
+> 5. Finally, let's create a new branch for your edits:
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash

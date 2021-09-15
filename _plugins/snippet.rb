@@ -52,14 +52,22 @@ module Jekyll
             end
             icons = get_config(context)
 
+            tiptitle = "Tip"
+            handsontitle = "Hands-on"
+            if context.registers[:page]&.key?('lang')
+              lang = context.registers[:page]['lang']
+              tiptitle = context.registers[:site].data["lang"][lang]["tip"]
+              handsontitle = context.registers[:site].data["lang"][lang]["handson"]
+            end
+
             if box_type == 'tip'
                 icon_text = icons['tip']
-                box_start = '> ### '+get_icon(icon_text)+' Tip: ' + metadata['title']
+                box_start = '> ### '+get_icon(icon_text)+' '+tiptitle+': ' + metadata['title']
                 box_end   = "\n{: .tip}"
             end
             if box_type == 'hands_on'
                 icon_text = icons['hands_on']
-                box_start = '> ### '+get_icon(icon_text)+' Hands-on: ' + metadata['title']
+                box_start = '> ### '+get_icon(icon_text)+' '+handsontitle+': ' + metadata['title']
                 box_end   = "\n{: .hands_on}"
             end
             if box_type == 'comment'
@@ -69,12 +77,24 @@ module Jekyll
             end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
+          #if y =~ /contribute/
+            #puts "=== step 1   ===\n#{y}\n\n"
+          #end
+          z = markdownify(y)
+          #if z =~ /contribute/
+            #puts "=== step 2   ===\n#{z}\n\n"
+          #end
           if box_start != ""
-             y = y.gsub(/\R+/,"\n> ")
+             z = z.gsub(/\R/,"\n> ")
              #puts box_start+y+box_end
           end
+          #if z =~ /contribute/
+            #puts "=== step 3   ===\n#{z}\n\n"
+            #puts "=== MARKDOWN ===\n#{box_start+z+box_end}\n\n"
+            #puts "=== RENDERED ===\n#{markdownify(box_start+z+box_end)}\n\n"
+          #end
 
-          '<!--SNIPPET-->' + markdownify(box_start+y+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
+          '<!--SNIPPET-->' + markdownify(box_start+z+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
         end
       end
 

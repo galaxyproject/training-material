@@ -606,7 +606,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
 >
-> 6. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
+> 6. **Return** to the analysis view by clicking on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top menu bar.
 >
 {: .hands_on}
 

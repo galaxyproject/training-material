@@ -16,6 +16,8 @@ follow_up_training:
     tutorials:
         - r-basics
 time_estimation: 3H
+tags:
+  - interactive-tools
 key_points:
 - Why it's helpful to be able to work with R interactively within Galaxy
 contributors:

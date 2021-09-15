@@ -1,20 +1,16 @@
 ---
 layout: tutorial_hands_on
 
-title: Title of the tutorial
+title: VGP assembly pipeline
 zenodo_link: ''
 enable: false
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- what combination of tools can produce the highest quality assembly of vertebrate genomes?
+- How can we evaluate how good it is? 
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: ''
+- Learn the tools necessary to perform a de novo assembly of a vertebrate genome
+- Evaluate the quality of the assembly
+time_estimation: '2h'
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
@@ -28,29 +24,16 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+An assembly can be defined as a hierarchical data structure that maps the sequence data to a putative reconstruction of the target ({% cite Miller2010 %}). Advances in sequencing technologies over the last few decades have revolutionised the field of genomics, allowing for a reduction in both the time and resources required to carry out de novo genome assembly. Until recently, second-generation DNA sequencing technologies allowed to produced either short highly accurate reads, or error-prone long reads. However, in recent years, third-generation sequencing technologies, usually known as real-time single-molecule sequencing, have become dominant in de novo assembly of large genomes. It uses native DNA fragments to sequence instead of template amplification, avoiding copying errors, sequence-dependent biases and information losses ({% cite Hon2020 %}). An example of such a technology is PacBio Single molecule high-fidelity (HiFi) Sequencing, which enables average read lengths of 10-20 kb with average sequence identity greater than 99%, which is one of the technologies used to generate the data for this tutorial.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+Deciphering the structural organisation of complex vertebrate genomes is currently one of the most important problems in genomics. ({% cite Frenkel2012 %}). However, despite the great progress made in recent years, a key question remain to be answered: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repeated sequences and heterozigosity.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+Repetitive sequences can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR), that occur at a single locus ({% cite Trresen2019 %}). Repetitive sequences, and TE in particular, are an important component of eukariotes genomes, constituting more than a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tamdem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). TE content is probably the main factor contributing to fragmented genomes, specially in the case of large genomes, as its content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, TR usually lead to local genome assembly collapse and partial or complete loss of genes, specially when the read length of the sequencing method is shorter than the TR ({% cite Trresen2019 %}).
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+In the case of heterozygosity, haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). A common strategy to overcome these difficulties is to remap genomes to a single haplotype, which represents the whole genome. This approach is useful for highly inbred samples that are nearly homozygous, but when applied to highly heterozygous genomes, such as aquatic organism, it missses potential differences in sequence, structure, and gene presence, usually leading to ambiguties and redundancies in the initial contig-level assemblies ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}).
 
+To address these problems, the G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species currently present on planet Earth ({% cite Rhie2021 %}). The protocol proposed in this tutorial, the VGP assembly pipeline, is the result of years of study and analysis of the available tools and data sources.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -61,114 +44,81 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# VGP assembly pipeline overview
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+The figure 1 represents the VGP assembly pipeline. 
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+![fig1:VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0")
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+In order to facilitate the development of the workflow, we will structure it in four main sections:
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+- Genome profile analysis
+- HiFi long read phased assembly with Hifiasm
+- Hybrid scaffolding based on phased assembly and Bionano data
+- Hybrid scaffolding based on a phased assembly and Hi-C mapping data
 
-have fun!
+## Background on datasets
 
-## Get data
+In order to reduce processing times, we will use samples from the fungus _Saccharomyces cerevisiae_ for this training. 
+The VGP assembly pipeline requires datasets generated by three different technologies: PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
+
+PacBio HiFi reads rely on the Single Molecule Real-Time (SMRT) sequencing technology. It is based on real-time imaging of fluorescently tagged nucleotides as they are synthesized along individual DNA template molecules, combining multiple subreads of the same circular template using a statistical model to produce one highly accurate consensus sequence, along with base quality values (figure 2). This technology allows to generate long-read sequencing dataseets with read lengths averaging 10-25 kb and accuracies greater than 99.5%.
+
+![fig2:PacBio sequencing technolgoy](../../images/vgp_assembly/pacbio_hifi.png "PacBio HiFi sequencing")
+
+Optical genome mapping is a method for detecting structural variants. The generation of Bionano optical maps starts with high molecular weight DNA, which is labeled at specific sequences motif with a fluorescent dye, resulting in a unique fluorescence pattern for each individual genome. The comparison of the labelled fragments among different samples enables the detection of structural variants. Optical maps are integrated with the primary assemby sequence in order to identify and correct potential chimeric joints, and estimate the gap sizes.
+
+The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin conformation, enabling the identification of topological domains. Hi-C chromatin interaction maps methods first crosslink the chromatin in its 3D conformation. The crosslinked DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. Next, the blunt ends  of spatially proximal digested end are ligated, preserving the chromosome interaction regions. Finally, the DNA is purified to assure that only fragments originating from ligation events are sequenced. 
+
+# Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - *"Upload data as"*: `Datasets`
+>    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
+>
 >
 >    ```
->
+>   SRR7126301_1.fastq.gz   https://zenodo.org/record/5383832/files/SRR7126301_1.fastq.gz   fastqsanger.gz
+>   SRR7126301_2.fastq.gz   https://zenodo.org/record/5383832/files/SRR7126301_2.fastq.gz   fastqsanger.gz
+>   SRR13577846.fastq.gz    https://zenodo.org/record/5383832/files/SRR13577846.30x.wgaps.fastq.gz  fastqsanger.gz
+>   bionano.cmap    https://zenodo.org/record/5383832/files/bionano.cmap    cmap
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `Name`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>    - Click `Apply` and press <kbd>Upload</kbd>
+>   
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}>
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
+> 3. Add to each database a tag
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+# Data quality assessment
 
-![Alternative text](../../images/assembly_steps.png "Legend of the image")
+To begin our analysis we will carry out the evaluation and pre-processing of our data, in order to identify potential inconsistencies and other anomalies in the data, and if identified, correct them. In order to obtain a general overview of our datasets, we are going to use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an open-source tool that provides a simple way to quality control raw sequence data.
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon hands_on %} Hands-on: Quality check
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. Run **FastQC** {% icon tool %} with the following parameters
+>    - {% icon param-files %} *"Raw read data from your current history"*: `SRR13577846.fastq.gz`
 >
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. Inspect the generated HTML files
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Next, will remove the adaptors by using Cutadapt. 
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cutadapt**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Primer removal
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -189,6 +139,171 @@ A big step can have several subsections or sub steps:
 >    - In *"Filter Options"*:
 >        - *"Discard Trimmed Reads"*: `Yes`
 >
+{: .hands_on}
+
+# Genome profile analysis
+
+An important step before starting a de novo genome assembly project is to proceed with the analysis of the genome profile. Determining these characteristics in advance has the potential to reveal whether an analysis is not reflecting the full complexity of the genome, for example, if the number of variants is underestimated or a significant fraction of the genome is not assembled ({% cite Vurture2017 %}).
+
+Traditionally DNA flow citometry was considered the golden standart for estimating the genome size, one of the most important factors to determine the required coverage level. However, nowadays experimental methods have been replaced by computational approaches {% cite wang2020estimation %}. One of the most widely used procedures for undertaking genomic profiling is the analyis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality. In addition, k-mer spectra analysis can be used in a reference-free manner for assessing genome assembly quality metrics ({% cite Rhie2020 %}).
+
+> ### {% icon details %} K-mer size, sequencing coverage and genome size
+>
+>K-mers are unique substrings of length k contained within a DNA sequence. For example, the DNA sequence *TCGATCACA* can be decomposed into six unique k-mers that have five bases long: *TCGAT*, *CGATC*, *GATCA*, *ATCAC* and *TCACA*. A sequence of length L will have  L-k+1 k-mers. On the other hand, the number of possible k-mers can be calculated as  n<sup>k</sup>, where n is number of possible monomers and k is the k-mer size.
+>
+>
+>---------| -------------|-----------------------
+>  Bases  |  K-mer size  |  Total possible k-mers
+>---------| -------------|-----------------------
+>    4    |       1      |            4          
+>    4    |       2      |           16          
+>    4    |       3      |           64          
+>    4    |       4      |          256          
+>    4    |      ...     |          ...          
+>    4    |      10      |    1.048.576         
+>---------|--------------|-----------------------
+>
+>Thus, k-mer size is a key parameter in order to ensure as may unique k-mers as possible, avoiding unnecessary waste of computational resources as far as possible. In the case of the human genome, k-mers of 31 bases in length lead to 96.96% of unique k-mers.
+>
+>Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.
+{: .details}
+
+    
+In section we will use two basic tools to computationally estimate the genome features: Meryl and GenomeScope.
+
+## Generation of k-mer spectra with **Meryl**
+
+Meryl will allow us to perform the k-mer profiling by decomposing the sequencing data into k-lenght substrings and determining its frequency. The original version was developed for use in the Celera Assembler, and it comprises three modules: one for generating k-mer databases, one for filtering and combining databases, and one for searching databases. The k-mer database is stored in sorted order, similar to words in a dictionary ({% cite Rhie2020 %}).
+
+> ### {% icon comment %} K-mer size estimation
+>
+> One of the important aspects is the size of the k-mer, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. Given an estimated genome size (G) and a tolerable collision rate (p), an appropriate k can be computed as k = log4 (G(1 − p)/p).
+>
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Generate k-mers count distribution
+>
+> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
+>    - *"Operation type selector"*: `Count operations`
+>        - *"Count operations"*: `Count: count the ocurrences of canonical k-mers`
+>        - {% icon param-collection %} *"Input sequences"*: `SRR13577846.fastq.gz`
+>        - *"K-mer size selector"*: `Set a k-mer size`
+>            - "*K-mer size*": `21`
+>
+>    > ### {% icon comment %} Election of k-mer size
+>    >
+>    > We used 21 as k-mer size, as this length is has demonstrated to be sufficiently long that most k-mers are not repetitive and is short enough that the analysis will be more robust to sequencing errors. For extremely large (haploid size over 10 Gb) and/or very repetitive genomes, it is recommended to use larger k-mer lengths to increase the number of unique k-mers. 
+>    {: .comment}
+>
+> 2. Rename it `Collection meryldb`
+>
+> 3. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1) %} with the following parameters:
+>    - *"Operation type selector"*: `Operations on sets of k-mers`
+>        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
+>        - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
+>
+> 4. Rename it as `Merged meryldb`    
+>
+> 5. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0) %} with the following parameters:
+>    - *"Operation type selector"*: `Generate histogram dataset`
+>        - {% icon param-file %} *"Input meryldb"*: `Merged meryldb`
+>
+> 6. Finally, rename it as `Meryldb histogram`.
+>
+{: .hands_on}
+
+
+## Genome profiling with GenomeScope2
+
+The next step is to computationally infer the genome properties from the k-mer count distribution generated by Meryl, for which we'll use GenomeScope2. It relies in a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
+
+> ### {% icon hands_on %} Hands-on: Estimate genome properties
+>
+> 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input histogram file"*: `Meryldb histogram`
+>    - *"K-mer length used to calculate k-mer spectra"*: `21`
+>
+>   - In "*Output options*": mark `Generate a file with the model parameters` and `Summary of the analysis`
+>
+>    {: .comment}
+>
+{: .hands_on}
+
+Genomescope will generate six outputs:
+    
+- Plots
+    - *Linear plot*: K-mer spectra and fitted models: frequency (y-axis) versus coverage.
+    - *Log plot*: logarithmic transformation of the previous plot.
+    - Transformed linear plot: K-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). It allows to increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
+    - Transformed log plot: logarithmic transformation of the previous plot.
+- Model: this file includes a detailed report about the model fitting.
+- Summary: it includes the properties infered from the model, such as genome haploid length and the percentage of heterozygosity.
+
+Now, let's analyze the k-mer profiles, fitted models and estimated parameters:
+
+![fig3:Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "Genomescope2 plot")
+
+As we can see, there is an unique peak centered around 28, which is the coverage with the highest number of different 21-mers. According the normal-like k-mer spectra, we can infer that it is a haploid genome. The The large number of unique k-mers on the left size with frequence around one is due to error during the sequencing process.
+
+Before jumping to the next section, we need to carry out some operation on the output generated by Genomescope2.
+
+
+> ### {% icon hands_on %} Hands-on: Get estimated genome size
+>
+> 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `summary` (output of **GenomeScope** {% icon tool %})
+>    - *"Find pattern"*: ` bp`
+>    - *"Replace all occurences of the pattern"*: `Yes`
+>    - *"Find and Replace text in"*: `entire line`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>
+> 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `outfile` (output of **Replace** {% icon tool %})
+>    - *"Find pattern"*: `,`
+>    - *"Replace all occurences of the pattern"*: `Yes`
+>    - *"Find and Replace text in"*: `entire line`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>
+> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `outfile` (output of **Replace** {% icon tool %})
+>    - *"Type of regex"*: `Basic`
+>    - *"Regular Expression"*: `Haploid`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>
+> 4. {% tool [Convert](Convert characters1) %} with the following parameters:
+>    - {% icon param-file %} *"in Dataset"*: `output` (output of **Search in textfiles** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>
+> 5. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `cc7`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>
+> 6. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
+>    - *"Select type of parameter to parse"*: `Integer`
+>
 >    ***TODO***: *Check parameter descriptions*
 >
 >    ***TODO***: *Consider adding a comment or tip box*
@@ -199,30 +314,83 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Collapse Collection**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `out1` (output of **Cutadapt** {% icon tool %})
->    - *"Prepend File name"*: `Yes`
+> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
+>    - *"Add expression"*: `1.5*c3`
+>    - {% icon param-file %} *"as a new column to"*: `model_params` (output of **GenomeScope** {% icon tool %})
+>    - *"Round result?"*: `Yes`
+>    - *"Input has a header line with column names?"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
+>    - *"Add expression"*: `3*c7`
+>    - {% icon param-file %} *"as a new column to"*: `out_file1` (output of **Compute** {% icon tool %})
+>    - *"Round result?"*: `Yes`
+>    - *"Input has a header line with column names?"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `cc7`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `cc7`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
+>    - *"Select type of parameter to parse"*: `Integer`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
+>    - *"Select type of parameter to parse"*: `Integer`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -235,21 +403,8 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# HiFi long read phased assembly with Hifiasm
 
 ## Sub-step with **Hifiasm**
 
@@ -273,60 +428,7 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Meryl**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0) %} with the following parameters:
->    - *"Operation type selector"*: `Count operations`
->        - {% icon param-file %} *"Input sequences"*: `output` (output of **Collapse Collection** {% icon tool %})
->        - *"K-mer size selector"*: `Estimate the best k-mer size`
->            - *"Genome size"*: `1050000000`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GFA to FASTA**
+## Sub-step with **GFA to FASTA**: primary assembly
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -344,92 +446,6 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GFA to FASTA**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [GFA to FASTA](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
->    - {% icon param-file %} *"Input GFA file"*: `alternate_contig_graph` (output of **Hifiasm** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Meryl**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0) %} with the following parameters:
->    - *"Operation type selector"*: `Generate histogram dataset`
->        - {% icon param-file %} *"Input meryldb"*: `read_db` (output of **Meryl** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Quast**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -438,6 +454,8 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 31, 'output_name': 'integer_param'}`
+>        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - In *"Genes"*:
 >        - *"Tool for gene prediction"*: `Don't predict genes`
 >
@@ -452,132 +470,7 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge overlaps**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `split FASTA file by 'N's`
->        - {% icon param-file %} *"Base-level coverage file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Busco**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: `Vertebrata`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Merqury**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Map with minimap2**
 
@@ -605,32 +498,13 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GenomeScope**
+## Sub-step with **Purge overlaps**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
->    - {% icon param-file %} *"Input histogram file"*: `read_db_hist` (output of **Meryl** {% icon tool %})
->    - *"Add the model parameters to your history"*: `Yes`
->    - *"Output a summary of the analysis"*: `Yes`
->    - *"K-mer length used to calculate k-mer spectra"*: `31`
->    - *"Create testing.tsv file with model parameters"*: `Yes`
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `split FASTA file by 'N's`
+>        - {% icon param-file %} *"Base-level coverage file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -643,73 +517,7 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Map with minimap2**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `split_fasta` (output of **Purge overlaps** {% icon tool %})
->    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `split_fasta` (output of **Purge overlaps** {% icon tool %})
->        - *"Select a profile of preset options"*: `Construct a self-homology map - use same genome as query and reference (-DP -k19 -w19 -m200) (self-homology)`
->    - In *"Mapping options"*:
->        - *"force minimap2 to always use k-mers occuring this many times or fewer"*: `100`
->        - *"minimal chaining score (matching bases minus log gap penalty)"*: `40`
->    - In *"Alignment options"*:
->        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
->        - *"Score for a sequence match"*: `1`
->        - *"Penalty for a mismatch"*: `19`
->        - *"Gap open penalties for deletions"*: `39`
->        - *"Gap open penalties for insertions"*: `81`
->        - *"Gap extension penalties; a gap of size k cost '-O + -E*k'. If two numbers are specified, the first is the penalty of extending a deletion and the second for extending an insertion"*: `3`
->        - *"Gap extension penalty for extending an insertion; if left empty uses the value specified for Gap extension penalties above"*: `1`
->        - *"Z-drop threshold for truncating an alignment"*: `200`
->    - In *"Set advanced output options"*:
->        - *"Select an output format"*: `paf`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Purge overlaps**
 
@@ -730,31 +538,20 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Compute**
+## Sub-step with **Map with minimap2**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
->    - *"Add expression"*: `1.5*c3`
->    - {% icon param-file %} *"as a new column to"*: `model_params` (output of **GenomeScope** {% icon tool %})
->    - *"Round result?"*: `Yes`
->    - *"Input has a header line with column names?"*: `No`
+> 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy1) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-file %} *"Select fastq dataset"*: `out1` (output of **Cutadapt** {% icon tool %})
+>        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
+>    - In *"Alignment options"*:
+>        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
+>    - In *"Set advanced output options"*:
+>        - *"Select an output format"*: `PAF`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -767,244 +564,12 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Compute**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
->    - *"Add expression"*: `3*c7`
->    - {% icon param-file %} *"as a new column to"*: `out_file1` (output of **Compute** {% icon tool %})
->    - *"Round result?"*: `Yes`
->    - *"Input has a header line with column names?"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Advanced Cut**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c8
-`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Advanced Cut**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `cc7`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
->    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
->    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Purge overlaps**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `calculate coverage cutoffs`
->        - {% icon param-file %} *"STAT input file"*: `pbcstat_stat` (output of **Purge overlaps** {% icon tool %})
->        - *"Transition between haploid and diploid"*: `{'id': 26, 'output_name': 'integer_param'}`
->        - *"Upper bound for read depth"*: `{'id': 25, 'output_name': 'integer_param'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge haplotigs**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge haplotigs](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy0) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `purge haplotigs and overlaps for an assembly`
 >        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
 >        - {% icon param-file %} *"Base-level coverage file"*: `pbcstat_cov` (output of **Purge overlaps** {% icon tool %})
@@ -1022,21 +587,6 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Purge overlaps**
 
@@ -1058,31 +608,14 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Merqury**
+## Sub-step with **Purge overlaps**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `obtain seqeuences after purging`
+>        - {% icon param-file %} *"Fasta input file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>        - {% icon param-file %} *"Bed input file"*: `purge_dups_bed` (output of **Purge haplotigs** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1095,57 +628,7 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Bionano Hybrid Scaffold**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Bionano Hybrid Scaffold](toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"NGS FASTA"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
->    - {% icon param-file %} *"BioNano CMAP"*: `output` (Input dataset)
->    - *"Configuration mode"*: `VGP mode`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Quast**
 
@@ -1156,6 +639,8 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 31, 'output_name': 'integer_param'}`
+>        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - In *"Genes"*:
 >        - *"Tool for gene prediction"*: `Don't predict genes`
 >
@@ -1170,31 +655,15 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **Busco**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: `Vertebrata`
+>    - *"Lineage"*: ``
 >    - In *"Advanced Options"*:
 >        - *"Which outputs should be generated"*: ``
 >
@@ -1209,21 +678,67 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Sub-step with **Busco**
 
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Lineage"*: ``
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: ``
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+>    ***TODO***: *Check parameter descriptions*
 >
-{: .question}
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **GFA to FASTA**: alternate assembly
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [GFA to FASTA](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
+>    - {% icon param-file %} *"Input GFA file"*: `primary_contig_graph` (output of **Hifiasm** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Merqury**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
+>        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
+>            - {% icon param-file %} *"Genome assembly"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
 ## Sub-step with **Concatenate datasets**
 
@@ -1234,6 +749,208 @@ A big step can have several subsections or sub steps:
 >    - In *"Dataset"*:
 >        - {% icon param-repeat %} *"Insert Dataset"*
 >            - {% icon param-file %} *"Select"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Purge overlaps**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Split FASTA file by 'N's (split_fa)`
+>        - {% icon param-file %} *"Base-level coverage file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Map with minimap2**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy1) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-file %} *"Select fastq dataset"*: `out1` (output of **Cutadapt** {% icon tool %})
+>        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
+>    - In *"Alignment options"*:
+>        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
+>    - In *"Set advanced output options"*:
+>        - *"Select an output format"*: `PAF`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Sub-step with **Purge overlaps**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Calculate coverage cutoff and create read depth histogram and base-levelread depth for PacBio data (calcuts+pbcstats)`
+>        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
+>        - In *"Calcuts options"*:
+>            - *"Upper bound for read depth"*: `{'id': 28, 'output_name': 'integer_param'}`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Purge overlaps**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
+>        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
+>        - {% icon param-file %} *"Base-level coverage file"*: `pbcstat_cov` (output of **Purge overlaps** {% icon tool %})
+>        - {% icon param-file %} *"Cutoffs file"*: `calcuts_tab` (output of **Purge overlaps** {% icon tool %})
+>        - *"Rounds of chaining"*: `1 round`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Purge overlaps**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Obtain seqeuences after purging (get_seqs)`
+>        - {% icon param-file %} *"Fasta input file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>        - {% icon param-file %} *"Bed input file"*: `purge_dups_bed` (output of **Purge overlaps** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Quast**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
+>    - *"Type of assembly"*: `Genome`
+>        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 31, 'output_name': 'integer_param'}`
+>        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
+>    - In *"Genes"*:
+>        - *"Tool for gene prediction"*: `Don't predict genes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Busco**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Lineage"*: ``
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: ``
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Merqury**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"K-mer counts database"*: `output` (Input dataset)
+>        - *"Number of assemblies"*: `Two assemblies (diploid)`
+>            - {% icon param-file %} *"Second genome assembly"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+# Hybrid scaffolding based on phased assembly and Bionano data
+
+
+## Sub-step with **Bionano Hybrid Scaffold**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Bionano Hybrid Scaffold](toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"NGS FASTA"*: `output` (Input dataset)
+>    - {% icon param-file %} *"BioNano CMAP"*: `output` (Input dataset)
+>    - *"Configuration mode"*: `VGP mode`
+>    - {% icon param-file %} *"Conflict resolution file"*: `output` (Input dataset)
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1299,20 +1016,13 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Map with minimap2**
+## Sub-step with **Parse parameter value**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `out1` (output of **Cutadapt** {% icon tool %})
->        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
->    - In *"Alignment options"*:
->        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
->    - In *"Set advanced output options"*:
->        - *"Select an output format"*: `paf`
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
+>    - *"Select type of parameter to parse"*: `Integer`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1324,94 +1034,6 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge overlaps**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `split FASTA file by 'N's`
->        - {% icon param-file %} *"Base-level coverage file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Merqury**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Quast**
 
@@ -1422,6 +1044,8 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 7, 'output_name': 'integer_param'}`
+>        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - In *"Genes"*:
 >        - *"Tool for gene prediction"*: `Don't predict genes`
 >
@@ -1436,60 +1060,7 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Busco**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: `Vertebrata`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Hybrid scaffolding based on a phased assembly and HiC mapping data
 
 ## Sub-step with **Map with BWA-MEM**
 
@@ -1497,7 +1068,7 @@ A big step can have several subsections or sub steps:
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"Select fastq dataset"*: `output` (Input dataset)
 >    - *"Set read groups information?"*: `Do not set`
@@ -1515,29 +1086,13 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **Map with BWA-MEM**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"Select fastq dataset"*: `output` (Input dataset)
 >    - *"Set read groups information?"*: `Do not set`
@@ -1555,29 +1110,14 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge overlaps**
+## Sub-step with **Filter and merge**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `create read depth histogram and base-level read depth for pacbio data`
->        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
+> 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+>    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1590,46 +1130,14 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Map with minimap2**
+## Sub-step with **PretextMap**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `split_fasta` (output of **Purge overlaps** {% icon tool %})
->    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `split_fasta` (output of **Purge overlaps** {% icon tool %})
->        - *"Select a profile of preset options"*: `Construct a self-homology map - use same genome as query and reference (-DP -k19 -w19 -m200) (self-homology)`
->    - In *"Mapping options"*:
->        - *"force minimap2 to always use k-mers occuring this many times or fewer"*: `100`
->        - *"minimal chaining score (matching bases minus log gap penalty)"*: `40`
->    - In *"Alignment options"*:
->        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
->        - *"Score for a sequence match"*: `1`
->        - *"Penalty for a mismatch"*: `19`
->        - *"Gap open penalties for deletions"*: `39`
->        - *"Gap open penalties for insertions"*: `81`
->        - *"Gap extension penalties; a gap of size k cost '-O + -E*k'. If two numbers are specified, the first is the penalty of extending a deletion and the second for extending an insertion"*: `3`
->        - *"Gap extension penalty for extending an insertion; if left empty uses the value specified for Gap extension penalties above"*: `1`
->        - *"Z-drop threshold for truncating an alignment"*: `200`
->    - In *"Set advanced output options"*:
->        - *"Select an output format"*: `paf`
+> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
+>    - *"Sort by"*: `Don't sort`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1642,27 +1150,14 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **bellerophon**
+## Sub-step with **Pretext Snapshot**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [bellerophon](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
+>    - *"Output image format"*: `png`
+>    - *"Show grid?"*: `Yes`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1675,31 +1170,13 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge overlaps**
+## Sub-step with **Parse parameter value**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `calculate coverage cutoffs`
->        - {% icon param-file %} *"STAT input file"*: `pbcstat_stat` (output of **Purge overlaps** {% icon tool %})
->        - *"Transition between haploid and diploid"*: `31`
->        - *"Upper bound for read depth"*: `94`
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
+>    - *"Select type of parameter to parse"*: `Integer`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1711,29 +1188,13 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **bedtools BAM to BED**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [bedtools BAM to BED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **bellerophon** {% icon tool %})
+>    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -1746,60 +1207,6 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge haplotigs**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge haplotigs](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy0) %} with the following parameters:
->    - *"Select the purge_dups function"*: `purge haplotigs and overlaps for an assembly`
->        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
->        - {% icon param-file %} *"Base-level coverage file"*: `pbcstat_cov` (output of **Purge overlaps** {% icon tool %})
->        - {% icon param-file %} *"Cutoffs file"*: `calcuts_tab` (output of **Purge overlaps** {% icon tool %})
->        - *"Rounds of chaining"*: `1 round`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Sort**
 
@@ -1822,30 +1229,15 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge overlaps**
+## Sub-step with **Replace**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `obtain seqeuences after purging`
->        - {% icon param-file %} *"Fasta input file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->        - {% icon param-file %} *"Bed input file"*: `purge_dups_bed` (output of **Purge haplotigs** {% icon tool %})
+> 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
+>    - *"Find pattern"*: `:`
+>    - *"Replace all occurences of the pattern"*: `Yes`
+>    - *"Find and Replace text in"*: `entire line`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1858,30 +1250,35 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+## Sub-step with **Parse parameter value**
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+>    ***TODO***: *Check parameter descriptions*
 >
-{: .question}
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
 
 ## Sub-step with **SALSA**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Initial assembly file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+> 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
 >    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
->    - *"Restriction enzyme sequence(s)"*: `{'id': 5, 'output_name': 'text_param'}`
+>    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
+>    - *"Restriction enzyme sequence(s)"*: `{'id': 14, 'output_name': 'text_param'}`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1894,33 +1291,13 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Quast**
+## Sub-step with **Parse parameter value**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->        - {% icon param-file %} *"Contigs/scaffolds file"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
+>    - *"Select type of parameter to parse"*: `Integer`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1932,174 +1309,6 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Merqury**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Busco**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `get_seqs_purged` (output of **Purge overlaps** {% icon tool %})
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: `Vertebrata`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Merqury**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Busco**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: `Vertebrata`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Quast**
 
@@ -2110,6 +1319,9 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 13, 'output_name': 'integer_param'}`
+>        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
+>    - *"Is genome large (> 100 Mbp)?"*: `Yes`
 >    - In *"Genes"*:
 >        - *"Tool for gene prediction"*: `Don't predict genes`
 >
@@ -2124,21 +1336,31 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+## Sub-step with **Busco**
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Lineage"*: ``
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: ``
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+>    ***TODO***: *Check parameter descriptions*
 >
-{: .question}
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
 
 ## Sub-step with **Map with BWA-MEM**
 
@@ -2147,11 +1369,54 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
->    - *"Single or Paired-end reads"*: `Paired`
->        - {% icon param-file %} *"Select first set of reads"*: `output` (Input dataset)
->        - {% icon param-file %} *"Select second set of reads"*: `output` (Input dataset)
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-file %} *"Select fastq dataset"*: `output` (Input dataset)
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Sub-step with **Map with BWA-MEM**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-file %} *"Select fastq dataset"*: `output` (Input dataset)
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Sub-step with **Filter and merge**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+>    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -2185,7 +1450,7 @@ A big step can have several subsections or sub steps:
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -2234,30 +1499,6 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}

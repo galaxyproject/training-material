@@ -29,6 +29,7 @@ tags:
 - single-cell
 - 10x
 - paper-replication
+- interactive-tools
 contributors:
 - nomadscientist
 
@@ -517,7 +518,7 @@ We still have too many dimensions. Transcript changes are not usually singular -
 Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, `2262` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first `x` principal components in our data to drastically reduce the number of dimensions.
 
 > ### {% icon comment %} 2262???
-> Where did the `2262` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 2262 genes. I prefer to keep these in the object, just in case something is important (paranoia?), but you will get the same results whether you keep these or remove them. The following steps all use only highly variable genes.
+> Where did the `2262` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 2262 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 2262 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 2262 or 2000 (if you set a limit on it) highly variable genes.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Calculate Principal Components

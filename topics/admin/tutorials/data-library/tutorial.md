@@ -78,7 +78,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    library_import_dir: /libraries/admin
@@ -156,6 +156,13 @@ If user directories are configured, as we did at the beginning of this tutorial,
 ![Import popup with a list of files with one file, user-wildtype.fna, and buttons for configuring import behaviour.](../../images/data/import-user.png)
 
 This will enable the option for everyone, any unprivileged user with a folder in the `user_library_import_dir` directory *and* permissions on a data library can import things from their import directory.
+
+> ### {% icon tip %} Tip: Do you not see a directory here?
+> We pre-created a directory for someone registered as `admin@example.org`, but if you are logged in with an account registered with a different email, you'll see nothing.
+>
+> You can fix this by going into /libraries/user and `ln -s admin@example.org whatever-email-you-used`
+> Then it should appear in Galaxy.
+{: .tip}
 
 ## from import Directory (Admins only)
 

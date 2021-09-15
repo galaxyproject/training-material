@@ -1,9 +1,7 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: DIA Analysis using OpenSwathWorkflow
-zenodo_link: 'https://zenodo.org/record/4301690'
+zenodo_link: 'https://zenodo.org/record/4307762'
 level: Intermediate
 questions:
 - How to analyze data independent acquisition (DIA) mass spectrometry (MS) data using OpenSwathWorkflow?
@@ -73,19 +71,19 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the fasta and raw files as well as the sample annotation and the iRT Transition file from [Zenodo](https://zenodo.org/record/4301690)
+> 2. Import the fasta and raw files as well as the sample annotation and the iRT Transition file from [Zenodo](https://zenodo.org/record/4307762)
 >    ```
->    https://zenodo.org/record/4301690/files/HEK_Ecoli_lib.pqp
->    https://zenodo.org/record/4301690/files/iRTassays.tsv
->    https://zenodo.org/record/4301690/files/Sample_annotation.txt
->    https://zenodo.org/record/4301690/files/Sample1.raw
->    https://zenodo.org/record/4301690/files/Sample2.raw
->    https://zenodo.org/record/4301690/files/Sample3.raw
->    https://zenodo.org/record/4301690/files/Sample4.raw
->    https://zenodo.org/record/4301690/files/Sample5.raw
->    https://zenodo.org/record/4301690/files/Sample6.raw
->    https://zenodo.org/record/4301690/files/Sample7.raw
->    https://zenodo.org/record/4301690/files/Sample8.raw
+>    https://zenodo.org/record/4307762/files/HEK_Ecoli_lib.pqp
+>    https://zenodo.org/record/4307762/files/iRTassays.tsv
+>    https://zenodo.org/record/4307762/files/Sample_annotation.txt
+>    https://zenodo.org/record/4307762/files/Sample1.raw
+>    https://zenodo.org/record/4307762/files/Sample2.raw
+>    https://zenodo.org/record/4307762/files/Sample3.raw
+>    https://zenodo.org/record/4307762/files/Sample4.raw
+>    https://zenodo.org/record/4307762/files/Sample5.raw
+>    https://zenodo.org/record/4307762/files/Sample6.raw
+>    https://zenodo.org/record/4307762/files/Sample7.raw
+>    https://zenodo.org/record/4307762/files/Sample8.raw
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -154,7 +152,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >    - *"Optional outputs"*: `out_osw`
 >
 >    > ### {% icon comment %} Comment: Mass tolerances and *"Minimal number of bins required to be covered"*
->    >Here we analyze data acquired on a QExactive Plus MS instrument which uses an Orbitrap and generates high resolution data. Other instrumentation (such as TOF devices) might require larger mass tolerances for improved peptide identification. Furthermore, here we require at least 7 of the iRT peptides to be found in each of the DIA measurements. This number can be set to lower values if for some reasons fewer iRT peptides were found in some of the measurements.
+>    >Here we analyze data acquired on a QExactive Plus MS instrument which uses an Orbitrap and generates high resolution data. Therefore, we allow for 10 ppm mass tolerance for both the MS1 and the MS2 level. If larger mass deviation are expected the mass tolerances can be adjusted. Other instrumentation (such as TOF devices) might require larger mass tolerances for improved peptide identification. Furthermore, here we require at least 7 of the iRT peptides to be found in each of the DIA measurements. This number can be set to lower values if for some reasons fewer iRT peptides were found in some of the measurements. In case only a few iRT peptides are identified in the DIA measurements, the mass tolerance for the iRT extraction can be increased to 20 ppm. We than recommend to increase the extraction window for the MS2 level to 20 ppm. For more information see also [OpenSwathWorkflow](http://openswath.org/en/latest/docs/openswath.html).
 >    {: .comment}
 >
 {: .hands_on}
@@ -188,10 +186,10 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 > ### {% icon tip %} Tip: Continue with results from Zenodo
 >
 > In case the pyprophet score run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4301690)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307762)
 >    ```
->    https://zenodo.org/record/4301690/files/PyProphet_score_report.pdf
->    https://zenodo.org/record/4301690/files/PyProphet_score.osw
+>    https://zenodo.org/record/4307762/files/PyProphet_score_report.pdf
+>    https://zenodo.org/record/4307762/files/PyProphet_score.osw
 >    ```
 {: .tip}
 
@@ -260,13 +258,13 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 > ### {% icon hands_on %} Hands-on: Exporting pyprophet scored OSW results
 >
 > 1. {% tool [PyProphet export](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1) %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `protein.osw` (output of **PyProphet protein** {% icon tool %})
+>    - {% icon param-file %} *"Input file"*: `protein.osw` (output of the second **PyProphet protein** {% icon tool %})
 >    - *"Export format, either matrix, legacy_split, legacy_merged (mProphet/PyProphet) or score_plots format"*: `legacy_merged`
 >    - *"Use swath2stats to export file for statsics"*: `yes`
 >        - {% icon param-file %} *"Study design tabular file"*: `Sample_annotation`
 >
->    > ### {% icon comment %} Comment: swath2stats functionality
->    >Utilizing the swath2stats functionality generates a summary as well as a peptide and protein expression matrix. In addition to the non-processed pyprophet tabular output a refined tabular is generated using the specified criteria. The refined tabular `msstats_input.tabular` is dircetly compatable with **MSstats** for statistical analysis.
+>    > ### {% icon comment %} Comment: PyProphet export and the swath2stats functionality
+>    >All previous FDR scoring steps using **PyProphet peptide** and **PyProphet protein** are integrated in the respective `.osw` output. Therefore, the latest `protein.osw` can be used for the export step. If peptide and protein FDR scoring was performed in the global context, the exported results will be filtered to 1% FDR by default. For more information see also [PyProphet](http://openswath.org/en/latest/docs/pyprophet.html). Utilizing the swath2stats functionality generates a summary as well as a peptide and protein expression matrix. In addition to the non-processed pyprophet tabular output a refined tabular is generated using the specified criteria. The refined tabular `msstats_input.tabular` is dircetly compatable with **MSstats** for statistical analysis. The integration of swath2stats also allows to adjust the processing by applying different FFT and FDR settings as well as specifying a minimum number of peptides per protein. For more information see also [Swath2stats](https://bioconductor.org/packages/release/bioc/html/SWATH2stats.html).
 >    {: .comment}
 >
 {: .hands_on}
@@ -278,7 +276,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. In total, over 27.300 peptides and over 5.100 proteins were identified and quantified in the DIA measurements.
+> > 1. In total, over 27,300 peptides and over 5,100 proteins were identified and quantified in the DIA measurements.
 > > 2. No, the summary mainly provides an overview of the identifications in each individual DIA measurement as well as some descriptive statistics such as CVs and correlations.
 > >
 > {: .solution}

@@ -1,10 +1,10 @@
 {% if include.material.hands_on == "external" %}
-<a class="topic-icon" href="{{ include.material.hands_on_url }}">
-    {% icon tutorial %}
+<a class="topic-icon" href="{{ include.material.hands_on_url }}" title="Link to external materials">
+    {% icon tutorial aria=false %}
 </a>
 {% elsif include.material.hands_on == "github" %}
-<a href="{{ site.github_repository }}/tree/main/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md">
-    {% icon tutorial %}
+<a href="{{ site.github_repository }}/tree/main/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md" title="Materials on github">
+    {% icon tutorial aria=false %}
 </a>
 {% elsif include.material.hands_on %}
     <span class="btn-group">
@@ -15,9 +15,10 @@
             <span class="sr-only">Toggle Dropdown</span>
         </a>
         <ul class="dropdown-menu">
-        {% if material.translations %}
+        {% assign translations = material.translations.tutorial | size %}
+        {% if translations > 0 %}
           <div class="dropdown-item"><strong>Curated translations</strong></div>
-           {% for lang in material.translations %}
+           {% for lang in material.translations.tutorial %}
             <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial_{{lang | upcase }}.html" title="{{ lang }}">
                 {{language[lang]}}
             </a>

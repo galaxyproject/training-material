@@ -1,9 +1,7 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: Statistical analysis of DIA data
-zenodo_link: 'https://zenodo.org/record/4302084'
+zenodo_link: 'https://zenodo.org/record/4307758'
 level: Intermediate
 questions:
 - How to perform statistical analysis on DIA mass spectrometry data?
@@ -56,12 +54,12 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the DIA analysis results, the sample annotation and the comparison matrix from [Zenodo](https://zenodo.org/record/4302084)
+> 2. Import the DIA analysis results, the sample annotation and the comparison matrix from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/PyProphet_export.tabular
->    https://zenodo.org/record/4302084/files/Sample_annot_MSstats.txt
->    https://zenodo.org/record/4302084/files/Comp_matrix_HEK_Ecoli.txt
->    https://zenodo.org/record/4302084/files/PyProphet_msstats_input.tabular
+>    https://zenodo.org/record/4307758/files/PyProphet_export.tabular
+>    https://zenodo.org/record/4307758/files/Sample_annot_MSstats.txt
+>    https://zenodo.org/record/4307758/files/Comp_matrix_HEK_Ecoli.txt
+>    https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -109,9 +107,9 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 > ### {% icon tip %} Tip: Continue with results from Zenodo
 >
 > In case the **MSstats** run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4302084)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_export_tabular.tsv
+>    https://zenodo.org/record/4307758/files/MSstats_ComparisonResult_export_tabular.tsv
 >    ```
 {: .tip}
 
@@ -121,7 +119,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `MSstats_ComparisonResult_export_tabular` (output of **MSstats** {% icon tool %})
->    - *"the pattern"*: `(ECOLI)|(logFC)`
+>    - *"the pattern"*: `(ECOLI)|(log2FC)`
 >
 > 2. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Select_Ecoli` (output of **Select** {% icon tool %})
@@ -190,9 +188,9 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 > ### {% icon tip %} Tip: Continue with results from Zenodo
 >
 > In case the **MSstats** run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4302084)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_msstats_input.tsv
+>    https://zenodo.org/record/4307758/files/MSstats_ComparisonResult_msstats_input.tsv
 >    ```
 {: .tip}
 
@@ -202,7 +200,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `MSstats_ComparisonResult_msstats_input` (output of the second **MSstats** {% icon tool %})
->    - *"the pattern"*: `(ECOLI)|(logFC)`
+>    - *"the pattern"*: `(ECOLI)|(log2FC)`
 >
 > 2. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Select_Ecoli` (output of the second **Select** {% icon tool %})

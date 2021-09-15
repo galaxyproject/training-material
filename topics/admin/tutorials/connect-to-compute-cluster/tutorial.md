@@ -120,7 +120,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -139,3 +139,13 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -137,3 +137,13 @@ golang_gopath: '/opt/workspace-go'
 >     # Singularity target version
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
@@ -359,12 +359,12 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -103,6 +103,7 @@ galaxy_config_files:
->
+>    @@ -101,6 +101,7 @@ galaxy_config_templates:
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
->
+>     
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}

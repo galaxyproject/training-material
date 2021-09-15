@@ -63,11 +63,47 @@ var tutorials = { {% for topic in site.data %}
 
 function search(idx, q){
 	if(q.length > 2){
-		var results = idx.search(`*${q}*`).map(x => {
-			return tutorials['/' + x.ref.replaceAll(".md", ".html")];
+        var results_partial = idx.search(`*${q}*`),
+            results_exact = idx.search(`${q}`),
+            results_fuzzy = idx.search(`${q}~3`);
+
+        thereMap  = Object.assign({}, ...results_partial.map((x) => ({[x.ref]: x.score})));
+
+        results_exact.forEach(x => {
+            if(thereMap[x.ref] !== undefined){
+                if(thereMap[x.ref] < x.score + 4){
+                    thereMap[x.ref] = x.score + 4
+                }
+            } else {
+                    thereMap[x.ref] = x.score + 4
+            }
+        })
+        results_fuzzy.forEach(x => {
+            if(thereMap[x.ref] !== undefined){
+                if(thereMap[x.ref] < x.score - 2){
+                    thereMap[x.ref] = x.score - 2
+                }
+            } else {
+                    thereMap[x.ref] = x.score - 2
+            }
+        })
+
+        combined_results = Object.getOwnPropertyNames(thereMap);
+        combined_results.sort((a, b) => {
+            if (thereMap[a] > thereMap[b]) {
+                return -1;
+            }
+            if (thereMap[a] < thereMap[b]) {
+                return 1;
+            }
+            return 0;
+        });
+
+		var results_final = combined_results.map(x => {
+			return tutorials['/' + x.replaceAll(".md", ".html")];
 		}).filter(x => x !== undefined);
 
-		$("#results-container").html(results.map(x => x.entry));
+		$("#results-container").html(results_final.map(x => x.entry));
 	}
 }
 

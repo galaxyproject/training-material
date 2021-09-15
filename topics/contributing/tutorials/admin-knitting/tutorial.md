@@ -256,7 +256,7 @@ When you're done editing, you can run the `./bin/knit-automated.sh import`, it w
 >    +    # NFS workarounds
 >    +    retry_job_output_collection: 3
 >         # Debugging
->         cleanup_job: onerror
+>         cleanup_job: onsuccess
 >         allow_user_impersonation: true
 >    ```
 >

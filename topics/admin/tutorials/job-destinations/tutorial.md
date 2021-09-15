@@ -56,12 +56,12 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 
 > ### {% icon hands_on %} Hands-on: Deploying a Tool
 >
-> 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
+> 1. Create the directory `templates/galaxy/tools/` if it doesn't exist and edit a new file in `templates/galaxy/tools/testing.xml` with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/tools/testing.xml
+>    +++ b/templates/galaxy/tools/testing.xml
 >    @@ -0,0 +1,11 @@
 >    +<tool id="testing" name="Testing Tool">
 >    +    <command>
@@ -84,10 +84,10 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -101,6 +101,9 @@ galaxy_config_files:
->     - src: files/galaxy/config/dependency_resolvers_conf.xml
->       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->
+>    @@ -99,6 +99,9 @@ galaxy_config_templates:
+>       - src: templates/galaxy/config/dependency_resolvers_conf.xml
+>         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>     
 >    +galaxy_local_tools:
 >    +- testing.xml
 >    +
@@ -211,12 +211,12 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
 >
-> 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
+> 1. Create and open `templates/galaxy/dynamic_job_rules/my_rules.py`
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/dynamic_job_rules/my_rules.py
+>    +++ b/templates/galaxy/dynamic_job_rules/my_rules.py
 >    @@ -0,0 +1,10 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -246,13 +246,13 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -103,6 +103,8 @@ galaxy_config_files:
->
+>    @@ -101,6 +101,8 @@ galaxy_config_templates:
+>     
 >     galaxy_local_tools:
 >     - testing.xml
 >    +galaxy_dynamic_job_rules:
 >    +- my_rules.py
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    {% endraw %}
@@ -326,12 +326,12 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 
 > ### {% icon hands_on %} Hands-on: Writing a DTD
 >
-> 1. Dynamic tool destinations are configured via a YAML file. As before, we'll use a fake example but this is extremely useful in real-life scenarios. Create the file `files/galaxy/config/tool_destinations.yml` with the following contents:
+> 1. Dynamic tool destinations are configured via a YAML file. As before, we'll use a fake example but this is extremely useful in real-life scenarios. Create the file `templates/galaxy/config/tool_destinations.yml` with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/config/tool_destinations.yml
+>    +++ b/templates/galaxy/config/tool_destinations.yml
 >    @@ -0,0 +1,11 @@
 >    +---
 >    +tools:
@@ -354,14 +354,14 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >      - If the input dataset is <16 bytes, run on the destination `slurm`
 >    - Else, run on the destination `slurm`
 >
-> 2. We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy_config` > `galaxy`. Additionally we need to add a `galaxy_config_files` entry to ensure it is deployed.
+> 2. We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy_config` > `galaxy`. Additionally we need to add a `galaxy_config_templates` entry to ensure it is deployed.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
@@ -370,13 +370,13 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    @@ -98,6 +99,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->
->     galaxy_config_files:
->    +- src: files/galaxy/config/tool_destinations.yml
->    +  dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
->     - src: files/galaxy/config/dependency_resolvers_conf.xml
->       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->
+>       - src: templates/galaxy/config/dependency_resolvers_conf.xml
+>         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    +  - src: templates/galaxy/config/tool_destinations.yml
+>    +    dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
+>     
+>     galaxy_local_tools:
+>     - testing.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy tool destinations config file"}
@@ -474,7 +474,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -93,6 +93,8 @@ galaxy_config:
 >         farm: job-handlers:1,2
->
+>     
 >     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
@@ -567,12 +567,12 @@ Lastly, we need to write the rule that will read the value of the job resource p
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic destination
 >
-> 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
+> 1. Create and edit `templates/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/dynamic_job_rules/map_resources.py
+>    +++ b/templates/galaxy/dynamic_job_rules/map_resources.py
 >    @@ -0,0 +1,42 @@
 >    +import logging
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -630,19 +630,19 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
 >         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->    @@ -110,6 +111,7 @@ galaxy_local_tools:
+>    @@ -108,6 +109,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >    +- map_resources.py
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    {% endraw %}

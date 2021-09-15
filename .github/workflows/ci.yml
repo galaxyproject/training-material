@@ -1,116 +1,29 @@
-name: Lint and Build GTN
+name: Lint Broken Links
 
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '**/*.html'
+      - '*.yml'
+      - '*.yaml'
+      - 'metadata/*'
+      - 'topics/*/images/*'
+      - '_plugins/*'
+      - '_plugins_dev/*'
+      - '**/*.bib'
 
 jobs:
-  setup:
-    runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        ruby: [2.5]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-
-  lint-frontmatter:
-    needs: setup
-    runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        ruby: [2.5]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-      - run: make check-frontmatter ACTIVATE_ENV=pwd
-
-  lint-workflows:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Lint 🔍👁👁
-        run: |
-          make check-workflows
-
-  lint-tool-links:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-          architecture: 'x64'
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Lint 🔍👁👁
-        run: |
-          make check-tool-links
-
-  lint-data-lib-yaml:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Check yaml are valid and can be merged
-        run: |
-          python bin/mergeyaml.py --nondocker > /dev/null
-
-  lint-broken-symlinks:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Check for broken symlinks
-        run: |
-          bash bin/check-broken-symlinks.sh
-
   build-site:
-    needs: setup
     runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        ruby: [2.5]
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: "2.5"
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
