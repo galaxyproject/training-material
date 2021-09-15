@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -283,7 +283,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-08-12 13:20:04 +0000",
+  "dateModified": "2021-09-15 13:20:54 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin",
   "interactivityType": "mixed",
@@ -317,8 +317,8 @@
   "description": "",
   "inLanguage": {
     "@type": "Language",
-    "name": "English",
-    "alternateName": "en"
+    "name": null,
+    "alternateName": "es"
   },
   "coursePrerequisites": [
     {
@@ -471,7 +471,8 @@
       "termCode": "topic_3308",
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
     }
-  ]
+  ],
+  "skillLevel": "Advanced"
 }
 </script>
 
@@ -479,16 +480,16 @@
     <h1 data-toc-skip>Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin</h1>
     
 
-    <div class="contributors-line">Authors: 
+    <div class="contributors-line">Autores: 
 
  <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nomadscientist" alt="Avatar">Wendi Bacon</a> <a href="/training-material/hall-of-fame/pinin4fjords/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pinin4fjords" alt="Avatar">Jonathan Manning</a> <a href="/training-material/hall-of-fame/pclo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pclo" alt="Avatar">Patricia Carvajal López</a> <a href="/training-material/hall-of-fame/ales-ibt/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/ales-ibt" alt="Avatar">Alejandra Escobar-Zepeda</a>
 
 </div>
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <h3>Descripción General</h3>
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
-        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas:</strong>
         <ul>
         
         <li><p>Tengo algunos archivos FASTQ de secuenciación de ARN de células únicas los cuales quiero analizar. ¿Por dónde empiezo?</p>
@@ -496,7 +497,7 @@
         
         </ul>
 
-        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objetivos: </strong>
         <ul>
         
         <li><p>Repetir la generación de una matriz para datos de secuenciación de ARN de células únicas obtenidos a partir de técnicas de goteo</p>
@@ -514,7 +515,7 @@
         </ul>
 
         
-        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requisitos:</strong>
         <ul>
         
     <li>
@@ -586,16 +587,27 @@
         
 
         
-        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Duración estimada:</strong> 3 horas</div>
         
 
         
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Nivel: </strong>
+        
+
+
+ Avanzado <span class="visually-hidden">Advanced</span>
+<span class="level advanced" title="Advanced Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
 
         
         
 
         
-        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Materiales de apoyo:</strong></div>
         <ul class="supporting_material">
             
                 <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
@@ -608,7 +620,7 @@
 
 
 <a class="topic-icon" href="https://zenodo.org/record/4574153">
-    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Conjuntos de datos
 </a>
 
 </li>
@@ -619,7 +631,7 @@
 
 
     <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/workflows/" title="Workflows" alt="Generating a single cell matrix using Alevin workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Flujos de trabajos
     </a>
 
 </li>
@@ -636,7 +648,7 @@
 
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
-        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Disponible en estas instancias de Galaxy 
     </a>
     <ul class="dropdown-menu">
     
@@ -647,142 +659,6 @@
         </li>
     
     
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
-            Human Cell Atlas
-        </a>
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
     </ul>
 
 
@@ -791,10 +667,10 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 12, 2021 </div>
-        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
-            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
-            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Última modificación:</strong> Sep 15, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> Licencia:</strong>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">GTN Framework tiene licencia del MIT</a>
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">GTN Framework tiene licencia del MIT</a>
         </div>
     </blockquote>
 
@@ -905,7 +781,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-consejo-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
     </li>
     <li>Cambiar el nombre <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> de los conjuntos de datos</li>
   </ol>
@@ -1015,9 +891,9 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <p>Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas dentro de algunas de las instancias públicas. Si esto sucede, haz click sobre la pestaña <span class="notranslate">Single Cell</span> en la parte izquierda de la pantalla y desplázate hacia abajo hasta encontrar la herramienta Alevin. Consejo: Si haces click sobre las herramientas (tools) dentro de la opción ‘tutorial’ de <span class="notranslate">Galaxy</span> siempre tendrás la versión correcta de la herramienta. En este caso: <span class="notranslate">Galaxy</span> Version 1.3.0+<span class="notranslate">galaxy</span>2 - debe ser la versión por defecto; si no lo es, haz click sobre ‘Versiones’ (‘Versions’) y escoge dicha versión.</p>
 
-<figure id="figure-1"><img src="../../images/wab-tutorial-in-galaxy.png" alt="Tutorial option in Galaxy" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> La opción de tutorial está situada en la parte superior derecha de <span class="notranslate">Galaxy</span></figcaption></figure>
+<figure id="figure-1"><img src="../../images/wab-tutorial-in-galaxy.png" alt="Tutorial option in Galaxy" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 1:</span> La opción de tutorial está situada en la parte superior derecha de <span class="notranslate">Galaxy</span></figcaption></figure>
 
-<figure id="figure-2"><img src="../../images/wab-tutorial-option-filler.png" alt="Accessing tools in the tutorial option within Galaxy" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Haz click sobre la herramienta en el tutorial de <span class="notranslate">Galaxy</span></figcaption></figure>
+<figure id="figure-2"><img src="../../images/wab-tutorial-option-filler.png" alt="Accessing tools in the tutorial option within Galaxy" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 2:</span> Haz click sobre la herramienta en el tutorial de <span class="notranslate">Galaxy</span></figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-practica-ejecutando-alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Practica: Ejecutando Alevin</h3>
@@ -1174,15 +1050,15 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 </blockquote>
 
-<figure id="figure-3"><img src="../../images/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Subconjunto de datos crudos, 400k cadenas</figcaption></figure>
+<figure id="figure-3"><img src="../../images/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 3:</span> Subconjunto de datos crudos, 400k cadenas</figcaption></figure>
 
 <p>La imagen aquí generada (4000k) no es muy informativa - pero ten en cuenta que tan solo estás manejando una fracción de las lecturas. Si procesas la muestra completa (que involucra los mismos pasos mencionados en la parte superior, pero que tardaría mucho más tiempo) obtendrás la imagen siguiente.</p>
 
-<figure id="figure-4"><img src="../../images/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Muestra completa - 32,579,453 lecturas - datos crudos</figcaption></figure>
+<figure id="figure-4"><img src="../../images/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 4:</span> Muestra completa - 32,579,453 lecturas - datos crudos</figcaption></figure>
 
 <p>Esta es la formulación del gráfico de código de barras que basamos en una <a href="https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480">discusión</a> que entablamos con miembros de la comunidad científica. Los gráficos de líneas suaves de la izquierda son los principales; estos gráficos muestran, clasificados de los más bajos a los más altos, los conteos de UMIs para códigos de barras individuales. Esperamos una fuerte caída entre las gotas que contienen células y las gotas vacías o que solo contienen restos celulares. Este no es un conjunto de datos ideal, así que en perspectiva, en un mundo ideal un conjunto de datos muy limpio proveniente de procesados 10x, los datos se asemejarían un poco más a la siguiente imagen del atlas de pulmón (ver <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne">aquí</a> el estudio del Atlas de Expresión de Células Únicas y la remisión del proyecto <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/">aquí</a>).</p>
 
-<figure id="figure-5"><img src="../../images/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Datos ‘bonitos’ - crudos</figcaption></figure>
+<figure id="figure-5"><img src="../../images/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 5:</span> Datos ‘bonitos’ - crudos</figcaption></figure>
 
 <p>En este gráfico puedes ver más claramente una flexión tipo “rodilla”, mostrando el corte entre las gotas vacías y las gotas que contienen células.</p>
 
@@ -1206,15 +1082,15 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 </blockquote>
 
-<figure id="figure-6"><img src="../../images/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> 400k sub-muestreo - Alevin procesado</figcaption></figure>
+<figure id="figure-6"><img src="../../images/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 6:</span> 400k sub-muestreo - Alevin procesado</figcaption></figure>
 
 <p>Y la muestra completa se ve como la siguiente figura:</p>
 
-<figure id="figure-7"><img src="../../images/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Muestra total - 32,579,453 lecturas - Alevin procesado</figcaption></figure>
+<figure id="figure-7"><img src="../../images/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 7:</span> Muestra total - 32,579,453 lecturas - Alevin procesado</figcaption></figure>
 
 <p>Y concluyendo, he aquí el gráfico del atlas de pulmón.</p>
 
-<figure id="figure-8"><img src="../../images/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Datos bonitos - Alevin procesado</figcaption></figure>
+<figure id="figure-8"><img src="../../images/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 8:</span> Datos bonitos - Alevin procesado</figcaption></figure>
 
 <p>Debes ver una caída casi vertical de la curva, que es donde Alevin truncó la distribución (después de haber excluido muchos códigos de barra celulares que tuvieron &lt;10 UMI, Alevin posteriormente selecciona un umbral basándose en la curva y elimina los códigos de barras con menos UMIs)</p>
 
@@ -1237,7 +1113,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-re-running-a-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Re-running a tool</h3>  <ol>  <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>  <li><strong>Click</strong> re-run <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li></ol>  <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p></blockquote>
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-consejo-re-running-a-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Re-running a tool</h3>  <ol>  <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>  <li><strong>Click</strong> re-run <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li></ol>  <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p></blockquote>
 </blockquote>
 
 <blockquote class="question">
@@ -1504,14 +1380,14 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-consejo-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
     </li>
     <li>Cambiar de nombre al conjunto de datos</li>
     <li>
       <p>Verifica que el tipo de datos sea <code class="language-plaintext highlighter-rouge">h5ad</code> de lo contrario ¡Necesitarás cambiar cada tipo de datos al formato <code class="language-plaintext highlighter-rouge">h5ad</code>!</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>  <li>Click the <strong>Change datatype</strong> button</li></ul></blockquote>
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-consejo-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>  <li>Click the <strong>Change datatype</strong> button</li></ul></blockquote>
     </li>
   </ol>
 
@@ -1589,7 +1465,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <p>Configura el historial de ejemplo con los índices más antiguos en la parte inferior.</p>
 
-<figure id="figure-9"><img src="../../images/wab-history-files-ascending.png" alt="Ordered history" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Nota como N701 es el más bajo, en orden ascendente al N707</figcaption></figure>
+<figure id="figure-9"><img src="../../images/wab-history-files-ascending.png" alt="Ordered history" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 9:</span> Nota como N701 es el más bajo, en orden ascendente al N707</figcaption></figure>
 
 <p>Por tanto, cuando se concatenan, el lote (<code class="language-plaintext highlighter-rouge">batch</code>) aparece de la siguiente manera:</p>
 
@@ -1865,9 +1741,9 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<figure id="figure-10"><img src="../../images/wab-alevin-part1workflow.png" alt="Workflow Part 1" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Flujo de trabajo - Pasos 1-3</figcaption></figure>
+<figure id="figure-10"><img src="../../images/wab-alevin-part1workflow.png" alt="Workflow Part 1" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 10:</span> Flujo de trabajo - Pasos 1-3</figcaption></figure>
 
-<figure id="figure-11"><img src="../../images/wab-alevin-part2workflow.png" alt="Workflow Part 2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Flujo de trabajo - Pasos 4-6</figcaption></figure>
+<figure id="figure-11"><img src="../../images/wab-alevin-part2workflow.png" alt="Workflow Part 2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 11:</span> Flujo de trabajo - Pasos 4-6</figcaption></figure>
 
 <p>¡Has llegado al final de esta sesión! Quizá te interese echarle un vistazo a un <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1">ejemplo de un historial</a> y a la <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2">Parte 2 del flujo de trabajo</a>. Nota que según la forma en que ejecutes el flujo de trabajo este requerirá que cambies la columna (<code class="language-plaintext highlighter-rouge">column</code>) que contiene el lote de metadatos. <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example">Aquí</a> puedes encontrar el objeto final que contiene todas las lecturas.</p>
 
@@ -1886,7 +1762,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Puntos clave</h3>
                     <ul>
                         
                         <li><p>Partiendo de archivos FASTQ crear un objeto AnnData que sea accesible con scanpy, incluir metadatos relevantes sobre células y genes</p>
@@ -1899,7 +1775,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
                 </blockquote>
                 
 
-                <h1>Frequently Asked Questions</h1>
+                <h1>Preguntas frecuentes</h1>
                 Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
                 If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
                 <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
@@ -1910,7 +1786,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
                 
 
                 
-                <h1 id="bibliography">References</h1>
+                <h1 id="bibliography">Referencias</h1>
                 <ol class="bibliography"><li><span id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9:</span>
     
     
@@ -1955,8 +1831,8 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
                 
 
-                <h1>Feedback</h1>
-                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Retroalimentación</h1>
+                <p class="text-muted">¿Usaste este material como instructor? <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">Cuéntanos tu experiencia</a>.</p>
 
                 <div id="feedback-button">
                     <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
@@ -1988,7 +1864,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 
 
-                <h1>Citing this Tutorial</h1>
+                <h1>Cómo citar este tutorial</h1>
                 <p>
                     <ol>
                         <li id="citation-text">Wendi Bacon, Jonathan Manning, Patricia Carvajal López, Alejandra Escobar-Zepeda, 2021 <b>Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial-ES.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial-ES.html</a> Online; accessed TODAY
@@ -2009,8 +1885,8 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 author = "Wendi Bacon and Jonathan Manning and Patricia Carvajal López and Alejandra Escobar-Zepeda",
 title = "Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin (Galaxy Training Materials)",
 year = "2021",
-month = "08",
-day = "12"
+month = "09",
+day = "15"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial-ES.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -2039,7 +1915,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> ¡Felicitaciones! ¡ Completaste con éxito este tutorial!</h3>
 
                 
 
