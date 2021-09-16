@@ -1,5 +1,9 @@
 name: Lint Tutorials And Slides
 
+concurrency:
+  group: ci-tutsli-${{ github.head_ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
     paths:
