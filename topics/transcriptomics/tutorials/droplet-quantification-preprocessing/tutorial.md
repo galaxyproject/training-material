@@ -26,6 +26,7 @@ tags:
   - single-cell
   - 10x
   - paper-replication
+  - español
 
 contributors:
   - nomadscientist
@@ -37,6 +38,9 @@ requirements:
     tutorials:
         - scrna-intro
         - scrna-umis
+
+translations:
+  - es
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
