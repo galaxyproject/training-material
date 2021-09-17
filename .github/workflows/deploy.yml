@@ -36,6 +36,7 @@ jobs:
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+          pip install -r requirements.txt
 
       - name: Build Site
         run: |
@@ -46,6 +47,7 @@ jobs:
           make annotate ACTIVATE_ENV=pwd
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
+          make convert-python-notebooks
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           GTN_FORK: ${{ github.repository_owner }}
