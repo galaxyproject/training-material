@@ -37,3 +37,7 @@ jobs:
       - name: Check for broken symlinks
         run: |
           make check-diffs
+      - name: Check for broken notebooks
+        run: |
+          pip install -r requirements.txt
+          make convert-python-notebooks
