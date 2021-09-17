@@ -3,9 +3,9 @@ set -e
 
 # We have an old commit ID, so we need to figure out which slides to build.
 if [[ "${PREVIOUS_COMMIT_ID}" != "none" ]]; then
-	changed_slides="$(join <(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-has-videos | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
+	changed_slides="$(join <(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-resource-metadata video | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
 else
-	changed_slides="$(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-has-videos)"
+	changed_slides="$(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-resource-metadata video)"
 fi
 
 for slides in $changed_slides; do

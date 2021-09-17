@@ -166,6 +166,9 @@ check: check-html-internal check-html check-broken-boxes check-slides ## run che
 lint: check-frontmatter check-workflows check-tool-links ## run linting checks which do not require a built site
 .PHONY: lint
 
+convert-python-notebooks: ## Render Jupyter notebooks from selected GTN training materials.
+	ruby ./bin/filter-resource-metadata notebook $$(find topics -name 'tutorial*.md') | xargs -n 1 -I '{}' notedown --match=python '{}' -o '{}'.ipynb
+
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 	$(ACTIVATE_ENV) && \
 	  	htmlproofer \
