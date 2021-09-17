@@ -19,6 +19,7 @@ key_points:
 subtopic: core
 contributors:
   - tnabtaf
+  - gallardoalba
 ---
 
 # Introduction to Galaxy
@@ -231,7 +232,7 @@ This expands the dataset and shows you information about it, and a preview of it
 
 From this preview we can obtain a huge amount of useful information:
 1. The dataset has over 4000 regions, meaning that there are over 4000 genes on chromosome 22.
-1. The dataset is in **BED** format, one of several standard for representing genome annotation.  We got BED format because BED was preselected as the output format in the UCSC table browser.
+1. The dataset is in **BED** format, one of several standards for representing genome annotation.  We got BED format because BED was preselected as the output format in the UCSC table browser.
 1. The dataset's "database" is **hg38**.  This says which revision of the reference genome this data maps too.  hg38 is the latest human reference genome.  hg38 was also selected by default in UCSC.
 1. Finally, it shows us the first 5 rows in the dataset.
 
@@ -250,7 +251,7 @@ The dataset preview is informative, but you can't see much of the actual dataset
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > Our BED file includes 12 columns, on which the information about the genes distribution along the genomes in the chromosome 12 is summarized.
+> > > Our BED file includes 12 columns, on which the information about the genes distribution along the genome in the chromosome 12 is summarized.
 > > {: .solution}
 > >
 > {: .question}
