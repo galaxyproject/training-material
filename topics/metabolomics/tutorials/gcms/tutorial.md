@@ -322,7 +322,7 @@ The *runGC* function is implemented in **metaMS.runGC {% icon tool %} tool** in 
 
 The peak picking is performed by the usual **XCMS** functions. A function has been written in **metaMS** to allow the individual parameters to be passed to the function as a settings list. The result is that the whole of the **XCMS** functionality is available, simply by changing the values of some settings, or by adding fields. 
  {: .text-justify}
-Whereas the package is not up-to-date since the new version of **XCMS** (3.x). This new version brought a lot of new object and transformed the peak picking processus. To have the last version of this processus, **metaMS** authorized **to start its function directly with the file containing all peak picking results**. 
+Whereas the package is not up-to-date since the new version of **XCMS** (3.x). This new version brought a lot of new objects and transformed the peak picking process. To have the last version of this process, **metaMS** authorized **to start its function directly with the file containing all peak picking results**. 
 {: .text-justify}
 Due to this update, **we have already processed the peak picking during the first part** of this tutorial. So we can continue it with the file outputted from the peak picking part. This also allow us to make a good peak picking without the following step include in **metaMS** functions. So it takes less time of processing and we can verify our peaks with this cut between peak picking and the following steps of GC-MS analysis. 
 {: .text-justify}
