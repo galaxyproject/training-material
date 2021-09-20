@@ -314,7 +314,7 @@ During this tutorial we are interested in GC-MS analysis, so we will use the *ru
 
 ![Workflow metaMS](../../images/tuto_gcms_workflow_metaMS.png "Workflow of metaMS for GC datas")
 
-The *runGC* function is implemented in **metaMS.runGC {% icon tool %} tool** in W4M Galaxy. It takes a vector of file names, corresponding to the samples, and a settings list as mandatory arguments. In addition, some extra arguments can be provided. In particular, a database of standards, as discussed later in tutorial, can be provided for annotation purposes. This tool regroups all these steps that are described in the following parts to be able to understand all its functionnalities and particularities. We will run the tool after we understand each of its steps because it is important to know what are the best parameters for our datas and why each parameter is done. 
+The *runGC* function is implemented in **metaMS.runGC {% icon tool %} tool** in W4M Galaxy. It takes a vector of file names, corresponding to the samples, and a settings list as mandatory arguments. In addition, some extra arguments can be provided. In particular, a database of standards, as discussed later in the tutorial, can be provided for annotation purposes. This tool regroups all these steps that are described in the following parts to be able to understand all its functionalities and particularities. We will run the tool after we understand each of its steps because it is important to know what are the best parameters for our data and why each parameter is done. 
 {: .text-justify}
 
 
