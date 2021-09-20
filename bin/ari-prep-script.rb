@@ -14,7 +14,7 @@ engine = ARGV[2]
 
 # For each line in the script, iterate
 # The spoken line is the one that's hashed. (2nd col)
-final_script = script.map.with_index{ |slide, idx|
+final_script = script['blocks'].map.with_index{ |slide, idx|
   paired = slide.map{ |subtitle|
     digest = Digest::MD5.hexdigest subtitle
 
@@ -26,7 +26,9 @@ final_script = script.map.with_index{ |slide, idx|
     handle.write(subtitle)
 
     # Synthesize and copy to the temp dir
-    mp3, json, duration = synthesize(subtitle, engine)
+    voice = script['voice']
+
+    mp3, json, duration = synthesize(subtitle, engine, voice: voice['voice'], 'lang': voice['lang'], neural: voice['neural'])
     puts "\tSynthesizing: #{subtitle}"
     FileUtils.cp(mp3, File.join(dir, digest + '.mp3'))
     FileUtils.cp(json, File.join(dir, digest + '.json'))

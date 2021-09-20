@@ -113,5 +113,8 @@ blocks = blocks.map{ |block|
 }
 
 #out_subs.write(blocks.map{ |line| line.join(" ") }.join("\n"))
+res = Hash.new
+res["blocks"] = blocks
+res["voice"] = metadata.fetch('voice', {"voice" => "Amy", "lang" => "en-GB", "neural" => true})
 
-print JSON.pretty_generate(blocks)
+print JSON.pretty_generate(res)
