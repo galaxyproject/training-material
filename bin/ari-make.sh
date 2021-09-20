@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 
-function cleanup()
-{
+function cleanup(){
 	kill $(pgrep -f http-server)
 }
 

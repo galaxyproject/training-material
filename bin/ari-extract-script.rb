@@ -15,6 +15,21 @@ YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
 
+APPROVED_VOICES = [
+  {"id" =>"Amy"     , "lang" => "en-GB" , "neural" => true},
+  {"id" =>"Aria"    , "lang" => "en-NZ" , "neural" => true},
+  {"id" =>"Brian"   , "lang" => "en-GB" , "neural" => true},
+  {"id" =>"Emma"    , "lang" => "en-GB" , "neural" => true},
+  {"id" =>"Joanna"  , "lang" => "en-US" , "neural" => true},
+  {"id" =>"Joey"    , "lang" => "en-US" , "neural" => true},
+  {"id" =>"Kendra"  , "lang" => "en-US" , "neural" => true},
+  {"id" =>"Matthew" , "lang" => "en-US" , "neural" => true},
+  {"id" =>"Nicole"  , "lang" => "en-AU" , "neural" => false},
+  {"id" =>"Olivia"  , "lang" => "en-AU" , "neural" => true},
+  {"id" =>"Raveena" , "lang" => "en-IN" , "neural" => false},
+  {"id" =>"Salli"   , "lang" => "en-US" , "neural" => true}
+]
+
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
 m_qs = [] if m_qs.nil?
@@ -35,6 +50,7 @@ t_rq = [] if t_rq.nil?
 has_requirements = m_rq.length > 0 || t_rq.length > 0
 
 m_lang = metadata.fetch('lang', 'en')
+m_voice = metadata.fetch('voice', nil)
 
 # Parse the material for the slide notes
 file = File.open(fn)
@@ -124,6 +140,11 @@ blocks = blocks.map{ |block|
 #out_subs.write(blocks.map{ |line| line.join(" ") }.join("\n"))
 res = Hash.new
 res["blocks"] = blocks
-res["voice"] = metadata.fetch('voice', {"voice" => "Amy", "lang" => "en-GB", "neural" => true})
+
+if m_voice.nil? then
+  res["voice"] = APPROVED_VOICES.sample
+else
+  res["voice"] = metadata['voice']
+end
 
 print JSON.pretty_generate(res)
