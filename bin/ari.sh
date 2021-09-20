@@ -31,7 +31,14 @@ fi
 slides=$1  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.pdf
 source=$2  # e.g. topic/admin/tutorials/ansible/slides.html
 output=$3  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.mp4
-subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".en.vtt
+slidesbase=$(basename "$source" .html)
+if [[ "$slidesbase" == *"-es" ]]; then
+	lang=es
+else
+	lang=en
+fi
+
+subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".${lang}.vtt
 cover="$output".png
 srcdir="$(dirname "$source")"
 

@@ -34,6 +34,8 @@ t_rq = topic_metadata.fetch('requirements', [])
 t_rq = [] if t_rq.nil?
 has_requirements = m_rq.length > 0 || t_rq.length > 0
 
+m_lang = metadata.fetch('lang', 'en')
+
 # Parse the material for the slide notes
 file = File.open(fn)
 lines = file.readlines.map(&:chomp)
@@ -87,7 +89,14 @@ blocks.push(current_block)
 if has_keypoints
   blocks.push(metadata['key_points'])
 end
-blocks.push(["Thank you for watching!"])
+
+if m_lang == "en" then
+  blocks.push(["Thank you for watching!"])
+elsif m_lang == "es" then
+  blocks.push(["¡Gracias por ver este vídeo!"])
+else
+  blocks.push(["This is an unknown language, it needs to be translated"])
+end
 
 # For each block, cleanup first.
 blocks = blocks.map{ |block|
