@@ -36,7 +36,7 @@ cover="$output".png
 srcdir="$(dirname "$source")"
 
 # Metadata
-meta_authors="$(ruby bin/extract-frontmatter.rb topics/admin/tutorials/cvmfs/slides.html | jq '.contributors | join(", ")' -r)"
+meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors | join(", ")' -r)"
 meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
 REVISION="$(git log -1 --format=%H)"
 
