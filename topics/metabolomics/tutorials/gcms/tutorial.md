@@ -43,7 +43,7 @@ A lot of packages are available for the analysis of GC-MS or LC-MS datas. Typica
 {: .agenda}
 
 
-# pre-processing with XCMS
+# Pre-processing with XCMS
 
 The first step of the workflow is the pre-processing of the raw data with **XCMS** ({% cite Smith2006 %}).
 {: .text-justify}
