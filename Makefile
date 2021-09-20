@@ -214,7 +214,7 @@ _site/%/slides.pdf: _site/%/slides.html
 	http-server _site -p 9876 & \
 	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
-_site/%/slides-es.pdf: _site/%/slides-es.html
+_site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(ACTIVATE_ENV) && \
 	http-server _site -p 9876 & \
 	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \

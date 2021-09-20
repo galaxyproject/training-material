@@ -32,7 +32,7 @@ slides=$1  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.p
 source=$2  # e.g. topic/admin/tutorials/ansible/slides.html
 output=$3  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.mp4
 slidesbase=$(basename "$source" .html)
-if [[ "$slidesbase" == *"-es" ]]; then
+if [[ "$slidesbase" == *"_ES" ]]; then
 	lang=es
 else
 	lang=en
