@@ -50,7 +50,7 @@ During this tutorial, we will learn how to process easily a test dataset from ra
 The first step of the workflow is the pre-processing of the raw data with **XCMS** ({% cite Smith2006 %}).
 {: .text-justify}
 
-**XCMS** is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
+**XCMS** {% icon tool %} is a free and open-source software dedicated to pre-processing any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is used worldwide by a huge community of specialists in metabolomics.
 {: .text-justify}
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software.
