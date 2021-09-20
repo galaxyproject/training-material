@@ -59,7 +59,7 @@ ruby bin/ari-prep-script.rb "${script}" "${build_dir}" "${engine}"
 
 # Generate images for use.
 echo "  Extracting slides"
-convert -density 300 "${slides}" "${build_dir}/slides.%03d.png"
+convert "${slides}" -resize 1920x1080 "${build_dir}/slides.%03d.png"
 
 # Generate a pause of 1 seconds, used after slides.
 sox -n -r 44100 -c 2 "${build_dir}/silence-unfixed.mp3" trim 0 1

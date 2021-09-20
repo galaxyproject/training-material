@@ -203,19 +203,21 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
+
 _site/%/introduction.pdf: _site/%/introduction.html
 	$(ACTIVATE_ENV) && \
-	http-server _site/ -p 9876 & \
-	pid=$$!; \
+	http-server _site -p 9876 & \
 	decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
-	kill $$pid
 
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
-	http-server _site/ -p 9876 & \
-	pid=$$!; \
+	http-server _site -p 9876 & \
 	decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
-	kill $$pid
+
+_site/%/slides-es.pdf: _site/%/slides-es.html
+	$(ACTIVATE_ENV) && \
+	http-server _site -p 9876 & \
+	decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 video: ## Build all videos
 	bash bin/ari-make.sh
