@@ -405,7 +405,7 @@ That file can be used for database search online (Golm, MassBank) or locally (NI
 
 # Take a look at your results after metaMS processing
 
-We choose to separate our first W4M Galaxy tool into 2 parts : the processing of GC-MS datas (**metaMS.runGC {% icon tool %}**) and the plotting results of these datas (**metaMS.plot {% icon tool %}**). So we now have the first part describes just before and the second part we will describe just after. This part allows users to see their TIC (Total Ion Chromatogram), BPC (Base Peak Chromatogram) and also all EICs (Extracted Ion Chromatogram) you want, from our previous result outputted from **metaMS.runGC {% icon tool %} tool**. 
+We choose to separate our first W4M Galaxy tool into 2 parts: the processing of GC-MS data (**metaMS.runGC {% icon tool %}**) and the plotting results of these data (**metaMS.plot {% icon tool %}**). So we now have the first part describes just before and the second part we will describe just after. This part allows users to see the TIC (Total Ion Chromatogram), BPC (Base Peak Chromatogram), and also all EICs (Extracted Ion Chromatogram) you want, from our previous result outputted from **metaMS.runGC {% icon tool %} tool**. 
 {: .text-justify}
 
 If you separated your samples into different classes, this tool can constructs TICs and BPCs one class against one class, in a `pdf` file (Figure 5) : 
