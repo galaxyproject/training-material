@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-03-23 18:12:58 +0000",
+  "dateModified": "2021-09-17 08:04:17 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Introduction to Genomics and Galaxy",
   "interactivityType": "mixed",
@@ -325,12 +325,20 @@
     {
       "@type": "Person",
       "name": "Dave Clements"
+    },
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Dave Clements"
+    },
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
     }
   ],
   "about": [
@@ -351,7 +359,7 @@
 
     <div class="contributors-line">Authors: 
 
- <a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Avatar">Dave Clements</a>
+ <a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Avatar">Dave Clements</a> <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/gallardoalba" alt="Avatar">Cristóbal Gallardo</a>
 
 </div>
 
@@ -451,7 +459,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 23, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 17, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
@@ -482,12 +490,14 @@
   <p>In this tutorial, we will:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
-      <li><a href="#get-human-gene-definitions" id="markdown-toc-get-human-gene-definitions">Get human gene definitions</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#get-human-data" id="markdown-toc-get-human-data">Get human data</a>    <ol>
       <li><a href="#get-data-into-galaxy" id="markdown-toc-get-data-into-galaxy">Get data into <span class="notranslate">Galaxy</span></a></li>
       <li><a href="#examine-the-data" id="markdown-toc-examine-the-data">Examine the data</a></li>
       <li><a href="#naming" id="markdown-toc-naming">Naming</a></li>
-      <li><a href="#weve-got-the-data---whats-our-plan-for-answering-the-question" id="markdown-toc-weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</a></li>
+    </ol>
+  </li>
+  <li><a href="#weve-got-the-data---whats-our-plan-for-answering-the-question" id="markdown-toc-weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</a>    <ol>
       <li><a href="#results-and-final-steps" id="markdown-toc-results-and-final-steps">Results and final steps.</a></li>
       <li><a href="#do-we-have-a-problem" id="markdown-toc-do-we-have-a-problem">Do we have a problem?</a></li>
       <li><a href="#walk-through-the-workflow-tutorial" id="markdown-toc-walk-through-the-workflow-tutorial">Walk through the <span class="notranslate">workflow</span> tutorial</a></li>
@@ -495,16 +505,11 @@
       <li><a href="#are-we-done" id="markdown-toc-are-we-done">Are we done?</a></li>
     </ol>
   </li>
-  <li><a href="#what-next" id="markdown-toc-what-next">What next?</a></li>
-  <li><a href="#final-thoughts" id="markdown-toc-final-thoughts">Final thoughts</a>    <ol>
-      <li><a href="#why-not-use-excel-for-this" id="markdown-toc-why-not-use-excel-for-this">Why not use Excel for this?</a></li>
-    </ol>
-  </li>
 </ol>
 
 </blockquote>
 
-<h1 id="pretreatments">Pretreatments</h1>
+<h1 id="introduction">Introduction</h1>
 
 <blockquote class="comment">
   <h3 id="requirements-requirements"><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</h3>
@@ -566,7 +571,7 @@
 
 <p><em>Non-overlapping genes are common.  How common are overlapping genes?</em></p>
 
-<h2 id="get-human-gene-definitions">Get human gene definitions</h2>
+<h1 id="get-human-data">Get human data</h1>
 
 <p>To answer this question we need to know where genes start and stop on human chromosomes.  That seems like a simple question, but if you are new to bioinformatics it’s actually a hard question to answer.  Web searches will land you at any number of useful places on the web, but without a lot of background knowledge it’s hard to know what you want:  <em>What’s the difference between sequence and annotation?  What are FASTA, <span class="notranslate">BED</span>, GTF, GFF3, and VCF?  What are GRCh37, GRCh38, hg19, and hg38 (and what happened to hg20 through hg37 - are they okay)?</em></p>
 
@@ -743,16 +748,16 @@
       <td>Item has finished successfully (data transfer complete).</td>
       <td><img src="../../images/status_finished_success.png" alt="Status: Successfully finished" loading="lazy" /></td>
     </tr>
+    <tr>
+      <td><strong>Red</strong></td>
+      <td>Cross</td>
+      <td>The job has failed. There can be <a href="https://galaxyproject.org/support/tool-error/">many reasons</a>.</td>
+      <td><img src="../../images/status_failed.png" alt="Status: Successfully finished" loading="lazy" /></td>
+    </tr>
   </tbody>
 </table>
 
-<p>Occasionally you will also see a 4th status</p>
-
-<ul>
-  <li><strong>Red</strong>: Item did not finish successfully.</li>
-</ul>
-
-<p>See the <em><span class="notranslate">Galaxy</span> History Item Status</em> practical for more. [TODO]</p>
+<p>You can find more information in the <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">Undestanding <span class="notranslate">Galaxy</span> history system</a> training.</p>
 
 <h2 id="examine-the-data">Examine the data</h2>
 
@@ -765,71 +770,90 @@
 
 <p><img src="../../images/genes_human_chr22_preview.png" alt="Preview of the data from UCSC Table Browser" loading="lazy" /></p>
 
+<p>From this preview we can obtain a huge amount of useful information:</p>
 <ol>
-  <li>The preview tells us  several things:</li>
   <li>The dataset has over 4000 regions, meaning that there are over 4000 genes on chromosome 22.</li>
-  <li>The dataset is in <strong><span class="notranslate">bed</span></strong> format.  <span class="notranslate">BED</span> is one of several standard formats for representing genome annotation.  <span class="notranslate">BED</span> is a tabular format that we’ll expand on below.  We got <span class="notranslate">BED</span> format because <span class="notranslate">BED</span> was preselected as the output format in the UCSC table browser.</li>
+  <li>The dataset is in <strong><span class="notranslate">BED</span></strong> format, one of several standards for representing genome annotation.  We got <span class="notranslate">BED</span> format because <span class="notranslate">BED</span> was preselected as the output format in the UCSC table browser.</li>
   <li>The dataset’s “database” is <strong>hg38</strong>.  This says which revision of the reference genome this data maps too.  hg38 is the latest human reference genome.  hg38 was also selected by default in UCSC.</li>
   <li>Finally, it shows us the first 5 rows in the dataset.</li>
 </ol>
 
-<p>The dataset preview is informative, but you can’t see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset</p>
+<p>The dataset preview is informative, but you can’t see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-look-at-all-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Look at all the data.</h3>
   <ol>
     <li>
-      <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to view the contents of the dataset.
-This displays all of the data</p>
+      <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to view the contents of the dataset. This displays all of the data.</p>
 
       <p><img src="../../images/genes_human_chr22_dataset_view.png" alt="Full dataset in central panel" loading="lazy" /></p>
     </li>
+    <li>
+      <p>Use the side scroll bars to move through the file.</p>
+    </li>
   </ol>
+
+  <blockquote class="question">
+    <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>How many columns include the <span class="notranslate">BED</span> file?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <p>Our <span class="notranslate">BED</span> file includes 12 columns, on which the information about the genes distribution along the genome in the chromosome 12 is summarized.</p>
+    </blockquote>
+
+  </blockquote>
+
 </blockquote>
 
-<h3 id="bed-format"><span class="notranslate">BED</span> Format</h3>
+<blockquote class="details">
+  <h3 id="details-additional-information-about-bed-files"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Additional information about <span class="notranslate">BED</span> files</h3>
 
-<p><a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><span class="notranslate">BED</span></a> is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, <span class="notranslate">BED</span> format is easiest to work with.  <span class="notranslate">BED</span> was created to power the UCSC Genome Browser.  <span class="notranslate">BED</span> files contain between 3 and 15 columns.  Our example <span class="notranslate">BED</span> file describes genes and contains 12 columns.</p>
+  <p><a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><span class="notranslate">BED</span></a> is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, <span class="notranslate">BED</span> format is easiest to work with.  <span class="notranslate">BED</span> was created to power the UCSC Genome Browser.  <span class="notranslate">BED</span> files contain between 3 and 15 columns.  Our example <span class="notranslate">BED</span> file describes genes and contains 12 columns.</p>
 
-<p>We care about columns 1, 2, 3, and 6:</p>
+  <p>We care about columns 1, 2, 3, and 6:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Column Name</th>
-      <th>Meaning</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Chromosome</td>
-      <td>The name of the chromosome this gene is on.</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Start</td>
-      <td>Where on the chromosome the gene starts.</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>End</td>
-      <td>Where on the chromosome the gene ends.</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Strand</td>
-      <td>Which strand the gene is on.  <code class="language-plaintext highlighter-rouge">+</code> means forward (top, left to right), <code class="language-plaintext highlighter-rouge">-</code> means reverse (bottom, right to left)</td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Column Name</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Chromosome</td>
+        <td>The name of the chromosome this gene is on.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Start</td>
+        <td>Where on the chromosome the gene starts.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>End</td>
+        <td>Where on the chromosome the gene ends.</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Strand</td>
+        <td>Which strand the gene is on.  <code class="language-plaintext highlighter-rouge">+</code> means forward (top, left to right), <code class="language-plaintext highlighter-rouge">-</code> means reverse (bottom, right to left)</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>See the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><span class="notranslate">BED</span> format description at UCSC</a> for a full description of all the columns.</p>
+  <p>See the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><span class="notranslate">BED</span> format description at UCSC</a> for a full description of all the columns.</p>
+
+</blockquote>
 
 <h2 id="naming">Naming</h2>
 
-<p><span class="notranslate">Galaxy</span> allow you to name your analyses (your histories) and your datasets.  We only have one history (“Unnamed history”) and one dataset (“UCSC Main on Human:…”) so far, but it’s a good idea to</p>
+<p><span class="notranslate">Galaxy</span> allows you to name your analyses (your histories) and your datasets.  We only have one history (“Unnamed history”) and one dataset (“UCSC Main on Human:…”) so far, but it’s a good idea to</p>
 
 <ol>
   <li>Always name your histories</li>
@@ -862,11 +886,11 @@ This displays all of the data</p>
   </ol>
 </blockquote>
 
-<h2 id="weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</h2>
+<h1 id="weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</h1>
 
 <p>You have to know what’s possible, before you can build a plan.  If you don’t have experience with data analysis then you might not have any idea how you would answer our question.  Before we dive in using a particular solution, think about how you might solve this.  If you don’t have any experience with tools, then think about how you might solve it manually, using pencil and paper (it may help to assume you have an infinite supply of helpers to do the pencil and paper work).</p>
 
-<p>Here’s how we’ll answer this question.</p>
+<p>Here’s how we’ll answer this question:</p>
 
 <ol>
   <li>Split the genes dataset in two: one for genes on the forward strand, and one for genes on the reverse strand.</li>
@@ -874,7 +898,7 @@ This displays all of the data</p>
   <li>Check how many (or what percentage) of our genes overlap with another gene.</li>
 </ol>
 
-<p>It turns out that all of these steps are easy in <span class="notranslate">Galaxy</span>.</p>
+<p>It turns out that all of these steps are easy in <span class="notranslate">Galaxy</span>!</p>
 
 <h3 id="split-the-genes-into-forward-and-reverse-datasets">Split the genes into forward and reverse datasets</h3>
 
@@ -898,9 +922,7 @@ This displays all of the data</p>
   <p><img src="../../images/filter_tool_defaults.png" alt="The Filter Tool form" loading="lazy" /></p>
 </blockquote>
 
-<p>It doesn’t say anything about Filter being able to split a file into multiple files.  It does look like we can use Filter to get only genes on the forward strand, or only genes on the reverse strand.  We would have to run Filter twice, once for forward strand genes, and once for reverse strand genes. Let’s do that.</p>
-
-<p>(You may have noticed during your search for tools that <em>all</em> tools have a similar look and feel.)</p>
+<p>It doesn’t say anything about <strong>Filter</strong> being able to split a file into multiple files.  It does look like we can use Filter to get only genes on the forward strand, or only genes on the reverse strand.  We would have to run Filter twice, once for forward strand genes, and once for reverse strand genes. Let’s do that.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-the-filter-tool-to-get-genes-on-the-forward-strand"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run the Filter tool to get genes on the forward strand.</h3>
@@ -910,7 +932,7 @@ This displays all of the data</p>
       <p>The filter tool has 3 fields:</p>
 
       <ol>
-        <li><strong>Dataset</strong>: This pulldown will list any dataset from your history that this tool can work on.  In your case that’s probably only one dataset.  Make sure this is set to your <code class="language-plaintext highlighter-rouge">Genes</code> dataset.</li>
+        <li><strong>Dataset</strong>: This pulldown will list any dataset from your history that this tool can work on.  In your case that’s probably only one dataset.  Make sure this is set to your <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</li>
         <li><strong>Condition</strong>: this free text field is where we specify which records we want in the output dataset.  <em>Enter</em> <code class="language-plaintext highlighter-rouge">c6 == "+"</code> in the text box.
 This specifies that column 6 (the strand) must be equal to (<code class="language-plaintext highlighter-rouge">==</code> is Python for <em>is equal to</em>) a plus sign.</li>
         <li><strong>Header lines to skip</strong>: Leave this as <code class="language-plaintext highlighter-rouge">0</code>. Our dataset does not have any header lines.</li>
@@ -935,7 +957,7 @@ This specifies that column 6 (the strand) must be equal to (<code class="languag
   <p><strong>Method 1</strong></p>
 
   <ol>
-    <li>Open the dataset preview by <em>clicking</em> on the name of the <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> dataset.  This shows an icon than the uploaded <code class="language-plaintext highlighter-rouge">Genes</code> dataset did not: a looping arrow.</li>
+    <li>Open the dataset preview by <em>clicking</em> on the name of the <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> dataset.  This shows an icon than the uploaded <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset did not: a looping arrow.</li>
     <li><em>Click</em> the <strong>looping arrow</strong> (“Run this job again”) icon.  This won’t actually run the job again.  What it will do is bring up the Filter tool form with <em>the exact same settings that were used to produce this dataset.</em></li>
     <li>Rather than run Filter again with the same settings, <em>change</em> <strong>Condition</strong> to <code class="language-plaintext highlighter-rouge">c6 == "-"</code></li>
     <li><em>Click</em> the <strong>Execute</strong> button.</li>
@@ -946,7 +968,7 @@ This specifies that column 6 (the strand) must be equal to (<code class="languag
     <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  in the tool panel to open the Filter tool in the central panel.</li>
     <li><em>Fill</em> the form as before, <em>except</em>:
       <ul>
-        <li>Make sure the <strong>Dataset</strong> pulldown is set to the <code class="language-plaintext highlighter-rouge">Genes</code> dataset.</li>
+        <li>Make sure the <strong>Dataset</strong> pulldown is set to the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</li>
         <li><em>Set</em> <strong>Condition</strong> to <code class="language-plaintext highlighter-rouge">c6 == "-"</code>.</li>
       </ul>
     </li>
@@ -966,18 +988,18 @@ This specifies that column 6 (the strand) must be equal to (<code class="languag
 
   <p>If you used Method 2 and didn’t explicitly set the dataset, then you ran Filter on the <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> dataset. None of the genes in the forward strand dataset have “-“ in column 6 so all of them were filtered out from the result.</p>
 
-  <p>Try again and set the dataset to your <code class="language-plaintext highlighter-rouge">Genes</code> dataset.</p>
+  <p>Try again and set the dataset to your <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</p>
 </blockquote>
 
 <p>Your history should now have (at least) 3 datasets in it, with names like:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">Genes</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Genes chr22</code></li>
   <li><code class="language-plaintext highlighter-rouge">Genes, forward strand</code></li>
   <li><code class="language-plaintext highlighter-rouge">Genes, reverse strand</code></li>
 </ul>
 
-<p>The number of genes in the <code class="language-plaintext highlighter-rouge">forward</code> plus <code class="language-plaintext highlighter-rouge">reverse</code> datasets should be the same as in the <code class="language-plaintext highlighter-rouge">Genes</code> dataset.  If they aren’t can you figure out why?</p>
+<p>The number of genes in the <code class="language-plaintext highlighter-rouge">forward</code> plus <code class="language-plaintext highlighter-rouge">reverse</code> datasets should be the same as in the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.  If they aren’t can you figure out why?</p>
 
 <h3 id="check-for-overlaps">Check for overlaps</h3>
 
@@ -1037,7 +1059,7 @@ In <span class="notranslate">Galaxy</span>, a <em>genomic interval</em> is a som
 
 <h2 id="results-and-final-steps">Results and final steps.</h2>
 
-<p>At this point we <em>could</em> say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the <code class="language-plaintext highlighter-rouge">Overlapping forward</code> and <code class="language-plaintext highlighter-rouge">Overlapping reverse</code> datasets with the number of genes in the full <code class="language-plaintext highlighter-rouge">Genes</code> dataset, and <em>conclude that overlapping genes on opposite strands are actually pretty common.</em></p>
+<p>At this point we <em>could</em> say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the <code class="language-plaintext highlighter-rouge">Overlapping forward</code> and <code class="language-plaintext highlighter-rouge">Overlapping reverse</code> datasets with the number of genes in the full <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset, and <em>conclude that overlapping genes on opposite strands are actually pretty common.</em></p>
 
 <p>However, before we rush off to publish our conclusions, let’s</p>
 
@@ -1177,13 +1199,13 @@ In humans (and in all plants and animals) the molecules that are built from gene
     <li><em>Select</em> the <strong>Copy Datasets</strong> option from the pull down menu.  This launches the copy datasets form.</li>
     <li>Under <strong>Source History:</strong>, <em>select</em> the dataset(s) you want to copy to the new history.
       <ul>
-        <li>In our case, we only want the <code class="language-plaintext highlighter-rouge">Genes</code> dataset.</li>
+        <li>In our case, we only want the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</li>
       </ul>
     </li>
     <li>Under <strong>Destination History</strong> enter an informative history name in the <strong>New history named:</strong> box.
       <ul>
         <li>For example, <code class="language-plaintext highlighter-rouge">Exon overlaps on opposite strands</code>
-<img src="../../images/copy_datasets_to_new_history.png" alt="Copy only the Genes dataset to the new history" loading="lazy" /></li>
+<img src="../../images/copy_datasets_to_new_history.png" alt="Copy only the Genes chr22  dataset to the new history" loading="lazy" /></li>
       </ul>
     </li>
     <li><em>Click</em> the <strong>Copy History Items</strong> button to create your new history.
@@ -1258,17 +1280,9 @@ In humans (and in all plants and animals) the molecules that are built from gene
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in <span class="notranslate">Galaxy</span>.</p>
+<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in <span class="notranslate">Galaxy</span>!</p>
 
-<h1 id="what-next">What next?</h1>
-
-<p>Sharing tutorial</p>
-
-<h1 id="final-thoughts">Final thoughts</h1>
-
-<h2 id="why-not-use-excel-for-this">Why not use Excel for this?</h2>
-
-<p>You could use Excel or another sp<span class="notranslate">reads</span>heet program to do this analysis.  Here, we learned how to use <span class="notranslate">Galaxy</span> by answering a question.  You could just as easily learn Excel by answering the same question, and if the goal is to learn how to use a tool, then either tool would be great. But what if you are working on a question where your analysis matters?  Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?</p>
+<p>Here, we learned how to use <span class="notranslate">Galaxy</span> by answering a question. You could just as easily learn Excel by answering the same question, and if the goal is to learn how to use a tool, then either tool would be great. But what if you are working on a question where your analysis matters?  Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?</p>
 
 <p>In these cases your analysis, <em>and the ability to reproduce it exactly</em>, is vitally important, and Excel won’t help you here. It doesn’t track changes and it offers very little insight to others on how you got from your initial data to your conclusions.</p>
 
@@ -1348,7 +1362,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Dave Clements, 2021 <b>Introduction to Genomics and Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Dave Clements, Cristóbal Gallardo, 2021 <b>Introduction to Genomics and Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1363,11 +1377,11 @@ In humans (and in all plants and animals) the molecules that are built from gene
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{introduction-galaxy-intro-strands,
-author = "Dave Clements",
+author = "Dave Clements and Cristóbal Gallardo",
 title = "Introduction to Genomics and Galaxy (Galaxy Training Materials)",
 year = "2021",
-month = "03",
-day = "23"
+month = "09",
+day = "17"
 url = "\url{https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
