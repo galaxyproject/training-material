@@ -308,7 +308,7 @@ Before the next step with msPurity package on MS/MS datas, here are some questio
 
 # Processing with metaMS part
 
-**metaMS** is a R package for MS-based metabolomics data. It can does basic peak picking and grouping using functions from **XCMS** and **CAMERA** packages. The main output of **metaMS** is a table of feature intensities in all samples which can be analysed with multivariate methods immediately. The package also offers the possibility to create in-house databases of mass spectra (including retention information) of pure chemical compounds. These databases can then be used for annotation purposes. The most important functions of this package are *runGC* and *runLC* (and each one to create databases *createSTDdbGC* and *createSTDdbLC*).
+**metaMS** is a R package for MS-based metabolomics data. It can do basic peak picking and grouping using functions from **XCMS** and **CAMERA** packages. The main output of **metaMS** is a table of feature intensities in all samples which can be analyzed with multivariate methods immediately. The package also offers the possibility to create in-house databases of mass spectra (including retention information) of pure chemical compounds. These databases can then be used for annotation purposes. The most important functions of this package are *runGC* and *runLC* (and each one to create databases *createSTDdbGC* and *createSTDdbLC*).
 {: .text-justify}
 During this tutorial we are interested in GC-MS analysis, so we will use the *runGC* function of **metaMS** and described it in details to be able to understand this function. The standard workflow of **metaMS** for GC-MS data is the following : 
 
