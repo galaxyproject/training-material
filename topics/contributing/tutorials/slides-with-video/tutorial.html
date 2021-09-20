@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-05-20 12:30:12 +0000",
+  "dateModified": "2021-09-16 08:29:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Adding auto-generated video to your slides",
   "interactivityType": "mixed",
@@ -433,7 +433,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 20, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 16, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
@@ -463,6 +463,7 @@
       <li><a href="#enable-the-video" id="markdown-toc-enable-the-video">Enable the Video</a></li>
     </ol>
   </li>
+  <li><a href="#how-it-works-in-detail" id="markdown-toc-how-it-works-in-detail">How it works: In Detail</a></li>
 </ol>
 
 </blockquote>
@@ -587,6 +588,37 @@ This role deploys CVMFS.</p>
 
 <p>That’s it! With this, videos can be automatically generated.</p>
 
+<h1 id="how-it-works-in-detail">How it works: In Detail</h1>
+
+<ol>
+  <li>We take our markdown slides, e.g. <a href="https://github.com/galaxyproject/training-material/blob/main/topics/introduction/tutorials/galaxy-intro-short/slides.html"><code class="language-plaintext highlighter-rouge">topics/introduction/tutorials/<span class="notranslate">galaxy</span>-intro-short/slides.html</code></a></li>
+  <li>In order for them to be processed, slides must have an annotation saying <code class="language-plaintext highlighter-rouge">video: true</code> in the header metadata, and then ‘speaker notes’ (everything after the ??? before the —)</li>
+  <li>This is turned into our ‘plain text slides’ which just renders the markdown a bit more nicely (<a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html">example</a>)</li>
+  <li>
+    <p>Then we run ari.sh which does the following:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">make video</code> is run which runs <a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari-make.sh"><code class="language-plaintext highlighter-rouge">bin/ari-make.sh</code></a></li>
+      <li>This builds PDFs for any slides which have changed</li>
+      <li>And runs <code class="language-plaintext highlighter-rouge">./bin/ari.sh</code> with the PDF, the original Slides, and where the mp4 should be saved.
+        <ul>
+          <li>In <a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh"><code class="language-plaintext highlighter-rouge">./bin/ari.sh</code></a></li>
+          <li>It <a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L38">extracts metadata</a> from the tutorial (title, authors, etc.)</li>
+          <li>It <a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L51">builds a ‘script’</a>, a json document with blocks for every line of the speaker notes that were in the slides.</li>
+          <li><a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L55">Those get converted into mp3 files</a> by AWS Polly (or MozillaTTS), one per slide.</li>
+          <li>The PDFs get turned into <a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L60">a series of PNG images</a></li>
+          <li>We take the timings of the mp3 files together with the json ‘script’ to <a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L69">write out webvtt / srt subtitles</a> which get embedded into the video, and supplied next to it.</li>
+          <li><a href="https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L75">ffmpeg is used</a> to knit together the PNGs + mp3s with appropriate delay</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>All of this is run on cron by <a href="https://github.com/galaxyproject/training-material/blob/main/.github/workflows/video.yml"><code class="language-plaintext highlighter-rouge">.github/workflows/video.yml</code></a> which handles building all of these videos and then later uploading them to s3.</p>
+
+<p>Many of the scripts inte<span class="notranslate">rna</span>lly are prefixed with <code class="language-plaintext highlighter-rouge">ari</code>, we named our inte<span class="notranslate">rna</span>l version after <a href="https://github.com/jhudsl/ari/">github.com/jhudsl/ari/</a> which inspired it, but we wanted a version that would be more closely tied to the GTN and integrate with our infrastructure nicely, so we ended up writing our own.</p>
+
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 
@@ -670,8 +702,8 @@ This role deploys CVMFS.</p>
 author = "Helena Rasche",
 title = "Adding auto-generated video to your slides (Galaxy Training Materials)",
 year = "2021",
-month = "05",
-day = "20"
+month = "09",
+day = "16"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
