@@ -67,14 +67,14 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 				</a>
 			</div>
 			{% for lang in material.translations.slides %}
-			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction-{{ lang }}{% else %}tutorials/{{ material.tutorial_name }}/slides-{{ lang }}{% endif %}{% endcapture %}
+			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction_{{ lang | upcase }}{% else %}tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endif %}{% endcapture %}
 			<div class="pl-item">
 				<a href="watch.html?v={{ vid }}">
 					<div class="cover">
 						<img src="https://training.galaxyproject.org/videos/topics/{{ vid }}.mp4.png" width="200px"/>
 					</div>
 					<div>
-						<div class="title">[{{ lang }}] {{ material.title }}</div>
+						<div class="title">[{{ lang | upcase }}] {{ material.title }}</div>
 					</div>
 				</a>
 			</div>

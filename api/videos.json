@@ -24,7 +24,7 @@
 			},
 								{% for lang in material.translations.slides %}
 			{
-				"id": "{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction-{{ lang }}{% else %}tutorials/{{ material.tutorial_name }}/slides-{{ lang }}{% endif %}",
+				"id": "{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction_{{ lang | upcase }}{% else %}tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endif %}",
 				"topic": "{{ t.title }}",
 				"title": "{{ material.title }}"
 			},
