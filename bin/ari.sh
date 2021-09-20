@@ -58,6 +58,7 @@ sounds="${build_dir}/sounds.txt"
 # Generate our script
 echo ruby bin/ari-extract-script.rb "$source"
 ruby bin/ari-extract-script.rb "$source" > "$script"
+voice=$(cat "$script" | jq .voice.id)
 
 # Now explode that into individual lines, synthesize, and re-assemble them into
 # our images.txt/sounds.txt scripts
@@ -101,9 +102,9 @@ ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264
 echo "  Muxing"
 ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" -i "${build_dir}/tmp.srt" \
 	-movflags +faststart \
-	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$REVISION/$USER/$engine" \
+	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$REVISION/$USER/$engine/$voice" \
 	-metadata network="Galaxy Training Network"\
-	-metadata artist="$meta_authors" \
+	-metadata artist="$meta_authors, AWS Polly $voice" \
 	-metadata title="$meta_title" \
 	-c:v copy -c:a copy -c:s mov_text \
 	-map 0:v:0 -map 1:a:0 -map 2 \
