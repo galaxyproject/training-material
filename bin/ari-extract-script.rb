@@ -15,20 +15,29 @@ YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
 
-APPROVED_VOICES = [
-  {"id" =>"Amy"     , "lang" => "en-GB" , "neural" => true},
-  {"id" =>"Aria"    , "lang" => "en-NZ" , "neural" => true},
-  {"id" =>"Brian"   , "lang" => "en-GB" , "neural" => true},
-  {"id" =>"Emma"    , "lang" => "en-GB" , "neural" => true},
-  {"id" =>"Joanna"  , "lang" => "en-US" , "neural" => true},
-  {"id" =>"Joey"    , "lang" => "en-US" , "neural" => true},
-  {"id" =>"Kendra"  , "lang" => "en-US" , "neural" => true},
-  {"id" =>"Matthew" , "lang" => "en-US" , "neural" => true},
-  {"id" =>"Nicole"  , "lang" => "en-AU" , "neural" => false},
-  {"id" =>"Olivia"  , "lang" => "en-AU" , "neural" => true},
-  {"id" =>"Raveena" , "lang" => "en-IN" , "neural" => false},
-  {"id" =>"Salli"   , "lang" => "en-US" , "neural" => true}
-]
+APPROVED_VOICES = {
+  "en" => [
+    {"id" =>"Amy"     , "lang" => "en-GB" , "neural" => true},
+    {"id" =>"Aria"    , "lang" => "en-NZ" , "neural" => true},
+    {"id" =>"Brian"   , "lang" => "en-GB" , "neural" => true},
+    {"id" =>"Emma"    , "lang" => "en-GB" , "neural" => true},
+    {"id" =>"Joanna"  , "lang" => "en-US" , "neural" => true},
+    {"id" =>"Joey"    , "lang" => "en-US" , "neural" => true},
+    {"id" =>"Kendra"  , "lang" => "en-US" , "neural" => true},
+    {"id" =>"Matthew" , "lang" => "en-US" , "neural" => true},
+    {"id" =>"Nicole"  , "lang" => "en-AU" , "neural" => false},
+    {"id" =>"Olivia"  , "lang" => "en-AU" , "neural" => true},
+    {"id" =>"Raveena" , "lang" => "en-IN" , "neural" => false},
+    {"id" =>"Salli"   , "lang" => "en-US" , "neural" => true}
+  ],
+  "es" => [
+    { "id" => "Miguel"   , "lang" => "es-US" , "neural" => false },
+    { "id" => "Mia"      , "lang" => "es-MX" , "neural" => false },
+    { "id" => "Enrique"  , "lang" => "es-ES" , "neural" => false },
+    { "id" => "Conchita" , "lang" => "es-ES" , "neural" => false },
+    { "id" => "Lupe"     , "lang" => "es-US" , "neural" => true }
+  ]
+}
 
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
@@ -111,7 +120,7 @@ if m_lang == "en" then
 elsif m_lang == "es" then
   blocks.push(["¡Gracias por ver este vídeo!"])
 else
-  blocks.push(["This is an unknown language, it needs to be translated"])
+  blocks.push(["Thank you for watching!"])
 end
 
 # For each block, cleanup first.
@@ -142,7 +151,13 @@ res = Hash.new
 res["blocks"] = blocks
 
 if m_voice.nil? then
-  res["voice"] = APPROVED_VOICES.sample
+  if m_lang == "en" then
+    res["voice"] = APPROVED_VOICES['en'].sample
+  elsif m_lang == "es" then
+    res["voice"] = APPROVED_VOICES['es'].sample
+  else
+    res["voice"] = APPROVED_VOICES['en'].sample
+  end
 else
   res["voice"] = metadata['voice']
 end
