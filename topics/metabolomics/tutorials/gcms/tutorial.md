@@ -378,7 +378,7 @@ In addition, one is ignoring the information in the other peaks of the pseudospe
 In both cases, the result is a list containing a set of patterns corresponding with the compounds that have been found, either annotated or unknown, the relative intensities of these patterns in the individual annotations, and possibly the xcmsSetobject for further inspection. In practice, the *runGC* function is all that users need to use.
 {: .text-justify}
 
-That file can be used for database search online (Golm, MassBank) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.
+That file can be used for database search online (as Golm ({% cite Kopka2005 %}) and MassBank ({% cite Horai2010 %})) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.
 {: .text-justify}
 
 > ### {% icon hands_on %} Hands-on : metaMS.runGC {% icon tool %}
