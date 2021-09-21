@@ -2,7 +2,7 @@
 set -e
 
 function cleanup(){
-	kill $(pgrep -f http-server)
+	kill $(pgrep -f $(npm bin)/http-server)
 }
 
 trap cleanup EXIT
@@ -14,7 +14,7 @@ else
 	changed_slides="$(find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_ES.html' | xargs ./bin/filter-has-videos)"
 fi
 
-http-server -p 9876 _site &
+$(npm bin)/http-server -p 9876 _site &
 
 for slides in $changed_slides; do
 	echo "====== $slides ======"
