@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Una Breve Introducción a Galaxy</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Galaxy is a scientific workflow, data integration, and da..." />
+    <meta property="og:title" content="Galaxy Training: Una Breve Introducción a Galaxy" />
+    <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and da..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:21 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Una Breve Introducción a Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Introduction to Galaxy Analyses",
+    "description": "Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ",
+    "url": "https://training.galaxyproject.org//training-material/topics/introduction/"
+  },
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": null,
+    "alternateName": "es"
+  },
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": ""
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": ""
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/introduction" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/introduction/tutorials/galaxy-intro-short/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Una Breve Introducción a Galaxy
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Avatar">Saskia Hiltemann</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a> <a href="/training-material/hall-of-fame/npalopoli/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/npalopoli" alt="Avatar">npalopoli</a>
+
+
+</div>
+
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Sep 21, 2021</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- ¿Qué es Galaxy?
+
+- ¿Por qué debería usar Galaxy?
+
+- ¿Cómo uso Galaxy?
+
+- ¿Cómo puedo conectarme con la Comunidad Galaxy?
+
+
+---
+
+
+
+
+# ¿Qué es Galaxy?
+
+???
+
+¿Qué es Galaxy?
+
+---
+
+![Galaxy Logo](/training-material/shared/images/galaxy_logo_25percent_transparent.png)
+
+** *Análisis* de datos intensivos para todos**
+
+.pull-left[
+- Plataforma para **Análisis de Datos**
+- Basado en la Web
+- **Fácil** de usar
+- **Gratis** y de Código Abierto
+
+
+- Muchas herramientas (~8000)
+- Popular (&amp;gt;10.000 [publicaciones](https://www.zotero.org/groups/1732893/galaxy))
+- Extensos [tutoriales](https://training.galaxyproject.org) disponibles
+
+
+]
+
+.pull-right[
+![infografía de ciencia de datos](/training-material/topics/introduction/images/data_science.jpg) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+]
+
+.footnote[Página principal: [galaxyproject.org](https://galaxyproject.org)]
+
+???
+
+- Galaxy es una plataforma web para el análisis de datos.
+- Es fácil de usar y completamente gratis.
+- Galaxy ofrece más de ocho mil herramientas para análisis.
+- Galaxy se usa extensamente. Actualmente tiene más de diez mil publicaciones.
+
+
+---
+
+# ¿Por qué usar Galaxy?
+
+- Es **fácil**!
+    - No se necesita instalación, solamente un navegador.
+    - No hay comandos complejos, ¡simplemente apunta y haz clic!
+
+
+- Es **reproducible**
+    - Galaxy mantiene un registro de los detalles del análisis.
+
+
+- **Multidisciplinar**: bioinformática, química, ecología, climatología, ..
+
+![Banner de recursos de Galaxy](/training-material/topics/introduction/images/titleless-use-resource-banner.png)
+
+???
+
+- Análisis de datos puede ser muy complejo.
+- Muchas veces requiere conocimiento especializado de programación o habilidades en la interfaz de línea de comandos.
+- Galaxy facilita el trabajo proveyendo una interfaz gráfica de usuario para herramientas populares en análisis de datos.
+- Galaxy se basa en la web. Esto significa que no tienes que instalar nada, solamente abre tu navegador y accede a Galaxy.
+- Galaxy apoya muchas disciplinas científicas diferentes.
+
+---
+
+# ¿Cómo uso Galaxy?
+
+???
+
+- ¿Cómo uso Galaxy?
+
+---
+
+# Encontrar un servidor de Galaxy
+
+- **Las Tres Grandes**: Galaxy Principal ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europa ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+
+  .image-75[![servidores usegalaxy.*](/training-material/shared/images/usegalaxy_servers.png)]
+
+
+- Existen muchos más servidores de Galaxy dedicados a ámbitos específicos (125+)
+ - Lista de todas los servidores públicos de Galaxy: [galaxyproject.org/use](https://galaxyproject.org/use/)
+
+???
+
+- Hay tres servidores principales. Son Galaxy Principal, Galaxy Europa, y Galaxy Australia.
+- Estas tres Galaxies tienen los equipos más grandes detrás de ellos, y ofrecen la mayoría de las herramientas y recursos.
+- Puedes acceder a una cuenta gratis en cualquiera de estos servidores.
+- Además, hay muchos servidores más pequeños donde elegir.
+- Muchos de ellos se dedican a una disciplina. Por ejemplo, Galaxy Proteomics se enfoca en las herramientas y workflows de la proteómica.
+
+
+---
+
+# La interfaz de Galaxy
+
+- Los tres paneles principales
+  - **Izquierdo:** Herramientas disponibles
+  - **Centro:** Ver tus datos y ejecutar una herramienta
+  - **Derecho:** Registro completo de tus análisis **historia**
+
+![Interfaz del usuario de Galaxy](/training-material/topics/introduction/images/galaxy_interface.png)
+
+???
+
+- La interfaz para el usuario de Galaxy consiste en tres partes principales.
+- A izquierda, se muestra la lista de herramientas disponibles.
+- En el panel central ejecutarás tus herramientas de análisis y verás tus datos y resultados.
+- A la derecha hay un registro completo de la historia de tus análisis.
+
+---
+
+# Cargar datos
+
+.pull-left[
+- Cargar desde **tu ordenador**
+
+
+- Importar archivos **desde enlace URL**
+
+
+- Importar desde **almacenajes de datos públicos**
+  - UCSC, NCBI, ENA, muchos más..
+
+
+]
+
+.pull-right[
+![Botón para cargar de Galaxy](/training-material/topics/introduction/images/upload-data.png)
+]
+
+???
+
+- El primer paso de un análisis es cargar tus datos en Galaxy.
+- Esto se puede hacer de varias maneras.
+- Puedes cargar archivos desde tu ordenador.
+- O puedes usar un enlace URL, y Galaxy descargará los datos desde allí.
+- Aún más, Galaxy puede importar datos directamente de varios almacenajes de datos en línea, por ejemplo UCSC, NCBI, y muchos más.
+
+---
+
+# Historia
+
+.pull-left[
+- Archivos aparecen en tu **historia**
+
+
+- Tres botones
+    - &lt;i class=&quot;far fa-eye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-eye&lt;/span&gt; **Ver** el archivo
+    - &lt;i class=&quot;fas fa-pencil-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-pencil&lt;/span&gt; **Editar atributos**
+        - p.ej. cambiar nombre
+    - &lt;i class=&quot;fas fa-times&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-cross&lt;/span&gt; **Borrar archivo**
+
+
+- Hacer clic para **expandir**
+    - información sobre el archivo
+       - formato, tamaño ...
+    - vista previa del archivo
+    - opciones del archivo
+       - descargar, visualizar ...
+
+
+
+
+]
+
+.pull-right[
+![expandir un conjunto de datos](/training-material/topics/introduction/images/galaxy_history_dataset_expand.gif)
+]
+
+???
+
+- Todos los archivos que cargas aparecerán en tu historia.
+- Hay tres botones en cada conjunto de datos en tu historia.
+- El icono del ojo te deja ver el conjunto de datos. Esto aparecerá en el panel central de Galaxy.
+- El icono del lápiz te deja editar los atributos del archivo. Por ejemplo puedes cambiar el nombre del archivo aquí.
+- El icono de la equis te deja borrar el conjunto de datos de tu historia.
+- Puedes hacer clic para expandir el conjunto de datos. Esto dará más información y opciones.
+
+---
+
+# Encontrar una herramienta
+
+.pull-left[
+
+- Explorar las secciones del panel de herramientas
+- Teclear un nombre en el campo **Buscar herramientas**
+]
+
+.pull-right[
+![el campo de buscar herramientas](/training-material/topics/introduction/images/tool_search.png)
+]
+
+&lt;br&gt;
+
+- &lt;i class=&quot;far fa-star&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-star&lt;/span&gt; **Star** (añadir una estrella) a tus herramientas favoritas para encontrarlas más fácilmente.
+
+![añadir una herramienta a tus favoritos haciendo clic en el icono de la estrella](/training-material/topics/introduction/images/tool_favorite.png)
+
+???
+
+- Después de cargar tus datos, estás listo para ejecutar herramientas.
+- Puedes encontrar herramientas explorando la lista a la izquierda.
+- Si ya conoces el nombre de la herramienta que quieres usar, puedes teclearlo en el campo de búsqueda que se ubica en la parte de arriba del panel de herramientas.
+- Si has encontrado una herramienta que te gusta, puedes añadirla a tus favoritos haciendo clic en la estrella en la parte de arriba de la herramienta.
+
+---
+
+# Ejecutar una herramienta
+
+.pull-left[
+- Elegir los **archivos de entrada**
+- Establecer **paramétros** de la herramienta
+- **Ejecutar**
+
+
+- Debajo del formulario de la herramienta:
+    - Ayuda
+    - Cita de la herramienta
+
+]
+
+.pull-right[
+![Interfaz de la herramienta](/training-material/topics/introduction/images/galaxy_tool.png)
+]
+
+???
+
+- Cuando hagas clic en la herramienta, aparecerá en el panel del centro.
+- Aquí puedes seleccionar tus archivos de entrada e indicar los parámetros para la herramienta.
+- Luego puedes hacer clic en el botón ‘ejecutar’ para iniciar la herramienta.
+
+---
+
+# Resultados del análisis
+
+.pull-left[
+- Salidas de la herramienta se añaden a la historia
+
+
+- Estados diferentes de los conjuntos de datos
+    - &lt;span style=&quot;background-color: lightgrey&quot;&gt; esperando &lt;/span&gt;, &lt;span style=&quot;background-color: orange&quot;&gt; ejecutando &lt;/span&gt;, &lt;span style=&quot;background-color: lightgreen&quot;&gt;éxito&lt;/span&gt;, &lt;span style=&quot;background-color: red&quot;&gt;fallado&lt;/span&gt;
+
+
+- Expandir para más opciones
+    - &lt;i class=&quot;far fa-save&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-save&lt;/span&gt; **Descargar** conjunto de datos
+    - &lt;i class=&quot;fas fa-info-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-info&lt;/span&gt; **Información** sobre la ejecución de una herramienta
+    - &lt;i class=&quot;fas fa-sync-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-refresh&lt;/span&gt; **Recargar** herramienta con los mismos parámetros
+    - &lt;i class=&quot;fas fa-chart-bar&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-barchart&lt;/span&gt; **Visualizar** conjunto de datos
+
+
+
+- Conjunto de datos rojo?
+    - &lt;i class=&quot;fas fa-bug&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-bug&lt;/span&gt; Hacer clic en icono de insecto
+      - ver mensaje de error
+      - enviar reporte de error
+]
+
+.pull-right[
+![ejemplo de la ejecución de una herramienta](/training-material/topics/introduction/images/tool_run.gif)
+]
+
+???
+
+- Los resultados del análisis se añadirán a tu historia.
+- Verás estos archivos de salida pasando por varios estados.
+- Cuando un conjunto de datos está en gris, significa que está esperando para ejecutar.
+- Cuando está amarillo, significa que la herramienta está ejecutando.
+- Cuando la herramienta termine, las salidas aparecerán verdes si la herramienta se ejecutó con éxito.
+- Puedes hacer clic en cada artículo en la historia para más información y opciones.
+- Por ejemplo, puedes descargar el archivo a tu ordenador.
+- O puedes recargar la herramienta con los mismos parámetros.
+- También hay una opción para visualizar tus datos.
+- Si hay un problema con la herramienta, el color se convertirá en rojo.
+- Puedes hacer clic en el icono del insecto para ver el mensaje de error o enviar un reporte del error a los administradores de Galaxy.
+
+
+---
+
+# Visualizaciones
+
+- Galaxy tiene muchas opciones para visualizar los datos
+
+![Ejemplos de visualización en Galaxy](/training-material/topics/dev/images/charts_examples2.png)
+
+???
+
+- Galaxy también tiene muchas opciones para visualizar tus conjuntos de datos.
+- Dependiendo del tipo de datos, habrá diferentes opciones para visualizar.
+
+---
+
+# Múltiples Análisis
+
+- ¿Empezando un nuevo análisis? Crea una nueva historia &lt;i class=&quot;fas fa-plus&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;new-history&lt;/span&gt;
+- Puedes tener tantas historias como quieras
+- Puedes ver todas tus historias &lt;i class=&quot;fas fa-columns&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-history&lt;/span&gt;
+- Dar buenos nombres a tus historias ayudará para el seguimiento de tus análisis
+
+![Vista de múltiples historias](/training-material/topics/introduction/images/galaxy_interface_multiple_histories.png)
+
+???
+
+- Cuando quieres empezar un nuevo análisis, puedes crear una nueva historia usando el icono del signo más en la parte superior del panel de la historia.
+- Puedes tener tantas historias como quieras.
+- Puedes intercambiar fácilmente entre historias.
+- Dar buenos nombres a tus historias ayudará para el seguimiento de tus análisis.
+
+---
+
+# Workflows
+
+- Ejecutar **análisis extremo a extremo** con un clic
+
+![Interfaz de workflow](/training-material/topics/introduction/images/101_28.png)
+
+- **Extraer** de una historia
+- **Construir manualmente** con el editor de workflows
+- **Importar** un workflow compartido
+
+???
+
+- Los workflows te permiten ejecutar tus análisis fácilmente.
+- Hay múltiples maneras de crear un workflow.
+- Los workflows se pueden extraer automáticamente de una historia.
+- Esto quiere decir que puedes hacer el análisis manualmente solo una vez, y luego repetirlo con diferentes datos de entrada.
+- Puedes construir workflows a mano usando el editor.
+- O puedes importar un workflow que alguien ha compartido contigo.
+
+
+---
+
+# Compartir
+
+- Puedes compartir todo lo que haces en Galaxy
+    - Historias, Workflows, y Visualizaciones
+
+
+- Opciones para compartir
+    - Compartir con usuarios específicos
+    - Compartir vía enlace
+    - *Publicar* para hacerlo visible a todos
+
+
+![menú de datos compartidos](/training-material/topics/introduction/images/shared_data.png)
+
+???
+
+- Todo lo que haces en Galaxy se puede compartir.
+- Puedes compartir tus historias, tus workflows, y tus visualizaciones.
+- Hay diferentes maneras para compartir tu trabajo.
+- Lo puedes compartir con usuarios específicos en Galaxy.
+- O puedes obtener un enlace para compartir con cualquier persona.
+- Si publicas tu trabajo, será visible a todos.
+
+---
+
+# Aprendiendo Galaxy
+
+- Material formativo en Galaxy ([training.galaxyproject.org](https://training.galaxyproject.org))
+
+![Captura de pantalla de la página de estadísticas de GTN con 21 temas, 170 tutoriales, 159 colaboradores, 16 temas científicos y una comunidad en crecimiento](/training-material/topics/introduction/images/gtn_stats.png)
+
+???
+
+- Si deseas aprender más sobre Galaxy, hay un gran número de tutoriales disponibles.
+- Estos tutoriales cubren un gran rango de dominios científicos.
+
+---
+
+# Obteniendo Ayuda
+
+- **Foro de Ayuda** ([help.galaxyproject.org](https://help.galaxyproject.org))
+
+
+  ![Ayuda con Galaxy](/training-material/topics/introduction/images/galaxy_help.png)
+
+
+- **Gitter Chat**
+    - [Chat principal](https://gitter.im/galaxyproject/Lobby)
+    - [Galaxy Training Chat](https://gitter.im/Galaxy-Training-Network/Lobby)
+    - Muchos más canales (dominios científicos, desarrolladores y administradores)
+
+???
+
+- Si te bloqueas, hay maneras de conseguir ayuda.
+- Puedes hacer tus preguntas en el foro de ayuda.
+- O puedes chatear con la comunidad en Gitter.
+
+---
+
+# Únete a un evento
+
+- Muchos eventos de Galaxy a través del globo.
+- Eventos en el horizonte: [galaxyproject.org/events](https://galaxyproject.org/events)
+
+![Horario de eventos](/training-material/topics/introduction/images/event_horizon.png)
+
+???
+
+- Hay eventos de Galaxy en todo el mundo, a menudo.
+- Puedes encontrar eventos próximos en el Horizonte de Eventos de Galaxy.
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Galaxy te permite hacer complejos análisis de datos directamente desde tu navegador
+
+- Estos análisis son *reproducibles*; Galaxy mantiene registro de todos los detalles de tus análisis
+
+- Galaxy tiene una comunidad de usuarios muy grande y activa
+
+- Hay mucho material de entrenamiento disponible para aprender Galaxy
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Avatar">Saskia Hiltemann</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a> <a href="/training-material/hall-of-fame/npalopoli/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/npalopoli" alt="Avatar">npalopoli</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
