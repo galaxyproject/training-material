@@ -2,7 +2,7 @@
 set -e
 
 function cleanup(){
-	kill $(pgrep -f $(npm bin)/http-server)
+	kill $(pgrep -f $(npm bin)/http-server) || true
 }
 
 trap cleanup EXIT
