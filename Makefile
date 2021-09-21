@@ -206,27 +206,21 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
+
 _site/%/introduction.pdf: _site/%/introduction.html
-	if ! grep 'http-equiv="refresh"' $< --quiet; then \
-		$(ACTIVATE_ENV) && \
-		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
-		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
-		wkhtmltopdf \
-		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
-			--user-style-sheet bin/slides-fix.css \
-			- $@; \
-	fi
+	$(ACTIVATE_ENV) && \
+	http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 _site/%/slides.pdf: _site/%/slides.html
-	if ! grep 'http-equiv="refresh"' $< --quiet; then \
-		$(ACTIVATE_ENV) && \
-		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
-		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
-		wkhtmltopdf \
-		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
-			--user-style-sheet bin/slides-fix.css \
-			- $@; \
-	fi
+	$(ACTIVATE_ENV) && \
+	http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
+
+_site/%/slides_ES.pdf: _site/%/slides_ES.html
+	$(ACTIVATE_ENV) && \
+	http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 video: ## Build all videos
 	bash bin/ari-make.sh

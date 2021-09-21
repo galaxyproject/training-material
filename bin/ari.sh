@@ -31,7 +31,14 @@ fi
 slides=$1  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.pdf
 source=$2  # e.g. topic/admin/tutorials/ansible/slides.html
 output=$3  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.mp4
-subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".en.vtt
+slidesbase=$(basename "$source" .html)
+if [[ "$slidesbase" == *"_ES" ]]; then
+	lang=es
+else
+	lang=en
+fi
+
+subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".${lang}.vtt
 cover="$output".png
 srcdir="$(dirname "$source")"
 
@@ -51,6 +58,7 @@ sounds="${build_dir}/sounds.txt"
 # Generate our script
 echo ruby bin/ari-extract-script.rb "$source"
 ruby bin/ari-extract-script.rb "$source" > "$script"
+voice=$(cat "$script" | jq .voice.id)
 
 # Now explode that into individual lines, synthesize, and re-assemble them into
 # our images.txt/sounds.txt scripts
@@ -59,7 +67,7 @@ ruby bin/ari-prep-script.rb "${script}" "${build_dir}" "${engine}"
 
 # Generate images for use.
 echo "  Extracting slides"
-convert -density 300 "${slides}" "${build_dir}/slides.%03d.png"
+convert "${slides}" -resize 1920x1080 "${build_dir}/slides.%03d.png"
 
 # Generate a pause of 1 seconds, used after slides.
 sox -n -r 44100 -c 2 "${build_dir}/silence-unfixed.mp3" trim 0 1
@@ -94,9 +102,9 @@ ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264
 echo "  Muxing"
 ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" -i "${build_dir}/tmp.srt" \
 	-movflags +faststart \
-	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$REVISION/$USER/$engine" \
+	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$REVISION/$USER/$engine/$voice" \
 	-metadata network="Galaxy Training Network"\
-	-metadata artist="$meta_authors" \
+	-metadata artist="$meta_authors, AWS Polly $voice" \
 	-metadata title="$meta_title" \
 	-c:v copy -c:a copy -c:s mov_text \
 	-map 0:v:0 -map 1:a:0 -map 2 \
@@ -109,5 +117,5 @@ mkdir -p "$(dirname "$output")"
 # Copy our files over
 cp "${build_dir}/out.mp4" "$output"
 cp "${build_dir}/out.vtt" "$subtitles"
-cp "${build_dir}/slides.000.png" "$cover"
+convert -resize 480x270  "${build_dir}/slides.000.png" "$cover"
 ffprobe -loglevel warning -show_format -show_private_data -show_streams -print_format json -i "$output" > "$output".json
