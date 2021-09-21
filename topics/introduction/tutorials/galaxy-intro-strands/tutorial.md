@@ -242,7 +242,7 @@ The dataset preview is informative, but you can't see much of the actual dataset
 > 1. Click on the {% icon galaxy-eye %} (eye) icon to view the contents of the dataset. This displays all of the data.
 >
 >    ![Full dataset in central panel](../../images/genes_human_chr22_dataset_view.png)
-> 
+>
 > 2. Use the side scroll bars to move through the file.
 >
 > > ### {% icon question %} Questions
@@ -259,7 +259,7 @@ The dataset preview is informative, but you can't see much of the actual dataset
 {: .hands_on}
 
 > ### {% icon details %} Additional information about BED files
-> 
+>
 >[BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, BED format is easiest to work with.  BED was created to power the UCSC Genome Browser.  BED files contain between 3 and 15 columns.  Our example BED file describes genes and contains 12 columns.
 >
 >We care about columns 1, 2, 3, and 6:
@@ -274,7 +274,7 @@ The dataset preview is informative, but you can't see much of the actual dataset
 >See the [BED format description at UCSC](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) for a full description of all the columns.
 >
 >
-{: .details}   
+{: .details}
 
 
 ## Naming
