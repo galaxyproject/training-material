@@ -45,7 +45,7 @@ During this tutorial, we will learn how to process easily a test dataset from ra
 {: .agenda}
 
 
-# Pre-processing with XCMS
+# First steps of pre-processing using a standard XCMS workflow (mandatory)
 
 The first step of the workflow is the pre-processing of the raw data with **XCMS** ({% cite Smith2006 %}).
 {: .text-justify}
@@ -59,191 +59,154 @@ This software is based on different algorithms that have been published, and is 
 **MSnbase readMSData** {% icon tool %} function, prior to **XCMS**, is able to read files with open format as `mzXML`, `mzML`, `mzData` and `netCDF`, which are independent of the constructors' formats. The **XCMS** package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes, adducts and fragments (using the R package CAMERA, {% cite CAMERA %}). This set of functions gives modularity, and thus is particularly well adapted to define workflows, one of the key points of Galaxy.
 {: .text-justify}
 
-First step of this tutorial is to download the data test. As describe in the introduction, we will use datas from {% cite Dittami2012 %}. We will only process on a subset of their datas. So, you can **import your files directly in Galaxy by using the following URLs below** or download files into your computer (then upload them on Galaxy) : 
+First step of this tutorial is to download the data test. As describe in the introduction, we will use datas from {% cite Dittami2012 %}. We will only process on a subset of their data. 
+So, you can **import your files directly in Galaxy from Zenodo (see hands-on below)** or download files into your computer using the following link then upload them on Galaxy: 
 {: .text-justify}
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3631074.svg)](https://doi.org/10.5281/zenodo.3631074)
 
-```
-https://zenodo.org/record/3631074/files/alg11.mzData
-https://zenodo.org/record/3631074/files/alg2.mzData
-https://zenodo.org/record/3631074/files/alg3.mzData
-https://zenodo.org/record/3631074/files/alg7.mzData
-https://zenodo.org/record/3631074/files/alg8.mzData
-https://zenodo.org/record/3631074/files/alg9.mzData
-https://zenodo.org/record/3631074/files/sampleMetadata.tsv
-https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
-```
-This step is described as number 1 in details part below.
 
-Then, to be able to pre-process our GC-MS datas, we need to **start with the peakpicking of MS datas**. One Galaxy Training already explains how to act with your MS datas. You should **follow this link and complete this tutorial** : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For GC-MS analysis you **don't really need to follow all of this previous tutorial** but for a better understanding of your datas, it is recommanded to try it with their test dataset. In this tutorial, you **just have to compute** your datas with the **following steps and specific parameters** describe in the *details* part below (please follow parameters values to have the same results during the training).
+Then, to be able to pre-process our GC-MS data, we need to **start with the peakpicking of MS data**. 
+One Galaxy Training material already explains how to act with MS data. We encourage you to **follow this link and complete the corresponding tutorial**: [Mass spectrometry: LC-MS preprocessing with XCMS](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). 
+For GC-MS analysis you **don't really need to follow all of this previous tutorial** but for a better understanding of your data, it is recommanded to try it with their test dataset.
+Concerning the current GC-MS tutorial, you **just have to compute the following steps and specific parameters** described in the hands-on part below (please follow parameters values to have the same results during the training).
 {: .text-justify}
 
-> ### {% icon details %} Some help : Resume of the XCMS pre-processing
+## 1 - Import the data into Galaxy 
+
+> ### {% icon hands_on %} Hands-on: Data upload
 >
-> Here is a resume of the **XCMS** {% icon tool %} pre-processing. Please follow instructions for this training tutorial. It has few steps that are an obligation to be able to obtain the final file. With this file, we can continue the workflow to process our GC-MS datas with **metaMS** {% icon tool %} R package.
-> {: .text-justify}
+> 1. Create a new history for this tutorial
 >
-> > ### {% icon solution %} 1 - Import your datas into a Galaxy collection
-> > 
-> > For a good workflow, you need to create a collection in Galaxy which contains **all** your datas. When we write **all** datas, it means all **raw files** from the mass spectrometer and already transforms with **msConvert** into `mzML`, `mzXML`, `mzData` or some other format. But don't download `sampleMetadata file` (for example) in your collection. 
-> > 
-> > > ### {% icon tip %} Tip: Create a dataset collection
-> > > 1. Click on {% icon galaxy-selector %} icon (**Operation on multiple datasets**) on the top of the history
-> > > 2. Select all the datasets for the collection
-> > > 3. Expand **For all selected** menu
-> > > 4. Select **Build dataset list**
-> > > 5. Enter a name for the collection
-> > > 6. Tick **Hide original elements?**
-> > > 5. Click on **Create list** (and wait a bit)
-> > {: .tip}
-> >
-> > > ### {% icon tip %} Tip: Importing data via links
-> > >
-> > > * Copy the link location
-> > > * Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
-> > > {% if include.collection %}
-> > > * Click on **Collection** on the top
-> > > {% endif %}
-> > > {% if include.collection_type %}
-> > > * Click on **Collection Type** and select `{{ include.collection_type }}`
-> > > {% endif %}
-> > > * Select **Paste/Fetch Data**
-> > > * Paste the link into the text field
-> > > {% if include.link %}
-> > >   `{{ include.link }}`
-> > > {% endif %}
-> > > {% if include.link2 %}
-> > >   `{{ include.link2 }}`
-> > > {% endif %}
-> > > {% if include.format %}
-> > > * Change **Type** from "Auto-detect" to `{{ include.format }}`
-> > > {% endif %}
-> > > {% if include.genome %}
-> > > * Change **Genome** to `{{ include.genome }}`
-> > > {% endif %}
-> > > * Press **Start**
-> > > {% if include.collection %}
-> > > * Click on **Build** when available
-> > > {% if include.pairswaptext %}
-> > > * Ensure that the forward and reverse reads are set to {{ include.pairswaptext }}, respectively.
-> > >     * Click **Swap** otherwise
-> > > {% endif %}
-> > > * Enter a name for the collection
-> > > {% if include.collection_name_convention %}
-> > >     * A useful naming convention is to use {{ include.collection_name_convention }}
-> > > {% endif %}
-> > > {% if include.collection_name %}
-> > >     * {{ include.collection_name }}
-> > > {% endif %}
-> > > * Click on **Create list** (and wait a bit)
-> > > {% else %}
-> > > * **Close** the window
-> > > {% endif %}
-> > > {% if include.renaming == undefined or include.renaming == true %}
-> > > By default, Galaxy uses the URL as the name, so rename the files with a more useful name.
-> > > {% endif %}
-> > {: .tip}
-> > > ### {% icon tip %} Tip: Importing data from a data library
-> > >
-> > > As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a *shared data library*:
-> > >
-> > > * Go into **Shared data** (top panel) then **Data libraries**
-> > > {% if include.path %}
-> > > * {{ include.path }}
-> > > {% else %}
-> > > * Find the correct folder (ask your instructor)
-> > > {% endif %}
-> > > * Select the desired files
-> > > * Click on the **To History** button near the top and select **{{ include.astype | default: "as Datasets" }}** from the dropdown menu
-> > > * In the pop-up window, select the history you want to import the files to (or create a new one)
-> > > * Click on **Import**
-> > {: .tip}
-> >
-> {: .solution}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> > ### {% icon solution %} 2 - Prepare your MS datas with *MSnbase readMSData* {% icon tool %}
-> >
-> > **MSnbase readMSData** {% icon tool %}, prior to **XCMS** {% icon tool %} is able to read files with open format as `mzXML`, `mzML`, `mzData` and `netCDF`, which are independent of the constructors' formats.
-> >   - **Input** : your collection with all your files
-> >   - **Output** : a new collection with your files and their information after `readMSData` function. Format : `collection.raw.RData`.
-> {: .solution}
+> 2. Import the following 6 `mzData` files into a collection named `mzData`
+>    - Option 1: from a shared data library (ask your instructor)
+>    - Option 2: from Zenodo using the URLs given below
 >
-> > ### {% icon solution %} 3 - First XCMS step : *peak picking*
-> >    
-> > Open and run the **xcms findChromPeaks (xcmsSet)** {% icon tool %} tool and set your parameters. For our training please enter the following parameters : 
-> >   - **Extraction method for peaks detection** : there are 4 different possible options here. Please select `MatchedFilter - peak detection in chromatographic space` for our tutorial.
-> >   - **Full width at half maximum of matched filtration gaussian model peak** : it corresponds to the full width at half maximum. Please set it at `5`.
-> >   - **Step size to use for profile generation** : the peak detection algorithm creates extracted ion base peak chromatograms on a fixed step size. For our tutorial please set it to `0.5`. 
-> >   - **Advanced options** :  
-> >     - **Maximum number of peaks that are expected/will be identified per slice** : Set to `500` the maximum number of peaks identified per slice.
-> >     - **Signal to noise ratio cutoff** : set it to `2` for the signal to noise cutoff to be used in the chromatographic peak detection step. 
-> >     - **Number of bins to be merged before filtration** : it is the number of neighboring bins that will be joined to the slice in which filtration and peak detection will be performed. Please set it to `2`.
-> >     - **Minimum difference in m/z for peaks with overlapping retention times** : set to `0.5` the minimum difference of m/z for peaks with overlapping retention times.
-> > 
-> > Here, you have all the right parameters for our example. These are the two dataset collection you will have in your hsitory on the right of Galaxy instance : 
-> >    - **Input** : collection of Rdata object(s) obtained just before (format : `collection.raw.RData`)
-> >    - **Output** : a collection with informations about peak picking for each files. Format : `collection.raw.xset.RData`.
-> {: .solution}
-> 
-> > ### {% icon solution %} 4 - *Merge samples* in one dataset with a sampleMetadata file
-> >
-> > To merge your datas, you need to **input a sampleMetadata file** containing namefiles and their metadata informations like their class for example. If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}. Here is an example of the minimum expectations about a sampleMetadata file (**important** : don't write the format of the file, just their names) :
-> > {: .text-justify}
-> > 
-> > | sample_name |  class  | 
-> > |:-----------:|:-------:|
-> > |    file1    |   man   |
-> > |-------------+---------|
-> > |    file2    |  woman  |
-> > |-------------+---------|
-> > |    file3    |   man   |
-> > 
-> > You have just to enter the following files in the tool and process it. You should now have these files in your history :
-> >   - **Input** : 
-> >     - collection of RData object(s) obtained during peak picking (format : `collection.raw.xset.RData`) 
-> >     - optionnaly a sampleMetadata file in `tabular` format. For our example please start with `sampleMetadata_hommeVSfemme.csv` in tabular format.
-> >   - **Output** : 
-> >     - one RData file named `xset.merged.RData` which contains a list of all your datas processed just before.
-> {: .solution}
+>    ```
+>    https://zenodo.org/record/3631074/files/alg11.mzData
+>    https://zenodo.org/record/3631074/files/alg2.mzData
+>    https://zenodo.org/record/3631074/files/alg3.mzData
+>    https://zenodo.org/record/3631074/files/alg7.mzData
+>    https://zenodo.org/record/3631074/files/alg8.mzData
+>    https://zenodo.org/record/3631074/files/alg9.mzData
+>    ```
 >
-> > ### {% icon solution %} 5 - Second XCMS step : *determining shared ions across samples*
-> >
-> > Open **xcms groupChromPeaks (group)** {% icon tool %} tool and run it with your parameters. This tool will group all your peaks found before together when they represent the same analyte across samples. It uses overlapping m/z bins and calculations of smoothed peak distributions in chromatographic time. In Galaxy instance please set the parameters as below : 
-> >  - **Method to use for grouping** : please `keep the PeakDensity method` which will groups peak based on time dimension peak densities.
-> >  - **Bandwidth** : it correspond to the standard deviation of the smoothing kernel to be used. Set it to `10` for our example.
-> >  - **Minimum fraction of samples** : minimum fraction of samples in at least one sample group in which the peaks have to be present to be considered as a peak group. This value is the threshold and `don't change` it for our example.
-> >  - **Minimum number of samples** : minimum number of sample(s) in which the peak have to be detected to be considered as a group. Please `don't change` it for our example.
-> >  - **Width of overlapping m/z slices** : the m/z difference between two peaks to be able to be grouped. For our example please set it to `0.05`.
-> > 
-> > You don't need to change the other parameters, except if you want the peaklist as output. You should now have these files in your history : 
-> >  - **Input** : 
-> >    - the RData file obtained just before with all datas and peaks informations for each files (format : `xset.merged.RData`).
-> >  - **Output** : 
-> >    - one Rdata file named `xset.merged.groupChromPeaks.RData` containing all peaks grouped according to their mz and retention time.
-> >    - one `pdf` file named `xset.merged.groupChromPeaks.plotChromPeakDensity.pdf`. It contains chromatographic density plots.
-> >    - 2 `tsv` files. The first one named `xset.merged.group.dataMatrix.tsv` contains informations about ions intensities. The second one named `xset.merged.group.variableMetadata.tsv` contains an other table with informations about ions. These files are generated **only if you set the parameter *Get peaklist*** to `yes`. It is just more informations after the grouping step. 
-> {: .solution}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="mzData" renaming=false %}
 >
-> > ### {% icon solution %} 7 - (Optionnal) XCMS step : *integrating areas of missing peaks*
-> >
-> > This last step can be run after grouping your peaks and don't need the retention time correction. It is not an obligation to process it but when you have low peaks it can be helpfull to obtain something around them. Run **xcms fillChromPeaks (fillPeaks)** {% icon tool%} to identify, for each sample, peak groups where that sample is not represented. 
-> >  - **Input** : 
-> >    - your Rdata file `xset.merged.groupChromPeaks.*.RData`
-> >  - **Output** : 
-> >    - a new RData file named `xset.merged.groupChromPeaks.*.fillChromPeaks.RData`
-> {: .solution}
-> > ### {% icon comment %} Important : Be careful of the file format
-> >
-> > During each step of pre-processing, your file has its format changed and can have also its name changed.
-> > To be able to continue to MSMS processing, you need to have a RData object wich is **merged and grouped** (step 4 and 5) at least. It means that you should have a file named `xset.merged.groupChromPeaks.RData` (and maybe with some step more in it).
-> {: .warning} 
-{: .details}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" %}
+>
+> 3. Make sure your data is in a **collection**. Make sure it is named `mzData`
+>    - If you forgot to select the collection option during import, you can create the collection now:
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+> 4. Import the following 2 files from Zenodo or from a shared data library (ask your instructor). 
+Beware: these files must not be in a collection. 
+>
+>    ```
+>    https://zenodo.org/record/3631074/files/sampleMetadata.tsv
+>    https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+>
+{: .hands_on}
+
+## 2 - First steps using XCMS
+
+> ### {% icon hands_on %} Hands-on: First steps using a standard XCMS workflow
+>
+> 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"File(s) from your history containing your chromatograms"*: `mzData` (Input dataset collection)
+>
+> 2. {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"RData file"*: `mzData.raw.RData` (output of the **MSnbase readMSData** {% icon tool %} job)
+>    - *"Extraction method for peaks detection"*: `MatchedFilter - peak detection in chromatographic space`
+>        - *"Full width at half maximum of matched filtration gaussian model peak"*: `5`
+>        - *"Step size to use for profile generation"*: `0.5`
+>        - In *"Advanced Options"*:
+>            - *"Maximum number of peaks that are expected/will be identified per slice"*: `500`
+>            - *"Signal to Noise ratio cutoff"*: `2`
+>            - *"Minimum difference in m/z for peaks with overlapping Retention Times"*: `0.5`
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > With GC-MS data in profile mode, we need to use the *MatchedFilter* algorithm instead of the *Centwave* one used in the LC-MS tutorial.
+>    {: .comment}
+>
+> 3. {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"RData file"*: `mzData.raw.xset.RData` (output of the **xcms findChromPeaks (xcmsSet)** {% icon tool %} job)
+>    - {% icon param-file %} *"Sample metadata file "*: `sampleMetadata.tsv` (One of the uploaded files from Zenodo)
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > To merge your data, you need to **input a sampleMetadata file** containing filenames and their metadata informations like their class for example.
+If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. 
+You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}. 
+Here is an example of the minimum expectations about a sampleMetadata file (**important**: don't write the format of the file, just their names):
+>    > {: .text-justify}
+>    > 
+>    > | sample_name |  class  | 
+>    > |:-----------:|:-------:|
+>    > |    file1    |   man   |
+>    > |-------------+---------|
+>    > |    file2    |  woman  |
+>    > |-------------+---------|
+>    > |    file3    |   man   |
+>    > 
+>    {: .comment}
+>
+{: .hands_on}
+
+The output from **xcms findChromPeaks Merger** {% icon tool %} is a *.RData* file that is mandatory to proceed with the end of the extraction process.
+There are two available options: 
+- carrying on using the standard XCMS workflow similarly to the one used in the LC-MS tutorial
+- using the metaMS strategy specifically designed for GC-MS data
+The two options are illustrated in this tutorial. 
+
+# Carrying on using the standard XCMS workflow (option 1)
+
+This option follows the standard LC-MS workflow to obtain in the end a dataMatrix file and its corresponding variableMetadata file. 
+
+> ### {% icon hands_on %} Hands-on: Example of end of extraction when using the standard XCMS workflow
+>
+> 1. {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"RData file"*: `xset.merged.RData` (output of the **xcms findChromPeaks Merger** {% icon tool %} job)
+>    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
+>        - *"Bandwidth"*: `10.0`
+>        - *"Width of overlapping m/z slices"*: `0.05`
+>
+> 2. {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"RData file"*: `xset.merged.groupChromPeaks.RData` (output of the **xcms groupChromPeaks (group)** {% icon tool %} job)
+>    - In *"Peak List"*:
+>        - *"Convert retention time (seconds) into minutes"*: `Yes`
+>        - *"Number of decimal places for retention time values reported in ions' identifiers."*: `2`
+>        - *"Reported intensity values"*: `maxo`
+>
+>
+{: .hands_on}
+
+The outputs of this strategy are similar to the ones discribed in the LC-MS tutotial mentioned previously. 
+
+> ### {% icon comment %} Important : Be careful of the file format
+>
+> During each step of pre-processing, your dataset has its format changed and can have also its name changed.
+> To be able to continue to MSMS processing, you need to have a RData object wich is **merged and grouped** (from **xcms findChromPeaks Merger** {% icon tool %} and **xcms groupChromPeaks (group)** {% icon tool %}) at least. 
+It means that you should have a file named `xset.merged.groupChromPeaks.RData` (and maybe with some step more in it).
+{: .comment} 
 
 
-# Stopover : Verify your datas after the XCMS pre-processing
+# Stopover : Verify your data after the XCMS pre-processing
 
-When you have process **all or only needed** steps described before, you can continue with the MS/MS processing part with **msPurity** package. Don't forget to always check your files format ! For the next step you need to have this file `xset.merged.groupChromPeaks.*.RData` where * is the name of **optionnal** steps you could do during the pre-processing. For our example, your file should be named `xset.merged.groupchromPeaks.RData`. 
+When you have processed **all or only needed** steps described before, you can continue with the MS/MS processing part with **msPurity** package. 
+Don't forget to always check your files format! For the next step you need to have this file `xset.merged.groupChromPeaks.*.RData` where * is the name of **optionnal** steps you could do during the pre-processing. 
+For our example, your file should be named `xset.merged.groupchromPeaks.RData`. 
 {: .text-justify}
 
 > ### {% icon comment %} Comment
@@ -306,7 +269,7 @@ Before the next step with msPurity package on MS/MS datas, here are some questio
 {: .question}
 
 
-# Processing with metaMS part
+# Processing with metaMS part (option 2)
 
 **metaMS** is a R package for MS-based metabolomics data. It can do basic peak picking and grouping using functions from **XCMS** and **CAMERA** packages. The main output of **metaMS** is a table of feature intensities in all samples which can be analyzed with multivariate methods immediately. The package also offers the possibility to create in-house databases of mass spectra (including retention information) of pure chemical compounds. These databases can then be used for annotation purposes. The most important functions of this package are *runGC* and *runLC* (and each one to create databases *createSTDdbGC* and *createSTDdbLC*).
 {: .text-justify}
