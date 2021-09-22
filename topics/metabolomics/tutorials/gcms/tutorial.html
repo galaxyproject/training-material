@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Mass spectrometry : GC-MS analysis with metaMS package</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material to analyse Mass spectrometry data in Ga..." />
+        <meta property="og:title" content="Galaxy Training: Mass spectrometry : GC-MS analysis with metaMS package" />
+        <meta property="og:description" content="Training material to analyse Mass spectrometry data in Ga..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/metabolomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Metabolomics
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/metabolomics/faqs/" title="Check our FAQs for the Metabolomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/metabolomics/tutorials/gcms/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/metabolomics/tutorials/gcms/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metabolomics/tutorials/gcms/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metabolomics/tutorials/gcms/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metabolomics/tutorials/gcms/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metabolomics/tutorials/gcms/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metabolomics/tutorials/gcms/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Fgcms%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/metabolomics/tutorials/gcms/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/metabolomics/tutorials/gcms/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/metabolomics/tutorials/gcms/tutorial.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2021-09-22 11:20:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Mass spectrometry : GC-MS analysis with metaMS package",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metabolomics",
+    "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+    "url": "https://training.galaxyproject.org//training-material/topics/metabolomics/"
+  },
+  "courseCode": "metabolomics / gcms / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Mass spectrometry : GC-MS analysis with metaMS package' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/metabolomics/tutorials/gcms/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - What are the main steps of GC-MS datas processing for metabolomic analysis ?\n - How te be able to annotate the maximum of unknowns using Galaxy ?\n\n\\nThe objectives are:\n - To be sure you have already comprehend the diversity of MS pre-processing analysis.\n - To learn the principal functions of metaMS package through Galaxy.\n - To evaluate the potential of this new GC-MS workflow for GC-MS metabolomic analysis.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/metabolomics/tutorials/lcms/tutorial.html",
+      "name": "Mass spectrometry: LC-MS analysis",
+      "description": "Hands-on for 'Mass spectrometry: LC-MS analysis' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Julien Saint-Vanne"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Julien Saint-Vanne"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metabolomics",
+      "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+      "url": "https://training.galaxyproject.org//training-material/topics/metabolomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3172",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3172",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3172"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+</script>
+
+<section class="tutorial topic-metabolomics">
+    <h1 data-toc-skip>Mass spectrometry : GC-MS analysis with metaMS package</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <div class="contributors-line">Authors: 
+
+ <a href="/training-material/hall-of-fame/jsaintvanne/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jsaintvanne" alt="Avatar">Julien Saint-Vanne</a>
+
+</div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the main steps of GC-MS datas processing for metabolomic analysis ?</p>
+</li>
+        
+        <li><p>How te be able to annotate the maximum of unknowns using Galaxy ?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>To be sure you have already comprehend the diversity of MS pre-processing analysis.</p>
+</li>
+        
+        <li><p>To learn the principal functions of metaMS package through Galaxy.</p>
+</li>
+        
+        <li><p>To evaluate the potential of this new GC-MS workflow for GC-MS metabolomic analysis.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/metabolomics">Metabolomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Mass spectrometry: LC-MS analysis:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/metabolomics/tutorials/lcms/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/metabolomics/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/metabolomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 22, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>A lot of packages are available for the analysis of GC-MS or LC-MS data. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alte<span class="notranslate">rna</span>tives such as <strong>XCMS</strong> are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like <strong>XCMS</strong>, several other packages have been developed to use the functionality of <strong>XCMS</strong> for optimal performance in a particular context. Package <strong>metaMS</strong> does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals <strong>metaMS</strong> was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments.</p>
+
+<p>During this tutorial, we will learn how to process easily a test dataset from raw files to the annotation using W4M <span class="notranslate">Galaxy</span>. Datas are from <a class="citation" href="#Dittami2012">Dittami <i>et al.</i> 2012</a> and have been used as test dataset for the development of the <span class="notranslate">Galaxy</span> wrappers.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#first-steps-of-pre-processing-using-a-standard-xcms-workflow-mandatory" id="markdown-toc-first-steps-of-pre-processing-using-a-standard-xcms-workflow-mandatory">First steps of pre-processing using a standard XCMS <span class="notranslate">workflow</span> (mandatory)</a>    <ol>
+      <li><a href="#1---import-the-data-into-galaxy" id="markdown-toc-1---import-the-data-into-galaxy">1 - Import the data into <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#2---first-steps-using-xcms" id="markdown-toc-2---first-steps-using-xcms">2 - First steps using XCMS</a></li>
+    </ol>
+  </li>
+  <li><a href="#carrying-on-using-the-standard-xcms-workflow-option-1" id="markdown-toc-carrying-on-using-the-standard-xcms-workflow-option-1">Carrying on using the standard XCMS <span class="notranslate">workflow</span> (option 1)</a></li>
+  <li><a href="#stopover--verify-your-data-after-the-xcms-pre-processing" id="markdown-toc-stopover--verify-your-data-after-the-xcms-pre-processing">Stopover : Verify your data after the XCMS pre-processing</a></li>
+  <li><a href="#processing-with-metams-part-option-2" id="markdown-toc-processing-with-metams-part-option-2">Processing with metaMS part (option 2)</a>    <ol>
+      <li><a href="#peak-picking" id="markdown-toc-peak-picking">Peak picking</a></li>
+      <li><a href="#definition-of-pseudo-spectra" id="markdown-toc-definition-of-pseudo-spectra">Definition of pseudo-spectra</a></li>
+      <li><a href="#annotation" id="markdown-toc-annotation">Annotation</a></li>
+      <li><a href="#unknowns-research" id="markdown-toc-unknowns-research">Unknowns research</a></li>
+      <li><a href="#outputs-and-results" id="markdown-toc-outputs-and-results">Outputs and results</a></li>
+    </ol>
+  </li>
+  <li><a href="#take-a-look-at-your-results-after-metams-processing" id="markdown-toc-take-a-look-at-your-results-after-metams-processing">Take a look at your results after metaMS processing</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="first-steps-of-pre-processing-using-a-standard-xcms-workflow-mandatory">First steps of pre-processing using a standard XCMS <span class="notranslate">workflow</span> (mandatory)</h1>
+
+<p class="text-justify">The first step of the <span class="notranslate">workflow</span> is the pre-processing of the raw data with <strong>XCMS</strong> (<a class="citation" href="#Smith2006">Smith <i>et al.</i> 2006</a>).</p>
+
+<p class="text-justify"><strong>XCMS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a free and open-source software dedicated to pre-processing any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is used worldwide by a huge community of specialists in metabolomics.</p>
+
+<p class="text-justify">This software is based on different algorithms that have been published, and is provided and maintained using R software.</p>
+
+<p class="text-justify"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> function, prior to <strong>XCMS</strong>, is able to read files with open format as <code class="language-plaintext highlighter-rouge">mzXML</code>, <code class="language-plaintext highlighter-rouge">mzML</code>, <code class="language-plaintext highlighter-rouge">mzData</code> and <code class="language-plaintext highlighter-rouge">netCDF</code>, which are independent of the constructors’ formats. The <strong>XCMS</strong> package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes, adducts and fragments (using the R package CAMERA, <a class="citation" href="#CAMERA">Carsten Kuhl 2017</a>). This set of functions gives modularity, and thus is particularly well adapted to define workflows, one of the key points of <span class="notranslate">Galaxy</span>.</p>
+
+<p class="text-justify">First step of this tutorial is to download the data test. As describe in the introduction, we will use datas from <a class="citation" href="#Dittami2012">Dittami <i>et al.</i> 2012</a>. We will only process on a subset of their data. 
+So, you can <strong>import your files directly in <span class="notranslate">Galaxy</span> from Zenodo (see hands-on below)</strong> or download files into your computer using the following link then upload them on <span class="notranslate">Galaxy</span>:</p>
+
+<p><a href="https://doi.org/10.5281/zenodo.3631074"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3631074.svg" alt="DOI" loading="lazy" /></a></p>
+
+<p class="text-justify">Then, to be able to pre-process our GC-MS data, we need to <strong>start with the peakpicking of MS data</strong>. 
+One <span class="notranslate">Galaxy</span> Training material already explains how to act with MS data. We encourage you to <strong>follow this link and complete the corresponding tutorial</strong>: <a href="https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html">Mass spectrometry: LC-MS preprocessing with XCMS</a>. 
+For GC-MS analysis you <strong>don’t really need to follow all of this previous tutorial</strong> but for a better understanding of your data, it is recommanded to try it with their test dataset.
+Concerning the current GC-MS tutorial, you <strong>just have to compute the following steps and specific parameters</strong> described in the hands-on part below (please follow parameters values to have the same results during the training).</p>
+
+<h2 id="1---import-the-data-into-galaxy">1 - Import the data into <span class="notranslate">Galaxy</span></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+    </li>
+    <li>Import the following 6 <code class="language-plaintext highlighter-rouge">mzData</code> files into a collection named <code class="language-plaintext highlighter-rouge">mzData</code>
+      <ul>
+        <li>Option 1: from a shared data library (ask your instructor)</li>
+        <li>Option 2: from Zenodo using the URLs given below</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3631074/files/alg11.mzData
+https://zenodo.org/record/3631074/files/alg2.mzData
+https://zenodo.org/record/3631074/files/alg3.mzData
+https://zenodo.org/record/3631074/files/alg7.mzData
+https://zenodo.org/record/3631074/files/alg8.mzData
+https://zenodo.org/record/3631074/files/alg9.mzData
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>    <p>Click on <strong>Collection</strong> on the top</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p>Click on <strong>Build</strong> when available</p>  </li>  <li>    <p>Enter a name for the collection</p>    <ul>      <li>mzData</li>    </ul>  </li>  <li>Click on <strong>Create list</strong> (and wait a bit)</li></ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+    <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="language-plaintext highlighter-rouge">mzData</code>
+      <ul>
+        <li>If you forgot to select the collection option during import, you can create the collection now:</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Import the following 2 files from Zenodo or from a shared data library (ask your instructor). 
+Beware: these files must not be in a collection.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3631074/files/sampleMetadata.tsv
+https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="2---first-steps-using-xcms">2 - First steps using XCMS</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-first-steps-using-a-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: First steps using a standard XCMS <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File(s) from your history containing your chromatograms”</em>: <code class="language-plaintext highlighter-rouge">mzData</code> (Input dataset collection)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0"><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzData.raw.RData</code> (output of the <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Extraction method for peaks detection”</em>: <code class="language-plaintext highlighter-rouge">MatchedFilter - peak detection in chromatographic space</code>
+          <ul>
+            <li><em>“Full width at half maximum of matched filtration gaussian model peak”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+            <li><em>“Step size to use for profile generation”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+            <li>In <em>“Advanced Options”</em>:
+              <ul>
+                <li><em>“Maximum number of peaks that are expected/will be identified per slice”</em>: <code class="language-plaintext highlighter-rouge">500</code></li>
+                <li><em>“Signal to Noise ratio cutoff”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+                <li><em>“Minimum difference in m/z for peaks with overlapping Retention Times”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>With GC-MS data in profile mode, we need to use the <em>MatchedFilter</em> algorithm instead of the <em>Centwave</em> one used in the LC-MS tutorial.</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0"><strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzData.raw.xset.RData</code> (output of the <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file “</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata.tsv</code> (One of the uploaded files from Zenodo)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p class="text-justify">To merge your data, you need to <strong>input a sampleMetadata file</strong> containing filenames and their metadata informations like their class for example.
+If you don’t add a sampleMetadata file, the <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool will <strong>group all your files together</strong>. 
+You can also <strong>create your sampleMetadata file</strong> with W4M <span class="notranslate">Galaxy</span> tool <strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters: <em>“RData file”</em> outputed from <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. 
+Here is an example of the minimum expectations about a sampleMetadata file (<strong>important</strong>: don’t write the format of the file, just their names):</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: center">sample_name</th>
+              <th style="text-align: center">class</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: center">file1</td>
+              <td style="text-align: center">man</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td style="text-align: center">file2</td>
+              <td style="text-align: center">woman</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td style="text-align: center">file3</td>
+              <td style="text-align: center">man</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output from <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a <em>.RData</em> file that is mandatory to proceed with the end of the extraction process.
+There are two available options:</p>
+<ul>
+  <li>carrying on using the standard XCMS <span class="notranslate">workflow</span> similarly to the one used in the LC-MS tutorial</li>
+  <li>using the metaMS strategy specifically designed for GC-MS data
+The two options are illustrated in this tutorial.</li>
+</ul>
+
+<h1 id="carrying-on-using-the-standard-xcms-workflow-option-1">Carrying on using the standard XCMS <span class="notranslate">workflow</span> (option 1)</h1>
+
+<p>This option follows the standard LC-MS <span class="notranslate">workflow</span> to obtain in the end a dataMatrix file and its corresponding variableMetadata file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-example-of-end-of-extraction-when-using-the-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Example of end of extraction when using the standard XCMS <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0"><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.RData</code> (output of the <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
+          <ul>
+            <li><em>“Bandwidth”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+            <li><em>“Width of overlapping m/z slices”</em>: <code class="language-plaintext highlighter-rouge">0.05</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0"><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.RData</code> (output of the <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li>In <em>“Peak List”</em>:
+          <ul>
+            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><em>“Reported intensity values”</em>: <code class="language-plaintext highlighter-rouge">maxo</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The outputs of this strategy are similar to the ones discribed in the LC-MS tutotial mentioned previously.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-important--be-careful-of-the-file-format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Important : Be careful of the file format</h3>
+
+  <p>During each step of pre-processing, your dataset has its format changed and can have also its name changed.
+To be able to continue to MSMS processing, you need to have a RData object wich is <strong>merged and grouped</strong> (from <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) at least. 
+It means that you should have a file named <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.RData</code> (and maybe with some step more in it).</p>
+</blockquote>
+
+<h1 id="stopover--verify-your-data-after-the-xcms-pre-processing">Stopover : Verify your data after the XCMS pre-processing</h1>
+
+<p class="text-justify">When you have processed <strong>all or only needed</strong> steps described before, you can continue with the MS/MS processing part with <strong>msPurity</strong> package. 
+Don’t forget to always check your files format! For the next step you need to have this file <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.RData</code> where * is the name of <strong>optionnal</strong> steps you could do during the pre-processing. 
+For our example, your file should be named <code class="language-plaintext highlighter-rouge">xset.merged.groupchromPeaks.RData</code>.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p class="text-justify">The pre-processing part of this analysis can be <strong>quite time-consuming</strong>, and already corresponds to quite a few number of steps, depending of your analysis. We highly recommend, at this step of the MS/MS <span class="notranslate">workflow</span>, to split your analysis by beginning a new <span class="notranslate">Galaxy</span> history with <strong>only the files you need</strong> (final xset Rdata file and your data collection of mzML). This will help you in limiting selecting the wrong dataset in further analysis, and bring a little <strong>tidiness</strong> for future review of your MS/MS analysis process. You should also be able to make a better peakpicking in the future in the same history and it will not be polluated by MS/MS part of your process.</p>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-copy-dataset-to-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Copy dataset to a new history</h3>
+
+    <ol>
+      <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+      <li>Click on <strong>Copy Dataset</strong></li>
+      <li>Select the desired files</li>
+      <li>Give a relevant name to the “New history”</li>
+      <li>Click on the new history name in the green box that have just appear to switch to this history</li>
+    </ol>
+  </blockquote>
+
+  <p class="text-justify">To begin a new history with the files from your current history, you can <strong>use the functionality ‘copy dataset’</strong> and copy it into a new history (the option is hidden behind the notched wheel at the top right of the history).</p>
+
+  <p class="text-justify">You may have notice that the XCMS tools generate <strong>output names that contain the different XCMS steps you used</strong>, allowing easy traceability while browsing your history. Hence, we highly recommend you to rename it <strong>with something short</strong>, e.g. “xset”, “XCMSSetObject”, or anything not too long that you may find convenient.</p>
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+
+</blockquote>
+
+<p class="text-justify">Before the next step with msPurity package on MS/MS datas, here are some questions to be able to verify if your file is ready and if you have the same results as us. Please check these questions :</p>
+
+<blockquote class="question">
+  <h3 id="question-question-before-msms-steps"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question before MS/MS steps</h3>
+
+  <p><strong>1</strong> - What are the steps of XCMS you made before your final file ?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Here are the different steps made for our example :</p>
+    <ul>
+      <li><strong>(Not with XCMS)</strong> import your datas into <span class="notranslate">Galaxy</span> instance</li>
+      <li><strong>MSNbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to read our MS datas</li>
+      <li>XCMS peakpicking with <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</li>
+      <li>(Not with XCMS but necessary) merge my datas into one file with <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</li>
+      <li>XCMS grouping with <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</li>
+      <li><strong>(Not done)</strong> XCMS retention time correction, then grouping again with xcms adjustRtime (retcor) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</li>
+      <li>XCMS integration of missing peaks with <strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</li>
+    </ul>
+
+  </blockquote>
+  <p><br />
+ <strong>2</strong> - Concerning what we said before and the previous answer, what is the complete name of your final RData file ?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p class="text-justify">During each step of XCMS pre-processing, the name of the file which is processing is completed by the name of the step you were doing. So, finally your file should be name <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.fillChromPeaks.RData</code>. That because (as seen in previous answer) you ran a grouping and the integration after merged datas.</p>
+
+  </blockquote>
+  <p><br />
+<strong>3</strong> - What is the size (in MB) of your final RData file ?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p class="text-justify">To be able to see the size of a file in your history, you just have to select it. It will deploy informations about it and you can see the size of yours. For our example, the size of the final file is <strong>1.4 MB</strong>.</p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="processing-with-metams-part-option-2">Processing with metaMS part (option 2)</h1>
+
+<p class="text-justify"><strong>metaMS</strong> is a R package for MS-based metabolomics data. It can do basic peak picking and grouping using functions from <strong>XCMS</strong> and <strong>CAMERA</strong> packages. The main output of <strong>metaMS</strong> is a table of feature intensities in all samples which can be analyzed with multivariate methods immediately. The package also offers the possibility to create in-house databases of mass spectra (including retention information) of pure chemical compounds. These databases can then be used for annotation purposes. The most important functions of this package are <em>runGC</em> and <em>runLC</em> (and each one to create databases <em>createSTDdbGC</em> and <em>createSTDdbLC</em>).</p>
+<p>During this tutorial we are interested in GC-MS analysis, so we will use the <em>runGC</em> function of <strong>metaMS</strong> and described it in details to be able to understand this function. The standard <span class="notranslate">workflow</span> of <strong>metaMS</strong> for GC-MS data is the following :</p>
+
+<figure id="figure-1"><img src="../../images/tuto_gcms_workflow_metaMS.png" alt="Workflow metaMS" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">Workflow</span> of metaMS for GC datas</figcaption></figure>
+
+<p class="text-justify">The <em>runGC</em> function is implemented in <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</strong> in W4M <span class="notranslate">Galaxy</span>. It takes a vector of file names, corresponding to the samples, and a settings list as mandatory arguments. In addition, some extra arguments can be provided. In particular, a database of standards, as discussed later in the tutorial, can be provided for annotation purposes. This tool regroups all these steps that are described in the following parts to be able to understand all its functionalities and particularities. We will run the tool after we understand each of its steps because it is important to know what are the best parameters for our data and why each parameter is done.</p>
+
+<h2 id="peak-picking">Peak picking</h2>
+
+<p class="text-justify">The peak picking is performed by the usual <strong>XCMS</strong> functions. A function has been written in <strong>metaMS</strong> to allow the individual parameters to be passed to the function as a settings list. The result is that the whole of the <strong>XCMS</strong> functionality is available, simply by changing the values of some settings, or by adding fields.</p>
+<p class="text-justify">Whereas the package is not up-to-date since the new version of <strong>XCMS</strong> (3.x). This new version brought a lot of new objects and transformed the peak picking process. To have the last version of this process, <strong>metaMS</strong> authorized <strong>to start its function directly with the file containing all peak picking results</strong>.</p>
+<p class="text-justify">Due to this update, <strong>we have already processed the peak picking during the first part</strong> of this tutorial. So we can continue it with the file outputted from the peak picking part. This also allow us to make a good peak picking without the following step include in <strong>metaMS</strong> functions. So it takes less time of processing and we can verify our peaks with this cut between peak picking and the following steps of GC-MS analysis.</p>
+
+<h2 id="definition-of-pseudo-spectra">Definition of pseudo-spectra</h2>
+
+<p class="text-justify">Rather than a feature-based analysis with individual peaks, as is the case with <strong>XCMS</strong>, <strong>metaMS</strong> performs a pseudospectrum-based analysis. So, the basic entity is a set of m/z values showing a chromatographic peak at the same retention time.</p>
+
+<figure id="figure-2"><img src="../../images/tuto_gcms_pseudospectrum_example.png" alt="Pseudospectrum example" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Pseudospectrum example from `msp` file</figcaption></figure>
+
+<p class="text-justify">This choice is motivated by several considerations. First of all, <strong>in GC the amount of overlap is much less than in LC</strong> : peaks are much narrower. This means that even a one- or two-second difference in retention time can be enough to separate the corresponding mass spectra. Secondly, fragmentation patterns for many compounds are <strong>available in extensive libraries like the <a href="http://www.nist.gov/srd/nist1a.cfm" title="NIST library">NIST library</a></strong>. In addition, the spectra are somewhat easier to interpret since adducts, such as found in LC, are not present. The main advantage of pseudo-spectra, however, is that their use allows the results to be interpreted directly as relative concentrations of chemical compounds : <strong>a fingerprint in terms of chemical composition is obtained</strong>, rather than a fingerprint in terms of hard-to-interpret features. The pseudo-spectra are obtained by simply clustering on retention time, using the <em>runCAMERA</em> function, which for GC data calls <em>groupFWHM</em>. All the usual parameters for the <em>groupFWHM</em> function are included in W4M <span class="notranslate">Galaxy</span> <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</strong>. The most important parameter is <em>perfwhm</em>, which determines the maximal retention time difference of features in one pseudospectrum.</p>
+
+<p class="text-justify">The final step is to convert the <strong>CAMERA</strong> objects into easily handled lists, which are basically the R equivalent of the often-used <code class="language-plaintext highlighter-rouge">msp</code> format from the AMDIS software (<a class="citation" href="#Stein1999">Stein 1999</a>). The <code class="language-plaintext highlighter-rouge">msp</code>  file is a nested list, with one entry for each sample, and each sample represented by a number of fields. The pseudo-spectra are three-column matrices, containing m/z, intensity and retention time information, respectively. They can be draw with the <em>plotPseudoSpectrum</em> function of <strong>metaMS</strong> package easily (Figure 2).</p>
+
+<h2 id="annotation">Annotation</h2>
+
+<p class="text-justify">Once we have identified our pseudo-spectra, we can start the annotation process. This is done by <strong>comparing every pseudospectrum to a database of spectra</strong>. As a similarity measure, we use the weighted dot product as it is fast, simple, and gives good results (<a class="citation" href="#Stein1994">Stein and Scott 1994</a>). The first step in the comparison is based on retention, since a comparison of either retention time or retention index is much faster than a spectral comparison. The corresponding function is <em>matchSamples2DB</em>. Since the weighted dot product uses scaled mass spectra, the scaling of the database is done once, and then used in all comparisons.</p>
+
+<figure id="figure-3"><img src="../../images/tuto_gcms_match_spec.png" alt="Match spectra" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Best match between an experimental pseudospectrum (red) and a database entry (blue)</figcaption></figure>
+
+<p class="text-justify">This <em>matchSamples2DB</em> function returns a table where all patterns that have a match with a DB entry are shown in the first column, and the DB entry itself in the second column. If for a particular experimental pattern more than one match is found, the alte<span class="notranslate">rna</span>tives (with a lower match factor) are shown in the last column. To see the match for a particular pattern, one can use the function <em>matchExpSpec</em>, returning matchfactors (numbers between 0 and 1, where the latter means a perfect match) for all entries in the database (if the plotIt argument is TRUE, the best match is shown – see Figure 2). Samples may contain compounds that are not of any interest, such as plasticizers, inte<span class="notranslate">rna</span>l standards, column material etc…. These can be filtered out before doing an annotation : <strong>metaMS</strong> allows certain categories of database entries (defined in slot <em>matchIrrelevants</em> of the settings object) to be removed before further annotation. If the spectra of these compounds are very specific (and they often are), the retention criterion may be bypassed by setting the maximal retention time difference to very high values, which leads to the removal of such spectra wherever they occur in the chromatogram.</p>
+
+<h2 id="unknowns-research">Unknowns research</h2>
+
+<p>The most important aspect of untargeted metabolomics is the definition of unknowns, patterns that occur repeatedly in several samples, but for which no annotation has been found. In <strong>metaMS</strong> these unknowns are found by comparing all patterns within a certain retention time (or retention index) difference on their spectral characteristics. The same match function is used, but the threshold may be different from the threshold used to match with the database of standards. Likewise, the maximum retention time(index)difference may be different, too.</p>
+
+<p class="text-justify">In defining unknowns we have so far used settings that are more strict than when compared to a database : since all samples are typically measured in one single run, expected retention time differences are rather small. In addition, one would expect reproducible spectra for a single compound. A true unknown, or at least an interesting one, is also present in a significant fraction of the samples. All these parameters are gathered in thebetweenSampleselement of the settingsobject .Since the matching is done using scaled patterns, we need to create a scaled version of the experimental pseudo-spectra first.</p>
+
+<p class="text-justify">For large numbers of samples, this process can take quite some time (it scales quadratically), especiallyif the allowed difference in retention time is large. The result now is a list of two elements : the first is the annotation table that we also saw after the comparison with the database, and the second is a list of pseudo-spectra corresponding to unknowns. In the annotation table, negative indices correspond to the pseudo-spectra in this list.</p>
+
+<h2 id="outputs-and-results">Outputs and results</h2>
+
+<p class="text-justify">At this stage, all elements are complete : we have the list of pseudo-spectra with an annotation, either as a chemical standard from the database, or an unknown occurring in a sizeable fraction of the injections. The only things left to do is to calculate relative intensities for the pseudo-spectra, and to put the results in an easy-to-use table. This table consists of two parts. The first part is the information on the “features”, which here are the pseudo-spectra. The second part of the table contains the intensities of these features in the individual injections.</p>
+
+<figure id="figure-4"><img src="../../images/tuto_gcms_finale_table.png" alt="Match spectra" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Final table with unknowns and compounds found during **metaMS** processus</figcaption></figure>
+
+<p>The first five lines are the standards, and the next ones are the unknowns that are identified by the pipeline.  In the manual interpretation of this kind of data, the intensities of one or two “highly specific” features are often used to achieve relative quantitation. In an automatic pipeline, this is a risky strategy: not only can the intensity of a peak vary quite dramatically (relative standard deviations of up to 30% are assumed acceptable in GC-MS, e.g. when SPME is applied), but these errors are all the more pronounced in high-intensity peaks (hence the common use of a relative standard deviation).</p>
+
+<p class="text-justify">In addition, one is ignoring the information in the other peaks of the pseudospectrum. In <strong>metaMS</strong>, pseudospectrum intensity is expressed as a multiple of the corresponding reference pattern (either a database pattern or an unknown), where the intensity ratio is determined using robust regression to avoid one deviating feature to influence the results too much (<a class="citation" href="#Wehrens2014">Wehrens <i>et al.</i> 2014</a>). First, we define an object containing all relevant pseudo-spectra, and next the intensities are generated.</p>
+
+<p class="text-justify">In both cases, the result is a list containing a set of patterns corresponding with the compounds that have been found, either annotated or unknown, the relative intensities of these patterns in the individual annotations, and possibly the xcmsSetobject for further inspection. In practice, the <em>runGC</em> function is all that users need to use.</p>
+
+<p class="text-justify">That file can be used for database search online (as Golm (<a class="citation" href="#Kopka2005">J. <i>et al.</i> 2005</a>) and MassBank (<a class="citation" href="#Horai2010">Hisayuki <i>et al.</i> 2010</a>)) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on--metamsrungc-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on : metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></h3>
+
+  <p>We now know each step of this <em>runGC</em> function. So, please open the <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> too</strong> to run it. You should enter the following parameters for our tutorial :</p>
+  <ul>
+    <li><strong>Rdata from xcms and merged</strong> : here you have to select your file from <strong>XCMS</strong> where you made the peak picking, grouping and all the pre-processing. It should be named <code class="language-plaintext highlighter-rouge">xset.merged.groupdChromPeaks.RData</code>.</li>
+    <li><strong>Settings</strong> : you can keep it at <em>user_default</em> but to see all possible parameters please set it at <code class="language-plaintext highlighter-rouge">use_defnied</code>.
+      <ul>
+        <li><strong>RT range option</strong> : it ables to select a region of retention time. If you select to <em>show</em> it, you have to enter the window in minutes, separate by a coma (for example 5,20 to have results between 5 minutes and 20 minutes). For our tutorial, we <code class="language-plaintext highlighter-rouge">keep it to hide</code>.</li>
+        <li><strong>RT_Diff</strong> : it is the allowed retention time difference in minutes between the same compound/unknown in different sample. For our tutorial, <code class="language-plaintext highlighter-rouge">keep it at 0.05</code> to have low differences between unknowns’ retention times.</li>
+        <li><strong>Min_Features</strong> : this parameter is used during the comparison with database or unknowns. It corresponds to the minimal number of features required to have a valid pseudospectrum. For our tutorial, please <code class="language-plaintext highlighter-rouge">keep it to 5</code> to have really good compounds.</li>
+        <li><strong>similarity_threshold</strong> : this parameter is also used for comparison. It is the minimum similarity allowed between peaks mass spectra to be considers as equal. For our tutorial, please <code class="language-plaintext highlighter-rouge">keep it to 0.7</code>.</li>
+        <li><strong>min.class.fract</strong> : it corresponds to the minimal fraction of samples in which a pseudospectrum is present before it is regarded as an unknown. For the tutorial, please <code class="language-plaintext highlighter-rouge">keep it to 0.5</code>.</li>
+        <li><strong>min.class.size</strong> : it corresponds to the minimum number of samples in which a pseudospectrum should be present before it is regarded as an unknown. For our tutorial, please <code class="language-plaintext highlighter-rouge">set it to 2</code> because we have classes with only 2 samples.</li>
+      </ul>
+    </li>
+    <li><strong>Use Personnal DataBase option</strong> : you can compare your datas to a personnal database. If you want to do it start to choose <code class="language-plaintext highlighter-rouge">show</code> in this parameter. Then you will be able to select your file. If not, keep it to <code class="language-plaintext highlighter-rouge">hide</code> and you will only have unknowns as results.
+      <ul>
+        <li><strong>DB file</strong> : this parameter will appear if you choose to show it. You just have to <code class="language-plaintext highlighter-rouge">select your database in your file</code> to add this here. Be careful, this database has to respect some rules (please look at <em>?????????????????? part</em>).</li>
+      </ul>
+    </li>
+    <li><strong>Use RI option</strong> : choose if you want to use the RI for standards.
+      <ul>
+        <li><strong>RI file</strong> : enter here <code class="language-plaintext highlighter-rouge">your RI file</code> which have to contains two columns : retention time and retention indices.</li>
+      </ul>
+    </li>
+    <li><strong>Use RI as filter</strong> : just to know if you want to use RI parameter as a filter.
+      <ul>
+        <li><strong>RIshift</strong> : if you want to use RI as filter, please precise here the RI shift. For our tutorial <code class="language-plaintext highlighter-rouge">keep the previous parameter to FALSE</code>.</li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<h1 id="take-a-look-at-your-results-after-metams-processing">Take a look at your results after metaMS processing</h1>
+
+<p class="text-justify">We choose to separate our first W4M <span class="notranslate">Galaxy</span> tool into 2 parts: the processing of GC-MS data (<strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></strong>) and the plotting results of these data (<strong>metaMS.plot <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></strong>). So we now have the first part describes just before and the second part we will describe just after. This part allows users to see the TIC (Total Ion Chromatogram), BPC (Base Peak Chromatogram), and also all EICs (Extracted Ion Chromatogram) you want, from our previous result outputted from <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</strong>.</p>
+
+<p class="text-justify">If you separated your samples into different classes, this tool can constructs TICs and BPCs one class against one class, in a <code class="language-plaintext highlighter-rouge">pdf</code> file (Figure 5) :</p>
+
+<figure id="figure-5"><img src="../../images/tuto_gcms_tic.png" alt="TIC" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> TIC comparing 2 classes</figcaption></figure>
+
+<p class="text-justify">Concerning EICs, it is possible to choose for which compound you want to draw an EIC when you run the W4M <span class="notranslate">Galaxy</span> tool. According to your choice, you will obtain EICs for one compound in each sample you enter in the previous <strong>metaMS</strong> part.</p>
+
+<figure id="figure-6"><img src="../../images/tuto_gcms_eic.png" alt="TIC" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of EIC of the 'Unknown 1' in sample 'alg2'</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on--metamsplot-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on : metaMS.plot <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></h3>
+
+  <p>This tool is very easy to run. It is an obligation to process <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></strong> before this one. After that, you just have to choose if you want or not to draw your TIC, BPC or EIC :</p>
+  <ul>
+    <li><strong>Rdata from new_metaMS_runGC</strong> : the file you obtained with the <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></strong> tool. It should be named <code class="language-plaintext highlighter-rouge">runGC.RData</code>.</li>
+    <li><strong>Do you want to process for TIC(s) ?</strong> : if you select “yes” you will obtain the <code class="language-plaintext highlighter-rouge">pdf</code> file containing each TIC from each class against each others.</li>
+    <li><strong>Do you want to process for BPC(s) ?</strong> : if you select “yes” you will obtain the <code class="language-plaintext highlighter-rouge">pdf</code> file containing each BPC from each class against each others.</li>
+    <li><strong>Do you want to process for EIC(s) ?</strong> : if you select “yes” you will have to choose which compound(s) and unknown(s) you want to obtain its EIC.
+      <ul>
+        <li><strong>EIC_Unknown</strong> : here please choose which compound(s) or unknown(s) you want to obtain according to the <code class="language-plaintext highlighter-rouge">peaktable.tsv</code> file. For out tutorial it can be interesting to have a look at <strong>all</strong> the EICs. So put the <code class="language-plaintext highlighter-rouge">value to 0</code>.</li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Have a good file containing all your peaks during the first stopover</p>
+</li>
+                        
+                        <li><p>Find all your unknowns in your datas</p>
+</li>
+                        
+                        <li><p>Find your stanards if you have some</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/metabolomics/faqs/">FAQ page for the Metabolomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Stein1994">Stein, S. E., and D. R. Scott, 1994 <b>Optimization and testing of mass spectral library search algorithms for compound identification</b>. Journal of the American Society for Mass Spectrometry 5: 859–866.</span>
+    
+    
+    <a href="https://doi.org/10.1016/1044-0305(94)87009-8">10.1016/1044-0305(94)87009-8</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Stein1999">Stein, S. E., 1999 <b>An integrated method for spectrum extraction and compound identification from gas chromatography/mass spectrometry data</b>. Journal of the American Society for Mass Spectrometry 10: 770–781.</span>
+    
+    
+    <a href="https://doi.org/10.1016/S1044-0305(99)00047-1">10.1016/S1044-0305(99)00047-1</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Kopka2005">J., K., S. N., K. S., B. C., U. B. <i>et al.</i>, 2005 <b>GMD@CSB.DB: the Golm Metabolome Database</b>. Bioinformatics 21: 1635–1638.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/bti236">10.1093/bioinformatics/bti236</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="http://gmd.mpimp-golm.mpg.de/">http://gmd.mpimp-golm.mpg.de/</a>
+      
+    
+
+</li>
+<li><span id="Smith2006">Smith, C. A., E. J. Want, G. O’Maille, R. Abagyan, and G. Siuzdak, 2006 <b>XCMS:  Processing Mass Spectrometry Data for Metabolite Profiling Using Nonlinear Peak Alignment,  Matching,  and Identification</b>. Analytical Chemistry 78: 779–787.</span>
+    
+    
+    <a href="https://doi.org/10.1021/ac051437y">10.1021/ac051437y</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Horai2010">Hisayuki, H., A. Masanori, K. Shigehiko, N. Yoshito, I. Tasuku <i>et al.</i>, 2010 <b>MassBank: a public repository for sharing mass spectral data for life sciences</b>. Journal of Mass Spectrometry 45: 703–714.</span>
+    
+    
+    <a href="https://doi.org/10.1002/jms.1777">10.1002/jms.1777</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://massbank.eu/MassBank/Search">https://massbank.eu/MassBank/Search</a>
+      
+    
+
+</li>
+<li><span id="Dittami2012">Dittami, S. M., A. Gravot, S. Goulitquer, S. Rousvoal, A. F. Peters <i>et al.</i>, 2012 <b>Towards deciphering dynamic changes and evolutionarymechanisms involved in the adaptation to low salinities inEctocarpus(brown algae)</b>. The Plant Journal 71: 366–377.</span>
+    
+    
+    <a href="https://doi.org/10.1111/j.1365-313X.2012.04982.x">10.1111/j.1365-313X.2012.04982.x</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Wehrens2014">Wehrens, R., G. Weingart, and F. Mattivi, 2014 <b>metaMS: An open-source pipeline for GC-MS-based untargeted metabolomics</b>. Journal of Chromatography B 966: 109–116.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.jchromb.2014.02.051">10.1016/j.jchromb.2014.02.051</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="CAMERA">Carsten Kuhl, R. T., 2017 <b>CAMERA</b>.</span>
+    
+    
+    <a href="https://doi.org/10.18129/b9.bioc.camera">10.18129/b9.bioc.camera</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://bioconductor.org/packages/CAMERA">https://bioconductor.org/packages/CAMERA</a>
+      
+    
+
+</li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Mass spectrometry : GC-MS analysis with metaMS package (Metabolomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Julien Saint-Vanne, 2021 <b>Mass spectrometry : GC-MS analysis with metaMS package (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/gcms/tutorial.html">https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/gcms/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{metabolomics-gcms,
+author = "Julien Saint-Vanne",
+title = "Mass spectrometry : GC-MS analysis with metaMS package (Galaxy Training Materials)",
+year = "2021",
+month = "09",
+day = "22"
+url = "\url{https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/gcms/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
