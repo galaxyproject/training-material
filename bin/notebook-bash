@@ -1,6 +1,0 @@
-#!/bin/bash
-notedown --match=bash "$1" -o "$1".ipynb
-sed -i 's/"%%bash\\n",//g' "$1".ipynb
-t=$(mktemp)
-jq '.metadata = {"kernelspec":{"display_name":"Bash","language":"bash","name":"bash"},"language_info":{"codemirror_mode":"shell","file_extension":".sh","mimetype":"text/x-sh","name":"bash"}}' < "$1".ipynb > $t
-mv $t "$1".ipynb
