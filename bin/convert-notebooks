@@ -1,5 +1,0 @@
-#!/bin/bash
-for tutorial in $(ruby ./bin/filter-resource-metadata notebook $(find topics -name 'tutorial*.md')); do
-	language="$(ruby bin/extract-frontmatter.rb "${tutorial}" | jq '.notebook_language)"
-	notedown --match=$language '{}' -o '{}'.ipynb
-done
