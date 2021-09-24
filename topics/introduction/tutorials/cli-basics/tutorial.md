@@ -151,7 +151,7 @@ Let's get started.
 When the shell is first opened, you are presented with a **prompt**,
 indicating that the shell is waiting for input.
 
-```console
+```
 $
 ```
 
@@ -180,18 +180,17 @@ ls
 > If the shell can't find a program whose name is the command you typed, it
 > will print an error message such as:
 >
-> > > ### {% icon code-in %} Input: Bash
-> > > ```
-> > > $ ks
-> > > ```
-> > {: .code-in}
-> >
-> > > ### {% icon code-out %} Output: Bash
-> > > ```
-> > > ks: command not found
-> > > ```
-> > {: .code-out}
-> {: .code-2col}
+> > ### {% icon code-in %} Input: Bash
+> > ```
+> > $ ks
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > ```
+> > ks: command not found
+> > ```
+> {: .code-out}
 >
 > This might happen if the command was mis-typed or if the program corresponding to that command
 > is not installed.
@@ -384,40 +383,12 @@ information on how to use the command or program.
 ls --help
 ```
 
-```
-Usage: ls [OPTION]... [FILE]...
-List information about the FILEs (the current directory by default).
-Sort entries alphabetically if neither -cftuvSUX nor --sort is specified.
-
-Mandatory arguments to long options are mandatory for short options, too.
-  -a, --all                  do not ignore entries starting with .
-  -A, --almost-all           do not list implied . and ..
-      --author               with -l, print the author of each file
-  -b, --escape               print C-style escapes for nongraphic characters
-      --block-size=SIZE      scale sizes by SIZE before printing them; e.g.,
-                               '--block-size=M' prints sizes in units of
-                               1,048,576 bytes; see SIZE format below
-  -B, --ignore-backups       do not list implied entries ending with ~
-  -c                         with -lt: sort by, and show, ctime (time of last
-                               modification of file status information);
-                               with -l: show ctime and sort by name;
-                               otherwise: sort by ctime, newest first
-  -C                         list entries by columns
-      --color[=WHEN]         colorize the output; WHEN can be 'always' (default
-                               if omitted), 'auto', or 'never'; more info below
-  -d, --directory            list directories themselves, not their contents
-  -D, --dired                generate output designed for Emacs' dired mode
-  -f                         do not sort, enable -aU, disable -ls --color
-  -F, --classify             append indicator (one of */=>@|) to entries
-...        ...        ...
-```
-
 > ### {% icon tip %} Unsupported command-line options
 > If you try to use an option (flag) that is not supported, `ls` and other commands
 > will usually print an error message similar to:
 >
 > > ### {% icon code-in %} Input: Bash
-> > ```console
+> > ```
 > > ls -j
 > > ```
 > {: .code-in}
@@ -700,7 +671,7 @@ to move to `shell-lesson-data`.
 
 Then we could run something like:
 
-```console
+```
 $ cd /Users/nelle/shell-lesson-data
 ```
 
@@ -726,17 +697,17 @@ Run `pwd` and `ls -F` to ensure that we're in the directory we expect.
 > ----
 > Try it!
 > First navigate to `~/shell-lesson-data` (you should already be there).
-> ```console
+> ```
 > $ cd ~/shell-lesson-data
 > ```
 >
 > Then `cd` into the `creatures` directory
-> ```console
+> ```
 > $ cd creatures
 > ```
 >
 > Now if you run
-> ```console
+> ```
 > $ cd -
 > ```
 > you'll see you're back in `~/shell-lesson-data`.
@@ -825,7 +796,7 @@ but it is perhaps useful to formalise some terminology.
 Consider the command below as a general example of a command,
 which we will dissect into its component parts:
 
-```console
+```
 $ ls -F /
 ```
 
@@ -845,7 +816,7 @@ doesn't exist. Also, capitalization can be important.
 For example, `ls -s` will display the size of files and directories alongside the names,
 while `ls -S` will sort the files and directories by size, as shown below:
 
-```console
+```
 $ ls -s Desktop/shell-lesson-data/data
 total 116
  4 amino-acids.txt   4 animals.txt   4 morse.txt  12 planets.txt  76 sunspot.txt
@@ -1054,7 +1025,7 @@ project/results:
 Let's change our working directory to `thesis` using `cd`,
 then run a text editor called Nano to create a file called `draft.txt`:
 
-```console
+```
 $ cd thesis
 $ nano draft.txt
 ```
@@ -1265,7 +1236,7 @@ ls quotes.txt
 > Jamie realizes that she put the files `sucrose.dat` and `maltose.dat` into the wrong folder.
 > The files should have been placed in the `raw` folder.
 >
-> ```console
+> ```
 > $ ls -F
 >  analyzed/ raw/
 > $ ls -F analyzed
@@ -1347,31 +1318,39 @@ ls thesis thesis_backup
 >
 > What is the output of the closing `ls` command in the sequence shown below?
 >
-> ~~~
-> $ pwd
-> ~~~
-> {: .language-bash}
+> > ### {% icon code-in %} Input: Bash
+> > ```
+> > pwd
+> > ```
+> {: .code-in}
 >
-> ~~~
-> /Users/jamie/data
-> ~~~
-> {: .output}
-> ~~~
-> $ ls
-> ~~~
-> {: .language-bash}
-> ~~~
-> proteins.dat
-> ~~~
-> {: .output}
-> ~~~
-> $ mkdir recombined
-> $ mv proteins.dat recombined/
-> $ cp recombined/proteins.dat ../proteins-saved.dat
-> $ ls
-> ~~~
-> {: .language-bash}
+> > ### {% icon code-out %} Output
+> > ```
+> > /Users/jamie/data
+> > ```
+> {: .code-out}
 >
+> > ### {% icon code-in %} Input: Bash
+> > ```
+> > ls
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > ```
+> > proteins.dat
+> > ```
+> {: .code-out}
+>
+>
+> > ### {% icon code-in %} Input: Bash
+> > ```
+> > mkdir recombined
+> > mv proteins.dat recombined/
+> > cp recombined/proteins.dat ../proteins-saved.dat
+> > ls
+> > ```
+> {: .code-in}
 >
 > 1.   `proteins-saved.dat recombined`
 > 2.   `recombined`
@@ -1388,10 +1367,11 @@ ls thesis thesis_backup
 > > directory, **not** with respect to the location of the file being copied.
 > > So, the only thing that will show using ls (in `/Users/jamie/data`) is the recombined folder.
 > >
-> > 1. No, see explanation above.  `proteins-saved.dat` is located at `/Users/jamie`
+> > 1. No, see explanation above. `proteins-saved.dat` is located at `/Users/jamie`
 > > 2. Yes
-> > 3. No, see explanation above.  `proteins.dat` is located at `/Users/jamie/data/recombined`
-> > 4. No, see explanation above.  `proteins-saved.dat` is located at `/Users/jamie`
+> > 3. No, see explanation above. `proteins.dat` is located at `/Users/jamie/data/recombined`
+> > 4. No, see explanation above. `proteins-saved.dat` is located at `/Users/jamie`
+> >
 > {: .solution}
 {: .question}
 
@@ -1474,27 +1454,23 @@ or specifying a naming pattern using wildcards.
 >
 > In the example below, what does `cp` do when given several filenames and a directory name?
 >
-> ~~~
-> $ mkdir backup
-> $ cp amino-acids.txt animals.txt backup/
-> ~~~
-> {: .language-bash}
+> > ### {% icon code-in %} Input: Bash
+> > ```
+> > $ mkdir backup
+> > $ cp amino-acids.txt animals.txt backup/
+> > ```
+> {: .code-in}
 >
 > In the example below, what does `cp` do when given three or more file names?
 >
-> ~~~
-> $ ls -F
-> ~~~
-> {: .language-bash}
-> ~~~
-> amino-acids.txt  animals.txt  backup/  elements/  morse.txt  pdb/
-> planets.txt  salmon.txt  sunspot.txt
-> ~~~
-> {: .output}
-> ~~~
-> $ cp amino-acids.txt animals.txt morse.txt
-> ~~~
-> {: .language-bash}
+> > ### {% icon code-in %} Input: Bash
+> > ```
+> > $ ls -F
+> > amino-acids.txt  animals.txt  backup/  elements/  morse.txt  pdb/
+> > planets.txt  salmon.txt  sunspot.txt
+> > $ cp amino-acids.txt animals.txt morse.txt
+> > ```
+> {: .code-in}
 >
 > > ### {% icon solution %} Solution
 > > If given more than one file name followed by a directory name
@@ -1505,7 +1481,7 @@ or specifying a naming pattern using wildcards.
 > > because it is expecting a directory name as the last argument.
 > >
 > > ```
-> > cp: target ‘morse.txt’ is not a directory
+> > cp: target 'morse.txt' is not a directory
 > > ```
 > > {: .output}
 > {: .solution}
@@ -1581,7 +1557,7 @@ or specifying a naming pattern using wildcards.
 > Sam has a directory containing calibration data, datasets, and descriptions of
 > the datasets:
 >
-> ~~~
+> ```
 > .
 > ├── 2015-10-23-calibration.txt
 > ├── 2015-10-23-dataset1.txt
@@ -1601,24 +1577,23 @@ or specifying a naming pattern using wildcards.
 > └── send_to_bob
 >     ├── all_datasets_created_on_a_23rd
 >     └── all_november_files
-> ~~~
-> {: .language-bash}
+> ```
 >
 > Before heading off to another field trip, she wants to back up her data and
 > send some datasets to her colleague Bob. Sam uses the following commands
 > to get the job done:
 >
-> ~~~
+> ```
 > $ cp *dataset* backup/datasets
 > $ cp ____calibration____ backup/calibration
 > $ cp 2015-____-____ send_to_bob/all_november_files/
 > $ cp ____ send_to_bob/all_datasets_created_on_a_23rd/
-> ~~~
-> {: .language-bash}
+> ```
 >
 > Help Sam by filling in the blanks.
 >
 > The resulting directory structure should look like this
+>
 > ```
 > .
 > ├── 2015-10-23-calibration.txt
@@ -1662,15 +1637,15 @@ or specifying a naming pattern using wildcards.
 >         ├── 2015-11-23-dataset2.txt
 >         └── 2015-11-23-dataset_overview.txt
 > ```
-> {: .language-bash}
 >
 > > ### {% icon solution %} Solution
+> >
 > > ```
-> > $ cp *calibration.txt backup/calibration
-> > $ cp 2015-11-* send_to_bob/all_november_files/
-> > $ cp *-23-dataset* send_to_bob/all_datasets_created_on_a_23rd/
+> > cp *calibration.txt backup/calibration
+> > cp 2015-11-* send_to_bob/all_november_files/
+> > cp *-23-dataset* send_to_bob/all_datasets_created_on_a_23rd/
 > > ```
-> > {: .language-bash}
+> >
 > {: .solution}
 {: .question}
 
@@ -1679,35 +1654,21 @@ or specifying a naming pattern using wildcards.
 > Jamie is working on a project and she sees that her files aren't very well
 > organized:
 >
-> ~~~
+> ```
 > $ ls -F
-> ~~~
-> {: .language-bash}
-> ~~~
 > analyzed/  fructose.dat    raw/   sucrose.dat
-> ~~~
-> {: .output}
+> ```
 >
 > The `fructose.dat` and `sucrose.dat` files contain output from her data
 > analysis. What command(s) covered in this lesson does she need to run
 > so that the commands below will produce the output shown?
 >
-> ~~~
+> ```
 > $ ls -F
-> ~~~
-> {: .language-bash}
-> ~~~
 > analyzed/   raw/
-> ~~~
-> {: .output}
-> ~~~
 > $ ls analyzed
-> ~~~
-> {: .language-bash}
-> ~~~
 > fructose.dat    sucrose.dat
-> ~~~
-> {: .output}
+> ```
 >
 > > ### {% icon solution %} Solution
 > > ```
@@ -1731,50 +1692,59 @@ or specifying a naming pattern using wildcards.
 > of the `2016-05-18-data` folder into a folder called `2016-05-20`
 > so that your final directory structure looks like this:
 >
-> ~~~
+> ```
 > 2016-05-20/
 > └── data
 >    ├── processed
 >    └── raw
-> ~~~
-> {: .output}
+> ```
 >
 > Which of the following set of commands would achieve this objective?
 > What would the other commands do?
 >
-> ~~~
-> $ mkdir 2016-05-20
-> $ mkdir 2016-05-20/data
-> $ mkdir 2016-05-20/data/processed
-> $ mkdir 2016-05-20/data/raw
-> ~~~
-> {: .language-bash}
-> ~~~
-> $ mkdir 2016-05-20
-> $ cd 2016-05-20
-> $ mkdir data
-> $ cd data
-> $ mkdir raw processed
-> ~~~
-> {: .language-bash}
-> ~~~
-> $ mkdir 2016-05-20/data/raw
-> $ mkdir 2016-05-20/data/processed
-> ~~~
-> {: .language-bash}
-> ~~~
-> $ mkdir -p 2016-05-20/data/raw
-> $ mkdir -p 2016-05-20/data/processed
-> ~~~
-> {: .language-bash}
-> ~~~
-> $ mkdir 2016-05-20
-> $ cd 2016-05-20
-> $ mkdir data
-> $ mkdir raw processed
-> ~~~
-> {: .language-bash}
-> >
+> > ### {% icon code-in %} Option 1
+> > ```
+> > $ mkdir 2016-05-20
+> > $ mkdir 2016-05-20/data
+> > $ mkdir 2016-05-20/data/processed
+> > $ mkdir 2016-05-20/data/raw
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-in %} Option 2
+> > ```
+> > $ mkdir 2016-05-20
+> > $ cd 2016-05-20/
+> > $ mkdir data/
+> > $ cd data
+> > $ mkdir raw processed
+> > ```
+> {: .code-in}
+>
+>
+> > ### {% icon code-in %} Option 3
+> > ```
+> > $ mkdir 2016-05-20/data/raw
+> > $ mkdir 2016-05-20/data/processed
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-in %} Option 4
+> > ```
+> > $ mkdir -p 2016-05-20/data/raw
+> > $ mkdir -p 2016-05-20/data/processed
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-in %} Option 5
+> > ```
+> > $ mkdir 2016-05-20
+> > $ cd 2016-05-20
+> > $ mkdir data
+> > $ mkdir raw processed
+> > ```
+> {: .code-in}
+>
 > > ### {% icon solution %} Solution
 > > The first two sets of commands achieve this objective.
 > > The first set uses relative paths to create the top-level directory before
