@@ -4,6 +4,9 @@ require 'fileutils'
 require 'yaml'
 require "kramdown"
 
+module MakeMakefile::Logging
+  @logfile = File::NULL
+end
 
 module Jekyll
   class JupyterNotebookGenerator < Generator
