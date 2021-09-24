@@ -4,7 +4,11 @@ title: Introduction to SQL
 level: Introductory
 zenodo_link:
 requirements:  []
-follow_up_training:  []
+follow_up_training:
+- type: "internal"
+  topic_name: introduction
+  tutorials:
+      - sql-advanced
 
 questions:
 - "How can I get data from a database?"
@@ -49,6 +53,8 @@ key_points:
 
 contributors:
 - hexylena
+
+subtopic: sql
 
 notebook:
     language: sql
