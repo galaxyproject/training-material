@@ -106,11 +106,7 @@ module Jekyll
       ).convert(text.to_s)
     end
 
-    def renderMarkdownCells(site, notebook, page)
-      # TODO:
-      #   - strip agenda
-      #   - strip yaml metadata header (or render it more nicely.)
-
+    def renderMarkdownCells(site, notebook, metadata, page)
       colors = {
         "overview" => "#8A9AD0",
         "agenda" => "#86D486; display: none",
@@ -126,6 +122,8 @@ module Jekyll
         "code-in" => "#86D486",
         "code-out" => "#fb99d0",
       }
+
+      seen_abbreviations = Hash.new
 
       notebook['cells'].map{|cell|
         if cell.fetch('cell_type') == 'markdown'
@@ -150,6 +148,27 @@ module Jekyll
             .gsub(/{% icon warning %}/, '⚠️')
             .gsub(/{% icon comment %}/, '💬')
             .gsub(/{% icon hands_on %}/, '✏️')
+
+          if metadata.key?('abbreviations')
+            metadata['abbreviations'].each{|abbr, defn|
+              puts "#{abbr} → #{defn}"
+              puts "#{seen_abbreviations}"
+              cell['source'].gsub(/\{#{abbr}\}/) {
+                if seen_abbreviations.key?(abbr) then
+                  firstdef = false
+                else
+                  firstdef = true
+                  seen_abbreviations[abbr] = true
+                end
+
+                if firstdef then
+                  "#{defn} (#{abbr})"
+                else
+                  "<abbr title=\"#{defn}\">#{abbr}</abbr>"
+                end
+              }
+            }
+          end
 
           # Here we give a GTN-ish styling that doesn't try to be too faithful,
           # so we aren't spending time keeping up with changes to GTN css,
@@ -225,7 +244,7 @@ module Jekyll
         # custom CSS which only seems to work when inline on a cell, i.e. we
         # can't setup a style block, so we really need to render the markdown
         # to html.
-        notebook = renderMarkdownCells(site, notebook, page)
+        notebook = renderMarkdownCells(site, notebook, metadata, page)
 
         # Here we add a close to the notebook
         notebook['cells'] = notebook['cells'] + [{
