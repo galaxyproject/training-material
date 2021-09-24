@@ -25,7 +25,7 @@ objectives:
 - "Create a directory hierarchy that matches a given diagram."
 - "Create files in that hierarchy using an editor or by copying and renaming existing files."
 - "Delete, copy and move specified files and/or directories."
-time_estimation: 3H
+time_estimation: 1H
 key_points:
 - A shell is a program whose primary purpose is to read commands and run other programs.
 - This lesson uses Bash, the default shell in many implementations of Unix.
@@ -56,7 +56,7 @@ key_points:
 - "Depending on the type of work you do, you may need a more powerful text editor than Nano."
 notebook:
   language: bash
-subtopic: r
+subtopic: bash
 contributors:
   - hexylena
 ---
