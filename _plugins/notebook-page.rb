@@ -1,4 +1,5 @@
 require 'json'
+require 'mkmf'
 require 'fileutils'
 require 'yaml'
 require "kramdown"
@@ -165,6 +166,11 @@ module Jekyll
 
 
     def generate(site)
+      if find_executable('notedown').nil?
+        puts "We could not find the notedown executable, so, notebooks will not be rendered."
+        return
+      end
+
       # For every tutorial with the 'notebook' key in the page data
       site.pages.select{|page| page.data['layout'] == 'tutorial_hands_on' and page.data.has_key?('notebook')}.each do |page|
         # We get the path to the tutorial source
