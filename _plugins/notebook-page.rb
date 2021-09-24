@@ -60,6 +60,35 @@ module Jekyll
       return notebook, metadata
     end
 
+    def fixRNotebook(notebook)
+      # Set the bash kernel
+      notebook['metadata'] = {
+        "kernelspec" => {
+         "display_name" => "R",
+         "language" => "R",
+         "name" => "r"
+        },
+        "language_info" => {
+         "codemirror_mode" => "r",
+         "file_extension" => ".r",
+         "mimetype" => "text/x-r-source",
+         "name" => "R",
+         "pygments_lexer" => "r",
+         "version" => "4.1.0"
+        }
+      }
+      # Strip out %%R since we'll use the bash kernel
+      notebook['cells'].map{|cell|
+        if cell.fetch('cell_type') == 'code'
+          if cell['source'][0] == "%%R\n"
+            cell['source'] = cell['source'].slice(1..-1)
+          end
+        end
+        cell
+      }
+      notebook
+    end
+
     def fixBashNotebook(notebook)
       # Set the bash kernel
       notebook['metadata'] = {
@@ -236,6 +265,8 @@ module Jekyll
           notebook = fixBashNotebook(notebook)
         elsif notebook_language == 'sql'
           notebook = fixSqlNotebook(notebook)
+        elsif notebook_language == 'r'
+          notebook = fixRNotebook(notebook)
         end
 
         # Here we loop over the markdown cells and render them to HTML. This

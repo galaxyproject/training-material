@@ -59,7 +59,7 @@ notebook:
 For this tutorial we need to download a database that we will use for the queries.
 
 ```r
-!wget -c http://swcarpentry.github.io/sql-novice-survey/files/survey.db
+download.file("http://swcarpentry.github.io/sql-novice-survey/files/survey.db", destfile="survey.db")
 ```
 
 # Programming with Databases - R
