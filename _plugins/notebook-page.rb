@@ -87,6 +87,19 @@ module Jekyll
       notebook
     end
 
+    def fixSqlNotebook(notebook)
+      # Add in a %%sql at the top of each cell
+      notebook['cells'].map{|cell|
+        if cell.fetch('cell_type') == 'code'
+          if cell['source'].join('').index('load_ext').nil?
+            cell['source'] = ["%%sql\n"] + cell['source']
+          end
+        end
+        cell
+      }
+      notebook
+    end
+
     def markdownify(site, text)
       site.find_converter_instance(
         Jekyll::Converters::Markdown
@@ -202,6 +215,8 @@ module Jekyll
         # Apply language specific conventions
         if notebook_language == 'bash'
           notebook = fixBashNotebook(notebook)
+        elsif notebook_language == 'sql'
+          notebook = fixSqlNotebook(notebook)
         end
 
         # Here we loop over the markdown cells and render them to HTML. This
