@@ -111,8 +111,8 @@ guide your exploration of the CLI.
 cd ~/
 mkdir -p Desktop/
 cd Desktop/
-wget https://github.com/swcarpentry/shell-novice/raw/2929ba2cbb1bcb5ff0d1b4100c6e58b96e155fd1/data/shell-lesson-data.zip
-unzip shell-lesson-data.zip
+wget -c https://github.com/swcarpentry/shell-novice/raw/2929ba2cbb1bcb5ff0d1b4100c6e58b96e155fd1/data/shell-lesson-data.zip
+unzip -u shell-lesson-data.zip
 ```
 
 
@@ -675,7 +675,12 @@ Then we could run something like:
 $ cd /Users/nelle/shell-lesson-data
 ```
 
-Run `pwd` and `ls -F` to ensure that we're in the directory we expect.
+Run `pwd` and `ls -F` to ensure that we're in the directory we expect. If we're not, edit the command block below to make sure we're in the correct location (`~/Desktop/shell-lesson-data/`)
+
+```
+pwd
+ls -F
+```
 
 > ### {% icon tip %} Two More Shortcuts
 >

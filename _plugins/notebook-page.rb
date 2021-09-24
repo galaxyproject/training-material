@@ -123,7 +123,7 @@ module Jekyll
           # Here we replace individual `s with codeblocks, they screw up
           # rendering otherwise by going through rouge
           source = source.gsub(/ `([^`]*)`([^`])/, ' <code>\1</code>\2')
-            .gsub(/`([^`])([^`]*)` /, '\1<code>\2</code> ')
+            .gsub(/([^`])`([^`]*)` /, '\1<code>\2</code> ')
 
           # Replace all the broken icons that can't render, because we don't
           # have access to the full render pipeline.
