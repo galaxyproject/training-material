@@ -27,8 +27,9 @@ module Jekyll
           metadata = YAML.load(cell['source'].join(''))
           offset = cell['source'].slice(1..-1).index("---\n")
 
+          puts "#{metadata['contributors']}"
           by_line = metadata['contributors'].map{|c|
-            "[#{contributors[c].fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
+            "[#{contributors.fetch('c', {"name" => c}).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
           }.join(", ")
 
           meta_header = [
@@ -206,9 +207,10 @@ module Jekyll
         }]
 
         # Create the JSON file and inject the data
-        FileUtils.mkdir_p "_site/training-material/#{dir}"
-        f = File.new("_site/training-material/#{dir}/tutorial.md.ipynb", "w+")
-        f.puts(JSON.generate(notebook))
+        page2 = PageWithoutAFile.new(site, "", dir, "tutorial.md.ipynb")
+        page2.content = JSON.generate(notebook)
+        page2.data["layout"] = nil
+        site.pages << page2
       end
     end
   end
