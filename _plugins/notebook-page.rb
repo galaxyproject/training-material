@@ -1,4 +1,5 @@
 require 'json'
+require 'fileutils'
 require 'yaml'
 require "kramdown"
 
@@ -205,9 +206,9 @@ module Jekyll
         }]
 
         # Create the JSON file and inject the data
+        FileUtils.mkdir_p "_site/training-material/#{dir}"
         f = File.new("_site/training-material/#{dir}/tutorial.md.ipynb", "w+")
         f.puts(JSON.generate(notebook))
-
       end
     end
   end
