@@ -229,6 +229,34 @@ capitalization.  One convention is to use UPPER CASE for SQL
 statements, to distinguish them from tables and column names. This is
 the convention that we will use for this lesson.
 
+> ### {% icon question %} Is a personal and family name column a good design?
+> If you were tasked with designing a database to store this same data, is storing the name data in
+> this way the best way to do it? Why or why not?
+>
+> Can you think of any names that would be difficult to enter in such a schema?
+>
+> > ### {% icon solution %} Solution
+> > No, it is generally not. There are a lot of [falsehoods that programmers believe about names](https://shinesolutions.com/2018/01/08/falsehoods-programmers-believe-about-names-with-examples/).
+> > The situation is much more complex as you can read in that article, but names vary wildly and
+> > generally placing constraints on how names are entered is only likely to frustrate you or your
+> > users later on when they need to enter data into that database.
+> >
+> > In general you should consider using a single text field for the name and allowing users to
+> > specify them as whatever they like (if it is a system with registration), or asking what they
+> > wish to be recorded (if you are doing this sort of data collection).
+> >
+> > If you are doing scientific research, you might know that names are generally very poor
+> > identifiers of a single human, and in that case consider recording their
+> > [ORCiD](https://orcid.org/) which will help you reference that individual when you are
+> > publishing later.
+> >
+> > This is also a good time to consider what data you really *need* to collect. If you are working
+> > in the EU under GDPR, do you really need their full legal name? Is that necessary? Do you have a
+> > plan for ensuring that data is correct when publishing, if any part of their name has changed
+> > since?
+> {: .solution}
+{: .question}
+
 While we are on the topic of SQL's syntax, one aspect of SQL's syntax
 that can frustrate novices and experts alike is forgetting to finish a
 command with `;` (semicolon).  When you press enter for a command
@@ -479,6 +507,57 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 > {: .solution}
 {: .question}
 
+> ### {% icon tip %} Tip: Is sorting names useful?
+> If you are someone with a name which falls at the end of the alphabet, you've likely been
+> penalised for this your entire life. Alphabetically sorting names should always be looked at
+> critically and through a lens to whether you are fairly reflecting everyone's contributions,
+> rather than just the default sort order.
+>
+> There are many options, either by some metric of contribution that everyone could agree on, or
+> better, consider random sorting, like the GTN uses with our [Hall of Fame]({% link hall-of-fame.md %})
+> page where we intentionally order randomly to tell contributors that no one persons
+> contributions matter more than anothers.
+>
+> > The evidence provided in a variety of studies leaves no doubt that an
+> > alphabetical author ordering norm disadvantages researchers with
+> > last names toward the end of the alphabet. There is furthermore con-
+> > vincing evidence that researchers are aware of this and that they
+> > react strategically to such alphabetical discrimination, for example
+> > with their choices of who to collaborate with. {% cite Weber_2018 %}
+> {: .quote}
+{: .tip}
+
+> ### {% icon tip %} Tip: Name collation
+> When you are sorting things in SQL, you need to be aware of something called collation which can
+> affect your results if you have values that are not the letters A-Z. Collating is the process of
+> sorting values, and this affects many human languages when storing data in a database.
+>
+> Here is a Dutch example. In the old days their alphabet contained a `ÿ` which was later replaced
+> with `ĳ`, a digraph of two characters squished together. This is commonly rendered as `ij`
+> however, two separate characters, due to the internet and widespread use of keyboards featuring
+> mainly ascii characters. However, it is still the 25th letter of their alphabet.
+>
+> ```
+> sqlite> create table nl(value text);
+> sqlite> insert into nl values ('appel'), ('beer'), ('index'), ('ijs'), ('jammer'), ('winkel'), ('zon');
+> sqlite> select * from nl order by value;
+> appel
+> beer
+> index
+> ijs
+> jammer
+> winkel
+> zon
+> ```
+>
+> Find a dutch friend and ask them if this is the correct order for this list. Unfortunately it
+> isn't. Even though it is `ij` as two separate characters, it should be sorted as if it was `ĳ` or
+> `ÿ`, before `z`. Like so: appel, beer, index, jammer, winkel, ijs, zon
+>
+> While there is not much you can do about it now (you're just beginning!) it is something you
+> should be aware of. When you later need to know about this, you will find the term 'collation'
+> useful, and you'll find the procedure is different for every database engine.
+{: .tip}
 
 # Filtering
 
@@ -510,7 +589,7 @@ based on values in columns that aren't then displayed:
 SELECT id FROM Visited WHERE site = 'DR-1';
 ```
 
-![SQL Filtering in Action](../../images/carpentries-sql/sql-filter.svg)
+![SQL Filtering in Action]`(../../images/carpentries-sql/sql-filter.svg)
 
 We can use many other Boolean operators to filter our data.
 For example,
@@ -540,6 +619,16 @@ SELECT * FROM Visited WHERE site = 'DR-1' AND dated < '1930-01-01';
 > it is,
 > but not nearly as complicated as figuring out
 > [historical dates in Sweden](https://en.wikipedia.org/wiki/Swedish_calendar).
+{: .tip}
+
+> ### {% icon tip %} '30: 1930 or 2030?
+> Storing the year as the last two digits causes problems in databases, and is part of what caused
+> [Y2K](https://en.wikipedia.org/wiki/Year_2000_problem). Be sure to use the databases' built in
+> format for storing dates, if it is available as that will generally avoid any major issues.
+>
+> Similarly there is a ["Year 2038 problem"](https://en.wikipedia.org/wiki/Year_2000_problem#Year_2038_problem),
+> as the timestamps mentioned above that count seconds since Jan 1, 1970 were running out of space
+> on 32-bit machines. Many systems have since migrated to work around this with 64-bit timestamps.
 {: .tip}
 
 If we want to find out what measurements were taken by either Lake or Roerich,
@@ -681,6 +770,17 @@ not to the entire rows as they are being processed.
 > {: .solution}
 {: .question}
 
+> ### {% icon tip %} Case-insensitive matching
+> But what about if you don't care about if it's `ALPHA` or `alpha` in the database, and you are
+> using a language that has a notion of case (unlike e.g. Chinese, Japenese)?
+>
+> Then you can use the `ILIKE` operator for 'case Insensitive LIKE'.
+> for example the following are true:
+>
+> - `'a' ILIKE 'A'`
+> - `'AlPhA' ILIKE '%lpha'`
+{: .tip}
+
 
 # Calculating New Values
 
@@ -721,13 +821,15 @@ query as:
 SELECT taken, round(5 * (reading - 32) / 9, 2) as Celsius FROM Survey WHERE quant = 'temp';
 ```
 
-
 We can also combine values from different fields,
 for example by using the string concatenation operator `||`:
 
 ```sql
 SELECT personal || ' ' || family FROM Person;
 ```
+
+But of course that can also be solved by simply having a single name field which avoids other
+issues.
 
 > ### {% icon question %} Fixing Salinity Readings
 >

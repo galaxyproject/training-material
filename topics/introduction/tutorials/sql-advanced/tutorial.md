@@ -89,7 +89,7 @@ abbreviations:
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
 >
 > Abigail Cabunoc and Sheldon McKay (eds): "Software Carpentry: Using Databases and SQL."  Version 2017.08, August 2017,
-> https://github.com/swcarpentry/sql-novice-survey, https://doi.org/10.5281/zenodo.838776
+> https://github.com/swcarpentry/sql-novice-survey, [https://doi.org/10.5281/zenodo.838776](https://doi.org/10.5281/zenodo.838776)
 >
 > Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
@@ -271,6 +271,14 @@ it no longer matters that the database manager
 is picking an arbitrary one to display
 alongside the aggregated `reading` values.
 
+> ### {% icon tip %} Know Excel? It's just a pivot table.
+> `GROUP BY` is basically just a pivot table for Excel users, it lets you build
+> nice summary tables which aggregate your results.
+>
+> And if you didn't already know the Excel equivalent, now you know what to
+> look for when you need it!
+{: .tip}
+
 Just as we can sort by multiple criteria at once,
 we can also group by multiple criteria.
 To get the average reading by scientist and quantity measured,
@@ -301,22 +309,10 @@ ORDER BY person, quant;
 Looking more closely,
 this query:
 
-1.  selected records from the `Survey` table
-    where the `person` field was not null;
-
-2.  grouped those records into subsets
-    so that the `person` and `quant` values in each subset
-    were the same;
-
-3.  ordered those subsets first by `person`,
-    and then within each sub-group by `quant`;
-    and
-
-4.  counted the number of records in each subset,
-    calculated the average `reading` in each,
-    and chose a `person` and `quant` value from each
-    (it doesn't matter which ones,
-    since they're all equal).
+1.  selected records from the `Survey` table where the `person` field was not null;
+2.  grouped those records into subsets so that the `person` and `quant` values in each subset were the same;
+3.  ordered those subsets first by `person`, and then within each sub-group by `quant`; and
+4.  counted the number of records in each subset, calculated the average `reading` in each, and chose a `person` and `quant` value from each (it doesn't matter which ones, since they're all equal).
 
 > ### {% icon question %} Counting Temperature Readings
 >
@@ -790,12 +786,26 @@ but most provide the following:
 
 Most databases also support Booleans and date/time values;
 SQLite uses the integers 0 and 1 for the former,
-and represents the latter as discussed [earlier]({{ page.root }}/03-filter/#date-types).
+and represents the latter as text or numeric fields.
+
 An increasing number of databases also support geographic data types,
 such as latitude and longitude.
 Keeping track of what particular systems do or do not offer,
 and what names they give different data types,
 is an unending portability headache.
+
+> ### {% icon tip %} Which database should I use?
+> SQLite is fantastic for small databases or embedded into applications where
+> you want to be able to use SQL to query and process data.
+>
+> However for any real analysis PostgreSQL is usually the best choice, it
+> scales incredibly well and can meet a wide range of use cases. It has good
+> data type support.
+{: .tip}
+
+> ### {% icon tip %} Do you have geographic data?
+> Use Postgres. The [PostGIS](https://postgis.net/) library is fantastic and industry standard for storing geographic data in a database.
+{: .tip}
 
 When we create a table,
 we can specify several kinds of constraints on its columns.
