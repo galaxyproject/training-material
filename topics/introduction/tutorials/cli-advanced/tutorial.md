@@ -201,7 +201,7 @@ But first we'll use an exercise to learn a little about the sort command:
 
 > ### {% icon question %} What Does `sort -n` Do?
 >
-> The file [`shell-lesson-data/numbers.txt`](../shell-lesson-data/numbers.txt)
+> The file `shell-lesson-data/numbers.txt`
 > contains the following lines:
 >
 > ```
