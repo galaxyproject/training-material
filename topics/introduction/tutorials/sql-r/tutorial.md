@@ -8,7 +8,7 @@ requirements:
   topic_name: introduction
   tutorials:
       - sql-advanced
-      - r-basic
+      - r-basics
       - r-advanced
 follow_up_training:  []
 
