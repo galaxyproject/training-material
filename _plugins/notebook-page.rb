@@ -98,7 +98,7 @@ module Jekyll
       ).convert(text.to_s)
     end
 
-    def renderMarkdownCells(site, notebook)
+    def renderMarkdownCells(site, notebook, page)
       # TODO:
       #   - strip agenda
       #   - strip yaml metadata header (or render it more nicely.)
@@ -150,6 +150,9 @@ module Jekyll
             cell['source'] = cell['source'].gsub(/<blockquote class="#{key}">/, "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
           }
 
+          # Images are referenced in the GTN through relative URLs which is fab, but in a notebook this doesn't make sense as it will live outside of the GTN. We need real URLs.
+          cell['source'] = cell['source'].gsub(/<img src=\"\.\./, '<img src="' + site.config['url'] + site.config['baseurl'] + page.url.split('/')[0..-2].join('/') + '/..')
+
           # There is some weirdness in the processing of $s in Jupyter. After a
           # certain number of them, it will give up, and just render everything
           # like with a '<pre>'. We remove this to prevent that result.
@@ -200,7 +203,7 @@ module Jekyll
         # custom CSS which only seems to work when inline on a cell, i.e. we
         # can't setup a style block, so we really need to render the markdown
         # to html.
-        notebook = renderMarkdownCells(site, notebook)
+        notebook = renderMarkdownCells(site, notebook, page)
 
         # Here we add a close to the notebook
         notebook['cells'] = notebook['cells'] + [{
@@ -217,7 +220,7 @@ module Jekyll
 
         # Create the JSON file and inject the data
         page2 = PageWithoutAFile.new(site, "", dir, "tutorial.md.ipynb")
-        page2.content = JSON.generate(notebook)
+        page2.content = JSON.pretty_generate(notebook)
         page2.data["layout"] = nil
         site.pages << page2
       end
