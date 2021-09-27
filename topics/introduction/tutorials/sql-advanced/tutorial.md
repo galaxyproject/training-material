@@ -135,7 +135,7 @@ and produces a single record as output:
 SELECT min(dated) FROM Visited;
 ```
 
-![SQL Aggregation](../fig/sql-aggregation.svg)
+![SQL Aggregation](../../images/carpentries-sql/sql-aggregation.svg)
 
 ```sql
 SELECT max(dated) FROM Visited;
@@ -428,7 +428,7 @@ We need to combine these tables somehow.
 
 This figure shows the relations between the tables:
 
-![Survey Database Structure](../fig/sql-join-structure.svg)
+![Survey Database Structure](../../images/carpentries-sql/sql-join-structure.svg)
 
 The SQL command to do this is `JOIN`.
 To see how it works,
