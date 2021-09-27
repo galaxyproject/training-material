@@ -89,7 +89,7 @@ abbreviations:
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
 >
 > Abigail Cabunoc and Sheldon McKay (eds): "Software Carpentry: Using Databases and SQL."  Version 2017.08, August 2017,
-> https://github.com/swcarpentry/sql-novice-survey, [https://doi.org/10.5281/zenodo.838776](https://doi.org/10.5281/zenodo.838776)
+> [github.com/swcarpentry/sql-novice-survey](https://github.com/swcarpentry/sql-novice-survey), [https://doi.org/10.5281/zenodo.838776](https://doi.org/10.5281/zenodo.838776)
 >
 > Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
