@@ -180,8 +180,6 @@ module Jekyll
 
           if metadata.key?('abbreviations')
             metadata['abbreviations'].each{|abbr, defn|
-              puts "#{abbr} → #{defn}"
-              puts "#{seen_abbreviations}"
               cell['source'].gsub(/\{#{abbr}\}/) {
                 if seen_abbreviations.key?(abbr) then
                   firstdef = false
