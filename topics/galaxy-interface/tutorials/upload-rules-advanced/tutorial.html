@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-04-02 14:33:05 +0000",
+  "dateModified": "2021-09-28 09:47:26 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Rule Based Uploader: Advanced",
   "interactivityType": "mixed",
@@ -560,7 +560,7 @@
 
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 2, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
@@ -846,8 +846,8 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
     </li>
     <li>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Split Columns</code>
       <ul>
-        <li><em>“Odd Number Column(s)”</em>: <code class="language-plaintext highlighter-rouge">C</code>, <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">E</code> (the fasta columns)</li>
-        <li><em>“Even Number Column(s)”</em>: <code class="language-plaintext highlighter-rouge">F</code>, <code class="language-plaintext highlighter-rouge">G</code>, and <code class="language-plaintext highlighter-rouge">H</code> (the gff3 columns)</li>
+        <li><em>“Odd Row Column(s)”</em>: <code class="language-plaintext highlighter-rouge">C</code>, <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">E</code> (the fasta columns)</li>
+        <li><em>“Even Row Column(s)”</em>: <code class="language-plaintext highlighter-rouge">F</code>, <code class="language-plaintext highlighter-rouge">G</code>, and <code class="language-plaintext highlighter-rouge">H</code> (the gff3 columns)</li>
       </ul>
 
       <p>This will take the row consisting of the columns <code class="language-plaintext highlighter-rouge">ABCDEFGH</code> and build two rows, one with <code class="language-plaintext highlighter-rouge">ABCDEF</code> and the other with <code class="language-plaintext highlighter-rouge">ABFGH</code>
@@ -1025,13 +1025,13 @@ SRR5363715	2017-03-21 11:26:06	2017-03-21 10:59:33	712060	142833136	702138	200	5
       </ul>
 
       <p>For the analysis we wish to do, we want to group these files based on the type indicated in column <code class="language-plaintext highlighter-rouge">L</code> (LibraryName) shown below.
-The source data though adds numbers to the library type to to generate the <code class="language-plaintext highlighter-rouge">LibraryName</code>, we need to strip those out to use the type
+The source data though adds numbers to the library type to generate the <code class="language-plaintext highlighter-rouge">LibraryName</code>, so we need to strip those out to use the type
 as an identifier for grouping the datasets. To do this, use the regex column adder rule again.</p>
     </li>
     <li>From <strong>Column</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
       <ul>
         <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">L</code></li>
-        <li>Select <code class="language-plaintext highlighter-rouge">Create column from regular <span class="notranslate">expression</span> groups</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
         <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">([^\d]+)\d+</code>.</li>
         <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
@@ -1134,7 +1134,7 @@ sublists below that. We can do this with the <code class="language-plaintext hig
 likely be under the <code class="language-plaintext highlighter-rouge">Collection Operations</code> tool menu in your <span class="notranslate">Galaxy</span> interface.</p>
     </li>
     <li>
-      <p>Open the <strong>Apply Rule to Collection</strong> tool</p>
+      <p>Open the <strong>Apply Rules</strong> tool</p>
 
       <p>The very simple interface should look something like this:
 <img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_5_apply_rules_landing.png" alt="screenshot" loading="lazy" /></p>
@@ -1142,7 +1142,7 @@ likely be under the <code class="language-plaintext highlighter-rouge">Collectio
       <p>This interface simply lets one pick a collection to operate on and then launch the rule builder
 window to work to describe and preview manipulating the metadata of that collection.</p>
     </li>
-    <li><strong>Apply Rule to Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Apply Rules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Input Collection”</em>: the collection we just uploaded</li>
         <li>Click the <code class="language-plaintext highlighter-rouge">Edit</code> button
@@ -1189,10 +1189,10 @@ characters will be matched as the second group. Click to apply this rule and two
 <img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_8_nested.png" alt="screenshot" loading="lazy" /></p>
 
       <p>Placing the “single” and “paired” sublists inside the “treated” and “untreated” lists was a bit arbitrary and depending on the
-<span class="notranslate">workflow</span> these may need to be inverted at different parts of an analysis. The <strong>Apply Rules</strong> tool can be used to invert these levels
+<span class="notranslate">workflow</span> these may need to be inverted at different parts of an analysis. The <code class="language-plaintext highlighter-rouge">Apply Rules</code> tool can be used to invert these levels
 if that is needed.</p>
     </li>
-    <li><strong>Apply Rule to Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Apply Rules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Input Collection”</em>: the new nested list we created in the previous step</li>
         <li>Click “Edit”.</li>
@@ -1217,14 +1217,14 @@ One can pretty easily invert the outer two layers of the list by simply assignin
 
       <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_11_inverted.png" alt="screenshot" loading="lazy" /></p>
 
-      <p>In addition to structural re-organizations of a collection, the Apply Rules tool can be used to
+      <p>In addition to structural re-organizations of a collection, the <code class="language-plaintext highlighter-rouge">Apply Rules</code> tool can be used to
 filter elements out of the collection.</p>
     </li>
-    <li><strong>Apply Rule to Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Apply Rules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Input Collection”</em>: the original flat list created</li>
         <li>Click <code class="language-plaintext highlighter-rouge">Edit</code></li>
-        <li>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">From a regular <span class="notranslate">expression</span></code>
+        <li>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
           <ul>
             <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
             <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_single_.*</code></li>
@@ -1243,9 +1243,9 @@ filter elements out of the collection.</p>
 
       <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_13_filtered.png" alt="screenshot" loading="lazy" /></p>
 
-      <p>Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the Apply Rules tool. Use the same regular <span class="notranslate">expression</span> as last time to filter the result but also add a column for “treated” and “untreated” list identifiers.</p>
+      <p>Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the <code class="language-plaintext highlighter-rouge">Apply Rules</code> tool. Use the same regular <span class="notranslate">expression</span> as last time to filter the result but also add a column for “treated” and “untreated” list identifiers.</p>
     </li>
-    <li><strong>Apply Rule to Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Apply Rules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
           <ul>
@@ -1256,7 +1256,7 @@ filter elements out of the collection.</p>
         <li>From <strong>Column</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
           <ul>
             <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
-            <li>Select <code class="language-plaintext highlighter-rouge">Create column from regular <span class="notranslate">expression</span> groups</code></li>
+            <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
             <li><em>“Regular <span class="notranslate">Expression</span>”</em>:  <code class="language-plaintext highlighter-rouge">(.*)_single_.*</code></li>
             <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
@@ -1346,8 +1346,8 @@ filter elements out of the collection.</p>
 author = "John Chilton and Helena Rasche",
 title = "Rule Based Uploader: Advanced (Galaxy Training Materials)",
 year = "2021",
-month = "04",
-day = "02"
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
