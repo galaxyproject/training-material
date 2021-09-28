@@ -169,12 +169,44 @@ The cursor is usually a flashing or solid block, but it can also be an underscor
 You may have seen it in a text editor program, for example.
 
 So let's try our first command, `ls` which is short for listing.
+
+> ### {% icon comment %} Decision point! Jupyter or Terminal
+>
+> This tutorial will let you accomplish almost everything from this view, running code in the cells below directly in the training material.
+>
+> You now get to choose between running the code here, or opening up a terminal tab in which to run it. Here are some instructions for how to open the terminal on various environments.
+>
+> **Jupyter** on UseGalaxy.\* and **MyBinder.org**
+>
+> 1. Use the File → New → Terminal menu to launch a terminal.
+>
+>    ![screenshot of jupyterlab showing the File menu expanded to show new and terminal option.](../../images/carpentries-cli/mybinder-launch.png)
+>
+> 2. Disable "Simple" mode in the bottom left hand corner, if it activated.
+>
+>    ![screenshot of jupyterlab showing a toggle labelled simple](../../images/carpentries-cli/mybinder-simple.png)
+>
+> 3. Drag one of the terminal or notebook tabs to the side to have the training materials and terminal side-by-side
+>
+>    ![screenshot of jupyterlab with notebook and terminal side-by-side.](../../images/carpentries-cli/mybinder-final.png)
+>
+> **CoCalc**
+>
+> 1. Use the *Split View* functionality of cocalc to split your view into two portions.
+>
+>    ![screenshot of cocalc button to split views](../../images/carpentries-cli/cocalc-split.png)
+>
+> 2. Change the view of one panel to a terminal
+>
+>    ![screenshot of cocalc swapping view port to that of a terminal](../../images/carpentries-cli/cocalc-terminal.png)
+>
+{: .comment}
+
 This command will list the contents of the current directory:
 
 ```bash
 ls
 ```
-
 
 > ### {% icon tip %} Command not found
 > If the shell can't find a program whose name is the command you typed, it
@@ -521,6 +553,10 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 > > see if a new output file was written.
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 ### Exploring Other Directories
 
@@ -1183,6 +1219,10 @@ ls
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon tip %} What's In A Name?
 >
 > You may have noticed that all of Nelle's files are named 'something dot
@@ -1534,6 +1574,10 @@ or specifying a naming pattern using wildcards.
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 ### Using wildcards for accessing multiple files at once
 
 > ### {% icon tip %} Wildcards
@@ -1598,6 +1642,10 @@ or specifying a naming pattern using wildcards.
 > > `4.` only shows files starting with `ethane.`.
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 > ### {% icon question %} More on Wildcards
 >
@@ -1696,6 +1744,10 @@ or specifying a naming pattern using wildcards.
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Organizing Directories and Files
 >
 > Jamie is working on a project and she sees that her files aren't very well
@@ -1727,6 +1779,10 @@ or specifying a naming pattern using wildcards.
 > > The `mv` command then moves the list of .dat files to the 'analyzed' directory.
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 > ### {% icon question %} Reproduce a folder structure
 >
@@ -1810,7 +1866,9 @@ or specifying a naming pattern using wildcards.
 > {: .solution}
 {: .question}
 
-
+```bash
+# Explore the possible solutions here!
+```
 
 
 [Arguments]: https://swcarpentry.github.io/shell-novice/reference.html#argument

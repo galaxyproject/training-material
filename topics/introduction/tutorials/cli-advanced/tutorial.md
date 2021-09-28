@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Advanced CLI in Galaxy
-level: Introductory
+level: Intermediate
 zenodo_link: ""
 requirements: []
 follow_up_training: []
@@ -325,6 +325,10 @@ the output of `head` must be the file with the fewest lines.
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Appending Data
 >
 > We have already met the `head` command, which prints lines from the start of a file.
@@ -352,6 +356,10 @@ the output of `head` must be the file with the fewest lines.
 > > by doing `head -n 3 animals.txt | tail -n 2 > animals-subset.txt`
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 
 ## Passing output to another command
@@ -426,6 +434,10 @@ the output of the head command is directed to the shell
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 
 ## Tools designed to work together
 This idea of linking programs together is why Unix has been so successful.
@@ -487,6 +499,10 @@ so that you and other people can put those programs into pipes to multiply their
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Pipe Construction
 >
 > For the file `animals.txt` from the previous exercise, consider the following command:
@@ -525,6 +541,10 @@ so that you and other people can put those programs into pipes to multiply their
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Which Pipe?
 >
 > The file `animals.txt` contains 8 lines of data formatted as follows:
@@ -554,6 +574,10 @@ so that you and other people can put those programs into pipes to multiply their
 > > the pipelines (make sure you are in the `shell-lesson-data/data` directory).
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 ## Nelle's Pipeline: Checking Files
 
@@ -842,6 +866,10 @@ increase the odds that the program won't do what its readers think it does.
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Limiting Sets of Files
 >
 > What would be the output of running the following loop in thei
@@ -885,6 +913,10 @@ increase the odds that the program won't do what its readers think it does.
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Saving to a File in a Loop - Part One
 >
 > In the `shell-lesson-data/molecules` directory, what is the effect of this loop?
@@ -912,6 +944,10 @@ increase the odds that the program won't do what its readers think it does.
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Saving to a File in a Loop - Part Two
 >
 > Also in the `shell-lesson-data/molecules` directory,
@@ -938,6 +974,10 @@ increase the odds that the program won't do what its readers think it does.
 > > Given the output from the `cat` command has been redirected, nothing is printed to the screen.
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 Let's continue with our example in the `shell-lesson-data/creatures` directory.
 Here's a slightly more complicated loop:
@@ -1282,6 +1322,10 @@ so she decides to get some coffee and catch up on her reading.
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Nested Loops
 >
 > Suppose we want to set up a directory structure to organize
@@ -1307,6 +1351,10 @@ so she decides to get some coffee and catch up on her reading.
 > > Try running the code for yourself to see which directories are created!
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 
 # Finding Things
@@ -1458,6 +1506,10 @@ grep --help
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon tip %} Wildcards
 >
 > `grep`'s real power doesn't come from its options, though; it comes from
@@ -1485,6 +1537,10 @@ grep --help
 > matches a single character (just like `?` in the shell), while the `o`
 > matches an actual 'o'.
 {: .tip}
+
+```bash
+# Explore the possible solutions here!
+```
 
 > ### {% icon question %} Tracking a Species
 >
@@ -1544,6 +1600,10 @@ grep --help
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon question %} Little Women
 >
 > You and your friend, having just finished reading *Little Women* by
@@ -1591,6 +1651,10 @@ grep --help
 > > most frequently).
 > {: .solution}
 {: .question}
+
+```bash
+# Explore the possible solutions here!
+```
 
 While `grep` finds lines in files,
 the `find` command finds files themselves.
@@ -1742,6 +1806,10 @@ grep "FE" $(find .. -name "*.pdb")
 > {: .solution}
 {: .question}
 
+```bash
+# Explore the possible solutions here!
+```
+
 > ### {% icon tip %} Binary Files
 >
 > We have focused exclusively on finding patterns in text files. What if
@@ -1788,5 +1856,4 @@ without thinking about them.'
 > > 3. Sort the output from step 2. numerically
 > {: .solution}
 {: .question}
-
 

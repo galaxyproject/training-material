@@ -153,6 +153,9 @@ module Jekyll
           # Images are referenced in the GTN through relative URLs which is fab, but in a notebook this doesn't make sense as it will live outside of the GTN. We need real URLs.
           cell['source'] = cell['source'].gsub(/<img src=\"\.\./, '<img src="' + site.config['url'] + site.config['baseurl'] + page.url.split('/')[0..-2].join('/') + '/..')
 
+          # Strip out the highlighting as it is bad on some platforms.
+          cell['source'] = cell['source'].gsub(/<pre class="highlight">/, '<pre>').gsub(/<div class="highlight">/, '<div>')
+
           # There is some weirdness in the processing of $s in Jupyter. After a
           # certain number of them, it will give up, and just render everything
           # like with a '<pre>'. We remove this to prevent that result.
