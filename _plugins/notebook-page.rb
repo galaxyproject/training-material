@@ -33,7 +33,7 @@ module Jekyll
 
           puts "#{metadata['contributors']}"
           by_line = metadata['contributors'].map{|c|
-            "[#{contributors.fetch('c', {"name" => c}).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
+            "[#{contributors.fetch(c, {"name" => c}).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
           }.join(", ")
 
           meta_header = [
