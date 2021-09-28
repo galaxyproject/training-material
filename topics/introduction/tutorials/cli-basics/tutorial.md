@@ -58,6 +58,7 @@ notebook:
   language: bash
 subtopic: bash
 contributors:
+  - carpentries
   - hexylena
 ---
 
