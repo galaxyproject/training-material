@@ -28,6 +28,7 @@ key_points:
 - "R has multiple helper functions to make working with databases easier."
 
 contributors:
+- carpentries
 - hexylena
 
 subtopic: sql

@@ -73,6 +73,7 @@ key_points:
 - "Queries should be written using parameter substitution, not string formatting."
 
 contributors:
+- carpentries
 - hexylena
 
 subtopic: sql

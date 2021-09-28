@@ -52,6 +52,7 @@ key_points:
 - "Queries can test for NULLs using IS NULL and IS NOT NULL."
 
 contributors:
+- carpentries
 - hexylena
 
 subtopic: sql
