@@ -93,16 +93,12 @@ ls molecules
 ```
 
 
-Let's go into that directory with `cd` and run an example  command `wc cubane.pdb`:
+Let's go into that directory with `cd` and run an example command `wc cubane.pdb`:
 
 ```bash
 cd molecules
+wc cubane
 ```
-
-```
-20  156 1158 cubane.pdb
-```
-{: .output}
 
 `wc` is the 'word count' command:
 it counts the number of lines, words, and characters in files (from left to right, in that order).
@@ -566,7 +562,8 @@ and created 17 files in the `north-pacific-gyre/2012-07-03` directory described 
 As a quick check, starting from her home directory, Nelle types:
 
 ```bash
-cd north-pacific-gyre/2012-07-03
+cd ~/Desktop/shell-lesson-data/north-pacific-gyre/2012-07-03
+wc -l *.txt
 ```
 
 The output is 18 lines that look like this:
@@ -656,7 +653,13 @@ amount of typing required (and hence reduces the number of typing mistakes).
 Suppose we have several hundred genome data files named `basilisk.dat`, `minotaur.dat`, and
 `unicorn.dat`.
 For this example, we'll use the `creatures` directory which only has three example files,
-but the principles can be applied to many many more files at once.
+but the principles can be applied to many many more files at once. First, go
+into the creatures directory.
+
+```bash
+# Change directories here!
+
+```
 
 The structure of these files is the same: the common name, classification, and updated date are
 presented on the first three lines, with DNA sequences on the following lines.
@@ -671,7 +674,7 @@ line of each file.
 For each file, we would need to execute the command `head -n 2` and pipe this to `tail -n 1`.
 We’ll use a loop to solve this problem, but first let’s look at the general form of a loop:
 
-```bash
+```
 for thing in list_of_things
 do
     operation_using $thing    # Indentation within the loop is not required, but aids legibility
@@ -1109,7 +1112,7 @@ these are ones whose names end in 'A' or 'B', rather than 'Z'.
 Starting from her home directory, Nelle types:
 
 ```bash
-cd north-pacific-gyre/2012-07-03
+cd ~/Desktop/shell-lesson-data/north-pacific-gyre/2012-07-03
 for datafile in NENE*A.txt NENE*B.txt
 do
     echo $datafile
@@ -1131,18 +1134,20 @@ done
 She hasn't actually run `goostats.sh` yet,
 but now she's sure she can select the right files and generate the right output filenames.
 
-Typing in commands over and over again is becoming tedious,
-though,
-and Nelle is worried about making mistakes,
-so instead of re-entering her loop,
-she presses <kbd>↑</kbd>.
-In response,
-the shell redisplays the whole loop on one line
-(using semi-colons to separate the pieces):
-
-```
-for datafile in NENE*A.txt NENE*B.txt; do echo $datafile stats-$datafile; done
-```
+> ### {% icon tip %} Top Terminal Tip: Re-running previous commands
+> Typing in commands over and over again is becoming tedious,
+> though,
+> and Nelle is worried about making mistakes,
+> so instead of re-entering her loop,
+> she presses <kbd>↑</kbd>.
+> In response,
+> the shell redisplays the whole loop on one line
+> (using semi-colons to separate the pieces):
+>
+> ```
+> for datafile in NENE*A.txt NENE*B.txt; do echo $datafile stats-$datafile; done
+> ```
+{: .tip}
 
 Using the left arrow key,
 Nelle backs up and changes the command `echo` to `bash goostats.sh`:
@@ -1204,7 +1209,7 @@ so she decides to get some coffee and catch up on her reading.
 > ```
 >
 > then she can re-run `goostats.sh` on `NENE01729B.txt` simply by typing
-> `!458`.
+> `!458`. This number will be different for you, you should check your history before running it!
 {: .tip}
 
 > ### {% icon tip %} Other History Commands
@@ -1235,6 +1240,7 @@ so she decides to get some coffee and catch up on her reading.
 > without actually running those commands:
 >
 > ```
+> cd ~/Desktop/shell-lesson-data/pdb/
 > for datafile in *.pdb
 > do
 >     cat $datafile >> all.pdb

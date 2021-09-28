@@ -264,9 +264,12 @@ Try running it now.
 > ### {% icon tip %} Home Directory Variation
 >
 > The home directory path will look different on different operating systems.
-> On Linux, it may look like `/home/nelle`,
-> and on Windows, it will be similar to `C:\Documents and Settings\nelle` or
-> `C:\Users\nelle`.
+>
+> Linux         | OSX            | Jupyter (UseGalaxy/Binder) | CoCalc
+> ---           | --             | ---                        | ---
+> `/home/nelle` | `/Users/nelle` | `/home/joyvan`             | `/projects/<id>`
+>
+> On Windows, it will be similar to `C:\Documents and Settings\nelle` or `C:\Users\nelle`.
 > (Note that it may look slightly different for different versions of Windows.)
 > In future examples, we've used Mac output as the default - Linux and Windows
 > output may differ slightly but should be generally similar.
@@ -405,9 +408,57 @@ ls --help
 #### The `man` command
 
 The other way to learn about `ls` is to type
-```bash
-man ls
-```
+
+> ### {% icon code-in %} Input: Bash
+> ```
+> $ man ls
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output
+> ```
+> LS(1)                                                          User Commands                                                          LS(1)
+>
+> NAME
+>        ls - list directory contents
+>
+> SYNOPSIS
+>        ls [OPTION]... [FILE]...
+>
+> DESCRIPTION
+>        List information about the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor --sort is
+>        specified.
+>
+>        Mandatory arguments to long options are mandatory for short options too.
+>
+>        -a, --all
+>               do not ignore entries starting with .
+>
+>        -A, --almost-all
+>               do not list implied . and ..
+>
+>        --author
+>               with -l, print the author of each file
+>
+>        -b, --escape
+>               print C-style escapes for nongraphic characters
+>
+>        --block-size=SIZE
+>               with -l, scale sizes by SIZE when printing them; e.g., '--block-size=M'; see SIZE format below
+>
+>        -B, --ignore-backups
+>               do not list implied entries ending with ~
+>
+>        -c     with -lt: sort by, and show, ctime (time of last modification of file status information); with -l: show ctime  and  sort  by
+>               name; otherwise: sort by ctime, newest first
+>
+>        -C     list entries by columns
+>
+>        --color[=WHEN]
+>               colorize the output; WHEN can be 'always' (default if omitted), 'auto', or 'never'; more info below
+>
+> ```
+{: .code-out}
 
 This command will turn your terminal into a page with a description
 of the `ls` command and its options.
@@ -475,20 +526,15 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 
 Not only can we use `ls` on the current working directory,
 but we can use it to list the contents of a different directory.
-Let's take a look at our `root` directory by running `ls -F /`,
+Let's take a look at our current directory by running `ls -F ~/`,
 i.e.,
 the command `ls` with the `-F` **option** and the [**argument**][Arguments]  `/`.
-The argument `/` tells `ls` that
+The argument `~/` tells `ls` that
 we want a listing of something other than our current working directory:
 
 ```bash
-ls -F /
+ls -F ~/
 ```
-
-
-Note that if a directory named `Desktop` does not exist in your current working directory,
-this command will return an error. Typically, a `Desktop` directory exists in your
-home directory, which we assume is the current working directory of your bash shell.
 
 As you may now see, using a bash shell is strongly dependent on the idea that
 your files are organized in a hierarchical file system.
@@ -524,7 +570,6 @@ use the following series of commands to get there:
 
 ```bash
 cd shell-lesson-data
-cd data
 ```
 
 These commands will move us into
@@ -632,7 +677,7 @@ three commands, but we can actually string together the list of directories
 to move to `data` in one step:
 
 ```bash
-cd shell-lesson-data/data
+cd ~/Desktop/shell-lesson-data/data
 ```
 
 Check that we've moved to the right place by running `pwd` and `ls -F`.
@@ -700,24 +745,26 @@ ls -F
 > that the former brings you *up*, while the latter brings you *back*.
 >
 > ----
-> Try it!
-> First navigate to `~/shell-lesson-data` (you should already be there).
-> ```
-> $ cd ~/shell-lesson-data
-> ```
->
-> Then `cd` into the `creatures` directory
-> ```
-> $ cd creatures
-> ```
->
-> Now if you run
-> ```
-> $ cd -
-> ```
-> you'll see you're back in `~/shell-lesson-data`.
-> Run `cd -` again and you're back in `~/shell-lesson-data/creatures`
+> Try it out below!
 {: .tip}
+
+First navigate to `~/Desktop/shell-lesson-data` (you should already be there).
+
+```bash
+cd ~/Desktop/shell-lesson-data
+```
+
+Then `cd` into the `creatures` directory
+```bash
+cd creatures
+```
+
+Now if you run
+```bash
+cd -
+```
+you'll see you're back in `~/Desktop/shell-lesson-data`.
+Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 
 > ### {% icon question %} Absolute vs Relative Paths
 >
@@ -802,7 +849,7 @@ Consider the command below as a general example of a command,
 which we will dissect into its component parts:
 
 ```
-$ ls -F /
+$ ls -F ~/Desktop/shell-lesson-data/
 ```
 
 `ls` is the **command**, with an **option** `-F` and an
@@ -832,12 +879,7 @@ planets.txt  elements       morse.txt  animals.txt
 ```
 
 Putting all that together, our command above gives us a listing
-of files and directories in the root directory `/`.
-An example of the output you might get from the above command is given below:
-
-```bash
-ls -F /
-```
+of files and directories in our shell-lesson-data folder.
 
 
 ### Nelle's Pipeline: Organizing Files
