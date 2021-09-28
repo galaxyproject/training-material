@@ -5,7 +5,13 @@ title: CLI basics in Galaxy
 level: Introductory
 zenodo_link: ""
 requirements: []
-follow_up_training: []
+follow_up_training:
+- type: "internal"
+  topic_name: introduction
+  tutorials:
+      - cli-advanced
+      - cli-bashcrawl
+
 
 questions:
 - "What is a command shell and why would I use one?"

@@ -4,8 +4,16 @@ layout: tutorial_hands_on
 title: Advanced CLI in Galaxy
 level: Intermediate
 zenodo_link: ""
-requirements: []
-follow_up_training: []
+requirements:
+- type: "internal"
+  topic_name: introduction
+  tutorials:
+      - cli-basics
+follow_up_training:
+- type: "internal"
+  topic_name: introduction
+  tutorials:
+      - cli-bashcrawl
 
 questions:
 - "How can I combine existing commands to do new things?"
