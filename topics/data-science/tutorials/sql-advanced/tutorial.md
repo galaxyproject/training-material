@@ -114,6 +114,7 @@ import sqlalchemy
 engine = sqlalchemy.create_engine("sqlite:///survey.db")
 %load_ext sql
 %sql sqlite:///survey.db
+%config SqlMagic.displaycon=False
 ```
 
 # Aggregation

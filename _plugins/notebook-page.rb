@@ -216,7 +216,7 @@ module Jekyll
           end
 
           # Strip out the highlighting as it is bad on some platforms.
-          cell['source'].gsub!(/<pre class="highlight">/, '<pre>')
+          cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: white">')
           cell['source'].gsub!(/<div class="highlight">/, '<div>')
 
           # add a 'hint' to the solution boxes which have blanked out text.

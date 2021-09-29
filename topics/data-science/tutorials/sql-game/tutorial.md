@@ -51,6 +51,7 @@ import sqlalchemy
 engine = sqlalchemy.create_engine("sqlite:///sql-murder-mystery.db")
 %load_ext sql
 %sql sqlite:///sql-murder-mystery.db
+%config SqlMagic.displaycon=False
 ```
 
 ## Tables
