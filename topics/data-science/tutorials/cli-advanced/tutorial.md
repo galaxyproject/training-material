@@ -66,6 +66,7 @@ subtopic: bash
 contributors:
   - carpentries
   - hexylena
+  - bazante1
 ---
 
 This tutorial will walk you through the basics of how to use the Unix command line.
