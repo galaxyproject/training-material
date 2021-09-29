@@ -106,7 +106,7 @@ module Jekyll
         "tip" => "#FFE19E",
         "warning" => "#de8875",
         "comment" => "#ffecc1",
-        "handson" => "#dfe5f9",
+        "hands_on" => "#dfe5f9",
         "question" => "#8A9AD0",
         "solution" => "#B8C3EA",
         "details" => "#ddd",
@@ -137,6 +137,7 @@ module Jekyll
             .gsub(/{% icon solution %}/, '👁')
             .gsub(/{% icon warning %}/, '⚠️')
             .gsub(/{% icon comment %}/, '💬')
+            .gsub(/{% icon hands_on %}/, '✏️')
 
           # Here we give a GTN-ish styling that doesn't try to be too faithful,
           # so we aren't spending time keeping up with changes to GTN css,
