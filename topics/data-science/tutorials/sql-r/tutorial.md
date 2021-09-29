@@ -7,9 +7,12 @@ requirements:
 - type: "internal"
   topic_name: introduction
   tutorials:
-      - sql-advanced
       - r-basics
       - r-advanced
+- type: "internal"
+  topic_name: data-science
+  tutorials:
+      - sql-advanced
 follow_up_training:  []
 
 questions:

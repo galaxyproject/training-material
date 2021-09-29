@@ -5,12 +5,12 @@ level: Introductory
 zenodo_link:
 requirements:
 - type: "internal"
-  topic_name: introduction
+  topic_name: data-science
   tutorials:
       - sql-basic
 follow_up_training:
 - type: "internal"
-  topic_name: introduction
+  topic_name: data-science
   tutorials:
       - sql-python
 
