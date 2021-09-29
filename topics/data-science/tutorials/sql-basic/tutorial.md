@@ -296,27 +296,6 @@ we can select all of the columns in a table using `*`:
 SELECT * FROM Person;
 ```
 
-> ### {% icon question %} Understanding CREATE statements
->
-> Use the `.schema` to identify column that contains integers.
->
-> > ### {% icon solution %} Solution
-> >
-> > ~~~
-> > .schema
-> > ~~~
-> >
-> > ~~~
-> > CREATE TABLE Person (id text, personal text, family text);
-> > CREATE TABLE Site (name text, lat real, long real);
-> > CREATE TABLE Survey (taken integer, person text, quant text, reading real);
-> > CREATE TABLE Visited (id integer, site text, dated text);
-> > ~~~
-> > {: .output}
-> > From the output, we see that the **taken** column in the **Survey** table (3rd line) is composed of integers.
-> {: .solution}
-{: .question}
-
 > ### {% icon question %} Selecting Site Names
 >
 > Write a query that selects only the `name` column from the `Site` table.
