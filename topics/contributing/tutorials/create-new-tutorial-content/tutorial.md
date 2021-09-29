@@ -1030,9 +1030,11 @@ If your tutorial is primarily focused on teaching students how to write code (Ba
 
 To use this system, you need to take care of a few things:
 
-- Do **not** use hands-on boxes for segments that should be executed
+- Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
+- Do not use snippets
+- Do not use the built in citation system
 - Do not use a terminal or prompt character
-- Generally avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
+- Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 
 And be aware that the output will look a little bit different than the GTN, e.g. solution boxes cannot be hidden by default.
 
