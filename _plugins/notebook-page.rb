@@ -54,10 +54,6 @@ module Jekyll
             "\n",
             "</div>\n",
           ]
-
-
-
-
           cell['source'] = meta_header + cell['source'].slice(offset + 2..-1)
         end
         cell
@@ -150,7 +146,9 @@ module Jekyll
             cell['source'] = cell['source'].gsub(/<blockquote class="#{key}">/, "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
           }
 
-          # Images are referenced in the GTN through relative URLs which is fab, but in a notebook this doesn't make sense as it will live outside of the GTN. We need real URLs.
+          # Images are referenced in the GTN through relative URLs which is
+          # fab, but in a notebook this doesn't make sense as it will live
+          # outside of the GTN. We need real URLs.
           cell['source'] = cell['source'].gsub(/<img src=\"\.\./, '<img src="' + site.config['url'] + site.config['baseurl'] + page.url.split('/')[0..-2].join('/') + '/..')
 
           # Strip out the highlighting as it is bad on some platforms.
