@@ -502,7 +502,7 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 > > last names toward the end of the alphabet. There is furthermore con-
 > > vincing evidence that researchers are aware of this and that they
 > > react strategically to such alphabetical discrimination, for example
-> > with their choices of who to collaborate with. {% cite Weber_2018 %}
+> > with their choices of who to collaborate with. See [Weber 2018](https://doi.org/10.1093%2Freseval%2Frvy008) for more.
 > {: .quote}
 {: .tip}
 
