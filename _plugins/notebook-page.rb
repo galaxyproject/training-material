@@ -31,7 +31,6 @@ module Jekyll
           metadata = YAML.load(cell['source'].join(''))
           offset = cell['source'].slice(1..-1).index("---\n")
 
-          puts "#{metadata['contributors']}"
           by_line = metadata['contributors'].map{|c|
             "[#{contributors.fetch(c, {"name" => c}).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
           }.join(", ")
