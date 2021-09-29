@@ -6,12 +6,12 @@ level: Intermediate
 zenodo_link: ""
 requirements:
 - type: "internal"
-  topic_name: introduction
+  topic_name: data-science
   tutorials:
       - cli-basics
 follow_up_training:
 - type: "internal"
-  topic_name: introduction
+  topic_name: data-science
   tutorials:
       - cli-bashcrawl
 
