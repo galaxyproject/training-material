@@ -108,7 +108,7 @@ module Jekyll
         "comment" => "#ffecc1",
         "hands_on" => "#dfe5f9",
         "question" => "#8A9AD0",
-        "solution" => "#B8C3EA",
+        "solution" => "#B8C3EA; color: white",
         "details" => "#ddd",
         "feedback" => "#86D486",
         "code-in" => "#86D486",
@@ -144,28 +144,34 @@ module Jekyll
           # we're making it 'our own' a bit.
 
           colors.each{ |key, val|
-            cell['source'] = cell['source'].gsub(/<blockquote class="#{key}">/, "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
+            cell['source'].gsub!(/<blockquote class="#{key}">/, "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
           }
 
           # Images are referenced in the GTN through relative URLs which is
           # fab, but in a notebook this doesn't make sense as it will live
           # outside of the GTN. We need real URLs.
-          cell['source'] = cell['source'].gsub(/<img src=\"\.\./, '<img src="' + site.config['url'] + site.config['baseurl'] + page.url.split('/')[0..-2].join('/') + '/..')
+          #
+          # But we'll only do this if it's in "deploy" mode, in order to have
+          # the images also work locally.
+          if site.config['url'] == "https://training.galaxyproject.org"
+            cell['source'].gsub!(/<img src=\"\.\./, '<img src="' + site.config['url'] + site.config['baseurl'] + page.url.split('/')[0..-2].join('/') + '/..')
+          end
 
           # Strip out the highlighting as it is bad on some platforms.
-          cell['source'] = cell['source'].gsub(/<pre class="highlight">/, '<pre>').gsub(/<div class="highlight">/, '<div>')
+          cell['source'].gsub!(/<pre class="highlight">/, '<pre>')
+          cell['source'].gsub!(/<div class="highlight">/, '<div>')
+
+          # add a 'hint' to the solution boxes which have blanked out text.
+          cell['source'].gsub!(/(<h3 id="-icon-solution--solution">)/, '<div style="color: #555; font-size: 95%;">Hint: Select the text with your mouse to see the answer</div>\1')
 
           # There is some weirdness in the processing of $s in Jupyter. After a
           # certain number of them, it will give up, and just render everything
           # like with a '<pre>'. We remove this to prevent that result.
-          #
+          cell['source'].gsub!(/^\s*</, '<')
           # Additionally leading spaces are sometimes interpreted as <pre>s and
           # end up causing paragraphs to be rendered as code. So we wipe out
           # all leading space.
-
-          cell['source'] = cell['source']
-            .gsub(/^\s*</, '<')
-            .gsub(/\$/, '&#36;')
+          cell['source'].gsub!(/\$/, '&#36;')
         end
         cell
       }
