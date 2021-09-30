@@ -66,6 +66,28 @@ layout: base
                 </tbody>
             </table>
 
+            <h2>Data Science Survival Kit</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Tutorials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for topic in sorted_topics %}
+                    {% if topic[1].type == "data-science" and topic[1].enable != false  %}
+                    <tr>
+                        {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
+                        <td>{{ tutorial_number }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+
             <h2>Galaxy for Developers and Admins</h2>
             <table class="table table-striped">
                 <thead>

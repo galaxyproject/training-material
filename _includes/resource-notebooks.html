@@ -1,0 +1,7 @@
+{% assign locale = site.data.lang[page.lang] %}
+
+{% if include.material.notebook %}
+    <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md.ipynb" title="Notebooks" alt="{{ include.material.title }} workflows">
+        {% icon notebook aria=false %}{% if include.label %} {{locale['notebooks'] | default: "Jupyter Notebook"}}{% endif %}
+    </a>
+{% endif %}
