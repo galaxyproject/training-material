@@ -1,0 +1,2682 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>CLI basics in Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: CLI basics in Galaxy" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/cli-basics/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/cli-basics/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-basics/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-basics/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-basics/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-basics/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-basics/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdata-science%2Ftutorials%2Fcli-basics%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/data-science/tutorials/cli-basics/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/data-science/tutorials/cli-basics/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/data-science/tutorials/cli-basics/tutorial.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2021-09-29 14:33:05 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "CLI basics in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / cli-basics / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'CLI basics in Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/cli-basics/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - What is a command shell and why would I use one?\n - How can I move around on my computer?\n - How can I see what files and directories I have?\n - How can I specify the location of a file or directory on my computer?\n - How can I create, copy, and delete files and directories?\n - How can I edit files?\n\n\\nThe objectives are:\n - Explain how the shell relates to the keyboard, the screen, the operating system, and users' programs.\n - Explain when and why command-line interfaces should be used instead of graphical interfaces.\n - Explain the similarities and differences between a file and a directory.\n - Translate an absolute path into a relative path and vice versa.\n - Construct absolute and relative paths that identify specific files and directories.\n - Use options and arguments to change the behaviour of a shell command.\n - Demonstrate the use of tab completion and explain its advantages.\n - Create a directory hierarchy that matches a given diagram.\n - Create files in that hierarchy using an editor or by copying and renaming existing files.\n - Delete, copy and move specified files and/or directories.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>CLI basics in Galaxy</h1>
+    
+
+    <div class="contributors-line">Authors: 
+
+ <a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/carpentries" alt="Avatar">The Carpentries</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a> <a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bazante1" alt="Avatar">Bazante Sanders</a>
+
+</div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is a command shell and why would I use one?</p>
+</li>
+        
+        <li><p>How can I move around on my computer?</p>
+</li>
+        
+        <li><p>How can I see what files and directories I have?</p>
+</li>
+        
+        <li><p>How can I specify the location of a file or directory on my computer?</p>
+</li>
+        
+        <li><p>How can I create, copy, and delete files and directories?</p>
+</li>
+        
+        <li><p>How can I edit files?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Explain how the shell relates to the keyboard, the screen, the operating system, and users’ programs.</p>
+</li>
+        
+        <li><p>Explain when and why command-line interfaces should be used instead of graphical interfaces.</p>
+</li>
+        
+        <li><p>Explain the similarities and differences between a file and a directory.</p>
+</li>
+        
+        <li><p>Translate an absolute path into a relative path and vice versa.</p>
+</li>
+        
+        <li><p>Construct absolute and relative paths that identify specific files and directories.</p>
+</li>
+        
+        <li><p>Use options and arguments to change the behaviour of a shell command.</p>
+</li>
+        
+        <li><p>Demonstrate the use of tab completion and explain its advantages.</p>
+</li>
+        
+        <li><p>Create a directory hierarchy that matches a given diagram.</p>
+</li>
+        
+        <li><p>Create files in that hierarchy using an editor or by copying and renaming existing files.</p>
+</li>
+        
+        <li><p>Delete, copy and move specified files and/or directories.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/cli-basics/tutorial.md.ipynb" title="Notebooks" alt="CLI basics in Galaxy workflows">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+
+</li>
+            
+
+            
+            
+            
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 29, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+                <blockquote class="comment">
+                    <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                    <p>
+                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers, or you can click to run it in MyBinder
+                    </p>
+                    <p><b>Launching on MyBinder</b>
+                        Click here and the notebook will launch on MyBinder.org
+                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fcli-basics%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                    </p>
+                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                        <ol>
+                            <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                            <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-basics/tutorial.md.ipynb</code></li>
+                            <li>Select the notebook that appears in the list of files on the left.</li>
+                        </ol>
+                    </p>
+                </blockquote>
+                
+
+                <p>This tutorial will walk you through the basics of how to use the Unix command line.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/shell-novice/">“The Unix Shell”</a> lesson, which is licensed CC-BY 4.0. Adaptations have been made to make this work better in a GTN/<span class="notranslate">Galaxy</span> environment.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#background" id="markdown-toc-background">Background</a>    <ol>
+      <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+      <li><a href="#the-shell" id="markdown-toc-the-shell">The Shell</a></li>
+      <li><a href="#nelles-pipeline-a-typical-problem" id="markdown-toc-nelles-pipeline-a-typical-problem">Nelle’s Pipeline: A Typical Problem</a></li>
+    </ol>
+  </li>
+  <li><a href="#navigating-files-and-directories" id="markdown-toc-navigating-files-and-directories">Navigating Files and Directories</a>    <ol>
+      <li><a href="#slashes" id="markdown-toc-slashes">Slashes</a></li>
+      <li><a href="#general-syntax-of-a-shell-command" id="markdown-toc-general-syntax-of-a-shell-command">General Syntax of a Shell Command</a></li>
+    </ol>
+  </li>
+  <li><a href="#working-with-files-and-directories" id="markdown-toc-working-with-files-and-directories">Working with Files and Directories</a>    <ol>
+      <li><a href="#step-one-see-where-we-are-and-what-we-already-have" id="markdown-toc-step-one-see-where-we-are-and-what-we-already-have">Step one: see where we are and what we already have</a></li>
+      <li><a href="#create-a-directory" id="markdown-toc-create-a-directory">Create a directory</a></li>
+      <li><a href="#creating-a-text-file" id="markdown-toc-creating-a-text-file">Creating a text file</a></li>
+      <li><a href="#moving-files-and-directories" id="markdown-toc-moving-files-and-directories">Moving files and directories</a></li>
+      <li><a href="#copying-files-and-directories" id="markdown-toc-copying-files-and-directories">Copying files and directories</a></li>
+      <li><a href="#removing-files-and-directories" id="markdown-toc-removing-files-and-directories">Removing files and directories</a></li>
+      <li><a href="#deleting-is-forever" id="markdown-toc-deleting-is-forever">Deleting Is Forever</a></li>
+      <li><a href="#operations-with-multiple-files-and-directories" id="markdown-toc-operations-with-multiple-files-and-directories">Operations with multiple files and directories</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="background">Background</h1>
+
+<p>Humans and computers commonly interact in many different ways, such as through a keyboard and mouse,
+touch screen interfaces, or using speech recognition systems.
+The most widely used way to interact with personal computers is called a
+<strong>graphical user interface</strong> (GUI).
+With a GUI, we give instructions by clicking a mouse and using menu-driven interactions.</p>
+
+<p>While the visual aid of a GUI makes it intuitive to learn,
+this way of delivering instructions to a computer scales very poorly.
+Imagine the following task:
+for a literature search, you have to copy the third line of one thousand text files in one thousand
+different directories and paste it into a single file.
+Using a GUI, you would not only be clicking at your desk for several hours,
+but you could potentially also commit an error in the process of completing this repetitive task.
+This is where we take advantage of the Unix shell.
+The Unix shell is both a <strong>command-line interface</strong> (CLI) and a scripting language,
+allowing such repetitive tasks to be done automatically and fast.
+With the proper commands, the shell can repeat tasks with or without some modification
+as many times as we want.
+Using the shell, the task in the literature example can be accomplished in seconds.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>Before we do anything, we’ll get you setup with some test data which can help
+guide your exploration of the CLI.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/
+<span class="nb">mkdir</span> <span class="nt">-p</span> Desktop/
+<span class="nb">cd </span>Desktop/
+wget <span class="nt">-c</span> https://github.com/swcarpentry/shell-novice/raw/2929ba2cbb1bcb5ff0d1b4100c6e58b96e155fd1/data/shell-lesson-data.zip
+unzip <span class="nt">-u</span> shell-lesson-data.zip
+</code></pre></div></div>
+
+<h2 id="the-shell">The Shell</h2>
+
+<p>The shell is a program where users can type commands.
+With the shell, it’s possible to invoke complicated programs like climate modeling software
+or simple commands that create an empty directory with only one line of code.
+The most popular Unix shell is Bash (the Bourne Again SHell —
+so-called because it’s derived from a shell written by Stephen Bourne).
+Bash is the default shell on most modern implementations of Unix and in most packages that provide
+Unix-like tools for Windows.</p>
+
+<p>Using the shell will take some effort and some time to learn.
+While a GUI presents you with choices to select, CLI choices are not automatically presented to you,
+so you must learn a few commands like new vocabulary in a language you’re studying.
+However, unlike a spoken language, a small number of “words” (i.e. commands) gets you a long way,
+and we’ll cover those essential few today.</p>
+
+<p>The grammar of a shell allows you to combine existing tools into powerful
+pipelines and handle large volumes of data automatically. Sequences of
+commands can be written into a <em>script</em>, improving the reproducibility of
+workflows.</p>
+
+<p>In addition, the command line is often the easiest way to interact with remote machines
+and supercomputers.
+Familiarity with the shell is near essential to run a variety of specialized tools and resources
+including high-performance computing systems.
+As clusters and cloud computing systems become more popular for scientific data crunching,
+being able to interact with the shell is becoming a necessary skill.
+We can build on the command-line skills covered here
+to tackle a wide range of scientific questions and computational challenges.</p>
+
+<p>Let’s get started.</p>
+
+<p>When the shell is first opened, you are presented with a <strong>prompt</strong>,
+indicating that the shell is waiting for input.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$
+</code></pre></div></div>
+
+<p>The shell typically uses <code class="language-plaintext highlighter-rouge">$ </code> as the prompt, but may use a different symbol.
+In the examples for this lesson, we will <strong>not</strong> include this prompt!</p>
+
+<p>Most importantly:
+when typing commands, either from these lessons or from other sources,
+<em>do not type the prompt</em>, only the commands that follow it.
+Also note that after you type a command, you have to press the <kbd>Enter</kbd> key to execute it.</p>
+
+<p>The prompt is followed by a <strong>text cursor</strong>, a character that indicates the position where your
+typing will appear.
+The cursor is usually a flashing or solid block, but it can also be an underscore or a pipe.
+You may have seen it in a text editor program, for example.</p>
+
+<p>So let’s try our first command, <code class="language-plaintext highlighter-rouge">ls</code> which is short for listing.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-open-a-jupyter-terminal"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Open a Jupyter Terminal</h3>
+  <p>This tutorial will let you accomplish almost everything from this view, running code in the cells below directly in the training material. You can choose between running the code here, or opening up a terminal tab in which to run it.</p>
+
+  <p>Here are some instructions for how to do this on various environments.</p>
+
+  <p><strong>Jupyter</strong> on Use<span class="notranslate">Galaxy</span>.* and <strong>MyBinder.org</strong></p>
+
+  <ol>
+    <li>
+      <p>Use the File → New → Terminal menu to launch a terminal.</p>
+
+      <p><img src="../../images/carpentries-cli/mybinder-launch.png" alt="screenshot of jupyterlab showing the File menu expanded to show new and terminal option." loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Disable “Simple” mode in the bottom left hand corner, if it activated.</p>
+
+      <p><img src="../../images/carpentries-cli/mybinder-simple.png" alt="screenshot of jupyterlab showing a toggle labelled simple" loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Drag one of the terminal or notebook tabs to the side to have the training materials and terminal side-by-side</p>
+
+      <p><img src="../../images/carpentries-cli/mybinder-final.png" alt="screenshot of jupyterlab with notebook and terminal side-by-side." loading="lazy" /></p>
+    </li>
+  </ol>
+
+  <p><strong>CoCalc</strong></p>
+
+  <ol>
+    <li>
+      <p>Use the <em>Split View</em> functionality of cocalc to split your view into two portions.</p>
+
+      <p><img src="../../images/carpentries-cli/cocalc-split.png" alt="screenshot of cocalc button to split views" loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Change the view of one panel to a terminal</p>
+
+      <p><img src="../../images/carpentries-cli/cocalc-terminal.png" alt="screenshot of cocalc swapping view port to that of a terminal" loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This command will list the contents of the current directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-command-not-found"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Command not found</h3>
+  <p>If the shell can’t find a program whose name is the command you typed, it
+will print an error message such as:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ks
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ks: command not found
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>This might happen if the command was mis-typed or if the program corresponding to that command
+is not installed.</p>
+</blockquote>
+
+<h2 id="nelles-pipeline-a-typical-problem">Nelle’s Pipeline: A Typical Problem</h2>
+
+<p>Nelle Nemo, a marine biologist,
+has just returned from a six-month survey of the
+<a href="http://en.wikipedia.org/wiki/North_Pacific_Gyre">North Pacific Gyre</a>,
+where she has been sampling gelatinous marine life in the
+<a href="http://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch">Great Pacific Garbage Patch</a>.
+She has 1520 samples that she’s run through an assay machine to measure the relative abundance
+of 300 proteins.
+She needs to run these 1520 files through an imaginary program called <code class="language-plaintext highlighter-rouge">goostats.sh</code> she inherited.
+On top of this huge task, she has to write up results by the end of the month so her paper
+can appear in a special issue of <em>Aquatic Goo Letters</em>.</p>
+
+<p>The bad news is that if she has to run <code class="language-plaintext highlighter-rouge">goostats.sh</code> by hand using a GUI,
+she’ll have to select and open a file 1520 times.
+If <code class="language-plaintext highlighter-rouge">goostats.sh</code> takes 30 seconds to run each file, the whole process will take more than 12 hours
+of Nelle’s attention.
+With the shell, Nelle can instead assign her computer this mundane task while she focuses
+her attention on writing her paper.</p>
+
+<p>The next few lessons will explore the ways Nelle can achieve this.
+More specifically,
+they explain how she can use a command shell to run the <code class="language-plaintext highlighter-rouge">goostats.sh</code> program,
+using loops to automate the repetitive steps of entering file names,
+so that her computer can work while she writes her paper.</p>
+
+<p>As a bonus,
+once she has put a processing pipeline together,
+she will be able to use it again whenever she collects more data.</p>
+
+<p>In order to achieve her task, Nelle needs to know how to:</p>
+<ul>
+  <li>navigate to a file/directory</li>
+  <li>create a file/directory</li>
+  <li>check the length of a file</li>
+  <li>chain commands together</li>
+  <li>retrieve a set of files</li>
+  <li>iterate over files</li>
+  <li>run a shell script containing her pipeline</li>
+</ul>
+
+<h1 id="navigating-files-and-directories">Navigating Files and Directories</h1>
+
+<p>The part of the operating system responsible for managing files and directories
+is called the <strong>file system</strong>.
+It organizes our data into files,
+which hold information,
+and directories (also called ‘folders’),
+which hold files or other directories.</p>
+
+<p>Several commands are frequently used to create, inspect, rename, and delete files and directories.
+To start exploring them, we’ll go to our open shell window.</p>
+
+<p>First, let’s find out where we are by running a command called <code class="language-plaintext highlighter-rouge">pwd</code>
+(which stands for ‘print working directory’). Directories are like <em>places</em>, at any time
+while we are using the shell, we are in exactly one place called
+our <strong>current working directory</strong>. Commands mostly read and write files in the
+current working directory, i.e. ‘here’, so knowing where you are before running
+a command is important. <code class="language-plaintext highlighter-rouge">pwd</code> shows you where you are:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<p>Try running it now.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-home-directory-variation"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Home Directory Variation</h3>
+
+  <p>The home directory path will look different on different operating systems.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Linux</th>
+        <th>OSX</th>
+        <th>Jupyter (Use<span class="notranslate">Galaxy</span>/Binder)</th>
+        <th>CoCalc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">/home/nelle</code></td>
+        <td><code class="language-plaintext highlighter-rouge">/Users/nelle</code></td>
+        <td><code class="language-plaintext highlighter-rouge">/home/joyvan</code></td>
+        <td><code class="language-plaintext highlighter-rouge">/projects/&lt;id&gt;</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>On Windows, it will be similar to <code class="language-plaintext highlighter-rouge">C:\Documents and Settings\nelle</code> or <code class="language-plaintext highlighter-rouge">C:\Users\nelle</code>.
+(Note that it may look slightly different for different versions of Windows.)
+In future examples, we’ve used Mac output as the default - Linux and Windows
+output may differ slightly but should be generally similar.</p>
+
+  <p>We will also assume that your <code class="language-plaintext highlighter-rouge">pwd</code> command returns your user’s home directory.
+If <code class="language-plaintext highlighter-rouge">pwd</code> returns something different, you may need to navigate there using <code class="language-plaintext highlighter-rouge">cd</code>
+or some commands in this lesson will not work as written.
+See <a href="#exploring-other-directories">Exploring Other Directories</a> for more details
+on the <code class="language-plaintext highlighter-rouge">cd</code> command.</p>
+</blockquote>
+
+<p>To understand what a ‘home directory’ is,
+let’s have a look at how the file system as a whole is organized.  For the
+sake of this example, we’ll be
+illustrating the filesystem on our scientist Nelle’s computer.  After this
+illustration, you’ll be learning commands to explore your own filesystem,
+which will be constructed in a similar way, but not be exactly identical.</p>
+
+<p>On Nelle’s computer, the filesystem looks like this:</p>
+
+<p><img src="../../images/carpentries-cli/filesystem.svg" alt="The file system is made up of a root directory that contains sub-directories titled bin, data, users, and tmp" loading="lazy" /></p>
+
+<p>At the top is the <strong>root directory</strong>
+that holds everything else.
+We refer to it using a slash character, <code class="language-plaintext highlighter-rouge">/</code>, on its own;
+this character is the leading slash in <code class="language-plaintext highlighter-rouge">/Users/nelle</code>.</p>
+
+<p>Inside that directory are several other directories:
+<code class="language-plaintext highlighter-rouge">bin</code> (which is where some built-in programs are stored),
+<code class="language-plaintext highlighter-rouge">data</code> (for miscellaneous data files),
+<code class="language-plaintext highlighter-rouge">Users</code> (where users’ personal directories are located),
+<code class="language-plaintext highlighter-rouge">tmp</code> (for temporary files that don’t need to be stored long-term),
+and so on.</p>
+
+<p>We know that our current working directory <code class="language-plaintext highlighter-rouge">/Users/nelle</code> is stored inside <code class="language-plaintext highlighter-rouge">/Users</code>
+because <code class="language-plaintext highlighter-rouge">/Users</code> is the first part of its name.
+Similarly,
+we know that <code class="language-plaintext highlighter-rouge">/Users</code> is stored inside the root directory <code class="language-plaintext highlighter-rouge">/</code>
+because its name begins with <code class="language-plaintext highlighter-rouge">/</code>.</p>
+
+<blockquote class="tip">
+  <h2 id="slashes">Slashes</h2>
+
+  <p>Notice that there are two meanings for the <code class="language-plaintext highlighter-rouge">/</code> character.
+When it appears at the front of a file or directory name,
+it refers to the root directory. When it appears <em>inside</em> a path,
+it’s just a separator.</p>
+</blockquote>
+
+<p>Underneath <code class="language-plaintext highlighter-rouge">/Users</code>,
+we find one directory for each user with an account on Nelle’s machine,
+her colleagues <em>imhotep</em> and <em>larry</em>.</p>
+
+<p><img src="../../images/carpentries-cli/home-directories.svg" alt="Like other directories, home directories are sub-directories underneath '/Users' like '/Users/imhotep', '/Users/larry' or '/Users/nelle'" loading="lazy" /></p>
+
+<p>The user <em>imhotep</em>’s files are stored in <code class="language-plaintext highlighter-rouge">/Users/imhotep</code>,
+user <em>larry</em>’s in <code class="language-plaintext highlighter-rouge">/Users/larry</code>,
+and Nelle’s in <code class="language-plaintext highlighter-rouge">/Users/nelle</code>.  Because Nelle is the user in our
+examples here, therefore we get <code class="language-plaintext highlighter-rouge">/Users/nelle</code> as our home directory.
+Typically, when you open a new command prompt, you will be in
+your home directory to start.</p>
+
+<p>Now let’s learn the command that will let us see the contents of our
+own filesystem.  We can see what’s in our home directory by running <code class="language-plaintext highlighter-rouge">ls</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code> prints the names of the files and directories in the current directory.
+We can make its output more comprehensible by using the <code class="language-plaintext highlighter-rouge">-F</code> <strong>option</strong>
+(also known as a <strong>switch</strong> or a <strong>flag</strong>),
+which tells <code class="language-plaintext highlighter-rouge">ls</code> to classify the output
+by adding a marker to file and directory names to indicate what they are:</p>
+<ul>
+  <li>a trailing <code class="language-plaintext highlighter-rouge">/</code> indicates that this is a directory</li>
+  <li><code class="language-plaintext highlighter-rouge">@</code> indicates a link</li>
+  <li><code class="language-plaintext highlighter-rouge">*</code> indicates an executable</li>
+</ul>
+
+<p>Depending on your default options,
+the shell might also use colors to indicate whether each entry is a file or
+directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span>
+</code></pre></div></div>
+
+<p>Here,
+we can see that our home directory contains only <strong>sub-directories</strong>.
+Any names in our output that don’t have a classification symbol
+are plain old <strong>files</strong>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-real-terminal-tip-clearing-your-terminal"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Real Terminal Tip: Clearing your terminal</h3>
+
+  <p>If your screen gets too cluttered, you can clear your terminal using the
+<code class="language-plaintext highlighter-rouge">clear</code> command. You can still access previous commands using <kbd>↑</kbd>
+and <kbd>↓</kbd> to move line-by-line, or by scrolling in your terminal.</p>
+</blockquote>
+
+<h3 id="getting-help">Getting help</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code> has lots of other <strong>options</strong>. There are two common ways to find out how
+to use a command and what options it accepts:</p>
+
+<ol>
+  <li>We can pass a <code class="language-plaintext highlighter-rouge">--help</code> option to the command,</li>
+  <li>We can read its manual with <code class="language-plaintext highlighter-rouge">man</code></li>
+</ol>
+
+<h4 id="the---help-option">The <code class="language-plaintext highlighter-rouge">--help</code> option</h4>
+
+<p>Many bash commands, and programs that people have written that can be
+run from within bash, support a <code class="language-plaintext highlighter-rouge">--help</code> option to display more
+information on how to use the command or program.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">--help</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-unsupported-command-line-options"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Unsupported command-line options</h3>
+  <p>If you try to use an option (flag) that is not supported, <code class="language-plaintext highlighter-rouge">ls</code> and other commands
+will usually print an error message similar to:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -j
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls: invalid option -- 'j'
+Try 'ls --help' for more information.
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<h4 id="the-man-command">The <code class="language-plaintext highlighter-rouge">man</code> command</h4>
+
+<p>The other way to learn about <code class="language-plaintext highlighter-rouge">ls</code> is to type</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ man ls
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LS(1)                                                          User Commands                                                          LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List information about the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor --sort is
+       specified.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       -a, --all
+              do not ignore entries starting with .
+
+       -A, --almost-all
+              do not list implied . and ..
+
+       --author
+              with -l, print the author of each file
+
+       -b, --escape
+              print C-style escapes for nongraphic characters
+
+       --block-size=SIZE
+              with -l, scale sizes by SIZE when printing them; e.g., '--block-size=M'; see SIZE format below
+
+       -B, --ignore-backups
+              do not list implied entries ending with ~
+
+       -c     with -lt: sort by, and show, ctime (time of last modification of file status information); with -l: show ctime  and  sort  by
+              name; otherwise: sort by ctime, newest first
+
+       -C     list entries by columns
+
+       --color[=WHEN]
+              colorize the output; WHEN can be 'always' (default if omitted), 'auto', or 'never'; more info below
+
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This command will turn your terminal into a page with a description
+of the <code class="language-plaintext highlighter-rouge">ls</code> command and its options.</p>
+
+<p>To navigate through the <code class="language-plaintext highlighter-rouge">man</code> pages,
+you may use <kbd>↑</kbd> and <kbd>↓</kbd> to move line-by-line,
+or try <kbd>B</kbd> and <kbd>Spacebar</kbd> to skip up and down by a full page.
+To search for a character or word in the <code class="language-plaintext highlighter-rouge">man</code> pages,
+use <kbd>/</kbd> followed by the character or word you are searching for.
+Sometimes a search will result in multiple hits.
+If so, you can move between hits using <kbd>N</kbd> (for moving forward) and
+<kbd>Shift</kbd>+<kbd>N</kbd> (for moving backward).</p>
+
+<p>To <strong>quit</strong> the <code class="language-plaintext highlighter-rouge">man</code> pages, press <kbd>Q</kbd>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-manual-pages-on-the-web"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Manual pages on the web</h3>
+
+  <p>Of course, there is a third way to access help for commands:
+searching the internet via your web browser.
+When using internet search, including the phrase <code class="language-plaintext highlighter-rouge">unix man page</code> in your search
+query will help to find relevant results.</p>
+
+  <p>GNU provides links to its
+<a href="http://www.gnu.org/manual/manual.html">manuals</a> including the
+<a href="http://www.gnu.org/software/coreutils/manual/coreutils.html">core GNU utilities</a>,
+which covers many commands introduced within this lesson.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-exploring-more-ls-flags"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Exploring More <code class="language-plaintext highlighter-rouge">ls</code> Flags</h3>
+
+  <p>You can also use two options at the same time. What does the command <code class="language-plaintext highlighter-rouge">ls</code> do when used
+with the <code class="language-plaintext highlighter-rouge">-l</code> option? What about if you use both the <code class="language-plaintext highlighter-rouge">-l</code> and the <code class="language-plaintext highlighter-rouge">-h</code> option?</p>
+
+  <p>Some of its output is about properties that we do not cover in this lesson (such
+as file permissions and ownership), but the rest should be useful
+nevertheless.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The <code class="language-plaintext highlighter-rouge">-l</code> option makes <code class="language-plaintext highlighter-rouge">ls</code> use a <strong>l</strong>ong listing format, showing not only
+the file/directory names but also additional information, such as the file size
+and the time of its last modification. If you use both the <code class="language-plaintext highlighter-rouge">-h</code> option and the <code class="language-plaintext highlighter-rouge">-l</code> option,
+this makes the file size ‘<strong>h</strong>uman readable’, i.e. displaying something like <code class="language-plaintext highlighter-rouge">5.3K</code>
+instead of <code class="language-plaintext highlighter-rouge">5369</code>.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-listing-in-reverse-chronological-order"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Listing in Reverse Chronological Order</h3>
+
+  <p>By default, <code class="language-plaintext highlighter-rouge">ls</code> lists the contents of a directory in alphabetical
+order by name. The command <code class="language-plaintext highlighter-rouge">ls -t</code> lists items by time of last
+change instead of alphabetically. The command <code class="language-plaintext highlighter-rouge">ls -r</code> lists the
+contents of a directory in reverse order.
+Which file is displayed last when you combine the <code class="language-plaintext highlighter-rouge">-t</code> and <code class="language-plaintext highlighter-rouge">-r</code> flags?
+Hint: You may need to use the <code class="language-plaintext highlighter-rouge">-l</code> flag to see the
+last changed dates.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The most recently changed file is listed last when using <code class="language-plaintext highlighter-rouge">-rt</code>. This
+can be very useful for finding your most recent edits or checking to
+see if a new output file was written.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<h3 id="exploring-other-directories">Exploring Other Directories</h3>
+
+<p>Not only can we use <code class="language-plaintext highlighter-rouge">ls</code> on the current working directory,
+but we can use it to list the contents of a different directory.
+Let’s take a look at our current directory by running <code class="language-plaintext highlighter-rouge">ls -F ~/</code>,
+i.e.,
+the command <code class="language-plaintext highlighter-rouge">ls</code> with the <code class="language-plaintext highlighter-rouge">-F</code> <strong>option</strong> and the <a href="https://swcarpentry.github.io/shell-novice/reference.html#argument"><strong>argument</strong></a>  <code class="language-plaintext highlighter-rouge">/</code>.
+The argument <code class="language-plaintext highlighter-rouge">~/</code> tells <code class="language-plaintext highlighter-rouge">ls</code> that
+we want a listing of something other than our current working directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span> ~/
+</code></pre></div></div>
+
+<p>As you may now see, using a bash shell is strongly dependent on the idea that
+your files are organized in a hierarchical file system.
+Organizing things hierarchically in this way helps us keep track of our work:
+it’s possible to put hundreds of files in our home directory,
+just as it’s possible to pile hundreds of printed papers on our desk,
+but it’s a self-defeating strategy.</p>
+
+<p>Now that we know the <code class="language-plaintext highlighter-rouge">shell-lesson-data</code> directory is located in current working directory, we
+can do two things.</p>
+
+<p>First, we can look at its contents, using the same strategy as before, passing
+a directory name to <code class="language-plaintext highlighter-rouge">ls</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span> shell-lesson-data
+</code></pre></div></div>
+
+<p>Second, we can actually change our location to a different directory, so
+we are no longer located in
+our home directory.</p>
+
+<p>The command to change locations is <code class="language-plaintext highlighter-rouge">cd</code> followed by a
+directory name to change our working directory.
+<code class="language-plaintext highlighter-rouge">cd</code> stands for ‘change directory’,
+which is a bit misleading:
+the command doesn’t change the directory;
+it changes the shell’s idea of what directory we are in.
+The <code class="language-plaintext highlighter-rouge">cd</code> command is akin to double clicking a folder in a graphical interface to get into a folder.</p>
+
+<p>Let’s say we want to move to the <code class="language-plaintext highlighter-rouge">data</code> directory we saw above. We can
+use the following series of commands to get there:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>shell-lesson-data
+</code></pre></div></div>
+
+<p>These commands will move us into
+the <code class="language-plaintext highlighter-rouge">shell-lesson-data</code> directory, then into the <code class="language-plaintext highlighter-rouge">data</code> directory.
+You will notice that <code class="language-plaintext highlighter-rouge">cd</code> doesn’t print anything. This is normal.
+Many shell commands will not output anything to the screen when successfully executed.
+But if we run <code class="language-plaintext highlighter-rouge">pwd</code> after it, we can see that we are now
+in <code class="language-plaintext highlighter-rouge">/Users/nelle/Desktop/shell-lesson-data/data</code>.
+If we run <code class="language-plaintext highlighter-rouge">ls -F</code> without arguments now,
+it lists the contents of <code class="language-plaintext highlighter-rouge">/Users/nelle/Desktop/shell-lesson-data/data</code>,
+because that’s where we now are:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span> data/
+</code></pre></div></div>
+
+<p>We now know how to go down the directory tree (i.e. how to go into a subdirectory),
+but how do we go up (i.e. how do we leave a directory and go into its parent directory)?
+We might try the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>shell-lesson-data
+</code></pre></div></div>
+
+<p>But we get an error! Why is this?</p>
+
+<p>With our methods so far,
+<code class="language-plaintext highlighter-rouge">cd</code> can only see sub-directories inside your current directory. There are
+different ways to see directories above your current location; we’ll start
+with the simplest.</p>
+
+<p>There is a shortcut in the shell to move up one directory level
+that looks like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ..
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">..</code> is a special directory name meaning
+“the directory containing this one”,
+or more succinctly,
+the <strong>parent</strong> of the current directory.
+Sure enough,
+if we run <code class="language-plaintext highlighter-rouge">pwd</code> after running <code class="language-plaintext highlighter-rouge">cd ..</code>, we’re back in <code class="language-plaintext highlighter-rouge">/Users/nelle/Desktop/shell-lesson-data</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<p>The special directory <code class="language-plaintext highlighter-rouge">..</code> doesn’t usually show up when we run <code class="language-plaintext highlighter-rouge">ls</code>. If we want
+to display it, we can add the <code class="language-plaintext highlighter-rouge">-a</code> option to <code class="language-plaintext highlighter-rouge">ls -F</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span> <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-a</code> stands for ‘show all’;
+it forces <code class="language-plaintext highlighter-rouge">ls</code> to show us file and directory names that begin with <code class="language-plaintext highlighter-rouge">.</code>,
+such as <code class="language-plaintext highlighter-rouge">..</code> (which, if we’re in <code class="language-plaintext highlighter-rouge">/Users/nelle</code>, refers to the <code class="language-plaintext highlighter-rouge">/Users</code> directory).
+As you can see,
+it also displays another special directory that’s just called <code class="language-plaintext highlighter-rouge">.</code>,
+which means ‘the current working directory’.
+It may seem redundant to have a name for it,
+but we’ll see some uses for it soon.</p>
+
+<p>Note that in most command line tools, multiple options can be combined
+with a single <code class="language-plaintext highlighter-rouge">-</code> and no spaces between the options: <code class="language-plaintext highlighter-rouge">ls -F -a</code> is
+equivalent to <code class="language-plaintext highlighter-rouge">ls -Fa</code>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-other-hidden-files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Other Hidden Files</h3>
+
+  <p>In addition to the hidden directories <code class="language-plaintext highlighter-rouge">..</code> and <code class="language-plaintext highlighter-rouge">.</code>, you may also see a file
+called <code class="language-plaintext highlighter-rouge">.bash_profile</code>. This file usually contains shell configuration
+settings. You may also see other files and directories beginning
+with <code class="language-plaintext highlighter-rouge">.</code>. These are usually files and directories that are used to configure
+different programs on your computer. The prefix <code class="language-plaintext highlighter-rouge">.</code> is used to prevent these
+configuration files from cluttering the terminal when a standard <code class="language-plaintext highlighter-rouge">ls</code> command
+is used.</p>
+</blockquote>
+
+<p>These three commands are the basic commands for navigating the filesystem on your computer:
+<code class="language-plaintext highlighter-rouge">pwd</code>, <code class="language-plaintext highlighter-rouge">ls</code>, and <code class="language-plaintext highlighter-rouge">cd</code>. Let’s explore some variations on those commands. What happens
+if you type <code class="language-plaintext highlighter-rouge">cd</code> on its own, without giving
+a directory?</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span>
+</code></pre></div></div>
+
+<p>How can you check what happened? <code class="language-plaintext highlighter-rouge">pwd</code> gives us the answer!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<p>It turns out that <code class="language-plaintext highlighter-rouge">cd</code> without an argument will return you to your home directory,
+which is great if you’ve gotten lost in your own filesystem.</p>
+
+<p>Let’s try returning to the <code class="language-plaintext highlighter-rouge">data</code> directory from before. Last time, we used
+three commands, but we can actually string together the list of directories
+to move to <code class="language-plaintext highlighter-rouge">data</code> in one step:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Desktop/shell-lesson-data/data
+</code></pre></div></div>
+
+<p>Check that we’ve moved to the right place by running <code class="language-plaintext highlighter-rouge">pwd</code> and <code class="language-plaintext highlighter-rouge">ls -F</code>.</p>
+
+<p>If we want to move up one level from the data directory, we could use <code class="language-plaintext highlighter-rouge">cd ..</code>.  But
+there is another way to move to any directory, regardless of your
+current location.</p>
+
+<p>So far, when specifying directory names, or even a directory path (as above),
+we have been using <strong>relative paths</strong>.  When you use a relative path with a command
+like <code class="language-plaintext highlighter-rouge">ls</code> or <code class="language-plaintext highlighter-rouge">cd</code>, it tries to find that location from where we are,
+rather than from the root of the file system.</p>
+
+<p>However, it is possible to specify the <strong>absolute path</strong> to a directory by
+including its entire path from the root directory, which is indicated by a
+leading slash. The leading <code class="language-plaintext highlighter-rouge">/</code> tells the computer to follow the path from
+the root of the file system, so it always refers to exactly one directory,
+no matter where we are when we run the command.</p>
+
+<p>This allows us to move to our <code class="language-plaintext highlighter-rouge">shell-lesson-data</code> directory from anywhere on
+the filesystem (including from inside <code class="language-plaintext highlighter-rouge">data</code>). To find the absolute path
+we’re looking for, we can use <code class="language-plaintext highlighter-rouge">pwd</code> and then extract the piece we need
+to move to <code class="language-plaintext highlighter-rouge">shell-lesson-data</code>.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ pwd
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/nelle/
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Then we could run something like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd /Users/nelle/shell-lesson-data
+</code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">pwd</code> and <code class="language-plaintext highlighter-rouge">ls -F</code> to ensure that we’re in the directory we expect. If we’re not, edit the command block below to make sure we’re in the correct location (<code class="language-plaintext highlighter-rouge">~/Desktop/shell-lesson-data/</code>)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pwd
+ls -F
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-two-more-shortcuts"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Two More Shortcuts</h3>
+
+  <p>The shell interprets a tilde (<code class="language-plaintext highlighter-rouge">~</code>) character at the start of a path to
+mean “the current user’s home directory”. For example, if Nelle’s home
+directory is <code class="language-plaintext highlighter-rouge">/Users/nelle</code>, then <code class="language-plaintext highlighter-rouge">~/data</code> is equivalent to
+<code class="language-plaintext highlighter-rouge">/Users/nelle/data</code>. This only works if it is the first character in the
+path: <code class="language-plaintext highlighter-rouge">here/there/~/elsewhere</code> is <em>not</em> <code class="language-plaintext highlighter-rouge">here/there/Users/nelle/elsewhere</code>.</p>
+
+  <p>Another shortcut is the <code class="language-plaintext highlighter-rouge">-</code> (dash) character. <code class="language-plaintext highlighter-rouge">cd</code> will translate <code class="language-plaintext highlighter-rouge">-</code> into
+<em>the previous directory I was in</em>, which is faster than having to remember,
+then type, the full path.  This is a <em>very</em> efficient way of moving
+<em>back and forth between two directories</em> – i.e. if you execute <code class="language-plaintext highlighter-rouge">cd -</code> twice,
+you end up back in the starting directory.</p>
+
+  <p>The difference between <code class="language-plaintext highlighter-rouge">cd ..</code> and <code class="language-plaintext highlighter-rouge">cd -</code> is
+that the former brings you <em>up</em>, while the latter brings you <em>back</em>.</p>
+
+  <hr />
+  <p>Try it out below!</p>
+</blockquote>
+
+<p>First navigate to <code class="language-plaintext highlighter-rouge">~/Desktop/shell-lesson-data</code> (you should already be there).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Desktop/shell-lesson-data
+</code></pre></div></div>
+
+<p>Then <code class="language-plaintext highlighter-rouge">cd</code> into the <code class="language-plaintext highlighter-rouge">creatures</code> directory</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>creatures
+</code></pre></div></div>
+
+<p>Now if you run</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> -
+</code></pre></div></div>
+<p>you’ll see you’re back in <code class="language-plaintext highlighter-rouge">~/Desktop/shell-lesson-data</code>.
+Run <code class="language-plaintext highlighter-rouge">cd -</code> again and you’re back in <code class="language-plaintext highlighter-rouge">~/Desktop/shell-lesson-data/creatures</code></p>
+
+<blockquote class="question">
+  <h3 id="question-absolute-vs-relative-paths"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Absolute vs Relative Paths</h3>
+
+  <p>Starting from <code class="language-plaintext highlighter-rouge">/Users/amanda/data</code>,
+which of the following commands could Amanda use to navigate to her home directory,
+which is <code class="language-plaintext highlighter-rouge">/Users/amanda</code>?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">cd .</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd /</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd /home/amanda</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ../..</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ~</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd home</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ~/data/..</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ..</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="question-solution"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Solution</h3>
+    <ol>
+      <li>No: <code class="language-plaintext highlighter-rouge">.</code> stands for the current directory.</li>
+      <li>No: <code class="language-plaintext highlighter-rouge">/</code> stands for the root directory.</li>
+      <li>No: Amanda’s home directory is <code class="language-plaintext highlighter-rouge">/Users/amanda</code>.</li>
+      <li>No: this command goes up two levels, i.e. ends in <code class="language-plaintext highlighter-rouge">/Users</code>.</li>
+      <li>Yes: <code class="language-plaintext highlighter-rouge">~</code> stands for the user’s home directory, in this case <code class="language-plaintext highlighter-rouge">/Users/amanda</code>.</li>
+      <li>No: this command would navigate into a directory <code class="language-plaintext highlighter-rouge">home</code> in the current directory, if it exists.</li>
+      <li>Yes: unnecessarily complicated, but correct.</li>
+      <li>Yes: shortcut to go back to the user’s home directory.</li>
+      <li>Yes: goes up one level.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-relative-path-resolution"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Relative Path Resolution</h3>
+
+  <p>Using the filesystem diagram below, if <code class="language-plaintext highlighter-rouge">pwd</code> displays <code class="language-plaintext highlighter-rouge">/Users/thing</code>,
+what will <code class="language-plaintext highlighter-rouge">ls -F ../backup</code> display?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">../backup: No such file or directory</code></li>
+    <li><code class="language-plaintext highlighter-rouge">2012-12-01 2013-01-08 2013-01-27</code></li>
+    <li><code class="language-plaintext highlighter-rouge">2012-12-01/ 2013-01-08/ 2013-01-27/</code></li>
+    <li><code class="language-plaintext highlighter-rouge">original/ pnas_final/ pnas_sub/</code></li>
+  </ol>
+
+  <p><img src="../../images/carpentries-cli/filesystem-challenge.svg" alt="A directory tree below the Users directory where '/Users' contains the directories 'backup' and 'thing'; '/Users/backup' contains 'original', 'pnas_final' and 'pnas_sub'; '/Users/thing' contains 'backup'; and '/Users/thing/backup' contains '2012-12-01', '2013-01-08' and '2013-01-27'" loading="lazy" /></p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>No: there <em>is</em> a directory <code class="language-plaintext highlighter-rouge">backup</code> in <code class="language-plaintext highlighter-rouge">/Users</code>.</li>
+      <li>No: this is the content of <code class="language-plaintext highlighter-rouge">Users/thing/backup</code>, but with <code class="language-plaintext highlighter-rouge">..</code>, we asked for one level further up.</li>
+      <li>No: see previous explanation.</li>
+      <li>Yes: <code class="language-plaintext highlighter-rouge">../backup/</code> refers to <code class="language-plaintext highlighter-rouge">/Users/backup/</code>.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-ls-reading-comprehension"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> <code class="language-plaintext highlighter-rouge">ls</code> Reading Comprehension</h3>
+
+  <p>Using the filesystem diagram below,
+if <code class="language-plaintext highlighter-rouge">pwd</code> displays <code class="language-plaintext highlighter-rouge">/Users/backup</code>,
+and <code class="language-plaintext highlighter-rouge">-r</code> tells <code class="language-plaintext highlighter-rouge">ls</code> to display things in reverse order,
+what command(s) will result in the following output:</p>
+
+  <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pnas_sub/ pnas_final/ original/
+</code></pre></div>  </div>
+
+  <p><img src="../../images/carpentries-cli/filesystem-challenge.svg" alt="A directory tree below the Users directory where '/Users' contains the directories 'backup' and 'thing'; '/Users/backup' contains 'original', 'pnas_final' and 'pnas_sub'; '/Users/thing' contains 'backup'; and'/Users/thing/backup' contains '2012-12-01', '2013-01-08' and '2013-01-27'" loading="lazy" /></p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">ls pwd</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ls -r -F</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ls -r -F /Users/backup</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>No: <code class="language-plaintext highlighter-rouge">pwd</code> is not the name of a directory.</li>
+      <li>Yes: <code class="language-plaintext highlighter-rouge">ls</code> without directory argument lists files and directories in the current directory.</li>
+      <li>Yes: uses the absolute path explicitly.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="general-syntax-of-a-shell-command">General Syntax of a Shell Command</h2>
+<p>We have now encountered commands, options, and arguments,
+but it is perhaps useful to formalise some terminology.</p>
+
+<p>Consider the command below as a general example of a command,
+which we will dissect into its component parts:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -F ~/Desktop/shell-lesson-data/
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code> is the <strong>command</strong>, with an <strong>option</strong> <code class="language-plaintext highlighter-rouge">-F</code> and an
+<strong>argument</strong> <code class="language-plaintext highlighter-rouge">/</code>.
+We’ve already encountered options (also called <strong>switches</strong> or <strong>flags</strong>) which
+either start with a single dash (<code class="language-plaintext highlighter-rouge">-</code>) or two dashes (<code class="language-plaintext highlighter-rouge">--</code>),
+and they change the behavior of a command.
+<a href="https://swcarpentry.github.io/shell-novice/reference.html#argument">Arguments</a> tell the command what to operate on (e.g. files and directories).
+Sometimes options and arguments are referred to as <strong>parameters</strong>.
+A command can be called with more than one option and more than one argument, but a
+command doesn’t always require an argument or an option.</p>
+
+<p>Each part is separated by spaces: if you omit the space
+between <code class="language-plaintext highlighter-rouge">ls</code> and <code class="language-plaintext highlighter-rouge">-F</code> the shell will look for a command called <code class="language-plaintext highlighter-rouge">ls-F</code>, which
+doesn’t exist. Also, capitalization can be important.
+For example, <code class="language-plaintext highlighter-rouge">ls -s</code> will display the size of files and directories alongside the names,
+while <code class="language-plaintext highlighter-rouge">ls -S</code> will sort the files and directories by size, as shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -s Desktop/shell-lesson-data/data
+total 116
+ 4 amino-acids.txt   4 animals.txt   4 morse.txt  12 planets.txt  76 sunspot.txt
+ 4 animal-counts     4 elements      4 pdb         4 salmon.txt
+$ ls -S Desktop/shell-lesson-data/data
+sunspot.txt  animal-counts  pdb        amino-acids.txt  salmon.txt
+planets.txt  elements       morse.txt  animals.txt
+</code></pre></div></div>
+
+<p>Putting all that together, our command above gives us a listing
+of files and directories in our shell-lesson-data folder.</p>
+
+<h3 id="nelles-pipeline-organizing-files">Nelle’s Pipeline: Organizing Files</h3>
+
+<p>Knowing this much about files and directories,
+Nelle is ready to organize the files that the protein assay machine will create.
+First,
+she creates a directory called <code class="language-plaintext highlighter-rouge">north-pacific-gyre</code>
+(to remind herself where the data came from).
+Inside that,
+she creates a directory called <code class="language-plaintext highlighter-rouge">2012-07-03</code>,
+which is the date she started processing the samples.
+She used to use names like <code class="language-plaintext highlighter-rouge">conference-paper</code> and <code class="language-plaintext highlighter-rouge">revised-results</code>,
+but she found them hard to understand after a couple of years.
+(The final straw was when she found herself creating
+a directory called <code class="language-plaintext highlighter-rouge">revised-revised-results-3</code>.)</p>
+
+<blockquote class="tip">
+  <h3 id="tip-sorting-output"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Sorting Output</h3>
+
+  <p>Nelle names her directories ‘year-month-day’,
+with leading zeroes for months and days,
+because the shell displays file and directory names in alphabetical order.
+If she used month names,
+December would come before July;
+if she didn’t use leading zeroes,
+November (‘11’) would come before July (‘7’). Similarly, putting the year first
+means that June 2012 will come before June 2013.</p>
+</blockquote>
+
+<p>Each of her physical samples is labelled according to her lab’s convention
+with a unique ten-character ID,
+such as ‘NENE01729A’.
+This ID is what she used in her collection log
+to record the location, time, depth, and other characteristics of the sample,
+so she decides to use it as part of each data file’s name.
+Since the assay machine’s output is plain text,
+she will call her files <code class="language-plaintext highlighter-rouge">NENE01729A.txt</code>, <code class="language-plaintext highlighter-rouge">NENE01812A.txt</code>, and so on.
+All 1520 files will go into the same directory.</p>
+
+<p>Now in her current directory <code class="language-plaintext highlighter-rouge">shell-lesson-data</code>,
+Nelle can see what files she has using the command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>north-pacific-gyre/2012-07-03/
+</code></pre></div></div>
+
+<p>This command is a lot to type,
+but she can let the shell do most of the work through what is called <strong>tab completion</strong>.
+If she types:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>nor
+</code></pre></div></div>
+
+<p>and then presses <kbd>Tab</kbd> (the tab key on her keyboard),
+the shell automatically completes the directory name for her:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls </span>north-pacific-gyre/
+</code></pre></div></div>
+
+<p>If she presses <kbd>Tab</kbd> again,
+Bash will add <code class="language-plaintext highlighter-rouge">2012-07-03/</code> to the command,
+since it’s the only possible completion.
+Pressing <kbd>Tab</kbd> again does nothing,
+since there are 19 possibilities;
+pressing <kbd>Tab</kbd> twice brings up a list of all the files,
+and so on.
+This is called <strong>tab completion</strong>,
+and we will see it in many other tools as we go on.</p>
+
+<h1 id="working-with-files-and-directories">Working with Files and Directories</h1>
+
+<p>We now know how to explore files and directories,
+but how do we create them in the first place?</p>
+
+<h2 id="step-one-see-where-we-are-and-what-we-already-have">Step one: see where we are and what we already have</h2>
+
+<p>Let’s go back to our <code class="language-plaintext highlighter-rouge">shell-lesson-data</code> directory on the Desktop
+and use <code class="language-plaintext highlighter-rouge">ls -F</code> to see what it contains:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span>
+</code></pre></div></div>
+
+<p>You should see folders like the following, if not, you’re in the wrong place!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>creatures/  data/  molecules/  north-pacific-gyre/  notes.txt  pizza.cfg  solar.pdf  writing/
+</code></pre></div></div>
+
+<h2 id="create-a-directory">Create a directory</h2>
+
+<p>Let’s create a new directory called <code class="language-plaintext highlighter-rouge">thesis</code> using the command <code class="language-plaintext highlighter-rouge">mkdir thesis</code>
+(which has no output):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>thesis
+</code></pre></div></div>
+
+<p>As you might guess from its name,
+<code class="language-plaintext highlighter-rouge">mkdir</code> means ‘make directory’.
+Since <code class="language-plaintext highlighter-rouge">thesis</code> is a relative path
+(i.e., does not have a leading slash, like <code class="language-plaintext highlighter-rouge">/what/ever/thesis</code>),
+the new directory is created in the current working directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span>
+</code></pre></div></div>
+
+<p>Since we’ve just created the <code class="language-plaintext highlighter-rouge">thesis</code> directory, there’s nothing in it yet:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-F</span> thesis
+</code></pre></div></div>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">mkdir</code> is not limited to creating single directories one at a time.
+The <code class="language-plaintext highlighter-rouge">-p</code> option allows <code class="language-plaintext highlighter-rouge">mkdir</code> to create a directory with nested subdirectories
+in a single operation:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> project/data project/results
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">-R</code> option to the <code class="language-plaintext highlighter-rouge">ls</code> command will list all nested subdirectories within a directory.
+Let’s use <code class="language-plaintext highlighter-rouge">ls -FR</code> to recursively list the new directory hierarchy we just created in the
+<code class="language-plaintext highlighter-rouge">project</code> directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-FR</span> project
+</code></pre></div></div>
+
+<p>It should look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>project/:
+data/  results/
+
+project/data:
+
+project/results:
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-two-ways-of-doing-the-same-thing"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Two ways of doing the same thing</h3>
+  <p>Using the shell to create a directory is no different than using a file explorer.
+If you open the current directory using your operating system’s graphical file explorer,
+the <code class="language-plaintext highlighter-rouge">thesis</code> directory will appear there too.
+While the shell and the file explorer are two different ways of interacting with the files,
+the files and directories themselves are the same.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-good-names-for-files-and-directories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Good names for files and directories</h3>
+
+  <p>Complicated names of files and directories can make your life painful
+when working on the command line. Here we provide a few useful
+tips for the names of your files and directories.</p>
+
+  <ol>
+    <li>
+      <p>Don’t use spaces.</p>
+
+      <p>Spaces can make a name more meaningful,
+but since spaces are used to separate arguments on the command line
+it is better to avoid them in names of files and directories.
+You can use <code class="language-plaintext highlighter-rouge">-</code> or <code class="language-plaintext highlighter-rouge">_</code> instead (e.g. <code class="language-plaintext highlighter-rouge">north-pacific-gyre/</code> rather than <code class="language-plaintext highlighter-rouge">north pacific gyre/</code>).
+To test this out, try typing <code class="language-plaintext highlighter-rouge">mkdir north pacific gyre</code>and see what directory (or directories!)
+are made when you check with <code class="language-plaintext highlighter-rouge">ls -F</code>.</p>
+    </li>
+    <li>
+      <p>Don’t begin the name with <code class="language-plaintext highlighter-rouge">-</code> (dash).</p>
+
+      <p>Commands treat names starting with <code class="language-plaintext highlighter-rouge">-</code> as options.</p>
+    </li>
+    <li>
+      <p>Stick with letters, numbers, <code class="language-plaintext highlighter-rouge">.</code> (period or ‘full stop’), <code class="language-plaintext highlighter-rouge">-</code> (dash) and <code class="language-plaintext highlighter-rouge">_</code> (underscore).</p>
+
+      <p>Many other characters have special meanings on the command line.
+We will learn about some of these during this lesson.
+There are special characters that can cause your command to not work as
+expected and can even result in data loss.</p>
+    </li>
+  </ol>
+
+  <p>If you need to refer to names of files or directories that have spaces
+or other special characters, you should surround the name in quotes (<code class="language-plaintext highlighter-rouge">""</code>).</p>
+</blockquote>
+
+<h2 id="creating-a-text-file">Creating a text file</h2>
+
+<p>Let’s change our working directory to <code class="language-plaintext highlighter-rouge">thesis</code> using <code class="language-plaintext highlighter-rouge">cd</code>,
+then run a text editor called Nano to create a file called <code class="language-plaintext highlighter-rouge">draft.txt</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd thesis
+$ nano draft.txt
+</code></pre></div></div>
+
+<blockquote class="warning">
+  <h3 id="warning-nano-wont-work-in-a-jupyter-notebook"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Nano won’t work in a Jupyter Notebook!</h3>
+  <p>Nano is an interactive, full screen editor. You’ll need to switch to a proper
+console to do this step, if you haven’t already.</p>
+
+  <p>In JupyterLab you can find this under the top menu by clicking <strong>File -&gt; New -&gt; Terminal</strong></p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-which-editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Which Editor?</h3>
+
+  <p>When we say, “<code class="language-plaintext highlighter-rouge">nano</code> is a text editor” we really do mean “text”: it can
+only work with plain character data, not tables, images, or any other
+human-friendly media. We use it in examples because it is one of the
+least complex text editors. However, because of this trait, it may
+not be powerful enough or flexible enough for the work you need to do
+after this workshop. On Unix systems (such as Linux and macOS),
+many programmers use <a href="http://www.gnu.org/software/emacs/">Emacs</a> or
+<a href="http://www.vim.org/">Vim</a> (both of which require more time to learn),
+or a graphical editor such as
+<a href="http://projects.gnome.org/gedit/">Gedit</a>. On Windows, you may wish to
+use <a href="http://notepad-plus-plus.org/">Notepad++</a>.  Windows also has a built-in
+editor called <code class="language-plaintext highlighter-rouge">notepad</code> that can be run from the command line in the same
+way as <code class="language-plaintext highlighter-rouge">nano</code> for the purposes of this lesson.</p>
+
+  <p>No matter what editor you use, you will need to know where it searches
+for and saves files. If you start it from the shell, it will (probably)
+use your current working directory as its default location. If you use
+your computer’s start menu, it may want to save files in your desktop or
+documents directory instead. You can change this by navigating to
+another directory the first time you “Save As…”</p>
+</blockquote>
+
+<p>Let’s type in a few lines of text.
+Once we’re happy with our text, we can press <kbd>Ctrl</kbd>+<kbd>O</kbd>
+(press the <kbd>Ctrl</kbd> or <kbd>Control</kbd> key and, while
+holding it down, press the <kbd>O</kbd> key) to write our data to disk
+(we’ll be asked what file we want to save this to:
+press <kbd>Return</kbd> to accept the suggested default of <code class="language-plaintext highlighter-rouge">draft.txt</code>).</p>
+
+<p><img src="../../images/carpentries-cli/nano-screenshot.png" alt="screenshot of nano text editor in action" loading="lazy" /></p>
+
+<p>Once our file is saved, we can use <kbd>Ctrl</kbd>+<kbd>X</kbd> to quit the editor and
+return to the shell.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-control-ctrl-or--key"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Control, Ctrl, or ^ Key</h3>
+
+  <p>The Control key is also called the ‘Ctrl’ key. There are various ways
+in which using the Control key may be described. For example, you may
+see an instruction to press the <kbd>Control</kbd> key and, while holding it down,
+press the <kbd>X</kbd> key, described as any of:</p>
+
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">Control-X</code></li>
+    <li><code class="language-plaintext highlighter-rouge">Control+X</code></li>
+    <li><code class="language-plaintext highlighter-rouge">Ctrl-X</code></li>
+    <li><code class="language-plaintext highlighter-rouge">Ctrl+X</code></li>
+    <li><code class="language-plaintext highlighter-rouge">^X</code></li>
+    <li><code class="language-plaintext highlighter-rouge">C-x</code></li>
+  </ul>
+
+  <p>In nano, along the bottom of the screen you’ll see <code class="language-plaintext highlighter-rouge">^G Get Help ^O WriteOut</code>.
+This means that you can use <code class="language-plaintext highlighter-rouge">Control-G</code> to get help and <code class="language-plaintext highlighter-rouge">Control-O</code> to save your
+file.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">nano</code> doesn’t leave any output on the screen after it exits,
+but <code class="language-plaintext highlighter-rouge">ls</code> now shows that we have created a file called <code class="language-plaintext highlighter-rouge">draft.txt</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-creating-files-a-different-way"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Creating Files a Different Way</h3>
+
+  <p>We have seen how to create text files using the <code class="language-plaintext highlighter-rouge">nano</code> editor.
+Now, try the following command:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>my_file.txt
+</code></pre></div>  </div>
+
+  <ol>
+    <li>
+      <p>What did the <code class="language-plaintext highlighter-rouge">touch</code> command do?
+When you look at your current directory using the GUI file explorer,
+does the file show up?</p>
+    </li>
+    <li>
+      <p>Use <code class="language-plaintext highlighter-rouge">ls -l</code> to inspect the files.  How large is <code class="language-plaintext highlighter-rouge">my_file.txt</code>?</p>
+    </li>
+    <li>
+      <p>When might you want to create a file this way?</p>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>
+        <p>The <code class="language-plaintext highlighter-rouge">touch</code> command generates a new file called <code class="language-plaintext highlighter-rouge">my_file.txt</code> in
+your current directory.  You
+can observe this newly generated file by typing <code class="language-plaintext highlighter-rouge">ls</code> at the
+command line prompt.  <code class="language-plaintext highlighter-rouge">my_file.txt</code> can also be viewed in your
+GUI file explorer.</p>
+      </li>
+      <li>
+        <p>When you inspect the file with <code class="language-plaintext highlighter-rouge">ls -l</code>, note that the size of
+<code class="language-plaintext highlighter-rouge">my_file.txt</code> is 0 bytes.  In other words, it contains no data.
+If you open <code class="language-plaintext highlighter-rouge">my_file.txt</code> using your text editor it is blank.</p>
+      </li>
+      <li>
+        <p>Some programs do not generate output files themselves, but
+instead require that empty files have already been generated.
+When the program is run, it searches for an existing file to
+populate with its output.  The touch command allows you to
+efficiently generate a blank text file to be used by such
+programs.</p>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-whats-in-a-name"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> What’s In A Name?</h3>
+
+  <p>You may have noticed that all of Nelle’s files are named ‘something dot
+something’, and in this part of the lesson, we always used the extension
+<code class="language-plaintext highlighter-rouge">.txt</code>.  This is just a convention: we can call a file <code class="language-plaintext highlighter-rouge">mythesis</code> or
+almost anything else we want. However, most people use two-part names
+most of the time to help them (and their programs) tell different kinds
+of files apart. The second part of such a name is called the
+<strong>filename extension</strong> and indicates
+what type of data the file holds: <code class="language-plaintext highlighter-rouge">.txt</code> signals a plain text file, <code class="language-plaintext highlighter-rouge">.pdf</code>
+indicates a PDF document, <code class="language-plaintext highlighter-rouge">.cfg</code> is a configuration file full of parameters
+for some program or other, <code class="language-plaintext highlighter-rouge">.png</code> is a PNG image, and so on.</p>
+
+  <p>This is <em>just a convention</em>, albeit an important one. Files contain
+bytes: it’s up to us and our programs to interpret those bytes
+according to the rules for plain text files, PDF documents, configuration
+files, images, and so on.</p>
+
+  <p>Naming a PNG image of a whale as <code class="language-plaintext highlighter-rouge">whale.mp3</code> doesn’t somehow
+magically turn it into a recording of whale song, though it <em>might</em>
+cause the operating system to try to open it with a music player
+when someone double-clicks it.</p>
+</blockquote>
+
+<h2 id="moving-files-and-directories">Moving files and directories</h2>
+<p>Returning to the <code class="language-plaintext highlighter-rouge">shell-lesson-data</code> directory,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Desktop/shell-lesson-data/
+</code></pre></div></div>
+
+<p>In our <code class="language-plaintext highlighter-rouge">thesis</code> directory we have a file <code class="language-plaintext highlighter-rouge">draft.txt</code>
+which isn’t a particularly informative name,
+so let’s change the file’s name using <code class="language-plaintext highlighter-rouge">mv</code>,
+which is short for ‘move’:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>thesis/draft.txt thesis/quotes.txt
+</code></pre></div></div>
+
+<p>The first argument tells <code class="language-plaintext highlighter-rouge">mv</code> what we’re ‘moving’,
+while the second is where it’s to go.
+In this case,
+we’re moving <code class="language-plaintext highlighter-rouge">thesis/draft.txt</code> to <code class="language-plaintext highlighter-rouge">thesis/quotes.txt</code>,
+which has the same effect as renaming the file.
+Sure enough,
+<code class="language-plaintext highlighter-rouge">ls</code> shows us that <code class="language-plaintext highlighter-rouge">thesis</code> now contains one file called <code class="language-plaintext highlighter-rouge">quotes.txt</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>thesis
+</code></pre></div></div>
+
+<p>One must be careful when specifying the target file name, since <code class="language-plaintext highlighter-rouge">mv</code> will
+silently overwrite any existing file with the same name, which could
+lead to data loss. An additional option, <code class="language-plaintext highlighter-rouge">mv -i</code> (or <code class="language-plaintext highlighter-rouge">mv --interactive</code>),
+can be used to make <code class="language-plaintext highlighter-rouge">mv</code> ask you for confirmation before overwriting.</p>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">mv</code> also works on directories.</p>
+
+<p>Let’s move <code class="language-plaintext highlighter-rouge">quotes.txt</code> into the current working directory.
+We use <code class="language-plaintext highlighter-rouge">mv</code> once again,
+but this time we’ll use just the name of a directory as the second argument
+to tell <code class="language-plaintext highlighter-rouge">mv</code> that we want to keep the filename
+but put the file somewhere new.
+(This is why the command is called ‘move’.)
+In this case,
+the directory name we use is the special directory name <code class="language-plaintext highlighter-rouge">.</code> that we mentioned earlier.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>thesis/quotes.txt <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>The effect is to move the file from the directory it was in to the current working directory.
+<code class="language-plaintext highlighter-rouge">ls</code> now shows us that <code class="language-plaintext highlighter-rouge">thesis</code> is empty:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>thesis
+</code></pre></div></div>
+
+<p>Alte<span class="notranslate">rna</span>tively, we can confirm the file <code class="language-plaintext highlighter-rouge">quotes.txt</code> is no longer present in the <code class="language-plaintext highlighter-rouge">thesis</code> directory
+by explicitly trying to list it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>thesis/quotes.txt
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code> with a filename or directory as an argument only lists the requested file or directory.
+If the file given as the argument doesn’t exist, the shell returns an error as we saw above.
+We can use this to see that <code class="language-plaintext highlighter-rouge">quotes.txt</code> is now present in our current directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>quotes.txt
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-moving-files-to-a-new-folder"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Moving Files to a new folder</h3>
+
+  <p>After running the following commands,
+Jamie realizes that she put the files <code class="language-plaintext highlighter-rouge">sucrose.dat</code> and <code class="language-plaintext highlighter-rouge">maltose.dat</code> into the wrong folder.
+The files should have been placed in the <code class="language-plaintext highlighter-rouge">raw</code> folder.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -F
+ analyzed/ raw/
+$ ls -F analyzed
+fructose.dat glucose.dat maltose.dat sucrose.dat
+$ cd analyzed
+</code></pre></div>  </div>
+
+  <p>Fill in the blanks to move these files to the <code class="language-plaintext highlighter-rouge">raw/</code> folder
+(i.e. the one she forgot to put them in)</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>sucrose.dat maltose.dat ____/____
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mv </span>sucrose.dat maltose.dat ../raw
+</code></pre></div>    </div>
+    <p>Recall that <code class="language-plaintext highlighter-rouge">..</code> refers to the parent directory (i.e. one above the current directory)
+and that <code class="language-plaintext highlighter-rouge">.</code> refers to the current directory.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="copying-files-and-directories">Copying files and directories</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">cp</code> command works very much like <code class="language-plaintext highlighter-rouge">mv</code>,
+except it copies a file instead of moving it.
+We can check that it did the right thing using <code class="language-plaintext highlighter-rouge">ls</code>
+with two paths as arguments — like most Unix commands,
+<code class="language-plaintext highlighter-rouge">ls</code> can be given multiple paths at once:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>quotes.txt thesis/quotations.txt
+<span class="nb">ls </span>quotes.txt thesis/quotations.txt
+</code></pre></div></div>
+
+<p>We can also copy a directory and all its contents by using the
+<a href="https://en.wikipedia.org/wiki/Recursion">recursive</a> option <code class="language-plaintext highlighter-rouge">-r</code>,
+e.g. to back up a directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> <span class="nt">-r</span> thesis thesis_backup
+</code></pre></div></div>
+
+<p>We can check the result by listing the contents of both the <code class="language-plaintext highlighter-rouge">thesis</code> and <code class="language-plaintext highlighter-rouge">thesis_backup</code> directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>thesis thesis_backup
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-renaming-files"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Renaming Files</h3>
+
+  <p>Suppose that you created a plain-text file in your current directory to contain a list of the
+statistical tests you will need to do to analyze your data, and named it: <code class="language-plaintext highlighter-rouge">statstics.txt</code></p>
+
+  <p>After creating and saving this file you realize you misspelled the filename! You want to
+correct the mistake, which of the following commands could you use to do so?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">cp statstics.txt statistics.txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">mv statstics.txt statistics.txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">mv statstics.txt .</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cp statstics.txt .</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>No.  While this would create a file with the correct name,
+the incorrectly named file still exists in the directory
+and would need to be deleted.</li>
+      <li>Yes, this would work to rename the file.</li>
+      <li>No, the period(.) indicates where to move the file, but does not provide a new file name;
+identical file names
+cannot be created.</li>
+      <li>No, the period(.) indicates where to copy the file, but does not provide a new file name;
+identical file names cannot be created.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-moving-and-copying"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Moving and Copying</h3>
+
+  <p>What is the output of the closing <code class="language-plaintext highlighter-rouge">ls</code> command in the sequence shown below?</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pwd
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/jamie/data
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-5"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proteins.dat
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir recombined
+mv proteins.dat recombined/
+cp recombined/proteins.dat ../proteins-saved.dat
+ls
+</code></pre></div>    </div>
+  </blockquote>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">proteins-saved.dat recombined</code></li>
+    <li><code class="language-plaintext highlighter-rouge">recombined</code></li>
+    <li><code class="language-plaintext highlighter-rouge">proteins.dat recombined</code></li>
+    <li><code class="language-plaintext highlighter-rouge">proteins-saved.dat</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We start in the <code class="language-plaintext highlighter-rouge">/Users/jamie/data</code> directory, and create a new folder called <code class="language-plaintext highlighter-rouge">recombined</code>.
+The second line moves (<code class="language-plaintext highlighter-rouge">mv</code>) the file <code class="language-plaintext highlighter-rouge">proteins.dat</code> to the new folder (<code class="language-plaintext highlighter-rouge">recombined</code>).
+The third line makes a copy of the file we just moved.
+The tricky part here is where the file was copied to.
+Recall that <code class="language-plaintext highlighter-rouge">..</code> means ‘go up a level’, so the copied file is now in <code class="language-plaintext highlighter-rouge">/Users/jamie</code>.
+Notice that <code class="language-plaintext highlighter-rouge">..</code> is interpreted with respect to the current working
+directory, <strong>not</strong> with respect to the location of the file being copied.
+So, the only thing that will show using ls (in <code class="language-plaintext highlighter-rouge">/Users/jamie/data</code>) is the recombined folder.</p>
+
+    <ol>
+      <li>No, see explanation above. <code class="language-plaintext highlighter-rouge">proteins-saved.dat</code> is located at <code class="language-plaintext highlighter-rouge">/Users/jamie</code></li>
+      <li>Yes</li>
+      <li>No, see explanation above. <code class="language-plaintext highlighter-rouge">proteins.dat</code> is located at <code class="language-plaintext highlighter-rouge">/Users/jamie/data/recombined</code></li>
+      <li>No, see explanation above. <code class="language-plaintext highlighter-rouge">proteins-saved.dat</code> is located at <code class="language-plaintext highlighter-rouge">/Users/jamie</code></li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="removing-files-and-directories">Removing files and directories</h2>
+
+<p>Returning to the <code class="language-plaintext highlighter-rouge">shell-lesson-data</code> directory,
+let’s tidy up this directory by removing the <code class="language-plaintext highlighter-rouge">quotes.txt</code> file we created.
+The Unix command we’ll use for this is <code class="language-plaintext highlighter-rouge">rm</code> (short for ‘remove’):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm </span>quotes.txt
+</code></pre></div></div>
+
+<p>We can confirm the file has gone using <code class="language-plaintext highlighter-rouge">ls</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>quotes.txt
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h2 id="deleting-is-forever">Deleting Is Forever</h2>
+
+  <p>The Unix shell doesn’t have a trash bin that we can recover deleted
+files from (though most graphical interfaces to Unix do).  Instead,
+when we delete files, they are unlinked from the file system so that
+their storage space on disk can be recycled. Tools for finding and
+recovering deleted files do exist, but there’s no guarantee they’ll
+work in any particular situation, since the computer may recycle the
+file’s disk space right away.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-using-rm-safely"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Using <code class="language-plaintext highlighter-rouge">rm</code> Safely</h3>
+
+  <p>What happens when we execute <code class="language-plaintext highlighter-rouge">rm -i thesis_backup/quotations.txt</code>?
+Why would we want this protection when using <code class="language-plaintext highlighter-rouge">rm</code>?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span>: remove regular file <span class="s1">'thesis_backup/quotations.txt'</span>? y
+</code></pre></div>    </div>
+    <p>The <code class="language-plaintext highlighter-rouge">-i</code> option will prompt before (every) removal (use <kbd>Y</kbd> to confirm deletion
+or <kbd>N</kbd> to keep the file).
+The Unix shell doesn’t have a trash bin, so all the files removed will disappear forever.
+By using the <code class="language-plaintext highlighter-rouge">-i</code> option, we have the chance to check that we are deleting only the files
+that we want to remove.</p>
+  </blockquote>
+</blockquote>
+
+<p>If we try to remove the <code class="language-plaintext highlighter-rouge">thesis</code> directory using <code class="language-plaintext highlighter-rouge">rm thesis</code>,
+we get an error message:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm </span>thesis
+</code></pre></div></div>
+
+<p>This happens because <code class="language-plaintext highlighter-rouge">rm</code> by default only works on files, not directories.</p>
+
+<p><code class="language-plaintext highlighter-rouge">rm</code> can remove a directory <em>and all its contents</em> if we use the
+recursive option <code class="language-plaintext highlighter-rouge">-r</code>, and it will do so <em>without any confirmation prompts</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-r</span> thesis
+</code></pre></div></div>
+
+<p>Given that there is no way to retrieve files deleted using the shell,
+<code class="language-plaintext highlighter-rouge">rm -r</code> <em>should be used with great caution</em>
+(you might consider adding the interactive option <code class="language-plaintext highlighter-rouge">rm -r -i</code>).</p>
+
+<h2 id="operations-with-multiple-files-and-directories">Operations with multiple files and directories</h2>
+
+<p>Oftentimes one needs to copy or move several files at once.
+This can be done by providing a list of individual filenames,
+or specifying a naming pattern using wildcards.</p>
+
+<blockquote class="question">
+  <h3 id="question-copy-with-multiple-filenames"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Copy with Multiple Filenames</h3>
+
+  <p>For this exercise, you can test the commands in the <code class="language-plaintext highlighter-rouge">shell-lesson-data/data</code> directory.</p>
+
+  <p>In the example below, what does <code class="language-plaintext highlighter-rouge">cp</code> do when given several filenames and a directory name?</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir backup
+$ cp amino-acids.txt animals.txt backup/
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>In the example below, what does <code class="language-plaintext highlighter-rouge">cp</code> do when given three or more file names?</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -F
+amino-acids.txt  animals.txt  backup/  elements/  morse.txt  pdb/
+planets.txt  salmon.txt  sunspot.txt
+$ cp amino-acids.txt animals.txt morse.txt
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>If given more than one file name followed by a directory name
+(i.e. the destination directory must be the last argument),
+<code class="language-plaintext highlighter-rouge">cp</code> copies the files to the named directory.</p>
+
+    <p>If given three file names, <code class="language-plaintext highlighter-rouge">cp</code> throws an error such as the one below,
+because it is expecting a directory name as the last argument.</p>
+
+    <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp: target 'morse.txt' is not a directory
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<h3 id="using-wildcards-for-accessing-multiple-files-at-once">Using wildcards for accessing multiple files at once</h3>
+
+<blockquote class="tip">
+  <h3 id="tip-wildcards"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Wildcards</h3>
+
+  <p><code class="language-plaintext highlighter-rouge">*</code> is a <strong>wildcard</strong>, which matches zero or more  characters.
+Let’s consider the <code class="language-plaintext highlighter-rouge">shell-lesson-data/molecules</code> directory:
+<code class="language-plaintext highlighter-rouge">*.pdb</code> matches <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, <code class="language-plaintext highlighter-rouge">propane.pdb</code>, and every
+file that ends with ‘.pdb’. On the other hand, <code class="language-plaintext highlighter-rouge">p*.pdb</code> only matches
+<code class="language-plaintext highlighter-rouge">pentane.pdb</code> and <code class="language-plaintext highlighter-rouge">propane.pdb</code>, because the ‘p’ at the front only
+matches filenames that begin with the letter ‘p’.</p>
+
+  <p><code class="language-plaintext highlighter-rouge">?</code> is also a wildcard, but it matches exactly one character.
+So <code class="language-plaintext highlighter-rouge">?ethane.pdb</code> would match <code class="language-plaintext highlighter-rouge">methane.pdb</code> whereas
+<code class="language-plaintext highlighter-rouge">*ethane.pdb</code> matches both <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, and <code class="language-plaintext highlighter-rouge">methane.pdb</code>.</p>
+
+  <p>Wildcards can be used in combination with each other
+e.g. <code class="language-plaintext highlighter-rouge">???ane.pdb</code> matches three characters followed by <code class="language-plaintext highlighter-rouge">ane.pdb</code>,
+giving <code class="language-plaintext highlighter-rouge">cubane.pdb  ethane.pdb  octane.pdb</code>.</p>
+
+  <p>When the shell sees a wildcard, it expands the wildcard to create a
+list of matching filenames <em>before</em> running the command that was
+asked for. As an exception, if a wildcard <span class="notranslate">expression</span> does not match
+any file, Bash will pass the <span class="notranslate">expression</span> as an argument to the command
+as it is. For example, typing <code class="language-plaintext highlighter-rouge">ls *.pdf</code> in the <code class="language-plaintext highlighter-rouge">molecules</code> directory
+(which contains only files with names ending with <code class="language-plaintext highlighter-rouge">.pdb</code>) results in
+an error message that there is no file called <code class="language-plaintext highlighter-rouge">*.pdf</code>.
+However, generally commands like <code class="language-plaintext highlighter-rouge">wc</code> and <code class="language-plaintext highlighter-rouge">ls</code> see the lists of
+file names matching these <span class="notranslate">expression</span>s, but not the wildcards
+themselves. It is the shell, not the other programs, that deals with
+expanding wildcards.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-list-filenames-matching-a-pattern"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> List filenames matching a pattern</h3>
+
+  <p>When run in the <code class="language-plaintext highlighter-rouge">molecules</code> directory, which <code class="language-plaintext highlighter-rouge">ls</code> command(s) will
+produce this output?</p>
+
+  <p><code class="language-plaintext highlighter-rouge">ethane.pdb   methane.pdb</code></p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">ls *t*ane.pdb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ls *t?ne.*</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ls *t??ne.pdb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ls ethane.*</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The solution is <code class="language-plaintext highlighter-rouge">3.</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">1.</code> shows all files whose names contain zero or more characters (<code class="language-plaintext highlighter-rouge">*</code>)
+followed by the letter <code class="language-plaintext highlighter-rouge">t</code>,
+then zero or more characters (<code class="language-plaintext highlighter-rouge">*</code>) followed by <code class="language-plaintext highlighter-rouge">ane.pdb</code>.
+This gives <code class="language-plaintext highlighter-rouge">ethane.pdb  methane.pdb  octane.pdb  pentane.pdb</code>.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">2.</code> shows all files whose names start with zero or more characters (<code class="language-plaintext highlighter-rouge">*</code>) followed by
+the letter <code class="language-plaintext highlighter-rouge">t</code>,
+then a single character (<code class="language-plaintext highlighter-rouge">?</code>), then <code class="language-plaintext highlighter-rouge">ne.</code> followed by zero or more characters (<code class="language-plaintext highlighter-rouge">*</code>).
+This will give us <code class="language-plaintext highlighter-rouge">octane.pdb</code> and <code class="language-plaintext highlighter-rouge">pentane.pdb</code> but doesn’t match anything
+which ends in <code class="language-plaintext highlighter-rouge">thane.pdb</code>.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">3.</code> fixes the problems of option 2 by matching two characters (<code class="language-plaintext highlighter-rouge">??</code>) between <code class="language-plaintext highlighter-rouge">t</code> and <code class="language-plaintext highlighter-rouge">ne</code>.
+This is the solution.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">4.</code> only shows files starting with <code class="language-plaintext highlighter-rouge">ethane.</code>.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-more-on-wildcards"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> More on Wildcards</h3>
+
+  <p>Sam has a directory containing calibration data, datasets, and descriptions of
+the datasets:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── 2015-10-23-calibration.txt
+├── 2015-10-23-dataset1.txt
+├── 2015-10-23-dataset2.txt
+├── 2015-10-23-dataset_overview.txt
+├── 2015-10-26-calibration.txt
+├── 2015-10-26-dataset1.txt
+├── 2015-10-26-dataset2.txt
+├── 2015-10-26-dataset_overview.txt
+├── 2015-11-23-calibration.txt
+├── 2015-11-23-dataset1.txt
+├── 2015-11-23-dataset2.txt
+├── 2015-11-23-dataset_overview.txt
+├── backup
+│   ├── calibration
+│   └── datasets
+└── send_to_bob
+    ├── all_datasets_created_on_a_23rd
+    └── all_november_files
+</code></pre></div>  </div>
+
+  <p>Before heading off to another field trip, she wants to back up her data and
+send some datasets to her colleague Bob. Sam uses the following commands
+to get the job done:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cp *dataset* backup/datasets
+$ cp ____calibration____ backup/calibration
+$ cp 2015-____-____ send_to_bob/all_november_files/
+$ cp ____ send_to_bob/all_datasets_created_on_a_23rd/
+</code></pre></div>  </div>
+
+  <p>Help Sam by filling in the blanks.</p>
+
+  <p>The resulting directory structure should look like this</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── 2015-10-23-calibration.txt
+├── 2015-10-23-dataset1.txt
+├── 2015-10-23-dataset2.txt
+├── 2015-10-23-dataset_overview.txt
+├── 2015-10-26-calibration.txt
+├── 2015-10-26-dataset1.txt
+├── 2015-10-26-dataset2.txt
+├── 2015-10-26-dataset_overview.txt
+├── 2015-11-23-calibration.txt
+├── 2015-11-23-dataset1.txt
+├── 2015-11-23-dataset2.txt
+├── 2015-11-23-dataset_overview.txt
+├── backup
+│   ├── calibration
+│   │   ├── 2015-10-23-calibration.txt
+│   │   ├── 2015-10-26-calibration.txt
+│   │   └── 2015-11-23-calibration.txt
+│   └── datasets
+│       ├── 2015-10-23-dataset1.txt
+│       ├── 2015-10-23-dataset2.txt
+│       ├── 2015-10-23-dataset_overview.txt
+│       ├── 2015-10-26-dataset1.txt
+│       ├── 2015-10-26-dataset2.txt
+│       ├── 2015-10-26-dataset_overview.txt
+│       ├── 2015-11-23-dataset1.txt
+│       ├── 2015-11-23-dataset2.txt
+│       └── 2015-11-23-dataset_overview.txt
+└── send_to_bob
+    ├── all_datasets_created_on_a_23rd
+    │   ├── 2015-10-23-dataset1.txt
+    │   ├── 2015-10-23-dataset2.txt
+    │   ├── 2015-10-23-dataset_overview.txt
+    │   ├── 2015-11-23-dataset1.txt
+    │   ├── 2015-11-23-dataset2.txt
+    │   └── 2015-11-23-dataset_overview.txt
+    └── all_november_files
+        ├── 2015-11-23-calibration.txt
+        ├── 2015-11-23-dataset1.txt
+        ├── 2015-11-23-dataset2.txt
+        └── 2015-11-23-dataset_overview.txt
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp *calibration.txt backup/calibration
+cp 2015-11-* send_to_bob/all_november_files/
+cp *-23-dataset* send_to_bob/all_datasets_created_on_a_23rd/
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-organizing-directories-and-files"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Organizing Directories and Files</h3>
+
+  <p>Jamie is working on a project and she sees that her files aren’t very well
+organized:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -F
+analyzed/  fructose.dat    raw/   sucrose.dat
+</code></pre></div>  </div>
+
+  <p>The <code class="language-plaintext highlighter-rouge">fructose.dat</code> and <code class="language-plaintext highlighter-rouge">sucrose.dat</code> files contain output from her data
+analysis. What command(s) covered in this lesson does she need to run
+so that the commands below will produce the output shown?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -F
+analyzed/   raw/
+$ ls analyzed
+fructose.dat    sucrose.dat
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv</span> <span class="k">*</span>.dat analyzed
+</code></pre></div>    </div>
+    <p>Jamie needs to move her files <code class="language-plaintext highlighter-rouge">fructose.dat</code> and <code class="language-plaintext highlighter-rouge">sucrose.dat</code> to the <code class="language-plaintext highlighter-rouge">analyzed</code> directory.
+The shell will expand *.dat to match all .dat files in the current directory.
+The <code class="language-plaintext highlighter-rouge">mv</code> command then moves the list of .dat files to the ‘analyzed’ directory.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-reproduce-a-folder-structure"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Reproduce a folder structure</h3>
+
+  <p>You’re starting a new experiment and would like to duplicate the directory
+structure from your previous experiment so you can add new data.</p>
+
+  <p>Assume that the previous experiment is in a folder called ‘2016-05-18’,
+which contains a <code class="language-plaintext highlighter-rouge">data</code> folder that in turn contains folders named <code class="language-plaintext highlighter-rouge">raw</code> and
+<code class="language-plaintext highlighter-rouge">processed</code> that contain data files.  The goal is to copy the folder structure
+of the <code class="language-plaintext highlighter-rouge">2016-05-18-data</code> folder into a folder called <code class="language-plaintext highlighter-rouge">2016-05-20</code>
+so that your final directory structure looks like this:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2016-05-20/
+└── data
+   ├── processed
+   └── raw
+</code></pre></div>  </div>
+
+  <p>Which of the following set of commands would achieve this objective?
+What would the other commands do?</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-option-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Option 1</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir 2016-05-20
+$ mkdir 2016-05-20/data
+$ mkdir 2016-05-20/data/processed
+$ mkdir 2016-05-20/data/raw
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-option-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Option 2</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir 2016-05-20
+$ cd 2016-05-20/
+$ mkdir data/
+$ cd data
+$ mkdir raw processed
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-option-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Option 3</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir 2016-05-20/data/raw
+$ mkdir 2016-05-20/data/processed
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-option-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Option 4</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir -p 2016-05-20/data/raw
+$ mkdir -p 2016-05-20/data/processed
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-option-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Option 5</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir 2016-05-20
+$ cd 2016-05-20
+$ mkdir data
+$ mkdir raw processed
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The first two sets of commands achieve this objective.
+The first set uses relative paths to create the top-level directory before
+the subdirectories.</p>
+
+    <p>The third set of commands will give an error because the default behavior of <code class="language-plaintext highlighter-rouge">mkdir</code>
+won’t create a subdirectory of a non-existent directory:
+the intermediate level folders must be created first.</p>
+
+    <p>The fourth set of commands achieve this objective. Remember, the <code class="language-plaintext highlighter-rouge">-p</code> option,
+followed by a path of one or more
+directories, will cause <code class="language-plaintext highlighter-rouge">mkdir</code> to create any intermediate subdirectories as required.</p>
+
+    <p>The final set of commands generates the ‘raw’ and ‘processed’ directories at the same level
+as the ‘data’ directory.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>A shell is a program whose primary purpose is to read commands and run other programs.</p>
+</li>
+                        
+                        <li><p>This lesson uses Bash, the default shell in many implementations of Unix.</p>
+</li>
+                        
+                        <li><p>Programs can be run in Bash by entering commands at the command-line prompt.</p>
+</li>
+                        
+                        <li><p>The shell’s main advantages are its high action-to-keystroke ratio, its support for automating repetitive tasks, and its capacity to access networked machines.</p>
+</li>
+                        
+                        <li><p>The shell’s main disadvantages are its primarily textual nature and how cryptic its commands and operation can be.</p>
+</li>
+                        
+                        <li><p>The file system is responsible for managing information on the disk.</p>
+</li>
+                        
+                        <li><p>Information is stored in files, which are stored in directories (folders).</p>
+</li>
+                        
+                        <li><p>Directories can also store other directories, which then form a directory tree.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">cd [path]</code> changes the current working directory.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">ls [path]</code> prints a listing of a specific file or directory; <code class="language-plaintext highlighter-rouge">ls</code> on its own lists the current working directory.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">pwd</code> prints the user’s current working directory.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">/</code> on its own is the root directory of the whole file system.</p>
+</li>
+                        
+                        <li><p>Most commands take options (flags) that begin with a <code class="language-plaintext highlighter-rouge">-</code>.</p>
+</li>
+                        
+                        <li><p>A relative path specifies a location starting from the current location.</p>
+</li>
+                        
+                        <li><p>An absolute path specifies a location from the root of the file system.</p>
+</li>
+                        
+                        <li><p>Directory names in a path are separated with <code class="language-plaintext highlighter-rouge">/</code> on Unix, but <code class="language-plaintext highlighter-rouge">\</code> on Windows.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">..</code> means ‘the directory above the current one’; <code class="language-plaintext highlighter-rouge">.</code> on its own means ‘the current directory’.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">cp [old] [new]</code> copies a file.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">mkdir [path]</code> creates a new directory.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">mv [old] [new]</code> moves (renames) a file or directory.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">rm [path]</code> removes (deletes) a file.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">*</code> matches zero or more characters in a filename, so <code class="language-plaintext highlighter-rouge">*.txt</code> matches all files ending in <code class="language-plaintext highlighter-rouge">.txt</code>.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">?</code> matches any single character in a filename, so <code class="language-plaintext highlighter-rouge">?.txt</code> matches <code class="language-plaintext highlighter-rouge">a.txt</code> but not <code class="language-plaintext highlighter-rouge">any.txt</code>.</p>
+</li>
+                        
+                        <li><p>Use of the Control key may be described in many ways, including <code class="language-plaintext highlighter-rouge">Ctrl-X</code>, <code class="language-plaintext highlighter-rouge">Control-X</code>, and <code class="language-plaintext highlighter-rouge">^X</code>.</p>
+</li>
+                        
+                        <li><p>The shell does not have a trash bin: once something is deleted, it’s really gone.</p>
+</li>
+                        
+                        <li><p>Most files’ names are <code class="language-plaintext highlighter-rouge">something.extension</code>. The extension isn’t required, and doesn’t guarantee anything, but is normally used to indicate the type of data in the file.</p>
+</li>
+                        
+                        <li><p>Depending on the type of work you do, you may need a more powerful text editor than Nano.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=CLI basics in Galaxy (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">The Carpentries, Helena Rasche, Bazante Sanders, 2021 <b>CLI basics in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-basics/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-basics/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-cli-basics,
+author = "The Carpentries and Helena Rasche and Bazante Sanders",
+title = "CLI basics in Galaxy (Galaxy Training Materials)",
+year = "2021",
+month = "09",
+day = "29"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-basics/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Advanced CLI in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/cli-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> CLI Educational Game - Bashcrawl:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/cli-bashcrawl/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

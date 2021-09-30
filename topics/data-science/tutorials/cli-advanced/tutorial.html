@@ -1,0 +1,2609 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Advanced CLI in Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: Advanced CLI in Galaxy" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/cli-advanced/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/cli-advanced/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-advanced/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-advanced/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-advanced/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-advanced/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/cli-advanced/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdata-science%2Ftutorials%2Fcli-advanced%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/data-science/tutorials/cli-advanced/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/data-science/tutorials/cli-advanced/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/data-science/tutorials/cli-advanced/tutorial.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2021-09-29 14:33:05 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Advanced CLI in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / cli-advanced / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Advanced CLI in Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/cli-advanced/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - How can I combine existing commands to do new things?\n - How can I perform the same actions on many different files?\n - How can I find files?\n - How can I find things in files?\n\n\\nThe objectives are:\n - Redirect a command's output to a file.\n - Process a file instead of keyboard input using redirection.\n - Construct command pipelines with two or more stages.\n - Explain what usually happens if a program or pipeline isn't given any input to process.\n - Explain Unix's 'small pieces, loosely joined' philosophy.\n - Write a loop that applies one or more commands separately to each file in a set of files.\n - Trace the values taken on by a loop variable during execution of the loop.\n - Explain the difference between a variable's name and its value.\n - Explain why spaces and some punctuation characters shouldn't be used in file names.\n - Demonstrate how to see what commands have recently been executed.\n - Re-run recently executed commands without retyping them.\n - Use `grep` to select lines from text files that match simple patterns.\n - Use `find` to find files and directories whose names match simple patterns.\n - Use the output of one command as the command-line argument(s) to another command.\n - Explain what is meant by 'text' and 'binary' files, and why many common tools don't handle the latter well.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/cli-basics/tutorial.html",
+      "name": "CLI basics in Galaxy",
+      "description": "Hands-on for 'CLI basics in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Advanced CLI in Galaxy</h1>
+    
+
+    <div class="contributors-line">Authors: 
+
+ <a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/carpentries" alt="Avatar">The Carpentries</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a> <a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bazante1" alt="Avatar">Bazante Sanders</a>
+
+</div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I combine existing commands to do new things?</p>
+</li>
+        
+        <li><p>How can I perform the same actions on many different files?</p>
+</li>
+        
+        <li><p>How can I find files?</p>
+</li>
+        
+        <li><p>How can I find things in files?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Redirect a command’s output to a file.</p>
+</li>
+        
+        <li><p>Process a file instead of keyboard input using redirection.</p>
+</li>
+        
+        <li><p>Construct command pipelines with two or more stages.</p>
+</li>
+        
+        <li><p>Explain what usually happens if a program or pipeline isn’t given any input to process.</p>
+</li>
+        
+        <li><p>Explain Unix’s ‘small pieces, loosely joined’ philosophy.</p>
+</li>
+        
+        <li><p>Write a loop that applies one or more commands separately to each file in a set of files.</p>
+</li>
+        
+        <li><p>Trace the values taken on by a loop variable during execution of the loop.</p>
+</li>
+        
+        <li><p>Explain the difference between a variable’s name and its value.</p>
+</li>
+        
+        <li><p>Explain why spaces and some punctuation characters shouldn’t be used in file names.</p>
+</li>
+        
+        <li><p>Demonstrate how to see what commands have recently been executed.</p>
+</li>
+        
+        <li><p>Re-run recently executed commands without retyping them.</p>
+</li>
+        
+        <li><p>Use <code class="language-plaintext highlighter-rouge">grep</code> to select lines from text files that match simple patterns.</p>
+</li>
+        
+        <li><p>Use <code class="language-plaintext highlighter-rouge">find</code> to find files and directories whose names match simple patterns.</p>
+</li>
+        
+        <li><p>Use the output of one command as the command-line argument(s) to another command.</p>
+</li>
+        
+        <li><p>Explain what is meant by ‘text’ and ‘binary’ files, and why many common tools don’t handle the latter well.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> CLI basics in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/cli-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/cli-advanced/tutorial.md.ipynb" title="Notebooks" alt="Advanced CLI in Galaxy workflows">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+
+</li>
+            
+
+            
+            
+            
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 29, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+                <blockquote class="comment">
+                    <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                    <p>
+                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers, or you can click to run it in MyBinder
+                    </p>
+                    <p><b>Launching on MyBinder</b>
+                        Click here and the notebook will launch on MyBinder.org
+                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fcli-advanced%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                    </p>
+                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                        <ol>
+                            <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                            <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-advanced/tutorial.md.ipynb</code></li>
+                            <li>Select the notebook that appears in the list of files on the left.</li>
+                        </ol>
+                    </p>
+                </blockquote>
+                
+
+                <p>This tutorial will walk you through the basics of how to use the Unix command line.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/shell-novice/">“The Unix Shell”</a> lesson, which is licensed CC-BY 4.0. Adaptations have been made to make this work better in a GTN/<span class="notranslate">Galaxy</span> environment.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#pipes-and-filtering" id="markdown-toc-pipes-and-filtering">Pipes and Filtering</a>    <ol>
+      <li><a href="#capturing-output-from-commands" id="markdown-toc-capturing-output-from-commands">Capturing output from commands</a></li>
+      <li><a href="#filtering-output" id="markdown-toc-filtering-output">Filtering output</a></li>
+      <li><a href="#solution" id="markdown-toc-solution">Solution</a></li>
+      <li><a href="#passing-output-to-another-command" id="markdown-toc-passing-output-to-another-command">Passing output to another command</a></li>
+      <li><a href="#combining-multiple-commands" id="markdown-toc-combining-multiple-commands">Combining multiple commands</a></li>
+      <li><a href="#tools-designed-to-work-together" id="markdown-toc-tools-designed-to-work-together">Tools designed to work together</a></li>
+      <li><a href="#nelles-pipeline-checking-files" id="markdown-toc-nelles-pipeline-checking-files">Nelle’s Pipeline: Checking Files</a></li>
+    </ol>
+  </li>
+  <li><a href="#loops" id="markdown-toc-loops">Loops</a>    <ol>
+      <li><a href="#nelles-pipeline-processing-files" id="markdown-toc-nelles-pipeline-processing-files">Nelle’s Pipeline: Processing Files</a></li>
+      <li><a href="#beginning-and-end" id="markdown-toc-beginning-and-end">Beginning and End</a></li>
+    </ol>
+  </li>
+  <li><a href="#finding-things" id="markdown-toc-finding-things">Finding Things</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="pipes-and-filtering">Pipes and Filtering</h1>
+
+<p>Now that we know a few basic commands,
+we can finally look at the shell’s most powerful feature:
+the ease with which it lets us combine existing programs in new ways.
+We’ll start with the directory called <code class="language-plaintext highlighter-rouge">shell-lesson-data/molecules</code>
+that contains six files describing some simple organic molecules.
+The <code class="language-plaintext highlighter-rouge">.pdb</code> extension indicates that these files are in Protein Data Bank format,
+a simple text format that specifies the type and position of each atom in the molecule.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Desktop/shell-lesson-data/
+<span class="nb">ls </span>molecules
+</code></pre></div></div>
+
+<p>Let’s go into that directory with <code class="language-plaintext highlighter-rouge">cd</code> and run an example command <code class="language-plaintext highlighter-rouge">wc cubane.pdb</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>molecules
+<span class="nb">wc </span>cubane
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">wc</code> is the ‘word count’ command:
+it counts the number of lines, words, and characters in files (from left to right, in that order).</p>
+
+<p>If we run the command <code class="language-plaintext highlighter-rouge">wc *.pdb</code>, the <code class="language-plaintext highlighter-rouge">*</code> in <code class="language-plaintext highlighter-rouge">*.pdb</code> matches zero or more characters,
+so the shell turns <code class="language-plaintext highlighter-rouge">*.pdb</code> into a list of all <code class="language-plaintext highlighter-rouge">.pdb</code> files in the current directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="k">*</span>.pdb
+</code></pre></div></div>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">wc *.pdb</code> also shows the total number of all lines in the last line of the output.</p>
+
+<p>If we run <code class="language-plaintext highlighter-rouge">wc -l</code> instead of just <code class="language-plaintext highlighter-rouge">wc</code>,
+the output shows only the number of lines per file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> <span class="k">*</span>.pdb
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">-m</code> and <code class="language-plaintext highlighter-rouge">-w</code> options can also be used with the <code class="language-plaintext highlighter-rouge">wc</code> command, to show
+only the number of characters or the number of words in the files.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-why-isnt-it-doing-anything"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why Isn’t It Doing Anything?</h3>
+
+  <p>What happens if a command is supposed to process a file, but we
+don’t give it a filename? For example, what if we type:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">wc</span> <span class="nt">-l</span>
+</code></pre></div>  </div>
+
+  <p>but don’t type <code class="language-plaintext highlighter-rouge">*.pdb</code> (or anything else) after the command?
+Since it doesn’t have any filenames, <code class="language-plaintext highlighter-rouge">wc</code> assumes it is supposed to
+process input given at the command prompt, so it just sits there and waits for us to give
+it some data interactively. From the outside, though, all we see is it
+sitting there: the command doesn’t appear to do anything.</p>
+
+  <p>If you make this kind of mistake, you can escape out of this state by holding down
+the control key (<kbd>Ctrl</kbd>) and typing the letter <kbd>C</kbd> once and
+letting go of the <kbd>Ctrl</kbd> key.
+<kbd>Ctrl</kbd>+<kbd>C</kbd></p>
+</blockquote>
+
+<h2 id="capturing-output-from-commands">Capturing output from commands</h2>
+
+<p>Which of these files contains the fewest lines?
+It’s an easy question to answer when there are only six files,
+but what if there were 6000?
+Our first step toward a solution is to run the command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> <span class="k">*</span>.pdb <span class="o">&gt;</span> lengths.txt
+</code></pre></div></div>
+
+<p>The greater than symbol, <code class="language-plaintext highlighter-rouge">&gt;</code>, tells the shell to <strong>redirect</strong> the command’s output
+to a file instead of printing it to the screen. (This is why there is no screen output:
+everything that <code class="language-plaintext highlighter-rouge">wc</code> would have printed has gone into the
+file <code class="language-plaintext highlighter-rouge">lengths.txt</code> instead.)  The shell will create
+the file if it doesn’t exist. If the file exists, it will be
+silently overwritten, which may lead to data loss and thus requires
+some caution.
+<code class="language-plaintext highlighter-rouge">ls lengths.txt</code> confirms that the file exists:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>lengths.txt
+</code></pre></div></div>
+
+<p>We can now send the content of <code class="language-plaintext highlighter-rouge">lengths.txt</code> to the screen using <code class="language-plaintext highlighter-rouge">cat lengths.txt</code>.
+The <code class="language-plaintext highlighter-rouge">cat</code> command gets its name from ‘concatenate’ i.e. join together,
+and it prints the contents of files one after another.
+There’s only one file in this case,
+so <code class="language-plaintext highlighter-rouge">cat</code> just shows us what it contains:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>lengths.txt
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-output-page-by-page"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Output Page by Page</h3>
+
+  <p>We’ll continue to use <code class="language-plaintext highlighter-rouge">cat</code> in this lesson, for convenience and consistency,
+but it has the disadvantage that it always dumps the whole file onto your screen.
+More useful in practice is the command <code class="language-plaintext highlighter-rouge">less</code>,
+which you use with <code class="language-plaintext highlighter-rouge">less lengths.txt</code>.
+This displays a screenful of the file, and then stops.
+You can go forward one screenful by pressing the spacebar,
+or back one by pressing <code class="language-plaintext highlighter-rouge">b</code>.  Press <code class="language-plaintext highlighter-rouge">q</code> to quit.</p>
+</blockquote>
+
+<h2 id="filtering-output">Filtering output</h2>
+
+<p>Next we’ll use the <code class="language-plaintext highlighter-rouge">sort</code> command to sort the contents of the <code class="language-plaintext highlighter-rouge">lengths.txt</code> file.
+But first we’ll use an exercise to learn a little about the sort command:</p>
+
+<blockquote class="question">
+  <h3 id="question-what-does-sort--n-do"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> What Does <code class="language-plaintext highlighter-rouge">sort -n</code> Do?</h3>
+
+  <p>The file <code class="language-plaintext highlighter-rouge">shell-lesson-data/numbers.txt</code>
+contains the following lines:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10
+2
+19
+22
+6
+</code></pre></div>  </div>
+
+  <p>If we run <code class="language-plaintext highlighter-rouge">sort</code> on this file, the output is:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10
+19
+2
+22
+6
+</code></pre></div>  </div>
+
+  <p>If we run <code class="language-plaintext highlighter-rouge">sort -n</code> on the same file, we get this instead:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+6
+10
+19
+22
+</code></pre></div>  </div>
+
+  <p>Explain why <code class="language-plaintext highlighter-rouge">-n</code> has this effect.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The <code class="language-plaintext highlighter-rouge">-n</code> option specifies a numerical rather than an alphanumerical sort.</p>
+  </blockquote>
+</blockquote>
+
+<p>We will also use the <code class="language-plaintext highlighter-rouge">-n</code> option to specify that the sort is
+numerical instead of alphanumerical.
+This does <em>not</em> change the file;
+instead, it sends the sorted result to the screen:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sort</span> <span class="nt">-n</span> lengths.txt
+</code></pre></div></div>
+
+<p>We can put the sorted list of lines in another temporary file called <code class="language-plaintext highlighter-rouge">sorted-lengths.txt</code>
+by putting <code class="language-plaintext highlighter-rouge">&gt; sorted-lengths.txt</code> after the command,
+just as we used <code class="language-plaintext highlighter-rouge">&gt; lengths.txt</code> to put the output of <code class="language-plaintext highlighter-rouge">wc</code> into <code class="language-plaintext highlighter-rouge">lengths.txt</code>.
+Once we’ve done that,
+we can run another command called <code class="language-plaintext highlighter-rouge">head</code> to get the first few lines in <code class="language-plaintext highlighter-rouge">sorted-lengths.txt</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sort</span> <span class="nt">-n</span> lengths.txt <span class="o">&gt;</span> sorted-lengths.txt
+</code></pre></div></div>
+
+<p>Using <code class="language-plaintext highlighter-rouge">-n 1</code> with <code class="language-plaintext highlighter-rouge">head</code> tells it that
+we only want the first line of the file;
+<code class="language-plaintext highlighter-rouge">-n 20</code> would get the first 20,
+and so on.
+Since <code class="language-plaintext highlighter-rouge">sorted-lengths.txt</code> contains the lengths of our files ordered from least to greatest,
+the output of <code class="language-plaintext highlighter-rouge">head</code> must be the file with the fewest lines.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-redirecting-to-the-same-file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Redirecting to the same file</h3>
+
+  <p>It’s a very bad idea to try redirecting
+the output of a command that operates on a file
+to the same file. For example:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sort -n lengths.txt &gt; lengths.txt
+</code></pre></div>  </div>
+
+  <p>Doing something like this may give you
+incorrect results and/or delete
+the contents of <code class="language-plaintext highlighter-rouge">lengths.txt</code>.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-what-does--mean"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> What Does <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> Mean?</h3>
+
+  <p>We have seen the use of <code class="language-plaintext highlighter-rouge">&gt;</code>, but there is a similar operator <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>
+which works slightly differently.
+We’ll learn about the differences between these two operators by printing some strings.
+We can use the <code class="language-plaintext highlighter-rouge">echo</code> command to print strings e.g.</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo The echo command prints text
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The echo command prints text
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>Now test the commands below to reveal the difference between the two operators:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo hello &gt; testfile01.txt
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>and:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo hello &gt;&gt; testfile02.txt
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p><strong>Hint</strong>: Try executing each command twice in a row and then examining the output files.</p>
+
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+    <p>In the first example with <code class="language-plaintext highlighter-rouge">&gt;</code>, the string ‘hello’ is written to <code class="language-plaintext highlighter-rouge">testfile01.txt</code>,
+but the file gets overwritten each time we run the command.</p>
+
+    <p>We see from the second example that the <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> operator also writes ‘hello’ to a file
+(in this case<code class="language-plaintext highlighter-rouge">testfile02.txt</code>),
+but appends the string to the file if it already exists
+(i.e. when we run it for the second time).</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-appending-data"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Appending Data</h3>
+
+  <p>We have already met the <code class="language-plaintext highlighter-rouge">head</code> command, which prints lines from the start of a file.
+<code class="language-plaintext highlighter-rouge">tail</code> is similar, but prints lines from the end of a file instead.</p>
+
+  <p>Consider the file <code class="language-plaintext highlighter-rouge">shell-lesson-data/data/animals.txt</code>.
+After these commands, select the answer that
+corresponds to the file <code class="language-plaintext highlighter-rouge">animals-subset.txt</code>:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ head -n 3 animals.txt &gt; animals-subset.txt
+$ tail -n 2 animals.txt &gt;&gt; animals-subset.txt
+</code></pre></div>  </div>
+
+  <ol>
+    <li>The first three lines of <code class="language-plaintext highlighter-rouge">animals.txt</code></li>
+    <li>The last two lines of <code class="language-plaintext highlighter-rouge">animals.txt</code></li>
+    <li>The first three lines and the last two lines of <code class="language-plaintext highlighter-rouge">animals.txt</code></li>
+    <li>The second and third lines of <code class="language-plaintext highlighter-rouge">animals.txt</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Option 3 is correct.
+For option 1 to be correct we would only run the <code class="language-plaintext highlighter-rouge">head</code> command.
+For option 2 to be correct we would only run the <code class="language-plaintext highlighter-rouge">tail</code> command.
+For option 4 to be correct we would have to pipe the output of <code class="language-plaintext highlighter-rouge">head</code> into <code class="language-plaintext highlighter-rouge">tail -n 2</code>
+by doing <code class="language-plaintext highlighter-rouge">head -n 3 animals.txt | tail -n 2 &gt; animals-subset.txt</code></p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<h2 id="passing-output-to-another-command">Passing output to another command</h2>
+<p>In our example of finding the file with the fewest lines,
+we are using two intermediate files <code class="language-plaintext highlighter-rouge">lengths.txt</code> and <code class="language-plaintext highlighter-rouge">sorted-lengths.txt</code> to store output.
+This is a confusing way to work because
+even once you understand what <code class="language-plaintext highlighter-rouge">wc</code>, <code class="language-plaintext highlighter-rouge">sort</code>, and <code class="language-plaintext highlighter-rouge">head</code> do,
+those intermediate files make it hard to follow what’s going on.
+We can make it easier to understand by running <code class="language-plaintext highlighter-rouge">sort</code> and <code class="language-plaintext highlighter-rouge">head</code> together:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sort</span> <span class="nt">-n</span> lengths.txt | <span class="nb">head</span> <span class="nt">-n</span> 1
+</code></pre></div></div>
+
+<p>The vertical bar, <code class="language-plaintext highlighter-rouge">|</code>, between the two commands is called a <strong>pipe</strong>.
+It tells the shell that we want to use
+the output of the command on the left
+as the input to the command on the right.</p>
+
+<p>This has removed the need for the <code class="language-plaintext highlighter-rouge">sorted-lengths.txt</code> file.</p>
+
+<h2 id="combining-multiple-commands">Combining multiple commands</h2>
+<p>Nothing prevents us from chaining pipes consecutively.
+We can for example send the output of <code class="language-plaintext highlighter-rouge">wc</code> directly to <code class="language-plaintext highlighter-rouge">sort</code>,
+and then the resulting output to <code class="language-plaintext highlighter-rouge">head</code>.
+This removes the need for any intermediate files.</p>
+
+<p>We’ll start by using a pipe to send the output of <code class="language-plaintext highlighter-rouge">wc</code> to <code class="language-plaintext highlighter-rouge">sort</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> <span class="k">*</span>.pdb | <span class="nb">sort</span> <span class="nt">-n</span>
+</code></pre></div></div>
+
+<p>We can then send that output through another pipe, to <code class="language-plaintext highlighter-rouge">head</code>, so that the full pipeline becomes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> <span class="k">*</span>.pdb | <span class="nb">sort</span> <span class="nt">-n</span> | <span class="nb">head</span> <span class="nt">-n</span> 1
+</code></pre></div></div>
+
+<p>This is exactly like a mathematician nesting functions like <em>log(3x)</em>
+and saying ‘the log of three times <em>x</em>’.
+In our case,
+the calculation is ‘head of sort of line count of <code class="language-plaintext highlighter-rouge">*.pdb</code>’.</p>
+
+<p>The redirection and pipes used in the last few commands are illustrated below:</p>
+
+<p><img src="../../images/carpentries-cli/redirects-and-pipes.svg" alt="Redirects and Pipes of different commands" loading="lazy" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">wc -l *.pdb</code> will direct the output to the shell. <code class="language-plaintext highlighter-rouge">wc -l *.pdb &gt; lengths</code> will
+direct output to the file lengths. <code class="language-plaintext highlighter-rouge">wc -l *.pdb | sort -n | head -n 1</code> will
+build a pipeline where the output of the wc command is the input to the sort
+command, the output of the sort command is the input to the head command and
+the output of the head command is directed to the shell</p>
+
+<blockquote class="question">
+  <h3 id="question-piping-commands-together"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Piping Commands Together</h3>
+
+  <p>In our current directory, we want to find the 3 files which have the least number of
+lines. Which command listed below would work?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">wc -l * &gt; sort -n &gt; head -n 3</code></li>
+    <li><code class="language-plaintext highlighter-rouge">wc -l * | sort -n | head -n 1-3</code></li>
+    <li><code class="language-plaintext highlighter-rouge">wc -l * | head -n 3 | sort -n</code></li>
+    <li><code class="language-plaintext highlighter-rouge">wc -l * | sort -n | head -n 3</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Option 4 is the solution.
+The pipe character <code class="language-plaintext highlighter-rouge">|</code> is used to connect the output from one command to
+the input of another.
+<code class="language-plaintext highlighter-rouge">&gt;</code> is used to redirect standard output to a file.
+Try it in the <code class="language-plaintext highlighter-rouge">shell-lesson-data/molecules</code> directory!</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<h2 id="tools-designed-to-work-together">Tools designed to work together</h2>
+<p>This idea of linking programs together is why Unix has been so successful.
+Instead of creating enormous programs that try to do many different things,
+Unix programmers focus on creating lots of simple tools that each do one job well,
+and that work well with each other.
+This programming model is called ‘pipes and filters’.
+We’ve already seen pipes;
+a <strong>filter</strong> is a program like <code class="language-plaintext highlighter-rouge">wc</code> or <code class="language-plaintext highlighter-rouge">sort</code>
+that transforms a stream of input into a stream of output.
+Almost all of the standard Unix tools can work this way:
+unless told to do otherwise,
+they read from standard input,
+do something with what they’ve read,
+and write to standard output.</p>
+
+<p>The key is that any program that <span class="notranslate">reads</span> lines of text from standard input
+and writes lines of text to standard output
+can be combined with every other program that behaves this way as well.
+You can <em>and should</em> write your programs this way
+so that you and other people can put those programs into pipes to multiply their power.</p>
+
+<blockquote class="question">
+  <h3 id="question-pipe-reading-comprehension"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Pipe Reading Comprehension</h3>
+
+  <p>A file called <code class="language-plaintext highlighter-rouge">animals.txt</code> (in the <code class="language-plaintext highlighter-rouge">shell-lesson-data/data</code> folder) contains the following data:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-11-05,deer
+2012-11-05,rabbit
+2012-11-05,raccoon
+2012-11-06,rabbit
+2012-11-06,deer
+2012-11-06,fox
+2012-11-07,rabbit
+2012-11-07,bear
+</code></pre></div>  </div>
+
+  <p>What text passes through each of the pipes and the final redirect in the pipeline below?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat animals.txt | head -n 5 | tail -n 3 | sort -r &gt; final.txt
+</code></pre></div>  </div>
+
+  <p>Hint: build the pipeline up one command at a time to test your understanding</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The <code class="language-plaintext highlighter-rouge">head</code> command extracts the first 5 lines from <code class="language-plaintext highlighter-rouge">animals.txt</code>.
+Then, the last 3 lines are extracted from the previous 5 by using the <code class="language-plaintext highlighter-rouge">tail</code> command.
+With the <code class="language-plaintext highlighter-rouge">sort -r</code> command those 3 lines are sorted in reverse order and finally,
+the output is redirected to a file <code class="language-plaintext highlighter-rouge">final.txt</code>.
+The content of this file can be checked by executing <code class="language-plaintext highlighter-rouge">cat final.txt</code>.
+The file should contain the following lines:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-11-06,rabbit
+2012-11-06,deer
+2012-11-05,raccoon
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-pipe-construction"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Pipe Construction</h3>
+
+  <p>For the file <code class="language-plaintext highlighter-rouge">animals.txt</code> from the previous exercise, consider the following command:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cut -d , -f 2 animals.txt
+</code></pre></div>  </div>
+
+  <p>The <code class="language-plaintext highlighter-rouge">cut</code> command is used to remove or ‘cut out’ certain sections of each line in the file,
+and <code class="language-plaintext highlighter-rouge">cut</code> expects the lines to be separated into columns by a <kbd>Tab</kbd> character.
+A character used in this way is a called a <strong>delimiter</strong>.
+In the example above we use the <code class="language-plaintext highlighter-rouge">-d</code> option to specify the comma as our delimiter character.
+We have also used the <code class="language-plaintext highlighter-rouge">-f</code> option to specify that we want to extract the second field (column).
+This gives the following output:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deer
+rabbit
+raccoon
+rabbit
+deer
+fox
+rabbit
+bear
+</code></pre></div>  </div>
+
+  <p>The <code class="language-plaintext highlighter-rouge">uniq</code> command filters out adjacent matching lines in a file.
+How could you extend this pipeline (using <code class="language-plaintext highlighter-rouge">uniq</code> and another command) to find
+out what animals the file contains (without any duplicates in their
+names)?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cut -d , -f 2 animals.txt | sort | uniq
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-which-pipe"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Which Pipe?</h3>
+
+  <p>The file <code class="language-plaintext highlighter-rouge">animals.txt</code> contains 8 lines of data formatted as follows:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-11-05,deer
+2012-11-05,rabbit
+2012-11-05,raccoon
+2012-11-06,rabbit
+...
+</code></pre></div>  </div>
+
+  <p>The <code class="language-plaintext highlighter-rouge">uniq</code> command has a <code class="language-plaintext highlighter-rouge">-c</code> option which gives a count of the
+number of times a line occurs in its input.  Assuming your current
+directory is <code class="language-plaintext highlighter-rouge">shell-lesson-data/data/</code>, what command would you use to produce
+a table that shows the total count of each type of animal in the file?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">sort animals.txt | uniq -c</code></li>
+    <li><code class="language-plaintext highlighter-rouge">sort -t, -k2,2 animals.txt | uniq -c</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cut -d, -f 2 animals.txt | uniq -c</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cut -d, -f 2 animals.txt | sort | uniq -c</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cut -d, -f 2 animals.txt | sort | uniq -c | wc -l</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Option 4. is the correct answer.
+If you have difficulty understanding why, try running the commands, or sub-sections of
+the pipelines (make sure you are in the <code class="language-plaintext highlighter-rouge">shell-lesson-data/data</code> directory).</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<h2 id="nelles-pipeline-checking-files">Nelle’s Pipeline: Checking Files</h2>
+
+<p>Nelle has run her samples through the assay machines
+and created 17 files in the <code class="language-plaintext highlighter-rouge">north-pacific-gyre/2012-07-03</code> directory described earlier.
+As a quick check, starting from her home directory, Nelle types:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Desktop/shell-lesson-data/north-pacific-gyre/2012-07-03
+<span class="nb">wc</span> <span class="nt">-l</span> <span class="k">*</span>.txt
+</code></pre></div></div>
+
+<p>The output is 18 lines that look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>300 NENE01729A.txt
+300 NENE01729B.txt
+300 NENE01736A.txt
+300 NENE01751A.txt
+300 NENE01751B.txt
+300 NENE01812A.txt
+... ...
+</code></pre></div></div>
+
+<p>Now she types this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> <span class="k">*</span>.txt | <span class="nb">sort</span> <span class="nt">-n</span> | <span class="nb">head</span> <span class="nt">-n</span> 5
+</code></pre></div></div>
+
+<p>Whoops: one of the files is 60 lines shorter than the others.
+When she goes back and checks it,
+she sees that she did that assay at 8:00 on a Monday morning — someone
+was probably in using the machine on the weekend,
+and she forgot to reset it.
+Before re-running that sample,
+she checks to see if any files have too much data:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> <span class="k">*</span>.txt | <span class="nb">sort</span> <span class="nt">-n</span> | <span class="nb">tail</span> <span class="nt">-n</span> 5
+</code></pre></div></div>
+
+<p>Those numbers look good — but what’s that ‘Z’ doing there in the third-to-last line?
+All of her samples should be marked ‘A’ or ‘B’;
+by convention,
+her lab uses ‘Z’ to indicate samples with missing information.
+To find others like it, she does this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="k">*</span>Z.txt
+</code></pre></div></div>
+
+<p>Sure enough,
+when she checks the log on her laptop,
+there’s no depth recorded for either of those samples.
+Since it’s too late to get the information any other way,
+she must exclude those two files from her analysis.
+She could delete them using <code class="language-plaintext highlighter-rouge">rm</code>,
+but there are actually some analyses she might do later where depth doesn’t matter,
+so instead, she’ll have to be careful later on to select files using the wildcard <span class="notranslate">expression</span>s
+<code class="language-plaintext highlighter-rouge">NENE*A.txt NENE*B.txt</code>.</p>
+
+<blockquote class="question">
+  <h3 id="question-removing-unneeded-files"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Removing Unneeded Files</h3>
+
+  <p>Suppose you want to delete your processed data files, and only keep
+your raw files and processing script to save storage.
+The raw files end in <code class="language-plaintext highlighter-rouge">.dat</code> and the processed files end in <code class="language-plaintext highlighter-rouge">.txt</code>.
+Which of the following would remove all the processed data files,
+and <em>only</em> the processed data files?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">rm ?.txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">rm *.txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">rm * .txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">rm *.*</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>This would remove <code class="language-plaintext highlighter-rouge">.txt</code> files with one-character names</li>
+      <li>This is correct answer</li>
+      <li>The shell would expand <code class="language-plaintext highlighter-rouge">*</code> to match everything in the current directory,
+so the command would try to remove all matched files and an additional
+file called <code class="language-plaintext highlighter-rouge">.txt</code></li>
+      <li>The shell would expand <code class="language-plaintext highlighter-rouge">*.*</code> to match all files with any extension,
+so this command would delete all files</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="loops">Loops</h1>
+
+<p><strong>Loops</strong> are a programming construct which allow us to repeat a command or set of commands
+for each item in a list.
+As such they are key to productivity improvements through automation.
+Similar to wildcards and tab completion, using loops also reduces the
+amount of typing required (and hence reduces the number of typing mistakes).</p>
+
+<p>Suppose we have several hundred genome data files named <code class="language-plaintext highlighter-rouge">basilisk.dat</code>, <code class="language-plaintext highlighter-rouge">minotaur.dat</code>, and
+<code class="language-plaintext highlighter-rouge">unicorn.dat</code>.
+For this example, we’ll use the <code class="language-plaintext highlighter-rouge">creatures</code> directory which only has three example files,
+but the principles can be applied to many many more files at once. First, go
+into the creatures directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Change directories here!</span>
+
+</code></pre></div></div>
+
+<p>The structure of these files is the same: the common name, classification, and updated date are
+presented on the first three lines, with <span class="notranslate">DNA</span> sequences on the following lines.
+Let’s look at the files:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">head</span> <span class="nt">-n</span> 5 basilisk.dat minotaur.dat unicorn.dat
+</code></pre></div></div>
+
+<p>We would like to print out the classification for each species, which is given on the second
+line of each file.
+For each file, we would need to execute the command <code class="language-plaintext highlighter-rouge">head -n 2</code> and pipe this to <code class="language-plaintext highlighter-rouge">tail -n 1</code>.
+We’ll use a loop to solve this problem, but first let’s look at the general form of a loop:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for thing in list_of_things
+do
+    operation_using $thing    # Indentation within the loop is not required, but aids legibility
+done
+</code></pre></div></div>
+
+<p>and we can apply this to our example like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>filename <span class="k">in </span>basilisk.dat minotaur.dat unicorn.dat
+<span class="k">do
+    </span><span class="nb">head</span> <span class="nt">-n</span> 2 <span class="nv">$filename</span> | <span class="nb">tail</span> <span class="nt">-n</span> 1
+<span class="k">done</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-follow-the-prompt"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Follow the Prompt</h3>
+
+  <p>The shell prompt changes from <code class="language-plaintext highlighter-rouge">$</code> to <code class="language-plaintext highlighter-rouge">&gt;</code> and back again as we were
+typing in our loop. The second prompt, <code class="language-plaintext highlighter-rouge">&gt;</code>, is different to remind
+us that we haven’t finished typing a complete command yet. A semicolon, <code class="language-plaintext highlighter-rouge">;</code>,
+can be used to separate two commands written on a single line.</p>
+</blockquote>
+
+<p>When the shell sees the keyword <code class="language-plaintext highlighter-rouge">for</code>,
+it knows to repeat a command (or group of commands) once for each item in a list.
+Each time the loop runs (called an iteration), an item in the list is assigned in sequence to
+the <strong>variable</strong>, and the commands inside the loop are executed, before moving on to
+the next item in the list.
+Inside the loop,
+we call for the variable’s value by putting <code class="language-plaintext highlighter-rouge">$</code> in front of it.
+The <code class="language-plaintext highlighter-rouge">$</code> tells the shell interpreter to treat
+the variable as a variable name and substitute its value in its place,
+rather than treat it as text or an exte<span class="notranslate">rna</span>l command.</p>
+
+<p>In this example, the list is three filenames: <code class="language-plaintext highlighter-rouge">basilisk.dat</code>, <code class="language-plaintext highlighter-rouge">minotaur.dat</code>, and <code class="language-plaintext highlighter-rouge">unicorn.dat</code>.
+Each time the loop iterates, it will assign a file name to the variable <code class="language-plaintext highlighter-rouge">filename</code>
+and run the <code class="language-plaintext highlighter-rouge">head</code> command.
+The first time through the loop,
+<code class="language-plaintext highlighter-rouge">$filename</code> is <code class="language-plaintext highlighter-rouge">basilisk.dat</code>.
+The interpreter runs the command <code class="language-plaintext highlighter-rouge">head</code> on <code class="language-plaintext highlighter-rouge">basilisk.dat</code>
+and pipes the first two lines to the <code class="language-plaintext highlighter-rouge">tail</code> command,
+which then prints the second line of <code class="language-plaintext highlighter-rouge">basilisk.dat</code>.
+For the second iteration, <code class="language-plaintext highlighter-rouge">$filename</code> becomes
+<code class="language-plaintext highlighter-rouge">minotaur.dat</code>. This time, the shell runs <code class="language-plaintext highlighter-rouge">head</code> on <code class="language-plaintext highlighter-rouge">minotaur.dat</code>
+and pipes the first two lines to the <code class="language-plaintext highlighter-rouge">tail</code> command,
+which then prints the second line of <code class="language-plaintext highlighter-rouge">minotaur.dat</code>.
+For the third iteration, <code class="language-plaintext highlighter-rouge">$filename</code> becomes
+<code class="language-plaintext highlighter-rouge">unicorn.dat</code>, so the shell runs the <code class="language-plaintext highlighter-rouge">head</code> command on that file,
+and <code class="language-plaintext highlighter-rouge">tail</code> on the output of that.
+Since the list was only three items, the shell exits the <code class="language-plaintext highlighter-rouge">for</code> loop.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-same-symbols-different-meanings"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Same Symbols, Different Meanings</h3>
+
+  <p>Here we see <code class="language-plaintext highlighter-rouge">&gt;</code> being used as a shell prompt, whereas <code class="language-plaintext highlighter-rouge">&gt;</code> is also
+used to redirect output.
+Similarly, <code class="language-plaintext highlighter-rouge">$</code> is used as a shell prompt, but, as we saw earlier,
+it is also used to ask the shell to get the value of a variable.</p>
+
+  <p>If the <em>shell</em> prints <code class="language-plaintext highlighter-rouge">&gt;</code> or <code class="language-plaintext highlighter-rouge">$</code> then it expects you to type something,
+and the symbol is a prompt.</p>
+
+  <p>If <em>you</em> type <code class="language-plaintext highlighter-rouge">&gt;</code> or <code class="language-plaintext highlighter-rouge">$</code> yourself, it is an instruction from you that
+the shell should redirect output or get the value of a variable.</p>
+</blockquote>
+
+<p>When using variables it is also
+possible to put the names into curly braces to clearly delimit the variable
+name: <code class="language-plaintext highlighter-rouge">$filename</code> is equivalent to <code class="language-plaintext highlighter-rouge">${filename}</code>, but is different from
+<code class="language-plaintext highlighter-rouge">${file}name</code>. You may find this notation in other people’s programs.</p>
+
+<p>We have called the variable in this loop <code class="language-plaintext highlighter-rouge">filename</code>
+in order to make its purpose clearer to human readers.
+The shell itself doesn’t care what the variable is called;
+if we wrote this loop as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>x <span class="k">in </span>basilisk.dat minotaur.dat unicorn.dat
+<span class="k">do
+    </span><span class="nb">head</span> <span class="nt">-n</span> 2 <span class="nv">$x</span> | <span class="nb">tail</span> <span class="nt">-n</span> 1
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>or:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>temperature <span class="k">in </span>basilisk.dat minotaur.dat unicorn.dat
+<span class="k">do
+    </span><span class="nb">head</span> <span class="nt">-n</span> 2 <span class="nv">$temperature</span> | <span class="nb">tail</span> <span class="nt">-n</span> 1
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>it would work exactly the same way.</p>
+
+<p><strong>Don’t do this.</strong></p>
+
+<p>Programs are only useful if people can understand them,
+so meaningless names (like <code class="language-plaintext highlighter-rouge">x</code>) or misleading names (like <code class="language-plaintext highlighter-rouge">temperature</code>)
+increase the odds that the program won’t do what its readers think it does.</p>
+
+<blockquote class="question">
+  <h3 id="question-variables-in-loops"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Variables in Loops</h3>
+
+  <p>This exercise refers to the <code class="language-plaintext highlighter-rouge">shell-lesson-data/molecules</code> directory.
+<code class="language-plaintext highlighter-rouge">ls</code> gives the following output:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+</code></pre></div>  </div>
+
+  <p>What is the output of the following code?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in *.pdb
+do
+    ls *.pdb
+done
+</code></pre></div>  </div>
+
+  <p>Now, what is the output of the following code?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in *.pdb
+do
+   ls $datafile
+done
+</code></pre></div>  </div>
+
+  <p>Why do these two loops give different outputs?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The first code block gives the same output on each iteration through
+the loop.
+Bash expands the wildcard <code class="language-plaintext highlighter-rouge">*.pdb</code> within the loop body (as well as
+before the loop starts) to match all files ending in <code class="language-plaintext highlighter-rouge">.pdb</code>
+and then lists them using <code class="language-plaintext highlighter-rouge">ls</code>.
+The expanded loop would look like this:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ for datafile in cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+&gt; do
+&gt;     ls cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+&gt; done
+</code></pre></div>    </div>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+</code></pre></div>    </div>
+
+    <p>The second code block lists a different file on each loop iteration.
+The value of the <code class="language-plaintext highlighter-rouge">datafile</code> variable is evaluated using <code class="language-plaintext highlighter-rouge">$datafile</code>,
+and then listed using <code class="language-plaintext highlighter-rouge">ls</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cubane.pdb
+ethane.pdb
+methane.pdb
+octane.pdb
+pentane.pdb
+propane.pdb
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-limiting-sets-of-files"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Limiting Sets of Files</h3>
+
+  <p>What would be the output of running the following loop in thei
+<code class="language-plaintext highlighter-rouge">shell-lesson-data/molecules</code> directory?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for filename in c*
+do
+    ls $filename
+done
+</code></pre></div>  </div>
+
+  <ol>
+    <li>No files are listed.</li>
+    <li>All files are listed.</li>
+    <li>Only <code class="language-plaintext highlighter-rouge">cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">octane.pdb</code> and <code class="language-plaintext highlighter-rouge">pentane.pdb</code> are listed.</li>
+    <li>Only <code class="language-plaintext highlighter-rouge">cubane.pdb</code> is listed.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>4 is the correct answer. <code class="language-plaintext highlighter-rouge">*</code> matches zero or more characters, so any file name starting with
+the letter c, followed by zero or more other characters will be matched.</p>
+  </blockquote>
+
+  <p>How would the output differ from using this command instead?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for filename in *c*
+do
+    ls $filename
+done
+</code></pre></div>  </div>
+
+  <ol>
+    <li>The same files would be listed.</li>
+    <li>All the files are listed this time.</li>
+    <li>No files are listed this time.</li>
+    <li>The files <code class="language-plaintext highlighter-rouge">cubane.pdb</code> and <code class="language-plaintext highlighter-rouge">octane.pdb</code> will be listed.</li>
+    <li>Only the file <code class="language-plaintext highlighter-rouge">octane.pdb</code> will be listed.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>4 is the correct answer. <code class="language-plaintext highlighter-rouge">*</code> matches zero or more characters, so a file name with zero or more
+characters before a letter c and zero or more characters after the letter c will be matched.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-saving-to-a-file-in-a-loop---part-one"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Saving to a File in a Loop - Part One</h3>
+
+  <p>In the <code class="language-plaintext highlighter-rouge">shell-lesson-data/molecules</code> directory, what is the effect of this loop?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for alkanes in *.pdb
+do
+    echo $alkanes
+    cat $alkanes &gt; alkanes.pdb
+done
+</code></pre></div>  </div>
+
+  <ol>
+    <li>Prints <code class="language-plaintext highlighter-rouge">cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, <code class="language-plaintext highlighter-rouge">methane.pdb</code>, <code class="language-plaintext highlighter-rouge">octane.pdb</code>, <code class="language-plaintext highlighter-rouge">pentane.pdb</code> and
+   <code class="language-plaintext highlighter-rouge">propane.pdb</code>, and the text from <code class="language-plaintext highlighter-rouge">propane.pdb</code> will be saved to a file called <code class="language-plaintext highlighter-rouge">alkanes.pdb</code>.</li>
+    <li>Prints <code class="language-plaintext highlighter-rouge">cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, and <code class="language-plaintext highlighter-rouge">methane.pdb</code>, and the text from all three files
+would be concatenated and saved to a file called <code class="language-plaintext highlighter-rouge">alkanes.pdb</code>.</li>
+    <li>Prints <code class="language-plaintext highlighter-rouge">cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, <code class="language-plaintext highlighter-rouge">methane.pdb</code>, <code class="language-plaintext highlighter-rouge">octane.pdb</code>, and <code class="language-plaintext highlighter-rouge">pentane.pdb</code>,
+and the text from <code class="language-plaintext highlighter-rouge">propane.pdb</code> will be saved to a file called <code class="language-plaintext highlighter-rouge">alkanes.pdb</code>.</li>
+    <li>None of the above.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>1 is correct. The text from each file in turn gets written to the <code class="language-plaintext highlighter-rouge">alkanes.pdb</code> file.
+However, the file gets overwritten on each loop iteration, so the final content of <code class="language-plaintext highlighter-rouge">alkanes.pdb</code>
+is the text from the <code class="language-plaintext highlighter-rouge">propane.pdb</code> file.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-saving-to-a-file-in-a-loop---part-two"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Saving to a File in a Loop - Part Two</h3>
+
+  <p>Also in the <code class="language-plaintext highlighter-rouge">shell-lesson-data/molecules</code> directory,
+what would be the output of the following loop?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in *.pdb
+do
+    cat $datafile &gt;&gt; all.pdb
+done
+</code></pre></div>  </div>
+
+  <ol>
+    <li>All of the text from <code class="language-plaintext highlighter-rouge">cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, <code class="language-plaintext highlighter-rouge">methane.pdb</code>, <code class="language-plaintext highlighter-rouge">octane.pdb</code>, and
+<code class="language-plaintext highlighter-rouge">pentane.pdb</code> would be concatenated and saved to a file called <code class="language-plaintext highlighter-rouge">all.pdb</code>.</li>
+    <li>The text from <code class="language-plaintext highlighter-rouge">ethane.pdb</code> will be saved to a file called <code class="language-plaintext highlighter-rouge">all.pdb</code>.</li>
+    <li>All of the text from <code class="language-plaintext highlighter-rouge">cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, <code class="language-plaintext highlighter-rouge">methane.pdb</code>, <code class="language-plaintext highlighter-rouge">octane.pdb</code>, <code class="language-plaintext highlighter-rouge">pentane.pdb</code>
+and <code class="language-plaintext highlighter-rouge">propane.pdb</code> would be concatenated and saved to a file called <code class="language-plaintext highlighter-rouge">all.pdb</code>.</li>
+    <li>All of the text from <code class="language-plaintext highlighter-rouge">cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">ethane.pdb</code>, <code class="language-plaintext highlighter-rouge">methane.pdb</code>, <code class="language-plaintext highlighter-rouge">octane.pdb</code>, <code class="language-plaintext highlighter-rouge">pentane.pdb</code>
+and <code class="language-plaintext highlighter-rouge">propane.pdb</code> would be printed to the screen and saved to a file called <code class="language-plaintext highlighter-rouge">all.pdb</code>.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>3 is the correct answer. <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> appends to a file, rather than overwriting it with the redirected
+output from a command.
+Given the output from the <code class="language-plaintext highlighter-rouge">cat</code> command has been redirected, nothing is printed to the screen.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<p>Let’s continue with our example in the <code class="language-plaintext highlighter-rouge">shell-lesson-data/creatures</code> directory.
+Here’s a slightly more complicated loop:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>filename <span class="k">in</span> <span class="k">*</span>.dat
+<span class="k">do
+    </span><span class="nb">echo</span> <span class="nv">$filename</span>
+    <span class="nb">head</span> <span class="nt">-n</span> 100 <span class="nv">$filename</span> | <span class="nb">tail</span> <span class="nt">-n</span> 20
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>The shell starts by expanding <code class="language-plaintext highlighter-rouge">*.dat</code> to create the list of files it will process.
+The <strong>loop body</strong>
+then executes two commands for each of those files.
+The first command, <code class="language-plaintext highlighter-rouge">echo</code>, prints its command-line arguments to standard output.
+For example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo </span>hello there
+</code></pre></div></div>
+
+<p>prints:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello there
+</code></pre></div></div>
+
+<p>In this case,
+since the shell expands <code class="language-plaintext highlighter-rouge">$filename</code> to be the name of a file,
+<code class="language-plaintext highlighter-rouge">echo $filename</code> prints the name of the file.
+Note that we can’t write this as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>filename <span class="k">in</span> <span class="k">*</span>.dat
+<span class="k">do</span>
+    <span class="nv">$filename</span>
+    <span class="nb">head</span> <span class="nt">-n</span> 100 <span class="nv">$filename</span> | <span class="nb">tail</span> <span class="nt">-n</span> 20
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>because then the first time through the loop,
+when <code class="language-plaintext highlighter-rouge">$filename</code> expanded to <code class="language-plaintext highlighter-rouge">basilisk.dat</code>, the shell would try to run <code class="language-plaintext highlighter-rouge">basilisk.dat</code> as a program.
+Finally,
+the <code class="language-plaintext highlighter-rouge">head</code> and <code class="language-plaintext highlighter-rouge">tail</code> combination selects lines 81-100
+from whatever file is being processed
+(assuming the file has at least 100 lines).</p>
+
+<blockquote class="tip">
+  <h3 id="tip-spaces-in-names"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Spaces in Names</h3>
+
+  <p>Spaces are used to separate the elements of the list
+that we are going to loop over. If one of those elements
+contains a space character, we need to surround it with
+quotes, and do the same thing to our loop variable.
+Suppose our data files are named:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>red dragon.dat
+purple unicorn.dat
+</code></pre></div>  </div>
+
+  <p>To loop over these files, we would need to add double quotes like so:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ for filename in "red dragon.dat" "purple unicorn.dat"
+&gt; do
+&gt;     head -n 100 "$filename" | tail -n 20
+&gt; done
+</code></pre></div>  </div>
+
+  <p>It is simpler to avoid using spaces (or other special characters) in filenames.</p>
+
+  <p>The files above don’t exist, so if we run the above code, the <code class="language-plaintext highlighter-rouge">head</code> command will be unable
+to find them, however the error message returned will show the name of the files it is
+expecting:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>head: cannot open ‘red dragon.dat’ for reading: No such file or directory
+head: cannot open ‘purple unicorn.dat’ for reading: No such file or directory
+</code></pre></div>  </div>
+
+  <p>Try removing the quotes around <code class="language-plaintext highlighter-rouge">$filename</code> in the loop above to see the effect of the quote
+marks on spaces. Note that we get a result from the loop command for unicorn.dat
+when we run this code in the <code class="language-plaintext highlighter-rouge">creatures</code> directory:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>head: cannot open ‘red’ for reading: No such file or directory
+head: cannot open ‘dragon.dat’ for reading: No such file or directory
+head: cannot open ‘purple’ for reading: No such file or directory
+CGGTACCGAA
+AAGGGTCGCG
+CAAGTGTTCC
+...
+</code></pre></div>  </div>
+</blockquote>
+
+<p>We would like to modify each of the files in <code class="language-plaintext highlighter-rouge">shell-lesson-data/creatures</code>, but also save a version
+of the original files, naming the copies <code class="language-plaintext highlighter-rouge">original-basilisk.dat</code> and <code class="language-plaintext highlighter-rouge">original-unicorn.dat</code>.
+We can’t use:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp *.dat original-*.dat
+</code></pre></div></div>
+
+<p>because that would expand to:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>basilisk.dat minotaur.dat unicorn.dat original-<span class="k">*</span>.dat
+</code></pre></div></div>
+
+<p>This wouldn’t back up our files, instead we get an error.</p>
+
+<p>This problem arises when <code class="language-plaintext highlighter-rouge">cp</code> receives more than two inputs. When this happens, it
+expects the last input to be a directory where it can copy all the files it was passed.
+Since there is no directory named <code class="language-plaintext highlighter-rouge">original-*.dat</code> in the <code class="language-plaintext highlighter-rouge">creatures</code> directory we get an
+error.</p>
+
+<p>Instead, we can use a loop:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>filename <span class="k">in</span> <span class="k">*</span>.dat
+<span class="k">do
+    </span><span class="nb">cp</span> <span class="nv">$filename</span> original-<span class="nv">$filename</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>This loop runs the <code class="language-plaintext highlighter-rouge">cp</code> command once for each filename.
+The first time,
+when <code class="language-plaintext highlighter-rouge">$filename</code> expands to <code class="language-plaintext highlighter-rouge">basilisk.dat</code>,
+the shell executes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp basilisk.dat original-basilisk.dat
+</code></pre></div></div>
+
+<p>The second time, the command is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp minotaur.dat original-minotaur.dat
+</code></pre></div></div>
+
+<p>The third and last time, the command is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp unicorn.dat original-unicorn.dat
+</code></pre></div></div>
+
+<p>Since the <code class="language-plaintext highlighter-rouge">cp</code> command does not normally produce any output, it’s hard to check
+that the loop is doing the correct thing.
+However, we learned earlier how to print strings using <code class="language-plaintext highlighter-rouge">echo</code>, and we can modify the loop
+to use <code class="language-plaintext highlighter-rouge">echo</code> to print our commands without actually executing them.
+As such we can check what commands <em>would be</em> run in the unmodified loop.</p>
+
+<p>The following diagram
+shows what happens when the modified loop is executed, and demonstrates how the
+judicious use of <code class="language-plaintext highlighter-rouge">echo</code> is a good debugging technique.</p>
+
+<p><img src="../../images/carpentries-cli/shell_script_for_loop_flow_chart.svg" alt="The for loop 'for filename in *.dat; do echo cp $filename original-$filename; done' will successively assign the names of all '*.dat' files in your current directory to the variable '$filename' and then execute the command. With the files 'basilisk.dat', 'minotaur.dat' and 'unicorn.dat' in the current directory the loop will successively call the echo command three times and print three lines: 'cp basislisk.dat original-basilisk.dat', then 'cp minotaur.dat original-minotaur.dat' and finally 'cp unicorn.dat original-unicorn.dat'" loading="lazy" /></p>
+
+<h2 id="nelles-pipeline-processing-files">Nelle’s Pipeline: Processing Files</h2>
+
+<p>Nelle is now ready to process her data files using <code class="language-plaintext highlighter-rouge">goostats.sh</code> —
+a shell script written by her supervisor.
+This calculates some statistics from a protein sample file, and takes two arguments:</p>
+
+<ol>
+  <li>an input file (containing the raw data)</li>
+  <li>an output file (to store the calculated statistics)</li>
+</ol>
+
+<p>Since she’s still learning how to use the shell,
+she decides to build up the required commands in stages.
+Her first step is to make sure that she can select the right input files — remember,
+these are ones whose names end in ‘A’ or ‘B’, rather than ‘Z’.
+Starting from her home directory, Nelle types:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Desktop/shell-lesson-data/north-pacific-gyre/2012-07-03
+<span class="k">for </span>datafile <span class="k">in </span>NENE<span class="k">*</span>A.txt NENE<span class="k">*</span>B.txt
+<span class="k">do
+    </span><span class="nb">echo</span> <span class="nv">$datafile</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>Her next step is to decide
+what to call the files that the <code class="language-plaintext highlighter-rouge">goostats.sh</code> analysis program will create.
+Prefixing each input file’s name with ‘stats’ seems simple,
+so she modifies her loop to do that:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>datafile <span class="k">in </span>NENE<span class="k">*</span>A.txt NENE<span class="k">*</span>B.txt
+<span class="k">do
+    </span><span class="nb">echo</span> <span class="nv">$datafile</span> stats-<span class="nv">$datafile</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>She hasn’t actually run <code class="language-plaintext highlighter-rouge">goostats.sh</code> yet,
+but now she’s sure she can select the right files and generate the right output filenames.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-top-terminal-tip-re-running-previous-commands"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Top Terminal Tip: Re-running previous commands</h3>
+  <p>Typing in commands over and over again is becoming tedious,
+though,
+and Nelle is worried about making mistakes,
+so instead of re-entering her loop,
+she presses <kbd>↑</kbd>.
+In response,
+the shell redisplays the whole loop on one line
+(using semi-colons to separate the pieces):</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in NENE*A.txt NENE*B.txt; do echo $datafile stats-$datafile; done
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Using the left arrow key,
+Nelle backs up and changes the command <code class="language-plaintext highlighter-rouge">echo</code> to <code class="language-plaintext highlighter-rouge">bash goostats.sh</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in NENE*A.txt NENE*B.txt; do bash goostats.sh $datafile stats-$datafile; done
+</code></pre></div></div>
+
+<p>When she presses <kbd>Enter</kbd>,
+the shell runs the modified command.
+However, nothing appears to happen — there is no output.
+After a moment, Nelle realizes that since her script doesn’t print anything to the screen
+any longer, she has no idea whether it is running, much less how quickly.
+She kills the running command by typing <kbd>Ctrl</kbd>+<kbd>C</kbd>,
+uses <kbd>↑</kbd> to repeat the command,
+and edits it to read:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in NENE*A.txt NENE*B.txt; do echo $datafile; bash goostats.sh $datafile stats-$datafile; done
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h2 id="beginning-and-end">Beginning and End</h2>
+
+  <p>We can move to the beginning of a line in the shell by typing <kbd>Ctrl</kbd>+<kbd>A</kbd>
+and to the end using <kbd>Ctrl</kbd>+<kbd>E</kbd>.</p>
+</blockquote>
+
+<p>When she runs her program now,
+it produces one line of output every five seconds or so:</p>
+
+<p>1518 times 5 seconds,
+divided by 60,
+tells her that her script will take about two hours to run.
+As a final check,
+she opens another terminal window,
+goes into <code class="language-plaintext highlighter-rouge">north-pacific-gyre/2012-07-03</code>,
+and uses <code class="language-plaintext highlighter-rouge">cat stats-NENE01729B.txt</code>
+to examine one of the output files.
+It looks good,
+so she decides to get some coffee and catch up on her reading.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-those-who-know-history-can-choose-to-repeat-it"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Those Who Know History Can Choose to Repeat It</h3>
+
+  <p>Another way to repeat previous work is to use the <code class="language-plaintext highlighter-rouge">history</code> command to
+get a list of the last few hundred commands that have been executed, and
+then to use <code class="language-plaintext highlighter-rouge">!123</code> (where ‘123’ is replaced by the command number) to
+repeat one of those commands. For example, if Nelle types this:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ history | tail -n 5
+</code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  456  ls -l NENE0*.txt
+  457  rm stats-NENE01729B.txt.txt
+  458  bash goostats.sh NENE01729B.txt stats-NENE01729B.txt
+  459  ls -l NENE0*.txt
+  460  history
+</code></pre></div>  </div>
+
+  <p>then she can re-run <code class="language-plaintext highlighter-rouge">goostats.sh</code> on <code class="language-plaintext highlighter-rouge">NENE01729B.txt</code> simply by typing
+<code class="language-plaintext highlighter-rouge">!458</code>. This number will be different for you, you should check your history before running it!</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-other-history-commands"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Other History Commands</h3>
+
+  <p>There are a number of other shortcut commands for getting at the history.</p>
+
+  <ul>
+    <li><kbd>Ctrl</kbd>+<kbd>R</kbd> enters a history search mode ‘reverse-i-search’ and finds the
+most recent command in your history that matches the text you enter next.
+Press <kbd>Ctrl</kbd>+<kbd>R</kbd> one or more additional times to search for earlier matches.
+You can then use the left and right arrow keys to choose that line and edit
+it then hit <kbd>Return</kbd> to run the command.</li>
+    <li><code class="language-plaintext highlighter-rouge">!!</code> retrieves the immediately preceding command
+(you may or may not find this more convenient than using <kbd>↑</kbd>)</li>
+    <li><code class="language-plaintext highlighter-rouge">!$</code> retrieves the last word of the last command.
+That’s useful more often than you might expect: after
+<code class="language-plaintext highlighter-rouge">bash goostats.sh NENE01729B.txt stats-NENE01729B.txt</code>, you can type
+<code class="language-plaintext highlighter-rouge">less !$</code> to look at the file <code class="language-plaintext highlighter-rouge">stats-NENE01729B.txt</code>, which is
+quicker than doing <kbd>↑</kbd> and editing the command-line.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-doing-a-dry-run"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Doing a Dry Run</h3>
+
+  <p>A loop is a way to do many things at once — or to make many mistakes at
+once if it does the wrong thing. One way to check what a loop <em>would</em> do
+is to <code class="language-plaintext highlighter-rouge">echo</code> the commands it would run instead of actually running them.</p>
+
+  <p>Suppose we want to preview the commands the following loop will execute
+without actually running those commands:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/Desktop/shell-lesson-data/pdb/
+for datafile in *.pdb
+do
+    cat $datafile &gt;&gt; all.pdb
+done
+</code></pre></div>  </div>
+
+  <p>What is the difference between the two loops below, and which one would we
+want to run?</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-version-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Version 1</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in *.pdb
+do
+    echo cat $datafile &gt;&gt; all.pdb
+done
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-version-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Version 2</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for datafile in *.pdb
+do
+    echo "cat $datafile &gt;&gt; all.pdb"
+done
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="solution">
+    <h3 id="tip-solution"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Solution</h3>
+    <p>The second version is the one we want to run.
+This prints to screen everything enclosed in the quote marks, expanding the
+loop variable name because we have prefixed it with a dollar sign.</p>
+
+    <p>The first version appends the output from the command <code class="language-plaintext highlighter-rouge">echo cat $datafile</code>
+to the file, <code class="language-plaintext highlighter-rouge">all.pdb</code>. This file will just contain the list;
+<code class="language-plaintext highlighter-rouge">cat cubane.pdb</code>, <code class="language-plaintext highlighter-rouge">cat ethane.pdb</code>, <code class="language-plaintext highlighter-rouge">cat methane.pdb</code> etc.</p>
+
+    <p>Try both versions for yourself to see the output! Be sure to open the
+<code class="language-plaintext highlighter-rouge">all.pdb</code> file to view its contents.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-nested-loops"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Nested Loops</h3>
+
+  <p>Suppose we want to set up a directory structure to organize
+some experiments measuring reaction rate constants with different compounds
+<em>and</em> different temperatures.  What would be the
+result of the following code:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for species in cubane ethane methane
+do
+    for temperature in 25 30 37 40
+    do
+        mkdir $species-$temperature
+    done
+done
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We have a nested loop, i.e. contained within another loop, so for each species
+in the outer loop, the inner loop (the nested loop) iterates over the list of
+temperatures, and creates a new directory for each combination.</p>
+
+    <p>Try running the code for yourself to see which directories are created!</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<h1 id="finding-things">Finding Things</h1>
+
+<p>In the same way that many of us now use ‘Google’ as a
+verb meaning ‘to find’, Unix programmers often use the
+word ‘grep’.
+‘grep’ is a contraction of ‘global/regular <span class="notranslate">expression</span>/print’,
+a common sequence of operations in early Unix text editors.
+It is also the name of a very useful command-line program.</p>
+
+<p><code class="language-plaintext highlighter-rouge">grep</code> finds and prints lines in files that match a pattern.
+For our examples,
+we will use a file that contains three haiku taken from a
+1998 competition in <em>Salon</em> magazine. For this set of examples,
+we’re going to be working in the writing subdirectory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd
+cd </span>Desktop/shell-lesson-data/writing
+<span class="nb">cat </span>haiku.txt
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-forever-or-five-years"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Forever, or Five Years</h3>
+
+  <p>We haven’t linked to the original haiku because
+they don’t appear to be on <em>Salon</em>’s site any longer.
+As <a href="https://www.clir.org/wp-content/uploads/sites/6/ensuring.pdf">Jeff Rothenberg said</a>,
+‘Digital information lasts forever — or five years, whichever comes first.’
+Luckily, popular content often <a href="http://wiki.c2.com/?ComputerErrorHaiku">has backups</a>.</p>
+</blockquote>
+
+<p>Let’s find lines that contain the word ‘not’:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep </span>not haiku.txt
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">not</code> is the pattern we’re searching for.
+The grep command searches through the file, looking for matches to the pattern specified.
+To use it type <code class="language-plaintext highlighter-rouge">grep</code>, then the pattern we’re searching for and finally
+the name of the file (or files) we’re searching in.</p>
+
+<p>The output is the three lines in the file that contain the letters ‘not’.</p>
+
+<p>By default, grep searches for a pattern in a case-sensitive way.
+In addition, the search pattern we have selected does not have to form a complete word,
+as we will see in the next example.</p>
+
+<p>Let’s search for the pattern: ‘The’.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep </span>The haiku.txt
+</code></pre></div></div>
+
+<p>This time, two lines that include the letters ‘The’ are outputted,
+one of which contained our search pattern within a larger word, ‘Thesis’.</p>
+
+<p>To restrict matches to lines containing the word ‘The’ on its own,
+we can give <code class="language-plaintext highlighter-rouge">grep</code> with the <code class="language-plaintext highlighter-rouge">-w</code> option.
+This will limit matches to word boundaries.</p>
+
+<p>Later in this lesson, we will also see how we can change the search behavior of grep
+with respect to its case sensitivity.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-w</span> The haiku.txt
+</code></pre></div></div>
+
+<p>Note that a ‘word boundary’ includes the start and end of a line, so not
+just letters surrounded by spaces.
+Sometimes we don’t
+want to search for a single word, but a phrase. This is also easy to do with
+<code class="language-plaintext highlighter-rouge">grep</code> by putting the phrase in quotes.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-w</span> <span class="s2">"is not"</span> haiku.txt
+</code></pre></div></div>
+
+<p>We’ve now seen that you don’t have to have quotes around single words,
+but it is useful to use quotes when searching for multiple words.
+It also helps to make it easier to distinguish between the search term or phrase
+and the file being searched.
+We will use quotes in the remaining examples.</p>
+
+<p>Another useful option is <code class="language-plaintext highlighter-rouge">-n</code>, which numbers the lines that match:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-n</span> <span class="s2">"it"</span> haiku.txt
+</code></pre></div></div>
+
+<p>Here, we can see that lines 5, 9, and 10 contain the letters ‘it’.</p>
+
+<p>We can combine options (i.e. flags) as we do with other Unix commands.
+For example, let’s find the lines that contain the word ‘the’.
+We can combine the option <code class="language-plaintext highlighter-rouge">-w</code> to find the lines that contain the word ‘the’
+and <code class="language-plaintext highlighter-rouge">-n</code> to number the lines that match:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-n</span> <span class="nt">-w</span> <span class="s2">"the"</span> haiku.txt
+</code></pre></div></div>
+
+<p>Now we want to use the option <code class="language-plaintext highlighter-rouge">-i</code> to make our search case-insensitive:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-n</span> <span class="nt">-w</span> <span class="nt">-i</span> <span class="s2">"the"</span> haiku.txt
+</code></pre></div></div>
+
+<p>Now, we want to use the option <code class="language-plaintext highlighter-rouge">-v</code> to invert our search, i.e., we want to output
+the lines that do not contain the word ‘the’.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-n</span> <span class="nt">-w</span> <span class="nt">-v</span> <span class="s2">"the"</span> haiku.txt
+</code></pre></div></div>
+
+<p>If we use the <code class="language-plaintext highlighter-rouge">-r</code> (recursive) option,
+<code class="language-plaintext highlighter-rouge">grep</code> can search for a pattern recursively through a set of files in subdirectories.</p>
+
+<p>Let’s search recursively for <code class="language-plaintext highlighter-rouge">Yesterday</code> in the <code class="language-plaintext highlighter-rouge">shell-lesson-data/writing</code> directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-r</span> Yesterday <span class="nb">.</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">grep</code> has lots of other options. To find out what they are, we can type:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">--help</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-using-grep"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Using <code class="language-plaintext highlighter-rouge">grep</code></h3>
+
+  <p>Which command would result in the following output:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>and the presence of absence:
+</code></pre></div>  </div>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">grep "of" haiku.txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">grep -E "of" haiku.txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">grep -w "of" haiku.txt</code></li>
+    <li><code class="language-plaintext highlighter-rouge">grep -i "of" haiku.txt</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The correct answer is 3, because the <code class="language-plaintext highlighter-rouge">-w</code> option looks only for whole-word matches.
+The other options will also match ‘of’ when part of another word.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-wildcards"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Wildcards</h3>
+
+  <p><code class="language-plaintext highlighter-rouge">grep</code>’s real power doesn’t come from its options, though; it comes from
+the fact that patterns can include wildcards. (The technical name for
+these is <strong>regular <span class="notranslate">expression</span>s</strong>, which
+is what the ‘re’ in ‘grep’ stands for.) Regular <span class="notranslate">expression</span>s are both complex
+and powerful; if you want to do complex searches, please look at the lesson
+on <a href="http://v4.software-carpentry.org/regexp/index.html">our website</a>. As a taster, we can
+find lines that have an ‘o’ in the second position like this:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ grep -E "^.o" haiku.txt
+</code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You bring fresh toner.
+Today it is not working
+Software is like that.
+</code></pre></div>  </div>
+
+  <p>We use the <code class="language-plaintext highlighter-rouge">-E</code> option and put the pattern in quotes to prevent the shell
+from trying to interpret it. (If the pattern contained a <code class="language-plaintext highlighter-rouge">*</code>, for
+example, the shell would try to expand it before running <code class="language-plaintext highlighter-rouge">grep</code>.) The
+<code class="language-plaintext highlighter-rouge">^</code> in the pattern anchors the match to the start of the line. The <code class="language-plaintext highlighter-rouge">.</code>
+matches a single character (just like <code class="language-plaintext highlighter-rouge">?</code> in the shell), while the <code class="language-plaintext highlighter-rouge">o</code>
+matches an actual ‘o’.</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-tracking-a-species"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Tracking a Species</h3>
+
+  <p>Leah has several hundred
+data files saved in one directory, each of which is formatted like this:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-11-05,deer,5
+2013-11-05,rabbit,22
+2013-11-05,raccoon,7
+2013-11-06,rabbit,19
+2013-11-06,deer,2
+</code></pre></div>  </div>
+
+  <p>She wants to write a shell script that takes a species as the first command-line argument
+and a directory as the second argument. The script should return one file called <code class="language-plaintext highlighter-rouge">species.txt</code>
+containing a list of dates and the number of that species seen on each date.
+For example using the data shown above, <code class="language-plaintext highlighter-rouge">rabbit.txt</code> would contain:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-11-05,22
+2013-11-06,19
+</code></pre></div>  </div>
+
+  <p>Put these commands and pipes in the right order to achieve this:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cut -d : -f 2
+&gt;
+|
+grep -w $1 -r $2
+|
+$1.txt
+cut -d , -f 1,3
+</code></pre></div>  </div>
+
+  <p>Hint: use <code class="language-plaintext highlighter-rouge">man grep</code> to look for how to grep text recursively in a directory
+and <code class="language-plaintext highlighter-rouge">man cut</code> to select more than one field in a line.</p>
+
+  <p>An example of such a file is provided in <code class="language-plaintext highlighter-rouge">shell-lesson-data/data/animal-counts/animals.txt</code></p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -w $1 -r $2 | cut -d : -f 2 | cut -d , -f 1,3 &gt; $1.txt
+</code></pre></div>    </div>
+
+    <p>Actually, you can swap the order of the two cut commands and it still works. At the
+command line, try changing the order of the cut commands, and have a look at the output
+from each step to see why this is the case.</p>
+
+    <p>You would call the script above like this:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bash count-species.sh bear .
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-little-women"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Little Women</h3>
+
+  <p>You and your friend, having just finished reading <em>Little Women</em> by
+Louisa May Alcott, are in an argument.  Of the four sisters in the
+book, Jo, Meg, Beth, and Amy, your friend thinks that Jo was the
+most mentioned.  You, however, are certain it was Amy.  Luckily, you
+have a file <code class="language-plaintext highlighter-rouge">LittleWomen.txt</code> containing the full text of the novel
+(<code class="language-plaintext highlighter-rouge">shell-lesson-data/writing/data/LittleWomen.txt</code>).
+Using a <code class="language-plaintext highlighter-rouge">for</code> loop, how would you tabulate the number of times each
+of the four sisters is mentioned?</p>
+
+  <p>Hint: one solution might employ
+the commands <code class="language-plaintext highlighter-rouge">grep</code> and <code class="language-plaintext highlighter-rouge">wc</code> and a <code class="language-plaintext highlighter-rouge">|</code>, while another might utilize
+<code class="language-plaintext highlighter-rouge">grep</code> options.
+There is often more than one way to solve a programming task, so a
+particular solution is usually chosen based on a combination of
+yielding the correct result, elegance, readability, and speed.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solutions"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solutions</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for sis in Jo Meg Beth Amy
+do
+	echo $sis:
+	grep -ow $sis LittleWomen.txt | wc -l
+done
+</code></pre></div>    </div>
+
+    <p>Alte<span class="notranslate">rna</span>tive, slightly inferior solution:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for sis in Jo Meg Beth Amy
+do
+	echo $sis:
+	grep -ocw $sis LittleWomen.txt
+done
+</code></pre></div>    </div>
+
+    <p>This solution is inferior because <code class="language-plaintext highlighter-rouge">grep -c</code> only reports the number of lines matched.
+The total number of matches reported by this method will be lower if there is more
+than one match per line.</p>
+
+    <p>Perceptive observers may have noticed that character names sometimes appear in all-uppercase
+in chapter titles (e.g. ‘MEG GOES TO VANITY FAIR’).
+If you wanted to count these as well, you could add the <code class="language-plaintext highlighter-rouge">-i</code> option for case-insensitivity
+(though in this case, it doesn’t affect the answer to which sister is mentioned
+most frequently).</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<p>While <code class="language-plaintext highlighter-rouge">grep</code> finds lines in files,
+the <code class="language-plaintext highlighter-rouge">find</code> command finds files themselves.
+Again,
+it has a lot of options;
+to show how the simplest ones work, we’ll use the directory tree shown below.</p>
+
+<p><img src="../../images/carpentries-cli/find-file-tree.svg" alt="A file tree under the directory 'writing' contians several sub-directories and files such that 'writing' contains directories 'data', 'thesis', 'tools' and a file 'haiku.txt'; 'writing/data' contains the files 'Little Women.txt', 'one.txt' and 'two.txt'; 'writing/thesis' contains the file 'empty-draft.md'; 'writing/tools' contains the directory 'old' and the files 'format' and 'stats'; and 'writing/tools/old' contains a file 'oldtool'" loading="lazy" /></p>
+
+<p>Nelle’s <code class="language-plaintext highlighter-rouge">writing</code> directory contains one file called <code class="language-plaintext highlighter-rouge">haiku.txt</code> and three subdirectories:
+<code class="language-plaintext highlighter-rouge">thesis</code> (which contains a sadly empty file, <code class="language-plaintext highlighter-rouge">empty-draft.md</code>);
+<code class="language-plaintext highlighter-rouge">data</code> (which contains three files <code class="language-plaintext highlighter-rouge">LittleWomen.txt</code>, <code class="language-plaintext highlighter-rouge">one.txt</code> and <code class="language-plaintext highlighter-rouge">two.txt</code>);
+and a <code class="language-plaintext highlighter-rouge">tools</code> directory that contains the programs <code class="language-plaintext highlighter-rouge">format</code> and <code class="language-plaintext highlighter-rouge">stats</code>,
+and a subdirectory called <code class="language-plaintext highlighter-rouge">old</code>, with a file <code class="language-plaintext highlighter-rouge">oldtool</code>.</p>
+
+<p>For our first command,
+let’s run <code class="language-plaintext highlighter-rouge">find .</code> (remember to run this command from the <code class="language-plaintext highlighter-rouge">shell-lesson-data/writing</code> folder).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>As always,
+the <code class="language-plaintext highlighter-rouge">.</code> on its own means the current working directory,
+which is where we want our search to start.
+<code class="language-plaintext highlighter-rouge">find</code>’s output is the names of every file <strong>and</strong> directory
+under the current working directory.
+This can seem useless at first but <code class="language-plaintext highlighter-rouge">find</code> has many options
+to filter the output and in this lesson we will discover some
+of them.</p>
+
+<p>The first option in our list is
+<code class="language-plaintext highlighter-rouge">-type d</code> that means ‘things that are directories’.
+Sure enough,
+<code class="language-plaintext highlighter-rouge">find</code>’s output is the names of the five directories in our little tree
+(including <code class="language-plaintext highlighter-rouge">.</code>):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> d
+</code></pre></div></div>
+
+<p>Notice that the objects <code class="language-plaintext highlighter-rouge">find</code> finds are not listed in any particular order.
+If we change <code class="language-plaintext highlighter-rouge">-type d</code> to <code class="language-plaintext highlighter-rouge">-type f</code>,
+we get a listing of all the files instead:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> f
+</code></pre></div></div>
+
+<p>Now let’s try matching by name:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-name</span> <span class="k">*</span>.txt
+</code></pre></div></div>
+
+<p>We expected it to find all the text files,
+but it only prints out <code class="language-plaintext highlighter-rouge">./haiku.txt</code>.
+The problem is that the shell expands wildcard characters like <code class="language-plaintext highlighter-rouge">*</code> <em>before</em> commands run.
+Since <code class="language-plaintext highlighter-rouge">*.txt</code> in the current directory expands to <code class="language-plaintext highlighter-rouge">haiku.txt</code>,
+the command we actually ran was:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-name</span> haiku.txt
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">find</code> did what we asked; we just asked for the wrong thing.</p>
+
+<p>To get what we want,
+let’s do what we did with <code class="language-plaintext highlighter-rouge">grep</code>:
+put <code class="language-plaintext highlighter-rouge">*.txt</code> in quotes to prevent the shell from expanding the <code class="language-plaintext highlighter-rouge">*</code> wildcard.
+This way,
+<code class="language-plaintext highlighter-rouge">find</code> actually gets the pattern <code class="language-plaintext highlighter-rouge">*.txt</code>, not the expanded filename <code class="language-plaintext highlighter-rouge">haiku.txt</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-name</span> <span class="s2">"*.txt"</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-listing-vs-finding"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Listing vs. Finding</h3>
+
+  <p><code class="language-plaintext highlighter-rouge">ls</code> and <code class="language-plaintext highlighter-rouge">find</code> can be made to do similar things given the right options,
+but under normal circumstances,
+<code class="language-plaintext highlighter-rouge">ls</code> lists everything it can,
+while <code class="language-plaintext highlighter-rouge">find</code> searches for things with certain properties and shows them.</p>
+</blockquote>
+
+<p>As we said earlier,
+the command line’s power lies in combining tools.
+We’ve seen how to do that with pipes;
+let’s look at another technique.
+As we just saw,
+<code class="language-plaintext highlighter-rouge">find . -name "*.txt"</code> gives us a list of all text files in or below the current directory.
+How can we combine that with <code class="language-plaintext highlighter-rouge">wc -l</code> to count the lines in all those files?</p>
+
+<p>The simplest way is to put the <code class="language-plaintext highlighter-rouge">find</code> command inside <code class="language-plaintext highlighter-rouge">$()</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> <span class="si">$(</span>find <span class="nb">.</span> <span class="nt">-name</span> <span class="s2">"*.txt"</span><span class="si">)</span>
+</code></pre></div></div>
+
+<p>When the shell executes this command,
+the first thing it does is run whatever is inside the <code class="language-plaintext highlighter-rouge">$()</code>.
+It then replaces the <code class="language-plaintext highlighter-rouge">$()</code> <span class="notranslate">expression</span> with that command’s output.
+Since the output of <code class="language-plaintext highlighter-rouge">find</code> is the four filenames <code class="language-plaintext highlighter-rouge">./data/one.txt</code>, <code class="language-plaintext highlighter-rouge">./data/LittleWomen.txt</code>,
+<code class="language-plaintext highlighter-rouge">./data/two.txt</code>, and <code class="language-plaintext highlighter-rouge">./haiku.txt</code>, the shell constructs the command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-l</span> ./data/one.txt ./data/LittleWomen.txt ./data/two.txt ./haiku.txt
+</code></pre></div></div>
+
+<p>which is what we wanted.
+This expansion is exactly what the shell does when it expands wildcards like <code class="language-plaintext highlighter-rouge">*</code> and <code class="language-plaintext highlighter-rouge">?</code>,
+but lets us use any command we want as our own ‘wildcard’.</p>
+
+<p>It’s very common to use <code class="language-plaintext highlighter-rouge">find</code> and <code class="language-plaintext highlighter-rouge">grep</code> together.
+The first finds files that match a pattern;
+the second looks for lines inside those files that match another pattern.
+Here, for example, we can find PDB files that contain iron atoms
+by looking for the string ‘FE’ in all the <code class="language-plaintext highlighter-rouge">.pdb</code> files above the current directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="s2">"FE"</span> <span class="si">$(</span>find .. <span class="nt">-name</span> <span class="s2">"*.pdb"</span><span class="si">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-matching-and-subtracting"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Matching and Subtracting</h3>
+
+  <p>The <code class="language-plaintext highlighter-rouge">-v</code> option to <code class="language-plaintext highlighter-rouge">grep</code> inverts pattern matching, so that only lines
+which do <em>not</em> match the pattern are printed. Given that, which of
+the following commands will find all files in <code class="language-plaintext highlighter-rouge">/data</code> whose names
+end in <code class="language-plaintext highlighter-rouge">s.txt</code> but whose names also do <em>not</em> contain the string <code class="language-plaintext highlighter-rouge">net</code>?
+(For example, <code class="language-plaintext highlighter-rouge">animals.txt</code> or <code class="language-plaintext highlighter-rouge">amino-acids.txt</code> but not <code class="language-plaintext highlighter-rouge">planets.txt</code>.)
+Once you have thought about your answer, you can test the commands in the <code class="language-plaintext highlighter-rouge">shell-lesson-data</code>
+directory.</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">find data -name "*s.txt" | grep -v net</code></li>
+    <li><code class="language-plaintext highlighter-rouge">find data -name *s.txt | grep -v net</code></li>
+    <li><code class="language-plaintext highlighter-rouge">grep -v "net" $(find data -name "*s.txt")</code></li>
+    <li>None of the above.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The correct answer is 1. Putting the match <span class="notranslate">expression</span> in quotes prevents the shell
+expanding it, so it gets passed to the <code class="language-plaintext highlighter-rouge">find</code> command.</p>
+
+    <p>Option 2 is incorrect because the shell expands <code class="language-plaintext highlighter-rouge">*s.txt</code> instead of passing the wildcard
+<span class="notranslate">expression</span> to <code class="language-plaintext highlighter-rouge">find</code>.</p>
+
+    <p>Option 3 is incorrect because it searches the contents of the files for lines which
+do not match ‘net’, rather than searching the file names.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Explore the possible solutions here!</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-binary-files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Binary Files</h3>
+
+  <p>We have focused exclusively on finding patterns in text files. What if
+your data is stored as images, in databases, or in some other format?</p>
+
+  <p>A handful of tools extend <code class="language-plaintext highlighter-rouge">grep</code> to handle a few non text formats. But a
+more generalizable approach is to convert the data to text, or
+extract the text-like elements from the data. On the one hand, it makes simple
+things easy to do. On the other hand, complex things are usually impossible. For
+example, it’s easy enough to write a program that will extract X and Y
+dimensions from image files for <code class="language-plaintext highlighter-rouge">grep</code> to play with, but how would you
+write something to find values in a sp<span class="notranslate">reads</span>heet whose cells contained
+formulas?</p>
+
+  <p>A last option is to recognize that the shell and text processing have
+their limits, and to use another programming language.
+When the time comes to do this, don’t be too hard on the shell: many
+modern programming languages have borrowed a lot of
+ideas from it, and imitation is also the sincerest form of praise.</p>
+</blockquote>
+
+<p>The Unix shell is older than most of the people who use it. It has
+survived so long because it is one of the most productive programming
+environments ever created — maybe even <em>the</em> most productive. Its syntax
+may be cryptic, but people who have mastered it can experiment with
+different commands interactively, then use what they have learned to
+automate their work. Graphical user interfaces may be easier to use at
+first, but once learned, the productivity in the shell is unbeatable.
+And as Alfred North Whitehead wrote in 1911, ‘Civilization advances by
+extending the number of important operations which we can perform
+without thinking about them.’</p>
+
+<blockquote class="question">
+  <h3 id="question-find-pipeline-reading-comprehension"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> <code class="language-plaintext highlighter-rouge">find</code> Pipeline Reading Comprehension</h3>
+
+  <p>Write a short explanatory comment for the following shell script:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wc -l $(find . -name "*.dat") | sort -n
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-16"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>Find all files with a <code class="language-plaintext highlighter-rouge">.dat</code> extension recursively from the current directory</li>
+      <li>Count the number of lines each of these files contains</li>
+      <li>Sort the output from step 2. numerically</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">wc</code> counts lines, words, and characters in its inputs.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">cat</code> displays the contents of its inputs.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">sort</code> sorts its inputs.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">head</code> displays the first 10 lines of its input.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">tail</code> displays the last 10 lines of its input.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">command &gt; [file]</code> redirects a command’s output to a file (overwriting any existing content).</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">command &gt;&gt; [file]</code> appends a command’s output to a file.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">[first] | [second]</code> is a pipeline: the output of the first command is used as the input to the second.</p>
+</li>
+                        
+                        <li><p>The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).</p>
+</li>
+                        
+                        <li><p>A <code class="language-plaintext highlighter-rouge">for</code> loop repeats commands once for every thing in a list.</p>
+</li>
+                        
+                        <li><p>Every <code class="language-plaintext highlighter-rouge">for</code> loop needs a variable to refer to the thing it is currently operating on.</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">$name</code> to expand a variable (i.e., get its value). <code class="language-plaintext highlighter-rouge">${name}</code> can also be used.</p>
+</li>
+                        
+                        <li><p>Do not use spaces, quotes, or wildcard characters such as ‘*’ or ‘?’ in filenames, as it complicates variable expansion.</p>
+</li>
+                        
+                        <li><p>Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping.</p>
+</li>
+                        
+                        <li><p>Use the up-arrow key to scroll up through previous commands to edit and repeat them.</p>
+</li>
+                        
+                        <li><p>Use <kbd>Ctrl</kbd>+<kbd>R</kbd> to search through the previously entered commands.</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">history</code> to display recent commands, and <code class="language-plaintext highlighter-rouge">![number]</code> to repeat a command by number.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">find</code> finds files with specific properties that match patterns.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">grep</code> selects lines in files that match patterns.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">--help</code> is an option supported by many bash commands, and programs that can be run from within Bash, to display more information on how to use these commands or programs.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">man [command]</code> displays the manual page for a given command.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">$([command])</code> inserts a command’s output in place.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Advanced CLI in Galaxy (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">The Carpentries, Helena Rasche, Bazante Sanders, 2021 <b>Advanced CLI in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-advanced/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-advanced/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-cli-advanced,
+author = "The Carpentries and Helena Rasche and Bazante Sanders",
+title = "Advanced CLI in Galaxy (Galaxy Training Materials)",
+year = "2021",
+month = "09",
+day = "29"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-advanced/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> CLI Educational Game - Bashcrawl:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/cli-bashcrawl/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
