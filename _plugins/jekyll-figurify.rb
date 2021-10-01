@@ -56,7 +56,6 @@ module Jekyll
       fig = "Figure"
       if page['lang']
           lang = page['lang']
-          puts lang
           fig = site.data["lang"][lang]["figure"]
       end
       @config['prefix'] || fig+' '
