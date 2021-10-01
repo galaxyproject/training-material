@@ -1054,7 +1054,7 @@ We have started [a trial for translating tutorials into Spanish]({{site.baseurl}
 
 1. **Add a new file** with the translated material, next to the English version.
    - Add suffix `_ES` suffix
-       - i.e. `tutorial_ES.md` or `slides_ES.md`
+       - i.e. `tutorial_ES.md` or `slides_ES.html`
 
 
 2. **Add metadata** to the **English version** (at the top of the file):
