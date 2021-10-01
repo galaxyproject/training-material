@@ -1077,7 +1077,7 @@ If all worked well, it should look something like this, with a dropdown menu on 
 ![example of the view in the topic page for a tutorial with a Spanish translation](../../images/curated-translations.png)
 
 ## Other Languages
-Would you like to add a different language to the GTN? Please contact us first (e.g. on Gitter), to discuss a long-term sustainability plan!
+Would you like to add a different language to the GTN? Please contact us first (e.g. on [Gitter]({{site.gitter_url}})), to discuss a long-term sustainability plan!
 
 # Conclusion
 {:.no_toc}
