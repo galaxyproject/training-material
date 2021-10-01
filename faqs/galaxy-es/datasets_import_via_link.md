@@ -34,8 +34,9 @@ layout: faq
 {% if include.collection %}
 * Selecciona **Build** cuando está disponible
 {% if include.pairswaptext %}
+* Asegúrate de que ambas lecturas, sentido y antisentido, tengan la configuración {{ include.pairswaptext }}, respectivamente.
 * Ensure that the forward and reverse reads are set to {{ include.pairswaptext }}, respectively.
-    * Click **Swap** otherwise
+    * Si no, selecciona **Swap**
 {% endif %}
 * Pon un nombre por la colección
 {% if include.collection_name_convention %}
