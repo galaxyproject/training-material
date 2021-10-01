@@ -1046,6 +1046,39 @@ notebook:
   language: python
 ```
 
+
+
+# Spanish Translation Project
+
+We have started [a trial for translating tutorials into Spanish]({{site.baseurl}}/news/2021/05/20/spanish_project_begins.html). Below are instructions on how to add translations of slides and/or hands-on tutorials in Spanish.
+
+1. **Add a new file** with the translated material, next to the English version.
+   - Add suffix `_ES` suffix
+       - i.e. `tutorial_ES.md` or `slides_ES.html`
+
+
+2. **Add metadata** to the **English version** (at the top of the file):
+     ```yaml
+     tags:
+       - español
+     translations:
+       - es
+     ```
+
+3. **Add metadata** to the **translated version** of the file:
+     ```yaml
+     lang: es
+     translations:
+       - en
+     ```
+
+If all worked well, it should look something like this, with a dropdown menu on the slides and/or tutorial showing the presence of a curated tutorial:
+
+![example of the view in the topic page for a tutorial with a Spanish translation](../../images/curated-translations.png)
+
+## Other Languages
+Would you like to add a different language to the GTN? Please contact us first (e.g. on [Gitter]({{site.gitter_url}})), to discuss a long-term sustainability plan!
+
 # Conclusion
 {:.no_toc}
 
@@ -1053,3 +1086,5 @@ notebook:
 ## Footnotes (Rendered)
 
 [^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
+
+
