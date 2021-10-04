@@ -15,7 +15,7 @@ title: Search Tutorials
 <script>
 var tutorials = { {% for topic in site.data %}
     {% if topic[1].type == 'use' or topic[1].type == 'admin-dev' or topic[1].type == 'basics' %}
-      {% assign topic_material = site.pages | topic_filter:topic[0] %}
+      {% assign topic_material = site | topic_filter:topic[0] %}
       {% assign topic_title = topic[1].title %}
       {% for tutorial in topic_material %}
 
