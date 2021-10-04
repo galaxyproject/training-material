@@ -11,7 +11,7 @@ module Jekyll
         page2 = Jekyll::Page.new(site, site.source, dir, page.name)
         page2.data['layout'] = 'slides-plain'
         if page2.data.has_key?('lang') then
-          page2.basename = "slides-plain-#{page2.data['lang']}"
+          page2.basename = "slides-plain_#{page2.data['lang'].upcase}"
         else
           page2.basename = 'slides-plain'
         end
