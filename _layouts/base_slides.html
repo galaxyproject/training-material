@@ -86,27 +86,32 @@ class: center, middle, inverse
 </div>
 {% endif %}
 
-<div class="footnote" style="bottom: 3em;">{% icon last_modification %} {{locale['last-modification'] | Default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
-<div class="footnote" style="bottom: 2em;">{{locale['plaintext-slides'] | Default: 'Or view the <a href="slides-plain.html">plain-text slides without JS</a>'}}</div>
-<div class="footnote" style="bottom: 1em;">{{locale['presenter-notes'] | Default: "Tip: press <kbd>P</kbd> to view the presenter notes"}}</div>
+<div class="footnote" style="bottom: 3em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+
+
+<div class="footnote" style="bottom: 2em;">{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Or view the plain-text slides without JS"}}</a></div>
+
+<div class="footnote" style="bottom: 1em;"><strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}</div>
 
 ???
-{{locale['presenter-notes-explanation'] | Default: "Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+{{locale['presenter-notes-explanation'] | default: "Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
 
-Press P again to switch presenter notes off
+Press `P` again to switch presenter notes off
 
-Press C to create a new window where the same presentation will be displayed.
+Press `C` to create a new window where the same presentation will be displayed.
 This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting."
+slide to change on the other.
+
+Useful when presenting."
 }}
 
 {% if topic.requirements or page.requirements %}
 
 ---
 
-## {{locale['requirements'] | Default: "Requirements"}}
+## {{locale['requirements'] | default: "Requirements"}}
 
-{{ locale['before-diving-in'] | Default: "Before diving into this slide deck, we recommend you to have a look at"}}:
+{{ locale['before-diving-in'] | default: "Before diving into this slide deck, we recommend you to have a look at"}}:
 
 {% include _includes/display_extra_training_slides.md extra_trainings=topic.requirements %}
 {% include _includes/display_extra_training_slides.md extra_trainings=page.requirements %}
