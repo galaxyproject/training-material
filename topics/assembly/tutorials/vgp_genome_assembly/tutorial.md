@@ -83,11 +83,11 @@ The high-throughput chromosome conformation capture (Hi-C) technology is based o
 >    - *"Upload data as"*: `Datasets`
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
->   ```
->   Hi-C_dataset_F   https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz?download=1   fastqsanger.gz    Hi-C
->   Hi-C_dataset_R   https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz?download=1   fastqsanger.gz    Hi-C
->   Bionano_dataset    https://zenodo.org/record/5550653/files/bionano.cmap?download=1   cmap    Bionano
->   ```
+>       ```
+>       Hi-C_dataset_F   https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz?download=1   fastqsanger.gz    Hi-C
+>       Hi-C_dataset_R   https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz?download=1   fastqsanger.gz    Hi-C
+>       Bionano_dataset    https://zenodo.org/record/5550653/files/bionano.cmap?download=1   cmap    Bionano
+>       ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `Name`: column `A`
@@ -103,11 +103,11 @@ The high-throughput chromosome conformation capture (Hi-C) technology is based o
 >    - *"Upload data as"*: `Collections`
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
->   ```
->   SRR13577846_1    https://zenodo.org/record/5550653/files/SRR13577846_1.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
->   SRR13577846_2    https://zenodo.org/record/5550653/files/SRR13577846_2.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
->   SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
->   ```
+>       ```
+>       SRR13577846_1    https://zenodo.org/record/5550653/files/SRR13577846_1.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>       SRR13577846_2    https://zenodo.org/record/5550653/files/SRR13577846_2.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>       SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>       ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
@@ -209,7 +209,7 @@ Meryl will allow us to perform the k-mer profiling by decomposing the sequencing
 > 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
 >        - *"Count operations"*: `Count: count the ocurrences of canonical k-mers`
->        - {% icon param-collection %} *"Input sequences"*: `SRR13577846.fastq.gz`
+>        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
 >        - *"K-mer size selector"*: `Set a k-mer size`
 >            - "*K-mer size*": `21`
 >
