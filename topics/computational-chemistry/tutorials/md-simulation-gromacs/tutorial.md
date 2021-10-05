@@ -241,7 +241,7 @@ Note that we can continue where the last simulation left off (with new parameter
 >    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
 >    - {% icon param-file %} *"Checkpoint (CPT) file"*: Checkpoint file produced by NVT equilibration
 >    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
->    - *"Apply position restraints"*: `Apply position restraints`
+>    - *"Apply position restraints"*: `No position restraints`
 >    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
 >    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
 >    - *"Trajectory output"*: `Return no trajectory output`
