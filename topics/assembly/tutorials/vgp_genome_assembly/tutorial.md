@@ -317,7 +317,7 @@ Before jumping to the next section, we need to carry out some operation on the o
 > 
 {: .hands_on}
 
-Now let's parse the `upper bound for the read depth estimation`.
+Now let's parse the `upper bound for the read depth estimation` parameter.
        
 > ### {% icon hands_on %} Hands-on: Get maximum read depth
 >
