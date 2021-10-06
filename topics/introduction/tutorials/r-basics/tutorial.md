@@ -30,6 +30,7 @@ tags:
   - interactive-tools
 subtopic: r
 contributors:
+  - carpentries
   - bebatut
   - fpsom
   - tobyhodges

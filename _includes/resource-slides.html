@@ -34,9 +34,34 @@
 	</a>
     </ul>
     {% endif %}
-{% if include.material.video %}
-<a class="btn btn-default topic-icon" href="{{ site.baseurl }}/videos/watch.html?v={{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides" title="Video">
-    {% icon video aria=false %}
-</a>
-{% endif %}
     </span>
+
+<!-- video slides -->
+{% if include.material.video %}
+<span class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/videos/watch.html?v={{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides" title="Video">
+    {% icon video aria=false %}
+  </a>
+
+
+  <!-- add dropdown with links to different languages for the video-->
+  {% if translations > 0 %}
+  <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </a>
+  <ul class="dropdown-menu">
+
+    <div class="dropdown-item"><strong>Video Languages</strong></div>
+      {% for lang in include.material.translations.slides %}
+      <a class="dropdown-item" href="{{ site.baseurl }}/videos/watch.html?v={{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides_{{lang | upcase}}" title="{{ lang }}">
+         {{language[lang]}}
+      </a>
+      {% endfor %}
+
+  </ul>
+  {% endif %}
+
+{% endif %}
+
+</span>

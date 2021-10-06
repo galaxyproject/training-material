@@ -38,6 +38,7 @@ key_points:
 - Pipes can be used to combine simple operations into complex procedures.
 subtopic: r
 contributors:
+  - carpentries
   - bebatut
   - fpsom
   - tobyhodges

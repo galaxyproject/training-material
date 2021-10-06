@@ -1018,7 +1018,66 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 {: .tip}
 
 
+# Automatic Jupyter Notebooks
 
+If your tutorial is primarily focused on teaching students how to write code (Bash, Python, SQL, etc) you can take advantage of the GTN's ability to automatically export Jupyter Notebooks from the tutorial content. In this system, you pick a single language for your tutorial, and then all code blocks tagged with that language become runnable. E.g.
+
+    Here is some explanation
+
+    ```bash
+    some code that students should execute
+    ```
+
+To use this system, you need to take care of a few things:
+
+- Do **not** use hands-on boxes for segments that should be executed
+- Do not use a terminal or prompt character
+- Generally avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
+
+And be aware that the output will look a little bit different than the GTN, e.g. solution boxes cannot be hidden by default.
+
+## Enabling the system
+
+Add metadata to your `tutorial.md` header like:
+
+
+```
+notebook:
+  language: python
+```
+
+
+
+# Spanish Translation Project
+
+We have started [a trial for translating tutorials into Spanish]({{site.baseurl}}/news/2021/05/20/spanish_project_begins.html). Below are instructions on how to add translations of slides and/or hands-on tutorials in Spanish.
+
+1. **Add a new file** with the translated material, next to the English version.
+   - Add suffix `_ES` suffix
+       - i.e. `tutorial_ES.md` or `slides_ES.html`
+
+
+2. **Add metadata** to the **English version** (at the top of the file):
+     ```yaml
+     tags:
+       - español
+     translations:
+       - es
+     ```
+
+3. **Add metadata** to the **translated version** of the file:
+     ```yaml
+     lang: es
+     translations:
+       - en
+     ```
+
+If all worked well, it should look something like this, with a dropdown menu on the slides and/or tutorial showing the presence of a curated tutorial:
+
+![example of the view in the topic page for a tutorial with a Spanish translation](../../images/curated-translations.png)
+
+## Other Languages
+Would you like to add a different language to the GTN? Please contact us first (e.g. on [Gitter]({{site.gitter_url}})), to discuss a long-term sustainability plan!
 
 # Conclusion
 {:.no_toc}
@@ -1027,3 +1086,5 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 ## Footnotes (Rendered)
 
 [^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
+
+

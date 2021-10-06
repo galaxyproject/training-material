@@ -106,7 +106,7 @@ footer: no
             {% assign tuto_has_zenodo = true %}
         {% endif %}
 
-        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
+        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or material.notebook %}
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> {{ locale['supporting-materials'] | default: "Supporting Materials" }}:</strong></div>
         <ul class="supporting_material">
             {% if associated_slides %}
@@ -129,6 +129,10 @@ footer: no
 
             {% if own_material.tours %}
                 <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
+            {% endif %}
+
+            {% if material.notebook %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=material topic=topic.name label=true %}</li>
             {% endif %}
 
             {% assign faqpage = page.dir | append: 'faqs/index.md' | remove_first: '/' %}
@@ -157,6 +161,29 @@ footer: no
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
+                {% if page.notebook %}
+                <blockquote class="comment">
+                    <h3>{% icon comment aria=false %} {{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</h3>
+                    <p>
+                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                    </p>
+                    <!--
+                    <p><b>Launching on MyBinder</b>
+                        Click here and the notebook will launch on MyBinder.org
+                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath={{ site.baseurl | replace: '/','' }}%2F{{ page.path | replace: '/','%2F' }}.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                    </p>
+                    -->
+                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                        <ol>
+                            <li><a href="{% link faqs/galaxy/interactive_tools_jupyter_launch.md %}">Instructions to Launch JupyterLab</a></li>
+                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                            <li>Run <code>wget {{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb</code></li>
+                            <li>Select the notebook that appears in the list of files on the left.</li>
+                        </ol>
+                    </p>
+                </blockquote>
+                {% endif %}
+
                 {{ content
                     | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
                     | no_translate:site.words_to_not_translate }}
