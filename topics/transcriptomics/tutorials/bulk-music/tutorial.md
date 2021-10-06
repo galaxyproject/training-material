@@ -185,108 +185,21 @@ We can also extract specific information pertaining to Samples or Features:
 >
 {: .hands_on}
 
+.. and if necessary extract the general information itself as a standalone text-file
 
-
-> ### {% icon hands_on %} Hands-on: Finding
+> ### {% icon hands_on %} Hands-on: General Information as a text file
 >
 > 1. {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
->    - {% icon param-file %} *"ESet Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
->    - *"Inspect"*: `Feature Data Table`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Estimating Cell Type proportions
 
-## Sub-step with **Inspect Expression Set Object**
+Instead of selecting marker genes, MuSiC gives weights to each gene. The weighting scheme is based on cross-subject variation: up-weigh genes with low variation and down-weigh genes with high variation. Here we demonstrate step by step with the human pancreas datasets.
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
->    - {% icon param-file %} *"ESet Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Inspect Expression Set Object**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
->    - {% icon param-file %} *"ESet Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **MuSiC**
 
