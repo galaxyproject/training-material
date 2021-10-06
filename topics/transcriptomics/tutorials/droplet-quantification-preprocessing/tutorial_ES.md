@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin"
 subtopic: single-cell-CS
 priority: 1
+level: Advanced
 
 zenodo_link: 'https://zenodo.org/record/4574153'
 
@@ -26,6 +27,8 @@ tags:
   - single-cell
   - 10x
   - paper-replication
+
+lang: es
 
 translations:
   - en
