@@ -84,6 +84,10 @@ Below is an overview of the workflow that will be used throughout this tutorial.
 Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabular assay data, and the other from single-cell RNA-seq tabular assay data. A blind analysis of cell proportion estimation is performed, along side a guided analysis using pre-grouped cell types.
 
 
+# Cell Proportion Estimation
+
+Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** from **CITE ET AL**, using a single cell dataset from **CITE ET AL** containing **XXX LIST OF CELL TYPES**. If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
+
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -94,7 +98,9 @@ Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabula
 >     -> `{{ page.title }}`):
 >
 >    ```
->    
+>    scrna_assay.tab
+>    bulk_assay.tab
+>    bulk_pheno.tab
 >    ```
 >    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
@@ -107,112 +113,81 @@ Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabula
 > 3. Rename the datasets
 > 4. Check that the datatype
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="rdata" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 5. Add to each database a tag corresponding to `#bulk` and `#scrna`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
+## Building the Expression Set objects
 
+Here we shall build two ExpressionSet objects corresponding to the bulk and single-cell datatypes. 
 
-# Title of the section usually corresponding to a big step in the analysis
+## **Construct Expression Set Object**
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Construct Expression Set Object**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
 >
 > 1. {% tool [Construct Expression Set Object](music_construct_eset) %} with the following parameters:
->    - {% icon param-file %} *"Assay Data"*: `output` (Input dataset)
->    - {% icon param-file %} *"Phenotype Data"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Assay Data"*: `bulk_assay.tab` (Input dataset)
+>    - {% icon param-file %} *"Phenotype Data"*: `bulk_pheno.tab` (Input dataset)
 >    - In *"Meta Data"*:
 >        - {% icon param-repeat %} *"Insert Meta Data"*
->            - *"Label"*: `{'id': 2, 'output_name': 'output'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>            - *"Label"*: `This is a meaningful piece of text`
+>    - Execute
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > An ExpressionSet object has many data slots, the principle of which are the experiment data, the phenotype data, as well more "meta" data pertaining to experiment information and additional annotations.
 >    {: .comment}
+>
+> 2. {% tool [Construct Expression Set Object](music_construct_eset) %} with the following parameters:
+>    - {% icon param-file %} *"Assay Data"*: `scrna_assay.tab` (Input dataset)
+>    - *"Annotation"*: `Another meaningful piece of text`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## **Inspect Expression Set Object**
+
+We will now inspect these objects we juset created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
+
+> ### {% icon hands_on %} Hands-on: Viewing General Information
+> 1. {% icon galaxy_eye %} Click on the `#scrna` dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
+>    - Wait for the dataset to expand and see the properites
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many samples are in dataset?
+> 2. How many genes?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. XXX Answer for question1
+> > 2. XXX Answer for question2
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Construct Expression Set Object**
+We can also extract specific information pertaining to Samples or Features:
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Construct Expression Set Object](music_construct_eset) %} with the following parameters:
->    - {% icon param-file %} *"Assay Data"*: `output` (Input dataset)
->    - *"Annotation"*: `{'id': 4, 'output_name': 'output'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> ### {% icon hands_on %} Hands-on: Extracting Feature Data
+> 1. {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
+>    - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
+>    - *"Inspect"*: `Feature Data Table`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > "Features" are synonymous with "genes" in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **Inspect Expression Set Object**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Finding
 >
 > 1. {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
 >    - {% icon param-file %} *"ESet Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
