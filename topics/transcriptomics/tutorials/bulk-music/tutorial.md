@@ -57,20 +57,31 @@ What is deconvoltion and why is it needed.
 
 ## MusiC
 
-Music utilizes blah blah blah
+MuSiC utilizes cell-type specific gene expression from single-cell RNA sequencing (RNA-seq) data to characterize cell type compositions from bulk RNA-seq data in complex tissues. By appropriate weighting of genes showing cross-subject and cross-cell consistency, MuSiC enables the transfer of cell type-specific gene expression information from one dataset to another.
 
-<!-- Nice image here (https://xuranw.github.io/MuSiC/articles/MuSiC.html) of how it works -->
+Solid tissues often contain closely related cell types which leads to collinearity. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, we first group similar cell types into the same cluster and estimate cluster proportions, then recursively repeat this procedure within each cluster.
 
-## Expression Set Objects
+![muse1](../../images/bulk-music/figure_method.jpg "Overview of MuSiC Suite")
 
-Expressions Sets are Rdata sets invented by Bioconductor for reasons X Y Z
+## Expression Set
+
+Expression Set objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. ExpressionSet class is derived from eSet, and requires a matrix named exprs as assayData member.
+
+The ExpressionSet class is designed to combine several different sources of information into a single convenient structure. An ExpressionSet can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
+
+The data in an ExpressionSet is complicated, consisting of expression data from microarray experiments (assayData; assayData is used to hint at the methods used to access different data components, as we will see below), ‘meta-data’ describing samples in the experiment (phenoData), annotations and meta-data about the features on the chip or technology used for the experiment (featureData, annotation), information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData), and a flexible structure to describe the experiment (experimentData). The ExpressionSet
+class coordinates all of this data, so that you do not usually have to worry about the details.
 
 
 # Workflow Overview 
 
-Here is a nice image of the workflow that will be used in this tutorial
+In this tutorial we will be constructing  ExpressionSet objects, inspecting, and annotating them, and then finally processing them with the MuSiC RNA-Deconvolution analysis suite.
+
+Below is an overview of the workflow that will be used throughout this tutorial.
 
 ![workflow1](../../images/bulk-music/workflow1.png "Workflow of Steps")
+
+Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabular assay data, and the other from single-cell RNA-seq tabular assay data. A blind analysis of cell proportion estimation is performed, along side a guided analysis using pre-grouped cell types.
 
 
 ## Get data
