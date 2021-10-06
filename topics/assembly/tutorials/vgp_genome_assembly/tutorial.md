@@ -129,17 +129,27 @@ To begin our analysis we will carry out the evaluation and pre-processing of our
 > 1. Run **FastQC** {% icon tool %} with the following parameters
 >    - {% icon param-collection %} *"Raw read data from your current history"*: `HiFi_collection`
 >
-> 2. Inspect the generated HTML files
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
+>    - In *"Results"*:
+>      - *"Which tool was used generate logs?"*: `FastQC`
+>      - {% icon param-collection %} *"Dataset collection"*: select the `HiFi_collection` dataset.
+>    - In *"Report title"*: `HiFi quality report`
+> 3. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated HTML file
 >
 {: .hands_on}
+
+![fig3:HiFi Quality report](../../images/vgp_assembly/quality_plot.png "PacBio HiFi qualiry report")
+
+As we can see, the mean Phred score is over 80 in all the samples which means, which means that the base call accuracy is around 99.999999%!
+
 
 > ### {% icon comment %} Comments
 > For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
 {: .comment}
 
-Next, we will trim the residual adaptors sequences by using Cutadapt.
+According the quality report, less that 0.1% of the reads include adaptor sequences. Despide of this, we will trim the residual adaptors sequences by using Cutadapt, in order to avoid potential reads which could interfer in the subsequent steps.
 
-> ### {% icon hands_on %} Hands-on: Primer removal
+> ### {% icon hands_on %} Hands-on: Optional step: primer removal
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -274,23 +284,23 @@ Before jumping to the next section, we need to carry out some operation on the o
 >
 > 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `summary` (output of **GenomeScope** {% icon tool %})
->    - *"Find pattern"*: ` bp`
+>    - *"Find pattern"*: `bp`
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
 > 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `outfile` (output of **Replace** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: output file of **Replace** {% icon tool %})
 >    - *"Find pattern"*: `,`
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
-> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `outfile` (output of **Replace** {% icon tool %})
+> 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: output file of the previous step.
 >    - *"Type of regex"*: `Basic`
 >    - *"Regular Expression"*: `Haploid`
 >
-> 4. {% tool [Convert](Convert characters1) %} with the following parameters:
->    - {% icon param-file %} *"in Dataset"*: `output` (output of **Search in textfiles** {% icon tool %})
+> 4. {% tool [Convert delimiters to TAB](Convert characters1) %} with the following parameters:
+>    - {% icon param-file %} *"in Dataset"*: output of **Search in textfiles** {% icon tool %})
 >
 > 5. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
@@ -346,6 +356,16 @@ Now let's parse the `upper bound for the read depth estimation` parameter.
 >
 > 6. Rename it as `Maximum depth`
 >
+> > ### {% icon question %} Question
+> >
+> > What is the estimated maximum depth?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > The estimated maximum depth is  .
+> > >
+> > {: .solution}
+>
 {: .hands_on}
 
 Finally, let's parse the `transition between haploid and diploid coverage depths` parameter.
@@ -361,6 +381,16 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 >    - *"Select type of parameter to parse"*: `Integer`
 >
 > 3. Rename it as `Transition parameter`
+>
+> > ### {% icon question %} Question
+> >
+> > What is the estimated transition parameter?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > The estimated transition parameter is  .
+> > >
+> > {: .solution}
 >
 {: .hands_on}
 
@@ -388,7 +418,7 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >
 > 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.14+galaxy0) %} with the following parameters:
 >    - *"Assembly mode"*: `Standard`
->        - {% icon param-file %} *"Input reads"*: `out1` (output of **Cutadapt** {% icon tool %})
+>        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
 >    - *"Options for purging duplicates"*: `Specify`
 >       - *"Coverage upper bound"*: `value obtained previously`
 >
