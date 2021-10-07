@@ -196,8 +196,10 @@ We can also extract specific information pertaining to Samples or Features:
 
 # Estimating Cell Type proportions
 
+<!-- Maybe this goes in a comment? -->
 Instead of selecting marker genes, MuSiC gives weights to each gene. The weighting scheme is based on cross-subject variation: up-weigh genes with low variation and down-weigh genes with high variation. Here we demonstrate step by step with the human pancreas datasets.
 
+The deconvolution of 89 subjects from Fadista et al. (2014) are preformed with bulk data GSE50244.bulk.eset and single cell reference EMTAB.eset. We constrained our estimation on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.
 
 ## Sub-step with **MuSiC**
 
@@ -220,6 +222,17 @@ Instead of selecting marker genes, MuSiC gives weights to each gene. The weighti
 >
 {: .hands_on}
 
+The estimated proportions are normalized to sum to 1 across included cell types. Here we use GSE50244.bulk.eset as the bulk.eset input and EMTAB.eset as sc.eset input. The clusters is specified as cellType while samples is sampleID. As stated before, we only included 6 major cell types as select.ct.
+
+![jitter_plot](../../images/bulk-music/jitter_plot.png "Jitter plot of Estimated Proportions")
+
+XXX Jitter plot looks different, why? -- Explain what jitter is and its random nature
+
+It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. Let’s look at the beta cell proportions with HbA1c level.
+
+![ctprop](../../images/bulk-music/ctprop_plot.png "Cell Type Proportions")
+
+
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
@@ -236,7 +249,12 @@ Instead of selecting marker genes, MuSiC gives weights to each gene. The weighti
 >
 {: .question}
 
-## Sub-step with **MuSiC**
+
+# Estimation of cell type proportions with pre-grouping of cell types
+
+Solid tissues often contain closely related cell types, and correlation of gene expression between these cell types leads to collinearity, making it difficult to resolve their relative proportions in bulk data. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, we first group similar cell types into the same cluster and estimate cluster proportions, then recursively repeat this procedure within each cluster. At each recursion stage, we only use genes that have low within-cluster variance, a.k.a. the cross-cell consistent genes. This is critical as the mean expression estimates of genes with high variance are affected by the pervasive bias in cell capture of scRNA-seq experiments, and thus cannot serve as reliable reference.
+
+**TODO**: Users start a new history here and get new bulk and single cell data
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
