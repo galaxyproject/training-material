@@ -209,11 +209,15 @@ The deconvolution of 89 subjects from Fadista et al. (2014) are preformed with b
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Estimate Proportions`
->        - *"Comma list of cell types to use from scRNA dataset"*: `{'id': 5, 'output_name': 'output'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>        - *"Cell Types Label from scRNA dataset"*: `cellType`
+>        - *"Samples Identifier from scRNA dataset"*: `sampleID`
+>        - *"Comma list of cell types to use from scRNA dataset"*: `alpha,beta,delta,gamma,acinar,ductal`
+>        - *"Phenotype factors"*: `(leave blank)`
+>        - *"Excluded phenotype factors"*: `sampleID,SubjectName`
+>        - *"Phenotype Target"*: `hba1c`
+>        - *"Sample Disease Group"*: `T2D`
+>        - *"Sample Disease Group (Scale)"*: `5`
+>        - *"Plot Title"*: `HbA1c vs Beta Cell Type Proportion`
 >
 >    > ### {% icon comment %} Comment
 >    >
