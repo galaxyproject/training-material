@@ -15,7 +15,7 @@ requirements:
 follow_up_training:
 -
   type: "internal"
-  topic_name: introduction
+  topic_name: data-science
   tutorials:
       - r-advanced
 
@@ -41,11 +41,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-{% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
-{% include topics/introduction/tutorials/r-basics/r_introduction.md %}
-{% include topics/introduction/tutorials/r-basics/r_history.md %}
-{% include topics/introduction/tutorials/r-basics/r_advantages.md %}
-{% include topics/introduction/tutorials/r-basics/disclaimer.md %}
+{% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
+{% include topics/data-science/tutorials/r-basics/r_introduction.md %}
+{% include topics/data-science/tutorials/r-basics/r_history.md %}
+{% include topics/data-science/tutorials/r-basics/r_advantages.md %}
+{% include topics/data-science/tutorials/r-basics/disclaimer.md %}
 
 > ### Agenda
 >
