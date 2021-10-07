@@ -257,6 +257,8 @@ The next step is to computationally infer the genome properties from the k-mer c
 >    - *"K-mer length used to calculate k-mer spectra"*: `21`
 >
 >   - In "*Output options*": mark `Generate a file with the model parameters` and `Summary of the analysis`
+>   - In "*Advanced options*":
+>       - *"Create testing.tsv file with model parameters"*: `true`
 >
 >    {: .comment}
 >
@@ -303,12 +305,12 @@ Before jumping to the next section, we need to carry out some operation on the o
 >    - {% icon param-file %} *"in Dataset"*: output of **Search in textfiles** {% icon tool %})
 >
 > 5. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
+>    - {% icon param-file %} *"File to cut"*: output of **Search in textfiles** {% icon tool %})
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `Column: 5`
 >
 > 6. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %})
 >    - *"Select type of parameter to parse"*: `Integer`
 >
 > 7. Rename the output as `Estimated genome size`.
@@ -319,7 +321,7 @@ Before jumping to the next section, we need to carry out some operation on the o
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > The estimated genome size is 12828090 bp.
+> > > The estimated genome size is 12664060 bp.
 > > >
 > > {: .solution}
 > >
@@ -339,7 +341,7 @@ Now let's parse the `upper bound for the read depth estimation` parameter.
 >
 > 2. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
 >    - *"Add expression"*: `3*c7`
->    - {% icon param-file %} *"as a new column to"*: `out_file1` (output of **Compute** {% icon tool %})
+>    - {% icon param-file %} *"as a new column to"*: output of **Compute** {% icon tool %})
 >    - *"Round result?"*: `Yes`
 >    - *"Input has a header line with column names?"*: `No`
 >
@@ -356,15 +358,17 @@ Now let's parse the `upper bound for the read depth estimation` parameter.
 >
 > 6. Rename it as `Maximum depth`
 >
-> > ### {% icon question %} Question
+> > ### {% icon question %} Questions
 > >
 > > What is the estimated maximum depth?
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > The estimated maximum depth is  .
+> > > The estimated maximum depth is  63 reads.
 > > >
 > > {: .solution}
+> >
+> {: .question}
 >
 {: .hands_on}
 
@@ -382,15 +386,17 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 >
 > 3. Rename it as `Transition parameter`
 >
-> > ### {% icon question %} Question
+> > ### {% icon question %} Questions
 > >
 > > What is the estimated transition parameter?
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > The estimated transition parameter is  .
+> > > The estimated transition parameter is  21 reads.
 > > >
 > > {: .solution}
+> >
+> {: .question}
 >
 {: .hands_on}
 
@@ -421,24 +427,89 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
 >    - *"Options for purging duplicates"*: `Specify`
 >       - *"Coverage upper bound"*: `value obtained previously`
+>    - *"Options for Hi-C partition"*: `Specify`
+>       - *"Hi-C R1 reads"*: `SRR7126301_1`
+>       - *"Hi-C R2 reads"*: `SRR7126301_2`
+>
+> 2. Rename the `Hi-C hap1 balanced contig graph` as `Primary contig graph` and add a `#primary` tag
+> 3. Rename the `Hi-C hap2 balanced contig graph` as `Alternate contig graph` and  add a `#alternate` tag
 >
 {: .hands_on}
 
+Hifiasm generates four outputs in GFA format; this format is specially designed to capture sequence graphs as the product of an assembly, a representation of variation in genomes, splice graphs in genes, or even overlap between reads from long-read sequencing technology.
+
 ## Convert GFA format to FASTA with **GFA to FASTA** 
 
-Next step: conversion from GFA to FASTA. The purpose of the GFA format is to capture sequence graphs as the product of an assembly, a representation of variation in genomes, splice graphs in genes, or even overlap between reads from long-read sequencing technology.
-
-The GFA format is a tab-delimited text format for describing a set of sequences and their overlap.
+We have obtained the fully phased contig graphs of the primary and alternate haplotypes, but the output format of **hifiasm** is not adequate for the subsequent steps, so we will convert them into fasta format.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [GFA to FASTA](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
->    - {% icon param-files %} *"Input GFA file"*: select `primary_contig_graph` and the `alternate assembly graph` (output of **Hifiasm** {% icon tool %})
+>    - {% icon param-files %} *"Input GFA file"*: select `Primary contig graph` and the `Alternate contig graph` datasets (output of **Hifiasm** {% icon tool %})
 >
-> 2. Rename the outputs
+> 2. Rename the outputs as `Primary contig FASTA` and `Alternate contig FASTA`.
 >
 {: .hands_on}
 
+# Identify and remove haplotypic duplication
+
+An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes (haplotype contigs), as well as all hemizygous regions from both haplomes. However, the allelic relationship between haplotypes still present a problem for *de novo* genome assembly, specially in high heterozygous genomes; sequence divergence between pair of allelic sequences can lead to assemble there regions as separate contigs, rather than the expected single haplotype-fused contig. It can result in assemblies signicantly larger than the haploid genome size, which can lead to interferences in downstream stages, such as scaffolding and gene annotation ({% cite Guan2019 %}, {% cite Roach2018 %}). 
+
+Usually, allelic relationships are inferred at the post-assembly stage. Despite the haplotig processing requites multiple steps, the approach used in this tutorial can be summaryzed in two steps: firstly we will identify the syntenic contigs by using the mapped read coverage and **minimap2** ({% cite Li2018 %}) alignments. Then, we will resolve the haplotigs and overlaps in the primary assembly by using **purge_dups**.
+
+## Estimate the coverage cutoff
+
+The first step is to use **minimap2** to map long read sequencing data onto the assembly and collect read depth at each base position in the assembly.
+
+> ### {% icon hands_on %} Hands-on: Mapping with minimap2
+>
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*:`HiFi_collection (trim)`
+> 
+> 2. Rename de output as `HiFi reads collapsed`
+>
+> 3. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Primary contig FASTA` (output of **GFA to FASTA** {% icon tool %})
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-collection %} *"Select fastq dataset"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
+>        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
+>    - In *"Set advanced output options"*:
+>        - *"Select an output format"*: `paf`
+>
+> 4. Rename the output as `Read mapped to contigs`
+> 
+> 5. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Calculate coverage cutoff and create read depth histogram and base-levelread depth for PacBio data (calcuts+pbcstats)`
+>        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
+>        - In *"Calcuts options"*:
+>            - *"Upper bound for read depth"*: `63` (the previously estimad maximum depth)
+>            - *"Ploidity"*: `Haploid`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > In the case you are working with a diploid orgasm, you should select `diploid` in the ploidity option.
+>    {: .comment}
+>
+>
+{: .hands_on}
+
+
+<!--
+
+Bibliography https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3409271/
+
+We segment the input draft assembly into contigs by cutting at blocks ‘N’s, and use minimap2 to generate an all by all self-alignment.
+
+We next recognize and remove haplotigs in essentially the same way as purge_haplotigs, and remove all matches associated with haplotigs from the self-alignment set.
+
+Finally we chain consistent matches in the remainder to find overlaps, then calculate the average coverage of the matching intervals for each overlap, and mark an unambiguous overlap as heterozygous when the average coverage on both contigs is less than the read depth cutoff found in step 1, removing the sequence corresponding to the matching interval in the shorter contig.
+
+purge_dups can significantly improve genome assemblies by removing overlaps and haplotigs caused by sequence divergence in heterozygous regions. This both removes false duplications in primary draft assemblies while retaining completeness and sequence integrity, and can improve scaffolding. 
+
+Along with sequence similarity, purge_dups and purge_haplotigs take into account the coverage depth obtained by mapping short or long reads to the contigs. Coverage depth represents the number of reads covering a position in a contig (computed after mapping reads on the assembly). The contigs are then aligned to select duplicates accurately and remove them. While purge_dups sets its coverage thresholds automatically, purge_haplotigs requires user-provided values.
+
+-->
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -467,29 +538,7 @@ The GFA format is a tab-delimited text format for describing a set of sequences 
 
 ## Sub-step with **Map with minimap2**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `out1` (output of **Cutadapt** {% icon tool %})
->        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
->    - In *"Alignment options"*:
->        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
->    - In *"Set advanced output options"*:
->        - *"Select an output format"*: `paf`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+
 
 ## Sub-step with **Purge overlaps**
 
@@ -786,22 +835,7 @@ The GFA format is a tab-delimited text format for describing a set of sequences 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
->    - *"Select the purge_dups function"*: `Calculate coverage cutoff and create read depth histogram and base-levelread depth for PacBio data (calcuts+pbcstats)`
->        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
->        - In *"Calcuts options"*:
->            - *"Upper bound for read depth"*: `{'id': 28, 'output_name': 'integer_param'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+
 
 ## Sub-step with **Purge overlaps**
 
