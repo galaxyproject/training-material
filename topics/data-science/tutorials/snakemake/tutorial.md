@@ -26,6 +26,7 @@ contributors:
   - bazante1
 abbreviations:
   SciWMS: Scientific Workflow Management System
+  DAG: Directed Acyclic Graph
 ---
 
 Here you will learn to write both Make and Snakemake workflows. We teach two workflow engines because Snakemake uses a lot of the concepts of Make, and these concepts are somewhat complex and a very different way of thinking than you might be used to with workflow design.
@@ -267,7 +268,7 @@ Reading the above you should be able to imagine a tree of tasks that Make is cre
 
 TODO
 
-This is called a "Directed Acyclic Graph", it is a graph of nodes (tasks that need to be executed), with connections between nodes that have a direction (this task depends on outputs of that task), and there are no cycles (no outputs depend on inputs.) These are very common in {SciWMS}s because they make computation faster. Instead of executing step-by-step, we can build this graph of what work needs to be done, and then starting with the leaves of the graph (the end nodes without other dependencies) we can start executing and removing them.
+This is called a {DAG}, it is a graph of nodes (tasks that need to be executed), with connections between nodes that have a direction (this task depends on outputs of that task), and there are no cycles (no outputs depend on inputs.) These are very common in {SciWMS}s because they make computation faster. Instead of executing step-by-step, we can build this graph of what work needs to be done, and then starting with the leaves of the graph (the end nodes without other dependencies) we can start executing and removing them.
 
 This also how we can really easily parallelise workflows: because we know the dependencies of each step, we know which can be executed right now, and we can execute them in parallel because we know for sure they do not depend on each other.
 
@@ -929,7 +930,7 @@ This is starting to look like a pretty good workflow! Let's preview how it will 
 > ```
 {: .code-out.code-max-300}
 
-Gosh that's a lot of output! Let's build the dag to see a more concise representation of what is going to happen:
+Gosh that's a lot of output! Let's build the {DAG} to see a more concise representation of what is going to happen:
 
 > ### {% icon code-in %} Input
 > ```bash
@@ -1019,6 +1020,10 @@ We should use something exactly like this for our samples. We can have a `SAMPLE
 > {: .solution}
 {: .hands_on}
 
+> ### {% icon hands_on %} Hands-on: Run the pipeline
+> Run `snakemake -c1 --use-conda`. Did it work?
+{: .hands_on}
+
 ### Adding all FastQC reports
 
 Now that you've done one expand, let's do a more complicated one. The expand function can take multiple variables which we can use to expand both our samples AND our expected extensions
@@ -1044,6 +1049,8 @@ Now that you've done one expand, let's do a more complicated one. The expand fun
 > > > ### {% icon tip %} Why not `_1.fastqc.html`?
 > > >
 > > > There's not always a good answer for this, some tools will mangle names in unexpected ways. The best way to discover this in a {SciWMS} like Snakemake is to just write what you expect, and run it, and see how it fails. Here the filenames were not as expected, so, we updated the `ext` to use `_1_fastqc.html` and everything works. This was done by `fastqc` so if we really wanted the other style of naming we could read the FastQC manual to maybe determine why.
+> > >
+> > > Here Snakemake failed, complaining "the output files weren't created", but we could ee they were, just not with the expected filename.
 > > {: .tip}
 > {: .solution}
 {: .hands_on}
@@ -1099,30 +1106,132 @@ So with that said, let's go with option three, duplicate our fastqc rule to have
 > > ```diff
 > > --- a/Snakefile
 > > +++ b/Snakefile
-> > @@ -3,6 +3,7 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
-> >  rule all:
-> >         input:
-> >                 expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
-> > +               expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> > @@ -4,6 +4,7 @@ rule all:
+> >  	input:
+> >  		expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+> >  		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> > +		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
 > >
 > >  rule download:
-> >         output:
+> >  	output:
+> > @@ -27,6 +28,19 @@ rule fastqc:
+> >  	shell:
+> >  		"fastqc {input} --outdir fastqc/ >{log.out} 2>{log.err}"
+> >
+> > +rule fastqc_trimmed:
+> > +	input:
+> > +		"trim/{sample}.fq"
+> > +	output:
+> > +		"fastqc-trim/{sample}_fastqc.html"
+> > +	conda:
+> > +		"envs/fastqc.yaml"
+> > +	log:
+> > +		out="logs/fastqc.{sample}.out",
+> > +		err="logs/fastqc.{sample}.err"
+> > +	shell:
+> > +		"fastqc {input} --outdir fastqc-trim/ >{log.out} 2>{log.err}"
+> > +
+> >
 > > ```
 > >
-> > > ### {% icon tip %} Why not `_1.fastqc.html`?
-> > >
-> > > There's not always a good answer for this, some tools will mangle names in unexpected ways. The best way to discover this in a {SciWMS} like Snakemake is to just write what you expect, and run it, and see how it fails. Here the filenames were not as expected, so, we updated the `ext` to use `_1_fastqc.html` and everything works. This was done by `fastqc` so if we really wanted the other style of naming we could read the FastQC manual to maybe determine why.
-> > {: .tip}
 > {: .solution}
+{: .hands_on}
+
+Ok! That's hopefully went successfully. Run your pipeline to check.
+
+> ### {% icon hands_on %} Hands-on: Run the pipeline
+> Run `snakemake -c1 --use-conda`
 {: .hands_on}
 
 ### MultiQC
 
+As a last step, we'll summarize all of the FastQC files. With all of the expands at the top, we're now receiving 4 trimmed FastQC reports plus 2 untrimmed FastQC reports per sample which is a lot of data to go through! So we can use MultiQC to aggregate all of these files and generate a single summary file which makes analysis much easier.
+
+> ### {% icon hands_on %} Hands-on: Add the MultiQC step
+> The command we need to run is: `multiqc *fastqc.zip`. You cannot use wildcards like that in Snakemake, so write this out as a proper rule.
+>
+> > ### {% icon solution %} Solution
+> > You'll notice that we now need to replace our `.html` outputs from the FastQC rules with the `.zip` outputs which we need instead. We didn't have to update the command line, because the output file name was thankfully not part of it.
+> >
+> > ```diff
+> > --- a/Snakefile
+> > +++ b/Snakefile
+> > @@ -2,9 +2,8 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
+> >
+> >  rule all:
+> >  	input:
+> > -		expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+> > -		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> > -		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
+> > +		expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+> > +		"multiqc/multiqc_report.html"
+> >
+> >  rule download:
+> >  	output:
+> > @@ -19,7 +18,7 @@ rule fastqc:
+> >  	input:
+> >  		"reads/{sample}.fq"
+> >  	output:
+> > -		"fastqc/{sample}.fastqc.html"
+> > +		"fastqc/{sample}_fastqc.zip"
+> >  	conda:
+> >  		"envs/fastqc.yaml"
+> >  	log:
+> > @@ -32,7 +31,7 @@ rule fastqc_trimmed:
+> >  	input:
+> >  		"trim/{sample}.fq"
+> >  	output:
+> > -		"fastqc-trim/{sample}.fastqc.html"
+> > +		"fastqc-trim/{sample}_fastqc.zip"
+> >  	conda:
+> >  		"envs/fastqc.yaml"
+> >  	log:
+> > @@ -41,6 +40,20 @@ rule fastqc_trimmed:
+> >  	shell:
+> >  		"fastqc {input} --outdir fastqc-trim/ >{log.out} 2>{log.err}"
+> >
+> > +rule multiqc:
+> > +	input:
+> > +		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.zip", "_2_fastqc.zip"]),
+> > +		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.zip", "_2.trim_fastqc.zip", "_1un.trim_fastqc.zip", "_2un.trim_fastqc.zip"])
+> > +	output:
+> > +		"multiqc/multiqc_report.html"
+> > +	conda:
+> > +		"envs/multiqc.yaml"
+> > +	log:
+> > +		out="logs/multiqc.out",
+> > +		err="logs/multiqc.err"
+> > +	shell:
+> > +		"multiqc --outdir multiqc {input} >{log.out} 2>{log.err}"
+> > +
+> >  rule trimmomatic:
+> >  	input:
+> >  		r1="reads/{sample}_1.fq",
+> > ```
+> {: .solution}
+{: .hands_on}
+
+And with that, you should have a working pipeline! Test it out.
+
+> ### {% icon hands_on %} Hands-on: Run the pipeline
+> Run `snakemake -c1 --use-conda`
+{: .hands_on}
+
+Let's check our {DAG} again
+
+> ### {% icon code-in %} Input
+> ```bash
+> snakemake --dag | dot -Tsvg > out.svg
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output
+> ![Image of the snakemake dag. FastQC and MultiQC are now there which add about 7 new boxes and a bunch of new arrows. This makes the graph very wide and quite hard to read.](../../images/snakemake.dag2.svg)
+{: .code-out}
 
 
+## Conclusion
 
+With this you've made a real pipeline in Snakemake and hopefully learned a bit about how to manage jobs on the command line. If you're going to work at the command line to do your bioinformatics or other analyses, this (or another {SciWMS}) is the way to do it! They all have pros and cons which you should evaluate.
 
-
-
-
-
+But for those of you who have done Galaxy work before, you'll notice there is a **lot** of overhead, things you need to take care of yourself. Is the program installed, are the dependencies correct, how many cores would you like this job to use, what is precisely the command line you would like to run. How would you like to batch your data, by sample? By another method? And this is one of the major benefits of using a system like Galaxy, it abstracts away all of the command line, all of the resource management for you. Our administrators check things like how much memory each step should have, or how many cores, the tool developers work to make sure the interface has all of the options that are available on the command line. You get less control over your data and the processes, but in exchange you don't need to worry about these intricate details of low level bioinformatics.
