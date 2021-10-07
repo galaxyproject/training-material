@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/introduction/tutorials/r-advanced/tutorial
 
 title: Advanced R in Galaxy
 level: Intermediate

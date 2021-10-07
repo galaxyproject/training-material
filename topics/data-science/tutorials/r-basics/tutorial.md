@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/introduction/tutorials/r-basics/tutorial
 
 title: R basics in Galaxy
 level: Introductory
