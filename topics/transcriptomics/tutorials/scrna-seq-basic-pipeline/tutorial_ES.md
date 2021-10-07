@@ -9,7 +9,7 @@ questions:
 - ¿Es mi conjunto de datos de células únicas un conjunto de calidad?
 - ¿Cómo genero y anoto agrupamientos de células?
 - ¿Cómo selecciono el umbral y los parámetros en mi análisis? ¿Cuál es un número “razonable”? ¿Colapsará el mundo si selecciono uno incorrecto?
-obhectives:
+objectives:
 - Interpretar gráficos con control de calidad para decidir los valores de los parámetros
 - Repetir el análisis desde una matriz hasta agrupamientos
 - Identificar puntos de decisión
@@ -18,7 +18,7 @@ obhectives:
 time_estimation: 3H
 key_points:
 - Los datos de células únicas son enormes, y sus dimensiones (# genes) deben reducirse para ser analizados
-- El análisis es más subjetivo de lo que podríamos pensar y tanto comprender biológicamente las muestras como iterar sobre el análisis son importantes para obtener conocimientos biológicos reales.
+- El análisis es más subjetivo de lo que podríamos pensar y tanto comprender biológicamente las muestras como iterar sobre el análisis es importante para obtener conocimientos biológicos reales.
 requirements:
 -
     type: "internal"
@@ -47,7 +47,7 @@ translations:
 Has hecho el trabajo para crear una matriz de células únicas, con recuentos de genes y mitocondrias y con grupos de metadatos celulares de todas tus variables de interés (si no, por favor consulta [este tutorial]({% link topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.md %}) para hacerlo). Ahora analizaremos completamente nuestros datos para eliminar las células con poca calidad, para reducir las dimensiones de los datos que dificultan el trabajo, y finalmente, para intentar definir nuestros agrupamientos ¡y darles significado biológico! Hay muchos paquetes para analizar datos de células únicas - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, etc. Aquí trabajaremos con Scanpy porque es la opción con más herramientas disponibles en Galaxy.
 
 > ### {% icon comment %} ¿Tutoriales por todos lados?
-> Este tutorial es similar a otro tutorial fantástico: [Clustering 3k PBMC]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). Este tutorial profundiza mucho más en el análisis, en particular en la visualización y la ciencia tras la identificación de marcadores. Todos los pasos se ilustran a la perfección ya que los datos experimentales están limpios y bien anotados. Aquí, trabajaremos con datos más desorganizados para ayudarte a tomar decisiones durante el análisis. Te recomendamos que sigas los tutoriales de célula única disponibles para aumentar tu confianza y experiencia. Para instructores: tengan en cuenta que este tutorial dispone de opciones para grupos pequeños.
+> Este tutorial es similar a otro tutorial fantástico: [Clustering 3k PBMC]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). Este tutorial profundiza mucho más en el análisis, en particular en la visualización y la ciencia tras la identificación de marcadores. Todos los pasos se ilustran a la perfección ya que los datos experimentales están limpios y bien anotados. Aquí, trabajaremos con datos más desorganizados para ayudarte a tomar decisiones durante el análisis. Te recomendamos que sigas los tutoriales de célula única disponibles para aumentar tu confianza y experiencia. Para instructores: ten en cuenta que este tutorial dispone de opciones para grupos pequeños.
 {: .comment}
 
 > ### Agenda
@@ -74,7 +74,7 @@ Te proporcionamos un conjunto de datos experimentales de ratón de restricción 
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. **Cambiar nombre** {% icon galaxy-pencil %} los conjuntos de datos `Mito-counted AnnData`
+> 3. **Cambiar nombre** {% icon galaxy-pencil %} de los conjuntos de datos `Mito-counted AnnData`
 > 4. Verificar que el tipo o formato de los datos es `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
@@ -148,7 +148,7 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 >            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
 >        - *"The key of the observation grouping to consider"*: `sex`
 >
-> 4. **Cambiar nombre** {% icon galaxy-pencil %} salida `Violin - sex - log`
+> 4. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `Violin - sex - log`
 >
 > 5. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
@@ -157,7 +157,7 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 >            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
 >        - *"The key of the observation grouping to consider"*: `batch`
 >
-> 6. **Cambiar nombre** {% icon galaxy-pencil %} salida `Violin - batch - log`
+> 6. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `Violin - batch - log`
 >
 > 7. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
@@ -166,7 +166,7 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 >            - *"x coordinate"*: `log1p_total_counts`
 >            - *"y coordinate"*: `pct_counts_mito`
 >
-> 6. **Cambiar nombre** {% icon galaxy-pencil %} salida `Scatter - mito x UMIs`
+> 6. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `Scatter - mito x UMIs`
 >
 > 7. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
@@ -175,7 +175,7 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 >            - *"x coordinate"*: `log1p_n_genes_by_counts`
 >            - *"y coordinate"*: `pct_counts_mito`
 >
-> 8. **Cambiar nombre** {% icon galaxy-pencil %} salida `Scatter - mito x genes`
+> 8. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `Scatter - mito x genes`
 >
 > 9. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
@@ -185,7 +185,7 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 >            - *"y coordinate"*: `log1p_n_genes_by_counts`
 >            - *"Color by"*: `pct_counts_mito`
 >
-> 10. **Cambiar nombre** {% icon galaxy-pencil %} salida `Scatter - genes x UMIs`
+> 10. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `Scatter - genes x UMIs`
 >
 {: .hands_on}
 
@@ -250,7 +250,7 @@ Ahora que hemos evaluado la diferencia en nuestras muestras, miraremos a las lib
 >
 > > ### {% icon solution %} Respuesta
 > >
-> > 1. Cualquier diagrama con `log1p_n_genes_by_counts` funcionaría aquí en realidad. Algunas personas prefieren diagramas de dispersión que los diagramas de violín.
+> > 1. Cualquier diagrama con `log1p_n_genes_by_counts` funcionaría aquí en realidad. Algunas personas prefieren diagramas de dispersión frente a los diagramas de violín.
 > > ![Scatter-genesxmito](../../images/wab-scatter-genesxmito.png "Dispersión - mito x genes (Datos crudos)")
 > >
 > > 2. En `Scatter - mito x genes` puedes ver cómo las células con `log1p_n_genes_by_counts` hasta, quizás, `5.7` (sobre 300 genes) a menudo tienen alto `pct_counts_mito`.
@@ -314,7 +314,7 @@ Ahora que hemos evaluado la diferencia en nuestras muestras, miraremos a las lib
 >
 > 2. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `Genes-filtered Object`
 >
-> 3. {% tool [Plot con scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %}  los siguientes parámetros:
+> 3. {% tool [Plot con scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Genes-filtered Object`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables”"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -330,7 +330,7 @@ Ahora que hemos evaluado la diferencia en nuestras muestras, miraremos a las lib
 > 6. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `General - Filterbygenes`
 {: .hands_on}
 
-Nota que el {% icon tool %} **Scanpy Filtercells** te permite poner {% icon param-repeat %} múltiples parámetros al mismo tiempo (ejm. los filtros `log1p_total_counts`, `log1p_n_genes_by_counts`,y `pct_counts_mito`) en el mismo paso. La única razón por la que no estamos haciendo eso aquí es para que pueda ver lo que cada filtro logra. Como tal, examine tu plot y la información general.
+Nota que {% icon tool %} **Scanpy Filtercells** te permite poner {% icon param-repeat %} múltiples parámetros al mismo tiempo (ejm. los filtros `log1p_total_counts`, `log1p_n_genes_by_counts`,y `pct_counts_mito`) en el mismo paso. La única razón por la que no estamos haciendo eso aquí es para que puedas ver lo que cada filtro logra. Como tal, examina tu plot y la información general.
 
 > ### {% icon question %} Preguntas
 >
@@ -383,7 +383,7 @@ Nota que el {% icon tool %} **Scanpy Filtercells** te permite poner {% icon para
 > > ### {% icon solution %} Solución
 > >
 > > ![Violinplot-filtertwice](../../images/wab-violin-filteredgenesxfilteredcounts.png "1er filtro vs 2do filtro - conteos/célula")
-> > 1. Nos enfocaremos en `log1p_total_counts`. De manera similar a la superior, la parte inferior de la forma del violín se ha aplanado debido a el umbral.
+> > 1. Nos enfocaremos en `log1p_total_counts`. De manera similar a la superior, la parte inferior de la forma del violín se ha aplanado debido al umbral.
 > > 2. En `General - Filterbycounts`, puedes ver que ahora tienes `7,916 cells x 35,734 genes`.
 > >
 > {: .solution}
@@ -440,13 +440,13 @@ Nota que el {% icon tool %} **Scanpy Filtercells** te permite poner {% icon para
 Si te es de ayuda, aquí tenemos un vistazo al resumen general.
 ![Violinplot-Summary](../../images/wab-violins2gether.png "Resumen de filtrado")
 
-¡Excelente trabajo! Sin embargo, removiste un montón de células, y ya que los genes capturados son esporádicos (ejemplo, un pequeño porcentaje del transcriptoma completo por célula), esto significa que hay un número de genes en tu matriz que al momento no están en ninguna de las células restantes. Los genes que no aparecen en ninguna célula, ni siquiera en una o dos células, causarán que algunas de las herramientas analíticas funcionen incorrectamente (o dejen de funcionar) y en general, no serán informativos con respecto a la biología del fenómeno analizado. !Entonces removamos estos genes! Note que `3` no es necesariamente el mejor número, más bien es un umbral bastante conservador. Podrías subir hasta 10 o más.
+¡Excelente trabajo! Sin embargo, eliminaste un montón de células, y ya que los genes capturados son esporádicos (ejemplo, un pequeño porcentaje del transcriptoma completo por célula), esto significa que hay un número de genes en tu matriz que al momento no están en ninguna de las células restantes. Los genes que no aparecen en ninguna célula, ni siquiera en una o dos células, causarán que algunas de las herramientas analíticas funcionen incorrectamente (o dejen de funcionar) y en general, no serán informativos con respecto a la biología del fenómeno analizado. !Entonces eliminemos estos genes! Nota que `3` no es necesariamente el mejor número, más bien es un umbral bastante conservador. Podrías subir hasta 10 o más.
 
 > ### {% icon details %} ¿Estás trabajando en grupo? ¡Tomemos algunas decisiones!
 > Ahora pueden trabajar en equipos y hacer distintos análisis, un equipo optando por un *control* y el resto variando números de tal forma que puedan comparar resultados a lo largo de los tutoriales.
 > - Variable: **n_cells**
 > - Control > `3`
-> - Todos los demás: ¡Escojan sus propios umbrales y comparen resultados! Noten que si dan valores menores a 3 (o si omiten este paso por completo), es muy posible que las herramientas que utilizaremos en posteriormente no funcionen debido a la falta de datos de genes.
+> - Todos los demás: ¡Escojan sus propios umbrales y comparen resultados! Noten que si dan valores menores a 3 (o si omiten este paso por completo), es muy posible que las herramientas que utilizaremos posteriormente no funcionen debido a la falta de datos de genes.
 {: .details}
 
 
@@ -469,7 +469,7 @@ Si te es de ayuda, aquí tenemos un vistazo al resumen general.
 > 4. **Cambiar nombre** {% icon galaxy-pencil %} de salida a `General - Filtered object`
 {: .hands_on}
 
-En la práctica, es muy probable que escojas umbrales y después configures el sistema para correr todos estos filtros omitiendo la revisión de gráficos de resultados intermedios. Sin embargo, es muy informativo ver cómo se van modificando los datos con estos filtros.
+En la práctica, es muy probable que escojas umbrales y después configures el sistema para aplicar todos estos filtros omitiendo la revisión de gráficos de resultados intermedios. Sin embargo, es muy informativo ver cómo se van modificando los datos con estos filtros.
 
 Utilizando el `General - Filtered object` final, puedes obtener un resumen de tus resultados de filtrado:
 
@@ -481,11 +481,11 @@ Utilizando el `General - Filtered object` final, puedes obtener un resumen de tu
 | Filtro mito/célula | 7874   | 35734    |
 | Filtro células/gene | 7874    | 14832    |
 
-{% icon congratulations %} ¡Felicitaciones, haz filtrado tu objeto! Ahora será más fácil su análisis.
+{% icon congratulations %} ¡Felicitaciones, has filtrado tu objeto! Ahora será más fácil su análisis.
 
 # Procesamiento
 
-Por el momento tienes una matriz de 7874 células por 14832 genes. Estos son muchos datos. Tenemos dos problemas aquí - primero, ya sabes que hay diferencias en cuántos transcritos y genes han sido cuantificados por células. Esta variable técnica puede no dejar muy en claro diferencias biológicas. Segundo, nos encarta visualizar resultados en gráficos x/y. Por ejemplo, *Gapdh* puede ser uno de los ejes, y *Actin* puede ser otro, y grafica las células en los ejes bidimensionales con base en cuántos transcritos posee cada una. Esto puede ser bueno, pero añadir una tercera dimensión (o en este caso, 14830 dimensiones más) es un poco más complejo. Por tanto, nuestros siguientes pasos se enfocan en transformar nuestro enorme objeto de datos en algo que sea más fácil de analizar y visualizar.  
+Por el momento tienes una matriz de 7874 células por 14832 genes. Estos son muchos datos. Tenemos dos problemas aquí - primero, ya sabes que hay diferencias en cuántos transcritos y genes han sido cuantificados por células. Esta variable técnica puede no dejar muy en claro diferencias biológicas. Segundo, nos encanta visualizar resultados en gráficos x/y. Por ejemplo, *Gapdh* puede ser uno de los ejes, y *Actin* puede ser otro, y grafica las células en los ejes bidimensionales con base en cuántos transcritos posee cada una. Esto puede ser bueno, pero añadir una tercera dimensión (o en este caso, 14830 dimensiones más) es un poco más complejo. Por tanto, nuestros siguientes pasos se enfocan en transformar nuestro enorme objeto de datos en algo que sea más fácil de analizar y visualizar.  
 
 > ### {% icon hands_on %} Práctica: Normalización
 >
@@ -513,7 +513,7 @@ Ahora vamos a escalar nuestros datos de tal manera que todos los genes tengan la
 >    - *"Truncate to this value after scaling"*: `10.0`
 {: .hands_on}
 
-{% icon congratulations %} ¡Felicitaciones, haz procesado tu objeto!
+{% icon congratulations %} ¡Felicitaciones, has procesado tu objeto!
 
 # Preparación de coordenadas
 
@@ -521,10 +521,10 @@ Seguimos teniendo demasiadas dimensiones. Los cambios de transcritos usualmente 
 
 
 ## Componentes principales
-Los componentes principales se calculan a partir de datos con alta dimensionalidad para poder encontrar la mayor dispersión en el conjunto de datos. Así es que, en nuestras `2262` dimensiones con gran variabilidad, tendremos una línea (eje) que refleje la mayor dispersión y variación a través de las células. Ese será nuestro Componente Principal. Podemos calcular la los primeros componentes principales `x` en nuestros datos para reducir drásticamente el número de dimensiones.
+Los componentes principales se calculan a partir de datos con alta dimensionalidad para poder encontrar la mayor dispersión en el conjunto de datos. Así es que, en nuestras `2262` dimensiones con gran variabilidad, tendremos una línea (eje) que refleje la mayor dispersión y variación a través de las células. Ese será nuestro Componente Principal. Podemos calcular los primeros componentes principales `x` en nuestros datos para reducir drásticamente el número de dimensiones.
 
 > ### {% icon comment %} ¿2262?
-> ¿De dónde proviene el `2262`? La forma más rápida de figurar cuantos genes tienes con alta variabilidad, en mi opinión, es volver a ejecutar {% icon galaxy-refresh %} la herramienta **Scanpy FindVariableGenes** y seleccionar el parámetro *Remove genes not marked as highly variable* (“eliminar genes que no están marcados con alta variabilidad”). Después puedes inspeccionar el objeto resultante y verás que hay sólo 2262 genes. En los siguientes pasos el proceso únicamente utilizará los genes con alta variabilidad para realizar sus cálculos, pero como regla general, te recomiendo encarecidamente que incluyas los genes no variables (ejemplo, utiliza la salida general de tu herramienta FindVariableGenes, la cual contiene más de 2262 genes). Este tutorial no trabajará al final de la etapa de graficación si únicamente utilizas solo los 2262 o 2000 genes con alta variabilidad (si es que le impones algún límite).  
+> ¿De dónde proviene el `2262`? La forma más rápida de figurar cuantos genes tienes con alta variabilidad, en mi opinión, es volver a ejecutar {% icon galaxy-refresh %} la herramienta **Scanpy FindVariableGenes** y seleccionar el parámetro *Remove genes not marked as highly variable* (“eliminar genes que no están marcados con alta variabilidad”). Después puedes inspeccionar el objeto resultante y verás que hay sólo 2262 genes. En los siguientes pasos el proceso únicamente utilizará los genes con alta variabilidad para realizar sus cálculos, pero como regla general, te recomiendo encarecidamente que incluyas los genes no variables (ejemplo, utiliza la salida general de tu herramienta FindVariableGenes, la cual contiene más de 2262 genes). Este tutorial no funcionará al final de la etapa de graficación si únicamente utilizas solo los 2262 o 2000 genes con alta variabilidad (si es que le impones algún límite).  
 
 {: .comment}
 
@@ -550,7 +550,7 @@ Podemos ver que en realidad no existe mucha variación que pueda ser explicada u
 
 ## Gráfico de vecindad
 
-En este punto seguimos enfocándonos en aproximadamente 20 dimensiones. Necesitamos identificar qué tan similar es una célula comparada con otra, esto a través de cada célula y a través de estas dimensiones. Para esto, utilizaremos el gráfico de “k-nearest neighbor” (kNN - k vecindades más cercanas), para identificar qué células se encuentran más cercanas unas de otras y cuáles no. El gráfico kNN muestra las conexiones entre las células si sus distancias son casi las k-ésimas distancias más cortas de esa célula con respecto a las otras (¡cuando son graficadas en este espacio de 20 dimensiones). Esto será crucial para identificar clusters, y es necesario para graficar un UMAP. Asignar valores mayores de vecindad dará pie a la preservación de una estructura más global a costa de la pérdida de una estructura local detallada. En general este parámetro frecuentemente se le asignan valores entre el 5 al 50, con la opción de asignar por defecto valores de 10 a 15](https://github.com/lmcinnes/umap).
+En este punto seguimos enfocándonos en aproximadamente 20 dimensiones. Necesitamos identificar qué tan similar es una célula comparada con otra, esto a través de cada célula y a través de estas dimensiones. Para esto, utilizaremos el gráfico de “k-nearest neighbor” (kNN - k vecindades más cercanas), para identificar qué células se encuentran más cercanas unas de otras y cuáles no. El gráfico kNN muestra las conexiones entre las células si sus distancias son casi las k-ésimas distancias más cortas de esa célula con respecto a las otras (¡cuando son graficadas en este espacio de 20 dimensiones). Esto será crucial para identificar clusters, y es necesario para graficar un UMAP. Asignar valores mayores de vecindad dará pie a la preservación de una estructura más global a costa de la pérdida de una estructura local detallada. En general, a este parámetro frecuentemente se le asignan valores entre el 5 y el 50, con la opción de asignar por defecto valores de 10 a 15](https://github.com/lmcinnes/umap).
 
 > ### {% icon details %} ¿Estás trabajando en grupos? ¡Tomemos decisiones!
 > Si estás trabajando en grupos ahora pueden dividir el trabajo, unos pueden trabajar con un  *control* y el resto trabajar con distintos números para que puedan comparar sus resultados posteriormente por lo que resta del tutorial.
@@ -571,11 +571,10 @@ En este punto seguimos enfocándonos en aproximadamente 20 dimensiones. Necesita
 
 ## Visualización de la reducción de dimensionalidades
 
-Dos visualizaciones importantes en estos datos son tSNE y UMAP. Debemos calcular las coordenadas para ambos antes de la visualización. Para tSNE, el parámetro
-[**perplexity**](https://www.nature.com/articles/s41467-019-13056-x) puede ser cambiado de tal manera que represente de mejor forma a los datos, mientras que para UMAP el cambio principal sería el modificar en sí mismo el gráfico kNN, por medio del cambio de **neighbours** (vecinos).
+Dos visualizaciones importantes en estos datos son tSNE y UMAP. Debemos calcular las coordenadas para ambos antes de la visualización. Para tSNE, el parámetro [**perplexity**](https://www.nature.com/articles/s41467-019-13056-x) puede ser cambiado de tal manera que represente de mejor forma a los datos, mientras que para UMAP el cambio principal sería el modificar en sí mismo el gráfico kNN, por medio del cambio de **neighbours** (vecinos).
 
 > ### {% icon details %} ¿Estás trabajando en grupos? ¡Tomemos decisiones!
-> Si estás trabajando en grupos ahora pueden dividir el trabajo, unos pueden trabajar con un  *control* y el resto trabajar con distintos números para que posteriormente puedan comparar sus resultados por lo que resta del tutorial.
+> Si estás trabajando en grupos ahora pueden dividir el trabajo, unos pueden trabajar con un *control* y el resto trabajar con distintos números para que posteriormente puedan comparar sus resultados por lo que resta del tutorial.
 
 > - Control
 >      - **Perplejidad** = `30`
@@ -604,7 +603,7 @@ Dos visualizaciones importantes en estos datos son tSNE y UMAP. Debemos calcular
 >
 > > ### {% icon solution %} Solución
 > >
-> > En realidad necesitamos dos cosas - primero, necesitamos asegurarnos que nuestro experimento fue bien configurado. Es decir, que nuestras réplicas biológicas deberían superponerse, e idealmente, nuestras variables deberían mostrar diferencias entre sí. Segundo, queremos obtener conocimiento a partir de este experimento - queremos saber qué tipo de células se encuentran presentes en nuestros datos, qué genes controlan este tipo de células, y en este caso, cómo podrían verse afectados por nuestra variable biológica de restricción del crecimiento. ¿Cómo es que esto afecta a las células en desarrollo y que genes controlan esto? Por tanto, ¡añadamos información sobre los agrupamientos de células y los marcadores génicos!
+> > En realidad necesitamos dos cosas - primero, necesitamos asegurarnos que nuestro experimento fue bien configurado. Es decir, que nuestras réplicas biológicas deberían superponerse, e idealmente, nuestras variables deberían mostrar diferencias entre sí. Segundo, queremos obtener conocimiento a partir de este experimento - queremos saber qué tipo de células se encuentran presentes en nuestros datos, qué genes controlan este tipo de células, y en este caso, cómo podrían verse afectados por nuestra variable biológica de restricción del crecimiento. ¿Cómo afecta esto a las células en desarrollo y que genes lo controlan? Por tanto, ¡añadamos información sobre los agrupamientos de células y los marcadores génicos!
 > >
 > {: .solution}
 >
@@ -617,7 +616,7 @@ Por fin, ¡identifiquemos clusters! Por desgracia, esto no es tan “majestuoso�
 > - Control
 >      - **Resolución, valores altos para obtener mayor nùmero de clusters de menor tamaño** = `0.6`
 >      - **Algoritmo de agrupamiento** = `Louvain`
-> - Todos los demás: Escojan un valor. Si es de ayuda, en este ejemplo deberás ver un montón de células muy similares. Contiene células-T en desarrollo, por tanto no se esperan diferencias masivas entre células, como las que esperarías, por así decirlo, en un embrión entero, con todos tipos de células no relacionadas.
+> - Todos los demás: Escojan un valor. Si es de ayuda, en este ejemplo deberás ver un montón de células muy similares. Contiene células-T en desarrollo, por tanto no se esperan diferencias masivas entre células, como las que esperarías, por así decirlo, en un embrión entero, con todo tipo de células no relacionadas.
 > - Todos los demás: Consideren el nuevo método de agurpamiento **Leiden**. Nota que para los parámetros que utilizaremos subsecuentemente, es muy probable que necesites especificar 'leiden' en lugar de 'louvain', qué es el valor por defecto si escoges este método de agrupamiento.
 {: .details}
 
@@ -649,13 +648,13 @@ Por fin, ¡identifiquemos clusters! Por desgracia, esto no es tan “majestuoso�
 >    - *"The sample grouping/clustering to use"*: `genotype`
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >
-> 4. **Cambiar nombre** {% icon galaxy-pencil %} tabla de salida (not h5ad) `Markers - genotype`
+> 4. **Cambiar nombre** {% icon galaxy-pencil %} de la tabla de salida (no h5ad) a `Markers - genotype`
 >
-> 5. No **Cambiar el nombre** del objeto de salida AnnData (de hecho, puedes eliminarlo). Tienes la tabla de marcadores de genotipo para deleitarse, pero queremos mantener las comparaciones de agrupamiento, en lugar de las comparaciones de genes, almacenadas en el objeto AnnData para más tarde.
+> 5. No **Cambiar el nombre** del objeto de salida AnnData (de hecho, puedes eliminarlo). Tienes la tabla de marcadores de genotipo para disfrutarla, pero queremos mantener las comparaciones de agrupamiento, en lugar de las comparaciones de genes, almacenadas en el objeto AnnData para más tarde.
 >
 {: .hands_on}
 
-Ahora, hay un pequeño problema aquí, y es que cuando inspeccionas la tabla de salida de marcadores, no verás nombres de genes, sino que verás los IDs de Ensembl. Aunque esta es una forma más precisa de hacerlo desde el punto de vista bioinformático (¡no cada ID tiene un nombre de gen!), es probable que queramos ver los nombres de los genes más reconocidos ¡así que introduzcamos algo de esa información!  
+Ahora, hay un pequeño problema aquí, y es que cuando inspeccionas la tabla de salida de marcadores, no verás nombres de genes, sino que verás los IDs de Ensembl. Aunque esta es una forma más precisa de hacerlo desde el punto de vista bioinformático (¡cada ID no tiene un nombre de gen!), es probable que queramos ver los nombres de los genes más reconocidos ¡así que introduzcamos algo de esa información!  
 
 
 > ### {% icon hands_on %} Práctica: Añadir los nombres de los genes
@@ -690,7 +689,7 @@ Ahora, hay un pequeño problema aquí, y es que cuando inspeccionas la tabla de 
 # ¡A visualizar mediante gráficos!
 
 ¡Ya es hora! ¡Vamos a representar gráficamente todo!
-Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento de marcadores” que también hiciste. Para ser honesto, en la práctica, ahora estarías gastando un montón de tiempo buscando lo que hace cada gen (gracias a google). Sin embargo, existen cada vez más herramientas de anotación automatizada, siempre y cuando tengas una buena referencia (conjunto de datos bien anotado que usarás como ideal). Mientras tanto, hagamos esto a la antigua, y simplemente copiemos un montón de marcadores en el documento original.
+Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento de marcadores” que también hiciste. Para ser honesto, en la práctica, ahora estarías gastando un montón de tiempo buscando lo que hace cada gen (gracias a Google). Sin embargo, existen cada vez más herramientas de anotación automatizada, siempre y cuando tengas una buena referencia (conjunto de datos bien anotado que usarás como ideal). Mientras tanto, hagamos esto a la antigua, y simplemente copiemos un montón de marcadores en el documento original.
 
 
 > ### {% icon hands_on %} Práctica: ¡Representemos gráficamente las células!
@@ -719,7 +718,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
 
 # Mirando más allá
 
-¡Ahora es la parte divertida! Podemos ver dónde se expresan los genes, y empezar a interpretar su papel biológico. En este momento, se decide qué información realmente quieres obtener de tus datos, lo siguiente es sólo la punta del iceberg. Sin embargo, una breve exploración es adecuada, porque puede ayudarte a sacar ideas de como seguir con tus propios datos. ¡Empecemos a interrogar nuestros datos!
+¡Ahora viene la parte divertida! Podemos ver dónde se expresan los genes, y empezar a interpretar su papel biológico. En este momento, se decide qué información realmente quieres obtener de tus datos, lo siguiente es sólo la punta del iceberg. Sin embargo, una breve exploración es adecuada, porque puede ayudarte a sacar ideas de como seguir con tus propios datos. ¡Empecemos a interrogar nuestros datos!
 
 ## Interpretación biológica
 
@@ -760,10 +759,10 @@ Los autores no estaban interesados en seguir anotando las células DP, así que 
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
->    - *"Function to manipulate the object"*: `Cambiar nombre categories of annotation`
+>    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `louvain`
 >    - *"Comma-separated list of new categories"*: `DP-M1,DP-M2,T-mat,DN,DP-M3,DP-L,DP-M4,RBC,Macrophages`
->    - Aunque, espera aquí. Lamentablemente esto elimina la numeración original de las agrupaciones. En caso de que quieras recuperarla, se puede volver a añadir la anotación.
+>    - Un momento... Lamentablemente esto elimina la numeración original de las agrupaciones. En caso de que quieras recuperarla, se puede volver a añadir la anotación.
 >
 > 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
@@ -782,7 +781,7 @@ Los autores no estaban interesados en seguir anotando las células DP, así que 
 >    - *"Original name"*: `louvain_0`
 >    - *"New name"*: `cell_type`
 >
-> 4. **Cambiar nombre** {% icon galaxy-pencil %} output h5ad `Final cell annotated object`
+> 4. **Cambiar nombre** {% icon galaxy-pencil %} de salida h5ad a `Final cell annotated object`
 >   -  ¡Es hora de volver a visualizar con gráficos! {% icon time %} Siéntete libre de volver a ejecutar {% icon galaxy-refresh %} la herramienta **Scanpy PlotEmbed** {% icon tool %} en el nuevo objeto que visualiza gráficamente `cell_type` para acelerar esto. De lo contrario...
 > 5. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} con los siguientes parámetros::
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final cell annotated object`
@@ -843,7 +842,7 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 >
 > > ### {% icon solution %} Solución
 > >
-> >¡Eureka! Esto explica el extraño cambio de DP entre las células de fenotipo normal y las de knockout: el lado derecho de las células DP simplemente tiene una mayor profundidad de secuenciación (UMIs/célula) que las del lado izquierdo. Eso explica parte del subgrupo que estamos viendo en esa franja. Es importante destacar que no vemos que las agrupaciones de DP-L o (sobre todo) de células T maduras se vean afectadas de forma similar. Así que, aunque de nuevo, esta variable de la profundidad de secuenciación podría ser algo a lo que habría que retroceder de alguna manera, no parece estar afectando a nuestro conjunto de datos. En general, cuanto menos se retroceda/modifique los datos, mejor: hay que ser lo más fiel posible a los datos crudo y sólo utilizar las matemáticas para corregir los datos cuando sea realmente necesario (¡y no para crear ideas donde no las hay!).
+> >¡Eureka! Esto explica el extraño cambio de DP entre las células de fenotipo normal y las de knockout: el lado derecho de las células DP simplemente tiene una mayor profundidad de secuenciación (UMIs/célula) que las del lado izquierdo. Eso explica parte del subgrupo que estamos viendo en esa franja. Es importante destacar que no vemos que las agrupaciones de DP-L o (sobre todo) de células T maduras se vean afectadas de forma similar. Así que, aunque de nuevo, esta variable de la profundidad de secuenciación podría ser algo a lo que habría que retroceder de alguna manera, no parece estar afectando a nuestro conjunto de datos. En general, cuanto menos se retroceda/modifique los datos, mejor: hay que ser lo más fiel posible a los datos en crudo y sólo utilizar las matemáticas para corregir los datos cuando sea realmente necesario (¡y no para crear ideas donde no las hay!).
 
 > >
 > {: .solution}
@@ -858,7 +857,7 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 >
 > > ### {% icon solution %} Solución
 > >
-> >Hemos visto en las imágenes anteriores que estos agrupamientos no están muy compactados o definidos, por lo que podríamos considerar un filtrado más severo. Por ejemplo, aunque la hemoglobina es alta en la agrupación de los hematíes, aparece en toda la muestra en números bajos. Esto sugiere que hay un fondo en el medio en el que estaban las células, y podríamos considerar en el laboratorio húmedo “wet lab” tratar de obtener una muestra más pura y mejor calidad, o en el laboratorio seco “dry lab”, emplear técnicas como SoupX u otras para eliminar este fondo. Jugar con los ajustes de filtrado (aumentando los recuentos mínimos por célula, etc.) suele ser el punto de partida en estos escenarios.
+> >Hemos visto en las imágenes anteriores que estos agrupamientos no están muy compactados o definidos, por lo que podríamos considerar un filtrado más severo. Por ejemplo, aunque la hemoglobina es alta en la agrupación de los hematíes, aparece en toda la muestra en números bajos. Esto sugiere que hay un fondo en el medio en el que estaban las células, y podríamos considerar en el laboratorio húmedo “wet lab” tratar de obtener una muestra más pura y de mejor calidad, o en el laboratorio seco “dry lab”, emplear técnicas como SoupX u otras para eliminar este fondo. Jugar con los ajustes de filtrado (aumentando los recuentos mínimos por célula, etc.) suele ser el punto de partida en estos escenarios.
 
 > >
 > {: .solution}
@@ -896,9 +895,9 @@ Antes de que te dejemos explorar lo desconocido, habrás notado que las interpre
 >    - {% icon param-file %} *"Concatenate dataset"*: `Final cell annotated object`
 >
 > 2. Cuando estés listo, verás un mensaje
->    - {% icon details %} *Hay una vista de resultados de la herramienta interactiva disponible, haga clic aquí para mostrarla* <---- ¡Haga clic ahí!
+>    - {% icon details %} *Hay una vista de resultados de la herramienta interactiva disponible, haz clic aquí para mostrarla* <---- ¡Haz clic ahí!
 >
-> A veces este enlace puede perturbar un cortafuegos o algo similar. Debería funcionar para  ir al sitio web. Se te pedirá que “nombres tu anotación”, así que ¡hazlo para empezar a divertirte!
+> A veces este enlace puede perturbar un cortafuegos o algo similar. Debería funcionar para ir al sitio web. Se te pedirá que “nombres tu anotación”, así que ¡hazlo para empezar a divertirte!
 >
 > 3. También puedes acceder a ella yendo a “Usuario” en el menú superior de Galaxy, y luego seleccionando “Herramientas interactivas activas”
 >
@@ -912,15 +911,15 @@ Estás advertido: esta herramienta de visualización es una poderosa opción par
 
 > ### {% icon details %} %} ¿Trabajando en grupo? ¡El final!
 > Es de esperar que, independientemente de la vía de análisis que hayas tomado, hayas encontrado las mismas interpretaciones generales. Si no es así, este es un buen momento para hablar y considerar con tu grupo por qué puede ser así: ¿qué decisión fue "errónea" o "desacertada", y cómo te asegurarias de interpretar correctamente tus datos en el futuro? El mejor consejo: probar y equivocarse es una buena idea, lo creas o no, y cuantas más formas encuentres de la misma manera, más seguro estarás. Pero no hay nada mejor que la validación experimental...
-> Para aquellos que no tomaron las opciones de "control", por favor haga lo siguiente:
-> > 1. **Cambia de nombre** tu historial (haciendo clic en el título del historial) como “DECISIÓNs-Filtrado y representación visual de datos de ARN seq de célula única”
+> Para aquellos que no tomaron las opciones de "control", por favor haced lo siguiente:
+> > 1. **Cambia de nombre** de tu historial (haciendo clic en el título del historial) a “DECISIÓNs-Filtrado y representación visual de datos de ARN seq de célula única”
 > > 2. Añade una anotación en el historial {% icon history-annotate %} que incluya los parámetros que has cambiado/los pasos que has cambiado respecto al *control*
 > >
 > >    {% snippet faqs/galaxy/histories_sharing.md %}
 > >
 > > 3. Siéntete libre de explorar cualquier otra historia similar {: .details}
 
-{% icon congratulations %} ¡Felicitaciones! ¡Has llegado al final! Puede que te resulte útil esta  [historia ejemplo control](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) para comparar, o este [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/filter-plot-and-explore-single-cell-rna-seq-data).
+{% icon congratulations %} ¡Felicitaciones! ¡Has llegado al final! Puede que te resulte útil esta [historia ejemplo control](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) para comparar, o este [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/filter-plot-and-explore-single-cell-rna-seq-data).
 
 En este tutorial, has pasado del procesamiento técnico a la exploración biológica. Al analizar datos reales -¡tanto los emocionantes como los desordenados! - has experimentado lo que es analizar y cuestionar un conjunto de datos, potencialmente sin límites claros o respuestas claras. Si has trabajado en grupo, cada uno de vosotros ha analizado los datos de forma diferente, y lo más probable es que hayáis encontrado ideas similares. Uno de los mayores problemas en el análisis de scRNA-seq es la falta de una vía o parámetros claramente definidos. Hay que tomar la mejor decisión posible a medida que se avanza en el análisis y, en última instancia, en caso de duda, ¡probar de varias maneras y ver qué pasa!
-Para debatir con científicos afines, ¡únate a nuestro canal Gitter para todo lo relacionado con Galaxy-single cell! [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+Para debatir con científicos afines, ¡únete a nuestro canal Gitter para todo lo relacionado con Galaxy-single cell! [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
