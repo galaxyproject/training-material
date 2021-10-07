@@ -233,7 +233,22 @@ It is well known that the beta cell proportions is related to T2D disease status
 ![ctprop](../../images/bulk-music/ctprop_plot.png "Cell Type Proportions")
 
 
+
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+***TODO***: What to do with this data:
+
+```
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.797148   0.194757   4.093  0.00011 ***
+age          0.002639   0.001772   1.489  0.14087    
+bmi         -0.013620   0.007276  -1.872  0.06529 .  
+hba1c       -0.061396   0.025403  -2.417  0.01819 *  
+genderMale   0.079874   0.039274   2.034  0.04566 *  
+
+```
+
 
 > ### {% icon question %} Questions
 >
