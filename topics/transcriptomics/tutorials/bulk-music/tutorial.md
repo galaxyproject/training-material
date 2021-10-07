@@ -111,11 +111,12 @@ Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** fr
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
+> 
 > 4. Check that the datatype
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="rdata" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 5. Add to each database a tag corresponding to `#bulk` and `#scrna`
+> 5. Add to each `expression` file a tag corresponding to `#bulk` and `#scrna`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -130,12 +131,8 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 > ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
 >
 > 1. {% tool [Construct Expression Set Object](music_construct_eset) %} with the following parameters:
->    - {% icon param-file %} *"Assay Data"*: `bulk_assay.tab` (Input dataset)
->    - {% icon param-file %} *"Phenotype Data"*: `bulk_pheno.tab` (Input dataset)
->    - In *"Meta Data"*:
->        - {% icon param-repeat %} *"Insert Meta Data"*
->            - *"Label"*: `This is a meaningful piece of text`
->    - Execute
+>    - {% icon param-file %} *"Assay Data"*: `GSE50244bulkeset.expression.tabular` (Input dataset)
+>    - {% icon param-file %} *"Phenotype Data"*: `GSE50244bulkeset.phenotype.tabular` (Input dataset)
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -143,8 +140,8 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 >    {: .comment}
 >
 > 2. {% tool [Construct Expression Set Object](music_construct_eset) %} with the following parameters:
->    - {% icon param-file %} *"Assay Data"*: `scrna_assay.tab` (Input dataset)
->    - *"Annotation"*: `Another meaningful piece of text`
+>    - {% icon param-file %} *"Assay Data"*: `EMTABesethealthy.expression.tabular` (Input dataset)
+>    - {% icon param-file %} *"Phenotype Data"*: `EMTABesethealthy.phenotype.tabular` (Input dataset)
 >
 {: .hands_on}
 
@@ -153,8 +150,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 We will now inspect these objects we juset created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
 
 > ### {% icon hands_on %} Hands-on: Viewing General Information
-> 1. {% icon galaxy_eye %} Click on the `#scrna` dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
->    - Wait for the dataset to expand and see the properites
+> 1. {% icon galaxy_eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
 {: .hands_on}
 
 > ### {% icon question %} Questions
@@ -164,10 +160,16 @@ We will now inspect these objects we juset created to see what information we ca
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. XXX Answer for question1
-> > 2. XXX Answer for question2
+> > 1. 1097 samples
+> > 2. 25 453 genes
 > >
 > {: .solution}
+>
+> > ### {% icon comment %} Comment
+> >
+> > "Features" are synonymous with "genes" in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.
+> >
+> {: .comment}
 >
 {: .question}
 
@@ -178,10 +180,6 @@ We can also extract specific information pertaining to Samples or Features:
 >    - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Inspect"*: `Feature Data Table`
 >
->    > ### {% icon comment %} Comment
->    >
->    > "Features" are synonymous with "genes" in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.
->    {: .comment}
 >
 {: .hands_on}
 
@@ -206,8 +204,8 @@ Instead of selecting marker genes, MuSiC gives weights to each gene. The weighti
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [MuSiC](music_deconvolution) %} with the following parameters:
->    - {% icon param-file %} *"scRNA Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
->    - {% icon param-file %} *"Bulk RNA Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
+>    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
+>    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Estimate Proportions`
 >        - *"Comma list of cell types to use from scRNA dataset"*: `{'id': 5, 'output_name': 'output'}`
 >
