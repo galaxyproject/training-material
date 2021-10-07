@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Bulk RNA Deconvolution with MuSiC
-zenodo_link: ''
+zenodo_link: https://zenodo.org/record/5554814
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
@@ -98,13 +98,13 @@ Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** fr
 >     -> `{{ page.title }}`):
 >
 >    ```
->    scrna_assay.tab
->    bulk_assay.tab
->    bulk_pheno.tab
+>    # bulk RNA datasets
+>    https://zenodo.org/record/5554814/files/GSE50244bulkeset.expression.tabular
+>    https://zenodo.org/record/5554814/files/GSE50244bulkeset.phenotype.tabular
+>    # single-cell RNA datasets
+>    https://zenodo.org/record/5554814/files/EMTABesethealthy.expression.tabular
+>    https://zenodo.org/record/5554814/files/EMTABesethealthy.phenotype.tabular
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
