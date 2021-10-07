@@ -333,7 +333,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 > 	conda:
 > 		"envs/fastqc.yaml"
 > 	<span class="s2">shell:
-> 		"fastqc {input}"</span>
+> 		"fastqc {input} --outdir fastqc/"</span>
 > </code></pre>
 >
 > Essentially the same, but now we've also added a Conda environment in which our job will run. This makes dependency management a lot simpler. The <code>envs/fastqc.yaml</code> file contains a list of the necessary dependencies at the correct version and if the environment for it does not exist, Snakemake will create it before running the job.
@@ -400,7 +400,7 @@ Now that you have seen a few rules, let's write the rest.
 > 	conda:
 > 		"envs/fastqc.yaml"
 > 	shell:
-> 		"fastqc {input}"
+> 		"fastqc {input} --outdir fastqc/"
 >
 > rule trimmomatic:
 > 	input:
@@ -657,8 +657,8 @@ But **don't just copy/paste** the above example because:
 > > +		out="logs/fastqc.{sample}.out",
 > > +		err="logs/fastqc.{sample}.err"
 > >  	shell:
-> > -		"fastqc {input}"
-> > +		"fastqc {input} >{log.out} 2>{log.err}"
+> > -		"fastqc {input} --outdir fastqc/"
+> > +		"fastqc {input} --outdir fastqc/ >{log.out} 2>{log.err}"
 > >
 > >  rule trimmomatic:
 > >  	input:
@@ -699,9 +699,9 @@ But **don't just copy/paste** the above example because:
 > >  	conda:
 > >  		"envs/bwa.yaml"
 > > +	log:
-> > +		bwaerr="logs/bwa.{sample}.err",
-> > +		out="logs/samtools.{sample}.out",
-> > +		err="logs/samtools.{sample}.err"
+> > +		bwaerr="logs/bwa.{genome}.{sample}.err",
+> > +		out="logs/samtools.{genome}.{sample}.out",
+> > +		err="logs/samtools.{genome}.{sample}.err"
 > >  	shell:
 > > -		"bwa mem {wildcard.genome}.fna {input.r1} {input.r2} | "
 > > -		"samtools sort -O bam -o {output}"
@@ -941,7 +941,7 @@ Gosh that's a lot of output! Let's build the dag to see a more concise represent
 > ![Image of the snakemake dag. Conspicuously missing is FastQC jobs!](../../images/snakemake.dag.svg)
 {: .code-out}
 
-But wait, where is FastQC? It's missing! Let's read a bit more about Snakemake and then we'll cover the case of the missing FastQC.
+But wait, where is FastQC? It's missing! Let's summarize the transition from a Makefile to a Snakemake file and then we'll cover the case of the missing FastQC.
 
 ## Why Snakemake
 
@@ -968,18 +968,20 @@ If you were reading closely above you've noticed we mention several times:
 
 This meant that if a file already existed on disk, Make and Snakemake would not re-run that step. Smart! But it *also* meant that if your `all` rule did not mention a file, or if any of the tasks that were required to make the final output didn't include or use the output of FastQC, then that file would not be created.
 
-So naturally when we request the final `bam` file, and none of the steps leading up to it need that FastQC output, of course it doesn't run. To fix that, we need to declare FastQC as one of our pipeline's outputs. Let's look at how to solve this. First you need to know the expand function:
+So naturally when we request the final `bam` file, and none of the steps leading up to it need that FastQC output, of course it doesn't run. To fix that, we need to declare FastQC as one of our pipeline's outputs. Let's look at how to solve this.
+
+### expand
 
 You can use this function in inputs and outputs to help you list all expected files, without having to write out or hardcode that list of files. Here we define a `sorted_reads/{sample}.bam` and then this is repeated for every value of samples
 
 
-> ### {% icon code-in %} Snakemake
+> ### {% icon code-in %} Snakemake Code
 > ```
 > SAMPLES = ["a", "b", "c"]
 > expand("sorted_reads/{sample}.bam", sample=SAMPLES)
 > ```
 {: .code-in}
-> ### {% icon code-out %} Output
+> ### {% icon code-out %} Snakemake Output
 > ```
 > ["sorted_reads/a.bam", "sorted_reads/b.bam", "sorted_reads/c.bam"]
 > ```
@@ -993,7 +995,7 @@ expand("sorted_reads/{sample}.{replicate}.bam", sample=SAMPLES, replicate=[0, 1]
 
 We should use something exactly like this for our samples. We can have a `SAMPLES` variable representing our final output bam files we wish to generate, and then instead of `replicates` we'll have `_1` and `_2` or so. First let's make the change to use the `SAMPLES` and expand just for our final output.
 
-> ### {% icon hands_on %} Hands-on: Update all task to use expand
+> ### {% icon hands_on %} Hands-on: Update `all` task to use expand
 > And while you're at it, define `SAMPLES` to be a list (like in python) with two elements:
 > - `SRR2584863`
 > - `SRR2589044`
@@ -1017,9 +1019,104 @@ We should use something exactly like this for our samples. We can have a `SAMPLE
 > {: .solution}
 {: .hands_on}
 
+### Adding all FastQC reports
+
+Now that you've done one expand, let's do a more complicated one. The expand function can take multiple variables which we can use to expand both our samples AND our expected extensions
+
+> ### {% icon hands_on %} Hands-on: Add FastQC outputs to `all`
+> Which file extensions do we expect to see? (e.g. `_1.fastqc`) Make a single expand that uses two variables, `{sample}` and `{ext}`? Add an expand that uses our previously defined `SAMPLES` and now also a list of the extensions we expect.
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```diff
+> > --- a/Snakefile
+> > +++ b/Snakefile
+> > @@ -3,6 +3,7 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
+> >  rule all:
+> >         input:
+> >                 expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+> > +               expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> >
+> >  rule download:
+> >         output:
+> > ```
+> >
+> > > ### {% icon tip %} Why not `_1.fastqc.html`?
+> > >
+> > > There's not always a good answer for this, some tools will mangle names in unexpected ways. The best way to discover this in a {SciWMS} like Snakemake is to just write what you expect, and run it, and see how it fails. Here the filenames were not as expected, so, we updated the `ext` to use `_1_fastqc.html` and everything works. This was done by `fastqc` so if we really wanted the other style of naming we could read the FastQC manual to maybe determine why.
+> > {: .tip}
+> {: .solution}
+{: .hands_on}
+
+Success! We've got a bunch of FastQC reports. But something is wrong, we only have the pre-trimming reports, none of the post-trimming reports. You can see why in our FastQC rule:
+
+```
+rule fastqc:
+	input:
+		"reads/{sample}.fq.gz"
+```
+
+This rule only knows how to input files from the `reads` directory. We have some options:
+
+1. We can probably most easily solve this by simply replacing our `trimmed` folder with the `reads` folder and making them the same. This way all fastq files will be in the same place, but perhaps it will be less clear later which files we can delete if we need to clean up. Right now we know we can remove the `trimmed` folder if we need some space, and our pipeline can re-create the data. If we mixed them, it would be slightly more complicated.
+2. We could probably use `reads` as a wildcard (like our `{genome}` or `{sample}`), but here we'd have to have some additional complexity as a result, like the folder name would en up part of the `output` name, as is required by `Snakemake` to prevent accidental conflicts.
+
+    > ### {% icon tip %} How would this look?
+    > ```
+    > --- a/Snakefile
+    > +++ b/Snakefile
+    > @@ -16,16 +16,16 @@ rule download:
+    >
+    >  rule fastqc:
+    >         input:
+    > -               "reads/{sample}.fq"
+    > +               "{folder}/{sample}.fq"
+    >         output:
+    > -               "fastqc/{sample}.fastqc.html"
+    > +               "fastqc/{folder}-{sample}.fastqc.html"
+    >         conda:
+    >                 "envs/fastqc.yaml"
+    >         log:
+    > -               out="logs/fastqc.{sample}.out",
+    > -               err="logs/fastqc.{sample}.err"
+    > +               out="logs/fastqc.{folder}-{sample}.out",
+    > +               err="logs/fastqc.{folder}-{sample}.err"
+    >         shell:
+    >                 "fastqc {input} --outdir fastqc/ >{log.out} 2>{log.err}"
+    > ```
+    {: .tip}
+
+3. Or, we could duplicate the fastqc rule, and have a separate rule for `fastqc-trimmed` that also outputs to a separate folder
 
 
+So with that said, let's go with option three, duplicate our fastqc rule to have a `fastqc-trimmed` version
 
+> ### {% icon hands_on %} Hands-on: Add FastQC outputs to `all`
+> Copy the rule and rename it appropriately, changing all of the variables where necessary to take in trimmed fastq files.
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```diff
+> > --- a/Snakefile
+> > +++ b/Snakefile
+> > @@ -3,6 +3,7 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
+> >  rule all:
+> >         input:
+> >                 expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+> > +               expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> >
+> >  rule download:
+> >         output:
+> > ```
+> >
+> > > ### {% icon tip %} Why not `_1.fastqc.html`?
+> > >
+> > > There's not always a good answer for this, some tools will mangle names in unexpected ways. The best way to discover this in a {SciWMS} like Snakemake is to just write what you expect, and run it, and see how it fails. Here the filenames were not as expected, so, we updated the `ext` to use `_1_fastqc.html` and everything works. This was done by `fastqc` so if we really wanted the other style of naming we could read the FastQC manual to maybe determine why.
+> > {: .tip}
+> {: .solution}
+{: .hands_on}
+
+### MultiQC
 
 
 
