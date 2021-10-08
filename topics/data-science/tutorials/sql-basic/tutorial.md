@@ -54,6 +54,9 @@ key_points:
 contributors:
 - carpentries
 - hexylena
+- Dirowa
+- bazante1
+
 
 subtopic: sql
 
@@ -299,7 +302,7 @@ SELECT * FROM Person;
 
 > ### {% icon question %} Selecting Site Names
 >
-> Write a query that selects only the `name` column from the `Site` table.
+> **Challenge**: Write a query that selects only the `name` column from the `Site` table.
 >
 > > ### {% icon solution %} Solution
 > >
@@ -444,7 +447,7 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 
 > ### {% icon question %} Finding Distinct Dates
 >
-> Write a query that selects distinct dates from the `Visited` table.
+> **Challenge**: Write a query that selects distinct dates from the `Visited` table.
 >
 > > ### {% icon solution %} Solution
 > >
@@ -467,7 +470,7 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 
 > ### {% icon question %} Displaying Full Names
 >
-> Write a query that displays the full names of the scientists in the `Person` table,
+> **Challenge**: Write a query that displays the full names of the scientists in the `Person` table,
 > ordered by family name.
 >
 > > ### {% icon solution %} Solution
@@ -645,7 +648,8 @@ We can also filter by partial matches.  For example, if we want to
 know something just about the site names beginning with "DR" we can
 use the `LIKE` keyword.  The percent symbol acts as a
 wildcard, matching any characters in that
-place.  It can be used at the beginning, middle, or end of the string:
+place.  It can be used at the beginning, middle, or end of the string
+Click [Here](https://www.w3schools.com/sql/sql_wildcards.asp) for more information about wildcards:
 
 ```sql
 SELECT * FROM Visited WHERE site LIKE 'DR%';
@@ -687,7 +691,8 @@ not to the entire rows as they are being processed.
 {: .tip}
 
 > ### {% icon question %} Fix This Query
->
+
+> **Challenge**:
 > Suppose we want to select all sites that lie within 48 degrees of the equator.
 > Our first query is:
 >
@@ -713,7 +718,7 @@ not to the entire rows as they are being processed.
 > ### {% icon question %} Finding Outliers
 >
 > Normalized salinity readings are supposed to be between 0.0 and 1.0.
-> Write a query that selects all records from `Survey`
+> **Challenge**: Write a query that selects all records from `Survey`
 > with salinity values outside this range.
 >
 > > ### {% icon solution %} Solution
@@ -731,7 +736,7 @@ not to the entire rows as they are being processed.
 
 > ### {% icon question %} Matching Patterns
 >
-> Which of these expressions are true?
+> **Challenge**: Which of these expressions are true?
 >
 > 1. `'a' LIKE 'a'`
 > 2. `'a' LIKE '%a'`
@@ -815,7 +820,7 @@ issues.
 > After further reading,
 > we realize that Valentina Roerich
 > was reporting salinity as percentages.
-> Write a query that returns all of her salinity measurements
+> **Challenge**: Write a query that returns all of her salinity measurements
 > from the `Survey` table
 > with the values divided by 100.
 >
@@ -900,7 +905,8 @@ issues.
 > or 0 if Y does not exist in X.
 > The substring function `substr(X, I, [L])`
 > returns the substring of X starting at index I, with an optional length L.
-> Use these two functions to produce a list of unique major site identifiers.
+> 
+> **Challenge**: Use these two functions to produce a list of unique major site identifiers.
 > (For this data,
 > the list should contain only "DR" and "MSK").
 >
@@ -1031,7 +1037,7 @@ are averaging it. Aggregation functions will be addressed in more
 detail in [the next section](#).
 
 > ### {% icon question %} Sorting by Known Date
->
+> **Challenge**:
 > Write a query that sorts the records in `Visited` by date,
 > omitting entries for which the date is not known
 > (i.e., is null).
@@ -1093,6 +1099,6 @@ detail in [the next section](#).
 > they will use the date "0000-00-00" to mark a missing date,
 > or -1.0 to mark a missing salinity or radiation reading
 > (since actual readings cannot be negative).
-> What does this simplify?
-> What burdens or risks does it introduce?
+> **Challenge**: What does this simplify?
+> **Challenge**: What burdens or risks does it introduce?
 {: .question}
