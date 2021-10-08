@@ -68,12 +68,12 @@ wget https://zenodo.org/api/files/TODO/SRR2589044_2.fq.gz
 fastqc *.fq
 
 # Run Trimmomatic to trim the bad reads out.
-trimmomatic PE SRR2589044_1.fq SRR2589044_2.fq \
+trimmomatic PE SRR2589044_1.fq.gz SRR2589044_2.fq.gz \
                SRR2589044_1.trim.fq SRR2589044_1un.trim.fq \
                SRR2589044_2.trim.fq SRR2589044_2un.trim.fq \
                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
 
-trimmomatic PE SRR2584866_1.fq SRR2589044_2.fq \
+trimmomatic PE SRR2584866_1.fq.gz SRR2589044_2.fq.gz \
                SRR2584866_1.trim.fq SRR2589044_1un.trim.fq \
                SRR2584866_2.trim.fq SRR2589044_2un.trim.fq \
                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
@@ -145,12 +145,12 @@ This may seem tedious, to annotate the inputs and outputs of each step, but beca
 ### Trimming Data
 
 > ### {% icon code-in %} Bash
-> <pre class="highlight"><code><span class="s2">trimmomatic PE</span> <span class="kt">SRR2589044_1.fq SRR2589044_2.fq</span> \
+> <pre class="highlight"><code><span class="s2">trimmomatic PE</span> <span class="kt">SRR2589044_1.fq.gz SRR2589044_2.fq.gz</span> \
 >                <span class="nb">SRR2589044_1.trim.fq SRR2589044_1un.trim.fq \
 >                SRR2589044_2.trim.fq SRR2589044_2un.trim.fq</span> \
 >                <span class="s2">SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15</span>
 >
-> <span class="s2">trimmomatic PE</span> <span class="kt">SRR2584866_1.fq SRR2584866_2.fq</span> \
+> <span class="s2">trimmomatic PE</span> <span class="kt">SRR2584866_1.fq.gz SRR2584866_2.fq.gz</span> \
 >                <span class="nb">SRR2584866_1.trim.fq SRR2584866_1un.trim.fq \
 >                SRR2584866_2.trim.fq SRR2584866_2un.trim.fq</span> \
 >                <span class="s2">SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15</span>
@@ -158,7 +158,7 @@ This may seem tedious, to annotate the inputs and outputs of each step, but beca
 > Run these two individual trimmomatic commands with these hardcoded filenames. If you need to run a new file make sure to carefully change all of the uses of it!
 {: .code-in}
 > ### {% icon code-out %} Make
-> <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq %_2.fq</span>
+> <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
 > 	<span class="s2">trimmomatic PE $^ \
 > 		$(shell basename $(word 1,$^) .fq).trim.fq \
 > 		$(shell basename $(word 1,$^) .fq)un.trim.fq \
@@ -215,12 +215,12 @@ all: SRR2589044.bam
 
 # Here we've hardcoded the genome name because it's less likely to change for a
 # single pipeline than the individual data files are.
-%.bam: %_1.trim.fq %_1.trim.fq GCA_000017985.1_ASM1798v1_genomic.fna.bwt
+%.bam: %_1.trim.fq %_1.trim.fq GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
 	bwa mem GCA_000017985.1_ASM1798v1_genomic.fna $(word 1,$^) $(word 2,$^) | \
 		samtools sort -O bam -o $@
 
 # This indexing step however will work for any possible
-%.fna.bwt: %.fna
+%.fna.gz.bwt: %.fna.gz
 	bwa index $<
 
 # This handles ALL fastqc reporting, so we don't have to do it in two sections,
@@ -230,7 +230,7 @@ all: SRR2589044.bam
 
 # This rule violates some Makefile internal expectations by having multiple
 # outputs which is not handled well by all implementations
-%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq: %_1.fq %_2.fq
+%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq: %_1.fq.gz %_2.fq.gz
 	trimmomatic PE $^ \
 		$(shell basename $(word 1,$^) .fq).trim.fq \
 		$(shell basename $(word 1,$^) .fq)un.trim.fq \
@@ -266,8 +266,10 @@ Make will read the above makefile like so:
 Notice that Make isn't running every task, it's reading the one task you asked for, and seeing what's required for that based on your annotations of inputs and outputs.
 
 > ### {% icon question %} Check your understanding
+>
 > 1. If a file is not part of the final output, or not the requested task, will it be created?
 > 2. Do you spot any omissions in the above pipeline?
+>
 > > ### {% icon solution %} Solution
 > > 1. No, Make only runs the tasks for files it needs, it won't run any of the other tasks. This is part of what makes `make` fast and easily parallelisable.
 > > 2. Yes! FastQC is missing, it won't be created unless we ask for it.
@@ -298,8 +300,6 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 	<span class="nb">output:
 		"output-1",
 		"output-2"</span>
-	conda:
-		"envs/mapping.yaml"
 	<span class="s2">shell:
 		"cat {input} > {output}"</span>
 </code></pre>
@@ -320,7 +320,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 > 	<span class="nb">output:
 > 		"{sample}.fq.gz"</span>
 > 	<span class="s2">shell:
-> 		"wget https://ncbi.example.org/{sample}.fq.gz -O {output}"</span>
+> 		"wget https://ncbi.example.org/{wildcards.sample}.fq.gz -O {output}"</span>
 > </code></pre>
 >
 > This is much more explicit, the outputs are listed and `{sample}` is used as the variable to be templated out, a lot like you might recognise from Python's `format` function or `f""` strings. The rule also has a name which serves as really nice documentation for what that step does, you don't have to read the command to figure it out.
@@ -338,24 +338,22 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 > ### {% icon code-out %} Snakemake
 > <pre class="highlight"><code>rule fastqc:
 > 	<span class="kt">input:
-> 		"{sample}.fq"</span>
+> 		"{sample}.fq.gz"</span>
 > 	<span class="nb">output:
-> 		"{sample}.fastqc.html"</span>
-> 	conda:
-> 		"envs/fastqc.yaml"
+> 		"{sample}_fastqc.html"</span>
 > 	<span class="s2">shell:
 > 		"fastqc {input} --outdir fastqc/"</span>
 > </code></pre>
 >
-> Essentially the same, but now we've also added a Conda environment in which our job will run. This makes dependency management a lot simpler. The <code>envs/fastqc.yaml</code> file contains a list of the necessary dependencies at the correct version and if the environment for it does not exist, Snakemake will create it before running the job.
+> Essentially the same, but now we've also added a Conda environment in which our job will run. This makes dependency management a lot simpler.
 {: .code-out}
 
 
 ### Trimming Data
 
 
-> ### {% icon code-in %} Mask
-> <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq %_2.fq</span>
+> ### {% icon code-in %} Make
+> <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
 > 	<span class="s2">trimmomatic PE $^ \
 > 		$(shell basename $(word 1,$^) .fq).trim.fq \
 > 		$(shell basename $(word 1,$^) .fq)un.trim.fq \
@@ -370,15 +368,13 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 > ### {% icon code-out %} Snakemake
 > <pre class="highlight"><code>rule trimmomatic:
 > 	<span class="kt">input:
-> 		r1="{sample}_1.fq",
-> 		r2="{sample}_2.fq"</span>
+> 		r1="{sample}_1.fq.gz",
+> 		r2="{sample}_2.fq.gz"</span>
 > 	<span class="nb">output:
 > 		o1="{sample}_1.trim.fq",
 > 		o2="{sample}_2.trim.fq",
 > 		o1un="{sample}_1un.trim.fq",
 > 		o2un="{sample}_2un.trim.fq"</span>
-> 	conda:
-> 		"envs/trimmomatic.yaml"
 > 	<span class="s2">shell:
 > 		"trimmomatic PE "
 > 		"{input.r1} {input.r2} "
@@ -389,11 +385,13 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 > </code></pre>
 >
 > And turn it into a much more readable and clear Snakemake step! Now instead of using more opaque terms like `$(word 1,$^)` we can just declare "our output should have this name and use {sample} as part of the name" and Snakemake takes care of the rest. Then in our commandline we can clearly reference exactly what we want.
+>
+> Note: We also use `fq.gz` as our input file because trimmomatic we know can accept gzipped fastq files, but we output plain fastq files because re-compressing those is another step and it's not necessary right now for our small datasets. In a real world situation you might also choose not to compress intermediate datasets because you want better performance and you know you'll throw away the intermediates and keep the source and final datasets.
 {: .code-out}
 
 Now that you have seen a few rules, let's write the rest.
 
-> ### {% icon hands_on %} Hands-on: Write this Snakefile to the filesystem
+> ### {% icon hands_on %} Hands-on: Save this Snakefile to the filesystem
 > From here on you are going to finish writing this Snakefile on your own! We'll give you the bits you have seen up until now, and future tasks will require you to add your own rules and get to actually test out the pipeline!
 >
 > ```Snakemake
@@ -401,29 +399,31 @@ Now that you have seen a few rules, let's write the rest.
 > 	output:
 > 		"{sample}.fq.gz"
 > 	shell:
-> 		"wget https://ncbi.example.org/{sample}.fq.gz -O {output}"
+> 		"wget https://ncbi.example.org/{wildcards.sample}.fq.gz -O {output}"
+>
+> rule download_genome:
+> 	output:
+> 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
+> 	shell:
+> 		"wget https://ncbi.example.org/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
 >
 > rule fastqc:
 > 	input:
-> 		"{sample}.fq"
+> 		"{sample}.fq.gz"
 > 	output:
-> 		"{sample}.fastqc.html"
-> 	conda:
-> 		"envs/fastqc.yaml"
+> 		"{sample}_fastqc.html"
 > 	shell:
 > 		"fastqc {input} --outdir fastqc/"
 >
 > rule trimmomatic:
 > 	input:
-> 		r1="{sample}_1.fq",
-> 		r2="{sample}_2.fq"
+> 		r1="{sample}_1.fq.gz",
+> 		r2="{sample}_2.fq.gz"
 > 	output:
 > 		o1="{sample}_1.trim.fq",
 > 		o2="{sample}_2.trim.fq",
 > 		o1un="{sample}_1un.trim.fq",
 > 		o2un="{sample}_2un.trim.fq"
-> 	conda:
-> 		"envs/trimmomatic.yaml"
 > 	shell:
 > 		"trimmomatic PE "
 > 		"{input.r1} {input.r2} "
@@ -432,31 +432,101 @@ Now that you have seen a few rules, let's write the rest.
 > 		"SLIDINGWINDOW:4:20 MINLEN:25 "
 > 		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15"
 > ```
->
-> And here is the `envs/fastqc.yaml`:
->
-> ```yaml
-> channels:
->   - conda-forge
->   - bioconda
->   - defaults
-> dependencies:
->   - fastqc=0.11.9
-> ```
->
-> And here is the `envs/trimmomatic.yaml`:
->
-> ```yaml
-> channels:
->   - conda-forge
->   - bioconda
->   - defaults
-> dependencies:
->   - trimmomatic=0.39
-> ```
->
-> So copy those to the correct places (you might need to `mkdir -p envs/` to create the envs folder!)
 {: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Try running snakemake!
+>
+> 1. Try running snakemake
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > snakemake -c1
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output
+>    > ```
+>    > Building DAG of jobs...
+>    > WorkflowError:
+>    > Target rules may not contain wildcards. Please specify concrete files or a rule without wildcards at the command line, or have a rule without wildcards at the very top of your workflow (e.g. the typical "rule all" which just collects all results you want to generate in the end).
+>    > ```
+>    {: .code-out}
+>
+>    Wait, that didn't work! This is the `all` rule we also saw in the makefile. But we can use Snakemake to build individual rule outputs, so let's try that now.
+>
+> 2. Run snakemake to download `SRR2584866_1.fq.gz` and `SRR2584866_2.fq.gz`
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > snakemake -c1 SRR2584866_1.fq.gz SRR2584866_2.fq.gz
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output
+>    > ```
+>    > Building DAG of jobs...
+>    > Using shell: /usr/bin/bash
+>    > Provided cores: 1 (use --cores to define parallelism)
+>    > Rules claiming more threads will be scaled down.
+>    > Conda environments: ignored
+>    > Job stats:
+>    > job         count    min threads    max threads
+>    > --------  -------  -------------  -------------
+>    > download        2              1              1
+>    > total           2              1              1
+>    >
+>    > Select jobs to execute...
+>    >
+>    > [Fri Oct  8 16:06:32 2021]
+>    > rule download:
+>    >     output: SRR2584866_2.fq.gz
+>    >     jobid: 1
+>    >     wildcards: sample=SRR2584866_2
+>    >     resources: tmpdir=/tmp
+>    >
+>    > --2021-10-08 16:06:32--  http://localhost:8000/SRR2584866_2.fq.gz
+>    > Resolving localhost (localhost)... 127.0.0.1
+>    > Connecting to localhost (localhost)|127.0.0.1|:8000... connected.
+>    > HTTP request sent, awaiting response... 200 OK
+>    > Length: 6319969 (6,0M) [application/gzip]
+>    > Saving to: ‘SRR2584866_2.fq.gz’
+>    >
+>    > 2021-10-08 16:06:32 (538 MB/s) - ‘SRR2584866_2.fq.gz’ saved [6319969/6319969]
+>    >
+>    > [Fri Oct  8 16:06:32 2021]
+>    > Finished job 1.
+>    > 1 of 2 steps (50%) done
+>    > Select jobs to execute...
+>    >
+>    > [Fri Oct  8 16:06:32 2021]
+>    > rule download:
+>    >     output: SRR2584866_1.fq.gz
+>    >     jobid: 0
+>    >     wildcards: sample=SRR2584866_1
+>    >     resources: tmpdir=/tmp
+>    >
+>    > --2021-10-08 16:06:32--  http://localhost:8000/SRR2584866_1.fq.gz
+>    > Resolving localhost (localhost)... 127.0.0.1
+>    > Connecting to localhost (localhost)|127.0.0.1|:8000... connected.
+>    > HTTP request sent, awaiting response... 200 OK
+>    > Length: 6586718 (6,3M) [application/gzip]
+>    > Saving to: ‘SRR2584866_1.fq.gz’
+>    >
+>    > 2021-10-08 16:06:32 (537 MB/s) - ‘SRR2584866_1.fq.gz’ saved [6586718/6586718]
+>    >
+>    > [Fri Oct  8 16:06:32 2021]
+>    > Finished job 0.
+>    > 2 of 2 steps (100%) done
+>    > Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snakemake.log
+>    > ```
+>    {: .code-out.code-max-300}
+>
+> 3. Check that it worked. Do you see files in your directory?
+{: .hands_on}
+
+
+Now that we've got our pipeline started, let's do some more with it!
 
 > ### {% icon question %} Question
 >
@@ -464,15 +534,15 @@ Now that you have seen a few rules, let's write the rest.
 >
 > The command is
 > <pre class="highlight"><code><span class="s2">bwa index</span> <span class="kt">GCA_000017985.1_ASM1798v1_genomic.fna</span></code></pre>
-> and it creates `GCA_000017985.1_ASM1798v1_genomic.fna.bwt`
+> and it creates `GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt`
 >
 > > ### {% icon solution %} Solution
 > >
 > > <pre class="highlight"><code>rule indexgenome:
 > > 	<span class="kt">input:
-> > 		"GCA_000017985.1_ASM1798v1_genomic.fna"</span>
+> > 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"</span>
 > > 	<span class="nb">output:
-> > 		"GCA_000017985.1_ASM1798v1_genomic.fna.bwt"</span>
+> > 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt"</span>
 > > 	<span class="s2">shell:
 > > 		"bwa index {input}"</span>
 > > </code></pre>
@@ -490,26 +560,26 @@ Now that you have seen a few rules, let's write the rest.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. `GCA_000017985.1_ASM1798v1_genomic.fna.bwt`, the index file (but beware it does not get passed in as-is, the indexing tool expects just the `GCA_000017985.1_ASM1798v1_genomic.fna` portion.)
+> > 1. `GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt`, the index file (but beware it does not get passed in as-is, the indexing tool expects just the `GCA_000017985.1_ASM1798v1_genomic.fna` portion.)
 > >
 > >    Also we have our two sequence files `SRR2584866_1.trim.fq SRR2584866_2.trim.fq`
 > >
 > > 2. Our output is `SRR2584866.bam`
 > >
-> > 3. There are a couple of options we have here, we can supply both the `.fna` and the `.fna.bwt` file as inputs (not strictly true, we don't need the fasta file) and then just use the `fna` file in the command line, or we can pass in just the `.fna.bwt` file and try and calculate the `.fna` version that is expected as the index name. We will show the second option as it is more complicated.
+> > 3. There are a couple of options we have here, we can supply both the `.fna` and the `.fna.gz.bwt` file as inputs (not strictly true, we don't need the fasta file) and then just use the `fna` file in the command line, or we can pass in just the `.fna.gz.bwt` file and try and calculate the `.fna` version that is expected as the index name. We will show the second option as it is more complicated.
 > > <pre class="highlight"><code>rule align:
 > > 	<span class="kt">input:
 > > 		r1="{sample}_1.trim.fq",
 > > 		r2="{sample}_1.trim.fq",
-> > 		index="{genome}.fna.bwt"</span>
+> > 		index="{genome}.fna.gz.bwt"</span>
 > > 	<span class="nb">output:
 > > 		"{genome}/{sample}.bam"</span>
 > > 	<span class="s2">shell:
-> > 		"bwa mem {wildcard.genome}.fna {input.r1} {input.r2} | "
+> > 		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} | "
 > > 		"samtools sort -O bam -o {output}"</span>
 > > </code></pre>
 > >
-> > Here we used a number of features to accomplish what we need, and we'll now go through them. First is [Wildcards](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#wildcards) which can be used to take a portion of the output name or a portion of the input name and to re-use that in the command line. Here we declared that the first part of the index name up to `.fna.bwt` was going to be the `genome` wildcard.
+> > Here we used a number of features to accomplish what we need, and we'll now go through them. First is [Wildcards](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#wildcards) which can be used to take a portion of the output name or a portion of the input name and to re-use that in the command line. Here we declared that the first part of the index name up to `.fna.gz.bwt` was going to be the `genome` wildcard.
 > >
 > > Importantly, we also used this in our output. What would have happened if we didn't? It would be unresolvable! We would run `snakemake ... output.bam` and it would say "I don't know what value genome should be set to", so we need to have that value somewhere in our output filename in order to be able to figure that out.
 > >
@@ -533,7 +603,7 @@ But this was our very first attempt at a workflow, so what might a best practice
 
 ### Conda for reproducibility
 
-If you're not already using conda, you should be! Much scientific software you might be interested in using is already in there, probably mostly provided by the [BioConda](https://anaconda.org/bioconda/repo) repository. Writing an environment file can be pretty simple, you just need something like this in your `envs` folder:
+If you're not already using conda, you should be! Much scientific software you might be interested in using is already in there, probably mostly provided by the [BioConda](https://anaconda.org/bioconda/repo) repository. Writing an environment file can be pretty simple, you just need a file like this, which we customarily put in a folder named `envs/`
 
 > ### {% icon code-in %} `envs/bwa.yaml`
 > ```yaml
@@ -542,7 +612,7 @@ If you're not already using conda, you should be! Much scientific software you m
 >   - bioconda
 >   - defaults
 > dependencies:
->   - bwa=0.7.17=h5bf99c6_8
+>   - bwa=0.7.17
 >   - samtools=1.13
 > ```
 {: .code-in}
@@ -554,56 +624,108 @@ In the above code sample you can see `bwa=0.7.17`, that's the version of the `bw
 >
 > Bioinformatics tools on the other hand, these need conda envs.
 >
-> Try and add these yourself, and check your work below. You'll need to install `bwa` and `samtools` into the environment for the alignment step.
+> Try and add these yourself, and check your work below.
+>
+> Please use the following versions:
+>
+> Package     | Version
+> ---         | --
+> fastqc      | 0.11.9
+> trimmomatic | 0.39
+> bwa         | 0.7.17
+> samtools    | 1.13
+>
+> *Hints*
+> 1. see above for what a conda environment looks like.
+> 2. You'll need to install both `bwa` and `samtools` into the environment for the alignment step.
+> 3. Create the `envs/` directory if it does not exist.
 >
 > > ### {% icon solution %} Solution
-> > You could create two individual environments, but since we need `bwa` in both the `indexgenome` and `align` step, and it's only two packages, it's probably fine to have one environment with both.
+> >
+> > `envs/bwa.yaml` should look like this:
+> >
+> > ```yaml
+> > channels:
+> >   - conda-forge
+> >   - bioconda
+> >   - defaults
+> > dependencies:
+> >   - bwa=0.7.17
+> >   - samtools=1.13
+> > ```
+> >
+> > And here is the `envs/fastqc.yaml`:
+> >
+> > ```yaml
+> > channels:
+> >   - conda-forge
+> >   - bioconda
+> >   - defaults
+> > dependencies:
+> >   - fastqc=0.11.9
+> > ```
+> >
+> > And here is the `envs/trimmomatic.yaml`:
+> >
+> > ```yaml
+> > channels:
+> >   - conda-forge
+> >   - bioconda
+> >   - defaults
+> > dependencies:
+> >   - trimmomatic=0.39
+> > ```
+> >
 > >
 > > > ### {% icon comment %} How to read diffs
 > > > This is a 'diff', it shows you the difference between two versions of a text file. Everything added is highlighed in light blue. Anything deleted is shown in black with a strikethrough. Importantly it shows you the context, the bits that are not highlighted, and this helps you know where the changes should go.
 > > > The first line shows the original file, and the second line shows the new file. If the names are different, it means the file has been renamed.
+> > >
+> > > The `@@ ... @@` line shows the position in the file and how that changes, and often it will also show you the name of the function or in the case of Snakemake, the name of the rule that change appears in.
 > > {: .comment}
 > >
 > > ```diff
 > > --- a/Snakefile
 > > +++ b/Snakefile
-> > @@ -39,6 +39,8 @@ rule indexgenome:
-> >                 "GCA_000017985.1_ASM1798v1_genomic.fna"
-> >         output:
-> >                 "GCA_000017985.1_ASM1798v1_genomic.fna.bwt"
-> > +       conda:
-> > +               "envs/bwa.yaml"
-> >         shell:
-> >                 "bwa index {input}"
+> > @@ -9,6 +9,8 @@ rule fastqc:
+> >  		"{sample}.fq.gz"
+> >  	output:
+> >  		"{sample}_fastqc.html"
+> > +	conda:
+> > +		"envs/fastqc.yaml"
+> >  	shell:
+> >  		"fastqc {input} --outdir fastqc/"
 > >
-> > @@ -49,6 +51,8 @@ rule align:
-> >                 index="{genome}.fna.bwt"
-> >         output:
-> >                 "{genome}/{sample}.bam"
-> > +       conda:
-> > +               "envs/bwa.yaml"
-> >         shell:
-> >                 "bwa mem {wildcard.genome}.fna {input.r1} {input.r2} | "
-> >                 "samtools sort -O bam -o {output}"
+> > @@ -21,6 +23,8 @@ rule trimmomatic:
+> >  		o2="{sample}_2.trim.fq",
+> >  		o1un="{sample}_1un.trim.fq",
+> >  		o2un="{sample}_2un.trim.fq"
+> > +	conda:
+> > +		"envs/trimmomatic.yaml"
+> >  	shell:
+> >  		"trimmomatic PE "
+> >  		"{input.r1} {input.r2} "
+> > @@ -34,6 +38,8 @@ rule indexgenome:
+> >  		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
+> >  	output:
+> >  		"GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt"
+> > +	conda:
+> > +		"envs/bwa.yaml"
+> >  	shell:
+> >  		"bwa index {input}"
+> >
+> > @@ -44,6 +50,8 @@ rule align:
+> >  		index="{genome}.fna.gz.bwt"
+> >  	output:
+> >  		"{genome}/{sample}.bam"
+> > +	conda:
+> > +		"envs/bwa.yaml"
+> >  	shell:
+> >  		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} | "
+> >  		"samtools sort -O bam -o {output}"
 > > ```
 > >
-> > > ### {% icon comment %} How to read diffs
-> > > When you see /dev/null as the 'original' file, it means a file has been added that didn't exist before, so there was nothing to compare against. The contents of this file (everything from `channels` on would be added to a new file, `envs/bwa.yaml`)
-> > {: .comment}
-> >
-> > ```diff
-> > --- /dev/null
-> > +++ b/envs/bwa.yaml
-> > @@ -0,0 +1,7 @@
-> > +channels:
-> > +  - conda-forge
-> > +  - bioconda
-> > +  - defaults
-> > +dependencies:
-> > +  - bwa=0.7.17
-> > +  - samtools=1.13
-> > ```
-> >
+> > Here in the last two steps we used a single environment, this is a technical decision we made. We could have used a single environment for every step, but with conda the more packages you add, the more complicated it is for Conda to find a version of all of those packages that work together OK. So by isolating packages to single environments, you speed up the installation process. But in two out of four steps above, we have used a shared environment. This is because `bwa` was required in both, and one just needs the additional `samtools` package. For this there is no real technical reason, just a feeling of "it's probably ok and won't be too difficult to resolve".
 > {: .solution}
 {: .hands_on}
 
@@ -615,9 +737,9 @@ Saving log files is key to making sure that you have a complete log of the execu
 > ```
 > rule indexgenome:
 > 	input:
-> 		"{sample}.fna"
+> 		"{sample}.fna.gz"
 > 	output:
-> 		"{sample}.fna.bwt"
+> 		"{sample}.fna.gz.bwt"
 > 	conda:
 > 		"envs/bwa.yaml"
 > 	log:
@@ -643,11 +765,13 @@ But **don't just copy/paste** the above example because:
 > Try and add log files everywhere (err and out where appropriate) to all of your rules. And use them in the `shell` sections as well. Also put your logs under the `logs/` folder!
 >
 > > ### {% icon solution %} Solution
+> >
 > > This is again a diff, things in blue were added to the file named at the top, things with black highlight were deleted. Think "track changes" mode in Google Docs or Word, except harder to read.
+> >
 > > ```diff
 > > --- a/Snakefile
 > > +++ b/Snakefile
-> > @@ -1,8 +1,11 @@
+> > @@ -1,14 +1,20 @@
 > >  rule download:
 > >  	output:
 > >  		"{sample}.fq.gz"
@@ -655,13 +779,23 @@ But **don't just copy/paste** the above example because:
 > > +		out="logs/download.{sample}.out",
 > > +		err="logs/download.{sample}.err"
 > >  	shell:
-> > -		"wget https://ncbi.example.org/{sample}.fq.gz -O {output}"
-> > +		"wget https://ncbi.example.org/{sample}.fq.gz -O {output} >{log.out} 2>{log.err}"
+> > -		"wget http://localhost:8000/{wildcards.sample}.fq.gz -O {output}"
+> > +		"wget http://localhost:8000/{wildcards.sample}.fq.gz -O {output} >{log.out} 2>{log.err}"
+> >
+> >  rule download_genome:
+> >  	output:
+> >  		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
+> > +	log:
+> > +		out="logs/download.out",
+> > +		err="logs/download.err"
+> >  	shell:
+> > -		"wget https://ncbi.example.org/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
+> > +		"wget https://ncbi.example.org/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output} >{log.out} 2>{log.err}"
 > >
 > >  rule fastqc:
 > >  	input:
-> > @@ -11,8 +14,11 @@ rule fastqc:
-> >  		"{sample}.fastqc.html"
+> > @@ -17,8 +23,11 @@ rule fastqc:
+> >  		"{sample}_fastqc.html"
 > >  	conda:
 > >  		"envs/fastqc.yaml"
 > > +	log:
@@ -673,7 +807,7 @@ But **don't just copy/paste** the above example because:
 > >
 > >  rule trimmomatic:
 > >  	input:
-> > @@ -25,14 +31,16 @@ rule trimmomatic:
+> > @@ -31,13 +40,16 @@ rule trimmomatic:
 > >  		o2un="{sample}_2un.trim.fq"
 > >  	conda:
 > >  		"envs/trimmomatic.yaml"
@@ -687,25 +821,24 @@ But **don't just copy/paste** the above example because:
 > >  		"{output.o2} {output.o2un} "
 > >  		"SLIDINGWINDOW:4:20 MINLEN:25 "
 > > -		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15"
-> > -
 > > +		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 >{log.out} 2>{log.err}"
 > >
 > >  rule indexgenome:
 > >  	input:
-> > @@ -41,8 +49,11 @@ rule indexgenome:
-> >  		"GCA_000017985.1_ASM1798v1_genomic.fna.bwt"
+> > @@ -46,8 +58,11 @@ rule indexgenome:
+> >  		"GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt"
 > >  	conda:
 > >  		"envs/bwa.yaml"
 > > +	log:
-> > +		out="logs/bwa.index.{sample}.out",
-> > +		err="logs/bwa.index.{sample}.err"
+> > +		out="logs/bwa.index.out",
+> > +		err="logs/bwa.index.err"
 > >  	shell:
 > > -		"bwa index {input}"
 > > +		"bwa index {input} >{log.out} 2>{log.err}"
 > >
 > >  rule align:
 > >  	input:
-> > @@ -53,6 +64,10 @@ rule align:
+> > @@ -58,6 +73,10 @@ rule align:
 > >  		"{genome}/{sample}.bam"
 > >  	conda:
 > >  		"envs/bwa.yaml"
@@ -714,9 +847,9 @@ But **don't just copy/paste** the above example because:
 > > +		out="logs/samtools.{genome}.{sample}.out",
 > > +		err="logs/samtools.{genome}.{sample}.err"
 > >  	shell:
-> > -		"bwa mem {wildcard.genome}.fna {input.r1} {input.r2} | "
+> > -		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} | "
 > > -		"samtools sort -O bam -o {output}"
-> > +		"bwa mem {wildcard.genome}.fna {input.r1} {input.r2} 2>{log.bwaerr} | "
+> > +		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} 2>{log.bwaerr} | "
 > > +		"samtools sort -O bam -o {output} >{log.out} 2>{log.err}"
 > > ```
 > >
@@ -754,7 +887,8 @@ You've seen a couple examples above but it's best to use folders to help keep yo
 > > ### {% icon solution %} Solution
 > >
 > > ```diff
-> >
+> > diff --git a/Snakefile b/Snakefile
+> > index 59b983c..31ebdff 100644
 > > --- a/Snakefile
 > > +++ b/Snakefile
 > > @@ -1,6 +1,6 @@
@@ -765,19 +899,28 @@ You've seen a couple examples above but it's best to use folders to help keep yo
 > >  	log:
 > >  		out="logs/download.{sample}.out",
 > >  		err="logs/download.{sample}.err"
-> > @@ -9,9 +9,9 @@ rule download:
+> > @@ -9,7 +9,7 @@ rule download:
+> >
+> >  rule download_genome:
+> >  	output:
+> > -		"GCA_000017985.1_ASM1798v1_genomic.fa.gz"
+> > +		"reference/GCA_000017985.1_ASM1798v1_genomic.fa.gz"
+> >  	log:
+> >  		out="logs/download.{sample}.out",
+> >  		err="logs/download.{sample}.err"
+> > @@ -18,9 +18,9 @@ rule download_genome:
 > >
 > >  rule fastqc:
 > >  	input:
 > > -		"{sample}.fq"
-> > +		"reads/{sample}.fq"
+> > +		"reads/{sample}.fq.gz"
 > >  	output:
-> > -		"{sample}.fastqc.html"
-> > +		"fastqc/{sample}.fastqc.html"
+> > -		"{sample}_fastqc.html"
+> > +		"fastqc/{sample}_fastqc.html"
 > >  	conda:
 > >  		"envs/fastqc.yaml"
 > >  	log:
-> > @@ -22,13 +22,13 @@ rule fastqc:
+> > @@ -31,13 +31,13 @@ rule fastqc:
 > >
 > >  rule trimmomatic:
 > >  	input:
@@ -797,19 +940,19 @@ You've seen a couple examples above but it's best to use folders to help keep yo
 > >  	conda:
 > >  		"envs/trimmomatic.yaml"
 > >  	log:
-> > @@ -44,9 +44,9 @@ rule trimmomatic:
+> > @@ -53,9 +53,9 @@ rule trimmomatic:
 > >
 > >  rule indexgenome:
 > >  	input:
 > > -		"GCA_000017985.1_ASM1798v1_genomic.fna"
-> > +		"reference/GCA_000017985.1_ASM1798v1_genomic.fna"
+> > +		"reference/GCA_000017985.1_ASM1798v1_genomic.fa"
 > >  	output:
 > > -		"GCA_000017985.1_ASM1798v1_genomic.fna.bwt"
-> > +		"reference/GCA_000017985.1_ASM1798v1_genomic.fna.bwt"
+> > +		"reference/GCA_000017985.1_ASM1798v1_genomic.fa.bwt"
 > >  	conda:
 > >  		"envs/bwa.yaml"
 > >  	log:
-> > @@ -57,9 +57,9 @@ rule indexgenome:
+> > @@ -66,11 +66,11 @@ rule indexgenome:
 > >
 > >  rule align:
 > >  	input:
@@ -817,23 +960,34 @@ You've seen a couple examples above but it's best to use folders to help keep yo
 > > -		r2="{sample}_1.trim.fq",
 > > -		index="{genome}.fna.bwt"
 > > +		r1="trim/{sample}_1.trim.fq",
-> > +		r2="trim/{sample}_2.trim.fq",
+> > +		r2="trim/{sample}_1.trim.fq",
 > > +		index="reference/{genome}.fna.bwt"
 > >  	output:
-> >  		"{genome}/{sample}.bam"
+> > -		"{genome}/{sample}.bam"
+> > +		"alignments/{genome}/{sample}.bam"
 > >  	conda:
+> >  		"envs/bwa.yaml"
+> >  	log:
+> > @@ -78,5 +78,5 @@ rule align:
+> >  		out="logs/samtools.{genome}.{sample}.out",
+> >  		err="logs/samtools.{genome}.{sample}.err"
+> >  	shell:
+> > -		"bwa mem {wildcard.genome}.fna {input.r1} {input.r2} 2>{log.bwaerr} | "
+> > +		"bwa mem reference/{wildcards.genome}.fna.gz {input.r1} {input.r2} 2>{log.bwaerr} | "
+> >  		"samtools sort -O bam -o {output} >{log.out} 2>{log.err}"
 > > ```
 > {: .solution}
 {: .hands_on}
 
-Notice how while updating data location, we only had to update the input and output boxes of the Snakefile, we didn't need to change any commands.
+Notice how while updating data location, we only had to update the input and output boxes of the Snakefile, we didn't need to change any commands because there we used `{input}` or `{output}` which are automatically templated for us. Except for the last command where we had to use a wildcard and manually construct the path to work around the issue of 'fake' inputs where the tool expected a filename that was the common subset of all of the files it would produce.
+
 
 ### Set a Default Task
 
 In the Makefile we had an `all` rule which was the first and default action to take. Let's reproduce that.
 
 > ### {% icon hands_on %} Hands-on: Add an all task
-> It should build `GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam`
+> It should build `alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam`
 >
 > > ### {% icon solution %} Solution
 > > We add this to the very top of our file.
@@ -843,7 +997,7 @@ In the Makefile we had an `all` rule which was the first and default action to t
 > > @@ -1,3 +1,7 @@
 > > +rule all:
 > > +	input:
-> > +		"GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam"
+> > +		"alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam"
 > > +
 > >  rule download:
 > >  	output:
@@ -868,73 +1022,94 @@ This is starting to look like a pretty good workflow! Let's preview how it will 
 > ```
 > Building DAG of jobs...
 > Job stats:
-> job            count    min threads    max threads
-> -----------  -------  -------------  -------------
-> align              1              1              1
-> all                1              1              1
-> download           1              1              1
-> indexgenome        1              1              1
-> trimmomatic        1              1              1
-> total              5              1              1
+> job                count    min threads    max threads
+> ---------------  -------  -------------  -------------
+> align                  1              1              1
+> all                    1              1              1
+> download               2              1              1
+> download_genome        1              1              1
+> indexgenome            1              1              1
+> trimmomatic            1              1              1
+> total                  7              1              1
 >
 >
-> [Fri Oct  1 13:27:48 2021]
+> [Fri Oct  8 16:59:39 2021]
 > rule download:
->     output: reads/SRR2584863_1.fastq.gz, reads/SRR2584863_2.fastq.gz
->     log: logs/fasterq.SRR2584863.out, logs/fasterq.SRR2584863.err
->     jobid: 3
->     wildcards: sample=SRR2584863
->     resources: tmpdir=/tmp
->
-> fasterq-dump --outdir reads --split-files SRR2584863 >logs/fasterq.SRR2584863.out 2>logs/fasterq.SRR2584863.err
->
-> [Fri Oct  1 13:27:48 2021]
-> rule indexgenome:
->     input: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz
->     output: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
->     log: logs/bwa.index.GCA_000017985.1_ASM1798v1_genomic.out, logs/bwa.index.GCA_000017985.1_ASM1798v1_genomic.err
+>     output: reads/SRR2584863_2.fq.gz
+>     log: logs/download.SRR2584863_2.out, logs/download.SRR2584863_2.err
 >     jobid: 4
->     wildcards: sample=GCA_000017985.1_ASM1798v1_genomic
+>     wildcards: sample=SRR2584863_2
 >     resources: tmpdir=/tmp
 >
-> bwa index reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz >logs/bwa.index.GCA_000017985.1_ASM1798v1_genomic.out 2>logs/bwa.index.GCA_000017985.1_ASM1798v1_genomic.err
+> wget http://localhost:8000/SRR2584863_2.fq.gz -O reads/SRR2584863_2.fq.gz >logs/download.SRR2584863_2.out 2>logs/download.SRR2584863_2.err
 >
-> [Fri Oct  1 13:27:48 2021]
+> [Fri Oct  8 16:59:39 2021]
+> rule download:
+>     output: reads/SRR2584863_1.fq.gz
+>     log: logs/download.SRR2584863_1.out, logs/download.SRR2584863_1.err
+>     jobid: 3
+>     wildcards: sample=SRR2584863_1
+>     resources: tmpdir=/tmp
+>
+> wget http://localhost:8000/SRR2584863_1.fq.gz -O reads/SRR2584863_1.fq.gz >logs/download.SRR2584863_1.out 2>logs/download.SRR2584863_1.err
+>
+> [Fri Oct  8 16:59:39 2021]
+> rule download_genome:
+>     output: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+>     log: logs/download.out, logs/download.err
+>     jobid: 6
+>     resources: tmpdir=/tmp
+>
+> wget http://localhost:8000/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz >logs/download.out 2>logs/download.err
+>
+> [Fri Oct  8 16:59:39 2021]
 > rule trimmomatic:
->     input: reads/SRR2584863_1.fastq.gz, reads/SRR2584863_2.fastq.gz
->     output: trim/SRR2584863_1.trim.fastq, trim/SRR2584863_2.trim.fastq, trim/SRR2584863_1un.trim.fastq, trim/SRR2584863_2un.trim.fastq
->     log: logs/trimmomatic.SRR2584863.log
+>     input: reads/SRR2584863_1.fq.gz, reads/SRR2584863_2.fq.gz
+>     output: trim/SRR2584863_1.trim.fq, trim/SRR2584863_2.trim.fq, trim/SRR2584863_1un.trim.fq, trim/SRR2584863_2un.trim.fq
+>     log: logs/trimmomatic.SRR2584863.out, logs/trimmomatic.SRR2584863.err
 >     jobid: 2
 >     wildcards: sample=SRR2584863
 >     resources: tmpdir=/tmp
 >
-> trimmomatic PE reads/SRR2584863_1.fastq.gz reads/SRR2584863_2.fastq.gz trim/SRR2584863_1.trim.fastq trim/SRR2584863_1un.trim.fastq trim/SRR2584863_2.trim.fastq trim/SRR2584863_2un.trim.fastq SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+> trimmomatic PE reads/SRR2584863_1.fq.gz reads/SRR2584863_2.fq.gz trim/SRR2584863_1.trim.fq trim/SRR2584863_1un.trim.fq trim/SRR2584863_2.trim.fq trim/SRR2584863_2un.trim.fq SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 >logs/trimmomatic.SRR2584863.out 2>logs/trimmomatic.SRR2584863.err
 >
-> [Fri Oct  1 13:27:48 2021]
+> [Fri Oct  8 16:59:39 2021]
+> rule indexgenome:
+>     input: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+>     output: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
+>     log: logs/bwa.index.out, logs/bwa.index.err
+>     jobid: 5
+>     resources: tmpdir=/tmp
+>
+> bwa index reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz >logs/bwa.index.out 2>logs/bwa.index.err
+>
+> [Fri Oct  8 16:59:39 2021]
 > rule align:
->     input: trim/SRR2584863_1.trim.fastq, trim/SRR2584863_2.trim.fastq, reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
->     output: GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam
+>     input: trim/SRR2584863_1.trim.fq, trim/SRR2584863_1.trim.fq, reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
+>     output: alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam
+>     log: logs/bwa.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err, logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.out, logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err
 >     jobid: 1
 >     wildcards: genome=GCA_000017985.1_ASM1798v1_genomic, sample=SRR2584863
 >     resources: tmpdir=/tmp
 >
-> bwa mem reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz trim/SRR2584863_1.trim.fastq trim/SRR2584863_2.trim.fastq | samtools sort -O bam -o GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam
+> bwa mem reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz trim/SRR2584863_1.trim.fq trim/SRR2584863_1.trim.fq 2>logs/bwa.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err | samtools sort -O bam -o alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam >logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.out 2>logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err
 >
-> [Fri Oct  1 13:27:48 2021]
+> [Fri Oct  8 16:59:39 2021]
 > localrule all:
->     input: GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam
+>     input: alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam
 >     jobid: 0
 >     resources: tmpdir=/tmp
 >
 > Job stats:
-> job            count    min threads    max threads
-> -----------  -------  -------------  -------------
-> align              1              1              1
-> all                1              1              1
-> download           1              1              1
-> indexgenome        1              1              1
-> trimmomatic        1              1              1
-> total              5              1              1
+> job                count    min threads    max threads
+> ---------------  -------  -------------  -------------
+> align                  1              1              1
+> all                    1              1              1
+> download               2              1              1
+> download_genome        1              1              1
+> indexgenome            1              1              1
+> trimmomatic            1              1              1
+> total                  7              1              1
 >
 > This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
 > ```
@@ -952,7 +1127,7 @@ Gosh that's a lot of output! Let's build the {DAG} to see a more concise represe
 > ![Image of the snakemake dag. Conspicuously missing is FastQC jobs!](../../images/snakemake.dag.svg)
 {: .code-out}
 
-But wait, where is FastQC? It's missing! Let's summarize the transition from a Makefile to a Snakemake file and then we'll cover the case of the missing FastQC.
+But wait, where is FastQC? It's missing! 😱 Let's summarize the transition from a Makefile to a Snakemake file and then we'll cover the case of the missing FastQC.
 
 ## Why Snakemake
 
@@ -1021,8 +1196,8 @@ We should use something exactly like this for our samples. We can have a `SAMPLE
 > > +
 > >  rule all:
 > >  	input:
-> > -		"GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam"
-> > +		expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+> > -		"alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam"
+> > +		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
 > >
 > >  rule download:
 > >  	output:
@@ -1031,7 +1206,7 @@ We should use something exactly like this for our samples. We can have a `SAMPLE
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Run the pipeline
-> Run `snakemake -c1 --use-conda`. Did it work?
+> Run `snakemake -c4 --use-conda`. Did it work?
 {: .hands_on}
 
 ### Adding all FastQC reports
@@ -1046,14 +1221,16 @@ Now that you've done one expand, let's do a more complicated one. The expand fun
 > > ```diff
 > > --- a/Snakefile
 > > +++ b/Snakefile
-> > @@ -3,6 +3,7 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
+> > @@ -2,7 +2,8 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
+> >
 > >  rule all:
-> >         input:
-> >                 expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
-> > +               expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> >  	input:
+> > -		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+> > +		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+> > +		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
 > >
 > >  rule download:
-> >         output:
+> >  	output:
 > > ```
 > >
 > > > ### {% icon tip %} Why not `_1.fastqc.html`?
@@ -1086,11 +1263,11 @@ This rule only knows how to input files from the `reads` directory. We have some
     >
     >  rule fastqc:
     >         input:
-    > -               "reads/{sample}.fq"
-    > +               "{folder}/{sample}.fq"
+    > -               "reads/{sample}.fq.gz"
+    > +               "{folder}/{sample}.fq.gz"
     >         output:
-    > -               "fastqc/{sample}.fastqc.html"
-    > +               "fastqc/{folder}-{sample}.fastqc.html"
+    > -               "fastqc/{sample}_fastqc.html"
+    > +               "fastqc/{folder}-{sample}_fastqc.html"
     >         conda:
     >                 "envs/fastqc.yaml"
     >         log:
@@ -1116,32 +1293,36 @@ So with that said, let's go with option three, duplicate our fastqc rule to have
 > > ```diff
 > > --- a/Snakefile
 > > +++ b/Snakefile
-> > @@ -4,6 +4,7 @@ rule all:
+> > @@ -3,7 +3,8 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
+> >  rule all:
 > >  	input:
-> >  		expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
-> >  		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> >  		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+> > -		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+> > +		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
 > > +		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
 > >
 > >  rule download:
 > >  	output:
-> > @@ -27,6 +28,19 @@ rule fastqc:
+> > @@ -36,6 +37,19 @@ rule fastqc:
 > >  	shell:
 > >  		"fastqc {input} --outdir fastqc/ >{log.out} 2>{log.err}"
 > >
-> > +rule fastqc_trimmed:
+> > +rule fastqc_trim:
 > > +	input:
-> > +		"trim/{sample}.fq"
+> > +		"reads/{sample}.fq.gz"
 > > +	output:
-> > +		"fastqc-trim/{sample}_fastqc.html"
+> > +		"fastqc/{sample}_fastqc.html"
 > > +	conda:
 > > +		"envs/fastqc.yaml"
 > > +	log:
 > > +		out="logs/fastqc.{sample}.out",
 > > +		err="logs/fastqc.{sample}.err"
 > > +	shell:
-> > +		"fastqc {input} --outdir fastqc-trim/ >{log.out} 2>{log.err}"
+> > +		"fastqc {input} --outdir fastqc/ >{log.out} 2>{log.err}"
 > > +
-> >
+> >  rule trimmomatic:
+> >  	input:
+> >  		r1="reads/{sample}_1.fq.gz",
 > > ```
 > >
 > {: .solution}
@@ -1149,16 +1330,266 @@ So with that said, let's go with option three, duplicate our fastqc rule to have
 
 Ok! That's hopefully went successfully. Run your pipeline to check.
 
-> ### {% icon hands_on %} Hands-on: Run the pipeline
-> Run `snakemake -c1 --use-conda`
+> ### {% icon hands_on %} Hands-on:
+>
+> 1. Dry-run snakemake
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > snakemake -np
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output
+>    > ```
+>    > Building DAG of jobs...
+>    > AmbiguousRuleException:
+>    > Rules fastqc_trim and fastqc are ambiguous for the file fastqc/SRR2584863_1_fastqc.html.
+>    > Consider starting rule output with a unique prefix, constrain your wildcards, or use the ruleorder directive.
+>    > Wildcards:
+>    > 	fastqc_trim: sample=SRR2584863_1
+>    > 	fastqc: sample=SRR2584863_1
+>    > Expected input files:
+>    > 	fastqc_trim: reads/SRR2584863_1.fq.gz
+>    > 	fastqc: reads/SRR2584863_1.fq.gz
+>    > Expected output files:
+>    > 	fastqc_trim: fastqc/SRR2584863_1_fastqc.html
+>    > 	fastqc: fastqc/SRR2584863_1_fastqc.html
+>    > ```
+>    {: .code-in}
+>
+> 2. Uhoh! There was an error. If we read the error message we see **Rules fastqc_trim and fastqc are ambiguous for the file fastqc/SRR2584863_1_fastq**, because both rules produce the same file. We should rename the folder, `fastqc-trimmed`.
+>
+>    ```diff
+>    --- a/Snakefile
+>    +++ b/Snakefile
+>    @@ -28,7 +28,7 @@ rule fastqc:
+>     	input:
+>     		"reads/{sample}.fq.gz"
+>     	output:
+>    -		"fastqc/{sample}_fastqc.html"
+>    +		"fastqc-trim/{sample}_fastqc.html"
+>     	conda:
+>     		"envs/fastqc.yaml"
+>     	log:
+>    ```
+>
+> 3. Re-run the dry-run.
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > snakemake -np
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > ...
+>    > Job stats:
+>    > job         count    min threads    max threads
+>    > --------  -------  -------------  -------------
+>    > all             1              1              1
+>    > download        4              1              1
+>    > fastqc          8              1              1
+>    > total          13              1              1
+>    >
+>    > This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+>    > ```
+>    {: .code-in}
+>
+> 4. That looks good!
 {: .hands_on}
+
+Now that we've got a pipeline successfully completing the dry-run, let's try it again.
+
+> ### {% icon hands_on %} Hands-on: Run the pipeline!
+> 4. Run the pipeline
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > snakemake --use-conda -c4
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > Error in rule download:
+>    > Removing output files of failed job download since they might be corrupted:
+>    > reads/SRR2584863_2un.fq.gz
+>    >     jobid: 24
+>    >     output: reads/SRR2589044_1un.fq.gz
+>    >     log: logs/download.SRR2589044_1un.out, logs/download.SRR2589044_1un.err (check log file(s) for error message)
+>    >     shell:
+>    >         wget http://localhost:8000/SRR2589044_1un.fq.gz -O reads/SRR2589044_1un.fq.gz >logs/download.SRR2589044_1un.out 2>logs/download.SRR2589044_1un.err
+>    >         (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+>    >
+>    > Removing output files of failed job download since they might be corrupted:
+>    > reads/SRR2589044_1un.fq.gz
+>    > [Fri Oct  8 17:15:46 2021]
+>    > Error in rule download:
+>    >     jobid: 26
+>    >     output: reads/SRR2589044_2un.fq.gz
+>    >     log: logs/download.SRR2589044_2un.out, logs/download.SRR2589044_2un.err (check log file(s) for error message)
+>    >     shell:
+>    >         wget http://localhost:8000/SRR2589044_2un.fq.gz -O reads/SRR2589044_2un.fq.gz >logs/download.SRR2589044_2un.out 2>logs/download.SRR2589044_2un.err
+>    >         (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+>    >
+>    > Removing output files of failed job download since they might be corrupted:
+>    > reads/SRR2589044_2un.fq.gz
+>    > Waiting at most 5 seconds for missing files.
+>    > MissingOutputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
+>    > Job Missing files after 5 seconds:
+>    > fastqc-trim/SRR2589044_1_fastqc.html
+>    > This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+>    > Job id: 21 completed successfully, but some output files are missing. 21
+>    > ```
+>    {: .code-in}
+>
+> 2. Now it is complaining that it cannot download the requested files, we didn't even want to download new read files, we should have used the files from the `trimmed` folder. Let's fix our rule again.
+>
+>    ```diff
+>    --- a/Snakefile
+>    +++ b/Snakefile
+>    @@ -26,7 +26,7 @@ rule download_genome:
+>
+>     rule fastqc:
+>     	input:
+>    -		"reads/{sample}.fq.gz"
+>    +		"trim/{sample}.fq.gz"
+>     	output:
+>     		"fastqc-trim/{sample}_fastqc.html"
+>     	conda:
+>    ```
+>
+> 3. And dry-run
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > snakemake -np
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > Building DAG of jobs...
+>    > MissingInputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
+>    > Missing input files for rule fastqc:
+>    > trim/SRR2584863_1.fq.gz
+>    > ```
+>    {: .code-out}
+>
+> 4. Ok, now it says it can't find the input file. The `.gz` suffix wasn't part of the `trim` output filenames, and if we look there they all have `.trim.fq` as the suffix. Let's use that.
+>
+>    ```diff
+>    --- a/Snakefile
+>    +++ b/Snakefile
+>    @@ -26,7 +26,7 @@ rule download_genome:
+>
+>     rule fastqc:
+>     	input:
+>    -		"trim/{sample}.fq.gz"
+>    +		"trim/{sample}.trim.fq"
+>     	output:
+>     		"fastqc-trim/{sample}_fastqc.html"
+>     	conda:
+>    ```
+>
+> 5. And finally? Success?
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > snakemake --use-conda -c4
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    >    raise IOError(
+>    >OSError: Missing files after 5 seconds:
+>    >fastqc-trim/SRR2589044_1_fastqc.html
+>    >
+>    >During handling of the above exception, another exception occurred:
+>    >
+>    >Traceback (most recent call last):
+>    >  File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/scheduler.py", line 529, in _finish_jobs
+>    >    self.get_executor(job).handle_job_success(job)
+>    >  File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 608, in handle_job_success
+>    >    super().handle_job_success(job)
+>    >  File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 265, in handle_job_success
+>    >    job.postprocess(
+>    >  File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/jobs.py", line 1011, in postprocess
+>    >    self.dag.check_and_touch_output(
+>    >  File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/dag.py", line 500, in check_and_touch_output
+>    >    raise MissingOutputException(
+>    >snakemake.exceptions.MissingOutputException: Job Missing files after 5 seconds:
+>    >fastqc-trim/SRR2589044_1_fastqc.html
+>    >This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+>    >Job id: 19 completed successfully, but some output files are missing. 19
+>    > ```
+>    {: .code-out}
+>
+>    Shoot! No, ok. If we read this message it says **Job Missing files after 5 seconds** which means it couldn't find the file. Specifically it tells us it is missing `fastqc-trim/SRR2589044_1_fastqc.html` and that makes sense, since all of our output fastqc reports had the full input name, so those should have `trim` in them too.
+>
+>    > ### {% icon tip %} Tip: Filesystem Latency?
+>    > On servers with shared directories using Network File Systems, it can happen that when you run a job on one machine, it may take time for the files to be visible on other machines, it isn't instantaneous. In our case this is **not** the issue.
+>    {: .tip}
+>
+> 5. Let's see what files are available, so we know how to fix the command.
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > ls fastqc-trim
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} CLI
+>    > ```
+>    > SRR2584863_1.trim_fastqc.html    SRR2584863_2.trim_fastqc.html
+>    > SRR2589044_1.trim_fastqc.html    SRR2589044_2.trim_fastqc.html
+>    > SRR2584863_1.trim_fastqc.zip     SRR2584863_2.trim_fastqc.zip
+>    > SRR2589044_1.trim_fastqc.zip     SRR2589044_2.trim_fastqc.zip
+>    > SRR2584863_1un.trim_fastqc.html  SRR2584863_2un.trim_fastqc.html
+>    > SRR2589044_1un.trim_fastqc.html  SRR2589044_2un.trim_fastqc.html
+>    > SRR2584863_1un.trim_fastqc.zip   SRR2584863_2un.trim_fastqc.zip
+>    > SRR2589044_1un.trim_fastqc.zip   SRR2589044_2un.trim_fastqc.zip
+>    > ```
+>    {: .code-out}
+>
+> 6. So we need to adjust our `all` rule where we requested the files with the wrong names.
+>
+>    ```diff
+>    --- a/Snakefile
+>    +++ b/Snakefile
+>    @@ -4,7 +4,7 @@ rule all:
+>     	input:
+>     		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+>     		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
+>    -		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
+>    +		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.html", "_2.trim_fastqc.html", "_1un.trim_fastqc.html", "_2un.trim_fastqc.html"])
+>
+>     rule download:
+>     	output:
+>    ```
+>
+> 7. Maybe it works now? Yes! Huzzah!
+>
+>    ```
+>    [Fri Oct  8 17:25:41 2021]
+>    Finished job 0.
+>    15 of 15 steps (100%) done
+>    Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snakemake.log
+>    ```
+>
+{: .hands_on}
+
+This interactive debugging of your pipeline is **very common**, if you need to write a pipeline expect to go through a development cycle like this, where you make a change or write a rule, dry-run, and run, and find errors that you need to fix.
+
+This is why we always work with test datasets to confirm our pipeline works first, and then we scale up to big data.
 
 ### MultiQC
 
 As a last step, we'll summarize all of the FastQC files. With all of the expands at the top, we're now receiving 4 trimmed FastQC reports plus 2 untrimmed FastQC reports per sample which is a lot of data to go through! So we can use MultiQC to aggregate all of these files and generate a single summary file which makes analysis much easier.
 
 > ### {% icon hands_on %} Hands-on: Add the MultiQC step
-> The command we need to run is: `multiqc *fastqc.zip`. You cannot use wildcards like that in Snakemake, so write this out as a proper rule.
+> The command we need to run is: `multiqc --outdir multiqc *fastqc.zip`. You cannot use wildcards like that in Snakemake, so write this out as a proper rule that accepts all of the same inputs as you used in the `rule all`. It outputs a file named `multiqc/multiqc_report.html` (set by the `--outdir` flag)
 >
 > > ### {% icon solution %} Solution
 > > You'll notice that we now need to replace our `.html` outputs from the FastQC rules with the `.zip` outputs which we need instead. We didn't have to update the command line, because the output file name was thankfully not part of it.
@@ -1166,39 +1597,37 @@ As a last step, we'll summarize all of the FastQC files. With all of the expands
 > > ```diff
 > > --- a/Snakefile
 > > +++ b/Snakefile
-> > @@ -2,9 +2,8 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
-> >
+> > @@ -3,8 +3,7 @@ SAMPLES = ['SRR2584863', 'SRR2589044']
 > >  rule all:
 > >  	input:
-> > -		expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
-> > -		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
-> > -		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
-> > +		expand("GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+> >  		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+> > -		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
+> > -		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.html", "_2.trim_fastqc.html", "_1un.trim_fastqc.html", "_2un.trim_fastqc.html"])
 > > +		"multiqc/multiqc_report.html"
 > >
 > >  rule download:
 > >  	output:
-> > @@ -19,7 +18,7 @@ rule fastqc:
+> > @@ -28,7 +27,7 @@ rule fastqc:
 > >  	input:
-> >  		"reads/{sample}.fq"
+> >  		"trim/{sample}.trim.fq"
 > >  	output:
-> > -		"fastqc/{sample}.fastqc.html"
-> > +		"fastqc/{sample}_fastqc.zip"
-> >  	conda:
-> >  		"envs/fastqc.yaml"
-> >  	log:
-> > @@ -32,7 +31,7 @@ rule fastqc_trimmed:
-> >  	input:
-> >  		"trim/{sample}.fq"
-> >  	output:
-> > -		"fastqc-trim/{sample}.fastqc.html"
+> > -		"fastqc-trim/{sample}_fastqc.html"
 > > +		"fastqc-trim/{sample}_fastqc.zip"
 > >  	conda:
 > >  		"envs/fastqc.yaml"
 > >  	log:
-> > @@ -41,6 +40,20 @@ rule fastqc_trimmed:
+> > @@ -41,7 +40,7 @@ rule fastqc_trim:
+> >  	input:
+> >  		"reads/{sample}.fq.gz"
+> >  	output:
+> > -		"fastqc/{sample}_fastqc.html"
+> > +		"fastqc/{sample}_fastqc.zip"
+> >  	conda:
+> >  		"envs/fastqc.yaml"
+> >  	log:
+> > @@ -50,6 +49,21 @@ rule fastqc_trim:
 > >  	shell:
-> >  		"fastqc {input} --outdir fastqc-trim/ >{log.out} 2>{log.err}"
+> >  		"fastqc {input} --outdir fastqc/ >{log.out} 2>{log.err}"
 > >
 > > +rule multiqc:
 > > +	input:
@@ -1214,9 +1643,21 @@ As a last step, we'll summarize all of the FastQC files. With all of the expands
 > > +	shell:
 > > +		"multiqc --outdir multiqc {input} >{log.out} 2>{log.err}"
 > > +
+> > +
 > >  rule trimmomatic:
 > >  	input:
-> >  		r1="reads/{sample}_1.fq",
+> >  		r1="reads/{sample}_1.fq.gz",
+> > ```
+> >
+> > And your new `envs/multiqc.yaml` should look like this:
+> >
+> > ```yaml
+> > channels:
+> >   - conda-forge
+> >   - bioconda
+> >   - defaults
+> > dependencies:
+> >    -multiqc=1.11
 > > ```
 > {: .solution}
 {: .hands_on}
@@ -1224,7 +1665,7 @@ As a last step, we'll summarize all of the FastQC files. With all of the expands
 And with that, you should have a working pipeline! Test it out.
 
 > ### {% icon hands_on %} Hands-on: Run the pipeline
-> Run `snakemake -c1 --use-conda`
+> Run `snakemake -c4 --use-conda`
 {: .hands_on}
 
 Let's check our {DAG} again
