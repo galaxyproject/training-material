@@ -1867,3 +1867,6 @@ without thinking about them.'
 > {: .solution}
 {: .question}
 
+# Final Notes
+
+All of the commands you have run up until now were ad-hoc, interactive commands.

@@ -4,22 +4,30 @@ layout: tutorial_hands_on
 title: Make & Snakemake
 level: Intermediate
 zenodo_link: ""
-requirements: []
+requirements:
+- type: "internal"
+  topic_name: data-science
+  tutorials:
+      - cli-basics
+      - cli-advanced
 follow_up_training: []
 
 questions:
-- What is Make and Snakemake
-- What is a Makefile and a Snakefile
-- How do these relate
+- What is Make & Snakemake
+- What is a Makefile/Snakefile
+- How do these improve pipelines over simple scripts?
 - Why is Snakemake better for scientific research and how can I use it
+- How do I use conda envs with Snakemake?
 objectives:
-- Write a snakefile that does some simple computations
+- Write a snakefile that does a simple QC and Mapping workflow
 time_estimation: 3H
 key_points:
 - Make and Snakemake are ways to write pipelines in a declarative format
 - Instead of writing individual actions you wish to take, you describe how to produce each file you need, and the system executes those steps only if they're needed
-- These systems can significantly speed up your pipelines by providing automatic detection of inputs, and not re-creating them if they don't need
-- These systems both also provide very easy access to paralellisation without complexity.
+- If you're doing scientific research you should use Snakemake
+- Snakemake can significantly speed up your command line pipelines by providing automatic detection of inputs, and not re-creating them if they don't need
+- Snakemake also provides very easy access to paralellisation without complexity.
+- But it is more complex than using Galaxy
 subtopic: sciwms
 contributors:
   - hexylena
@@ -30,6 +38,8 @@ abbreviations:
 ---
 
 Here you will learn to write both Make and Snakemake workflows. We teach two workflow engines because Snakemake uses a lot of the concepts of Make, and these concepts are somewhat complex and a very different way of thinking than you might be used to with workflow design.
+
+This tutorial is aimed at students and Galaxy community members who might want to convert Snakemake workflows into Galaxy workflows, but need to understand how Snakemake workflows work.
 
 > ### Agenda
 >
@@ -1230,8 +1240,27 @@ Let's check our {DAG} again
 {: .code-out}
 
 
-## Conclusion
+# Conclusion
 
 With this you've made a real pipeline in Snakemake and hopefully learned a bit about how to manage jobs on the command line. If you're going to work at the command line to do your bioinformatics or other analyses, this (or another {SciWMS}) is the way to do it! They all have pros and cons which you should evaluate.
 
 But for those of you who have done Galaxy work before, you'll notice there is a **lot** of overhead, things you need to take care of yourself. Is the program installed, are the dependencies correct, how many cores would you like this job to use, what is precisely the command line you would like to run. How would you like to batch your data, by sample? By another method? And this is one of the major benefits of using a system like Galaxy, it abstracts away all of the command line, all of the resource management for you. Our administrators check things like how much memory each step should have, or how many cores, the tool developers work to make sure the interface has all of the options that are available on the command line. You get less control over your data and the processes, but in exchange you don't need to worry about these intricate details of low level bioinformatics.
+
+Let's do a final comparison table for the systems, and since this is the Galaxy Training Network we'll include Galaxy in the comparison. Here we categorise features as 'manual' if you can accomplish those features with manual work, 'automatic' if they're built in parts of the system, `none` if the concept doesn't really apply
+
+
+Aspect | Bash | Make | Snakemake | Galaxy
+--- |--- | --- | --- | ---
+Language style | Line-by-line | Custom Generic Rules | Custom Generic Rules | Pre-built rules via Galaxy Tools
+Partial re-run | Manual | Manual | Automatic | Automatic (but requires a user preference.)
+How it is invoked | `bash script.sh` | `make` | `snakemake` | Clicking 'execute'
+Running with different data? | Manual | Automatic | Automatic | Automatic
+Paralellisation? | Manual | Automatic | Automatic | Automatic
+Memory / CPU core Management | Manual | Manual | Manual | Autoamtic
+Filename | `*.sh` | `Makefile` | `Snakefile` or `*.snk` | Workflows stored in website, downloadable as `.ga` files.
+Dependencies | None | None+Difficult | Conda is integrated | Automatic, done by tool devs for you.
+Multiple output files per step | n/a | Complicated | Yes! | Automatic, done by tool devs for you.
+Cluster/HPC Friendliness | None | None | Yes, but manual | Automatic, handled by Galaxy Admins
+Installation/Maintenance | None | None | None | Requires regular updates and management.
+
+The author's biases are probably quite clear in the above table, and you can find an alternative viewpoint from Snakemake's documentation, but it comes down to different audiences. If you care how many CPU cores a job receives and need precise control over the command line, or can't/don't want to deploy Galaxy and just want a quick command line tool.
