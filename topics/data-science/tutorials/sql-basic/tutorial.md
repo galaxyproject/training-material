@@ -54,6 +54,8 @@ key_points:
 contributors:
 - carpentries
 - hexylena
+- Dirowa 
+- Bazante1
 
 subtopic: sql
 
@@ -229,7 +231,7 @@ capitalization.  One convention is to use UPPER CASE for SQL
 statements, to distinguish them from tables and column names. This is
 the convention that we will use for this lesson.
 
-> ### {% icon question %} Is a personal and family name column a good design?
+> ### {% icon question %} Question: Is a personal and family name column a good design?
 > If you were tasked with designing a database to store this same data, is storing the name data in
 > this way the best way to do it? Why or why not?
 >
@@ -297,7 +299,7 @@ we can select all of the columns in a table using `*`:
 SELECT * FROM Person;
 ```
 
-> ### {% icon question %} Selecting Site Names
+> ### {% icon question %} Question: Selecting Site Names
 >
 > Write a query that selects only the `name` column from the `Site` table.
 >
@@ -315,7 +317,7 @@ SELECT * FROM Person;
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Query Style
+> ### {% icon question %} Question: Query Style
 >
 > Many people format queries as:
 >
@@ -442,7 +444,7 @@ removing duplicates.
 SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 ```
 
-> ### {% icon question %} Finding Distinct Dates
+> ### {% icon question %} Question: Finding Distinct Dates
 >
 > Write a query that selects distinct dates from the `Visited` table.
 >
@@ -465,7 +467,7 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Displaying Full Names
+> ### {% icon question %} Question: Displaying Full Names
 >
 > Write a query that displays the full names of the scientists in the `Person` table,
 > ordered by family name.
@@ -645,7 +647,8 @@ We can also filter by partial matches.  For example, if we want to
 know something just about the site names beginning with "DR" we can
 use the `LIKE` keyword.  The percent symbol acts as a
 wildcard, matching any characters in that
-place.  It can be used at the beginning, middle, or end of the string:
+place.  It can be used at the beginning, middle, or end of the string
+Click [Here](https://www.w3schools.com/sql/sql_wildcards.asp) for more information about wildcards:
 
 ```sql
 SELECT * FROM Visited WHERE site LIKE 'DR%';
@@ -686,7 +689,7 @@ not to the entire rows as they are being processed.
 > and use that.
 {: .tip}
 
-> ### {% icon question %} Fix This Query
+> ### {% icon question %} Question: Fix This Query
 >
 > Suppose we want to select all sites that lie within 48 degrees of the equator.
 > Our first query is:
@@ -710,7 +713,7 @@ not to the entire rows as they are being processed.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Finding Outliers
+> ### {% icon question %} Question: Finding Outliers
 >
 > Normalized salinity readings are supposed to be between 0.0 and 1.0.
 > Write a query that selects all records from `Survey`
@@ -729,7 +732,7 @@ not to the entire rows as they are being processed.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Matching Patterns
+> ### {% icon question %} Question:  Matching Patterns
 >
 > Which of these expressions are true?
 >
@@ -810,7 +813,7 @@ SELECT personal || ' ' || family FROM Person;
 But of course that can also be solved by simply having a single name field which avoids other
 issues.
 
-> ### {% icon question %} Fixing Salinity Readings
+> ### {% icon question %} Question:  Fixing Salinity Readings
 >
 > After further reading,
 > we realize that Valentina Roerich
@@ -1030,7 +1033,7 @@ for example, unknown values are thus not affecting our data when we
 are averaging it. Aggregation functions will be addressed in more
 detail in [the next section](#).
 
-> ### {% icon question %} Sorting by Known Date
+> ### {% icon question %} Question: Sorting by Known Date
 >
 > Write a query that sorts the records in `Visited` by date,
 > omitting entries for which the date is not known
@@ -1084,7 +1087,7 @@ detail in [the next section](#).
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Pros and Cons of Sentinels
+> ### {% icon question %} Question: Pros and Cons of Sentinels
 >
 > Some database designers prefer to use
 > a sentinel value
