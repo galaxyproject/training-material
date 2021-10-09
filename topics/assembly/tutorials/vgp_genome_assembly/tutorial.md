@@ -442,7 +442,7 @@ Hifiasm generates four outputs in GFA format; this format is specially designed 
 
 We have obtained the fully phased contig graphs of the primary and alternate haplotypes, but the output format of **hifiasm** is not adequate for the subsequent steps, so we will convert them into fasta format.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: convert GFA to FASTA
 >
 > 1. {% tool [GFA to FASTA](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
 >    - {% icon param-files %} *"Input GFA file"*: select `Primary contig graph` and the `Alternate contig graph` datasets (output of **Hifiasm** {% icon tool %})
@@ -451,17 +451,20 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 >
 {: .hands_on}
 
-# Identify and remove haplotypic duplication
+# Post-assembly processing
 
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes (haplotype contigs), as well as all hemizygous regions from both haplomes. However, the allelic relationship between haplotypes still present a problem for *de novo* genome assembly, specially in high heterozygous genomes; sequence divergence between pair of allelic sequences can lead to assemble there regions as separate contigs, rather than the expected single haplotype-fused contig. It can result in assemblies signicantly larger than the haploid genome size, which can lead to interferences in downstream stages, such as scaffolding and gene annotation ({% cite Guan2019 %}, {% cite Roach2018 %}). 
 
 Usually, allelic relationships are inferred at the post-assembly stage. Despite the haplotig processing requites multiple steps, the approach used in this tutorial can be summaryzed in two steps: firstly we will identify the syntenic contigs by using the mapped read coverage and **minimap2** ({% cite Li2018 %}) alignments. Then, we will resolve the haplotigs and overlaps in the primary assembly by using **purge_dups**.
 
-## Estimate the coverage cutoff
+## Remove haplotypic duplication with **purge_dups**
 
-The first step is to use **minimap2** to map long read sequencing data onto the assembly and collect read depth at each base position in the assembly.
+This step includes 11 steps, summarized in the following scheme:
 
-> ### {% icon hands_on %} Hands-on: Mapping with minimap2
+![fig4:Post-processing step](../../images/vgp_assembly/purge_dupspipeline.png "Purge_dups pipeline")
+
+
+> ### {% icon hands_on %} Hands-on: purge_dups pipeline
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*:`HiFi_collection (trim)`
@@ -470,30 +473,61 @@ The first step is to use **minimap2** to map long read sequencing data onto the 
 >
 > 3. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Primary contig FASTA` (output of **GFA to FASTA** {% icon tool %})
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Primary contig FASTA`
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-collection %} *"Select fastq dataset"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
 >        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
 >    - In *"Set advanced output options"*:
 >        - *"Select an output format"*: `paf`
 >
-> 4. Rename the output as `Read mapped to contigs`
+> 4. Rename the output as `Reads mapped to contigs`
 > 
-> 5. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+> 5. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `Calculate coverage cutoff and create read depth histogram and base-levelread depth for PacBio data (calcuts+pbcstats)`
->        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
+>        - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
 >        - In *"Calcuts options"*:
->            - *"Upper bound for read depth"*: `63` (the previously estimad maximum depth)
+>            - *"Upper bound for read depth"*: `63` (the previously estimated maximum depth)
 >            - *"Ploidity"*: `Haploid`
 >
 >    > ### {% icon comment %} Comment
 >    >
 >    > In the case you are working with a diploid orgasm, you should select `diploid` in the ploidity option.
+>    > It will generate three outputs: the base-level coverage file (PBCSTAT base coverage), the cutoff file (calcuts cutoff) and a histogram plot.
 >    {: .comment}
+>
+> 6. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `split FASTA file by 'N's (split_fa)`
+>        - {% icon param-file %} *"Base-level coverage file"*: `Primary contig FASTA`
+>
+> 7. Rename the output as `Split FASTA`
+>
+> 8. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA`
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-collection %} *"Select fastq dataset"*: `Split FASTA`
+>        - *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
+>    - In *"Set advanced output options"*:
+>        - *"Select an output format"*: `PAF`
+> 
+> 9. Rename the output as `Self-homology map`
+>
+> 10. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
+>        - {% icon param-file %} *"PAF input file"*: `Self-homology map`
+>        - {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage` (output of the fifth step)
+>        - {% icon param-file %} *"Cutoffs file"*: `calcuts cutoff` (output of the fifth step)
+>
+> 11. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
+>        - {% icon param-file %} *"Assembly FASTA file"*: `Primary contig FASTA`
+>        - {% icon param-file %} *"BED input file"*: `purge_dups BED` (output of the previous step)
 >
 >
 {: .hands_on}
 
+
+----
 
 <!--
 
@@ -536,28 +570,6 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 
 
-## Sub-step with **Map with minimap2**
-
-
-
-## Sub-step with **Purge overlaps**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `split FASTA file by 'N's`
->        - {% icon param-file %} *"Base-level coverage file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 
 
@@ -607,48 +619,6 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 {: .hands_on}
 
 
-## Sub-step with **Purge overlaps**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy0) %} with the following parameters:
->    - *"Select the purge_dups function"*: `purge haplotigs and overlaps for an assembly`
->        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
->        - {% icon param-file %} *"Base-level coverage file"*: `pbcstat_cov` (output of **Purge overlaps** {% icon tool %})
->        - {% icon param-file %} *"Cutoffs file"*: `calcuts_tab` (output of **Purge overlaps** {% icon tool %})
->        - *"Rounds of chaining"*: `1 round`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-
-## Sub-step with **Purge overlaps**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `obtain seqeuences after purging`
->        - {% icon param-file %} *"Fasta input file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->        - {% icon param-file %} *"Bed input file"*: `purge_dups_bed` (output of **Purge haplotigs** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 ## Sub-step with **Purge overlaps**
 
@@ -845,7 +815,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
 >        - {% icon param-file %} *"PAF input file"*: `alignment_output` (output of **Map with minimap2** {% icon tool %})
 >        - {% icon param-file %} *"Base-level coverage file"*: `pbcstat_cov` (output of **Purge overlaps** {% icon tool %})
->        - {% icon param-file %} *"Cutoffs file"*: `calcuts_tab` (output of **Purge overlaps** {% icon tool %})
+>        - {% icon param-file %} *"Cutoffs file"*: `calcuts_cutoff` (output of **Purge overlaps** {% icon tool %})
 >        - *"Rounds of chaining"*: `1 round`
 >
 >    ***TODO***: *Check parameter descriptions*
