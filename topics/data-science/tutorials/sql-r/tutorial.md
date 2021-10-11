@@ -5,7 +5,7 @@ level: Intermediate
 zenodo_link:
 requirements:
 - type: "internal"
-  topic_name: introduction
+  topic_name: data-science
   tutorials:
       - r-basics
       - r-advanced
