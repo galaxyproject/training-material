@@ -28,7 +28,8 @@ new_tutorial_name = {
     'Workflows: Extracting Workflows from Histories': 'Extracting Workflows from Histories',
     'Workflows: Using Workflow Parameters': 'Using Workflow Parameters',
     'Exome sequencing data analysis': 'Exome sequencing data analysis for diagnosing a genetic disease',
-    'Galaxy Tool Management': 'Galaxy Tool Management with Ephemeris'
+    'Galaxy Tool Management': 'Galaxy Tool Management with Ephemeris',
+    'Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring': 'Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring'
 }
 new_topic_for_tuto = {
     'Formation of the Super-Structures on the Inactive X': 'Epigenetics',
@@ -45,10 +46,34 @@ new_topics = {
     'Assembly) is not working I can do up to multiQC and after unicycler not working': 'Assembly'
 }
 
+acceptable_topics = [
+    "Assembly",
+    "Climate",
+    "Computational chemistry",
+    "Contributing to the Galaxy Training Material",
+    "Development in Galaxy",
+    "Ecology",
+    "Epigenetics",
+    "Galaxy Server administration",
+    "Genome Annotation",
+    "Imaging",
+    "Introduction to Galaxy Analyses",
+    "Metabolomics",
+    "Metagenomics",
+    "Proteomics",
+    "Sequence analysis",
+    "Statistics and machine learning",
+    "Teaching and Hosting Galaxy training",
+    "Transcriptomics",
+    "Using Galaxy and Managing your Data",
+    "Variant Analysis",
+    "Visualisation"
+]
+
 def extract_tutorial_feedbacks(topic_df, topic_name):
-    '''Extract pro/con per tutorial for a topic and 
+    '''Extract pro/con per tutorial for a topic and
     write them in a file
-    
+
     :topic_df: dataframe object for the topic
     :topic_name: name for the topic, name for the file
     '''
@@ -79,7 +104,7 @@ def extract_tutorial_feedbacks(topic_df, topic_name):
 def fix_tutorial_info(df):
     '''Change tutorial topic or title
 
-    :param df: dataframe    
+    :param df: dataframe
     '''
     df = df.copy()
     # change topic for some tutorials
@@ -130,7 +155,7 @@ def prepare_feedback(url, out_file):
         .fillna(value={'note': 0})
         # fill other NaN by empty string
         .fillna('')
-        # format 
+        # format
         .assign(
             #note to integer
             note=lambda x: x['note'].astype(int),
@@ -146,13 +171,15 @@ def prepare_feedback(url, out_file):
         .pipe(fix_tutorial_info)
         # remove extra columns
         .drop(columns=["tutorial_topic", "timestamp"])
-        # remove some rows 
+        # remove some rows
         .query('topic != "TESTIN"')
         .query('topic != "tes"')
         .query('topic != ""')
         # remove tutorials
         .query('tutorial != "RNA-seq counts to genes and pathways"')
         .query('tutorial != "Recording Job Metrics"')
+        # Remove non-existent topics
+        .query("topic in @acceptable_topics")
         #
         .query('pro != "TESTING"')
         .to_csv(out_file))

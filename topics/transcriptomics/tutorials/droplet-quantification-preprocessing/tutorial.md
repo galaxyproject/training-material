@@ -26,6 +26,7 @@ tags:
   - single-cell
   - 10x
   - paper-replication
+  - español
 
 contributors:
   - nomadscientist
@@ -37,6 +38,9 @@ requirements:
     tutorials:
         - scrna-intro
         - scrna-umis
+
+translations:
+  - es
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -668,7 +672,7 @@ That was so fun, let's do it all again but for genotype!
 > 3. Rename {% icon galaxy-pencil %} output `Genotype metadata`
 {: .hands_on}
 
-You might want to do this with all sorts of different metadata - which labs handled the samples, which days they were run, etc. Once you've added created all your metadata columns, we can add them together before plugging them into the AnnData object itself.
+You might want to do this with all sorts of different metadata - which labs handled the samples, which days they were run, etc. Once you've added all your metadata columns, we can add them together before plugging them into the AnnData object itself.
 
 > ### {% icon hands_on %} Hands-on: Combining metadata columns
 >

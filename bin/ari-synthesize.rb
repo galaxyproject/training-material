@@ -103,7 +103,7 @@ end
 
 def synthesize(uncorrected_line, engine, voice: "Amy", lang: "en-GB", neural: true)
   line = correct(uncorrected_line)
-  digest = Digest::MD5.hexdigest uncorrected_line
+  digest = Digest::MD5.hexdigest line
   mp3 = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.mp3")
   json = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.json")
   if File.file?(mp3)

@@ -29,9 +29,12 @@ tags:
 - single-cell
 - 10x
 - paper-replication
+- interactive-tools
+- español
 contributors:
 - nomadscientist
-
+translations:
+  - es
 ---
 
 

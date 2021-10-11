@@ -6,7 +6,6 @@ box_type: tip
 layout: faq
 ---
 
-
 Click the {% icon new-history %} icon at the top of the history panel.
 
 If the {% icon new-history %} is missing:

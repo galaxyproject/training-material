@@ -10,9 +10,10 @@ layout: base_slides
         {% assign title = tutorial.title %}
     {% endif %}
 {% endfor %}
+{% assign locale = site.data.lang[page.lang] %}
 
 {% if page.questions %}
-### {% icon question %} Questions
+### {% icon question %} {{ locale['questions'] | default: "Questions" }}
 
 {% for question in page.questions %}
 - {{ question }}
@@ -22,7 +23,7 @@ layout: base_slides
 {% endif %}
 
 {% if page.objectives %}
-### {% icon objectives %} Objectives
+### {% icon objectives %} {{ locale['objectives'] | default: "Objectives" }}
 
 {% for objective in page.objectives %}
 - {{ objective }}
@@ -36,7 +37,7 @@ layout: base_slides
 
 {% if page.key_points %}
 ---
-### {% icon keypoints %} Key points
+### {% icon keypoints %} {{ locale['key-points'] | default: "Key points" }}
 
 {% for key_point in page.key_points %}
 - {{ key_point }}

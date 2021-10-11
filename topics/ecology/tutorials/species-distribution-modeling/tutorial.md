@@ -11,6 +11,8 @@ objectives:
     - "Model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM"
 requirements:
 time_estimation: "1h"
+tags:
+    - interactive-tools
 key_points:
     - "Use 'classical' Galaxy tools in combination with Interactive tools"
     - "Identify general steps of a species distribution modeling aproach"

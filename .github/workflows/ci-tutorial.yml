@@ -1,5 +1,9 @@
 name: Lint Tutorials
 
+concurrency:
+  group: ci-tutorial-${{ github.head_ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
     paths:

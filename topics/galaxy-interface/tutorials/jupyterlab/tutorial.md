@@ -18,6 +18,8 @@ objectives:
 - "Use put() to export datasets from the notebook to your history"
 - "Save your notebook into your history"
 time_estimation: 1H
+tags:
+  - interactive-tools
 key_points:
 - How to work with JupyterLab interactively within Galaxy
 contributors:

@@ -16,6 +16,8 @@ time_estimation: 1H
 key_points:
 - Inspect and view netCDF data with netCDF
 - Interact with Galaxy to save your plots
+tags:
+- interactive-tools
 contributors:
 - annefou
 

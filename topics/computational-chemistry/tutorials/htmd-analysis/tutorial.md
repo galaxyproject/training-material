@@ -64,7 +64,7 @@ As a first step, we create a new Galaxy history and then we download a crystal s
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Search Galaxy for the 'Get PDB' tool. Request the accession code ```6hhr```.
+> 2. Search Galaxy for the {% tool [Get PDB](toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0) %} tool. Request the accession code ```6hhr```.
 > 3. Rename the dataset to 'Hsp90 structure'
 > 4. Check that the datatype is correct (PDB file).
 >
@@ -102,12 +102,12 @@ Parameterization needs to be done separately for the ligand and protein. Therefo
 
 > ### {% icon hands_on %} Hands-on: Separate protein and ligand coordinates
 >
-> 1. **Search in textfiles** {% icon tool %} with the following parameters:
+> 1. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - *"Select lines from"*: 'Hsp90 structure'
 >    - *"that"*: `Don't Match`
 >    - *"Regular Expression"*: `HETATM`
 > 2. Rename output to 'Protein (PDB)'
-> 3. **Search in textfiles** {% icon tool %} with the following parameters:
+> 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - *"Select lines from"*: 'Hsp90 structure'
 >    - *"that"*: `Match`
 >    - *"Regular Expression"*: `AG5E`
@@ -123,7 +123,7 @@ Firstly, we need to calculate the topology for the protein file. We will use the
 
 > ### {% icon hands_on %} Hands-on: Generate protein topology
 >
-> 1. **GROMACS initial setup** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS initial setup](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0) %} with the following parameters:
 >    - *"PDB input file"*: 'Protein (PDB)' file
 >    - *"Force field"*: `AMBER99SB`
 >    - *"Water model"*: `TIP3P`
@@ -152,12 +152,12 @@ Inspecting the contents of the `Ligand (PDB)` file shows that it contains no hyd
 
 > ### {% icon hands_on %} Hands-on: Generate ligand topology
 >
-> 1. **Compound conversion** {% icon tool %} with the following parameters:
+> 1. {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
 >    - *"Molecular input file"*: 'Ligand (PDB)'
 >    - *"Output format"*: `Protein Data Bank format (pdb)`
 >    - *"Add hydrogens appropriate for pH"*: `7.0`
 > 2. Rename the output file to `Hydrated ligand (PDB)`.
-> 3. **Generate MD topologies for small molecules** {% icon tool %} with the following parameters:
+> 3. {% tool [Generate MD topologies for small molecules](toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/21.3+galaxy0) %} with the following parameters:
 >    - *"Input file"*: 'Hydrated ligand (PDB)'
 >    - *"Charge of the molecule"*: `0`
 >    - *"Multiplicity"*: `1`
@@ -184,7 +184,7 @@ While we have separate topology and structure files for both protein and ligand,
 
 > ### {% icon hands_on %} Hands-on: Combine GRO and topology files
 >
-> 1. **Merge GROMACS topologies** {% icon tool %} with the following parameters:
+> 1. {% tool [Merge GROMACS topologies](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Protein topology (TOP) file"*: `TOP` file created by the **GROMACS initial setup** tool
 >    - {% icon param-file %} *"Ligand topology (TOP or ITP file)"*: `Topology` created by the **acpype** tool
 >    - {% icon param-file %} *"Protein structure (GRO) file"*: `GRO` file created by the **GROMACS initial setup** tool
@@ -199,7 +199,7 @@ The next step, once combined coordinate (GRO) and topology (TOP) files have been
 
 > ### {% icon hands_on %} Hands-on: Create simulation box
 >
-> 1. **GROMACS structure configuration** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS structure configuration](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input structure"*: `System GRO file` (Input dataset)
 >    - *"Configure box?"*: `Yes`
 >        - *"Box dimensions in nanometers"*: `1.0`
@@ -222,7 +222,7 @@ The next step is solvation of the newly created simulation box - as we are simul
 
 > ### {% icon hands_on %} Hands-on: Solvation
 >
-> 1. **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS solvation and adding ions](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: output of **GROMACS structure configuration** {% icon tool %}
 >    - {% icon param-file %} *"Topology (TOP) file"*: `TOP` output of **Merge GROMACS topologies**
 >    - *"Water model for solvation"*: `SPC (generic three-point model)`
@@ -253,7 +253,7 @@ After the solvation step, parameterization of the system is complete and prepara
 
 > ### {% icon hands_on %} Hands-on: Energy minimization
 >
-> 1. **GROMACS energy minimization** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS energy minimization](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file."*: GRO output of **GROMACS solvation and adding ions** {% icon tool %}
 >    - {% icon param-file %} *"Topology (TOP) file."*: TOP output of **GROMACS solvation and adding ions** {% icon tool %}
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
@@ -270,7 +270,7 @@ As an aside, we can use the `Extract energy components` tool to plot the converg
 
 > ### {% icon hands_on %} Hands-on: Checking EM convergence
 >
-> 1. **Extract energy components with GROMACS** {% icon tool %} with the following parameters:
+> 1. {% tool [Extract energy components with GROMACS](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_energy/gmx_energy/2020.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"EDR file."*: EDR output of **GROMACS energy minimization** {% icon tool %}
 >    - *"Terms to calculate"*: `Potential`
 >    - *"Output format"*: `Galaxy tabular`
@@ -303,7 +303,7 @@ Simulation under the NVT ensemble allows the solvent to be brought to the desire
 
 > ### {% icon hands_on %} Hands-on: NVT equilibration
 >
-> 1. **GROMACS simulation** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: `Minimized GRO file` (from energy minimization step)
 >    - {% icon param-file %} *"Topology (TOP) file"*: `Solvated TOP`
 >    - In *"Inputs"*:
@@ -338,7 +338,7 @@ NVT simulation.
 
 > ### {% icon hands_on %} Hands-on: NPT equilibration
 >
-> 1. **GROMACS simulation** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO output of **GROMACS simulation** {% icon tool %} (NVT equilibration)
 >    - {% icon param-file %} *"Topology (TOP) file"*: `Solvated TOP`
 >    - In *"Inputs"*:
@@ -370,7 +370,7 @@ We can now remove the restraints and continue with the production simulation. Th
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **GROMACS simulation** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: Output of **GROMACS simulation** {% icon tool %} (NPT equilibration)
 >    - {% icon param-file %} *"Topology (TOP) file"*: `Solvated TOP`
 >    - In *"Inputs"*:
@@ -403,7 +403,7 @@ Before beginning a detailed analysis, the structure and trajectory files generat
 
 > ### {% icon hands_on %} Hands-on: Convert coordinate format
 >
-> 1. **GROMACS structure configuration** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS structure configuration](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0) %} with the following parameters:
 >    - *"Output format"*: `PDB file`
 >    - *"Configure box?"*: `No`
 >
@@ -421,7 +421,7 @@ Convert from XTC to DCD format. A number of the analysis tools being used have b
 
 > ### {% icon hands_on %} Hands-on: Convert trajectory format
 >
-> 1. **MDTraj file converter** {% icon tool %} with the following parameters:
+> 1. {% tool [MDTraj file converter](toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0) %} with the following parameters:
 >    - *"Output format"*: `DCD file`
 >
 >    > ### {% icon comment %} Comment
@@ -443,7 +443,7 @@ is a measure of how much the protein conformation has changed between different 
 
 > ### {% icon hands_on %} Hands-on: RMSD Analysis
 >
-> 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+> 1. {% tool [RMSD Analysis](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4) with the following parameters:
 >    - *"Select domains"*: `C-alpha`
 >
 >    > ### {% icon comment %} Comment
@@ -469,7 +469,7 @@ For the RMSD analysis of the ligand, the `Select domains` parameter of the tool 
 
 > ### {% icon hands_on %} Hands-on: RMSD analysis
 >
-> 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+> 1. {% tool [RMSD Analysis](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4) with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
 >    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `Residue ID`
@@ -491,7 +491,7 @@ The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represent
 
 > ### {% icon hands_on %} Hands-on: RMSF analysis
 >
-> 1. **RMSF Analysis** {% icon tool %} with the following parameters:
+> 1. {% tool [RMSF Analysis](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4) with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
 >    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `C-alpha`
@@ -517,7 +517,7 @@ Having discovered the principal components usually these are visualized. The PCA
 
 > ### {% icon hands_on %} Hands-on: PCA
 >
-> 1. **PCA** {% icon tool %} with the following parameters:
+> 1. {% tool [PCA](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
 >    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `C-alpha`
@@ -533,19 +533,18 @@ The first three principal components are responsible for 32.8% of the total vari
 
 > ### {% icon hands_on %} Hands-on: PCA cosine content calculation
 >
-> 1. **Cosine Content** {% icon tool %} with the following parameters:
+> 1. {% tool [Cosine Content](toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/1.0.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
 >    - {% icon param-file %} *"PDB/GRO input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >
 >
 {: .hands_on}
 
-
 The PCA cosine content of the dominant motion related to PC1 is 0.93, indicating that the simulation is not fully converged. This is expected due to the short simulation length. For production level simulations, it is the norm to extend simulations to hundreds of nanoseconds in length, if not microseconds. As this tutorial is designed to be carried out on public webservers, we limit simulations to 1 ns, as we cannot provide a large amount of computational resources for training purposes.
 
 > ### {% icon hands_on %} Hands-on: PCA visualisation
 >
-> 1. **PCA visualization** {% icon tool %} with the following parameters:
+> 1. {% tool [PCA visualization](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
 >    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `C-alpha`
@@ -561,7 +560,7 @@ Hydrogen bonding interactions contribute to binding and are worth investigating,
 
 > ### {% icon hands_on %} Hands-on: Hydrogen bond analysis
 >
-> 1. **Hydrogen Bond Analysis using VMD** {% icon tool %} with the following parameters:
+> 1. {% tool [Hydrogen Bond Analysis using VMD](toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3) %} with the following parameters:
 >    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
 >    - {% icon param-file %} *"PDB/GRO input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Selection 1"*: `protein`
@@ -595,7 +594,6 @@ We will demonstrate the high-throughput capabilities of Galaxy by running the wo
 This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy's [collection feature]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.
 
 Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina ({% cite Trott2009 %}) or rDock ({% cite Ruiz2014 %}); tutorials and workflows are available for both of these from the Galaxy Training Network. As an example, the history in which the SD-file used in the HTMD workflow is generated (using AutoDock Vina) is provided ({% cite eu_6hhr %}).
-
 
 Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting [histories to workflows]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}), using [multiple histories]({% link topics/galaxy-interface/tutorials/history/tutorial.md %}), and the [Galaxy Application Programming Interface (API)]({% link topics/dev/tutorials/bioblend-api/slides.html %}). For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.
 

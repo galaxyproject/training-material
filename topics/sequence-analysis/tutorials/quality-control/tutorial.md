@@ -8,12 +8,9 @@ questions:
   - What are the quality parameters to check for a dataset?
   - How to improve the quality of a dataset?
 objectives:
-  - Manipulate FASTQ files
-  - Assess quality from a FASTQ file
-  - Use FastQC tool
-  - Understand FastQC output
-  - Use tools for quality correction
-  - Use a tool to aggregate FastQC output
+  - Assess FASTQ quality using FASTQE 🧬😎 and FastQC
+  - Perform quality correction with Cutadapt
+  - Summarise quality metrics MultiQC
   - Process single-end and paired-end data
 follow_up_training:
   -
@@ -24,12 +21,14 @@ follow_up_training:
 time_estimation: "1H30M"
 level: Introductory
 key_points:
-  - Run quality control on every dataset before running any other bioinformatics analysis
-  - Take care of the parameters used to improve the sequence quality
-  - Re-run FastQC to check the impact of the quality control
+  - Perform quality control on every dataset before running any other bioinformatics analysis
+  - Assess the quality metrics and improve quality if necessary
+  - Check the impact of the quality control
+  - Different tools are available to provide additional quality metrics
   - For paired-end reads analyze the forward and reverse reads together
 contributors:
   - bebatut
+  - mblue9
 ---
 
 # Introduction
@@ -60,20 +59,15 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import `GSM461178_untreat_paired_subset_1.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
+> 2. Import the file `female_oral2.fastq-4143.gz` from [Zenodo](https://zenodo.org/record/3977236) or from the data library (ask your instructor)
+>    This is a microbiome sample from a snake {% cite StJacques2021 %}.
 >
 >    ```
->    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+>    https://zenodo.org/record/3977236/files/female_oral2.fastq-4143.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
->    As default, Galaxy takes the link as name, so rename them.
->
-> 4. Rename the file to `reads_1`
->
->    {% snippet faqs/galaxy/datasets_rename.md name="reads_1" %}
 >
 {: .hands_on}
 
@@ -99,13 +93,13 @@ Line  | Description
 So for example, the first sequence in our file is:
 
 ```
-@SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-GTGGATATGGATATCCAAATTATATTTGCATAATTTG
-+SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
+@M00970:337:000000000-BR5KF:1:1102:17745:1557 1:N:0:CGCAGAAC+ACAGAGTT
+GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTATGCCGTCTTCTGCTTGAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAGAAGCAAATGACGATTCAAGAAAGAAAAAAACACAGAATACTAACAATAAGTCATAAACATCATCAACATAAAAAAGGAAATACACTTACAACACATATCAATATCTAAAATAAATGATCAGCACACAACATGACGATTACCACACATGTGTACTACAAGTCAACTA
++
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGGGGGGGGFGGGGGGGGGGGGGGFGGG+38+35*311*6,,31=******441+++0+0++0+*1*2++2++0*+*2*02*/***1*+++0+0++38++00++++++++++0+0+2++*+*+*+*+*****+0**+0**+***+)*.***1**//*)***)/)*)))*)))*),)0(((-((((-.(4(,,))).,(())))))).)))))))-))-(
 ```
 
-It means that the fragment named `SRR031716.1` corresponds to the DNA sequence `GTGGATATGGATATCCAAATTATATTTGCATAATTTG` and this sequence has been sequenced with a quality `IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII`.
+It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTATGCCGTCTTCTGCTTGAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAGAAGCAAATGACGATTCAAGAAAGAAAAAAACACAGAATACTAACAATAAGTCATAAACATCATCAACATAAAAAAGGAAATACACTTACAACACATATCAATATCTAAAATAAATGATCAGCACACAACATGACGATTACCACACATGTGTACTACAAGTCAACTA` and this sequence has been sequenced with a quality `GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGGGGGGGGFGGGGGGGGGGGGGGFGGG+38+35*311*6,,31=******441+++0+0++0+*1*2++2++0*+*2*02*/***1*+++0+0++38++00++++++++++0+0+2++*+*+*+*+*****+0**+0**+***+)*.***1**//*)***)/)*)))*)))*),)0(((-((((-.(4(,,))).,(())))))).)))))))-))-(`.
 
 But what does this quality score mean?
 
@@ -131,29 +125,84 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 > 3. What is the accuracy of this 3rd nucleotide?
 >
 > > ### {% icon solution %} Solution
-> > 1. The worst Phred score is the smallest one, so 0. For Illumina, it corresponds to the `!` character.
-> > 2. The 3rd nucleotide of the 1st sequence has a ASCII character `I`, which correspond to a score of 40.
-> > 3. The corresponding nucleotide `G` has an accuracy of 99.99%
+> > 1. The worst Phred score is the smallest one, so 0. For Illumina 1.8+, it corresponds to the `!` character.
+> > 2. The 3rd nucleotide of the 1st sequence has a ASCII character `G`, which correspond to a score of 38.
+> > 3. The corresponding nucleotide `G` has an accuracy of almost 99.99%
 > >
 > {: .solution }
 {: .question}
 
 > ### {% icon comment %} Comment
-> The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. **FastQC** {% icon tool %}, the tool we will use in the next step, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ).
+> The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. **FastQC** {% icon tool %}, a tool we will use later in this tutorial, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ).
 {: .comment}
 
-When looking at the file in Galaxy, it looks like most the nucleotides have a high score (`I` corresponding to a score 40). Is it true for all sequences? And along the full sequence length?
+When looking at the file in Galaxy, it looks like most the nucleotides have a high score (`G` corresponding to a score 38). Is it true for all sequences? And along the full sequence length?
 
-# Assess the Read Quality
 
-To estimate sequence quality along all sequences, we now use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). It is an open-source tool that provides a simple way to quality control raw sequence data. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
+# Assess quality with FASTQE 🧬😎
+
+To take a look at sequence quality along all sequences, we can use [FASTQE](https://fastqe.com/). It is an open-source tool that provides a simple and fun way to quality control raw sequence data and print them as emoji. You can use it to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
-> 1. Run **FastQC** {% icon tool %} with the following parameters
->    - {% icon param-files %} *"Short read data from your current history"*: `reads_1`
+> 1. {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %} with the following parameters
+>    - {% icon param-files %} *"FastQ data"*: `female_oral2.fastq-4143.gz`
+>    - {% icon param-select %} *"Score types to show"*: `Mean`
 >
-> 2. Inspect the generated HTML files
+> 2. Inspect the generated HTML file
+>
+{: .hands_on}
+
+Rather than looking at quality scores for each individual read, FASTQE looks at quality collectively across all reads within a sample and can calculate the mean for each nucleotide position along the length of the reads. Below shows the mean values for this dataset.
+
+![FASTQE before](../../images/quality-control/fastqe-mean-before.png "FASTQE mean scores")
+
+You can see the score for each emoji [here](https://github.com/fastqe/fastqe#scale). The emojis below, with Phred scores less than 20, are the ones we hope we don't see much.
+
+Phred Quality Score | ASCII code | Emoji
+--- | --- | ---
+0 | ! | 🚫
+1 | " | ❌
+2 | # | 👺
+3 | $ | 💔
+4 | % | 🙅
+5 | & | 👾
+6 | ' | 👿
+7 | ( | 💀
+8 | ) | 👻
+9 | * | 🙈
+10 | + | 🙉
+11 | , | 🙊
+12 | - | 🐵
+13 | . | 😿
+14 | / | 😾
+15 | 0 | 🙀
+16 | 1 | 💣
+17 | 2 | 🔥
+18 | 3 | 😡
+19 | 4 | 💩
+
+
+> ### {% icon question %} Questions
+>
+> What is the lowest mean score in this dataset?
+>
+> > ### {% icon solution %} Solution
+> > The lowest score in this dataset is 😿 13.
+> {: .solution }
+{: .question}
+
+
+# Assess quality with FastQC
+
+An additional or alternative way we can check sequence quality is with [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). It provides a modular set of analyses which you can use to check whether your data has any problems of which you should be aware before doing any further analysis.  We can use it, for example, to assess whether there are known adapters present in the data. We'll run it on the FASTQ file.
+
+> ### {% icon hands_on %} Hands-on: Quality check
+>
+> 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters
+>    - {% icon param-files %} *"Short read data from your current history"*: `Cutadapt Read 1 Output`
+>
+> 2. Inspect the generated HTML file
 >
 {: .hands_on}
 
@@ -168,21 +217,15 @@ To estimate sequence quality along all sequences, we now use [FastQC](https://ww
 
 ## Per base sequence quality
 
-Rather than looking at quality scores for each individual read, FastQC looks at quality collectively across all reads within a sample:
+With FastQC we can use the per base sequence quality plot to check the base quality of the reads, similar to what we did with FASTQE.
 
-![Per base sequence quality](../../images/quality-control/per_base_sequence_quality.png "Per base sequence quality")
+![Per base sequence quality](../../images/quality-control/per_base_sequence_quality-before.png "Per base sequence quality")
 
-On the x-axis are the base position in the read. In this example, the sample contains reads that are 37 bp long.
+On the x-axis are the base position in the read. In this example, the sample contains reads that are up to 296 bp long.
 
 > ### {% icon details %} Non uniform x-axis
 >
-> The x-axis is not always uniform. When you have long reads, some binning is applied to keep things compact:
->
-> ![Per base sequence quality](../../images/quality-control/per_base_sequence_quality_binned.png "Per base sequence quality with binned reads")
->
-> It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. Data binning means grouping and is a data pre-processing technique used to reduce the effects of minor observation errors. The number of base positions binned together depends on the length of the read. With 150 bp reads, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows.
->
-> Binning can be removed when running FastQC
+> The x-axis is not always uniform. When you have long reads, some binning is applied to keep things compact. We can see that in our sample. It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. Data binning means grouping and is a data pre-processing technique used to reduce the effects of minor observation errors. The number of base positions binned together depends on the length of the read. With reads >50bp, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows. Binning can be removed when running FastQC by setting the paramter "Disable grouping of bases for reads >50bp" to Yes.
 {: .details}
 
 For each position, a boxplot is drawn with:
@@ -192,7 +235,7 @@ For each position, a boxplot is drawn with:
 - the 10% and 90% values in the upper and lower whiskers
 - the mean quality, represented by the blue line
 
-The y-axis shows the quality scores. The higher the score, the better the base call. The background of the  graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and reads of poor quality (red).
+The y-axis shows the quality scores. The higher the score, the better the base call. The background of the graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and reads of poor quality (red).
 
 It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will drop at the end of the read. This is often due to signal decay or phasing during the sequencing run. The recent developments in chemistry applied to sequencing has improved this somewhat, but reads are now longer than ever.
 
@@ -214,8 +257,9 @@ It is normal with all Illumina sequencers for the median quality score to start 
 {: .details}
 
 
-
-> ### {% icon details %} Some other sequencing error profiles that you could see
+> ### {% icon details %} Other sequence quality profiles
+>
+> These are some per base sequence quality profiles that can indicate issues with the sequencing.
 >
 > - Overclustering
 >
@@ -243,47 +287,81 @@ It is normal with all Illumina sequencers for the median quality score to start 
 
 > ### {% icon question %} Questions
 >
-> 1. How is the mean score changing along the sequence?
+> 1. How does the mean quality score change along the sequence?
 > 2. Is this tendency seen in all sequences?
 >
 > > ### {% icon solution %} Solution
-> > 1. The mean score over the sequence is dropping at the end of the sequences. This is very common: the sequencers are incorporating more incorrect nucleotides at the end. But the overall score stays good: over 28.
-> > 2. The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.
+> > 1. The mean quality score (blue line) drops about midway though these sequences. It is common for the mean quality to drop towards the end of the sequences, as the sequencers are incorporating more incorrect nucleotides at the end. However, in this sample there is a very large drop in quality from the middle onwards.
+> > 2. The box plots are getting wider from position ~100.  It means a lot of sequences have their score dropping from the middle of the sequence. After 100 nucleotides, more than 10% of the sequences have scores below 20.
 > >
 > {: .solution }
 {: .question}
 
-When the median quality is below a Phred score of ~20, we should consider trimming away bad quality bases from the sequence. We will explain that process in the next section.
+When the median quality is below a Phred score of ~20, we should consider trimming away bad quality bases from the sequence. We will explain that process in the Trim and filter section.
 
-FastQC produces other diagnostic plots to assess sample quality.
+#### Adapter Content
+
+![Adapter Content](../../images/quality-control/adapter_content-before.png "Adapter Content")
+
+The plot shows the cumulative percentage of reads with the different adapter sequences at each position. Once an adapter sequence is seen in a read it  is counted as being present right through to the end of the read so the percentage increases with the read length. FastQC can detect some adapters by default (e.g. Illumina, Nextera), for others we could provide a contaminants file as an input to the FastQC tool.
+
+Ideally Illumina sequence data should not have any adapter sequence present. But with long reads, some of the library inserts are shorter than the read length resulting in read-through to the adapter at the 3' end of the read. This microbiome sample has relatively long reads and we can see Nextera dapater has been detected.
+
+> ### {% icon details %} Other adapter content profiles
+>
+> Adapter content may also be detected with RNA-Seq libraries where the distribution of library insert sizes is varied and likely to include some short inserts.
+>
+> ![Adapter Content](../../images/quality-control/adapter_content_rna_seq.png)
+>
+{: .details}
+
+We can run an trimming tool such as Cutadapt to remove this adapter. We will explain that process in the filter and trim section.
+
 
 > ### {% icon tip %} Take a shortcut
 >
-> The following sections go into detail about some of the other plots generated by FastQC.
+> The following sections go into detail about some of the other plots generated by FastQC. Note that some plots/modules may give warnings but be normal
+> for the type of data you're working with, as discussed below and [here](https://rtsf.natsci.msu.edu/genomics/tech-notes/fastqc-tutorial-and-faq/).
+> The other plots give us information to more deeply understand the quality of the data, and to see if changes could be made in the lab to get higher-quality data in the future.
 > These sections are **optional**, and if you would like to skip these you can:
->   - Jump straight to the [next section](#filter-and-trim) to continue with filtering and trimming of your dataset
+>   - Jump straight to the [next section](#trim-and-filter) to learn about trimming paired-end data
 {: .comment}
 
+#### Per tile sequence quality
+
+This plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell. The plot shows the deviation from the average quality for each flowcell tile. The hotter colours indicate that reads in the given tile have worse qualities for that position than reads in other tiles. With this sample, you can see that certain tiles show consistently poor quality, especially from ~100bp onwards. A good plot should be blue all over.
+
+![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality-before.png "Per tile sequence quality")
+
+This plot will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came.
+
+> ### {% icon details %} Other tile quality profiles
+>
+> In some cases, the chemicals used during sequencing becoming a bit exhausted over the time and the last tiles got worst chemicals which makes the sequencing reactions a bit error-prone. The "Per tile sequence quality" graph will then have some horizontal lines like this:
+>
+> ![Per tile sequence quality with horizontal lines](../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png)
+>
+{: .details}
 
 ## Per sequence quality scores
 
 It plots the average quality score over the full length of all reads on the x-axis and gives the total number of reads with this score on the y-axis:
 
-![Per sequence quality scores](../../images/quality-control/per_sequence_quality_scores.png "Per sequence quality scores")
+![Per sequence quality scores](../../images/quality-control/per_sequence_quality_scores-before.png "Per sequence quality scores")
 
 The distribution of average read quality should be tight peak in the upper range of the plot. It can also report if a subset of the sequences have universally low quality values: it can happen because some sequences are poorly imaged (on the edge of the field of view etc), however these should represent only a small percentage of the total sequences.
 
 ## Per base sequence content
 
-![Per base sequence content](../../images/quality-control/per_base_sequence_content.png "Per base sequence content for a DNA library")
+![Per base sequence content](../../images/quality-control/per_base_sequence_content-before.png "Per base sequence content for a DNA library")
 
 "Per Base Sequence Content" plots the percentage of each of the four nucleotides (T, C, A, G) at each position across all reads in the input sequence file. As for the per base sequence quality, the x-axis is non-uniform.
 
-In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with `%A=%T` and `%G=%C`, and the lines in this plot should run parallel with each other.
+In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with `%A=%T` and `%G=%C`, and the lines in this plot should run parallel with each other. This is amplicon data, where 16S DNA is PCR amplified and sequenced, so we'd expect this plot to have some bias and not show a random distribution.
 
 > ### {% icon details %} Biases by library type
 >
-> It's worth noting that some library types will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries as in the previous plot), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which reads start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5' end of the reads. Whilst this is a true technical bias, it isn't something which can be corrected by trimming and in most cases doesn't seem to adversely affect the downstream analysis. It will, however, produce a warning or error in this module.
+> It's worth noting that some library types will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which reads start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5' end of the reads. Whilst this is a true technical bias, it isn't something which can be corrected by trimming and in most cases doesn't seem to adversely affect the downstream analysis. It will, however, produce a warning or error in this module.
 >
 > ![Per base sequence content for RNA-seq data](../../images/quality-control/per_base_sequence_content_rnaseq.png)
 >
@@ -299,14 +377,15 @@ In a random library we would expect that there would be little to no difference 
 > Why is there a warning for the per-base sequence content graphs?
 >
 > > ### {% icon solution %} Solution
-> > In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal, as expected for RNA-seq data (see the detail box before)
+> > In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal, as expected for 16S amplicon data.
+> >
 > {: .solution }
 {: .question}
 
 
 ## Per sequence GC content
 
-![Per sequence GC content](../../images/quality-control/per_sequence_gc_content.png "Per sequence GC content")
+![Per sequence GC content](../../images/quality-control/per_sequence_gc_content-before.png "Per sequence GC content")
 
 This plot displays the number of reads vs. percentage of bases G and C per read. It is compared to a theoretical distribution assuming an uniform GC content for all reads, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.
 
@@ -316,18 +395,26 @@ But there are also other situations in which an unusually-shaped distribution ma
 
 > ### {% icon question %} Questions
 >
-> Why is there a warning for the per sequence GC content graphs?
+> Why is there a fail for the per sequence GC content graphs?
 >
 > > ### {% icon solution %} Solution
-> > The distribution is slightly shifted on the left, and too high.
+> > There are multiple peaks. This can be indicative of unexpected contamination, such as adapter, rRNA or overrepresented sequences. Or it may be normal if it is amplicon data or you have highly abundant RNA-seq transcripts.
 > {: .solution }
 {: .question}
+
+#### Sequence length distribution
+
+This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment. Our plot shows variable length as we trimmed the data. The biggest peak is at 296bp but there is a second large peak at ~100bp. So even though our sequences range up to 296bp in length, a lot of the good-quality sequences are shorter. This corresponds with the drop we saw in the sequence quality at ~100bp and the red stripes starting at this position in the per tile sequence quality plot.
+
+![Sequence length distribution](../../images/quality-control/sequence_length_distribution-before.png "Sequence length distribution")
+
+Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.
 
 ## Sequence Duplication Levels
 
 The graph shows in blue the percentage of reads of a given sequence in the file which are present a given number of times in the file:
 
-![Sequence Duplication Levels](../../images/quality-control/sequence_duplication_levels.png "Sequence Duplication Levels")
+![Sequence Duplication Levels](../../images/quality-control/sequence_duplication_levels-before.png "Sequence Duplication Levels")
 
 In a diverse library most sequences will occur only once in the final set. A low level of duplication may indicate a very high level of coverage of the target sequence, but a high level of duplication is more likely to indicate some kind of enrichment bias.
 
@@ -336,21 +423,25 @@ Two sources of duplicate reads can be found:
 
   It is a concern because PCR duplicates misrepresent the true proportion of sequences in the input.
 
-- Truly over-represented sequences such as very abundant transcripts in an RNA-Seq library
+- Truly over-represented sequences such as very abundant transcripts in an RNA-Seq library or in amplicon data (like this sample)
 
   It is an expected case and not of concern because it does faithfully represent the input.
 
-FastQC counts the degree of duplication for every sequence in a library and creates a plot showing the relative number of sequences with different degrees of duplication. There are two lines on the plot:
-- Blue line: distribution of the duplication levels for the full sequence set
-- Red line: distribution for the de-duplicated sequences with the proportions of the deduplicated set which come from different duplication levels in the original data.
-
-For whole genome shotgun data it is expected that nearly 100% of your reads will be unique (appearing only 1 time in the sequence data). Most sequences should fall into the far left of the plot in both the red and blue lines. This indicates a highly diverse library that was not over sequenced. If the sequencing depth is extremely high (e.g. > 100x the size of the genome) some inevitable sequence duplication can appear: there are in theory only a finite number of completely unique sequence reads which can be obtained from any given input DNA sample.
-
-More specific enrichments of subsets, or the presence of low complexity contaminants will tend to produce spikes towards the right of the plot. These high duplication peaks will most often appear in the blue trace as they make up a high proportion of the original library, but usually disappear in the red trace as they make up an insignificant proportion of the deduplicated set. If peaks persist in the red trace then this suggests that there are a large number of different highly duplicated sequences which might indicate either a contaminant set or a very severe technical duplication.
-
-It is usually the case for RNA sequencing where there is some very highly abundant transcripts and some lowly abundant. It is expected that duplicate reads will be observed for high abundance transcripts:
-
-![Sequence Duplication Levels for RNA-seq](../../images/quality-control/sequence_duplication_levels_rna_seq.png)
+> ### {% icon details %} More details about duplication
+>
+> FastQC counts the degree of duplication for every sequence in a library and creates a plot showing the relative number of sequences with different degrees of duplication. There are two lines on the plot:
+> - Blue line: distribution of the duplication levels for the full sequence set
+> - Red line: distribution for the de-duplicated sequences with the proportions of the deduplicated set which come from different duplication levels in the original data.
+>
+> For whole genome shotgun data it is expected that nearly 100% of your reads will be unique (appearing only 1 time in the sequence data). Most sequences should fall into the far left of the plot in both the red and blue lines. This indicates a highly diverse library that was not over sequenced. If the sequencing depth is extremely high (e.g. > 100x the size of the genome) some inevitable sequence duplication can appear: there are in theory only a finite number of completely unique sequence reads which can be obtained from any given input DNA sample.
+>
+> More specific enrichments of subsets, or the presence of low complexity contaminants will tend to produce spikes towards the right of the plot. These high duplication peaks will most often appear in the blue trace as they make up a high proportion of the original library, but usually disappear in the red trace as they make up an insignificant proportion of the deduplicated set. If peaks persist in the red trace then this suggests that there are a large number of different highly duplicated sequences which might indicate either a contaminant set or a very severe technical duplication.
+>
+> It is usually the case for RNA sequencing where there is some very highly abundant transcripts and some lowly abundant. It is expected that duplicate reads will be observed for high abundance transcripts:
+>
+> ![Sequence Duplication Levels for RNA-seq](../../images/quality-control/sequence_duplication_levels_rna_seq.png)
+>
+{: .details}
 
 ## Over-represented sequences
 
@@ -358,25 +449,30 @@ A normal high-throughput library will contain a diverse set of sequences, with n
 
 FastQC lists all of the sequence which make up more than 0.1% of the total. For each over-represented sequence FastQC will look for matches in a database of common contaminants and will report the best hit it finds. Hits must be at least 20bp in length and have no more than 1 mismatch. Finding a hit doesn't necessarily mean that this is the source of the contamination, but may point you in the right direction. It's also worth pointing out that many adapter sequences are very similar to each other so you may get a hit reported which isn't technically correct, but which has a very similar sequence to the actual match.
 
-With DNA sequencing data no single sequence should be present at a high enough frequency to be listed, but we can sometimes see a small percentage of adapter reads. RNA sequencing data may have some transcripts that are so abundant that they register as over-represented sequence.
+RNA sequencing data may have some transcripts that are so abundant that they register as over-represented sequence. With DNA sequencing data no single sequence should be present at a high enough frequency to be listed, but we can sometimes see a small percentage of adapter reads.
+
+> ### {% icon question %} Questions
+>
+> How could we find out what the overrepreseented sequences are?
+>
+> > ### {% icon solution %} Solution
+> > We can BLAST overrepresented sequences to see what they are. In this case, if we take the top overrepresented sequence
+> > ```
+> > >overrep_seq1
+> > GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
+> > ```
+> > and use [blastn](https://blast.ncbi.nlm.nih.gov/Blast.cgi) against the default Nucleotide (nr/nt) database we don't get any hits. But if we use [VecScreen](https://www.ncbi.nlm.nih.gov/tools/vecscreen/) we see it is the Nextera adapter.
+> > ![VecScreen](../../images/quality-control/vecscreen-nextera.png "Nextera adapter")
+> {: .solution }
+{: .question}
+
 
 > ### {% icon details %} More details about other FastQC plots
 >
-> #### Per tile sequence quality
->
-> ![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality.png "Per tile sequence quality")
->
-> This plot will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came. The plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell.
->
-> The plot shows the deviation from the average quality for each tile. The hotter colours indicate that reads in the given tile have worse qualities for that position than reads in other tiles. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
->
-> In some cases, the chemicals used during sequencing becoming a bit exhausted over the time and the last tiles got worst chemicals which makes the sequencing reactions a bit error-prone. The "Per tile sequence quality" graph will then have some horizontal lines like this:
->
-> ![Per tile sequence quality with horizontal lines](../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png)
 >
 > #### Per base N content
 >
-> ![Per base N content](../../images/quality-control/per_base_n_content.png "Per base N content")
+> ![Per base N content](../../images/quality-control/per_base_n_content-before.png "Per base N content")
 >
 > If a sequencer is unable to make a base call with sufficient confidence, it will write an "N" instead of a conventional base call. This plot displays the percentage of base calls at each position or bin for which an N was called.
 >
@@ -384,35 +480,18 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > ![Per base N content](../../images/quality-control/per_base_n_content_error.png)
 >
-> #### Sequence length distribution
->
-> ![Sequence length distribution](../../images/quality-control/sequence_length_distribution.png "Sequence length distribution")
->
-> Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.
->
-> This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
->
-> #### Adapter Content
->
-> ![Adapter Content](../../images/quality-control/adapter_content.png "Adapter Content")
->
-> The plot shows the cumulative percentage of reads with the different adapter sequences at each position. Once an adapter sequence is seen in a read it is counted as being present right through to the end of the read so the percentages increases with the read length. Only adapters specific to the library type are searched.
->
-> Ideally Illumina sequence data should not have any adapter sequence present. But with when using long read, some of the library inserts are shorter than the read length resulting in read-through to the adapter at the 3' end of the read. This is more likely to occur with RNA-Seq libraries where the distribution of library insert sizes is more varied and likely to include some short inserts. In the example below, a high quality RNA-Seq library have a small percentage of the library with inserts smaller than 150bp:
->
-> ![Adapter Content](../../images/quality-control/adapter_content_rna_seq.png)
 >
 > #### Kmer Content
 >
-> FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read.
+> This plot not output by default. As stated in the tool form, if you want this module it needs to be enabled using a custom Submodule and limits file. With this module, FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read.
 >
 > FastQC will report the list of kmers which appear at specific positions with a greater frequency than expected. This can be due to different sources of bias in the library, including the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer from these sequences. Any biased kmer due to other interesting biases may be then diluted and not easy to see.
 >
 > The following example is from a high-quality DNA-Seq library. The biased kmers nearby the start of the read likely are due to slight sequence dependent efficiency of DNA shearing or a result of random priming:
 >
-> ![Adapter Content](../../images/quality-control/kmer_content.png "Kmer content")
+> ![Kmer Content](../../images/quality-control/kmer_content.png "Kmer content")
 >
-> This module can be very difficult to interpret. RNA-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the [FastQC Kmer Content documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html).
+> This module can be very difficult to interpret. The adapter content plot and overrepesented sequences table are easier to interpret and may give you enough information without needing this plot. RNA-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the [FastQC Kmer Content documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html).
 >
 {: .details}
 
@@ -459,11 +538,18 @@ We tried to explain here there different FastQC reports and some use cases. More
 >
 {: .details}
 
-# Filter and Trim
+> ### {% icon comment %} Bad quality sequences
+> If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data).
+>
+> You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding reads then will be filtered out and you lose them.
+{: .comment}
 
-The quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. In general, quality treatments include:
 
-1. Cutting/Trimming/masking sequences
+# Trim and filter
+
+The quality drops in the middle of these sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. Trimming can help to increase the number of reads the aligner or assembler are able to succesfully use, reducing the number of reads that are unmapped or unassembled. In general, quality treatments include:
+
+1. Trimming/cutting/masking sequences
     - from low quality score regions
     - beginning/end of sequence
     - removing adapters
@@ -472,74 +558,47 @@ The quality of the sequences drops at the end of the sequences. This could cause
     - too short
     - with too many ambiguous (N) bases
 
-To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html), a tool that enhances sequence quality by automating adapter trimming as well as quality control.
+To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) {% cite marcel2011cutadapt %}, a tool that enhances sequence quality by automating adapter trimming as well as quality control.  We will:
+
+- Trim low-quality bases from the ends. Quality trimming is done before any adapter trimming. We will set the quality threshold as 20, a commonly used threshold, see more [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035531872-Phred-scaled-quality-scores).
+- Trim adapter with Cutadapt. For that we need to supply the sequence of the adapter. In this sample, Nextera is the adapter that was detected. We can find the sequence of the Nextera adapter on the [Illumina website here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html) `CTGTCTCTTATACACATCT`. We will trim that sequence from the 3' end of the reads.
+- Filter out sequences with length < 20 after trimming
 
 > ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
-> 1. Run **Cutadapt** {% icon tool %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `reads_1` (Input dataset)
+>       - {% icon param-file %} *"Reads in FASTQ format"*: `female_oral2.fastq-4143.gz` (Input dataset)
 >
 >          > ### {% icon tip %} Tip: Files not selectable?
->          > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the pencil symbol.
+>          > If your FASTQ file cannot be selected, you might check whether the format is FASTQ with Sanger-scaled quality values (`fastqsanger.gz`). You can edit the data type by clicking on the pencil symbol.
 >          {: .tip}
->
->       - In *Read 1 Options*
->
->          > ### {% icon comment %} Know adapters
->          > In this dataset, no adapters were found as we saw in FastQC report. They were already removed.
->          > If you see or know which adapter sequences were used during library preparation, provide their sequences there.
->          {: .comment}
->
+>    - In *"Read 1 Options"*:
+>       - *"Insert 3' (End) Adapters"*:
+>          - *"Source"*: `Enter custom sequence`
+>          - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCT`
 >    - In *"Filter Options"*
 >       - *"Minimum length"*: `20`
->
->           It will remove reads that are shorter than 20 bp, after trimming of adapters and bad regions.
->
 >    - In *"Read Modification Options"*
 >       - *"Quality cutoff"*: `20`
->
->           After adapter removal (if any), we choose to remove ends ( 5' and/or 3') with low-quality, here below 20 in quality).
->
->    - In *"Output Options"*
->       - *"Report"*: `Yes`
+>    - {% icon param-select %} *"Outputs selector"*: `Report`
 >
 > 2. Inspect the generated txt file (`Report`)
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How many reads have been found with adapters?
->    > 2. How many basepairs have been removed from the reads because of bad quality?
->    > 3. How many sequence pairs have been removed because they were too short?
+>    > 1. What % reads contain adapter?
+>    > 2. What % reads have been trimmed because of bad quality?
+>    > 3. What % reads have been removed because they were too short?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 0 reads with adapters
->    > > 2. 44,164 bp (1.2%) (`Quality-trimmed:`)
->    > > 3. 322 sequences
->    > {: .solution }
->    {: .question}
->
-> 2. (Optional) **FastQC** {% icon tool %}: Re-run **FastQC** on the quality-controlled data, and inspect the new FastQC report
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many sequences have been removed?
->    > 2. Has sequence quality been improved?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. Before Cutadapt, the dataset comprised 100,000 sequences. After Cutadapt, there are 99,678 sequences
->    > > 2. The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation
+>    > > 1. 58.6% reads contain adapter (`Reads with adapters:`)
+>    > > 2. 35.1% reads have been trimmed because of bad quality (`Quality-trimmed:`)
+>    > > 3. 0 % reads were removed because they were too short
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
-The quality of the previous dataset was pretty good from the beginning and we improved it with with trimming and filtering step (in a reasonable way to not lose too much information)
-
-> ### {% icon comment %} Bad quality sequences
-> If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data).
->
-> You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding reads then will be filtered out and you loose them.
-{: .comment}
 
 > ### {% icon details %} Trimming with Cutadapt
 >
@@ -580,7 +639,7 @@ The quality of the previous dataset was pretty good from the beginning and we im
 > 42 40 26 27
 > ```
 >
-> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
+> Note that therefore, positions with a quality value larger than the chosen threshold are also removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
 >
 >
 > Alternatives to this procedure would be:
@@ -591,7 +650,104 @@ The quality of the previous dataset was pretty good from the beginning and we im
 >     The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the window (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
 {: .details}
 
-# Process paired-end data
+
+We can examine our trimmed data with FASTQE and/or FastQC.
+
+> ### {% icon hands_on %} Hands-on: Checking quality after trimming
+>
+> 1. {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}: Re-run **FASTQE** with the following parameters
+>    - {% icon param-files %} *"FastQ data"*: `Cutadapt Read 1 Output`
+>    - {% icon param-select %} *"Score types to show"*: `Mean`
+>
+> 2. Inspect the new FASTQE report
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > Compare the FASTQE output to the previous one before trimming above. Has sequence quality been improved?
+>    >
+>    > {% snippet faqs/galaxy/features_scratchbook.md %}
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > Yes, the quality score emojis look better (happier) now.
+>    > >
+>    > > ![FASTQE before](../../images/quality-control/fastqe-mean-before.png "Before trimming")
+>    > >
+>    > > ![FASTQE after](../../images/quality-control/fastqe-mean-after.png "After trimming")
+>    > >
+>    > {: .solution }
+>    {: .question}
+{: .hands_on}
+
+With FASTQE we can see we improved the quality of the bases in the dataset.
+
+We can also, or instead, check the quality-controlled data with FastQC.
+
+
+> ### {% icon hands_on %} Hands-on: Checking quality after trimming
+>
+> 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters
+>    - {% icon param-files %} *"Short read data from your current history"*: `Cutadapt Read 1 Output`
+>
+> 2. Inspect the generated HTML file
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+> 1. Does the per base sequence quality look better?
+> 2. Is the adapter gone?
+>
+> > ### {% icon solution %} Solution
+> > 1. Yes. The vast majority of the bases have a quality score above 20 now.
+> > ![Per base sequence quality](../../images/quality-control/per_base_sequence_quality-after.png "Per base sequence quality")
+> >
+> > 2. Yes. No adapter is detected now.
+> > ![Adapter Content](../../images/quality-control/adapter_content-after.png)
+> >
+> {: .solution }
+{: .question}
+
+With FastQC we can see we improved the quality of the bases in the dataset and removed the adapter.
+
+> ### {% icon details %} Other FastQC plots after trimming
+>
+> ![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality-after.png)
+> We have some red stripes as we've trimmed those regions from the reads.
+>
+> ![Per sequence quality scores](../../images/quality-control/per_sequence_quality_scores-after.png)
+> We now have one peak of high quality instead of one high and one lower quality that we had previously.
+>
+> ![Per base sequence content](../../images/quality-control/per_base_sequence_content-after.png)
+> We don't have equal representation of the bases as before as this is amplicon data.
+>
+> ![Per sequence GC content](../../images/quality-control/per_sequence_gc_content-after.png)
+> We now have a single main GC peak due to removing the adapter.
+>
+> ![Per base N content](../../images/quality-control/per_base_n_content-after.png)
+> This is the same as before as we don't have any Ns in these reads.
+>
+> ![Sequence length distribution](../../images/quality-control/sequence_length_distribution-after.png)
+> We now have multiple peaks and a range of lengths, instead of the single peak with had before trimming when all sequences were the same length.
+>
+> ![Sequence Duplication Levels](../../images/quality-control/sequence_duplication_levels-after.png)
+> > ### {% icon question %} Questions
+> >
+> > What does the top overrepresented sequence `GTGTCAGCCGCCGCGGTAGTCCGACGTGG` correspond to?
+> >
+> > > ### {% icon solution %} Solution
+> > > If we take the top overrepresented sequence
+> > > ```
+> > > >overrep_seq1_after
+> > > GTGTCAGCCGCCGCGGTAGTCCGACGTGG
+> > > ```
+> > > and use [blastn](https://blast.ncbi.nlm.nih.gov/Blast.cgi) against the default Nucleotide (nr/nt) database we see the top hits are to 16S rRNA genes. This makes sense as this is 16S amplicon data, where the 16S gene is PCR amplified.
+> > {: .solution }
+> {: .question}
+{: .details}
+
+
+# Processing multiple datasets
+
+## Process paired-end data
 
 With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. With this technique, we have the advantage to get more information about each DNA fragment compared to reads sequenced by only single-end sequencing:
 
@@ -610,30 +766,32 @@ Paired-end sequencing generates 2 FASTQ files:
 
 Usually we recognize these two files which belong to one sample by the name which has the same identifier for the reads but a different extension, e.g. `sampleA_R1.fastq` for the forward reads and `sampleA_R2.fastq` for the reverse reads. It can also be `_f` or `_1` for the forward reads and `_r` or `_2` for the reverse reads.
 
-The data we analyzed in the previous step was not single-end data but the forward reads of paired-end data. We will now do the quality control on the reverse reads.
+The data we analyzed in the previous step was single-end data so we will import a paired-end RNA-seq dataset to use. We will run FastQC and aggregate the two reports with MultiQC {% cite ewels2016multiqc %}.
 
 > ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end reads
 >
-> 1. Import the reverse read `GSM461178_untreat_paired_subset_2.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
+> 1. Import the paired-end reads `GSM461178_untreat_paired_subset_1.fastq` and `GSM461178_untreat_paired_subset_2.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
 >
 >    ```
+>    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
 >    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
 >    ```
 >
-> 2. Rename the file to `reads_2`
-> 3. **FastQC** {% icon tool %} with the reverse reads
-> 4. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports of both forward and reverse reads
+> 2. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with both datasets
+>
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+>
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters to aggregate the FastQC reports of both forward and reverse reads
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
 >
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
->
-> 5. Inspect the webpage output from MultiQC
+> 4. Inspect the webpage output from MultiQC
 >
 {: .hands_on}
+
 
 > ### {% icon question %} Questions
 >
@@ -659,16 +817,16 @@ With paired-end reads the average quality scores for forward reads will almost a
 After trimming, reverse reads will be shorter because of their quality and then will be eliminated during the filtering step. If one of the reverse reads is removed, its corresponding forward read should be removed too. Otherwise we will get different number of reads in both files and in different order, and order is important for the next steps. Therefore **it is important to treat the forward and reverse reads together for trimming and filtering**.
 
 > ### {% icon hands_on %} Hands-on: Improving the quality of paired-end data
-> 1. **Cutadapt** {% icon tool %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
->       - {% icon param-file %} *"FASTQ/A file #1"*: `reads_1` (Input dataset)
->       - {% icon param-file %} *"FASTQ/A file #2"*: `reads_2` (Input dataset)
+>       - {% icon param-file %} *"FASTQ/A file #1"*: `GSM461178_untreat_paired_subset_1.fastq` (Input dataset)
+>       - {% icon param-file %} *"FASTQ/A file #2"*: `GSM461178_untreat_paired_subset_2.fastq` (Input dataset)
 >
 >          The order is important here!
 >
 >       - In *Read 1 Options* or *Read 2 Options*
 >
->         As before, no adapters were found in these datasets. When you process your own data and you know which adapter sequences were used during library preparation, you should provide their sequences here.
+>         No adapters were found in these datasets. When you process your own data and you know which adapter sequences were used during library preparation, you should provide their sequences here.
 >
 >    - In *"Filter Options"*
 >       - *"Minimum length"*: `20`
@@ -714,7 +872,7 @@ These datasets can be used for the downstream analysis, e.g. mapping.
 # Conclusion
 {:.no_toc}
 
-In this tutorial we checked the quality of two FASTQ files to ensure that their data looks good before inferring any further information. This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:
+In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information. This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:
 
-- Quality assessment with a tool like **FastQC** {% icon tool %}
+- Quality assessment with tools like **FASTQE** {% icon tool %} and **FastQC** {% icon tool %}
 - Trimming and filtering with a tool like **Cutadapt** {% icon tool %}
