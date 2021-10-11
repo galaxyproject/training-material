@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Make & Snakemake
 level: Intermediate
-zenodo_link: ""
+zenodo_link: "https://zenodo.org/record/5562251"
 requirements:
 - type: "internal"
   topic_name: data-science
@@ -58,11 +58,11 @@ We've set up a simple bash pipeline. It downloads some read files from a website
 
 ```bash
 # Downloading our datasets
-wget https://zenodo.org/api/files/TODO/GCA_000017985.1_ASM1798v1_genomic.fna.gz
-wget https://zenodo.org/api/files/TODO/SRR2584866_1.fq.gz
-wget https://zenodo.org/api/files/TODO/SRR2584866_2.fq.gz
-wget https://zenodo.org/api/files/TODO/SRR2589044_1.fq.gz
-wget https://zenodo.org/api/files/TODO/SRR2589044_2.fq.gz
+wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+wget https://zenodo.org/record/5562251/files/SRR2584866_1.fq.gz
+wget https://zenodo.org/record/5562251/files/SRR2584866_2.fq.gz
+wget https://zenodo.org/record/5562251/files/SRR2589044_1.fq.gz
+wget https://zenodo.org/record/5562251/files/SRR2589044_2.fq.gz
 
 # Generate FastQC Report
 fastqc *.fq
@@ -240,7 +240,7 @@ all: SRR2589044.bam
 
 # And here's finally our download step
 %:
-	wget https://.../$(shell basename $@) \
+	https://zenodo.org/record/5562251/files/$(shell basename $@) \
 		-O $@
 ```
 
@@ -310,7 +310,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 
 > ### {% icon code-in %} Mask
 > <pre class="highlight"><code><span class="nb">%.fq.gz</span>:
-> 	<span class="s2">wget https://ncbi.example.org/$@</span>
+> 	<span class="s2">wget https://zenodo.org/record/5562251/files/$@</span>
 > </code></pre>
 >
 > Generic download rule, the <code>$@</code> and <code>%</code> used are a bit opaque, you need to know what they mean to understand how the rule works.
@@ -320,7 +320,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 > 	<span class="nb">output:
 > 		"{sample}.fq.gz"</span>
 > 	<span class="s2">shell:
-> 		"wget https://ncbi.example.org/{wildcards.sample}.fq.gz -O {output}"</span>
+> 		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output}"</span>
 > </code></pre>
 >
 > This is much more explicit, the outputs are listed and `{sample}` is used as the variable to be templated out, a lot like you might recognise from Python's `format` function or `f""` strings. The rule also has a name which serves as really nice documentation for what that step does, you don't have to read the command to figure it out.
@@ -399,13 +399,13 @@ Now that you have seen a few rules, let's write the rest.
 > 	output:
 > 		"{sample}.fq.gz"
 > 	shell:
-> 		"wget https://ncbi.example.org/{wildcards.sample}.fq.gz -O {output}"
+> 		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output}"
 >
 > rule download_genome:
 > 	output:
 > 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
 > 	shell:
-> 		"wget https://ncbi.example.org/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
+> 		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
 >
 > rule fastqc:
 > 	input:
@@ -491,7 +491,7 @@ Now that you have seen a few rules, let's write the rest.
 >    >     wildcards: sample=SRR2584866_2
 >    >     resources: tmpdir=/tmp
 >    >
->    > --2021-10-08 16:06:32--  http://localhost:8000/SRR2584866_2.fq.gz
+>    > --2021-10-08 16:06:32--  https://zenodo.org/record/5562251/SRR2584866_2.fq.gz
 >    > Resolving localhost (localhost)... 127.0.0.1
 >    > Connecting to localhost (localhost)|127.0.0.1|:8000... connected.
 >    > HTTP request sent, awaiting response... 200 OK
@@ -512,7 +512,7 @@ Now that you have seen a few rules, let's write the rest.
 >    >     wildcards: sample=SRR2584866_1
 >    >     resources: tmpdir=/tmp
 >    >
->    > --2021-10-08 16:06:32--  http://localhost:8000/SRR2584866_1.fq.gz
+>    > --2021-10-08 16:06:32--  https://zenodo.org/record/5562251/SRR2584866_1.fq.gz
 >    > Resolving localhost (localhost)... 127.0.0.1
 >    > Connecting to localhost (localhost)|127.0.0.1|:8000... connected.
 >    > HTTP request sent, awaiting response... 200 OK
@@ -785,8 +785,8 @@ But **don't just copy/paste** the above example because:
 > > +		out="logs/download.{sample}.out",
 > > +		err="logs/download.{sample}.err"
 > >  	shell:
-> > -		"wget http://localhost:8000/{wildcards.sample}.fq.gz -O {output}"
-> > +		"wget http://localhost:8000/{wildcards.sample}.fq.gz -O {output} >{log.out} 2>{log.err}"
+> > -		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output}"
+> > +		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output} >{log.out} 2>{log.err}"
 > >
 > >  rule download_genome:
 > >  	output:
@@ -795,8 +795,8 @@ But **don't just copy/paste** the above example because:
 > > +		out="logs/download.out",
 > > +		err="logs/download.err"
 > >  	shell:
-> > -		"wget https://ncbi.example.org/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
-> > +		"wget https://ncbi.example.org/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output} >{log.out} 2>{log.err}"
+> > -		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
+> > +		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output} >{log.out} 2>{log.err}"
 > >
 > >  rule fastqc:
 > >  	input:
@@ -1047,7 +1047,7 @@ This is starting to look like a pretty good workflow! Let's preview how it will 
 >     wildcards: sample=SRR2584863_2
 >     resources: tmpdir=/tmp
 >
-> wget http://localhost:8000/SRR2584863_2.fq.gz -O reads/SRR2584863_2.fq.gz >logs/download.SRR2584863_2.out 2>logs/download.SRR2584863_2.err
+> wget https://zenodo.org/record/5562251/SRR2584863_2.fq.gz -O reads/SRR2584863_2.fq.gz >logs/download.SRR2584863_2.out 2>logs/download.SRR2584863_2.err
 >
 > [Fri Oct  8 16:59:39 2021]
 > rule download:
@@ -1057,7 +1057,7 @@ This is starting to look like a pretty good workflow! Let's preview how it will 
 >     wildcards: sample=SRR2584863_1
 >     resources: tmpdir=/tmp
 >
-> wget http://localhost:8000/SRR2584863_1.fq.gz -O reads/SRR2584863_1.fq.gz >logs/download.SRR2584863_1.out 2>logs/download.SRR2584863_1.err
+> wget https://zenodo.org/record/5562251/SRR2584863_1.fq.gz -O reads/SRR2584863_1.fq.gz >logs/download.SRR2584863_1.out 2>logs/download.SRR2584863_1.err
 >
 > [Fri Oct  8 16:59:39 2021]
 > rule download_genome:
@@ -1066,7 +1066,7 @@ This is starting to look like a pretty good workflow! Let's preview how it will 
 >     jobid: 6
 >     resources: tmpdir=/tmp
 >
-> wget http://localhost:8000/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz >logs/download.out 2>logs/download.err
+> wget https://zenodo.org/record/5562251/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz >logs/download.out 2>logs/download.err
 >
 > [Fri Oct  8 16:59:39 2021]
 > rule trimmomatic:
@@ -1425,7 +1425,7 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >    >     output: reads/SRR2589044_1un.fq.gz
 >    >     log: logs/download.SRR2589044_1un.out, logs/download.SRR2589044_1un.err (check log file(s) for error message)
 >    >     shell:
->    >         wget http://localhost:8000/SRR2589044_1un.fq.gz -O reads/SRR2589044_1un.fq.gz >logs/download.SRR2589044_1un.out 2>logs/download.SRR2589044_1un.err
+>    >         wget https://zenodo.org/record/5562251/SRR2589044_1un.fq.gz -O reads/SRR2589044_1un.fq.gz >logs/download.SRR2589044_1un.out 2>logs/download.SRR2589044_1un.err
 >    >         (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
 >    >
 >    > Removing output files of failed job download since they might be corrupted:
@@ -1436,7 +1436,7 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >    >     output: reads/SRR2589044_2un.fq.gz
 >    >     log: logs/download.SRR2589044_2un.out, logs/download.SRR2589044_2un.err (check log file(s) for error message)
 >    >     shell:
->    >         wget http://localhost:8000/SRR2589044_2un.fq.gz -O reads/SRR2589044_2un.fq.gz >logs/download.SRR2589044_2un.out 2>logs/download.SRR2589044_2un.err
+>    >         wget https://zenodo.org/record/5562251/SRR2589044_2un.fq.gz -O reads/SRR2589044_2un.fq.gz >logs/download.SRR2589044_2un.out 2>logs/download.SRR2589044_2un.err
 >    >         (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
 >    >
 >    > Removing output files of failed job download since they might be corrupted:
