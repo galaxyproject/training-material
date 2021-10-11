@@ -343,7 +343,7 @@ Let's take a look at the result. Using the search bar we can check if certain ta
 > > ### {% icon solution %} Solution
 > >
 > > 1. The low presence of _Alphaproteobacteria_ (including members of the order _Rhizobiales_), as well as the abundance of _Bacteroidetes_ and _Gammaproteobacteria_, suggest that the soil is highly exposed to phosphorus. This mineral is strongly associated with the anthropogenic activity as it is an important component of agrochemicals.
-> > 2. We can observe that there are important differences in the structure of the bacterial populations between the soil and rhizosphere samples. Particularly significant is the increase in phylum _Plactomycetes_, which are usually abundant in the rhizosphere.
+> > 2. We can observe that there are important differences in the structure of the bacterial populations between the soil and rhizosphere samples. Particularly significant is the increase in phylum _Planctomycetes_, which are usually abundant in the rhizosphere.
 > >
 > {: .solution}
 >

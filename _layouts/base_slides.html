@@ -9,6 +9,8 @@
 {% assign title = tutorial.title %}
 {% assign contributors = site.data['contributors'] %}
 
+{% assign locale = site.data.lang[page.lang] %}
+
   <head>
     <meta charset="utf-8">
     <title>{{ title | strip_html }}</title>
@@ -84,27 +86,32 @@ class: center, middle, inverse
 </div>
 {% endif %}
 
-<div class="footnote" style="bottom: 3em;">{% icon last_modification %} Updated: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
-<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
-<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+<div class="footnote" style="bottom: 3em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+
+
+<div class="footnote" style="bottom: 2em;">{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Or view the plain-text slides without JS"}}</a></div>
+
+<div class="footnote" style="bottom: 1em;"><strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}</div>
 
 ???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
+{{locale['presenter-notes-explanation'] | default: "Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
 
 Press `P` again to switch presenter notes off
 
 Press `C` to create a new window where the same presentation will be displayed.
 This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
+slide to change on the other.
+
+Useful when presenting."
+}}
 
 {% if topic.requirements or page.requirements %}
 
 ---
 
-## Requirements
+## {{locale['requirements'] | default: "Requirements"}}
 
-Before diving into this slide deck, we recommend you to have a look at:
+{{ locale['before-diving-in'] | default: "Before diving into this slide deck, we recommend you to have a look at"}}:
 
 {% include _includes/display_extra_training_slides.md extra_trainings=topic.requirements %}
 {% include _includes/display_extra_training_slides.md extra_trainings=page.requirements %}
@@ -117,9 +124,9 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 ---
 
-## Thank you!
+## {{ locale['thank-you'] | default: "Thank You" }}!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+{{ locale['collaborative-effort'] | default: "This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!" }}
 
 {% if tutorial.contributors %}
 <div class="contributors-line">
@@ -137,7 +144,8 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
   {% endif %}
 {% endif %}
 
-This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+{{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.
 
 {% if page.layout == "base_slides" %}
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
