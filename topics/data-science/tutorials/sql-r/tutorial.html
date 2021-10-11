@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>SQL with R</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: SQL with R" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/sql-r/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/sql-r/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/sql-r/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/sql-r/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/sql-r/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/sql-r/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/sql-r/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdata-science%2Ftutorials%2Fsql-r%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/data-science/tutorials/sql-r/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/data-science/tutorials/sql-r/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/data-science/tutorials/sql-r/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2021-10-11 13:27:43 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "SQL with R",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / sql-r / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'SQL with R' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/sql-r/tutorial.html",
+  "timeRequired": "PT45M",
+  "description": "The questions this  addresses are:\n - How can I access databases from programs written in R?\n\n\\nThe objectives are:\n - Write short programs that execute SQL queries.\n - Trace the execution of a program that contains an SQL query.\n - Explain why most database applications are written in a general-purpose language rather than in SQL.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/r-basics/tutorial.html",
+      "name": "R basics in Galaxy",
+      "description": "Hands-on for 'R basics in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/r-advanced/tutorial.html",
+      "name": "Advanced R in Galaxy",
+      "description": "Hands-on for 'Advanced R in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/sql-advanced/tutorial.html",
+      "name": "Advanced SQL",
+      "description": "Hands-on for 'Advanced SQL' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>SQL with R</h1>
+    
+
+    <div class="contributors-line">Authors: 
+
+ <a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/carpentries" alt="Avatar">The Carpentries</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a>
+
+</div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I access databases from programs written in R?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Write short programs that execute SQL queries.</p>
+</li>
+        
+        <li><p>Trace the execution of a program that contains an SQL query.</p>
+</li>
+        
+        <li><p>Explain why most database applications are written in a general-purpose language rather than in SQL.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> R basics in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/r-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Advanced R in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/r-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Advanced SQL:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/sql-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 45 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/sql-r/tutorial.md.ipynb" title="Notebooks" alt="SQL with R workflows">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+
+</li>
+            
+
+            
+            
+            
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 11, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+                <blockquote class="comment">
+                    <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                    <p>
+                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                    </p>
+                    <!--
+                    <p><b>Launching on MyBinder</b>
+                        Click here and the notebook will launch on MyBinder.org
+                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fsql-r%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                    </p>
+                    -->
+                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                        <ol>
+                            <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                            <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-r/tutorial.md.ipynb</code></li>
+                            <li>Select the notebook that appears in the list of files on the left.</li>
+                        </ol>
+                    </p>
+                </blockquote>
+                
+
+                <blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://github.com/swcarpentry/sql-novice-survey/">Databases and SQL</a> lesson, which is licensed CC-BY 4.0.</p>
+
+  <p>Abigail Cabunoc and Sheldon McKay (eds): “Software Carpentry: Using Databases and SQL.”  Version 2017.08, August 2017,
+<a href="https://github.com/swcarpentry/sql-novice-survey">github.com/swcarpentry/sql-novice-survey</a>, <a href="https://doi.org/10.5281/zenodo.838776">https://doi.org/10.5281/zenodo.838776</a></p>
+
+  <p>Adaptations have been made to make this work better in a GTN/<span class="notranslate">Galaxy</span> environment.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#programming-with-databases---r" id="markdown-toc-programming-with-databases---r">Programming with Databases - R</a>    <ol>
+      <li><a href="#database-helper-functions-in-r" id="markdown-toc-database-helper-functions-in-r">Database helper functions in R</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<p>For this tutorial we need to download a database that we will use for the queries.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">download.file</span><span class="p">(</span><span class="s2">"http://swcarpentry.github.io/sql-novice-survey/files/survey.db"</span><span class="p">,</span><span class="w"> </span><span class="n">destfile</span><span class="o">=</span><span class="s2">"survey.db"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="programming-with-databases---r">Programming with Databases - R</h1>
+
+<p>Let’s have a look at how to access a database from
+a data analysis language like R.
+Other languages use almost exactly the same model:
+library and function names may differ,
+but the concepts are the same.</p>
+
+<p>Here’s a short R program that selects latitudes and longitudes
+from an SQLite database stored in a file called <code class="language-plaintext highlighter-rouge">survey.db</code>:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RSQLite</span><span class="p">)</span><span class="w">
+</span><span class="n">connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dbConnect</span><span class="p">(</span><span class="n">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s2">"survey.db"</span><span class="p">)</span><span class="w">
+</span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dbGetQuery</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s2">"SELECT Site.lat, Site.long FROM Site;"</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="w">
+</span><span class="n">dbDisconnect</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The program starts by importing the <code class="language-plaintext highlighter-rouge">RSQLite</code> library.
+If we were connecting to MySQL, DB2, or some other database,
+we would import a different library,
+but all of them provide the same functions,
+so that the rest of our program does not have to change
+(at least, not much)
+if we switch from one database to another.</p>
+
+<p>Line 2 establishes a connection to the database.
+Since we’re using SQLite,
+all we need to specify is the name of the database file.
+Other systems may require us to provide a use<span class="notranslate">rna</span>me and password as well.</p>
+
+<p>On line 3, we retrieve the results from an SQL query.
+It’s our job to make sure that SQL is properly formatted;
+if it isn’t,
+or if something goes wrong when it is being executed,
+the database will report an error.
+This result is a dataframe with one row for each entry and one column for each column in the database.</p>
+
+<p>Finally, the last line closes our connection,
+since the database can only keep a limited number of these open at one time.
+Since establishing a connection takes time,
+though,
+we shouldn’t open a connection,
+do one operation,
+then close the connection,
+only to reopen it a few microseconds later to do another operation.
+Instead,
+it’s normal to create one connection that stays open for the lifetime of the program.</p>
+
+<p>Queries in real applications will often depend on values provided by users.
+For example,
+this function takes a user’s ID as a parameter and returns their name:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RSQLite</span><span class="p">)</span><span class="w">
+
+</span><span class="n">connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dbConnect</span><span class="p">(</span><span class="n">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s2">"survey.db"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">getName</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">personID</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">query</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"SELECT personal || ' ' || family FROM Person WHERE id =='"</span><span class="p">,</span><span class="w">
+                  </span><span class="n">personID</span><span class="p">,</span><span class="w"> </span><span class="s2">"';"</span><span class="p">)</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">dbGetQuery</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">))</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"full name for dyer:"</span><span class="p">,</span><span class="w"> </span><span class="n">getName</span><span class="p">(</span><span class="s1">'dyer'</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">dbDisconnect</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We use string concatenation on the first line of this function
+to construct a query containing the user ID we have been given.
+This seems simple enough,
+but what happens if someone gives us this string as input?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dyer'; DROP TABLE Survey; SELECT '
+</code></pre></div></div>
+
+<p>It looks like there’s garbage after the user’s ID,
+but it is very carefully chosen garbage.
+If we insert this string into our query,
+the result is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT personal || ' ' || family FROM Person WHERE id='dyer'; DROP TABLE Survey; SELECT '';
+</code></pre></div></div>
+
+<p>If we execute this,
+it will erase one of the tables in our database.</p>
+
+<p>This is called an SQL injection attack,
+and it has been used to attack thousands of programs over the years.
+In particular,
+many web sites that take data from users insert values directly into queries
+without checking them carefully first.
+A very <a href="https://xkcd.com/327/">relevant XKCD</a> that explains the
+dangers of using raw input in queries a little more succinctly:</p>
+
+<p><img src="https://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="A 4 panel comic, in the first panel a person is shown answering the phone, hearing that their son's school has some computer trouble. In panel 2 they apologises asking if their child broke something. In panel 3, the unseen person on the other end of the phone call asks if they really named their son Robert'); Drop table students;--? They respond saying 'oh yes. little bobby tables we call him.' In the 4th panel the caller says 'well we have lost this years student records, I hope you're happy.' They respond 'And I hope you've learned to sanitize your database inputs'." loading="lazy" /></p>
+
+<p>Since an unscrupulous parent might try to smuggle commands into our queries in many different ways,
+the safest way to deal with this threat is
+to replace characters like quotes with their escaped equivalents,
+so that we can safely put whatever the user gives us inside a string.
+We can do this by using a prepared statement
+instead of formatting our statements as strings.
+Here’s what our example program looks like if we do this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RSQLite</span><span class="p">)</span><span class="w">
+</span><span class="n">connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dbConnect</span><span class="p">(</span><span class="n">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s2">"survey.db"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">getName</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">personID</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">query</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"SELECT personal || ' ' || family FROM Person WHERE id == ?"</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">dbGetPreparedQuery</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">personID</span><span class="p">)))</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"full name for dyer:"</span><span class="p">,</span><span class="w"> </span><span class="n">getName</span><span class="p">(</span><span class="s1">'dyer'</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">dbDisconnect</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The key changes are in the query string and the <code class="language-plaintext highlighter-rouge">dbGetQuery</code> call (we use dbGetPreparedQuery instead).
+Instead of formatting the query ourselves,
+we put question marks in the query template where we want to insert values.
+When we call <code class="language-plaintext highlighter-rouge">dbGetPreparedQuery</code>,
+we provide a dataframe
+that contains as many values as there are question marks in the query.
+The library matches values to question marks in order,
+and translates any special characters in the values
+into their escaped equivalents
+so that they are safe to use.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-filling-a-table-vs-printing-values"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Filling a Table vs. Printing Values</h3>
+
+  <p>Write an R program that creates a new database in a file called
+<code class="language-plaintext highlighter-rouge">original.db</code> containing a single table called <code class="language-plaintext highlighter-rouge">Pressure</code>, with a
+single field called <code class="language-plaintext highlighter-rouge">reading</code>, and inserts 100,000 random numbers
+between 10.0 and 25.0.  How long does it take this program to run?
+How long does it take to run a program that simply writes those
+random numbers to a file?</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-filtering-in-sql-vs-filtering-in-r"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Filtering in SQL vs. Filtering in R</h3>
+
+  <p>Write an R program that creates a new database called
+<code class="language-plaintext highlighter-rouge">backup.db</code> with the same structure as <code class="language-plaintext highlighter-rouge">original.db</code> and copies all
+the values greater than 20.0 from <code class="language-plaintext highlighter-rouge">original.db</code> to <code class="language-plaintext highlighter-rouge">backup.db</code>.
+Which is faster: filtering values in the query, or reading
+everything into memory and filtering in R?</p>
+</blockquote>
+
+<h2 id="database-helper-functions-in-r">Database helper functions in R</h2>
+
+<p>R’s database interface packages (like <code class="language-plaintext highlighter-rouge">RSQLite</code>) all share
+a common set of helper functions useful for exploring databases and
+reading/writing entire tables at once.</p>
+
+<p>To view all tables in a database, we can use <code class="language-plaintext highlighter-rouge">dbListTables()</code>:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dbConnect</span><span class="p">(</span><span class="n">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s2">"survey.db"</span><span class="p">)</span><span class="w">
+</span><span class="n">dbListTables</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To view all column names of a table, use <code class="language-plaintext highlighter-rouge">dbListFields()</code>:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dbListFields</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s2">"Survey"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To read an entire table as a dataframe, use <code class="language-plaintext highlighter-rouge">dbReadTable()</code>:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dbReadTable</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Finally to write an entire table to a database, you can use <code class="language-plaintext highlighter-rouge">dbWriteTable()</code>.
+Note that we will always want to use the <code class="language-plaintext highlighter-rouge">row.names = FALSE</code> argument or R
+will write the row names as a separate column.
+In this example we will write R’s built-in <code class="language-plaintext highlighter-rouge">iris</code> dataset as a table in <code class="language-plaintext highlighter-rouge">survey.db</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dbWriteTable</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s2">"iris"</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">dbReadTable</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s2">"iris"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>And as always, remember to close the database connection when done!</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dbDisconnect</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Data analysis languages have libraries for accessing databases.</p>
+</li>
+                        
+                        <li><p>To connect to a database, a program must use a library specific to that database manager.</p>
+</li>
+                        
+                        <li><p>R’s libraries can be used to directly query or read from a database.</p>
+</li>
+                        
+                        <li><p>Programs can read query results in batches or all at once.</p>
+</li>
+                        
+                        <li><p>Queries should be written using parameter substitution, not string formatting.</p>
+</li>
+                        
+                        <li><p>R has multiple helper functions to make working with databases easier.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=SQL with R (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">The Carpentries, Helena Rasche, 2021 <b>SQL with R (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-r/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-r/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-sql-r,
+author = "The Carpentries and Helena Rasche",
+title = "SQL with R (Galaxy Training Materials)",
+year = "2021",
+month = "10",
+day = "11"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-r/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
