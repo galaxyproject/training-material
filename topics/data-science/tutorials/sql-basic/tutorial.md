@@ -54,8 +54,8 @@ key_points:
 contributors:
 - carpentries
 - hexylena
-- Dirowa 
-- Bazante1
+- dirowa
+- bazante1
 
 subtopic: sql
 
@@ -835,7 +835,7 @@ issues.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Unions
+> ### {% icon question %} Question: Unions
 >
 > The `UNION` operator combines the results of two queries:
 >
@@ -882,7 +882,7 @@ issues.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Selecting Major Site Identifiers
+> ### {% icon question %} Question: Selecting Major Site Identifiers
 >
 > The site identifiers in the `Visited` table have two parts
 > separated by a '-':
@@ -1057,7 +1057,7 @@ detail in [the next section](#).
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} NULL in a Set
+> ### {% icon question %} Question: NULL in a Set
 >
 > What do you expect the following query to produce?
 >

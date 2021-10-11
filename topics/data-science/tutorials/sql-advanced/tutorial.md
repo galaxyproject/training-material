@@ -316,7 +316,7 @@ this query:
 3.  ordered those subsets first by `person`, and then within each sub-group by `quant`; and
 4.  counted the number of records in each subset, calculated the average `reading` in each, and chose a `person` and `quant` value from each (it doesn't matter which ones, since they're all equal).
 
-> ### {% icon question %} Counting Temperature Readings
+> ### {% icon question %} Question: Counting Temperature Readings
 >
 > How many temperature readings did Frank Pabodie record,
 > and what was their average value?
@@ -356,7 +356,7 @@ this query:
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} What Does This Query Do?
+> ### {% icon question %} Question: What Does This Query Do?
 >
 > We want to calculate the difference between
 > each individual radiation reading
@@ -399,7 +399,7 @@ this query:
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Ordering When Concatenating
+> ### {% icon question %} Question: Ordering When Concatenating
 >
 > The function `group_concat(field, separator)`
 > concatenates all the values in a field
@@ -548,7 +548,7 @@ and we can use those record numbers in queries:
 SELECT rowid, * FROM Person;
 ```
 
-> ### {% icon question %} Listing Radiation Readings
+> ### {% icon question %} Question: Listing Radiation Readings
 >
 > Write a query that lists all radiation readings from the DR-1 site.
 > > ### {% icon solution %} Solution
@@ -570,7 +570,7 @@ SELECT rowid, * FROM Person;
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Where's Frank?
+> ### {% icon question %} Question: Where's Frank?
 >
 > Write a query that lists all sites visited by people named "Frank".
 > > ### {% icon solution %} Solution
@@ -590,7 +590,7 @@ SELECT rowid, * FROM Person;
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Reading Queries
+> ### {% icon question %} Question: Reading Queries
 >
 > Describe in your own words what the following query produces:
 >
@@ -600,7 +600,7 @@ SELECT rowid, * FROM Person;
 > ```
 {: .question}
 
-> ### {% icon question %} Who Has Been Where?
+> ### {% icon question %} Question: Who Has Been Where?
 >
 > Write a query that shows each site with exact location (lat, long) ordered by visited date,
 > followed by personal name and family name of the person who visited the site
@@ -704,7 +704,7 @@ but organize our data that way because we have tools to manipulate it efficientl
 As anthropologists say,
 the tool shapes the hand that shapes the tool.
 
-> ### {% icon question %} Identifying Atomic Values
+> ### {% icon question %} Question: Identifying Atomic Values
 >
 > Which of the following are atomic values? Which are not? Why?
 >
@@ -728,7 +728,7 @@ the tool shapes the hand that shapes the tool.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Identifying a Primary Key
+> ### {% icon question %} Question: Identifying a Primary Key
 >
 > What is the primary key in this table?
 > I.e., what value or combination of values uniquely identifies a record?
@@ -912,7 +912,7 @@ this technique is outside the scope of this chapter.
 > but the files themselves live on disk.
 {: .tip}
 
-> ### {% icon question %} Replacing NULL
+> ### {% icon question %} Question: Replacing NULL
 >
 > Write an SQL statement to replace all uses of `null` in
 > `Survey.person` with the string `'unknown'`.
@@ -924,7 +924,7 @@ this technique is outside the scope of this chapter.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Backing Up with SQL
+> ### {% icon question %} Question: Backing Up with SQL
 >
 > SQLite has several administrative commands that aren't part of the
 > SQL standard.  One of them is `.dump`, which prints the SQL commands

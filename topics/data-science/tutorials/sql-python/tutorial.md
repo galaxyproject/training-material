@@ -294,7 +294,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 ```
 
 
-> ### {% icon question %} Filling a Table vs. Printing Values
+> ### {% icon question %} Question: Filling a Table vs. Printing Values
 >
 > Write a Python program that creates a new database in a file called
 > `original.db` containing a single table called `Pressure`, with a
@@ -341,7 +341,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Filtering in SQL vs. Filtering in Python
+> ### {% icon question %} Question: Filtering in SQL vs. Filtering in Python
 >
 > Write a Python program that creates a new database called
 > `backup.db` with the same structure as `original.db` and copies all
@@ -411,7 +411,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Generating Insert Statements
+> ### {% icon question %} Question: Generating Insert Statements
 >
 > One of our colleagues has sent us a
 > CSV

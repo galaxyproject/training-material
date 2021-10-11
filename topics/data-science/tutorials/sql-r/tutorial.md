@@ -200,7 +200,7 @@ and translates any special characters in the values
 into their escaped equivalents
 so that they are safe to use.
 
-> ### {% icon question %} Filling a Table vs. Printing Values
+> ### {% icon question %} Question: Filling a Table vs. Printing Values
 >
 > Write an R program that creates a new database in a file called
 > `original.db` containing a single table called `Pressure`, with a
@@ -210,7 +210,7 @@ so that they are safe to use.
 > random numbers to a file?
 {: .question}
 
-> ### {% icon question %} Filtering in SQL vs. Filtering in R
+> ### {% icon question %} Question: Filtering in SQL vs. Filtering in R
 >
 > Write an R program that creates a new database called
 > `backup.db` with the same structure as `original.db` and copies all
