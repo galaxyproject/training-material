@@ -7,7 +7,15 @@ module Jekyll
     end
 
     def render(context)
-        %Q(<span class="text-muted">[citation hidden; run 'make serve-full' to show]</span>)
+      begin
+        citation_text = context.registers[:site].config['cached_citeproc'].render(:citation, id: @text)
+        res = %Q(<span class="citation">#{citation_text}</span>)
+      rescue
+        puts "[GTN/scholar] Could not render #{@text}"
+        res = %Q(<span>ERROR INVALID CITATION #{@text}</span>)
+      end
+
+      res
     end
 
     private
