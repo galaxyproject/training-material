@@ -30,7 +30,7 @@ tags:
 - 10x
 - paper-replication
 - interactive-tools
-Colaboradores:
+contributors:
 - nomadscientist
 - pclo
 - beatrizserrano
@@ -485,7 +485,7 @@ Utilizando el `General - Filtered object` final, puedes obtener un resumen de tu
 
 # Procesamiento
 
-Por el momento tienes una matriz de 7874 células por 14832 genes. Estos son muchos datos. Tenemos dos problemas aquí - primero, ya sabes que hay diferencias en cuántos transcritos y genes han sido cuantificados por células. Esta variable técnica puede no dejar muy en claro diferencias biológicas. Segundo, nos encanta visualizar resultados en gráficos x/y. Por ejemplo, *Gapdh* puede ser uno de los ejes, y *Actin* puede ser otro, y grafica las células en los ejes bidimensionales con base en cuántos transcritos posee cada una. Esto puede ser bueno, pero añadir una tercera dimensión (o en este caso, 14830 dimensiones más) es un poco más complejo. Por tanto, nuestros siguientes pasos se enfocan en transformar nuestro enorme objeto de datos en algo que sea más fácil de analizar y visualizar.  
+Por el momento tienes una matriz de 7874 células por 14832 genes. Estos son muchos datos. Tenemos dos problemas aquí - primero, ya sabes que hay diferencias en cuántos transcritos y genes han sido cuantificados por células. Esta variable técnica puede no dejar muy en claro diferencias biológicas. Segundo, nos encanta visualizar resultados en gráficos x/y. Por ejemplo, *Gapdh* puede ser uno de los ejes, y *Actin* puede ser otro, y grafica las células en los ejes bidimensionales con base en cuántos transcritos posee cada una. Esto puede ser bueno, pero añadir una tercera dimensión (o en este caso, 14830 dimensiones más) es un poco más complejo. Por tanto, nuestros siguientes pasos se enfocan en transformar nuestro enorme objeto de datos en algo que sea más fácil de analizar y visualizar.
 
 > ### {% icon hands_on %} Práctica: Normalización
 >
@@ -524,7 +524,7 @@ Seguimos teniendo demasiadas dimensiones. Los cambios de transcritos usualmente 
 Los componentes principales se calculan a partir de datos con alta dimensionalidad para poder encontrar la mayor dispersión en el conjunto de datos. Así es que, en nuestras `2262` dimensiones con gran variabilidad, tendremos una línea (eje) que refleje la mayor dispersión y variación a través de las células. Ese será nuestro Componente Principal. Podemos calcular los primeros componentes principales `x` en nuestros datos para reducir drásticamente el número de dimensiones.
 
 > ### {% icon comment %} ¿2262?
-> ¿De dónde proviene el `2262`? La forma más rápida de figurar cuantos genes tienes con alta variabilidad, en mi opinión, es volver a ejecutar {% icon galaxy-refresh %} la herramienta **Scanpy FindVariableGenes** y seleccionar el parámetro *Remove genes not marked as highly variable* (“eliminar genes que no están marcados con alta variabilidad”). Después puedes inspeccionar el objeto resultante y verás que hay sólo 2262 genes. En los siguientes pasos el proceso únicamente utilizará los genes con alta variabilidad para realizar sus cálculos, pero como regla general, te recomiendo encarecidamente que incluyas los genes no variables (ejemplo, utiliza la salida general de tu herramienta FindVariableGenes, la cual contiene más de 2262 genes). Este tutorial no funcionará al final de la etapa de graficación si únicamente utilizas solo los 2262 o 2000 genes con alta variabilidad (si es que le impones algún límite).  
+> ¿De dónde proviene el `2262`? La forma más rápida de figurar cuantos genes tienes con alta variabilidad, en mi opinión, es volver a ejecutar {% icon galaxy-refresh %} la herramienta **Scanpy FindVariableGenes** y seleccionar el parámetro *Remove genes not marked as highly variable* (“eliminar genes que no están marcados con alta variabilidad”). Después puedes inspeccionar el objeto resultante y verás que hay sólo 2262 genes. En los siguientes pasos el proceso únicamente utilizará los genes con alta variabilidad para realizar sus cálculos, pero como regla general, te recomiendo encarecidamente que incluyas los genes no variables (ejemplo, utiliza la salida general de tu herramienta FindVariableGenes, la cual contiene más de 2262 genes). Este tutorial no funcionará al final de la etapa de graficación si únicamente utilizas solo los 2262 o 2000 genes con alta variabilidad (si es que le impones algún límite).
 
 {: .comment}
 
@@ -654,7 +654,7 @@ Por fin, ¡identifiquemos clusters! Por desgracia, esto no es tan “majestuoso�
 >
 {: .hands_on}
 
-Ahora, hay un pequeño problema aquí, y es que cuando inspeccionas la tabla de salida de marcadores, no verás nombres de genes, sino que verás los IDs de Ensembl. Aunque esta es una forma más precisa de hacerlo desde el punto de vista bioinformático (¡cada ID no tiene un nombre de gen!), es probable que queramos ver los nombres de los genes más reconocidos ¡así que introduzcamos algo de esa información!  
+Ahora, hay un pequeño problema aquí, y es que cuando inspeccionas la tabla de salida de marcadores, no verás nombres de genes, sino que verás los IDs de Ensembl. Aunque esta es una forma más precisa de hacerlo desde el punto de vista bioinformático (¡cada ID no tiene un nombre de gen!), es probable que queramos ver los nombres de los genes más reconocidos ¡así que introduzcamos algo de esa información!
 
 
 > ### {% icon hands_on %} Práctica: Añadir los nombres de los genes
@@ -663,7 +663,7 @@ Ahora, hay un pequeño problema aquí, y es que cuando inspeccionas la tabla de 
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
-> Esto proporciona a nuestra tabla todos los posibles genes con sus nombres.  
+> Esto proporciona a nuestra tabla todos los posibles genes con sus nombres.
 >
 > 2. {% tool [Join two Datasets side by side on a specified field](join1) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Join"*: {% icon param-files %} Select multiple files: `Markers - cluster` and `Markers - genotype`
@@ -771,7 +771,7 @@ Los autores no estaban interesados en seguir anotando las células DP, así que 
 >    - *"Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`
 >    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
->    - Has añadido las nuevas anotaciones de las células, ahora titulada  `louvain_0´. ¿Qué, no es suficiente? ¿Quieres cambiar el título también? Que así sea.  
+>    - Has añadido las nuevas anotaciones de las células, ahora titulada  `louvain_0´. ¿Qué, no es suficiente? ¿Quieres cambiar el título también? Que así sea.
 >
 > 3. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} {% icon tool %} con los siguientes parámetros::
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: (output of **AnnData Operations** {% icon tool %})
@@ -823,7 +823,7 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 > > ### {% icon solution %} Solución
 > >
 > >Si bien se esperan algunos cambios, no hay nada de qué preocuparse, DP-L parece estar limitado a  sólo dos muestras: N706 y N705. Ahora, para ser justos, ambas son de fenotipo normal, pero aún así, no es bueno que sólo el 50% de las muestras de fenotipo normal estén realmente en ese grupo. ¿Se puede decir que es la razón por la que no hay células knockout allí? Es posible que haya un poco de efecto de lote “batch effect”, por lo que se debería considerar el uso de la corrección de lote en este conjunto de datos. Sin embargo, si centramos nuestra atención en el otro agrupamiento -células T maduras- en el que hay mezcla de lotes, todavía podemos evaluar esto biológicamente incluso sin corrección de lotes.
-> > Además, también analizaremos el effecto de confusión del sexo.  
+> > Además, también analizaremos el effecto de confusión del sexo.
 > >
 > > ![Sex effect](../../images/wab-sex-batch.png "Diferencias de sexo")
 > >
