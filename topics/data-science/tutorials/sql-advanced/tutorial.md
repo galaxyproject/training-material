@@ -333,6 +333,11 @@ this query:
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ## Averaging with NULL
 >
 > The average of a set of values is the sum of the values
@@ -355,6 +360,11 @@ this query:
 > > ```
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 > ### {% icon question %} Question: What Does This Query Do?
 >
@@ -399,6 +409,11 @@ this query:
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Ordering When Concatenating
 >
 > The function `group_concat(field, separator)`
@@ -414,6 +429,11 @@ this query:
 >
 > Can you find a way to order the list by surname?
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 
 # Combining Data
@@ -570,6 +590,11 @@ SELECT rowid, * FROM Person;
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Where's Frank?
 >
 > Write a query that lists all sites visited by people named "Frank".
@@ -590,6 +615,11 @@ SELECT rowid, * FROM Person;
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Reading Queries
 >
 > Describe in your own words what the following query produces:
@@ -599,6 +629,11 @@ SELECT rowid, * FROM Person;
 > ON Site.lat < -49.0 AND Site.name = Visited.site AND Visited.dated >= '1932-01-01';
 > ```
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 > ### {% icon question %} Question: Who Has Been Where?
 >
@@ -638,6 +673,11 @@ SELECT rowid, * FROM Person;
 > >DR-1    |    -49.85   |   -128.57   |  Valentina  | Roerich  |   rad     |    11.25  |   1932-03-22
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 A good visual explanation of joins can be found [here][joinref]
 
@@ -728,6 +768,11 @@ the tool shapes the hand that shapes the tool.
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Identifying a Primary Key
 >
 > What is the primary key in this table?
@@ -741,6 +786,11 @@ the tool shapes the hand that shapes the tool.
 > > Latitude, longitude, and date are all required to uniquely identify the temperature record.
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 # Creating and Modifying Data
 
@@ -924,6 +974,11 @@ this technique is outside the scope of this chapter.
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Backing Up with SQL
 >
 > SQLite has several administrative commands that aren't part of the
@@ -948,6 +1003,11 @@ this technique is outside the scope of this chapter.
 > > - Artificial differences between commits because records don't have a fixed order
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 [create-table]: https://www.sqlite.org/lang_createtable.html
 [drop-table]: https://www.sqlite.org/lang_droptable.html

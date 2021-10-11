@@ -259,6 +259,11 @@ the convention that we will use for this lesson.
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 While we are on the topic of SQL's syntax, one aspect of SQL's syntax
 that can frustrate novices and experts alike is forgetting to finish a
 command with `;` (semicolon).  When you press enter for a command
@@ -317,6 +322,12 @@ SELECT * FROM Person;
 > {: .solution}
 {: .question}
 
+
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Query Style
 >
 > Many people format queries as:
@@ -333,6 +344,11 @@ SELECT * FROM Person;
 >
 > What style do you find easiest to read, and why?
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 
 # Sorting and Removing Duplicates
@@ -467,6 +483,11 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Displaying Full Names
 >
 > Write a query that displays the full names of the scientists in the `Person` table,
@@ -487,6 +508,11 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 > > |Valentina |Roerich   |
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 > ### {% icon tip %} Tip: Is sorting names useful?
 > If you are someone with a name which falls at the end of the alphabet, you've likely been
@@ -713,6 +739,11 @@ not to the entire rows as they are being processed.
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Finding Outliers
 >
 > Normalized salinity readings are supposed to be between 0.0 and 1.0.
@@ -731,6 +762,11 @@ not to the entire rows as they are being processed.
 > > |837       |roe       |sal       |22.5      |
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 > ### {% icon question %} Question:  Matching Patterns
 >
@@ -751,6 +787,11 @@ not to the entire rows as they are being processed.
 > > 5. True because the first wildcard matches `l` and the second wildcard matches `ha`.
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 > ### {% icon tip %} Case-insensitive matching
 > But what about if you don't care about if it's `ALPHA` or `alpha` in the database, and you are
@@ -835,6 +876,11 @@ issues.
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Unions
 >
 > The `UNION` operator combines the results of two queries:
@@ -882,6 +928,11 @@ issues.
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Selecting Major Site Identifiers
 >
 > The site identifiers in the `Visited` table have two parts
@@ -913,6 +964,11 @@ issues.
 > > ```
 > {: .solution}
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
 
 # Missing Data
 
@@ -1057,6 +1113,11 @@ detail in [the next section](#).
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: NULL in a Set
 >
 > What do you expect the following query to produce?
@@ -1087,6 +1148,11 @@ detail in [the next section](#).
 > {: .solution}
 {: .question}
 
+```sql
+%%sql
+-- Try solutions here!
+```
+
 > ### {% icon question %} Question: Pros and Cons of Sentinels
 >
 > Some database designers prefer to use
@@ -1099,3 +1165,8 @@ detail in [the next section](#).
 > What does this simplify?
 > What burdens or risks does it introduce?
 {: .question}
+
+```sql
+%%sql
+-- Try solutions here!
+```
