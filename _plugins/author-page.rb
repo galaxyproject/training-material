@@ -15,7 +15,6 @@ module Jekyll
         site.pages.each {|t|
           # Tutorials
           if t['layout'] == 'tutorial_hands_on' && ! t.data['contributors'].nil?
-            puts "#{t.path} #{t.data}"
             t.data['contributors'].each{|c| tutorials_by_author[c].push(t) }
           end
 
@@ -30,7 +29,7 @@ module Jekyll
           end
         }
 
-        site.data['contributors'].each_key do |contributor|
+        site.data['contributors'].select{|c| c['halloffame'] != "no"}.each_key do |contributor|
           # Using PageWithoutAFile instead of a custom class which reads files
           # from disk each time, saves some time, but it is unclear how much
           # due to how the previous was accounted. But assuming 0.040s per page * 193 should be about 8 seconds.
