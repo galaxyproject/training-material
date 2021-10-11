@@ -327,7 +327,7 @@ One of the most common uses for factors is to plot categorical values. For examp
 >    ```
 {: .hands_on}
 
-![feature plot](../../images/rna-seq-counts-to-viz-in-r/featurePlot.png)
+![feature plot](../../../introduction/images/rna-seq-counts-to-viz-in-r/featurePlot.png)
 
 This isn't a particularly pretty example of a plot. We'll be learning much more about creating nice, publication-quality graphics later.
 
