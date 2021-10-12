@@ -27,7 +27,7 @@ module Jekyll
         citation_text = context.registers[:site].config['cached_citeproc'].render(:citation, id: @text)
         res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
       rescue
-        puts "[GTN/scholar] Could not render #{@text}"
+        puts "[GTN/scholar] Could not render #{@text} from #{source_page}"
         res = %Q(<span>ERROR INVALID CITATION #{@text}</span>)
       end
 
