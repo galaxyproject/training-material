@@ -34,10 +34,13 @@ jobs:
           ruby-version: "2.5"
       - uses: actions/cache@v2
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          path:
+          - vendor/bundle
+          - ~/.cache/pip
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-gems-
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-
+            ${{ runner.os }}-gems--py-
       - name: Install dependencies
         run: |
           gem install bundler
