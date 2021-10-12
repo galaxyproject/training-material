@@ -283,7 +283,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-09-16 14:24:33 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Generating a single cell matrix using Alevin",
   "interactivityType": "mixed",
@@ -979,8 +979,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -1061,11 +1059,11 @@
   <li><a href="https://salmon.readthedocs.io/en/latest/alevin.html">Alevin</a> - another transcriptome analysis method developed by the authors of the Salmon tool.</li>
 </ul>
 
-<p>We’re going to use Alevin <a class="citation" href="#article-Alevin">Srivastava <i>et al.</i> 2019</a> for demonstration purposes, but we do not endorse one method over another.</p>
+<p>We’re going to use Alevin <span class="citation"><a href="#article-Alevin">Srivastava <i>et al.</i> 2019</a></span> for demonstration purposes, but we do not endorse one method over another.</p>
 
 <h2 id="get-data">Get Data</h2>
 
-<p>We’ve provided you with some example data to play with, a small subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction <a class="citation" href="#Bacon2018">Bacon <i>et al.</i> 2018</a> (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it’s real, it’s messy, it desperately needs filtering, it has background <span class="notranslate">RNA</span> running around, and most of all it will give you a chance to practice your analysis as if this data were yours.</p>
+<p>We’ve provided you with some example data to play with, a small subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it’s real, it’s messy, it desperately needs filtering, it has background <span class="notranslate">RNA</span> running around, and most of all it will give you a chance to practice your analysis as if this data were yours.</p>
 
 <p>Down-sampled <span class="notranslate">reads</span> and some associated annotation can be downloaded from Zenodo below, or you can import this <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin">example input history</a>. How did I downsample these FASTQ files? Check out <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample">this history</a> to find out!
 Additionally, to map your <span class="notranslate">reads</span>, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest from Ensembl <a href="https://www.ensembl.org/info/data/ftp/index.html">here</a>. Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!</p>
@@ -1498,7 +1496,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <h1 id="emptydrops">emptyDrops</h1>
 
-<p>emptyDrops <a class="citation" href="#article-emptyDrops">Lun <i>et al.</i> 2019</a> works with a specific form of R object called a SingleCellExperiment. We need to convert our transformed MTX files into that form, using the DropletUtils Read10x tool:</p>
+<p>emptyDrops <span class="citation"><a href="#article-emptyDrops">Lun <i>et al.</i> 2019</a></span> works with a specific form of R object called a SingleCellExperiment. We need to convert our transformed MTX files into that form, using the DropletUtils Read10x tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-converting-to-singlecellexperiment-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Converting to SingleCellExperiment format</h3>
@@ -1964,7 +1962,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <h1 id="pulling-single-cell-data-from-public-resources">Pulling <span class="notranslate">single cell</span> data from public resources</h1>
 
-<p>If you happen to be interested in analysing publicly available data, particularly from the <a href="https://www.ebi.ac.uk/gxa/sc/home"><span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a>, you may be interested in the following tool <a class="citation" href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a> which rather skips forward all these steps in one! For this tutorial, the dataset can be seen <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads">here</a> with experiment id of <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code>.</p>
+<p>If you happen to be interested in analysing publicly available data, particularly from the <a href="https://www.ebi.ac.uk/gxa/sc/home"><span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a>, you may be interested in the following tool <span class="citation"><a href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a></span> which rather skips forward all these steps in one! For this tutorial, the dataset can be seen <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads">here</a> with experiment id of <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-retrieving-data-from-single-cell-expression-atlas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieving data from <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</h3>
@@ -2041,46 +2039,10 @@ You may be interested in seeing an <a href="https://humancellatlas.usegalaxy.eu/
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9:</span>
-    
-    
-    <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="article-Alevin">Srivastava, A., L. Malik, T. Smith, I. Sudbery, and R. Patro, 2019 <b>Alevin efficiently estimates accurate gene abundances from dscRNA-seq data</b>. Genome Biology 20:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s13059-019-1670-y">10.1186/s13059-019-1670-y</a>
-    
-    
-
-</li>
-<li><span id="article-emptyDrops">Lun, A., S. Riesenfeld, T. Andrews, T. Dao, T. Gomes <i>et al.</i>, 2019 <b>EmptyDrops: Distinguishing cells from empty droplets in droplet-based single-cell RNA sequencing data</b>. Genome Biology 20: 63.</span>
-    
-    
-    <a href="https://doi.org/10.1186/s13059-019-1662-y">10.1186/s13059-019-1662-y</a>
-    
-    
-
-</li>
-<li><span id="Moreno2020.04.08.032698">Moreno, P., N. Huang, J. R. Manning, S. Mohammed, A. Solovyev <i>et al.</i>, 2020 <b>User-friendly, scalable tools and workflows for single-cell analysis</b>. bioRxiv.</span>
-    
-    
-    <a href="https://doi.org/10.1101/2020.04.08.032698">10.1101/2020.04.08.032698</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.biorxiv.org/content/early/2020/04/09/2020.04.08.032698">https://www.biorxiv.org/content/early/2020/04/09/2020.04.08.032698</a>
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
+<li id="article-emptyDrops">Lun, A., S. Riesenfeld, T. Andrews, T. Dao, T. Gomes <i>et al.</i>, 2019 <b>EmptyDrops: Distinguishing cells from empty droplets in droplet-based single-cell RNA sequencing data</b>. Genome Biology 20: 63. <a href="https://doi.org/10.1186/s13059-019-1662-y">10.1186/s13059-019-1662-y</a></li>
+<li id="article-Alevin">Srivastava, A., L. Malik, T. Smith, I. Sudbery, and R. Patro, 2019 <b>Alevin efficiently estimates accurate gene abundances from dscRNA-seq data</b>. Genome Biology 20: <a href="https://doi.org/10.1186/s13059-019-1670-y">10.1186/s13059-019-1670-y</a></li>
+<li id="Moreno2020.04.08.032698">Moreno, P., N. Huang, J. R. Manning, S. Mohammed, A. Solovyev <i>et al.</i>, 2020 <b>User-friendly, scalable tools and workflows for single-cell analysis</b>. bioRxiv. <a href="https://doi.org/10.1101/2020.04.08.032698">10.1101/2020.04.08.032698</a> <a href="https://www.biorxiv.org/content/early/2020/04/09/2020.04.08.032698">https://www.biorxiv.org/content/early/2020/04/09/2020.04.08.032698</a></li></ol>
                 
 
                 

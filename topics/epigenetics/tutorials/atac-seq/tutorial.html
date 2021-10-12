@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-06-22 11:03:25 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "ATAC-Seq data analysis",
   "interactivityType": "mixed",
@@ -756,8 +756,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -843,7 +841,7 @@
 
 <p>With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A <a href="https://en.wikipedia.org/wiki/Transposase">transposase</a> can bind to a <a href="https://en.wikipedia.org/wiki/Transposable_element">transposable element</a>, which is a <span class="notranslate">DNA</span> sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts <span class="notranslate">DNA</span> sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the <span class="notranslate">DNA</span> is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end <span class="notranslate">reads</span> are recommended for ATAC-Seq for the reasons described <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>.</p>
 
-<p>In this tutorial we will use data from the study of <a class="citation" href="#Buenrostro2013">Buenrostro <i>et al.</i> 2013</a>, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million <span class="notranslate">reads</span> and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected <span class="notranslate">reads</span>. We also added about 200,000 <span class="notranslate">reads</span> pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million <span class="notranslate">reads</span> in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a <span class="notranslate">DNA</span>-binding protein implicated in 3D structure: <a href="https://en.wikipedia.org/wiki/CTCF">CTCF</a>. CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).</p>
+<p>In this tutorial we will use data from the study of <span class="citation"><a href="#Buenrostro2013">Buenrostro <i>et al.</i> 2013</a></span>, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million <span class="notranslate">reads</span> and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected <span class="notranslate">reads</span>. We also added about 200,000 <span class="notranslate">reads</span> pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million <span class="notranslate">reads</span> in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a <span class="notranslate">DNA</span>-binding protein implicated in 3D structure: <a href="https://en.wikipedia.org/wiki/CTCF">CTCF</a>. CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).</p>
 
 <h3 class="no_toc" id="when-working-with-real-data">When working with real data</h3>
 <p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control">this <span class="notranslate">workflow</span></a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this <span class="notranslate">workflow</span>, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified <span class="notranslate">DNA</span>.</p>
@@ -1045,7 +1043,7 @@ To be able to have the exon information, you could use a GTF file which can be d
 
 <h2 id="quality-control">Quality Control</h2>
 
-<p>The first step is to check the quality of the <span class="notranslate">reads</span> and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get <span class="notranslate">DNA</span> fragments of about 40 bp if two adjacent Tn5 transposases cut the <span class="notranslate">DNA</span> <a class="citation" href="#Adey2010">Adey <i>et al.</i> 2010</a>. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those <span class="notranslate">reads</span>. We can assess the <span class="notranslate">reads</span> with <strong>FastQC</strong>.</p>
+<p>The first step is to check the quality of the <span class="notranslate">reads</span> and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get <span class="notranslate">DNA</span> fragments of about 40 bp if two adjacent Tn5 transposases cut the <span class="notranslate">DNA</span> <span class="citation"><a href="#Adey2010">Adey <i>et al.</i> 2010</a></span>. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those <span class="notranslate">reads</span>. We can assess the <span class="notranslate">reads</span> with <strong>FastQC</strong>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1079,7 +1077,7 @@ To be able to have the exon information, you could use a GTF file which can be d
             <li>
               <p><strong>Per base sequence content</strong></p>
 
-              <p>It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in <a class="citation" href="#Green2012">Green <i>et al.</i> 2012</a>.</p>
+              <p>It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in <span class="citation"><a href="#Green2012">Green <i>et al.</i> 2012</a></span>.</p>
             </li>
             <li>
               <p><strong>Sequence Duplication Levels</strong></p>
@@ -1402,7 +1400,7 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
 
 </blockquote>
 
-<p>High numbers of mitochondrial <span class="notranslate">reads</span> can be a problem in ATAC-Seq. Some ATAC-Seq samples have been reported to be 80% mitochondrial <span class="notranslate">reads</span> and so wet-lab methods have been developed to deal with this issue <a class="citation" href="#Corces2017">Corces <i>et al.</i> 2017</a> and <a class="citation" href="#Litzenburger2017">Litzenburger <i>et al.</i> 2017</a>. It can be a useful QC to assess the number of mitochondrial <span class="notranslate">reads</span>.
+<p>High numbers of mitochondrial <span class="notranslate">reads</span> can be a problem in ATAC-Seq. Some ATAC-Seq samples have been reported to be 80% mitochondrial <span class="notranslate">reads</span> and so wet-lab methods have been developed to deal with this issue <span class="citation"><a href="#Corces2017">Corces <i>et al.</i> 2017</a></span> and <span class="citation"><a href="#Litzenburger2017">Litzenburger <i>et al.</i> 2017</a></span>. It can be a useful QC to assess the number of mitochondrial <span class="notranslate">reads</span>.
 However, it does not predict the quality of the rest of the data. It is just that sequencing <span class="notranslate">reads</span> have been wasted.</p>
 
 <blockquote class="tip">
@@ -1563,7 +1561,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 <blockquote class="comment">
   <h3 id="comment-comment-on-tn5-insertion"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment on Tn5 insertion</h3>
 
-  <p>When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp (<a class="citation" href="#Kia2017">Kia <i>et al.</i> 2017</a>):</p>
+  <p>When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp (<span class="citation"><a href="#Kia2017">Kia <i>et al.</i> 2017</a></span>):</p>
   <figure id="figure-16"><img src="../../images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera Library Construction" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Nextera Library Construction</figcaption></figure>
 
   <p>This means in order to have the read start site reflecting the centre of where Tn5 bound, the <span class="notranslate">reads</span> on the positive strand should be shifted 4 bp to the right and <span class="notranslate">reads</span> on the negative strands should be shifted 5 bp to the left as in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825">Buenrostro et al. 2013</a>. <strong>Genrich</strong> can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don’t take it into account but if you are interested in the footprint, this is important.</p>
@@ -1645,7 +1643,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 <h2 id="prepare-the-datasets">Prepare the Datasets</h2>
 
 <h3 id="extract-ctcf-peaks-on-chr22-in-intergenic-regions">Extract CTCF peaks on chr22 in intergenic regions</h3>
-<p>As our training dataset is focused on chromosome 22 we will only use the CTCF peaks from chr22. We expect to have ATAC-seq coverage at TSS but only good ATAC-seq have coverage on intergenic CTCF. Indeed, the CTCF protein is able to position nucleosomes and creates a region depleted of nucleosome of around 120bp <a class="citation" href="#fu_insulator_2008">Fu <i>et al.</i> 2008</a>. This is smaller than the 200bp nucleosome-free region around TSS and also probably not present in all cells. Thus it is more difficult to get enrichment. In order to get the list of intergenic CTCF peaks of chr22, we will first select the peaks on chr22 and then exclude the one which overlap with genes.</p>
+<p>As our training dataset is focused on chromosome 22 we will only use the CTCF peaks from chr22. We expect to have ATAC-seq coverage at TSS but only good ATAC-seq have coverage on intergenic CTCF. Indeed, the CTCF protein is able to position nucleosomes and creates a region depleted of nucleosome of around 120bp <span class="citation"><a href="#fu_insulator_2008">Fu <i>et al.</i> 2008</a></span>. This is smaller than the 200bp nucleosome-free region around TSS and also probably not present in all cells. Thus it is more difficult to get enrichment. In order to get the list of intergenic CTCF peaks of chr22, we will first select the peaks on chr22 and then exclude the one which overlap with genes.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-select-ctcf-peaks-from-chr22-in-intergenic-regions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Select CTCF peaks from chr22 in intergenic regions:</h3>
@@ -2024,80 +2022,13 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>MA
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="fu_insulator_2008">Fu, Y., M. Sinha, C. L. Peterson, and Z. Weng, 2008 <b>The insulator binding protein CTCF positions 20 nucleosomes around its binding sites across the human genome</b>. PLoS genetics 4: e1000138.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pgen.1000138">10.1371/journal.pgen.1000138</a>
-    
-    
-
-</li>
-<li><span id="Adey2010">Adey, A., H. G. Morrison, A. (no last name), X. Xun, J. O. Kitzman <i>et al.</i>, 2010 <b>Rapid,  low-input,  low-bias construction of shotgun fragment libraries by high-density in vitro transposition</b>. Genome Biology 11: R119.</span>
-    
-    
-    <a href="https://doi.org/10.1186/gb-2010-11-12-r119">10.1186/gb-2010-11-12-r119</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Green2012">Green, B., C. Bouchier, C. Fairhead, N. L. Craig, and B. P. Cormack, 2012 <b>Insertion site preference of Mu,  Tn5,  and Tn7 transposons</b>. Mobile DNA 3: 3.</span>
-    
-    
-    <a href="https://doi.org/10.1186/1759-8753-3-3">10.1186/1759-8753-3-3</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Buenrostro2013">Buenrostro, J. D., P. G. Giresi, L. C. Zaba, H. Y. Chang, and W. J. Greenleaf, 2013 <b>Transposition of native chromatin for fast and sensitive epigenomic profiling of open chromatin,  DNA-binding proteins and nucleosome position</b>. Nature Methods 10: 1213–1218.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nmeth.2688">10.1038/nmeth.2688</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Litzenburger2017">Litzenburger, U. M., J. D. Buenrostro, B. Wu, Y. Shen, N. C. Sheffield <i>et al.</i>, 2017 <b>Single-cell epigenomic variability reveals functional cancer heterogeneity</b>. Genome Biology 18:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s13059-016-1133-7">10.1186/s13059-016-1133-7</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Kia2017">Kia, A., C. Gloeckner, T. Osothprarop, N. Gormley, E. Bomati <i>et al.</i>, 2017 <b>Improved genome sequencing using an engineered transposase</b>. BMC Biotechnology 17:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s12896-016-0326-1">10.1186/s12896-016-0326-1</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Corces2017">Corces, M. R., A. E. Trevino, E. G. Hamilton, P. G. Greenside, N. A. Sinnott-Armstrong <i>et al.</i>, 2017 <b>An improved ATAC-seq protocol reduces background and enables interrogation of frozen tissues</b>. Nature Methods 14: 959–962.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nmeth.4396">10.1038/nmeth.4396</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="fu_insulator_2008">Fu, Y., M. Sinha, C. L. Peterson, and Z. Weng, 2008 <b>The insulator binding protein CTCF positions 20 nucleosomes around its binding sites across the human genome</b>. PLoS genetics 4: e1000138. <a href="https://doi.org/10.1371/journal.pgen.1000138">10.1371/journal.pgen.1000138</a></li>
+<li id="Adey2010">Adey, A., H. G. Morrison, A. (no last name), X. Xun, J. O. Kitzman <i>et al.</i>, 2010 <b>Rapid,  low-input,  low-bias construction of shotgun fragment libraries by high-density in vitro transposition</b>. Genome Biology 11: R119. <a href="https://doi.org/10.1186/gb-2010-11-12-r119">10.1186/gb-2010-11-12-r119</a></li>
+<li id="Green2012">Green, B., C. Bouchier, C. Fairhead, N. L. Craig, and B. P. Cormack, 2012 <b>Insertion site preference of Mu,  Tn5,  and Tn7 transposons</b>. Mobile DNA 3: 3. <a href="https://doi.org/10.1186/1759-8753-3-3">10.1186/1759-8753-3-3</a></li>
+<li id="Buenrostro2013">Buenrostro, J. D., P. G. Giresi, L. C. Zaba, H. Y. Chang, and W. J. Greenleaf, 2013 <b>Transposition of native chromatin for fast and sensitive epigenomic profiling of open chromatin,  DNA-binding proteins and nucleosome position</b>. Nature Methods 10: 1213–1218. <a href="https://doi.org/10.1038/nmeth.2688">10.1038/nmeth.2688</a></li>
+<li id="Corces2017">Corces, M. R., A. E. Trevino, E. G. Hamilton, P. G. Greenside, N. A. Sinnott-Armstrong <i>et al.</i>, 2017 <b>An improved ATAC-seq protocol reduces background and enables interrogation of frozen tissues</b>. Nature Methods 14: 959–962. <a href="https://doi.org/10.1038/nmeth.4396">10.1038/nmeth.4396</a></li>
+<li id="Kia2017">Kia, A., C. Gloeckner, T. Osothprarop, N. Gormley, E. Bomati <i>et al.</i>, 2017 <b>Improved genome sequencing using an engineered transposase</b>. BMC Biotechnology 17: <a href="https://doi.org/10.1186/s12896-016-0326-1">10.1186/s12896-016-0326-1</a></li>
+<li id="Litzenburger2017">Litzenburger, U. M., J. D. Buenrostro, B. Wu, Y. Shen, N. C. Sheffield <i>et al.</i>, 2017 <b>Single-cell epigenomic variability reveals functional cancer heterogeneity</b>. Genome Biology 18: <a href="https://doi.org/10.1186/s13059-016-1133-7">10.1186/s13059-016-1133-7</a></li></ol>
                 
 
                 

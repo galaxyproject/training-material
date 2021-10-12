@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-09-02 10:24:50 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring",
   "interactivityType": "mixed",
@@ -663,8 +663,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -732,7 +730,7 @@
 
 <p>This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European <span class="notranslate">Galaxy</span> Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described <a href="https://covid19.galaxyproject.org/cheminformatics">here</a>.</p>
 
-<p>In this tutorial, you will perform protein-ligand docking to MPro using rxDock (<a class="citation" href="#rdock">Ruiz-Carmona <i>et al.</i> 2014</a>), a version of the popular rDock software, and score the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.</p>
+<p>In this tutorial, you will perform protein-ligand docking to MPro using rxDock (<span class="citation"><a href="#rdock">Ruiz-Carmona <i>et al.</i> 2014</a></span>), a version of the popular rDock software, and score the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -775,12 +773,12 @@
   <li>Charge enumeration of the 41,000 candidate molecules selected based on the fragment hits.</li>
   <li>Generation of 3D conformations based on SMILES strings of the candidate molecules.</li>
   <li>Docking of molecules into each of the MPro structures using rxDock.</li>
-  <li>Evaluation of the docking poses using a TransFS, a deep learning approach (<a class="citation" href="#transfs">Scantlebury 2019</a>) developed by the XChem group and collaborators, and SuCOS scoring (<a class="citation" href="#sucos">Leong 2019</a>), which compares the poses with the structures of the original fragment hits.</li>
+  <li>Evaluation of the docking poses using a TransFS, a deep learning approach (<span class="citation"><a href="#transfs">Scantlebury 2019</a></span>) developed by the XChem group and collaborators, and SuCOS scoring (<span class="citation"><a href="#sucos">Leong 2019</a></span>), which compares the poses with the structures of the original fragment hits.</li>
 </ol>
 
 <p>The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the <span class="notranslate">workflow</span> with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to original <span class="notranslate">Galaxy</span> histories, with notes to explain where and why things were done differently to the tutorial.</p>
 
-<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/mpro.png" alt="MPro structure, with a fragment bound" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of MPro, with a fragment bound. <a href="https://usegalaxy.eu/u/sbray/v/mpro-x0072">Click to view</a> in NGL. (<a class="citation" href="#ngl">Rose <i>et al.</i> 2018</a>)</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/mpro.png" alt="MPro structure, with a fragment bound" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of MPro, with a fragment bound. <a href="https://usegalaxy.eu/u/sbray/v/mpro-x0072">Click to view</a> in NGL. (<span class="citation"><a href="#ngl">Rose <i>et al.</i> 2018</a></span>)</figcaption></figure>
 
 <h1 id="get-data">Get data</h1>
 
@@ -871,7 +869,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
       <blockquote class="comment">
         <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>The <strong>Enumerate charges</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the Dimorphite-DL program. (<a class="citation" href="#Ropp2019">Ropp <i>et al.</i> 2019</a>)</p>
+        <p>The <strong>Enumerate charges</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the Dimorphite-DL program. (<span class="citation"><a href="#Ropp2019">Ropp <i>et al.</i> 2019</a></span>)</p>
       </blockquote>
     </li>
   </ol>
@@ -906,7 +904,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
       <blockquote class="comment">
         <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>The <strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the OpenBabel toolkit. (<a class="citation" href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a>)</p>
+        <p>The <strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the OpenBabel toolkit. (<span class="citation"><a href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a></span>)</p>
       </blockquote>
     </li>
   </ol>
@@ -1111,7 +1109,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
 
 <h2 id="pose-scoring-with-transfs">Pose scoring with TransFS</h2>
 
-<p>In this step, we carry out scoring of the poses using TransFS. This is a deep learning approach developed at the University of Oxford, employing augmentation of training data with incorrectly docked ligands to prompt the model to learn from protein-ligand interactions. (<a class="citation" href="#transfs">Scantlebury 2019</a>)</p>
+<p>In this step, we carry out scoring of the poses using TransFS. This is a deep learning approach developed at the University of Oxford, employing augmentation of training data with incorrectly docked ligands to prompt the model to learn from protein-ligand interactions. (<span class="citation"><a href="#transfs">Scantlebury 2019</a></span>)</p>
 
 <p>The TransFS scoring returns a value (saved as <code class="language-plaintext highlighter-rouge">&lt;TransFSScore&gt;</code> in the SDF file) between 0 (poor) and 1 (good).</p>
 
@@ -1132,7 +1130,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
 
 <h2 id="pose-scoring-with-sucos">Pose scoring with SuCOS</h2>
 
-<p>This step involves scoring of the poses from each molecule against the original fragment screening hit ligands using the SuCOS MAX shape and feature overlay algorithm. (<a class="citation" href="#sucos">Leong 2019</a>) The conformation and position of the poses are compared to known structures (i.e. the fragment hits) to determine a score.</p>
+<p>This step involves scoring of the poses from each molecule against the original fragment screening hit ligands using the SuCOS MAX shape and feature overlay algorithm. (<span class="citation"><a href="#sucos">Leong 2019</a></span>) The conformation and position of the poses are compared to known structures (i.e. the fragment hits) to determine a score.</p>
 
 <p>SuCOS scoring returns a value (saved as <code class="language-plaintext highlighter-rouge">&lt;Max_SuCOS_Score&gt;</code> in the SDF file) between 0 (poor) and 1 (good).</p>
 
@@ -1188,74 +1186,12 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="OBoyle2011">O’Boyle, N. M., M. Banck, C. A. James, C. Morley, T. Vandermeersch <i>et al.</i>, 2011 <b>Open Babel: An open chemical toolbox</b>. Journal of Cheminformatics 3:</span>
-    
-    
-    <a href="https://doi.org/10.1186/1758-2946-3-33">10.1186/1758-2946-3-33</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="rdock">Ruiz-Carmona, S., D. Alvarez-Garcia, N. Foloppe, A. B. Garmendia-Doval, S. Juhos <i>et al.</i>, 2014 <b>rDock: A Fast, Versatile and Open Source Program for Docking Ligands to Proteins and Nucleic Acids</b>. PLOS Computational Biology 10: 1–7.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pcbi.1003571">10.1371/journal.pcbi.1003571</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="ngl">Rose, A. S., A. R. Bradley, Y. Valasatava, J. M. Duarte, A. Prlić <i>et al.</i>, 2018 <b>NGL viewer: web-based molecular graphics for large complexes</b>. Bioinformatics 34: 3755–3758.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/bty419">10.1093/bioinformatics/bty419</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="transfs">Scantlebury, J. et al., 2019 <b>Dataset Augmentation Allows Deep Learning-Based Virtual Screening To Better Generalise To Unseen Target Classes, And Highlight Important Binding Interactions</b>.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.biorxiv.org/content/10.1101/2020.03.06.979625v1">https://www.biorxiv.org/content/10.1101/2020.03.06.979625v1</a>
-      
-    
-
-</li>
-<li><span id="sucos">Leong, S. et al., 2019 <b>SuCOS is Better than RMSD for Evaluating Fragment Elaboration and Docking Poses</b>.</span>
-    
-    
-    <a href="https://doi.org/10.26434/chemrxiv.8100203.v1">10.26434/chemrxiv.8100203.v1</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://chemrxiv.org/articles/SuCOS_is_Better_than_RMSD_for_Evaluating_Fragment_Elaboration_and_Docking_Poses/8100203/1">https://chemrxiv.org/articles/SuCOS_is_Better_than_RMSD_for_Evaluating_Fragment_Elaboration_and_Docking_Poses/8100203/1</a>
-      
-    
-
-</li>
-<li><span id="Ropp2019">Ropp, P. J., J. C. Kaminsky, S. Yablonski, and J. D. Durrant, 2019 <b>Dimorphite-DL: an open-source program for enumerating the ionization states of drug-like small molecules</b>. Journal of Cheminformatics 11:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s13321-019-0336-9">10.1186/s13321-019-0336-9</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="OBoyle2011">O’Boyle, N. M., M. Banck, C. A. James, C. Morley, T. Vandermeersch <i>et al.</i>, 2011 <b>Open Babel: An open chemical toolbox</b>. Journal of Cheminformatics 3: <a href="https://doi.org/10.1186/1758-2946-3-33">10.1186/1758-2946-3-33</a></li>
+<li id="rdock">Ruiz-Carmona, S., D. Alvarez-Garcia, N. Foloppe, A. B. Garmendia-Doval, S. Juhos <i>et al.</i>, 2014 <b>rDock: A Fast, Versatile and Open Source Program for Docking Ligands to Proteins and Nucleic Acids</b>. PLOS Computational Biology 10: 1–7. <a href="https://doi.org/10.1371/journal.pcbi.1003571">10.1371/journal.pcbi.1003571</a></li>
+<li id="ngl">Rose, A. S., A. R. Bradley, Y. Valasatava, J. M. Duarte, A. Prlić <i>et al.</i>, 2018 <b>NGL viewer: web-based molecular graphics for large complexes</b>. Bioinformatics 34: 3755–3758. <a href="https://doi.org/10.1093/bioinformatics/bty419">10.1093/bioinformatics/bty419</a></li>
+<li id="sucos">Leong, S. et al., 2019 <b>SuCOS is Better than RMSD for Evaluating Fragment Elaboration and Docking Poses</b>. <a href="https://doi.org/10.26434/chemrxiv.8100203.v1">10.26434/chemrxiv.8100203.v1</a> <a href="https://chemrxiv.org/articles/SuCOS_is_Better_than_RMSD_for_Evaluating_Fragment_Elaboration_and_Docking_Poses/8100203/1">https://chemrxiv.org/articles/SuCOS_is_Better_than_RMSD_for_Evaluating_Fragment_Elaboration_and_Docking_Poses/8100203/1</a></li>
+<li id="Ropp2019">Ropp, P. J., J. C. Kaminsky, S. Yablonski, and J. D. Durrant, 2019 <b>Dimorphite-DL: an open-source program for enumerating the ionization states of drug-like small molecules</b>. Journal of Cheminformatics 11: <a href="https://doi.org/10.1186/s13321-019-0336-9">10.1186/s13321-019-0336-9</a></li>
+<li id="transfs">Scantlebury, J. et al., 2019 <b>Dataset Augmentation Allows Deep Learning-Based Virtual Screening To Better Generalise To Unseen Target Classes, And Highlight Important Binding Interactions</b>. <a href="https://www.biorxiv.org/content/10.1101/2020.03.06.979625v1">https://www.biorxiv.org/content/10.1101/2020.03.06.979625v1</a></li></ol>
                 
 
                 

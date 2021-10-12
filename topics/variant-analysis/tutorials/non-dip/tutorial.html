@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-06-17 14:09:33 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Calling variants in non-diploid systems",
   "interactivityType": "mixed",
@@ -753,8 +753,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -832,7 +830,7 @@
 
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant’s chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial <span class="notranslate">DNA</span> although the same approaches will work equally good on viral and bacterial genomes (<a class="citation" href="#Rebolledo-Jaramillo2014">Rebolledo-Jaramillo <i>et al.</i> 2014</a>, <a class="citation" href="#Li2015">Li <i>et al.</i> 2015</a>).</p>
+<p>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant’s chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial <span class="notranslate">DNA</span> although the same approaches will work equally good on viral and bacterial genomes (<span class="citation"><a href="#Rebolledo-Jaramillo2014">Rebolledo-Jaramillo <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span>).</p>
 
 <p>As an example of non-diploid systems, we will be using human mitochondrial genome. However, this approach will also work for most bacterial and viral genomes.</p>
 
@@ -843,11 +841,11 @@
   <li>By assembling a genome first and then <span class="notranslate">mapping</span> against that assembly</li>
 </ol>
 
-<figure id="figure-1"><img src="../../images/ref_vs_assembly.jpg" alt="2 approaches" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This figure from <a class="citation" href="#Olson2015">Olson <i>et al.</i> 2015</a> contrasts the two approaches.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/ref_vs_assembly.jpg" alt="2 approaches" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This figure from <span class="citation"><a href="#Olson2015">Olson <i>et al.</i> 2015</a></span> contrasts the two approaches.</figcaption></figure>
 
 <p>In this tutorial we will take the <em>first</em> path, in which we map <span class="notranslate">reads</span> against an existing assembly. Later in the course, after we learn about assembly approaches, we will try the second approach as well.</p>
 
-<p>The goal of this example is to detect heteroplasmies - variants within mitochondrial <span class="notranslate">DNA</span>. Mitochondria are transmitted mate<span class="notranslate">rna</span>lly, and heteroplasmy frequencies may change dramatically and unpredictably during the transmission due to a germ-line bottleneck (<a class="citation" href="#Cree2008">Cree <i>et al.</i> 2008</a>). As we mentioned above, the procedure for finding variants in bacterial or viral genomes will be essentially the same.</p>
+<p>The goal of this example is to detect heteroplasmies - variants within mitochondrial <span class="notranslate">DNA</span>. Mitochondria are transmitted mate<span class="notranslate">rna</span>lly, and heteroplasmy frequencies may change dramatically and unpredictably during the transmission due to a germ-line bottleneck (<span class="citation"><a href="#Cree2008">Cree <i>et al.</i> 2008</a></span>). As we mentioned above, the procedure for finding variants in bacterial or viral genomes will be essentially the same.</p>
 
 <p>Datasets representing a child and a mother are available in <a href="https://doi.org/10.5281/zenodo.1251112">Zenodo</a>. These datasets were obtained by paired-end Illumina sequencing of human genomic <span class="notranslate">DNA</span> enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. Samples will therefore still contain a lot of <span class="notranslate">DNA</span> from the nuclear genome, which, in this case, is a contaminant.</p>
 
@@ -886,7 +884,7 @@
 
 <h1 id="importing-data">Importing data</h1>
 
-<p>For this tutorial we have prepared a subset of data previously by our group (<a class="citation" href="#Rebolledo-Jaramillo2014">Rebolledo-Jaramillo <i>et al.</i> 2014</a>). Let’s import these data into <span class="notranslate">Galaxy</span>. They are available from <a href="https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7">this <span class="notranslate">Galaxy</span> Library</a> or via <a href="https://zenodo.org/record/582600">Zenodo</a></p>
+<p>For this tutorial we have prepared a subset of data previously by our group (<span class="citation"><a href="#Rebolledo-Jaramillo2014">Rebolledo-Jaramillo <i>et al.</i> 2014</a></span>). Let’s import these data into <span class="notranslate">Galaxy</span>. They are available from <a href="https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7">this <span class="notranslate">Galaxy</span> Library</a> or via <a href="https://zenodo.org/record/582600">Zenodo</a></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get the data</h3>
@@ -946,7 +944,7 @@ https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
 
 <h1 id="mapping-reads-to-a-reference"><span class="notranslate">Mapping</span> <span class="notranslate">reads</span> to a reference</h1>
 
-<p>Our <span class="notranslate">reads</span> are long (250 bp) so we will use BWA-MEM (<a class="citation" href="#Li2013">Li 2013</a>) to align them against the reference genome as it has good <span class="notranslate">mapping</span> performance for longer <span class="notranslate">reads</span> (100bp and up).</p>
+<p>Our <span class="notranslate">reads</span> are long (250 bp) so we will use BWA-MEM (<span class="citation"><a href="#Li2013">Li 2013</a></span>) to align them against the reference genome as it has good <span class="notranslate">mapping</span> performance for longer <span class="notranslate">reads</span> (100bp and up).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-map-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map <span class="notranslate">reads</span></h3>
@@ -1008,7 +1006,7 @@ By setting <strong>Set read groups information</strong> to <code class="language
 
 <h2 id="removing-duplicates">Removing duplicates</h2>
 
-<p>Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. PCR has its own biases which are especially profound in cases of multi-template PCR used for construction of sequencing libraries (<a class="citation" href="#Kanagawa2003">Kanagawa 2003</a>).</p>
+<p>Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. PCR has its own biases which are especially profound in cases of multi-template PCR used for construction of sequencing libraries (<span class="citation"><a href="#Kanagawa2003">Kanagawa 2003</a></span>).</p>
 
 <p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate <span class="notranslate">reads</span> is the <strong>MarkDuplicates</strong> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package which is designed to identify both PCR and optical duplicates.</p>
 
@@ -1076,7 +1074,7 @@ raw_mother-ds-	95	54973	1951	95	89	4712	2	0.08645	302188
 
 <h2 id="left-aligning-indels">Left-aligning indels</h2>
 
-<p>Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. For illustrating how left-aligning works, we expanded on an example provided by <a class="citation" href="#Tan2015">Tan <i>et al.</i> 2015</a>. Suppose you have a reference sequence and a sequencing read:</p>
+<p>Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. For illustrating how left-aligning works, we expanded on an example provided by <span class="citation"><a href="#Tan2015">Tan <i>et al.</i> 2015</a></span>. Suppose you have a reference sequence and a sequencing read:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference GGGCACACACAGGG
 Read      GGGCACACAGGG
@@ -1096,7 +1094,7 @@ GGGCACACACAGGG            Ref: GCA
 GGG--CACACAGGG            Alt: G
 </code></pre></div></div>
 
-<p>The last of these is <em>left-aligned</em>. In this case gaps (represented by dashes) are moved as far left as possible. For a formal definition of left-alignment and variant normalization, see <a class="citation" href="#Tan2015">Tan <i>et al.</i> 2015</a>.</p>
+<p>The last of these is <em>left-aligned</em>. In this case gaps (represented by dashes) are moved as far left as possible. For a formal definition of left-alignment and variant normalization, see <span class="citation"><a href="#Tan2015">Tan <i>et al.</i> 2015</a></span>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-left-align-indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Left-align indels</h3>
@@ -1548,84 +1546,13 @@ Child   341    694
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Kanagawa2003">Kanagawa, T., 2003 <b>Bias and artifacts in multitemplate polymerase chain reactions (PCR)</b>. Journal of Bioscience and Bioengineering 96: 317–323.</span>
-    
-    
-    <a href="https://doi.org/https://doi.org/10.1016/S1389-1723(03)90130-7">https://doi.org/10.1016/S1389-1723(03)90130-7</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://www.sciencedirect.com/science/article/pii/S1389172303901307">http://www.sciencedirect.com/science/article/pii/S1389172303901307</a>
-      
-    
-
-</li>
-<li><span id="Cree2008">Cree, L. M., D. C. Samuels, S. C. de Sousa Lopes, H. K. Rajasimha, P. Wonnapinij <i>et al.</i>, 2008 <b>A reduction of mitochondrial DNA molecules during embryogenesis explains the rapid segregation of genotypes</b>. Nature Genetics 40: 249–254.</span>
-    
-    
-    <a href="https://doi.org/10.1038/ng.2007.63">10.1038/ng.2007.63</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Li2013">Li, H., 2013 <b>Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM</b>.</span>
-    
-    
-    
-
-</li>
-<li><span id="Rebolledo-Jaramillo2014">Rebolledo-Jaramillo, B., M. S.-W. Su, N. Stoler, J. A. McElhoe, B. Dickins <i>et al.</i>, 2014 <b>Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</b>. Proceedings of the National Academy of Sciences 111: 15474–15479.</span>
-    
-    
-    <a href="https://doi.org/10.1073/pnas.1409328111">10.1073/pnas.1409328111</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.pnas.org/content/111/43/15474">https://www.pnas.org/content/111/43/15474</a>
-      
-    
-
-</li>
-<li><span id="Olson2015">Olson, N. D., S. P. Lund, R. E. Colman, J. T. Foster, J. W. Sahl <i>et al.</i>, 2015 <b>Best practices for evaluating single nucleotide variant calling methods for microbial genomics</b>. Frontiers in Genetics 6: 235.</span>
-    
-    
-    <a href="https://doi.org/10.3389/fgene.2015.00235">10.3389/fgene.2015.00235</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Tan2015">Tan, A., G. R. Abecasis, and H. M. Kang, 2015 <b>Unified representation of genetic variants</b>. Bioinformatics 31: 2202–2204.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btv112">10.1093/bioinformatics/btv112</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Li2015">Li, M., R. Schröder, S. Ni, B. Madea, and M. Stoneking, 2015 <b>Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations</b>. Proceedings of the National Academy of Sciences 112: 2491–2496.</span>
-    
-    
-    <a href="https://doi.org/10.1073/pnas.1419651112">10.1073/pnas.1419651112</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.pnas.org/content/112/8/2491">https://www.pnas.org/content/112/8/2491</a>
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Kanagawa2003">Kanagawa, T., 2003 <b>Bias and artifacts in multitemplate polymerase chain reactions (PCR)</b>. Journal of Bioscience and Bioengineering 96: 317–323. <a href="https://doi.org/https://doi.org/10.1016/S1389-1723(03)90130-7">https://doi.org/10.1016/S1389-1723(03)90130-7</a> <a href="http://www.sciencedirect.com/science/article/pii/S1389172303901307">http://www.sciencedirect.com/science/article/pii/S1389172303901307</a></li>
+<li id="Cree2008">Cree, L. M., D. C. Samuels, S. C. de Sousa Lopes, H. K. Rajasimha, P. Wonnapinij <i>et al.</i>, 2008 <b>A reduction of mitochondrial DNA molecules during embryogenesis explains the rapid segregation of genotypes</b>. Nature Genetics 40: 249–254. <a href="https://doi.org/10.1038/ng.2007.63">10.1038/ng.2007.63</a></li>
+<li id="Li2013">Li, H., 2013 <b>Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM</b>.</li>
+<li id="Rebolledo-Jaramillo2014">Rebolledo-Jaramillo, B., M. S.-W. Su, N. Stoler, J. A. McElhoe, B. Dickins <i>et al.</i>, 2014 <b>Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</b>. Proceedings of the National Academy of Sciences 111: 15474–15479. <a href="https://doi.org/10.1073/pnas.1409328111">10.1073/pnas.1409328111</a> <a href="https://www.pnas.org/content/111/43/15474">https://www.pnas.org/content/111/43/15474</a></li>
+<li id="Li2015">Li, D., C.-M. Liu, R. Luo, K. Sadakane, and T.-W. Lam, 2015 <b>MEGAHIT: an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph</b>. Bioinformatics 31: 1674–1676. <a href="https://doi.org/10.1093/bioinformatics/btv033">10.1093/bioinformatics/btv033</a></li>
+<li id="Olson2015">Olson, N. D., S. P. Lund, R. E. Colman, J. T. Foster, J. W. Sahl <i>et al.</i>, 2015 <b>Best practices for evaluating single nucleotide variant calling methods for microbial genomics</b>. Frontiers in Genetics 6: 235. <a href="https://doi.org/10.3389/fgene.2015.00235">10.3389/fgene.2015.00235</a></li>
+<li id="Tan2015">Tan, A., G. R. Abecasis, and H. M. Kang, 2015 <b>Unified representation of genetic variants</b>. Bioinformatics 31: 2202–2204. <a href="https://doi.org/10.1093/bioinformatics/btv112">10.1093/bioinformatics/btv112</a></li></ol>
                 
 
                 

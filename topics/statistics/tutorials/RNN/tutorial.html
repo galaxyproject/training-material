@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-05-21 19:19:40 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Deep Learning (Part 2) - Recurrent neural networks (RNN)",
   "interactivityType": "mixed",
@@ -770,8 +770,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -854,8 +852,8 @@ training complex neural networks in some domains requires lots of data and compu
 are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss
 recurrent neural networks, which model sequential data, and have been successfully applied to language
 generation, machine translation, speech recognition, image description, and text summarization
-(<a class="citation" href="#wen-etal-2015-semantically">Wen <i>et al.</i> 2015</a>, <a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>, <a class="citation" href="#LimEtAl">Lim <i>et al.</i> 2016</a>,
-<a class="citation" href="#karpathyEtAl">Karpathy and Fei-Fei 2017</a>, <a class="citation" href="#li-etal-2017-deep">Li <i>et al.</i> 2017</a>). We then explain how RNN differ from feedforward networks,
+(<span class="citation"><a href="#wen-etal-2015-semantically">Wen <i>et al.</i> 2015</a></span>, <span class="citation"><a href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#LimEtAl">Lim <i>et al.</i> 2016</a></span>,
+<span class="citation"><a href="#karpathyEtAl">Karpathy and Fei-Fei 2017</a></span>, <span class="citation"><a href="#li-etal-2017-deep">Li <i>et al.</i> 2017</a></span>). We then explain how RNN differ from feedforward networks,
 describe various RNN architectures and solve a sentiment analysis problem using RNN in <span class="notranslate">Galaxy</span>.</p>
 
 <blockquote class="agenda">
@@ -908,16 +906,16 @@ weight. Afterwards, the results are summed up, along with a bias, and passed to 
 
 <p>The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
 Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation
-functions, please refer to <a class="citation" href="#nwankpaEtAl">Nwankpa <i>et al.</i> 2018</a>.</p>
+functions, please refer to <span class="citation"><a href="#nwankpaEtAl">Nwankpa <i>et al.</i> 2018</a></span>.</p>
 
 <figure id="figure-3"><img src="../../images/sigmoid.gif" alt="Mathmatical formula for Sigmoid activation function" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sigmoid activation function</figcaption></figure>
 
 <h2 id="multi-layer-fnn">Multi-layer FNN</h2>
 
 <p>Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable,
-such as the XOR problem (<a class="citation" href="#Newell780">Newell 1969</a>). Adding one (or more) hidden layers to FNN enables it to solve problems
+such as the XOR problem (<span class="citation"><a href="#Newell780">Newell 1969</a></span>). Adding one (or more) hidden layers to FNN enables it to solve problems
 in which data is non-linearly separable. Per Universal Approximation Theorem, a FNN with one hidden layer can represent
-any function (<a class="citation" href="#Cybenko1989">Cybenko 1989</a>), although in practice training such a model is very difficult (if not impossible),
+any function (<span class="citation"><a href="#Cybenko1989">Cybenko 1989</a></span>), although in practice training such a model is very difficult (if not impossible),
 hence, we usually add multiple hidden layers to solve complex problems.</p>
 
 <figure id="figure-4"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
@@ -934,7 +932,7 @@ measure how much the model output is off of the expected output. For classificat
 
 <p>The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training
 set input-output pairs is called the <strong>Cost function</strong>. The goal of the learning algorithm is to minimize the cost function. The cost function
-is a function of network weights and biases of all neurons in all layers. The <strong>backpropagation</strong> learning algorithm <a class="citation" href="#Rumelhart1986">Rumelhart <i>et al.</i> 1986</a>
+is a function of network weights and biases of all neurons in all layers. The <strong>backpropagation</strong> learning algorithm <span class="citation"><a href="#Rumelhart1986">Rumelhart <i>et al.</i> 1986</a></span>
 iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite
 direction of the gradient, to find the local minimum.</p>
 
@@ -966,7 +964,7 @@ we pass in n words in English and get m words in Italian (See Figure 9).</p>
 
 <h2 id="rnn-architectures">RNN architectures</h2>
 
-<p>Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM (<a class="citation" href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a>), and 3) GRU (<a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>).
+<p>Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM (<span class="citation"><a href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a></span>), and 3) GRU (<span class="citation"><a href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a></span>).
 A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the
 state information and output for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
 <strong>vanishing gradient</strong> problem. Basically, weights/biases are updated according to the gradient of the loss functions relative to 
@@ -976,13 +974,13 @@ layer (which is the product of multiple small values) will very small, resulting
 of the RNN, effectively halting the learning process.</p>
 
 <p>LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this
-tutorial (Please refer to <a class="citation" href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a> and <a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>), but in a nutshell both LSTM and GRU use <strong>gates</strong> such that the weights/biases updates in previous
+tutorial (Please refer to <span class="citation"><a href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a></span> and <span class="citation"><a href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a></span>), but in a nutshell both LSTM and GRU use <strong>gates</strong> such that the weights/biases updates in previous
 layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or
 thousands of layers.</p>
 
 <h1 id="text-representation-schemes">Text representation schemes</h1>
 
-<p>In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset (<a class="citation" href="#maas-EtAl">Maas <i>et al.</i> 2011</a>). We train our RNN on
+<p>In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset (<span class="citation"><a href="#maas-EtAl">Maas <i>et al.</i> 2011</a></span>). We train our RNN on
 the training dataset, which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is
 also made up of 25000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with
 text data, it’s a good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess
@@ -1265,7 +1263,7 @@ the test dataset.</p>
 that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that
 were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified
 as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate <strong>precision</strong> and
-<strong>recall</strong> <a class="citation" href="#TatbulEtAl">Tatbul <i>et al.</i> 2018</a>. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
+<strong>recall</strong> <span class="citation"><a href="#TatbulEtAl">Tatbul <i>et al.</i> 2018</a></span>. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
 is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
 to use the <strong>F score</strong>, which is the harmonic mean of precision and recall</p>
 
@@ -1311,135 +1309,18 @@ classification problem using RNN on IMDB movie reviews dataset.</p>
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Newell780">Newell, A., 1969 <b>Perceptrons. An Introduction to Computational Geometry. Marvin Minsky and Seymour Papert. M.I.T. Press, Cambridge, Mass., 1969. vi + 258 pp., illus. Cloth, 12; paper, 4.95</b>. Science 165: 780–782.</span>
-    
-    
-    <a href="https://doi.org/10.1126/science.165.3895.780">10.1126/science.165.3895.780</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://science.sciencemag.org/content/165/3895/780">https://science.sciencemag.org/content/165/3895/780</a>
-      
-    
-
-</li>
-<li><span id="Rumelhart1986">Rumelhart, D. E., G. E. Hinton, and R. J. Williams, 1986 <b>Learning representations by back-propagating errors</b>. Nature 323: 533–536.</span>
-    
-    
-    <a href="https://doi.org/10.1038/323533a0">10.1038/323533a0</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Cybenko1989">Cybenko, G., 1989 <b>Approximation by superpositions of a sigmoidal function</b>. Mathematics of Control, Signals and Systems 2: 303–314.</span>
-    
-    
-    <a href="https://doi.org/10.1007/BF02551274">10.1007/BF02551274</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="hochreiter1997long">Hochreiter, S., and J. Schmidhuber, 1997 <b>Long short-term memory</b>. Neural computation 9: 1735–1780.</span>
-    
-    
-    
-
-</li>
-<li><span id="maas-EtAl">Maas, A. L., R. E. Daly, P. T. Pham, D. Huang, A. Y. Ng <i>et al.</i>, 2011 <b>Learning Word Vectors for Sentiment Analysis</b>. Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies 142–150.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://www.aclweb.org/anthology/P11-1015">http://www.aclweb.org/anthology/P11-1015</a>
-      
-    
-
-</li>
-<li><span id="cho-etal-2014-learning">Cho, K., B. van Merriënboer, C. Gulcehre, D. Bahdanau, F. Bougares <i>et al.</i>, 2014 <b>Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation</b>. Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) 1724–1734.</span>
-    
-    
-    <a href="https://doi.org/10.3115/v1/D14-1179">10.3115/v1/D14-1179</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.aclweb.org/anthology/D14-1179">https://www.aclweb.org/anthology/D14-1179</a>
-      
-    
-
-</li>
-<li><span id="wen-etal-2015-semantically">Wen, T.-H., M. Gasic, N. Mrksic, P.-hao Su, D. Vandyke <i>et al.</i>, 2015 <b>Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems</b>. Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing 1711–1721.</span>
-    
-    
-    <a href="https://doi.org/10.18653/v1/D15-1199">10.18653/v1/D15-1199</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.aclweb.org/anthology/D15-1199">https://www.aclweb.org/anthology/D15-1199</a>
-      
-    
-
-</li>
-<li><span id="LimEtAl">Lim, W., D. Jang, and T. Lee, 2016 <b>Speech emotion recognition using convolutional and Recurrent Neural Networks</b>. 2016 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA) 1–4.</span>
-    
-    
-    <a href="https://doi.org/10.1109/APSIPA.2016.7820699">10.1109/APSIPA.2016.7820699</a>
-    
-    
-
-</li>
-<li><span id="karpathyEtAl">Karpathy, A., and L. Fei-Fei, 2017 <b>Deep Visual-Semantic Alignments for Generating Image Descriptions</b>. IEEE Transactions on Pattern Analysis and Machine Intelligence 39: 664–676.</span>
-    
-    
-    <a href="https://doi.org/10.1109/TPAMI.2016.2598339">10.1109/TPAMI.2016.2598339</a>
-    
-    
-
-</li>
-<li><span id="li-etal-2017-deep">Li, P., W. Lam, L. Bing, and Z. Wang, 2017 <b>Deep Recurrent Generative Decoder for Abstractive Text Summarization</b>. Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing 2091–2100.</span>
-    
-    
-    <a href="https://doi.org/10.18653/v1/D17-1222">10.18653/v1/D17-1222</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.aclweb.org/anthology/D17-1222">https://www.aclweb.org/anthology/D17-1222</a>
-      
-    
-
-</li>
-<li><span id="nwankpaEtAl">Nwankpa, C., W. Ijomah, A. Gachagan, and S. Marshall, 2018 <b>Activation Functions: Comparison of trends in Practice and Research for Deep Learning</b>. CoRR abs/1811.03378:</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://arxiv.org/abs/1811.03378">http://arxiv.org/abs/1811.03378</a>
-      
-    
-
-</li>
-<li><span id="TatbulEtAl">Tatbul, N., T. J. Lee, S. Zdonik, M. Alam, and J. Gottschlich, 2018 <b>Precision and Recall for Time Series</b>. Advances in Neural Information Processing Systems 31: 1920–1930.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf">https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf</a>
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Newell780">Newell, A., 1969 <b>Perceptrons. An Introduction to Computational Geometry. Marvin Minsky and Seymour Papert. M.I.T. Press, Cambridge, Mass., 1969. vi + 258 pp., illus. Cloth, 12; paper, 4.95</b>. Science 165: 780–782. <a href="https://doi.org/10.1126/science.165.3895.780">10.1126/science.165.3895.780</a> <a href="https://science.sciencemag.org/content/165/3895/780">https://science.sciencemag.org/content/165/3895/780</a></li>
+<li id="Rumelhart1986">Rumelhart, D. E., G. E. Hinton, and R. J. Williams, 1986 <b>Learning representations by back-propagating errors</b>. Nature 323: 533–536. <a href="https://doi.org/10.1038/323533a0">10.1038/323533a0</a></li>
+<li id="Cybenko1989">Cybenko, G., 1989 <b>Approximation by superpositions of a sigmoidal function</b>. Mathematics of Control, Signals and Systems 2: 303–314. <a href="https://doi.org/10.1007/BF02551274">10.1007/BF02551274</a></li>
+<li id="hochreiter1997long">Hochreiter, S., and J. Schmidhuber, 1997 <b>Long short-term memory</b>. Neural computation 9: 1735–1780.</li>
+<li id="maas-EtAl">Maas, A. L., R. E. Daly, P. T. Pham, D. Huang, A. Y. Ng <i>et al.</i>, 2011 <b>Learning Word Vectors for Sentiment Analysis</b>. Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies 142–150. <a href="http://www.aclweb.org/anthology/P11-1015">http://www.aclweb.org/anthology/P11-1015</a></li>
+<li id="cho-etal-2014-learning">Cho, K., B. van Merriënboer, C. Gulcehre, D. Bahdanau, F. Bougares <i>et al.</i>, 2014 <b>Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation</b>. Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) 1724–1734. <a href="https://doi.org/10.3115/v1/D14-1179">10.3115/v1/D14-1179</a> <a href="https://www.aclweb.org/anthology/D14-1179">https://www.aclweb.org/anthology/D14-1179</a></li>
+<li id="wen-etal-2015-semantically">Wen, T.-H., M. Gasic, N. Mrksic, P.-hao Su, D. Vandyke <i>et al.</i>, 2015 <b>Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems</b>. Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing 1711–1721. <a href="https://doi.org/10.18653/v1/D15-1199">10.18653/v1/D15-1199</a> <a href="https://www.aclweb.org/anthology/D15-1199">https://www.aclweb.org/anthology/D15-1199</a></li>
+<li id="LimEtAl">Lim, W., D. Jang, and T. Lee, 2016 <b>Speech emotion recognition using convolutional and Recurrent Neural Networks</b>. 2016 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA) 1–4. <a href="https://doi.org/10.1109/APSIPA.2016.7820699">10.1109/APSIPA.2016.7820699</a></li>
+<li id="karpathyEtAl">Karpathy, A., and L. Fei-Fei, 2017 <b>Deep Visual-Semantic Alignments for Generating Image Descriptions</b>. IEEE Transactions on Pattern Analysis and Machine Intelligence 39: 664–676. <a href="https://doi.org/10.1109/TPAMI.2016.2598339">10.1109/TPAMI.2016.2598339</a></li>
+<li id="li-etal-2017-deep">Li, P., W. Lam, L. Bing, and Z. Wang, 2017 <b>Deep Recurrent Generative Decoder for Abstractive Text Summarization</b>. Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing 2091–2100. <a href="https://doi.org/10.18653/v1/D17-1222">10.18653/v1/D17-1222</a> <a href="https://www.aclweb.org/anthology/D17-1222">https://www.aclweb.org/anthology/D17-1222</a></li>
+<li id="nwankpaEtAl">Nwankpa, C., W. Ijomah, A. Gachagan, and S. Marshall, 2018 <b>Activation Functions: Comparison of trends in Practice and Research for Deep Learning</b>. CoRR abs/1811.03378: <a href="http://arxiv.org/abs/1811.03378">http://arxiv.org/abs/1811.03378</a></li>
+<li id="TatbulEtAl">Tatbul, N., T. J. Lee, S. Zdonik, M. Alam, and J. Gottschlich, 2018 <b>Precision and Recall for Time Series</b>. Advances in Neural Information Processing Systems 31: 1920–1930. <a href="https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf">https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf</a></li></ol>
                 
 
                 

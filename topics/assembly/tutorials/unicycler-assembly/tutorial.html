@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-03-12 17:24:55 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Unicycler Assembly",
   "interactivityType": "mixed",
@@ -714,8 +714,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -807,7 +805,7 @@
 
                 <h1 id="the-goal-e-coli-c-1-assembly">The goal: <em>E. coli</em> C-1 assembly</h1>
 
-<p>In this tutorial we assemble and annotate the genome of <em>E. coli</em> strain <a href="http://cgsc2.biology.yale.edu/Strain.php?ID=8232">C-1</a>. This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classic works by Holly Wichman and Jim Bull (<a class="citation" href="#Bull1997">Bull 1997</a>, <a class="citation" href="#Bull1998">Bull 1998</a>, <a class="citation" href="#Wichman1999">Wichman 1999</a>) have been performed using this strain and bacteriophage phiX174.</p>
+<p>In this tutorial we assemble and annotate the genome of <em>E. coli</em> strain <a href="http://cgsc2.biology.yale.edu/Strain.php?ID=8232">C-1</a>. This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classic works by Holly Wichman and Jim Bull (<span class="citation"><a href="#Bull1997">Bull 1997</a></span>, <span class="citation"><a href="#Bull1998">Bull 1998</a></span>, <span class="citation"><a href="#Wichman1999">Wichman 1999</a></span>) have been performed using this strain and bacteriophage phiX174.</p>
 
 <p>To sequence the genome we have obtained the strain from the <a href="http://cgsc2.biology.yale.edu/">Yale E. coli Stock Center</a>. The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic <span class="notranslate">DNA</span> was isolated. The <span class="notranslate">DNA</span> was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end <span class="notranslate">reads</span>. To generate high length <span class="notranslate">reads</span> we used the Oxford Nanopore MinION machine.</p>
 
@@ -875,19 +873,19 @@
 
 <p><img src="https://github.com/rrwick/Unicycler/raw/master/misc/logo.png" alt="Logo unicycler" loading="lazy" /></p>
 
-<p>For assembly we will be using <a href="https://github.com/rrwick/Unicycler">Unicycler</a> (also see publication <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>). Unicycler is designed specifically for <em>hybrid assembly</em> (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:</p>
+<p>For assembly we will be using <a href="https://github.com/rrwick/Unicycler">Unicycler</a> (also see publication <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>). Unicycler is designed specifically for <em>hybrid assembly</em> (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:</p>
 
-<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long <span class="notranslate">reads</span> to produce the longest possible set of contigs. These are then polished by aligning the original short <span class="notranslate">reads</span> against contigs and feeding these alignments to Pilon - an assembly improvement tool. <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a></figcaption></figure>
+<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long <span class="notranslate">reads</span> to produce the longest possible set of contigs. These are then polished by aligning the original short <span class="notranslate">reads</span> against contigs and feeding these alignments to Pilon - an assembly improvement tool. <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span></figcaption></figure>
 
-<p>As you can see Unicycler relies heavily on SPAdes (<a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>) and <a href="https://github.com/broadinstitute/pilon/wiki">Pilon</a>. We will briefly describe these two tools.</p>
+<p>As you can see Unicycler relies heavily on SPAdes (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>) and <a href="https://github.com/broadinstitute/pilon/wiki">Pilon</a>. We will briefly describe these two tools.</p>
 
 <h4 id="spades">Spades</h4>
 
 <h5 id="multisized-debruijn-graph">Multisized deBruijn graph</h5>
 
-<p>Assemblers usually construct graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers (<a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>)):</p>
+<p>Assemblers usually construct graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>)):</p>
 
-<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of <span class="notranslate">Reads</span> consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from <span class="notranslate">Reads</span> (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the <span class="notranslate">Reads</span>. (A) The outside circle shows a separate black edge for each 3-mer from <span class="notranslate">Reads</span>. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(<span class="notranslate">Reads</span>, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-<span class="notranslate">reads</span> ATAG, AGGA, and GACA. Thus <span class="notranslate">Reads</span><sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer <span class="notranslate">reads</span>. The next inner circle shows the graph DB(<span class="notranslate">Reads</span>, 4), and the innermost circle represents the Genome. The graph DB(<span class="notranslate">Reads</span>, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (<span class="notranslate">Reads</span>, 3, 4). Figure and text from <a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of <span class="notranslate">Reads</span> consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from <span class="notranslate">Reads</span> (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the <span class="notranslate">Reads</span>. (A) The outside circle shows a separate black edge for each 3-mer from <span class="notranslate">Reads</span>. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(<span class="notranslate">Reads</span>, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-<span class="notranslate">reads</span> ATAG, AGGA, and GACA. Thus <span class="notranslate">Reads</span><sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer <span class="notranslate">reads</span>. The next inner circle shows the graph DB(<span class="notranslate">Reads</span>, 4), and the innermost circle represents the Genome. The graph DB(<span class="notranslate">Reads</span>, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (<span class="notranslate">Reads</span>, 3, 4). Figure and text from <span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>.</figcaption></figure>
 
 <h5 id="read-pair-utilization">Read pair utilization</h5>
 
@@ -895,7 +893,7 @@
 
 <h5 id="error-correction">Error correction</h5>
 
-<p>Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One way to improve the graph before assembly it is to minimize the number of sequencing errors by performing error correction. SPAdes uses BayesHammer (<a class="citation" href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a>) to correct the <span class="notranslate">reads</span>. Here is a brief summary of what it does:</p>
+<p>Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One way to improve the graph before assembly it is to minimize the number of sequencing errors by performing error correction. SPAdes uses BayesHammer (<span class="citation"><a href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a></span>) to correct the <span class="notranslate">reads</span>. Here is a brief summary of what it does:</p>
 
 <ol>
   <li>SPAdes (or rather BayesHammer) counts <em>k</em>-mers in <span class="notranslate">reads</span> and computes <em>k</em>-mer statistics that take into account base quality values.</li>
@@ -906,19 +904,19 @@
   <li><span class="notranslate">Reads</span> are corrected using solid <em>k</em>-mers:</li>
 </ol>
 
-<figure id="figure-4"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <a class="citation" href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a>)</figcaption></figure>
+<figure id="figure-4"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <span class="citation"><a href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a></span>)</figcaption></figure>
 
 <p>In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 <span class="notranslate">reads</span> - a substantial fraction of the full ~18 million read dataset.</p>
 
 <h4 id="pilon">Pilon</h4>
 
-<p>Pilon improves draft assemblies by using the information from the original <span class="notranslate">reads</span> aligned to the draft assembly. The following image from a publication by <a class="citation" href="#Walker2014">Walker <i>et al.</i> 2014</a> highlights the steps of this process:</p>
+<p>Pilon improves draft assemblies by using the information from the original <span class="notranslate">reads</span> aligned to the draft assembly. The following image from a publication by <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span> highlights the steps of this process:</p>
 
-<figure id="figure-5"><img src="../../images/pilon.png" alt="Pilon workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses <span class="notranslate">reads</span> and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <a class="citation" href="#Walker2014">Walker <i>et al.</i> 2014</a>)</figcaption></figure>
+<figure id="figure-5"><img src="../../images/pilon.png" alt="Pilon workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses <span class="notranslate">reads</span> and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span>)</figcaption></figure>
 
 <h3 id="annotation">Annotation</h3>
 
-<p>For annotation we are using <a href="https://vicbioinformatics.com/software.prokka.shtml">Prokka</a> (also see <a class="citation" href="#Seemann2014">Seemann 2014</a>). It scans the assembly generated with Unicycler with a set of feature prediction tools and compiles a list of genome annotation. It predicts the following features (Table from <a class="citation" href="#Seemann2014">Seemann 2014</a>):</p>
+<p>For annotation we are using <a href="https://vicbioinformatics.com/software.prokka.shtml">Prokka</a> (also see <span class="citation"><a href="#Seemann2014">Seemann 2014</a></span>). It scans the assembly generated with Unicycler with a set of feature prediction tools and compiles a list of genome annotation. It predicts the following features (Table from <span class="citation"><a href="#Seemann2014">Seemann 2014</a></span>):</p>
 
 <table>
   <thead>
@@ -992,7 +990,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <h3 id="assess-read-quality">Assess Read Quality</h3>
 
-<p>To assess quality we will use two tools: FastQC (<a class="citation" href="#FastQC">Andrews</a>) to generate quality statistics and multiQC (<a class="citation" href="#Ewels2016">Ewels <i>et al.</i> 2016</a>) to summarize these statistics.</p>
+<p>To assess quality we will use two tools: FastQC (<span class="citation"><a href="#FastQC">Andrews</a></span>) to generate quality statistics and multiQC (<span class="citation"><a href="#Ewels2016">Ewels <i>et al.</i> 2016</a></span>) to summarize these statistics.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality Control</h3>
@@ -1054,7 +1052,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <h2 id="assess-assembly-quality-with-quast">Assess Assembly quality with Quast</h2>
 
-<p>Quast (<a class="citation" href="#Gurevich2013">Gurevich <i>et al.</i> 2013</a>) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.</p>
+<p>Quast (<span class="citation"><a href="#Gurevich2013">Gurevich <i>et al.</i> 2013</a></span>) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assembly-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assembly Quality</h3>
@@ -1181,127 +1179,17 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="FastQC">Andrews, S. <b>FastQC A Quality Control tool for High Throughput Sequence Data</b>.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">http://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>
-      
-    
-
-</li>
-<li><span id="Bull1997">Bull, J., 1997 <b>Different Trajectories of Parallel Evolution During Viral Adaptation</b>. Genetics.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1208326/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1208326/</a>
-      
-    
-
-</li>
-<li><span id="Bull1998">Bull, J., 1998 <b>A Revolution in Evolution</b>. Science 281: 1959–1959.</span>
-    
-    
-    <a href="https://doi.org/10.1126/science.281.5385.1959">10.1126/science.281.5385.1959</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wichman1999">Wichman, H. A., 1999 <b>Different Trajectories of Parallel Evolution During Viral Adaptation</b>. Science 285: 422–424.</span>
-    
-    
-    <a href="https://doi.org/10.1126/science.285.5426.422">10.1126/science.285.5426.422</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Bankevich2012">Bankevich, A., S. Nurk, D. Antipov, A. A. Gurevich, M. Dvorkin <i>et al.</i>, 2012 <b>SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing</b>. Journal of Computational Biology 19: 455–477.</span>
-    
-    
-    <a href="https://doi.org/10.1089/cmb.2012.0021">10.1089/cmb.2012.0021</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Nikolenko2013">Nikolenko, S. I., A. I. Korobeynikov, and M. A. Alekseyev, 2013 <b>BayesHammer: Bayesian clustering for error correction in single-cell sequencing</b>. BMC Genomics 14: S7.</span>
-    
-    
-    <a href="https://doi.org/10.1186/1471-2164-14-s1-s7">10.1186/1471-2164-14-s1-s7</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Gurevich2013">Gurevich, A., V. Saveliev, N. Vyahhi, and G. Tesler, 2013 <b>QUAST: quality assessment tool for genome assemblies</b>. Bioinformatics 29: 1072–1075.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btt086">10.1093/bioinformatics/btt086</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Seemann2014">Seemann, T., 2014 <b>Prokka: rapid prokaryotic genome annotation</b>. Bioinformatics 30: 2068–2069.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btu153">10.1093/bioinformatics/btu153</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Walker2014">Walker, B. J., T. Abeel, T. Shea, M. Priest, A. Abouelliel <i>et al.</i>, 2014 <b>Pilon: An Integrated Tool for Comprehensive Microbial Variant Detection and Genome Assembly Improvement</b> (J. Wang, Ed.). PLoS ONE 9: e112963.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pone.0112963">10.1371/journal.pone.0112963</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Ewels2016">Ewels, P., M. Magnusson, M. Käller, and S. Lundin, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wick2017">Wick, R. R., L. M. Judd, C. L. Gorrie, and K. E. Holt, 2017 <b>Unicycler: Resolving bacterial genome assemblies from short and long sequencing reads</b> (A. M. Phillippy, Ed.). PLOS Computational Biology 13: e1005595.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pcbi.1005595">10.1371/journal.pcbi.1005595</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Bull1997">Bull, J., 1997 <b>Different Trajectories of Parallel Evolution During Viral Adaptation</b>. Genetics. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1208326/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1208326/</a></li>
+<li id="Bull1998">Bull, J., 1998 <b>A Revolution in Evolution</b>. Science 281: 1959–1959. <a href="https://doi.org/10.1126/science.281.5385.1959">10.1126/science.281.5385.1959</a></li>
+<li id="Wichman1999">Wichman, H. A., 1999 <b>Different Trajectories of Parallel Evolution During Viral Adaptation</b>. Science 285: 422–424. <a href="https://doi.org/10.1126/science.285.5426.422">10.1126/science.285.5426.422</a></li>
+<li id="Bankevich2012">Bankevich, A., S. Nurk, D. Antipov, A. A. Gurevich, M. Dvorkin <i>et al.</i>, 2012 <b>SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing</b>. Journal of Computational Biology 19: 455–477. <a href="https://doi.org/10.1089/cmb.2012.0021">10.1089/cmb.2012.0021</a></li>
+<li id="Gurevich2013">Gurevich, A., V. Saveliev, N. Vyahhi, and G. Tesler, 2013 <b>QUAST: quality assessment tool for genome assemblies</b>. Bioinformatics 29: 1072–1075. <a href="https://doi.org/10.1093/bioinformatics/btt086">10.1093/bioinformatics/btt086</a></li>
+<li id="Nikolenko2013">Nikolenko, S. I., A. I. Korobeynikov, and M. A. Alekseyev, 2013 <b>BayesHammer: Bayesian clustering for error correction in single-cell sequencing</b>. BMC Genomics 14: S7. <a href="https://doi.org/10.1186/1471-2164-14-s1-s7">10.1186/1471-2164-14-s1-s7</a></li>
+<li id="Seemann2014">Seemann, T., 2014 <b>Prokka: rapid prokaryotic genome annotation</b>. Bioinformatics 30: 2068–2069. <a href="https://doi.org/10.1093/bioinformatics/btu153">10.1093/bioinformatics/btu153</a></li>
+<li id="Walker2014">Walker, B. J., T. Abeel, T. Shea, M. Priest, A. Abouelliel <i>et al.</i>, 2014 <b>Pilon: An Integrated Tool for Comprehensive Microbial Variant Detection and Genome Assembly Improvement</b> (J. Wang, Ed.). PLoS ONE 9: e112963. <a href="https://doi.org/10.1371/journal.pone.0112963">10.1371/journal.pone.0112963</a></li>
+<li id="Ewels2016">Ewels, P., M. Magnusson, M. Käller, and S. Lundin, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048. <a href="https://doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a></li>
+<li id="Wick2017">Wick, R. R., L. M. Judd, C. L. Gorrie, and K. E. Holt, 2017 <b>Unicycler: Resolving bacterial genome assemblies from short and long sequencing reads</b>. PLOS Computational Biology 13: 1–22. <a href="https://doi.org/10.1371/journal.pcbi.1005595">10.1371/journal.pcbi.1005595</a></li>
+<li id="FastQC">Andrews, S. <b>FastQC A Quality Control tool for High Throughput Sequence Data</b>. <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">http://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a></li></ol>
                 
 
                 

@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-05-24 15:57:24 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Deep Learning (Part 3) - Convolutional neural networks (CNN)",
   "interactivityType": "mixed",
@@ -855,8 +855,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -923,7 +921,7 @@
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Artificial neural networks are a machine learning discipline that have been successfully applied to problems
-in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control <a class="citation" href="#JainEtAl">Jain <i>et al.</i> 1996</a>.
+in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control <span class="citation"><a href="#JainEtAl">Jain <i>et al.</i> 1996</a></span>.
 With the increasing popularity of social media in the past decade, image and video processing tasks have become very
 important. The previous neural network architectures (e.g. feedforward neural networks) could not scale up to handle
 image and video processing tasks. This gave way to the development of convolutional neural networks that are specifically
@@ -963,7 +961,7 @@ images, each pixel in a color image is represented by 3 values, representing red
 can be represented by various combination of these primary colors. Since each color pixel can be represented by 3 values, we say the <strong>channel</strong> size
 is 3. Such an image can be represented by 64 X 64 X 3 = 12,288 values (rows X columns X channels). The number of weights between the input layer and
 the first hidden layer with 500 nodes is now 12,288 X 500 = 6,144,000. It is clear that a FNN cannot scale to handle larger images
-(<a class="citation" href="#OSheaEtAl">O’Shea and Nash 2015</a>) and that we need a more scalable architecture.</p>
+(<span class="citation"><a href="#OSheaEtAl">O’Shea and Nash 2015</a></span>) and that we need a more scalable architecture.</p>
 
 <figure id="figure-1"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
 
@@ -973,23 +971,23 @@ for finding spatial relationships in the image data.</p>
 
 <h2 id="inspiration-for-convolutional-neural-networks">Inspiration for convolutional neural networks</h2>
 
-<p>In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information (<a class="citation" href="#HubelWiesel">Hubel and Wiesel 1959</a>).
+<p>In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information (<span class="citation"><a href="#HubelWiesel">Hubel and Wiesel 1959</a></span>).
 They recorded the activity of the neurons in the visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire
 when the bright line is shown at a particular angle and a particular location (They called these <strong>simple</strong> cells). Other neurons fired when the bright
 line was shown regardless of the angle/location and seemed to detect movement (They called these <strong>complex</strong> cells). It seemed complex cells receive
 inputs from multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.</p>
 
-<p>In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed <em>Neocognitron</em> (<a class="citation" href="#Fukishima">Fukushima 1988</a>), a hierarchical neural
+<p>In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed <em>Neocognitron</em> (<span class="citation"><a href="#Fukishima">Fukushima 1988</a></span>), a hierarchical neural
 network used for handwritten Japanese character recognition. Neocognitron was the first CNN, and had its own training algorithm. In 1989, LeCun et. al.
-(<a class="citation" href="#LeCunEtAl">LeCun <i>et al.</i> 1989</a>) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other
+(<span class="citation"><a href="#LeCunEtAl">LeCun <i>et al.</i> 1989</a></span>) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other
 models at ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ILSVRC is a competition in object classification and detection on hundreds of
 object categories and millions of images. The challenge has been run annually from 2010 to present, attracting participation from more than fifty
-institutions (<a class="citation" href="#RussakovskyEtAl">Russakovsky <i>et al.</i> 2015</a>). Notable CNN architectures that won ILSVRC are AlexNet in 2012 (<a class="citation" href="#KrizhevskyEtAl">Krizhevsky <i>et al.</i> 2012</a>), ZFNet in 2013 (
-<a class="citation" href="#ZeilerEtAl">Zeiler and Fergus 2013</a>), GoogLeNet and VGG in 2014 (<a class="citation" href="#SzegedyEtAl">Szegedy <i>et al.</i> 2014</a>, <a class="citation" href="#SimonyanEtAl">Simonyan and Zisserman 2015</a>), and ResNet in 2015 (<a class="citation" href="#HeEtAl">He <i>et al.</i> 2015</a>).</p>
+institutions (<span class="citation"><a href="#RussakovskyEtAl">Russakovsky <i>et al.</i> 2015</a></span>). Notable CNN architectures that won ILSVRC are AlexNet in 2012 (<span class="citation"><a href="#KrizhevskyEtAl">Krizhevsky <i>et al.</i> 2012</a></span>), ZFNet in 2013 (
+<span class="citation"><a href="#ZeilerEtAl">Zeiler and Fergus 2013</a></span>), GoogLeNet and VGG in 2014 (<span class="citation"><a href="#SzegedyEtAl">Szegedy <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#SimonyanEtAl">Simonyan and Zisserman 2015</a></span>), and ResNet in 2015 (<span class="citation"><a href="#HeEtAl">He <i>et al.</i> 2015</a></span>).</p>
 
 <h2 id="architecture-of-cnn">Architecture of CNN</h2>
 
-<p>A typical CNN has the following 4 layers (<a class="citation" href="#OSheaEtAl">O’Shea and Nash 2015</a>)</p>
+<p>A typical CNN has the following 4 layers (<span class="citation"><a href="#OSheaEtAl">O’Shea and Nash 2015</a></span>)</p>
 
 <ol>
   <li>Input layer</li>
@@ -1016,7 +1014,7 @@ corner of the image, multiplying filter values by the pixel values and adding th
 a time and repeating this process. When we get to the top right corner of the image, we simply move the filter down one pixel and
 restart from the right. This process ends when we get to the bottom right corner of the image.</p>
 
-<figure id="figure-2"><img src="../../images/Conv_no_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image (<a class="citation" href="#DumoulinVisin">Dumoulin and Visin 2016</a>)</figcaption></figure>
+<figure id="figure-2"><img src="../../images/Conv_no_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>Covolution operator has the following parameters:</p>
 
@@ -1036,23 +1034,23 @@ sized filters are preferred to even sized filters, due to the nice geometric pro
 down. If we want to keep the resultant image size the same, we can use <em>padding</em>. We pad the input in every direction with 0’s before applying the
 filter. If the padding is 1 by 1, then we add 1 zero in evey direction. If its 2 by 2, then we add 2 zeros in every direction, and so on.</p>
 
-<figure id="figure-3"><img src="../../images/Conv_same_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image (<a class="citation" href="#DumoulinVisin">Dumoulin and Visin 2016</a>)</figcaption></figure>
+<figure id="figure-3"><img src="../../images/Conv_same_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>As mentioned before, we start the convolution by placing the filter on the top left corner of the image, and after multiplying filter and image
 values (and adding them), we move the filter to the right and repeat the process. How many pixels we move to the right (or down) is the <em>stride</em>.
 In figure 2 and 3, the stride of the filter is 1. We move the filter one pixel to the right (or down). But we could use a different stride. Figure 4
 shows an example of using stride of 2.</p>
 
-<figure id="figure-4"><img src="../../images/Conv_no_padding_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image (<a class="citation" href="#DumoulinVisin">Dumoulin and Visin 2016</a>)</figcaption></figure>
+<figure id="figure-4"><img src="../../images/Conv_no_padding_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>When we apply a, say 3 by 3, filter to an image, our filter’s output is affected by pixels in a 3 by 3 subset of the image. If we like to have a
 larger <em>receptive field</em> (portion of the image that affect our filter’s output), we could use <em>dilation</em>. If we set the dilation to 2 (Figure 5),
 instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 5 subset of the image affects the filter’s output.</p>
 
-<figure id="figure-5"><img src="../../images/Conv_dilation.gif" alt="A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image (<a class="citation" href="#DumoulinVisin">Dumoulin and Visin 2016</a>)</figcaption></figure>
+<figure id="figure-5"><img src="../../images/Conv_dilation.gif" alt="A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>After the filter scans the whole image, we apply an activation function to filter output to introduce non-linearlity. The preferred activation function
-used in CNN is ReLU or one its variants like Leaky ReLU (<a class="citation" href="#NwankpaEtAl">Nwankpa <i>et al.</i> 2018</a>). ReLU leaves pixels with positive values in filter output as is, and
+used in CNN is ReLU or one its variants like Leaky ReLU (<span class="citation"><a href="#NwankpaEtAl">Nwankpa <i>et al.</i> 2018</a></span>). ReLU leaves pixels with positive values in filter output as is, and
 replacing negative values with 0 (or a small number in case of Leaky ReLU). Figure 6 shows the results of applying ReLU activation function to a filter
 output.</p>
 
@@ -1088,7 +1086,7 @@ filter with a stride of 2 that returns the maximum value as it slides over the i
 <p>The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
 for classification of the image.</p>
 
-<figure id="figure-10"><img src="../../images/Conv_CNN.png" alt="A convolutional neural network with 3 convolution layers followed by 3 pooling layers" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A convolutional neural network with 3 convolution layers followed by 3 pooling layers (<a class="citation" href="#OSheaEtAl">O’Shea and Nash 2015</a>)</figcaption></figure>
+<figure id="figure-10"><img src="../../images/Conv_CNN.png" alt="A convolutional neural network with 3 convolution layers followed by 3 pooling layers" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A convolutional neural network with 3 convolution layers followed by 3 pooling layers (<span class="citation"><a href="#OSheaEtAl">O’Shea and Nash 2015</a></span>)</figcaption></figure>
 
 <p>As shown in Figure 10, a typical CNN usually has more than one convolution layer plus pooling layer. Each convolution plus pooling layer is responsible
 for feature extraction at a different level of abstraction. For example, the filters in the first layer could detect horizental, vertical, and diagonal
@@ -1098,7 +1096,7 @@ feature extraction. This distinguishes CNN from other classification techniques 
 
 <h2 id="mnist-dataset">MNIST dataset</h2>
 
-<p>The MNIST database of handwritten digits (<a class="citation" href="#LeCunMnist">LeCun <i>et al.</i> 2010</a>) is composed of a training set of 60,000 images and a test set of 10,000 images. The digits
+<p>The MNIST database of handwritten digits (<span class="citation"><a href="#LeCunMnist">LeCun <i>et al.</i> 2010</a></span>) is composed of a training set of 60,000 images and a test set of 10,000 images. The digits
 have been size-normalized and centered in a fixed-size image (28 by 28 pixels). Images are grayscale, where each pixel is represented by a number between
 0 and 255 (0 for black, 255 for white, and other values for different shades of gray). MNIST database is a standard image classification dataset and is used
 to compare various Machine Learning techniques.</p>
@@ -1371,7 +1369,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 classified by the model, True positives (TP) and true negatives (TN). It also lists the number of examples that were classified as positive that
 were actually negative (False positive, FP, or Type I error), and the number of examples that were classified as negative that were actually
 positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate <strong>precision</strong> and
-<strong>recall</strong> <a class="citation" href="#TatbulEtAl">Tatbul <i>et al.</i> 2018</a>. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
+<strong>recall</strong> <span class="citation"><a href="#TatbulEtAl">Tatbul <i>et al.</i> 2018</a></span>. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
 is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
 to use the <strong>F score</strong>, which is the harmonic mean of precision and recall</p>
 
@@ -1421,141 +1419,21 @@ operator and its parameters. We then used <span class="notranslate">Galaxy</span
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="HubelWiesel">Hubel, D. H., and T. N. Wiesel, 1959 <b>Receptive fields of single neurones in the cat’s striate cortex</b>. The Journal of physiology 148: 574–591.</span>
-    
-    
-    <a href="https://doi.org/10.1113/jphysiol.1959.sp006308">10.1113/jphysiol.1959.sp006308</a>
-    
-    
-
-</li>
-<li><span id="Fukishima">Fukushima, K., 1988 <b>Neocognitron: A hierarchical neural network capable of visual pattern recognition</b>. Neural Networks 1: 119–130.</span>
-    
-    
-    <a href="https://doi.org/https://doi.org/10.1016/0893-6080(88)90014-7">https://doi.org/10.1016/0893-6080(88)90014-7</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.sciencedirect.com/science/article/pii/0893608088900147">https://www.sciencedirect.com/science/article/pii/0893608088900147</a>
-      
-    
-
-</li>
-<li><span id="LeCunEtAl">LeCun, Y., B. Boser, J. S. Denker, D. Henderson, R. E. Howard <i>et al.</i>, 1989 <b>Backpropagation Applied to Handwritten Zip Code Recognition</b>. Neural Computation 1: 541–551.</span>
-    
-    
-    <a href="https://doi.org/10.1162/neco.1989.1.4.541">10.1162/neco.1989.1.4.541</a>
-    
-    
-
-</li>
-<li><span id="JainEtAl">Jain, A. K., J. Mao, and K. M. Mohiuddin, 1996 <b>Artificial neural networks: a tutorial</b>. Computer 29: 31–44.</span>
-    
-    
-    <a href="https://doi.org/10.1109/2.485891">10.1109/2.485891</a>
-    
-    
-
-</li>
-<li><span id="LeCunMnist">LeCun, Y., C. Cortes, and C. J. Burges, 2010 <b>MNIST handwritten digit database</b>. ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist 2:</span>
-    
-    
-    
-
-</li>
-<li><span id="KrizhevskyEtAl">Krizhevsky, A., I. Sutskever, and G. Hinton, 2012 <b>ImageNet Classification with Deep Convolutional Neural Networks</b>. Neural Information Processing Systems 25:</span>
-    
-    
-    <a href="https://doi.org/10.1145/3065386">10.1145/3065386</a>
-    
-    
-
-</li>
-<li><span id="ZeilerEtAl">Zeiler, M. D., and R. Fergus, 2013 <b>Visualizing and Understanding Convolutional Networks</b>. ECCV.</span>
-    
-    
-    <a href="https://doi.org/1311.2901">1311.2901</a>
-    
-    
-
-</li>
-<li><span id="SzegedyEtAl">Szegedy, C., W. Liu, Y. Jia, P. Sermanet, S. Reed <i>et al.</i>, 2014 <b>Going Deeper with Convolutions</b>. CVPR.</span>
-    
-    
-    <a href="https://doi.org/1409.4842">1409.4842</a>
-    
-    
-
-</li>
-<li><span id="OSheaEtAl">O’Shea, K., and R. Nash, 2015 <b>An Introduction to Convolutional Neural Networks</b>. CoRR abs/1511.08458:</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://arxiv.org/abs/1511.08458">http://arxiv.org/abs/1511.08458</a>
-      
-    
-
-</li>
-<li><span id="RussakovskyEtAl">Russakovsky, O., J. Deng, H. Su, J. Krause, S. Satheesh <i>et al.</i>, 2015 <b>ImageNet Large Scale Visual Recognition Challenge</b>. International Journal of Computer Vision 115: 2211–252.</span>
-    
-    
-    <a href="https://doi.org/10.1007/s11263-015-0816-y">10.1007/s11263-015-0816-y</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="SimonyanEtAl">Simonyan, K., and A. Zisserman, 2015 <b>Very Deep Convolutional Networks for Large-Scale Image Recognition</b>. CVPR.</span>
-    
-    
-    <a href="https://doi.org/1409.1556">1409.1556</a>
-    
-    
-
-</li>
-<li><span id="HeEtAl">He, K., X. Zhang, S. Ren, and J. Sun, 2015 <b>Deep Residual Learning for Image Recognition</b>. CVPR.</span>
-    
-    
-    <a href="https://doi.org/1512.03385">1512.03385</a>
-    
-    
-
-</li>
-<li><span id="DumoulinVisin">Dumoulin, V., and F. Visin, 2016 <b>A guide to convolution arithmetic for deep learning</b>.</span>
-    
-    
-    <a href="https://doi.org/1603.07285">1603.07285</a>
-    
-    
-
-</li>
-<li><span id="NwankpaEtAl">Nwankpa, C., W. Ijomah, A. Gachagan, and S. Marshall, 2018 <b>Activation Functions: Comparison of trends in Practice and Research for Deep Learning</b>. CoRR abs/1811.03378:</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://arxiv.org/abs/1811.03378">http://arxiv.org/abs/1811.03378</a>
-      
-    
-
-</li>
-<li><span id="TatbulEtAl">Tatbul, N., T. J. Lee, S. Zdonik, M. Alam, and J. Gottschlich, 2018 <b>Precision and Recall for Time Series</b>. Advances in Neural Information Processing Systems 31: 1920–1930.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf">https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf</a>
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="HubelWiesel">Hubel, D. H., and T. N. Wiesel, 1959 <b>Receptive fields of single neurones in the cat’s striate cortex</b>. The Journal of physiology 148: 574–591. <a href="https://doi.org/10.1113/jphysiol.1959.sp006308">10.1113/jphysiol.1959.sp006308</a></li>
+<li id="Fukishima">Fukushima, K., 1988 <b>Neocognitron: A hierarchical neural network capable of visual pattern recognition</b>. Neural Networks 1: 119–130. <a href="https://doi.org/https://doi.org/10.1016/0893-6080(88)90014-7">https://doi.org/10.1016/0893-6080(88)90014-7</a> <a href="https://www.sciencedirect.com/science/article/pii/0893608088900147">https://www.sciencedirect.com/science/article/pii/0893608088900147</a></li>
+<li id="LeCunEtAl">LeCun, Y., B. Boser, J. S. Denker, D. Henderson, R. E. Howard <i>et al.</i>, 1989 <b>Backpropagation Applied to Handwritten Zip Code Recognition</b>. Neural Computation 1: 541–551. <a href="https://doi.org/10.1162/neco.1989.1.4.541">10.1162/neco.1989.1.4.541</a></li>
+<li id="JainEtAl">Jain, A. K., J. Mao, and K. M. Mohiuddin, 1996 <b>Artificial neural networks: a tutorial</b>. Computer 29: 31–44. <a href="https://doi.org/10.1109/2.485891">10.1109/2.485891</a></li>
+<li id="LeCunMnist">LeCun, Y., C. Cortes, and C. J. Burges, 2010 <b>MNIST handwritten digit database</b>. ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist 2:</li>
+<li id="KrizhevskyEtAl">Krizhevsky, A., I. Sutskever, and G. Hinton, 2012 <b>ImageNet Classification with Deep Convolutional Neural Networks</b>. Neural Information Processing Systems 25: <a href="https://doi.org/10.1145/3065386">10.1145/3065386</a></li>
+<li id="ZeilerEtAl">Zeiler, M. D., and R. Fergus, 2013 <b>Visualizing and Understanding Convolutional Networks</b>. ECCV. <a href="https://doi.org/1311.2901">1311.2901</a></li>
+<li id="SzegedyEtAl">Szegedy, C., W. Liu, Y. Jia, P. Sermanet, S. Reed <i>et al.</i>, 2014 <b>Going Deeper with Convolutions</b>. CVPR. <a href="https://doi.org/1409.4842">1409.4842</a></li>
+<li id="HeEtAl">He, K., X. Zhang, S. Ren, and J. Sun, 2015 <b>Deep Residual Learning for Image Recognition</b>. CVPR. <a href="https://doi.org/1512.03385">1512.03385</a></li>
+<li id="OSheaEtAl">O’Shea, K., and R. Nash, 2015 <b>An Introduction to Convolutional Neural Networks</b>. CoRR abs/1511.08458: <a href="http://arxiv.org/abs/1511.08458">http://arxiv.org/abs/1511.08458</a></li>
+<li id="RussakovskyEtAl">Russakovsky, O., J. Deng, H. Su, J. Krause, S. Satheesh <i>et al.</i>, 2015 <b>ImageNet Large Scale Visual Recognition Challenge</b>. International Journal of Computer Vision 115: 2211–252. <a href="https://doi.org/10.1007/s11263-015-0816-y">10.1007/s11263-015-0816-y</a></li>
+<li id="SimonyanEtAl">Simonyan, K., and A. Zisserman, 2015 <b>Very Deep Convolutional Networks for Large-Scale Image Recognition</b>. CVPR. <a href="https://doi.org/1409.1556">1409.1556</a></li>
+<li id="DumoulinVisin">Dumoulin, V., and F. Visin, 2016 <b>A guide to convolution arithmetic for deep learning</b>. <a href="https://doi.org/1603.07285">1603.07285</a></li>
+<li id="NwankpaEtAl">Nwankpa, C., W. Ijomah, A. Gachagan, and S. Marshall, 2018 <b>Activation Functions: Comparison of trends in Practice and Research for Deep Learning</b>. CoRR abs/1811.03378: <a href="http://arxiv.org/abs/1811.03378">http://arxiv.org/abs/1811.03378</a></li>
+<li id="TatbulEtAl">Tatbul, N., T. J. Lee, S. Zdonik, M. Alam, and J. Gottschlich, 2018 <b>Precision and Recall for Time Series</b>. Advances in Neural Information Processing Systems 31: 1920–1930. <a href="https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf">https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf</a></li></ol>
                 
 
                 

@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-03-23 18:28:07 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Clustering 3K PBMCs with Scanpy",
   "interactivityType": "mixed",
@@ -998,8 +998,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -1090,13 +1088,13 @@
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-  <p>This tutorial is significantly based on <a href="https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html#Clustering-3K-PBMCs">“Clustering 3K PBMCs” tutorial from Scanpy</a>, <a href="https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html">“Seurat - Guided Clustering Tutorial”</a> and <a href="https://osca.bioconductor.org/">“Orchestrating <span class="notranslate">Single-Cell</span> Analysis with Bioconductor”</a> <a class="citation" href="#amezquita2019orchestrating">Amezquita <i>et al.</i> 2019</a>.</p>
+  <p>This tutorial is significantly based on <a href="https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html#Clustering-3K-PBMCs">“Clustering 3K PBMCs” tutorial from Scanpy</a>, <a href="https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html">“Seurat - Guided Clustering Tutorial”</a> and <a href="https://osca.bioconductor.org/">“Orchestrating <span class="notranslate">Single-Cell</span> Analysis with Bioconductor”</a> <span class="citation"><a href="#amezquita2019orchestrating">Amezquita <i>et al.</i> 2019</a></span>.</p>
 
 </blockquote>
 
 <p><span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells. The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk <span class="notranslate">RNA</span>-seq.</p>
 
-<p>In this tutorial, we will investigate clustering of <span class="notranslate">single-cell</span> data from 10x Genomics, including preprocessing, clustering and the identification of cell types via known marker genes, using <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<a class="citation" href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a>). It will be illustrated using a dataset of Peripheral Blood Mononuclear Cells (PBMC), containing 2,700 <span class="notranslate">single cell</span>s.</p>
+<p>In this tutorial, we will investigate clustering of <span class="notranslate">single-cell</span> data from 10x Genomics, including preprocessing, clustering and the identification of cell types via known marker genes, using <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>). It will be illustrated using a dataset of Peripheral Blood Mononuclear Cells (PBMC), containing 2,700 <span class="notranslate">single cell</span>s.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -1216,7 +1214,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 
 <figure id="figure-1"><img src="../../images/tenx_anndata.svg" alt="Anndata format" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.</figcaption></figure>
 
-<p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<a class="citation" href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a>), the tool suite for analyzing <span class="notranslate">single-cell</span> gene <span class="notranslate">expression</span> data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
+<p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>), the tool suite for analyzing <span class="notranslate">single-cell</span> gene <span class="notranslate">expression</span> data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-transform-matrix-and-all-into-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Transform matrix and all into AnnData object</h3>
@@ -1407,7 +1405,7 @@ RP11-34P13.8	ENSG00000239945
 
 <h1 id="preprocessing">Preprocessing</h1>
 
-<p>The first step when we get our counts is to prepare them before we perform the clustering. This includes (<a class="citation" href="#amezquita2019orchestrating">Amezquita <i>et al.</i> 2019</a>):</p>
+<p>The first step when we get our counts is to prepare them before we perform the clustering. This includes (<span class="citation"><a href="#amezquita2019orchestrating">Amezquita <i>et al.</i> 2019</a></span>):</p>
 
 <ol>
   <li>
@@ -1477,7 +1475,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 </blockquote>
 
-<p>Low-quality cells may be due to a variety of sources such as cell damage during dissociation or failure in library preparation (e.g., inefficient reverse transcription or PCR amplification, <a class="citation" href="#ilicic2016classification">Ilicic <i>et al.</i> 2016</a>). Usually these low-quality cells have low total counts, few expressed genes and high mitochondrial or spike-in proportions. Low-quality cells are problematic for <span class="notranslate">downstream</span> analyses and may contribute to misleading results.</p>
+<p>Low-quality cells may be due to a variety of sources such as cell damage during dissociation or failure in library preparation (e.g., inefficient reverse transcription or PCR amplification, <span class="citation"><a href="#ilicic2016classification">Ilicic <i>et al.</i> 2016</a></span>). Usually these low-quality cells have low total counts, few expressed genes and high mitochondrial or spike-in proportions. Low-quality cells are problematic for <span class="notranslate">downstream</span> analyses and may contribute to misleading results.</p>
 
 <blockquote class="details">
   <h3 id="details-impact-of-low-quality-cells-on-the-downstream-analyses"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Impact of low-quality cells on the <span class="notranslate">downstream</span> analyses</h3>
@@ -1512,7 +1510,7 @@ RP11-34P13.8	ENSG00000239945
   <li>
     <p><strong>Proportion of <span class="notranslate">reads</span> mapped to genes in the mitochondrial genome</strong></p>
 
-    <p>High concentrations of mitochondrial genes is often a result of damaged cells (<a class="citation" href="#islam2014quantitative">Islam <i>et al.</i> 2014</a>, <a class="citation" href="#ilicic2016classification">Ilicic <i>et al.</i> 2016</a>) where the endogenous <span class="notranslate">RNA</span> escapes or degrades. As mitochondria has its own cell membranes, it is often the last <span class="notranslate">DNA</span>/<span class="notranslate">RNA</span> in damaged cells to degrade and hence occurs in high quantities during sequencing.</p>
+    <p>High concentrations of mitochondrial genes is often a result of damaged cells (<span class="citation"><a href="#islam2014quantitative">Islam <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#ilicic2016classification">Ilicic <i>et al.</i> 2016</a></span>) where the endogenous <span class="notranslate">RNA</span> escapes or degrades. As mitochondria has its own cell membranes, it is often the last <span class="notranslate">DNA</span>/<span class="notranslate">RNA</span> in damaged cells to degrade and hence occurs in high quantities during sequencing.</p>
   </li>
 </ul>
 
@@ -2053,7 +2051,7 @@ RP11-34P13.8	ENSG00000239945
 
 <h2 id="normalization-and-scaling">Normalization and scaling</h2>
 
-<p>In sc<span class="notranslate">RNA</span>-seq, we can observe systematic differences in sequencing coverage between cells (<a class="citation" href="#stegle2015computational">Stegle <i>et al.</i> 2015</a>), because of technical differences in c<span class="notranslate">DNA</span> capture or PCR amplification efficiency across cells, attributable to the difficulty of achieving consistent library preparation with minimal starting material. After removing low-quality cells, normalization of the counts removes these differences to avoid that they interfere with comparisons of the <span class="notranslate">expression</span> profiles between cells. Any observed heterogeneity or differential <span class="notranslate">expression</span> within the cell population after normalization are then driven by biology and not technical biases.</p>
+<p>In sc<span class="notranslate">RNA</span>-seq, we can observe systematic differences in sequencing coverage between cells (<span class="citation"><a href="#stegle2015computational">Stegle <i>et al.</i> 2015</a></span>), because of technical differences in c<span class="notranslate">DNA</span> capture or PCR amplification efficiency across cells, attributable to the difficulty of achieving consistent library preparation with minimal starting material. After removing low-quality cells, normalization of the counts removes these differences to avoid that they interfere with comparisons of the <span class="notranslate">expression</span> profiles between cells. Any observed heterogeneity or differential <span class="notranslate">expression</span> within the cell population after normalization are then driven by biology and not technical biases.</p>
 
 <p>Scaling normalization is the simplest and most commonly-used class of normalization strategies. All counts for each cell are divided by a cell-specific scaling factor, often called a “size factor”. The assumption behind this process is that any technical biases tend to affect genes in a similar manner. The relative bias for each cell is represented by the size factor for that cell. Dividing the cell counts by its size factor should then remove the bias.</p>
 
@@ -2124,7 +2122,7 @@ RP11-34P13.8	ENSG00000239945
 
 <p>To quantify the per-gene variation, the simplest approach consists of computing the variance of the log-normalized <span class="notranslate">expression</span> values for each gene across all cells in the population. With this approach, the feature selection is based on the same log-values as the ones used in clustering, ensuring then that the quantitative definition of heterogeneity is consistent throughout the entire analysis.</p>
 
-<p>Calculation of the per-gene variance is simple but feature selection requires modelling of the mean-variance relationship, as done in the Seurat procedure (<a class="citation" href="#stuart2019comprehensive">Stuart <i>et al.</i> 2019</a>) we will use.</p>
+<p>Calculation of the per-gene variance is simple but feature selection requires modelling of the mean-variance relationship, as done in the Seurat procedure (<span class="citation"><a href="#stuart2019comprehensive">Stuart <i>et al.</i> 2019</a></span>) we will use.</p>
 
 <p>Once the per-gene variation has been quantified, we need to select the subset of highly variable genes that we will use in <span class="notranslate">downstream</span> analyses. A large subset reduces the risk of discarding any interesting biological signal, but increases the noise from irrelevant genes on the signal. The optimal trade-off is difficult to determine but there are several common strategies routinely used. You can read the <a href="https://osca.bioconductor.org/feature-selection.html#hvg-selection">Chapter 8 from “Orchestrating <span class="notranslate">Single-Cell</span> Analysis with Bioconductor”</a> for a nice presentation of the different strategies. Here, we will define the set of highly variable genes as those which, after normalization, have a normalized dispersion amount higher than 0.5.</p>
 
@@ -2690,7 +2688,7 @@ RP11-34P13.8	ENSG00000239945
 
 <p>Clustering summarizes the data and allows us to describe the population heterogeneity in terms of discrete and easily understandable labels. The subpopulations can be afterwards treated as proxies for biological objects like cell types or states.</p>
 
-<p>Graph-based clustering has been popularized for clustering large sc<span class="notranslate">RNA</span>-Seq datasets by its use in Seurat (<a class="citation" href="#butler2018integrating">Butler <i>et al.</i> 2018</a>, <a class="citation" href="#stuart2019comprehensive">Stuart <i>et al.</i> 2019</a>). Such approaches like the K-nearest neighbor (KNN) graph works in 2 steps:</p>
+<p>Graph-based clustering has been popularized for clustering large sc<span class="notranslate">RNA</span>-Seq datasets by its use in Seurat (<span class="citation"><a href="#butler2018integrating">Butler <i>et al.</i> 2018</a></span>, <span class="citation"><a href="#stuart2019comprehensive">Stuart <i>et al.</i> 2019</a></span>). Such approaches like the K-nearest neighbor (KNN) graph works in 2 steps:</p>
 
 <ol>
   <li>
@@ -2714,7 +2712,7 @@ RP11-34P13.8	ENSG00000239945
   <li>What scheme is used to weight the edges.</li>
 </ul>
 
-<p>Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the Euclidian distance metrics and the UMAP method (<a class="citation" href="#mcinnes2018umap">McInnes <i>et al.</i> 2018</a>) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.</p>
+<p>Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the Euclidian distance metrics and the UMAP method (<span class="citation"><a href="#mcinnes2018umap">McInnes <i>et al.</i> 2018</a></span>) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-compute-the-neighborhood-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute the neighborhood graph</h3>
@@ -2775,7 +2773,7 @@ RP11-34P13.8	ENSG00000239945
 
 <p>To visualize and explore the neighborhood graph, we can apply an extra step of non-linear dimensional reduction techniques to learn the underlying manifold of the data in order to place similar cells together in low-dimensional space. Cells that will be in the same clusters, i.e. cells with similar local neighborhoods in high-dimensional space, should co-localize on these low-dimensional plots.</p>
 
-<p>Two techniques are commonly used for the non-linear dimensional reduction: <em>t</em>-SNE (t-distributed stochastic neighbor embedding) and UMAP. Scanpy authors recommend to use here UMAP as it better preserves trajectories (check <a class="citation" href="#becht2019dimensionality">Becht <i>et al.</i> 2019</a> for a review) and easily accommodates new data.</p>
+<p>Two techniques are commonly used for the non-linear dimensional reduction: <em>t</em>-SNE (t-distributed stochastic neighbor embedding) and UMAP. Scanpy authors recommend to use here UMAP as it better preserves trajectories (check <span class="citation"><a href="#becht2019dimensionality">Becht <i>et al.</i> 2019</a></span> for a review) and easily accommodates new data.</p>
 
 <p>Here, we will reduce the neighborhood to 2 UMAP components and then we will check to see how the cells are projected on them given the top genes</p>
 
@@ -2857,7 +2855,7 @@ RP11-34P13.8	ENSG00000239945
 
 <p>Given the first visualization, we can now cluster the cells within a neighborhood graph.</p>
 
-<p>Which community detection algorithm should we use to define the clusters? Several modularity optimization techniques such as the SLM (<a class="citation" href="#blondel2008fast">Blondel <i>et al.</i> 2008</a>), Louvain algorithm (<a class="citation" href="#levine2015data">Levine <i>et al.</i> 2015</a>) or the Leiden algorithm (<a class="citation" href="#traag2019louvain">Traag <i>et al.</i> 2019</a>) are available to iteratively group cells together while optimizing the standard modularity function.</p>
+<p>Which community detection algorithm should we use to define the clusters? Several modularity optimization techniques such as the SLM (<span class="citation"><a href="#blondel2008fast">Blondel <i>et al.</i> 2008</a></span>), Louvain algorithm (<span class="citation"><a href="#levine2015data">Levine <i>et al.</i> 2015</a></span>) or the Leiden algorithm (<span class="citation"><a href="#traag2019louvain">Traag <i>et al.</i> 2019</a></span>) are available to iteratively group cells together while optimizing the standard modularity function.</p>
 
 <p>Currently, the Louvain graph-clustering method (community detection based on optimizing modularity) is the one recommended. We need to define a value for the resolution parameter, i.e. the ‘granularity’ of the <span class="notranslate">downstream</span> clustering. High values lead to a greater number of clusters. For <span class="notranslate">single-cell</span> datasets of around 3K cells, we recommend to use a value between 0.4 and 1.2. For larger datasets, the optimal resolution will be higher.</p>
 
@@ -2976,7 +2974,7 @@ RP11-34P13.8	ENSG00000239945
 
 <h2 id="using-the-t-test">Using the <em>t</em>-test</h2>
 
-<p>The simplest and fastest method is the Welch <em>t</em>-test. It has good statistical properties for large numbers of cells (<a class="citation" href="#soneson2018bias">Soneson and Robinson 2018</a>).</p>
+<p>The simplest and fastest method is the Welch <em>t</em>-test. It has good statistical properties for large numbers of cells (<span class="citation"><a href="#soneson2018bias">Soneson and Robinson 2018</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-rank-the-highly-differential-genes-using-t-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rank the highly differential genes using t-test</h3>
@@ -3160,7 +3158,7 @@ RP11-34P13.8	ENSG00000239945
 
 <h2 id="using-wilcoxon-rank-sum-test">Using Wilcoxon rank sum test</h2>
 
-<p>Another widely used method for pairwise comparisons between groups of observations is the Wilcoxon rank sum test (also known as the Wilcoxon-Mann-Whitney test). This test directly assesses separation between the <span class="notranslate">expression</span> distributions of different clusters. It is the recommended approach to use in publication (<a class="citation" href="#soneson2018bias">Soneson and Robinson 2018</a>).</p>
+<p>Another widely used method for pairwise comparisons between groups of observations is the Wilcoxon rank sum test (also known as the Wilcoxon-Mann-Whitney test). This test directly assesses separation between the <span class="notranslate">expression</span> distributions of different clusters. It is the recommended approach to use in publication (<span class="citation"><a href="#soneson2018bias">Soneson and Robinson 2018</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-rank-the-highly-differential-genes-using-wilcoxon-rank-sum"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rank the highly differential genes using Wilcoxon rank sum</h3>
@@ -3677,7 +3675,7 @@ RP11-34P13.8	ENSG00000239945
 <blockquote class="tip">
   <h3 id="tip-how-to-find-canonical-markers"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How to find canonical markers?</h3>
 
-  <p>Canonical markers are usually found in the literature and are also aggregated into dedicated database like the <a href="https://panglaodb.se/markers.html">PanglaoDB</a> <a class="citation" href="#franzen2019panglaodb">Franzén <i>et al.</i> 2019</a></p>
+  <p>Canonical markers are usually found in the literature and are also aggregated into dedicated database like the <a href="https://panglaodb.se/markers.html">PanglaoDB</a> <span class="citation"><a href="#franzen2019panglaodb">Franzén <i>et al.</i> 2019</a></span></p>
 </blockquote>
 
 <blockquote class="question">
@@ -4093,7 +4091,7 @@ RP11-34P13.8	ENSG00000239945
   <li>Annotation of the clusters with cell types</li>
 </ol>
 
-<p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<a class="citation" href="#tekman2020single">Tekman <i>et al.</i> 2020</a>).</p>
+<p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
 
 
@@ -4124,161 +4122,21 @@ RP11-34P13.8	ENSG00000239945
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="blondel2008fast">Blondel, V. D., J.-L. Guillaume, R. Lambiotte, and E. Lefebvre, 2008 <b>Fast unfolding of communities in large networks</b>. Journal of statistical mechanics: theory and experiment 2008: P10008.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://iopscience.iop.org/article/10.1088/1742-5468/2008/10/P10008/meta">https://iopscience.iop.org/article/10.1088/1742-5468/2008/10/P10008/meta</a>
-      
-    
-
-</li>
-<li><span id="islam2014quantitative">Islam, S., A. Zeisel, S. Joost, G. La Manno, P. Zajac <i>et al.</i>, 2014 <b>Quantitative single-cell RNA-seq with unique molecular identifiers</b>. Nature methods 11: 163.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/nmeth/journal/v11/n2/abs/nmeth.2772.html">https://www.nature.com/nmeth/journal/v11/n2/abs/nmeth.2772.html</a>
-      
-    
-
-</li>
-<li><span id="levine2015data">Levine, J. H., E. F. Simonds, S. C. Bendall, K. L. Davis, D. A. El-ad <i>et al.</i>, 2015 <b>Data-driven phenotypic dissection of AML reveals progenitor-like cells that correlate with prognosis</b>. Cell 162: 184–197.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.sciencedirect.com/science/article/pii/S0092867415006376">https://www.sciencedirect.com/science/article/pii/S0092867415006376</a>
-      
-    
-
-</li>
-<li><span id="stegle2015computational">Stegle, O., S. A. Teichmann, and J. C. Marioni, 2015 <b>Computational and analytical challenges in single-cell transcriptomics</b>. Nature Reviews Genetics 16: 133–145.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/articles/nrg3833">https://www.nature.com/articles/nrg3833</a>
-      
-    
-
-</li>
-<li><span id="ilicic2016classification">Ilicic, T., J. K. Kim, A. A. Kolodziejczyk, F. O. Bagger, D. J. McCarthy <i>et al.</i>, 2016 <b>Classification of low quality cells from single-cell RNA-seq data</b>. Genome biology 17: 29.</span>
-    
-    
-    
-
-</li>
-<li><span id="butler2018integrating">Butler, A., P. Hoffman, P. Smibert, E. Papalexi, and R. Satija, 2018 <b>Integrating single-cell transcriptomic data across different conditions, technologies, and species</b>. Nature biotechnology 36: 411.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/articles/nbt.4096?draft=journal">https://www.nature.com/articles/nbt.4096?draft=journal</a>
-      
-    
-
-</li>
-<li><span id="mcinnes2018umap">McInnes, L., J. Healy, and J. Melville, 2018 <b>Umap: Uniform manifold approximation and projection for dimension reduction</b>. arXiv preprint arXiv:1802.03426.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://arxiv.org/abs/1802.03426">https://arxiv.org/abs/1802.03426</a>
-      
-    
-
-</li>
-<li><span id="soneson2018bias">Soneson, C., and M. D. Robinson, 2018 <b>Bias, robustness and scalability in single-cell differential expression analysis</b>. Nature methods 15: 255.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/nmeth/journal/v15/n4/abs/nmeth.4612.html">https://www.nature.com/nmeth/journal/v15/n4/abs/nmeth.4612.html</a>
-      
-    
-
-</li>
-<li><span id="wolf2018scanpy">Wolf, F. A., P. Angerer, and F. J. Theis, 2018 <b>SCANPY: large-scale single-cell gene expression data analysis</b>. Genome biology 19: 15.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0</a>
-      
-    
-
-</li>
-<li><span id="amezquita2019orchestrating">Amezquita, R. A., V. J. Carey, L. N. Carpp, L. Geistlinger, A. T. L. Lun <i>et al.</i>, 2019 <b>Orchestrating Single-Cell Analysis with Bioconductor</b>. bioRxiv 590562.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.biorxiv.org/content/10.1101/590562v1">https://www.biorxiv.org/content/10.1101/590562v1</a>
-      
-    
-
-</li>
-<li><span id="becht2019dimensionality">Becht, E., L. McInnes, J. Healy, C.-A. Dutertre, I. W. H. Kwok <i>et al.</i>, 2019 <b>Dimensionality reduction for visualizing single-cell data using UMAP</b>. Nature biotechnology 37: 38.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/articles/nbt.4314">https://www.nature.com/articles/nbt.4314</a>
-      
-    
-
-</li>
-<li><span id="franzen2019panglaodb">Franzén, O., L.-M. Gan, and J. L. M. Björkegren, 2019 <b>PanglaoDB: a web server for exploration of mouse and human single-cell RNA sequencing data</b>. Database 2019:</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/database/article-abstract/doi/10.1093/database/baz046/5427041">https://academic.oup.com/database/article-abstract/doi/10.1093/database/baz046/5427041</a>
-      
-    
-
-</li>
-<li><span id="stuart2019comprehensive">Stuart, T., A. Butler, P. Hoffman, C. Hafemeister, E. Papalexi <i>et al.</i>, 2019 <b>Comprehensive Integration of Single-Cell Data</b>. Cell.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.sciencedirect.com/science/article/pii/S0092867419305598">https://www.sciencedirect.com/science/article/pii/S0092867419305598</a>
-      
-    
-
-</li>
-<li><span id="traag2019louvain">Traag, V. A., L. Waltman, and N. J. van Eck, 2019 <b>From Louvain to Leiden: guaranteeing well-connected communities</b>. Scientific reports 9:</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6435756/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6435756/</a>
-      
-    
-
-</li>
-<li><span id="tekman2020single">Tekman, M., B. Batut, A. Ostrovsky, C. Antoniewski, D. Clements <i>et al.</i>, 2020 <b>A single-cell RNA-sequencing training and analysis suite using the Galaxy framework</b>. GigaScience 9: giaa102.</span>
-    
-    
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="blondel2008fast">Blondel, V. D., J.-L. Guillaume, R. Lambiotte, and E. Lefebvre, 2008 <b>Fast unfolding of communities in large networks</b>. Journal of statistical mechanics: theory and experiment 2008: P10008. <a href="https://iopscience.iop.org/article/10.1088/1742-5468/2008/10/P10008/meta">https://iopscience.iop.org/article/10.1088/1742-5468/2008/10/P10008/meta</a></li>
+<li id="islam2014quantitative">Islam, S., A. Zeisel, S. Joost, G. La Manno, P. Zajac <i>et al.</i>, 2014 <b>Quantitative single-cell RNA-seq with unique molecular identifiers</b>. Nature methods 11: 163. <a href="https://www.nature.com/nmeth/journal/v11/n2/abs/nmeth.2772.html">https://www.nature.com/nmeth/journal/v11/n2/abs/nmeth.2772.html</a></li>
+<li id="levine2015data">Levine, J. H., E. F. Simonds, S. C. Bendall, K. L. Davis, D. A. El-ad <i>et al.</i>, 2015 <b>Data-driven phenotypic dissection of AML reveals progenitor-like cells that correlate with prognosis</b>. Cell 162: 184–197. <a href="https://www.sciencedirect.com/science/article/pii/S0092867415006376">https://www.sciencedirect.com/science/article/pii/S0092867415006376</a></li>
+<li id="stegle2015computational">Stegle, O., S. A. Teichmann, and J. C. Marioni, 2015 <b>Computational and analytical challenges in single-cell transcriptomics</b>. Nature Reviews Genetics 16: 133–145. <a href="https://www.nature.com/articles/nrg3833">https://www.nature.com/articles/nrg3833</a></li>
+<li id="ilicic2016classification">Ilicic, T., J. K. Kim, A. A. Kolodziejczyk, F. O. Bagger, D. J. McCarthy <i>et al.</i>, 2016 <b>Classification of low quality cells from single-cell RNA-seq data</b>. Genome biology 17: 29.</li>
+<li id="butler2018integrating">Butler, A., P. Hoffman, P. Smibert, E. Papalexi, and R. Satija, 2018 <b>Integrating single-cell transcriptomic data across different conditions, technologies, and species</b>. Nature biotechnology 36: 411. <a href="https://www.nature.com/articles/nbt.4096?draft=journal">https://www.nature.com/articles/nbt.4096?draft=journal</a></li>
+<li id="mcinnes2018umap">McInnes, L., J. Healy, and J. Melville, 2018 <b>Umap: Uniform manifold approximation and projection for dimension reduction</b>. arXiv preprint arXiv:1802.03426. <a href="https://arxiv.org/abs/1802.03426">https://arxiv.org/abs/1802.03426</a></li>
+<li id="soneson2018bias">Soneson, C., and M. D. Robinson, 2018 <b>Bias, robustness and scalability in single-cell differential expression analysis</b>. Nature methods 15: 255. <a href="https://www.nature.com/nmeth/journal/v15/n4/abs/nmeth.4612.html">https://www.nature.com/nmeth/journal/v15/n4/abs/nmeth.4612.html</a></li>
+<li id="wolf2018scanpy">Wolf, F. A., P. Angerer, and F. J. Theis, 2018 <b>SCANPY: large-scale single-cell gene expression data analysis</b>. Genome biology 19: 15. <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0</a></li>
+<li id="amezquita2019orchestrating">Amezquita, R. A., V. J. Carey, L. N. Carpp, L. Geistlinger, A. T. L. Lun <i>et al.</i>, 2019 <b>Orchestrating Single-Cell Analysis with Bioconductor</b>. bioRxiv 590562. <a href="https://www.biorxiv.org/content/10.1101/590562v1">https://www.biorxiv.org/content/10.1101/590562v1</a></li>
+<li id="becht2019dimensionality">Becht, E., L. McInnes, J. Healy, C.-A. Dutertre, I. W. H. Kwok <i>et al.</i>, 2019 <b>Dimensionality reduction for visualizing single-cell data using UMAP</b>. Nature biotechnology 37: 38. <a href="https://www.nature.com/articles/nbt.4314">https://www.nature.com/articles/nbt.4314</a></li>
+<li id="franzen2019panglaodb">Franzén, O., L.-M. Gan, and J. L. M. Björkegren, 2019 <b>PanglaoDB: a web server for exploration of mouse and human single-cell RNA sequencing data</b>. Database 2019: <a href="https://academic.oup.com/database/article-abstract/doi/10.1093/database/baz046/5427041">https://academic.oup.com/database/article-abstract/doi/10.1093/database/baz046/5427041</a></li>
+<li id="stuart2019comprehensive">Stuart, T., A. Butler, P. Hoffman, C. Hafemeister, E. Papalexi <i>et al.</i>, 2019 <b>Comprehensive Integration of Single-Cell Data</b>. Cell. <a href="https://www.sciencedirect.com/science/article/pii/S0092867419305598">https://www.sciencedirect.com/science/article/pii/S0092867419305598</a></li>
+<li id="traag2019louvain">Traag, V. A., L. Waltman, and N. J. van Eck, 2019 <b>From Louvain to Leiden: guaranteeing well-connected communities</b>. Scientific reports 9: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6435756/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6435756/</a></li>
+<li id="tekman2020single">Tekman, M., B. Batut, A. Ostrovsky, C. Antoniewski, D. Clements <i>et al.</i>, 2020 <b>A single-cell RNA-sequencing training and analysis suite using the Galaxy framework</b>. GigaScience 9: giaa102.</li></ol>
                 
 
                 

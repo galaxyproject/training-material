@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-09-23 09:28:38 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "16S Microbial analysis with Nanopore data",
   "interactivityType": "mixed",
@@ -602,8 +602,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -691,17 +689,17 @@
 
 <p><strong>Healthy soils</strong> are an essential element in maintaining the planet’s ecological balance. That is why their protection must be considered a priority in order to guarantee the well-being of humanity. The alteration of microbial populations often precedes changes in the physical and chemical properties of soils, so monitoring their condition can serve to predict their future evolution, allowing to develop strategies to <strong>mitigate ecosystem damage</strong>.</p>
 
-<p>Advances in sequencing technologies have opened up the possibility of using the study of taxa present in bacterial communities as indicators of soil condition. For such an approach to be possible, variations in microbial populations need to be less affected by spatial factors than by human-derived alterations, which has been confirmed by various investigations (<a class="citation" href="#Hermans2016">Hermans <i>et al.</i> 2016</a>, <a class="citation" href="#Fierer2006">Fierer and Jackson 2006</a>).</p>
+<p>Advances in sequencing technologies have opened up the possibility of using the study of taxa present in bacterial communities as indicators of soil condition. For such an approach to be possible, variations in microbial populations need to be less affected by spatial factors than by human-derived alterations, which has been confirmed by various investigations (<span class="citation"><a href="#Hermans2016">Hermans <i>et al.</i> 2016</a></span>, <span class="citation"><a href="#Fierer2006">Fierer and Jackson 2006</a></span>).</p>
 
 <p>Among the environmental variables that have shown the greatest correlation with alterations in the composition of bacterial communities are soil pH, the carbon-nitrogen ratio (C:N), and the co-concentrations of Olsen P (a measure of plant available phosphorus), aluminium and copper (Fig. 1).</p>
 
-<figure id="figure-1"><img src="../../images/metagenomics-nanopore/bioindicators.jpg" alt="Bacterial bioindicators" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Relationship between bacterial community composition and soil parameters. The radius of each circle represents the taxon abundance that was accounted for by each soil variable, based on adjusted R-squared values from distance-based multivariate multiple regression analyses. The univariate relationship between the abundance of each taxon and soil variables, calculated using Pearson’s correlation coefficient, is represented by the color of the circle. Phyla or classes are ordered according to overall abundance in all the samples, from most abundant (top) to least abundant (bottom). Image published originally in <a class="citation" href="#Hermans2016">Hermans <i>et al.</i> 2016</a>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/metagenomics-nanopore/bioindicators.jpg" alt="Bacterial bioindicators" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Relationship between bacterial community composition and soil parameters. The radius of each circle represents the taxon abundance that was accounted for by each soil variable, based on adjusted R-squared values from distance-based multivariate multiple regression analyses. The univariate relationship between the abundance of each taxon and soil variables, calculated using Pearson’s correlation coefficient, is represented by the color of the circle. Phyla or classes are ordered according to overall abundance in all the samples, from most abundant (top) to least abundant (bottom). Image published originally in <span class="citation"><a href="#Hermans2016">Hermans <i>et al.</i> 2016</a></span>.</figcaption></figure>
 
 <p>On the other hand, many species of microorganisms establish complex <strong>symbiotic relationships</strong> with plant organisms. The fraction of the substrate that is directly influenced by root secretions and associated microorganism is known as <strong>rhizosphere</strong>. Thus, for example, bacteria of the genus <em>Bacillus</em>, <em>Pseudomonas</em> or <em>Burkholderia</em> appear associated with the plant roots, protecting them from pathogenic microorganisms.</p>
 
 <figure id="figure-2"><img src="../../images/metagenomics-nanopore/bacteria_community.png" alt="Bacterial communities" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Representation of the relationships between root microbiomes and plant organisms.</figcaption></figure>
 
-<p>In this tutorial, we will use sequencing data obtained through the <strong>MinION sequencer</strong> (Oxford Nanopore Technologies) with two objectives: 1) evaluate the health status of soil samples and 2) study how microbial populations are modified by their interaction with plant roots. This example was inspired by <a class="citation" href="#Brown2017">Brown <i>et al.</i> 2017</a>.</p>
+<p>In this tutorial, we will use sequencing data obtained through the <strong>MinION sequencer</strong> (Oxford Nanopore Technologies) with two objectives: 1) evaluate the health status of soil samples and 2) study how microbial populations are modified by their interaction with plant roots. This example was inspired by <span class="citation"><a href="#Brown2017">Brown <i>et al.</i> 2017</a></span>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -908,11 +906,11 @@
 
 <h2 id="adapter-and-chimera-removal-with-porechop">Adapter and chimera removal with porechop</h2>
 
-<p>Nanopore sequencing technology requires to ligate adapters to both ends of genomic material to facilitate the strand capture and loading of a processive enzyme at the 5’end, boosting the effectiveness of the sequencing process. Adapter sequences should be removed because they <strong>can interfere with aligment of <span class="notranslate">reads</span></strong> to 16S r<span class="notranslate">RNA</span> gene reference database, for which we will use the <strong>porechop</strong> tool (<a class="citation" href="#rrwick2017">Wick 2017</a>).</p>
+<p>Nanopore sequencing technology requires to ligate adapters to both ends of genomic material to facilitate the strand capture and loading of a processive enzyme at the 5’end, boosting the effectiveness of the sequencing process. Adapter sequences should be removed because they <strong>can interfere with aligment of <span class="notranslate">reads</span></strong> to 16S r<span class="notranslate">RNA</span> gene reference database, for which we will use the <strong>porechop</strong> tool (<span class="citation"><a href="#rrwick2017">Wick 2017</a></span>).</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-  <p>If you are interested in Nanopore sequecing technology, you can find more information in <a class="citation" href="#Jain2016">Jain <i>et al.</i> 2016</a>.</p>
+  <p>If you are interested in Nanopore sequecing technology, you can find more information in <span class="citation"><a href="#Jain2016">Jain <i>et al.</i> 2016</a></span>.</p>
 
 </blockquote>
 
@@ -935,7 +933,7 @@
 
 <h2 id="filter-sequences-with-fastp">Filter sequences with fastp</h2>
 
-<p>To increase the specificity of the analysis, we will select the <span class="notranslate">reads</span> with lengths between 1000 bp and 2000 bp, which are more informative from a taxonomic point of view, because they include both preserved and hypervariable regions of the 16S r<span class="notranslate">RNA</span> gene. In addition, sequences will be filtered on a minimum average read quality score of 9, according to the recommendations from <a class="citation" href="#Nygaard2020">Nygaard <i>et al.</i> 2020</a>. This stage will be carried out through the use of <strong>fastp</strong> (<a class="citation" href="#Chen_2018">Chen <i>et al.</i> 2018</a>), an open-source tool designed to process FASTQ files.</p>
+<p>To increase the specificity of the analysis, we will select the <span class="notranslate">reads</span> with lengths between 1000 bp and 2000 bp, which are more informative from a taxonomic point of view, because they include both preserved and hypervariable regions of the 16S r<span class="notranslate">RNA</span> gene. In addition, sequences will be filtered on a minimum average read quality score of 9, according to the recommendations from <span class="citation"><a href="#Nygaard2020">Nygaard <i>et al.</i> 2020</a></span>. This stage will be carried out through the use of <strong>fastp</strong> (<span class="citation"><a href="#Chen_2018">Chen <i>et al.</i> 2018</a></span>), an open-source tool designed to process FASTQ files.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-sequence-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter sequence with fastp</h3>
@@ -1028,7 +1026,7 @@
 
 <h2 id="taxonomic-classification-with-kraken2">Taxonomic classification with Kraken2</h2>
 
-<p>To perform the taxonomic classification we will use <strong>Kraken2</strong> ((missing reference)). This tool uses the minimizer method to sample the k-mers (all the read’s subsequences of length <em>k</em>) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using <strong>dustmasker</strong>.</p>
+<p>To perform the taxonomic classification we will use <strong>Kraken2</strong> (<span>ERROR INVALID CITATION Wood_2019</span>). This tool uses the minimizer method to sample the k-mers (all the read’s subsequences of length <em>k</em>) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using <strong>dustmasker</strong>.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comments-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
@@ -1036,9 +1034,9 @@
 You can find more information about the <strong>Kraken2</strong> algorithm in the paper <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0"><em>Improved metagenomic analysis with Kraken 2</em></a>.</p>
 </blockquote>
 
-<figure id="figure-7"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Taxonomic classification" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in <a class="citation" href="#Wood2014">Wood and Salzberg 2014</a>.</figcaption></figure>
+<figure id="figure-7"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Taxonomic classification" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in <span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>.</figcaption></figure>
 
-<p>For this tutorial, we will use the <strong>SILVA database</strong> (<a class="citation" href="#Quast2012">Quast <i>et al.</i> 2012</a>). It includes over 3.2 million 16S r<span class="notranslate">RNA</span> sequences from the <em>Bacteria</em>, <em>Archaea</em> and <em>Eukaryota</em> domains.</p>
+<p>For this tutorial, we will use the <strong>SILVA database</strong> (<span class="citation"><a href="#Quast2012">Quast <i>et al.</i> 2012</a></span>). It includes over 3.2 million 16S r<span class="notranslate">RNA</span> sequences from the <em>Bacteria</em>, <em>Archaea</em> and <em>Eukaryota</em> domains.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assign-taxonomic-labels-with-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assign taxonomic labels with Kraken2</h3>
@@ -1071,7 +1069,7 @@ You can find more information about the <strong>Kraken2</strong> algorithm in th
 
 <h1 id="analyze-taxonomic-assigment">Analyze taxonomic assigment</h1>
 
-<p>Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the <strong>Krona pie chart</strong> tool (<a class="citation" href="#Ondov_2011">Ondov <i>et al.</i> 2011</a>). But before that, we need to adjust the format of the data output from <strong>Kraken2</strong>.</p>
+<p>Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the <strong>Krona pie chart</strong> tool (<span class="citation"><a href="#Ondov_2011">Ondov <i>et al.</i> 2011</a></span>). But before that, we need to adjust the format of the data output from <strong>Kraken2</strong>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-adjust-dataset-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adjust dataset format</h3>
@@ -1181,116 +1179,16 @@ You can find more information about the <strong>Kraken2</strong> algorithm in th
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Fierer2006">Fierer, N., and R. B. Jackson, 2006 <b>The diversity and biogeography of soil bacterial communities</b>. Proceedings of the National Academy of Sciences 103: 626–631.</span>
-    
-    
-    <a href="https://doi.org/10.1073/pnas.0507535103">10.1073/pnas.0507535103</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Ondov_2011">Ondov, B. D., N. H. Bergman, and A. M. Phillippy, 2011 <b>Interactive metagenomic visualization in a Web browser</b>. BMC Bioinformatics 12:</span>
-    
-    
-    <a href="https://doi.org/10.1186/1471-2105-12-385">10.1186/1471-2105-12-385</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Quast2012">Quast, C., E. Pruesse, P. Yilmaz, J. Gerken, T. Schweer <i>et al.</i>, 2012 <b>The SILVA ribosomal RNA gene database project: improved data processing and web-based tools</b>. Nucleic Acids Research 41: D590–D596.</span>
-    
-    
-    <a href="https://doi.org/10.1093/nar/gks1219">10.1093/nar/gks1219</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wood2014">Wood, D. E., and S. L. Salzberg, 2014 <b>Kraken: ultrafast metagenomic sequence classification using exact alignments</b>. Genome Biology 15: R46.</span>
-    
-    
-    <a href="https://doi.org/10.1186/gb-2014-15-3-r46">10.1186/gb-2014-15-3-r46</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Hermans2016">Hermans, S. M., H. L. Buckley, B. S. Case, F. Curran-Cournane, M. Taylor <i>et al.</i>, 2016 <b>Bacteria as Emerging Indicators of Soil Condition</b> (F. E. Loeffler, Ed.). Applied and Environmental Microbiology 83:</span>
-    
-    
-    <a href="https://doi.org/10.1128/aem.02826-16">10.1128/aem.02826-16</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Jain2016">Jain, M., H. E. Olsen, B. Paten, and M. Akeson, 2016 <b>The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community</b>. Genome Biology 17:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s13059-016-1103-0">10.1186/s13059-016-1103-0</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="rrwick2017">Wick, R., 2017 <b>Porechop</b>. <i>GitHub</i>.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://github.com/rrwick/Porechop">https://github.com/rrwick/Porechop</a>
-      
-    
-
-</li>
-<li><span id="Brown2017">Brown, B. L., M. Watson, S. S. Minot, M. C. Rivera, and R. B. Franklin, 2017 <b>MinION™ nanopore sequencing of environmental metagenomes: a synthetic approach</b>. GigaScience 6:</span>
-    
-    
-    <a href="https://doi.org/10.1093/gigascience/gix007">10.1093/gigascience/gix007</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Chen_2018">Chen, S., Y. Zhou, Y. Chen, and J. Gu, 2018 <b>fastp: an ultra-fast all-in-one FASTQ preprocessor</b>.</span>
-    
-    
-    <a href="https://doi.org/10.1101/274100">10.1101/274100</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Nygaard2020">Nygaard, A. B., H. S. Tunsjø, R. Meisal, and C. Charnock, 2020 <b>A preliminary study on the potential of Nanopore MinION and Illumina MiSeq 16S rRNA gene sequencing to characterize building-dust microbiomes</b>. Scientific Reports 10: 3209.</span>
-    
-    
-    <a href="https://doi.org/10.1038/s41598-020-59771-0">10.1038/s41598-020-59771-0</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Fierer2006">Fierer, N., and R. B. Jackson, 2006 <b>The diversity and biogeography of soil bacterial communities</b>. Proceedings of the National Academy of Sciences 103: 626–631. <a href="https://doi.org/10.1073/pnas.0507535103">10.1073/pnas.0507535103</a></li>
+<li id="Ondov_2011">Ondov, B. D., N. H. Bergman, and A. M. Phillippy, 2011 <b>Interactive metagenomic visualization in a Web browser</b>. BMC Bioinformatics 12: <a href="https://doi.org/10.1186/1471-2105-12-385">10.1186/1471-2105-12-385</a></li>
+<li id="Quast2012">Quast, C., E. Pruesse, P. Yilmaz, J. Gerken, T. Schweer <i>et al.</i>, 2012 <b>The SILVA ribosomal RNA gene database project: improved data processing and web-based tools</b>. Nucleic Acids Research 41: D590–D596. <a href="https://doi.org/10.1093/nar/gks1219">10.1093/nar/gks1219</a></li>
+<li id="Wood2014">Wood, D. E., and S. L. Salzberg, 2014 <b>Kraken: ultrafast metagenomic sequence classification using exact alignments</b>. Genome Biology 15: R46. <a href="https://doi.org/10.1186/gb-2014-15-3-r46">10.1186/gb-2014-15-3-r46</a></li>
+<li id="Hermans2016">Hermans, S. M., H. L. Buckley, B. S. Case, F. Curran-Cournane, M. Taylor <i>et al.</i>, 2016 <b>Bacteria as Emerging Indicators of Soil Condition</b> (F. E. Loeffler, Ed.). Applied and Environmental Microbiology 83: <a href="https://doi.org/10.1128/aem.02826-16">10.1128/aem.02826-16</a></li>
+<li id="Jain2016">Jain, M., H. E. Olsen, B. Paten, and M. Akeson, 2016 <b>The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community</b>. Genome Biology 17: <a href="https://doi.org/10.1186/s13059-016-1103-0">10.1186/s13059-016-1103-0</a></li>
+<li id="Brown2017">Brown, B. L., M. Watson, S. S. Minot, M. C. Rivera, and R. B. Franklin, 2017 <b>MinION™ nanopore sequencing of environmental metagenomes: a synthetic approach</b>. GigaScience 6: <a href="https://doi.org/10.1093/gigascience/gix007">10.1093/gigascience/gix007</a></li>
+<li id="rrwick2017">Wick, R., 2017 <b>Porechop</b>. <i>GitHub</i>. <a href="https://github.com/rrwick/Porechop">https://github.com/rrwick/Porechop</a></li>
+<li id="Chen_2018">Chen, S., Y. Zhou, Y. Chen, and J. Gu, 2018 <b>fastp: an ultra-fast all-in-one FASTQ preprocessor</b>. <a href="https://doi.org/10.1101/274100">10.1101/274100</a></li>
+<li id="Nygaard2020">Nygaard, A. B., H. S. Tunsjø, R. Meisal, and C. Charnock, 2020 <b>A preliminary study on the potential of Nanopore MinION and Illumina MiSeq 16S rRNA gene sequencing to characterize building-dust microbiomes</b>. Scientific Reports 10: 3209. <a href="https://doi.org/10.1038/s41598-020-59771-0">10.1038/s41598-020-59771-0</a></li></ol>
                 
 
                 

@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-08-06 18:10:00 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "DIA Analysis using OpenSwathWorkflow",
   "interactivityType": "mixed",
@@ -711,8 +711,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -780,7 +778,7 @@ You can learn how to prepare and optimize a spectral library for the analysis of
 <p>The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are in silico reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured MS2 spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.</p>
 
 <p>In clinical proteomic studies often two or more conditions should be compared against each other, thus focusing on the proteins which were found in all conditions. Using the data dependent acquisition (DDA) approach could lead to limited numbers of cumulative proteins, due to method instrinsic dependencies (e.g. if the same peptides is selected for fragmentation in all measurements).
-Over the last decade another acquisition method has been developed addressing the urgent need for increased cumulatively identified and quantified peptides and proteins across multiple measurements (<a class="citation" href="#Ludwig2018">Ludwig <i>et al.</i> 2018</a>). The so called data independent acquisition (DIA) circumvents the time and abundance dependent selection for fragmentation by using predefined fragmentation windows (m/z windows) going through the whole m/z range of the previous MS1 scan.</p>
+Over the last decade another acquisition method has been developed addressing the urgent need for increased cumulatively identified and quantified peptides and proteins across multiple measurements (<span class="citation"><a href="#Ludwig2018">Ludwig <i>et al.</i> 2018</a></span>). The so called data independent acquisition (DIA) circumvents the time and abundance dependent selection for fragmentation by using predefined fragmentation windows (m/z windows) going through the whole m/z range of the previous MS1 scan.</p>
 <figure id="figure-1"><img src="../../images/DIA_analysis_window.png" alt="DIA_window_schema" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Measurement principles of DIA and m/z window schema of staggered DIA windows.</figcaption></figure>
 
 <p>Therefore, all peptides which are present in the same m/z window at the same time are fragmented simultaneously and a MS2 spectra containing fragments from multiple peptides is acquired. Using the same m/z windows for all measurements, results in more reproducible fragmentation and potential identification across multiple measurements.
@@ -790,7 +788,7 @@ However, the resulting MS2 spectra contain fragments from multiple peptides and 
 <p>To allow for the identification of peptides in those ambiguous MS2 spectra, a spectral library can be used. The spectral library contains experimentally measured  MS2 spectra, which are specific for one precursor (from previous DDA measurements). In more recent approaches the MS2 spectra can be predicted based on theoretical peptide sequences (e.g. from a protein database).</p>
 <figure id="figure-3"><img src="../../images/DIA_analysis_basic.png" alt="DIA_basics" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Spectral libraries are necesseary for the identification of peptides in DIA MS2 scans. In this example the spectral library is generated based on DDA data from the same samples.</figcaption></figure>
 
-<p>One of the open-source software options for DIA data analysis is <em>OpenSwath</em> (<a class="citation" href="#Rost2014">Röst <i>et al.</i> 2014</a>), which requires a spectral library, retention time alignment peptides as well as the DIA MS data.</p>
+<p>One of the open-source software options for DIA data analysis is <em>OpenSwath</em> (<span class="citation"><a href="#Rost2014">Röst <i>et al.</i> 2014</a></span>), which requires a spectral library, retention time alignment peptides as well as the DIA MS data.</p>
 
 <p>The dataset in this tutorial consists of two different Spike-in mixtures of human and Ecoli peptides, with an increase of the Ecoli peptides in one of the Spike-ins. For each Spike-in there a four replicate measurements to allow for statistical analysis later on. Here we will go through the data analysis of DIA mass spectrometry data and will get first impressions on which of the Spike-ins might contain higher amounts of Ecoli peptides.</p>
 
@@ -1206,27 +1204,8 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Rost2014">Röst, H. L., G. Rosenberger, P. Navarro, L. Gillet, S. M. Miladinović <i>et al.</i>, 2014 <b>OpenSWATH enables automated, targeted analysis of data-independent acquisition MS data.</b> Nature biotechnology 32: 219–23.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nbt.2841">10.1038/nbt.2841</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://www.ncbi.nlm.nih.gov/pubmed/24727770">http://www.ncbi.nlm.nih.gov/pubmed/24727770</a>
-      
-    
-
-</li>
-<li><span id="Ludwig2018">Ludwig, C., L. Gillet, G. Rosenberger, S. Amon, B. C. Collins <i>et al.</i>, 2018 <b> Data‐independent acquisition‐based SWATH ‐ MS for quantitative proteomics: a tutorial </b>. Molecular Systems Biology 14: 1–23.</span>
-    
-    
-    <a href="https://doi.org/10.15252/msb.20178126">10.15252/msb.20178126</a>
-    
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Rost2014">Röst, H. L., G. Rosenberger, P. Navarro, L. Gillet, S. M. Miladinović <i>et al.</i>, 2014 <b>OpenSWATH enables automated, targeted analysis of data-independent acquisition MS data.</b> Nature biotechnology 32: 219–23. <a href="https://doi.org/10.1038/nbt.2841">10.1038/nbt.2841</a> <a href="http://www.ncbi.nlm.nih.gov/pubmed/24727770">http://www.ncbi.nlm.nih.gov/pubmed/24727770</a></li>
+<li id="Ludwig2018">Ludwig, C., L. Gillet, G. Rosenberger, S. Amon, B. C. Collins <i>et al.</i>, 2018 <b> Data‐independent acquisition‐based SWATH ‐ MS for quantitative proteomics: a tutorial </b>. Molecular Systems Biology 14: 1–23. <a href="https://doi.org/10.15252/msb.20178126">10.15252/msb.20178126</a></li></ol>
                 
 
                 

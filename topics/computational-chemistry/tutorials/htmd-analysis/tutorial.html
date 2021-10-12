@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-09-02 10:24:50 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "High Throughput Molecular Dynamics and Analysis",
   "interactivityType": "mixed",
@@ -635,8 +635,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -751,17 +749,17 @@
 <p>Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g. potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput <span class="notranslate">workflow</span> for screening multiple small molecules, using the open-source GROMACS tools provided through the <span class="notranslate">Galaxy</span> platform. Following simulation, the trajectory data is analyzed using a range of tools to investigate structural properties and correlations over time.</p>
 
 <h2 id="why-is-hsp90-interesting-to-study">Why is Hsp90 interesting to study?</h2>
-<p>The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases (<a class="citation" href="#Pearl2006">Pearl and Prodromou 2006</a>). The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle (<a class="citation" href="#Schopf2017">Schopf <i>et al.</i> 2017</a>).</p>
+<p>The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases (<span class="citation"><a href="#Pearl2006">Pearl and Prodromou 2006</a></span>). The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle (<span class="citation"><a href="#Schopf2017">Schopf <i>et al.</i> 2017</a></span>).</p>
 
-<p>Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site of the NTD could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents (<a class="citation" href="#Stebbins1997">Stebbins <i>et al.</i> 1997</a>, <a class="citation" href="#Hermane2019">Hermane <i>et al.</i> 2019</a>).</p>
+<p>Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site of the NTD could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents (<span class="citation"><a href="#Stebbins1997">Stebbins <i>et al.</i> 1997</a></span>, <span class="citation"><a href="#Hermane2019">Hermane <i>et al.</i> 2019</a></span>).</p>
 
-<p>In the structure which will be examined during this tutorial, the ligand of concern is a resorcinol, a common class of compounds with affinity for the Hsp90 N-terminal domain. It is registered in the PubChem database under the compound ID 135508238 (<a class="citation" href="#ligand_resorcinol">PubChem</a>). As can be seen by viewing the PDB structure, the resorcinol part of the structure is embedded in the binding site, bound by a hydrogen bond to residue aspartate-93. The ligand structure also contains a triazole and a fluorophenyl ring, which lie nearer to the surface of the protein.</p>
+<p>In the structure which will be examined during this tutorial, the ligand of concern is a resorcinol, a common class of compounds with affinity for the Hsp90 N-terminal domain. It is registered in the PubChem database under the compound ID 135508238 (<span class="citation"><a href="#ligand_resorcinol">PubChem</a></span>). As can be seen by viewing the PDB structure, the resorcinol part of the structure is embedded in the binding site, bound by a hydrogen bond to residue aspartate-93. The ligand structure also contains a triazole and a fluorophenyl ring, which lie nearer to the surface of the protein.</p>
 
-<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/hsp90lig.png" alt="Hsp90 structure, with a ligand bound" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. (<a class="citation" href="#ngl">Rose <i>et al.</i> 2018</a>)</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/hsp90lig.png" alt="Hsp90 structure, with a ligand bound" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. (<span class="citation"><a href="#ngl">Rose <i>et al.</i> 2018</a></span>)</figcaption></figure>
 
 <h2 id="get-data">Get data</h2>
 
-<p>As a first step, we create a new <span class="notranslate">Galaxy</span> history and then we download a crystal structure for the Hsp90 protein from the Protein Data Bank (PDB). The structure is provided under accession code <code class="language-plaintext highlighter-rouge">6HHR</code> (<a class="citation" href="#Schuetz2018">Schuetz <i>et al.</i> 2018</a>) and shows Hsp90 in complex with a ligand belonging to the resorcinol class.</p>
+<p>As a first step, we create a new <span class="notranslate">Galaxy</span> history and then we download a crystal structure for the Hsp90 protein from the Protein Data Bank (PDB). The structure is provided under accession code <code class="language-plaintext highlighter-rouge">6HHR</code> (<span class="citation"><a href="#Schuetz2018">Schuetz <i>et al.</i> 2018</a></span>) and shows Hsp90 in complex with a ligand belonging to the resorcinol class.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -856,7 +854,7 @@
 
       <blockquote class="comment">
         <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-        <p>A force field is essentially a function to calculate the potential energy of a system, based on various empirical parameters (for the atoms, bonds, charges, dihedral angles and so on). There are a number of families of forcefields; some of the most commonly used include CHARMM, AMBER, GROMOS and OpenFF (for a recent, accessible overview see (<a class="citation" href="#Lemkul2020">Lemkul 2020</a>).</p>
+        <p>A force field is essentially a function to calculate the potential energy of a system, based on various empirical parameters (for the atoms, bonds, charges, dihedral angles and so on). There are a number of families of forcefields; some of the most commonly used include CHARMM, AMBER, GROMOS and OpenFF (for a recent, accessible overview see (<span class="citation"><a href="#Lemkul2020">Lemkul 2020</a></span>).</p>
 
         <p>A wide range of models exist for modeling water. Here we are using the common TIP3P model, which is an example of a ‘three-site model’ - so-called because the molecule is modeled using three points, corresponding to the three atoms of water. (Four- and five-site models include additional ‘dummy atoms’ representing the negative charges of the lone pairs of the oxygen atom).</p>
       </blockquote>
@@ -869,11 +867,11 @@
 
 <p>Please note all GROMACS tools output a log. Generally, you only need to look at this when a job fails. These provide useful information for debugging if we encounter any problems.</p>
 
-<p><!-- (<a class="citation" href="#"></a>) --></p>
+<p><!-- (<span>ERROR INVALID CITATION </span>) --></p>
 
 <h3 id="generate-a-topology-for-the-ligand">Generate a topology for the ligand</h3>
 
-<p>To generate a topology for the ligand, we will use the <strong>acpype</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool (<a class="citation" href="#SousadaSilva2012">da Silva and Vranken 2012</a>). This provides a convenient interface to the AmberTools suite and allows us to easily create the ligand topology in the format required by GROMACS.</p>
+<p>To generate a topology for the ligand, we will use the <strong>acpype</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool (<span class="citation"><a href="#SousadaSilva2012">da Silva and Vranken 2012</a></span>). This provides a convenient interface to the AmberTools suite and allows us to easily create the ligand topology in the format required by GROMACS.</p>
 
 <p>Inspecting the contents of the <code class="language-plaintext highlighter-rouge">Ligand (PDB)</code> file shows that it contains no hydrogen atoms. These need to be added before the topology can be calculated. The <strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (which is based on OpenBabel) can be used to achieve this.</p>
 
@@ -915,7 +913,7 @@ minimization step.</p>
 
 <h2 id="combine-topology-and-gro-files">Combine topology and GRO files</h2>
 
-<p>While we have separate topology and structure files for both protein and ligand, we need to combine them into a single set of files to continue with the simulation setup. A dedicated <span class="notranslate">Galaxy</span> tool is provided for this, using the Python library ParmEd (<a class="citation" href="#Swails2016">Swails <i>et al.</i> 2016</a>).</p>
+<p>While we have separate topology and structure files for both protein and ligand, we need to combine them into a single set of files to continue with the simulation setup. A dedicated <span class="notranslate">Galaxy</span> tool is provided for this, using the Python library ParmEd (<span class="citation"><a href="#Swails2016">Swails <i>et al.</i> 2016</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-combine-gro-and-topology-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Combine GRO and topology files</h3>
@@ -1219,7 +1217,7 @@ NVT simulation.</p>
 
 <h1 id="analysis">Analysis</h1>
 
-<p>After the completion of the simulation, the following questions arise: 1) is the simulation converged enough, and 2) what interesting molecular properties are observed. To answer these questions, an analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using <span class="notranslate">Galaxy</span> tools developed for computational chemistry (<a class="citation" href="#senapathi_biomolecular_2019">Senapathi <i>et al.</i> 2019</a>) based on popular analysis software, such as MDAnalysis (<a class="citation" href="#michaudagrawal_mdanalysis_2011">Michaud‐Agrawal <i>et al.</i> 2011</a>), MDTraj (<a class="citation" href="#mcgibbon_mdtraj_2015">McGibbon <i>et al.</i> 2015</a>), and  Bio3D (<a class="citation" href="#skjaerven_integrating_2014">Skjærven <i>et al.</i> 2014</a>). These tools output both tabular files as well as a variety of attractive plots.</p>
+<p>After the completion of the simulation, the following questions arise: 1) is the simulation converged enough, and 2) what interesting molecular properties are observed. To answer these questions, an analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using <span class="notranslate">Galaxy</span> tools developed for computational chemistry (<span class="citation"><a href="#senapathi_biomolecular_2019">Senapathi <i>et al.</i> 2019</a></span>) based on popular analysis software, such as MDAnalysis (<span class="citation"><a href="#michaudagrawal_mdanalysis_2011">Michaud‐Agrawal <i>et al.</i> 2011</a></span>), MDTraj (<span class="citation"><a href="#mcgibbon_mdtraj_2015">McGibbon <i>et al.</i> 2015</a></span>), and  Bio3D (<span class="citation"><a href="#skjaerven_integrating_2014">Skjærven <i>et al.</i> 2014</a></span>). These tools output both tabular files as well as a variety of attractive plots.</p>
 
 <h2 id="create-pdb-file-needed-by-most-analysis-tools">Create PDB file needed by most analysis tools</h2>
 
@@ -1328,7 +1326,7 @@ is a measure of how much the protein conformation has changed between different 
 
 <h2 id="rmsf-analysis">RMSF analysis</h2>
 
-<p>The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The Cα of the protein, designated by <code class="language-plaintext highlighter-rouge">C-alpha</code>, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M"{o}ssbauer spectroscopy (<a class="citation" href="#berjanskii_nmr_2006">Berjanskii and Wishart 2006</a>, <a class="citation" href="#kuzmanic_determination_2010">Kuzmanic and Zagrovic 2010</a>). The output from the tools is the requested RMSF data and the RMSF plotted as a time series.</p>
+<p>The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The Cα of the protein, designated by <code class="language-plaintext highlighter-rouge">C-alpha</code>, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M"{o}ssbauer spectroscopy (<span class="citation"><a href="#berjanskii_nmr_2006">Berjanskii and Wishart 2006</a></span>, <span class="citation"><a href="#kuzmanic_determination_2010">Kuzmanic and Zagrovic 2010</a></span>). The output from the tools is the requested RMSF data and the RMSF plotted as a time series.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-rmsf-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: RMSF analysis</h3>
@@ -1356,7 +1354,7 @@ is a measure of how much the protein conformation has changed between different 
 observations (movement of selected atoms in protein) to a set of principal
 components (PCs) which are linearly independent (or uncorrelated). Here several related tools are used.
 The PCA tool calculates the PCA in order to determine the relationship between statistically meaningful conformations (major global motions) sampled during the trajectory. The Cα carbons of the protein backbone are again a good selection for this purpose.  Outputs include the PCA raw data and figures of the relevant principal components (PCs) as well as an eigenvalue rank plot which is used to visualize the proportion of variance due to each principal component (remembering that the PCs are ranked eigenvectors based on the variance).
-Having discovered the principal components usually these are visualized. The PCA visualization tool will create trajectories of specific principal components which can be viewed in a molecular viewer such as VMD (<a class="citation" href="#hump_vmd_1996">Humphrey <i>et al.</i> 1996</a>) or NGL viewer (<a class="citation" href="#Rose2018ngl">Rose <i>et al.</i> 2018</a>). We also consider the PCA cosine content which when close to 1 indicates that the simulation is not converged and a longer simulation is needed. For values below 0.7, no statement can be made about convergence or lack thereof.</p>
+Having discovered the principal components usually these are visualized. The PCA visualization tool will create trajectories of specific principal components which can be viewed in a molecular viewer such as VMD (<span class="citation"><a href="#hump_vmd_1996">Humphrey <i>et al.</i> 1996</a></span>) or NGL viewer (<span class="citation"><a href="#Rose2018ngl">Rose <i>et al.</i> 2018</a></span>). We also consider the PCA cosine content which when close to 1 indicates that the simulation is not converged and a longer simulation is needed. For values below 0.7, no statement can be made about convergence or lack thereof.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-pca"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: PCA</h3>
@@ -1443,7 +1441,7 @@ Having discovered the principal components usually these are visualized. The PCA
   <ol>
     <li>Create a new history for running the high-throughput <span class="notranslate">workflow</span> and name it <code class="language-plaintext highlighter-rouge">Hsp90 HTMD simulation</code></li>
     <li>Upload the SD-file containing the new ligand structures from Zenodo  and rename it <code class="language-plaintext highlighter-rouge">Ligands (SDF)</code></li>
-    <li>Import the simulation <span class="notranslate">workflow</span> from the European (<a class="citation" href="#eu_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | Europe | Accessible History | Protein-ligand HTMD simulation</b>”</a>) or the South African <span class="notranslate">Galaxy</span> server (<a class="citation" href="#za_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | South Africa | Accessible History | Protein-ligand HTMD analysis</b>”</a>).</li>
+    <li>Import the simulation <span class="notranslate">workflow</span> from the European (<span class="citation"><a href="#eu_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | Europe | Accessible History | Protein-ligand HTMD simulation</b>”</a></span>) or the South African <span class="notranslate">Galaxy</span> server (<span class="citation"><a href="#za_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | South Africa | Accessible History | Protein-ligand HTMD analysis</b>”</a></span>).</li>
     <li>Run the imported <span class="notranslate">workflow</span> with the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1458,11 +1456,11 @@ Having discovered the principal components usually these are visualized. The PCA
 
 <p>This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses <span class="notranslate">Galaxy</span>’s <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">collection feature</a> to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.</p>
 
-<p>Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina (<a class="citation" href="#Trott2009">Trott and Olson 2009</a>) or rDock (<a class="citation" href="#Ruiz2014">Ruiz-Carmona <i>et al.</i> 2014</a>); tutorials and workflows are available for both of these from the <span class="notranslate">Galaxy</span> Training Network. As an example, the history in which the SD-file used in the HTMD <span class="notranslate">workflow</span> is generated (using AutoDock Vina) is provided (<a class="citation" href="#eu_6hhr">“<b><span class="notranslate">Galaxy</span> | Europe | Accessible History | Protein-ligand docking (6hhr)</b>”</a>).</p>
+<p>Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina (<span class="citation"><a href="#Trott2009">Trott and Olson 2009</a></span>) or rDock (<span class="citation"><a href="#Ruiz2014">Ruiz-Carmona <i>et al.</i> 2014</a></span>); tutorials and workflows are available for both of these from the <span class="notranslate">Galaxy</span> Training Network. As an example, the history in which the SD-file used in the HTMD <span class="notranslate">workflow</span> is generated (using AutoDock Vina) is provided (<span class="citation"><a href="#eu_6hhr">“<b><span class="notranslate">Galaxy</span> | Europe | Accessible History | Protein-ligand docking (6hhr)</b>”</a></span>).</p>
 
 <p>Apart from manual setups or collections, there are several other alte<span class="notranslate">rna</span>tives which are helpful in scaling up workflows. <span class="notranslate">Galaxy</span> supports and provides training material for converting <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">histories to workflows</a>, using <a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">multiple histories</a>, and the <a href="/training-material/topics/dev/tutorials/bioblend-api/slides.html"><span class="notranslate">Galaxy</span> Application Programming Interface (API)</a>. For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard <span class="notranslate">Galaxy</span> user interface.</p>
 
-<p>If you are able to write small scripts, you can automate everything you have learned here with the <span class="notranslate">Galaxy</span> API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend (<a class="citation" href="#sloggett_bioblend">Sloggett <i>et al.</i> 2013</a>). An example Python script, which uses BioBlend to run the GROMACS simulation <span class="notranslate">workflow</span> for each of a list of ligands, is given in the hands-on box below.</p>
+<p>If you are able to write small scripts, you can automate everything you have learned here with the <span class="notranslate">Galaxy</span> API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend (<span class="citation"><a href="#sloggett_bioblend">Sloggett <i>et al.</i> 2013</a></span>). An example Python script, which uses BioBlend to run the GROMACS simulation <span class="notranslate">workflow</span> for each of a list of ligands, is given in the hands-on box below.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-bioblend-script"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bioblend script</h3>
@@ -1556,252 +1554,30 @@ table as <code class="language-plaintext highlighter-rouge">History Content API 
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="eu_6hhr"><b>Galaxy | Europe | Accessible History | Protein-ligand docking (6hhr)</b>.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://cheminformatics.usegalaxy.eu/u/sbray/h/protein-ligand-docking-6hhr">https://cheminformatics.usegalaxy.eu/u/sbray/h/protein-ligand-docking-6hhr</a>
-      
-    
-
-</li>
-<li><span id="eu_htmd_simulation_workflow"><b>Galaxy | Europe | Accessible History | Protein-ligand HTMD simulation</b>.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://cheminformatics.usegalaxy.eu/u/sbray/w/protein-ligand-htmd-sim">https://cheminformatics.usegalaxy.eu/u/sbray/w/protein-ligand-htmd-sim</a>
-      
-    
-
-</li>
-<li><span id="za_htmd_simulation_workflow"><b>Galaxy | South Africa | Accessible History | Protein-ligand HTMD analysis</b>.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://galaxy-compchem.ilifu.ac.za/u/sbray/w/protein-ligand-htmd-sim">https://galaxy-compchem.ilifu.ac.za/u/sbray/w/protein-ligand-htmd-sim</a>
-      
-    
-
-</li>
-<li><span id="ligand_resorcinol">PubChem <b>3-(2,4-Dihydroxyphenyl)-4-(2-fluorophenyl)-1H-1,2,4-triazole-5-thione</b>.</span>
-    
-    Library Catalog: pubchem.ncbi.nlm.nih.gov.
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://pubchem.ncbi.nlm.nih.gov/compound/135508238">https://pubchem.ncbi.nlm.nih.gov/compound/135508238</a>
-      
-    
-
-</li>
-<li><span id="hump_vmd_1996">Humphrey, W., A. Dalke, and K. Schulten, 1996 <b>VMD – Visual Molecular Dynamics</b>. Journal of Molecular Graphics 14: 33–38.</span>
-    
-    .
-    
-    
-    
-
-</li>
-<li><span id="Stebbins1997">Stebbins, C. E., A. A. Russo, C. Schneider, N. Rosen, F. U. Hartl <i>et al.</i>, 1997 <b>Crystal Structure of an Hsp90–Geldanamycin Complex: Targeting of a Protein Chaperone by an Antitumor Agent</b>. Cell 89: 239–250.</span>
-    
-    
-    <a href="https://doi.org/10.1016/s0092-8674(00)80203-2">10.1016/s0092-8674(00)80203-2</a>
-    
-    
-
-</li>
-<li><span id="Pearl2006">Pearl, L. H., and C. Prodromou, 2006 <b>Structure and Mechanism of the Hsp90 Molecular Chaperone Machinery.</b> Annual Review of Biochemistry 75: 271–294.</span>
-    
-    
-    <a href="https://doi.org/10.1146/annurev.biochem.75.103004.142738">10.1146/annurev.biochem.75.103004.142738</a>
-    
-    
-
-</li>
-<li><span id="berjanskii_nmr_2006">Berjanskii, M., and D. S. Wishart, 2006 <b>NMR: prediction of protein flexibility</b>. Nature Protocols 1: 683–688.</span>
-    
-    Number: 2
-Publisher: Nature Publishing Group.
-    
-    
-    <a href="https://doi.org/10.1038/nprot.2006.108">10.1038/nprot.2006.108</a>
-    
-    
-
-</li>
-<li><span id="Trott2009">Trott, O., and A. J. Olson, 2009 <b>AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function,  efficient optimization,  and multithreading</b>. Journal of Computational Chemistry NA–NA.</span>
-    
-    
-    <a href="https://doi.org/10.1002/jcc.21334">10.1002/jcc.21334</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="kuzmanic_determination_2010">Kuzmanic, A., and B. Zagrovic, 2010 <b>Determination of Ensemble-Average Pairwise Root Mean-Square Deviation from Experimental B-Factors</b>. Biophysical Journal 98: 861–871.</span>
-    
-    
-    <a href="https://doi.org/10.1016/j.bpj.2009.11.011">10.1016/j.bpj.2009.11.011</a>
-    
-    
-
-</li>
-<li><span id="michaudagrawal_mdanalysis_2011">Michaud‐Agrawal, N., E. J. Denning, T. B. Woolf, and O. Beckstein, 2011 <b>MDAnalysis: A toolkit for the analysis of molecular dynamics simulations</b>. Journal of Computational Chemistry 32: 2319–2327.</span>
-    
-    
-    <a href="https://doi.org/10.1002/jcc.21787">10.1002/jcc.21787</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/jcc.21787">https://onlinelibrary.wiley.com/doi/abs/10.1002/jcc.21787</a>
-      
-    
-
-</li>
-<li><span id="SousadaSilva2012">Silva, A. W. S. da, and W. F. Vranken, 2012 <b>ACPYPE - AnteChamber PYthon Parser interfacE</b>. BMC Research Notes 5: 367.</span>
-    
-    
-    <a href="https://doi.org/10.1186/1756-0500-5-367">10.1186/1756-0500-5-367</a>
-    
-    
-
-</li>
-<li><span id="sloggett_bioblend">Sloggett, C., N. Goonasekera, and E. Afgan, 2013 <b>BioBlend: automating pipeline analyses within Galaxy and CloudMan</b>. Bioinformatics 29: 1685–1686.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btt199">10.1093/bioinformatics/btt199</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Ruiz2014">Ruiz-Carmona, S., D. Alvarez-Garcia, N. Foloppe, A. B. Garmendia-Doval, S. Juhos <i>et al.</i>, 2014 <b>rDock: a fast, versatile and open source program for docking ligands to proteins and nucleic acids</b>. PLoS Computational Biology 10: e1003571.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pcbi.1003571">10.1371/journal.pcbi.1003571</a>
-    
-    
-
-</li>
-<li><span id="skjaerven_integrating_2014">Skjærven, L., X.-Q. Yao, G. Scarabelli, and B. J. Grant, 2014 <b>Integrating protein structural dynamics and evolutionary analysis with Bio3D</b>. BMC Bioinformatics 15: 399.</span>
-    
-    
-    <a href="https://doi.org/10.1186/s12859-014-0399-6">10.1186/s12859-014-0399-6</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="mcgibbon_mdtraj_2015">McGibbon, R. T., K. A. Beauchamp, M. P. Harrigan, C. Klein, J. M. Swails <i>et al.</i>, 2015 <b>MDTraj: A Modern Open Library for the Analysis of Molecular Dynamics Trajectories</b>. Biophysical Journal 109: 1528–1532.</span>
-    
-    
-    <a href="https://doi.org/10.1016/j.bpj.2015.08.015">10.1016/j.bpj.2015.08.015</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4623899/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4623899/</a>
-      
-    
-
-</li>
-<li><span id="Swails2016">Swails, J., C. X. Hernandez, D. L. Mobley, H. Nguyen, L. P. Wang <i>et al.</i>, 2016 <b>ParmEd: Cross-program parameter and topology file editor and molecular mechanical simulator engine</b>.</span>
-    
-    Accessed: 23.01.20.
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://parmed.github.io/ParmEd/html/index.html">https://parmed.github.io/ParmEd/html/index.html</a>
-      
-    
-
-</li>
-<li><span id="Schopf2017">Schopf, F. H., M. M. Biebl, and J. Buchner, 2017 <b>The HSP90 chaperone machinery</b>. Nature Reviews Molecular Cell Biology 18: 345–360.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nrm.2017.20">10.1038/nrm.2017.20</a>
-    
-    
-
-</li>
-<li><span id="ngl">Rose, A. S., A. R. Bradley, Y. Valasatava, J. M. Duarte, A. Prlić <i>et al.</i>, 2018 <b>NGL viewer: web-based molecular graphics for large complexes</b>. Bioinformatics 34: 3755–3758.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/bty419">10.1093/bioinformatics/bty419</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Rose2018ngl">Rose, A. S., A. R. Bradley, Y. Valasatava, J. M. Duarte, A. Prlić <i>et al.</i>, 2018 <b>NGL viewer: web-based molecular graphics for large complexes</b>. Bioinformatics 34: 3755–3758.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/bty419">10.1093/bioinformatics/bty419</a>
-    
-    
-
-</li>
-<li><span id="Schuetz2018">Schuetz, D. A., M. Bernetti, M. Bertazzo, D. Musil, H.-M. Eggenweiler <i>et al.</i>, 2018 <b>Predicting Residence Time and Drug Unbinding Pathway through Scaled Molecular Dynamics</b>. Journal of Chemical Information and Modeling 59: 535–549.</span>
-    
-    
-    <a href="https://doi.org/10.1021/acs.jcim.8b00614">10.1021/acs.jcim.8b00614</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Hermane2019">Hermane, J., S. Eichner, L. Mancuso, B. Schröder, F. Sasse <i>et al.</i>, 2019 <b>New geldanamycin derivatives with anti Hsp properties by mutasynthesis</b>. Organic &amp; Biomolecular Chemistry 17: 5269–5278.</span>
-    
-    
-    <a href="https://doi.org/10.1039/c9ob00892f">10.1039/c9ob00892f</a>
-    
-    
-
-</li>
-<li><span id="senapathi_biomolecular_2019">Senapathi, T., S. Bray, C. B. Barnett, B. Grüning, and K. J. Naidoo, 2019 <b>Biomolecular Reaction and Interaction Dynamics Global Environment (BRIDGE)</b>. Bioinformatics 35: 3508–3509.</span>
-    
-    Publisher: Oxford Academic.
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btz107">10.1093/bioinformatics/btz107</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/35/18/3508/5317160">https://academic.oup.com/bioinformatics/article/35/18/3508/5317160</a>
-      
-    
-
-</li>
-<li><span id="Lemkul2020">Lemkul, J. A., 2020 <b>Pairwise-additive and polarizable atomistic force fields for molecular dynamics simulations of proteins</b>, pp. 1–71 <span style="font-style: normal">in</span> <i>Computational Approaches for Understanding Dynamical Systems: Protein Folding and Assembly</i>, <i>Elsevier</i>, New York.</span>
-    
-    
-    <a href="https://doi.org/10.1016/bs.pmbts.2019.12.009">10.1016/bs.pmbts.2019.12.009</a>
-    
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="eu_htmd_simulation_workflow"><b>Galaxy | Europe | Accessible History | Protein-ligand HTMD simulation</b>. <a href="https://cheminformatics.usegalaxy.eu/u/sbray/w/protein-ligand-htmd-sim">https://cheminformatics.usegalaxy.eu/u/sbray/w/protein-ligand-htmd-sim</a></li>
+<li id="za_htmd_simulation_workflow"><b>Galaxy | South Africa | Accessible History | Protein-ligand HTMD analysis</b>. <a href="https://galaxy-compchem.ilifu.ac.za/u/sbray/w/protein-ligand-htmd-sim">https://galaxy-compchem.ilifu.ac.za/u/sbray/w/protein-ligand-htmd-sim</a></li>
+<li id="eu_6hhr"><b>Galaxy | Europe | Accessible History | Protein-ligand docking (6hhr)</b>. <a href="https://cheminformatics.usegalaxy.eu/u/sbray/h/protein-ligand-docking-6hhr">https://cheminformatics.usegalaxy.eu/u/sbray/h/protein-ligand-docking-6hhr</a></li>
+<li id="hump_vmd_1996">Humphrey, W., A. Dalke, and K. Schulten, 1996 <b>VMD – Visual Molecular Dynamics</b>. Journal of Molecular Graphics 14: 33–38. .</li>
+<li id="Stebbins1997">Stebbins, C. E., A. A. Russo, C. Schneider, N. Rosen, F. U. Hartl <i>et al.</i>, 1997 <b>Crystal Structure of an Hsp90–Geldanamycin Complex: Targeting of a Protein Chaperone by an Antitumor Agent</b>. Cell 89: 239–250. <a href="https://doi.org/10.1016/s0092-8674(00)80203-2">10.1016/s0092-8674(00)80203-2</a></li>
+<li id="berjanskii_nmr_2006">Berjanskii, M., and D. S. Wishart, 2006 <b>NMR: prediction of protein flexibility</b>. Nature Protocols 1: 683–688. Number: 2 Publisher: Nature Publishing Group. <a href="https://doi.org/10.1038/nprot.2006.108">10.1038/nprot.2006.108</a></li>
+<li id="Pearl2006">Pearl, L. H., and C. Prodromou, 2006 <b>Structure and Mechanism of the Hsp90 Molecular Chaperone Machinery.</b> Annual Review of Biochemistry 75: 271–294. <a href="https://doi.org/10.1146/annurev.biochem.75.103004.142738">10.1146/annurev.biochem.75.103004.142738</a></li>
+<li id="Trott2009">Trott, O., and A. J. Olson, 2009 <b>AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function,  efficient optimization,  and multithreading</b>. Journal of Computational Chemistry NA–NA. <a href="https://doi.org/10.1002/jcc.21334">10.1002/jcc.21334</a></li>
+<li id="kuzmanic_determination_2010">Kuzmanic, A., and B. Zagrovic, 2010 <b>Determination of Ensemble-Average Pairwise Root Mean-Square Deviation from Experimental B-Factors</b>. Biophysical Journal 98: 861–871. <a href="https://doi.org/10.1016/j.bpj.2009.11.011">10.1016/j.bpj.2009.11.011</a></li>
+<li id="michaudagrawal_mdanalysis_2011">Michaud‐Agrawal, N., E. J. Denning, T. B. Woolf, and O. Beckstein, 2011 <b>MDAnalysis: A toolkit for the analysis of molecular dynamics simulations</b>. Journal of Computational Chemistry 32: 2319–2327. <a href="https://doi.org/10.1002/jcc.21787">10.1002/jcc.21787</a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/jcc.21787">https://onlinelibrary.wiley.com/doi/abs/10.1002/jcc.21787</a></li>
+<li id="SousadaSilva2012">Silva, A. W. S. da, and W. F. Vranken, 2012 <b>ACPYPE - AnteChamber PYthon Parser interfacE</b>. BMC Research Notes 5: 367. <a href="https://doi.org/10.1186/1756-0500-5-367">10.1186/1756-0500-5-367</a></li>
+<li id="sloggett_bioblend">Sloggett, C., N. Goonasekera, and E. Afgan, 2013 <b>BioBlend: automating pipeline analyses within Galaxy and CloudMan</b>. Bioinformatics 29: 1685–1686. <a href="https://doi.org/10.1093/bioinformatics/btt199">10.1093/bioinformatics/btt199</a></li>
+<li id="Ruiz2014">Ruiz-Carmona, S., D. Alvarez-Garcia, N. Foloppe, A. B. Garmendia-Doval, S. Juhos <i>et al.</i>, 2014 <b>rDock: a fast, versatile and open source program for docking ligands to proteins and nucleic acids</b>. PLoS Computational Biology 10: e1003571. <a href="https://doi.org/10.1371/journal.pcbi.1003571">10.1371/journal.pcbi.1003571</a></li>
+<li id="skjaerven_integrating_2014">Skjærven, L., X.-Q. Yao, G. Scarabelli, and B. J. Grant, 2014 <b>Integrating protein structural dynamics and evolutionary analysis with Bio3D</b>. BMC Bioinformatics 15: 399. <a href="https://doi.org/10.1186/s12859-014-0399-6">10.1186/s12859-014-0399-6</a></li>
+<li id="mcgibbon_mdtraj_2015">McGibbon, R. T., K. A. Beauchamp, M. P. Harrigan, C. Klein, J. M. Swails <i>et al.</i>, 2015 <b>MDTraj: A Modern Open Library for the Analysis of Molecular Dynamics Trajectories</b>. Biophysical Journal 109: 1528–1532. <a href="https://doi.org/10.1016/j.bpj.2015.08.015">10.1016/j.bpj.2015.08.015</a> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4623899/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4623899/</a></li>
+<li id="Swails2016">Swails, J., C. X. Hernandez, D. L. Mobley, H. Nguyen, L. P. Wang <i>et al.</i>, 2016 <b>ParmEd: Cross-program parameter and topology file editor and molecular mechanical simulator engine</b>. Accessed: 23.01.20. <a href="https://parmed.github.io/ParmEd/html/index.html">https://parmed.github.io/ParmEd/html/index.html</a></li>
+<li id="Schopf2017">Schopf, F. H., M. M. Biebl, and J. Buchner, 2017 <b>The HSP90 chaperone machinery</b>. Nature Reviews Molecular Cell Biology 18: 345–360. <a href="https://doi.org/10.1038/nrm.2017.20">10.1038/nrm.2017.20</a></li>
+<li id="ngl">Rose, A. S., A. R. Bradley, Y. Valasatava, J. M. Duarte, A. Prlić <i>et al.</i>, 2018 <b>NGL viewer: web-based molecular graphics for large complexes</b>. Bioinformatics 34: 3755–3758. <a href="https://doi.org/10.1093/bioinformatics/bty419">10.1093/bioinformatics/bty419</a></li>
+<li id="Rose2018ngl">Rose, A. S., A. R. Bradley, Y. Valasatava, J. M. Duarte, A. Prlić <i>et al.</i>, 2018 <b>NGL viewer: web-based molecular graphics for large complexes</b>. Bioinformatics 34: 3755–3758. <a href="https://doi.org/10.1093/bioinformatics/bty419">10.1093/bioinformatics/bty419</a></li>
+<li id="Schuetz2018">Schuetz, D. A., M. Bernetti, M. Bertazzo, D. Musil, H.-M. Eggenweiler <i>et al.</i>, 2018 <b>Predicting Residence Time and Drug Unbinding Pathway through Scaled Molecular Dynamics</b>. Journal of Chemical Information and Modeling 59: 535–549. <a href="https://doi.org/10.1021/acs.jcim.8b00614">10.1021/acs.jcim.8b00614</a></li>
+<li id="Hermane2019">Hermane, J., S. Eichner, L. Mancuso, B. Schröder, F. Sasse <i>et al.</i>, 2019 <b>New geldanamycin derivatives with anti Hsp properties by mutasynthesis</b>. Organic &amp; Biomolecular Chemistry 17: 5269–5278. <a href="https://doi.org/10.1039/c9ob00892f">10.1039/c9ob00892f</a></li>
+<li id="senapathi_biomolecular_2019">Senapathi, T., S. Bray, C. B. Barnett, B. Grüning, and K. J. Naidoo, 2019 <b>Biomolecular Reaction and Interaction Dynamics Global Environment (BRIDGE)</b>. Bioinformatics 35: 3508–3509. Publisher: Oxford Academic. <a href="https://doi.org/10.1093/bioinformatics/btz107">10.1093/bioinformatics/btz107</a> <a href="https://academic.oup.com/bioinformatics/article/35/18/3508/5317160">https://academic.oup.com/bioinformatics/article/35/18/3508/5317160</a></li>
+<li id="Lemkul2020">Lemkul, J. A., 2020 <b>Pairwise-additive and polarizable atomistic force fields for molecular dynamics simulations of proteins</b>, pp. 1–71 <span style="font-style: normal">in</span> <i>Computational Approaches for Understanding Dynamical Systems: Protein Folding and Assembly</i>, <i>Elsevier</i>, New York. <a href="https://doi.org/10.1016/bs.pmbts.2019.12.009">10.1016/bs.pmbts.2019.12.009</a></li>
+<li id="ligand_resorcinol">PubChem <b>3-(2,4-Dihydroxyphenyl)-4-(2-fluorophenyl)-1H-1,2,4-triazole-5-thione</b>. Library Catalog: pubchem.ncbi.nlm.nih.gov. <a href="https://pubchem.ncbi.nlm.nih.gov/compound/135508238">https://pubchem.ncbi.nlm.nih.gov/compound/135508238</a></li></ol>
                 
 
                 

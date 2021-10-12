@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-03-23 18:12:58 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Essential genes detection with Transposon insertion sequencing",
   "interactivityType": "mixed",
@@ -610,8 +610,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -754,9 +752,9 @@
 
 <p>After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the transposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave <span class="notranslate">DNA</span> <span class="notranslate">downstream</span> of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.</p>
 
-<p>As we just want to identify the TA site affected by an insertion, we only need the location of the start of the <span class="notranslate">reads</span> and not a good coverage of the entire genome. Long <span class="notranslate">reads</span> are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise <span class="notranslate">mapping</span> on the genome <a class="citation" href="#Kwon2015">Kwon <i>et al.</i> 2015</a>. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.</p>
+<p>As we just want to identify the TA site affected by an insertion, we only need the location of the start of the <span class="notranslate">reads</span> and not a good coverage of the entire genome. Long <span class="notranslate">reads</span> are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise <span class="notranslate">mapping</span> on the genome <span class="citation"><a href="#Kwon2015">Kwon <i>et al.</i> 2015</a></span>. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.</p>
 
-<p><strong>In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformly,</strong> with two specific regions used to specifically sequence the region <span class="notranslate">upstream</span> of the insertion <a class="citation" href="#Santiago2015">Santiago <i>et al.</i> 2015</a></p>
+<p><strong>In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformly,</strong> with two specific regions used to specifically sequence the region <span class="notranslate">upstream</span> of the insertion <span class="citation"><a href="#Santiago2015">Santiago <i>et al.</i> 2015</a></span></p>
 
 <figure id="figure-2"><img src="../../images/tnseq/tranposon_structure.png" alt="Structure of the transposon containing several parcodes and adapters" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structure of the transposon containing several parcodes and adapters (from <a href="#Santiago2015"> Santiago <i>et al.</i> 2015</a>)</figcaption></figure>
 
@@ -777,7 +775,7 @@
 
 <p>Once the genomic sequences are extracted from the initial <span class="notranslate">reads</span> (<em>i.e.</em> remove non genomic sequences from the <span class="notranslate">reads</span>), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.</p>
 
-<p>We will apply this approach in this tutorial using a subset of TnSeq <span class="notranslate">reads</span> from <a class="citation" href="#Santiago2015">Santiago <i>et al.</i> 2015</a>.</p>
+<p>We will apply this approach in this tutorial using a subset of TnSeq <span class="notranslate">reads</span> from <span class="citation"><a href="#Santiago2015">Santiago <i>et al.</i> 2015</a></span>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -1534,11 +1532,11 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <li>
     <p><strong>Annotation independent method</strong></p>
 
-    <p>The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories <em>essential</em> or <em>non-essential</em>. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as <em>essential</em>, <em>non-essential</em>, or <em>domain essential</em> according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as <em>essential</em> or <em>non essential</em> <a class="citation" href="#Chao2016">Chao <i>et al.</i> 2016</a>).</p>
+    <p>The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories <em>essential</em> or <em>non-essential</em>. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as <em>essential</em>, <em>non-essential</em>, or <em>domain essential</em> according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as <em>essential</em> or <em>non essential</em> <span class="citation"><a href="#Chao2016">Chao <i>et al.</i> 2016</a></span>).</p>
   </li>
 </ol>
 
-<p>To predict the essential genes in our datasets, we will use the Transit tool <a class="citation" href="#dejesus2015transit">DeJesus <i>et al.</i> 2015</a>.</p>
+<p>To predict the essential genes in our datasets, we will use the Transit tool <span class="citation"><a href="#dejesus2015transit">DeJesus <i>et al.</i> 2015</a></span>.</p>
 
 <h2 id="transit">Transit</h2>
 <p>Transit is a software that can be used to analyse TnSeq Data. It is compatible with Mariner and Tn5 transposon. In total, 3 methods are available to assess gene essentiality in one sample.</p>
@@ -1549,7 +1547,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <p>The distribution governing the longest sequence of consecutive non insertion is  characterized by a Gumbel distribution. This distribution is often used to model the distribution of maximums (or minimums) of a variable (See the <a href="https://en.wikipedia.org/wiki/Gumbel_distribution">Wikipedia article on Gumbel distribution </a>). The Gumbel distribution is used as a likelihood of non-essentiality, as the longest run of non-insertions should follow what is expected given the global distribution of non-insertion runs. The essential genes, whose runs of empty sites are longer than expected, are modeled through a normalized sigmoid function. This function reflect that any gene can be essential, except the gene were the run of non insertions are too smell to represent a domain.</p>
 
-<p>The total distribution of the maximum run of non-insertion per gene is therefore represented y a bimodal distribution composed of a Gumbel distribution of non-essential genes and a normalized sigmoid function of essential ones. The parameters of these distributions are estimated through a Metropolis–Hastings (MH) sampling procedure <a class="citation" href="#dejesus2013bayesian">DeJesus <i>et al.</i> 2013</a>).</p>
+<p>The total distribution of the maximum run of non-insertion per gene is therefore represented y a bimodal distribution composed of a Gumbel distribution of non-essential genes and a normalized sigmoid function of essential ones. The parameters of these distributions are estimated through a Metropolis–Hastings (MH) sampling procedure <span class="citation"><a href="#dejesus2013bayesian">DeJesus <i>et al.</i> 2013</a></span>).</p>
 
 <p>Using these two distribution, the posterior probability of each distribution is calculated for each gene. Some genes can be classified as “Unclear” if one probability is not winning over the other. Some other can be classified as “Small” if the space of TA sites covered by the gene is insufficient to categorize it (See the <a href="https://transit.readthedocs.io/en/latest/transit_methods.html#gumbel">Transit Manual for the Gumbel method</a>).</p>
 
@@ -1557,11 +1555,11 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <p>The HMM method performs a whole genome essentiality analysis for Mariner data. This approach uses the clustering of TA sites along the genome to identify essential regions, and then apply results to the annotation to identify genes containing essential regions. The HMM method provides a classification for each TA site into 4 states : Essential, Non-Essential, Growth Advantage, and Growth Defect.</p>
 
-<p>This method require a well-saturated library and is sensitive to sparse datasets <a class="citation" href="#dejesus2013hidden">DeJesus and Ioerger 2013</a>.</p>
+<p>This method require a well-saturated library and is sensitive to sparse datasets <span class="citation"><a href="#dejesus2013hidden">DeJesus and Ioerger 2013</a></span>.</p>
 
 <h4 id="tn5gaps-method">Tn5Gaps method</h4>
 
-<p>The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method <a class="citation" href="#griffin2011high">Griffin <i>et al.</i> 2011</a> and adapted to Tn5 transposon specificity. The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
+<p>The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method <span class="citation"><a href="#griffin2011high">Griffin <i>et al.</i> 2011</a></span> and adapted to Tn5 transposon specificity. The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
 creating libraries with lower insertion rates. The difference from the Gumbel method described above is that the run of non insertion are computer on the whole genome instead of individual genes. The longest run of non insertion considered is not the longest within the gene, but the longest one overlapping the gene.</p>
 
 <h2 id="predict-the-essentiality-of-genes">Predict the essentiality of genes</h2>
@@ -1834,62 +1832,13 @@ For repetitive analyses, the steps are fewer : <span class="notranslate">mapping
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="griffin2011high">Griffin, J. E., J. D. Gawronski, M. A. DeJesus, T. R. Ioerger, B. J. Akerley <i>et al.</i>, 2011 <b>High-resolution phenotypic profiling defines genes essential for mycobacterial growth and cholesterol catabolism</b>. PLoS pathogens 7: e1002251.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.ppat.1002251">10.1371/journal.ppat.1002251</a>
-    
-    
-
-</li>
-<li><span id="dejesus2013bayesian">DeJesus, M. A., Y. J. Zhang, C. M. Sassetti, E. J. Rubin, J. C. Sacchettini <i>et al.</i>, 2013 <b>Bayesian analysis of gene essentiality based on sequencing of transposon insertion libraries</b>. Bioinformatics 29: 695–703.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btt043">10.1093/bioinformatics/btt043</a>
-    
-    
-
-</li>
-<li><span id="dejesus2013hidden">DeJesus, M. A., and T. R. Ioerger, 2013 <b>A hidden Markov model for identifying essential and growth-defect regions in bacterial genomes from transposon insertion sequencing data</b>. BMC bioinformatics 14: 303.</span>
-    
-    
-    <a href="https://doi.org/10.1186/1471-2105-14-303">10.1186/1471-2105-14-303</a>
-    
-    
-
-</li>
-<li><span id="dejesus2015transit">DeJesus, M. A., C. Ambadipudi, R. Baker, C. Sassetti, and T. R. Ioerger, 2015 <b>TRANSIT-a software tool for Himar1 TnSeq analysis</b>. PLoS computational biology 11: e1004401.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pcbi.1004401">10.1371/journal.pcbi.1004401</a>
-    
-    
-
-</li>
-<li><span id="Santiago2015">Santiago, M., L. M. Matano, S. H. Moussa, M. S. Gilmore, S. Walker <i>et al.</i>, 2015 <b>A new platform for ultra-high density Staphylococcus aureus transposon libraries</b>. BMC Genomics 16:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s12864-015-1361-3">10.1186/s12864-015-1361-3</a>
-    
-    
-
-</li>
-<li><span id="Kwon2015">Kwon, Y. M., S. C. Ricke, and R. K. Mandal, 2015 <b>Transposon sequencing: methods and expanding applications</b>. Applied Microbiology and Biotechnology 100: 31–43.</span>
-    
-    
-    <a href="https://doi.org/10.1007/s00253-015-7037-8">10.1007/s00253-015-7037-8</a>
-    
-    
-
-</li>
-<li><span id="Chao2016">Chao, M. C., S. Abel, B. M. Davis, and M. K. Waldor, 2016 <b>The design and analysis of transposon insertion sequencing experiments</b>. Nature Reviews Microbiology 14: 119–128.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nrmicro.2015.7">10.1038/nrmicro.2015.7</a>
-    
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="griffin2011high">Griffin, J. E., J. D. Gawronski, M. A. DeJesus, T. R. Ioerger, B. J. Akerley <i>et al.</i>, 2011 <b>High-resolution phenotypic profiling defines genes essential for mycobacterial growth and cholesterol catabolism</b>. PLoS pathogens 7: e1002251. <a href="https://doi.org/10.1371/journal.ppat.1002251">10.1371/journal.ppat.1002251</a></li>
+<li id="dejesus2013hidden">DeJesus, M. A., and T. R. Ioerger, 2013 <b>A hidden Markov model for identifying essential and growth-defect regions in bacterial genomes from transposon insertion sequencing data</b>. BMC bioinformatics 14: 303. <a href="https://doi.org/10.1186/1471-2105-14-303">10.1186/1471-2105-14-303</a></li>
+<li id="dejesus2013bayesian">DeJesus, M. A., Y. J. Zhang, C. M. Sassetti, E. J. Rubin, J. C. Sacchettini <i>et al.</i>, 2013 <b>Bayesian analysis of gene essentiality based on sequencing of transposon insertion libraries</b>. Bioinformatics 29: 695–703. <a href="https://doi.org/10.1093/bioinformatics/btt043">10.1093/bioinformatics/btt043</a></li>
+<li id="dejesus2015transit">DeJesus, M. A., C. Ambadipudi, R. Baker, C. Sassetti, and T. R. Ioerger, 2015 <b>TRANSIT-a software tool for Himar1 TnSeq analysis</b>. PLoS computational biology 11: e1004401. <a href="https://doi.org/10.1371/journal.pcbi.1004401">10.1371/journal.pcbi.1004401</a></li>
+<li id="Kwon2015">Kwon, Y. M., S. C. Ricke, and R. K. Mandal, 2015 <b>Transposon sequencing: methods and expanding applications</b>. Applied Microbiology and Biotechnology 100: 31–43. <a href="https://doi.org/10.1007/s00253-015-7037-8">10.1007/s00253-015-7037-8</a></li>
+<li id="Santiago2015">Santiago, M., L. M. Matano, S. H. Moussa, M. S. Gilmore, S. Walker <i>et al.</i>, 2015 <b>A new platform for ultra-high density Staphylococcus aureus transposon libraries</b>. BMC Genomics 16: <a href="https://doi.org/10.1186/s12864-015-1361-3">10.1186/s12864-015-1361-3</a></li>
+<li id="Chao2016">Chao, M. C., S. Abel, B. M. Davis, and M. K. Waldor, 2016 <b>The design and analysis of transposon insertion sequencing experiments</b>. Nature Reviews Microbiology 14: 119–128. <a href="https://doi.org/10.1038/nrmicro.2015.7">10.1038/nrmicro.2015.7</a></li></ol>
                 
 
                 

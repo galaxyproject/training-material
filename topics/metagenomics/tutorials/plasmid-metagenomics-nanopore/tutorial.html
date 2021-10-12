@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-03-24 17:40:19 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Antibiotic resistance detection",
   "interactivityType": "mixed",
@@ -623,8 +623,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -710,18 +708,18 @@
 
 <p><img src="../../images/plasmid-metagenomics-nanopore/plasmids.png" alt="Depiction of plasmids" loading="lazy" /></p>
 
-<p>Plasmids are considered a major vector facilitating the transmission of drug resistant genes among bacteria via <a href="https://en.wikipedia.org/wiki/Horizontal_gene_transfer">horizontal transfer</a> (<a class="citation" href="#Beatson2014">Beatson and Walker 2014</a>, <a class="citation" href="#Smillie2010">Smillie <i>et al.</i> 2010</a>). Careful characterization of plasmids and other MDR mobile genetic elements is vital for understanding their evolution and transmission and adaptation to new hosts.</p>
+<p>Plasmids are considered a major vector facilitating the transmission of drug resistant genes among bacteria via <a href="https://en.wikipedia.org/wiki/Horizontal_gene_transfer">horizontal transfer</a> (<span class="citation"><a href="#Beatson2014">Beatson and Walker 2014</a></span>, <span class="citation"><a href="#Smillie2010">Smillie <i>et al.</i> 2010</a></span>). Careful characterization of plasmids and other MDR mobile genetic elements is vital for understanding their evolution and transmission and adaptation to new hosts.</p>
 
 <p><img src="../../images/plasmid-metagenomics-nanopore/bacterial_transformation.png" alt="Illustration of transformation of a bacteria to drug resistance" loading="lazy" /></p>
 
 <p>Due to the high prevalence of repeat sequences and inserts in plasmids, using traditional NGS short-read sequencing to assemble plasmid sequences is difficult and time-consuming. With the advent of third-generation single-molecule long-read sequencing technologies, full assembly of plasmid sequences is now possible.</p>
 
-<p>In this tutorial we will recreate the analysis described in the paper by <a class="citation" href="#LiXie2018">Li <i>et al.</i> 2018</a> entitled <em>Efficient generation of complete sequences of MDR-encoding plasmids by rapid assembly of MinION barcoding sequencing data</em>. We will use data sequenced by the <a href="https://nanoporetech.com/">Nanopore</a> MinION sequencer.</p>
+<p>In this tutorial we will recreate the analysis described in the paper by <span class="citation"><a href="#LiXie2018">Li <i>et al.</i> 2018</a></span> entitled <em>Efficient generation of complete sequences of MDR-encoding plasmids by rapid assembly of MinION barcoding sequencing data</em>. We will use data sequenced by the <a href="https://nanoporetech.com/">Nanopore</a> MinION sequencer.</p>
 
-<p>The assembly will be performed with <strong>Minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2018">Li 2018</a>),
-<strong>Miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2016">Li <i>et al.</i> 2015</a>), <strong>Racon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Vaser2017">Vaser <i>et al.</i> 2017</a>) and <strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>).
-The <span class="notranslate">downstream</span> analysis will use <strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#DeCoster2018">Coster <i>et al.</i> 2018</a>),
-<strong>Bandage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2015">Wick <i>et al.</i> 2015</a>), <strong>PlasFlow</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Krawczyk2018">Krawczyk <i>et al.</i> 2018</a>) and <strong>starmr</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a href="https://github.com/phac-nml/staramr">GitHub</a>).</p>
+<p>The assembly will be performed with <strong>Minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Li2018">Li 2018</a></span>),
+<strong>Miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Li2016">Li 2016</a></span>), <strong>Racon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Vaser2017">Vaser <i>et al.</i> 2017</a></span>) and <strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>).
+The <span class="notranslate">downstream</span> analysis will use <strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#DeCoster2018">Coster <i>et al.</i> 2018</a></span>),
+<strong>Bandage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Wick2015">Wick <i>et al.</i> 2015</a></span>), <strong>PlasFlow</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Krawczyk2018">Krawczyk <i>et al.</i> 2018</a></span>) and <strong>starmr</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a href="https://github.com/phac-nml/staramr">GitHub</a>).</p>
 
 <p>A schematic view of the <span class="notranslate">workflow</span> we will perform in this tutorial is given below:</p>
 
@@ -772,7 +770,7 @@ The <span class="notranslate">downstream</span> analysis will use <strong>Nanopl
 <h1 id="obtaining-and-preparing-data">Obtaining and preparing data</h1>
 
 <p>We are interested in the reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
-We will use the plasmid dataset created by <a class="citation" href="#LiXie2018">Li <i>et al.</i> 2018</a> for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing bacterial strains were selected for plasmid extraction, including <em>E. coli</em>, <em>S. typhimurium</em>, <em>V. parahaemolyticus</em>, and <em>K. pneumoniae</em>.</p>
+We will use the plasmid dataset created by <span class="citation"><a href="#LiXie2018">Li <i>et al.</i> 2018</a></span> for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing bacterial strains were selected for plasmid extraction, including <em>E. coli</em>, <em>S. typhimurium</em>, <em>V. parahaemolyticus</em>, and <em>K. pneumoniae</em>.</p>
 
 <!--SNIPPET-->
 <blockquote class="comment">  <h3 data-toc-skip="" id="-nanopore-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Nanopore sequencing</h3>  <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>  <ol>  <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>  <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>  <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li></ol>  <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>  <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change inelectrical current is measured over the membrane of a flow cell. Whennucleotides pass the pores in the flow cell the current change is translated(basecalled) to nucleotides by a basecaller. A schematic overview is given inthe picture above.</p>  <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software ispresent on the devices. With basecalling the electrical signals are translatedto bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand willbe basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in afastq file.</p></blockquote>
@@ -880,7 +878,7 @@ Typical other use cases for Minimap2 include:</p>
 
 <p>Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
 therefore widely used for Nanopore alignment. Detailed evaluations of Minimap2 are available in
-the Minimap2 publication (<a class="citation" href="#Li2018">Li 2018</a>).</p>
+the Minimap2 publication (<span class="citation"><a href="#Li2018">Li 2018</a></span>).</p>
 
 <p><img src="../../images/plasmid-metagenomics-nanopore/Minimap2.png" alt="Pairwise alignment" loading="lazy" /></p>
 
@@ -1000,7 +998,7 @@ channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	251	1328	+	channe
 
 <h2 id="ultrafast-de-novo-assembly-using-miniasm">Ultrafast de novo assembly using Miniasm</h2>
 
-<p>The mapped <span class="notranslate">reads</span> are ready to be assembled with <strong>Miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2016">Li <i>et al.</i> 2015</a>). Miniasm is a very fast Overlap Layout Consensus based de-novo assembler for noisy long <span class="notranslate">reads</span>.
+<p>The mapped <span class="notranslate">reads</span> are ready to be assembled with <strong>Miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Li2016">Li 2016</a></span>). Miniasm is a very fast Overlap Layout Consensus based de-novo assembler for noisy long <span class="notranslate">reads</span>.
 It takes all-vs-all read self-<span class="notranslate">mapping</span>s (typically by <strong>Minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) as input and outputs an assembly graph in the GFA format.</p>
 
 <p>Different from mainstream assemblers, miniasm does not have a consensus step.
@@ -1094,7 +1092,7 @@ Hint: run <strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true">
 
 <h2 id="ultrafast-consensus-module-using-racon">Ultrafast consensus module using Racon</h2>
 
-<p>The mapped <span class="notranslate">reads</span> can be improved even more using <strong>Racon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Vaser2017">Vaser <i>et al.</i> 2017</a>) to find a consensus sequence.
+<p>The mapped <span class="notranslate">reads</span> can be improved even more using <strong>Racon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Vaser2017">Vaser <i>et al.</i> 2017</a></span>) to find a consensus sequence.
 Racon is a standalone consensus module to correct raw contigs generated by rapid assembly methods which do not include a consensus step.
 It supports data produced by both Pacific Biosciences and Oxford Nanopore Technologies.</p>
 
@@ -1127,8 +1125,8 @@ AATGCAGCTATGGCGCGTGCGGTGCCAAGAAAGCCCGCAGATATTCCGCTTCCTCGCTCATT [..]
 
 <p>To get a sense of how well our data was assembled, and to determine whether the contigs are chomosomal or plasmid <span class="notranslate">DNA</span> (the former being linear sequences while plasmids are circular molecules), <strong>Bandage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can give a clear view of the assembly.</p>
 
-<p><strong>Bandage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2015">Wick <i>et al.</i> 2015</a>) (a <strong>B</strong>ioinformatics <strong>A</strong>pplication for <strong>N</strong>avigating <strong>D</strong>e novo <strong>A</strong>ssembly <strong>G</strong>raphs <strong>E</strong>asily), is a program that creates visualisations of assembly graphs.
-Sequence assembler programs (such as <strong>Miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2016">Li <i>et al.</i> 2015</a>), <strong>Velvet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Zerbino2008">Zerbino and Birney 2008</a>), <strong>SPAdes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>), <strong>Trinity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Grabherr2011">Grabherr <i>et al.</i> 2011</a>) and <strong>MEGAHIT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <a class="citation" href="#Li2015">Li <i>et al.</i> 2015</a>) carry out assembly by building a graph, from which contigs are generated.</p>
+<p><strong>Bandage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Wick2015">Wick <i>et al.</i> 2015</a></span>) (a <strong>B</strong>ioinformatics <strong>A</strong>pplication for <strong>N</strong>avigating <strong>D</strong>e novo <strong>A</strong>ssembly <strong>G</strong>raphs <strong>E</strong>asily), is a program that creates visualisations of assembly graphs.
+Sequence assembler programs (such as <strong>Miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Li2016">Li 2016</a></span>), <strong>Velvet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Zerbino2008">Zerbino and Birney 2008</a></span>), <strong>SPAdes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>), <strong>Trinity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Grabherr2011">Grabherr <i>et al.</i> 2011</a></span>) and <strong>MEGAHIT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span>) carry out assembly by building a graph, from which contigs are generated.</p>
 
 <p>By visualizing these assembly graphs, Bandage allows users to better understand, troubleshoot, and improve the assemblies.</p>
 
@@ -1168,7 +1166,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 
 <p>As you can see from these Bandage outputs, we were able to assemble our data into fairly large fragments, but were not quite successful in assembling the full (circular) plasmid sequences.</p>
 
-<p>However, all the tools we used to do the assembly have many different parameters that we did not explore, and multiple rounds of <span class="notranslate">mapping</span> and cleaning could improve our data as well. Choosing these parameters carefully could potentially improve our assembly, but this is also a lot of work and not an easy task. This is where <strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>) can help us out.</p>
+<p>However, all the tools we used to do the assembly have many different parameters that we did not explore, and multiple rounds of <span class="notranslate">mapping</span> and cleaning could improve our data as well. Choosing these parameters carefully could potentially improve our assembly, but this is also a lot of work and not an easy task. This is where <strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>) can help us out.</p>
 
 <h2 id="optimizing-assemblies-using-unicycler">Optimizing assemblies using Unicycler</h2>
 
@@ -1237,7 +1235,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 
 </blockquote>
 
-<p>The Assembly graph image of the RB01 assembly with <strong>miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> shows one unclear hypothetical plasmid, where the output of <strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> shows two clear plasmids, as also shown by <a class="citation" href="#LiXie2018">Li <i>et al.</i> 2018</a>.</p>
+<p>The Assembly graph image of the RB01 assembly with <strong>miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> shows one unclear hypothetical plasmid, where the output of <strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> shows two clear plasmids, as also shown by <span class="citation"><a href="#LiXie2018">Li <i>et al.</i> 2018</a></span>.</p>
 
 <p><img src="../../images/plasmid-metagenomics-nanopore/Bandage_output.png" alt="Bandage output" loading="lazy" /></p>
 
@@ -1245,7 +1243,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 
 <h2 id="prediction-of-plasmid-sequences-and-classes-using-plasflow">Prediction of plasmid sequences and classes using PlasFlow</h2>
 
-<p>To automatically determine whether the contigs represent chromosomal or plasmid <span class="notranslate">DNA</span>, <strong>PlasFlow</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Krawczyk2018">Krawczyk <i>et al.</i> 2018</a>) can be used, also in the case where a full circular plasmid sequence was not assembled. Furthermore, it assigns the contigs to a bacterial class.</p>
+<p>To automatically determine whether the contigs represent chromosomal or plasmid <span class="notranslate">DNA</span>, <strong>PlasFlow</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="citation"><a href="#Krawczyk2018">Krawczyk <i>et al.</i> 2018</a></span>) can be used, also in the case where a full circular plasmid sequence was not assembled. Furthermore, it assigns the contigs to a bacterial class.</p>
 
 <p><strong>PlasFlow</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a set of scripts used for prediction of plasmid sequences in metagenomic contigs.
 It relies on the neural network models trained on full genome and plasmid sequences and is able to differentiate between plasmids and chromosomes with accuracy reaching 96%.</p>
@@ -1300,7 +1298,7 @@ It relies on the neural network models trained on full genome and plasmid sequen
 <h2 id="scan-genome-contigs-for-antimicrobial-resistance-genes">Scan genome contigs for antimicrobial resistance genes</h2>
 
 <p>To determine whether the contigs contain antimircobial resistance genes (AMR) <a href="https://github.com/phac-nml/staramr">staramr</a> can be used.
-<strong>Staramr</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> scans bacterial genome contigs against both the <strong>ResFinder</strong> (<a class="citation" href="#Zankari2012">Zankari <i>et al.</i> 2012</a>), <strong>PointFinder</strong> (<a class="citation" href="#Zankari2017">Zankari <i>et al.</i> 2017</a>), and <strong>PlasmidFinder</strong> (<a class="citation" href="#Carattoli2014">Carattoli <i>et al.</i> 2014</a>) databases (used by the ResFinder webservice)
+<strong>Staramr</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> scans bacterial genome contigs against both the <strong>ResFinder</strong> (<span class="citation"><a href="#Zankari2012">Zankari <i>et al.</i> 2012</a></span>), <strong>PointFinder</strong> (<span class="citation"><a href="#Zankari2017">Zankari <i>et al.</i> 2017</a></span>), and <strong>PlasmidFinder</strong> (<span class="citation"><a href="#Carattoli2014">Carattoli <i>et al.</i> 2014</a></span>) databases (used by the ResFinder webservice)
 and compiles a summary report of detected antimicrobial resistance genes.</p>
 
 <p><img src="../../images/plasmid-metagenomics-nanopore/StarAmr.png" alt="Pairwise alignment" loading="lazy" /></p>
@@ -1345,7 +1343,7 @@ and compiles a summary report of detected antimicrobial resistance genes.</p>
 <p>The summary file is most important and provides all the resistance genes found.</p>
 
 <h2 id="card-database">CARD database</h2>
-<p>To get more information about these antibiotic resistant genes, you can check the <a href="https://card.mcmaster.ca">CARD database</a> (<strong>C</strong>omprehensive <strong>A</strong>ntibiotic <strong>R</strong>esistance <strong>D</strong>atabase) (<a class="citation" href="#Jia2016">Jia <i>et al.</i> 2016</a>)</p>
+<p>To get more information about these antibiotic resistant genes, you can check the <a href="https://card.mcmaster.ca">CARD database</a> (<strong>C</strong>omprehensive <strong>A</strong>ntibiotic <strong>R</strong>esistance <strong>D</strong>atabase) (<span class="citation"><a href="#Jia2016">Jia <i>et al.</i> 2016</a></span>)</p>
 
 <figure id="figure-3"><img src="../../images/plasmid-metagenomics-nanopore/card_database.png" alt="Screenshot of the CARD database" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.</figcaption></figure>
 
@@ -1360,7 +1358,7 @@ and compiles a summary report of detected antimicrobial resistance genes.</p>
 
     <p>This can be determined by searching for <a href="https://card.mcmaster.ca/ontology/39294">the gene on the CARD database</a>
 <br /><br />
-For more information about antibiotic resistance mechanisms, see <a class="citation" href="#Munita">Munita and Arias</a></p>
+For more information about antibiotic resistance mechanisms, see <span class="citation"><a href="#Munita">Munita and Arias</a></span></p>
   </blockquote>
 </blockquote>
 
@@ -1369,7 +1367,7 @@ For more information about antibiotic resistance mechanisms, see <a class="citat
 
 <p>As for any analysis, there are many different tools that can do the job, and the tools presented here are just
 one possible pipeline. Which tools are best for your specific data and research question depends on a number of
-factors. For more information and comparisons between various tools, review papers such as <a class="citation" href="#DeMaio2019">Maio <i>et al.</i> 2019</a> and <a class="citation" href="#Jayakumar2017">Jayakumar and Sakakibara 2017</a>
+factors. For more information and comparisons between various tools, review papers such as <span class="citation"><a href="#DeMaio2019">Maio <i>et al.</i> 2019</a></span> and <span class="citation"><a href="#Jayakumar2017">Jayakumar and Sakakibara 2017</a></span>
 may provide further insight.</p>
 
 <p>You have worked your way through the following pipeline:</p>
@@ -1413,239 +1411,27 @@ may provide further insight.</p>
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Munita">Munita, J. M., and C. A. Arias <b>Mechanisms of Antibiotic Resistance</b>, pp. 481–511 <span style="font-style: normal">in</span> <i>Virulence Mechanisms of Bacterial Pathogens,  Fifth Edition</i>, <i>American Society of Microbiology</i>.</span>
-    
-    
-    <a href="https://doi.org/10.1128/microbiolspec.vmbf-0016-2015">10.1128/microbiolspec.vmbf-0016-2015</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Zerbino2008">Zerbino, D. R., and E. Birney, 2008 <b>Velvet: Algorithms for de novo short read assembly using de Bruijn graphs</b>. Genome Research 18: 821–829.</span>
-    
-    
-    <a href="https://doi.org/10.1101/gr.074492.107">10.1101/gr.074492.107</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Smillie2010">Smillie, C., M. P. Garcillan-Barcia, M. V. Francia, E. P. C. Rocha, and F. de la Cruz, 2010 <b>Mobility of Plasmids</b>. Microbiology and Molecular Biology Reviews 74: 434–452.</span>
-    
-    
-    <a href="https://doi.org/10.1128/mmbr.00020-10">10.1128/mmbr.00020-10</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Grabherr2011">Grabherr, M. G., B. J. Haas, M. Yassour, J. Z. Levin, D. A. Thompson <i>et al.</i>, 2011 <b>Full-length transcriptome assembly from RNA-Seq data without a reference genome</b>. Nature Biotechnology 29: 644–652.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nbt.1883">10.1038/nbt.1883</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Bankevich2012">Bankevich, A., S. Nurk, D. Antipov, A. A. Gurevich, M. Dvorkin <i>et al.</i>, 2012 <b>SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing</b>. Journal of Computational Biology 19: 455–477.</span>
-    
-    
-    <a href="https://doi.org/10.1089/cmb.2012.0021">10.1089/cmb.2012.0021</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Zankari2012">Zankari, E., H. Hasman, S. Cosentino, M. Vestergaard, S. Rasmussen <i>et al.</i>, 2012 <b>Identification of acquired antimicrobial resistance genes</b>. Journal of Antimicrobial Chemotherapy 67: 2640–2644.</span>
-    
-    
-    <a href="https://doi.org/10.1093/jac/dks261">10.1093/jac/dks261</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Carattoli2014">Carattoli, A., E. Zankari, Garcı́a-Fernández Aurora, M. V. Larsen, O. Lund <i>et al.</i>, 2014 <b>In SilicoDetection and Typing of Plasmids using PlasmidFinder and Plasmid Multilocus Sequence Typing</b>. Antimicrobial Agents and Chemotherapy 58: 3895–3903.</span>
-    
-    
-    <a href="https://doi.org/10.1128/aac.02412-14">10.1128/aac.02412-14</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Beatson2014">Beatson, S. A., and M. J. Walker, 2014 <b>Tracking antibiotic resistance</b>. Science 345: 1454–1455.</span>
-    
-    
-    <a href="https://doi.org/10.1126/science.1260471">10.1126/science.1260471</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Li2015">Li, M., R. Schröder, S. Ni, B. Madea, and M. Stoneking, 2015 <b>Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations</b>. Proceedings of the National Academy of Sciences 112: 2491–2496.</span>
-    
-    
-    <a href="https://doi.org/10.1073/pnas.1419651112">10.1073/pnas.1419651112</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.pnas.org/content/112/8/2491">https://www.pnas.org/content/112/8/2491</a>
-      
-    
-
-</li>
-<li><span id="Li2016">Li, D., C.-M. Liu, R. Luo, K. Sadakane, and T.-W. Lam, 2015 <b>MEGAHIT: an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph</b>. Bioinformatics 31: 1674–1676.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btv033">10.1093/bioinformatics/btv033</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wick2015">Wick, R. R., M. B. Schultz, J. Zobel, and K. E. Holt, 2015 <b>Bandage: interactive visualization ofde novogenome assemblies</b>. Bioinformatics 31: 3350–3352.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btv383">10.1093/bioinformatics/btv383</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Jia2016">Jia, B., A. R. Raphenya, B. Alcock, N. Waglechner, P. Guo <i>et al.</i>, 2016 <b>CARD 2017: expansion and model-centric curation of the comprehensive antibiotic resistance database</b>. Nucleic Acids Research 45: D566–D573.</span>
-    
-    
-    <a href="https://doi.org/10.1093/nar/gkw1004">10.1093/nar/gkw1004</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Vaser2017">Vaser, R., I. Sović, N. Nagarajan, and M. Šikić, 2017 <b>Fast and accurate de novo genome assembly from long uncorrected reads</b>. Genome Research 27: 737–746.</span>
-    
-    
-    <a href="https://doi.org/10.1101/gr.214270.116">10.1101/gr.214270.116</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wick2017">Wick, R. R., L. M. Judd, C. L. Gorrie, and K. E. Holt, 2017 <b>Unicycler: Resolving bacterial genome assemblies from short and long sequencing reads</b> (A. M. Phillippy, Ed.). PLOS Computational Biology 13: e1005595.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pcbi.1005595">10.1371/journal.pcbi.1005595</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Zankari2017">Zankari, E., R. Allesøe, K. G. Joensen, L. M. Cavaco, O. Lund <i>et al.</i>, 2017 <b>PointFinder: a novel web tool for WGS-based detection of antimicrobial resistance associated with chromosomal point mutations in bacterial pathogens</b>. Journal of Antimicrobial Chemotherapy 72: 2764–2768.</span>
-    
-    
-    <a href="https://doi.org/10.1093/jac/dkx217">10.1093/jac/dkx217</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Jayakumar2017">Jayakumar, V., and Y. Sakakibara, 2017 <b>Comprehensive evaluation of non-hybrid genome assembly tools for third-generation PacBio long-read sequence data</b>. Briefings in Bioinformatics 20: 866–876.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bib/bbx147">10.1093/bib/bbx147</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Krawczyk2018">Krawczyk, P. S., L. Lipinski, and A. Dziembowski, 2018 <b>PlasFlow: predicting plasmid sequences in metagenomic data using genome signatures</b>. Nucleic Acids Research 46: e35–e35.</span>
-    
-    
-    <a href="https://doi.org/10.1093/nar/gkx1321">10.1093/nar/gkx1321</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="LiXie2018">Li, R., M. Xie, N. Dong, D. Lin, X. Yang <i>et al.</i>, 2018 <b>Efficient generation of complete sequences of MDR-encoding plasmids by rapid assembly of MinION barcoding sequencing data</b>. GigaScience 7:</span>
-    
-    
-    <a href="https://doi.org/10.1093/gigascience/gix132">10.1093/gigascience/gix132</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="DeCoster2018">Coster, W. D., S. D’Hert, D. T. Schultz, M. Cruts, and C. V. Broeckhoven, 2018 <b>NanoPack: visualizing and processing long-read sequencing data</b> (B. Berger, Ed.). Bioinformatics 34: 2666–2669.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/bty149">10.1093/bioinformatics/bty149</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Li2018">Li, H., 2018 <b>Minimap2: pairwise alignment for nucleotide sequences</b> (I. Birol, Ed.). Bioinformatics 34: 3094–3100.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/bty191">10.1093/bioinformatics/bty191</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="DeMaio2019">Maio, N. D., L. P. Shaw, A. Hubbard, S. George, N. Sanderson <i>et al.</i>, 2019 <b>Comparison of long-read sequencing technologies in the hybrid assembly of complex bacterial genomes</b>.</span>
-    
-    
-    <a href="https://doi.org/10.1101/530824">10.1101/530824</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Zerbino2008">Zerbino, D. R., and E. Birney, 2008 <b>Velvet: Algorithms for de novo short read assembly using de Bruijn graphs</b>. Genome Research 18: 821–829. <a href="https://doi.org/10.1101/gr.074492.107">10.1101/gr.074492.107</a></li>
+<li id="Smillie2010">Smillie, C., M. P. Garcillan-Barcia, M. V. Francia, E. P. C. Rocha, and F. de la Cruz, 2010 <b>Mobility of Plasmids</b>. Microbiology and Molecular Biology Reviews 74: 434–452. <a href="https://doi.org/10.1128/mmbr.00020-10">10.1128/mmbr.00020-10</a></li>
+<li id="Grabherr2011">Grabherr, M. G., B. J. Haas, M. Yassour, J. Z. Levin, D. A. Thompson <i>et al.</i>, 2011 <b>Full-length transcriptome assembly from RNA-Seq data without a reference genome</b>. Nature Biotechnology 29: 644–652. <a href="https://doi.org/10.1038/nbt.1883">10.1038/nbt.1883</a></li>
+<li id="Bankevich2012">Bankevich, A., S. Nurk, D. Antipov, A. A. Gurevich, M. Dvorkin <i>et al.</i>, 2012 <b>SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing</b>. Journal of Computational Biology 19: 455–477. <a href="https://doi.org/10.1089/cmb.2012.0021">10.1089/cmb.2012.0021</a></li>
+<li id="Zankari2012">Zankari, E., H. Hasman, S. Cosentino, M. Vestergaard, S. Rasmussen <i>et al.</i>, 2012 <b>Identification of acquired antimicrobial resistance genes</b>. Journal of Antimicrobial Chemotherapy 67: 2640–2644. <a href="https://doi.org/10.1093/jac/dks261">10.1093/jac/dks261</a></li>
+<li id="Beatson2014">Beatson, S. A., and M. J. Walker, 2014 <b>Tracking antibiotic resistance</b>. Science 345: 1454–1455. <a href="https://doi.org/10.1126/science.1260471">10.1126/science.1260471</a></li>
+<li id="Carattoli2014">Carattoli, A., E. Zankari, Garcı́a-Fernández Aurora, M. V. Larsen, O. Lund <i>et al.</i>, 2014 <b>In SilicoDetection and Typing of Plasmids using PlasmidFinder and Plasmid Multilocus Sequence Typing</b>. Antimicrobial Agents and Chemotherapy 58: 3895–3903. <a href="https://doi.org/10.1128/aac.02412-14">10.1128/aac.02412-14</a></li>
+<li id="Li2015">Li, D., C.-M. Liu, R. Luo, K. Sadakane, and T.-W. Lam, 2015 <b>MEGAHIT: an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph</b>. Bioinformatics 31: 1674–1676. <a href="https://doi.org/10.1093/bioinformatics/btv033">10.1093/bioinformatics/btv033</a></li>
+<li id="Wick2015">Wick, R. R., M. B. Schultz, J. Zobel, and K. E. Holt, 2015 <b>Bandage: interactive visualization ofde novogenome assemblies: Fig. 1.</b> Bioinformatics 31: 3350–3352. <a href="https://doi.org/10.1093/bioinformatics/btv383">10.1093/bioinformatics/btv383</a></li>
+<li id="Jia2016">Jia, B., A. R. Raphenya, B. Alcock, N. Waglechner, P. Guo <i>et al.</i>, 2016 <b>CARD 2017: expansion and model-centric curation of the comprehensive antibiotic resistance database</b>. Nucleic Acids Research 45: D566–D573. <a href="https://doi.org/10.1093/nar/gkw1004">10.1093/nar/gkw1004</a></li>
+<li id="Li2016">Li, H., 2016 <b>Minimap and miniasm: fast mapping and de novo assembly for noisy long sequences</b>. Bioinformatics 32: 2103–2110. <a href="https://doi.org/10.1093/bioinformatics/btw152">10.1093/bioinformatics/btw152</a></li>
+<li id="Jayakumar2017">Jayakumar, V., and Y. Sakakibara, 2017 <b>Comprehensive evaluation of non-hybrid genome assembly tools for third-generation PacBio long-read sequence data</b>. Briefings in Bioinformatics 20: 866–876. <a href="https://doi.org/10.1093/bib/bbx147">10.1093/bib/bbx147</a></li>
+<li id="Vaser2017">Vaser, R., I. Sović, N. Nagarajan, and M. Šikić, 2017 <b>Fast and accurate de novo genome assembly from long uncorrected reads</b>. Genome Research 27: 737–746. <a href="https://doi.org/10.1101/gr.214270.116">10.1101/gr.214270.116</a></li>
+<li id="Wick2017">Wick, R. R., L. M. Judd, C. L. Gorrie, and K. E. Holt, 2017 <b>Unicycler: Resolving bacterial genome assemblies from short and long sequencing reads</b>. PLOS Computational Biology 13: 1–22. <a href="https://doi.org/10.1371/journal.pcbi.1005595">10.1371/journal.pcbi.1005595</a></li>
+<li id="Zankari2017">Zankari, E., R. Allesøe, K. G. Joensen, L. M. Cavaco, O. Lund <i>et al.</i>, 2017 <b>PointFinder: a novel web tool for WGS-based detection of antimicrobial resistance associated with chromosomal point mutations in bacterial pathogens</b>. Journal of Antimicrobial Chemotherapy 72: 2764–2768. <a href="https://doi.org/10.1093/jac/dkx217">10.1093/jac/dkx217</a></li>
+<li id="DeCoster2018">Coster, W. D., S. D’Hert, D. T. Schultz, M. Cruts, and C. V. Broeckhoven, 2018 <b>NanoPack: visualizing and processing long-read sequencing data</b> (B. Berger, Ed.). Bioinformatics 34: 2666–2669. <a href="https://doi.org/10.1093/bioinformatics/bty149">10.1093/bioinformatics/bty149</a></li>
+<li id="Krawczyk2018">Krawczyk, P. S., L. Lipinski, and A. Dziembowski, 2018 <b>PlasFlow: predicting plasmid sequences in metagenomic data using genome signatures</b>. Nucleic Acids Research 46: e35–e35. <a href="https://doi.org/10.1093/nar/gkx1321">10.1093/nar/gkx1321</a></li>
+<li id="Li2018">Li, H., 2018 <b>Minimap2: pairwise alignment for nucleotide sequences</b> (I. Birol, Ed.). Bioinformatics 34: 3094–3100. <a href="https://doi.org/10.1093/bioinformatics/bty191">10.1093/bioinformatics/bty191</a></li>
+<li id="LiXie2018">Li, R., M. Xie, N. Dong, D. Lin, X. Yang <i>et al.</i>, 2018 <b>Efficient generation of complete sequences of MDR-encoding plasmids by rapid assembly of MinION barcoding sequencing data</b>. GigaScience 7: <a href="https://doi.org/10.1093/gigascience/gix132">10.1093/gigascience/gix132</a></li>
+<li id="DeMaio2019">Maio, N. D., L. P. Shaw, A. Hubbard, S. George, N. Sanderson <i>et al.</i>, 2019 <b>Comparison of long-read sequencing technologies in the hybrid assembly of complex bacterial genomes</b>. <a href="https://doi.org/10.1101/530824">10.1101/530824</a></li>
+<li id="Munita">Munita, J. M., and C. A. Arias <b>Mechanisms of Antibiotic Resistance</b>, pp. 481–511 <span style="font-style: normal">in</span> <i>Virulence Mechanisms of Bacterial Pathogens,  Fifth Edition</i>, <i>American Society of Microbiology</i>. <a href="https://doi.org/10.1128/microbiolspec.vmbf-0016-2015">10.1128/microbiolspec.vmbf-0016-2015</a></li></ol>
                 
 
                 

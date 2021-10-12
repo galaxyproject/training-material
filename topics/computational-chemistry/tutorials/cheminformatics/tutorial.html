@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-09-02 10:24:50 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Protein-ligand docking",
   "interactivityType": "mixed",
@@ -599,8 +599,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -674,7 +672,7 @@
 
 <p>Docking is a form of molecular modelling, but several simplifications are made in comparison to methods such as molecular dynamics. Most significantly, the receptor is generally considered to be rigid, with covalent bond lengths and angles held constant. Charges and protonation states are also not permitted to change. While these approximations reduce accuracy to some extent, they increase computational speed, which is necessary to screen a large compound library in a realistic amount of time.</p>
 
-<p>In this tutorial, you will perform docking of ligands into the N-terminus of Hsp90 (heat shock protein 90). The tools used for docking are based on the open-source software <a href="http://vina.scripps.edu/">AutoDock Vina</a> (<a class="citation" href="#Trott2009">Trott and Olson 2009</a>).</p>
+<p>In this tutorial, you will perform docking of ligands into the N-terminus of Hsp90 (heat shock protein 90). The tools used for docking are based on the open-source software <a href="http://vina.scripps.edu/">AutoDock Vina</a> (<span class="citation"><a href="#Trott2009">Trott and Olson 2009</a></span>).</p>
 
 <blockquote class="details">
   <h3 id="details-biological-background"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Biological background</h3>
@@ -683,7 +681,7 @@
 
   <p>Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to slow cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents.</p>
 
-  <p>See <a class="citation" href="#Pearl2006">Pearl and Prodromou 2006</a> for a review on the structure and mechanism of the Hsp90 protein. Alte<span class="notranslate">rna</span>tively, read more at <a href="https://pdb101.rcsb.org/motm/108">PDB-101</a> and <a href="https://en.wikipedia.org/wiki/Hsp90">Wikipedia</a>.</p>
+  <p>See <span class="citation"><a href="#Pearl2006">Pearl and Prodromou 2006</a></span> for a review on the structure and mechanism of the Hsp90 protein. Alte<span class="notranslate">rna</span>tively, read more at <a href="https://pdb101.rcsb.org/motm/108">PDB-101</a> and <a href="https://en.wikipedia.org/wiki/Hsp90">Wikipedia</a>.</p>
 </blockquote>
 
 <blockquote class="agenda">
@@ -710,7 +708,7 @@
 
 <h1 id="download-data">Download data</h1>
 
-<p>For this exercise, we need two datasets: a protein structure and a library of compounds. We will download the former directly from the Protein Data Bank; the latter will be created by searching the ChEMBL database (<a class="citation" href="#Gaulton2016">Gaulton <i>et al.</i> 2016</a>).</p>
+<p>For this exercise, we need two datasets: a protein structure and a library of compounds. We will download the former directly from the Protein Data Bank; the latter will be created by searching the ChEMBL database (<span class="citation"><a href="#Gaulton2016">Gaulton <i>et al.</i> 2016</a></span>).</p>
 
 <h2 id="get-data">Get data</h2>
 
@@ -731,11 +729,11 @@
 
 </blockquote>
 
-<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<a class="citation" href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a>).</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<span class="citation"><a href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a></span>).</figcaption></figure>
 
 <h1 id="separating-protein-and-ligand-structures">Separating protein and ligand structures</h1>
 
-<p>You can view the contents of the downloaded PDB file by pressing the ‘View data’ icon in the history pane. After the header section (about 500 lines), the atoms of the protein and their coordinates are listed. The lines begin with <code class="language-plaintext highlighter-rouge">ATOM</code>. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled <code class="language-plaintext highlighter-rouge">HETATM</code>. We will use the grep tool to separate these molecules into separate files, and then convert the ligand file into SDF/MOL format using the ‘Compound conversion’ tool, which is based on OpenBabel, an open-source library for analyzing chemical data (<a class="citation" href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a>).</p>
+<p>You can view the contents of the downloaded PDB file by pressing the ‘View data’ icon in the history pane. After the header section (about 500 lines), the atoms of the protein and their coordinates are listed. The lines begin with <code class="language-plaintext highlighter-rouge">ATOM</code>. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled <code class="language-plaintext highlighter-rouge">HETATM</code>. We will use the grep tool to separate these molecules into separate files, and then convert the ligand file into SDF/MOL format using the ‘Compound conversion’ tool, which is based on OpenBabel, an open-source library for analyzing chemical data (<span class="citation"><a href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a></span>).</p>
 
 <blockquote class="details">
   <h3 id="details-what-is-grep"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What is grep?</h3>
@@ -833,7 +831,7 @@
 
         <blockquote class="solution">
           <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>Lipinski’s rule of five is an empirical rule which can be used to determine the ‘druglikeness’ of a molecule. The rule consists of four criteria which relate to the pharmacokinetics of the molecule. The rule is discussed in (<a class="citation" href="#Lipinski2004">Lipinski 2004</a>), or you can also read more on <a href="https://en.wikipedia.org/wiki/Lipinski%27s_rule_of_five">Wikipedia</a>.</p>
+          <p>Lipinski’s rule of five is an empirical rule which can be used to determine the ‘druglikeness’ of a molecule. The rule consists of four criteria which relate to the pharmacokinetics of the molecule. The rule is discussed in (<span class="citation"><a href="#Lipinski2004">Lipinski 2004</a></span>), or you can also read more on <a href="https://en.wikipedia.org/wiki/Lipinski%27s_rule_of_five">Wikipedia</a>.</p>
         </blockquote>
       </blockquote>
 
@@ -974,7 +972,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <blockquote class="details">
   <h3 id="details-how-to-find-the-binding-site-of-an-apoprotein"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> How to find the binding site of an apoprotein?</h3>
 
-  <p>If the structure contains no ligand in complex with the protein (i.e. apoprotein), there is an additional step of identifying the binding site. Software is available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, let’s try out the fpocket tool (<a class="citation" href="#LeGuilloux2009">Le Guilloux <i>et al.</i> 2009</a>) on the Hsp90 structure, imagining we don’t have access to the file containing the ligand coordinates.</p>
+  <p>If the structure contains no ligand in complex with the protein (i.e. apoprotein), there is an additional step of identifying the binding site. Software is available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, let’s try out the fpocket tool (<span class="citation"><a href="#LeGuilloux2009">Le Guilloux <i>et al.</i> 2009</a></span>) on the Hsp90 structure, imagining we don’t have access to the file containing the ligand coordinates.</p>
   <blockquote class="notranslate hands_on">
     <h3 id="hands_on-hands-on-finding-binding-sites-using-fpocket"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Finding binding sites using fpocket</h3>
 
@@ -1064,7 +1062,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <h3 id="calculation-of-fingerprints-and-clustering">Calculation of fingerprints and clustering</h3>
 
-<p>In this step, we will group similar molecules together. A key tool in cheminformatics for measuring molecular similarity is fingerprinting, which entails extracting chemical properties of molecules and storing them as a bitstring. These bitstrings can be easily compared computationally, for example with a clustering method. The fingerprinting tools in <span class="notranslate">Galaxy</span> are based on the Chemfp tools (<a class="citation" href="#Dalke2013">Dalke 2013</a>).</p>
+<p>In this step, we will group similar molecules together. A key tool in cheminformatics for measuring molecular similarity is fingerprinting, which entails extracting chemical properties of molecules and storing them as a bitstring. These bitstrings can be easily compared computationally, for example with a clustering method. The fingerprinting tools in <span class="notranslate">Galaxy</span> are based on the Chemfp tools (<span class="citation"><a href="#Dalke2013">Dalke 2013</a></span>).</p>
 
 <p>Before clustering, let’s label each compound. To do so add a second column to the SMILES compound library containing a label for each molecule. The <code class="language-plaintext highlighter-rouge">Ligand SMILES</code> file is also labelled something like <code class="language-plaintext highlighter-rouge">/data/dnb02/<span class="notranslate">galaxy</span>_db/files/010/406/dataset_10406067.dat</code> (the exact name will vary) and we would like to give it a more useful name. When labelling is complete, we can concatenate (join together) the library file with the original SMILES file for the ligand from the PDB file.</p>
 
@@ -1095,7 +1093,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
   </ol>
 </blockquote>
 
-<p>Taylor-Butina clustering  (<a class="citation" href="#Butina1999">Butina 1999</a>) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.</p>
+<p>Taylor-Butina clustering  (<span class="citation"><a href="#Butina1999">Butina 1999</a></span>) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.</p>
 
 <figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Fingerprinting" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
 
@@ -1224,79 +1222,15 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Humphrey1996">Humphrey, W., A. Dalke, and K. Schulten, 1996 <b>VMD – Visual Molecular Dynamics</b>. Journal of Molecular Graphics 14: 33–38.</span>
-    
-    .
-    
-    
-    
-
-</li>
-<li><span id="Butina1999">Butina, D., 1999 <b>Unsupervised data base clustering based on daylight’s fingerprint and Tanimoto similarity: A fast and automated way to cluster small and large data sets</b>. Journal of Chemical Information and Computer Sciences 39: 747–750.</span>
-    
-    
-    
-
-</li>
-<li><span id="Lipinski2004">Lipinski, C. A., 2004 <b>Lead- and drug-like compounds: the rule-of-five revolution</b>. Drug Discovery Today: Technologies 1: 337–341.</span>
-    
-    
-    <a href="https://doi.org/10.1016/j.ddtec.2004.11.007">10.1016/j.ddtec.2004.11.007</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Pearl2006">Pearl, L. H., and C. Prodromou, 2006 <b>Structure and Mechanism of the Hsp90 Molecular Chaperone Machinery.</b> Annual Review of Biochemistry 75: 271–294.</span>
-    
-    
-    <a href="https://doi.org/10.1146/annurev.biochem.75.103004.142738">10.1146/annurev.biochem.75.103004.142738</a>
-    
-    
-
-</li>
-<li><span id="Trott2009">Trott, O., and A. J. Olson, 2009 <b>AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function,  efficient optimization,  and multithreading</b>. Journal of Computational Chemistry NA–NA.</span>
-    
-    
-    <a href="https://doi.org/10.1002/jcc.21334">10.1002/jcc.21334</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="LeGuilloux2009">Le Guilloux, V., P. Schmidtke, and P. Tuffery, 2009 <b>Fpocket: an open source platform for ligand pocket detection</b>. BMC bioinformatics 10: 168.</span>
-    
-    
-    
-
-</li>
-<li><span id="OBoyle2011">O’Boyle, N. M., M. Banck, C. A. James, C. Morley, T. Vandermeersch <i>et al.</i>, 2011 <b>Open Babel: An open chemical toolbox</b>. Journal of Cheminformatics 3:</span>
-    
-    
-    <a href="https://doi.org/10.1186/1758-2946-3-33">10.1186/1758-2946-3-33</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Dalke2013">Dalke, A., 2013 <b>The FPS fingerprint format and chemfp toolkit</b>. Journal of cheminformatics 5: P36.</span>
-    
-    
-    
-
-</li>
-<li><span id="Gaulton2016">Gaulton, A., A. Hersey, M. Nowotka, Bento A Patrı́cia, J. Chambers <i>et al.</i>, 2016 <b>The ChEMBL database in 2017</b>. Nucleic acids research 45: D945–D954.</span>
-    
-    
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Humphrey1996">Humphrey, W., A. Dalke, and K. Schulten, 1996 <b>VMD – Visual Molecular Dynamics</b>. Journal of Molecular Graphics 14: 33–38. .</li>
+<li id="Butina1999">Butina, D., 1999 <b>Unsupervised data base clustering based on daylight’s fingerprint and Tanimoto similarity: A fast and automated way to cluster small and large data sets</b>. Journal of Chemical Information and Computer Sciences 39: 747–750.</li>
+<li id="Lipinski2004">Lipinski, C. A., 2004 <b>Lead- and drug-like compounds: the rule-of-five revolution</b>. Drug Discovery Today: Technologies 1: 337–341. <a href="https://doi.org/10.1016/j.ddtec.2004.11.007">10.1016/j.ddtec.2004.11.007</a></li>
+<li id="Pearl2006">Pearl, L. H., and C. Prodromou, 2006 <b>Structure and Mechanism of the Hsp90 Molecular Chaperone Machinery.</b> Annual Review of Biochemistry 75: 271–294. <a href="https://doi.org/10.1146/annurev.biochem.75.103004.142738">10.1146/annurev.biochem.75.103004.142738</a></li>
+<li id="LeGuilloux2009">Le Guilloux, V., P. Schmidtke, and P. Tuffery, 2009 <b>Fpocket: an open source platform for ligand pocket detection</b>. BMC bioinformatics 10: 168.</li>
+<li id="Trott2009">Trott, O., and A. J. Olson, 2009 <b>AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function,  efficient optimization,  and multithreading</b>. Journal of Computational Chemistry NA–NA. <a href="https://doi.org/10.1002/jcc.21334">10.1002/jcc.21334</a></li>
+<li id="OBoyle2011">O’Boyle, N. M., M. Banck, C. A. James, C. Morley, T. Vandermeersch <i>et al.</i>, 2011 <b>Open Babel: An open chemical toolbox</b>. Journal of Cheminformatics 3: <a href="https://doi.org/10.1186/1758-2946-3-33">10.1186/1758-2946-3-33</a></li>
+<li id="Dalke2013">Dalke, A., 2013 <b>The FPS fingerprint format and chemfp toolkit</b>. Journal of cheminformatics 5: P36.</li>
+<li id="Gaulton2016">Gaulton, A., A. Hersey, M. Nowotka, Bento A Patrı́cia, J. Chambers <i>et al.</i>, 2016 <b>The ChEMBL database in 2017</b>. Nucleic acids research 45: D945–D954.</li></ol>
                 
 
                 

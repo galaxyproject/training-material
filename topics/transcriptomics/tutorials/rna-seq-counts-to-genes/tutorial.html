@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-03-23 18:12:58 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "2: RNA-seq counts to genes",
   "interactivityType": "mixed",
@@ -904,8 +904,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -995,11 +993,11 @@
 
 <p><strong>Mouse mammary gland dataset</strong></p>
 
-<p>The data for this tutorial comes from a Nature Cell Biology paper by <a class="citation" href="#Fu2015">Fu <i>et al.</i> 2015</a>. Both the raw data (sequence <span class="notranslate">reads</span>) and processed data (counts) can be downloaded from Gene <span class="notranslate">Expression</span> Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
+<p>The data for this tutorial comes from a Nature Cell Biology paper by <span class="citation"><a href="#Fu2015">Fu <i>et al.</i> 2015</a></span>. Both the raw data (sequence <span class="notranslate">reads</span>) and processed data (counts) can be downloaded from Gene <span class="notranslate">Expression</span> Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
 
-<p>This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for <span class="notranslate">RNA</span>-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alte<span class="notranslate">rna</span>tively, you could create a count matrix from the raw sequence <span class="notranslate">reads</span>, as demonstrated in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts tutorial</a>. The GEO count file was generated from aligning the <span class="notranslate">reads</span> to the mouse <code class="language-plaintext highlighter-rouge">mm10</code> genome with the Rsubread aligner (<a class="citation" href="#Liao2019">Liao <i>et al.</i> 2019</a>), followed by counting <span class="notranslate">reads</span> mapped to RefSeq genes with featureCounts (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>), see the <a href="https://www.nature.com/articles/ncb3117">Fu paper</a> for details.</p>
+<p>This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for <span class="notranslate">RNA</span>-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alte<span class="notranslate">rna</span>tively, you could create a count matrix from the raw sequence <span class="notranslate">reads</span>, as demonstrated in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts tutorial</a>. The GEO count file was generated from aligning the <span class="notranslate">reads</span> to the mouse <code class="language-plaintext highlighter-rouge">mm10</code> genome with the Rsubread aligner (<span class="citation"><a href="#Liao2019">Liao <i>et al.</i> 2019</a></span>), followed by counting <span class="notranslate">reads</span> mapped to RefSeq genes with featureCounts (<span class="citation"><a href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a></span>), see the <a href="https://www.nature.com/articles/ncb3117">Fu paper</a> for details.</p>
 
-<p>We will use <strong>limma-voom</strong> (<a class="citation" href="#Law2014">Law <i>et al.</i> 2014</a>) for identifying differentially expressed genes here. Other popular alte<span class="notranslate">rna</span>tives are edgeR (<a class="citation" href="#robinson2010edger">Robinson <i>et al.</i> 2010</a>) and DESeq2 (<a class="citation" href="#love2014moderated">Love <i>et al.</i> 2014</a>). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity (<a class="citation" href="#CostaSilva2017">Costa-Silva <i>et al.</i> 2017</a>) and, due to its speed, it’s particularly recommended for large-scale datasets with 100s of samples (<a class="citation" href="#Chen2016">Chen <i>et al.</i> 2016</a>).</p>
+<p>We will use <strong>limma-voom</strong> (<span class="citation"><a href="#Law2014">Law <i>et al.</i> 2014</a></span>) for identifying differentially expressed genes here. Other popular alte<span class="notranslate">rna</span>tives are edgeR (<span class="citation"><a href="#robinson2010edger">Robinson <i>et al.</i> 2010</a></span>) and DESeq2 (<span class="citation"><a href="#love2014moderated">Love <i>et al.</i> 2014</a></span>). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity (<span class="citation"><a href="#CostaSilva2017">Costa-Silva <i>et al.</i> 2017</a></span>) and, due to its speed, it’s particularly recommended for large-scale datasets with 100s of samples (<span class="citation"><a href="#Chen2016">Chen <i>et al.</i> 2016</a></span>).</p>
 
 <p>This is a <span class="notranslate">Galaxy</span> tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">COMBINE R <span class="notranslate">RNA</span>seq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">here</a>.</p>
 
@@ -1221,12 +1219,12 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
 <blockquote class="details">
   <h3 id="details-more-details-on-filtering"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on filtering</h3>
 
-  <p>The limma tool uses the <code class="language-plaintext highlighter-rouge">cpm</code> function from the edgeR package (<a class="citation" href="#robinson2010edger">Robinson <i>et al.</i> 2010</a>) to generate the CPM values which can then be filtered. Note that by converting to CPMs we are normalizing for the different sequencing depths for each sample. A CPM of 0.5 is used as it corresponds to a count of 10-15 for the library sizes in this data set. If the count is any smaller, it is considered to be very low, indicating that the associated gene is not expressed in that sample. A requirement for <span class="notranslate">expression</span> in two or more libraries is used as each group contains two replicates. This ensures that a gene will be retained if it is only expressed in one group. Smaller CPM thresholds are usually appropriate for larger libraries. As a general rule, a good threshold can be chosen by identifying the CPM that corresponds to a count of 10, which in this case is about 0.5. You should filter with CPMs rather than filtering on the counts directly, as the latter does not account for differences in library sizes between samples.</p>
+  <p>The limma tool uses the <code class="language-plaintext highlighter-rouge">cpm</code> function from the edgeR package (<span class="citation"><a href="#robinson2010edger">Robinson <i>et al.</i> 2010</a></span>) to generate the CPM values which can then be filtered. Note that by converting to CPMs we are normalizing for the different sequencing depths for each sample. A CPM of 0.5 is used as it corresponds to a count of 10-15 for the library sizes in this data set. If the count is any smaller, it is considered to be very low, indicating that the associated gene is not expressed in that sample. A requirement for <span class="notranslate">expression</span> in two or more libraries is used as each group contains two replicates. This ensures that a gene will be retained if it is only expressed in one group. Smaller CPM thresholds are usually appropriate for larger libraries. As a general rule, a good threshold can be chosen by identifying the CPM that corresponds to a count of 10, which in this case is about 0.5. You should filter with CPMs rather than filtering on the counts directly, as the latter does not account for differences in library sizes between samples.</p>
 </blockquote>
 
 <h2 id="normalization-for-composition-bias">Normalization for composition bias</h2>
 
-<p>In an <span class="notranslate">RNA</span>-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less <span class="notranslate">reads</span> from other genes. By default, TMM normalization (<a class="citation" href="#robinson2010scaling">Robinson and Oshlack 2010</a>) is performed by the limma tool using the edgeR <code class="language-plaintext highlighter-rouge">calcNormFactors</code> function (this can be changed under <strong>Advanced Options</strong>). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log <span class="notranslate">expression</span> ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.</p>
+<p>In an <span class="notranslate">RNA</span>-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less <span class="notranslate">reads</span> from other genes. By default, TMM normalization (<span class="citation"><a href="#robinson2010scaling">Robinson and Oshlack 2010</a></span>) is performed by the limma tool using the edgeR <code class="language-plaintext highlighter-rouge">calcNormFactors</code> function (this can be changed under <strong>Advanced Options</strong>). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log <span class="notranslate">expression</span> ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.</p>
 
 <figure id="figure-7"><img src="../../images/rna-seq-counts-to-genes/TMM.png" alt="TMM normalization" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> TMM normalization (Robinson and Oshlack 2010)</figcaption></figure>
 
@@ -1284,7 +1282,7 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
 
 <h2 id="multidimensional-scaling-plot">Multidimensional scaling plot</h2>
 
-<p>By far, one of the most important plots we make when we analyse <span class="notranslate">RNA</span>-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This <span class="notranslate">Galaxy</span> limma tool outputs an MDS plot by default in the <code class="language-plaintext highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="language-plaintext highlighter-rouge">MDSPlot_CellTypeStatus.pdf</code>). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions, and you may choose to include batch as an additional factor in the differential <span class="notranslate">expression</span> analysis. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under <strong>Output Options</strong> <em>Additional Plots</em> <code class="language-plaintext highlighter-rouge">MDS Extra</code>. These are displayed in the <code class="language-plaintext highlighter-rouge">Report</code> along with a link to a PDF version (MDSPlot_extra.pdf). Selecting the <code class="language-plaintext highlighter-rouge">Glimma Interactive Plots</code> will generate an interactive version of the MDS plot, see the plots section of the report below. If outlier samples are detected you may decide to remove them. Alte<span class="notranslate">rna</span>tively, you could downweight them by choosing the option in the limma tool <em>Apply voom with sample quality weights?</em>. The voom sample quality weighting is described in the paper <em>Why weight? Modelling sample and observational level variability improves power in <span class="notranslate">RNA</span>-seq analyses (<a class="citation" href="#Liu2015">Liu <i>et al.</i> 2015</a>)</em>.</p>
+<p>By far, one of the most important plots we make when we analyse <span class="notranslate">RNA</span>-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This <span class="notranslate">Galaxy</span> limma tool outputs an MDS plot by default in the <code class="language-plaintext highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="language-plaintext highlighter-rouge">MDSPlot_CellTypeStatus.pdf</code>). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions, and you may choose to include batch as an additional factor in the differential <span class="notranslate">expression</span> analysis. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under <strong>Output Options</strong> <em>Additional Plots</em> <code class="language-plaintext highlighter-rouge">MDS Extra</code>. These are displayed in the <code class="language-plaintext highlighter-rouge">Report</code> along with a link to a PDF version (MDSPlot_extra.pdf). Selecting the <code class="language-plaintext highlighter-rouge">Glimma Interactive Plots</code> will generate an interactive version of the MDS plot, see the plots section of the report below. If outlier samples are detected you may decide to remove them. Alte<span class="notranslate">rna</span>tively, you could downweight them by choosing the option in the limma tool <em>Apply voom with sample quality weights?</em>. The voom sample quality weighting is described in the paper <em>Why weight? Modelling sample and observational level variability improves power in <span class="notranslate">RNA</span>-seq analyses (<span class="citation"><a href="#Liu2015">Liu <i>et al.</i> 2015</a></span>)</em>.</p>
 
 <figure id="figure-9"><img src="../../images/rna-seq-counts-to-genes/mdsscree.png" alt="MDS Plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> MDS Plot</figcaption></figure>
 
@@ -1469,7 +1467,7 @@ What is the second greatest source of variation in the data?</p>
 
   <figure id="figure-21"><img src="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" alt="Voom Mixedup Plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Voom Plot mixed-up samples</figcaption></figure>
 
-  <p>More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper (<a class="citation" href="#Law2014">Law <i>et al.</i> 2014</a>), shown below.</p>
+  <p>More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper (<span class="citation"><a href="#Law2014">Law <i>et al.</i> 2014</a></span>), shown below.</p>
 
   <figure id="figure-22"><img src="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" alt="Voom Plot Examples" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Voom Plot more examples</figcaption></figure>
 
@@ -1507,7 +1505,7 @@ What is the second greatest source of variation in the data?</p>
 
 <h1 id="testing-relative-to-a-threshold-treat">Testing relative to a threshold (TREAT)</h1>
 
-<p>When there is a lot of differential <span class="notranslate">expression</span>, sometimes we may want to cut-off on a fold change threshold, as well as a p-value threshold, so that we follow up on the most biologically significant genes. However, it is not recommended to simply rank by p-value and then discard genes with small logFC’s, as this has been shown to increase the false discovery rate. In other words, you are not controlling the false discovery rate at 5% any more. There is a function called <code class="language-plaintext highlighter-rouge">treat</code> in limma that performs this style of analysis correctly (<a class="citation" href="#McCarthy2009">McCarthy and Smyth 2009</a>). TREAT will simply take a user-specified log fold change cut-off and recalculate the moderated t-statistics and p-values with the new information about logFC. There are thousands of genes differentially expressed in this <code class="language-plaintext highlighter-rouge">basalpregnant-basallactate</code> comparison, so let’s rerun the analysis applying TREAT and similar thresholds to what was used in the Fu paper: an adjusted P value of 0.01 (1% false discovery rate) and a log-fold-change cutoff of 0.58 (equivalent to a fold change of 1.5).</p>
+<p>When there is a lot of differential <span class="notranslate">expression</span>, sometimes we may want to cut-off on a fold change threshold, as well as a p-value threshold, so that we follow up on the most biologically significant genes. However, it is not recommended to simply rank by p-value and then discard genes with small logFC’s, as this has been shown to increase the false discovery rate. In other words, you are not controlling the false discovery rate at 5% any more. There is a function called <code class="language-plaintext highlighter-rouge">treat</code> in limma that performs this style of analysis correctly (<span class="citation"><a href="#McCarthy2009">McCarthy and Smyth 2009</a></span>). TREAT will simply take a user-specified log fold change cut-off and recalculate the moderated t-statistics and p-values with the new information about logFC. There are thousands of genes differentially expressed in this <code class="language-plaintext highlighter-rouge">basalpregnant-basallactate</code> comparison, so let’s rerun the analysis applying TREAT and similar thresholds to what was used in the Fu paper: an adjusted P value of 0.01 (1% false discovery rate) and a log-fold-change cutoff of 0.58 (equivalent to a fold change of 1.5).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-testing-relative-to-a-threshold-treat"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing relative to a threshold (TREAT)</h3>
@@ -1556,7 +1554,7 @@ What is the second greatest source of variation in the data?</p>
 
 <h2 id="interactive-de-plots-glimma">Interactive DE plots (Glimma)</h2>
 
-<p>Interactive versions of the MD and Volcano plots can be output by the limma-voom tool via the Glimma package (<a class="citation" href="#Su2017">Su <i>et al.</i> 2017</a>), if a gene annotation file is provided and <code class="language-plaintext highlighter-rouge">Glimma Interactive Plots</code> is selected. Links to the Glimma html pages are generated in the <code class="language-plaintext highlighter-rouge">Report</code>.</p>
+<p>Interactive versions of the MD and Volcano plots can be output by the limma-voom tool via the Glimma package (<span class="citation"><a href="#Su2017">Su <i>et al.</i> 2017</a></span>), if a gene annotation file is provided and <code class="language-plaintext highlighter-rouge">Glimma Interactive Plots</code> is selected. Links to the Glimma html pages are generated in the <code class="language-plaintext highlighter-rouge">Report</code>.</p>
 
 <p>Let’s take a look at the interactive MD plot. Click on the <code class="language-plaintext highlighter-rouge">Glimma_MDPlot_basalpregnant-basallactate.html</code> link in the <code class="language-plaintext highlighter-rouge">Report</code>. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average <span class="notranslate">expression</span>. The right plot shows the <span class="notranslate">expression</span> levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot <span class="notranslate">expression</span> level for corresponding gene, clicking on points will fix the <span class="notranslate">expression</span> plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.</p>
 
@@ -1614,7 +1612,7 @@ What is the second greatest source of variation in the data?</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts</a>, that showed how to generate counts from the raw <span class="notranslate">reads</span> (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of <span class="notranslate">RNA</span>-seq count data and the methods used here, see the articles; <em><span class="notranslate">RNA</span>-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR (<a class="citation" href="#Law2018">Law <i>et al.</i> 2018</a>)</em>  and <em>From <span class="notranslate">reads</span> to genes to pathways: differential <span class="notranslate">expression</span> analysis of <span class="notranslate">RNA</span>-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline (<a class="citation" href="#Chen2016">Chen <i>et al.</i> 2016</a>)</em>.</p>
+<p>In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts</a>, that showed how to generate counts from the raw <span class="notranslate">reads</span> (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of <span class="notranslate">RNA</span>-seq count data and the methods used here, see the articles; <em><span class="notranslate">RNA</span>-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR (<span class="citation"><a href="#Law2018">Law <i>et al.</i> 2018</a></span>)</em>  and <em>From <span class="notranslate">reads</span> to genes to pathways: differential <span class="notranslate">expression</span> analysis of <span class="notranslate">RNA</span>-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline (<span class="citation"><a href="#Chen2016">Chen <i>et al.</i> 2016</a></span>)</em>.</p>
 
 
                 
@@ -1647,139 +1645,19 @@ What is the second greatest source of variation in the data?</p>
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="McCarthy2009">McCarthy, D. J., and G. K. Smyth, 2009 <b>Testing significance relative to a fold-change threshold is a TREAT</b>. Bioinformatics 25: 765–771.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btp053">10.1093/bioinformatics/btp053</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="robinson2010edger">Robinson, M. D., D. J. McCarthy, and G. K. Smyth, 2010 <b>edgeR: a Bioconductor package for differential expression analysis of digital gene expression data</b>. Bioinformatics 26: 139–140.</span>
-    
-    
-    
-
-</li>
-<li><span id="robinson2010scaling">Robinson, M. D., and A. Oshlack, 2010 <b>A scaling normalization method for differential expression analysis of RNA-seq data</b>. Genome biology 11: 1–9.</span>
-    
-    
-    
-
-</li>
-<li><span id="liao2013featurecounts">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>featureCounts: an efficient general purpose program for assigning sequence reads to genomic features</b>. Bioinformatics 30: 923–930.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a>
-      
-    
-
-</li>
-<li><span id="love2014moderated">Love, M. I., W. Huber, and S. Anders, 2014 <b>Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</b>. Genome Biology 15: 550.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</a>
-      
-    
-
-</li>
-<li><span id="Law2014">Law, C. W., Y. Chen, W. Shi, and G. K. Smyth, 2014 <b>voom: precision weights unlock linear model analysis tools for RNA-seq read counts</b>. Genome Biology 15: R29.</span>
-    
-    
-    <a href="https://doi.org/10.1186/gb-2014-15-2-r29">10.1186/gb-2014-15-2-r29</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Fu2015">Fu, N. Y., A. C. Rios, B. Pal, R. Soetanto, A. T. L. Lun <i>et al.</i>, 2015 <b>EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</b>. Nature Cell Biology 17: 365–375.</span>
-    
-    
-    <a href="https://doi.org/10.1038/ncb3117">10.1038/ncb3117</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Liu2015">Liu, R., A. Z. Holik, S. Su, N. Jansz, K. Chen <i>et al.</i>, 2015 <b>Why weight? Modelling sample and observational level variability improves power in RNA-seq analyses</b>. Nucleic Acids Research 43: e97–e97.</span>
-    
-    
-    <a href="https://doi.org/10.1093/nar/gkv412">10.1093/nar/gkv412</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Chen2016">Chen, Y., A. T. L. Lun, and G. K. Smyth, 2016 <b>From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline</b>. F1000Research 5: 1438.</span>
-    
-    
-    <a href="https://doi.org/10.12688/f1000research.8987.2">10.12688/f1000research.8987.2</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Su2017">Su, S., C. W. Law, C. Ah-Cann, M.-L. Asselin-Labat, M. E. Blewitt <i>et al.</i>, 2017 <b>Glimma: interactive graphics for gene expression analysis</b> (B. Berger, Ed.). Bioinformatics 33: 2050–2052.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btx094">10.1093/bioinformatics/btx094</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="CostaSilva2017">Costa-Silva, J., D. Domingues, and F. M. Lopes, 2017 <b>RNA-Seq differential expression analysis: An extended review and a software tool</b> (Z. Wei, Ed.). PLOS ONE 12: e0190152.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pone.0190152">10.1371/journal.pone.0190152</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Law2018">Law, C. W., M. Alhamdoosh, S. Su, X. Dong, L. Tian <i>et al.</i>, 2018 <b>RNA-seq analysis is easy as 1-2-3 with limma,  Glimma and edgeR</b>. F1000Research 5: 1408.</span>
-    
-    
-    <a href="https://doi.org/10.12688/f1000research.9005.3">10.12688/f1000research.9005.3</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Liao2019">Liao, Y., G. K. Smyth, and W. Shi, 2019 <b>The R package Rsubread is easier,  faster,  cheaper and better for alignment and quantification of RNA sequencing reads</b>. Nucleic Acids Research 47: e47–e47.</span>
-    
-    
-    <a href="https://doi.org/10.1093/nar/gkz114">10.1093/nar/gkz114</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="McCarthy2009">McCarthy, D. J., and G. K. Smyth, 2009 <b>Testing significance relative to a fold-change threshold is a TREAT</b>. Bioinformatics 25: 765–771. <a href="https://doi.org/10.1093/bioinformatics/btp053">10.1093/bioinformatics/btp053</a></li>
+<li id="robinson2010edger">Robinson, M. D., D. J. McCarthy, and G. K. Smyth, 2010 <b>edgeR: a Bioconductor package for differential expression analysis of digital gene expression data</b>. Bioinformatics 26: 139–140.</li>
+<li id="robinson2010scaling">Robinson, M. D., and A. Oshlack, 2010 <b>A scaling normalization method for differential expression analysis of RNA-seq data</b>. Genome biology 11: 1–9.</li>
+<li id="liao2013featurecounts">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>featureCounts: an efficient general purpose program for assigning sequence reads to genomic features</b>. Bioinformatics 30: 923–930. <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a></li>
+<li id="Law2014">Law, C. W., Y. Chen, W. Shi, and G. K. Smyth, 2014 <b>voom: precision weights unlock linear model analysis tools for RNA-seq read counts</b>. Genome Biology 15: R29. <a href="https://doi.org/10.1186/gb-2014-15-2-r29">10.1186/gb-2014-15-2-r29</a></li>
+<li id="love2014moderated">Love, M. I., W. Huber, and S. Anders, 2014 <b>Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</b>. Genome Biology 15: 550. <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</a></li>
+<li id="Fu2015">Fu, N. Y., A. C. Rios, B. Pal, R. Soetanto, A. T. L. Lun <i>et al.</i>, 2015 <b>EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</b>. Nature Cell Biology 17: 365–375. <a href="https://doi.org/10.1038/ncb3117">10.1038/ncb3117</a></li>
+<li id="Liu2015">Liu, R., A. Z. Holik, S. Su, N. Jansz, K. Chen <i>et al.</i>, 2015 <b>Why weight? Modelling sample and observational level variability improves power in RNA-seq analyses</b>. Nucleic Acids Research 43: e97–e97. <a href="https://doi.org/10.1093/nar/gkv412">10.1093/nar/gkv412</a></li>
+<li id="Chen2016">Chen, Y., A. T. L. Lun, and G. K. Smyth, 2016 <b>From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline</b>. F1000Research 5: 1438. <a href="https://doi.org/10.12688/f1000research.8987.2">10.12688/f1000research.8987.2</a></li>
+<li id="CostaSilva2017">Costa-Silva, J., D. Domingues, and F. M. Lopes, 2017 <b>RNA-Seq differential expression analysis: An extended review and a software tool</b> (Z. Wei, Ed.). PLOS ONE 12: e0190152. <a href="https://doi.org/10.1371/journal.pone.0190152">10.1371/journal.pone.0190152</a></li>
+<li id="Su2017">Su, S., C. W. Law, C. Ah-Cann, M.-L. Asselin-Labat, M. E. Blewitt <i>et al.</i>, 2017 <b>Glimma: interactive graphics for gene expression analysis</b> (B. Berger, Ed.). Bioinformatics 33: 2050–2052. <a href="https://doi.org/10.1093/bioinformatics/btx094">10.1093/bioinformatics/btx094</a></li>
+<li id="Law2018">Law, C. W., M. Alhamdoosh, S. Su, X. Dong, L. Tian <i>et al.</i>, 2018 <b>RNA-seq analysis is easy as 1-2-3 with limma,  Glimma and edgeR</b>. F1000Research 5: 1408. <a href="https://doi.org/10.12688/f1000research.9005.3">10.12688/f1000research.9005.3</a></li>
+<li id="Liao2019">Liao, Y., G. K. Smyth, and W. Shi, 2019 <b>The R package Rsubread is easier,  faster,  cheaper and better for alignment and quantification of RNA sequencing reads</b>. Nucleic Acids Research 47: e47–e47. <a href="https://doi.org/10.1093/nar/gkz114">10.1093/nar/gkz114</a></li></ol>
                 
 
                 

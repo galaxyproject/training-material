@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-03-12 17:24:55 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "De Bruijn Graph Assembly",
   "interactivityType": "mixed",
@@ -713,8 +713,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -869,7 +867,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 
 <h1 id="assembly-with-the-velvet-optimiser">Assembly with the Velvet Optimiser</h1>
 
-<p>We will perform an assembly with the Velvet Optimiser, which automatically runs and optimises the output of the Velvet assembler (<a class="citation" href="#Velvet2008">Zerbino and Birney 2008</a>). It will automatically choose a suitable value for the k-mer size (<strong>k</strong>). It will then go on to optimise the coverage cutoff (<strong>cov_cutoff</strong>) which corrects for read errors. It will use the “<em>n50</em>” metric for optimising the k-mer size and the “<em>total number of bases in contigs</em>” for optimising the coverage cutoff.</p>
+<p>We will perform an assembly with the Velvet Optimiser, which automatically runs and optimises the output of the Velvet assembler (<span class="citation"><a href="#Velvet2008">Zerbino and Birney 2008</a></span>). It will automatically choose a suitable value for the k-mer size (<strong>k</strong>). It will then go on to optimise the coverage cutoff (<strong>cov_cutoff</strong>) which corrects for read errors. It will use the “<em>n50</em>” metric for optimising the k-mer size and the “<em>total number of bases in contigs</em>” for optimising the coverage cutoff.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assemble-with-the-velvet-optimiser"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assemble with the Velvet Optimiser</h3>
@@ -941,14 +939,14 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <blockquote class="details">
   <h3 id="details-details-further-reading-on-assembly-with-velvet"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Further reading on assembly with Velvet</h3>
   <ul>
-    <li>Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler (<a class="citation" href="#Zerbino2009">Zerbino <i>et al.</i> 2009</a>)</li>
+    <li>Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler (<span class="citation"><a href="#Zerbino2009">Zerbino <i>et al.</i> 2009</a></span>)</li>
   </ul>
 
 </blockquote>
 
 <h2 id="visualisation-of-the-assembly">Visualisation of the Assembly</h2>
 
-<p>Now that we’ve assembled the genomes, let’s visualise this assembly using <a href="https://rrwick.github.io/Bandage/">Bandage</a> (<a class="citation" href="#Wick2015">Wick <i>et al.</i> 2015</a>). This tool will let us better understand how the assembly graph really looks, and can give us a feeling for if the genome was well assembled or not.</p>
+<p>Now that we’ve assembled the genomes, let’s visualise this assembly using <a href="https://rrwick.github.io/Bandage/">Bandage</a> (<span class="citation"><a href="#Wick2015">Wick <i>et al.</i> 2015</a></span>). This tool will let us better understand how the assembly graph really looks, and can give us a feeling for if the genome was well assembled or not.</p>
 
 <p>Currently VelvetOptimiser does not include the LastGraph output, so we will manually run <code class="language-plaintext highlighter-rouge">velveth</code> and <code class="language-plaintext highlighter-rouge">velvetg</code> with the optimised parameters.</p>
 
@@ -1104,7 +1102,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 
 <h1 id="assemble-with-spades">Assemble with SPAdes</h1>
 
-<p>We will now perform an assembly with the much more modern SPAdes assembler (<a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>). It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.</p>
+<p>We will now perform an assembly with the much more modern SPAdes assembler (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>). It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assemble-with-spades"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assemble with SPAdes</h3>
@@ -1230,50 +1228,10 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Velvet2008">Zerbino, D. R., and E. Birney, 2008 <b>Velvet: Algorithms for de novo short read assembly using de Bruijn graphs</b>. Genome Research 18: 821–829.</span>
-    
-    
-    <a href="https://doi.org/10.1101/gr.074492.107">10.1101/gr.074492.107</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Zerbino2009">Zerbino, D. R., G. K. McEwen, E. H. Margulies, and E. Birney, 2009 <b>Pebble and Rock Band: Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler</b> (S. L. Salzberg, Ed.). PLoS ONE 4: e8407.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pone.0008407">10.1371/journal.pone.0008407</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Bankevich2012">Bankevich, A., S. Nurk, D. Antipov, A. A. Gurevich, M. Dvorkin <i>et al.</i>, 2012 <b>SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing</b>. Journal of Computational Biology 19: 455–477.</span>
-    
-    
-    <a href="https://doi.org/10.1089/cmb.2012.0021">10.1089/cmb.2012.0021</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wick2015">Wick, R. R., M. B. Schultz, J. Zobel, and K. E. Holt, 2015 <b>Bandage: interactive visualization ofde novogenome assemblies</b>. Bioinformatics 31: 3350–3352.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btv383">10.1093/bioinformatics/btv383</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Velvet2008">Zerbino, D. R., and E. Birney, 2008 <b>Velvet: Algorithms for de novo short read assembly using de Bruijn graphs</b>. Genome Research 18: 821–829. <a href="https://doi.org/10.1101/gr.074492.107">10.1101/gr.074492.107</a></li>
+<li id="Zerbino2009">Zerbino, D. R., G. K. McEwen, E. H. Margulies, and E. Birney, 2009 <b>Pebble and Rock Band: Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler</b> (S. L. Salzberg, Ed.). PLoS ONE 4: e8407. <a href="https://doi.org/10.1371/journal.pone.0008407">10.1371/journal.pone.0008407</a></li>
+<li id="Bankevich2012">Bankevich, A., S. Nurk, D. Antipov, A. A. Gurevich, M. Dvorkin <i>et al.</i>, 2012 <b>SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing</b>. Journal of Computational Biology 19: 455–477. <a href="https://doi.org/10.1089/cmb.2012.0021">10.1089/cmb.2012.0021</a></li>
+<li id="Wick2015">Wick, R. R., M. B. Schultz, J. Zobel, and K. E. Holt, 2015 <b>Bandage: interactive visualization ofde novogenome assemblies: Fig. 1.</b> Bioinformatics 31: 3350–3352. <a href="https://doi.org/10.1093/bioinformatics/btv383">10.1093/bioinformatics/btv383</a></li></ol>
                 
 
                 

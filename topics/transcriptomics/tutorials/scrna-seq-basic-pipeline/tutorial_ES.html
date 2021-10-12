@@ -283,7 +283,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-10-11 13:06:35 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Filtrado, representación y exploración de secuenciación de ARN de células únicas",
   "interactivityType": "mixed",
@@ -886,8 +886,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -933,7 +931,7 @@
 
                 <h1 class="no_toc" id="introducción">Introducción</h1>
 
-<p>Has hecho el trabajo para crear una matriz de células únicas, con recuentos de genes y mitocondrias y con grupos de metadatos celulares de todas tus variables de interés (si no, por favor consulta <a href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html">este tutorial</a> para hacerlo). Ahora analizaremos completamente nuestros datos para eliminar las células con poca calidad, para reducir las dimensiones de los datos que dificultan el trabajo, y finalmente, para intentar definir nuestros agrupamientos ¡y darles significado biológico! Hay muchos paquetes para analizar datos de células únicas - Seurat <a class="citation" href="#Satija2015">Satija <i>et al.</i> 2015</a>, Scanpy <a class="citation" href="#Wolf2018">Wolf <i>et al.</i> 2018</a>, Monocle <a class="citation" href="#Trapnell2014">Trapnell <i>et al.</i> 2014</a>, Scater <a class="citation" href="#McCarthy2017">McCarthy <i>et al.</i> 2017</a>, etc. Aquí trabajaremos con Scanpy porque es la opción con más herramientas disponibles en <span class="notranslate">Galaxy</span>.</p>
+<p>Has hecho el trabajo para crear una matriz de células únicas, con recuentos de genes y mitocondrias y con grupos de metadatos celulares de todas tus variables de interés (si no, por favor consulta <a href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html">este tutorial</a> para hacerlo). Ahora analizaremos completamente nuestros datos para eliminar las células con poca calidad, para reducir las dimensiones de los datos que dificultan el trabajo, y finalmente, para intentar definir nuestros agrupamientos ¡y darles significado biológico! Hay muchos paquetes para analizar datos de células únicas - Seurat <span class="citation"><a href="#Satija2015">Satija <i>et al.</i> 2015</a></span>, Scanpy <span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>, Monocle <span class="citation"><a href="#Trapnell2014">Trapnell <i>et al.</i> 2014</a></span>, Scater <span class="citation"><a href="#McCarthy2017">McCarthy <i>et al.</i> 2017</a></span>, etc. Aquí trabajaremos con Scanpy porque es la opción con más herramientas disponibles en <span class="notranslate">Galaxy</span>.</p>
 
 <blockquote class="comment">
   <h3 id="comment-tutoriales-por-todos-lados"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> ¿Tutoriales por todos lados?</h3>
@@ -977,7 +975,7 @@
 
 <h2 id="obtener-datos">Obtener datos</h2>
 
-<p>Te proporcionamos un conjunto de datos experimentales de ratón de restricción en el crecimiento fetal <a class="citation" href="#Bacon2018">Bacon <i>et al.</i> 2018</a>. Este es el conjunto de datos generado a partir de <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html">este tutorial</a> si usaste los ficheros FASTQ completos en vez de los reducidos (ver el estudio del <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">aquí</a> y todos los datos del proyecto <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">aquí</a>). Puedes encontrar estos datos en este <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input">historial de entrada</a> o descargarlo del link a Zenodo que aparece más abajo.</p>
+<p>Te proporcionamos un conjunto de datos experimentales de ratón de restricción en el crecimiento fetal <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. Este es el conjunto de datos generado a partir de <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html">este tutorial</a> si usaste los ficheros FASTQ completos en vez de los reducidos (ver el estudio del <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">aquí</a> y todos los datos del proyecto <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">aquí</a>). Puedes encontrar estos datos en este <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input">historial de entrada</a> o descargarlo del link a Zenodo que aparece más abajo.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-práctica-subir-o-cargar-los-datos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Práctica: Subir o cargar los datos</h3>
@@ -2276,7 +2274,7 @@ Además, también analizaremos el effecto de confusión del sexo.</p>
 
 <h1 id="visualizaciones-interactivas">Visualizaciones interactivas</h1>
 
-<p>Antes de que te dejemos explorar lo desconocido, habrás notado que las interpretaciones anteriores son sólo algunas de las opciones posibles. Más aún, es posible que te hayas divertido intentando averiguar qué muestra es de qué genotipo y qué sexo, y pasando repetidamente de un gráfico a otro. Averiguar qué gráficos serán los definitivos y publicables requiere mucho tiempo y muchos intentos ¡Por suerte, existe un útil visor interactivo (missing reference) que puede ayudarte a explorar sin tener que producir nuevos gráficos una y otra vez!</p>
+<p>Antes de que te dejemos explorar lo desconocido, habrás notado que las interpretaciones anteriores son sólo algunas de las opciones posibles. Más aún, es posible que te hayas divertido intentando averiguar qué muestra es de qué genotipo y qué sexo, y pasando repetidamente de un gráfico a otro. Averiguar qué gráficos serán los definitivos y publicables requiere mucho tiempo y muchos intentos ¡Por suerte, existe un útil visor interactivo <span>ERROR INVALID CITATION Cakir2020  {% cite Moreno2020.04.08.032698</span> que puede ayudarte a explorar sin tener que producir nuevos gráficos una y otra vez!</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-práctica-cellxgene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Práctica: Cellxgene</h3>
@@ -2361,61 +2359,11 @@ Para debatir con científicos afines, ¡únete a nuestro canal Gitter para todo 
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Trapnell2014">Trapnell, C., D. Cacchiarelli, J. Grimsby, P. Pokharel, S. Li <i>et al.</i>, 2014 <b>The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells</b>. Nature Biotechnology 32: 381–386.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nbt.2859">10.1038/nbt.2859</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Satija2015">Satija, R., J. A. Farrell, D. Gennert, A. F. Schier, and A. Regev, 2015 <b>Spatial reconstruction of single-cell gene expression data</b>. Nature Biotechnology 33: 495–502.</span>
-    
-    
-    <a href="https://doi.org/10.1038/nbt.3192">10.1038/nbt.3192</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="McCarthy2017">McCarthy, D. J., K. R. Campbell, A. T. L. Lun, and Q. F. Wills, 2017 <b>Scater: pre-processing,  quality control,  normalization and visualization of single-cell RNA-seq data in R</b>. Bioinformatics btw777.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btw777">10.1093/bioinformatics/btw777</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wolf2018">Wolf, F. A., P. Angerer, and F. J. Theis, 2018 <b>SCANPY: large-scale single-cell gene expression data analysis</b>. Genome Biology 19:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s13059-017-1382-0">10.1186/s13059-017-1382-0</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9:</span>
-    
-    
-    <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Trapnell2014">Trapnell, C., D. Cacchiarelli, J. Grimsby, P. Pokharel, S. Li <i>et al.</i>, 2014 <b>The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells</b>. Nature Biotechnology 32: 381–386. <a href="https://doi.org/10.1038/nbt.2859">10.1038/nbt.2859</a></li>
+<li id="Satija2015">Satija, R., J. A. Farrell, D. Gennert, A. F. Schier, and A. Regev, 2015 <b>Spatial reconstruction of single-cell gene expression data</b>. Nature Biotechnology 33: 495–502. <a href="https://doi.org/10.1038/nbt.3192">10.1038/nbt.3192</a></li>
+<li id="McCarthy2017">McCarthy, D. J., K. R. Campbell, A. T. L. Lun, and Q. F. Wills, 2017 <b>Scater: pre-processing,  quality control,  normalization and visualization of single-cell RNA-seq data in R</b>. Bioinformatics btw777. <a href="https://doi.org/10.1093/bioinformatics/btw777">10.1093/bioinformatics/btw777</a></li>
+<li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
+<li id="Wolf2018">Wolf, F. A., P. Angerer, and F. J. Theis, 2018 <b>SCANPY: large-scale single-cell gene expression data analysis</b>. Genome Biology 19: <a href="https://doi.org/10.1186/s13059-017-1382-0">10.1186/s13059-017-1382-0</a></li></ol>
                 
 
                 

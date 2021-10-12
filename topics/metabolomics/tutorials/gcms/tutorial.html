@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-09-22 11:20:42 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mass spectrometry : GC-MS analysis with metaMS package",
   "interactivityType": "mixed",
@@ -561,7 +561,7 @@
 
 <p>A lot of packages are available for the analysis of GC-MS or LC-MS data. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alte<span class="notranslate">rna</span>tives such as <strong>XCMS</strong> are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like <strong>XCMS</strong>, several other packages have been developed to use the functionality of <strong>XCMS</strong> for optimal performance in a particular context. Package <strong>metaMS</strong> does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals <strong>metaMS</strong> was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments.</p>
 
-<p>During this tutorial, we will learn how to process easily a test dataset from raw files to the annotation using W4M <span class="notranslate">Galaxy</span>. Datas are from <a class="citation" href="#Dittami2012">Dittami <i>et al.</i> 2012</a> and have been used as test dataset for the development of the <span class="notranslate">Galaxy</span> wrappers.</p>
+<p>During this tutorial, we will learn how to process easily a test dataset from raw files to the annotation using W4M <span class="notranslate">Galaxy</span>. Datas are from <span class="citation"><a href="#Dittami2012">Dittami <i>et al.</i> 2012</a></span> and have been used as test dataset for the development of the <span class="notranslate">Galaxy</span> wrappers.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -591,15 +591,15 @@
 
 <h1 id="first-steps-of-pre-processing-using-a-standard-xcms-workflow-mandatory">First steps of pre-processing using a standard XCMS <span class="notranslate">workflow</span> (mandatory)</h1>
 
-<p class="text-justify">The first step of the <span class="notranslate">workflow</span> is the pre-processing of the raw data with <strong>XCMS</strong> (<a class="citation" href="#Smith2006">Smith <i>et al.</i> 2006</a>).</p>
+<p class="text-justify">The first step of the <span class="notranslate">workflow</span> is the pre-processing of the raw data with <strong>XCMS</strong> (<span class="citation"><a href="#Smith2006">Smith <i>et al.</i> 2006</a></span>).</p>
 
 <p class="text-justify"><strong>XCMS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a free and open-source software dedicated to pre-processing any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is used worldwide by a huge community of specialists in metabolomics.</p>
 
 <p class="text-justify">This software is based on different algorithms that have been published, and is provided and maintained using R software.</p>
 
-<p class="text-justify"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> function, prior to <strong>XCMS</strong>, is able to read files with open format as <code class="language-plaintext highlighter-rouge">mzXML</code>, <code class="language-plaintext highlighter-rouge">mzML</code>, <code class="language-plaintext highlighter-rouge">mzData</code> and <code class="language-plaintext highlighter-rouge">netCDF</code>, which are independent of the constructors’ formats. The <strong>XCMS</strong> package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes, adducts and fragments (using the R package CAMERA, <a class="citation" href="#CAMERA">Carsten Kuhl 2017</a>). This set of functions gives modularity, and thus is particularly well adapted to define workflows, one of the key points of <span class="notranslate">Galaxy</span>.</p>
+<p class="text-justify"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> function, prior to <strong>XCMS</strong>, is able to read files with open format as <code class="language-plaintext highlighter-rouge">mzXML</code>, <code class="language-plaintext highlighter-rouge">mzML</code>, <code class="language-plaintext highlighter-rouge">mzData</code> and <code class="language-plaintext highlighter-rouge">netCDF</code>, which are independent of the constructors’ formats. The <strong>XCMS</strong> package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes, adducts and fragments (using the R package CAMERA, <span class="citation"><a href="#CAMERA">Carsten Kuhl 2017</a></span>). This set of functions gives modularity, and thus is particularly well adapted to define workflows, one of the key points of <span class="notranslate">Galaxy</span>.</p>
 
-<p class="text-justify">First step of this tutorial is to download the data test. As describe in the introduction, we will use datas from <a class="citation" href="#Dittami2012">Dittami <i>et al.</i> 2012</a>. We will only process on a subset of their data. 
+<p class="text-justify">First step of this tutorial is to download the data test. As describe in the introduction, we will use datas from <span class="citation"><a href="#Dittami2012">Dittami <i>et al.</i> 2012</a></span>. We will only process on a subset of their data. 
 So, you can <strong>import your files directly in <span class="notranslate">Galaxy</span> from Zenodo (see hands-on below)</strong> or download files into your computer using the following link then upload them on <span class="notranslate">Galaxy</span>:</p>
 
 <p><a href="https://doi.org/10.5281/zenodo.3631074"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3631074.svg" alt="DOI" loading="lazy" /></a></p>
@@ -895,11 +895,11 @@ For our example, your file should be named <code class="language-plaintext highl
 
 <p class="text-justify">This choice is motivated by several considerations. First of all, <strong>in GC the amount of overlap is much less than in LC</strong> : peaks are much narrower. This means that even a one- or two-second difference in retention time can be enough to separate the corresponding mass spectra. Secondly, fragmentation patterns for many compounds are <strong>available in extensive libraries like the <a href="http://www.nist.gov/srd/nist1a.cfm" title="NIST library">NIST library</a></strong>. In addition, the spectra are somewhat easier to interpret since adducts, such as found in LC, are not present. The main advantage of pseudo-spectra, however, is that their use allows the results to be interpreted directly as relative concentrations of chemical compounds : <strong>a fingerprint in terms of chemical composition is obtained</strong>, rather than a fingerprint in terms of hard-to-interpret features. The pseudo-spectra are obtained by simply clustering on retention time, using the <em>runCAMERA</em> function, which for GC data calls <em>groupFWHM</em>. All the usual parameters for the <em>groupFWHM</em> function are included in W4M <span class="notranslate">Galaxy</span> <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</strong>. The most important parameter is <em>perfwhm</em>, which determines the maximal retention time difference of features in one pseudospectrum.</p>
 
-<p class="text-justify">The final step is to convert the <strong>CAMERA</strong> objects into easily handled lists, which are basically the R equivalent of the often-used <code class="language-plaintext highlighter-rouge">msp</code> format from the AMDIS software (<a class="citation" href="#Stein1999">Stein 1999</a>). The <code class="language-plaintext highlighter-rouge">msp</code>  file is a nested list, with one entry for each sample, and each sample represented by a number of fields. The pseudo-spectra are three-column matrices, containing m/z, intensity and retention time information, respectively. They can be draw with the <em>plotPseudoSpectrum</em> function of <strong>metaMS</strong> package easily (Figure 2).</p>
+<p class="text-justify">The final step is to convert the <strong>CAMERA</strong> objects into easily handled lists, which are basically the R equivalent of the often-used <code class="language-plaintext highlighter-rouge">msp</code> format from the AMDIS software (<span class="citation"><a href="#Stein1999">Stein 1999</a></span>). The <code class="language-plaintext highlighter-rouge">msp</code>  file is a nested list, with one entry for each sample, and each sample represented by a number of fields. The pseudo-spectra are three-column matrices, containing m/z, intensity and retention time information, respectively. They can be draw with the <em>plotPseudoSpectrum</em> function of <strong>metaMS</strong> package easily (Figure 2).</p>
 
 <h2 id="annotation">Annotation</h2>
 
-<p class="text-justify">Once we have identified our pseudo-spectra, we can start the annotation process. This is done by <strong>comparing every pseudospectrum to a database of spectra</strong>. As a similarity measure, we use the weighted dot product as it is fast, simple, and gives good results (<a class="citation" href="#Stein1994">Stein and Scott 1994</a>). The first step in the comparison is based on retention, since a comparison of either retention time or retention index is much faster than a spectral comparison. The corresponding function is <em>matchSamples2DB</em>. Since the weighted dot product uses scaled mass spectra, the scaling of the database is done once, and then used in all comparisons.</p>
+<p class="text-justify">Once we have identified our pseudo-spectra, we can start the annotation process. This is done by <strong>comparing every pseudospectrum to a database of spectra</strong>. As a similarity measure, we use the weighted dot product as it is fast, simple, and gives good results (<span class="citation"><a href="#Stein1994">Stein and Scott 1994</a></span>). The first step in the comparison is based on retention, since a comparison of either retention time or retention index is much faster than a spectral comparison. The corresponding function is <em>matchSamples2DB</em>. Since the weighted dot product uses scaled mass spectra, the scaling of the database is done once, and then used in all comparisons.</p>
 
 <figure id="figure-3"><img src="../../images/tuto_gcms_match_spec.png" alt="Match spectra" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Best match between an experimental pseudospectrum (red) and a database entry (blue)</figcaption></figure>
 
@@ -921,11 +921,11 @@ For our example, your file should be named <code class="language-plaintext highl
 
 <p>The first five lines are the standards, and the next ones are the unknowns that are identified by the pipeline.  In the manual interpretation of this kind of data, the intensities of one or two “highly specific” features are often used to achieve relative quantitation. In an automatic pipeline, this is a risky strategy: not only can the intensity of a peak vary quite dramatically (relative standard deviations of up to 30% are assumed acceptable in GC-MS, e.g. when SPME is applied), but these errors are all the more pronounced in high-intensity peaks (hence the common use of a relative standard deviation).</p>
 
-<p class="text-justify">In addition, one is ignoring the information in the other peaks of the pseudospectrum. In <strong>metaMS</strong>, pseudospectrum intensity is expressed as a multiple of the corresponding reference pattern (either a database pattern or an unknown), where the intensity ratio is determined using robust regression to avoid one deviating feature to influence the results too much (<a class="citation" href="#Wehrens2014">Wehrens <i>et al.</i> 2014</a>). First, we define an object containing all relevant pseudo-spectra, and next the intensities are generated.</p>
+<p class="text-justify">In addition, one is ignoring the information in the other peaks of the pseudospectrum. In <strong>metaMS</strong>, pseudospectrum intensity is expressed as a multiple of the corresponding reference pattern (either a database pattern or an unknown), where the intensity ratio is determined using robust regression to avoid one deviating feature to influence the results too much (<span class="citation"><a href="#Wehrens2014">Wehrens <i>et al.</i> 2014</a></span>). First, we define an object containing all relevant pseudo-spectra, and next the intensities are generated.</p>
 
 <p class="text-justify">In both cases, the result is a list containing a set of patterns corresponding with the compounds that have been found, either annotated or unknown, the relative intensities of these patterns in the individual annotations, and possibly the xcmsSetobject for further inspection. In practice, the <em>runGC</em> function is all that users need to use.</p>
 
-<p class="text-justify">That file can be used for database search online (as Golm (<a class="citation" href="#Kopka2005">J. <i>et al.</i> 2005</a>) and MassBank (<a class="citation" href="#Horai2010">Hisayuki <i>et al.</i> 2010</a>)) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.</p>
+<p class="text-justify">That file can be used for database search online (as Golm (<span class="citation"><a href="#Kopka2005">J. <i>et al.</i> 2005</a></span>) and MassBank (<span class="citation"><a href="#Horai2010">Hisayuki <i>et al.</i> 2010</a></span>)) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on--metamsrungc-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on : metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></h3>
@@ -1022,100 +1022,14 @@ For our example, your file should be named <code class="language-plaintext highl
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Stein1994">Stein, S. E., and D. R. Scott, 1994 <b>Optimization and testing of mass spectral library search algorithms for compound identification</b>. Journal of the American Society for Mass Spectrometry 5: 859–866.</span>
-    
-    
-    <a href="https://doi.org/10.1016/1044-0305(94)87009-8">10.1016/1044-0305(94)87009-8</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Stein1999">Stein, S. E., 1999 <b>An integrated method for spectrum extraction and compound identification from gas chromatography/mass spectrometry data</b>. Journal of the American Society for Mass Spectrometry 10: 770–781.</span>
-    
-    
-    <a href="https://doi.org/10.1016/S1044-0305(99)00047-1">10.1016/S1044-0305(99)00047-1</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Kopka2005">J., K., S. N., K. S., B. C., U. B. <i>et al.</i>, 2005 <b>GMD@CSB.DB: the Golm Metabolome Database</b>. Bioinformatics 21: 1635–1638.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/bti236">10.1093/bioinformatics/bti236</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://gmd.mpimp-golm.mpg.de/">http://gmd.mpimp-golm.mpg.de/</a>
-      
-    
-
-</li>
-<li><span id="Smith2006">Smith, C. A., E. J. Want, G. O’Maille, R. Abagyan, and G. Siuzdak, 2006 <b>XCMS:  Processing Mass Spectrometry Data for Metabolite Profiling Using Nonlinear Peak Alignment,  Matching,  and Identification</b>. Analytical Chemistry 78: 779–787.</span>
-    
-    
-    <a href="https://doi.org/10.1021/ac051437y">10.1021/ac051437y</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Horai2010">Hisayuki, H., A. Masanori, K. Shigehiko, N. Yoshito, I. Tasuku <i>et al.</i>, 2010 <b>MassBank: a public repository for sharing mass spectral data for life sciences</b>. Journal of Mass Spectrometry 45: 703–714.</span>
-    
-    
-    <a href="https://doi.org/10.1002/jms.1777">10.1002/jms.1777</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://massbank.eu/MassBank/Search">https://massbank.eu/MassBank/Search</a>
-      
-    
-
-</li>
-<li><span id="Dittami2012">Dittami, S. M., A. Gravot, S. Goulitquer, S. Rousvoal, A. F. Peters <i>et al.</i>, 2012 <b>Towards deciphering dynamic changes and evolutionarymechanisms involved in the adaptation to low salinities inEctocarpus(brown algae)</b>. The Plant Journal 71: 366–377.</span>
-    
-    
-    <a href="https://doi.org/10.1111/j.1365-313X.2012.04982.x">10.1111/j.1365-313X.2012.04982.x</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Wehrens2014">Wehrens, R., G. Weingart, and F. Mattivi, 2014 <b>metaMS: An open-source pipeline for GC-MS-based untargeted metabolomics</b>. Journal of Chromatography B 966: 109–116.</span>
-    
-    
-    <a href="https://doi.org/10.1016/j.jchromb.2014.02.051">10.1016/j.jchromb.2014.02.051</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="CAMERA">Carsten Kuhl, R. T., 2017 <b>CAMERA</b>.</span>
-    
-    
-    <a href="https://doi.org/10.18129/b9.bioc.camera">10.18129/b9.bioc.camera</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://bioconductor.org/packages/CAMERA">https://bioconductor.org/packages/CAMERA</a>
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Stein1994">Stein, S. E., and D. R. Scott, 1994 <b>Optimization and testing of mass spectral library search algorithms for compound identification</b>. Journal of the American Society for Mass Spectrometry 5: 859–866. <a href="https://doi.org/10.1016/1044-0305(94)87009-8">10.1016/1044-0305(94)87009-8</a></li>
+<li id="Stein1999">Stein, S. E., 1999 <b>An integrated method for spectrum extraction and compound identification from gas chromatography/mass spectrometry data</b>. Journal of the American Society for Mass Spectrometry 10: 770–781. <a href="https://doi.org/10.1016/S1044-0305(99)00047-1">10.1016/S1044-0305(99)00047-1</a></li>
+<li id="Kopka2005">J., K., S. N., K. S., B. C., U. B. <i>et al.</i>, 2005 <b>GMD@CSB.DB: the Golm Metabolome Database</b>. Bioinformatics 21: 1635–1638. <a href="https://doi.org/10.1093/bioinformatics/bti236">10.1093/bioinformatics/bti236</a> <a href="http://gmd.mpimp-golm.mpg.de/">http://gmd.mpimp-golm.mpg.de/</a></li>
+<li id="Smith2006">Smith, C. A., E. J. Want, G. O’Maille, R. Abagyan, and G. Siuzdak, 2006 <b>XCMS:  Processing Mass Spectrometry Data for Metabolite Profiling Using Nonlinear Peak Alignment,  Matching,  and Identification</b>. Analytical Chemistry 78: 779–787. <a href="https://doi.org/10.1021/ac051437y">10.1021/ac051437y</a></li>
+<li id="Horai2010">Hisayuki, H., A. Masanori, K. Shigehiko, N. Yoshito, I. Tasuku <i>et al.</i>, 2010 <b>MassBank: a public repository for sharing mass spectral data for life sciences</b>. Journal of Mass Spectrometry 45: 703–714. <a href="https://doi.org/10.1002/jms.1777">10.1002/jms.1777</a> <a href="https://massbank.eu/MassBank/Search">https://massbank.eu/MassBank/Search</a></li>
+<li id="Dittami2012">Dittami, S. M., A. Gravot, S. Goulitquer, S. Rousvoal, A. F. Peters <i>et al.</i>, 2012 <b>Towards deciphering dynamic changes and evolutionarymechanisms involved in the adaptation to low salinities inEctocarpus(brown algae)</b>. The Plant Journal 71: 366–377. <a href="https://doi.org/10.1111/j.1365-313X.2012.04982.x">10.1111/j.1365-313X.2012.04982.x</a></li>
+<li id="Wehrens2014">Wehrens, R., G. Weingart, and F. Mattivi, 2014 <b>metaMS: An open-source pipeline for GC-MS-based untargeted metabolomics</b>. Journal of Chromatography B 966: 109–116. <a href="https://doi.org/10.1016/j.jchromb.2014.02.051">10.1016/j.jchromb.2014.02.051</a></li>
+<li id="CAMERA">Carsten Kuhl, R. T., 2017 <b>CAMERA</b>. <a href="https://doi.org/10.18129/b9.bioc.camera">10.18129/b9.bioc.camera</a> <a href="https://bioconductor.org/packages/CAMERA">https://bioconductor.org/packages/CAMERA</a></li></ol>
                 
 
                 

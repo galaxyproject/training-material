@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-06-24 18:28:09 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Annotating a protein list identified by LC-MS/MS experiments",
   "interactivityType": "mixed",
@@ -623,8 +623,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
         </a>
@@ -678,7 +676,7 @@
 
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p><a href="http://www.proteore.org">ProteoRE <span class="notranslate">Galaxy</span> instance</a> provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled “Proteomic characterization of human exhaled breath condensate” <a class="citation" href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a>.
+<p><a href="http://www.proteore.org">ProteoRE <span class="notranslate">Galaxy</span> instance</a> provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled “Proteomic characterization of human exhaled breath condensate” <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span>.
 The goal of this study was to identify proteins secreted in the respiratory tract (lung, bronchi). Samples were obtained non-invasively by condensation of exhaled air that contains submicron droplets of airway lining fluid. Two pooled samples of EBC, each obtained from 10 healthy donors, were processed. Two ‘technical’ control samples were processed in parallel to the pooled samples to correct for exogenous protein contamination.
 A total of 229 unique proteins were identified in EBC among which 153 proteins were detected in both EBC pooled samples. A detailed bioinformatics analysis of these 153 proteins showed that most of the proteins identified corresponded to proteins secreted in the respiratory tract (lung, bronchi).</p>
 
@@ -698,7 +696,7 @@ A total of 229 unique proteins were identified in EBC among which 153 proteins w
 
 <h1 id="get-input-datasets">Get Input Datasets</h1>
 
-<p>For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from <a class="citation" href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a> and two others EBC proteomes previously published (<a class="citation" href="#Muccilli2015">Muccilli <i>et al.</i> 2015</a>  and <a class="citation" href="#Bredberg2011">Bredberg <i>et al.</i> 2011</a>). These datasets are available from Zenodo <a href="https://zenodo.org/record/3405119">here</a>.</p>
+<p>For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span> and two others EBC proteomes previously published (<span class="citation"><a href="#Muccilli2015">Muccilli <i>et al.</i> 2015</a></span>  and <span class="citation"><a href="#Bredberg2011">Bredberg <i>et al.</i> 2011</a></span>). These datasets are available from Zenodo <a href="https://zenodo.org/record/3405119">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -730,7 +728,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
 
 <h1 id="filtering-out-technical-contaminants">Filtering out technical contaminants</h1>
 
-<p>A group of 10 proteins were identified in both “technical” control samples with an enrichment in EBC samples below a fixed threshold. These proteins were thus considered to be technical contaminants (see list of proteins in Table 4 in <a class="citation" href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a>) and have to be removed from the initial dataset.</p>
+<p>A group of 10 proteins were identified in both “technical” control samples with an enrichment in EBC samples below a fixed threshold. These proteins were thus considered to be technical contaminants (see list of proteins in Table 4 in <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span>) and have to be removed from the initial dataset.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-the-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove the contaminants</h3>
@@ -767,7 +765,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
 
 <h1 id="check-for-the-presence-of-biological-contaminants">Check for the presence of biological contaminants</h1>
 
-<p>As EBC samples are obtained from air exhaled through the oral cavity, and even though the RTube collection device contained a saliva trap to separate saliva from the exhaled breath, contamination with salivary proteins had to be assessed. We decided to check the <span class="notranslate">expression</span> pattern for each protein of the “core” EBC proteome using the <a href="https://www.proteinatlas.org/">The Human Protein Atlas</a> (HPA, <a class="citation" href="#Uhln2005">Uhlén <i>et al.</i> 2005</a>). As HPA is indexed by Ensembl gene identifier (ENSG) we first need to convert Uniprot ID to Ensembl gene (ENSG). Secondly, check for proteins which are highly expressed in the salivary glands as reported by HPA, then in a third step, we filter out these proteins.</p>
+<p>As EBC samples are obtained from air exhaled through the oral cavity, and even though the RTube collection device contained a saliva trap to separate saliva from the exhaled breath, contamination with salivary proteins had to be assessed. We decided to check the <span class="notranslate">expression</span> pattern for each protein of the “core” EBC proteome using the <a href="https://www.proteinatlas.org/">The Human Protein Atlas</a> (HPA, <span class="citation"><a href="#Uhln2005">Uhlén <i>et al.</i> 2005</a></span>). As HPA is indexed by Ensembl gene identifier (ENSG) we first need to convert Uniprot ID to Ensembl gene (ENSG). Secondly, check for proteins which are highly expressed in the salivary glands as reported by HPA, then in a third step, we filter out these proteins.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-convert-uniprot-id-to-ensembl-gene-id"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert Uniprot ID to Ensembl gene ID</h3>
@@ -878,7 +876,7 @@ by filtering out the lines that contain the word <code class="language-plaintext
 
   <blockquote class="tip">
     <h3 id="tip-tip-using-genes-instead-of-keywords"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Using genes instead of keywords</h3>
-    <p>Note also that a list of “gene” may have been entered (selected on the basis of their TPM value) applied to column 5 instead of the keywords “salivary” to column 8, as it has been done in <a class="citation" href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a>.</p>
+    <p>Note also that a list of “gene” may have been entered (selected on the basis of their TPM value) applied to column 5 instead of the keywords “salivary” to column 8, as it has been done in <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span>.</p>
   </blockquote>
 
 </blockquote>
@@ -946,7 +944,7 @@ removal, which is the output of biological contaminants filter step.</p>
 <h1 id="visualize-ebc-proteome-on-biological-pathways-using-reactome">Visualize EBC proteome on biological pathways (using Reactome)</h1>
 
 <p>The 157 proteins identified in EBC samples are now mapped to biological pathways and visualized
-via the web service of Reactome (<a class="citation" href="#croft2013reactome">Croft <i>et al.</i> 2013</a>), an open access, manually curated and peer-reviewed human pathway
+via the web service of Reactome (<span class="citation"><a href="#croft2013reactome">Croft <i>et al.</i> 2013</a></span>), an open access, manually curated and peer-reviewed human pathway
 database that aims to provide intuitive bioinformatics tools for the visualization,
 interpretation and analysis of pathway knowledge.</p>
 
@@ -1052,51 +1050,11 @@ This allows the user to go deeper in the analysis of proteomics analyses results
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Uhln2005">Uhlén, M., E. Björling, C. Agaton, C. A.-K. Szigyarto, B. Amini <i>et al.</i>, 2005 <b>A Human Protein Atlas for Normal and Cancer Tissues Based on Antibody Proteomics</b>. Molecular &amp; Cellular Proteomics 4: 1920–1932.</span>
-    
-    
-    <a href="https://doi.org/10.1074/mcp.m500279-mcp200">10.1074/mcp.m500279-mcp200</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Bredberg2011">Bredberg, A., J. Gobom, A.-C. Almstrand, P. Larsson, K. Blennow <i>et al.</i>, 2011 <b>Exhaled Endogenous Particles Contain Lung Proteins</b>. Clinical Chemistry 58: 431–440.</span>
-    
-    
-    <a href="https://doi.org/10.1373/clinchem.2011.169235">10.1373/clinchem.2011.169235</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="croft2013reactome">Croft, D., A. F. Mundo, R. Haw, M. Milacic, J. Weiser <i>et al.</i>, 2013 <b>The Reactome pathway knowledgebase</b>. Nucleic acids research 42: D472–D477.</span>
-    
-    
-    
-
-</li>
-<li><span id="Muccilli2015">Muccilli, V., R. Saletti, V. Cunsolo, J. Ho, E. Gili <i>et al.</i>, 2015 <b>Protein profile of exhaled breath condensate determined by high resolution mass spectrometry</b>. Journal of pharmaceutical and biomedical analysis 105: 134–149.</span>
-    
-    
-    
-
-</li>
-<li><span id="Lacombe2018">Lacombe, M., C. Marie-Desvergne, F. Combes, A. Kraut, C. Bruley <i>et al.</i>, 2018 <b>Proteomic characterization of human exhaled breath condensate</b>. Journal of Breath Research 12: 021001.</span>
-    
-    
-    <a href="https://doi.org/10.1088/1752-7163/aa9e71">10.1088/1752-7163/aa9e71</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Uhln2005">Uhlén, M., E. Björling, C. Agaton, C. A.-K. Szigyarto, B. Amini <i>et al.</i>, 2005 <b>A Human Protein Atlas for Normal and Cancer Tissues Based on Antibody Proteomics</b>. Molecular &amp; Cellular Proteomics 4: 1920–1932. <a href="https://doi.org/10.1074/mcp.m500279-mcp200">10.1074/mcp.m500279-mcp200</a></li>
+<li id="Bredberg2011">Bredberg, A., J. Gobom, A.-C. Almstrand, P. Larsson, K. Blennow <i>et al.</i>, 2011 <b>Exhaled Endogenous Particles Contain Lung Proteins</b>. Clinical Chemistry 58: 431–440. <a href="https://doi.org/10.1373/clinchem.2011.169235">10.1373/clinchem.2011.169235</a></li>
+<li id="croft2013reactome">Croft, D., A. F. Mundo, R. Haw, M. Milacic, J. Weiser <i>et al.</i>, 2013 <b>The Reactome pathway knowledgebase</b>. Nucleic acids research 42: D472–D477.</li>
+<li id="Muccilli2015">Muccilli, V., R. Saletti, V. Cunsolo, J. Ho, E. Gili <i>et al.</i>, 2015 <b>Protein profile of exhaled breath condensate determined by high resolution mass spectrometry</b>. Journal of pharmaceutical and biomedical analysis 105: 134–149.</li>
+<li id="Lacombe2018">Lacombe, M., C. Marie-Desvergne, F. Combes, A. Kraut, C. Bruley <i>et al.</i>, 2018 <b>Proteomic characterization of human exhaled breath condensate</b>. Journal of Breath Research 12: 021001. <a href="https://doi.org/10.1088/1752-7163/aa9e71">10.1088/1752-7163/aa9e71</a></li></ol>
                 
 
                 

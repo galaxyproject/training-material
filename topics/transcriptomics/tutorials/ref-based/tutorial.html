@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-07-09 14:39:52 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference-based RNA-Seq data analysis",
   "interactivityType": "mixed",
@@ -839,8 +839,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -934,7 +932,7 @@
 
 <p>In recent years, <span class="notranslate">RNA</span> sequencing (in short <span class="notranslate">RNA</span>-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all <span class="notranslate">RNA</span> molecules in one cell or a population of cells. One of the most common aims of <span class="notranslate">RNA</span>-Seq is the profiling of gene <span class="notranslate">expression</span> by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational <span class="notranslate">workflow</span> for the detection of DE genes and pathways from <span class="notranslate">RNA</span>-Seq data by providing a complete analysis of an <span class="notranslate">RNA</span>-Seq experiment profiling <em>Drosophila</em> cells after the depletion of a regulatory gene.</p>
 
-<p>In the study of <a class="citation" href="#brooks2011conservation">Brooks <i>et al.</i> 2011</a>, the authors identified genes and pathways regulated by the <em>Pasilla</em> gene (the <em>Drosophila</em> homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using <span class="notranslate">RNA</span>-Seq data. They depleted the <em>Pasilla</em> (<em>PS</em>) gene in <em>Drosophila melanogaster</em> by <span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i). Total <span class="notranslate">RNA</span> was then isolated and used to prepare both single-end and paired-end <span class="notranslate">RNA</span>-Seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> for each sample. The <span class="notranslate">RNA</span>-Seq data for the treated and the untreated samples can be compared to identify the effects of <em>Pasilla</em> gene depletion on gene <span class="notranslate">expression</span>.</p>
+<p>In the study of <span class="citation"><a href="#brooks2011conservation">Brooks <i>et al.</i> 2011</a></span>, the authors identified genes and pathways regulated by the <em>Pasilla</em> gene (the <em>Drosophila</em> homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using <span class="notranslate">RNA</span>-Seq data. They depleted the <em>Pasilla</em> (<em>PS</em>) gene in <em>Drosophila melanogaster</em> by <span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i). Total <span class="notranslate">RNA</span> was then isolated and used to prepare both single-end and paired-end <span class="notranslate">RNA</span>-Seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> for each sample. The <span class="notranslate">RNA</span>-Seq data for the treated and the untreated samples can be compared to identify the effects of <em>Pasilla</em> gene depletion on gene <span class="notranslate">expression</span>.</p>
 
 <p>In this tutorial, we illustrate the analysis of the gene <span class="notranslate">expression</span> data step by step using 7 of the original datasets:</p>
 
@@ -1074,7 +1072,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
 <p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Adapters may also be present if the <span class="notranslate">reads</span> are longer than the fragments sequenced and trimming these may improve the number of <span class="notranslate">reads</span> mapped.</p>
 
-<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> to create a report of sequence quality, <a href="https://multiqc.info/">MultiQC</a> (<a class="citation" href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a>) to aggregate generated reports and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<a class="citation" href="#marcel2011cutadapt">Marcel 2011</a>) to improve the quality of sequences via trimming and filtering.</p>
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> to create a report of sequence quality, <a href="https://multiqc.info/">MultiQC</a> (<span class="citation"><a href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a></span>) to aggregate generated reports and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>) to improve the quality of sequences via trimming and filtering.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
@@ -1320,7 +1318,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
 <p>With eukaryotic transcriptomes most <span class="notranslate">reads</span> originate from processed m<span class="notranslate">RNA</span>s lacking introns:</p>
 
-<figure id="figure-7"><img src="../../images/ref-based/rna-seq-reads.png" alt="Types of RNA-Seq reads" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The types of <span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> (adaption of the Figure 1a from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>): <span class="notranslate">reads</span> that mapped entirely within an exon (in red), <span class="notranslate">reads</span> spanning over 2 exons (in blue), read spanning over more than 2 exons (in purple)</figcaption></figure>
+<figure id="figure-7"><img src="../../images/ref-based/rna-seq-reads.png" alt="Types of RNA-Seq reads" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The types of <span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> (adaption of the Figure 1a from <span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>): <span class="notranslate">reads</span> that mapped entirely within an exon (in red), <span class="notranslate">reads</span> spanning over 2 exons (in blue), read spanning over more than 2 exons (in purple)</figcaption></figure>
 
 <p>Therefore they cannot be simply mapped back to the genome as we normally do for <span class="notranslate">DNA</span> data. Spliced-awared mappers have been developed to efficiently map transcript-derived <span class="notranslate">reads</span> against a reference genome:</p>
 
@@ -1331,23 +1329,23 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
   <p>Several spliced mappers have been developed over the past years to process the explosion of <span class="notranslate">RNA</span>-Seq data.</p>
 
-  <p><a href="https://ccb.jhu.edu/software/tophat/index.shtml"><strong>TopHat</strong></a> (<a class="citation" href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a>) was one of the first tools designed specifically to address this problem. In <strong>TopHat</strong> <span class="notranslate">reads</span> are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). “Piles” of <span class="notranslate">reads</span> representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
+  <p><a href="https://ccb.jhu.edu/software/tophat/index.shtml"><strong>TopHat</strong></a> (<span class="citation"><a href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a></span>) was one of the first tools designed specifically to address this problem. In <strong>TopHat</strong> <span class="notranslate">reads</span> are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). “Piles” of <span class="notranslate">reads</span> representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
 
-  <figure id="figure-9"><img src="../../images/tophat.png" alt="TopHat" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> TopHat (Figure 1 from <a class="citation" href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a>)</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/tophat.png" alt="TopHat" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> TopHat (Figure 1 from <span class="citation"><a href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a></span>)</figcaption></figure>
 
-  <p><strong>TopHat</strong> has been subsequently improved with the development of <strong>TopHat2</strong> (<a class="citation" href="#kim2013tophat2">Kim <i>et al.</i> 2013</a>):</p>
+  <p><strong>TopHat</strong> has been subsequently improved with the development of <strong>TopHat2</strong> (<span class="citation"><a href="#kim2013tophat2">Kim <i>et al.</i> 2013</a></span>):</p>
 
-  <figure id="figure-10"><img src="../../images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> TopHat2 (Figure 6 from <a class="citation" href="#kim2013tophat2">Kim <i>et al.</i> 2013</a>)</figcaption></figure>
+  <figure id="figure-10"><img src="../../images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> TopHat2 (Figure 6 from <span class="citation"><a href="#kim2013tophat2">Kim <i>et al.</i> 2013</a></span>)</figcaption></figure>
 
-  <p>To further optimize and speed up spliced read alignment, <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong></a> (<a class="citation" href="#kim2019graph">Kim <i>et al.</i> 2019</a>) was developed. It uses a hierarchical graph <a href="https://en.wikipedia.org/wiki/FM-index">FM</a> (HGFM) index, representing the entire genome and eventual variants, together with overlapping local indexes (each spanning ~57 kb) that collectively cover the genome and its variants. This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
+  <p>To further optimize and speed up spliced read alignment, <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong></a> (<span class="citation"><a href="#kim2019graph">Kim <i>et al.</i> 2019</a></span>) was developed. It uses a hierarchical graph <a href="https://en.wikipedia.org/wiki/FM-index">FM</a> (HGFM) index, representing the entire genome and eventual variants, together with overlapping local indexes (each spanning ~57 kb) that collectively cover the genome and its variants. This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
 
-  <figure id="figure-11"><img src="../../images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>)</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from <span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>)</figcaption></figure>
 
   <p>A part of the read (blue arrow) is first mapped to the genome using the global FM index. <strong>HISAT2</strong> then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (<strong>a</strong>) it succeeds and this read is aligned as it completely resides within an exon. In (<strong>b</strong>) the extension hits a mismatch. Now <strong>HISAT2</strong> takes advantage of the local FM index overlapping this location to find the appropriate <span class="notranslate">mapping</span> for the remainder of this read (green arrow). The (<strong>c</strong>) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).</p>
 
-  <p><a href="https://github.com/alexdobin/STAR"><strong>STAR</strong> aligner</a> (<a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>) is a fast alte<span class="notranslate">rna</span>tive for <span class="notranslate">mapping</span> <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> against a reference genome utilizing an uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in two stages. In the first stage it performs a seed search:</p>
+  <p><a href="https://github.com/alexdobin/STAR"><strong>STAR</strong> aligner</a> (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) is a fast alte<span class="notranslate">rna</span>tive for <span class="notranslate">mapping</span> <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> against a reference genome utilizing an uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in two stages. In the first stage it performs a seed search:</p>
 
-  <figure id="figure-12"><img src="../../images/star.png" alt="STAR's seed search" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> STAR's seed search (Figure 1 from <a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>)</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/star.png" alt="STAR's seed search" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> STAR's seed search (Figure 1 from <span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>)</figcaption></figure>
 
   <p>Here a read is split between two consecutive exons. <strong>STAR</strong> starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (<strong>a</strong>). In the case of mismatches (<strong>b</strong>) and unalignable regions (<strong>c</strong>) MMPs serve as anchors from which to extend alignments.</p>
 
@@ -1357,7 +1355,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
 <h2 id="mapping-1"><span class="notranslate">Mapping</span></h2>
 
-<p>We will map our <span class="notranslate">reads</span> to the <em>Drosophila melanogaster</em> genome using <strong>STAR</strong> (<a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>).</p>
+<p>We will map our <span class="notranslate">reads</span> to the <em>Drosophila melanogaster</em> genome using <strong>STAR</strong> (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-spliced-mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Spliced <span class="notranslate">mapping</span></h3>
@@ -1571,7 +1569,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
 <h2 id="inspection-of-the-mapping-results">Inspection of the <span class="notranslate">mapping</span> results</h2>
 
-<p>The BAM file contains information for all our <span class="notranslate">reads</span>, making it difficult to inspect and explore in text format. A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (<strong>IGV</strong>, <a class="citation" href="#robinson2011integrative">Robinson <i>et al.</i> 2011</a>).</p>
+<p>The BAM file contains information for all our <span class="notranslate">reads</span>, making it difficult to inspect and explore in text format. A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (<strong>IGV</strong>, <span class="citation"><a href="#robinson2011integrative">Robinson <i>et al.</i> 2011</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-inspection-of-mapping-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspection of <span class="notranslate">mapping</span> results</h3>
@@ -1777,7 +1775,7 @@ installed on your machine. However, the questions in this section can also be an
 
   <h4 id="gene-body-coverage">Gene body coverage</h4>
 
-  <p>The gene body is the different regions of a gene. It is important to check if read coverage is uniform over gene body or if there is any 5’/3’ bias. For example, a bias towards the 5’ end of genes could indicate degradation of the <span class="notranslate">RNA</span>. Alte<span class="notranslate">rna</span>tively, a 3’ bias could indicate that the data is from a 3’ assay. To assess this, we can use the <strong>Gene Body Coverage</strong> tool from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of <span class="notranslate">reads</span> covering each nucleotide position.</p>
+  <p>The gene body is the different regions of a gene. It is important to check if read coverage is uniform over gene body or if there is any 5’/3’ bias. For example, a bias towards the 5’ end of genes could indicate degradation of the <span class="notranslate">RNA</span>. Alte<span class="notranslate">rna</span>tively, a 3’ bias could indicate that the data is from a 3’ assay. To assess this, we can use the <strong>Gene Body Coverage</strong> tool from the RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of <span class="notranslate">reads</span> covering each nucleotide position.</p>
 
   <blockquote class="notranslate hands_on">
     <h3 id="hands_on-hands-on-check-gene-body-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check gene body coverage</h3>
@@ -1834,7 +1832,7 @@ installed on your machine. However, the questions in this section can also be an
 
   <p>With <span class="notranslate">RNA</span>-Seq data, we expect most <span class="notranslate">reads</span> to map to exons rather than introns or intergenic regions. Before going further in counting and differential <span class="notranslate">expression</span> analysis, it may be interesting to check the distribution of <span class="notranslate">reads</span> across known gene features (exons, CDS, 5’ UTR, 3’ UTR, introns, intergenic regions). For example, a high number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to intergenic regions may indicate the presence of <span class="notranslate">DNA</span> contamination.</p>
 
-  <p>Here we will use the <strong>Read Distribution</strong> tool from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite, which uses the annotation file to identify the position of the different gene features.</p>
+  <p>Here we will use the <strong>Read Distribution</strong> tool from the RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tool suite, which uses the annotation file to identify the position of the different gene features.</p>
 
   <blockquote class="notranslate hands_on">
     <h3 id="hands_on-hands-on-check-the-number-of-reads-mapped-to-each-chromosome-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check the number of <span class="notranslate">reads</span> mapped to each chromosome</h3>
@@ -1952,7 +1950,7 @@ installed on your machine. However, the questions in this section can also be an
   </blockquote>
 </blockquote>
 
-<p>Two main tools are available for read counting: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html"><strong>HTSeq-count</strong></a> (<a class="citation" href="#anders2015htseq">Anders <i>et al.</i> 2015</a>) or <strong>featureCounts</strong> (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>). <strong>featureCounts</strong> is considerably faster and requires far less computational resources, so we will use it here.</p>
+<p>Two main tools are available for read counting: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html"><strong>HTSeq-count</strong></a> (<span class="citation"><a href="#anders2015htseq">Anders <i>et al.</i> 2015</a></span>) or <strong>featureCounts</strong> (<span class="citation"><a href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a></span>). <strong>featureCounts</strong> is considerably faster and requires far less computational resources, so we will use it here.</p>
 
 <p>In principle, the counting of <span class="notranslate">reads</span> overlapping with genomic features is a fairly simple task. But there are some details that need to be given to <strong>featureCounts</strong>, e.g. the strandness.</p>
 
@@ -1962,7 +1960,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <figure id="figure-18"><img src="../../images/ref-based/strandness_why.png" alt="Why strandness?" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Read1 will be assigned to gene1 located on the forward strand but Read2 could be assigned to gene1 (forward strand) or gene2 (reverse strand) depending if the strandness information is conserved.</figcaption></figure>
 
-<p>Some library preparation protocols create so-called <em>stranded</em> <span class="notranslate">RNA</span>-Seq libraries that preserve the strand information (<a class="citation" href="#levin2010comprehensive">Levin <i>et al.</i> 2010</a> provides an excellent overview). In practice, with Illumina paired-end <span class="notranslate">RNA</span>-Seq protocols you are unlikely to encounter many of these possibilities. You will most likely deal with either:</p>
+<p>Some library preparation protocols create so-called <em>stranded</em> <span class="notranslate">RNA</span>-Seq libraries that preserve the strand information (<span class="citation"><a href="#levin2010comprehensive">Levin <i>et al.</i> 2010</a></span> provides an excellent overview). In practice, with Illumina paired-end <span class="notranslate">RNA</span>-Seq protocols you are unlikely to encounter many of these possibilities. You will most likely deal with either:</p>
 
 <ul>
   <li>Unstranded <span class="notranslate">RNA</span>-Seq data</li>
@@ -1985,7 +1983,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <p>This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.</p>
 
-<p>Another option is to estimate these parameters with a tool called <strong>Infer Experiment</strong> from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite. This tool takes the BAM files from the <span class="notranslate">mapping</span>, selects a subsample of the <span class="notranslate">reads</span> and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how <span class="notranslate">reads</span> are stranded (forward or reverse):</p>
+<p>Another option is to estimate these parameters with a tool called <strong>Infer Experiment</strong> from the RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tool suite. This tool takes the BAM files from the <span class="notranslate">mapping</span>, selects a subsample of the <span class="notranslate">reads</span> and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how <span class="notranslate">reads</span> are stranded (forward or reverse):</p>
 
 <figure id="figure-22"><img src="../../images/ref-based/strandness_cases.png" alt="How to estimate the strandness?" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 22:</span> In a stranded forward library, <span class="notranslate">reads</span> map mostly on the genes located on forward strand (here gene1). With stranded reverse library, <span class="notranslate">reads</span> map mostly on genes on the reverse strand (here gene2). With unstranded library, <span class="notranslate">reads</span> maps on genes on both strands.</figcaption></figure>
 
@@ -2856,7 +2854,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
 
 <p>TPM, RPKM or FPKM do not deal with these differences in library composition during normalization, but more complex tools, like DESeq2, do.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> (<a class="citation" href="#love2014moderated">Love <i>et al.</i> 2014</a>) is a great tool for dealing with <span class="notranslate">RNA</span>-seq data and running Differential Gene <span class="notranslate">Expression</span> (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for <strong>sequencing depth</strong> and <strong>library composition</strong>. We do not need to account for gene length normalization does because we are comparing the counts between sample groups for the same gene.</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> (<span class="citation"><a href="#love2014moderated">Love <i>et al.</i> 2014</a></span>) is a great tool for dealing with <span class="notranslate">RNA</span>-seq data and running Differential Gene <span class="notranslate">Expression</span> (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for <strong>sequencing depth</strong> and <strong>library composition</strong>. We do not need to account for gene length normalization does because we are comparing the counts between sample groups for the same gene.</p>
 
 <blockquote class="details">
   <h3 id="details-normalization-in-deseq2"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Normalization in DESeq2</h3>
@@ -3429,7 +3427,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its \(log_{2} FC\) and other information.</p>
 
-<p>The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase (<a class="citation" href="#thurmond2018flybase">Thurmond <i>et al.</i> 2018</a>). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for <span class="notranslate">mapping</span> and counting.</p>
+<p>The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase (<span class="citation"><a href="#thurmond2018flybase">Thurmond <i>et al.</i> 2018</a></span>). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for <span class="notranslate">mapping</span> and counting.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-annotation-of-the-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Annotation of the differentially expressed genes</h3>
@@ -3752,7 +3750,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. However, standard methods give biased results on <span class="notranslate">RNA</span>-Seq data due to over-detection of differential <span class="notranslate">expression</span> for long and highly-expressed transcripts.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf"><strong>goseq</strong></a> (<a class="citation" href="#young2010gene">Young <i>et al.</i> 2010</a>) provides methods for performing GO analysis of <span class="notranslate">RNA</span>-Seq data while taking length bias into account. <strong>goseq</strong> could also be applied to other category-based tests of <span class="notranslate">RNA</span>-Seq data, such as KEGG pathway analysis, as discussed in a further section.</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf"><strong>goseq</strong></a> (<span class="citation"><a href="#young2010gene">Young <i>et al.</i> 2010</a></span>) provides methods for performing GO analysis of <span class="notranslate">RNA</span>-Seq data while taking length bias into account. <strong>goseq</strong> could also be applied to other category-based tests of <span class="notranslate">RNA</span>-Seq data, such as KEGG pathway analysis, as discussed in a further section.</p>
 
 <p><strong>goseq</strong> needs 2 files as inputs:</p>
 
@@ -3984,7 +3982,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </li>
 </ol>
 
-<p>We could investigate which genes are involved in which pathways by looking at the second file generated by <strong>goseq</strong>. However, this can be cumbersome and we would like to see the pathways as represented in the previous image. <strong>Pathview</strong> (<a class="citation" href="#luo2013pathview">Luo and Brouwer 2013</a>) can help to automatically generate similar images to the previous one, while also adding extra information about the genes (e.g. <span class="notranslate">expression</span>) in our study.</p>
+<p>We could investigate which genes are involved in which pathways by looking at the second file generated by <strong>goseq</strong>. However, this can be cumbersome and we would like to see the pathways as represented in the previous image. <strong>Pathview</strong> (<span class="citation"><a href="#luo2013pathview">Luo and Brouwer 2013</a></span>) can help to automatically generate similar images to the previous one, while also adding extra information about the genes (e.g. <span class="notranslate">expression</span>) in our study.</p>
 
 <p>This tool needs 2 main inputs:</p>
 
@@ -4120,193 +4118,23 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="trapnell2009tophat">Trapnell, C., L. Pachter, and S. L. Salzberg, 2009 <b>TopHat: discovering splice junctions with RNA-Seq</b>. Bioinformatics 25: 1105–1111.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/25/9/1105/203994">https://academic.oup.com/bioinformatics/article/25/9/1105/203994</a>
-      
-    
-
-</li>
-<li><span id="levin2010comprehensive">Levin, J. Z., M. Yassour, X. Adiconis, C. Nusbaum, D. A. Thompson <i>et al.</i>, 2010 <b>Comprehensive comparative analysis of strand-specific RNA sequencing methods</b>. Nature Methods 7: 709.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/</a>
-      
-    
-
-</li>
-<li><span id="young2010gene">Young, M. D., M. J. Wakefield, G. K. Smyth, and A. Oshlack, 2010 <b>Gene ontology analysis for RNA-seq: accounting for selection bias</b>. Genome Biology 11: R14.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-2-r14">https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-2-r14</a>
-      
-    
-
-</li>
-<li><span id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a>
-      
-    
-
-</li>
-<li><span id="brooks2011conservation">Brooks, A. N., L. Yang, M. O. Duff, K. D. Hansen, J. W. Park <i>et al.</i>, 2011 <b>Conservation of an RNA regulatory map between Drosophila and mammals</b>. Genome Research 21: 193–202.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/</a>
-      
-    
-
-</li>
-<li><span id="robinson2011integrative">Robinson, J. T., H. Thorvaldsdóttir, W. Winckler, M. Guttman, E. S. Lander <i>et al.</i>, 2011 <b>Integrative genomics viewer</b>. Nature Biotechnology 29: 24.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/nbt/journal/v29/n1/abs/nbt.1754.html">https://www.nature.com/nbt/journal/v29/n1/abs/nbt.1754.html</a>
-      
-    
-
-</li>
-<li><span id="wang2012rseqc">Wang, L., S. Wang, and W. Li, 2012 <b>RSeQC: quality control of RNA-seq experiments</b>. Bioinformatics 28: 2184–2185.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.ncbi.nlm.nih.gov/pubmed/22743226">https://www.ncbi.nlm.nih.gov/pubmed/22743226</a>
-      
-    
-
-</li>
-<li><span id="dobin2013star">Dobin, A., C. A. Davis, F. Schlesinger, J. Drenkow, C. Zaleski <i>et al.</i>, 2013 <b>STAR: ultrafast universal RNA-seq aligner</b>. Bioinformatics 29: 15–21.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">https://academic.oup.com/bioinformatics/article/29/1/15/272537</a>
-      
-    
-
-</li>
-<li><span id="kim2013tophat2">Kim, D., G. Pertea, C. Trapnell, H. Pimentel, R. Kelley <i>et al.</i>, 2013 <b>TopHat2: accurate alignment of transcriptomes in the presence of insertions, deletions and gene fusions</b>. Genome Biology 14: R36.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36</a>
-      
-    
-
-</li>
-<li><span id="liao2013featurecounts">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>featureCounts: an efficient general purpose program for assigning sequence reads to genomic features</b>. Bioinformatics 30: 923–930.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a>
-      
-    
-
-</li>
-<li><span id="luo2013pathview">Luo, W., and C. Brouwer, 2013 <b>Pathview: an R/Bioconductor package for pathway-based data integration and visualization</b>. Bioinformatics 29: 1830–1831.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article-abstract/29/14/1830/232698">https://academic.oup.com/bioinformatics/article-abstract/29/14/1830/232698</a>
-      
-    
-
-</li>
-<li><span id="love2014moderated">Love, M. I., W. Huber, and S. Anders, 2014 <b>Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</b>. Genome Biology 15: 550.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</a>
-      
-    
-
-</li>
-<li><span id="anders2015htseq">Anders, S., P. T. Pyl, and W. Huber, 2015 <b>HTSeq—a Python framework to work with high-throughput sequencing data</b>. Bioinformatics 31: 166–169.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a>
-      
-    
-
-</li>
-<li><span id="kim2015hisat">Kim, D., B. Langmead, and S. L. Salzberg, 2015 <b>HISAT: a fast spliced aligner with low memory requirements</b>. Nature Methods 12: 357.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/articles/nmeth.3317">https://www.nature.com/articles/nmeth.3317</a>
-      
-    
-
-</li>
-<li><span id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a>
-      
-    
-
-</li>
-<li><span id="thurmond2018flybase">Thurmond, J., J. L. Goodman, V. B. Strelets, H. Attrill, L. S. Gramates <i>et al.</i>, 2018 <b>FlyBase 2.0: the next generation</b>. Nucleic Acids Research 47: D759–D765.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/nar/article-abstract/47/D1/D759/5144957">https://academic.oup.com/nar/article-abstract/47/D1/D759/5144957</a>
-      
-    
-
-</li>
-<li><span id="kim2019graph">Kim, D., J. M. Paggi, C. Park, C. Bennett, and S. L. Salzberg, 2019 <b>Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype</b>. Nature Biotechnology 37: 907–915.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/articles/s41587-019-0201-4">https://www.nature.com/articles/s41587-019-0201-4</a>
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="trapnell2009tophat">Trapnell, C., L. Pachter, and S. L. Salzberg, 2009 <b>TopHat: discovering splice junctions with RNA-Seq</b>. Bioinformatics 25: 1105–1111. <a href="https://academic.oup.com/bioinformatics/article/25/9/1105/203994">https://academic.oup.com/bioinformatics/article/25/9/1105/203994</a></li>
+<li id="levin2010comprehensive">Levin, J. Z., M. Yassour, X. Adiconis, C. Nusbaum, D. A. Thompson <i>et al.</i>, 2010 <b>Comprehensive comparative analysis of strand-specific RNA sequencing methods</b>. Nature Methods 7: 709. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/</a></li>
+<li id="young2010gene">Young, M. D., M. J. Wakefield, G. K. Smyth, and A. Oshlack, 2010 <b>Gene ontology analysis for RNA-seq: accounting for selection bias</b>. Genome Biology 11: R14. <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-2-r14">https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-2-r14</a></li>
+<li id="brooks2011conservation">Brooks, A. N., L. Yang, M. O. Duff, K. D. Hansen, J. W. Park <i>et al.</i>, 2011 <b>Conservation of an RNA regulatory map between Drosophila and mammals</b>. Genome Research 21: 193–202. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/</a></li>
+<li id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12. <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a></li>
+<li id="robinson2011integrative">Robinson, J. T., H. Thorvaldsdóttir, W. Winckler, M. Guttman, E. S. Lander <i>et al.</i>, 2011 <b>Integrative genomics viewer</b>. Nature Biotechnology 29: 24. <a href="https://www.nature.com/nbt/journal/v29/n1/abs/nbt.1754.html">https://www.nature.com/nbt/journal/v29/n1/abs/nbt.1754.html</a></li>
+<li id="wang2012rseqc">Wang, L., S. Wang, and W. Li, 2012 <b>RSeQC: quality control of RNA-seq experiments</b>. Bioinformatics 28: 2184–2185. <a href="https://www.ncbi.nlm.nih.gov/pubmed/22743226">https://www.ncbi.nlm.nih.gov/pubmed/22743226</a></li>
+<li id="dobin2013star">Dobin, A., C. A. Davis, F. Schlesinger, J. Drenkow, C. Zaleski <i>et al.</i>, 2013 <b>STAR: ultrafast universal RNA-seq aligner</b>. Bioinformatics 29: 15–21. <a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">https://academic.oup.com/bioinformatics/article/29/1/15/272537</a></li>
+<li id="kim2013tophat2">Kim, D., G. Pertea, C. Trapnell, H. Pimentel, R. Kelley <i>et al.</i>, 2013 <b>TopHat2: accurate alignment of transcriptomes in the presence of insertions, deletions and gene fusions</b>. Genome Biology 14: R36. <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36</a></li>
+<li id="liao2013featurecounts">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>featureCounts: an efficient general purpose program for assigning sequence reads to genomic features</b>. Bioinformatics 30: 923–930. <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a></li>
+<li id="luo2013pathview">Luo, W., and C. Brouwer, 2013 <b>Pathview: an R/Bioconductor package for pathway-based data integration and visualization</b>. Bioinformatics 29: 1830–1831. <a href="https://academic.oup.com/bioinformatics/article-abstract/29/14/1830/232698">https://academic.oup.com/bioinformatics/article-abstract/29/14/1830/232698</a></li>
+<li id="love2014moderated">Love, M. I., W. Huber, and S. Anders, 2014 <b>Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</b>. Genome Biology 15: 550. <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</a></li>
+<li id="anders2015htseq">Anders, S., P. T. Pyl, and W. Huber, 2015 <b>HTSeq—a Python framework to work with high-throughput sequencing data</b>. Bioinformatics 31: 166–169. <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a></li>
+<li id="kim2015hisat">Kim, D., B. Langmead, and S. L. Salzberg, 2015 <b>HISAT: a fast spliced aligner with low memory requirements</b>. Nature Methods 12: 357. <a href="https://www.nature.com/articles/nmeth.3317">https://www.nature.com/articles/nmeth.3317</a></li>
+<li id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048. <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a></li>
+<li id="thurmond2018flybase">Thurmond, J., J. L. Goodman, V. B. Strelets, H. Attrill, L. S. Gramates <i>et al.</i>, 2018 <b>FlyBase 2.0: the next generation</b>. Nucleic Acids Research 47: D759–D765. <a href="https://academic.oup.com/nar/article-abstract/47/D1/D759/5144957">https://academic.oup.com/nar/article-abstract/47/D1/D759/5144957</a></li>
+<li id="kim2019graph">Kim, D., J. M. Paggi, C. Park, C. Bennett, and S. L. Salzberg, 2019 <b>Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype</b>. Nature Biotechnology 37: 907–915. <a href="https://www.nature.com/articles/s41587-019-0201-4">https://www.nature.com/articles/s41587-019-0201-4</a></li></ol>
                 
 
                 

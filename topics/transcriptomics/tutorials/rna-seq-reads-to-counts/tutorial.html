@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-09-20 18:56:43 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "1: RNA-Seq reads to counts",
   "interactivityType": "mixed",
@@ -1023,8 +1023,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -1122,7 +1120,7 @@
 
 <p><strong>Mouse mammary gland dataset</strong></p>
 
-<p>The data for this tutorial comes from a Nature Cell Biology paper by <a class="citation" href="#Fu2015">Fu <i>et al.</i> 2015</a>. Both the raw data (sequence <span class="notranslate">reads</span>) and processed data (counts) can be downloaded from Gene <span class="notranslate">Expression</span> Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
+<p>The data for this tutorial comes from a Nature Cell Biology paper by <span class="citation"><a href="#Fu2015">Fu <i>et al.</i> 2015</a></span>. Both the raw data (sequence <span class="notranslate">reads</span>) and processed data (counts) can be downloaded from Gene <span class="notranslate">Expression</span> Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
 
 <p>This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for <span class="notranslate">RNA</span>-seq.</p>
 
@@ -1171,7 +1169,7 @@
 
 <h2 id="import-data-from-urls">Import data from URLs</h2>
 
-<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential <span class="notranslate">expression</span> analysis can proceed, these <span class="notranslate">reads</span> must be aligned to the reference genome and counted into annotated genes. <span class="notranslate">Mapping</span> <span class="notranslate">reads</span> to the genome is a very important task, and many different aligners are available, such as HISAT2 (<a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>), STAR (<a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>) and Subread (<a class="citation" href="#Liao2013">Liao <i>et al.</i> 2013</a>). Most <span class="notranslate">mapping</span> tasks require larger computers than an average laptop, so usually read <span class="notranslate">mapping</span> is done on a server in a linux-like environment, requiring some programming knowledge. However, <span class="notranslate">Galaxy</span> enables you to do this <span class="notranslate">mapping</span> without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a>, <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>, <a href="https://usegalaxy.org.au/">use<span class="notranslate">galaxy</span>.org.au</a>.</p>
+<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential <span class="notranslate">expression</span> analysis can proceed, these <span class="notranslate">reads</span> must be aligned to the reference genome and counted into annotated genes. <span class="notranslate">Mapping</span> <span class="notranslate">reads</span> to the genome is a very important task, and many different aligners are available, such as HISAT2 (<span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>), STAR (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) and Subread (<span class="citation"><a href="#Liao2013">Liao <i>et al.</i> 2013</a></span>). Most <span class="notranslate">mapping</span> tasks require larger computers than an average laptop, so usually read <span class="notranslate">mapping</span> is done on a server in a linux-like environment, requiring some programming knowledge. However, <span class="notranslate">Galaxy</span> enables you to do this <span class="notranslate">mapping</span> without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a>, <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>, <a href="https://usegalaxy.org.au/">use<span class="notranslate">galaxy</span>.org.au</a>.</p>
 
 <p>The raw <span class="notranslate">reads</span> used in this tutorial were obtained from SRA from the link in GEO for the the mouse mammary gland dataset (e.g <code class="language-plaintext highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/<span class="notranslate">reads</span>/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be <span class="notranslate">mapping</span> 1000 <span class="notranslate">reads</span> from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://zenodo.org/record/4249555">Zenodo</a> and the links to the FASTQ files are provided below.</p>
 
@@ -1376,7 +1374,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 
 <p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Every base sequence gets a quality score from the sequencer and this information is present in the FASTQ file. A quality score of 30 corresponds to a 1 in 1000 chance of an incorrect base call (a quality score of 10 is a 1 in 10 chance of an incorrect base call). To look at the overall distribution of quality scores across the <span class="notranslate">reads</span>, we can use FastQC.</p>
 
-<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and Cutadapt (<a class="citation" href="#marcel2011cutadapt">Marcel 2011</a>).</p>
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and Cutadapt (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-raw-reads-with-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check raw <span class="notranslate">reads</span> with <strong>FastQC</strong></h3>
@@ -1417,7 +1415,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 </blockquote>
 
-<p>The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC (<a class="citation" href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a>) that can summarise QC information for multiple samples into a single report. We’ll generate a few MultiQC outputs in this tutorial so we’ll add name tags so we can differentiate them.</p>
+<p>The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC (<span class="citation"><a href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a></span>) that can summarise QC information for multiple samples into a single report. We’ll generate a few MultiQC outputs in this tutorial so we’ll add name tags so we can differentiate them.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-aggregate-fastqc-reports-with-multiqc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Aggregate FastQC reports with <strong>MultiQC</strong></h3>
@@ -1776,7 +1774,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h1 id="counting">Counting</h1>
 
-<p>The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped <span class="notranslate">reads</span> can be counted across mouse genes by using a tool called featureCounts (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>). featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (<code class="language-plaintext highlighter-rouge">mm10</code>, <code class="language-plaintext highlighter-rouge">mm9</code>) and human (<code class="language-plaintext highlighter-rouge">hg38</code>, <code class="language-plaintext highlighter-rouge">hg19</code>) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. <span class="notranslate">Reads</span> that map to exons of genes are added together to obtain the count for each gene, with some care taken with <span class="notranslate">reads</span> that span exon-exon boundaries. The output is a count for each Entrez Gene ID, which are numbers such as <code class="language-plaintext highlighter-rouge">100008567</code>. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in <span class="notranslate">Galaxy</span>, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.</p>
+<p>The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped <span class="notranslate">reads</span> can be counted across mouse genes by using a tool called featureCounts (<span class="citation"><a href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a></span>). featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (<code class="language-plaintext highlighter-rouge">mm10</code>, <code class="language-plaintext highlighter-rouge">mm9</code>) and human (<code class="language-plaintext highlighter-rouge">hg38</code>, <code class="language-plaintext highlighter-rouge">hg19</code>) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. <span class="notranslate">Reads</span> that map to exons of genes are added together to obtain the count for each gene, with some care taken with <span class="notranslate">reads</span> that span exon-exon boundaries. The output is a count for each Entrez Gene ID, which are numbers such as <code class="language-plaintext highlighter-rouge">100008567</code>. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in <span class="notranslate">Galaxy</span>, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1920,7 +1918,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h2 id="strandness">Strandness</h2>
 
-<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>. This is done through comparing the “strandness of <span class="notranslate">reads</span>” with the “strandness of transcripts”. For this tool, and many of the other RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tools, a reference <span class="notranslate">bed</span> file of genes (<code class="language-plaintext highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference <span class="notranslate">BED</span> files for model organisms. You can import the RSeQC mm10 RefSeq <span class="notranslate">BED</span> file from the link <code class="language-plaintext highlighter-rouge">https://sourceforge.net/projects/rseqc/files/<span class="notranslate">BED</span>/Mouse_Mus_musculus/mm10_RefSeq.<span class="notranslate">bed</span>.gz/download</code> (and rename to <code class="language-plaintext highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alte<span class="notranslate">rna</span>tively, you can provide your own <span class="notranslate">BED</span> file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to <span class="notranslate">BED</span>12</strong> tool can be used to convert a GTF into a <span class="notranslate">BED</span> file.</p>
+<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>. This is done through comparing the “strandness of <span class="notranslate">reads</span>” with the “strandness of transcripts”. For this tool, and many of the other RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tools, a reference <span class="notranslate">bed</span> file of genes (<code class="language-plaintext highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference <span class="notranslate">BED</span> files for model organisms. You can import the RSeQC mm10 RefSeq <span class="notranslate">BED</span> file from the link <code class="language-plaintext highlighter-rouge">https://sourceforge.net/projects/rseqc/files/<span class="notranslate">BED</span>/Mouse_Mus_musculus/mm10_RefSeq.<span class="notranslate">bed</span>.gz/download</code> (and rename to <code class="language-plaintext highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alte<span class="notranslate">rna</span>tively, you can provide your own <span class="notranslate">BED</span> file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to <span class="notranslate">BED</span>12</strong> tool can be used to convert a GTF into a <span class="notranslate">BED</span> file.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-strandness-with-infer-experiment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check strandness with <strong>Infer Experiment</strong></h3>
@@ -2261,94 +2259,14 @@ BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visua
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a>
-      
-    
-
-</li>
-<li><span id="wang2012rseqc">Wang, L., S. Wang, and W. Li, 2012 <b>RSeQC: quality control of RNA-seq experiments</b>. Bioinformatics 28: 2184–2185.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.ncbi.nlm.nih.gov/pubmed/22743226">https://www.ncbi.nlm.nih.gov/pubmed/22743226</a>
-      
-    
-
-</li>
-<li><span id="dobin2013star">Dobin, A., C. A. Davis, F. Schlesinger, J. Drenkow, C. Zaleski <i>et al.</i>, 2013 <b>STAR: ultrafast universal RNA-seq aligner</b>. Bioinformatics 29: 15–21.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">https://academic.oup.com/bioinformatics/article/29/1/15/272537</a>
-      
-    
-
-</li>
-<li><span id="liao2013featurecounts">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>featureCounts: an efficient general purpose program for assigning sequence reads to genomic features</b>. Bioinformatics 30: 923–930.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a>
-      
-    
-
-</li>
-<li><span id="Liao2013">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>The Subread aligner: fast,  accurate and scalable read mapping by seed-and-vote</b>. Nucleic Acids Research 41: e108–e108.</span>
-    
-    
-    <a href="https://doi.org/10.1093/nar/gkt214">10.1093/nar/gkt214</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="kim2015hisat">Kim, D., B. Langmead, and S. L. Salzberg, 2015 <b>HISAT: a fast spliced aligner with low memory requirements</b>. Nature Methods 12: 357.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://www.nature.com/articles/nmeth.3317">https://www.nature.com/articles/nmeth.3317</a>
-      
-    
-
-</li>
-<li><span id="Fu2015">Fu, N. Y., A. C. Rios, B. Pal, R. Soetanto, A. T. L. Lun <i>et al.</i>, 2015 <b>EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</b>. Nature Cell Biology 17: 365–375.</span>
-    
-    
-    <a href="https://doi.org/10.1038/ncb3117">10.1038/ncb3117</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048.</span>
-    
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-      <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a>
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12. <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a></li>
+<li id="wang2012rseqc">Wang, L., S. Wang, and W. Li, 2012 <b>RSeQC: quality control of RNA-seq experiments</b>. Bioinformatics 28: 2184–2185. <a href="https://www.ncbi.nlm.nih.gov/pubmed/22743226">https://www.ncbi.nlm.nih.gov/pubmed/22743226</a></li>
+<li id="dobin2013star">Dobin, A., C. A. Davis, F. Schlesinger, J. Drenkow, C. Zaleski <i>et al.</i>, 2013 <b>STAR: ultrafast universal RNA-seq aligner</b>. Bioinformatics 29: 15–21. <a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">https://academic.oup.com/bioinformatics/article/29/1/15/272537</a></li>
+<li id="liao2013featurecounts">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>featureCounts: an efficient general purpose program for assigning sequence reads to genomic features</b>. Bioinformatics 30: 923–930. <a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">https://academic.oup.com/bioinformatics/article/31/2/166/2366196</a></li>
+<li id="Liao2013">Liao, Y., G. K. Smyth, and W. Shi, 2013 <b>The Subread aligner: fast,  accurate and scalable read mapping by seed-and-vote</b>. Nucleic Acids Research 41: e108–e108. <a href="https://doi.org/10.1093/nar/gkt214">10.1093/nar/gkt214</a></li>
+<li id="Fu2015">Fu, N. Y., A. C. Rios, B. Pal, R. Soetanto, A. T. L. Lun <i>et al.</i>, 2015 <b>EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</b>. Nature Cell Biology 17: 365–375. <a href="https://doi.org/10.1038/ncb3117">10.1038/ncb3117</a></li>
+<li id="kim2015hisat">Kim, D., B. Langmead, and S. L. Salzberg, 2015 <b>HISAT: a fast spliced aligner with low memory requirements</b>. Nature Methods 12: 357. <a href="https://www.nature.com/articles/nmeth.3317">https://www.nature.com/articles/nmeth.3317</a></li>
+<li id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048. <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a></li></ol>
                 
 
                 

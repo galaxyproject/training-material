@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-10-09 17:25:40 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "VGP assembly pipeline",
   "interactivityType": "mixed",
@@ -568,15 +568,15 @@
 
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>An assembly can be defined as a hierarchical data structure that maps the sequence data to a putative reconstruction of the target (<a class="citation" href="#Miller2010">Miller <i>et al.</i> 2010</a>). Advances in sequencing technologies over the last few decades have revolutionised the field of genomics, allowing for a reduction in both the time and resources required to carry out de novo genome assembly. Until recently, second-generation <span class="notranslate">DNA</span> sequencing technologies allowed to produced either short highly accurate <span class="notranslate">reads</span>, or error-prone long <span class="notranslate">reads</span>. However, in recent years, third-generation sequencing technologies, usually known as real-time single-molecule sequencing, have become dominant in de novo assembly of large genomes. It uses native <span class="notranslate">DNA</span> fragments to sequence instead of template amplification, avoiding copying errors, sequence-dependent biases and information losses (<a class="citation" href="#Hon2020">Hon <i>et al.</i> 2020</a>). An example of such a technology is PacBio Single molecule high-fidelity (HiFi) Sequencing, which enables average read lengths of 10-20 kb with average sequence identity greater than 99%, which is one of the technologies used to generate the data for this tutorial.</p>
+<p>An assembly can be defined as a hierarchical data structure that maps the sequence data to a putative reconstruction of the target (<span class="citation"><a href="#Miller2010">Miller <i>et al.</i> 2010</a></span>). Advances in sequencing technologies over the last few decades have revolutionised the field of genomics, allowing for a reduction in both the time and resources required to carry out de novo genome assembly. Until recently, second-generation <span class="notranslate">DNA</span> sequencing technologies allowed to produced either short highly accurate <span class="notranslate">reads</span>, or error-prone long <span class="notranslate">reads</span>. However, in recent years, third-generation sequencing technologies, usually known as real-time single-molecule sequencing, have become dominant in de novo assembly of large genomes. It uses native <span class="notranslate">DNA</span> fragments to sequence instead of template amplification, avoiding copying errors, sequence-dependent biases and information losses (<span class="citation"><a href="#Hon2020">Hon <i>et al.</i> 2020</a></span>). An example of such a technology is PacBio Single molecule high-fidelity (HiFi) Sequencing, which enables average read lengths of 10-20 kb with average sequence identity greater than 99%, which is one of the technologies used to generate the data for this tutorial.</p>
 
-<p>Deciphering the structural organisation of complex vertebrate genomes is currently one of the most important problems in genomics. (<a class="citation" href="#Frenkel2012">Frenkel <i>et al.</i> 2012</a>). However, despite the great progress made in recent years, a key question remain to be answered: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repeated sequences and heterozigosity.</p>
+<p>Deciphering the structural organisation of complex vertebrate genomes is currently one of the most important problems in genomics. (<span class="citation"><a href="#Frenkel2012">Frenkel <i>et al.</i> 2012</a></span>). However, despite the great progress made in recent years, a key question remain to be answered: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repeated sequences and heterozigosity.</p>
 
-<p>Repetitive sequences can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR), that occur at a single locus (<a class="citation" href="#Trresen2019">Tørresen <i>et al.</i> 2019</a>). Repetitive sequences, and TE in particular, are an important component of eukariotes genomes, constituting more than a third of the genome in the case of mammals (<a class="citation" href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a>, <a class="citation" href="#Chalopin2015">Chalopin <i>et al.</i> 2015</a>). In the case of tamdem repeats, various estimates suggest that they are present in at least one third of human protein sequences (<a class="citation" href="#Marcotte1999">Marcotte <i>et al.</i> 1999</a>). TE content is probably the main factor contributing to fragmented genomes, specially in the case of large genomes, as its content is highly correlated with genome size (<a class="citation" href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a>). On the other hand, TR usually lead to local genome assembly collapse and partial or complete loss of genes, specially when the read length of the sequencing method is shorter than the TR (<a class="citation" href="#Trresen2019">Tørresen <i>et al.</i> 2019</a>).</p>
+<p>Repetitive sequences can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR), that occur at a single locus (<span class="citation"><a href="#Trresen2019">Tørresen <i>et al.</i> 2019</a></span>). Repetitive sequences, and TE in particular, are an important component of eukariotes genomes, constituting more than a third of the genome in the case of mammals (<span class="citation"><a href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Chalopin2015">Chalopin <i>et al.</i> 2015</a></span>). In the case of tamdem repeats, various estimates suggest that they are present in at least one third of human protein sequences (<span class="citation"><a href="#Marcotte1999">Marcotte <i>et al.</i> 1999</a></span>). TE content is probably the main factor contributing to fragmented genomes, specially in the case of large genomes, as its content is highly correlated with genome size (<span class="citation"><a href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a></span>). On the other hand, TR usually lead to local genome assembly collapse and partial or complete loss of genes, specially when the read length of the sequencing method is shorter than the TR (<span class="citation"><a href="#Trresen2019">Tørresen <i>et al.</i> 2019</a></span>).</p>
 
-<p>In the case of heterozygosity, haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies (<a class="citation" href="#Zhang2020">Zhang <i>et al.</i> 2020</a>). A common strategy to overcome these difficulties is to remap genomes to a single haplotype, which represents the whole genome. This approach is useful for highly inbred samples that are nearly homozygous, but when applied to highly heterozygous genomes, such as aquatic organism, it missses potential differences in sequence, structure, and gene presence, usually leading to ambiguties and redundancies in the initial contig-level assemblies (<a class="citation" href="#DominguezDelAngel2018">Angel <i>et al.</i> 2018</a>, <a class="citation" href="#Zhang2020">Zhang <i>et al.</i> 2020</a>).</p>
+<p>In the case of heterozygosity, haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies (<span class="citation"><a href="#Zhang2020">Zhang <i>et al.</i> 2020</a></span>). A common strategy to overcome these difficulties is to remap genomes to a single haplotype, which represents the whole genome. This approach is useful for highly inbred samples that are nearly homozygous, but when applied to highly heterozygous genomes, such as aquatic organism, it missses potential differences in sequence, structure, and gene presence, usually leading to ambiguties and redundancies in the initial contig-level assemblies (<span class="citation"><a href="#DominguezDelAngel2018">Angel <i>et al.</i> 2018</a></span>, <span class="citation"><a href="#Zhang2020">Zhang <i>et al.</i> 2020</a></span>).</p>
 
-<p>To address these problems, the G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species currently present on planet Earth (<a class="citation" href="#Rhie2021">Rhie <i>et al.</i> 2021</a>). The protocol proposed in this tutorial, the VGP assembly pipeline, is the result of years of study and analysis of the available tools and data sources.</p>
+<p>To address these problems, the G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species currently present on planet Earth (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2021</a></span>). The protocol proposed in this tutorial, the VGP assembly pipeline, is the result of years of study and analysis of the available tools and data sources.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -845,9 +845,9 @@
 
 <h1 id="genome-profile-analysis">Genome profile analysis</h1>
 
-<p>An important step before starting a de novo genome assembly project is to proceed with the analysis of the genome profile. Determining these characteristics in advance has the potential to reveal whether an analysis is not reflecting the full complexity of the genome, for example, if the number of variants is underestimated or a significant fraction of the genome is not assembled (<a class="citation" href="#Vurture2017">Vurture <i>et al.</i> 2017</a>).</p>
+<p>An important step before starting a de novo genome assembly project is to proceed with the analysis of the genome profile. Determining these characteristics in advance has the potential to reveal whether an analysis is not reflecting the full complexity of the genome, for example, if the number of variants is underestimated or a significant fraction of the genome is not assembled (<span class="citation"><a href="#Vurture2017">Vurture <i>et al.</i> 2017</a></span>).</p>
 
-<p>Traditionally <span class="notranslate">DNA</span> flow citometry was considered the golden standart for estimating the genome size, one of the most important factors to determine the required coverage level. However, nowadays experimental methods have been replaced by computational approaches <a class="citation" href="#wang2020estimation">Wang <i>et al.</i> 2020</a>. One of the most widely used procedures for undertaking genomic profiling is the analyis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality. In addition, k-mer spectra analysis can be used in a reference-free manner for assessing genome assembly quality metrics (<a class="citation" href="#Rhie2020">Rhie <i>et al.</i> 2020</a>).</p>
+<p>Traditionally <span class="notranslate">DNA</span> flow citometry was considered the golden standart for estimating the genome size, one of the most important factors to determine the required coverage level. However, nowadays experimental methods have been replaced by computational approaches <span class="citation"><a href="#wang2020estimation">Wang <i>et al.</i> 2020</a></span>. One of the most widely used procedures for undertaking genomic profiling is the analyis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality. In addition, k-mer spectra analysis can be used in a reference-free manner for assessing genome assembly quality metrics (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="details">
   <h3 id="details-k-mer-size-sequencing-coverage-and-genome-size"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> K-mer size, sequencing coverage and genome size</h3>
@@ -905,7 +905,7 @@
 
 <h2 id="generation-of-k-mer-spectra-with-meryl">Generation of k-mer spectra with <strong>Meryl</strong></h2>
 
-<p>Meryl will allow us to perform the k-mer profiling by decomposing the sequencing data into k-lenght substrings and determining its frequency. The original version was developed for use in the Celera Assembler, and it comprises three modules: one for generating k-mer databases, one for filtering and combining databases, and one for searching databases. The k-mer database is stored in sorted order, similar to words in a dictionary (<a class="citation" href="#Rhie2020">Rhie <i>et al.</i> 2020</a>).</p>
+<p>Meryl will allow us to perform the k-mer profiling by decomposing the sequencing data into k-lenght substrings and determining its frequency. The original version was developed for use in the Celera Assembler, and it comprises three modules: one for generating k-mer databases, one for filtering and combining databases, and one for searching databases. The k-mer database is stored in sorted order, similar to words in a dictionary (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="comment">
   <h3 id="comment-k-mer-size-estimation"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> K-mer size estimation</h3>
@@ -971,7 +971,7 @@
 
 <h2 id="genome-profiling-with-genomescope2">Genome profiling with <strong>GenomeScope2</strong></h2>
 
-<p>The next step is to computationally infer the genome properties from the k-mer count distribution generated by Meryl, for which we’ll use GenomeScope2. It relies in a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates (<a class="citation" href="#RanalloBenavidez2020">Ranallo-Benavidez <i>et al.</i> 2020</a>).</p>
+<p>The next step is to computationally infer the genome properties from the k-mer count distribution generated by Meryl, for which we’ll use GenomeScope2. It relies in a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates (<span class="citation"><a href="#RanalloBenavidez2020">Ranallo-Benavidez <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-estimate-genome-properties"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Estimate genome properties</h3>
@@ -1017,7 +1017,7 @@
 
 <p>As we can see, there is an unique peak centered around 28, which is the coverage with the highest number of different 21-mers. According the normal-like k-mer spectra, we can infer that it is a haploid genome. The The large number of unique k-mers on the left size with frequence around one is due to error during the sequencing process.</p>
 
-<p>Before jumping to the next section, we need to carry out some operation on the output generated by Genomescope2. The goal some parameters which at a later stage will be used by <strong>purge_dups</strong> (<a class="citation" href="#Guan2019">Guan <i>et al.</i> 2019</a>). Lets start with the <code class="language-plaintext highlighter-rouge">estimated genome size</code>.</p>
+<p>Before jumping to the next section, we need to carry out some operation on the output generated by Genomescope2. The goal some parameters which at a later stage will be used by <strong>purge_dups</strong> (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). Lets start with the <code class="language-plaintext highlighter-rouge">estimated genome size</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-get-estimated-genome-size"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get estimated genome size</h3>
@@ -1192,7 +1192,7 @@
 
 <h2 id="genome-assembly-with-hifiasm">Genome assembly with <strong>hifiasm</strong></h2>
 
-<p>One of the key focus of hifiams is to different copies of a segmental duplication involving a single segregating site, allowing to resolve near-identical, but not exactly identical, repeats and segmental duplications (<a class="citation" href="#Cheng2021">Cheng <i>et al.</i> 2021</a>).</p>
+<p>One of the key focus of hifiams is to different copies of a segmental duplication involving a single segregating site, allowing to resolve near-identical, but not exactly identical, repeats and segmental duplications (<span class="citation"><a href="#Cheng2021">Cheng <i>et al.</i> 2021</a></span>).</p>
 
 <blockquote class="comment">
   <h3 id="comment-hifiasm-algorithm-details"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Hifiasm algorithm details</h3>
@@ -1257,9 +1257,9 @@
 
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
 
-<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes (haplotype contigs), as well as all hemizygous regions from both haplomes. However, the allelic relationship between haplotypes still present a problem for <em>de novo</em> genome assembly, specially in high heterozygous genomes; sequence divergence between pair of allelic sequences can lead to assemble there regions as separate contigs, rather than the expected single haplotype-fused contig. It can result in assemblies signicantly larger than the haploid genome size, which can lead to interferences in <span class="notranslate">downstream</span> stages, such as scaffolding and gene annotation (<a class="citation" href="#Guan2019">Guan <i>et al.</i> 2019</a>, <a class="citation" href="#Roach2018">Roach <i>et al.</i> 2018</a>).</p>
+<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes (haplotype contigs), as well as all hemizygous regions from both haplomes. However, the allelic relationship between haplotypes still present a problem for <em>de novo</em> genome assembly, specially in high heterozygous genomes; sequence divergence between pair of allelic sequences can lead to assemble there regions as separate contigs, rather than the expected single haplotype-fused contig. It can result in assemblies signicantly larger than the haploid genome size, which can lead to interferences in <span class="notranslate">downstream</span> stages, such as scaffolding and gene annotation (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>, <span class="citation"><a href="#Roach2018">Roach <i>et al.</i> 2018</a></span>).</p>
 
-<p>Usually, allelic relationships are inferred at the post-assembly stage. Despite the haplotig processing requites multiple steps, the approach used in this tutorial can be summaryzed in two steps: firstly we will identify the syntenic contigs by using the mapped read coverage and <strong>minimap2</strong> (<a class="citation" href="#Li2018">Li 2018</a>) alignments. Then, we will resolve the haplotigs and overlaps in the primary assembly by using <strong>purge_dups</strong>.</p>
+<p>Usually, allelic relationships are inferred at the post-assembly stage. Despite the haplotig processing requites multiple steps, the approach used in this tutorial can be summaryzed in two steps: firstly we will identify the syntenic contigs by using the mapped read coverage and <strong>minimap2</strong> (<span class="citation"><a href="#Li2018">Li 2018</a></span>) alignments. Then, we will resolve the haplotigs and overlaps in the primary assembly by using <strong>purge_dups</strong>.</p>
 
 <h2 id="remove-haplotypic-duplication-with-purge_dups">Remove haplotypic duplication with <strong>purge_dups</strong></h2>
 
@@ -2813,199 +2813,24 @@ pipeline used.</p>
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li><span id="Marcotte1999">Marcotte, E. M., M. Pellegrini, T. O. Yeates, and D. Eisenberg, 1999 <b>A census of protein repeats</b>. Journal of Molecular Biology 293: 151–160.</span>
-    
-    
-    <a href="https://doi.org/10.1006/jmbi.1999.3136">10.1006/jmbi.1999.3136</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Miller2010">Miller, J. R., S. Koren, and G. Sutton, 2010 <b>Assembly algorithms for next-generation sequencing data</b>. Genomics 95: 315–327.</span>
-    
-    
-    <a href="https://doi.org/10.1016/j.ygeno.2010.03.001">10.1016/j.ygeno.2010.03.001</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Frenkel2012">Frenkel, S., V. Kirzhner, and A. Korol, 2012 <b>Organizational Heterogeneity of Vertebrate Genomes</b> (V. Laudet, Ed.). PLoS ONE 7: e32076.</span>
-    
-    
-    <a href="https://doi.org/10.1371/journal.pone.0032076">10.1371/journal.pone.0032076</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Chalopin2015">Chalopin, D., M. Naville, F. Plard, D. Galiana, and J.-N. Volff, 2015 <b>Comparative Analysis of Transposable Elements Highlights Mobilome Diversity and Evolution in Vertebrates</b>. Genome Biology and Evolution 7: 567–580.</span>
-    
-    
-    <a href="https://doi.org/10.1093/gbe/evv005">10.1093/gbe/evv005</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="SoteroCaio2017">Sotero-Caio, C. G., R. N. Platt, A. Suh, and D. A. Ray, 2017 <b>Evolution and Diversity of Transposable Elements in Vertebrate Genomes</b>. Genome Biology and Evolution 9: 161–177.</span>
-    
-    
-    <a href="https://doi.org/10.1093/gbe/evw264">10.1093/gbe/evw264</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Vurture2017">Vurture, G. W., F. J. Sedlazeck, M. Nattestad, C. J. Underwood, H. Fang <i>et al.</i>, 2017 <b>GenomeScope: fast reference-free genome profiling from short reads</b> (B. Berger, Ed.). Bioinformatics 33: 2202–2204.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/btx153">10.1093/bioinformatics/btx153</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="DominguezDelAngel2018">Angel, V. D. D., E. Hjerde, L. Sterck, S. Capella-Gutierrez, C. Notredame <i>et al.</i>, 2018 <b>Ten steps to get started in Genome Assembly and Annotation</b>. F1000Research 7: 148.</span>
-    
-    
-    <a href="https://doi.org/10.12688/f1000research.13598.1">10.12688/f1000research.13598.1</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Li2018">Li, H., 2018 <b>Minimap2: pairwise alignment for nucleotide sequences</b> (I. Birol, Ed.). Bioinformatics 34: 3094–3100.</span>
-    
-    
-    <a href="https://doi.org/10.1093/bioinformatics/bty191">10.1093/bioinformatics/bty191</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Roach2018">Roach, M. J., S. A. Schmidt, and A. R. Borneman, 2018 <b>Purge Haplotigs: allelic contig reassignment for third-gen diploid genome assemblies</b>. BMC Bioinformatics 19:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s12859-018-2485-7">10.1186/s12859-018-2485-7</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Guan2019">Guan, D., S. A. McCarthy, J. Wood, K. Howe, Y. Wang <i>et al.</i>, 2019 <b>Identifying and removing haplotypic duplication in primary genome assemblies</b>.</span>
-    
-    
-    <a href="https://doi.org/10.1101/729962">10.1101/729962</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Trresen2019">Tørresen, O. K., B. Star, P. Mier, M. A. Andrade-Navarro, A. Bateman <i>et al.</i>, 2019 <b>Tandem repeats lead to sequence assembly errors and impose multi-level challenges for genome and protein databases</b>. Nucleic Acids Research 47: 10994–11006.</span>
-    
-    
-    <a href="https://doi.org/10.1093/nar/gkz841">10.1093/nar/gkz841</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="wang2020estimation">Wang, H., B. Liu, Y. Zhang, F. Jiang, Y. Ren <i>et al.</i>, 2020 <b>Estimation of genome size using k-mer frequencies from corrected long reads</b>. arXiv preprint arXiv:2003.11817.</span>
-    
-    
-    
-
-</li>
-<li><span id="Zhang2020">Zhang, X., R. Wu, Y. Wang, J. Yu, and H. Tang, 2020 <b>Unzipping haplotypes in diploid and polyploid genomes</b>. Computational and Structural Biotechnology Journal 18: 66–72.</span>
-    
-    
-    <a href="https://doi.org/10.1016/j.csbj.2019.11.011">10.1016/j.csbj.2019.11.011</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="RanalloBenavidez2020">Ranallo-Benavidez, T. R., K. S. Jaron, and M. C. Schatz, 2020 <b>GenomeScope 2.0 and Smudgeplot for reference-free profiling of polyploid genomes</b>. Nature Communications 11:</span>
-    
-    
-    <a href="https://doi.org/10.1038/s41467-020-14998-3">10.1038/s41467-020-14998-3</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Rhie2020">Rhie, A., B. P. Walenz, S. Koren, and A. M. Phillippy, 2020 <b>Merqury: reference-free quality,  completeness,  and phasing assessment for genome assemblies</b>. Genome Biology 21:</span>
-    
-    
-    <a href="https://doi.org/10.1186/s13059-020-02134-9">10.1186/s13059-020-02134-9</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Hon2020">Hon, T., K. Mars, G. Young, Y.-C. Tsai, J. W. Karalius <i>et al.</i>, 2020 <b>Highly accurate long-read HiFi sequencing data for five complex genomes</b>. Scientific Data 7:</span>
-    
-    
-    <a href="https://doi.org/10.1038/s41597-020-00743-4">10.1038/s41597-020-00743-4</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Cheng2021">Cheng, H., G. T. Concepcion, X. Feng, H. Zhang, and H. Li, 2021 <b>Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm</b>. Nature Methods 18: 170–175.</span>
-    
-    
-    <a href="https://doi.org/10.1038/s41592-020-01056-5">10.1038/s41592-020-01056-5</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li>
-<li><span id="Rhie2021">Rhie, A., S. A. McCarthy, O. Fedrigo, J. Damas, G. Formenti <i>et al.</i>, 2021 <b>Towards complete and error-free genome assemblies of all vertebrate species</b>. Nature 592: 737–746.</span>
-    
-    
-    <a href="https://doi.org/10.1038/s41586-021-03451-0">10.1038/s41586-021-03451-0</a>
-    
-    
-      <!-- prevent duplicate doi links -->
-      
-    
-
-</li></ol>
+                <ol class="bibliography"><li id="Marcotte1999">Marcotte, E. M., M. Pellegrini, T. O. Yeates, and D. Eisenberg, 1999 <b>A census of protein repeats</b>. Journal of Molecular Biology 293: 151–160. <a href="https://doi.org/10.1006/jmbi.1999.3136">10.1006/jmbi.1999.3136</a></li>
+<li id="Miller2010">Miller, J. R., S. Koren, and G. Sutton, 2010 <b>Assembly algorithms for next-generation sequencing data</b>. Genomics 95: 315–327. <a href="https://doi.org/10.1016/j.ygeno.2010.03.001">10.1016/j.ygeno.2010.03.001</a></li>
+<li id="Frenkel2012">Frenkel, S., V. Kirzhner, and A. Korol, 2012 <b>Organizational Heterogeneity of Vertebrate Genomes</b> (V. Laudet, Ed.). PLoS ONE 7: e32076. <a href="https://doi.org/10.1371/journal.pone.0032076">10.1371/journal.pone.0032076</a></li>
+<li id="Chalopin2015">Chalopin, D., M. Naville, F. Plard, D. Galiana, and J.-N. Volff, 2015 <b>Comparative Analysis of Transposable Elements Highlights Mobilome Diversity and Evolution in Vertebrates</b>. Genome Biology and Evolution 7: 567–580. <a href="https://doi.org/10.1093/gbe/evv005">10.1093/gbe/evv005</a></li>
+<li id="SoteroCaio2017">Sotero-Caio, C. G., R. N. Platt, A. Suh, and D. A. Ray, 2017 <b>Evolution and Diversity of Transposable Elements in Vertebrate Genomes</b>. Genome Biology and Evolution 9: 161–177. <a href="https://doi.org/10.1093/gbe/evw264">10.1093/gbe/evw264</a></li>
+<li id="Vurture2017">Vurture, G. W., F. J. Sedlazeck, M. Nattestad, C. J. Underwood, H. Fang <i>et al.</i>, 2017 <b>GenomeScope: fast reference-free genome profiling from short reads</b> (B. Berger, Ed.). Bioinformatics 33: 2202–2204. <a href="https://doi.org/10.1093/bioinformatics/btx153">10.1093/bioinformatics/btx153</a></li>
+<li id="DominguezDelAngel2018">Angel, V. D. D., E. Hjerde, L. Sterck, S. Capella-Gutierrez, C. Notredame <i>et al.</i>, 2018 <b>Ten steps to get started in Genome Assembly and Annotation</b>. F1000Research 7: 148. <a href="https://doi.org/10.12688/f1000research.13598.1">10.12688/f1000research.13598.1</a></li>
+<li id="Li2018">Li, H., 2018 <b>Minimap2: pairwise alignment for nucleotide sequences</b> (I. Birol, Ed.). Bioinformatics 34: 3094–3100. <a href="https://doi.org/10.1093/bioinformatics/bty191">10.1093/bioinformatics/bty191</a></li>
+<li id="Roach2018">Roach, M. J., S. A. Schmidt, and A. R. Borneman, 2018 <b>Purge Haplotigs: allelic contig reassignment for third-gen diploid genome assemblies</b>. BMC Bioinformatics 19: <a href="https://doi.org/10.1186/s12859-018-2485-7">10.1186/s12859-018-2485-7</a></li>
+<li id="Guan2019">Guan, D., S. A. McCarthy, J. Wood, K. Howe, Y. Wang <i>et al.</i>, 2019 <b>Identifying and removing haplotypic duplication in primary genome assemblies</b>. <a href="https://doi.org/10.1101/729962">10.1101/729962</a></li>
+<li id="Trresen2019">Tørresen, O. K., B. Star, P. Mier, M. A. Andrade-Navarro, A. Bateman <i>et al.</i>, 2019 <b>Tandem repeats lead to sequence assembly errors and impose multi-level challenges for genome and protein databases</b>. Nucleic Acids Research 47: 10994–11006. <a href="https://doi.org/10.1093/nar/gkz841">10.1093/nar/gkz841</a></li>
+<li id="Hon2020">Hon, T., K. Mars, G. Young, Y.-C. Tsai, J. W. Karalius <i>et al.</i>, 2020 <b>Highly accurate long-read HiFi sequencing data for five complex genomes</b>. Scientific Data 7: <a href="https://doi.org/10.1038/s41597-020-00743-4">10.1038/s41597-020-00743-4</a></li>
+<li id="RanalloBenavidez2020">Ranallo-Benavidez, T. R., K. S. Jaron, and M. C. Schatz, 2020 <b>GenomeScope 2.0 and Smudgeplot for reference-free profiling of polyploid genomes</b>. Nature Communications 11: <a href="https://doi.org/10.1038/s41467-020-14998-3">10.1038/s41467-020-14998-3</a></li>
+<li id="Rhie2020">Rhie, A., B. P. Walenz, S. Koren, and A. M. Phillippy, 2020 <b>Merqury: reference-free quality,  completeness,  and phasing assessment for genome assemblies</b>. Genome Biology 21: <a href="https://doi.org/10.1186/s13059-020-02134-9">10.1186/s13059-020-02134-9</a></li>
+<li id="wang2020estimation">Wang, H., B. Liu, Y. Zhang, F. Jiang, Y. Ren <i>et al.</i>, 2020 <b>Estimation of genome size using k-mer frequencies from corrected long reads</b>. arXiv preprint arXiv:2003.11817.</li>
+<li id="Zhang2020">Zhang, X., R. Wu, Y. Wang, J. Yu, and H. Tang, 2020 <b>Unzipping haplotypes in diploid and polyploid genomes</b>. Computational and Structural Biotechnology Journal 18: 66–72. <a href="https://doi.org/10.1016/j.csbj.2019.11.011">10.1016/j.csbj.2019.11.011</a></li>
+<li id="Cheng2021">Cheng, H., G. T. Concepcion, X. Feng, H. Zhang, and H. Li, 2021 <b>Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm</b>. Nature Methods 18: 170–175. <a href="https://doi.org/10.1038/s41592-020-01056-5">10.1038/s41592-020-01056-5</a></li>
+<li id="Rhie2021">Rhie, A., S. A. McCarthy, O. Fedrigo, J. Damas, G. Formenti <i>et al.</i>, 2021 <b>Towards complete and error-free genome assemblies of all vertebrate species</b>. Nature 592: 737–746. <a href="https://doi.org/10.1038/s41586-021-03451-0">10.1038/s41586-021-03451-0</a></li></ol>
                 
 
                 
