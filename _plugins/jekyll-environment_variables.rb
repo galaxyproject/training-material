@@ -42,6 +42,7 @@ module Jekyll
         else
           if path =~ /bib$/ then
             for x in BibTeX.open(path)
+              x = x.convert_latex
               global_bib << x
             end
           end
@@ -54,8 +55,6 @@ module Jekyll
                                    format: 'html', locale: 'en'
       cp.import global_bib.to_citeproc
       site.config['cached_citeproc'] = cp
-
-
     end
   end
 end
