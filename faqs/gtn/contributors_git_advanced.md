@@ -60,7 +60,7 @@ To learn how to add new content, check out our [series of tutorials on creating 
 
 {% assign topic = site.data["contributing"] %}
 <ol>
-{% assign topic_material = site.pages | topic_filter:'contributing' %}
+{% assign topic_material = site | topic_filter:'contributing' %}
 {% for material in topic_material %}
  {% if material.enable != "false" %}
   {% if material.type == "introduction" %}
