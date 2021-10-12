@@ -510,6 +510,113 @@ our new Docker container as a Galaxy tool.
 
 ---
 
+# Testing locally
+
+You would like to check your GxIT integration in Galaxy but don't have a development server or don't want to disturb your sysadmin at this point?  
+Let's check this integration on your machine. You can use a VM if you prefer not to modify your machine environment.
+
+> ### {% icon comment %} A note on the OS
+> This part of the tutorial has been tested on Ubuntu and Debian and there is no guaranteed success for other operating systems. 
+> If you have another OS on your machine (like Windows), you will have to use a virtual machine with either Ubuntu or Debian on it.
+{: .comment}
+
+## Docker installation
+
+Install Docker as described on the [docker website](https://docs.docker.com/engine/install/) (click on your distribution name to get specific information).
+
+
+> ### {% icon hands_on %} Hands-on
+>
+> For Ubuntu 64bits:
+>
+> ```sh
+> # Store the encryption key of the Docker package distribution server
+> # So we can securely communicate with docker's servers
+> curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+> # Add the Docker package distribution server corresponding to your distribution (here, Ubuntu 64bits) to the list of packages providers. 
+> # So when we will try to install/upgrade docker, your machine will be aware that this package is to be downloaded from this server
+> sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+> # Tell the package manager of your system to update its packages indexes
+> # (it will ask download.docker.com what packages it can provide, and which versions)
+> sudo apt-get update
+> # Upgrade all your installed packages
+> sudo apt-get upgrade
+> # Install Docker community edition (the free version of docker)
+> sudo apt-get install docker-ce
+>
+> # Allow the current user to execute docker instructions by adding it to the docker group
+> sudo usermod -aG docker $USER
+> # Take group modification into account
+> # To be executed in each opened terminal
+> newgrp docker
+> ```
+{: .hands_on}
+  
+
+## Galaxy installation
+
+> ### {% icon hands_on %} Hands-on
+> 
+> For Ubuntu:
+> ```sh
+> # Install git to get Galaxy project
+> sudo apt-get install git
+> # Create a working directory and move to it
+> mkdir ~/GxIT && cd ~/GxIT
+> # Get the galaxy project. A new directory named "galaxy" will be created.
+> # This directory contains the whole project
+> git clone https://github.com/galaxyproject/galaxy
+> # Checkout the last stable version (v21.09 as the time of writing)
+> cd galaxy && git checkout v21.09
+> ```
+{: .hands_on}
+
+
+## Galaxy configuration
+
+
+> ### {% icon hands_on %} Hands-on
+> 
+> ```sh
+> cd ~/GxIT/galaxy/config
+> # Create custom config files
+> cat galaxy.yml.interactivetools > galaxy.yml
+> cat job_conf.xml.interactivetools > job_conf.xml
+> cat tool_conf.xml.sample > tool_conf.xml
+> ```
+> In `galaxy.yml`, add the `galaxy_infrastructure_url` parameter to the galaxy section:
+> ```yaml
+> galaxy:
+>   galaxy_infrastructure_url: http://localhost:8080
+> ```
+> This will make galaxy to provide your GxIT using links like <http://your_gxit_identifier.localhost:8080>.  
+> 
+> Configure the tool panel by adding a section in `~/GxIT/galaxy/config/tool_conf.xml`:
+> ```xml
+>   <section id="interactivetools" name="Interactive tools">
+>     <tool file="interactive/interactivetool_tabulator.xml" />
+>   </section>
+> ```
+> With these lines, Galaxy will create a new section named "Interactive tools" in the tool panel
+> with our interactive tabulator inside.  
+> Choose whatever name and id you want as long as the id is unique.  
+> And of course, you have no obligation to put your GxITs in this section. 
+> You can put them in any section.
+> 
+{: .hands_on}
+
+## Run Galaxy
+
+Go to the Galaxy directory and:  
+```sh
+./run.sh
+```
+
+Galaxy is served at <http://localhost:8080/> and you should be able to use your GxIT.  
+Congrats!
+
+---
+
 # Installing in Galaxy
 
 We now have all the required components, we can install the tool in our
