@@ -432,6 +432,8 @@ our new Docker container as a Galaxy tool.
 >
 >
 >    > ### {% icon solution %} Solution
+>    > 
+>    > {% raw  %}
 >    >
 >    > ```xml
 >    > <tool id="interactive_tool_tabulator" tool_type="interactive" name="Tabulator" version="0.1">
@@ -477,7 +479,7 @@ our new Docker container as a Galaxy tool.
 >    >     </inputs>
 >    >
 >    >     <outputs>
->    >         <data name="file_outfile" format="txt"/>
+>    >         <data name="file_output" format="txt"/>
 >    >     </outputs>
 >    >
 >    >     <tests>
@@ -501,6 +503,7 @@ our new Docker container as a Galaxy tool.
 >    >     </citations>
 >    > </tool>
 >    > ```
+>    > {% endraw  %}
 >    {: .solution}
 >
 {: .hands_on}
@@ -593,7 +596,7 @@ Have a look in the web interface of your Galaxy instance. You should find the ne
 > The [Interactive Tools admin tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html)
 > demonstrates how this can be acheived by adding our tool XML to the "local tools" section of the Ansible Playbook. However, for our GxIT to show up in the correct tool panel we'll need to add an extra config file: `local_tool_conf.xml`.
 >
-> 
+> {% raw  %} 
 >
 > 1) Copy the GxIT tool XML to `files/galaxy/tools/interactivetool_tabulator.xml` in your Ansible directory
 >
@@ -631,7 +634,7 @@ Have a look in the web interface of your Galaxy instance. You should find the ne
 >     ansible-playbook galaxy.yml
 >     ```
 >
-> 
+> {% endraw  %}
 >
 {: .tip}
 
