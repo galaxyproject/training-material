@@ -1,32 +1,37 @@
 ---
 layout: tutorial_slides
 logo: "GTN"
-title: "An introduction to scRNA-seq data analysis"
+title: "Introducción al análisis de datos de scRNA-seq"
 
 subtopic: single-cell
 priority: 1
+
+lang: cat_es
+translations:
+  - en
+  - es
 
 video: yes
 zenodo_link: ""
 tags:
   - single-cell
 questions:
-  - How are samples compared?
-  - How are cells captured?
-  - How does bulk RNA-seq differ from scRNA-seq?
-  - Why is clustering important?
+  - ¿Cómo se comparan las muestras?
+  - ¿Cómo se capturan las células?
+  - ¿En qué se diferencia la secuencia de ARN en masa de la secuencia de ARNc?
+  - ¿Por qué es importante la agrupación en clústeres?
 objectives:
-  - To understand the pitfalls in scRNA-seq sequencing and amplification, and how they are overcome.
-  - Know the types of variation in an analysis and how to control for them.
-  - Grasp what dimension reduction is, and how it might be performed.
-  - Be familiarised with the main types of clustering techniques and when to use them.
+  - Comprender las dificultades en la secuenciación y amplificación de scRNA-seq, y cómo se superan.
+  - Conocer los tipos de variación en un análisis y cómo controlarlos.
+  - Comprender qué es la reducción de dimensión y cómo se puede realizar.
+  - Familiarizarse con los principales tipos de técnicas de agrupación y cuándo utilizarlas.
 
 time_estimation: 30m
 key_points:
-  - scRNA-seq requires much pre-processing before analysis can be performed.
-  - Groups of similarly profiled-cells are compared against other groups.
-  - Detectability issues requires careful consideration at all stages.
-  - Clustering is an integral part of an analysis.
+  - scRNA-seq requiere mucho procesamiento previo antes de que se pueda realizar el análisis.
+  - Los grupos de células con perfiles similares se comparan con otros grupos.
+  - Los problemas de detectabilidad requieren una consideración cuidadosa en todas las etapas.
+  - La agrupación en clústeres es una parte integral de un análisis.
 
 follow_up_training:
   -
@@ -37,96 +42,96 @@ follow_up_training:
 
 contributors:
   - mtekman
+  - nomadscientist
 
 
 ---
 
-# Single-cell RNA-seq
+# RNA-seq de una sola célula
 
-An introduction to scRNA-seq data analysis
+Introducción al análisis de datos de scRNA-seq
 
 ???
-- Greetings everybody and welcome to the Galaxy single cell RNA-seq analysis workshop.
-- Here we will walk you through some of the basics and concepts when dealing with single cell data.
+- Saludos a todos y bienvenidos al taller de análisis de RNA-seq de una sola célula de Galaxy.
+- Aquí lo guiaremos a través de algunos de los conceptos básicos y conceptos al tratar con datos de una sola celda.
 
 ---
 
 
-## Bulk RNA-Seq
+## Secuencia de ARN a granel
 
-.pull-left-large[![Two blobs labelled tissue A and tissue B are shown, on the right they are summarised into tables of Gene A, B, and X and their different average expression per tissue.](../../images/scrna-intro/rna_cells_bulkrez.svg)]
+.pull-left-large[! [Se muestran dos manchas etiquetadas como tejido A y tejido B, a la derecha se resumen en tablas de Gen A, B y X y su diferente expresión promedio por tejido.] (../../ images / scrna- intro / rna_cells_bulkrez.svg)]
 
 .pull-right[
 .reduce90[
 
-|Attribute| Summary |
-|-:|:-|
-|Resolution| Entire tissues |
-|Signal | Average gene expression per tissue |
-|Differential Expression | Difference between average gene expression between tissues |
 
+| Atributo | Resumen |
+| -: |: - |
+| Resolución | Tejidos enteros |
+| Señal | Expresión génica media por tejido |
+| Expresión diferencial | Diferencia entre la expresión génica media entre tejidos |
 ]
 ]
 
 
 ???
-- Let's start with what the differences are between Bulk RNA-seq and single cell RNA seq data.
-- With Bulk RNA-seq we compare two tissues by looking at the average expression of each gene detected across each of the tissues.
-- Due to the number of RNA molecules being considered, the sequencing depth and the strength of the analysis is reasonably high.
-- The differential expression is then measured as the relative expression of a given gene between one tissue and another.
-
+- Comencemos con las diferencias entre Bulk RNA-seq y datos de secuencia de ARN de una sola célula.
+- Con Bulk RNA-seq comparamos dos tejidos observando la expresión promedio de cada gen detectado en cada uno de los tejidos.
+- Debido al número de moléculas de ARN que se están considerando, la profundidad de secuenciación y la fuerza del análisis es razonablemente alta.
+- La expresión diferencial se mide luego como la expresión relativa de un gen dado entre un tejido y otro.
 ---
 
-## Single Cell RNA-Seq
+## RNA-Seq de célula única
 
-.pull-left-large[![Red and blue clusters of cells are shown resembling the tissue blob from the previous slide. Now the graphs on the right for expression in Genes A, B, X are shown per cell instead of per tissue.](../../images/scrna-intro/rna_cells_singlerez.svg)]
+.pull-left-large[! [Se muestran grupos de células rojas y azules que se asemejan a la mancha de tejido de la diapositiva anterior. Ahora los gráficos de la derecha para la expresión en los genes A, B, X se muestran por celda en lugar de por tejido.] (../../ images / scrna-intro / rna_cells_singlerez.svg)]
 
 .pull-right[
 .reduce90[
 
-|Attribute| Summary |
-|-:|:-|
-| Resolution| Individual cells within tissues |
-| Signal | Individual gene expression per cell |
-| Differential Expression | Some cells express the same set of genes in the same way; comparing one set of cells against another |
+
+| Atributo | Resumen |
+| -: |: - |
+| Resolución | Células individuales dentro de los tejidos |
+| Señal | Expresión de genes individuales por célula |
+| Expresión diferencial | Algunas células expresan el mismo conjunto de genes de la misma manera; comparar un conjunto de células con otro |
 
 ]
 ]
 
 
 ???
-- With single cell RNA-seq analysis, the stage shifts away from measuring the average expression of a tissue.
-- And towards measuring the specific gene expression of individual cells within those tissues.
-- Here we are no longer comparing tissue against tissue, but cell against cell.
-- Each cell is assigned a gene profile which describes the relative abundance of genes detected within it.
-- Many cells share the same gene profile, where a gene profile ideally describes a cell type.
-- Sometimes we need to compare single-cell datasets across tissues, and we see that many cells across tissues share the same cell type.
-- For example, look at the purple and green gene profiles which are shared across both tissues.
-
+- Con el análisis de secuencia de ARN de una sola célula, la etapa se aleja de medir la expresión promedio de un tejido.
+- Y hacia la medición de la expresión génica específica de células individuales dentro de esos tejidos.
+- Aquí ya no comparamos tejido contra tejido, sino célula contra célula.
+- A cada célula se le asigna un perfil genético que describe la abundancia relativa de genes detectados en su interior.
+- Muchas células comparten el mismo perfil genético, donde un perfil genético describe idealmente un tipo de célula.
+- A veces necesitamos comparar conjuntos de datos unicelulares en tejidos, y vemos que muchas células en tejidos comparten el mismo tipo de célula.
+- Por ejemplo, observe los perfiles de genes púrpura y verde que se comparten en ambos tejidos.
 
 ---
 
-# From Bulk RNA to Single Cell RNA
+# De ARN a granel a ARN unicelular
 
-.image-50[![Tissue A and B from the first slide are shown as the collections of cells from the second slide.](../../images/scrna-intro/rna_cells_bulk2single.svg)]
+.image-50[![Los tejidos A y B de la primera diapositiva se muestran como las colecciones de células de la segunda diapositiva.] (../../ images / scrna-intro / rna_cells_bulk2single.svg)]
 
 .reduce90[
-* In order to quantify RNA at the level of individual cells:
-  * New methods of library preparation
-  * New methods of sequencing
-  * New methods of quality control
-  * New methods of analysis
+* Para cuantificar el ARN a nivel de células individuales:
+  * Nuevos métodos de preparación de bibliotecas
+  * Nuevos métodos de secuenciación
+  * Nuevos métodos de control de calidad
+  * Nuevos métodos de análisis
 ]
 
 ???
-- New technologies means new methods and techniques to harness the new features that come with them.
-- Single-cell RNA-seq data requires different means of library preparation, sequencing, quality control and analysis.
+- Las nuevas tecnologías significan nuevos métodos y técnicas para aprovechar las nuevas características que las acompañan.
+- Los datos de secuencia de ARN de una sola célula requieren diferentes medios de preparación, secuenciación, control de calidad y análisis de bibliotecas.
 
 ---
 
-# Cell Capture and Replicates
+# Captura de células y réplicas
 
-.center[*How do we prepare samples for sequencing?*]
+.center[*¿Cómo preparamos las muestras para la secuenciación?*]
 
 ???
 For example, how are cells captured and sequenced?
@@ -1230,4 +1235,3 @@ If the new configuration has instead increased the number of external links, the
 ???
 - In this regard, the vast UseGalaxy resources can be put to good use by testing out the many different paths of the analysis, and the Galaxy Training Network provides tutorials and hands-on trainings to assist you in this regard.
 - Please explore them to better develop your understanding.
-
