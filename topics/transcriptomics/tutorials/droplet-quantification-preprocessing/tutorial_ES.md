@@ -5,6 +5,7 @@ title: "Generación de una matriz de datos de secuenciación de ARN de células 
 subtopic: single-cell-CS
 priority: 1
 level: Advanced
+
 zenodo_link: 'https://zenodo.org/record/4574153'
 
 questions:
@@ -26,7 +27,9 @@ tags:
   - single-cell
   - 10x
   - paper-replication
+
 lang: es
+
 translations:
   - en
 
@@ -36,7 +39,9 @@ contributors:
   - pclo
   - ales-ibt
 
-recomendaciones:
+requirements:
+-
+    type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-intro
@@ -119,7 +124,7 @@ Adicionalmente, necesitarás un transcriptoma (en formato FASTA) contra el cual 
 >    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy-es/datasets_import_via_link.md %}
 >
 > 3. Cambiar el nombre {% icon galaxy-pencil %} de los conjuntos de datos
 >
@@ -361,7 +366,7 @@ Para poder utilizar emptyDrops de manera efectiva, necesitamos regresar y volver
 >    - *"keepCBFraction"*: '1' - por ejemplo conservarlos todos
 >    - *"freqThreshold"*: '3' - Esto solo eliminará los códigos de barras celulares que tengan una frecuencia menor de 3, un criterio bajo de aceptación, pero es una forma útil de evitar procesar un monton de códigos de barras que es casi seguro que estan vacíos.
 >
-> {% snippet faqs/galaxy/tools_rerun.md %}
+> {% snippet faqs/galaxy-es/tools_rerun.md %}
 {: .hands_on}
 
 > ### {% icon question %} Pregunta
@@ -394,7 +399,7 @@ Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete drop
 > 4. Cambiar el nombre {% icon galaxy-pencil %} de 'salmonKallistoMtxTo10x....:matrix' a `Matrix table`
 {: .hands_on}
 
-La salida es una matriz que contendrá la orientación correcta para poder ser utilizada por las herramientas en el análisis subsecuente. Sin embargo, nuestra matriz se ve un poco dispersa, por ejemplo, haz clic en `Gene table`. No se tú, pero a mí me costaría entablar una buena discusión biológica utilizando únicamente los gene_ids de Ensembl. Lo que en realidad me gustaría es tener información más ‘humanamente entendible’, como la del tipo ‘GAPDH’ o con otro tipo de acrónimos de genes; también me gustaría tener información sobre genes mitocondriales para poder evaluar si mis células están bajo algún tipo de estrés o no. Con el objetivo de preparar nuestros datos para meterlos a emptyDrops, vamos a combinar esta información y depositarla en un objeto; ahora es más sencillo añadir dicha información.   
+La salida es una matriz que contendrá la orientación correcta para poder ser utilizada por las herramientas en el análisis subsecuente. Sin embargo, nuestra matriz se ve un poco dispersa, por ejemplo, haz clic en `Gene table`. No se tú, pero a mí me costaría entablar una buena discusión biológica utilizando únicamente los gene_ids de Ensembl. Lo que en realidad me gustaría es tener información más ‘humanamente entendible’, como la del tipo ‘GAPDH’ o con otro tipo de acrónimos de genes; también me gustaría tener información sobre genes mitocondriales para poder evaluar si mis células están bajo algún tipo de estrés o no. Con el objetivo de preparar nuestros datos para meterlos a emptyDrops, vamos a combinar esta información y depositarla en un objeto; ahora es más sencillo añadir dicha información.
 
 ## Añadir metadatos de genes
 
@@ -573,12 +578,12 @@ Esta muestra es una de siete iniciales. Entonces, puedes utilizar un [flujo de t
 >    {{ page.zenodo_link }}/files/N707-400k-AnnData.h5ad
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy-es/datasets_import_via_link.md %}
 >
 > 3. Cambiar de nombre al conjunto de datos
 > 4. Verifica que el tipo de datos sea `h5ad` de lo contrario ¡Necesitarás cambiar cada tipo de datos al formato `h5ad`!
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy-es/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

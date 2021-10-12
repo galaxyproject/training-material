@@ -4,10 +4,6 @@ layout: base
 
 {% assign contributors = site.data['contributors'] %}
 
-{% assign stories = site.pages | where:"layout", "training_philosophy" %}
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
-{% assign slides = site.pages | filter_slides %}
-
 <style type="text/css" media="all">
 .card-title {
 	font-size: 2rem;
@@ -30,13 +26,6 @@ layout: base
 				<h3>
 					{{ contributors[page.contributor].name | default: page.contributor }}
 				</h3>
-
-				{% assign has_philosophy = false %}
-				{% for story in stories %}
-					{% if story.username == page.contributor %}
-						{% assign has_philosophy = true %}
-					{% endif %}
-				{% endfor %}
 
 				{% if has_philosophy %}
 				<div class="contact-items">
