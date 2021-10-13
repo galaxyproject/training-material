@@ -21,7 +21,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github.repository_url }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
+All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository: [{{ site.github_repository }}]({{ site.github_repository }}), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
 > ### Agenda
 >
@@ -34,11 +34,12 @@ All the training material which you find on [{{ site.url }}{{ site.baseurl }}/](
 
 # GitHub
 
-The GitHub repository for the training material is: [{{ site.github_repository }}]({{ site.github.repository_url }}).
+The GitHub repository for the training material is: [{{ site.github_repository }}]({{ site.github_repository }}).
 
 > ### {% icon hands_on %} Hands-on: Familiarization with GitHub
 >
-> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github.repository_url }})
+> 1. Go on the GitHub repository:
+[{{ site.github_repository }}]({{ site.github_repository }})
 >
 >    ![GitHub interface](../../images/github_interface.png "Interface of the GitHub repository of the training material")
 >
