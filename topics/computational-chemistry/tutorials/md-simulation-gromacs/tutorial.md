@@ -163,6 +163,8 @@ The next stage is protein solvation, performed using **GROMACS solvation and add
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by the structure configuration tool
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology produced by setup
 >    - *"Water model for solvation"*: `SPC`
+>    - *"Add ions to neutralise system?"*: `Yes, add ions`
+>    - *"Specify salt concentration (sodium chloride) to add, in mol/liter"*: `0`
 >    - *"Generate detailed log"*: `Yes`
 >
 {: .hands_on}
