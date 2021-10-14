@@ -5,21 +5,37 @@ enable: false
 title: CRISPR screen analysis
 zenodo_link: https://zenodo.org/record/5570011
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What are the steps to process CRISPR screen data?
+- How to identify differentially enriched guides across multiple experimental conditions?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- Check quality of raw reads
+- Trim sequencing adapters
+- Count guide sequences in samples
+- Evaluate the quality of count results
+- Test for differential enrichment of guides across conditions
+time_estimation: 2H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- CRISPR screen data can be analysed using MAGeCK and standard read quality tools
 contributors:
 - mblue9
+- kenjifujihara
+requirements:
+  -
+    type: "internal"
+    topic_name: introduction
+    tutorials:
+      - galaxy-intro-short
+  -
+    type: "internal"
+    topic_name: sequence-analysis
+    tutorials:
+      - quality-control
+  -
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+      - collections
+      - upload-rules
 
 ---
 
@@ -27,29 +43,16 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+**C**lustered **R**egularly **I**nterspaced **S**hort **P**alindromic **R**epeats (**CRISPR**)-Cas9 is a groundbreaking technology of recent years. It enables editing of the genome and resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020. 
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+The CRISPR repeat sequences guide the Cas9 enzyme to introduce breaks in DNA. With the CRISPR-Cas9 editing system, a 20 base target region in the genome is added into the CRISPR guide and the Cas9 enzyme then cuts this region.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+CRISPR screens provide a high-throughput way to identify genes and pathways that enable cells to survive. In a CRISPR screen all the genes in the genome can be targeted (genome-wide screen) or just a selection (boutique screen). Knockout or activation screens can be performed. 
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr-screen.jpg "CRISPR knockout and activation method (from <a href='#Joung2016'> Joung <i>et al.</i> 2016</a>)")
 
+Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -60,120 +63,106 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Preparing the reads
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+## Data upload
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+We will use fastq files containing 1% of reads from the original samples to demonstrate the read processing steps. 
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
-
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Retrieve CRISPR screen fastq datasets
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 2. Import the files from Zenodo:
 >
->    ```
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/brunello.tsv
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/mageck_counts_full.tsv
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T0-Control.fastq.gz
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-APR-246.fastq.gz
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-Vehicle.fastq.gz
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on __Rule-based__ tab
+>    - *"Upload data as"*: `Collection(s)`
+>    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
->    ***TODO***: *Remove the useless files (if added)*
+>      ```
+>      T0-Control https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T0-Control.fastq.gz
+>      T8-APR-246 https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-APR-246.fastq.gz
+>      T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-Vehicle.fastq.gz
+>      ```
+>  
+>    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>         > ### {% icon tip %} Can't find *List Identifier*?
+>         > Then you've chosen to upload as a 'dataset' and not a 'collection'. Close the upload menu, and restart the process, making sure you check *Upload data as*: **Collection(s)**
+>         {: .tip}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>       - Click `Add Definition` button and select `URL`: column `B`
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
+>    - Click `Apply` 
+>    - In the Name: box type `fastqs` and press <kbd>Upload</kbd>
+>      
+>    ![Rule-based Editor](../../images/crispr-screen/crispr_rule_editor.png)
+>    
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+## Raw reads QC
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+First we'll check the quality of the raw read sequences with [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and aggregate the reports from the multiple samples with [MultiQC](https://multiqc.info/) ({% cite ewels2016multiqc %}). We will check if the base quality is good and for presence of adapters. For more details on quality control and what the FastQC plots mean see the ["Quality control" tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 
-## Sub-step with **FastQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
+>    - {% icon param-collection %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
 >
->    ***TODO***: *Check parameter descriptions*
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. Inspect the webpage output of **FastQC** for the T0 sample
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon question %} Questions
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > What is the read length?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The read length is 75 bp.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters to aggregate the FastQC reports:
+>     - In *"Results"*
+>       - *"Which tool was used generate logs?"*: `FastQC`
+>       - In *"FastQC output"*
+>         - *"Type of FastQC output?"*: `Raw data`
+>         - {% icon param-collection %} *"FastQC output"*: `Raw data` files (output of **FastQC**)
+>
+> 4. Inspect the webpage output from MultiQC for each FASTQ
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > What do you think of the quality of the sequences?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The quality seems good for the 3 files.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+We need to trim the adapters to leave just the 20bp guide sequences.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Trim adapters
 
-## Sub-step with **Cutadapt**
+We'll trim these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) and its linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`, as discussed [here](https://github.com/marcelm/cutadapt/issues/261#issue-261019127).
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Trim adapters
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
+>        - {% icon param-collection %} *"FASTQ/A file #1"*: all fastq.gz files 
 >        - In *"Read 1 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
@@ -181,117 +170,77 @@ A big step can have several subsections or sub steps:
 >                        - *"Enter custom 3' adapter sequence"*: `TGTGGAAAGGACGAAACACCG...GTTTTAGAGCTAGAAATAGCAAG`
 >    - In *"Filter Options"*:
 >        - *"Minimum length (R1)"*: `20`
->        - *"Specify a minimum/maximum length for reverse reads (R2)"*: `Disabled`
 >    - In *"Read Modification Options"*:
 >        - *"Quality cutoff"*: `20`
->        - *"Shortening reads to a fixed length"*: `Disabled`
->    - *"Outputs selector"*: ``
+>    - *"Outputs selector"*: 
+>        - *"Report"*: tick
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Inspect the report output from Cutadapt for the T8-APR sample
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon question %} Questions
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > What % of reads had adapters?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 99.9% 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Counting
 
-## Sub-step with **MultiQC**
+For the rest of the CRISPR screen analysis, counting and testing, we'll use MAGeCK ({% cite Li2014 %}, {% cite Li2015 %}).
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `FastQC`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library so we use that file. The file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MAGeCK count**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [MAGeCK count](toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4) %} with the following parameters:
+> ### {% icon hands_on %} Hands-on: Count guides per gene
+> 1. Import the library file 
+>    ```
+>    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/brunello.tsv
+>    ```
+> 2. {% tool [MAGeCK count](toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4) %} with the following parameters:
 >    - *"Reads Files or Count Table?"*: `Separate Reads files`
+>        - {% icon param-collection %} *"Sample reads"*: the `Read 1 Output` (outputs of **Cutadapt**)
+>    - {% icon param-file %} *"sgRNA library file"*: the `brunello.tsv` file
 >    - In *"Output Options"*:
 >        - *"Output Count Summary file"*: `Yes`
 >        - *"Output plots"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
+> 3. Inspect the Count Summary file
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon question %} Questions
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > What percent of reads mapped?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > More than 80% reads mapped in each sample 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Testing
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+We have been using 1% of reads from the samples in the original dataset to save time as FASTQ files are large. As counts files are small, here we will import and use the MAGeCK counts file generated using all the reads for the samples.
 
-## Sub-step with **MAGeCKs test**
+We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehicle). We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren't allowed. We can also specify by their positions in the counts file with the first sample column being 0.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Test for enrichment
+> 1. Import the count file from the full dataset [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
+>    ```
+>    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/mageck_counts_full.tsv
+>    ```
 >
-> 1. {% tool [MAGeCKs test](toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1) %} with the following parameters:
+> 2. {% tool [MAGeCKs test](toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1) %} with the following parameters:
+>    - {% icon param-file %} *"Counts file"*: the `mageck_counts_full.tsv` file
 >    - *"Specify Treated samples or Control"*: `Treated samples`
 >        - *"Treated Sample Labels (or Indexes)"*: `0`
 >    - *"Control Sample Labels (or Indexes)"*: `1`
@@ -301,43 +250,24 @@ A big step can have several subsections or sub steps:
 >    - In *"Advanced Options"*:
 >        - *"Method for normalization"*: `Total`
 >
->    ***TODO***: *Check parameter descriptions*
+> 3. Inspect the PDF Report output.
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon question %} Questions
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > What are the top 3 genes?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > ESD, MTHFD1L and SHMT2 which are part of the glutathione pathway. That was the main pathway found to be altered in the published paper for this dataset.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+CRISPR Screen reads can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using MAGeCK.
