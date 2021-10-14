@@ -111,9 +111,7 @@ First we'll check the quality of the raw read sequences with [FastQC](https://ww
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
->
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+>    - {% icon param-collection %} *"Short read data from your current history"*: fastqs (click "Dataset collection" button on left-side of this input field)
 >
 > 2. Inspect the webpage output of **FastQC** for the T0 sample
 >
