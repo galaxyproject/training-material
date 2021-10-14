@@ -203,6 +203,9 @@ To count how many guides we have for each gene, we need a library file that tell
 >    ```
 >    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/brunello.tsv
 >    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 > 2. {% tool [MAGeCK count](toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4) %} with the following parameters:
 >    - *"Reads Files or Count Table?"*: `Separate Reads files`
 >        - {% icon param-collection %} *"Sample reads"*: the `Read 1 Output` (outputs of **Cutadapt**)
