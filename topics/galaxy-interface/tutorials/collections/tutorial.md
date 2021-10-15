@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/collections/tutorial
   
-  -topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial
+  - /topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial
 
 title: "Using dataset collections"
 zenodo_link: "https://doi.org/10.5281/zenodo.5119008"
