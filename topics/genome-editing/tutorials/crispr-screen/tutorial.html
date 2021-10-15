@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>CRISPR screen analysis</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for genome editing analysis." />
+        <meta property="og:title" content="Galaxy Training: CRISPR screen analysis" />
+        <meta property="og:description" content="Training material for genome editing analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-editing" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Editing
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-editing/faqs/" title="Check our FAQs for the Genome Editing topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-editing/tutorials/crispr-screen/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-editing/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-editing/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-editing/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-editing/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-editing/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-editing%2Ftutorials%2Fcrispr-screen%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/genome-editing/tutorials/crispr-screen/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/genome-editing/tutorials/crispr-screen/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/genome-editing/tutorials/crispr-screen/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "CRISPR screen analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Editing",
+    "description": "Training material for genome editing analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/genome-editing/"
+  },
+  "courseCode": "genome-editing / crispr-screen / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'CRISPR screen analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - What are the steps to process CRISPR screen data?\n - How to identify differentially enriched guides across multiple experimental conditions?\n\n\\nThe objectives are:\n - Check quality of raw reads\n - Trim sequencing adapters\n - Count guide sequences in samples\n - Evaluate the quality of count results\n - Test for differential enrichment of guides across conditions\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html",
+      "name": "A Short Introduction to Galaxy",
+      "description": "Slides for 'A Short Introduction to Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html",
+      "name": "A short introduction to Galaxy",
+      "description": "Hands-on for 'A short introduction to Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html",
+      "name": "A Short Introduction to Galaxy",
+      "description": "Slides for 'A Short Introduction to Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "name": "Using dataset collections",
+      "description": "Hands-on for 'Using dataset collections' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html",
+      "name": "Rule Based Uploader",
+      "description": "Hands-on for 'Rule Based Uploader' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Kenji Fujihara"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Kenji Fujihara"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Editing",
+      "description": "Training material for genome editing analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-editing/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-genome-editing">
+    <h1 data-toc-skip>CRISPR screen analysis</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <div class="contributors-line">Authors: <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-mblue9"><img src="https://avatars.githubusercontent.com/mblue9?s=27" alt="Avatar">Maria Doyle</a><a href="/training-material/hall-of-fame/kenjifujihara/" class="contributor-badge contributor-kenjifujihara"><img src="https://avatars.githubusercontent.com/kenjifujihara?s=27" alt="Avatar">Kenji Fujihara</a></div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the steps to process CRISPR screen data?</p>
+</li>
+        
+        <li><p>How to identify differentially enriched guides across multiple experimental conditions?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Check quality of raw reads</p>
+</li>
+        
+        <li><p>Trim sequencing adapters</p>
+</li>
+        
+        <li><p>Count guide sequences in samples</p>
+</li>
+        
+        <li><p>Evaluate the quality of count results</p>
+</li>
+        
+        <li><p>Test for differential enrichment of guides across conditions</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> A short introduction to Galaxy:
+                            
+                                <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Using dataset collections:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Rule Based Uploader:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-editing/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 14, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p><strong>C</strong>lustered <strong>R</strong>egularly <strong>I</strong>nterspaced <strong>S</strong>hort <strong>P</strong>alindromic <strong>R</strong>epeats (<strong>CRISPR</strong>)-Cas9 is a groundbreaking technology of recent years. It enables editing of the genome and resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Dou<span class="notranslate">dna</span> in 2020.</p>
+
+<p>The CRISPR repeat sequences guide the Cas9 enzyme to introduce breaks in <span class="notranslate">DNA</span>. With the CRISPR-Cas9 editing system, a 20 base target region in the genome is added into the CRISPR guide and the Cas9 enzyme then cuts this region.</p>
+
+<p>CRISPR screens provide a high-throughput way to identify genes and pathways that enable cells to survive. In a CRISPR screen all the genes in the genome can be targeted (genome-wide screen) or just a selection (boutique screen). Knockout or activation screens can be performed.</p>
+
+<figure id="figure-1"><img src="../../images/crispr-screen/crispr-screen.jpg" alt="Illustration of CRISPR Screen Method" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> CRISPR knockout and activation methods (from <span class="citation"><a href="#Joung2016">Joung <i>et al.</i> 2016</a></span>)</figcaption></figure>
+
+<p>Here we will demonstrate analysing CRISPR screen using data from <span class="citation"><a href="#Fujihara2020">Fujihara <i>et al.</i> 2020</a></span>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preparing-the-reads" id="markdown-toc-preparing-the-reads">Preparing the <span class="notranslate">reads</span></a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+      <li><a href="#raw-reads-qc" id="markdown-toc-raw-reads-qc">Raw <span class="notranslate">reads</span> QC</a></li>
+      <li><a href="#trim-adapters" id="markdown-toc-trim-adapters">Trim adapters</a></li>
+    </ol>
+  </li>
+  <li><a href="#counting" id="markdown-toc-counting">Counting</a></li>
+  <li><a href="#testing" id="markdown-toc-testing">Testing</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="preparing-the-reads">Preparing the <span class="notranslate">reads</span></h1>
+
+<h2 id="data-upload">Data upload</h2>
+
+<p>We will use fastq files containing 1% of <span class="notranslate">reads</span> from the original samples to demonstrate the read processing steps.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-retrieve-crispr-screen-fastq-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieve CRISPR screen fastq datasets</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li>Click on <strong>Rule-based</strong> tab</li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li>
+          <p>Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T0-Control https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T0-Control.fastq.gz
+T8-APR-246 https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-APR-246.fastq.gz
+T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-Vehicle.fastq.gz
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <p><img src="../../images/crispr-screen/crispr_rule_uploader.png" alt="Rule-based Uploader" loading="lazy" /></p>
+
+      <ul>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>
+              <p>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>: column <code class="language-plaintext highlighter-rouge">A</code></p>
+
+              <blockquote class="tip">
+                <h3 id="tip-cant-find-list-identifier"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Can’t find <em>List Identifier</em>?</h3>
+                <p>Then you’ve chosen to upload as a ‘dataset’ and not a ‘collection’. Close the upload menu, and restart the process, making sure you check <em>Upload data as</em>: <strong>Collection(s)</strong></p>
+              </blockquote>
+            </li>
+            <li>
+              <p>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></p>
+            </li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
+        <li>In the Name: box type <code class="language-plaintext highlighter-rouge">fastqs</code> and press <kbd>Upload</kbd></li>
+      </ul>
+
+      <p><img src="../../images/crispr-screen/crispr_rule_editor.png" alt="Rule-based Editor" loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="raw-reads-qc">Raw <span class="notranslate">reads</span> QC</h2>
+
+<p>First we’ll check the quality of the raw read sequences with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and aggregate the reports from the multiple samples with <a href="https://multiqc.info/">MultiQC</a> (<span class="citation"><a href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a></span>). We will check if the base quality is good and for presence of adapters. For more details on quality control and what the FastQC plots mean see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: fastqs (click “Dataset collection” button on left-side of this input field)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the webpage output of <strong>FastQC</strong> for the T0 sample</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What is the read length?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>The read length is 75 bp.</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters to aggregate the FastQC reports:
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
+            <li>In <em>“FastQC output”</em>
+              <ul>
+                <li><em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code></li>
+                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code> files (output of <strong>FastQC</strong>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the webpage output from MultiQC for each FASTQ</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What do you think of the quality of the sequences?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>The quality seems good for the 3 files.</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We need to trim the adapters to leave just the 20bp guide sequences.</p>
+
+<h2 id="trim-adapters">Trim adapters</h2>
+
+<p>We’ll trim these sequences using <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>) and its linked adapter format <code class="language-plaintext highlighter-rouge">MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER</code>, as discussed <a href="https://github.com/marcelm/cutadapt/issues/261#issue-261019127">here</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-trim-adapters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Trim adapters</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file #1”</em>: all fastq.gz files</li>
+            <li>In <em>“Read 1 Options”</em>:
+              <ul>
+                <li>In <em>“3’ (End) Adapters”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 3’ (End) Adapters”</em>
+                      <ul>
+                        <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom sequence</code>
+                          <ul>
+                            <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">TGTGGAAAGGACGAAACACCG...GTTTTAGAGCTAGAAATAGCAAG</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Filter Options”</em>:
+          <ul>
+            <li><em>“Minimum length (R1)”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Read Modification Options”</em>:
+          <ul>
+            <li><em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+          </ul>
+        </li>
+        <li><em>“Outputs selector”</em>:
+          <ul>
+            <li><em>“Report”</em>: tick</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the report output from Cutadapt for the T8-APR sample</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What % of <span class="notranslate">reads</span> had adapters?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>99.9%</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="counting">Counting</h1>
+
+<p>For the rest of the CRISPR screen analysis, counting and testing, we’ll use MAGeCK (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span>).</p>
+
+<p>To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library so we use that file. The file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in <span class="notranslate">Galaxy</span> that can format the file removing spaces and converting commas to tabs.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-count-guides-per-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count guides per gene</h3>
+  <ol>
+    <li>Import the library file
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/brunello.tsv
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4"><strong>MAGeCK count</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4</span></span>  with the following parameters:
+      <ul>
+        <li><em>“<span class="notranslate">Reads</span> Files or Count Table?”</em>: <code class="language-plaintext highlighter-rouge">Separate <span class="notranslate">Reads</span> files</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sample <span class="notranslate">reads</span>”</em>: the <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (outputs of <strong>Cutadapt</strong>)</li>
+          </ul>
+        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sg<span class="notranslate">RNA</span> library file”</em>: the <code class="language-plaintext highlighter-rouge">brunello.tsv</code> file</li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Output Count Summary file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Output plots”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the Count Summary file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What percent of <span class="notranslate">reads</span> mapped?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>More than 80% <span class="notranslate">reads</span> mapped in each sample</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="testing">Testing</h1>
+
+<p>We have been using 1% of <span class="notranslate">reads</span> from the samples in the original dataset to save time as FASTQ files are large. As counts files are small, here we will import and use the MAGeCK counts file generated using all the <span class="notranslate">reads</span> for the samples.</p>
+
+<p>We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehicle). We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren’t allowed. We can also specify by their positions in the counts file with the first sample column being 0.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-test-for-enrichment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test for enrichment</h3>
+  <ol>
+    <li>Import the count file from the full dataset <a href="https://zenodo.org/record/5570011">Zenodo</a> or the Shared Data library (if available):
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/mageck_counts_full.tsv
+</code></pre></div>      </div>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1"><strong>MAGeCKs test</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Counts file”</em>: the <code class="language-plaintext highlighter-rouge">mageck_counts_full.tsv</code> file</li>
+        <li><em>“Specify Treated samples or Control”</em>: <code class="language-plaintext highlighter-rouge">Treated samples</code>
+          <ul>
+            <li><em>“Treated Sample Labels (or Indexes)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+          </ul>
+        </li>
+        <li><em>“Control Sample Labels (or Indexes)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Output normalized counts file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Output plots”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Method for normalization”</em>: <code class="language-plaintext highlighter-rouge">Total</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the PDF Report output.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What are the top 3 genes?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>ESD, MTHFD1L and SHMT2 which are part of the glutathione pathway. That was the main pathway found to be altered in the published paper for this dataset.</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>CRISPR Screen <span class="notranslate">reads</span> can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using MAGeCK.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>CRISPR screen data can be analysed using MAGeCK and standard read quality tools</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/genome-editing/faqs/">FAQ page for the Genome Editing topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12. <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a></li>
+<li id="Li2014">Li, W., H. Xu, T. Xiao, L. Cong, M. I. Love <i>et al.</i>, 2014 <b>MAGeCK enables robust identification of essential genes from genome-scale CRISPR/Cas9 knockout screens</b>. 15: <a href="https://doi.org/10.1186/s13059-014-0554-4">10.1186/s13059-014-0554-4</a></li>
+<li id="Li2015">Li, W., J. Köster, H. Xu, C.-H. Chen, T. Xiao <i>et al.</i>, 2015 <b>Quality control,  modeling,  and visualization of CRISPR screens with MAGeCK-VISPR</b>. 16: <a href="https://doi.org/10.1186/s13059-015-0843-6">10.1186/s13059-015-0843-6</a></li>
+<li id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048. <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a></li>
+<li id="Joung2016">Joung, J., S. Konermann, J. S. Gootenberg, O. O. Abudayyeh, R. J. Platt <i>et al.</i>, 2016 <b>Protocol: Genome-scale CRISPR-Cas9 Knockout and Transcriptional Activation Screening</b>. <a href="https://doi.org/10.1101/059626">10.1101/059626</a></li>
+<li id="Fujihara2020">Fujihara, K. M., B. Zhang, T. D. Jackson, B. Nijiagel, C.-S. Ang <i>et al.</i>, 2020 <b>Genome-wide CRISPR screens reveal APR-246 (Eprenetapopt) triggers ferroptosis and inhibits iron-sulfur cluster biogenesis</b>. <a href="https://doi.org/10.1101/2020.11.29.398867">10.1101/2020.11.29.398867</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=CRISPR screen analysis (Genome Editing)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Maria Doyle, Kenji Fujihara, 2021 <b>CRISPR screen analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{genome-editing-crispr-screen,
+author = "Maria Doyle and Kenji Fujihara",
+title = "CRISPR screen analysis (Galaxy Training Materials)",
+year = "2021",
+month = "10",
+day = "14"
+url = "\url{https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
