@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/collections/tutorial
-redirect_from:
+  
   -topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial
 
 title: "Using dataset collections"
@@ -30,7 +30,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 
 #### In this tutorial we assume the following:
 
-- you already have basic understanding of how Galaxy works (if you don't see [Galaxy 101](https://usegalaxy.org/galaxy101) tutorial;
+- you already have basic understanding of how Galaxy works (if you don't see [Galaxy 101](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) tutorial;
 - you have an account in Galaxy ([see this](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account) if you don't);
 - you have your browser configured as described [here](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#00-getting-your-display-sorted-out).
 
