@@ -28,7 +28,20 @@ module Jekyll
       resources.select{ |a| a['type'] != 'introduction' }.length
     end
 
-    def topic_filter(pages, topic_name)
+    def topic_filter(site, topic_name)
+      if not site.data.has_key?('cache_topic_filter')
+        site.data['cache_topic_filter'] = Hash.new
+      end
+
+      if not site.data['cache_topic_filter'].has_key?(topic_name)
+        #puts "Cache miss: #{topic_name}"
+        site.data['cache_topic_filter'][topic_name] = run_topic_filter(site.pages, topic_name)
+      end
+
+      site.data['cache_topic_filter'][topic_name]
+    end
+
+    def run_topic_filter(pages, topic_name)
       # Arrays that will store all introduction slides and tutorials we discover.
       resource_intro = []
       resource_pages = []

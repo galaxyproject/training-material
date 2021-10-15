@@ -41,7 +41,7 @@ Keep an eye on this page for the latest news around the GTN. New tutorials, GTN 
    <div class="card-body">
         <!--<a href="{{site.baseurl}}{{n.url}}"><h4 class="card-title">{{n.title}}</h4></a>-->
         {% if n.contributors %}
-        <div class="contributors-line"> {% include _includes/contributor-badge-list.html contributors=n.contributors %}</div>
+        <div class="contributors-line"> {% include _includes/contributor-list.html contributors=n.contributors badge=true %}</div>
         {% endif %}
         {% for tag in n.tags %}
 <button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials with this tag">{{ tag  }}</button>

@@ -39,7 +39,9 @@ contributors:
   - pclo
   - ales-ibt
 
-recomendaciones:
+requirements:
+-
+    type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-intro
@@ -397,7 +399,7 @@ Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete drop
 > 4. Cambiar el nombre {% icon galaxy-pencil %} de 'salmonKallistoMtxTo10x....:matrix' a `Matrix table`
 {: .hands_on}
 
-La salida es una matriz que contendrá la orientación correcta para poder ser utilizada por las herramientas en el análisis subsecuente. Sin embargo, nuestra matriz se ve un poco dispersa, por ejemplo, haz clic en `Gene table`. No se tú, pero a mí me costaría entablar una buena discusión biológica utilizando únicamente los gene_ids de Ensembl. Lo que en realidad me gustaría es tener información más ‘humanamente entendible’, como la del tipo ‘GAPDH’ o con otro tipo de acrónimos de genes; también me gustaría tener información sobre genes mitocondriales para poder evaluar si mis células están bajo algún tipo de estrés o no. Con el objetivo de preparar nuestros datos para meterlos a emptyDrops, vamos a combinar esta información y depositarla en un objeto; ahora es más sencillo añadir dicha información.   
+La salida es una matriz que contendrá la orientación correcta para poder ser utilizada por las herramientas en el análisis subsecuente. Sin embargo, nuestra matriz se ve un poco dispersa, por ejemplo, haz clic en `Gene table`. No se tú, pero a mí me costaría entablar una buena discusión biológica utilizando únicamente los gene_ids de Ensembl. Lo que en realidad me gustaría es tener información más ‘humanamente entendible’, como la del tipo ‘GAPDH’ o con otro tipo de acrónimos de genes; también me gustaría tener información sobre genes mitocondriales para poder evaluar si mis células están bajo algún tipo de estrés o no. Con el objetivo de preparar nuestros datos para meterlos a emptyDrops, vamos a combinar esta información y depositarla en un objeto; ahora es más sencillo añadir dicha información.
 
 ## Añadir metadatos de genes
 

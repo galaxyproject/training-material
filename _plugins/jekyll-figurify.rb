@@ -22,6 +22,10 @@ module Jekyll
 
     def figurify(page, site)
       num = 0
+      if page.content.nil?
+        return
+      end
+
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")\)({:(.*)})?/) {
         alt = $1
         url = $2

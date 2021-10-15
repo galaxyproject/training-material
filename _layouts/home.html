@@ -35,7 +35,7 @@ layout: base
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "use" and topic[1].enable != false %}
                     <tr>
-                        {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
@@ -57,7 +57,7 @@ layout: base
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "basics" and topic[1].enable != false  %}
                     <tr>
-                        {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
@@ -78,7 +78,7 @@ layout: base
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "data-science" and topic[1].enable != false  %}
                     <tr>
-                        {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
@@ -100,7 +100,7 @@ layout: base
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "admin-dev" and topic[1].enable != false  %}
                     <tr>
-                        {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
@@ -129,7 +129,7 @@ layout: base
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "instructors" and topic[1].enable != false %}
                     <tr>
-                        {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                         <td>{{ tutorial_number }}</td>
                     </tr>

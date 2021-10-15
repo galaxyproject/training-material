@@ -1,0 +1,6 @@
+{%- if include.contributors -%}
+{%- capture people -%}
+{% for id in include.contributors %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+{%- endcapture -%}
+{%- endif -%}
+{{- people | remove_first: include.sep -}}
