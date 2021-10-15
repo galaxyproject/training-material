@@ -60,6 +60,35 @@ module Jekyll
       return notebook, metadata
     end
 
+    def fixRNotebook(notebook)
+      # Set the bash kernel
+      notebook['metadata'] = {
+        "kernelspec" => {
+         "display_name" => "R",
+         "language" => "R",
+         "name" => "r"
+        },
+        "language_info" => {
+         "codemirror_mode" => "r",
+         "file_extension" => ".r",
+         "mimetype" => "text/x-r-source",
+         "name" => "R",
+         "pygments_lexer" => "r",
+         "version" => "4.1.0"
+        }
+      }
+      # Strip out %%R since we'll use the bash kernel
+      notebook['cells'].map{|cell|
+        if cell.fetch('cell_type') == 'code'
+          if cell['source'][0] == "%%R\n"
+            cell['source'] = cell['source'].slice(1..-1)
+          end
+        end
+        cell
+      }
+      notebook
+    end
+
     def fixBashNotebook(notebook)
       # Set the bash kernel
       notebook['metadata'] = {
@@ -87,17 +116,26 @@ module Jekyll
       notebook
     end
 
+    def fixSqlNotebook(notebook)
+      # Add in a %%sql at the top of each cell
+      notebook['cells'].map{|cell|
+        if cell.fetch('cell_type') == 'code'
+          if cell['source'].join('').index('load_ext').nil?
+            cell['source'] = ["%%sql\n"] + cell['source']
+          end
+        end
+        cell
+      }
+      notebook
+    end
+
     def markdownify(site, text)
       site.find_converter_instance(
         Jekyll::Converters::Markdown
       ).convert(text.to_s)
     end
 
-    def renderMarkdownCells(site, notebook, page)
-      # TODO:
-      #   - strip agenda
-      #   - strip yaml metadata header (or render it more nicely.)
-
+    def renderMarkdownCells(site, notebook, metadata, page)
       colors = {
         "overview" => "#8A9AD0",
         "agenda" => "#86D486; display: none",
@@ -113,6 +151,8 @@ module Jekyll
         "code-in" => "#86D486",
         "code-out" => "#fb99d0",
       }
+
+      seen_abbreviations = Hash.new
 
       notebook['cells'].map{|cell|
         if cell.fetch('cell_type') == 'markdown'
@@ -138,6 +178,25 @@ module Jekyll
             .gsub(/{% icon comment %}/, '💬')
             .gsub(/{% icon hands_on %}/, '✏️')
 
+          if metadata.key?('abbreviations')
+            metadata['abbreviations'].each{|abbr, defn|
+              cell['source'].gsub(/\{#{abbr}\}/) {
+                if seen_abbreviations.key?(abbr) then
+                  firstdef = false
+                else
+                  firstdef = true
+                  seen_abbreviations[abbr] = true
+                end
+
+                if firstdef then
+                  "#{defn} (#{abbr})"
+                else
+                  "<abbr title=\"#{defn}\">#{abbr}</abbr>"
+                end
+              }
+            }
+          end
+
           # Here we give a GTN-ish styling that doesn't try to be too faithful,
           # so we aren't spending time keeping up with changes to GTN css,
           # we're making it 'our own' a bit.
@@ -157,7 +216,7 @@ module Jekyll
           end
 
           # Strip out the highlighting as it is bad on some platforms.
-          cell['source'].gsub!(/<pre class="highlight">/, '<pre>')
+          cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: white">')
           cell['source'].gsub!(/<div class="highlight">/, '<div>')
 
           # add a 'hint' to the solution boxes which have blanked out text.
@@ -202,6 +261,10 @@ module Jekyll
         # Apply language specific conventions
         if notebook_language == 'bash'
           notebook = fixBashNotebook(notebook)
+        elsif notebook_language == 'sql'
+          notebook = fixSqlNotebook(notebook)
+        elsif notebook_language == 'r'
+          notebook = fixRNotebook(notebook)
         end
 
         # Here we loop over the markdown cells and render them to HTML. This
@@ -210,7 +273,7 @@ module Jekyll
         # custom CSS which only seems to work when inline on a cell, i.e. we
         # can't setup a style block, so we really need to render the markdown
         # to html.
-        notebook = renderMarkdownCells(site, notebook, page)
+        notebook = renderMarkdownCells(site, notebook, metadata, page)
 
         # Here we add a close to the notebook
         notebook['cells'] = notebook['cells'] + [{

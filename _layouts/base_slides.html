@@ -2,7 +2,7 @@
 <html>
 
 {% assign topic = site.data[page.topic_name] %}
-{% assign topic_material = site.pages | topic_filter:page.topic_name %}
+{% assign topic_material = site | topic_filter:page.topic_name %}
 {% assign title = topic.title %}
 
 {% assign tutorial = page %}
@@ -82,7 +82,7 @@ class: center, middle, inverse
 
 {% if tutorial.contributors %}
 <div class="contributors-line">
-{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
+{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}
 </div>
 {% endif %}
 
@@ -130,7 +130,7 @@ Useful when presenting."
 
 {% if tutorial.contributors %}
 <div class="contributors-line">
-{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
+{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}
 </div>
 {% endif %}
 
