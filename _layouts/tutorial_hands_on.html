@@ -61,7 +61,7 @@ footer: no
     </div>
     {% endif %}
 
-    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-badge-list.html contributors=page.contributors %}</div>
+    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true %}</div>
 
     <blockquote class="overview">
         <h3>{{ locale['overview'] | default: "Overview"}}</h3>
@@ -262,7 +262,7 @@ footer: no
                 <p>
                     <ol>
                         <li id="citation-text">
-                            {%- include _includes/contributor-author-list-comma.html contributors=page.contributors -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
+                            {%- include _includes/contributor-list.html contributors=page.contributors sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -277,7 +277,7 @@ footer: no
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-author = "{%- include _includes/contributor-author-list.html contributors=page.contributors -%}",
+author = "{%- include _includes/contributor-list.html contributors=page.contributors sep=" and " -%}",
 title = "{{ page.title }} (Galaxy Training Materials)",
 year = "{{ page.last_modified_at | date: "%Y"}}",
 month = "{{ page.last_modified_at | date: "%m"}}",

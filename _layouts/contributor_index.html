@@ -27,7 +27,7 @@ layout: base
 					{{ contributors[page.contributor].name | default: page.contributor }}
 				</h3>
 
-				{% if has_philosophy %}
+				{% if page.has_philosophy %}
 				<div class="contact-items">
 					<a href="{{ site.baseurl }}/topics/instructors/philosophies/#{{ page.contributor }}">
 						Training Philosophy
@@ -83,24 +83,27 @@ layout: base
 				</div>
 				{% endif %}
 				<br/>
+				<h4>Favourite Topics</h4>
 				<canvas id="myChart" height="300px"></canvas>
+				<h4>Favourite Formats</h4>
+				<canvas id="slidesVsTutorials" height="300px"></canvas>
 
 			</div>
 
 			<div class="col-md-9">
 				<h1>Contributions</h1>
-				<p class="text-muted">
 				{% if contributors[page.contributor].bio %}
+				<p class="text-muted">
 					{{ contributors[page.contributor].bio }}
-				{% else %}
-					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.)
+				</p>
 				{% endif %}
+				<p class="text-muted">
+					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.)
 				</p>
 
 				<h2>Tutorials</h2>
 				<ul>
-				{% for res in tutorials %}
-					{% if res.contributors contains page.contributor %}
+				{% for res in page.tutorials %}
 					<li>
 						{% assign topic_id = res | get_topic %}
 						{% assign topic = site.data[topic_id] %}
@@ -112,14 +115,12 @@ layout: base
 						{{ res.title }}
 						</a>
 					</li>
-					{% endif %}
 				{% endfor %}
 				</ul>
 
 				<h2>Slides</h2>
 				<ul>
-				{% for res in slides %}
-					{% if res.contributors contains page.contributor %}
+				{% for res in page.slides %}
 					<li>
 						{% assign topic_id = res | get_topic %}
 						{% assign topic = site.data[topic_id] %}
@@ -131,7 +132,6 @@ layout: base
 						{{ res.title }}
 						</a>
 					</li>
-					{% endif %}
 				{% endfor %}
 				</ul>
 
@@ -140,72 +140,96 @@ layout: base
 				<script type="text/javascript">
 
 var ctx = document.getElementById('myChart').getContext('2d');
+var ctx2 = document.getElementById('slidesVsTutorials').getContext('2d');
 
 var topics = [
-{% for res in tutorials %}
-{% if res.contributors contains page.contributor %}
+{% for res in page.tutorials %}
 	{% assign topic_id = res | get_topic %}
 	{% assign topic = site.data[topic_id] %}
 	"{{ topic.title }}",
-{% endif %}
 {% endfor %}
-{% for res in slides %}
-{% if res.contributors contains page.contributor %}
+{% for res in page.slides %}
 	{% assign topic_id = res | get_topic %}
 	{% assign topic = site.data[topic_id] %}
 	"{{ topic.title }}",
-{% endif %}
 {% endfor %}
 ];
 
+var slidesVsTutos = [
+{% for res in page.tutorials %}
+	"Tutorials",
+{% endfor %}
+{% for res in page.slides %}
+	"Slides",
+	{% if res.video %}
+	"Videos",
+	{% endif %}
+{% endfor %}
+]
+
 function foo(arr) {
-var a = [], b = [], prev;
+	var a = [], b = [], prev;
 
-arr.sort();
-for ( var i = 0; i < arr.length; i++ ) {
-	if ( arr[i] !== prev ) {
-		a.push(arr[i]);
-		b.push(1);
-	} else {
-		b[b.length-1]++;
+	arr.sort();
+	for ( var i = 0; i < arr.length; i++ ) {
+		if ( arr[i] !== prev ) {
+			a.push(arr[i]);
+			b.push(1);
+		} else {
+			b[b.length-1]++;
+		}
+		prev = arr[i];
 	}
-	prev = arr[i];
-}
 
-return [a, b];
+	return [a, b];
 }
 
 out = foo(topics)
 
 function genColors(size) {
-var o = [];
-for(i = 0; i < size; i++){
-	o.push(`hsl(${ i * 360 / size }, 100%, 50%)`)
-}
-return o;
-}
-
-
-var chart = new Chart(ctx, {
-// The type of chart we want to create
-type: 'doughnut',
-
-// The data for our dataset
-data: {
-	labels: out[0],
-	datasets: [{
-		label: 'Contribution Areas',
-		backgroundColor: genColors(out[0].length),
-		data: out[1]
-	}]
-},
-
-// Configuration options go here
-options: {
-	legend: {
-		display: false
+	var o = [];
+	for(i = 0; i < size; i++){
+		o.push(`hsl(${ i * 360 / size }, 100%, 50%)`)
 	}
+	return o;
 }
+
+
+// Which topics
+var chart = new Chart(ctx, {
+	type: 'doughnut',
+	data: {
+		labels: out[0],
+		datasets: [{
+			label: 'Contribution Areas',
+			backgroundColor: genColors(out[0].length),
+			data: out[1]
+		}]
+	},
+	options: {
+		legend: {
+			display: false
+		}
+	}
+});
+
+out = foo(slidesVsTutos);
+// What material type
+var chart2 = new Chart(ctx2, {
+	type: 'doughnut',
+	data: {
+		labels: out[0],
+		datasets: [{
+			label: 'Contribution Areas',
+			backgroundColor: genColors(out[0].length),
+			data: out[1]
+		}]
+	},
+	options: {
+		legend: {
+			display: false
+		}
+	}
 });
 				</script>
 
