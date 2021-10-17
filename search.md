@@ -33,7 +33,7 @@ var tutorials = { {% for topic in site.data %}
             {% endfor %}
             </p>
           {% endif %}
-          <p>{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}</p>
+          <p>{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}</p>
           <a class='btn btn-primary' href='{{ site.baseurl }}{{ tutorial.url }}'>View Tutorial</a>
           </div>
           </div>
