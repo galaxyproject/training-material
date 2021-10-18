@@ -38,8 +38,7 @@ The GitHub repository for the training material is: [{{ site.github_repository }
 
 > ### {% icon hands_on %} Hands-on: Familiarization with GitHub
 >
-> 1. Go on the GitHub repository:
-[{{ site.github_repository }}]({{ site.github_repository }})
+> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 >
 >    ![GitHub interface](../../images/github_interface.png "Interface of the GitHub repository of the training material")
 >
