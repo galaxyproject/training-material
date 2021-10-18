@@ -309,7 +309,7 @@ Four versions of this workflow are available with their tools and parameters opt
 
 Workflow version 	| Input data | Read aligner | Variant caller
 --- | --- | --- | ---
-Illumina RNAseq SE | Single-end data derived from RNAseq experiments | **bowtie2** {% cite Langmead_2012 %} | **lofreq** {% cite wilm_2012 %}
+Illumina RNAseq SE | Single-end data derived from RNAseq experiments | **bowtie2** {% cite langmead_2012 %} | **lofreq** {% cite wilm_2012 %}
 Illumina RNAseq PE | Paired-end data derived from RNAseq experiments | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
 Illumina ARTIC | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
 ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
