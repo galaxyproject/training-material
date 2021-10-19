@@ -637,6 +637,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -710,11 +712,11 @@
 
 <p><strong>Proteogenomics</strong> involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene <span class="notranslate">expression</span>. In the first section of the tutorial, we will create a protein database (FASTA) using <span class="notranslate">RNA</span>-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization</p>
 
-<p><img src="../../images/potential_novel_publication.png" alt="Novel Peptides" loading="lazy" /></p>
+<p><img src="../../images/potential_novel_publication.png" alt="Novel Peptides. " loading="lazy" /></p>
 
 <p>Proteogenomics integrates <strong><span class="notranslate">RNA</span>-Seq</strong> data for generating customized protein sequence databases with mass spectrometry-based proteomics data, which are matched to these databases to identify protein sequence variants. (Cancer Res. (2017); 77(21):e43-e46. doi: <a target="_blank" href="https://doi.org/10.1158/0008-5472.CAN-17-0331">10.1158/0008-5472.CAN-17-0331</a>).</p>
 
-<p><img src="../../images/workflow_objective1.png" alt="Proteogenomics" loading="lazy" /></p>
+<p><img src="../../images/workflow_objective1.png" alt="Proteogenomics. " loading="lazy" /></p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -749,7 +751,7 @@
 
 <p>This tutorial focuses on creating a <strong>FASTA</strong> database generated from <span class="notranslate">RNA</span>-seq data. There are two outputs from this <span class="notranslate">workflow</span>: (1) a <strong>sequence database</strong> consisting of variants and known reference sequences and (2) <span class="notranslate">mapping</span> files containing <strong>genomic</strong> and <strong>variant</strong> <span class="notranslate">mapping</span> data.</p>
 
-<p><img src="../../images/database_creation.png" alt="Database creation" loading="lazy" /></p>
+<p><img src="../../images/database_creation.png" alt="Database creation. " loading="lazy" /></p>
 
 <p>The first part of the tutorial deals with creating the FASTA file containing sequences with single amino acid variants (SAVs), insertions and deletions (indels). The second part of the <span class="notranslate">workflow</span> helps in creating a FASTA file with transcript assemblies (splicing variants).</p>
 
@@ -767,7 +769,7 @@
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
     </li>
-    <li>Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo <a href="https://doi.org/10.5281/zenodo.1489208"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg" alt="DOI" loading="lazy" /></a>
+    <li>Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo <a href="https://doi.org/10.5281/zenodo.1489208"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg" alt="DOI. " loading="lazy" /></a>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/bf8c34bc-ed55-4b1c-9b69-edfe0926ea84/Trimmed_ref_5000_uniprot_cRAP.fasta
 https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
 https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
@@ -886,7 +888,7 @@ where fr - first strand corresponds to R and RF; fr - second strand corresponds 
 
 <p><a href="https://github.com/ekg/freebayes">FreeBayes</a> is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs (single-nucleotide polymorphisms), indels (insertions and deletions), MNPs (multi-nucleotide polymorphisms), and complex events (composite insertion and substitution events) smaller than the length of a short-read sequencing alignment.</p>
 
-<p><img src="../../images/variant_calling.png" alt="Variant calling" loading="lazy" /></p>
+<p><img src="../../images/variant_calling.png" alt="Variant calling. " loading="lazy" /></p>
 
 <p>Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate a VCF dataset describing SNPs, indels, and complex variants in samples in the input alignments. By default, FreeBayes will consider variants supported by at least two observations in a single sample (<code class="language-plaintext highlighter-rouge">-C</code>) and also by at least 20% of the <span class="notranslate">reads</span> from a single sample (<code class="language-plaintext highlighter-rouge">-F</code>). These settings are suitable for low to high depth sequencing in haploid and diploid samples, but users working with polyploid or pooled samples may adjust them depending on the characteristics of their sequencing data.</p>
 
@@ -956,7 +958,7 @@ The reference protein set can be filtered by transcript <span class="notranslate
 create reference and variant protein sequences. <span class="notranslate">Galaxy</span> administrators can use the CustomProDB
 data manager to create these annotations to make them available for users.</p>
 
-<p><img src="../../images/CustomProDB.png" alt="customproDB" loading="lazy" /></p>
+<p><img src="../../images/CustomProDB.png" alt="customproDB. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generate-protein-fastas-from-exosome-or-transcriptome-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate protein FASTAs from exosome or transcriptome data</h3>
@@ -1277,7 +1279,7 @@ We will also need to similarily modify the accessions in the genomic <span class
 Also, while running the <span class="notranslate">workflow</span>, the Title column for <strong>Tabular-to-FASTA</strong> might come empty, so please make sure you select Title Column as “1”.</p>
 </blockquote>
 
-<p><img src="../../images/Fasta_sequence.png" alt="Fasta sequence" loading="lazy" /></p>
+<p><img src="../../images/Fasta_sequence.png" alt="Fasta sequence. " loading="lazy" /></p>
 
 <p>For visualization purposes we also use the concatenate tool to concatenate the genomic <span class="notranslate">mapping</span> with the protein <span class="notranslate">mapping</span> dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.</p>
 
@@ -1378,7 +1380,7 @@ We need to modify the CustomProDB protein accessions the same as was done for th
     <li>
       <p>Rename the output as <strong>“genomic_<span class="notranslate">mapping</span>_sqlite”</strong></p>
 
-      <p><img src="../../images/genomic_mapping_file.png" alt="genomic mapping" loading="lazy" /></p>
+      <p><img src="../../images/genomic_mapping_file.png" alt="genomic mapping. " loading="lazy" /></p>
     </li>
   </ol>
 
@@ -1462,7 +1464,7 @@ FROM variant_annotation
 annotation information from the protein <span class="notranslate">mapping</span> file, will be utilized
 by MVP to visualize the genomic loci of any variant peptides.</p>
 
-<p><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant" loading="lazy" /></p>
+<p><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant. " loading="lazy" /></p>
 
 <p>Finally, we can create a database which can be used to search Mass spectrometry (raw/mgf) files to identify peptides that match to this database.</p>
 

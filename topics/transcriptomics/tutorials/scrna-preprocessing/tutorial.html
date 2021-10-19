@@ -832,10 +832,6 @@
         
     
         
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
-        
     
         
     
@@ -851,6 +847,8 @@
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
+        
+    
         
     
         
@@ -979,13 +977,13 @@
 
 <p>Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:</p>
 
-<figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
 
 <p>The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential <span class="notranslate">expression</span> in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.</p>
 
 <p>Other than cell development, there are many more factors that can shape the level of gene <span class="notranslate">expression</span> exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.</p>
 
-<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/scrna_nbt3711.png" alt="Facets of Cellular Identity" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Revealing the vectors of cellular identity with <span class="notranslate">single-cell</span> genomics, Nature Biotechnology, 2016</figcaption></figure>
+<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/scrna_nbt3711.png" alt="Facets of Cellular Identity. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Revealing the vectors of cellular identity with <span class="notranslate">single-cell</span> genomics, Nature Biotechnology, 2016</figcaption></figure>
 
 <p>This tutorial is in part inspired by aspects of the <a href="https://hemberg-lab.github.io/scRNA.seq.course/">Hemberg <span class="notranslate">workflow</span></a> at the Sanger institute, as well as the <a href="https://github.com/CGATOxford/UMI-tools">CGATOxford <span class="notranslate">workflow</span></a> which provides the <strong>UMI-tools</strong> suite that we make use of. The barcoding follows the <a href="https://doi.org/10.1186/s13059-016-0938-8">CEL-Seq2 protocol</a> mentioned in the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on, and uses the same lane configuration as utilised by the <a href="https://www.ie-freiburg.mpg.de/gruen">Freiburg MPI Grün lab</a>.</p>
 
@@ -1004,7 +1002,7 @@
   <li><strong>Multi-Batch Processing</strong></li>
 </ol>
 
-<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Overview of workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the entire <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Overview of workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the entire <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>The first part of this tutorial will deal with batches, and use example <em>FASTQ</em> data from a single batch, which we will perform <a href="#barcode-extraction">barcode extraction</a> and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.</p>
 
@@ -1049,7 +1047,7 @@
 
 <p>The size of sc<span class="notranslate">RNA</span> files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using <em>Mus Musculus</em> annotation data (.gtf) from the  <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/">NCBI RefSeq</a> track, as well as a barcodes file (.tsv).</p>
 
-<figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_upper.png" alt="Workflow Upper" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Single batch processing</figcaption></figure>
+<figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_upper.png" alt="Workflow Upper. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Single batch processing</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload and organization</h3>
@@ -1661,11 +1659,11 @@ The number of columns can be seen by scrolling the file preview window completel
 
   <p><span class="notranslate">Galaxy</span> provides a <span class="notranslate">workflow</span> that captures the process of all the above stages for a <a href="workflows/scrna_pp_celseq.ga">single pair of FASTQ data</a>:</p>
 
-  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_single.png" alt="Single Batch Workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Single Batch <span class="notranslate">Workflow</span></figcaption></figure>
+  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_single.png" alt="Single Batch Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Single Batch <span class="notranslate">Workflow</span></figcaption></figure>
 
   <p>For multiple batch processing, <span class="notranslate">Galaxy</span> can make use of <em>Nested Workflows</em> that in this case can take in a <a href="workflows/scrna_mp_celseq.ga">list of input paired FASTQ data</a> and process them in parallel.</p>
 
-  <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_nested.png" alt="Multiple Batch Workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Nested Multiple Batch <span class="notranslate">Workflow</span></figcaption></figure>
+  <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_nested.png" alt="Multiple Batch Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Nested Multiple Batch <span class="notranslate">Workflow</span></figcaption></figure>
 
 </blockquote>
 
@@ -1673,7 +1671,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <h1 id="multi-batch-processing">Multi-Batch Processing</h1>
 
-<figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_lower.png" alt="Workflow Lower" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Multiple batch processing</figcaption></figure>
+<figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_lower.png" alt="Workflow Lower. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Multiple batch processing</figcaption></figure>
 
 <p>Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:</p>
 
@@ -1740,7 +1738,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <p>To resolve this we can perform a “Full Table Join” where the missing data for <em>GeneE</em> and <em>GeneA</em> in Batch1 and Batch2 respectively are replaced with zeroes:</p>
 
-<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/scrna_fulltable.svg" alt="Table Join" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Full Table Join</figcaption></figure>
+<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/scrna_fulltable.svg" alt="Table Join. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Full Table Join</figcaption></figure>
 
 <blockquote class="comment">
   <h3 id="comment-comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
@@ -2014,7 +2012,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <h4 id="cross-contamination-plot">Cross-contamination Plot</h4>
 
-<figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_crosscontamination.png" alt="Contamination Plots" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The Pre-filter and Post-filter plots</figcaption></figure>
+<figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_crosscontamination.png" alt="Contamination Plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The Pre-filter and Post-filter plots</figcaption></figure>
 
 <p>Two things to take note of:</p>
 
@@ -2053,7 +2051,7 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 <p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our <span class="notranslate">reads</span> and into the read headers, in order to preserve them during <span class="notranslate">mapping</span>. We have discovered how these barcoded <span class="notranslate">reads</span> are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against <span class="notranslate">reads</span> that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.</p>
 
-<figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 

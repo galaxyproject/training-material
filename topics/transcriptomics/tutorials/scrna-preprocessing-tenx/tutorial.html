@@ -843,10 +843,6 @@
         
     
         
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
-        
     
         
     
@@ -862,6 +858,8 @@
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
+        
+    
         
     
         
@@ -989,13 +987,13 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 <p>10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many <span class="notranslate">downstream</span> analysis packages are now scrambling to accommodate.</p>
 
-<figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/tenx_clusters_intro.png" alt="clusters" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> From less than 1K to over 10K with 10x genomics: Analyses of two separate sc<span class="notranslate">RNA</span> datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/tenx_clusters_intro.png" alt="clusters. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> From less than 1K to over 10K with 10x genomics: Analyses of two separate sc<span class="notranslate">RNA</span> datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.</figcaption></figure>
 
 <p>The gain in resolution reduces the granularity and noise issues that plagued the field of sc<span class="notranslate">RNA</span>-seq not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.</p>
 
 <h3 id="library-preparation">Library Preparation</h3>
 
-<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/tenx_libprep.png" alt="Library Preparation" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> An overview of the library preparation</figcaption></figure>
+<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/tenx_libprep.png" alt="Library Preparation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> An overview of the library preparation</figcaption></figure>
 
 <p>The 10X barcoded gel beads consist of a pool barcodes which are used to separately index each cell’s transcriptome. The individual gel barcodes are delivered to each cell via flow-cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet described by a unique 10x barcode that all <span class="notranslate">reads</span> in that droplet are associated with once they undergo reverse-transcription (RT) which reconstructs the m<span class="notranslate">RNA</span> into a c<span class="notranslate">DNA</span> counterpart. The oil is then removed and all (now barcoded) c<span class="notranslate">DNA</span> <span class="notranslate">reads</span> are pooled together to be sequenced.</p>
 
@@ -1043,7 +1041,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 </blockquote>
 
-<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/tenx_workflow.png" alt="Overview of workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/tenx_workflow.png" alt="Overview of workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>The first part of this tutorial is essentially a one-click “fire and forget” solution to demultiplexing and quantifying sc<span class="notranslate">RNA</span>-seq data, where much of the complexity required in this extremely crucial stage is simplified into a single step.</p>
 
@@ -1056,7 +1054,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 <blockquote class="details">
   <h3 id="details-benchmark-of-cell-ranger-to-others"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span>: Benchmark of Cell Ranger to others</h3>
 
-  <figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/tenx_runtimes.jpg" alt="tenx_runtimes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Benchmark of different <span class="notranslate">mapping</span> software.</figcaption></figure>
+  <figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/tenx_runtimes.jpg" alt="tenx_runtimes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Benchmark of different <span class="notranslate">mapping</span> software.</figcaption></figure>
 
   <p>The image is from <a href="https://doi.org/10.1101/673285"><em>“Melsted et al (June, 2019)</em></a>. Notice the order of magnitude speed up that STARsolo and a few others display, for a variety of different datasets in comparison to Cell Ranger.</p>
 </blockquote>
@@ -1125,7 +1123,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 <p>There are two main reagent kits used during the library preparation, and the choice of one will influence the size of the sequences we work with. Below we can see the layout of the primers used in both chemistries. We can ignore most of these as they are not relevant, namely: the P5 and P7 illumina primers are used in the illumina <a href="https://en.wikipedia.org/wiki/Illumina_dye_sequencing#Bridge_amplification">bridge amplification</a> process; the Sample Index is an 8bp primer which is related to the Chromium system that balances nucleotide bias and ensures that there is no sample overlap during the multiplexed sequencing; and the Poly(dT) VN primer used to capture <span class="notranslate">RNA</span> sequences with poly-A tails (i.e. m<span class="notranslate">RNA</span>).</p>
 
-<figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/tenx_primers.svg" alt="chem" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> 10x Chromiumv2 and Chromiumv3 Chemistries</figcaption></figure>
+<figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/tenx_primers.svg" alt="chem. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> 10x Chromiumv2 and Chromiumv3 Chemistries</figcaption></figure>
 
 <p>The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our <span class="notranslate">reads</span>. It is highly advised that the <a href="/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html">Plates, Batches, and Barcodes</a> slides are revisited to refresh your mind on these concepts.</p>
 
@@ -1161,7 +1159,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
   <p>Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.</p>
 
-  <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/tenx_strandedness.svg" alt="strandedness" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> <span class="notranslate">Mapping</span> fragments to overlapping transcripts is ambiguous with unstranded protocols.</figcaption></figure>
+  <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/tenx_strandedness.svg" alt="strandedness. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> <span class="notranslate">Mapping</span> fragments to overlapping transcripts is ambiguous with unstranded protocols.</figcaption></figure>
 
   <p>Stranded protocols overcome this by fitting different 5’ and 3’ primers and adaptors, meaning that the orientation of the fragment is fixed during sequencing. For the Chromium v2 and v3 chemistries, the barcode information is purely within the R1 forward strand.</p>
 
@@ -1532,7 +1530,7 @@ Genes:
 
   <p>As expected, the format that usually wins is the one which is most common in the field. In this case, the format <em>also</em> happens to be a very good format that stores data in a concise, compressed, and extremely readable manner:</p>
 
-  <p>&lt;img src=”/training-material/topics/transcriptomics/images/tenx_anndata.svg “AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix.” “ alt=”anddata”  loading=”lazy”&gt;</p>
+  <p>&lt;img src=”/training-material/topics/transcriptomics/images/tenx_anndata.svg “AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix.” “ alt=”anddata. “  loading=”lazy”&gt;</p>
 
   <p>The <em>AnnData</em> format (<code class="language-plaintext highlighter-rouge">hda5</code>) is an extension of the <a href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format">HDF5 format</a>, which supports multidimensional datasets to be stored in a consistent and space-optimised way. This is the default output of <em>Cell Ranger</em> and so is also the default output of <strong><span class="notranslate">RNA</span> STARsolo</strong>. The format is also now a widely accepted format in many <span class="notranslate">downstream</span> analysis suites.</p>
 </blockquote>
@@ -1566,7 +1564,7 @@ Genes:
 
 </blockquote>
 
-<figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/tenx_knee.png" alt="knee" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Barcode Ranks: The separating thresholds of high and low quality cells</figcaption></figure>
+<figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/tenx_knee.png" alt="knee. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Barcode Ranks: The separating thresholds of high and low quality cells</figcaption></figure>
 
 <p>The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between empty droplets with little <span class="notranslate">RNA</span> and cell-containing droplets with much more <span class="notranslate">RNA</span>, and gives us a rough idea of how many cells to expect in our sample.</p>
 
@@ -1618,7 +1616,7 @@ Genes:
 
 </blockquote>
 
-<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/tenx_cells.png" alt="cells" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Detected Cells (red)</figcaption></figure>
+<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/tenx_cells.png" alt="cells. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Detected Cells (red)</figcaption></figure>
 
 <p>Here we recover 278 high quality cells instead of the 272 detected via the default method previously. On large datasets, this difference can help clean <span class="notranslate">downstream</span> clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the <span class="notranslate">downstream</span> analysis training materials.</p>
 
@@ -1632,7 +1630,7 @@ Genes:
 
 <p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
-<!-- <figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow"  loading="lazy"><figcaption><span class="figcaption-prefix">Figure 9:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure> -->
+<!-- <figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow. "  loading="lazy"><figcaption><span class="figcaption-prefix">Figure 9:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure> -->
 
 
                 

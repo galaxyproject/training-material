@@ -602,6 +602,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -782,23 +784,23 @@ https://zenodo.org/record/1219888/files/progeny_20
 
       <p>Once Stacks has completed running, you will see 5 new data collections and 8 datasets.</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovomap_out.png" alt="The output of de novo map" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovomap_out.png" alt="The output of de novo map. " loading="lazy" /></p>
 
       <p>Investigate the output files: <code class="language-plaintext highlighter-rouge">result.log</code> and <code class="language-plaintext highlighter-rouge">catalog.*</code> (snps, alleles and tags).</p>
 
       <p>Looking at the first file, <code class="language-plaintext highlighter-rouge">denovo_map.log</code>, you can see the command line used and the start as end execution time.</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_top.png" alt="De novo map log file" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_top.png" alt="De novo map log file. " loading="lazy" /></p>
 
       <p>Then are the different STACKS steps:</p>
 
       <p><code class="language-plaintext highlighter-rouge">ustacks</code></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png" alt="De novo map:ustacks log" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png" alt="De novo map:ustacks log. " loading="lazy" /></p>
 
       <p><code class="language-plaintext highlighter-rouge">cstacks</code></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png" alt="De novo map: cstacks" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png" alt="De novo map: cstacks. " loading="lazy" /></p>
 
       <blockquote class="question">
         <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -818,15 +820,15 @@ https://zenodo.org/record/1219888/files/progeny_20
       </blockquote>
       <p><code class="language-plaintext highlighter-rouge">sstacks</code></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png" alt="De novo map: sstacks log" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png" alt="De novo map: sstacks log. " loading="lazy" /></p>
 
       <p>Lastly, <code class="language-plaintext highlighter-rouge">genotypes</code> is executed. It searches for markers identified on the parents and the associate progenies’ haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declares an ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png" alt="De novo map: genotypes log" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png" alt="De novo map: genotypes log. " loading="lazy" /></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes2.png" alt="De novo map: genotypes log" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes2.png" alt="De novo map: genotypes log. " loading="lazy" /></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_end.png" alt="De novo map: genotypes log" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_end.png" alt="De novo map: genotypes log. " loading="lazy" /></p>
 
       <p>Finally, 447 loci, markers, are kept to generate the <code class="language-plaintext highlighter-rouge">batch_1.genotypess_1.tsv</code> file. 459 loci are stored on the observed haplotype file <code class="language-plaintext highlighter-rouge">batch_1.haplotypes_1.tsv</code>.</p>
     </li>
@@ -838,29 +840,29 @@ https://zenodo.org/record/1219888/files/progeny_20
 
 <p>Here are <code class="language-plaintext highlighter-rouge">sample1.snps</code> (left) and <code class="language-plaintext highlighter-rouge">sample2.snps</code> (right)</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG" alt="De novo map matches files" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG" alt="De novo map matches files. " loading="lazy" /></p>
 
 <p>Catalog_ID (= catalog Stacks_ID) is composed by the <code class="language-plaintext highlighter-rouge">Stack_ID</code> from the “reference” individual, here sample1, but number is different from sample2 <code class="language-plaintext highlighter-rouge">Stack_ID</code>. Thus, in the <code class="language-plaintext highlighter-rouge">catalog.alleles.tsv</code>, the <code class="language-plaintext highlighter-rouge">Stack_ID</code> number 3 corresponds to the <code class="language-plaintext highlighter-rouge">Stack_ID</code> number 16 from sample2!</p>
 
 <p>You can inspect the matches files (you maybe have to change the tsv datatype to a tabular one to correctly display the datasets).</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches2.png" alt="Male and female matches files" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches2.png" alt="Male and female matches files. " loading="lazy" /></p>
 
 <p>Consider catalog SNPs 27 &amp; 28, on the 302 catalog locus:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_snps.png" alt="De novo map matches considering catalog SNPs" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_snps.png" alt="De novo map matches considering catalog SNPs. " loading="lazy" /></p>
 
 <p>nd the corresponding catalog haplotypes, 3 on the 4 possible (AA, AT, GT but no GA):</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png" alt="De novo map matches considering catalog haplotypes" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png" alt="De novo map matches considering catalog haplotypes. " loading="lazy" /></p>
 
 <p>heterozygosity is observed on each parent (one ab, the other ac) and there are 19 genotypes for the 22 individuals.</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_markers.png" alt="De novo map macthes: markers" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_markers.png" alt="De novo map macthes: markers. " loading="lazy" /></p>
 
 <p>We can then see that Stack_ID 330 for female corresponds to the 39 for male:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png" alt="De novo map matches: male and female" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png" alt="De novo map matches: male and female. " loading="lazy" /></p>
 
 <h1 id="genotypes-determination">Genotypes determination</h1>
 
@@ -872,7 +874,7 @@ https://zenodo.org/record/1219888/files/progeny_20
     <li>
       <p>The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/Genetic_map_F2.png" alt="The genetic map type F2" loading="lazy" />    <img src="../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png" alt="The genetic map CrossPollination" loading="lazy" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/Genetic_map_F2.png" alt="The genetic map type F2. " loading="lazy" />    <img src="../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png" alt="The genetic map CrossPollination. " loading="lazy" /></p>
     </li>
     <li>
       <p>Genotyping options output file type for input in genetic mapper tools (ie JoinMap, R/qtl, …). Observe that the R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.</p>
@@ -887,7 +889,7 @@ https://zenodo.org/record/1219888/files/progeny_20
 
   <p>Here is an example of a locus originally marked as homozygous before automatic correction because an allele is supported by less than 5 <span class="notranslate">reads</span>. After correction, this locus is marked as heterozygous.</p>
 
-  <p><img src="../../images/RAD2_Genetic_Map/genotypes_automatic_correction.png" alt="Automatic correction of genotypes" loading="lazy" /></p>
+  <p><img src="../../images/RAD2_Genetic_Map/genotypes_automatic_correction.png" alt="Automatic correction of genotypes. " loading="lazy" /></p>
 
   <p>You can re-run <strong>Stacks: genotypes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.</p>
 
@@ -897,19 +899,19 @@ https://zenodo.org/record/1219888/files/progeny_20
 
 <p>One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, …) with observed genotype for each locus:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/genotypes_tsv.png" alt="Genotypes.tsv file overview" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/genotypes_tsv.png" alt="Genotypes.tsv file overview. " loading="lazy" /></p>
 
 <h3 id="genotypestxt-files">Genotypes.txt files</h3>
 
 <p>One line by individual, and for each individual, for each catalog locus, genotype:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/genotypes_txt.png" alt="Genotypes.txt file overview" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/genotypes_txt.png" alt="Genotypes.txt file overview. " loading="lazy" /></p>
 
 <h3 id="haplotypestsv-files">Haplotypes.tsv files</h3>
 
 <p>One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, …) with observed genotype for each locus:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/haplotypes_tsv.png" alt="Haplotypes.tsv file overview" loading="lazy" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/haplotypes_tsv.png" alt="Haplotypes.tsv file overview. " loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -932,7 +934,7 @@ https://zenodo.org/record/1219888/files/progeny_20
 
 <p>In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for <span class="notranslate">downstream</span> genetic map creation. This approach can be summarized with the following scheme:</p>
 
-<p><img src="../../images/genetic_map_workflow.PNG" alt="The genetic map tutorial workflow" loading="lazy" /></p>
+<p><img src="../../images/genetic_map_workflow.PNG" alt="The genetic map tutorial workflow. " loading="lazy" /></p>
 
 
                 

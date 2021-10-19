@@ -619,6 +619,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -701,7 +703,7 @@
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>Features and targets of a breast cancer dataset:</p>
-    <figure id="figure-1"><img src="images/breast_cancer_classification.png" alt="Breast_cancer_targets" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" gives information about whether the cells are mono or multi-layered. Similarly, other columns/features provide different information about the tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discrete which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.</figcaption></figure>
+    <figure id="figure-1"><img src="images/breast_cancer_classification.png" alt="Breast_cancer_targets. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" gives information about whether the cells are mono or multi-layered. Similarly, other columns/features provide different information about the tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discrete which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.</figcaption></figure>
 
   </blockquote>
 
@@ -743,7 +745,7 @@
   <p>The terms like ‘targets’, ‘classes’, ‘categories’ or ‘labels’ have been used interchangeably for the classification part of this tutorial. They contain identical meaning. For regression, we will just use ‘targets’.</p>
 </blockquote>
 
-<figure id="figure-2"><img src="images/classification.png" alt="classification" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is a tumor or no tumor, we use this decision boundary to compute the actual class.</figcaption></figure>
+<figure id="figure-2"><img src="images/classification.png" alt="classification. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is a tumor or no tumor, we use this decision boundary to compute the actual class.</figcaption></figure>
 
 <p>In figure <a href="#figure-2">2</a>, the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like <code class="language-plaintext highlighter-rouge">support vector machine</code> or  <code class="language-plaintext highlighter-rouge">tree</code> or <code class="language-plaintext highlighter-rouge">ensemble</code> based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let’s begin by uploading the necessary datasets.</p>
 
@@ -888,17 +890,17 @@ These attributes are stored in the trained model and can be accessed by reading 
   <li>
     <p><a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a>:</p>
 
-    <figure id="figure-3"><img src="images/confusion_matrix.png" alt="confusion_matrix" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Confusion matrix of the predictions as a heatmap. The horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). For a good prediction, the diagonal running from top-left to bottom-right should contain less number of samples (because it shows the counts of incorrectly predicted samples). Hovering over each box in <span class="notranslate">Galaxy</span> shows the true and predicted class labels and the count of samples.</figcaption></figure>
+    <figure id="figure-3"><img src="images/confusion_matrix.png" alt="confusion_matrix. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Confusion matrix of the predictions as a heatmap. The horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). For a good prediction, the diagonal running from top-left to bottom-right should contain less number of samples (because it shows the counts of incorrectly predicted samples). Hovering over each box in <span class="notranslate">Galaxy</span> shows the true and predicted class labels and the count of samples.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://en.wikipedia.org/wiki/Precision_and_recall">Precision, recall and F1 score</a>:</p>
 
-    <figure id="figure-4"><img src="images/precision_recall_f1.png" alt="prf1_scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. In the 'breast-w_test' dataset, all the samples with predicted class '0' (no tumor) have the true class as '0' (precision = 1.0) while not all samples with the predicted class as '1' have the true class as '1' (precision &lt; 1.0) (see precision curve). The recall curve is the opposite of the precision curve. Not all the samples with the true class as '0' are predicted as class '0' (recall &lt; 1.0) and all the samples with the true class as '1' are predicted as class '1' (recall = 1.0) (see recall curve). It is important to analyze the plot for any classification task to verify the accuracy across different classes which provides more information about the balanced or imbalanced accuracy across multiple classes present in the dataset.</figcaption></figure>
+    <figure id="figure-4"><img src="images/precision_recall_f1.png" alt="prf1_scores. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. In the 'breast-w_test' dataset, all the samples with predicted class '0' (no tumor) have the true class as '0' (precision = 1.0) while not all samples with the predicted class as '1' have the true class as '1' (precision &lt; 1.0) (see precision curve). The recall curve is the opposite of the precision curve. Not all the samples with the true class as '0' are predicted as class '0' (recall &lt; 1.0) and all the samples with the true class as '1' are predicted as class '1' (recall = 1.0) (see recall curve). It is important to analyze the plot for any classification task to verify the accuracy across different classes which provides more information about the balanced or imbalanced accuracy across multiple classes present in the dataset.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5">Receiver operator characteristics (ROC) and area under ROC (AUC)</a>:</p>
 
-    <figure id="figure-5"><img src="images/roc.png" alt="roc_scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).</figcaption></figure>
+    <figure id="figure-5"><img src="images/roc.png" alt="roc_scores. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).</figcaption></figure>
   </li>
 </ol>
 
@@ -911,7 +913,7 @@ These attributes are stored in the trained model and can be accessed by reading 
 
 <p>For classification, the targets are integers. However, when the targets in a dataset are real numbers, the machine learning task becomes <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>. Each sample in the dataset has a real-valued output or target. Figure <a href="#figure-6">6</a> shows how a (regression) curve is fitted which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. A regressor learns the <span class="notranslate">mapping</span> between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear or non-linear. In this part of the tutorial, we will perform regression on <a href="https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html">body density</a> dataset.</p>
 
-<figure id="figure-6"><img src="images/regression.png" alt="regression" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Regression fit through data points. These data points are the targets of the training dataset. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.</figcaption></figure>
+<figure id="figure-6"><img src="images/regression.png" alt="regression. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Regression fit through data points. These data points are the targets of the training dataset. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.</figcaption></figure>
 
 <h2 id="data-upload-1">Data upload</h2>
 
@@ -1049,17 +1051,17 @@ These attributes are used to predict the target for a new sample and are stored 
   <li>
     <p>True vs predicted targets curves:</p>
 
-    <figure id="figure-7"><img src="images/true_pred_curves.png" alt="true_predicted" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> True vs predicted targets curves. The corresponding points in both these curves should be close to each other for a good regression performance. We can see that the plot shows this behaviour.</figcaption></figure>
+    <figure id="figure-7"><img src="images/true_pred_curves.png" alt="true_predicted. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> True vs predicted targets curves. The corresponding points in both these curves should be close to each other for a good regression performance. We can see that the plot shows this behaviour.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5">Scatter plot</a> for true vs. predicted targets:</p>
 
-    <figure id="figure-8"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. The more points are aligned along the x = y line, the better the prediction. The R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0. The RMSE (root mean squared error) is also small (1.32) which also tells us that the predicted targets are close to the true targets.</figcaption></figure>
+    <figure id="figure-8"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. The more points are aligned along the x = y line, the better the prediction. The R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0. The RMSE (root mean squared error) is also small (1.32) which also tells us that the predicted targets are close to the true targets.</figcaption></figure>
   </li>
   <li>
     <p><a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">Residual plot</a> between residual (predicted - true) and predicted targets:</p>
 
-    <figure id="figure-9"><img src="images/residual_plot.png" alt="residual_plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.</figcaption></figure>
+    <figure id="figure-9"><img src="images/residual_plot.png" alt="residual_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.</figcaption></figure>
   </li>
 </ol>
 

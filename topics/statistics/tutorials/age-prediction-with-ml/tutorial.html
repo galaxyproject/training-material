@@ -602,6 +602,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -685,9 +687,9 @@
 <h4 id="r2-coefficient-of-determination">R2 (coefficient of determination)</h4>
 <p>In both the parts, learning on datasets is done using cross-validation and the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-1">1</a> and <a href="#figure-2">2</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-1">1</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. But, figure <a href="#figure-2">2</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For <span class="notranslate">RNA</span>-seq dataset, we will compute the cross-validated R2 score using the training set and for <span class="notranslate">DNA</span> methylation dataset, we will compute the R2 score for the test set.</p>
 
-<figure id="figure-1"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This shows an example of a bad model as most of the points are scattered. For a model to be good, most of the points should lie along the x = y  line. It means that the predicted target on the y (vertical) axis is close to the true targets on the x (horizontal) axis.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This shows an example of a bad model as most of the points are scattered. For a model to be good, most of the points should lie along the x = y  line. It means that the predicted target on the y (vertical) axis is close to the true targets on the x (horizontal) axis.</figcaption></figure>
 
-<figure id="figure-2"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0</figcaption></figure>
+<figure id="figure-2"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0</figcaption></figure>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -727,7 +729,7 @@
 
   <p>It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> folds and these folds are categorised into training and validation sets. The idea of cross-validation is shown in figure <a href="#figure-3">3</a>. The complete dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for <code class="language-plaintext highlighter-rouge">5</code> folds/iterations, each time the validation set (20% of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over <code class="language-plaintext highlighter-rouge">5</code> folds.</p>
 
-  <figure id="figure-3"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The image shows how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</figcaption></figure>
+  <figure id="figure-3"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The image shows how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</figcaption></figure>
 
 </blockquote>
 
@@ -998,7 +1000,7 @@
 
 <p>The output plot has the following legend: the colour-coding is based on the <code class="language-plaintext highlighter-rouge">mean_test_score</code> (<code class="language-plaintext highlighter-rouge">c3</code>) column. You can follow the line leading to the score along every column with the parameters’ settings. The columns <code class="language-plaintext highlighter-rouge">c4, c5</code> and <code class="language-plaintext highlighter-rouge">c6</code> are the parameters we chose and <code class="language-plaintext highlighter-rouge">c3</code> is the accuracy column present in the <code class="language-plaintext highlighter-rouge">tabular</code> output of <strong>Hyperparameter search</strong> tool.</p>
 
-<figure id="figure-4"><img src="../../images/age-prediction-with-ml/parallel_coor_plot.png" alt="data" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).</figcaption></figure>
+<figure id="figure-4"><img src="../../images/age-prediction-with-ml/parallel_coor_plot.png" alt="data. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1022,7 +1024,7 @@
 
 <h2 id="compare-results-with-original-paper">Compare results with original paper</h2>
 
-<figure id="figure-5"><img src="../../images/age-prediction-with-ml/rna_seq_age.png" alt="rna_seq_age_paper" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The plot shows accuracy obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.</figcaption></figure>
+<figure id="figure-5"><img src="../../images/age-prediction-with-ml/rna_seq_age.png" alt="rna_seq_age_paper. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The plot shows accuracy obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.</figcaption></figure>
 
 <h2 id="summary">Summary</h2>
 
@@ -1265,19 +1267,19 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
   </blockquote>
 </blockquote>
 
-<figure id="figure-6"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line, which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line, which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0.</figcaption></figure>
 
 <p>We can see in the scatter plot (figure <a href="#figure-6">6</a>) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (<code class="language-plaintext highlighter-rouge">RMSE</code>) is <code class="language-plaintext highlighter-rouge">3.76</code> and the R2 score is <code class="language-plaintext highlighter-rouge">0.94</code>.</p>
 
-<figure id="figure-7"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.</figcaption></figure>
+<figure id="figure-7"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.</figcaption></figure>
 
 <p>The <a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">residual plot</a> shown in figure <a href="#figure-7">7</a> is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good model, there should not be any visible pattern with the plotted points.</p>
 
-<figure id="figure-8"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> The plot shows the true vs predicted age for all the samples in the test set. We can see that the predicted values are close to the true values.</figcaption></figure>
+<figure id="figure-8"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> The plot shows the true vs predicted age for all the samples in the test set. We can see that the predicted values are close to the true values.</figcaption></figure>
 
 <h2 id="compare-results-with-original-paper-1">Compare results with original paper</h2>
 
-<figure id="figure-9"><img src="../../images/age-prediction-with-ml/dnam_age_paper.png" alt="dnam_image_paper" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The plot is from Jana Naue et al. 2017 (Chronological age prediction based on <span class="notranslate">DNA</span> methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random forest as the regressor and we used Gradient boosting as the regressor.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/age-prediction-with-ml/dnam_age_paper.png" alt="dnam_image_paper. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The plot is from Jana Naue et al. 2017 (Chronological age prediction based on <span class="notranslate">DNA</span> methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random forest as the regressor and we used Gradient boosting as the regressor.</figcaption></figure>
 
 <h2 id="summary-1">Summary</h2>
 

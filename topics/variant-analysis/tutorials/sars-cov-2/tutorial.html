@@ -755,6 +755,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -932,7 +934,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 >    This returns a longish list of SRA experiments that match our search, and that list is far too long to use in a tutorial exercise.  At this point we could use the advanced Entrez query builder we learned about above.
 >    But we won't.  Instead lets send the *too long for a tutorial* list results we have to the SRA Run Selector, and use its friendlier interface to narrow our results.
 >
-> <img src="../../images/sra_entrez.png" alt="sra entrez"  loading="lazy">
+> <img src="../../images/sra_entrez.png" alt="sra entrez. "  loading="lazy">
 {: .hands_on}
 
 
@@ -942,14 +944,14 @@ SRA can be reached either directly through it's website, or through the tool pan
 >
 > 1. Click <u>Send results to Run selector</u>, which appears in a box at the top of the search results.
 >
-> <img src="../../images/sra_entrez_result.png" alt="sra entrez result"  loading="lazy">
+> <img src="../../images/sra_entrez_result.png" alt="sra entrez result. "  loading="lazy">
 >
 > > ### <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> What if you don't see the Run Selector Link?
 > >
 > > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
 > >
 > > *You need to get to Run Selector to send your results to Galaxy.* What if you don't have enough results to trigger this link being shown?  In that case you call get to the Run Selector by **clicking** on the `Send to` pulldown menu at the top right of the results panel.  To get to Run Selector, **select** `Run Selector` and then **click** the `Go` button.
-> <img src="../../images/sra_entrez_send_to.png" alt="sra entrez send to"  loading="lazy">
+> <img src="../../images/sra_entrez_send_to.png" alt="sra entrez send to. "  loading="lazy">
 > {: .tip}
 >
 >
@@ -980,7 +982,7 @@ The Run Selector window is divided into several panels:
 * **`Filters List`**: In the upper left hand corner.  This is where we will refine our search.
 * **`Select`**: A summary of what was initially passed to Run Selector, and how much of that we have selected so far.  (And so far, we haven't selected any of it.)  Also note the tantalizing, but still grayed out, `<span class="notranslate">Galaxy</span>` button.
 * **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
-<img src="../../images/sra_run_selector.png" alt="sra run selector"  loading="lazy">
+<img src="../../images/sra_run_selector.png" alt="sra run selector. "  loading="lazy">
 
 > ### <i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Why did the number of found items *go up?*
 >
@@ -1048,7 +1050,7 @@ Lets now use that metadata to fetch the sequence data from SRA.  SRA provides to
   <ol>
     <li>Go to NCBI’s SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra</li>
     <li>In the search box enter <code class="language-plaintext highlighter-rouge">SARS-CoV-2 Patient Sequencing From Partners / MGH</code>:
-<img src="../../../images/find_mgh_data.png" alt="Find data" loading="lazy" /> (Alte<span class="notranslate">rna</span>tively, you simply click on this <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">link</a>)</li>
+<img src="../../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alte<span class="notranslate">rna</span>tively, you simply click on this <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">link</a>)</li>
     <li>Note that some of the datasets found say “ARTICv3 amplicon sequencing”. This is a sequencing technique that requires addition analysis steps not discussed in this tutorial. The data that we will analyse (datasets mentioned below) uses a technique called “metagenomic sequencing”.</li>
     <li>The web page will show a large number of SRA datasets (at the time of writing there were 3,927). This is data from a <a href="https://science.sciencemag.org/content/early/2020/12/09/science.abe3261">study</a> describing analysis of SARS-CoV-2 in Boston area.</li>
     <li>Download metadata describing these datasets by:
@@ -1058,7 +1060,7 @@ Lets now use that metadata to fetch the sequence data from SRA.  SRA provides to
         <li>Changing <strong>Format</strong> to <code class="language-plaintext highlighter-rouge">RunInfo</code></li>
         <li>Clicking <strong>Create file</strong>
 Here is how it should look like:
-<img src="../../images/get_runinfo.png" alt="GetRunInfo" loading="lazy" /></li>
+<img src="../../images/get_runinfo.png" alt="GetRunInfo. " loading="lazy" /></li>
       </ul>
     </li>
     <li>This would create a rather large <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file in your <code class="language-plaintext highlighter-rouge">Downloads</code> folder.</li>
@@ -1082,9 +1084,9 @@ Here is how it should look like:
   <ol>
     <li>Go to your <span class="notranslate">Galaxy</span> instance of choice such as one of the <a href="https://usegalaxy.org/">use<span class="notranslate">galaxy</span>.org</a>, <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>, <a href="https://usegalaxy.org.au">use<span class="notranslate">galaxy</span>.org.au</a> or any other. (This tutorial uses use<span class="notranslate">galaxy</span>.org).</li>
     <li>Click <em>Upload Data</em> button:
-<img src="../../images/upload_button.png" alt="Upload" loading="lazy" /></li>
+<img src="../../images/upload_button.png" alt="Upload. " loading="lazy" /></li>
     <li>In the dialog box that would appear click “<em>Choose local files</em>” button:
-<img src="../../../images/choose_local_files_button.png" alt="Choose local" loading="lazy" /></li>
+<img src="../../../images/choose_local_files_button.png" alt="Choose local. " loading="lazy" /></li>
     <li>Find and select <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file from your computer</li>
     <li>Click <em>Start</em> button</li>
     <li>Close dialog by pressing <strong>Close</strong> button</li>

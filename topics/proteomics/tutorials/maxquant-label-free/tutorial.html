@@ -615,6 +615,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -688,7 +690,7 @@
 
 <p>The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are <em>in silico</em> reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.</p>
 
-<figure id="figure-1"><img src="../../images/maxquant_lfq_lcmsms.png" alt="MQ_lcmsms" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Adapted from <a href="https://en.wikipedia.org/wiki/Tandem_mass_spectrometry#/media/File:MS_MS.png">wikipedia</a>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/maxquant_lfq_lcmsms.png" alt="MQ_lcmsms. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Adapted from <a href="https://en.wikipedia.org/wiki/Tandem_mass_spectrometry#/media/File:MS_MS.png">wikipedia</a>.</figcaption></figure>
 
 <p>A plethora of software solutions were developed for the analysis of proteomics data. MaxQuant is one of the most popular proteomics softwares because it is an easy to use and free software that offers functionalities for nearly all kinds of proteomics data analysis challenges <span class="citation"><a href="#Cox2008">Cox and Mann 2008</a></span>. Mass spectrometry raw data is normally obtained in a vendor specific, proprietary file format. MaxQuant can directly take those raw files as input. For peptide identification MaxQuant uses a search engine called “Andromeda”. MaxQuant offers highly accurate functionalities for many different proteomics quantification strategies, e.g. label-free, SILAC, TMT.</p>
 
@@ -815,17 +817,17 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 
 <p>Protease digestion is not always complete, therefore we set the <em>“number of missed cleavages”</em> to <code class="language-plaintext highlighter-rouge">1</code>, meaning that the <em>in silico</em> digestion also includes peptides that have an additional Arginine or Lysine in their sequence.</p>
 
-<figure id="figure-2"><img src="../../images/maxquant_param_missedcl.png" alt="MQ_param_missed" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Trypsin specificity and missed cleavages. With one missed cleavage all three peptides will be part of the *in silico* peptide database</figcaption></figure>
+<figure id="figure-2"><img src="../../images/maxquant_param_missedcl.png" alt="MQ_param_missed. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Trypsin specificity and missed cleavages. With one missed cleavage all three peptides will be part of the *in silico* peptide database</figcaption></figure>
 
 <p>From the <em>in silico</em> generated peptide database the masses of the peptides are calculated and matched to the measured masses in order to identify them. A peptide’s mass will change due to peptide modifications such as chemical labelling for example applied in different quantitation strategies or biological post translational modifications. Therefore, it is important to also include possible peptide modifications in the <em>in silico</em> generated peptide mass list. <em>“Fixed modifications”</em> are modifications that occur on every occurence of the specific amino acid. Those are often artificially introduced modifications such as Carbamidomethylation of cysteins (C) to prevent re-formation of the disulfid bridges. This is a common procedure in proteomics sample preparation and therefore also the default option in MaxQuant: <code class="language-plaintext highlighter-rouge">Carbamidomethyl (C)</code>. <em>“Variable modifications”</em> are modifications that do not occur on every amino acid such as Oxidation of Methionine might only occur on some Methionines and not all, but only a few peptide N-termini are acetylated. Variable modifications increase the <em>in silico</em> peptide database because each peptide’s mass is calculated once with and once without the additional modification. To keep computation times as short as possible we did not use any variable modification this training, despite the MaxQuant defaults Oxidation of Methionine and Acetylation of N-termini would have been completely valid to use.</p>
 
 <p>MaxQuant supports different <em>“Quantitation Methods”</em>. The three main categories are <code class="language-plaintext highlighter-rouge">label-free quantification</code>, <code class="language-plaintext highlighter-rouge">label-based quantification</code> and <code class="language-plaintext highlighter-rouge">reporter ion MS2</code> quantification. In this tutorial we have chosen <code class="language-plaintext highlighter-rouge">label-free</code> because we did not apply any specific labeling/quantitation strategy to the samples.</p>
 
-<figure id="figure-3"><img src="../../images/maxquant_lfq_quant_methods.png" alt="MQ_quant_methods" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Overview of MaxQuant quantification methods</figcaption></figure>
+<figure id="figure-3"><img src="../../images/maxquant_lfq_quant_methods.png" alt="MQ_quant_methods. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Overview of MaxQuant quantification methods</figcaption></figure>
 
 <p>The PTXQC software (<span class="citation"><a href="#Bielow2015">Bielow <i>et al.</i> 2015</a></span>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the <span class="notranslate">Galaxy</span> MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
 
-<figure id="figure-4"><img src="../../images/maxquant_ptxqc_overview.png" alt="PTXQC_overview" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Overview of PTXQC quality measures for sample1 and sample2</figcaption></figure>
+<figure id="figure-4"><img src="../../images/maxquant_ptxqc_overview.png" alt="PTXQC_overview. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Overview of PTXQC quality measures for sample1 and sample2</figcaption></figure>
 
 <p>MaxQuant automatically generates several output files. In the <em>“Output Options”</em> all or some of the output files can be selected. The protein information can be obtained by selecting <code class="language-plaintext highlighter-rouge">Protein Groups</code>, while the peptide information is obtained by choosing <code class="language-plaintext highlighter-rouge">Peptides</code>. The applied MaxQuant parameters are stored in the <code class="language-plaintext highlighter-rouge">mqpar.xml</code> This file can be re-used as an input file in the <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
@@ -901,9 +903,9 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Sample 2 has more contaminants, especially serum albumin is high abundant. <img src="../../images/maxquant_lfq_contaminants.png" alt="PTXQC_contaminants" loading="lazy" /></li>
-      <li>The digestion was not ideal but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. <img src="../../images/maxquant_lfq_missedcleavages.png" alt="PTXQC_missed" loading="lazy" /></li>
-      <li>Sample 1 yielded more protein identifications <img src="../../images/maxquant_lfq_proteinid.png" alt="PTXQC_ids" loading="lazy" /></li>
+      <li>Sample 2 has more contaminants, especially serum albumin is high abundant. <img src="../../images/maxquant_lfq_contaminants.png" alt="PTXQC_contaminants. " loading="lazy" /></li>
+      <li>The digestion was not ideal but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. <img src="../../images/maxquant_lfq_missedcleavages.png" alt="PTXQC_missed. " loading="lazy" /></li>
+      <li>Sample 1 yielded more protein identifications <img src="../../images/maxquant_lfq_proteinid.png" alt="PTXQC_ids. " loading="lazy" /></li>
       <li>Sample1, more information can be found in the next section.</li>
     </ol>
 
@@ -981,7 +983,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
   </ol>
 </blockquote>
 
-<figure id="figure-5"><img src="../../images/maxquant_lfq_serum_composition.png" alt="serum_composition" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Quantitative serum composition. In <span class="notranslate">Galaxy</span> one can hover over the graph to see the protein names</figcaption></figure>
+<figure id="figure-5"><img src="../../images/maxquant_lfq_serum_composition.png" alt="serum_composition. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Quantitative serum composition. In <span class="notranslate">Galaxy</span> one can hover over the graph to see the protein names</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1091,9 +1093,9 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
     <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>The log2 transformation leads to a close to normal intensity distribution for both samples. Intensities in the depleted sample are shifted towards higher values compared to the non-depleted samples. The big difference comes from artificially depleting (changing) protein intensities. <img src="../../images/maxquant_lfq_boxplots.png" alt="boxplots" loading="lazy" /></li>
+      <li>The log2 transformation leads to a close to normal intensity distribution for both samples. Intensities in the depleted sample are shifted towards higher values compared to the non-depleted samples. The big difference comes from artificially depleting (changing) protein intensities. <img src="../../images/maxquant_lfq_boxplots.png" alt="boxplots. " loading="lazy" /></li>
       <li>The log2 fold change (depleted vs. not depleted samples) is about -2.91. This means that the abundance in the not depleted sample is about 2^2.91 = 7.52 times higher than in the depleted sample, showing again that a large proportion of serum albumin was successfully removed by the antibody columns.</li>
-      <li>Most of the log2 fold changes are larger than zero. This means that many proteins have higher intensities in the depleted sample compared to the not-depleted sample. These are the proteins that benefitted from the depletion of serum albumin and other high abundand serum proteins. There is also a maximum around zero meaning that a substantial amount of proteins had a similar abundance in both samples. The negative log2 fold changes derive from the proteins that were depleted, e.g. serum albumin. <img src="../../images/maxquant_lfq_fc_histogram.png" alt="histogram" loading="lazy" /></li>
+      <li>Most of the log2 fold changes are larger than zero. This means that many proteins have higher intensities in the depleted sample compared to the not-depleted sample. These are the proteins that benefitted from the depletion of serum albumin and other high abundand serum proteins. There is also a maximum around zero meaning that a substantial amount of proteins had a similar abundance in both samples. The negative log2 fold changes derive from the proteins that were depleted, e.g. serum albumin. <img src="../../images/maxquant_lfq_fc_histogram.png" alt="histogram. " loading="lazy" /></li>
     </ol>
 
   </blockquote>

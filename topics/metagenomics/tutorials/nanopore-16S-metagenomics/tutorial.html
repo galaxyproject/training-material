@@ -586,6 +586,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
             NanoGalaxy
         </a>
@@ -685,11 +687,11 @@
 
 <p>Among the environmental variables that have shown the greatest correlation with alterations in the composition of bacterial communities are soil pH, the carbon-nitrogen ratio (C:N), and the co-concentrations of Olsen P (a measure of plant available phosphorus), aluminium and copper (Fig. 1).</p>
 
-<figure id="figure-1"><img src="../../images/metagenomics-nanopore/bioindicators.jpg" alt="Bacterial bioindicators" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Relationship between bacterial community composition and soil parameters. The radius of each circle represents the taxon abundance that was accounted for by each soil variable, based on adjusted R-squared values from distance-based multivariate multiple regression analyses. The univariate relationship between the abundance of each taxon and soil variables, calculated using Pearson’s correlation coefficient, is represented by the color of the circle. Phyla or classes are ordered according to overall abundance in all the samples, from most abundant (top) to least abundant (bottom). Image published originally in <span class="citation"><a href="#Hermans2016">Hermans <i>et al.</i> 2016</a></span>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/metagenomics-nanopore/bioindicators.jpg" alt="Bacterial bioindicators. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Relationship between bacterial community composition and soil parameters. The radius of each circle represents the taxon abundance that was accounted for by each soil variable, based on adjusted R-squared values from distance-based multivariate multiple regression analyses. The univariate relationship between the abundance of each taxon and soil variables, calculated using Pearson’s correlation coefficient, is represented by the color of the circle. Phyla or classes are ordered according to overall abundance in all the samples, from most abundant (top) to least abundant (bottom). Image published originally in <span class="citation"><a href="#Hermans2016">Hermans <i>et al.</i> 2016</a></span>.</figcaption></figure>
 
 <p>On the other hand, many species of microorganisms establish complex <strong>symbiotic relationships</strong> with plant organisms. The fraction of the substrate that is directly influenced by root secretions and associated microorganism is known as <strong>rhizosphere</strong>. Thus, for example, bacteria of the genus <em>Bacillus</em>, <em>Pseudomonas</em> or <em>Burkholderia</em> appear associated with the plant roots, protecting them from pathogenic microorganisms.</p>
 
-<figure id="figure-2"><img src="../../images/metagenomics-nanopore/bacteria_community.png" alt="Bacterial communities" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Representation of the relationships between root microbiomes and plant organisms.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/metagenomics-nanopore/bacteria_community.png" alt="Bacterial communities. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Representation of the relationships between root microbiomes and plant organisms.</figcaption></figure>
 
 <p>In this tutorial, we will use sequencing data obtained through the <strong>MinION sequencer</strong> (Oxford Nanopore Technologies) with two objectives: 1) evaluate the health status of soil samples and 2) study how microbial populations are modified by their interaction with plant roots. This example was inspired by <span class="citation"><a href="#Brown2017">Brown <i>et al.</i> 2017</a></span>.</p>
 
@@ -845,7 +847,7 @@
 
 <p><strong>FastQC</strong> provides information on various parameters, such as the range of quality values across all bases at each position. <strong>MultiQC</strong> allows summarizing the output of different outputs from <strong>FastQC</strong>.</p>
 
-<figure id="figure-3"><img src="../../images/metagenomics-nanopore/fastqc_sequence_length_distribution_plot.png" alt="FastQC plots length" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence length distribution</figcaption></figure>
+<figure id="figure-3"><img src="../../images/metagenomics-nanopore/fastqc_sequence_length_distribution_plot.png" alt="FastQC plots length. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence length distribution</figcaption></figure>
 
 <p>In the first place, we are going to analyse the sequence length distribution of the different datasets.</p>
 
@@ -864,11 +866,11 @@
   </blockquote>
 </blockquote>
 
-<figure id="figure-4"><img src="../../images/metagenomics-nanopore/fastqc_per_base_sequence_quality_plot.png" alt="FastQC plots quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per base sequence quality</figcaption></figure>
+<figure id="figure-4"><img src="../../images/metagenomics-nanopore/fastqc_per_base_sequence_quality_plot.png" alt="FastQC plots quality. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per base sequence quality</figcaption></figure>
 
 <p>If we examine figure 3, we can see that up to 3000 bp the quality of our sequencing data is around a <strong>Phred score</strong> of 12, which is a relatively low value compared to other sequencing technologies. This is explained because Nanopore <span class="notranslate">reads</span> poses <strong>high error rates in the basecalled <span class="notranslate">reads</span></strong> (10% as compared to 1% for Illumina). However, Nanopore sequencing generates <strong>very long <span class="notranslate">reads</span></strong> (in theory only limited by the mechanisms of extraction of the genetic material), enabling the sequencing of the complete 16S r<span class="notranslate">RNA</span> gene, which makes it possible to identify bacterial taxa at higher resolution.</p>
 
-<figure id="figure-5"><img src="../../images/metagenomics-nanopore/fastqc_per_sequence_gc_content_plot.png" alt="FasTQC plots CG" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per sequence GC content</figcaption></figure>
+<figure id="figure-5"><img src="../../images/metagenomics-nanopore/fastqc_per_sequence_gc_content_plot.png" alt="FasTQC plots CG. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per sequence GC content</figcaption></figure>
 
 <p>Let’s have a look at figure 4, which shows the content of the GC by sequence.</p>
 
@@ -1010,7 +1012,7 @@
 
 <p>We can verify that after processing the samples, the GC content presents a unimodal distribution, which indicates that the anomalies in the sequences have been successfully eliminated (Figure 6).</p>
 
-<figure id="figure-6"><img src="../../images/metagenomics-nanopore/fasqc_per_sequence_content_plot_clean.png" alt="FasTQC plots GC" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Per sequence GC content in processed samples</figcaption></figure>
+<figure id="figure-6"><img src="../../images/metagenomics-nanopore/fasqc_per_sequence_content_plot_clean.png" alt="FasTQC plots GC. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Per sequence GC content in processed samples</figcaption></figure>
 
 <h1 id="assign-taxonomic-classifications">Assign taxonomic classifications</h1>
 
@@ -1026,7 +1028,7 @@
 You can find more information about the <strong>Kraken2</strong> algorithm in the paper <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0"><em>Improved metagenomic analysis with Kraken 2</em></a>.</p>
 </blockquote>
 
-<figure id="figure-7"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Taxonomic classification" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in <span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>.</figcaption></figure>
+<figure id="figure-7"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Taxonomic classification. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in <span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>.</figcaption></figure>
 
 <p>For this tutorial, we will use the <strong>SILVA database</strong> (<span class="citation"><a href="#Quast2012">Quast <i>et al.</i> 2012</a></span>). It includes over 3.2 million 16S r<span class="notranslate">RNA</span> sequences from the <em>Bacteria</em>, <em>Archaea</em> and <em>Eukaryota</em> domains.</p>
 
@@ -1117,7 +1119,7 @@ You can find more information about the <strong>Kraken2</strong> algorithm in th
 
 <p>Let’s take a look at the result. Using the search bar we can check if certain taxa are present.</p>
 
-<iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/metagenomics-nanopore/krona.png" alt="Krona" loading="lazy" /> </iframe>
+<iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/metagenomics-nanopore/krona.png" alt="Krona. " loading="lazy" /> </iframe>
 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>

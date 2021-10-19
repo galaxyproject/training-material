@@ -653,7 +653,7 @@
 
 <p>The figure 1 represents the VGP assembly pipeline.</p>
 
-<figure id="figure-1"><img src="../../images/vgp_assembly/VGP_Pipeline.png" alt="fig1:VGP pipeline" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> VPG Pipeline 2.0</figcaption></figure>
+<figure id="figure-1"><img src="../../images/vgp_assembly/VGP_Pipeline.png" alt="fig1:VGP pipeline. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> VPG Pipeline 2.0</figcaption></figure>
 
 <p>In order to facilitate the development of the <span class="notranslate">workflow</span>, we will structure it in four main sections:</p>
 
@@ -672,7 +672,7 @@
 
 <p>PacBio HiFi <span class="notranslate">reads</span> rely on the Single Molecule Real-Time (SMRT) sequencing technology. It is based on real-time imaging of fluorescently tagged nucleotides as they are synthesized along individual <span class="notranslate">DNA</span> template molecules, combining multiple sub<span class="notranslate">reads</span> of the same circular template using a statistical model to produce one highly accurate consensus sequence, along with base quality values (figure 2). This technology allows to generate long-read sequencing dataseets with read lengths averaging 10-25 kb and accuracies greater than 99.5%.</p>
 
-<figure id="figure-2"><img src="../../images/vgp_assembly/pacbio_hifi.png" alt="fig2:PacBio sequencing technolgoy" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> PacBio HiFi sequencing</figcaption></figure>
+<figure id="figure-2"><img src="../../images/vgp_assembly/pacbio_hifi.png" alt="fig2:PacBio sequencing technolgoy. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> PacBio HiFi sequencing</figcaption></figure>
 
 <p>Optical genome <span class="notranslate">mapping</span> is a method for detecting structural variants. The generation of Bionano optical maps starts with high molecular weight <span class="notranslate">DNA</span>, which is labeled at specific sequences motif with a fluorescent dye, resulting in a unique fluorescence pattern for each individual genome. The comparison of the labelled fragments among different samples enables the detection of structural variants. Optical maps are integrated with the primary assemby sequence in order to identify and correct potential chimeric joints, and estimate the gap sizes.</p>
 
@@ -771,7 +771,7 @@
 
 </blockquote>
 
-<figure id="figure-3"><img src="../../images/vgp_assembly/quality_plot.png" alt="fig3:HiFi Quality report" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> PacBio HiFi qualiry report</figcaption></figure>
+<figure id="figure-3"><img src="../../images/vgp_assembly/quality_plot.png" alt="fig3:HiFi Quality report. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> PacBio HiFi qualiry report</figcaption></figure>
 
 <p>As we can see, the mean Phred score is over 80 in all the samples which means, which means that the base call accuracy is around 99.999999%!</p>
 
@@ -1009,7 +1009,7 @@
 
 <p>Now, let’s analyze the k-mer profiles, fitted models and estimated parameters:</p>
 
-<figure id="figure-4"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="fig3:Genomescope plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Genomescope2 plot</figcaption></figure>
+<figure id="figure-4"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="fig3:Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Genomescope2 plot</figcaption></figure>
 
 <p>As we can see, there is an unique peak centered around 28, which is the coverage with the highest number of different 21-mers. According the normal-like k-mer spectra, we can infer that it is a haploid genome. The The large number of unique k-mers on the left size with frequence around one is due to error during the sequencing process.</p>
 
@@ -1195,7 +1195,7 @@
 
   <p>By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are tow different nucleotides at the position of the alignment, and each type is supported by at least tree <span class="notranslate">reads</span>.</p>
 
-  <figure id="figure-5"><img src="../../images/vgp_assembly/hifiasm_algorithm.png" alt="fig4:Hifiasm algorithm overview" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Hifiasm algorithm overview. Orange and blue bars represent the <span class="notranslate">reads</span> with heterozygous alleles carrying local phasing information, while green bars come from the homozygous regions without any heterozygous alleles.</figcaption></figure>
+  <figure id="figure-5"><img src="../../images/vgp_assembly/hifiasm_algorithm.png" alt="fig4:Hifiasm algorithm overview. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Hifiasm algorithm overview. Orange and blue bars represent the <span class="notranslate">reads</span> with heterozygous alleles carrying local phasing information, while green bars come from the homozygous regions without any heterozygous alleles.</figcaption></figure>
 
   <p>Then, hifiasm builds a phased assembly string graph with local phasing information from the corrected <span class="notranslate">reads</span>. Only the <span class="notranslate">reads</span> coming from the same haplotype are connected in the phased assembly graph. After transitive reduction, a pair of heterozygous alleles will be represented by a <em>bubble</em> in the string graph. If there are no additional data, hifiasm arbitrarily selects one side of each bubble and outputs a primary assembly. For a heterozygous genome, the primary assembly generated at this step may still contain haplotigs from more than one homologous haplotype.</p>
 
@@ -1261,7 +1261,7 @@
 
 <p>This step includes 11 steps, summarized in the following scheme:</p>
 
-<figure id="figure-6"><img src="../../images/vgp_assembly/purge_dupspipeline.png" alt="fig4:Post-processing step" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Purge_dups pipeline</figcaption></figure>
+<figure id="figure-6"><img src="../../images/vgp_assembly/purge_dupspipeline.png" alt="fig4:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Purge_dups pipeline</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-purge_dups-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: purge_dups pipeline</h3>

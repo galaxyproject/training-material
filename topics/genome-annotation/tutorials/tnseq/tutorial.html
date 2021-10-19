@@ -588,6 +588,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -693,7 +695,7 @@
 
 <p>When a transposon inserts itself in a gene, the gene’s function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, <em>i.e.</em> creation of mutations of <span class="notranslate">DNA</span> by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.</p>
 
-<figure id="figure-1"><img src="../../images/tnseq/principle_tnseq.png" alt="Illustration of tnseq Method" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Transposon insertion sequencing method (from <a href="#Chao2016"> Chao <i>et al.</i> 2016</a>)</figcaption></figure>
+<figure id="figure-1"><img src="../../images/tnseq/principle_tnseq.png" alt="Illustration of tnseq Method. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Transposon insertion sequencing method (from <a href="#Chao2016"> Chao <i>et al.</i> 2016</a>)</figcaption></figure>
 
 <ol>
   <li>
@@ -748,7 +750,7 @@
 
 <p><strong>In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformly,</strong> with two specific regions used to specifically sequence the region <span class="notranslate">upstream</span> of the insertion <span class="citation"><a href="#Santiago2015">Santiago <i>et al.</i> 2015</a></span></p>
 
-<figure id="figure-2"><img src="../../images/tnseq/tranposon_structure.png" alt="Structure of the transposon containing several parcodes and adapters" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structure of the transposon containing several parcodes and adapters (from <a href="#Santiago2015"> Santiago <i>et al.</i> 2015</a>)</figcaption></figure>
+<figure id="figure-2"><img src="../../images/tnseq/tranposon_structure.png" alt="Structure of the transposon containing several parcodes and adapters. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structure of the transposon containing several parcodes and adapters (from <a href="#Santiago2015"> Santiago <i>et al.</i> 2015</a>)</figcaption></figure>
 
 <p>The transposon inserts itself at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site and a NotI restriction site which cut 21 bp <span class="notranslate">upstream</span> the restriction site. These two site are the 5’ and 3’ limits to the genomic <span class="notranslate">DNA</span> we want to sequence.</p>
 
@@ -853,7 +855,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <p>Because of the experimental design for transposon insertion sequencing, the raw <span class="notranslate">reads</span> contain a lot of adapters and foreign sequences used to insert and target the transposon. To obtain the core <span class="notranslate">reads</span> that contain only genomic sequence, the <span class="notranslate">reads</span> have to go through several steps (using the <strong>Cutadapt</strong> tool) to remove them and divide the <span class="notranslate">reads</span> per experimental condition and type of transposon:</p>
 
-<figure id="figure-3"><img src="../../images/tnseq/preprocessing.png" alt="Workflow of data pre-processing" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Data pre-processing</figcaption></figure>
+<figure id="figure-3"><img src="../../images/tnseq/preprocessing.png" alt="Workflow of data pre-processing. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Data pre-processing</figcaption></figure>
 
 <ol>
   <li>We separate the <span class="notranslate">reads</span> of each experimental condition based on a 8 bp barcode at the beginning of each read. These barcodes were added to be able to pool different conditions together before the transposon insertion and sequencing.</li>
@@ -1267,7 +1269,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <p>In our case, the sequenced <span class="notranslate">reads</span> cover the  5’ region flanking region of the TA site where the transposon inserted. We should not then extract the coverage across the whole <span class="notranslate">reads</span>, as it could cover several TA sites, but only the coverage at the 3’ end of the read:</p>
 
-<figure id="figure-4"><img src="../../images/tnseq/Map_cov.png" alt="A read align to the genome with its 3' end covering half of the TA site" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> <span class="notranslate">Mapping</span> read and TA site coverage</figcaption></figure>
+<figure id="figure-4"><img src="../../images/tnseq/Map_cov.png" alt="A read align to the genome with its 3' end covering half of the TA site. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> <span class="notranslate">Mapping</span> read and TA site coverage</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-compute-genome-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute genome coverage</h3>
@@ -1513,7 +1515,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <p>Now that we have the counts of insertions per TA site, we can use them to predict gene essentiality. Several methods exist to identify essential genes of regions. They can be divided in two major categories:</p>
 
-<figure id="figure-5"><img src="../../images/tnseq/type_of_analyses.png" alt="Different types of TnSeq Analyses" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Methods of TnSeq Analyses (from <a href="#Chao2016"> Chao <i>et al.</i> 2016</a>)</figcaption></figure>
+<figure id="figure-5"><img src="../../images/tnseq/type_of_analyses.png" alt="Different types of TnSeq Analyses. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Methods of TnSeq Analyses (from <a href="#Chao2016"> Chao <i>et al.</i> 2016</a>)</figcaption></figure>
 
 <ol>
   <li>
@@ -1786,8 +1788,8 @@ For repetitive analyses, the steps are fewer : <span class="notranslate">mapping
 
 <p>When looking at the read <span class="notranslate">mapping</span> at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all <span class="notranslate">mapping</span> to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of <span class="notranslate">reads</span>, possibly indicating a growth defect induced by the gene disruption.</p>
 
-<figure id="figure-6"><img src="../../images/tnseq/empty_gene.png" alt="Example of Essential gene with no reads mapped" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of Essential gene with no <span class="notranslate">reads</span> mapped</figcaption></figure>
-<figure id="figure-7"><img src="../../images/tnseq/low_coverage_gene.png" alt="Example of Essential gene with depleted coverage" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example of Essential gene with depleted coverage</figcaption></figure>
+<figure id="figure-6"><img src="../../images/tnseq/empty_gene.png" alt="Example of Essential gene with no reads mapped. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of Essential gene with no <span class="notranslate">reads</span> mapped</figcaption></figure>
+<figure id="figure-7"><img src="../../images/tnseq/low_coverage_gene.png" alt="Example of Essential gene with depleted coverage. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example of Essential gene with depleted coverage</figcaption></figure>
 
 <p>Once you have curated and confirm the genes that appear essential, comparing the annotation of essential genes with the condition of growth will allow you a better understanding of certain mechanism of interest, like the gene involved in resistance to stress for example.</p>
 

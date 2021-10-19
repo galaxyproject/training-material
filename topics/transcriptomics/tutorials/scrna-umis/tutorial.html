@@ -788,7 +788,7 @@
 
 <p>In this case; <em>Read1</em> contains the barcoding information followed by the polyT tail of the messenger <span class="notranslate">RNA</span>, and <em>Read2</em> contains the actual sequence. Here, Read1 is regarded as the ‘forward’ strand and Read2 as the ‘reverse’ strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.</p>
 
-<figure id="figure-1"><img src="../../images/celseq2_schema.svg" alt="CEL-Seq2 Scheme" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Read1 encapsulates the barcodes, and Read2 the m<span class="notranslate">RNA</span> sequence</figcaption></figure>
+<figure id="figure-1"><img src="../../images/celseq2_schema.svg" alt="CEL-Seq2 Scheme. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Read1 encapsulates the barcodes, and Read2 the m<span class="notranslate">RNA</span> sequence</figcaption></figure>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -819,11 +819,11 @@
 
 <p>Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.</p>
 
-<figure id="figure-2"><img src="../../images/scrna_pbb_barcodes_add.svg" alt="Cell Barcodes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells</figcaption></figure>
+<figure id="figure-2"><img src="../../images/scrna_pbb_barcodes_add.svg" alt="Cell Barcodes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells</figcaption></figure>
 
 <p>Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.</p>
 
-<figure id="figure-3"><img src="../../images/scrna_umi_add.svg" alt="Transcript Barcodes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Random oligonucleotides barcodes added to (cell barcoded) <span class="notranslate">reads</span></figcaption></figure>
+<figure id="figure-3"><img src="../../images/scrna_umi_add.svg" alt="Transcript Barcodes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Random oligonucleotides barcodes added to (cell barcoded) <span class="notranslate">reads</span></figcaption></figure>
 
 <p>There are two things to take note of:</p>
 
@@ -884,7 +884,7 @@
 
 <h2 id="naive-amplification">Naive Amplification</h2>
 
-<figure id="figure-4"><img src="../../images/scrna_amplif_errors.svg" alt="Amplification Bias" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> A cell with two <span class="notranslate">reads</span> from different transcripts being amplified unevenly</figcaption></figure>
+<figure id="figure-4"><img src="../../images/scrna_amplif_errors.svg" alt="Amplification Bias. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> A cell with two <span class="notranslate">reads</span> from different transcripts being amplified unevenly</figcaption></figure>
 
 <p>Consider the above example where two <span class="notranslate">reads</span> from different transcripts are amplified unevenly. The resulting frequency table would yield:</p>
 
@@ -916,7 +916,7 @@ How do we correct for this bias?</p>
 
 <p><strong>Unique Molecular Identifiers</strong> (or <em>UMIs</em>) constitute the second portion of a barcode, where their role is to <em>uniquely</em> count <span class="notranslate">reads</span> such that amplicons of the same read are only counted once, e.g:</p>
 
-<figure id="figure-5"><img src="../../images/scrna_amplif_errors_umis.svg" alt="Amplification Bias with UMIs" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> A cell with four unique transcripts, two from Gene Red and two from Gene Blue</figcaption></figure>
+<figure id="figure-5"><img src="../../images/scrna_amplif_errors_umis.svg" alt="Amplification Bias with UMIs. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> A cell with four unique transcripts, two from Gene Red and two from Gene Blue</figcaption></figure>
 
 <p>Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more <span class="notranslate">reads</span> than Gene Blue. If we were to construct a frequency table as before to count the <span class="notranslate">reads</span>, we would have:</p>
 
@@ -1316,7 +1316,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   </ol>
 </blockquote>
 
-<figure id="figure-6"><img src="../../images/scrna_barcodes_fastq.png" alt="FastQC Plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> FastQC plot of Forward read</figcaption></figure>
+<figure id="figure-6"><img src="../../images/scrna_barcodes_fastq.png" alt="FastQC Plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> FastQC plot of Forward read</figcaption></figure>
 
 <p>Here we can see the three distinct regions along the x-axis that correspond to our expected <a href="#the-cel-seq2-protocol">CEL-Seq2 Schema</a>:</p>
 

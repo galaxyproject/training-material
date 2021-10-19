@@ -625,6 +625,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -861,7 +863,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <p>The quality score for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-identification of each base. The score is encoded using the ASCII character table (with <a href="https://en.wikipedia.org/wiki/FASTQ_format#Encoding">some historical differences</a>):</p>
 
-<p><img src="../../../sequence-analysis/images/quality_score_encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina" loading="lazy" /></p>
+<p><img src="../../../sequence-analysis/images/quality_score_encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina. " loading="lazy" /></p>
 
 <p>So there is an ASCII character associated with each nucleotide, representing its <a href="https://en.wikipedia.org/wiki/Phred_quality_score">Phred quality score</a>, the probability of an incorrect base call:</p>
 
@@ -955,7 +957,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <p>Rather than looking at quality scores for each individual read, FASTQE looks at quality collectively across all <span class="notranslate">reads</span> within a sample and can calculate the mean for each nucleotide position along the length of the <span class="notranslate">reads</span>. Below shows the mean values for this dataset.</p>
 
-<figure id="figure-1"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> FASTQE mean scores</figcaption></figure>
+<figure id="figure-1"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> FASTQE mean scores</figcaption></figure>
 
 <p>You can see the score for each emoji <a href="https://github.com/fastqe/fastqe#scale">here</a>. The emojis below, with Phred scores less than 20, are the ones we hope we don’t see much.</p>
 
@@ -1115,7 +1117,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <p>With FastQC we can use the per base sequence quality plot to check the base quality of the <span class="notranslate">reads</span>, similar to what we did with FASTQE.</p>
 
-<figure id="figure-2"><img src="../../images/quality-control/per_base_sequence_quality-before.png" alt="Per base sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Per base sequence quality</figcaption></figure>
+<figure id="figure-2"><img src="../../images/quality-control/per_base_sequence_quality-before.png" alt="Per base sequence quality. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Per base sequence quality</figcaption></figure>
 
 <p>On the x-axis are the base position in the read. In this example, the sample contains <span class="notranslate">reads</span> that are up to 296 bp long.</p>
 
@@ -1181,17 +1183,17 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
         <li>
           <p>Manifold burst</p>
 
-          <p><img src="../../images/quality-control/per_base_sequence_quality_manifold_burst.png" alt="Manifold burst" loading="lazy" /></p>
+          <p><img src="../../images/quality-control/per_base_sequence_quality_manifold_burst.png" alt="Manifold burst. " loading="lazy" /></p>
         </li>
         <li>
           <p>Cycles loss</p>
 
-          <p><img src="../../images/quality-control/per_base_sequence_quality_cycle_loss.png" alt="Cycles loss" loading="lazy" /></p>
+          <p><img src="../../images/quality-control/per_base_sequence_quality_cycle_loss.png" alt="Cycles loss. " loading="lazy" /></p>
         </li>
         <li>
           <p>Read 2 failure</p>
 
-          <p><img src="../../images/quality-control/per_base_sequence_quality_read2_failure.png" alt="Cycles loss" loading="lazy" /></p>
+          <p><img src="../../images/quality-control/per_base_sequence_quality_read2_failure.png" alt="Cycles loss. " loading="lazy" /></p>
         </li>
       </ul>
 
@@ -1223,7 +1225,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <h4 id="adapter-content">Adapter Content</h4>
 
-<figure id="figure-3"><img src="../../images/quality-control/adapter_content-before.png" alt="Adapter Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Adapter Content</figcaption></figure>
+<figure id="figure-3"><img src="../../images/quality-control/adapter_content-before.png" alt="Adapter Content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Adapter Content</figcaption></figure>
 
 <p>The plot shows the cumulative percentage of <span class="notranslate">reads</span> with the different adapter sequences at each position. Once an adapter sequence is seen in a read it  is counted as being present right through to the end of the read so the percentage increases with the read length. FastQC can detect some adapters by default (e.g. Illumina, Nextera), for others we could provide a contaminants file as an input to the FastQC tool.</p>
 
@@ -1234,7 +1236,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
   <p>Adapter content may also be detected with <span class="notranslate">RNA</span>-Seq libraries where the distribution of library insert sizes is varied and likely to include some short inserts.</p>
 
-  <p><img src="../../images/quality-control/adapter_content_rna_seq.png" alt="Adapter Content" loading="lazy" /></p>
+  <p><img src="../../images/quality-control/adapter_content_rna_seq.png" alt="Adapter Content. " loading="lazy" /></p>
 
 </blockquote>
 
@@ -1256,7 +1258,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>This plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell. The plot shows the deviation from the average quality for each flowcell tile. The hotter colours indicate that <span class="notranslate">reads</span> in the given tile have worse qualities for that position than <span class="notranslate">reads</span> in other tiles. With this sample, you can see that certain tiles show consistently poor quality, especially from ~100bp onwards. A good plot should be blue all over.</p>
 
-<figure id="figure-4"><img src="../../images/quality-control/per_tile_sequence_quality-before.png" alt="Per tile sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per tile sequence quality</figcaption></figure>
+<figure id="figure-4"><img src="../../images/quality-control/per_tile_sequence_quality-before.png" alt="Per tile sequence quality. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per tile sequence quality</figcaption></figure>
 
 <p>This plot will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came.</p>
 
@@ -1265,7 +1267,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
   <p>In some cases, the chemicals used during sequencing becoming a bit exhausted over the time and the last tiles got worst chemicals which makes the sequencing reactions a bit error-prone. The “Per tile sequence quality” graph will then have some horizontal lines like this:</p>
 
-  <p><img src="../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png" alt="Per tile sequence quality with horizontal lines" loading="lazy" /></p>
+  <p><img src="../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png" alt="Per tile sequence quality with horizontal lines. " loading="lazy" /></p>
 
 </blockquote>
 
@@ -1273,13 +1275,13 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>It plots the average quality score over the full length of all <span class="notranslate">reads</span> on the x-axis and gives the total number of <span class="notranslate">reads</span> with this score on the y-axis:</p>
 
-<figure id="figure-5"><img src="../../images/quality-control/per_sequence_quality_scores-before.png" alt="Per sequence quality scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per sequence quality scores</figcaption></figure>
+<figure id="figure-5"><img src="../../images/quality-control/per_sequence_quality_scores-before.png" alt="Per sequence quality scores. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per sequence quality scores</figcaption></figure>
 
 <p>The distribution of average read quality should be tight peak in the upper range of the plot. It can also report if a subset of the sequences have universally low quality values: it can happen because some sequences are poorly imaged (on the edge of the field of view etc), however these should represent only a small percentage of the total sequences.</p>
 
 <h2 id="per-base-sequence-content">Per base sequence content</h2>
 
-<figure id="figure-6"><img src="../../images/quality-control/per_base_sequence_content-before.png" alt="Per base sequence content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Per base sequence content for a <span class="notranslate">DNA</span> library</figcaption></figure>
+<figure id="figure-6"><img src="../../images/quality-control/per_base_sequence_content-before.png" alt="Per base sequence content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Per base sequence content for a <span class="notranslate">DNA</span> library</figcaption></figure>
 
 <p>“Per Base Sequence Content” plots the percentage of each of the four nucleotides (T, C, A, G) at each position across all <span class="notranslate">reads</span> in the input sequence file. As for the per base sequence quality, the x-axis is non-uniform.</p>
 
@@ -1290,11 +1292,11 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
   <p>It’s worth noting that some library types will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all <span class="notranslate">RNA</span>-Seq libraries), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which <span class="notranslate">reads</span> start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5’ end of the <span class="notranslate">reads</span>. Whilst this is a true technical bias, it isn’t something which can be corrected by trimming and in most cases doesn’t seem to adversely affect the <span class="notranslate">downstream</span> analysis. It will, however, produce a warning or error in this module.</p>
 
-  <p><img src="../../images/quality-control/per_base_sequence_content_rnaseq.png" alt="Per base sequence content for RNA-seq data" loading="lazy" /></p>
+  <p><img src="../../images/quality-control/per_base_sequence_content_rnaseq.png" alt="Per base sequence content for RNA-seq data. " loading="lazy" /></p>
 
   <p>ChIP-seq data can also encounter read start sequence biases in this plot if fragmenting with transposases. With bisulphite converted data, e.g. HiC data, a separation of G from C and A from T is expected:</p>
 
-  <p><img src="../../images/quality-control/per_base_sequence_content_bisulphite.png" alt="Per base sequence content for Bisulphite data" loading="lazy" /></p>
+  <p><img src="../../images/quality-control/per_base_sequence_content_bisulphite.png" alt="Per base sequence content for Bisulphite data. " loading="lazy" /></p>
 
   <p>At the end, there is an overall shift in the sequence composition. If the shift correlates with a loss of sequencing quality, it can be suspected that miscalls are made with a more even sequence bias than bisulphite converted libraries.  Trimming the sequences fixed this problem, but if this hadn’t been done it would have had a dramatic effect on the methylation calls which were made.</p>
 </blockquote>
@@ -1313,7 +1315,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <h2 id="per-sequence-gc-content">Per sequence GC content</h2>
 
-<figure id="figure-7"><img src="../../images/quality-control/per_sequence_gc_content-before.png" alt="Per sequence GC content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Per sequence GC content</figcaption></figure>
+<figure id="figure-7"><img src="../../images/quality-control/per_sequence_gc_content-before.png" alt="Per sequence GC content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Per sequence GC content</figcaption></figure>
 
 <p>This plot displays the number of <span class="notranslate">reads</span> vs. percentage of bases G and C per read. It is compared to a theoretical distribution assuming an uniform GC content for all <span class="notranslate">reads</span>, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.</p>
 
@@ -1336,7 +1338,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment. Our plot shows variable length as we trimmed the data. The biggest peak is at 296bp but there is a second large peak at ~100bp. So even though our sequences range up to 296bp in length, a lot of the good-quality sequences are shorter. This corresponds with the drop we saw in the sequence quality at ~100bp and the red stripes starting at this position in the per tile sequence quality plot.</p>
 
-<figure id="figure-8"><img src="../../images/quality-control/sequence_length_distribution-before.png" alt="Sequence length distribution" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Sequence length distribution</figcaption></figure>
+<figure id="figure-8"><img src="../../images/quality-control/sequence_length_distribution-before.png" alt="Sequence length distribution. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Sequence length distribution</figcaption></figure>
 
 <p>Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain <span class="notranslate">reads</span> of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.</p>
 
@@ -1344,7 +1346,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>The graph shows in blue the percentage of <span class="notranslate">reads</span> of a given sequence in the file which are present a given number of times in the file:</p>
 
-<figure id="figure-9"><img src="../../images/quality-control/sequence_duplication_levels-before.png" alt="Sequence Duplication Levels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-9"><img src="../../images/quality-control/sequence_duplication_levels-before.png" alt="Sequence Duplication Levels. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequence Duplication Levels</figcaption></figure>
 
 <p>In a diverse library most sequences will occur only once in the final set. A low level of duplication may indicate a very high level of coverage of the target sequence, but a high level of duplication is more likely to indicate some kind of enrichment bias.</p>
 
@@ -1377,7 +1379,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
   <p>It is usually the case for <span class="notranslate">RNA</span> sequencing where there is some very highly abundant transcripts and some lowly abundant. It is expected that duplicate <span class="notranslate">reads</span> will be observed for high abundance transcripts:</p>
 
-  <p><img src="../../images/quality-control/sequence_duplication_levels_rna_seq.png" alt="Sequence Duplication Levels for RNA-seq" loading="lazy" /></p>
+  <p><img src="../../images/quality-control/sequence_duplication_levels_rna_seq.png" alt="Sequence Duplication Levels for RNA-seq. " loading="lazy" /></p>
 
 </blockquote>
 
@@ -1401,7 +1403,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
 </code></pre></div>    </div>
     <p>and use <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">blastn</a> against the default Nucleotide (nr/nt) database we don’t get any hits. But if we use <a href="https://www.ncbi.nlm.nih.gov/tools/vecscreen/">VecScreen</a> we see it is the Nextera adapter.</p>
-    <figure id="figure-10"><img src="../../images/quality-control/vecscreen-nextera.png" alt="VecScreen" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Nextera adapter</figcaption></figure>
+    <figure id="figure-10"><img src="../../images/quality-control/vecscreen-nextera.png" alt="VecScreen. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Nextera adapter</figcaption></figure>
   </blockquote>
 </blockquote>
 
@@ -1410,13 +1412,13 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
 
   <h4 id="per-base-n-content">Per base N content</h4>
 
-  <figure id="figure-11"><img src="../../images/quality-control/per_base_n_content-before.png" alt="Per base N content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Per base N content</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/quality-control/per_base_n_content-before.png" alt="Per base N content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Per base N content</figcaption></figure>
 
   <p>If a sequencer is unable to make a base call with sufficient confidence, it will write an “N” instead of a conventional base call. This plot displays the percentage of base calls at each position or bin for which an N was called.</p>
 
   <p>It’s not unusual to see a very high proportion of Ns appearing in a sequence, especially near the end of a sequence. But this curve should never rises noticeably above zero. If it does this indicates a problem occurred during the sequencing run. In the example below, an error caused the instrument to be unable to call a base for approximately 20% of the <span class="notranslate">reads</span> at position 29:</p>
 
-  <p><img src="../../images/quality-control/per_base_n_content_error.png" alt="Per base N content" loading="lazy" /></p>
+  <p><img src="../../images/quality-control/per_base_n_content_error.png" alt="Per base N content. " loading="lazy" /></p>
 
   <h4 id="kmer-content">Kmer Content</h4>
 
@@ -1426,7 +1428,7 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
 
   <p>The following example is from a high-quality <span class="notranslate">DNA</span>-Seq library. The biased kmers nearby the start of the read likely are due to slight sequence dependent efficiency of <span class="notranslate">DNA</span> shearing or a result of random priming:</p>
 
-  <figure id="figure-12"><img src="../../images/quality-control/kmer_content.png" alt="Kmer Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Kmer content</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/quality-control/kmer_content.png" alt="Kmer Content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Kmer content</figcaption></figure>
 
   <p>This module can be very difficult to interpret. The adapter content plot and overrepesented sequences table are easier to interpret and may give you enough information without needing this plot. <span class="notranslate">RNA</span>-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html">FastQC Kmer Content documentation</a>.</p>
 
@@ -1671,9 +1673,9 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
           <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>Yes, the quality score emojis look better (happier) now.</p>
 
-          <figure id="figure-13"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Before trimming</figcaption></figure>
+          <figure id="figure-13"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Before trimming</figcaption></figure>
 
-          <figure id="figure-14"><img src="../../images/quality-control/fastqe-mean-after.png" alt="FASTQE after" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> After trimming</figcaption></figure>
+          <figure id="figure-14"><img src="../../images/quality-control/fastqe-mean-after.png" alt="FASTQE after. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> After trimming</figcaption></figure>
 
         </blockquote>
       </blockquote>
@@ -1711,11 +1713,11 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
     <ol>
       <li>Yes. The vast majority of the bases have a quality score above 20 now.</li>
     </ol>
-    <figure id="figure-15"><img src="../../images/quality-control/per_base_sequence_quality-after.png" alt="Per base sequence quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Per base sequence quality</figcaption></figure>
+    <figure id="figure-15"><img src="../../images/quality-control/per_base_sequence_quality-after.png" alt="Per base sequence quality. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Per base sequence quality</figcaption></figure>
 
     <ol>
       <li>Yes. No adapter is detected now.
-<img src="../../images/quality-control/adapter_content-after.png" alt="Adapter Content" loading="lazy" /></li>
+<img src="../../images/quality-control/adapter_content-after.png" alt="Adapter Content. " loading="lazy" /></li>
     </ol>
 
   </blockquote>
@@ -1726,25 +1728,25 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
 <blockquote class="details">
   <h3 id="details-other-fastqc-plots-after-trimming"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other FastQC plots after trimming</h3>
 
-  <p><img src="../../images/quality-control/per_tile_sequence_quality-after.png" alt="Per tile sequence quality" loading="lazy" />
+  <p><img src="../../images/quality-control/per_tile_sequence_quality-after.png" alt="Per tile sequence quality. " loading="lazy" />
 We have some red stripes as we’ve trimmed those regions from the <span class="notranslate">reads</span>.</p>
 
-  <p><img src="../../images/quality-control/per_sequence_quality_scores-after.png" alt="Per sequence quality scores" loading="lazy" />
+  <p><img src="../../images/quality-control/per_sequence_quality_scores-after.png" alt="Per sequence quality scores. " loading="lazy" />
 We now have one peak of high quality instead of one high and one lower quality that we had previously.</p>
 
-  <p><img src="../../images/quality-control/per_base_sequence_content-after.png" alt="Per base sequence content" loading="lazy" />
+  <p><img src="../../images/quality-control/per_base_sequence_content-after.png" alt="Per base sequence content. " loading="lazy" />
 We don’t have equal representation of the bases as before as this is amplicon data.</p>
 
-  <p><img src="../../images/quality-control/per_sequence_gc_content-after.png" alt="Per sequence GC content" loading="lazy" />
+  <p><img src="../../images/quality-control/per_sequence_gc_content-after.png" alt="Per sequence GC content. " loading="lazy" />
 We now have a single main GC peak due to removing the adapter.</p>
 
-  <p><img src="../../images/quality-control/per_base_n_content-after.png" alt="Per base N content" loading="lazy" />
+  <p><img src="../../images/quality-control/per_base_n_content-after.png" alt="Per base N content. " loading="lazy" />
 This is the same as before as we don’t have any Ns in these <span class="notranslate">reads</span>.</p>
 
-  <p><img src="../../images/quality-control/sequence_length_distribution-after.png" alt="Sequence length distribution" loading="lazy" />
+  <p><img src="../../images/quality-control/sequence_length_distribution-after.png" alt="Sequence length distribution. " loading="lazy" />
 We now have multiple peaks and a range of lengths, instead of the single peak with had before trimming when all sequences were the same length.</p>
 
-  <p><img src="../../images/quality-control/sequence_duplication_levels-after.png" alt="Sequence Duplication Levels" loading="lazy" /></p>
+  <p><img src="../../images/quality-control/sequence_duplication_levels-after.png" alt="Sequence Duplication Levels. " loading="lazy" /></p>
   <blockquote class="question">
     <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 

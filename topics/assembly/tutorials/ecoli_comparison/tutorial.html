@@ -768,6 +768,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -961,12 +963,12 @@ to be altered (e.g. column numbers) when using data directly from NCBI.</p>
     <li>
       <p>Click on “Filters” at the top right:</p>
 
-      <p><img src="../../images/ecoli-list-filter.png" alt="Filter menu button" loading="lazy" /></p>
+      <p><img src="../../images/ecoli-list-filter.png" alt="Filter menu button. " loading="lazy" /></p>
     </li>
     <li>
       <p>Select only the “Complete” genomes with the filter at the top</p>
 
-      <p><img src="../../images/ecoli-list.png" alt="Filter settings, only &quot;complete&quot; is checked" loading="lazy" /></p>
+      <p><img src="../../images/ecoli-list.png" alt="Filter settings, only &quot;complete&quot; is checked. " loading="lazy" /></p>
     </li>
     <li>
       <p>At the top right, click “Download”</p>
@@ -1037,7 +1039,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 
 <p>Now that the list is formatted as a table in a sp<span class="notranslate">reads</span>heet, it is time to upload it into <span class="notranslate">Galaxy</span>. There is a problem though: the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL: <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1">GCA_000008865.1_ASM886v1</a> points to a directory (rather than a file) containing many files, most of which we do not need.</p>
 
-<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we only need the dataset ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we only need the dataset ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
 
 <p>So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add <code class="language-plaintext highlighter-rouge">/GCA_000008865.1_ASM886v1</code> and <code class="language-plaintext highlighter-rouge">_genomic.fna.gz</code> to the end to get this:</p>
 
@@ -1139,7 +1141,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 <blockquote class="tip">
   <h3 id="tip-tip-finding-tools-mentioned-in-this-tutorial"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Finding tools mentioned in this tutorial</h3>
   <p><span class="notranslate">Galaxy</span> instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, <span class="notranslate">Galaxy</span> has a search box at the top of the left panel. Use this box to find the tools mentioned here.</p>
-  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Use search box to find tools!</figcaption></figure>
+  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Use search box to find tools!</figcaption></figure>
 </blockquote>
 
 <p>The assembly we just uploaded has two issues that need to be addressed before proceeding with our analysis:</p>
@@ -1285,7 +1287,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the <em>E. coli</em> genomes and our assembly:</p>
 
-<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
 <p>.</p>
 
 <h2 id="collapsing-collection">Collapsing collection</h2>
@@ -1338,7 +1340,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the alignment identity and alignment length looks like this (remember that this is only a subsample of the data):</p>
 
-<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
+<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
 
 <p>You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging from this graph we can select alignment longer than 10,000 bp with identity above 90%.</p>
 
@@ -1426,7 +1428,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the number of alignment blocks and total alignment length looks like this:</p>
 
-<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
 
 <p>A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set <strong>Data point labels</strong> correctly in the previous step) will reveal their accession numbers: <code class="language-plaintext highlighter-rouge">LT906474.1</code>, <code class="language-plaintext highlighter-rouge">CP024090.1</code>, and <code class="language-plaintext highlighter-rouge">CP020543.1</code>.</p>
 
@@ -1723,7 +1725,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 
 <p>Because we chose to produce Dot Plots as well, LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:</p>
 
-<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
 
 <p>A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly.</p>
 
@@ -1731,7 +1733,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
   <h3 id="details-interpreting-dot-plots"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Interpreting Dot Plots</h3>
   <p>If you are not sure how to interpret Dot Plots here is a great explanation by <a href="http://schatz-lab.org/">Michael Schatz</a>:</p>
 
-  <figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
 </blockquote>
 
 <p>For a moment let’s leave LASTZ result and create a browser that would allows us to display our results.</p>
@@ -2469,7 +2471,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
 <p>It can be useful to have the complement of the aligned regions, to know which regions are unique.</p>
 
-<figure id="figure-8"><img src="../../images/complement.png" alt="Complementing genomic ranges" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
+<figure id="figure-8"><img src="../../images/complement.png" alt="Complementing genomic ranges. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-a-genome-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a genome file</h3>
@@ -2882,13 +2884,13 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
 <p>This should produce a lovely Circos plot of your data:</p>
 
-<figure id="figure-9"><img src="../../images/ecoli-comparison.png" alt="Circos plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Circos plot of the four genomes. The insertion in the related genomes is visible around the 3.2Mb region</figcaption></figure>
+<figure id="figure-9"><img src="../../images/ecoli-comparison.png" alt="Circos plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Circos plot of the four genomes. The insertion in the related genomes is visible around the 3.2Mb region</figcaption></figure>
 
 <h2 id="extracting-genes-programmatically">Extracting genes programmatically</h2>
 
 <p>Above we’ve been able to look at genes that appear to be deleted in our assembly. But what we really need is to create a list that can be interrogated further. For example, which of these genes are essential? We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. We could do this by inspecting the genome browser, or we can do it automatically by intersecting the gap regions with the list of genes:</p>
 
-<figure id="figure-10"><img src="../../images/intersect.png" alt="Intersect between two BED datasets" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Computing intersect means finding overlapping regions in two <span class="notranslate">BED</span> datasets (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
+<figure id="figure-10"><img src="../../images/intersect.png" alt="Intersect between two BED datasets. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Computing intersect means finding overlapping regions in two <span class="notranslate">BED</span> datasets (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-finding-genes-deleted-in-our-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Finding genes deleted in our assembly</h3>

@@ -616,6 +616,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -684,7 +686,7 @@ Phenotypes caused by reduced gene function are widely used to elucidate gene fun
 In particular, regardless of the targeted biological process, many screens include a <span class="notranslate">DNA</span> label and therefore can also reveal the effect of gene knock-downs on nucleoli.</p>
 
 <p><a name="nucleoli"></a></p>
-<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel" width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">DNA</span> channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">DNA</span> channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
 
 <p>In this tutorial, we will analyse <span class="notranslate">DNA</span> channel images of publicly available <span class="notranslate">RNA</span>i screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the <a href="http://idr.openmicroscopy.org/" target="_blank">Image Data Resource (IDR)</a>, a repository that collects image datasets of tissues and cells.</p>
@@ -700,7 +702,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>3) <strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to actually run the pipeline.</p>
 
 <p><a name="high_level_view"></a></p>
-<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>In this tutorial, you will learn how to create a <span class="notranslate">workflow</span> that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
 
@@ -765,7 +767,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
         <p>To get the valid IDR link, go to the <a href="http://idr.openmicroscopy.org/webclient/?show=screen-102" target="_blank">dataset of interest in the IDR</a> and select in the preview of a plate a few images ((figure <a href="#IDR_interface">Fig. 3</a> - 1)). Once you see them at the bottom of the page (figure <a href="#IDR_interface">Fig. 3</a> - 2), select them again and click the link button in the top-right corner of the right panel (figure <a href="#IDR_interface">Fig. 3</a> - 3).
 <a name="IDR_interface"></a></p>
-        <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> IDR interface</figcaption></figure>
+        <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> IDR interface</figcaption></figure>
       </blockquote>
 
       <blockquote class="comment">
@@ -946,7 +948,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like (you will only get this image after running the whole <span class="notranslate">workflow</span>):</p>
 
-<figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Identified nuclei with labels.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Identified nuclei with labels.</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1122,7 +1124,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>We have now one segmentation mask per image with all the nuclei detected, <code class="language-plaintext highlighter-rouge">MaskNuclei</code>, and another one for the nucleoli, <code class="language-plaintext highlighter-rouge">MaskNucleoli</code>. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both of them (using different colors) into one image. Here, we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome that you will obtain after the execution of the <span class="notranslate">workflow</span> will look like:</p>
 
-<figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-convert-and-save-the-nuclei-and-nucleoli-masks"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert and save the nuclei and nucleoli masks</h3>
