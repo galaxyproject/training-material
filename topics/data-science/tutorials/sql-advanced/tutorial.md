@@ -338,7 +338,6 @@ this query:
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -366,7 +365,6 @@ this query:
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -414,7 +412,6 @@ this query:
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -435,7 +432,6 @@ this query:
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -595,7 +591,6 @@ SELECT rowid, * FROM Person;
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -620,7 +615,6 @@ SELECT rowid, * FROM Person;
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -635,7 +629,6 @@ SELECT rowid, * FROM Person;
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -679,7 +672,6 @@ SELECT rowid, * FROM Person;
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -773,7 +765,6 @@ the tool shapes the hand that shapes the tool.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -792,7 +783,6 @@ the tool shapes the hand that shapes the tool.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -979,7 +969,6 @@ this technique is outside the scope of this chapter.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -1009,7 +998,6 @@ this technique is outside the scope of this chapter.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 

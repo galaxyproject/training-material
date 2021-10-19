@@ -264,7 +264,6 @@ the convention that we will use for this lesson.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -328,7 +327,6 @@ SELECT * FROM Person;
 
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -350,7 +348,6 @@ SELECT * FROM Person;
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -488,7 +485,6 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -514,7 +510,6 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -744,7 +739,6 @@ not to the entire rows as they are being processed.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -768,7 +762,6 @@ not to the entire rows as they are being processed.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -793,7 +786,6 @@ not to the entire rows as they are being processed.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -881,7 +873,6 @@ issues.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -933,7 +924,6 @@ issues.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -970,7 +960,6 @@ issues.
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -1118,7 +1107,6 @@ detail in [the next section](#).
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -1153,7 +1141,6 @@ detail in [the next section](#).
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
 
@@ -1171,6 +1158,5 @@ detail in [the next section](#).
 {: .question}
 
 ```sql
-%%sql
 -- Try solutions here!
 ```
