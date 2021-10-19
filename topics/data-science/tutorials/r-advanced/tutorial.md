@@ -39,6 +39,7 @@ key_points:
 - Use the `dplyr` package to manipulate data frames.
 - Pipes can be used to combine simple operations into complex procedures.
 subtopic: r
+priority: 2
 contributors:
   - carpentries
   - bebatut

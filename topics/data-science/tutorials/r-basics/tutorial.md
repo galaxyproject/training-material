@@ -32,6 +32,7 @@ tags:
   - interactive-tools
   - R
 subtopic: r
+priority: 1
 contributors:
   - carpentries
   - bebatut
