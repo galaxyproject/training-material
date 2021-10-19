@@ -30,6 +30,7 @@ key_points:
 - It is important to understand how data are organised by R in a given object type (e.g. numeric, character, logical, etc.) and how the mode of that type determines how R will operate on that data.
 tags:
   - interactive-tools
+  - R
 subtopic: r
 contributors:
   - carpentries

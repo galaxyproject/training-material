@@ -44,6 +44,8 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
+tags:
+- R
 ---
 
 # Introduction

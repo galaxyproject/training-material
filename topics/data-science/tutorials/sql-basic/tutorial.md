@@ -64,6 +64,10 @@ notebook:
 
 abbreviations:
     SQL: "Structured Query Language"
+
+tags:
+- SQL
+- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment
