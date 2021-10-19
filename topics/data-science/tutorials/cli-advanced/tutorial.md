@@ -67,6 +67,9 @@ contributors:
   - carpentries
   - hexylena
   - bazante1
+tags:
+- jupyter-notebook
+- bash
 ---
 
 This tutorial will walk you through the basics of how to use the Unix command line.

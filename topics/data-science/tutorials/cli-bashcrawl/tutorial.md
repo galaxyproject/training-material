@@ -31,6 +31,8 @@ contributors:
 - hexylena
 tags:
 - game
+- jupyter-notebook
+- bash
 ---
 
 This is not a tutorial like most GTN content but a fun exercise for you to play around and learn a bit about the command line, and hopefully re-inforce the skills you covered in Basic and Advanced CLI skills.

@@ -33,6 +33,11 @@ subtopic: sql
 
 notebook:
     language: python
+
+tags:
+- SQL
+- Python
+- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment
