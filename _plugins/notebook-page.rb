@@ -239,7 +239,7 @@ module Jekyll
 
     def generate(site)
       if find_executable('notedown').nil?
-        puts "We could not find the notedown executable, so, notebooks will not be rendered."
+        puts "[GTN/Notebooks] We could not find the notedown executable, so, notebooks will not be rendered."
         return
       end
 
@@ -266,6 +266,8 @@ module Jekyll
         elsif notebook_language == 'r'
           notebook = fixRNotebook(notebook)
         end
+
+        puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
 
         # Here we loop over the markdown cells and render them to HTML. This
         # allows us to get rid of classes like {: .tip} that would be left in
