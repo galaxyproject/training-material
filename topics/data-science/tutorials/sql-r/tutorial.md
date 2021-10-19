@@ -38,6 +38,11 @@ subtopic: sql
 
 notebook:
     language: r
+
+tags:
+- SQL
+- R
+- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment
