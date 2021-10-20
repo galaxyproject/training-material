@@ -19,51 +19,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # BEGIN Dependencies
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.7'
-          architecture: 'x64'
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "2.5"
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - uses: actions/cache@v2
-        with:
-          path: |
-            vendor/bundle
-            ~/.cache/pip
-            ~/.npm
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py--node-
-            ${{ runner.os }}-gems-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-          pip install -r requirements.txt
-          npm install
-      # END Dependencies
-
-      - name: Install rendering stuff
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb libfontconfig ffmpeg sox libsox-fmt-mp3 ghostscript
-
-      - name: Change ImageMagick policy to allow pdf->png conversion.
-        run: |
-          sudo rm /etc/ImageMagick-6/policy.xml
-
-      - name: Build Site
-        run: |
-          gem install bundler
-          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
-
       # We get the previous build ID to know how many videos were changed since
       # then.
       #
@@ -77,6 +32,67 @@ jobs:
         run: |
           echo "::set-output name=commit::$(curl https://galaxy-training.s3.amazonaws.com/videos/topics/last-commit -f 2>/dev/null || echo none)"
 
+      - name: Determine if we should build or exit early.
+        id: delta
+        run: |
+            result=$(join <(find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_ES.html' | xargs ./bin/filter-resource-metadata video | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort) | wc -l)
+            echo "::set-output name=changedSlideCount::${result}"
+        env:
+          PREVIOUS_COMMIT_ID: ${{ steps.build_id.outputs.commit }}
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.5"
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+      - uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+            ~/.cache/pip
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py--node-
+            ${{ runner.os }}-gems-
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          pip install -r requirements.txt
+          npm install
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+      # END Dependencies
+
+      - name: Install rendering stuff
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libfontconfig ffmpeg sox libsox-fmt-mp3 ghostscript
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+
+      - name: Change ImageMagick policy to allow pdf->png conversion.
+        run: |
+          sudo rm /etc/ImageMagick-6/policy.xml
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+
+      - name: Build Site
+        run: |
+          gem install bundler
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
+
       # The actual compilation process deposits everything in the ./videos/ folder.
       - name: Build Videos
         run: |
@@ -86,6 +102,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_POLLY_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
           PREVIOUS_COMMIT_ID: ${{ steps.build_id.outputs.commit }}
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
 
       # Deploy step, scary.
       - uses: jakejarvis/s3-sync-action@v0.5.1
@@ -97,3 +114,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: './videos/topics/'
           DEST_DIR: 'videos/topics/'
+        if: ${{ step.delta.outputs.changedSlideCount > 0 }}
