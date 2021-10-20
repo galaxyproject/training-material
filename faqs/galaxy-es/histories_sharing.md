@@ -1,33 +1,26 @@
 ---
-title: Sharing your History
+title: Compartiendo un historial
 area: histories
-description: You can share your work in Galaxy. There are various ways you can give access one of your histories to other users.
+description: Puedes compartir tu trabajo en Galaxy. Hay varias formas de dar acceso a tus historiales a otros usuarios.
 box_type: tip
 layout: faq
 ---
 
-Sharing your history allows others to import and access the datasets, parameters, and steps of your history.
-
-
-1. **Share via link**
-   - Open the **History Options** {% icon galaxy-gear %} menu (gear icon) at the top of your history panel
-     - {% icon galaxy-toggle %} **Make History accessible**
-     - A **Share Link** will appear that you give to others
-   - Anybody who has this link can view and copy your history
-
-2. **Publish your history**
-   - {% icon galaxy-toggle %} **Make History publicly available in Published Histories**
-   - Anybody on this Galaxy server will see your history listed under the *Shared Data* menu
-
-3. **Share only with another user**.
-   - Click the **Share with a user** button at the bottom
-   - Enter an email address for the user you want to share with
-   - Your history will be shared only with this user.
-
-4. **Finding histories others have shared with me**
-   - Click on **User** menu on the top bar
-   - Select **Histories shared with me**
-   - Here you will see all the histories others have shared with you directly
-
-**Note:** If you want to make changes to your history without affecting the shared version, make a copy by going to {% icon galaxy-gear %} *History options* icon in your history and clicking *Copy*
-
+Compartir tu historial permite a otros importar y acceder a los conjuntos de datos, parámetros y pasos de tu historial.
+1. **Compartir a través de un enlace**
+   - Abre el menú **Opciones de historial** {% icon galaxy-gear%} (icono de engranaje) en la parte superior del panel de historial
+     - {% icon galaxy-toggle%} **Hacer que el historial sea accesible**
+     - Aparecerá un **Compartir enlace** que puedes dar a otros usuarios.
+   - Cualquiera que tenga este enlace puede ver y copiar tu historial.
+2. **Publica tu historial**
+   - {% icon galaxy-toggle%} **Hacer que el historial esté disponible públicamente en Historias publicadas**
+   - Cualquiera en este servidor Galaxy podrá ver tu historial en el menú *Datos compartidos*
+3. **Comparte solo con otro usuario**.
+   - Haz clic en el botón **Compartir con un usuario** en la parte inferior
+   - Ingresa una dirección de correo electrónico del usuario con el que deseas compartir
+   - Tu historial se compartirá solo con este usuario.
+4. **Encontrar historiales que otros han compartido conmigo**
+   - Haz clic en el menú **Usuario** en la barra superior
+   - Selecciona **Historiales compartidos conmigo**
+   - Aquí verás todos los historiales que otros han compartido contigo directamente
+** Nota: ** Si deseas realizar cambios en tu historial sin afectar la versión compartida, crea una copia mediante al ícono {% icon galaxy-gear%} *Opciones de historial* en tu historial y haciendo clic en *Copiar*
