@@ -887,7 +887,7 @@ Por último, existen muchas maneras de analizar los datos, tanto dentro de los �
 
 # Visualizaciones interactivas
 
-Antes de que te dejemos explorar lo desconocido, habrás notado que las interpretaciones anteriores son sólo algunas de las opciones posibles. Más aún, es posible que te hayas divertido intentando averiguar qué muestra es de qué genotipo y qué sexo, y pasando repetidamente de un gráfico a otro. Averiguar qué gráficos serán los definitivos y publicables requiere mucho tiempo y muchos intentos ¡Por suerte, existe un útil visor interactivo {% cite Cakir2020  {% cite Moreno2020.04.08.032698 %} que puede ayudarte a explorar sin tener que producir nuevos gráficos una y otra vez!
+Antes de que te dejemos explorar lo desconocido, habrás notado que las interpretaciones anteriores son sólo algunas de las opciones posibles. Más aún, es posible que te hayas divertido intentando averiguar qué muestra es de qué genotipo y qué sexo, y pasando repetidamente de un gráfico a otro. Averiguar qué gráficos serán los definitivos y publicables requiere mucho tiempo y muchos intentos ¡Por suerte, existe un útil visor interactivo {% cite Cakir2020 %} {% cite Moreno2020.04.08.032698 %} que puede ayudarte a explorar sin tener que producir nuevos gráficos una y otra vez!
 
 > ### {% icon hands_on %} Práctica: Cellxgene
 >
