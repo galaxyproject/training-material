@@ -86,19 +86,19 @@ head(msleep)
 
 The columns (in order) correspond to the following:
 
-column name | Description
---- | ---
-name | common name
-genus | taxonomic rank
-vore | carnivore, omnivore or herbivore?
-order | taxonomic rank
+column name  | Description
+---          | ---
+name         | common name
+genus        | taxonomic rank
+vore         | carnivore, omnivore or herbivore?
+order        | taxonomic rank
 conservation | the conservation status of the mammal
 sleep\_total | total amount of sleep, in hours
-sleep\_rem | rem sleep, in hours
+sleep\_rem   | rem sleep, in hours
 sleep\_cycle | length of sleep cycle, in hours
-awake | amount of time spent awake, in hours
-brainwt | brain weight in kilograms
-bodywt | body weight in kilograms
+awake        | amount of time spent awake, in hours
+brainwt      | brain weight in kilograms
+bodywt       | body weight in kilograms
 
 Compare the above output with the more traditional `read.csv` that is built into R
 
