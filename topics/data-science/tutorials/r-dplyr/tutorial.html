@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>dplyr & tidyverse for data processing</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: dplyr & tidyverse for data processing" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/r-dplyr/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/r-dplyr/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/r-dplyr/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/r-dplyr/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/r-dplyr/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/r-dplyr/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/r-dplyr/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/r-dplyr/tutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/data-science/tutorials/r-dplyr/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/data-science/tutorials/r-dplyr/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-08-01/topics/data-science/tutorials/r-dplyr/tutorial.html" title="Version 2021-08-01">2021-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "dplyr & tidyverse for data processing",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / r-dplyr / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'dplyr & tidyverse for data processing' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/r-dplyr/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "R, jupyter-notebook",
+  "description": "The questions this  addresses are:\n - How can I load tabular data into R?\n - How can I slice and dice the data to ask questions?\n\n\\nThe objectives are:\n - Read data with the built-in `read.csv`\n - Read data with dplyr's `read_csv`\n - Use dplyr and tidyverse functions to cleanup data.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/r-basics/tutorial.html",
+      "name": "R basics in Galaxy",
+      "description": "Hands-on for 'R basics in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/r-advanced/tutorial.html",
+      "name": "Advanced R in Galaxy",
+      "description": "Hands-on for 'Advanced R in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Advanced"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>dplyr & tidyverse for data processing</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <div class="contributors-line">Authors: <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a></div>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I load tabular data into R?</p>
+</li>
+        
+        <li><p>How can I slice and dice the data to ask questions?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Read data with the built-in <code class="language-plaintext highlighter-rouge">read.csv</code></p>
+</li>
+        
+        <li><p>Read data with dplyr’s <code class="language-plaintext highlighter-rouge">read_csv</code></p>
+</li>
+        
+        <li><p>Use dplyr and tidyverse functions to cleanup data.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> R basics in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/r-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Advanced R in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/r-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Advanced <span class="visually-hidden">Advanced</span>
+<span class="level advanced" title="Advanced Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/r-dplyr/tutorial.md.ipynb" title="Notebooks" alt="dplyr & tidyverse for data processing workflows">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+
+</li>
+            
+
+            
+            
+            
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 20, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            Tutorial Content is licensed under MIT
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+                <blockquote class="comment">
+                    <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                    <p>
+                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                    </p>
+                    <!--
+                    <p><b>Launching on MyBinder</b>
+                        Click here and the notebook will launch on MyBinder.org
+                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fr-dplyr%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                    </p>
+                    -->
+                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                        <ol>
+                            <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                            <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.md.ipynb</code></li>
+                            <li>Select the notebook that appears in the list of files on the left.</li>
+                        </ol>
+                    </p>
+                    <p><b>Downloading the notebook</b>
+                        <ol>
+                            <li>Right click this link: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.md.ipynb">tutorial.ipynb</a></li>
+                            <li>Save Link As..</li>
+                        </ol>
+                    </p>
+                </blockquote>
+                
+
+                <p>dplyr is a powerful R-package to transform and summarize tabular data with rows and columns. For further exploration please see the dplyr package vignette: <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">Introduction to dplyr</a></p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>This tutorial is <strong>significantly</strong> based on <a href="https://github.com/genomicsclass/labs/blob/master/intro/dplyr_tutorial.Rmd">GenomicsClass/labs</a>.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#why-is-it-useful" id="markdown-toc-why-is-it-useful">Why Is It Useful?</a></li>
+  <li><a href="#how-does-it-compare-to-using-base-functions-r" id="markdown-toc-how-does-it-compare-to-using-base-functions-r">How Does It Compare To Using Base Functions R?</a></li>
+  <li><a href="#how-do-i-get-dplyr" id="markdown-toc-how-do-i-get-dplyr">How Do I Get dplyr?</a></li>
+  <li><a href="#data-mammals-sleep" id="markdown-toc-data-mammals-sleep">Data: Mammals Sleep</a></li>
+  <li><a href="#important-dplyr-verbs-to-remember" id="markdown-toc-important-dplyr-verbs-to-remember">Important dplyr Verbs To Remember</a></li>
+  <li><a href="#dplyr-verbs-in-action" id="markdown-toc-dplyr-verbs-in-action">dplyr Verbs In Action</a>    <ol>
+      <li><a href="#pipe-operator-" id="markdown-toc-pipe-operator-">Pipe Operator: %&gt;%</a></li>
+      <li><a href="#selecting-columns-using-select" id="markdown-toc-selecting-columns-using-select">Selecting Columns Using <code class="language-plaintext highlighter-rouge">select()</code></a></li>
+      <li><a href="#selecting-rows-using-filter" id="markdown-toc-selecting-rows-using-filter">Selecting Rows Using <code class="language-plaintext highlighter-rouge">filter()</code></a></li>
+      <li><a href="#arrange-or-re-order-rows-using-arrange" id="markdown-toc-arrange-or-re-order-rows-using-arrange">Arrange Or Re-order Rows Using <code class="language-plaintext highlighter-rouge">arrange()</code></a></li>
+      <li><a href="#create-new-columns-using-mutate" id="markdown-toc-create-new-columns-using-mutate">Create New Columns Using <code class="language-plaintext highlighter-rouge">mutate()</code></a></li>
+      <li><a href="#create-summaries-of-the-tibble-using-summarise" id="markdown-toc-create-summaries-of-the-tibble-using-summarise">Create summaries of the tibble using <code class="language-plaintext highlighter-rouge">summarise()</code></a></li>
+      <li><a href="#group-operations-using-group_by" id="markdown-toc-group-operations-using-group_by">Group operations using <code class="language-plaintext highlighter-rouge">group_by()</code></a></li>
+      <li><a href="#ggplot2" id="markdown-toc-ggplot2">ggplot2</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h2 id="why-is-it-useful">Why Is It Useful?</h2>
+
+<p>The package contains a set of functions (or “verbs”) that perform common data manipulation operations such as filtering for rows, selecting specific columns, re-ordering rows, adding new columns and summarizing data.</p>
+
+<p>In addition, dplyr contains a useful function to perform another common task which is the “split-apply-combine” concept.  We will discuss that in a little bit.</p>
+
+<h2 id="how-does-it-compare-to-using-base-functions-r">How Does It Compare To Using Base Functions R?</h2>
+
+<p>If you are familiar with R, you are probably familiar with base R functions such as split(), subset(), apply(), sapply(), lapply(), tapply() and aggregate(). Compared to base functions in R, the functions in dplyr are easier to work with, are more consistent in the syntax and are targeted for data analysis around tibbles, instead of just vectors.</p>
+
+<h2 id="how-do-i-get-dplyr">How Do I Get dplyr?</h2>
+
+<p>To install and load the required packages:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"dplyr"</span><span class="p">,</span><span class="w"> </span><span class="s2">"readr"</span><span class="p">))</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w"> </span><span class="c1"># This provides data processing functions</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span><span class="w"> </span><span class="c1"># This provides the `read_csv` function</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="data-mammals-sleep">Data: Mammals Sleep</h1>
+
+<p>The msleep (mammals sleep) data set contains the sleep times and weights for a set of mammals. This data set contains 83 rows and 11 variables.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/genomicsclass/dagdata/master/inst/extdata/msleep_ggplot2.csv"</span><span class="w">
+</span><span class="n">msleep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">msleep</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The columns (in order) correspond to the following:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>column name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td>common name</td>
+    </tr>
+    <tr>
+      <td>genus</td>
+      <td>taxonomic rank</td>
+    </tr>
+    <tr>
+      <td>vore</td>
+      <td>carnivore, omnivore or herbivore?</td>
+    </tr>
+    <tr>
+      <td>order</td>
+      <td>taxonomic rank</td>
+    </tr>
+    <tr>
+      <td>conservation</td>
+      <td>the conservation status of the mammal</td>
+    </tr>
+    <tr>
+      <td>sleep_total</td>
+      <td>total amount of sleep, in hours</td>
+    </tr>
+    <tr>
+      <td>sleep_rem</td>
+      <td>rem sleep, in hours</td>
+    </tr>
+    <tr>
+      <td>sleep_cycle</td>
+      <td>length of sleep cycle, in hours</td>
+    </tr>
+    <tr>
+      <td>awake</td>
+      <td>amount of time spent awake, in hours</td>
+    </tr>
+    <tr>
+      <td>brainwt</td>
+      <td>brain weight in kilograms</td>
+    </tr>
+    <tr>
+      <td>bodywt</td>
+      <td>body weight in kilograms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Compare the above output with the more traditional <code class="language-plaintext highlighter-rouge">read.csv</code> that is built into R</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dfmsleep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">dfmsleep</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This is a “data frame” and was the basis of data processing for years in R, and is still quite commonly used! But notice how <code class="language-plaintext highlighter-rouge">dplyr</code> has a much prettier and more consice output. This is what is called a <code class="language-plaintext highlighter-rouge">tibble</code> (like a table). We can immediately see metadata about the table, the separator that was guessed for us, what datatypes each column was (dbl or chr), how many rows and columns we have, etc. The <code class="language-plaintext highlighter-rouge">tibble</code> works basically exactly like a data frame except it has a lot of features to integrate nicely with the <code class="language-plaintext highlighter-rouge">dplyr</code> package.</p>
+
+<p><em>That said</em>, all of the functions below you will learn about work equally well with data frames and tibbles, but tibbles will save you from filling your screen with hundreds of rows by automatically truncating large tables unless you specifically request otherwise.</p>
+
+<h1 id="important-dplyr-verbs-to-remember">Important dplyr Verbs To Remember</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>dplyr verbs</th>
+      <th>Description</th>
+      <th>SQL Equivalent Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">select()</code></td>
+      <td>select columns</td>
+      <td><code class="language-plaintext highlighter-rouge">SELECT</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">filter()</code></td>
+      <td>filter rows</td>
+      <td><code class="language-plaintext highlighter-rouge">WHERE</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">arrange()</code></td>
+      <td>re-order or arrange rows</td>
+      <td><code class="language-plaintext highlighter-rouge">ORDER BY</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mutate()</code></td>
+      <td>create new columns</td>
+      <td><code class="language-plaintext highlighter-rouge">SELECT x, x*2 ...</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">summarise()</code></td>
+      <td>summarise values</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">group_by()</code></td>
+      <td>allows for group operations in the “split-apply-combine” concept</td>
+      <td><code class="language-plaintext highlighter-rouge">GROUP BY</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="dplyr-verbs-in-action">dplyr Verbs In Action</h1>
+
+<p>The two most basic functions are <code class="language-plaintext highlighter-rouge">select()</code> and <code class="language-plaintext highlighter-rouge">filter()</code>, which selects columns and filters rows respectively.</p>
+
+<h2 id="pipe-operator-">Pipe Operator: %&gt;%</h2>
+
+<p>Before we go any further, let’s introduce the pipe operator: %&gt;%. dplyr imports this operator from another package (magrittr).This operator allows you to pipe the output from one function to the input of another function. Instead of nesting functions (reading from the inside to the outside), the idea of piping is to read the functions from left to right. This is a lot more like how you would write a <code class="language-plaintext highlighter-rouge">bash</code> data processing pipeline and can be a lot more readable and intuitive than the nested version.</p>
+
+<p>Here’s is the more old fashioned way of writing the equivalent code:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">msleep</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Now in this case, we will pipe the msleep tibble to the function that will select two columns (name and sleep_total) and then pipe the new tibble to the function <code class="language-plaintext highlighter-rouge">head()</code>, which will return the head of the new tibble.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">head</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="selecting-columns-using-select">Selecting Columns Using <code class="language-plaintext highlighter-rouge">select()</code></h2>
+
+<p>Select a set of columns: the name and the sleep_total columns.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To select all the columns <em>except</em> a specific column, use the “-“ (subtraction) operator (also known as negative indexing):</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To select a range of columns by name, use the “:” (colon) operator:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="o">:</span><span class="n">order</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To select all columns that start with the character string “sl”, use the function <code class="language-plaintext highlighter-rouge">starts_with()</code>:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">starts_with</span><span class="p">(</span><span class="s2">"sl"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Some additional options to select columns based on a specific criteria include:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ends_with()</code></td>
+      <td>Select columns that end with a character string</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">contains()</code></td>
+      <td>Select columns that contain a character string</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">matches()</code></td>
+      <td>Select columns that match a regular <span class="notranslate">expression</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">one_of()</code></td>
+      <td>Select column names that are from a group of names</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="selecting-rows-using-filter">Selecting Rows Using <code class="language-plaintext highlighter-rouge">filter()</code></h2>
+
+<p>Filter the rows for mammals that sleep a total of more than 16 hours.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">sleep_total</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Filter the rows for mammals that sleep a total of more than 16 hours <em>and</em> have a body weight of greater than 1 kilogram.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">sleep_total</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">bodywt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Filter the rows for mammals in the Perissodactyla and Primates taxonomic order</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">order</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Perissodactyla"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Primates"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can use the boolean operators (e.g. &gt;, &lt;, &gt;=, &lt;=, !=, %in%) to create the logical tests.</p>
+
+<h2 id="arrange-or-re-order-rows-using-arrange">Arrange Or Re-order Rows Using <code class="language-plaintext highlighter-rouge">arrange()</code></h2>
+
+<p>To arrange (or re-order) rows by a particular column, such as the taxonomic order, list the name of the column you want to arrange the rows by:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">arrange</span><span class="p">(</span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">genus</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Now we will select three columns from msleep, arrange the rows by the taxonomic order and then arrange the rows by sleep_total. Finally, show the final tibble:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">arrange</span><span class="p">(</span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Same as above, except here we filter the rows for mammals that sleep for 16 or more hours, instead of showing the whole tibble:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">arrange</span><span class="p">(</span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">sleep_total</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Something slightly more complicated: same as above, except arrange the rows in the sleep_total column in a descending order. For this, use the function <code class="language-plaintext highlighter-rouge">desc()</code></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">arrange</span><span class="p">(</span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">desc</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">sleep_total</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="create-new-columns-using-mutate">Create New Columns Using <code class="language-plaintext highlighter-rouge">mutate()</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">mutate()</code> function will add new columns to the tibble. Create a new column called rem_proportion, which is the ratio of rem sleep to total amount of sleep.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">rem_proportion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sleep_rem</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">starts_with</span><span class="p">(</span><span class="s2">"sl"</span><span class="p">),</span><span class="w"> </span><span class="n">rem_proportion</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can many new columns using mutate (separated by commas). Here we add a second column called bodywt_grams which is the bodywt column in grams.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">mutate</span><span class="p">(</span><span class="n">rem_proportion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sleep_rem</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">,</span><span class="w">
+           </span><span class="n">bodywt_grams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bodywt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">select</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_rem</span><span class="p">,</span><span class="w"> </span><span class="n">rem_proportion</span><span class="p">,</span><span class="w"> </span><span class="n">bodywt</span><span class="p">,</span><span class="w"> </span><span class="n">bodywt_grams</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="create-summaries-of-the-tibble-using-summarise">Create summaries of the tibble using <code class="language-plaintext highlighter-rouge">summarise()</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">summarise()</code> function will create summary statistics for a given column in the tibble such as finding the mean. For example, to compute the average number of hours of sleep, apply the <code class="language-plaintext highlighter-rouge">mean()</code> function to the column sleep_total and call the summary value avg_sleep.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>There are many other summary statistics you could consider such <code class="language-plaintext highlighter-rouge">sd()</code>, <code class="language-plaintext highlighter-rouge">min()</code>, <code class="language-plaintext highlighter-rouge">max()</code>, <code class="language-plaintext highlighter-rouge">median()</code>, <code class="language-plaintext highlighter-rouge">sum()</code>, <code class="language-plaintext highlighter-rouge">n()</code> (returns the length of vector), <code class="language-plaintext highlighter-rouge">first()</code> (returns first value in vector), <code class="language-plaintext highlighter-rouge">last()</code> (returns last value in vector) and <code class="language-plaintext highlighter-rouge">n_distinct()</code> (number of distinct values in vector).</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">min_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">max_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="group-operations-using-group_by">Group operations using <code class="language-plaintext highlighter-rouge">group_by()</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">group_by()</code> verb is an important function in dplyr. As we mentioned before it’s related to concept of “split-apply-combine”. We literally want to split the tibble by some variable (e.g. taxonomic order), apply a function to the individual tibbles and then combine the output.</p>
+
+<p>Let’s do that: split the msleep tibble by the taxonomic order, then ask for the same summary statistics as above. We expect a set of summary statistics for each taxonomic order.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">group_by</span><span class="p">(</span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">min_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">max_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="ggplot2">ggplot2</h2>
+
+<p>Most people want to slice and dice their data before plotting, so let’s demonstrate that quickly by plotting our last dataset</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">group_by</span><span class="p">(</span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">min_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">max_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
+              </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">min_sleep</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">max_sleep</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="o">=</span><span class="n">order</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Notice how we can just keep piping our data together, this makes it incredibly easier to experiment and play around with our data and test out what filtering or summarisation we want and how that will plot in the end. If we wanted, or if the data processing is an especially computationally expensive step, we could save it to an intermediate variable before playing around with plotting options, but in the case of this small dataset that’s probably not necessary.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Dplyr and tidyverse make it a lot easier to process data</p>
+</li>
+                        
+                        <li><p>The functions for selecting data are a lot easier to understand than R’s built in alternatives.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=dplyr & tidyverse for data processing (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Helena Rasche, 2021 <b>dplyr & tidyverse for data processing (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-r-dplyr,
+author = "Helena Rasche",
+title = "dplyr & tidyverse for data processing (Galaxy Training Materials)",
+year = "2021",
+month = "10",
+day = "20"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
