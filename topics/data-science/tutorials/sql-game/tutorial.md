@@ -28,6 +28,8 @@ contributors:
 - NUKnightLab
 tags:
 - game
+- SQL
+- jupyter-notebook
 ---
 
 This is not a tutorial like most GTN content but a fun exercise for you to play around and learn a bit about SQL in a more 'practical', and hopefully re-inforce the skills you covered in Basic and Advanced SQL skills. It makes use of the [NUKnightLab/sql-mysteries](https://github.com/NUKnightLab/sql-mysteries) SQL murder mystery project and released under open licenses:
