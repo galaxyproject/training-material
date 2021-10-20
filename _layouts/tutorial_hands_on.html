@@ -65,7 +65,9 @@ footer: no
 
     <blockquote class="overview">
         <h3>{{ locale['overview'] | default: "Overview"}}</h3>
+        {% unless page.license %}
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        {% endunless %}
         <strong>{% icon question aria=false %} {{ locale['questions'] | default: "Questions" }}:</strong>
         <ul>
         {% for question in page.questions %}
@@ -149,7 +151,11 @@ footer: no
 
         <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
+            {% if page.license %}
+            Tutorial Content is licensed under {{ page.license }}
+            {% else %}
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{{ locale['license-framework'] | default: "Tutorial Content is licensed under Creative Commons Attribution 4.0 International License" }}</a>
+            {% endif %}
             <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">{{ locale['license-framework'] | default: "The GTN Framework is licensed under MIT" }}</a>
         </div>
     </blockquote>
