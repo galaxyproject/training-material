@@ -142,7 +142,6 @@ The tool produces four outputs: a GRO file (containing the coordinates of the pr
 
 Please note all GROMACS tools output a log. Generally, you only need to look at this when a job fails. These provide useful information for debugging if we encounter any problems.
 
- <!-- ({% cite  %}) -->
 
 ### Generate a topology for the ligand
 
