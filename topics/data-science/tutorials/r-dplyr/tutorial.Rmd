@@ -22,21 +22,18 @@ If you are familiar with R, you are probably familiar with base R functions such
 
 ## How Do I Get dplyr?
 
-To install dplyr:
+To install and load the required packages:
 
-```{r}
-install.packages("dplyr")
-```
-
-To load dplyr:
-
-```{r}
-library(dplyr)
+```r
+install.packages(c("dplyr", "readr"))
+library(dplyr) # This provides data processing functions
+library(readr) # This provides the `read_csv` function
 ```
 
 # Data: Mammals Sleep
 
-The msleep (mammals sleep) data set contains the sleep times and weights for a set of mammals and is available in the dagdata repository on github. This data set contains 83 rows and 11 variables.
+The msleep (mammals sleep) data set contains the sleep times and weights for a set of mammals. This data set contains 83 rows and 11 variables.
+
 ```{r}
 url <- "https://raw.githubusercontent.com/genomicsclass/dagdata/master/inst/extdata/msleep_ggplot2.csv"
 msleep <- read_csv(url)
@@ -59,6 +56,17 @@ awake        | amount of time spent awake, in hours
 brainwt      | brain weight in kilograms
 bodywt       | body weight in kilograms
 
+Compare the above output with the more traditional `read.csv` that is built into R
+
+```r
+dfmsleep <- read.csv(url)
+head(dfmsleep)
+```
+
+This is a "data frame" and was the basis of data processing for years in R, and is still quite commonly used! But notice how `dplyr` has a much prettier and more consice output. This is what is called a `tibble` (like a table). We can immediately see metadata about the table, the separator that was guessed for us, what datatypes each column was (dbl or chr), how many rows and columns we have, etc. The `tibble` works basically exactly like a data frame except it has a lot of features to integrate nicely with the `dplyr` package.
+
+
+*That said*, all of the functions below you will learn about work equally well with data frames and tibbles, but tibbles will save you from filling your screen with hundreds of rows by automatically truncating large tables unless you specifically request otherwise.
 
 # Important dplyr Verbs To Remember
 
@@ -78,7 +86,7 @@ The two most basic functions are `select()` and `filter()`, which selects column
 
 ## Pipe Operator: %>%
 
-Before we go any further, let's introduce the pipe operator: %>%. dplyr imports this operator from another package (magrittr).This operator allows you to pipe the output from one function to the input of another function. Instead of nesting functions (reading from the inside to the outside), the idea of piping is to read the functions from left to right.
+Before we go any further, let's introduce the pipe operator: %>%. dplyr imports this operator from another package (magrittr).This operator allows you to pipe the output from one function to the input of another function. Instead of nesting functions (reading from the inside to the outside), the idea of piping is to read the functions from left to right. This is a lot more like how you would write a `bash` data processing pipeline and can be a lot more readable and intuitive than the nested version.
 
 Here's is the more old fashioned way of writing the equivalent code:
 
@@ -91,9 +99,6 @@ Now in this case, we will pipe the msleep tibble to the function that will selec
 ```{r}
 msleep %>% select(name, sleep_total) %>% head(2)
 ```
-
-You will soon see how useful the pipe operator is when we start to combine many functions.
-
 
 ## Selecting Columns Using `select()`
 
@@ -123,10 +128,12 @@ msleep %>% select(starts_with("sl"))
 
 Some additional options to select columns based on a specific criteria include:
 
-1. `ends_with()` = Select columns that end with a character string
-2. `contains()` = Select columns that contain a character string
-3. `matches()` = Select columns that match a regular expression
-4. `one_of()` = Select column names that are from a group of names
+Function      | Usage
+--------      | -----
+`ends_with()` | Select columns that end with a character string
+`contains()`  | Select columns that contain a character string
+`matches()`   | Select columns that match a regular expression
+`one_of()`    | Select column names that are from a group of names
 
 
 ## Selecting Rows Using `filter()`

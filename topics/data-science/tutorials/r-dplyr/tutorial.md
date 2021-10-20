@@ -66,7 +66,7 @@ If you are familiar with R, you are probably familiar with base R functions such
 
 ## How Do I Get dplyr?
 
-To install and load `dplyr`:
+To install and load the required packages:
 
 ```r
 install.packages(c("dplyr", "readr"))
