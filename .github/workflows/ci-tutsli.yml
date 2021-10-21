@@ -60,6 +60,6 @@ jobs:
 
       - name: Check Citations
         run: |
-          bundle exec ruby bin/check-citations.rb | reviewdog -efm="%f:%l:%c %m" -filter-mode=file -reporter=github-pr-check
+          bundle exec ruby bin/check-citations.rb | reviewdog -efm="%f:%l:%c %m" -filter-mode=file -reporter=github-pr-check -fail-on-error
         env:
             REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
