@@ -21,7 +21,7 @@ contributors:
 # Genome assembly with Velvet: Background
 {:.no_toc}
 
-Velvet is one of a number of *de novo* assemblers that use short read sets as input (*e.g.* Illumina Reads). The assembly method is based on the manipulation of de Bruijn graphs, via the removal of errors and the simplication of repeated regions.
+Velvet is one of a number of *de novo* assemblers that use short read sets as input (*e.g.* Illumina Reads). The assembly method is based on the manipulation of de Bruijn graphs, via the removal of errors and the simplification of repeated regions.
 
 > ### {% icon comment %} Comment
 >
