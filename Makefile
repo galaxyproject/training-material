@@ -85,6 +85,11 @@ check-frontmatter: ## Validate the frontmatter
 		bundle exec ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
 
+check-contributors: ## Validate the contributors.yaml file
+	$(ACTIVATE_ENV) && \
+		bundle exec ruby bin/validate-contributors.rb
+.PHONY: check-contributors
+
 _check-html: # Internal
 	$(ACTIVATE_ENV) && \
 	  	htmlproofer \
