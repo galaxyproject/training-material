@@ -114,7 +114,9 @@ We will evaluate the input reads using the FastQC tool. This tool runs a standar
 > ### {% icon hands_on %} Hands-on: FastQC on a fastq file
 >
 > 1. **FastQC** {% icon tool %} with the following parameters
->    - *"Raw read data from your current history"*:   `mutant_R1.fastq` and `mutant_R2.fastq` (multiple datasets) (ctrl+click for multiple selection)
+>    - {% icon param-files %} *"Raw read data from your current history"*:   `mutant_R1.fastq` and `mutant_R2.fastq`
+>
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >  
 > 2. **MultiQC** {% icon tool %} with the following parameters
 >    - *"Software name"*: `FastQC`
