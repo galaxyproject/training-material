@@ -139,7 +139,6 @@ def lint_file(fn)
   if fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/ then
     errs.push(*validate_document(data, $tutorial_validator))
   elsif fn.include?('metadata.yaml') then
-    puts "#{fn}"
     errs.push(*validate_document(data, $topic_validator))
   elsif fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/ then
     errs.push(*validate_document(data, $slides_validator))
