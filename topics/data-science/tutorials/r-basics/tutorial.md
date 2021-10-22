@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/introduction/tutorials/r-basics/tutorial
 
 title: R basics in Galaxy
 level: Introductory
@@ -13,7 +15,7 @@ requirements:
 follow_up_training:
 -
   type: "internal"
-  topic_name: introduction
+  topic_name: data-science
   tutorials:
       - r-advanced
 
@@ -28,7 +30,9 @@ key_points:
 - It is important to understand how data are organised by R in a given object type (e.g. numeric, character, logical, etc.) and how the mode of that type determines how R will operate on that data.
 tags:
   - interactive-tools
+  - R
 subtopic: r
+priority: 1
 contributors:
   - carpentries
   - bebatut
@@ -39,11 +43,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-{% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
-{% include topics/introduction/tutorials/r-basics/r_introduction.md %}
-{% include topics/introduction/tutorials/r-basics/r_history.md %}
-{% include topics/introduction/tutorials/r-basics/r_advantages.md %}
-{% include topics/introduction/tutorials/r-basics/disclaimer.md %}
+{% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
+{% include topics/data-science/tutorials/r-basics/r_introduction.md %}
+{% include topics/data-science/tutorials/r-basics/r_history.md %}
+{% include topics/data-science/tutorials/r-basics/r_advantages.md %}
+{% include topics/data-science/tutorials/r-basics/disclaimer.md %}
 
 > ### Agenda
 >

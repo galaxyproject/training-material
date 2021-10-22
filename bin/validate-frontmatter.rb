@@ -94,7 +94,18 @@ def lint_file(fn)
   # Any error messages
   errs = []
 
-  data = YAML.load_file(fn)
+  begin
+    data = YAML.load_file(fn)
+  rescue
+    puts "Skipping #{fn}"
+    return nil
+  end
+
+  # Check this is something we actually want to process
+  if ! data.is_a?(Hash) then
+    puts "Skipping #{fn}"
+    return nil
+  end
 
   # If it's disabled, exit early
   if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
@@ -131,14 +142,14 @@ def lint_file(fn)
   end
 
   # Custom error handling:
-  if fn.include?('tutorial.md') then
+  if fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/ then
     errs.push(*validate_document(data, $tutorial_validator))
   elsif fn.include?('metadata.yaml') then
     errs.push(*validate_document(data, $metadata_validator))
-  elsif fn.include?('slides.html') then
+  elsif fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/ then
     errs.push(*validate_document(data, $slides_validator))
   else
-    errs.push("No validation available for this type of file")
+    #errs.push("No validation available for this type of file")
   end
 
 
@@ -163,7 +174,8 @@ Find.find('./topics') do |path|
       next
     end
   else
-    if ['tutorial.md', 'slides.html', 'metadata.yaml'].include?(path.split('/')[-1]) then
+    last_component = path.split('/')[-1]
+    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/ then
       errs = lint_file(path)
       if !errs.nil? && errs.length > 0 then
         ec = 1

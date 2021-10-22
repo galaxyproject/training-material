@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/introduction/tutorials/r-advanced/tutorial
 
 title: Advanced R in Galaxy
 level: Intermediate
@@ -12,7 +14,7 @@ requirements:
         - rstudio
   -
     type: "internal"
-    topic_name: introduction
+    topic_name: data-science
     tutorials:
         - r-basics
 
@@ -37,11 +39,14 @@ key_points:
 - Use the `dplyr` package to manipulate data frames.
 - Pipes can be used to combine simple operations into complex procedures.
 subtopic: r
+priority: 2
 contributors:
   - carpentries
   - bebatut
   - fpsom
   - tobyhodges
+tags:
+- R
 ---
 
 # Introduction
@@ -53,8 +58,8 @@ Sometimes we want to have some customizations on visualization, some complex tab
 
 <!-- Keeping this here because people may be familiar enough with R, that they go directly to this tutorial, and it is still useful information. -->
 
-{% include topics/introduction/tutorials/r-basics/r_introduction.md %}
-{% include topics/introduction/tutorials/r-basics/disclaimer.md %}
+{% include topics/data-science/tutorials/r-basics/r_introduction.md %}
+{% include topics/data-science/tutorials/r-basics/disclaimer.md %}
 
 In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
 
@@ -325,7 +330,7 @@ One of the most common uses for factors is to plot categorical values. For examp
 >    ```
 {: .hands_on}
 
-![feature plot](../../images/rna-seq-counts-to-viz-in-r/featurePlot.png)
+![feature plot](../../../introduction/images/rna-seq-counts-to-viz-in-r/featurePlot.png)
 
 This isn't a particularly pretty example of a plot. We'll be learning much more about creating nice, publication-quality graphics later.
 
