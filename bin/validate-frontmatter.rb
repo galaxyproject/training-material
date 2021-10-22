@@ -107,12 +107,6 @@ def lint_file(fn)
     return nil
   end
 
-  # If it's disabled, exit early
-  if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
-    #puts "#{fn} skipped (disabled)"
-    return
-  end
-
   if not fn.include?('metadata.yaml') then
     # Load topic metadata
     topic = fn.split('/')[2]
@@ -176,7 +170,7 @@ Find.find('./topics') do |path|
     end
   else
     last_component = path.split('/')[-1]
-    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/ then
+    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/  || last_component =~ /metadata.ya?ml/ then
       errs = lint_file(path)
       if !errs.nil? && errs.length > 0 then
         ec = 1
