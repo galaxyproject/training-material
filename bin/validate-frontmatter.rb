@@ -5,7 +5,7 @@ require 'pathname'
 require 'kwalify'
 
 # Schemas
-METADATA_SCHEMA = YAML.load_file('bin/schema-topic.yaml')
+TOPIC_SCHEMA = YAML.load_file('bin/schema-topic.yaml')
 TUTORIAL_SCHEMA = YAML.load_file('bin/schema-tutorial.yaml')
 SLIDES_SCHEMA = YAML.load_file('bin/schema-slides.yaml')
 requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
@@ -17,10 +17,10 @@ CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
 # Update the existing schemas to have enums with values. Then we get validation *for free*!
 TUTORIAL_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
 SLIDES_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
-METADATA_SCHEMA['mapping']['maintainers']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+TOPIC_SCHEMA['mapping']['maintainers']['sequence'][0]['enum'] = CONTRIBUTORS.keys
 
 # Build validators now that we've filled out the subtopic enum
-$metadata_validator = Kwalify::Validator.new(METADATA_SCHEMA)
+$topic_validator = Kwalify::Validator.new(TOPIC_SCHEMA)
 $tutorial_validator = Kwalify::Validator.new(TUTORIAL_SCHEMA)
 $slides_validator = Kwalify::Validator.new(SLIDES_SCHEMA)
 $requirement_external_validator = Kwalify::Validator.new(requirement_external_schema)
@@ -107,12 +107,6 @@ def lint_file(fn)
     return nil
   end
 
-  # If it's disabled, exit early
-  if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
-    #puts "#{fn} skipped (disabled)"
-    return
-  end
-
   if not fn.include?('metadata.yaml') then
     # Load topic metadata
     topic = fn.split('/')[2]
@@ -145,7 +139,7 @@ def lint_file(fn)
   if fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/ then
     errs.push(*validate_document(data, $tutorial_validator))
   elsif fn.include?('metadata.yaml') then
-    errs.push(*validate_document(data, $metadata_validator))
+    errs.push(*validate_document(data, $topic_validator))
   elsif fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/ then
     errs.push(*validate_document(data, $slides_validator))
   else
@@ -175,7 +169,7 @@ Find.find('./topics') do |path|
     end
   else
     last_component = path.split('/')[-1]
-    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/ then
+    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/  || last_component =~ /metadata.ya?ml/ then
       errs = lint_file(path)
       if !errs.nil? && errs.length > 0 then
         ec = 1
