@@ -75,6 +75,10 @@ The Galaxy interface consist of three main parts. The available tools are listed
 ![Galaxy interface](../../images/galaxy_interface.png "The Galaxy interface")
 
 Let's start with a fresh history.
+>Note: If you already have any history you can switch between the histories from {% icon galaxy-columns %} **Multi-history view**.
+>![Switching between histories](https://user-images.githubusercontent.com/90438502/138551014-7e051796-0d1f-4972-afa2-f834931528f1.PNG "Switching between histories")
+
+
 
 > ### {% icon hands_on %} Hands-on: Create history
 >
@@ -104,9 +108,10 @@ Let's start with a fresh history.
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left ot the interface
 >
->    ![Upload icon](../../../galaxy-interface/images/upload_button.png)
+>    ![Upload Data Icon](https://user-images.githubusercontent.com/90438502/138551235-4c2980c0-7667-40f8-a24c-67bbba72d8a6.PNG "Upload Data Icon")
+
 >
-> 3. Press **Choose local file** and search for your file on your computer
+> 3. Press **Choose local files** and search for your file on your computer
 > 4. Select `interval` as **Type**
 > 5. Press **Start**
 > 6. Press **Close**
@@ -157,6 +162,8 @@ Let's start with a fresh history.
 >    A form to edit dataset attributes is displayed in the central panel
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
+> ![DatabaseBuild](https://user-images.githubusercontent.com/90438502/138551354-a7f8ed3e-e763-473e-bd32-28badfe50e52.PNG)
+
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >
@@ -676,6 +683,9 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 1. **Make accessible via Link**
 
     This generates a link that you can give out to others. Anybody with this link will be able to view your history.
+    
+    ![Share your work](https://user-images.githubusercontent.com/90438502/138551446-6bcf8aa5-ba8d-4891-9cd9-408ea1e1f2a8.PNG)
+
 
 2. **Publish History**
 
@@ -684,6 +694,8 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 3. **Share with Individual Users**
 
     This will share the history only with specific users on the Galaxy instance.
+
+![Share your work 2](https://user-images.githubusercontent.com/90438502/138551450-52e31995-e642-407d-a8a1-fec51fc13030.PNG)
 
 
 > ### {% icon hands_on %} Hands-on: Share history and workflow
