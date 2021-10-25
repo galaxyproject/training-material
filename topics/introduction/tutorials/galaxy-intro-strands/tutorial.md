@@ -124,7 +124,7 @@ There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-i
 >
 > 1. *Click* on the **Get Data** toolbox to expand it.
 >
->    ![The Get Data toolbox](../../images/getdata.png)
+>    ![The Get Data toolbox](../../images/getdata.PNG)
 >
 {: .hands_on}
 
