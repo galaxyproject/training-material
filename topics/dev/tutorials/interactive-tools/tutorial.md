@@ -440,7 +440,7 @@ our new Docker container as a Galaxy tool.
 >    >     <description>Tuto tool for Gxit</description>
 >    >
 >    >     <requirements>
->    >         <container type="docker">geoc/tuto-gxit-01:latest</container>
+>    >         <container type="docker">ancelete/geoc-gxit:latest</container>
 >    >     </requirements>
 >    >
 >    >     <entry_points>
@@ -506,6 +506,7 @@ our new Docker container as a Galaxy tool.
 >    > {% endraw  %}
 >    {: .solution}
 >
+> Don't forget to change the container path (see the `$REMOTE` variable above) and the citation to fit your project settings. 
 {: .hands_on}
 
 ---
