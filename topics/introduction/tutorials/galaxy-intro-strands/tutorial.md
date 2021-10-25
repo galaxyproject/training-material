@@ -124,7 +124,7 @@ There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-i
 >
 > 1. *Click* on the **Get Data** toolbox to expand it.
 >
->    ![The Get Data toolbox](../../images/101_01.png)
+>    ![The Get Data toolbox](../../images/getdata.png)
 >
 {: .hands_on}
 
@@ -148,11 +148,12 @@ The [UCSC Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables) provides acce
 
 The Table Browser has a daunting number of options. Fortunately, they are all set to commonly used defaults, greatly simplifying things, and most of the options are already set to what we want:
 
-* **clade:** `Mammal`
-* **genome:** `Human`
-* **assembly:** `Dec. 2013 (GRCh38/hg38)`
-* **group:** `Genes and Gene Predictions`
-* **track:** `GENCODE v32`
+ - *"clade"*: `Mammal`
+ - *"genome"*: `Human`
+ - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+ - *"group"*: `Genes and Gene Predictions`
+ - *"track"*: `GENCODE v32`
+
 
 **clade** and **genome** seem pretty clear.  **assembly** asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting `hg38`, which is also the most recent.)  **group** is set to `Genes and Gene Predictions` which sounds like what we want. So far so good.
 
@@ -187,8 +188,8 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 > ### {% icon hands_on %} Hands-on: Limit the region and get the data.
 >
 > 1. Say that we just want chromosome 22
->    - For **region** select `position`.
->    - In the text box next to `position` enter `chr22` (case matters).
+>    - *"region"*: `position`.
+>    - *"position"*: `chr22` (case matters).
 >
 >    ![Change the region](../../images/ucsc_tb_set_region_chr22.png)
 >
@@ -198,8 +199,7 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 >
 >    ![UCSC Table Browser 2nd page](../../images/ucsc_tb_2nd_page_whole_gene.png)
 >
-> 3. Under **Create one BED record per** make sure that **Whole Gene** is selected.
->
+> 3.  - *"Create one BED record per"*: `Whole Gene`.
 > 4. *Click* the **Send query to Galaxy** button at the bottom of the form.
 {: .hands_on}
 
@@ -336,10 +336,10 @@ It doesn't say anything about **Filter** being able to split a file into multipl
 >
 > * The filter tool has 3 fields:
 >
->   1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset.  Make sure this is set to your `Genes chr22` dataset.
->   2. **Condition**: this free text field is where we specify which records we want in the output dataset.  *Enter* `c6 == "+"` in the text box.
+>   1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset. *"filter"*: `Genes chr22` .
+>   2. **Condition**: this free text field is where we specify which records we want in the output dataset. *"Condition"*:  `c6 == "+" ` .
 >      This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
->   3. **Header lines to skip**: Leave this as `0`. Our dataset does not have any header lines.
+>   3.  *"Header lines to skip"*:  `0 ` . Our dataset does not have any header lines.
 >
 > * Finally, *click* the **Execute** button.
 >
@@ -357,7 +357,7 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 >
 > 1. Open the dataset preview by *clicking* on the name of the `Genes, forward strand` dataset.  This shows an icon than the uploaded `Genes chr22` dataset did not: a looping arrow.
 > 1. *Click* the **looping arrow** ("Run this job again") icon.  This won't actually run the job again.  What it will do is bring up the Filter tool form with *the exact same settings that were used to produce this dataset.*
-> 1. Rather than run Filter again with the same settings, *change* **Condition** to `c6 == "-"`
+> 1. Rather than run Filter again with the same settings, *change* *"Condition"*:  `c6 == "-" `
 > 1. *Click* the **Execute** button.
 >
 > **Method 2**
@@ -412,11 +412,11 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 > ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
 > 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
->     - **Return** to `Overlapping Intervals`.
+>     -  *"Return"*:  `Overlapping Intervals`.
 >       - This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
->     - **of** (the first dataset) to `Genes, forward strand`
->     - **that intersect** (the second dataset) to `Genes, reverse strand`
->     - **for at least** to `1`
+>     - *"of"* (the first dataset):  `Genes, forward strand`.
+>     - *"that intersect"* (the second dataset : `Genes, reverse strand`
+>     - *"for at least"* : `1`
 >       - This will return genes with even just one position overlapping.
 >     - *Click* **Execute**.
 >
@@ -448,9 +448,9 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 > 1. *Open* the **Text Manipulation** toolbox.
 > 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
 > 3. {% tool [Concatenate](cat1) %} with the following parameters:
->   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
->   * *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
->   * *Select* `Overlapping forward genes` as the second dataset.
+>   - *"Concatenate Dataset"*: `Overlapping reverse genes`.
+>   - *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
+>   - *"Select"*: `Overlapping forward genes` as the second dataset.
 > 4. *Click* **Execute**
 > 5. *Rename* the resulting dataset something informative like `Overlapping genes`
 {: .hands_on}
