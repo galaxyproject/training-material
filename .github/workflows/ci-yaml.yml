@@ -1,7 +1,7 @@
-name: Lint Citations
+name: Lint YAML Metadata
 
 concurrency:
-  group: ci-tutsli-${{ github.head_ref }}
+  group: ci-yaml-${{ github.head_ref }}
   cancel-in-progress: true
 
 on:
@@ -10,6 +10,8 @@ on:
       - '**/tutorial*.md'
       - '**/slides.html'
       - '**/slides/*.html'
+      - '**/*.yaml'
+      - '**/*.yml'
 
 jobs:
   lint-frontmatter:
@@ -54,8 +56,7 @@ jobs:
           npm install
       # END Dependencies
 
-      - name: Check Citations
+      - name: Check Frontmatter
         run: |
-          bundle exec ruby bin/check-citations.rb | reviewdog -efm="%f:%l:%c %m" -filter-mode=file -reporter=github-pr-check -fail-on-error
-        env:
-            REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          make check-frontmatter ACTIVATE_ENV=pwd
+          make check-contributors ACTIVATE_ENV=pwd

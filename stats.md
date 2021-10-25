@@ -3,12 +3,12 @@ layout: base
 ---
 
 <!-- tutorial stats -->
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
+{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
 
 <!-- topic stats -->
-{% assign topics = site.data | where_exp: "item", "item.type" %}
-{% assign topics_science = topics | where: "type","use" | sort: "name" %}
-{% assign topics_technical = topics | where_exp: "item", "item.type != 'use'"%}
+{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
+{% assign topics_science = topics | where: "type","use" | where_exp:"item","item.enable != false" | sort: "name" %}
+{% assign topics_technical = topics | where_exp: "item", "item.type != 'use'" | where_exp:"item","item.enable != false" %}
 
 <!-- contributors stats -->
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}

@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: Filtrado, representación y exploración de secuenciación de ARN de células únicas
 subtopic: single-cell-CS
 priority: 2
+level: Advanced
 zenodo_link: 'https://zenodo.org/record/4624461'
 questions:
 - ¿Es mi conjunto de datos de células únicas un conjunto de calidad?
@@ -36,8 +37,12 @@ contributors:
 - beatrizserrano
 - npalopoli
 
+lang: es
+
 translations:
   - en
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
@@ -72,12 +77,12 @@ Te proporcionamos un conjunto de datos experimentales de ratón de restricción 
 >    {{ page.zenodo_link }}/files/Mito-counted_AnnData
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy-es/datasets_import_via_link.md %}
 >
 > 3. **Cambiar nombre** {% icon galaxy-pencil %} de los conjuntos de datos `Mito-counted AnnData`
 > 4. Verificar que el tipo o formato de los datos es `h5ad`
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>    {% snippet faqs/galaxy-es/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
 
@@ -120,7 +125,7 @@ Has generado un objeto anotado de tipo AnnData a partir de tus archivos FASTQ de
 
 {% icon time %} **Buen consejo para ahorrar tiempo** - ¡convierte las tres salidas de **Inspect AnnData** señaladas arriba en un workflow para tener acceso rápido!
 
-{% snippet faqs/galaxy/workflows_extract_from_history.md %}
+{% snippet faqs/galaxy-es/workflows_extract_from_history.md %}
 
 ## Generar gráficos de control de calidad
 
@@ -193,7 +198,7 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 
 ¡Eso fue mucha información! Abordemos por secciones y veamos qué preguntas pueden ayudar a resolver estos gráficos. El *scratchbook* {% icon galaxy-scratchbook %} puede ser útil aquí para ver los distintos gráficos al mismo tiempo.
 
-{% snippet faqs/galaxy/features_scratchbook.md %}
+{% snippet faqs/galaxy-es/features_scratchbook.md %}
 
 > ### {% icon question %} Pregunta - Variación en lote
 >
@@ -575,7 +580,6 @@ Dos visualizaciones importantes en estos datos son tSNE y UMAP. Debemos calcular
 
 > ### {% icon details %} ¿Estás trabajando en grupos? ¡Tomemos decisiones!
 > Si estás trabajando en grupos ahora pueden dividir el trabajo, unos pueden trabajar con un *control* y el resto trabajar con distintos números para que posteriormente puedan comparar sus resultados por lo que resta del tutorial.
-
 > - Control
 >      - **Perplejidad** = `30`
 > - Todos los demás: Seleccionen su propia perplejidad, ¡entre 5 y 50!
@@ -813,10 +817,9 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 
 ¿Es real nuestro análisis? ¿Es correcto? Bueno, podemos evaluarlo un poco.
 
-> ### {% icon question %} Pregunta -Efecto de lote ”Batch effect”
+> ### {% icon question %} Pregunta - Efecto de lote ”Batch effect”
 >
 > ¿existe un efecto de lote “batch effect”?
-
 >
 > ![Batch effect](../../images/wab-batcheffect.png "Efecto de lote?")
 >
@@ -828,7 +831,6 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 > > ![Sex effect](../../images/wab-sex-batch.png "Diferencias de sexo")
 > >
 > >Observamos que la única muestra femenina -desgraciadamente, una de las tres muestras knockout- parece estar distribuida en las mismas zonas que las muestras knockout en general, por lo que, afortunadamente, no parece ser un factor de confusión y podemos seguir aprendiendo de nuestros datos. Lo ideal sería volver a realizar este experimento con más muestras de hembras o sustituir esta muestra de hembras por la de machos.
-
 > >
 > {: .solution}
 >
@@ -843,7 +845,6 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 > > ### {% icon solution %} Solución
 > >
 > >¡Eureka! Esto explica el extraño cambio de DP entre las células de fenotipo normal y las de knockout: el lado derecho de las células DP simplemente tiene una mayor profundidad de secuenciación (UMIs/célula) que las del lado izquierdo. Eso explica parte del subgrupo que estamos viendo en esa franja. Es importante destacar que no vemos que las agrupaciones de DP-L o (sobre todo) de células T maduras se vean afectadas de forma similar. Así que, aunque de nuevo, esta variable de la profundidad de secuenciación podría ser algo a lo que habría que retroceder de alguna manera, no parece estar afectando a nuestro conjunto de datos. En general, cuanto menos se retroceda/modifique los datos, mejor: hay que ser lo más fiel posible a los datos en crudo y sólo utilizar las matemáticas para corregir los datos cuando sea realmente necesario (¡y no para crear ideas donde no las hay!).
-
 > >
 > {: .solution}
 >
@@ -858,7 +859,6 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 > > ### {% icon solution %} Solución
 > >
 > >Hemos visto en las imágenes anteriores que estos agrupamientos no están muy compactados o definidos, por lo que podríamos considerar un filtrado más severo. Por ejemplo, aunque la hemoglobina es alta en la agrupación de los hematíes, aparece en toda la muestra en números bajos. Esto sugiere que hay un fondo en el medio en el que estaban las células, y podríamos considerar en el laboratorio húmedo “wet lab” tratar de obtener una muestra más pura y de mejor calidad, o en el laboratorio seco “dry lab”, emplear técnicas como SoupX u otras para eliminar este fondo. Jugar con los ajustes de filtrado (aumentando los recuentos mínimos por célula, etc.) suele ser el punto de partida en estos escenarios.
-
 > >
 > {: .solution}
 >
@@ -867,16 +867,13 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 > ### {% icon question %} Pregunta -Resolución de agrupaciones
 >
 > ¿Consideras que la agrupación es adecuada? es decir, ¿hay agrupaciones individuales que crees que deberían estar separadas, y agrupaciones múltiples que podrían combinarse?
-
 >
 > ![Itm2a Expression](../../images/wab-umap-itm2a.png "Itm2a a través de grupos")
 >
 > > ### {% icon solution %} Solución
 > >
 > > Es importante tener en cuenta, por si acaso todos los bioinformáticos combinan sus fuerzas para atacar a los biólogos: ¡que una agrupación no parezca una agrupación a simple vista NO es suficiente para decir que no es una agrupación! Pero si nos fijamos en la biología aquí, nos esforzamos por encontrar genes marcadores para distinguir la población DP, que sabemos que también se ve afectada por la profundidad de la secuenciación. Es un argumento razonable que DP-M1, DP-M2 y DP-M3 podrían no ser tan diferentes. Tal vez necesitemos más profundidad de secuenciación en todas las células DP, o compararlas explícitamente entre sí (¡considera las variaciones de FindMarkers!). Sin embargo, DP-L parece salir del grupo de DP y también tiene menos células knockout, por lo que podríamos ver lo que DP-L está expresando en los genes marcadores. Si miramos más a T-mat, podemos ver que su gen marcador -Itm2a- sólo se expresa en la mitad superior del agrupamiento. Podrías considerar la posibilidad de subclasificar esto para indagar más, ya sea cambiando la resolución o analizando esta agrupación sola.
-
 > >Si miramos las diferencias entre solo los genotipos (por así decir, el “pseudo-bulk”) podemos ver que la mayoría de los genes en esa lista son realmente ribosomales. Esto podría ser un fondo constitutivo, podría estar relacionado con el ciclo celular, podría ser biológico, o las tres cosas. Se podría considerar la posibilidad de analizar el estado del ciclo de las células, o incluso hacer una regresión (que es lo que hicieron los autores).
-
 > {: .solution}
 >
 {: .question}
@@ -887,7 +884,7 @@ Por último, existen muchas maneras de analizar los datos, tanto dentro de los �
 
 # Visualizaciones interactivas
 
-Antes de que te dejemos explorar lo desconocido, habrás notado que las interpretaciones anteriores son sólo algunas de las opciones posibles. Más aún, es posible que te hayas divertido intentando averiguar qué muestra es de qué genotipo y qué sexo, y pasando repetidamente de un gráfico a otro. Averiguar qué gráficos serán los definitivos y publicables requiere mucho tiempo y muchos intentos ¡Por suerte, existe un útil visor interactivo {% cite Cakir2020  {% cite Moreno2020.04.08.032698 %} que puede ayudarte a explorar sin tener que producir nuevos gráficos una y otra vez!
+Antes de que te dejemos explorar lo desconocido, habrás notado que las interpretaciones anteriores son sólo algunas de las opciones posibles. Más aún, es posible que te hayas divertido intentando averiguar qué muestra es de qué genotipo y qué sexo, y pasando repetidamente de un gráfico a otro. Averiguar qué gráficos serán los definitivos y publicables requiere mucho tiempo y muchos intentos ¡Por suerte, existe un útil visor interactivo {% cite Cakir2020 %} {% cite Moreno2020.04.08.032698 %} que puede ayudarte a explorar sin tener que producir nuevos gráficos una y otra vez!
 
 > ### {% icon hands_on %} Práctica: Cellxgene
 >
@@ -912,14 +909,16 @@ Estás advertido: esta herramienta de visualización es una poderosa opción par
 > ### {% icon details %} %} ¿Trabajando en grupo? ¡El final!
 > Es de esperar que, independientemente de la vía de análisis que hayas tomado, hayas encontrado las mismas interpretaciones generales. Si no es así, este es un buen momento para hablar y considerar con tu grupo por qué puede ser así: ¿qué decisión fue "errónea" o "desacertada", y cómo te asegurarias de interpretar correctamente tus datos en el futuro? El mejor consejo: probar y equivocarse es una buena idea, lo creas o no, y cuantas más formas encuentres de la misma manera, más seguro estarás. Pero no hay nada mejor que la validación experimental...
 > Para aquellos que no tomaron las opciones de "control", por favor haced lo siguiente:
-> > 1. **Cambia de nombre** de tu historial (haciendo clic en el título del historial) a “DECISIÓNs-Filtrado y representación visual de datos de ARN seq de célula única”
+> > 1. **Cambia de nombre** de tu historial (haciendo clic en el título del historial) a “DECISIÓN-Filtrado y representación visual de datos de ARN seq de célula única”
 > > 2. Añade una anotación en el historial {% icon history-annotate %} que incluya los parámetros que has cambiado/los pasos que has cambiado respecto al *control*
 > >
-> >    {% snippet faqs/galaxy/histories_sharing.md %}
+> >    {% snippet faqs/galaxy-es/histories_sharing.md %}
 > >
-> > 3. Siéntete libre de explorar cualquier otra historia similar {: .details}
+> > 3. Siéntete libre de explorar cualquier otra historia similar
+{: .details}
 
 {% icon congratulations %} ¡Felicitaciones! ¡Has llegado al final! Puede que te resulte útil esta [historia ejemplo control](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) para comparar, o este [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/filter-plot-and-explore-single-cell-rna-seq-data).
 
 En este tutorial, has pasado del procesamiento técnico a la exploración biológica. Al analizar datos reales -¡tanto los emocionantes como los desordenados! - has experimentado lo que es analizar y cuestionar un conjunto de datos, potencialmente sin límites claros o respuestas claras. Si has trabajado en grupo, cada uno de vosotros ha analizado los datos de forma diferente, y lo más probable es que hayáis encontrado ideas similares. Uno de los mayores problemas en el análisis de scRNA-seq es la falta de una vía o parámetros claramente definidos. Hay que tomar la mejor decisión posible a medida que se avanza en el análisis y, en última instancia, en caso de duda, ¡probar de varias maneras y ver qué pasa!
+
 Para debatir con científicos afines, ¡únete a nuestro canal Gitter para todo lo relacionado con Galaxy-single cell! [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
