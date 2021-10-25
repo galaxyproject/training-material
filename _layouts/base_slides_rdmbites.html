@@ -31,13 +31,13 @@
     <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
     <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
     <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-    <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+    <meta property="og:image" content="{{ "/assets/images/elixir-uk.png" | prepend: site.baseurl }}" />
     <script type="application/ld+json">
       {% include _includes/material.jsonld material=page topic=topic site=site %}
     </script>
     <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
   </head>
-  <body>
+  <body class="rdmbites">
     <textarea id="source">
 name: inverse
 layout: true
@@ -52,18 +52,18 @@ class: center, middle, inverse
 {% endif %}
 <a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
+{% if page.logo == "GTN" %}
+<img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" class="slide-logo"/>
+{% else %}
+  {% if page.logo contains "://" %}
+<img src="{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="slide-logo"/>
+  {% else %}
+<img src="{{ site.baseurl }}/{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="slide-logo"/>
+  {% endif %}
+{% endif %}
 </span></div>
 
 <div class="my-footer"><span>
-{% if page.logo == "GTN" %}
-<img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
-{% else %}
-  {% if page.logo contains "://" %}
-<img src="{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
-  {% else %}
-<img src="{{ site.baseurl }}/{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
-  {% endif %}
-{% endif %}
 </span></div>
 
 ---
