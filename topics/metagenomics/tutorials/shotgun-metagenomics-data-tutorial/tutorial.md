@@ -7,8 +7,8 @@ questions:
   - "How to analyze metagenomics shotgun data?"
 objectives:
   - "Selection of tools to analyze shotgun data"
-  - "Visualisation of a community structure"
-time_estimation: "1H00M"
+  - "Extracting taxonomic and functional information"
+time_estimation: "30M"
 key_points:
   - "With amplicon data, we can extract information about the studied community structure"
   - "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
@@ -26,7 +26,7 @@ contributors:
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
 - [Amplicon sequencing](https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html), which sequences only the rRNA or ribosomal DNA of organisms
-- Shotgun sequencing, which sequences full genomes of the micro-organisms in the environment
+- __Shotgun sequencing__, which sequences full genomes of the micro-organisms in the environment
 
 In this tutorial, we will introduce the second type of analysis, shotgun data, with its general principles. For a more in-depth look at these analyses, we recommend our detailed tutorials on each analysis, Amplicon and Shotgun.
 
