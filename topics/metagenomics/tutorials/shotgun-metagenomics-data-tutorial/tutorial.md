@@ -17,6 +17,7 @@ key_points:
 contributors:
   - shiltemann
   - bebatut
+  - EngyNasr
 ---
 
 # Introduction
@@ -44,7 +45,7 @@ We will use the dataset from [project on the Argentinean agricultural pampean so
 
 In [16S Microbial Analysis with mothur tutorial](https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html), we saw how to analyze amplicon data to extract the community structure. Such information can also be extracted from shotgun metagenomic data.
 
-In shotgun data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the other genes of the micro-organisms. Using this information, we can try to answer questions such as "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
+In shotgun data analysis, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the other genes of the micro-organisms. Using this information, we can try to answer questions such as "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
 We will use a metagenomic sample of the Pampas Soil ([SRR606451](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372043/runs/SRR606451/results/versions/2.0)).
 
