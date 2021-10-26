@@ -208,7 +208,7 @@ Verify this test fails when running stand-alone.
 
 > ### {% icon code-in %} Input: Bash
 > ```bash
-> ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+> GALAXY_TEST_USE_UVICORN=TRUE ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 > ```
 {: .code-in}
 
@@ -240,7 +240,7 @@ with ``add_favorite_extension`` before finishing with ``delete_favorite_extensio
 
 > ### {% icon code-in %} Input: Bash
 > ```bash
-> ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+> GALAXY_TEST_USE_UVICORN=TRUE ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 > ```
 {: .code-in}
 
