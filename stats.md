@@ -3,12 +3,12 @@ layout: base
 ---
 
 <!-- tutorial stats -->
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
+{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
 
 <!-- topic stats -->
-{% assign topics = site.data | where_exp: "item", "item.type" %}
-{% assign topics_science = topics | where: "type","use" | sort: "name" %}
-{% assign topics_technical = topics | where_exp: "item", "item.type != 'use'"%}
+{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
+{% assign topics_science = topics | where: "type","use" | where_exp:"item","item.enable != false" | sort: "name" %}
+{% assign topics_technical = topics | where_exp: "item", "item.type != 'use'" | where_exp:"item","item.enable != false" %}
 
 <!-- contributors stats -->
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
@@ -197,7 +197,7 @@ function genColors(size) {
 // Scientific Topics
 var tutoBar = document.getElementById('tutorialsBar');
 
-var data_tutos = [{% for topic in topics_science %}{{site.pages | topic_filter: topic.name | size }}{%unless forloop.last%},{%endunless%}{% endfor %}];
+var data_tutos = [{% for topic in topics_science %}{{site | topic_filter: topic.name | size }}{%unless forloop.last%},{%endunless%}{% endfor %}];
 var labels_topics = [{% for topic in topics_science %}"{{ topic.title }}"{%unless forloop.last%},{%endunless%}{% endfor %}];
 
 var tutorialsBar = new Chart(tutoBar, {
@@ -233,7 +233,7 @@ var tutorialsBar = new Chart(tutoBar, {
 // Chart displaying number of tutorials per topic
 var tutoBarTechnical = document.getElementById('tutorialsBarTechnical');
 
-var data_tutos = [{% for topic in topics_technical %}{{site.pages | topic_filter: topic.name | size }}{%unless forloop.last%},{%endunless%}{% endfor %}];
+var data_tutos = [{% for topic in topics_technical %}{{site | topic_filter: topic.name | size }}{%unless forloop.last%},{%endunless%}{% endfor %}];
 var labels_topics = [{% for topic in topics_technical %}"{{ topic.title }}"{%unless forloop.last%},{%endunless%}{% endfor %}];
 
 var tutorialsBar = new Chart(tutoBarTechnical, {

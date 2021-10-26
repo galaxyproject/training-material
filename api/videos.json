@@ -14,7 +14,7 @@
                {% for topic in sorted_topics %}
 					{% assign topic_id = topic[0] %}
                        {% assign t = site.data[topic_id] %}
-                       {% assign topic_material = site.pages | topic_filter:topic[0] %}
+                       {% assign topic_material = site | topic_filter:topic[0] %}
                        {% for material in topic_material %}
                                {% if material.video %}
 			{
@@ -22,6 +22,13 @@
 				"topic": "{{ t.title }}",
 				"title": "{{ material.title }}"
 			},
+								{% for lang in material.translations.slides %}
+			{
+				"id": "{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction_{{ lang | upcase }}{% else %}tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endif %}",
+				"topic": "{{ t.title }}",
+				"title": "{{ material.title }}"
+			},
+								{% endfor %}
                                {% endif %}
                        {% endfor %}
                {% endfor %}

@@ -45,7 +45,7 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --no-document --system && \
-		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
 bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpod.io)
@@ -84,6 +84,11 @@ check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		bundle exec ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
+
+check-contributors: ## Validate the contributors.yaml file
+	$(ACTIVATE_ENV) && \
+		bundle exec ruby bin/validate-contributors.rb
+.PHONY: check-contributors
 
 _check-html: # Internal
 	$(ACTIVATE_ENV) && \
@@ -203,27 +208,21 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
+
 _site/%/introduction.pdf: _site/%/introduction.html
-	if ! grep 'http-equiv="refresh"' $< --quiet; then \
-		$(ACTIVATE_ENV) && \
-		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
-		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
-		wkhtmltopdf \
-		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
-			--user-style-sheet bin/slides-fix.css \
-			- $@; \
-	fi
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 _site/%/slides.pdf: _site/%/slides.html
-	if ! grep 'http-equiv="refresh"' $< --quiet; then \
-		$(ACTIVATE_ENV) && \
-		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
-		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
-		wkhtmltopdf \
-		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
-			--user-style-sheet bin/slides-fix.css \
-			- $@; \
-	fi
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
+
+_site/%/slides_ES.pdf: _site/%/slides_ES.html
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 video: ## Build all videos
 	bash bin/ari-make.sh

@@ -264,7 +264,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 ## Taxonomic classification with Kraken2
 
-To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
+To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
 
 
 > ### {% icon comment %} Comments
@@ -343,7 +343,7 @@ Let's take a look at the result. Using the search bar we can check if certain ta
 > > ### {% icon solution %} Solution
 > >
 > > 1. The low presence of _Alphaproteobacteria_ (including members of the order _Rhizobiales_), as well as the abundance of _Bacteroidetes_ and _Gammaproteobacteria_, suggest that the soil is highly exposed to phosphorus. This mineral is strongly associated with the anthropogenic activity as it is an important component of agrochemicals.
-> > 2. We can observe that there are important differences in the structure of the bacterial populations between the soil and rhizosphere samples. Particularly significant is the increase in phylum _Plactomycetes_, which are usually abundant in the rhizosphere.
+> > 2. We can observe that there are important differences in the structure of the bacterial populations between the soil and rhizosphere samples. Particularly significant is the increase in phylum _Planctomycetes_, which are usually abundant in the rhizosphere.
 > >
 > {: .solution}
 >
