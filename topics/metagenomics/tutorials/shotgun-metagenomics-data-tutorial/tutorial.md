@@ -8,6 +8,7 @@ questions:
 objectives:
   - "Selection of tools to analyze shotgun data"
   - "Extracting taxonomic and functional information"
+  - "Visualisation of a community structure"
 time_estimation: "30M"
 key_points:
   - "With amplicon data, we can extract information about the studied community structure"
