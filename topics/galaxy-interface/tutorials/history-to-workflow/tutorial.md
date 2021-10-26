@@ -93,7 +93,7 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 > 3. *Switch to* the history you want to extract a workflow from.
 >    - If the history that you want to create a repeatable workflow for is *not* your *current* history (the left-most one), then find the history you want and then *click* the **Switch to** button at the top of the history.
 >    - This makes that history the current history and moves it to the very left.
-> 4. *Click* on your **Back** button or the Galaxy Icon at the top upper left of your histories view.
+> 4. *Click* on the Galaxy Icon or the {% icon galaxy-home %} Home Button  at the top upper left of your histories view.
 >    - This returns you to the Galaxy home page with the selected history as your current history.
 {: .hands_on}
 
