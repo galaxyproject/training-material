@@ -210,7 +210,7 @@ The first step of the assembler is to build a de Bruijn graph. For that, it will
 >    - *"Hash Length"*: `29`
 >    - *"Input Files"*
 >       - Click on {% icon param-repeat %} *"Input Files"*
->       - In "1: Factor"
+>       - In "1: Input Files"
 >          - *"file format"*: `fastq`
 >          - *"read type"*: `shortPaired reads`
 >          - {% icon param-files %} *"Dataset"*:  outputs of **FASTQ interlacer** 
