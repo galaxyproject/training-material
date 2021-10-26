@@ -151,7 +151,7 @@ The *extract workflow* step assigns the name of input datasets in your history t
 >     - This helps make your general input dataset name more informative.
 >     - *add* a description of the dataset in the **Annotation** box.
 >     - For the example, we'll use:
->        - `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **It must be at least a 6 column BED file,** as the workflow makes decisions based on column 6.`
+>        - `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **It must be at least a 6 column BED file,** as the workflow makes decisions based on column 6 (the strand).`
 >      ![Renamed and annotated input dataset](../../images/workflow_strand_renamed_plus_annot.png)
 {: .hands_on}
 
