@@ -5,11 +5,13 @@ title: "Analysis of shotgun metagenomics data"
 zenodo_link: "https://doi.org/10.5281/zenodo.815875"
 questions:
   - "How to analyze metagenomics shotgun data?"
+  - "What information can be extracted of metagenomics data?"
+  - "What are the difference in the analyses of amplicon and shotgun data?"
 objectives:
   - "Selection of tools to analyze shotgun data"
   - "Extracting taxonomic and functional information"
   - "Visualisation of a community structure"
-time_estimation: "30M"
+time_estimation: "1H"
 key_points:
   - "With amplicon data, we can extract information about the studied community structure"
   - "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
@@ -26,7 +28,7 @@ contributors:
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
-- [Amplicon sequencing](https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html), which sequences only the rRNA or ribosomal DNA of organisms
+- [Amplicon sequencing]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %}), which sequences only the rRNA or ribosomal DNA of organisms
 - __Shotgun sequencing__, which sequences full genomes of the micro-organisms in the environment
 
 In this tutorial, we will introduce the second type of analysis, shotgun data, with its general principles. For a more in-depth look at these analyses, we recommend our detailed tutorials on each analysis, Amplicon and Shotgun.
@@ -44,7 +46,7 @@ We will use the dataset from [project on the Argentinean agricultural pampean so
 
 # Shotgun metagenomics data
 
-In [16S Microbial Analysis with mothur tutorial](https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html), we saw how to analyze amplicon data to extract the community structure. Such information can also be extracted from shotgun metagenomic data.
+In [16S Microbial Analysis with mothur tutorial]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %}), we saw how to analyze amplicon data to extract the community structure. Such information can also be extracted from shotgun metagenomic data.
 
 In shotgun data analysis, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the other genes of the micro-organisms. Using this information, we can try to answer questions such as "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
@@ -73,14 +75,14 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
-In this tutorial, we use the second approach with MetaPhlAn2. This tools is using a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
+In this tutorial, we use the second approach with MetaPhlAn. This tools is using a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
-> ### {% icon hands_on %} Hands-on: Taxonomic assignation with MetaPhlAn2
+> ### {% icon hands_on %} Hands-on: Taxonomic assignation with MetaPhlAn
 >
-> 1. **MetaPhlAN2** {% icon tool %} with
+> 1. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/3.0.13+galaxy0) %} with
 >    - "Input file" to the imported file
 >    - "Database with clade-specific marker genes" to `locally cached`
->    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
+>    - "Cached database with clade-specific marker genes" to `MetaPhlAn clade-specific marker genes`
 >
 > This step may take a couple of minutes.
 {: .hands_on}
@@ -90,7 +92,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 - A tabular file with the community structure
 
     ```
-    #SampleID   Metaphlan2_Analysis
+    #SampleID   Metaphlan_Analysis
     k__Bacteria 100.0
     k__Bacteria|p__Proteobacteria   86.20712
     k__Bacteria|p__Actinobacteria   13.79288
@@ -109,7 +111,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 > ### {% icon question %} Questions
 >
-> 1. What is the most precise level we have access to with MetaPhlAn2?
+> 1. What is the most precise level we have access to with MetaPhlAn?
 > 2. What are the two orders found in our sample?
 > 3. What is the most abundant family in our sample?
 >
@@ -120,16 +122,16 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 > {: .solution }
 {: .question}
 
-Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA
+Even if the output of MetaPhlAn is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA
 
 > ### {% icon hands_on %} Hands-on: Interactive visualization with KRONA
 >
-> 1. **Format MetaPhlAn2 output for Krona** {% icon tool %} with
->    - "Input file" to `Community profile` output of `MetaPhlAn2`
+> 1. {% tool [Format MetaPhlAn2 output for Krona](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0) %} with
+>    - "Input file" to `Community profile` output of `MetaPhlAn`
 >
-> 2. **KRONA pie chart** {% icon tool %} with
+> 2. {% tool [KRONA pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with
 >    - "What is the type of your input data" as `MetaPhlan`
->    - "Input file" to the output of `Format MetaPhlAn2`
+>    - "Input file" to the output of `Format MetaPhlAn`
 >
 {: .hands_on}
 
@@ -141,10 +143,10 @@ In the shotgun data, we have access to the gene sequences from the full genome. 
 
 > ### {% icon hands_on %} Hands-on: Metabolism function identification
 >
-> 1. **HUMAnN2** {% icon tool %} with
+> 1. {% tool [HUMAnN](toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.0.0+galaxy1) %} with
 >    - "Input sequence file" to the imported sequence file
 >    - "Use of a custom taxonomic profile" to `Yes`
->    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn2`
+>    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn`
 >    - "Nucleotide database" to `Locally cached`
 >    - "Nucleotide database" to `Full`
 >    - "Protein database" to `Locally cached`
@@ -165,7 +167,7 @@ In the shotgun data, we have access to the gene sequences from the full genome. 
 >    ```
 {: .hands_on}
 
-HUMAnN2 generates 3 files
+HUMAnN generates 3 files
 
 - A file with the abundance of gene families
 
@@ -192,8 +194,8 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 
 > ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
 >
-> 1. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
->    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
+> 1. {% tool [Renormalize a HUMAnN2 generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.11.1.1) %} with
+>    - "Gene/pathway table" to the gene family table generated with `HUMAnN`
 >    - "Normalization scheme" to `Relative abundance`
 >    - "Normalization level" to `Normalization of all levels by community total`
 >
