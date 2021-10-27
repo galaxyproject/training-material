@@ -44,11 +44,16 @@ We will use the dataset from [project on the Argentinean agricultural pampean so
 >
 {: .agenda}
 
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
+
 # Shotgun metagenomics data
 
 In [16S Microbial Analysis with mothur tutorial]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %}), we saw how to analyze amplicon data to extract the community structure. Such information can also be extracted from shotgun metagenomic data.
 
+
 In shotgun data analysis, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the other genes of the micro-organisms. Using this information, we can try to answer questions such as "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
+
+{% snippet faqs/galaxy/sequencing_shotgun.md %}
 
 We will use a metagenomic sample of the Pampas Soil ([SRR606451](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372043/runs/SRR606451/results/versions/2.0)).
 
@@ -57,7 +62,12 @@ We will use a metagenomic sample of the Pampas Soil ([SRR606451](https://www.ebi
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the `SRR606451_pampa` Fasta file from [Zenodo](http://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data")
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    ```
 >    https://zenodo.org/record/815875/files/SRR606451_pampa.fasta
