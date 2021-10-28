@@ -409,7 +409,7 @@ This plot shows the distribution of fragment sizes in the file which was analyse
 
 ![Sequence length distribution](../../images/quality-control/sequence_length_distribution-before.png "Sequence length distribution")
 
-Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.
+Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $$n$$ bases if they match the first $$n$$ bases of the adapter up to 90% (by default), with sometimes $$n = 1$$.
 
 ## Sequence Duplication Levels
 
