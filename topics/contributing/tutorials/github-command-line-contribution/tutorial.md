@@ -128,7 +128,7 @@ Here for this tutorial, you will create a branch called "my_new_branch" in which
 >
 >    ```
 >    $ git branch
->      * master
+>      * main
 >    ```
 >
 >    The branch on which you are is shown with the `*`
@@ -149,9 +149,9 @@ This branch is added to your local copy:
 
 # Make your changes on this branch
 
-You have created your first branch! Now you want to make the change in the `CONTRIBUTING.yaml` file. By changing a file in this branch, it will diverge from the `master` branch. It will contain data that is only on this new branch:
+You have created your first branch! Now you want to make the change in the `CONTRIBUTING.yaml` file. By changing a file in this branch, it will diverge from the `main` branch. It will contain data that is only on this new branch:
 
-![Divergence of the branch compared to master](../../images/PR_branches_02.png "The changes on your branch will not be on the master branch")
+![Divergence of the branch compared to master](../../images/PR_branches_02.png "The changes on your branch will not be on the main branch")
 
 > ### {% icon hands_on %} Hands-on: Make changes in a branch
 >
@@ -204,7 +204,7 @@ The changes you made on your branch are only on the local copy of the repository
 >
 > 2. Go to your GitHub repository
 > 3. Change to the "my_new_branch" branch:
->    1. Click on **Branch: master** (left)
+>    1. Click on **Branch: main** (left)
 >
 >       ![Selecting branch on GitHub](../../images/PR_branch_github.png)
 >
@@ -229,7 +229,7 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 >
 >    !["Opening a pull request"](../../images/PR_button.png)
 >
-> 3. Check that the selected branch are correct: **master** on the left and your branch name on the right
+> 3. Check that the selected branch are correct: **main** on the left and your branch name on the right
 >
 >    ![Branches in PR](../../images/PR_branch_check.png)
 >
@@ -329,10 +329,10 @@ You now want to work on a new tutorial or make some other new changes. However s
 
 > ### {% icon hands_on %} Hands-on: Update the local copy
 >
-> 1. Move to the `master` branch
+> 1. Move to the `main` branch
 >
 >    ```
->    $ git checkout master
+>    $ git checkout main
 >    ```
 >
 > 2. Add a reference to the original GitHub repository
@@ -367,7 +367,7 @@ You also learned the GitHub flow and its cycle:
 1. Create a new branch in your local copy
 2. Commit the changes in that branch
 1. Push that branch to your fork on GitHub
-1. Submit a pull request from that branch to the master repository
+1. Submit a pull request from that branch to the main repository
 1. Wait for feedbacks and make requested changes
 1. Update your local copy
 1. Restart the cycle
