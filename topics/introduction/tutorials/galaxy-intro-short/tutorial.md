@@ -101,7 +101,7 @@ Your "Tools" are in the panel at the left.
 > ### {% icon hands_on %} Hands-on: Upload a file from URL
 > 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload**
 >
->    ![upload button](../../images/upload-data.png)
+>    ![upload data button](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
@@ -133,7 +133,7 @@ What is this file?
 > ### {% icon hands_on %} Hands-on: View the dataset content
 > 1. Click on the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content
 >
->    ![eye](../../images/eye-icon.png){:width="320px"}
+>    ![eye icon with dropdown titled View Data](../../images/eye-icon.png){:width="320px"}
 {: .hands_on}
 
 The contents of the file will be displayed in the central Galaxy panel.
@@ -223,7 +223,7 @@ We could click on the eye icon to view the contents of this output file, but it 
 >
 >    This expands the information about the file.
 >
->    ![filter1](../../images/filter-fastq1.png)
+>    ![filter1 with 3 arrows click on filename to expand, click filter settings and how many reads were filtered out](../../images/filter-fastq1.png)
 >
 {: .hands_on}
 
@@ -243,7 +243,7 @@ We have now decided that our input reads have to be filtered to an even higher s
 > ### {% icon hands_on %} Hands-on: Re-run the tool
 > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Filter by quality** {% icon tool %}
 >
->    ![rerun](../../images/rerun.png)
+>    ![rerun the job](../../images/rerun.png)
 >
 >    This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.
 >
@@ -287,7 +287,7 @@ Where is your first history, called "my-analysis"?
 > ### {% icon hands_on %} Hands-on: View histories
 > 1. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
 >
->    ![view-hist](../../images/galaxy_interface_history_switch.png){:width="320px"}
+>    ![view all histories](../../images/galaxy_interface_history_switch.png){:width="320px"}
 >
 >    A new page will appear with all your histories displayed here.
 >
