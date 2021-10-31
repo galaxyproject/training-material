@@ -112,7 +112,7 @@ We will extract the 4 columns mentioned above and keep only the occurrence recor
 Here, you can either upload your Galaxy data or you can download data directly in Wallace. Let's use the data from your Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Launch Wallace
-> 1. Verify your current history has the filtered occurences data.
+> 1. Verify your current history has the filtered occurrences data.
 > 2. Open {% tool [Wallace](interactive_tool_wallace) %} in Galaxy or click here to [open the tool](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace) and click on execute.
 > 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool named `Wallace visualisation`. Wallace will open up in your browser.
 > 4. In Wallace
@@ -141,13 +141,13 @@ You now have your occurrence records on Wallace!
 
 ## Process occurrence data
 
-For the modeling, we need to the choose the occurrences we want to use. There is 4 ways to do this in Wallace in the **2 Process Occ** panel:
+For the modeling, we need to choose the occurrences we want to use. There is 4 ways to do this in Wallace in the **2 Process Occ** panel:
 
 1. Selecting occurrences on the map by delimiting an interesting geographic area
 2. Removing occurrences by ID
 3. Delimiting a spatial thin
 
-   This allows to select occurrences by setting a minimum distance (in km) between the different occurrences. For example, by typing 30km, we will get all the occurrences on the map which are at minimum 30km from each other.
+   This allows selecting occurrences by setting a minimum distance (in km) between the different occurrences. For example, by typing 30km, we will get all the occurrences on the map which are at a minimum of 30km from each other.
 
 4. Considering all the occurrences
 
@@ -166,7 +166,7 @@ We want to work on the data from the US, we will select the occurrences with the
 
 ## Obtain Environmental Data
 
-Now, we would like to obtain biologially relevant environmental data for our model. The [Bioclimatic variables](http://www.worldclim.org/bioclim) consist of such original and derived variables. We will associate them with the occurrence data, using the WorldClim Bioclims module.
+Now, we would like to obtain biologically relevant environmental data for our model. The [Bioclimatic variables](http://www.worldclim.org/bioclim) consist of such original and derived variables. We will associate them with the occurrence data, using the WorldClim Bioclims module.
 
 This module provides a raster with environmental variables from online sources. The raster is composed of environmental information. Each layer of the raster contains a climatic variable: starting from BIO1 = Annual mean temperature, to BIO19 = Precipitation of Coldest Quarter.
 
@@ -181,7 +181,7 @@ This module provides a raster with environmental variables from online sources. 
 >      > 2. In **Obtain Environmental Data**
 >      >    - *"Modules Available"*: `Galaxy History User`
 >      >    - *"Select from your Galaxy History User csv file"*: imported GeoTIFF file
->      >    Note that if you imput your own raster, you don't have the option for time prediction later on.
+>      >    Note that if you input your own raster, you don't have the option for time prediction later on.
 >      {: .comment}
 >
 >    - *"Select WorldClim bioclimatic variable resolution"*: `10 arcmin`
@@ -366,6 +366,6 @@ Following this tutorial, we have loaded a dataset of occurrences to the shiny ap
 > - BIOCLIM: the first species distribution modelling package, its early applications and relevance to most current MAXENT studies. Diversity and Distributions ({% cite booth2018 %}).
 > - ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. ({% cite muscarella2014 %}).
 >
-> [Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
+> [Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done, what is taken in consideration and more.
 {: .details}
 
