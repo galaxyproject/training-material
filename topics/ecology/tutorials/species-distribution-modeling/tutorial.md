@@ -2,11 +2,11 @@
 layout: tutorial_hands_on
 title: "Species distribution modeling"
 questions:
-    - "How to build & evaluate a niche model, visualize and project it ?"
+    - "How to build & evaluate a niche model, visualize and project it?"
 objectives:
     - "Find and download occurrences data from GBIF"
     - "Find and download environmental data"
-    - "Process both occurrences and environmental"
+    - "Process both occurrences and environmental data"
     - "Partition occurrence data"
     - "Model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM"
 requirements:
@@ -25,9 +25,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurrences (observations) with a set of environmental data (such as temperature and precipitation).
+Species Distribution Modeling (SDM) can help understand a species distribution in relation to its environment. It can also attempt to quantify the impact of climate change on the species' habitat, direct conservation efforts and predict invasive species distributions. This is acheived by associating species occurrence (observations) data with a set of environmental data (such as temperature and precipitation).
 
-The goal of this tutorial is to model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://en.wikipedia.org/wiki/Painted_turtle)) from the North America region.
+The goal of this tutorial is to model a theoretical ecological niche and predict species distribution in a future climate scenario by using an SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of *Chrysemys picta* ([Painted turtle](https://en.wikipedia.org/wiki/Painted_turtle)) in the US mainland North America region.
 
 > ### Agenda
 >
@@ -41,7 +41,7 @@ The goal of this tutorial is to model a theoretical ecological niche and predict
 
 # Step 1: Import data from public databank
 
-In this study the datasets are all imported from the [GBIF](https://www.gbif.org/) databanks. It is also possible to import from [bison](https://www.gbif.org/), [iNaturalist](https://www.inaturalist.org/) and others.
+In this study the datasets are all imported from the [GBIF](https://www.gbif.org/) databanks. It is also possible to import from [BISON](https://bison.usgs.gov/), [iNaturalist](https://www.inaturalist.org/) and others.
 
 
 > ### {% icon hands_on %} Hands-on: Import the data
@@ -51,30 +51,30 @@ In this study the datasets are all imported from the [GBIF](https://www.gbif.org
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. **Get species occurrences data** {% icon tool %} with the following parameters
->    - *"Scientific name"*: `chrysemys picta`
+>    - *"Scientific name"*: `Chrysemys picta`
 >    - *"Data source"*: `gbif`
 >    - *"Number of records to return"*: `10000`
 >
 > 3. Inspect the generated file with the Scratchbook
 {: .hands_on}
 
-We have now a tabular file with about 10,001 lines and many columns.
+We now have a tabular file with 10,001 lines and many columns.
 
 > ### {% icon question %} Questions
-> 1. What do the lines in the files represent?
-> 2. What are the columns 1, 2, 3 and 51 of the generated file?
+> 1. What do the rows in the files represent?
+> 2. What are columns 1, 2, 3 and 54 of the generated file?
 >
 > > ### {% icon solution %} Solution
-> > 1. Each line represent an observation of Chrysemys picta, with its location, and some other metadata
-> > 2. Column 1 is the name, column 2 the longitude of the observation of Chrysemys picta, column 3 the latitude and column 50 the country code of the location
+> > 1. Each row represents a *Chrysemys picta* observation, the location, and other metadata
+> > 2. Column 1 is the name, column 2 and 3 the observation's longitude and latitude respectively, and column 54 the observation's country code
 > {: .solution }
 {: .question }
 
-We would to extraction the 4 columns previously cited and keep only occurrence records from US.
+We will extract the 4 columns mentioned above and keep only the occurrence records from the US.
 
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. **Cut columns** {% icon tool %} with the following parameters
->    - *"Cut columns"*: `c1,c2,c3,c51`
+>    - *"Cut columns"*: `c1,c2,c3,c54`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Get species occurrences data**
 >
@@ -87,7 +87,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >
 >    > ### {% icon question %} Question
 >    >
->    > How many occurrences have been conserved?
+>    > How many occurrences were kept?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 64.55% of the occurrences (6,456) are conserved
@@ -95,26 +95,27 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    {: .question}
 >
 > 4. **Tabular to CSV** {% icon tool %}
+>    - You can find the option to convert 
 >    - {% icon param-file %} *"tabular file"*: output of **Filter**
 >    - *"output csv Separator"*: `,`
 >    - *"Header in file"*: `Yes`
-> 5. Due to an issue related to the actual tabular to csv converter application to GBIF format, each `"` sign is triplicated on the resulting file. You need to replace `"""` by `"` using for example the **Replace** {% icon tool %} parts of text tool.
+> 5. Due to an issue related to the GBIF format, each `"` sign is triplicated on the resulting file. You need to replace `"""` for `"`, using for example the **Replace** {% icon tool %} parts of text tool.
 {: .hands_on}
 
-# Step 2: Development and evaluation of SDM using Wallace
+# Step 2: Development and evaluation of the SDM using Wallace
 
-[Wallace](https://wallaceecomod.github.io/) is a R Shiny app integrated into Galaxy. It provides an interactive environment for the rapid and effective development and evaluation of SDM, including data download, cleaning, partitioning, modeling, visualisation and predictions.
+[Wallace](https://wallaceecomod.github.io/) is an R Shiny app integrated into Galaxy. It provides an interactive environment for the rapid and effective development and evaluation of an SDM, including data download, cleaning, partitioning, modeling, visualisation and prediction.
 
 ## Transmit occurrence data from Galaxy to Wallace
 
-With this you can either upload file you've loaded earlier from Galaxy data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
+Here, you can either upload your Galaxy data or you can download data directly in Wallace. Let's use the data from your Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Launch Wallace
-> 1. Verify your current history is the history containing previous filtered occurences data.
-> 2. Open {% tool [Wallace](interactive_tool_wallace) %} in Galaxy or click here to [open the tool](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace) and click on execute
+> 1. Verify your current history has the filtered occurences data.
+> 2. Open {% tool [Wallace](interactive_tool_wallace) %} in Galaxy or click here to [open the tool](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace) and click on execute.
 > 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool named `Wallace visualisation`
 > 4. In Wallace
->    0. Due to an issue related to last wallace Docker update, a manual fix is proposed waiting for a better solution. You first have to go to the **5 Partition Occs**, selecting *"Spatial Partition"* then for *"Options available"* selecting `Checkerboard 2 (k=4)` then click on the **Partition** button. This will fix the issue so now you have the *"Aggregation Factor"* displayed. Sorry for the inconvenience.
+>    0. Due to an issue related to last the Wallace Docker update, a manual fix is required. First go to the **5 Partition Occs**, select *"Spatial Partition"* then for *"Options available"* select `Checkerboard 2 (k=4)` then click on the **Partition** button. This will fix the issue so now you have the *"Aggregation Factor"* displayed. Sorry for the inconvenience.
 >    1. Go to **1 Occ Data**
 >    2. In **Obtain Occurrence Data**
 >       - *"Modules Available"*: `Galaxy History User`
@@ -122,7 +123,7 @@ With this you can either upload file you've loaded earlier from Galaxy data or y
 >       - Click on **Load Occurrences**
 {: .hands_on}
 
-In the main panel of Wallace, the data will load. They can now be inspected using the map, the table, etc
+In the main panel of Wallace, the data will load. It can now be inspected using the map, the table, etc.
 
 You now have your occurrence records on Wallace!
 
@@ -139,13 +140,13 @@ You now have your occurrence records on Wallace!
 
 ## Process occurrence data
 
-For the modelling, we need to the choose the occurrences we want to use. There is 4 ways to do it in Wallace in the **2 Process Occ** panel:
+For the modeling, we need to the choose the occurrences we want to use. There is 4 ways to do this in Wallace in the **2 Process Occ** panel:
 
 1. Selecting occurrences on the map by delimiting an interesting geographic area
 2. Removing occurrences by ID
-3. Delimiting a spacial thin
+3. Delimiting a spatial thin
 
-   This allow to select occurrences by setting a minimum distance (in km) between the different occurrences. For example, by typing 30km, we will get all the occurrences on the map which are at minimum 30km from each other.
+   This allows to select occurrences by setting a minimum distance (in km) between the different occurrences. For example, by typing 30km, we will get all the occurrences on the map which are at minimum 30km from each other.
 
 4. Considering all the occurrences
 
@@ -179,6 +180,7 @@ This module provides a raster with environmental variables from online sources. 
 >      > 2. In **Obtain Environmental Data**
 >      >    - *"Modules Available"*: `Galaxy History User`
 >      >    - *"Select from your Galaxy History User csv file"*: imported GeoTIFF file
+>      >    Note that if you imput your own raster, you don't have the option for time prediction later on.
 >      {: .comment}
 >
 >    - *"Select WorldClim bioclimatic variable resolution"*: `10 arcmin`
@@ -236,7 +238,7 @@ There is 2 possible way to partition data:
 
         ![Checkerboard 2](../../images/species-distribution-modeling/Checkerboard.png "Example of checkerboard (k=4) with a factor 4. Source: doi:10.0.4.87/2041-210X.12261")
 
-For both of these techniques the number of occurrences into each bin may vary.
+For both of these techniques the number of occurrences in each bin may vary.
 
 > ### {% icon hands_on %} Hands-on: Partition Occurrence Data
 > 1. Go to **5 Partition Occs**
@@ -304,7 +306,7 @@ To visualize the suitability on the map, we can use the map prediction module.
 
 ## Project Model
 
-Wallace can use the trained model to predict possible species distributions in a different area, outside of the sampled one. Here, we will try it for the Canada.
+Wallace can use the trained model to predict possible species distributions in a different area, outside of the sampled one. Here, we will try it for Canada.
 
 > ### {% icon hands_on %} Hands-on: Visualize Model Results
 > 1. Go to **8 Project**
@@ -318,9 +320,9 @@ Wallace can use the trained model to predict possible species distributions in a
 > 4. Click on **Project**
 {: .hands_on}
 
-We can also predict not only for a different area, but also different timing and climate. The [Global Circulation Model (GCM)](https://en.wikipedia.org/wiki/General_circulation_model#Atmospheric_and_oceanic_models) are used here to predict atmospheric fluctuation and then study climate change. Each model is different and use parameters like ocean atmosphere and others. The prediction need also a RCP scenario, a scenarios about the amount of greenhouse gases emitted in the near future. This scenario may have different predicted presence models.
+We can predict not only for a different area, but also for a different time and climate. We use the [Global Circulation Models (GCM)](https://en.wikipedia.org/wiki/General_circulation_model#Atmospheric_and_oceanic_models) to predict atmospheric fluctuation and then study climate change. Each model is different and uses several parameters such as ocean atmosphere. The prediction also uses RCP scenarios, Representative Concentration Pathways take average enegy requirements across the planet (2.6, 4.5, 6.0 and 8.5 watts per meter squared) to model the concentration of greenhouse gases emitted in the near future and their effect on climate. These scenarios may produce varying predicted presence models.
 
-We would like to predict the presence of Chrysemys Picta in Canada in 2050, given the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation, and a RCP value of 2.6 <!--(**TODO: what does that represent?**)-->
+We would like to predict the presence of *Chrysemys Picta* in Canada in 2050, given the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation, and an RCP value of 2.6 <!--(**TODO: what does that represent?**)-->
 
 > ### {% icon hands_on %} Hands-on: Visualize Model Results with a 2.6 RCP
 > 2. In **Project Model**
@@ -334,7 +336,7 @@ We would like to predict the presence of Chrysemys Picta in Canada in 2050, give
 
 ![CCM4 with a 2.6 RCP](../../images/species-distribution-modeling/GCM_CCSM4_RCP_2.6.png)
 
-We would like now to compare the prediction for RCP value of 8.5 <!--(**TODO: what does that represent?**)-->.
+Let's compare the prediction for the RCP value of 8.5. RCP 8.5 describes a pathway for the current carbon emission without additional constraints, it projects a 4.3˚C temperature increase by 2100.
 
 > ### {% icon hands_on %} Hands-on: Visualize Model Results with a 8.5 RCP
 > 2. In **Project Model**
@@ -355,7 +357,7 @@ We would like now to compare the prediction for RCP value of 8.5 <!--(**TODO: wh
 
 # Conclusion
 
-Following this tutorial, we have been able here to load a dataset of occurrences used in the shiny app Wallace and model the repartition of *Chrysemys picta* (Painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s future repartition on North America. The project saved can help for future similar studies.
+Following this tutorial, we have loaded a dataset of occurrences to the shiny app Wallace and model the distribution of *Chrysemys picta* (Painted turtle) with the Species Distribution Modeling (SDM) method. This allowed us to visualize it’s ecological niche and how climate change can influence it’s future distribution in North America. The saved project can be used for similar future studies.
 
 > ### {% icon details %} Some useful references
 >
