@@ -13,7 +13,7 @@ layout: faq
 3. Higher complexity
 4. Higher cost
 
-![jigsaw puzzle image illustrating shotgun sequencing approach]({% link topics/metagenomics/images/puzzles-shotgun.png %}) <br><br>
+![jigsaw puzzle image illustrating shotgun sequencing approach]({% link topics/metagenomics/images/puzzles-shotgun.png %}) <br>
 
 **Puzzle analogy**: think of each organism as a jigsaw puzzle.
 

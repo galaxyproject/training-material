@@ -53,7 +53,7 @@ In [16S Microbial Analysis with mothur tutorial]({% link topics/metagenomics/tut
 
 In shotgun data analysis, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the other genes of the micro-organisms. Using this information, we can try to answer questions such as "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
-{% snippet faqs/galaxy/sequencing_shotgun.md %}
+{% snippet topics/metagenomics/faqs/sequencing_shotgun.md %}
 
 We will use a metagenomic sample of the Pampas Soil ([SRR606451](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372043/runs/SRR606451/results/versions/2.0)).
 
@@ -85,14 +85,15 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
-In this tutorial, we use the second approach with MetaPhlAn. This tools is using a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
+In this tutorial, we use the second approach with [MetaPhlAn](https://elifesciences.org/articles/65088). This tools is using a database of ~1.1M unique clade-specific marker genes (not only the rRNA genes) identified from ~100,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
 > ### {% icon hands_on %} Hands-on: Taxonomic assignation with MetaPhlAn
 >
 > 1. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/3.0.13+galaxy0) %} with
->    - "Input file" to the imported file
->    - "Database with clade-specific marker genes" to `locally cached`
->    - "Cached database with clade-specific marker genes" to `MetaPhlAn clade-specific marker genes`
+>    - {% icon param-file %} *"1: Single-end Fasta/FastQ file with microbiota reads"*: `imported file: SRR606451_pampa.fasta`
+>    - In *"Inputs Options"*
+>       - *"Database with clade-specific marker genes"*: `locally cached`
+>       - *"Cached database with clade-specific marker genes"*:`MetaPhlAn clade-specific marker genes`
 >
 > This step may take a couple of minutes.
 {: .hands_on}
@@ -155,20 +156,20 @@ In the shotgun data, we have access to the gene sequences from the full genome. 
 >
 > 1. {% tool [HUMAnN](toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.0.0+galaxy1) %} with
 >    - "Input sequence file" to the imported sequence file
->    - "Use of a custom taxonomic profile" to `Yes`
+>    - "Input(s)" to `Pre-computed mappings of reads database sequences`
+>    - "Steps" to `Bypass the taxonomic profiling step and creates a custom ChocoPhlAn database of the species provided afterwards`
 >    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn`
 >    - "Nucleotide database" to `Locally cached`
->    - "Nucleotide database" to `Full`
+>    - "Nucleotide database" to `Full ChocoPhlAn for HUManN`
 >    - "Protein database" to `Locally cached`
->    - "Protein database" to `Full UniRef50`
->    - "Search for uniref50 or uniref90 gene families?" to `uniref50`
+>    - "Protein database" to `Full UniRef50 for HUManN`
 >    - "Database to use for pathway computations" to `MetaCyc`
 >    - "Advanced Options"
 >    - "Remove stratification from output" to `Yes`
 >
 >    This step is long so we generated the output for you!
 >
-> 2. Import the 3 files whose the name is starting with "humann2"
+> 2. Import the 3 files whose the name is starting with "humann"
 >
 >    ```
 >    https://zenodo.org/record/815875/files/humann2_gene_families_abundance.tsv
@@ -204,7 +205,7 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 
 > ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
 >
-> 1. {% tool [Renormalize a HUMAnN2 generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.11.1.1) %} with
+> 1. {% tool [Renormalize a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.11.1.1) %} with
 >    - "Gene/pathway table" to the gene family table generated with `HUMAnN`
 >    - "Normalization scheme" to `Relative abundance`
 >    - "Normalization level" to `Normalization of all levels by community total`
