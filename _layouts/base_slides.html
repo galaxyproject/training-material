@@ -86,10 +86,12 @@ class: center, middle, inverse
 </div>
 {% endif %}
 
-<div class="footnote" style="bottom: 3em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+<div class="footnote" style="bottom: 4em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
 
 
-<div class="footnote" style="bottom: 2em;">{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Or view the plain-text slides without JS"}}</a></div>
+<div class="footnote" style="bottom: 3em;">{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Or view the plain-text slides without JS"}}</a></div>
+
+<div class="footnote" style="bottom: 2em;"><strong>{{locale['First-time-using-slides?'] | default: "First time using slides?"}}: </strong>{{locale['arrow-keys'] | default: "press <kbd>←</kbd> and <kbd>→</kbd> to move between them!"}}</div>
 
 <div class="footnote" style="bottom: 1em;"><strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}</div>
 
