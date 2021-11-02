@@ -85,7 +85,7 @@ Your "History" is in the panel at the right.
 >
 >    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history.png){:width="320px"}
 >
-> 3. Type in a new name, for example, "My-Analysis"
+> 3. Type in a new name, for example, "My Analysis"
 > 4. Press <kbd>Enter</kbd> on your keyboard to save it
 >
 > > ### {% icon comment %} Renaming not an option?
@@ -148,12 +148,12 @@ Let's look at the quality of the reads in this file.
 
 > ### {% icon hands_on %} Hands-on: Use a tool
 > 1. Type **FastQC** in the tools panel search box (top)
-> 2. Click on the {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72) %} tool
+> 2. Click on the {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} tool
 >
 >    The tool will be displayed in the central Galaxy panel.
 >
 > 3. Select the following parameters:
->    - {% icon param-file %} *"Short read data from your current history"*: the FASTQ dataset that we uploaded
+>    - {% icon param-file %} *"Raw read data from your current history"*: the FASTQ dataset that we uploaded
 >    - No change in the other parameters
 > 4. Click **Execute**
 >
@@ -163,7 +163,7 @@ This tool will run and two new output datasets will appear at the top of your hi
 
 ## View results
 
-We will look at the output dataset called *FastQC on data 1: Webpage*.
+We will now look at the output dataset called *FastQC on data 1: Webpage*.
 
 > ### {% icon comment %} Comment
 > * Note that Galaxy has given this dataset a name according to both the tool name ("FastQC") and the input ("data 1") that it used.
@@ -173,7 +173,7 @@ We will look at the output dataset called *FastQC on data 1: Webpage*.
 
 
 > ### {% icon hands_on %} Hands-on: View results
-> * Click on the {% icon galaxy-eye %} (eye) icon next to the "Webpage" output dataset.
+> * Once it's green, click on the {% icon galaxy-eye %} (eye) icon next to the "Webpage" output dataset.
 >
 >    The information is displayed in the central panel
 >
@@ -201,7 +201,7 @@ Let's run a tool to filter out lower-quality reads from our FASTQ file.
 
 > ### {% icon hands_on %} Hands-on: Run another tool
 > 1. Type **Filter by quality** in the tools panel search box (top)
-> 2. Click on the tool {% tool [Filter by quality](toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1) %}
+> 2. Click on the tool {% tool [Filter by quality](toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.2+galaxy0) %}
 > 3. Set the following parameters:
 >    - {% icon param-file %} *"Input FASTQ file"*: our initial FASTQ dataset
 >    - *"Quality cut-off value"*: 35
@@ -238,7 +238,7 @@ We could click on the eye icon to view the contents of this output file, but it 
 
 ## Re-run that tool with changed settings
 
-We have now decided that our input reads have to be filtered to an even higher standard. We will change the filter settings and re-run the tool.
+We can now try to filter our input reads to an even higher standard, and see how this changes the resulting output (an exploratory analysis). We will change the filter settings and re-run the tool.
 
 > ### {% icon hands_on %} Hands-on: Re-run the tool
 > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Filter by quality** {% icon tool %}
@@ -272,7 +272,7 @@ Let's create a new history.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Rename your history, *e.g.* "Next-analysis"
+> 2. Rename your history, *e.g.* "Next Analysis"
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
@@ -282,7 +282,7 @@ This new history does not have any datasets in it yet.
 
 ## Look at all your histories
 
-Where is your first history, called "my-analysis"?
+Where is your first history, called "My Analysis"?
 
 > ### {% icon hands_on %} Hands-on: View histories
 > 1. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
@@ -292,8 +292,8 @@ Where is your first history, called "my-analysis"?
 >    A new page will appear with all your histories displayed here.
 >
 > 2. Copy a dataset into your new history
->    1. Click on the FASTQ dataset in "my-analysis" history
->    2. Drag it into the "Next-analysis" history
+>    1. Click on the FASTQ dataset in "My Analysis" history
+>    2. Drag it into the "Next Analysis" history
 >
 >    This makes a copy of the dataset in the new history (without actually using additional disk space).
 >
@@ -303,7 +303,7 @@ Where is your first history, called "my-analysis"?
 >
 {: .hands_on}
 
-Your main Galaxy window will now show the current history as "Next-analysis", and it will have one dataset in it.
+Your main Galaxy window will now show "Next Analysis" as the current history, and it will have one dataset in it.
 
 At any time, you can go back into the "View all histories" page and "Switch to" a different history.
 
