@@ -13,7 +13,8 @@ objectives:
   - "Learn how to use a tool"
   - "Learn how to view results"
   - "Learn how to view histories"
-time_estimation: "30m"
+  - "Learn how to extract and run a workflow"
+time_estimation: "40m"
 key_points:
   - "The Galaxy interface has tools on the left, viewing pane in the middle, and a history of your data analysis on the right."
   - "You can create a new history for each analysis. All your histories are saved."
@@ -28,6 +29,7 @@ translations:
   - es
 contributors:
   - annasyme
+  - nsoranzo
 
 ---
 
@@ -35,7 +37,7 @@ contributors:
 {:.no_toc}
 
 * This is a short introduction to the Galaxy user interface - the web page that you interact with.
-* We will cover key tasks in Galaxy: uploading files, using tools, and viewing histories.
+* We will cover key tasks in Galaxy: uploading files, using tools, viewing histories, and running workflows.
 
 > ### Agenda
 > 1. TOC
@@ -263,6 +265,39 @@ We can now try to filter our input reads to an even higher standard, and see how
 
 You can re-run a tool many times with different settings. Each time you re-run the tool, its new output datasets will appear at the top of your current history.
 
+
+## Convert your analysis history into a workflow
+
+When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you need to analyze new data, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
+
+Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
+
+> ### {% icon hands_on %} Hands-on: Extract workflow
+>
+> 1. **Clean up** your history.
+>    - If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
+>
+> 2. Go to the **History Options menu**  {% icon galaxy-gear %} menu
+>    - Select the **Extract Workflow** option.
+>
+>      ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    - The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>
+>    ![Selection of steps for `Extract Workflow` from history](../../images/intro_short_workflow_extract.png)
+>
+> 3. **Rename** the workflow to something descriptive, for example: `QC and filtering`.
+>    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them. In this case, uncheck the second **Filter by quality** tool at the bottom, where we used a too high quality cut-off.
+>
+> 4. **Rename** the input of the workflow in the first box on the second column *"Treat as input dataset"* to: `FASTQ reads`
+>
+> 5. Click on the **Create Workflow** button near the top.
+>    - You will get a message that the workflow was created.
+>    - In a minute we will see how to find it and use it.
+>
+{: .hands_on}
+
+
 ## Create a new history
 
 Let's create a new history.
@@ -307,7 +342,37 @@ Your main Galaxy window will now show "Next Analysis" as the current history, an
 
 At any time, you can go back into the "View all histories" page and "Switch to" a different history.
 
+
+## Run workflow in the new history
+
+Now that we have built our workflow, let's use it to re-create our small analysis in a single step. The same workflow could also be used on some new FASTQ data to quickly repeat the same analysis on different inputs.
+
+> ### {% icon hands_on %} Hands-on: Run workflow
+>
+> 1. Click on **Workflow** in the top menu bar of Galaxy.
+>    - Here you have a list of all your workflows.
+>    - Your newly created workflow should be listed at the top:
+>
+>    ![`Your workflows` list](../../images/intro_short_workflow_list.png)
+>
+>    If you click on a workflow name, you can see all available actions for the workflow, e.g. edit, copy, rename, delete.
+>
+> 2. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow.
+>    - The central panel will change to allow you to configure and launch the workflow.
+>
+>    ![Run workflow form](../../images/intro_short_run_workflow.png)
+>
+> 3. Check that the *"FASTQ reads"* input is set to the FASTQ dataset we have copied to the new history.
+     - In this page we could change any parameter for the tools composing the workflow as we would do when running them one by one.
+>
+> 4. Click the **Run Workflow** button at the top-right of the screen.
+>
+> 5. You should see a message that the workflow was successfully invoked. Then jobs will start to run and datasets appear in your "Next Analysis" history, replicating the steps of your previous history.
+>
+{: .hands_on}
+
+
 # Conclusion
 {:.no_toc}
 
-{% icon trophy %} Well done! You have completed the short introduction to Galaxy, where you named the history, uploaded a file, used a tool, and viewed results. Additional tutorials are available for a more in-depth introduction to Galaxy's features.
+{% icon trophy %} Well done! You have completed the short introduction to Galaxy, where you named the history, uploaded a file, used a tool, viewed results and run a workflow. Additional tutorials are available for a more in-depth introduction to Galaxy's features.
