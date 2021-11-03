@@ -2,10 +2,16 @@
 layout: page
 ---
 
-<section class="tutorial">
-{{ page.description }}
-<hr>
+{% assign contributors = site.data['contributors'] %}
 
-{{content | regex_replace: '<hr.*—<\/p>', '' }}
+<section class="tutorial">
+    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include
+        _includes/contributor-list.html
+        contributors=page.contributors badge=true newcontributors=true %}</div>
+
+    {{ page.description }}
+    <hr>
+
+    {{content | regex_replace: '<hr.*—<\ /p>', '' }}
 
 </section>
