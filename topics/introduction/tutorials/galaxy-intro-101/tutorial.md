@@ -455,25 +455,29 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the {% icon galaxy-cross %} button. This will make the creation of a workflow easier.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
-> 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
+>    This will make the creation of the workflow easier.
 >
->    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+>
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of features`.
+> 3. Replace the **Workflow name** to something more descriptive, for example `Find exons with the highest number of features`.
 >
-> While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
+>    While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
 >
->    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
-> 4. Click on the **Create Workflow** button near the top.
+> 5. Click on the **Create Workflow** button near the top.
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 5. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
+> 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
 >
 >    ![`Your workflows` list](../../images/101_26.png)
 {: .hands_on}

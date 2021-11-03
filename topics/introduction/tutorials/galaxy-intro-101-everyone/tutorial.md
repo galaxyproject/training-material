@@ -525,31 +525,32 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history.
->    - If you had any failed jobs (red), please remove those datasets from your history by clicking on the {% icon galaxy-cross %} button.
->    - This will make the creation of a workflow easier.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
-> 2. Go to the **History Options menu**  {% icon galaxy-gear %} menu
->    - Select the **Extract Workflow** option.
+>    This will make the creation of the workflow easier.
 >
->      ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
->    - The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_foreveryone_workflow_create.png)
 >
-> 3. **Rename** the workflow to something descriptive
->    - For example: `Exploring Iris dataset with statistics and scatterplots`.
->    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+> 3. Replace the **Workflow name** to something more descriptive, for example: `Exploring Iris dataset with statistics and scatterplots`.
 >
-> 4. Click on the **Create Workflow** button near the top.
->    - You will get a message that the workflow was created. But where did it go?
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
-> 5. Click on **Workflow** in the top menu of Galaxy.
+> 5. Click on the **Create Workflow** button near the top.
+>
+>    You will get a message that the workflow was created. But where did it go?
+>
+>    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
+>
+> 6. Click on **Workflow** in the top menu of Galaxy.
 >    - Here you have a list of all your workflows.
 >    - Your newly created workflow should be listed at the top:
 >
->    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
 >    ![`Your workflows` list](../../images/101_foreveryone_workflow_list.png)
 {: .hands_on}
 

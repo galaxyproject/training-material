@@ -274,29 +274,31 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history.
->    - If you had any failed jobs (red), please remove those datasets from your history by clicking on the {% icon galaxy-cross %} button. This will make the creation of a workflow easier.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
-> 2. Go to the **History Options menu**  {% icon galaxy-gear %} menu
->    - Select the **Extract Workflow** option.
+>    This will make the creation of the workflow easier.
 >
->      ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
->    - The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/intro_short_workflow_extract.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example: `QC and filtering`.
->    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them. In this case, uncheck the second **Filter by quality** tool at the bottom, where we used a too high quality cut-off.
+> 3. Replace the **Workflow name** to something more descriptive, for example: `QC and filtering`.
 >
-> 4. **Rename** the input of the workflow in the first box on the second column *"Treat as input dataset"* to: `FASTQ reads`
+> 4. **Rename** the workflow input in the box at the top of second column to: `FASTQ reads`
 >
-> 5. Click on the **Create Workflow** button near the top.
->    - You will get a message that the workflow was created.
->    - In a minute we will see how to find it and use it.
+> 5. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes. In this case, uncheck the second **Filter by quality** tool at the bottom, where we used a too high quality cut-off.
+>
+> 6. Click on the **Create Workflow** button near the top.
+>
+>    You will get a message that the workflow was created.
 >
 {: .hands_on}
 
+In a minute we will see how to find the extracted workflow and how to use it.
 
 ## Create a new history
 
