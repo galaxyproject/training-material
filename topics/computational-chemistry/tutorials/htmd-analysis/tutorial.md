@@ -61,7 +61,8 @@ This tutorial provides an introduction to using high-throughput molecular dynami
 * **GROMOS** - GROningen Molecular Simulation. This is the name of a force field for molecular dynamics simulation and a related computer software package.
 * **CHARMM** - Chemistry at Harvard Macromolecular Mechanics. It is a versatile molecular modeling and simulation program designed to provide broad application to the simulation of many-particle systems. It includes a comprehensive set of force fields to simulate biomolecules.
 * **AMBER** - Assisted Model building with Energy Refinement. It is a set of molecular mechanical force fields for the simulation of biomolecules.
-* **OpenFF** -Open Force Field. This is a python toolkit used for the development and application of mordern molecular mechanics force fields based on direct chemical perception and rigorous statistical parametization.
+* **OpenFF** -Open Force Field. This is a python toolkit used for the development and application of mordern molecular mechanics force fields based on di
+rect chemical perception and rigorous statistical parametization.
 * **TIP3P** - A water model that specifies rigid water molecules with charges and Lennard-Jones Parameters assigned to each of the 3 atoms.
 * **ITP files** - They are GROMAC file extensions that stands for Include Topology (with the **top** extension). 
 * **GAFF** - General AMBER  Force Field. It is a force field developed to augment the deficiencies of AMBER. In other words unlike AMBER which works for limited pharmaceutical molecules, GAFF works for most pharmaceutical molecules. 
