@@ -75,7 +75,7 @@ The Galaxy interface consist of three main parts. The available tools are listed
 ![Galaxy interface](../../images/galaxy_interface.png "The Galaxy interface")
 
 Let's start with a fresh history.
-
+![Switch Between Histories](../../images/Switch-Between-Histories.PNG)
 > ### {% icon hands_on %} Hands-on: Create history
 >
 > 1. Make sure you have an empty analysis history.
@@ -104,9 +104,9 @@ Let's start with a fresh history.
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left ot the interface
 >
->    ![Upload icon](../../../galaxy-interface/images/upload_button.png)
+>![Upload Data Icon](../../images/Upload_Data.PNG)
 >
-> 3. Press **Choose local file** and search for your file on your computer
+> 3. Press **Choose local files** and search for your file on your computer
 > 4. Select `interval` as **Type**
 > 5. Press **Start**
 > 6. Press **Close**
@@ -157,6 +157,7 @@ Let's start with a fresh history.
 >    A form to edit dataset attributes is displayed in the central panel
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
+![Search in Database/Build](../../images/Search-for-mm9.PNG)
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >
@@ -672,6 +673,7 @@ Congratulations! You should have a file with all the unique gene names and a cou
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
 To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+![Publish Your Work](../../images/share_work.PNG)
 
 1. **Make accessible via Link**
 
@@ -685,6 +687,7 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 
     This will share the history only with specific users on the Galaxy instance.
 
+![Publish Your Work](../../images/publish.PNG)
 
 > ### {% icon hands_on %} Hands-on: Share history and workflow
 >
