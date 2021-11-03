@@ -84,7 +84,7 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **History** is recorded on the right
 
 
-> ![Galaxy interface](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
+> ![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
 {: .comment}
 
 When you start Galaxy for very first time, your history will be empty. Let's add some data to it.
@@ -108,7 +108,7 @@ First we need to get some data into our history. You can upload files from your 
 > ### {% icon hands_on %} Hands-on: Upload SNPs and Exons
 > 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload Data**
 >
->    ![upload button](../../images/upload-data.png)
+>    ![upload data button](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
@@ -255,7 +255,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 >  The interface of the tool should look like this:
 >
->    ![Contents of the `Join` output dataset](../../images/101_bed_intersect_interface.png)
+>    ![Bedtool intersect interval interface](../../images/101_bed_intersect_interface.png)
 >
 >    > ### {% icon tip %} How do I use this tool?
 >    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
@@ -309,13 +309,13 @@ Since each line in our file represents a single overlap between SNP and exon, we
 >    - *"Input tabular dataset"*: select the output dataset from **bedtools intersect intervals** {% icon tool %}
 >    - *"Group by fields"*: `Column: 4` (the column with the exon IDs)
 >
->    ![Contents of the `Group` output dataset](../../images/101_datamash_1.png)
+>    ![Datamash tool interface](../../images/101_datamash_1.png)
 >
 >    - Scroll tool interface down to *"Operation to perform on each group"*
 >      - *"Type"*: `Count Unique values`
 >      - *"On column"*: `Column: 10` (this column contains SNPs ids like `rs2236639`. This we will count occurrences of unique SNP ids for each exon)
 >
->    ![Contents of the `Group` output dataset](../../images/101_datamash_2.png)
+>    ![Operation to perform on each group](../../images/101_datamash_2.png)
 >
 > 2. Click **Execute**. Your new output dataset will look something like this:
 >
