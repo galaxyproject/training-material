@@ -321,9 +321,9 @@
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'A short introduction to Galaxy' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html",
-  "timeRequired": "PT30M",
+  "timeRequired": "PT40M",
   "keywords": "español",
-  "description": "The questions this  addresses are:\n - How to get started in Galaxy\n\n\\nThe objectives are:\n - Learn how to upload a file\n - Learn how to use a tool\n - Learn how to view results\n - Learn how to view histories\n\n",
+  "description": "The questions this  addresses are:\n - How to get started in Galaxy\n\n\\nThe objectives are:\n - Learn how to upload a file\n - Learn how to use a tool\n - Learn how to view results\n - Learn how to view histories\n - Learn how to extract and run a workflow\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -336,12 +336,20 @@
     {
       "@type": "Person",
       "name": "Anna Syme"
+    },
+    {
+      "@type": "Person",
+      "name": "Nicola Soranzo"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Anna Syme"
+    },
+    {
+      "@type": "Person",
+      "name": "Nicola Soranzo"
     }
   ],
   "about": [
@@ -363,6 +371,9 @@
 
     <div class="contributors-line">Authors: 
 <a href="/training-material/hall-of-fame/annasyme/" class="contributor-badge contributor-annasyme"><img src="https://avatars.githubusercontent.com/annasyme?s=27" alt="Avatar">Anna Syme</a>
+
+
+<a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=27" alt="Avatar">Nicola Soranzo</a>
 
 
 <a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
@@ -398,12 +409,15 @@
         <li><p>Learn how to view histories</p>
 </li>
         
+        <li><p>Learn how to extract and run a workflow</p>
+</li>
+        
         </ul>
 
         
 
         
-        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 40 minutes</div>
         
 
         
@@ -682,6 +696,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
     
         
     
@@ -701,7 +721,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 30, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -723,7 +743,7 @@
 
 <ul>
   <li>This is a short introduction to the <span class="notranslate">Galaxy</span> user interface - the web page that you interact with.</li>
-  <li>We will cover key tasks in <span class="notranslate">Galaxy</span>: uploading files, using tools, and viewing histories.</li>
+  <li>We will cover key tasks in <span class="notranslate">Galaxy</span>: uploading files, using tools, viewing histories, and running workflows.</li>
 </ul>
 
 <blockquote class="agenda">
@@ -737,8 +757,10 @@
       <li><a href="#view-results" id="markdown-toc-view-results">View results</a></li>
       <li><a href="#run-another-tool" id="markdown-toc-run-another-tool">Run another tool</a></li>
       <li><a href="#re-run-that-tool-with-changed-settings" id="markdown-toc-re-run-that-tool-with-changed-settings">Re-run that tool with changed settings</a></li>
+      <li><a href="#convert-your-analysis-history-into-a-workflow" id="markdown-toc-convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></a></li>
       <li><a href="#create-a-new-history" id="markdown-toc-create-a-new-history">Create a new history</a></li>
       <li><a href="#look-at-all-your-histories" id="markdown-toc-look-at-all-your-histories">Look at all your histories</a></li>
+      <li><a href="#run-workflow-in-the-new-history" id="markdown-toc-run-workflow-in-the-new-history">Run <span class="notranslate">workflow</span> in the new history</a></li>
     </ol>
   </li>
 </ol>
@@ -797,7 +819,7 @@
 
       <p><img src="../../../../shared/images/rename_history.png" alt="Screenshot of the galaxy interface with the history name being edited, it currently reads &quot;Unnamed history&quot;, the default value." width="320px" loading="lazy" /></p>
     </li>
-    <li>Type in a new name, for example, “My-Analysis”</li>
+    <li>Type in a new name, for example, “My Analysis”</li>
     <li>Press <kbd>Enter</kbd> on your keyboard to save it</li>
   </ol>
 
@@ -875,13 +897,13 @@ the gray (preparing/queued) and yellow (running) states to become green (success
   <ol>
     <li>Type <strong>FastQC</strong> in the tools panel search box (top)</li>
     <li>
-      <p>Click on the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72</span></span>  tool</p>
+      <p>Click on the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+<span class="notranslate">galaxy</span>0</span></span>  tool</p>
 
       <p>The tool will be displayed in the central <span class="notranslate">Galaxy</span> panel.</p>
     </li>
     <li>Select the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Short read data from your current history”</em>: the FASTQ dataset that we uploaded</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Raw read data from your current history”</em>: the FASTQ dataset that we uploaded</li>
         <li>No change in the other parameters</li>
       </ul>
     </li>
@@ -894,7 +916,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
 <h2 id="view-results">View results</h2>
 
-<p>We will look at the output dataset called <em>FastQC on data 1: Webpage</em>.</p>
+<p>We will now look at the output dataset called <em>FastQC on data 1: Webpage</em>.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -909,7 +931,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
   <h3 id="hands_on-hands-on-view-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View results</h3>
   <ul>
     <li>
-      <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the “Webpage” output dataset.</p>
+      <p>Once it’s green, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the “Webpage” output dataset.</p>
 
       <p>The information is displayed in the central panel</p>
 
@@ -945,7 +967,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
   <h3 id="hands_on-hands-on-run-another-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run another tool</h3>
   <ol>
     <li>Type <strong>Filter by quality</strong> in the tools panel search box (top)</li>
-    <li>Click on the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1"><strong>Filter by quality</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1</span></span></li>
+    <li>Click on the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.2+galaxy0"><strong>Filter by quality</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.2+<span class="notranslate">galaxy</span>0</span></span></li>
     <li>Set the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file”</em>: our initial FASTQ dataset</li>
@@ -995,7 +1017,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
 <h2 id="re-run-that-tool-with-changed-settings">Re-run that tool with changed settings</h2>
 
-<p>We have now decided that our input <span class="notranslate">reads</span> have to be filtered to an even higher standard. We will change the filter settings and re-run the tool.</p>
+<p>We can now try to filter our input <span class="notranslate">reads</span> to an even higher standard, and see how this changes the resulting output (an exploratory analysis). We will change the filter settings and re-run the tool.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-re-run-the-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Re-run the tool</h3>
@@ -1026,6 +1048,50 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
 <p>You can re-run a tool many times with different settings. Each time you re-run the tool, its new output datasets will appear at the top of your current history.</p>
 
+<h2 id="convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></h2>
+
+<p>When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with <span class="notranslate">Galaxy</span> preserving all parameter settings applied at every step. But when you need to analyze new data, it would be tedious to do each step over again. Wouldn’t it be nice to just convert this history into a <span class="notranslate">workflow</span> that we will be able to execute again and again?</p>
+
+<p><span class="notranslate">Galaxy</span> makes this very easy with the <code class="language-plaintext highlighter-rouge">Extract <span class="notranslate">workflow</span></code> option. This means any time you want to build a <span class="notranslate">workflow</span>, you can just perform the steps once manually, and then convert it to a <span class="notranslate">workflow</span>, so that next time it will be a lot less work to do the same analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>
+      <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-times" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-cross</span> button.</p>
+
+      <p>This will make the creation of the <span class="notranslate">workflow</span> easier.</p>
+    </li>
+    <li>
+      <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract <span class="notranslate">workflow</span></strong>.</p>
+
+      <p><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu. " loading="lazy" /></p>
+
+      <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the <span class="notranslate">workflow</span>.</p>
+
+      <p><img src="../../images/intro_short_workflow_extract.png" alt="Selection of steps for `Extract Workflow` from history. " loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Replace the <strong><span class="notranslate">Workflow</span> name</strong> to something more descriptive, for example: <code class="language-plaintext highlighter-rouge">QC and filtering</code>.</p>
+    </li>
+    <li>
+      <p><strong>Rename</strong> the <span class="notranslate">workflow</span> input in the box at the top of second column to: <code class="language-plaintext highlighter-rouge">FASTQ <span class="notranslate">reads</span></code></p>
+    </li>
+    <li>
+      <p>If there are any steps that shouldn’t be included in the <span class="notranslate">workflow</span>, you can <strong>uncheck</strong> them in the first column of boxes. In this case, uncheck the second <strong>Filter by quality</strong> tool at the bottom, where we used a too high quality cut-off.</p>
+    </li>
+    <li>
+      <p>Click on the <strong>Create <span class="notranslate">Workflow</span></strong> button near the top.</p>
+
+      <p>You will get a message that the <span class="notranslate">workflow</span> was created.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In a minute we will see how to find the extracted <span class="notranslate">workflow</span> and how to use it.</p>
+
 <h2 id="create-a-new-history">Create a new history</h2>
 
 <p>Let’s create a new history.</p>
@@ -1040,7 +1106,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
     </li>
     <li>
-      <p>Rename your history, <em>e.g.</em> “Next-analysis”</p>
+      <p>Rename your history, <em>e.g.</em> “Next Analysis”</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>  <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>  <li>Type the new name</li>  <li>Press <kbd>Enter</kbd></li></ol></blockquote>
@@ -1053,7 +1119,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
 <h2 id="look-at-all-your-histories">Look at all your histories</h2>
 
-<p>Where is your first history, called “my-analysis”?</p>
+<p>Where is your first history, called “My Analysis”?</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-view-histories"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View histories</h3>
@@ -1067,8 +1133,8 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     </li>
     <li>Copy a dataset into your new history
       <ol>
-        <li>Click on the FASTQ dataset in “my-analysis” history</li>
-        <li>Drag it into the “Next-analysis” history</li>
+        <li>Click on the FASTQ dataset in “My Analysis” history</li>
+        <li>Drag it into the “Next Analysis” history</li>
       </ol>
 
       <p>This makes a copy of the dataset in the new history (without actually using additional disk space).</p>
@@ -1080,13 +1146,51 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
 </blockquote>
 
-<p>Your main <span class="notranslate">Galaxy</span> window will now show the current history as “Next-analysis”, and it will have one dataset in it.</p>
+<p>Your main <span class="notranslate">Galaxy</span> window will now show “Next Analysis” as the current history, and it will have one dataset in it.</p>
 
 <p>At any time, you can go back into the “View all histories” page and “Switch to” a different history.</p>
 
+<h2 id="run-workflow-in-the-new-history">Run <span class="notranslate">workflow</span> in the new history</h2>
+
+<p>Now that we have built our <span class="notranslate">workflow</span>, let’s use it to re-create our small analysis in a single step. The same <span class="notranslate">workflow</span> could also be used on some new FASTQ data to quickly repeat the same analysis on different inputs.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Click on <strong><span class="notranslate">Workflow</span></strong> in the top menu bar of <span class="notranslate">Galaxy</span>.
+      <ul>
+        <li>Here you have a list of all your workflows.</li>
+        <li>Your newly created <span class="notranslate">workflow</span> should be listed at the top:</li>
+      </ul>
+
+      <p><img src="../../images/intro_short_workflow_list.png" alt="`Your workflows` list. " loading="lazy" /></p>
+
+      <p>If you click on a <span class="notranslate">workflow</span> name, you can see all available actions for the <span class="notranslate">workflow</span>, e.g. edit, copy, rename, delete.</p>
+    </li>
+    <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span>.
+      <ul>
+        <li>The central panel will change to allow you to configure and launch the <span class="notranslate">workflow</span>.</li>
+      </ul>
+
+      <p><img src="../../images/intro_short_run_workflow.png" alt="Run workflow form. " loading="lazy" /></p>
+    </li>
+    <li>Check that the <em>“FASTQ <span class="notranslate">reads</span>”</em> input is set to the FASTQ dataset we have copied to the new history.
+      <ul>
+        <li>In this page we could change any parameter for the tools composing the <span class="notranslate">workflow</span> as we would do when running them one by one.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen.</p>
+    </li>
+    <li>You should see a message that the <span class="notranslate">workflow</span> was successfully invoked. Then jobs will start to run and datasets appear in your “Next Analysis” history, replicating the steps of your previous history.</li>
+  </ol>
+
+</blockquote>
+
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have completed the short introduction to <span class="notranslate">Galaxy</span>, where you named the history, uploaded a file, used a tool, and viewed results. Additional tutorials are available for a more in-depth introduction to <span class="notranslate">Galaxy</span>’s features.</p>
+<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have completed the short introduction to <span class="notranslate">Galaxy</span>, where you named the history, uploaded a file, used a tool, viewed results and run a <span class="notranslate">workflow</span>. Additional tutorials are available for a more in-depth introduction to <span class="notranslate">Galaxy</span>’s features.</p>
 
 
                 
@@ -1171,7 +1275,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Anna Syme, 2021 <b>A short introduction to Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Anna Syme, Nicola Soranzo, 2021 <b>A short introduction to Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1186,11 +1290,11 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{introduction-galaxy-intro-short,
-author = "Anna Syme",
+author = "Anna Syme and Nicola Soranzo",
 title = "A short introduction to Galaxy (Galaxy Training Materials)",
 year = "2021",
-month = "10",
-day = "30"
+month = "11",
+day = "03"
 url = "\url{https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
