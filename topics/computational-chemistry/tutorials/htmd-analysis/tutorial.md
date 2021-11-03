@@ -43,32 +43,33 @@ This tutorial provides an introduction to using high-throughput molecular dynami
 
 
 # Abbreviations
-* **Hsp90** –Heat Shock Protein 90 <br>
-* **MD**- Molecular Dynamics Simulation<br>
-* **PDB**- Protein Data Bank<br>
-* **GROMACS**- Groningen Machine for Chemical Simulation. It is a molecular dynamics package mainly designed for simulations of proteins, lipids and nucleic acids. <br>
-* **GRO files**- GROMAC Format<br>
-* **DCD** - Dynamics CoorDinate files<br>
-* **RSMD**-Root Mean Square Deviation<br>
-* **RSMF**- Root Mean Square Fluctuation<br>
-* **PCS**- Principal Components analysis<br>
-* **NTD**- N-Terminal Domain. <br>
-* **ATP**- Adenosine Triphosphate<br>
-* **TRR**- trajectory file (coordinates and velocity) <br>
-* **XTC**- trajectory file (coordinates only) <br>
-* **ACPYPE tool**- AnteChamber Python Parser interface<br>
-* **GROMOS**- GROningen Molecular Simulation<br>
-* **CHARMM**- Chemistry at Harvard Macromolecular Mechanics<br>
-* **AMBER**- Assisted Model building with Energy Refinement<br>
-* **OpenFF**-Open Force Field<br>
-* **TIP3P**- A water model that specifies rigid water molecules with charges and Lennard-Jones Paramenters assigned to each of the 3 atoms<br>
-* **ITP files**- Atom Topologies (charges, mass, radii etc) <br>
-* **GAFF**- (General AMBER  Force Field) <br>
-* **NVT**- constant number (N), Volume (V) Temperature (T) <br>
-* **NPT**- constant number (N) , Pressure (P), Temperature (T) <br>
-* **NMR**- Nuclear Magnetic Resonance<br>
-* **VMD**- Visual Molecular Dynamics <br>
-* **FASTA**- FastAll- A sequence alignment tool used to search for similarities between DNA and Proteins.
+* **Hsp90** - Heat Shock Protein 90. 
+* **MD** - Molecular Dynamics Simulation.
+* **PDB** - Protein Data Bank. This is an archive information about the 3-Dimensional structural data of large biomolecules such as proteins and nucleic acids.
+* **GROMACS** - Groningen Machine for Chemical Simulation. It is a molecular dynamics package mainly designed for simulations of proteins, lipids and nucleic acids. 
+* **NAMD** - Nanoscale Molecular Dynamics. It is a parallel molecular dynamics software designed for high-performance simulation of large biomolecular systems.
+* **GRO files** - They are file extensions that contain a molecular structure in GROMOS87 format.
+* **DCD files** - Dynamics CoorDinate. They are default trajectory file formats supported by CHARMM and NAMD.
+* **RMSD** - Root Mean Square Deviation
+* **RMSF** - Root Mean Square Fluctuation
+* **PCA** - Principal Components Analysis
+* **NTD** - N-Terminal Domain. It refers to the start of a protein or polypeptide where the free amine group is located.
+* **ATP** - Adenosine Triphosphate. This is the primary carrier of energy in cells.
+* **TRR** - It is a GROMACS trajectory file that is lossless. It stores coordinates, forces and velocity. 
+* **XTC** - It is a compressed GROMACS trajectory file. It stores coordinates. 
+* **ACPYPE tool** - AnteChamber Python Parser interface. It is a tool that simplifies the generation of small molecules topologies and parameters for a variety of molecular dynamics programs like GROMACS and CHARMM.
+* **GROMOS** - GROningen Molecular Simulation. This is the name of a force field for molecular dynamics simulation and a related computer software package.
+* **CHARMM** - Chemistry at Harvard Macromolecular Mechanics. It is a versatile molecular modeling and simulation program designed to provide broad application to the simulation of many-particle systems. It includes a comprehensive set of force fields to simulate biomolecules.
+* **AMBER** - Assisted Model building with Energy Refinement. It is a set of molecular mechanical force fields for the simulation of biomolecules.
+* **OpenFF** -Open Force Field. This is a python toolkit used for the development and application of mordern molecular mechanics force fields based on direct chemical perception and rigorous statistical parametization.
+* **TIP3P** - A water model that specifies rigid water molecules with charges and Lennard-Jones Parameters assigned to each of the 3 atoms.
+* **ITP files** - They are GROMAC file extensions that stands for Include Topology (with the **top** extension). 
+* **GAFF** - General AMBER  Force Field. It is a force field developed to augment the deficiencies of AMBER. In other words unlike AMBER which works for limited pharmaceutical molecules, GAFF works for most pharmaceutical molecules. 
+* **NVT** - constant number (N), Volume (V) Temperature (T). 
+* **NPT** - constant number (N) , Pressure (P), Temperature (T). 
+* **NMR** - Nuclear Magnetic Resonance. It is an instrument that allows analysis of the molecular structure of a material in a magnetic field.
+* **VMD** - Visual Molecular Dynamics. It is a molecular visualisation program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting. 
+* **FASTA** - FastAll. A sequence alignment tool used to search for similarities between DNA and Proteins.
 
 
 # Background
