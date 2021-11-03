@@ -82,7 +82,7 @@ The Galaxy interface consists of three main parts:
 2. Your analysis history is recorded on the right
 3. The central panel will let you run analyses and view outputs
 
-![Galaxy ecosystem]({% link shared/images/galaxy_interface.png %})
+![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center]({% link shared/images/galaxy_interface.png %})
 
 
 # Create a history
@@ -376,7 +376,7 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon comment %} petal and sepal
 > The image below shows you what the terms sepal and petal mean.
-> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
+> ![Iris flower image showing Petal and Sepal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
 {: .comment}
 
 ## Generate summary and descriptive statistics with

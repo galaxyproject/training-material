@@ -41,6 +41,36 @@ This tutorial provides an introduction to using high-throughput molecular dynami
 >
 {: .agenda}
 
+
+# Abbreviations
+* **Hsp90** –Heat Shock Protein 90 <br>
+* **MD**- Molecular Dynamics Simulation<br>
+* **PDB**- Protein Data Bank<br>
+* **GROMACS**- Groningen Machine for Chemical Simulation. It is a molecular dynamics package mainly designed for simulations of proteins, lipids and nucleic acids. <br>
+* **GRO files**- GROMAC Format<br>
+* **DCD** - Dynamics CoorDinate files<br>
+* **RSMD**-Root Mean Square Deviation<br>
+* **RSMF**- Root Mean Square Fluctuation<br>
+* **PCS**- Principal Components analysis<br>
+* **NTD**- N-Terminal Domain. <br>
+* **ATP**- Adenosine Triphosphate<br>
+* **TRR**- trajectory file (coordinates and velocity) <br>
+* **XTC**- trajectory file (coordinates only) <br>
+* **ACPYPE tool**- AnteChamber Python Parser interface<br>
+* **GROMOS**- GROningen Molecular Simulation<br>
+* **CHARMM**- Chemistry at Harvard Macromolecular Mechanics<br>
+* **AMBER**- Assisted Model building with Energy Refinement<br>
+* **OpenFF**-Open Force Field<br>
+* **TIP3P**- A water model that specifies rigid water molecules with charges and Lennard-Jones Paramenters assigned to each of the 3 atoms<br>
+* **ITP files**- Atom Topologies (charges, mass, radii etc) <br>
+* **GAFF**- (General AMBER  Force Field) <br>
+* **NVT**- constant number (N), Volume (V) Temperature (T) <br>
+* **NPT**- constant number (N) , Pressure (P), Temperature (T) <br>
+* **NMR**- Nuclear Magnetic Resonance<br>
+* **VMD**- Visual Molecular Dynamics <br>
+* **FASTA**- FastAll- A sequence alignment tool used to search for similarities between DNA and Proteins.
+
+
 # Background
 
 ## What is high-throughput molecular dynamics?
