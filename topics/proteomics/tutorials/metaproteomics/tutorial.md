@@ -69,6 +69,12 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    ```
+>    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_45.mgf
+>    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_46.mgf
+>    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_47.mgf
+>    https://zenodo.org/record/839701/files/FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.fasta 
+>    ```
 >
 >    As default, Galaxy takes the link as name.
 >
@@ -504,6 +510,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 > In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
 > one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
+> You could also upload the Gene Ontology Terms by copying this link on to the Upload Data - Paste/Fetch data `https://zenodo.org/record/839701/files/Gene_Ontology_Terms_full_07.08.2017.tabular`
 >
 {: .details}
 

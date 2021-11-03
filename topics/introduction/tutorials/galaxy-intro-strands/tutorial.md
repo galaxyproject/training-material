@@ -106,7 +106,7 @@ It turns out that for this particular question (and for many others), most **Gal
 
 The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, tool forms, and dataset content.
 
-![Galaxy interface](../../images/galaxy_interface.png)
+![Galaxy interface showing history panel on the right, tools panel on the left and main panel at the center](../../images/galaxy_interface.png)
 
 > ### {% icon hands_on %} Hands-on: Start with an empty history
 >
@@ -215,7 +215,7 @@ Watch your new history item.  It will go through three statuses before it's done
 | **Grey** | Clock | Item is waiting to start (waiting for data transfer to start) | ![Status: Queued](../../images/status_queued.png) |
 | **Yellow** | Spinner | Item is running (data is actively being transferred). | ![Status: Running](../../images/status_running.png) |
 | **Green** | None | Item has finished successfully (data transfer complete). | ![Status: Successfully finished](../../images/status_finished_success.png) |
-| **Red**  | Cross | The job has failed. There can be [many reasons](https://galaxyproject.org/support/tool-error/). | ![Status: Successfully finished](../../images/status_failed.png) |
+| **Red**  | Cross | The job has failed. There can be [many reasons](https://galaxyproject.org/support/tool-error/). | ![Status: Failed](../../images/status_failed.png) |
 | ---- | ---- | ---- |
 
 You can find more information in the [Undestanding Galaxy history system](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) training.
