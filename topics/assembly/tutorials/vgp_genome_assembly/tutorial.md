@@ -159,9 +159,11 @@ According the quality report, less that 0.1% of the reads include adaptor sequen
 >            - In *"5' or 3' (Anywhere) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
+>                        - *"Enter custom 5' or 3' adapter name"*: `First adapter`
 >                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT`
 >                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
+>                        - *"Enter custom 5' or 3' adapter name"*: `Second adapter`
 >                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
 >    - In *"Adapter Options"*:
 >        - *"Match times"*: `3`
@@ -257,7 +259,7 @@ The next step is to computationally infer the genome properties from the k-mer c
 >    - {% icon param-file %} *"Input histogram file"*: `Meryldb histogram`
 >    - *"K-mer length used to calculate k-mer spectra"*: `21`
 >
->   - In "*Output options*": mark `Generate a file with the model parameters` and `Summary of the analysis`
+>   - In "*Output options*": mark `Summary of the analysis`
 >   - In "*Advanced options*":
 >       - *"Create testing.tsv file with model parameters"*: `true`
 >
@@ -303,15 +305,15 @@ Before jumping to the next section, we need to carry out some operation on the o
 >    - *"Regular Expression"*: `Haploid`
 >
 > 4. {% tool [Convert delimiters to TAB](Convert characters1) %} with the following parameters:
->    - {% icon param-file %} *"in Dataset"*: output of **Search in textfiles** {% icon tool %})
+>    - {% icon param-file %} *"in Dataset"*: output of **Search in textfiles** {% icon tool %}
 >
 > 5. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: output of **Search in textfiles** {% icon tool %})
+>    - {% icon param-file %} *"File to cut"*: output of **Convert delimiters to TAB** {% icon tool %}
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `Column: 5`
 >
 > 6. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %})
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
 >    - *"Select type of parameter to parse"*: `Integer`
 >
 > 7. Rename the output as `Estimated genome size`.
@@ -334,19 +336,19 @@ Now let's parse the `upper bound for the read depth estimation` parameter.
        
 > ### {% icon hands_on %} Hands-on: Get maximum read depth
 >
-> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
+> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
 >    - *"Add expression"*: `1.5*c3`
 >    - {% icon param-file %} *"as a new column to"*: `model_params` (output of **GenomeScope** {% icon tool %})
 >    - *"Round result?"*: `Yes`
 >    - *"Input has a header line with column names?"*: `No`
 >
-> 2. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
+> 2. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
 >    - *"Add expression"*: `3*c7`
 >    - {% icon param-file %} *"as a new column to"*: output of **Compute** {% icon tool %})
 >    - *"Round result?"*: `Yes`
 >    - *"Input has a header line with column names?"*: `No`
 >
-> 3. Rename it as `Parsing temporal output`.
+> 3. Rename it as `Parsing temporal output`
 >
 > 4. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `Parsing temporal output` (output of **Compute** {% icon tool %})
@@ -354,7 +356,7 @@ Now let's parse the `upper bound for the read depth estimation` parameter.
 >        - *"List of Fields"*: `Column 8`
 >
 > 5. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
 >    - *"Select type of parameter to parse"*: `Integer`
 >
 > 6. Rename it as `Maximum depth`
@@ -382,7 +384,7 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 >        - *"List of Fields"*: `Column 7`
 >
 > 2. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (output of **Advanced Cut** {% icon tool %})
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
 >    - *"Select type of parameter to parse"*: `Integer`
 >
 > 3. Rename it as `Transition parameter`
@@ -427,7 +429,7 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >    - *"Assembly mode"*: `Standard`
 >        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
 >    - *"Options for purging duplicates"*: `Specify`
->       - *"Coverage upper bound"*: `value obtained previously`
+>       - *"Coverage upper bound"*: `63` (maximum depth previously obtained)
 >    - *"Options for Hi-C partition"*: `Specify`
 >       - *"Hi-C R1 reads"*: `SRR7126301_1`
 >       - *"Hi-C R2 reads"*: `SRR7126301_2`
@@ -446,11 +448,42 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 > ### {% icon hands_on %} Hands-on: convert GFA to FASTA
 >
 > 1. {% tool [GFA to FASTA](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
->    - {% icon param-files %} *"Input GFA file"*: select `Primary contig graph` and the `Alternate contig graph` datasets (output of **Hifiasm** {% icon tool %})
+>    - {% icon param-files %} *"Input GFA file"*: select `Primary contig graph` and the `Alternate contig graph` datasets
 >
-> 2. Rename the outputs as `Primary contig FASTA` and `Alternate contig FASTA`.
+> 2. Rename the outputs as `Primary contig FASTA` and `Alternate contig FASTA`
 >
 {: .hands_on}
+
+## Initial assembly evaluation with **Quast**
+
+Once generated the draft assembly, it is a good idea to evaluate its quality. 
+
+    
+> ### {% icon hands_on %} Hands-on: assembly evaluation with Quast
+>
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>    - *"Type of assembly"*: `Genome`
+>        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060`
+>        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
+>    - In *"Genes"*:
+>        - *"Tool for gene prediction"*: `Don't predict genes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+    
+
 
 # Post-assembly processing
 
@@ -546,28 +579,6 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 -->
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->        - {% icon param-file %} *"Contigs/scaffolds file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 31, 'output_name': 'integer_param'}`
->        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 
 
