@@ -612,6 +612,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -665,7 +667,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 13, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 4, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -901,7 +903,7 @@
 
 <p>At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant <strong>n</strong>umber of particles, <strong>v</strong>olume and <strong>t</strong>emperature, while the NPT ensemble maintains constant <strong>n</strong>umber of particles, <strong>p</strong>ressure and <strong>t</strong>emperature. (The NVT ensemble is also known as the isothermal-isochoric ensemble, while the NPT ensemble is also known as the isothermal-isobaric ensemble).</p>
 
-<p>For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.</p>
+<p>During the first equilibration step (NVT), the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished. During the second NPT step, we remove the restraints.</p>
 
 <h2 id="nvt-equilibration">NVT equilibration</h2>
 <p>Firstly, we perform equilibration using classical NVT dynamics.</p>
@@ -951,8 +953,8 @@
     <li><em>“Use a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Continue simulation from a CPT file.</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (CPT) file”</em>: Checkpoint file produced by NVT equilibration</li>
     <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Produce CPT output</code></li>
-    <li><em>“Apply position restraints”</em>: <code class="language-plaintext highlighter-rouge">Apply position restraints</code></li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by ‘Setup’ tool.</li>
+    <li><em>“Apply position restraints”</em>: <code class="language-plaintext highlighter-rouge">No position restraints</code></li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: None</li>
     <li><em>“Ensemble”</em>: <code class="language-plaintext highlighter-rouge">Isothermal-isobaric ensemble (NPT).</code></li>
     <li><em>“Trajectory output”</em>: <code class="language-plaintext highlighter-rouge">Return no trajectory output</code></li>
     <li><em>“Structure output”</em>: <code class="language-plaintext highlighter-rouge">Return .gro file</code></li>
@@ -1121,8 +1123,8 @@
 author = "Simon Bray",
 title = "Running molecular dynamics simulations using GROMACS (Galaxy Training Materials)",
 year = "2021",
-month = "10",
-day = "13"
+month = "11",
+day = "04"
 url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
