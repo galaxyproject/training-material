@@ -32,6 +32,7 @@ subtopic: sciwms
 contributors:
   - hexylena
   - bazante1
+  - dirowa
 abbreviations:
   SciWMS: Scientific Workflow Management System
   DAG: Directed Acyclic Graph
