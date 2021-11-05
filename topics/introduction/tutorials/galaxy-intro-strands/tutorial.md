@@ -341,7 +341,7 @@ It doesn't say anything about **Filter** being able to split a file into multipl
 >       This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
 >   3.  *"Header lines to skip"*:  `0 `
 >
->         Our dataset does not have any header lines.
+>       Our dataset does not have any header lines.
 >
 > * Finally, *click* the **Execute** button.
 >
