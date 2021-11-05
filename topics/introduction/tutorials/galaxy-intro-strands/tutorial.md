@@ -186,7 +186,7 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 
 > ### {% icon hands_on %} Hands-on: Limit the region and get the data.
 >
->1. Say that we just want chromosome 22
+> 1. Say that we just want chromosome 22
 >    - For **region** select `position`.
 >    - In the text box next to `position` enter `chr22` (case matters).
 >
