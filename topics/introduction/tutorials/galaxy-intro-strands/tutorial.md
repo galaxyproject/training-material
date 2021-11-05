@@ -415,7 +415,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 > ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
 > 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
->     -  *"Return"*:  `Overlapping Intervals`.
+>     - *"Return"*:  `Overlapping Intervals`.
 >       This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
 >     - {% icon param-files %}*"of"*:  `Genes, forward strand` (the first dataset)
 >     - {% icon param-files %} *"that intersect"* : `Genes, reverse strand` (the second dataset)
