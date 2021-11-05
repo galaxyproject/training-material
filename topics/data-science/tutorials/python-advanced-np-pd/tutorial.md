@@ -673,9 +673,6 @@ You can use `DataFrame.iloc[..., ...]` to select values by their (entry) positio
 ```python
 print(data.iloc[0, 0])
 ```
-```output
-1086.974295204891087
-```
 You can also use `DataFrame.loc[..., ...]` to select values by their (entry) label and basically specify location by row name analogously to 2D version of dictionary keys.
 
 ```python
