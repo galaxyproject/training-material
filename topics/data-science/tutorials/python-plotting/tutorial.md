@@ -4,7 +4,12 @@ layout: tutorial_hands_on
 title: Plotting in Python
 level: Introductory
 zenodo_link:  https://zenodo.org/record/3477564
-requirements:  []
+requirements:
+ -
+   type: internal
+   topic_name: data-science
+   tutorials:
+     - python-basics
 follow_up_training:  []
 
 questions:
@@ -267,7 +272,6 @@ This tutorial aims to serve as an introduction to plotting using the Python prog
 * Python has many libraries offering a variety of capabilities, which makes it popular for beginners, as well as, more experienced users
 
 * You can use scientific libraries like Matplotlib to perform exploratory data analysis.
-
 
 
 
