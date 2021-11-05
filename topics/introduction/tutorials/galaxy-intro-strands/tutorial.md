@@ -421,7 +421,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 >     - {% icon param-files %} *"that intersect"* : `Genes, reverse strand` (the second dataset)
 >     - *"for at least"*: `1`
 >       
->        This will return genes with even just one position overlapping.
+>       This will return genes with even just one position overlapping.
 >     - *Click* **Execute**.
 >
 >     ![Run Intersect](../../images/genes_human_intersect_strands.png)
