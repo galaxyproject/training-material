@@ -198,7 +198,7 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 >
 >    ![UCSC Table Browser 2nd page](../../images/ucsc_tb_2nd_page_whole_gene.png)
 >
->3. Under **Create one BED record per** make sure that **Whole Gene** is selected.
+> 3. Under **Create one BED record per** make sure that **Whole Gene** is selected.
 >
 > 4. *Click* the **Send query to Galaxy** button at the bottom of the form.
 {: .hands_on}
