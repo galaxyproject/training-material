@@ -22,11 +22,6 @@ contributors:
 requirements:
   -
     type: "internal"
-    topic_name: introduction
-    tutorials:
-      - galaxy-intro-short
-  -
-    type: "internal"
     topic_name: sequence-analysis
     tutorials:
       - quality-control
