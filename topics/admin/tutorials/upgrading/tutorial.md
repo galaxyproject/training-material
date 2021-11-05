@@ -212,8 +212,8 @@ Once you've made sure of these things, it's time to do it!
 >     galaxy_layout: root-dir
 >     galaxy_root: /srv/galaxy
 >     galaxy_user: {name: galaxy, shell: /bin/bash}
->    -galaxy_commit_id: release_20.09
->    +galaxy_commit_id: release_21.01
+>    -galaxy_commit_id: release_21.09
+>    +galaxy_commit_id: release_22.01
 >     galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12

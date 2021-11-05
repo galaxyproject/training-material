@@ -777,7 +777,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`                 | `root-dir`                                                       | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                                                    | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`                               | The user that Galaxy will run as.
->    `galaxy_commit_id`              | `release_20.09`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 20.09
+>    `galaxy_commit_id`              | `release_21.09`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 20.09
 >    `galaxy_force_checkout`         | `true`                                                           | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    `miniconda_version`             | `4.7.12`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
@@ -807,7 +807,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
->    +galaxy_commit_id: release_20.09
+>    +galaxy_commit_id: release_21.09
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    +miniconda_version: 4.7.12
@@ -2347,7 +2347,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_20.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_21.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 

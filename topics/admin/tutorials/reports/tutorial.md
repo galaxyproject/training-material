@@ -88,7 +88,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -51,6 +51,7 @@ galaxy_root: /srv/galaxy
 >     galaxy_user: {name: galaxy, shell: /bin/bash}
->     galaxy_commit_id: release_20.09
+>     galaxy_commit_id: release_21.09
 >     galaxy_force_checkout: true
 >    +galaxy_reports_path: "{{ galaxy_config_dir }}/reports.yml"
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
