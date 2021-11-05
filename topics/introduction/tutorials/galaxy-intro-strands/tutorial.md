@@ -360,7 +360,7 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 > 1. Open the dataset preview by *clicking* on the name of the `Genes, forward strand` dataset.  This shows an icon than the uploaded `Genes chr22` dataset did not: a looping arrow.
 > 1. *Click* the **looping arrow** ("Run this job again") icon.  This won't actually run the job again.  What it will do is bring up the Filter tool form with *the exact same settings that were used to produce this dataset.*
 > 1. Rerun {% tool [Filter](Filter1) %} but with
->     - *"Condition"*:  `c6 == "-" `
+>    - *"Condition"*:  `c6 == "-" `
 > 1. *Click* the **Execute** button.
 >
 > **Method 2**
