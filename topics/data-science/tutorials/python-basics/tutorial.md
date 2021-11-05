@@ -25,6 +25,9 @@ subtopic: python
 contributors:
   - mcmaniou
   - fpsom
+  
+notebook:
+  language: python
 ---
 
 # Introduction
