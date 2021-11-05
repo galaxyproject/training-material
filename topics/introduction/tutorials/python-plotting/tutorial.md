@@ -4,7 +4,12 @@ layout: tutorial_hands_on
 title: Plotting in Python
 level: Introductory
 zenodo_link:  https://zenodo.org/record/3477564
-requirements:  []
+requirements:
+ -
+   type: internal
+   topic_name: data-science
+   tutorials:
+     - python-basics
 follow_up_training:  []
 
 questions:
