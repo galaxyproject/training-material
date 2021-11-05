@@ -84,46 +84,44 @@ CMIP6 is the Coupled Model Intercomparison Project in its 6th phase. [CMIP6](htt
 * Calculate an ensemble mean of all used models
 * Calculate and plot the seasonal mean 
   
-## Get data
+## Starting Galaxy Climate JupyterLab
 
-> ### {% icon hands_on %} Hands-on: Data upload
+ ## {% icon hands_on %} Hands-on: Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> Currently JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu) only. JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem and not the default JupyterLab in Galaxy contains all the python packages and additional software we need for analyzing and visualizing Pangeo CMIP6 climate data. The default JupyterLab in Galaxy would not be sufficient for executing all the tasks in th
+is tutorial.
 >
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="netcdf" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
+> 1. Open the {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook){:target="_blank"}
+
+
+> 2. Create a new history for this tutorial and call it for instance pangeo CMIP6.
+
+{% snippet faqs/galaxy/histories_create_new.md %}
+
 {: .hands_on}
 
-# Plot the snowfall for January between 1985 - 2014 from NorESM2-MM
-For this task, the CMIP6 experiment_id = 'historical'
-> ### {% icon hands_on %} Hands-on: Open CMIP6 online catalog with Pangeo CMIP6
->
->   
->    > ### {% icon solution %} Solution
->    > ```
->    > cat_url = "https://storage.googleapis.com/cmip6/pangeo-cmip6.json"
->    > col = intake.open_esm_datastore(cat_url)
->    > col
->    > ```
-> ### {% icon hands_on %} Hands-on: Search CMIP6 high resolution models (~100 km) 
+# Exploring the Pangeo CMIP6 catalog
+
+To explore Pangeo CMIP6 climate data, we are using intake-esm, a data cataloging utility built on top of intake, pandas, and xarray.
+
+We start by opening an ESM (Earth System Model) collection definition file e.g. a JSON file that conforms to the ESM Collection Specification. When provided a link/path to an esm collection file, intake-esm establishes a link to a database (CSV file) that contains data assets locations and associated metadata (i.e., which experiment, model, the come from). The collection JSON file can be stored on a local filesystem or can be hosted on a remote server:
+~~~
+import intake
+
+col_url = "https://storage.googleapis.com/cmip6/pangeo-cmip6.json"
+
+col = intake.open_esm_datastore(col_url)
+~~~
+We can then search and discovery by execurting queries against the catalog:
+~~~
+col_subset = col.search(
+           experiment_id=["historical", "ssp585"],
+           table_id="Oyr",
+           variable_id="o2",
+           grid_label="gn",
+         )
+~~~~
+> ### {% icon hands_on %} Hands-on: Provide metadata information such as units, long name and give the list of available models.
 > The variable we later want to plot is snowfall. 
 > | shortname     |             Long name                   |      Units    |  levels |
 > | ------------- |:---------------------------------------:| -------------:|--------:|
@@ -139,6 +137,20 @@ For this task, the CMIP6 experiment_id = 'historical'
 >    > variable_id = ['prsn]
 >    > cat = col.search(source_id=list_models, experiment_id=['historical'], variable_id=variable_id[0], member_id=['r1i1p1f1'])
 >    > cat.df
+>    > ```
+
+
+
+# Plot the snowfall for January between 1985 - 2014 from NorESM2-MM
+For this task, the CMIP6 experiment_id = 'historical'
+> ### {% icon hands_on %} Hands-on: Open CMIP6 online catalog with Pangeo CMIP6
+>
+>   
+>    > ### {% icon solution %} Solution
+>    > ```
+>    > cat_url = "https://storage.googleapis.com/cmip6/pangeo-cmip6.json"
+>    > col = intake.open_esm_datastore(cat_url)
+>    > col
 >    > ```
 > ### {% icon hands_on %} Hands-on: Create dictonary from the list of datasets we found
 >    > ### {% icon solution %} Solution
@@ -186,69 +198,7 @@ For this task, the CMIP6 experiment_id = 'historical'
 >    > ```
 
 
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **My Tool**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **My Tool** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: File
->    - *"Parameter"*: `a value`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+We have learnt to analyze CMIP6 data with Galaxy Climate JupyterLab.
