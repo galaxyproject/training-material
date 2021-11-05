@@ -5,7 +5,13 @@ title: Introduction to Python
 level: Introductory
 zenodo_link:  []
 requirements:  []
-follow_up_training:  []
+follow_up_training:
+ -
+   type: internal
+   topic_name: data-science
+   tutorials:
+     - python-plotting
+     - python-advanced-np-pd
 
 questions:
 - How can I run Python programs using Galaxy?
