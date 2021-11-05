@@ -101,6 +101,7 @@ BASE = os.path.basename(args.prefix)
 BASE_PARTS = BASE.split('-')
 
 cmdhandle = open(f"{GITGAT}/.scripts/{BASE}-run.sh", 'w')
+scripthandle = open(f"{GITGAT}/.scripts/{BASE}-script.txt", 'w')
 cmdhandle.write("#!/bin/bash\n")
 cmdhandle.write("set -ex\n\n")
 cmdhandle.write("# Install dependencies before changing commits\n")
@@ -150,10 +151,13 @@ for idx, diff in enumerate(diffs):
         with open(fn, "w") as handle:
             print(fn)
             handle.write("\n".join(prefix + diff + postfix))
+
+        scripthandle.write(f'git checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
     elif 'data-cmd' in diff[-1]:
         cmdhandle.write("\n# CMD\n")
         if lastCommit is not None:
             cmdhandle.write(f'## Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
+            scripthandle.write(f'git checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
         for line in diff[0:-2]:
             cmdhandle.write("## Run command\n")
             if 'ansible-playbook' in line:
@@ -162,11 +166,13 @@ for idx, diff in enumerate(diffs):
                 cmdhandle.write("else\n")
                 cmdhandle.write(line.strip() + " -i ~/.hosts --vault-password-file ~/.vault-password.txt -e \"nginx_ssl_role=${SSL_ROLE} openssl_domains={{ certbot_domains }} galaxy_commit_id=${GALAXY_VERSION}\"\n")
                 cmdhandle.write("fi\n")
+                scripthandle.write(line.strip() + '\n')
             else:
                 line = line.strip()
                 line = line.replace('https://your-galaxy', 'https://$(hostname -f)')
                 line = line.replace('<api-key>', 'adminkey')
                 cmdhandle.write(line + "\n")
+                scripthandle.write(line + "\n")
     elif 'data-test' in diff[-1]:
         cmdhandle.write("\n# TEST\n")
         if lastCommit is not None:

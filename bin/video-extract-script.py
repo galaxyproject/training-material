@@ -95,13 +95,16 @@ def emit(d, i=0):
         for idx, x in enumerate(d['children']):
             # print(idx, x)
             if x['element'] == 'fenced_code':
-                # print(x)
+                print(x)
                 if idx + 1 < len(d['children']):
-                    nk = d['children'][idx + 1]['children'][0]['children']
-                    if 'data-commit' in nk:
-                        yield fixcommit(x, nk)
-                    elif 'data-cmd' in nk:
-                        yield fixcmd(x, nk)
+                    try:
+                        nk = d['children'][idx + 1]['children'][0]['children']
+                        if 'data-commit' in nk:
+                            yield fixcommit(x, nk)
+                        elif 'data-cmd' in nk:
+                            yield fixcmd(x, nk)
+                    except KeyError:
+                        pass
 
     if 'children' in d and isinstance(d['children'], list):
         for child in d['children']:
