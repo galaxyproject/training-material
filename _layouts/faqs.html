@@ -4,10 +4,12 @@ layout: base
 
 {% assign topic = site.data[page.topic_name] %}
 {% assign locale = site.data.lang[page.lang] %}
+{% assign contributors = site.data['contributors'] %}
 
 <section class="tutorial faqs">
     <h1 data-toc-skip>{{ locale['faqs'] | default: "Frequently Asked Questions"}}</h1>
-
+<div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true newcontributors=true %}
+    </div>
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->

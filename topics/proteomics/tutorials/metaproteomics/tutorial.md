@@ -73,7 +73,8 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_45.mgf
 >    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_46.mgf
 >    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_47.mgf
->    https://zenodo.org/record/839701/files/FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.fasta 
+>    https://zenodo.org/record/839701/files/FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.fasta
+>    https://zenodo.org/record/839701/files/Gene_Ontology_Terms.tabular
 >    ```
 >
 >    As default, Galaxy takes the link as name.
@@ -85,6 +86,26 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > 3. Build a **Dataset list** for the three MGF files
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+{: .hands_on}
+
+We have a choice to run all these steps using a single workflow, then discuss each step and the results in more detail.
+
+> ### {% icon hands_on %} Hands-on: Pretreatments
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: SixGill generated protein fasta file"*: `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.fasta`
+>    - {% icon param-file %} *"2: Dataset collection of Bering Strait MGF files"*: `Dataset collection of bering MGF`
+>    - {% icon param-file %} *"3: GeneOntology terms (selected)"*: `Gene_Ontology_terms.tabular`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
