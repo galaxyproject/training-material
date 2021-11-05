@@ -157,7 +157,6 @@ for idx, diff in enumerate(diffs):
         cmdhandle.write("\n# CMD\n")
         if lastCommit is not None:
             cmdhandle.write(f'## Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
-            scripthandle.write(f'git checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
         for line in diff[0:-2]:
             cmdhandle.write("## Run command\n")
             if 'ansible-playbook' in line:
