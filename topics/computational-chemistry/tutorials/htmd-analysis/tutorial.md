@@ -41,6 +41,7 @@ This tutorial provides an introduction to using high-throughput molecular dynami
 >
 {: .agenda}
 
+
 # Background
 
 ## What is high-throughput molecular dynamics?
@@ -662,3 +663,39 @@ If you now return to the web-browser, you should see a new history should have b
 This tutorial provides a guide on how to study protein-ligand interaction using molecular dynamics in Galaxy. Performing such analyses in Galaxy makes it straightforward to set up, schedule and run workflows, removing much of the difficulty from MD simulation. Thus, the technical barrier to performing high-throughput studies is greatly reduced. Results are structured in the form of Galaxy histories or collections, and include ready-plotted diagrams, which ensure data can be easily understood and reproduced if necessary. Apart from streamlining the process for existing MD users, this tutorial should also prove useful as a pedagogical guide for educating students or newcomers to the field.
 
 After completing the tutorial, the user will be familiar at a basic level with a range of MD analysis techniques, and understand the steps required for a typical MD simulation. Thus, they will be equipped to apply these tools to their own problems.
+
+
+# Glossary and abbreviations
+
+* Concepts:
+  * **MD** - molecular dynamics simulation.
+  * **NVT** - isothermal-isochoric ensemble, in which number of atoms (N), volume (V) and temperature (T) are kept constant. 
+  * **NPT** - isothermal-isobaric ensemble, in which number of atoms (N), pressure (P) and temperature (T) are kept constant. 
+  * **RMSD** - Root Mean Square Deviation
+  * **RMSF** - Root Mean Square Fluctuation
+  * **PCA** - Principal Component Analysis
+* Software:
+  * **GROMACS** (Groningen Machine for Chemical Simulation) - a molecular dynamics package mainly designed for simulations of proteins, lipids and nucleic acids. 
+  * **NAMD** (Nanoscale Molecular Dynamics) - a molecular dynamics software designed for high-performance simulation of large biomolecular systems.
+  * **CHARMM** (Chemistry at Harvard Macromolecular Mechanics) - a molecular modeling and simulation program for many-particle systems. It includes a comprehensive set of force fields to simulate biomolecules.
+  * **VMD** (Visual Molecular Dynamics) - a molecular visualisation program. 
+  * **ACPYPE** (AnteChamber Python Parser interface) - a tool that simplifies the generation of small molecule topologies and parameters for a variety of molecular dynamics programs, like GROMACS and CHARMM. It is based on the Antechamber software provided by AmberTools.
+* Filetypes:
+  * **PDB** - a commonly used filetype for storing 3-dimensional structural data of large biomolecules such as proteins and nucleic acids. Also stands for the Protein Data Bank, an online repository for such data.
+  * **GRO** - a filetype similar to PDB, which contains a molecular structure in a format supported by GROMACS.
+  * **DCD** - a trajectory file format supported by CHARMM and NAMD.
+  * **TOP** - a GROMACS filetype for representing molecular topologies.
+  * **ITP** - another GROMACS filetype for representing molecular topologies.
+  * **TRR** - a lossless GROMACS trajectory file, storing coordinates, forces and velocity. 
+  * **XTC** - a compressed GROMACS trajectory file, storing coordinates. 
+* Force fields and water molecules:
+  * **GROMOS** (GROningen Molecular Simulation) - the name of a force field for molecular dynamics simulation.
+  * **AMBER** (Assisted Model building with Energy Refinement) - a set of molecular mechanical force fields for the simulation of biomolecules.
+  * **OpenFF** (Open Force Field) - a Python toolkit used for the development and application of modern molecular mechanics force fields.
+  * **GAFF** (General AMBER Force Field) - a force field developed to augment the other AMBER force fields, allowing augmentation of most pharmaceutical molecules. 
+  * **TIP3P** - a water model that specifies rigid water molecules with charges and Lennard-Jones parameters assigned to each of the 3 atoms.
+* Biological concepts:
+  * **Hsp90** - Heat shock protein 90, a chaperone protein.
+  * **ATP** - Adenosine triphosphate, the primary carrier of energy in cells.
+  * **NTD** - N-Terminal Domain, the start of a protein or polypeptide chain where the free amine group is located.
+  * **NMR** (Nuclear Magnetic Resonance) - an experimental technique for determining 3D molecular structure.
