@@ -31,7 +31,7 @@ module Jekyll
           end
         }
 
-        site.posts.each {|t|
+        site.posts.docs.each {|t|
           # News
           if t['layout'] == 'news' && ! t.data['contributors'].nil?
             t.data['contributors'].each{|c| news_by_author[c].push(t) }

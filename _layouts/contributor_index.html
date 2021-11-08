@@ -137,7 +137,8 @@ layout: base
 
                 <h2>News items</h2>
                 <div class="newslist">
-                {% for n in page.news %}
+                {% assign news_sorted = page.news | sort: 'date' | reverse %}
+                {% for n in news_sorted %}
                    {% include _includes/news-card.html news=n %}
                 {% endfor %}
                 </div>
