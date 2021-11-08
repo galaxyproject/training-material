@@ -10,6 +10,7 @@ module Jekyll
         # build time of 5 seconds.
         tutorials_by_author = Hash.new { |hash, key| hash[key] = [] }
         slides_by_author = Hash.new { |hash, key| hash[key] = [] }
+        news_by_author = Hash.new { |hash, key| hash[key] = [] }
         has_philosophy = Hash.new { false }
 
         site.pages.each {|t|
@@ -21,6 +22,12 @@ module Jekyll
           # Slides
           if ! ['base_slides', 'introduction_slides', 'tutorial_slides'].index(t['layout']).nil? && ! t.data['contributors'].nil?
             t.data['contributors'].each{|c| slides_by_author[c].push(t) }
+          end
+
+        # News
+          if t['layout'] == 'news' && ! t.data['contributors'].nil?
+            puts t.data
+            t.data['contributors'].each{|c| news_by_author[c].push(t) }
           end
 
           # Philosophies
@@ -44,6 +51,7 @@ module Jekyll
           page2.data["layout"] = "contributor_index"
           page2.data["tutorials"] = tutorials_by_author[contributor]
           page2.data["slides"] = slides_by_author[contributor]
+          page2.data["news"] = news_by_author[contributor]
           page2.data["has_philosophy"] = has_philosophy[contributor]
           site.pages << page2
         end
