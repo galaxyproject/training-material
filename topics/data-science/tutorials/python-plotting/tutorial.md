@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Plotting in Python
-level: Introductory
+level: Intermediate
 zenodo_link: https://zenodo.org/record/3477564
 requirements:
  -
