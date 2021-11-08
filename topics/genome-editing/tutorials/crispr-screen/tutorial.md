@@ -232,11 +232,11 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 > ### {% icon hands_on %} Hands-on: Test for enrichment
 > 1. Import the count file from the full dataset [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/mageck_counts_full.tsv
+>    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/kenji_mageck_counts.tsv
 >    ```
 >
 > 2. {% tool [MAGeCKs test](toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1) %} with the following parameters:
->    - {% icon param-file %} *"Counts file"*: the `mageck_counts_full.tsv` file
+>    - {% icon param-file %} *"Counts file"*: the `kenji_mageck_counts.tsv` file
 >    - *"Specify Treated samples or Control"*: `Treated samples`
 >        - *"Treated Sample Labels (or Indexes)"*: `0`
 >    - *"Control Sample Labels (or Indexes)"*: `1`
