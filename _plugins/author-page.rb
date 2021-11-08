@@ -24,16 +24,19 @@ module Jekyll
             t.data['contributors'].each{|c| slides_by_author[c].push(t) }
           end
 
-        # News
-          if t['layout'] == 'news' && ! t.data['contributors'].nil?
-            puts t.data
-            t.data['contributors'].each{|c| news_by_author[c].push(t) }
-          end
 
           # Philosophies
           if t['layout'] == 'training_philosophy' && ! t.data['username'].nil?
             has_philosophy[t.data['username']] = true
           end
+        }
+
+        site.posts.each {|t|
+          # News
+          if t['layout'] == 'news' && ! t.data['contributors'].nil?
+            t.data['contributors'].each{|c| news_by_author[c].push(t) }
+          end
+
         }
 
         site.data['contributors'].select{|c| c['halloffame'] != "no"}.each_key do |contributor|

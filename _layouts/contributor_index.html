@@ -136,8 +136,11 @@ layout: base
 				</ul>
 
                 <h2>News items</h2>
-                {{page}}
-                {% for n in page.news %} | {% endfor %}
+                <div class="newslist">
+                {% for n in page.news %}
+                   {% include _includes/news-card.html news=n %}
+                {% endfor %}
+                </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 				<script type="text/javascript">
