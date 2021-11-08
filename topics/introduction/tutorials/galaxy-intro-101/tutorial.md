@@ -84,7 +84,7 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **History** is recorded on the right
 
 
-> ![Galaxy interface](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
+> ![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
 {: .comment}
 
 When you start Galaxy for very first time, your history will be empty. Let's add some data to it.
@@ -108,7 +108,7 @@ First we need to get some data into our history. You can upload files from your 
 > ### {% icon hands_on %} Hands-on: Upload SNPs and Exons
 > 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload Data**
 >
->    ![upload button](../../images/upload-data.png)
+>    ![upload data button](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
@@ -255,7 +255,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 >  The interface of the tool should look like this:
 >
->    ![Contents of the `Join` output dataset](../../images/101_bed_intersect_interface.png)
+>    ![Bedtool intersect interval interface](../../images/101_bed_intersect_interface.png)
 >
 >    > ### {% icon tip %} How do I use this tool?
 >    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
@@ -309,13 +309,13 @@ Since each line in our file represents a single overlap between SNP and exon, we
 >    - *"Input tabular dataset"*: select the output dataset from **bedtools intersect intervals** {% icon tool %}
 >    - *"Group by fields"*: `Column: 4` (the column with the exon IDs)
 >
->    ![Contents of the `Group` output dataset](../../images/101_datamash_1.png)
+>    ![Datamash tool interface](../../images/101_datamash_1.png)
 >
 >    - Scroll tool interface down to *"Operation to perform on each group"*
 >      - *"Type"*: `Count Unique values`
 >      - *"On column"*: `Column: 10` (this column contains SNPs ids like `rs2236639`. This we will count occurrences of unique SNP ids for each exon)
 >
->    ![Contents of the `Group` output dataset](../../images/101_datamash_2.png)
+>    ![Operation to perform on each group](../../images/101_datamash_2.png)
 >
 > 2. Click **Execute**. Your new output dataset will look something like this:
 >
@@ -449,31 +449,35 @@ You can always return to your analysis view by clicking on Home icon {% icon gal
 
 ## Convert your analysis history into a workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
+When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
 
 Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
-> 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
+>    This will make the creation of the workflow easier.
 >
->    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+>
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of features`.
+> 3. Replace the **Workflow name** to something more descriptive, for example `Find exons with the highest number of features`.
 >
-> While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
+>    While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
 >
->    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
-> 4. Click on the **Create Workflow** button near the top.
+> 5. Click on the **Create Workflow** button near the top.
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 5. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
+> 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
 >
 >    ![`Your workflows` list](../../images/101_26.png)
 {: .hands_on}

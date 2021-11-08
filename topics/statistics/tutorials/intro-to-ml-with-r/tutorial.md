@@ -12,13 +12,9 @@ requirements:
         - rstudio
   -
     type: "internal"
-    topic_name: introduction
+    topic_name: data-science
     tutorials:
         - r-basics
-  -
-    type: "internal"
-    topic_name: introduction
-    tutorials:
         - r-advanced
 
 follow_up_training:

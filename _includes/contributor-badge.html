@@ -1,1 +1,5 @@
-{% assign name = site.data['contributors'][include.id].name | default: include.id %}<a href="{{ site.baseurl }}/hall-of-fame/{{ include.id }}/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/{{ include.id }}" alt="Avatar">{{ name }}</a>
+{% if include.id == "newcontributors" %}
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-{{ include.id }}">{% icon hall-of-fame %}{{locale['add-contributions'] | default: "Add Contributions!" }}</a>
+{% else %}
+{% assign name = site.data['contributors'][include.id].name | default: include.id %}<a href="{{ site.baseurl }}/hall-of-fame/{{ include.id }}/" class="contributor-badge contributor-{{ include.id }}"><img src="https://avatars.githubusercontent.com/{{ include.id }}?s=27" alt="Avatar">{{ name }}</a>
+{% endif %}

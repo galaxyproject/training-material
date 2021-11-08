@@ -43,7 +43,7 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 {% assign t = site.data[topic_id] %}
 
 	{% assign has_video = false %}
-	{% assign topic_material = site.pages | topic_filter:topic[0] %}
+	{% assign topic_material = site | topic_filter:topic[0] %}
 	{% for material in topic_material %}
 		{% if material.video %}
 			{% assign has_video = true %}
@@ -66,6 +66,19 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 					</div>
 				</a>
 			</div>
+			{% for lang in material.translations.slides %}
+			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction_{{ lang | upcase }}{% else %}tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endif %}{% endcapture %}
+			<div class="pl-item">
+				<a href="watch.html?v={{ vid }}">
+					<div class="cover">
+						<img src="https://training.galaxyproject.org/videos/topics/{{ vid }}.mp4.png" width="200px"/>
+					</div>
+					<div>
+						<div class="title">[{{ lang | upcase }}] {{ material.title }}</div>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
 		{% endif %}
 	{% endfor %}
 </div>

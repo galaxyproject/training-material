@@ -379,7 +379,6 @@ body.theme-rainbow {
 		tbody tr:nth-of-type(5n+4) td:not(:first-child) { color: blue; i{color: blue} }
 		tbody tr:nth-of-type(5n+5) td:not(:first-child) { color: purple; i{color: purple} }
 	}
-
 	.tutorials-list.topic-type-use table.table-striped {
 		tbody tr td:nth-of-type(6n+2) { color: red; i{color: red} }
 		tbody tr td:nth-of-type(6n+3) { color: orange; i{color: orange} }
@@ -433,6 +432,8 @@ body.theme-progress {
 
 		}
 	}
+
+    .contributor-hexylena {background: linear-gradient(to right, #cfe4f777 0%, #cfe4f777 20%, #f7d7dc77 20%, #f7d7dc77 40%, white 40%, white 60%, #f7d7dc77 60%, #f7d7dc77 80%, #cfe4f777 80%, #cfe4f777 100%);}
 
 	.tutorials-list:not(.topic-type-use) table.table-striped {
 		tbody tr:nth-of-type(5n+1) td:not(:first-child) { color: red; i{color: red} }
@@ -672,6 +673,7 @@ nav input.nicer {
 
         &.overview {
             @include tutorial-box($overview-color, $text-color);
+            margin-top: 5rem;
         }
 
         &.warning {
@@ -745,21 +747,14 @@ nav input.nicer {
     h3 {
         margin-top: 1rem;
     }
-    .contributors-line{
-        margin-bottom: 1rem;
-    }
 }
 
-.newsitem{
- .contributors-line{
-        margin-bottom: 1rem;
-    }
-}
 
 .newstable{
-  h5 {
+  div {
     margin-top: 0px;
     color: $text-color !important;
+    font-weight: bold;
   }
   a.newstitle{
     font-color: $text-color;
@@ -787,7 +782,7 @@ nav input.nicer {
 
     .hall-of-fame-hero {
         margin: 0;
-        width: 20%;
+        width: 18%;
 
         .name {
             font-size: 0.7em;
@@ -809,12 +804,6 @@ nav input.nicer {
 		max-width: 100%;
 		width: 100%;
 	}
-}
-
-.contributors-line {
-    color: $gray;
-    font-size: 1.2em;
-    margin-bottom: 5rem;
 }
 
 .hall-of-fame {
@@ -1064,14 +1053,43 @@ nav[data-toggle='toc'] {
     }
 }
 
+.contributors-line {
+    color: $gray;
+    font-size: 1.2em;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-content: baseline;
+    line-height: 1.5em;
+
+    .contributor-badge {
+        img {
+            height: 1.5em;
+        }
+        i {
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+        }
+    }
+
+}
+
 .contributor-badge {
     /* prevent breaking across lines */
     white-space: nowrap;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 1em;
+    border: 1px solid #b7daff;
+    padding-right: 0.5em;
+    margin: 0.2em;
+    line-height: 1em;
 
     img {
-        height: 1.25em;
+        height: 1em;
         border-radius: 50%;
-        margin: 0.25em;
+        margin: 0 0.25em 0 0;
     }
 }
 
@@ -1247,6 +1265,6 @@ abbr {
                 margin-top: 0px;
             }
         }
-    }    
+    }
 }
 

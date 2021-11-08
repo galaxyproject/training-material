@@ -7,6 +7,7 @@ mapping:
         enum:
             - base_slides
             - tutorial_slides
+            - rdmbites_slides
     title:
         type: str
         required: true
@@ -76,6 +77,31 @@ mapping:
             - Introductory
             - Intermediate
             - Advanced
+    translations:
+        type: seq
+        required: false
+        sequence:
+            - type: str
+              required: true
+    lang:
+        type: str
+        required: false
+        enum:  # These are the only supported values currently
+            - es
+            - en
+    voice:
+        type: map
+        required: false
+        mapping:
+            id:
+                type: str
+                required: true
+            lang:
+                type: str
+                required: true
+            neural:
+                type: bool
+                required: true
     time_estimation:
         type: str
         required: false
@@ -141,3 +167,6 @@ mapping:
                   link:
                       type: str
                       required: false
+    enable:
+        type: bool
+        required: false

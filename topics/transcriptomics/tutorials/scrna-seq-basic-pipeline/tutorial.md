@@ -30,9 +30,11 @@ tags:
 - 10x
 - paper-replication
 - interactive-tools
+- español
 contributors:
 - nomadscientist
-
+translations:
+  - es
 ---
 
 

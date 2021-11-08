@@ -69,6 +69,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
+> 3. Rename the imported dataset to `Reads`.
 {: .hands_on}
 
 We just imported a file into Galaxy. This file is similar to the data we could get directly from a sequencing facility: a [FASTQ file](https://en.wikipedia.org/wiki/FASTQ_format).
@@ -146,7 +147,7 @@ To take a look at sequence quality along all sequences, we can use [FASTQE](http
 > ### {% icon hands_on %} Hands-on: Quality check
 >
 > 1. {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %} with the following parameters
->    - {% icon param-files %} *"FastQ data"*: `female_oral2.fastq-4143.gz`
+>    - {% icon param-files %} *"FastQ data"*: `Reads`
 >    - {% icon param-select %} *"Score types to show"*: `Mean`
 >
 > 2. Inspect the generated HTML file
@@ -199,8 +200,8 @@ An additional or alternative way we can check sequence quality is with [FastQC](
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
-> 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters
->    - {% icon param-files %} *"Short read data from your current history"*: `Cutadapt Read 1 Output`
+> 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters
+>    - {% icon param-files %} *"Raw read data from your current history"*: `Reads`
 >
 > 2. Inspect the generated HTML file
 >
@@ -408,7 +409,7 @@ This plot shows the distribution of fragment sizes in the file which was analyse
 
 ![Sequence length distribution](../../images/quality-control/sequence_length_distribution-before.png "Sequence length distribution")
 
-Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.
+Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $$n$$ bases if they match the first $$n$$ bases of the adapter up to 90% (by default), with sometimes $$n = 1$$.
 
 ## Sequence Duplication Levels
 
@@ -566,9 +567,9 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 
 > ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1) %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `female_oral2.fastq-4143.gz` (Input dataset)
+>       - {% icon param-file %} *"Reads in FASTQ format"*: `Reads` (Input dataset)
 >
 >          > ### {% icon tip %} Tip: Files not selectable?
 >          > If your FASTQ file cannot be selected, you might check whether the format is FASTQ with Sanger-scaled quality values (`fastqsanger.gz`). You can edit the data type by clicking on the pencil symbol.
@@ -685,7 +686,7 @@ We can also, or instead, check the quality-controlled data with FastQC.
 
 > ### {% icon hands_on %} Hands-on: Checking quality after trimming
 >
-> 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters
+> 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters
 >    - {% icon param-files %} *"Short read data from your current history"*: `Cutadapt Read 1 Output`
 >
 > 2. Inspect the generated HTML file
@@ -777,7 +778,8 @@ The data we analyzed in the previous step was single-end data so we will import 
 >    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
 >    ```
 >
-> 2. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with both datasets
+> 2. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with both datasets:
+>    - {% icon param-files %} *"Raw read data from your current history"*: both the uploaded datasets.
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
@@ -788,7 +790,7 @@ The data we analyzed in the previous step was single-end data so we will import 
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
 >
-> 4. Inspect the webpage output from MultiQC
+> 4. Inspect the webpage output from MultiQC.
 >
 {: .hands_on}
 
@@ -817,7 +819,7 @@ With paired-end reads the average quality scores for forward reads will almost a
 After trimming, reverse reads will be shorter because of their quality and then will be eliminated during the filtering step. If one of the reverse reads is removed, its corresponding forward read should be removed too. Otherwise we will get different number of reads in both files and in different order, and order is important for the next steps. Therefore **it is important to treat the forward and reverse reads together for trimming and filtering**.
 
 > ### {% icon hands_on %} Hands-on: Improving the quality of paired-end data
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1) %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
 >       - {% icon param-file %} *"FASTQ/A file #1"*: `GSM461178_untreat_paired_subset_1.fastq` (Input dataset)
 >       - {% icon param-file %} *"FASTQ/A file #2"*: `GSM461178_untreat_paired_subset_2.fastq` (Input dataset)
