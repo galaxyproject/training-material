@@ -28,6 +28,7 @@ contributors:
   - fpsom
   - carpentries
 
+priority: 1
 notebook:
   language: python
 ---
