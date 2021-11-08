@@ -1,0 +1,1347 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Advanced Python</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: Advanced Python" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/python-advanced-np-pd/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Advanced Python",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / python-advanced-np-pd / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Advanced Python' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "The questions this  addresses are:\n - How can I analyze data using Python with Numpy and Pandas?\n\n\\nThe objectives are:\n - Use the scientific libraries pandas and numpy to explore tabular datasets\n - Calculate basic statistics about datasets and columns\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/python-basics/tutorial.html",
+      "name": "Introduction to Python",
+      "description": "Hands-on for 'Introduction to Python' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Maria Christina Maniou"
+    },
+    {
+      "@type": "Person",
+      "name": "Fotis E. Psomopoulos"
+    },
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Maria Christina Maniou"
+    },
+    {
+      "@type": "Person",
+      "name": "Fotis E. Psomopoulos"
+    },
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Advanced Python</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/mcmaniou/" class="contributor-badge contributor-mcmaniou"><img src="https://avatars.githubusercontent.com/mcmaniou?s=27" alt="Avatar">Maria Christina Maniou</a>
+
+
+<a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="https://avatars.githubusercontent.com/fpsom?s=27" alt="Avatar">Fotis E. Psomopoulos</a>
+
+
+<a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=27" alt="Avatar">The Carpentries</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I analyze data using Python with Numpy and Pandas?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Use the scientific libraries pandas and numpy to explore tabular datasets</p>
+</li>
+        
+        <li><p>Calculate basic statistics about datasets and columns</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Introduction to Python:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" href="https://zenodo.org/record/3477564">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.md.ipynb" title="Notebooks" alt="Advanced Python workflows">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+
+</li>
+            
+
+            
+            
+            
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 8, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+                <blockquote class="comment">
+                    <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                    <p>
+                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                    </p>
+                    <!--
+                    <p><b>Launching on MyBinder</b>
+                        Click here and the notebook will launch on MyBinder.org
+                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fpython-advanced-np-pd%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                    </p>
+                    -->
+                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                        <ol>
+                            <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                            <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.md.ipynb</code></li>
+                            <li>Select the notebook that appears in the list of files on the left.</li>
+                        </ol>
+                    </p>
+                    <p><b>Downloading the notebook</b>
+                        <ol>
+                            <li>Right click this link: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.md.ipynb">tutorial.ipynb</a></li>
+                            <li>Save Link As..</li>
+                        </ol>
+                    </p>
+                </blockquote>
+                
+
+                <p>In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using <span class="notranslate">Galaxy</span>. Otherwise, it is advised to follow the “Introduction to Python” tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the <a href="https://usegalaxy.eu/">use<span class="notranslate">galaxy</span>.eu</a> and <a href="https://usegalaxy.org/">use<span class="notranslate">galaxy</span>.org</a> sites.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+  <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a> and <a href="https://swcarpentry.github.io/python-novice-gapminder/">Plotting and Programming in Python</a>, which is licensed CC-BY 4.0.</p>
+
+  <p>Adaptations have been made to make this work better in a GTN/<span class="notranslate">Galaxy</span> environment.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#analyze-data-using-numpy" id="markdown-toc-analyze-data-using-numpy">Analyze data using numpy</a>    <ol>
+      <li><a href="#process-the-data" id="markdown-toc-process-the-data">Process the data</a></li>
+    </ol>
+  </li>
+  <li><a href="#use-pandas-to-work-with-dataframes" id="markdown-toc-use-pandas-to-work-with-dataframes">Use pandas to work with dataframes</a>    <ol>
+      <li><a href="#explore-the-data" id="markdown-toc-explore-the-data">Explore the data</a></li>
+      <li><a href="#select-data" id="markdown-toc-select-data">Select data</a></li>
+      <li><a href="#use-conditionals-to-select-data" id="markdown-toc-use-conditionals-to-select-data">Use conditionals to select data</a></li>
+      <li><a href="#group-by-and-analyze-the-data" id="markdown-toc-group-by-and-analyze-the-data">Group-by and analyze the data</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="analyze-data-using-numpy">Analyze data using numpy</h1>
+<p>NumPy is a python library and it stands for Numerical Python. In general, you should use this library when you want to perform operations and manipulate numerical data, especially if you have matrices or arrays. To tell Python that we’d like to start using NumPy, we need to import it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+<p>A Numpy array contains one or more elements of the same type. To examine the basic functions of the library, we will create an array of random data. These data will correspond to arthritis patients’ inflammation. The rows are the individual patients, and the columns are their daily inflammation measurements. We will use the <code class="language-plaintext highlighter-rouge">random.randint()</code> function. It has 4 arguments as inputs <code class="language-plaintext highlighter-rouge">randint(low, high=None, size=None, dtype=int)</code>. <code class="language-plaintext highlighter-rouge">low</code> nad <code class="language-plaintext highlighter-rouge">high</code> specify the limits of the random number generator. <code class="language-plaintext highlighter-rouge">size</code> determines the shape of the array and it can be an integer or a tuple.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>  <span class="c1">#create reproducible work
+</span><span class="n">random_data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">70</span><span class="p">))</span>
+</code></pre></div></div>
+<p>If we want to check the data have been loaded, we can print the variable’s value:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">random_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now that the data are in memory, we can manipulate them. First, let’s ask what type of thing data refers to:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">random_data</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>The output tells us that data currently refers to an N-dimensional array, the functionality for which is provided by the NumPy library. These data correspond to arthritis patients’ inflammation. The rows are the individual patients, and the columns are their daily inflammation measurements.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">type</code> function will only tell you that a variable is a NumPy array but won’t tell you the type of thing inside the array. We can find out the type of the data contained in the NumPy array.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">random_data</span><span class="p">.</span><span class="n">dtype</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This tells us that the NumPy array’s elements are integer numbers.</p>
+
+<p>With the following command, we can see the array’s shape:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">random_data</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The output tells us that the data array variable contains 50 rows and 70 columns. When we created the variable <code class="language-plaintext highlighter-rouge">random_data</code> to store our arthritis data, we did not only create the array; we also created information about the array, called members or attributes. This extra information describes <code class="language-plaintext highlighter-rouge">random_data</code> in the same way an adjective describes a noun. <code class="language-plaintext highlighter-rouge">random_data.shape</code> is an attribute of <code class="language-plaintext highlighter-rouge">random_data</code> which describes the dimensions of <code class="language-plaintext highlighter-rouge">random_data</code>.</p>
+
+<p>If we want to get a single number from the array, we must provide an index in square brackets after the variable name, just as we do in math when referring to an element of a matrix. Our data has two dimensions, so we will need to use two indices to refer to one specific value:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'first value in data:'</span><span class="p">,</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'middle value in data:'</span><span class="p">,</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>The <span class="notranslate">expression</span> random_data[25, 35] accesses the element at row 25, column 35. While this <span class="notranslate">expression</span> may not surprise you, random_data[0, 0] might. Programming languages like Fortran, MATLAB and R start counting at 1 because that’s what human beings have done for thousands of years. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because it represents an offset from the first value in the array (the second value is offset by one index from the first value). As a result, if we have an M×N array in Python, its indices go from 0 to M-1 on the first axis and 0 to N-1 on the second.</p>
+
+<p>Slicing data
+An index like [25, 35] selects a single element of an array, but we can select whole sections as well, using slicing the same way as previously with the strings. For example, we can select the first ten days (columns) of values for the first four patients (rows) like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">random_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>We don’t have to include the upper and lower bound on the slice. If we don’t include the lower bound, Python uses 0 by default; if we don’t include the upper, the slice runs to the end of the axis, and if we don’t include either (i.e., if we use ‘:’ on its own), the slice includes everything:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">small</span> <span class="o">=</span> <span class="n">random_data</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">36</span><span class="p">:]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'small is:'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">small</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The above example selects rows 0 through 2 and columns 36 through to the end of the array.</p>
+
+<h2 id="process-the-data">Process the data</h2>
+<p>NumPy has several useful functions that take an array as input to perform operations on its values. If we want to find the average inflammation for all patients on all days, for example, we can ask NumPy to compute random_data’s mean value:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_data</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Let’s use three other NumPy functions to get some descriptive values about the dataset. We’ll also use multiple assignment, a convenient Python feature that will enable us to do this all in one line.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">maxval</span><span class="p">,</span> <span class="n">minval</span><span class="p">,</span> <span class="n">stdval</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">random_data</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">random_data</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">std</span><span class="p">(</span><span class="n">random_data</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'maximum inflammation:'</span><span class="p">,</span> <span class="n">maxval</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'minimum inflammation:'</span><span class="p">,</span> <span class="n">minval</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'standard deviation:'</span><span class="p">,</span> <span class="n">stdval</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>How did we know what functions NumPy has and how to use them? If you are working in IPython or in a Jupyter Notebook, there is an easy way to find out. If you type the name of something followed by a dot, then you can use tab completion (e.g. type <code class="language-plaintext highlighter-rouge">np.</code> and then press Tab) to see a list of all functions and attributes that you can use. After selecting one, you can also add a question mark (e.g. <code class="language-plaintext highlighter-rouge">np.cumprod?</code>), and IPython will return an explanation of the method! This is the same as doing <code class="language-plaintext highlighter-rouge">help(np.cumprod)</code>.</p>
+
+<p>When analyzing data, though, we often want to look at variations in statistical values, such as the maximum inflammation per patient or the average inflammation per day. One way to do this is to create a new temporary array of the data we want, then ask it to do the calculation:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patient_0</span> <span class="o">=</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># 0 on the first axis (rows), everything on the second (columns)
+</span><span class="k">print</span><span class="p">(</span><span class="s">'maximum inflammation for patient 0:'</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">patient_0</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>What if we need the maximum inflammation for each patient over all days (as in the next diagram on the left) or the average for each day (as in the diagram on the right)? As the diagram below shows, we want to perform the operation across an axis:</p>
+
+<p><img src="../../images/python-advanced-np-pd/Figure8_Operations_across_axis.png" alt="A cartoon shows a data structure on the left with Patient 0 to N as rows in a table, and then Day 0 to N as columns of the same table. Below is written &quot;numpy.max(data, axis=1)&quot; which does an aggregation and finds the max per patient (so maximum daily value for each patient.) On the right a similar table is shown but written below is numpy.max(data, axis=0) and now the maximum is calculated per day, which patient had the maximum value." loading="lazy" /></p>
+
+<p>To support this functionality, most array functions allow us to specify the axis we want to work on. If we ask for the average across axis 0 (rows in our 2D example), we get:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>As a quick check, we can ask this array what its shape is:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <span class="notranslate">expression</span> (70,) tells us we have an N×1 vector, so this is the average inflammation per day for all patients. If we average across axis 1 (columns in our 2D example), we get the average inflammation per patient across all days.:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="stacking-arrays">Stacking arrays</h3>
+<p>Arrays can be concatenated and stacked on top of one another, using NumPy’s <code class="language-plaintext highlighter-rouge">vstack</code> and <code class="language-plaintext highlighter-rouge">hstack</code> functions for vertical and horizontal stacking, respectively.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'A = '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'B = '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'C = '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="remove-nan-values">Remove NaN values</h3>
+
+<p>Sometimes there are missing values in an array, that could make it difficult to perform operations on it. To remove the <code class="language-plaintext highlighter-rouge">NaN</code> you must first find their indexes and then replace them. The following example replaces them with <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">NaN</span><span class="p">]])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-selecting-and-stacking-arrays"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Selecting and stacking arrays</h3>
+
+  <p>Write some additional code that slices the first and last columns of A, and stacks them into a 3x2 array. Make sure to print the results to verify your solution.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>A ‘gotcha’ with array indexing is that singleton dimensions are dropped by default. That means <code class="language-plaintext highlighter-rouge">A[:, 0]</code> is a one dimensional array, which won’t stack as desired. To preserve singleton dimensions, the index itself can be a slice or array. For example, <code class="language-plaintext highlighter-rouge">A[:, :1]</code> returns a two dimensional array with one singleton dimension (i.e. a column vector).</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D = np.hstack((A[:, :1], A[:, -1:]))
+print('D = ')
+print(D)
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-selecting-with-conditionals"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Selecting with conditionals</h3>
+
+  <p>Given the followind array <code class="language-plaintext highlighter-rouge">A</code>, keep only the elements that are lower that <code class="language-plaintext highlighter-rouge">0.05</code>.</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = np.array([0.81, 0.025, 0.15, 0.67, 0.01])
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = A[A&lt;0.05]
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="use-pandas-to-work-with-dataframes">Use pandas to work with dataframes</h1>
+
+<p>Pandas (<span class="citation"><a href="#reback2020pandas">pandas development team 2020</a></span>, <span class="citation"><a href="#mckinney-proc-scipy-2010">Wes McKinney 2010 </a></span>) is a widely-used Python library for statistics, particularly on tabular data. If you are familiar with R dataframes, then this is the library that integrates this functionality. A dataframe is a 2-dimensional table with indexes and column names. The indexes indicate the difference in rows, while the column names indicate the difference in columns. You will see later that these two features are useful when you’re manipulating your data. Each column can contain different data types.</p>
+
+<p>Load it with import pandas as <code class="language-plaintext highlighter-rouge">pd</code>. The alias <code class="language-plaintext highlighter-rouge">pd</code> is commonly used for pandas.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+
+<p>There are many ways to create a pandas dataframe. For example you can use a numpy array as input.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="s">''</span><span class="p">,</span><span class="s">'Col1'</span><span class="p">,</span><span class="s">'Col2'</span><span class="p">],</span>
+                <span class="p">[</span><span class="s">'Row1'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="s">'Row2'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">:],</span>
+                  <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">0</span><span class="p">],</span>
+                  <span class="n">columns</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:]))</span>
+</code></pre></div></div>
+
+<p>For the purposes of this tutorial, we will use a file with the annotated differentially expressed genes that was produced in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based <span class="notranslate">RNA</span>-Seq data analysis</a> tutorial</p>
+
+<p>We can read a tabular file with <code class="language-plaintext highlighter-rouge">pd.read_csv</code>. The first argument is the filepath of the file to be read. The <code class="language-plaintext highlighter-rouge">sep</code> argument refers to the symbol used to separate the data into different columns. You can check the rest of the arguments using the <code class="language-plaintext highlighter-rouge">help()</code> function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The columns in a dataframe are the observed variables, and the rows are the observations. Pandas uses backslash <code class="language-plaintext highlighter-rouge">\</code> to show wrapped lines when output is too wide to fit the screen.</p>
+
+<h2 id="explore-the-data">Explore the data</h2>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">index_col</code> to specify that a column’s values should be used as row headings.</p>
+
+<p>By default row indexes are numbers, but we could use a column of the data. To pass the name of the column to <code class="language-plaintext highlighter-rouge">read_csv</code>, you can use its <code class="language-plaintext highlighter-rouge">index_col</code> parameter. Be careful though, because the row indexes must be unique for each row.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="s">'GeneID'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You can use the <code class="language-plaintext highlighter-rouge">DataFrame.info()</code> method to find out more about a dataframe.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span><span class="p">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>We learn that this is a DataFrame. It consists of 130 rows and 12 columns. None of the columns contains any missing values. 6 columns contain 64-bit floating point <code class="language-plaintext highlighter-rouge">float64</code> values, 2 contain 64-bit integer <code class="language-plaintext highlighter-rouge">int64</code> values and 4 contain character <code class="language-plaintext highlighter-rouge">object</code> values. It uses 13.2KB of memory.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">DataFrame.columns</code> variable stores information about the dataframe’s columns.</p>
+
+<p>Note that this is an attribute, not a method. (It doesn’t have parentheses.) Called a member variable, or just member.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You could use <code class="language-plaintext highlighter-rouge">DataFrame.T</code> to transpose a dataframe. The <code class="language-plaintext highlighter-rouge">Transpose</code> (written <code class="language-plaintext highlighter-rouge">.T</code>) doesn’t copy the data, just changes the program’s view of it. Like columns, it is a member variable.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">T</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">DataFrame.describe()</code> to get summary statistics about the data. <code class="language-plaintext highlighter-rouge">DataFrame.describe()</code> returns the summary statistics of only the columns that have numerical data.  All other columns are ignored, unless you use the argument <code class="language-plaintext highlighter-rouge">include='all'</code>. Depending on the data type of each column, the statistics that can’t be calculated are replaced with  the value <code class="language-plaintext highlighter-rouge">NaN</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s">'all'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-using-pdhead-and-pdtail"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Using pd.head and pd.tail</h3>
+
+  <p>After reading the data, use <code class="language-plaintext highlighter-rouge">help(data.head)</code> and <code class="language-plaintext highlighter-rouge">help(data.tail)</code> to find out what <code class="language-plaintext highlighter-rouge">DataFrame.head</code> and <code class="language-plaintext highlighter-rouge">DataFrame.tail</code> do.
+	a. What method call will display the first three rows of the data?
+	b. What method call will display the last three columns of this data? (Hint: you may need to change your view of the data.)</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>a. We can check out the first five rows of the data by executing <code class="language-plaintext highlighter-rouge">data.head()</code> (allowing us to view the head of the DataFrame). We can specify the number of rows we wish to see by specifying the parameter <code class="language-plaintext highlighter-rouge">n</code> in our call to <code class="language-plaintext highlighter-rouge">data.head()</code>. To view the first three rows, execute:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.head(n=3)
+</code></pre></div>    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th> </th>
+          <th>Base mean</th>
+          <th>log2(FC)</th>
+          <th>StdErr</th>
+          <th>Wald-Stats</th>
+          <th>P-value</th>
+          <th>P-adj</th>
+          <th>Chromosome</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Strand</th>
+          <th>Feature</th>
+          <th>Gene name</th>
+          <th>GeneID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FBgn0039155</td>
+          <td>1086.974295</td>
+          <td>-4.148450</td>
+          <td>0.134949</td>
+          <td>-30.740913</td>
+          <td>1.617357e-207</td>
+          <td>1.387207e-203</td>
+          <td>chr3R</td>
+          <td>24141394</td>
+          <td>24147490</td>
+          <td>+</td>
+          <td>protein_coding</td>
+          <td>Kal1</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>FBgn0003360</td>
+          <td>6409.577128</td>
+          <td>-2.999777</td>
+          <td>0.104345</td>
+          <td>-28.748637</td>
+          <td>9.419922e-182</td>
+          <td>4.039734e-178</td>
+          <td>chrX</td>
+          <td>10780892</td>
+          <td>10786958</td>
+          <td>-</td>
+          <td>protein_coding</td>
+          <td>sesB</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>FBgn0026562</td>
+          <td>65114.840564</td>
+          <td>-2.380164</td>
+          <td>0.084327</td>
+          <td>-28.225437</td>
+          <td>2.850430e-175</td>
+          <td>8.149380e-172</td>
+          <td>chr3R</td>
+          <td>26869237</td>
+          <td>26871995</td>
+          <td>-</td>
+          <td>protein_coding</td>
+          <td>BM-40-SPARC</td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>b. To check out the last three rows, we would use the command, <code class="language-plaintext highlighter-rouge">data.tail(n=3)</code>, analogous to <code class="language-plaintext highlighter-rouge">head()</code> used above. However, here we want to look 	at the last three columns so we need to change our view and then use <code class="language-plaintext highlighter-rouge">tail()</code>. To do so, we create a new DataFrame in which rows and columns are 	switched:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_flipped = data.T
+</code></pre></div>    </div>
+    <p>We can then view the last three columns of the data by viewing the last three rows of data_flipped:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_flipped.tail(n=3)
+</code></pre></div>    </div>
+    <p>| GeneID | FBgn0039155 | FBgn0003360 | FBgn0026562 | FBgn0025111 | FBgn0029167 | FBgn0039827 | FBgn0035085 | FBgn0034736 | FBgn0264475 | FBgn0000071 | … | FBgn0264343 | FBgn0038237 | FBgn0020376 | FBgn0028939 | FBgn0036560 | FBgn0035710 | FBgn0035523 | FBgn0038261 | FBgn0039178 | FBgn0034636 |
+| —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- |
+| Strand | + | - | - | - | + | + | + | + | + | + | … | + | - | + | + | + | - | + | + | + | - |
+| Feature | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | linc<span class="notranslate">RNA</span> | protein_coding | … | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding |
+| Gene name | Kal1 | sesB | BM-40-SPARC | Ant2 | Hml | CG1544 | CG3770 | CG6018 | CR43883 | Ama | … | CG43799 | Pde6 | Sr-CIII | NimC2 | CG5895 | SP1173 | CG1311 | CG14856 | CG6356 | CG10440 |</p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-saving-in-a-csv-file"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Saving in a csv file</h3>
+
+  <p>As well as the <code class="language-plaintext highlighter-rouge">read_csv</code> function for reading data from a file, Pandas provides a <code class="language-plaintext highlighter-rouge">to_csv</code> function to write dataframes to files. Applying what you’ve learned about reading from files, write one of your dataframes to a file called <code class="language-plaintext highlighter-rouge">processed.csv</code>. You can use <code class="language-plaintext highlighter-rouge">help</code> to get information on how to use <code class="language-plaintext highlighter-rouge">to_csv</code>.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_flipped.to_csv('processed.csv')
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<ul>
+  <li>Note about Pandas DataFrames/Series</li>
+</ul>
+
+<p>A <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">DataFrame</a> is a collection of <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html">Series</a>; The DataFrame is the way Pandas represents a table, and Series is the data-structure Pandas use to represent a column.</p>
+
+<p>Pandas is built on top of the Numpy library, which in practice means that most of the methods defined for Numpy Arrays apply to Pandas Series/DataFrames.</p>
+
+<p>What makes Pandas so attractive is the powerful interface to access individual records of the table, proper handling of missing values, and relational-databases operations between DataFrames.</p>
+
+<h2 id="select-data">Select data</h2>
+<p>To access a value at the position <code class="language-plaintext highlighter-rouge">[i,j]</code> of a DataFrame, we have two options, depending on what is the meaning of i in use. Remember that a DataFrame provides an index as a way to identify the rows of the table; a row, then, has a position inside the table as well as a label, which uniquely identifies its entry in the DataFrame.</p>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">DataFrame.iloc[..., ...]</code> to select values by their (entry) position and basically specify location by numerical index analogously to 2D version of character selection in strings.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+<p>You can also use <code class="language-plaintext highlighter-rouge">DataFrame.loc[..., ...]</code> to select values by their (entry) label and basically specify location by row name analogously to 2D version of dictionary keys.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">"FBgn0039155"</span><span class="p">,</span> <span class="s">"Base mean"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>You can use Python’s usual slicing notation, to select all or a subset of rows and/or columns. For example, the following code selects all the columns of the row <code class="language-plaintext highlighter-rouge">"FBgn0039155"</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">"FBgn0039155"</span><span class="p">,</span> <span class="p">:])</span>
+</code></pre></div></div>
+
+<p>Which would get the same result as printing <code class="language-plaintext highlighter-rouge">data.loc["FBgn0039155"]</code> (without a second index).</p>
+
+<p>You can select multiple columns or rows using <code class="language-plaintext highlighter-rouge">DataFrame.loc</code> and a named slice or <code class="language-plaintext highlighter-rouge">Dataframe.iloc</code> and the numbers corresponding to the rows and columns.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'FBgn0003360'</span><span class="p">:</span><span class="s">'FBgn0029167'</span><span class="p">,</span> <span class="s">'Base mean'</span><span class="p">:</span><span class="s">'Wald-Stats'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Note the difference between the 2 outputs.</li>
+</ul>
+
+<p>When choosing or transitioning between <code class="language-plaintext highlighter-rouge">loc</code> and <code class="language-plaintext highlighter-rouge">iloc</code>, you should keep in mind that the two methods use slightly different indexing schemes.</p>
+
+<p><code class="language-plaintext highlighter-rouge">iloc</code> uses the Python stdlib indexing scheme, where the first element of the range is included and the last one excluded. So <code class="language-plaintext highlighter-rouge">0:10</code> will select entries <code class="language-plaintext highlighter-rouge">0,...,9</code>. <code class="language-plaintext highlighter-rouge">loc</code>, meanwhile, indexes inclusively. So <code class="language-plaintext highlighter-rouge">0:10</code> will select entries <code class="language-plaintext highlighter-rouge">0,...,10</code>.</p>
+
+<p>This is particularly confusing when the DataFrame index is a simple numerical list, e.g. <code class="language-plaintext highlighter-rouge">0,...,1000</code>. In this case <code class="language-plaintext highlighter-rouge">df.iloc[0:1000]</code> will return 1000 entries, while <code class="language-plaintext highlighter-rouge">df.loc[0:1000]</code> return 1001 of them! To get 1000 elements using <code class="language-plaintext highlighter-rouge">loc</code>, you will need to go one lower and ask for <code class="language-plaintext highlighter-rouge">df.loc[0:999]</code>.</p>
+
+<p>The result of slicing is a new dataframe and can be used in further operations. All the statistical operators that work on entire dataframes work the same way on slices. E.g., calculate max of a slice.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'FBgn0003360'</span><span class="p">:</span><span class="s">'FBgn0029167'</span><span class="p">,</span> <span class="s">'Base mean'</span><span class="p">].</span><span class="nb">max</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="use-conditionals-to-select-data">Use conditionals to select data</h2>
+
+<p>You can use conditionals to select data. A comparison is applied element by element and returns a similarly-shaped dataframe of <code class="language-plaintext highlighter-rouge">True</code> and <code class="language-plaintext highlighter-rouge">False</code>. The last one can be used as a mask to subset the original dataframe. The following example creates a new dataframe consisting only of the columns ‘P-adj’ and ‘Gene name’, then keeps the rows that comply with the <span class="notranslate">expression</span> <code class="language-plaintext highlighter-rouge">'P-adj' &lt; 0.000005</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'P-adj'</span><span class="p">,</span> <span class="s">'Gene name'</span><span class="p">]]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mask</span> <span class="o">=</span> <span class="n">subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'P-adj'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.000005</span>
+<span class="n">new_data</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>If we have not had specified the column, that the <span class="notranslate">expression</span> should be applied to, then it would have been applied to the entire dataframe. But the dataframe contains different type of data. In that case, an error would occur.</p>
+
+<p>Consider the following example of a dataframe consisting only of numerical data. The <span class="notranslate">expression</span> and the mask would be normally applied to the data and the mask would return <code class="language-plaintext highlighter-rouge">NaN</code> for the data that don’t comply with the <span class="notranslate">expression</span>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'StdErr'</span><span class="p">,</span>	<span class="s">'Wald-Stats'</span><span class="p">,</span> <span class="s">'P-value'</span><span class="p">,</span> <span class="s">'P-adj'</span><span class="p">]]</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">subset</span> <span class="o">&lt;</span> <span class="mf">0.05</span>
+<span class="n">new_data</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This is very useful because NaNs are ignored by operations like max, min, average, etc.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">new_data</span><span class="p">.</span><span class="n">describe</span><span class="p">())</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-manipulating-dataframes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Manipulating dataframes</h3>
+
+  <p>Explain what each line in the following short program does: what is in first, second, etc.?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
+second = first[first['log2(FC)'] &gt; 0 ]
+third = second.drop('FBgn0025111')
+fourth = third.drop('StdErr', axis = 1)
+fourth.to_csv('result.csv')
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Let’s go through this piece of code line by line.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
+</code></pre></div>    </div>
+    <p>This line loads the data into a dataframe called first. The <code class="language-plaintext highlighter-rouge">index_col='GeneID'</code> parameter selects which column to use as the row labels in the dataframe.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>second = first[first['log2(FC)'] &gt; 0 ]
+</code></pre></div>    </div>
+
+    <p>This line makes a selection: only those rows of first for which the ‘log2(FC)’ column contains a positive value are extracted. Notice how the Boolean <span class="notranslate">expression</span> inside the brackets is used to select only those rows where the <span class="notranslate">expression</span> is true.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>third = second.drop('FBgn0025111')
+</code></pre></div>    </div>
+
+    <p>As the syntax suggests, this line drops the row from second where the label is ‘FBgn0025111’. The resulting dataframe third has one row less than the original dataframe second.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fourth = third.drop('StdErr', axis = 1)
+</code></pre></div>    </div>
+
+    <p>Again we apply the drop function, but in this case we are dropping not a row but a whole column. To accomplish this, we need to specify also the axis parameter.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fourth.to_csv('result.csv')
+</code></pre></div>    </div>
+
+    <p>The final step is to write the data that we have been working on to a csv file. Pandas makes this easy with the <code class="language-plaintext highlighter-rouge">to_csv()</code> function. The only required argument to the function is the filename. Note that the file will be written in the directory from which you started the Jupyter or Python session.</p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-finding-min-max-indexes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Finding min-max indexes</h3>
+
+  <p>Explain in simple terms what <code class="language-plaintext highlighter-rouge">idxmin</code> and <code class="language-plaintext highlighter-rouge">idxmax</code> do in the short program below. When would you use these methods?</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
+
+print(data['Base mean'].idxmin())
+print(data['Base mean'].idxmax())
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p><code class="language-plaintext highlighter-rouge">idxmin</code> will return the index value corresponding to the minimum; idxmax will do the same for the maximum value.</p>
+
+    <p>You can use these functions whenever you want to get the row index of the minimum/maximum value and not the actual minimum/maximum value.</p>
+
+    <p>Output:
+FBgn0063667
+FBgn0026562</p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-selecting-with-conditionals-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Selecting with conditionals</h3>
+
+  <p>Assume Pandas has been imported and the previous dataset has been loaded. Write an <span class="notranslate">expression</span> to select each of the following:
+a. P-value of each gene
+b. all the information of gene <code class="language-plaintext highlighter-rouge">FBgn0039178</code>
+c. the information of all genes that belong to chromosome <code class="language-plaintext highlighter-rouge">chr3R</code></p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>a. <code class="language-plaintext highlighter-rouge">data['P-value']</code>
+b.<code class="language-plaintext highlighter-rouge">data.loc['FBgn0039178', :]</code>
+c. <code class="language-plaintext highlighter-rouge">data[data['Chromosome'] == 'chr3R']</code></p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="group-by-and-analyze-the-data">Group-by and analyze the data</h2>
+
+<p>Many data analysis tasks can be approached using the “split-apply-combine” paradigm: split the data into groups, apply some analysis to each group, and then combine the results.</p>
+
+<p>Pandas makes this very easy through the use of the <code class="language-plaintext highlighter-rouge">groupby()</code> method, which splits the data into groups. When the data is grouped in this way, the aggregate method <code class="language-plaintext highlighter-rouge">agg()</code> can be used to apply an aggregating or summary function to each group.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summarised_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'Chromosome'</span><span class="p">).</span><span class="n">agg</span><span class="p">({</span><span class="s">'Base mean'</span><span class="p">:</span><span class="s">'first'</span><span class="p">,</span>
+                             <span class="s">'log2(FC)'</span><span class="p">:</span> <span class="s">'max'</span><span class="p">})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">summarised_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>There are a couple of things that should be noted. The <code class="language-plaintext highlighter-rouge">agg()</code> method accepts a dictionary as input that specifies the function to be applied to each column. The output is a new dataframe, that each row corresponds to one group. The output dataframe uses the grouping column as index. We could change the last one by simply using the <code class="language-plaintext highlighter-rouge">reset_index()</code> method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summarised_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'Chromosome'</span><span class="p">).</span><span class="n">agg</span><span class="p">({</span><span class="s">'Base mean'</span><span class="p">:</span><span class="s">'first'</span><span class="p">,</span>
+                                                  <span class="s">'log2(FC)'</span><span class="p">:</span> <span class="s">'max'</span><span class="p">}).</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">summarised_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="question-question-finding-the-max-of-each-group"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Finding the max of each group</h3>
+
+  <p>Using the same dataset, try to find the longest genes in each chromosome.</p>
+
+  <blockquote>
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data['Gene Length'] = data['End'] - data['Start']
+data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-grouping-with-multiple-variables"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Grouping with multiple variables</h3>
+
+  <p>Using the same dataset, try to find how many genes are found on each strand of each chromosome.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>You can group the data according to more than one column.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.groupby(['Chromosome', 'Strand']).size()
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This tutorial aims to serve as an introduction to data analysis using the Python programming language. We hope you feel more confident in Python!</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Python has many libraries offering a variety of capabilities, which makes it popular for beginners, as well as, more experienced users</p>
+</li>
+                        
+                        <li><p>You can use scientific libraries like Numpy and Pandas to perform data analysis.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="mckinney-proc-scipy-2010">McKinney, Wes, 2010 <b> Data Structures for Statistical Computing in Python </b>, pp. 56–61 <span style="font-style: normal">in</span> <i> Proceedings of the 9th Python in Science Conference </i>, edited by Stéfan van der Walt and Jarrod Millman. <a href="https://doi.org/ 10.25080/Majora-92bf1922-00a "> 10.25080/Majora-92bf1922-00a </a></li>
+<li id="reback2020pandas">team, T. pandas development, 2020 <b>pandas-dev/pandas: Pandas</b>. <a href="https://doi.org/10.5281/zenodo.3509134">10.5281/zenodo.3509134</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Advanced Python (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Maria Christina Maniou, Fotis E. Psomopoulos, The Carpentries, 2021 <b>Advanced Python (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-python-advanced-np-pd,
+author = "Maria Christina Maniou and Fotis E. Psomopoulos and The Carpentries",
+title = "Advanced Python (Galaxy Training Materials)",
+year = "2021",
+month = "11",
+day = "08"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
