@@ -26,6 +26,11 @@ layout: base
 				<h3>
 					{{ contributors[page.contributor].name | default: page.contributor }}
 				</h3>
+                {% if contributors[page.contributor].bio %}
+				<p class="text-muted">
+					{{ contributors[page.contributor].bio }}
+				</p>
+				{% endif %}
 
 				{% if page.has_philosophy %}
 				<div class="contact-items">
@@ -92,15 +97,22 @@ layout: base
 
 			<div class="col-md-9">
 				<h1>Contributions</h1>
-				{% if contributors[page.contributor].bio %}
-				<p class="text-muted">
-					{{ contributors[page.contributor].bio }}
-				</p>
-				{% endif %}
-				<p class="text-muted">
-					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.)
-				</p>
 
+				<p class="text-muted">
+					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
+
+                {% unless contributors[page.contributor].github == false %}
+                <br><br>
+                <h2> GitHub Activity</h2>
+                <ul>
+                  <li><a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> </li>
+                  <li><a href="https://github.com/galaxyproject/training-material/commits?author={{page.contributor}}">{% icon github %} Commits</a></li>
+                  <li><a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a></li>
+                </ul>
+                {% endunless %}
+                </p>
+
+				{% if page.tutorials_count > 0 %}
 				<h2>Tutorials</h2>
 				<ul>
 				{% for res in page.tutorials %}
@@ -117,7 +129,9 @@ layout: base
 					</li>
 				{% endfor %}
 				</ul>
+				{% endif %}
 
+				{% if page.slides_count > 0 %}
 				<h2>Slides</h2>
 				<ul>
 				{% for res in page.slides %}
@@ -134,7 +148,17 @@ layout: base
 					</li>
 				{% endfor %}
 				</ul>
+				{% endif %}
 
+				{% if page.news_count > 0 %}
+                <h2>News</h2>
+                <div class="newslist">
+                {% assign news_sorted = page.news | sort: 'date' | reverse %}
+                {% for n in news_sorted %}
+                   {% include _includes/news-card.html news=n %}
+                {% endfor %}
+                </div>
+				{% endif %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 				<script type="text/javascript">
@@ -164,6 +188,9 @@ var slidesVsTutos = [
 	{% if res.video %}
 	"Videos",
 	{% endif %}
+{% endfor %}
+{% for res in page.news %}
+	"News Posts",
 {% endfor %}
 ]
 
