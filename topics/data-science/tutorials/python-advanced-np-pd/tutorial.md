@@ -155,7 +155,7 @@ print('maximum inflammation for patient 0:', np.max(patient_0))
 
 What if we need the maximum inflammation for each patient over all days (as in the next diagram on the left) or the average for each day (as in the diagram on the right)? As the diagram below shows, we want to perform the operation across an axis:
 
-![Figure 8_Operations_across_axis](../../images/python-advanced-np-pd/Figure8_Operations_across_axis.png)
+![A cartoon shows a data structure on the left with Patient 0 to N as rows in a table, and then Day 0 to N as columns of the same table. Below is written "numpy.max(data, axis=1)" which does an aggregation and finds the max per patient (so maximum daily value for each patient.) On the right a similar table is shown but written below is numpy.max(data, axis=0) and now the maximum is calculated per day, which patient had the maximum value.](../../images/python-advanced-np-pd/Figure8_Operations_across_axis.png)
 
 To support this functionality, most array functions allow us to specify the axis we want to work on. If we ask for the average across axis 0 (rows in our 2D example), we get:
 

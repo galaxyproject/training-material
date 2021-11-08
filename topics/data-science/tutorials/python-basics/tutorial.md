@@ -779,7 +779,7 @@ print('done')
 
 If the expression that follows the if statement is true, the body of the `if` (i.e., the set of lines indented underneath it) is executed, and `“greater”` is printed. If it is false, the body of the `else` is executed instead, and `“not greater”` is printed. Only one or the other is ever executed before continuing on with program execution to print `“done”`:
 
-![Figure5_Conditionals](../../images/python-basics/Figure5_Conditionals.png)
+![A flow chart diagram is shown with a decision box of number > 100. For true it branches to print 'greater'. For false it branches to print 'not greater'. Both branches re-connect to print done.](../../images/python-basics/Figure5_Conditionals.png)
 
 Conditional statements don’t have to include an `else`.  If there isn’t one, Python simply does nothing if the expression is false:
 
@@ -910,7 +910,7 @@ for variable in collection:
 ```
 
 Using the odds example above, the loop might look like this:
-![Figure6_For_loop](../../images/python-basics/Figure6_For_loop.png)
+![A cartoon schematic shows a  small array named odds with the odd numbers from 1 to 11. A for loop is written "for num in odds" and for each of these items in the array print(num) happens, and the output is shown below, the odd numbers printed out.](../../images/python-basics/Figure6_For_loop.png)
 
 where each number (`num`) in the variable odds is looped through and printed one number after another. The other numbers in the diagram denote which loop cycle the number was printed in (1 being the first loop cycle, and 6 being the final loop cycle).
 
@@ -1161,7 +1161,7 @@ def fahr_to_celsius(temp):
     return ((temp - 32) * (5/9))
 ```
 
-![Figure7_Functions](../../images/python-basics/Figure7_Functions.png)
+![The above function fahr to celsius is shown except annotated. def is labelled "def statement", fahr_to_celsius is noted as the function name. Inside parentheses is temp and an arrow shows it is called parameter names. The next line which is indented is annotated as the function body which has a return statement and the calculation from above.](../../images/python-basics/Figure7_Functions.png)
 
 The function definition opens with the keyword `def` followed by the name of the function `fahr_to_celsius` and a parenthesized list of parameter names `temp`. The body of the function — the statements that are executed when it runs — is indented below the definition line. The body concludes with a `return` keyword followed by the return value.
 

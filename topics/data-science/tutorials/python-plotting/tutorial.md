@@ -87,7 +87,7 @@ plt.xlabel('P-value')
 plt.ylabel('Gene name')
 ```
 
-![Figure9](../../images/python-plotting/Figure9_Lineplot.png)
+![A line chart is shown with a y axis of gene name and an x axis of p-value. The specific content of the graph is not important other than that it is produced with the expected x and y labels.](../../images/python-plotting/Figure9_Lineplot.png)
 
 We use Jupyter Notebook and so running the cell generates the figure directly below the code. The figure is also included in the Notebook document for future viewing. However, other Python environments like an interactive Python session started from a terminal or a Python script executed via the command line require an additional command to display the figure.
 
@@ -133,7 +133,7 @@ plt.xticks(range(0,len(new_subset.index)), new_subset['Gene name'], rotation=60)
 plt.xlabel('Gene name')
 ```
 
-![Figure10](../../images/python-plotting/Figure10_Multiple_lines_plot.png)
+![The graph is similar to the last image, now the x axis is the gene name, and the y axis runs from 0 to 7 with an annotation of 1e-65 above. Now there are two lines, one in red labelled p-adj, and one in blue labelled p-value.](../../images/python-plotting/Figure10_Multiple_lines_plot.png)
 
 In this example, we select a new subset of the dataset, but plot only the two columns `P-value` and `P-adj`. Then we use the `plt.xticks()` method to change the text and the rotation of the x axis.
 
@@ -145,7 +145,7 @@ bar_data.plot(kind='bar')
 plt.xticks(rotation=60)
 plt.ylabel('N')
 ```
-![Figure11](../../images/python-plotting/Figure11_Barplot.png)
+![It is now a bar plot with chromosome as an X axis and some values of N for the y axis for a few chromosomes.](../../images/python-plotting/Figure11_Barplot.png)
 
 `matplotlib` supports also different plot styles from ather popular plotting libraries such as ggplot and seaborn. For example, the previous plot in ggplot style.
 
@@ -156,7 +156,7 @@ bar_data.plot(kind='bar')
 plt.xticks(rotation=60)
 plt.ylabel('N')
 ```
-![Figure12](../../images/python-plotting/Figure12_ggplot_Barplot.png)
+![The same graph as the previous, but with a different aethetic, the background is now light grey instead of white and the bars are red instead of blue to be a bit more like ggplot2 outputs.](../../images/python-plotting/Figure12_ggplot_Barplot.png)
 
 You can also change different parameters and customize the plot.
 
@@ -168,7 +168,7 @@ plt.xticks(rotation=60)
 plt.ylabel('N')
 ```
 
-![Figure13](../../images/python-plotting/Figure13_Barplot_2.png)
+![The same graph again, but now the bars are red with a black border.](../../images/python-plotting/Figure13_Barplot_2.png)
 
 Another useful type of plot is a scatter plot. In the following example we plot the Base mean of a subset of genes.
 
@@ -181,7 +181,7 @@ plt.ylabel('Base mean')
 plt.xlabel('Gene name')
 ```
 
-![Figure14](../../images/python-plotting/Figure14_Scatterplot.png)
+![A scatterplot is shown comparing gene name to base mean.](../../images/python-plotting/Figure14_Scatterplot.png)
 
 > ### {% icon question %} Question: Plotting
 >
@@ -199,7 +199,7 @@ plt.xlabel('Gene name')
 > > plt.ylabel('Average P-value')
 > > plt.xlabel('Chromosome')
 > > ```
-> > ![Figure15](../../images/python-plotting/Figure15_Exercise_plot.png)
+> > ![Another scatterplot showing chromosome vs average p-value, but every column has both a blue and red point, presumably showing the values for different strands.](../../images/python-plotting/Figure15_Exercise_plot.png)
 > >
 > {: .solution}
 {: .question}
