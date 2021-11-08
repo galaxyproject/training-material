@@ -486,6 +486,25 @@ Once generated the draft assembly, it is a good idea to evaluate its quality.
 >
 {: .hands_on}
 
+Let's have a look at the HTML report.
+
+![fig5:QUAST plot](../../images/vgp_assembly/QUAST_initial.png "Quast initial report.")
+
+> ### {% icon question %} Questions
+>
+> 1. What is the longest contig in the primary assembly? And in the alternate one?
+> 2. What is the N50 of the primary assembly?
+> 3. Which percentage of reads mapped to each assembly? 
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The longest contig in the primary assembly is 914.549 bp, and 15.845 bp in the alternate assembly.
+> > 2. The N50 of the primary assembly is 425.706 bp.
+> > 3. According the report, 100% of reads mapped to the primary assembly, but only around 57% mapped to the alternate assembly.
+> > 
+> {: .solution}
+>
+{: .question}
 
 > ### {% icon hands_on %} Hands-on: assessing assembly completness with BUSCO
 >
