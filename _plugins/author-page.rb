@@ -52,10 +52,17 @@ module Jekyll
           page2.data['personname'] = name
           page2.data['title'] = "GTN Contributor: #{name}"
           page2.data["layout"] = "contributor_index"
+
           page2.data["tutorials"] = tutorials_by_author[contributor]
           page2.data["slides"] = slides_by_author[contributor]
           page2.data["news"] = news_by_author[contributor]
+
+          page2.data["tutorials_count"] = tutorials_by_author[contributor].length
+          page2.data["slides_count"] = slides_by_author[contributor].length
+          page2.data["news_count"] = news_by_author[contributor].length
+
           page2.data["has_philosophy"] = has_philosophy[contributor]
+
           site.pages << page2
         end
       end

@@ -112,6 +112,7 @@ layout: base
                 {% endunless %}
                 </p>
 
+				{% if page.tutorials_count > 0 %}
 				<h2>Tutorials</h2>
 				<ul>
 				{% for res in page.tutorials %}
@@ -128,7 +129,9 @@ layout: base
 					</li>
 				{% endfor %}
 				</ul>
+				{% endif %}
 
+				{% if page.slides_count > 0 %}
 				<h2>Slides</h2>
 				<ul>
 				{% for res in page.slides %}
@@ -145,7 +148,9 @@ layout: base
 					</li>
 				{% endfor %}
 				</ul>
+				{% endif %}
 
+				{% if page.news_count > 0 %}
                 <h2>News</h2>
                 <div class="newslist">
                 {% assign news_sorted = page.news | sort: 'date' | reverse %}
@@ -153,6 +158,7 @@ layout: base
                    {% include _includes/news-card.html news=n %}
                 {% endfor %}
                 </div>
+				{% endif %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 				<script type="text/javascript">
