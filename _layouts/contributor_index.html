@@ -26,6 +26,11 @@ layout: base
 				<h3>
 					{{ contributors[page.contributor].name | default: page.contributor }}
 				</h3>
+                {% if contributors[page.contributor].bio %}
+				<p class="text-muted">
+					{{ contributors[page.contributor].bio }}
+				</p>
+				{% endif %}
 
 				{% if page.has_philosophy %}
 				<div class="contact-items">
@@ -92,14 +97,15 @@ layout: base
 
 			<div class="col-md-9">
 				<h1>Contributions</h1>
-				{% if contributors[page.contributor].bio %}
+
 				<p class="text-muted">
-					{{ contributors[page.contributor].bio }}
-				</p>
-				{% endif %}
-				<p class="text-muted">
-					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.)
-				</p>
+					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
+
+                {% unless contributors[page.contributor].github == false %}
+                <br><br>
+                Please see this contributor's list of <a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">GitHub pull requests</a> and <a href="https://github.com/galaxyproject/training-material/commits?author={{page.contributor}}">commits</a> for a more comprehensive view of their contributions.
+                {% endunless %}
+                </p>
 
 				<h2>Tutorials</h2>
 				<ul>
@@ -171,6 +177,9 @@ var slidesVsTutos = [
 	{% if res.video %}
 	"Videos",
 	{% endif %}
+{% endfor %}
+{% for res in page.news %}
+	"News Posts",
 {% endfor %}
 ]
 
