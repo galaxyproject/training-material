@@ -250,6 +250,8 @@ module Jekyll
         fn = File.join('.', page.url).sub(/html$/, 'md')
         notebook_language = page.data['notebook'].fetch('language', 'python')
 
+        puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
+
         # Here we read use `notedown` to convert the tutorial to a Hash
         # representing the notebook
         notebook = convertToNotebook(fn, notebook_language)
@@ -267,7 +269,6 @@ module Jekyll
           notebook = fixRNotebook(notebook)
         end
 
-        puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
 
         # Here we loop over the markdown cells and render them to HTML. This
         # allows us to get rid of classes like {: .tip} that would be left in
