@@ -1,0 +1,329 @@
+{
+  "name": "metabolomics",
+  "type": "use",
+  "title": "Metabolomics",
+  "summary": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+  "docker_image": "quay.io/galaxy/metabolomics-training",
+  "edam_ontology": "topic_3172",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "introduction"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Gildas Le Corguillé",
+      "joined": "2017-09",
+      "id": "lecorguille",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/lecorguille.json"
+    },
+    {
+      "name": "Mélanie Petera",
+      "joined": "2019-06",
+      "id": "melpetera",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/melpetera.json"
+    },
+    {
+      "name": "Melanie Föll",
+      "email": "melanie.foell@mol-med.uni-freiburg.de",
+      "twitter": "MCFoell",
+      "gitter": "foellmelanie",
+      "orcid": "0000-0002-1887-7543",
+      "joined": "2018-10",
+      "id": "foellmelanie",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json"
+    }
+  ],
+  "materials": [
+    {
+      "layout": "introduction_slides",
+      "logo": "GTN",
+      "title": "Introduction to Metabolomics",
+      "type": "introduction",
+      "contributors": [
+        {
+          "name": "Gildas Le Corguillé",
+          "joined": "2017-09",
+          "id": "lecorguille",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/lecorguille.json"
+        },
+        {
+          "name": "Cécile Canlet",
+          "github": false,
+          "joined": "2018-09",
+          "id": "cecilecanlet",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/cecilecanlet.json"
+        }
+      ],
+      "last_modified_at": "26-Jul-21",
+      "url": "/topics/metabolomics/slides/introduction.html",
+      "topic_name": "metabolomics",
+      "tutorial_name": "introduction",
+      "slides": true
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Mass spectrometry imaging: Examining the spatial distribution of analytes",
+      "zenodo_link": "https://zenodo.org/record/484496",
+      "level": "Introductory",
+      "questions": [
+        "What is the typical mass range of VOCs?",
+        "In which compartments of the chilli are the measured VOCs located?",
+        "In which compartment of the chilli is the capsaicin located?"
+      ],
+      "objectives": [
+        "Plot average mass spectra and overlaid mass spectra of single spectra.",
+        "Filter MSI data for a specific m/z range.",
+        "Automatic generation of many m/z images.",
+        "Overlay the distribution of several m/z in one image."
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Average and annotated mass spectra show the relevant m/z range of the dataset and different compartment-specific peaks.",
+        "MSI data can be filtered for m/z ranges of interest to speed up analysis time.",
+        "Distribution images for many analytes can be automatically generated with the MSI m/z image tool.",
+        "The MSI m/z image tools allow overlaying the distribution images for several analytes."
+      ],
+      "contributors": [
+        {
+          "name": "Melanie Föll",
+          "email": "melanie.foell@mol-med.uni-freiburg.de",
+          "twitter": "MCFoell",
+          "gitter": "foellmelanie",
+          "orcid": "0000-0002-1887-7543",
+          "joined": "2018-10",
+          "id": "foellmelanie",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json"
+        },
+        {
+          "name": "Maren Stillger",
+          "joined": "2020-10",
+          "id": "MarenStillger",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarenStillger.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html",
+      "topic_name": "metabolomics",
+      "tutorial_name": "msi-analyte-distribution",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Mass spectrometry imaging: Finding differential analytes",
+      "zenodo_link": "https://zenodo.org/record/2628280",
+      "level": "Intermediate",
+      "questions": [
+        "Can N-linked glycans from FFPE tissues be detected by MALDI imaging?",
+        "Can potential N-linked glycans be identified by an additional LC-MS/MS experiment?",
+        "Do specific kidney compartments have different N-linked glycan compositions?"
+      ],
+      "objectives": [
+        "Combining MSI datasets while using the information about each subfile in further steps.",
+        "Preprocessing raw MSI data.",
+        "Performing supervised and unsupervised statistical analysis."
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Several files can be combined and the spectra used to obtain the annotation of their original file.",
+        "Preprocessing reduces the file size and can improve further analysis steps.",
+        "Unsupervised and supervised statistical analysis can reveal analytes with different abundances.",
+        "The spatial distribution of N-glycans in a tissue section can be measured by MALDI imaging.",
+        "Additional LC-MS/MS experiments enable the identification of N-glycans measured by MSI.",
+        "Some N-glycans are located to specific kidney compartments."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "mass-spectrometry-imaging-loading-exploring-data"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Melanie Föll",
+          "email": "melanie.foell@mol-med.uni-freiburg.de",
+          "twitter": "MCFoell",
+          "gitter": "foellmelanie",
+          "orcid": "0000-0002-1887-7543",
+          "joined": "2018-10",
+          "id": "foellmelanie",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.html",
+      "topic_name": "metabolomics",
+      "tutorial_name": "msi-finding-nglycans",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Mass spectrometry: LC-MS analysis",
+      "zenodo_link": "https://zenodo.org/record/3244991",
+      "questions": [
+        "What are the main steps of untargeted LC-MS data processing for metabolomic analysis?",
+        "How to conduct metabolomic data analysis from preprocessing to annotation using Galaxy?"
+      ],
+      "objectives": [
+        "To comprehend the diversity of LC-MS metabolomic data analysis.",
+        "To get familiar with the main steps constituting a metabolomic workflow for untargeted LC-MS analysis.",
+        "To evaluate the potential of a workflow approach when dealing with LC-MS metabolomic data."
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "To process untargeted LC-MS metabolomic data, you need a large variety of steps and tools.",
+        "Although main steps are standard, various ways to combined tools exist, depending on your data.",
+        "Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis."
+      ],
+      "contributors": [
+        {
+          "name": "Mélanie Petera",
+          "joined": "2019-06",
+          "id": "melpetera",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/melpetera.json"
+        },
+        {
+          "name": "Gildas Le Corguillé",
+          "joined": "2017-09",
+          "id": "lecorguille",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/lecorguille.json"
+        },
+        {
+          "name": "Jean-François Martin",
+          "joined": "2019-06",
+          "id": "jfrancoismartin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jfrancoismartin.json"
+        },
+        {
+          "name": "Yann Guitton",
+          "joined": "2019-06",
+          "id": "yguitton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yguitton.json"
+        },
+        {
+          "name": "Workflow4Metabolomics core team",
+          "joined": "2019-06",
+          "id": "workflow4metabolomics",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/workflow4metabolomics.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/metabolomics/tutorials/lcms/tutorial.html",
+      "topic_name": "metabolomics",
+      "tutorial_name": "lcms",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Mass spectrometry: LC-MS preprocessing with XCMS",
+      "zenodo_link": "https://zenodo.org/record/3757956",
+      "level": "Intermediate",
+      "questions": [
+        "What are the main steps of untargeted LC-MS data preprocessing for metabolomic analyses?",
+        "How to conduct metabolomic data preprocessing using Galaxy?"
+      ],
+      "objectives": [
+        "To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic preprocessing.",
+        "To get familiar with the way to use XCMS-based Galaxy modules dedicated to LC-MS data preprocessing.",
+        "To evaluate the potential of a workflow approach when dealing with LC-MS preprocessing."
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "To process untargeted LC-MS metabolomic data preprocessing, you need a large variety of steps and tools.",
+        "Although main steps are standard, various ways to combine and to set parameters for tools exist, depending on your data.",
+        "Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis."
+      ],
+      "contributors": [
+        {
+          "name": "Mélanie Petera",
+          "joined": "2019-06",
+          "id": "melpetera",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/melpetera.json"
+        },
+        {
+          "name": "Jean-François Martin",
+          "joined": "2019-06",
+          "id": "jfrancoismartin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jfrancoismartin.json"
+        },
+        {
+          "name": "Gildas Le Corguillé",
+          "joined": "2017-09",
+          "id": "lecorguille",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/lecorguille.json"
+        },
+        {
+          "name": "Workflow4Metabolomics core team",
+          "joined": "2019-06",
+          "id": "workflow4metabolomics",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/workflow4metabolomics.json"
+        }
+      ],
+      "last_modified_at": "01-Jul-21",
+      "url": "/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html",
+      "topic_name": "metabolomics",
+      "tutorial_name": "lcms-preprocessing",
+      "hands_on": true,
+      "slides": true,
+      "workflows": false,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    }
+  ]
+}

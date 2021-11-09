@@ -1,0 +1,723 @@
+{
+  "name": "assembly",
+  "type": "use",
+  "title": "Assembly",
+  "summary": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+  "docker_image": "quay.io/galaxy/assembly-training",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "introduction"
+    },
+    {
+      "type": "internal",
+      "topic_name": "sequence-analysis",
+      "tutorials": [
+        "quality-control"
+      ]
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Simon Gladman",
+      "email": "simon.gladman@unimelb.edu.au",
+      "joined": "2017-09",
+      "id": "slugger70",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+    },
+    {
+      "name": "Anton Nekrutenko",
+      "email": "anton@nekrut.org",
+      "joined": "2017-09",
+      "id": "nekrut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+    },
+    {
+      "name": "Delphine Lariviere",
+      "email": "delphine.lariviere@galaxy.org",
+      "joined": "2017-09",
+      "id": "delphine-l",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+    },
+    {
+      "name": "Cristóbal Gallardo",
+      "joined": "2020-11",
+      "id": "gallardoalba",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json"
+    }
+  ],
+  "materials": [
+    {
+      "layout": "tutorial_hands_on",
+      "title": "An Introduction to Genome Assembly",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.582600",
+      "questions": [
+        "How do we perform a very basic genome assembly from short read data?"
+      ],
+      "objectives": [
+        "assemble some paired end reads using Velvet",
+        "examine the output of the assembly."
+      ],
+      "time_estimation": "30m",
+      "level": "Introductory",
+      "key_points": [
+        "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet",
+        "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly",
+        "It looks as though there are some exploitable patterns in the metric data vs the k-mer size."
+      ],
+      "contributors": [
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        }
+      ],
+      "last_modified_at": "26-Oct-21",
+      "url": "/topics/assembly/tutorials/general-introduction/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "general-introduction",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Chloroplast genome assembly",
+      "zenodo_link": "http://doi.org/10.5281/zenodo.3567224",
+      "tags": [
+        "plants",
+        "nanopore"
+      ],
+      "questions": [
+        "How can we assemble a chloroplast genome?"
+      ],
+      "objectives": [
+        "Assemble a chloroplast genome from long reads",
+        "Polish the assembly with short reads",
+        "Annotate the assembly and view",
+        "Map reads to the assembly and view"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "A chloroplast genome can be assembled with long reads and polished with short reads",
+        "The assembly graph is useful to look at and think about genomic structure",
+        "We can map raw reads back to the assembly and investigate areas of high or low read coverage",
+        "We can view an assembly, its mapped reads, and its annotations in JBrowse"
+      ],
+      "contributors": [
+        {
+          "name": "Anna Syme",
+          "joined": "2017-09",
+          "id": "annasyme",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json"
+        }
+      ],
+      "last_modified_at": "21-Oct-21",
+      "url": "/topics/assembly/tutorials/chloroplast-assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "chloroplast-assembly",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "De Bruijn Graph Assembly",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.582600",
+      "questions": [
+        "What are the factors that affect genome assembly?",
+        "How does Genome assembly work?"
+      ],
+      "objectives": [
+        "Perform an optimised Velvet assembly with the Velvet Optimiser",
+        "Compare this assembly with those we did in the basic tutorial",
+        "Perform an assembly using the SPAdes assembler."
+      ],
+      "time_estimation": "2h",
+      "level": "Introductory",
+      "key_points": [
+        "We learned about how the choice of k-mer size will affect assembly outcomes",
+        "We learned about the strategies that assemblers use to make reference genomes",
+        "We performed a number of assemblies with Velvet and SPAdes.",
+        "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
+      ],
+      "contributors": [
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "gitter": "shiltemann",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/assembly/tutorials/debruijn-graph-assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "debruijn-graph-assembly",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Deeper look into Genome Assembly algorithms",
+      "questions": [
+        "What are the main types of assembly algorithms?",
+        "How do they perform with short and long reads?",
+        "How to improve assemblies using other technologies?"
+      ],
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        },
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+        },
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        }
+      ],
+      "level": "Intermediate",
+      "last_modified_at": "28-Dec-20",
+      "url": "/topics/assembly/tutorials/algorithms-introduction/slides.html",
+      "topic_name": "assembly",
+      "tutorial_name": "algorithms-introduction",
+      "hands_on": false,
+      "slides": true,
+      "workflows": false,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
+      "zenodo_link": "https://zenodo.org/record/4534098",
+      "questions": [
+        "How to check the quality of the MiSeq data?",
+        "How to perform an assembly with MiSeq data?",
+        "What species do I have and what is its sequence type?",
+        "Which resistance genes are on my genome?",
+        "Where are the genes located on my genome?"
+      ],
+      "objectives": [
+        "Assess your data on quality and quantity",
+        "Assemble a genome",
+        "Assess your assembly quality",
+        "Assess presence of antimicrobial resistance genes",
+        "Perform a species identification and MLST typing",
+        "Search for resistance genes on the assembly",
+        "Find a gene on your genome using Prokka + JBrowse"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Illumina assemblies can be done with Shovill, but the assemblies are not completely resolved",
+        "Annotation with Prokka is very easy"
+      ],
+      "tags": [
+        "illumina",
+        "assembly",
+        "amr"
+      ],
+      "contributors": [
+        {
+          "name": "Bazante Sanders",
+          "joined": "2020-12",
+          "id": "bazante1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
+        },
+        {
+          "name": "Miaomiao Zhou",
+          "email": "m.zhou1@avans.nl",
+          "joined": "2020-12",
+          "id": "miaomiaozhou88",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "gitter": "shiltemann",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "visualisation",
+          "tutorials": [
+            "jbrowse"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "history-to-workflow"
+          ]
+        }
+      ],
+      "last_modified_at": "17-Jun-21",
+      "url": "/topics/assembly/tutorials/mrsa-illumina/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "mrsa-illumina",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data",
+      "zenodo_link": "https://zenodo.org/record/4534098",
+      "questions": [
+        "How to check the quality of the MinION data?",
+        "How to perform an assembly with MinION data?",
+        "What species do I have and what is its sequence type?",
+        "Which resistance genes are on my genome?",
+        "Where are the genes located on my genome?"
+      ],
+      "objectives": [
+        "Assess your data on quality and quantity",
+        "Assemble a genome",
+        "Assess your assembly quality",
+        "Assess presence of antimicrobial resistance genes",
+        "Perform a species identification and MLST typing",
+        "Search for resistance genes on the assembly",
+        "Find a gene on your genome using Prokka + JBrowse"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Nanopore produces fantastic assemblies but with low quality data",
+        "Annotation with Prokka is very easy"
+      ],
+      "tags": [
+        "nanopore",
+        "assembly",
+        "amr"
+      ],
+      "contributors": [
+        {
+          "name": "Bazante Sanders",
+          "joined": "2020-12",
+          "id": "bazante1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
+        },
+        {
+          "name": "Miaomiao Zhou",
+          "email": "m.zhou1@avans.nl",
+          "joined": "2020-12",
+          "id": "miaomiaozhou88",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "gitter": "shiltemann",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "visualisation",
+          "tutorials": [
+            "jbrowse"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "history-to-workflow"
+          ]
+        }
+      ],
+      "last_modified_at": "24-Mar-21",
+      "url": "/topics/assembly/tutorials/mrsa-nanopore/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "mrsa-nanopore",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Making sense of a newly assembled genome",
+      "zenodo_link": "https://zenodo.org/record/3382053",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "assembly",
+          "tutorials": [
+            "unicycler-assembly"
+          ]
+        }
+      ],
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "I just assembled a genome. How does it compare with already sequenced genomes?",
+        "How do I find rearranged, inserted, or deleted regions?"
+      ],
+      "objectives": [
+        "Identification of the most closely related genome to my new assembly",
+        "Perform sequence comparison to locate rearrangements",
+        "Identify genes located in deletions"
+      ],
+      "time_estimation": "4h",
+      "key_points": [
+        "We learned how to download large sets of completed genomes from NCBI",
+        "We learned how to use Galaxy's rule-based collection builder",
+        "We learned how to use a combination of Galaxy tools to create complex views of genome comparisons",
+        "We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools"
+      ],
+      "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+        },
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/assembly/tutorials/ecoli_comparison/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "ecoli_comparison",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Unicycler Assembly",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.940733",
+      "level": "Introductory",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "I have short reads and long reads. How do I assemble a genome?"
+      ],
+      "objectives": [
+        "Perform Quality Control on your reads",
+        "Perform a Small genome Assembly with Unicycler",
+        "Evaluate the Quality of the Assembly with Quast",
+        "Annotate the assembly with Prokka"
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "assembly",
+          "tutorials": [
+            "ecoli_comparison"
+          ]
+        }
+      ],
+      "time_estimation": "4h",
+      "key_points": [
+        "We learned about the strategies used by assemblers for hybrid assemblies",
+        "We performed an hybrid assembly of a bacterial genome and its annotation",
+        "Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes",
+        "Combination of short and long reads helped us produce an almost perfect assembly"
+      ],
+      "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+        },
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/assembly/tutorials/unicycler-assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "unicycler-assembly",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3732358",
+      "questions": [
+        "How can a genome of interest be assembled against a background of contaminating reads from other genomes?",
+        "How can sequencing data from public sources be turned into assembly-ready polished datasets?"
+      ],
+      "objectives": [
+        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+        "Organize the data into collections and check its quality",
+        "Detect and remove human reads",
+        "Assemble retained reads and explore the results"
+      ],
+      "time_estimation": "4h",
+      "level": "Intermediate",
+      "key_points": [
+        "Certain types of NGS samples can be heavily contaminated with sequences from other genomes",
+        "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes",
+        "After mapping, use filtering tools to remove identified contaminating reads, and use conversion tools to convert remaining mapped reads back into raw sequenced reads expected by most downstream tools"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "assembly",
+          "tutorials": [
+            "unicycler-assembly"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "mapping"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "assembly-with-preprocessing",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    }
+  ]
+}

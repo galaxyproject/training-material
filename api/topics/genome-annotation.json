@@ -1,0 +1,479 @@
+{
+  "name": "genome-annotation",
+  "type": "use",
+  "title": "Genome Annotation",
+  "summary": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+  "docker_image": "quay.io/galaxy/genome-annotation-training",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "introduction"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Helena Rasche",
+      "email": "helena.rasche@gmail.com",
+      "orcid": "0000-0001-9760-8992",
+      "maintainer_contact": "gitter",
+      "gitter": "hexylena",
+      "joined": "2017-09",
+      "id": "hexylena",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+    },
+    {
+      "name": "Simon Gladman",
+      "email": "simon.gladman@unimelb.edu.au",
+      "joined": "2017-09",
+      "id": "slugger70",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+    },
+    {
+      "name": "Anthony Bretaudeau",
+      "email": "anthony.bretaudeau@inra.fr",
+      "twitter": "abretau",
+      "gitter": "abretaud",
+      "orcid": "0000-0003-0914-2470",
+      "joined": "2017-09",
+      "id": "abretaud",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+    }
+  ],
+  "gitter": "galaxy-genome-annotation/Lobby",
+  "materials": [
+    {
+      "layout": "introduction_slides",
+      "logo": "GTN",
+      "title": "Introduction to Genome Annotation",
+      "type": "introduction",
+      "level": "Intermediate",
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        }
+      ],
+      "last_modified_at": "26-Jul-21",
+      "url": "/topics/genome-annotation/slides/introduction.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "introduction",
+      "slides": true
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Essential genes detection with Transposon insertion sequencing",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.2579335",
+      "tags": [
+        "bacteria",
+        "tnseq",
+        "essential genes"
+      ],
+      "questions": [
+        "What is Transposon insertion Sequencing?",
+        "How to get TA sites Coverage ? ",
+        "How to predict essential genes ?"
+      ],
+      "objectives": [
+        "Understand the read structure of TnSeq analyses",
+        "Predict Essential genes with Transit",
+        "Compare gene essentiality in control sample and an different experimental condition"
+      ],
+      "time_estimation": "7H",
+      "key_points": [
+        "TnSeq is a useful analysis to detect essential genes and conditional essential genes",
+        "The saturation of the library must be sufficient so that every gene must have been impacted at least once",
+        "Be sure you have removed every transposon sequence before starting your analysis",
+        "Verify the results manually do separate domain essential and essential genes"
+      ],
+      "contributors": [
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/genome-annotation/tutorials/tnseq/tutorial.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "tnseq",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "From small to large-scale genome comparison",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4485547",
+      "questions": [
+        "How can we run pairwise genome comparisons using Galaxy?",
+        "How can we run massive chromosome comparisons in Galaxy?",
+        "How can we quickly visualize genome comparisons in Galaxy?"
+      ],
+      "objectives": [
+        "Learn the basics of pairwise sequence comparison",
+        "Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels",
+        "Learn how to post-process your sequence comparisons"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "We learnt that sequence comparison is a demanding problem and that there are several ways to approach it",
+        "We learnt how to run sequence comparisons in Galaxy with different levels of precision, particularly fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively",
+        "We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "introduction",
+          "tutorials": [
+            "galaxy-intro-101"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Esteban Perez-Wohlfeil",
+          "email": "estebanpw@uma.es",
+          "joined": "2020-11",
+          "id": "estebanpw",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/estebanpw.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "hpc-for-lsgc",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genome annotation with Maker",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4406623",
+      "tags": [
+        "eukaryote"
+      ],
+      "questions": [
+        "How to annotate an eukaryotic genome?",
+        "How to evaluate and visualize annotated genomic features?"
+      ],
+      "objectives": [
+        "Load genome into Galaxy",
+        "Annotate genome with Maker",
+        "Evaluate annotation quality with BUSCO",
+        "View annotations in JBrowse"
+      ],
+      "time_estimation": "4h",
+      "level": "Advanced",
+      "key_points": [
+        "Maker allows to annotate a eukaryotic genome.",
+        "BUSCO and JBrowse allow to inspect the quality of an annotation."
+      ],
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        }
+      ],
+      "last_modified_at": "31-Dec-20",
+      "url": "/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "annotation-with-maker",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genome annotation with Maker (short)",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4406623",
+      "tags": [
+        "eukaryote"
+      ],
+      "questions": [
+        "How to annotate an eukaryotic genome?",
+        "How to evaluate and visualize annotated genomic features?"
+      ],
+      "objectives": [
+        "Load genome into Galaxy",
+        "Annotate genome with Maker",
+        "Evaluate annotation quality with BUSCO",
+        "View annotations in JBrowse"
+      ],
+      "time_estimation": "2h",
+      "level": "Intermediate",
+      "key_points": [
+        "Maker allows to annotate a eukaryotic genome.",
+        "BUSCO and JBrowse allow to inspect the quality of an annotation."
+      ],
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        }
+      ],
+      "last_modified_at": "31-Dec-20",
+      "url": "/topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "annotation-with-maker-short",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genome annotation with Prokka",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1156405",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "How can we annotate a bacterial genome?",
+        "How can we visualize annotated genomic features?"
+      ],
+      "objectives": [
+        "Load genome into Galaxy",
+        "Annotate genome with Prokka",
+        "View annotations in JBrowse"
+      ],
+      "time_estimation": "1h",
+      "level": "Introductory",
+      "key_points": [
+        "Prokka is a useful tool to annotate a bacterial genome.",
+        "JBrowse can be used to inspect the annotation of a genome."
+      ],
+      "contributors": [
+        {
+          "name": "Anna Syme",
+          "joined": "2017-09",
+          "id": "annasyme",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json"
+        },
+        {
+          "name": "Torsten Seemann",
+          "joined": "2018-06",
+          "id": "tseemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tseemann.json"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        }
+      ],
+      "last_modified_at": "28-May-21",
+      "url": "/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "annotation-with-prokka",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": true,
+      "video": true,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Refining Genome Annotations with Apollo",
+      "zenodo_link": "https://zenodo.org/record/3270822",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "How to visualize your genome after automated annotations have been performed?",
+        "How to manually annotate genome after automated annotations have been performed?",
+        "How to evaluate and visualize annotated genomic features?",
+        "How do I collaborate when doing genome annotation?"
+      ],
+      "objectives": [
+        "Load a genome into Galaxy",
+        "View annotations in JBrowse",
+        "Learn how to load JBrowse data into Apollo",
+        "Learn how to manually refine genome annotations within Apollo",
+        "Export refined genome annotations"
+      ],
+      "time_estimation": "3h",
+      "level": "Intermediate",
+      "key_points": [
+        "Apollo is the Google Docs of the genome annotation world, real-time collaborative genome annotation.",
+        "Apollo allows a group to view and manually refine predicted genome annotations",
+        "Use Apollo to edit annotations within your group.",
+        "Export manual annotations as GFF3."
+      ],
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        },
+        {
+          "name": "Nathan Dunn",
+          "gitter": "nathandunn",
+          "twitter": "precogincog",
+          "email": "nathandunn@lbl.gov",
+          "joined": "2019-07",
+          "id": "nathandunn",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nathandunn.json"
+        },
+        {
+          "name": "Mateo Boudet",
+          "email": "mateo.boudet@inrae.fr",
+          "orcid": "0000-0002-7028-7620",
+          "joined": "2021-05",
+          "id": "mboudet",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mboudet.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "upload-rules"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "genome-annotation",
+          "tutorials": [
+            "annotation-with-prokka"
+          ]
+        }
+      ],
+      "last_modified_at": "15-Jun-21",
+      "url": "/topics/genome-annotation/tutorials/apollo/tutorial.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "apollo",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": true,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "type": "tutorial"
+    }
+  ]
+}

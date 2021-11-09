@@ -1,0 +1,311 @@
+{
+  "name": "imaging",
+  "type": "use",
+  "title": "Imaging",
+  "summary": "Image analysis using Galaxy",
+  "docker_image": "quay.io/galaxy/imaging-training",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "introduction"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Thomas Wollmann",
+      "orcid": "0000-0002-4741-3844",
+      "joined": "2019-08",
+      "id": "thomaswollmann",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/thomaswollmann.json"
+    }
+  ],
+  "references": [
+    {
+      "authors": "Thomas Wollmann et al",
+      "title": "Workflows for microscopy image analysis and cellular phenotyping",
+      "link": "https://www.sciencedirect.com/science/article/pii/S0168165617315444",
+      "summary": ""
+    }
+  ],
+  "materials": [
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Analyse HeLa fluorescence siRNA screen",
+      "zenodo_link": "https://zenodo.org/record/3362976",
+      "level": "Intermediate",
+      "questions": [
+        "How do I analyze a HeLa fluorescence siRNA screen?",
+        "How do I segment cell nuclei?",
+        "How do I extract features from segmentations?",
+        "How do I filter segmentations by morphological features?",
+        "How do I apply a feature extraction workflow to a screen?",
+        "How do I visualize feature extraction results?"
+      ],
+      "objectives": [
+        "How to segment cell nuclei in Galaxy.",
+        "How to extract features from segmentations in Galaxy.",
+        "How to filter segmentations by morphological features in Galaxy.",
+        "How to extract features from an imaging screen in Galaxy.",
+        "How to analyse extracted features from an imaging screen in Galaxy."
+      ],
+      "key_points": [
+        "Galaxy workflows can be used to scale image analysis pipelines to whole screens.",
+        "Segmented objects can be filtered using the **Filter segmentation** tool.",
+        "Galaxy charts can be used to compare features extracted from screens showing cells with different treatments."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "imaging",
+          "tutorials": [
+            "imaging-introduction"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "machinelearning"
+          ]
+        }
+      ],
+      "time_estimation": "1H",
+      "contributors": [
+        {
+          "name": "Thomas Wollmann",
+          "orcid": "0000-0002-4741-3844",
+          "joined": "2019-08",
+          "id": "thomaswollmann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/thomaswollmann.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/imaging/tutorials/hela-screen-analysis/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "hela-screen-analysis",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Introduction to image analysis using Galaxy",
+      "zenodo_link": "https://zenodo.org/record/3362976",
+      "level": "Introductory",
+      "questions": [
+        "How do I use Galaxy with imaging data?",
+        "How do I convert images using Galaxy?",
+        "How do I display images in Galaxy?",
+        "How do I filter images in Galaxy?",
+        "How do I segment simple images in Galaxy?"
+      ],
+      "objectives": [
+        "How to handle images in Galaxy.",
+        "How to perform basic image processing in Galaxy."
+      ],
+      "key_points": [
+        "The **Image Info** tool can provide valuable metadata information of an image.",
+        "TIFF files can not directly viewed in the browser, but have to be converted.",
+        "For visualization, images with a bit-depth more than 8-bit have to be histogram equalized."
+      ],
+      "time_estimation": "1H",
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "imaging",
+          "tutorials": [
+            "hela-screen-analysis"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Thomas Wollmann",
+          "orcid": "0000-0002-4741-3844",
+          "joined": "2019-08",
+          "id": "thomaswollmann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/thomaswollmann.json"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "gitter": "shiltemann",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/imaging/tutorials/imaging-introduction/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "imaging-introduction",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Nucleoli segmentation and feature extraction using CellProfiler",
+      "questions": [
+        "How do I run an image analysis pipeline on public data using CellProfiler?",
+        "How do I analyse the DNA channel of fluorescence siRNA screens?",
+        "How do I download public image data into my history?",
+        "How do I segment and label cell nuclei?",
+        "How do I segment nucleoli (as the absence of DNA)?",
+        "How do I combine nuclei and nucleoli into one segmentation mask?",
+        "How do I extract the background of an image?",
+        "How do I relate the nucleoli to their parent nucleus?",
+        "How do I measure the image and object features?",
+        "How do I measure the image quality?"
+      ],
+      "objectives": [
+        "How to download images from a public image repository.",
+        "How to segment cell nuclei using CellProfiler in Galaxy.",
+        "How to segment cell nucleoli using CellProfiler in Galaxy.",
+        "How to extract features for images, nuclei and nucleoli."
+      ],
+      "time_estimation": "4H",
+      "key_points": [
+        "Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.",
+        "CellProfiler in Galaxy can segment and extract features of any object of interest.",
+        "The features and masks can be exported for further analysis."
+      ],
+      "contributors": [
+        {
+          "name": "Beatriz Serrano-Solano",
+          "email": "beatrizserrano.galaxy@gmail.com",
+          "twitter": "Birthae",
+          "gitter": "beatrizserrano",
+          "joined": "2020-07",
+          "id": "beatrizserrano",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/beatrizserrano.json"
+        },
+        {
+          "name": "Jean-Karim Hériché",
+          "joined": "2020-07",
+          "id": "jkh1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jkh1.json"
+        }
+      ],
+      "zenodo_link": "",
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/imaging/tutorials/tutorial-CP/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "tutorial-CP",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Object tracking using CellProfiler",
+      "zenodo_link": "http://doi.org/10.5281/zenodo.4567084",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "workflow-editor"
+          ]
+        }
+      ],
+      "questions": [
+        "How to segment and track objects in fluorescence time-lapse microscopy images?"
+      ],
+      "objectives": [
+        "Segment fluorescent objects using CellProfiler in Galaxy",
+        "Track objects over multiple frames using CellProfiler in Galaxy"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "CellProfiler in Galaxy can be used to track objects in time-lapse microscopy images"
+      ],
+      "contributors": [
+        {
+          "name": "Yi Sun",
+          "email": "yi.sun@embl.de",
+          "joined": "2021-03",
+          "id": "sunyi000",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/sunyi000.json"
+        },
+        {
+          "name": "Beatriz Serrano-Solano",
+          "email": "beatrizserrano.galaxy@gmail.com",
+          "twitter": "Birthae",
+          "gitter": "beatrizserrano",
+          "joined": "2020-07",
+          "id": "beatrizserrano",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/beatrizserrano.json"
+        },
+        {
+          "name": "Jean-Karim Hériché",
+          "joined": "2020-07",
+          "id": "jkh1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jkh1.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "object-tracking-using-cell-profiler",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    }
+  ]
+}

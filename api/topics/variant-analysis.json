@@ -1,0 +1,690 @@
+{
+  "name": "variant-analysis",
+  "type": "use",
+  "title": "Variant Analysis",
+  "summary": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+  "docker_image": "quay.io/galaxy/variant-analysis-training",
+  "edam_ontology": "topic_0199",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "introduction"
+    },
+    {
+      "type": "internal",
+      "topic_name": "sequence-analysis",
+      "tutorials": [
+        "quality-control",
+        "mapping"
+      ]
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "gitter": "bebatut",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+    },
+    {
+      "name": "Wolfgang Maier",
+      "joined": "2017-09",
+      "id": "wm75",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+    },
+    {
+      "name": "Björn Grüning",
+      "email": "bjoern.gruening@gmail.com",
+      "twitter": "bjoerngruening",
+      "gitter": "bgruening",
+      "orcid": "0000-0002-3079-6586",
+      "linkedin": "bgruening",
+      "joined": "2017-09",
+      "id": "bgruening",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json"
+    },
+    {
+      "name": "Anton Nekrutenko",
+      "email": "anton@nekrut.org",
+      "joined": "2017-09",
+      "id": "nekrut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+    }
+  ],
+  "references": [
+    {
+      "authors": "Umadevi Paila, Brad A. Chapman, Rory Kirchner, Aaron R. Quinlan",
+      "title": "GEMINI: Integrative Exploration of Genetic Variation and Genome Annotations",
+      "link": "http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003153",
+      "summary": "GEMINI query is the most versatile of all the GEMINI tools. You can use it to ask questions in simple SQL"
+    },
+    {
+      "authors": "Rasmus Nielsen, Joshua S. Paul, Anders Albrechtsen & Yun S. Song",
+      "title": "Genotype and SNP calling from next-generation sequencing data",
+      "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/",
+      "summary": "Meaningful analysis of next-generation sequencing (NGS) data, which are produced extensively by genetics and genomics studies, relies crucially on the accurate calling of SNPs and genotypes."
+    },
+    {
+      "authors": "Erik Garrison and Gabor Marth",
+      "title": "Haplotype-based variant detection from short-read sequencing",
+      "link": "https://www.researchgate.net/publication/229157122_Haplotype-based_variant_detection_from_short-read_sequencing",
+      "summary": "The direct detection of haplotypes from short-read DNA sequencing data requires changes to existing small-variant detection methods, such as Bayesian statistical framework."
+    },
+    {
+      "authors": "Aaron R. Quinlan",
+      "title": "Introduction to GEMINI",
+      "link": "https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf",
+      "summary": "GEMINI query is the most versatile of all the GEMINI tools. You can use it to ask questions in simple SQL"
+    },
+    {
+      "authors": "Torsten Seemann",
+      "title": "Snippy: Rapid bacterial SNP calling and core genome alignments",
+      "link": "https://github.com/tseemann/snippy",
+      "summary": "Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels)."
+    },
+    {
+      "authors": "Wolfgang Maier",
+      "title": "MiModD Documentation",
+      "link": "http://mimodd.readthedocs.io/en/latest/",
+      "summary": "MiModD is a comprehensive software package for mapping-by-sequencing analyses"
+    },
+    {
+      "authors": "Korbinian Schneeberger",
+      "title": "Using next-generation sequencing to isolate mutant genes from forward genetic screens",
+      "link": "https://www.researchgate.net/profile/Korbinian_Schneeberger/publication/264904703_Using_next-generation_sequencing_to_isolate_mutant_genes_from_forward_genetic_screens/",
+      "summary": "Mapping the location of causal mutations using genetic crosses has traditionally been a complex procedure, but next-generation sequencing now allows the rapid identification of causal mutations even in complex genetic backgrounds"
+    }
+  ],
+  "materials": [
+    {
+      "layout": "introduction_slides",
+      "logo": "GTN",
+      "title": "Introduction to Variant analysis",
+      "type": "introduction",
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "gitter": "yvanlebras",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json"
+        }
+      ],
+      "last_modified_at": "09-Jul-21",
+      "url": "/topics/variant-analysis/slides/introduction.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "introduction",
+      "slides": true
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Calling variants in diploid systems",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.60520",
+      "questions": [
+        "How to find variable sites in diploid genomes?"
+      ],
+      "objectives": [
+        "Identification of genetic variations using variant calling"
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "Variants versus Genotypes",
+        "Bayesian approach to variant calling",
+        "Freebayes calls variant using haplotype windows",
+        "SNPEff allows functional annotation of variants",
+        "Gemini is a flexible system for analyzing variation patterns"
+      ],
+      "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+        },
+        {
+          "name": "Nicola Soranzo",
+          "gitter": "nsoranzo",
+          "orcid": "0000-0003-3627-5340",
+          "twitter": "NicolaSoranzo",
+          "joined": "2017-09",
+          "id": "nsoranzo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/variant-analysis/tutorials/dip/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "dip",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Calling variants in non-diploid systems",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1251112",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "How does frequency of mitochondrial polymorphisms change from mother to child?"
+      ],
+      "objectives": [
+        "Using Galaxy's main site we will see how to call variants in bacteria, viruses, and organelles."
+      ],
+      "time_estimation": "1h30m",
+      "key_points": [
+        "Variation in human mitochondria is a proxy for other haploid systems.",
+        "Nucleotide variants in haploid systems may have any frequency between 0 and 1.",
+        "Distinguishing true variants from noise is not easy and requires accounting <br> for strand bias and read placement bias.",
+        "FreeBayes can be effectively used to call variants in haploid systems."
+      ],
+      "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+        },
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json"
+        }
+      ],
+      "last_modified_at": "17-Jun-21",
+      "url": "/topics/variant-analysis/tutorials/non-dip/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "non-dip",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Exome sequencing data analysis for diagnosing a genetic disease",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3054169",
+      "questions": [
+        "How do you identify genetic variants in samples based on exome sequencing data?",
+        "How do you, among the set of detected variants, identify candidate causative variants for a given phenotype/disease?"
+      ],
+      "objectives": [
+        "Jointly call variants and genotypes for a family trio from whole-exome sequencing data",
+        "Use variant annotation and the observed inheritance pattern of a phenotype to identify candidate causative variants and to prioritize them"
+      ],
+      "time_estimation": "5h",
+      "key_points": [
+        "Exome sequencing is an efficient way to identify disease-relevant genetic variants.",
+        "Freebayes is a good variant and genotype caller for the joint analysis of multiple samples. It is straightforward to use and requires only minimal processing of mapped reads.",
+        "Variant annotation and being able to exploit genotype information across family members is key to identifying candidate disease variants. SnpEff and GEMINI, in particular, are powerful tools offered by Galaxy for that purpose."
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        },
+        {
+          "name": "Torsten Houwaart",
+          "joined": "2017-09",
+          "id": "torhou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/torhou.json"
+        },
+        {
+          "name": "Anika Erxleben",
+          "email": "anikaerxleben@gmail.com",
+          "orcid": "0000-0002-7427-6478",
+          "joined": "2017-09",
+          "id": "erxleben",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "gitter": "bgruening",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/variant-analysis/tutorials/exome-seq/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "exome-seq",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
+      "zenodo_link": "http://zenodo.org/record/3906454",
+      "questions": [
+        "Learn how to get and use data from the Sequence Read Archive in Galaxy."
+      ],
+      "objectives": [
+        "Understand how Galaxy and the Sequence Read Archive interact.",
+        "Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy."
+      ],
+      "time_estimation": "45m",
+      "key_points": [
+        "Sequence data in the SRA can be directly imported into Galaxy"
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Marius van den Beek",
+          "joined": "2018-06",
+          "id": "mvdbeek",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json"
+        },
+        {
+          "name": "Dave Clements",
+          "joined": "2017-09",
+          "id": "tnabtaf",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json"
+        },
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+        }
+      ],
+      "last_modified_at": "10-May-21",
+      "url": "/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "sars-cov-2",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Identification of somatic and germline variants from tumor and normal sample pairs",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.2582555",
+      "questions": [
+        "What are the specific challenges in somatic variant calling that set it apart from regular diploid variant calling?",
+        "How can you call variants and classify them according to their presence/absence in/from tumor and normal tissue of the same individual?",
+        "How can you annotate variants and affected genes with prior knowledge from human genetic and cancer-specific databases to generate clinically relevant reports?"
+      ],
+      "objectives": [
+        "Call variants and their somatic status from whole-exome sequencing data",
+        "Annotate variants with a wealth of human genetic and cancer-specific information extracted from public databases",
+        "Add gene-level annotations and generate reports of annotated somatic and germline variants, loss-of-heterozygosity (LOH) events, and affected genes, ready for interpretation by clinicians"
+      ],
+      "time_estimation": "7h",
+      "key_points": [
+        "Follow best practices for read mapping, quality control and mapped reads postprocessing to minimize false-positive variant calls.",
+        "Use a dedicated somatic variant caller to call variants and to classify them into somatic, germline and LOH event variants on statistical grounds.",
+        "Annotations and queries based on variant properties add relevance to variant and gene reports.",
+        "A framework like GEMINI is very helpful for managing, annotating and querying lists of variants in a flexible way.",
+        "Prefer public, free annotation sources to foster reproducibility and information sharing."
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/variant-analysis/tutorials/somatic-variants/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "somatic-variants",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "M. tuberculosis Variant Analysis",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3496437",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "How do we detect differences between a set of reads from *M. tuberculosis* (Mtb) and the Mtb reference genome"
+      ],
+      "objectives": [
+        "How should we filter those variants",
+        "How can we predict drug resistance from those variants",
+        "How do we annotate those variants"
+      ],
+      "time_estimation": "2h",
+      "level": "Intermediate",
+      "key_points": [
+        "variants in *M. tuberculosis* sequencing data can be discovered using common microbial bioinformatics tools",
+        "it is not enough to just call variants, variant calling involves multiple quality control steps",
+        "the choice of reference genome and some quality control procedures are species specific, and require knowledge of the organism in question"
+      ],
+      "contributors": [
+        {
+          "name": "Peter van Heusden",
+          "twitter": "pvanheus",
+          "orcid": "0000-0001-6553-5274",
+          "joined": "2017-09",
+          "bio": "Research at the South African National Bioinformatics Institute",
+          "id": "pvanheus",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pvanheus.json"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        },
+        {
+          "name": "Thoba Lose",
+          "joined": "2019-11",
+          "id": "thobalose",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/thobalose.json"
+        }
+      ],
+      "last_modified_at": "18-May-21",
+      "url": "/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "tb-variant-analysis",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Mapping and molecular identification of phenotype-causing mutations",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1098033",
+      "questions": [
+        "What is mapping-by-sequencing?",
+        "How can it help you identify the causative mutation in phenotypic mutants isolated from genetic screens?"
+      ],
+      "objectives": [
+        "Use joint variant calling and extraction to facilitate variant comparison across samples",
+        "Perform variant linkage analyses for phenotypically selected recombinant progeny",
+        "Filter, annotate and report lists of variants"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Mapping-by-sequencing is a powerful method for the molecular identification of mutations",
+        "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        }
+      ],
+      "last_modified_at": "07-Mar-19",
+      "url": "/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "mapping-by-sequencing",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Microbial Variant Calling",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.582600",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "How do we detect differences between a set of reads from a microorganism and a reference genome"
+      ],
+      "objectives": [
+        "Find variants between a reference genome and a set of reads",
+        "Visualise the SNP in context of the reads aligned to the genome",
+        "Determine the effect of those variants on genomic features",
+        "Understand if the SNP is potentially affecting the phenotype"
+      ],
+      "time_estimation": "45m",
+      "key_points": [
+        "We used a tool called Snippy to call variants between our reads and our reference genome.",
+        "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype.",
+        "We used the JBrowse genome browser to visualise what these changes look like."
+      ],
+      "contributors": [
+        {
+          "name": "Anna Syme",
+          "joined": "2017-09",
+          "id": "annasyme",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        },
+        {
+          "name": "Torsten Seemann",
+          "joined": "2018-06",
+          "id": "tseemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tseemann.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/variant-analysis/tutorials/microbial-variants/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "microbial-variants",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
+      "level": "Intermediate",
+      "zenodo_link": "https://zenodo.org/record/5036687",
+      "questions": [
+        "How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?",
+        "Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?"
+      ],
+      "objectives": [
+        "Repeat SARS-CoV-2 data preparation",
+        "Select and run workflow to extract annotated allelic variants from FASTQ files",
+        "Run workflow to summarize and generate report for previously called allelic variants",
+        "Interpret summaries for annotated allelic variants",
+        "Run workflow to extract consensus sequences",
+        "Select and run tools to assign clades/lineages"
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input",
+        "Data from batches of samples can be processed in parallel using collections",
+        "Annotated allelic variants can be used to build consensus sequences for and assign each sample to known viral clades/lineages"
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "last_modified_at": "17-Oct-21",
+      "url": "/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "sars-cov-2-variant-discovery",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    }
+  ]
+}

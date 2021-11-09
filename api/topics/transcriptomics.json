@@ -1,0 +1,2458 @@
+{
+  "name": "transcriptomics",
+  "type": "use",
+  "title": "Transcriptomics",
+  "summary": "Training material for all kinds of transcriptomics analysis.",
+  "docker_image": "quay.io/galaxy/transcriptomics-training",
+  "edam_ontology": "topic_3308",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "introduction"
+    },
+    {
+      "type": "internal",
+      "topic_name": "sequence-analysis",
+      "tutorials": [
+        "quality-control",
+        "mapping"
+      ]
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "gitter": "bebatut",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+    },
+    {
+      "name": "Maria Doyle",
+      "joined": "2018-09",
+      "id": "mblue9",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+    },
+    {
+      "name": "Florian Heyl",
+      "joined": "2018-08",
+      "id": "heylf",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/heylf.json"
+    },
+    {
+      "name": "Wendi Bacon",
+      "email": "wendi@ebi.ac.uk",
+      "joined": "2020-03",
+      "id": "nomadscientist",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+    }
+  ],
+  "subtopics": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "description": "Start here if you are new to RNA-Seq analysis in Galaxy"
+    },
+    {
+      "id": "end-to-end",
+      "title": "End-to-End Analysis",
+      "description": "These tutorials take you from raw sequencing reads to pathway analysis"
+    },
+    {
+      "id": "single-cell",
+      "title": "Single-cell RNA-seq",
+      "description": "Tutorials about analysis of single-cell RNA-seq data"
+    },
+    {
+      "id": "single-cell-CS",
+      "title": "Single-cell RNA-seq: Case Study",
+      "description": "Tutorials using a single published single-cell RNA-seq dataset for a variety of analyses"
+    },
+    {
+      "id": "visualisation",
+      "title": "Visualisation",
+      "description": "Tutorials covering data visualisation"
+    }
+  ],
+  "references": [
+    {
+      "authors": "Shirley Pepke et al",
+      "title": "Computation for ChIP-seq and RNA-seq studies",
+      "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4121056/",
+      "summary": ""
+    },
+    {
+      "authors": "Paul L. Auer & R. W. Doerge",
+      "title": "Statistical Design and Analysis of RNA Sequencing Data",
+      "link": "http://www.genetics.org/content/185/2/405",
+      "summary": "Insights into proper planning of your RNA-seq run! To read before any RNA-seq experiment!"
+    },
+    {
+      "authors": "Ian Korf",
+      "title": "Genomics: the state of the art in RNA-seq analysis",
+      "link": "https://www.ncbi.nlm.nih.gov/pubmed/24296473",
+      "summary": "A refreshingly honest view on the non-trivial aspects of RNA-seq analysis"
+    },
+    {
+      "authors": "Marie-Agnès Dillies et al",
+      "title": "A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis",
+      "link": "http://bib.oxfordjournals.org/content/14/6/671",
+      "summary": "Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)"
+    },
+    {
+      "authors": "Franck  Rapaport et al",
+      "title": "Comprehensive evaluation of differential gene expression analysis methods for RNA-seq data",
+      "link": "https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-9-r95",
+      "summary": "Evaluation of methods for differential gene expression analysis"
+    },
+    {
+      "authors": "Charlotte Soneson & Mauro Delorenzi",
+      "title": "A comparison of methods for differential expression analysis of RNA-seq data",
+      "link": "http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91",
+      "summary": ""
+    },
+    {
+      "authors": "Adam Roberts et al",
+      "title": "Improving RNA-Seq expression estimates by correcting for fragment bias",
+      "link": "https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-3-r22",
+      "summary": ""
+    },
+    {
+      "authors": "Manuel Garber et al",
+      "title": "Computational methods for transcriptome annotation and quantification using RNA-seq",
+      "link": "http://www.nature.com/nmeth/journal/v8/n6/abs/nmeth.1613.html",
+      "summary": "Classical paper about the computational aspects of RNA-seq data analysis"
+    },
+    {
+      "authors": "Cole Trapnell et al",
+      "title": "Differential gene and transcript expression analysis of RNA-seq experiments with TopHat and Cufflinks",
+      "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/",
+      "summary": ""
+    },
+    {
+      "authors": "Zhong Wang et al",
+      "title": "RNA-Seq: a revolutionary tool for transcriptomics",
+      "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/",
+      "summary": ""
+    },
+    {
+      "authors": "Dittrich, M. T. and Klau, G. W. and Rosenwald, A. and Dandekar, T. and Muller, T.",
+      "title": "Identifying functional modules in protein-protein interaction networks: an integrated exact approach",
+      "link": "http://dx.doi.org/10.1093/bioinformatics/btn161",
+      "summary": ""
+    },
+    {
+      "authors": "May, Ali; Brandt, Bernd W; El-Kebir, Mohammed; Klau, Gunnar W; Zaura, Egija; Crielaard, Wim; Heringa, Jaap; Abeln, Sanne",
+      "title": "metaModules identifies key functional subnetworks in microbiome-related disease",
+      "link": "http://dx.doi.org/10.1093/bioinformatics/btv526",
+      "summary": ""
+    },
+    {
+      "authors": "Pavankumar, Videm; Dominic, Rose; Fabrizio, Costa;  Rolf, Backofen",
+      "title": "BlockClust: efficient clustering and classification of non-coding RNAs from short read RNA-seq profiles",
+      "link": "doi:10.1093/bioinformatics/btu270",
+      "summary": ""
+    },
+    {
+      "authors": "Tekman, Mehmet and Batut, Bérénice; Ostrovsky, Alexander; Antoniewski, Christophe; Clements, Dave; Ramirez, Fidel; Etherington, Graham J; Hotz, Hans-Rudolf; Scholtalbers, Jelle; Manning, Jonathan R; Bellenger, Lea; Doyle, Maria A; Heydarian, Mohammad; Huang, Ni; Soranzo, Nicola; Moreno, Pablo; Mautner, Stefan; Papatheodorou, Irene; Nekrutenko, Anton; Taylor, James; Blankenberg, Daniel; Backofen, Rolf; Grüning, Björn;",
+      "title": "A single-cell RNA-sequencing training and analysis suite using the Galaxy framework",
+      "link": "https://doi.org/10.1093/gigascience/giaa102",
+      "summary": ""
+    }
+  ],
+  "materials": [
+    {
+      "layout": "introduction_slides",
+      "logo": "GTN",
+      "class": "enlarge120",
+      "subtopic": "introduction",
+      "priority": 1,
+      "title": "Introduction to Transcriptomics",
+      "type": "introduction",
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        },
+        {
+          "name": "Anika Erxleben",
+          "email": "anikaerxleben@gmail.com",
+          "orcid": "0000-0002-7427-6478",
+          "joined": "2017-09",
+          "id": "erxleben",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json"
+        },
+        {
+          "name": "Markus Wolfien",
+          "joined": "2017-09",
+          "id": "mwolfien",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mwolfien.json"
+        }
+      ],
+      "last_modified_at": "26-Jul-21",
+      "url": "/topics/transcriptomics/slides/introduction.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "introduction",
+      "slides": true
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "1: RNA-Seq reads to counts",
+      "subtopic": "end-to-end",
+      "zenodo_link": "https://zenodo.org/record/4249555",
+      "tags": [
+        "collections",
+        "mouse",
+        "QC"
+      ],
+      "questions": [
+        "How to convert RNA-seq reads into counts?",
+        "How to perform quality control (QC) of RNA-seq reads?",
+        "How to do this analysis efficiently in Galaxy?"
+      ],
+      "objectives": [
+        "Learn how RNA-seq reads are converted into counts",
+        "Understand QC steps that can be performed on RNA-seq reads",
+        "Generate interactive reports to summarise QC information with MultiQC",
+        "Use the Galaxy Rule-based Uploader to import FASTQs from URLs",
+        "Make use of Galaxy Collections for a tidy analysis",
+        "Create a Galaxy Workflow that converts RNA-seq reads into counts"
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)",
+        "The aligned reads (BAMs) can then be converted to counts",
+        "Many QC steps can be performed to help check the quality of the data",
+        "MultiQC can be used to create a nice summary report of QC information",
+        "The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        },
+        {
+          "name": "Belinda Phipson",
+          "joined": "2018-09",
+          "id": "bphipson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json"
+        },
+        {
+          "name": "Harriet Dashnow",
+          "joined": "2018-09",
+          "id": "hdashnow",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hdashnow.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "ref-based"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections",
+            "upload-rules"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-counts-to-genes"
+          ]
+        }
+      ],
+      "last_modified_at": "20-Sep-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-reads-to-counts",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "2: RNA-seq counts to genes",
+      "subtopic": "end-to-end",
+      "zenodo_link": "https://zenodo.org/record/4273218",
+      "tags": [
+        "limma-voom",
+        "mouse",
+        "QC"
+      ],
+      "questions": [
+        "What are the differentially expressed genes in the mammary gland of pregnant versus lactating mice?",
+        "How to analyze RNA count data using limma-voom?",
+        "How to perform quality control (QC) of RNA-seq count data?"
+      ],
+      "objectives": [
+        "Analysis of RNA-seq count data using limma-voom",
+        "QC of count data",
+        "Visualisation and interactive exploration of count data",
+        "Identification of differentially expressed genes"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "The limma-voom tool can be used to perform differential expression and output useful plots",
+        "Multiple comparisons can be input and compared",
+        "Results can be interactively explored with limma-voom via Glimma"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        },
+        {
+          "name": "Belinda Phipson",
+          "joined": "2018-09",
+          "id": "bphipson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json"
+        },
+        {
+          "name": "Jovana Maksimovic",
+          "joined": "2019-04",
+          "id": "JovMaksimovic",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/JovMaksimovic.json"
+        },
+        {
+          "name": "Anna Trigos",
+          "github": false,
+          "joined": "2018-09",
+          "id": "annatrigos",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annatrigos.json"
+        },
+        {
+          "name": "Matt Ritchie",
+          "joined": "2018-09",
+          "id": "mritchie",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mritchie.json"
+        },
+        {
+          "name": "Harriet Dashnow",
+          "joined": "2018-09",
+          "id": "hdashnow",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hdashnow.json"
+        },
+        {
+          "name": "Shian Su",
+          "joined": "2019-02",
+          "id": "Shians",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Shians.json"
+        },
+        {
+          "name": "Charity Law",
+          "joined": "2018-09",
+          "id": "charitylaw",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/charitylaw.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-reads-to-counts"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-genes-to-pathways",
+            "rna-seq-viz-with-heatmap2",
+            "rna-seq-viz-with-volcanoplot",
+            "rna-seq-analysis-with-askomics-it"
+          ]
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-counts-to-genes",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "3: RNA-seq genes to pathways",
+      "subtopic": "end-to-end",
+      "zenodo_link": "https://zenodo.org/record/2596382",
+      "tags": [
+        "mouse"
+      ],
+      "questions": [
+        "What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?"
+      ],
+      "objectives": [
+        "Identification of differentially expressed pathways"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "goseq can be used to identify enriched gene ontology categories and incorporate gene length bias",
+        "fgsea can be used to identify enriched gene sets, such as the MSigDB collections, and generate barcode plots",
+        "EGSEA can be used to identify enriched gene sets, such as MSigDB and KEGG, generating visualisations that include heatmaps and KEGG pathway diagrams",
+        "Multiple methods can be used to help identify differentially expressed pathways and to visualise results"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        },
+        {
+          "name": "Belinda Phipson",
+          "joined": "2018-09",
+          "id": "bphipson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json"
+        }
+      ],
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-genes-to-pathways",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "An introduction to scRNA-seq data analysis",
+      "subtopic": "single-cell",
+      "priority": 1,
+      "level": "Intermediate",
+      "video": true,
+      "zenodo_link": "",
+      "tags": [
+        "single-cell",
+        "español"
+      ],
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+          "es"
+        ],
+        "video": true
+      },
+      "questions": [
+        "How are samples compared?",
+        "How are cells captured?",
+        "How does bulk RNA-seq differ from scRNA-seq?",
+        "Why is clustering important?"
+      ],
+      "objectives": [
+        "To understand the pitfalls in scRNA-seq sequencing and amplification, and how they are overcome.",
+        "Know the types of variation in an analysis and how to control for them.",
+        "Grasp what dimension reduction is, and how it might be performed.",
+        "Be familiarised with the main types of clustering techniques and when to use them."
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "scRNA-seq requires much pre-processing before analysis can be performed.",
+        "Groups of similarly profiled-cells are compared against other groups.",
+        "Detectability issues requires careful consideration at all stages.",
+        "Clustering is an integral part of an analysis."
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-preprocessing"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        }
+      ],
+      "last_modified_at": "20-Oct-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-intro/slides.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-intro",
+      "hands_on": false,
+      "slides": true,
+      "workflows": false,
+      "tours": false,
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Analysis of plant scRNA-Seq Data with Scanpy",
+      "subtopic": "single-cell",
+      "priority": 9,
+      "zenodo_link": "https://zenodo.org/record/4597857",
+      "tags": [
+        "single-cell",
+        "plants",
+        "paper-replication"
+      ],
+      "questions": [
+        "Can we reclaim cell markers using a different analysis method?",
+        "Are highly variable genes paramount to the analysis?"
+      ],
+      "objectives": [
+        "Perform filtering, dimensionality reduction, and clustering",
+        "Generate a DotPlot emulating the original paper using a different analysis tool",
+        "Determine robust clusters across scRNA-seq pipelines"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-scanpy-pbmc3k"
+          ]
+        }
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Filtering parameters are dependent on the dataset, and should be explored using scatter or violin plots",
+        "A DotPlot is a fantastic way to validate clusters across different analyses"
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        },
+        {
+          "name": "Beatriz Serrano-Solano",
+          "email": "beatrizserrano.galaxy@gmail.com",
+          "twitter": "Birthae",
+          "gitter": "beatrizserrano",
+          "joined": "2020-07",
+          "id": "beatrizserrano",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/beatrizserrano.json"
+        },
+        {
+          "name": "Cristóbal Gallardo",
+          "joined": "2020-11",
+          "id": "gallardoalba",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json"
+        },
+        {
+          "name": "Pavankumar Videm",
+          "joined": "2017-09",
+          "id": "pavanvidem",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "27-May-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-plant/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-plant",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "CLIP-Seq data analysis from pre-processing to motif detection",
+      "zenodo_link": "https://zenodo.org/record/1327423",
+      "questions": [
+        "How is raw CLIP-Seq data processed and analysed?",
+        "How do I find binding motifs and targets for a protein (e.g., RBFOX2)?"
+      ],
+      "objectives": [
+        "Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads",
+        "Align trimmed reads with STAR",
+        "De-duplicate the read library",
+        "Inspect the read mapping and de-duplication quality",
+        "Perform peak calling with PEAKachu",
+        "Analyse the peaks and find potential binding motifs and targets",
+        "Check the quality of the peak calling"
+      ],
+      "time_estimation": "6h",
+      "key_points": [
+        "Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.",
+        "Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.",
+        "CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.",
+        "By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced."
+      ],
+      "contributors": [
+        {
+          "name": "Florian Heyl",
+          "joined": "2018-08",
+          "id": "heylf",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/heylf.json"
+        },
+        {
+          "name": "Daniel Maticzka",
+          "joined": "2018-08",
+          "id": "dmaticzka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/dmaticzka.json"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/clipseq/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "clipseq",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Clustering 3K PBMCs with Scanpy",
+      "subtopic": "single-cell",
+      "priority": 8,
+      "zenodo_link": "https://zenodo.org/record/3581213",
+      "questions": [
+        "What are the steps to prepare single-cell RNA-Seq data for clustering?",
+        "How to cluster cells in single-cell RNA-Seq data?",
+        "How cell type annotation can be assigned to cell clusters?"
+      ],
+      "objectives": [
+        "Describe an AnnData object to store single-cell data",
+        "Explain the preprocessing steps for single-cell data",
+        "Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC",
+        "Execute data normalization and scaling",
+        "Identify highly variable genes",
+        "Construct and run a dimensionality reduction using Principal Component Analysis",
+        "Perform a graph-based clustering for cells",
+        "Identify marker genes for the clusters",
+        "Construct and run a cell type annotation for the clusters"
+      ],
+      "time_estimation": "5H",
+      "key_points": [
+        "scRNA-seq data analysis is complex and exploratory process, still in development",
+        "Different tools and parameters should be tested for each step of the process"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-preprocessing",
+            "scrna-preprocessing-tenx"
+          ]
+        }
+      ],
+      "tags": [
+        "single-cell",
+        "10x"
+      ],
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        },
+        {
+          "name": "Hans-Rudolf Hotz",
+          "email": "hrhotz@googlemail.com",
+          "twitter": "hrhotz",
+          "gitter": "hrhotz",
+          "orcid": "0000-0002-2799-424X",
+          "linkedin": "hans-rudolf-hotz-542b31",
+          "joined": "2017-09",
+          "id": "hrhotz",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrhotz.json"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-scanpy-pbmc3k",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "De novo transcriptome reconstruction with RNA-Seq",
+      "subtopic": "introduction",
+      "priority": 3,
+      "zenodo_link": "https://zenodo.org/record/254485#.WKODmRIrKRu",
+      "questions": [
+        "What genes are differentially expressed between G1E cells and megakaryocytes?",
+        "How can we generate a transcriptome de novo from RNA sequencing data?"
+      ],
+      "objectives": [
+        "Analysis of RNA sequencing data using a reference genome",
+        "Reconstruction of transcripts without reference transcriptome (de novo)",
+        "Analysis of differentially expressed genes"
+      ],
+      "time_estimation": "6h",
+      "key_points": [
+        "De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts.",
+        "Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage.",
+        "Visualizing data on a genome browser is a great way to display interesting patterns of differential expression."
+      ],
+      "contributors": [
+        {
+          "name": "Mallory Freeberg",
+          "joined": "2017-09",
+          "id": "malloryfreeberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/malloryfreeberg.json"
+        },
+        {
+          "name": "Mo Heydarian",
+          "email": "mheydarian@gmail.com",
+          "joined": "2017-09",
+          "id": "moheydarian",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/moheydarian.json"
+        }
+      ],
+      "last_modified_at": "29-Jun-21",
+      "url": "/topics/transcriptomics/tutorials/de-novo/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "de-novo",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Differential abundance testing of small RNAs",
+      "zenodo_link": "https://zenodo.org/record/826906",
+      "questions": [
+        "What small RNAs are expressed?",
+        "What RNA features have significantly different numbers of small RNAs targeting them between two conditions?"
+      ],
+      "objectives": [
+        "Process small RNA-seq datasets to determine quality and reproducibility.",
+        "Filter out contaminants (e.g. rRNA reads) in small RNA-seq datasets.",
+        "Differentiate between subclasses of small RNAs based on their characteristics.",
+        "Identify differently abundant small RNAs and their targets."
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "Analysis of small RNAs is complex due to the diversity of small RNA subclasses.",
+        "Both alignment to references and transcript quantification approaches are useful for small RNA-seq analyses."
+      ],
+      "contributors": [
+        {
+          "name": "Mallory Freeberg",
+          "joined": "2017-09",
+          "id": "malloryfreeberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/malloryfreeberg.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/srna/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "srna",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Downstream Single-cell RNA analysis with RaceID",
+      "subtopic": "single-cell",
+      "priority": 6,
+      "zenodo_link": "https://zenodo.org/record/1511582",
+      "tags": [
+        "single-cell"
+      ],
+      "questions": [
+        "What is normalisation and why is it necessary?",
+        "How many types of unwanted variation are there?",
+        "How are biological phenotypes clustered?",
+        "What is the difference between PCA and tSNE?",
+        "What is the difference between cell trajectory and cell fate?"
+      ],
+      "objectives": [
+        "Filtering, normalising, and clustering cells in a matrix",
+        "Assessing the quality of individual clusters",
+        "Inferring cell type lineages",
+        "Examining gene expression",
+        "Determining the top most expressive genes per cluster",
+        "Correcting for unwanted variation"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-scater-qc"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-preprocessing-tenx"
+          ]
+        }
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Clustering single-cell RNA-seq data is often noisy",
+        "RaceID can be used to cluster cells based on the their gene expression profiles",
+        "StemID describes a hierarchical relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development",
+        "FateID predicts the potential lineages that cells within specific clusters are inclined towards"
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        },
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "16-Apr-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-raceid/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-raceid",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Filter, Plot and Explore Single-cell RNA-seq Data",
+      "subtopic": "single-cell-CS",
+      "priority": 2,
+      "zenodo_link": "https://zenodo.org/record/4624461",
+      "questions": [
+        "Is my single cell dataset a quality dataset?",
+        "How do I generate and annotate cell clusters?",
+        "How do I pick thresholds and parameters in my analysis? What's a \"reasonable\" number, and will the world collapse if I pick the wrong one?"
+      ],
+      "objectives": [
+        "Interpret quality control plots to direct parameter decisions",
+        "Repeat analysis from matrix to clustering",
+        "Identify decision-making points",
+        "Appraise data outputs and decisions",
+        "Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process"
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis",
+        "Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "droplet-quantification-preprocessing"
+          ]
+        }
+      ],
+      "tags": [
+        "single-cell",
+        "10x",
+        "paper-replication",
+        "interactive-tools",
+        "español"
+      ],
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@ebi.ac.uk",
+          "joined": "2020-03",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        }
+      ],
+      "translations": {
+        "tutorial": [
+          "es"
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "last_modified_at": "01-Oct-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-seq-basic-pipeline",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Generating a single cell matrix using Alevin",
+      "subtopic": "single-cell-CS",
+      "priority": 1,
+      "zenodo_link": "https://zenodo.org/record/4574153",
+      "questions": [
+        "I have some single cell FASTQ files I want to analyse. Where do I start?"
+      ],
+      "objectives": [
+        "Repeat matrix generation for any droplet-based single cell sequencing data",
+        "Apply data combination and metadata editing for particular experimental designs",
+        "Interpret quality control (QC) plots to make informed decisions on cell thresholds",
+        "Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata"
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Create a scanpy-accessible AnnData object from FASTQ files, including relevant cell and gene metadata",
+        "Combine multiple samples and label according to study design"
+      ],
+      "tags": [
+        "single-cell",
+        "10x",
+        "paper-replication",
+        "español"
+      ],
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@ebi.ac.uk",
+          "joined": "2020-03",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Jonathan Manning",
+          "email": "jmanning@ebi.ac.uk",
+          "joined": "2021-02",
+          "id": "pinin4fjords",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pinin4fjords.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-intro",
+            "scrna-umis"
+          ]
+        }
+      ],
+      "translations": {
+        "tutorial": [
+          "es"
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "16-Sep-21",
+      "url": "/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "droplet-quantification-preprocessing",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "GO Enrichment Analysis",
+      "zenodo_link": "https://zenodo.org/record/2565417#.XGXUXlz7TIU",
+      "questions": [
+        "How can I functionally interpret a list of genes of interest that I obtained from my experiment?"
+      ],
+      "objectives": [
+        "How to perform a GO Enrichment Analysis",
+        "How to interpret and simplify the results"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "The goenrichment tool can be used to perform GO Enrichment analysis",
+        "One needs to be careful when chosing the background population",
+        "There are several methods to simplify the output of the GO Enrichment analysis"
+      ],
+      "contributors": [
+        {
+          "name": "IGC Bioinformatics Unit",
+          "joined": "2018-12",
+          "id": "igcbioinformatics",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/igcbioinformatics.json"
+        },
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/goenrichment/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "goenrichment",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Network analysis with Heinz",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1344105",
+      "tags": [
+        "metatranscriptomics",
+        "network analysis"
+      ],
+      "questions": [
+        "Which pathways are potentially contributing to dental caries?"
+      ],
+      "objectives": [
+        "Network Analysis of metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
+      ],
+      "time_estimation": "1h30m",
+      "key_points": [
+        "Using Heinz do the network analysis based on the metatranscriptomics or transcriptomics data.",
+        "Extracting the signals hidden in the p-value distribution of the differential expression analysis.",
+        "Visualizing the pinpointed subnetwork helps us understand the result better",
+        "Heinz helps narrow down the scope to find the key pathways",
+        "Multiple CPUs will accelerate the computation especially for the complex datasets"
+      ],
+      "contributors": [
+        {
+          "name": "Chao (Cico) Zhang",
+          "maintainer_contact": "https://hi-it.org",
+          "twitter": "CicoCN",
+          "joined": "2018-08",
+          "id": "cicozhang",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/cicozhang.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/network-analysis-with-heinz/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "network-analysis-with-heinz",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Plates, Batches, and Barcodes",
+      "subtopic": "single-cell",
+      "priority": 4,
+      "video": true,
+      "zenodo_link": "",
+      "tags": [
+        "single-cell"
+      ],
+      "questions": [
+        "What is a batch when it comes to single cells?",
+        "What’s the difference between a barcode and an index?",
+        "What is batch effect and how do you prevent it?",
+        "What is a lane?"
+      ],
+      "objectives": [
+        "How to set up plates to prevent batch effect",
+        "Proper naming conventions when dealing with scRNA-seq samples"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "Balanced batches and replicates allow bioinformatic batch correction",
+        "A sequencing lane often contains multiple batches, and is itself a batch effect!"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-umis"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-scater-qc"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@ebi.ac.uk",
+          "joined": "2020-03",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        },
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json"
+        }
+      ],
+      "last_modified_at": "12-Apr-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-plates-batches-barcodes",
+      "hands_on": false,
+      "slides": true,
+      "workflows": false,
+      "tours": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Pre-processing of 10X Single-Cell RNA Datasets",
+      "subtopic": "single-cell",
+      "priority": 7,
+      "zenodo_link": "https://zenodo.org/record/3457880",
+      "tags": [
+        "single-cell",
+        "10x"
+      ],
+      "questions": [
+        "What is 10X?",
+        "What is STARsolo and what is Cell Ranger?",
+        "What are BCL and MTX files?",
+        "What is an HDF5 file, and why is it important?"
+      ],
+      "objectives": [
+        "Demultiplex single-cell FASTQ data from 10X Genomics",
+        "Learn about transparent matrix formats",
+        "Understand the importance of high and low quality cells"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "Barcode FASTQ Reads are used to parse cDNA sequencing Reads.",
+        "A raw matrix is too large to process alone, and need to be filtered into a high quality one for downstream analysis"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-preprocessing"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-scanpy-pbmc3k"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        },
+        {
+          "name": "Hans-Rudolf Hotz",
+          "email": "hrhotz@googlemail.com",
+          "twitter": "hrhotz",
+          "gitter": "hrhotz",
+          "orcid": "0000-0002-2799-424X",
+          "linkedin": "hans-rudolf-hotz-542b31",
+          "joined": "2017-09",
+          "id": "hrhotz",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrhotz.json"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json"
+        },
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@ebi.ac.uk",
+          "joined": "2020-03",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "23-Apr-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-preprocessing-tenx",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/scrna_preprocessing/tutorial"
+      ],
+      "title": "Pre-processing of Single-Cell RNA Data",
+      "subtopic": "single-cell",
+      "priority": 2,
+      "zenodo_link": "https://zenodo.org/record/3253142",
+      "tags": [
+        "single-cell"
+      ],
+      "questions": [
+        "What is single-cell?",
+        "How do we process a batch?",
+        "How do we process multiple batches?",
+        "How do we check for cross-contamination?"
+      ],
+      "objectives": [
+        "Demultiplex FASTQ data via UMI-tools",
+        "Understand and validate the extraction of barcodes",
+        "Obtain an overview of general alignment and quantification techniques",
+        "Generate a count matrix for downstream single-cell RNA analysis"
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "Verifying the distribution of barcodes via a FASTQC plot",
+        "Relocating barcodes into headers",
+        "Merging matrices from different batches together",
+        "Removing unwanted barcodes"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-intro"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-umis"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        },
+        {
+          "name": "Anika Erxleben",
+          "email": "anikaerxleben@gmail.com",
+          "orcid": "0000-0002-7427-6478",
+          "joined": "2017-09",
+          "id": "erxleben",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json"
+        },
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-preprocessing",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Reference-based RNA-Seq data analysis",
+      "subtopic": "introduction",
+      "priority": 2,
+      "tags": [
+        "bulk",
+        "rna-seq"
+      ],
+      "zenodo_link": "https://zenodo.org/record/4541751",
+      "questions": [
+        "What are the steps to process RNA-Seq data?",
+        "How to identify differentially expressed genes across multiple experimental conditions?",
+        "What are the biological functions impacted by the differential expression of genes?"
+      ],
+      "objectives": [
+        "Check a sequence quality report generated by FastQC for RNA-Seq data",
+        "Explain the principle and specificity of mapping of RNA-Seq data to an eukaryotic reference genome",
+        "Select and run a state of the art mapping tool for RNA-Seq data",
+        "Evaluate the quality of mapping results",
+        "Describe the process to estimate the library strandness",
+        "Estimate the number of reads per genes",
+        "Explain the count normalization to perform before sample comparison",
+        "Construct and run a differential gene expression analysis",
+        "Analyze the DESeq2 output to identify, annotate and visualize differentially expressed genes",
+        "Perform a gene ontology enrichment analysis",
+        "Perform and visualize an enrichment analysis for KEGG pathways"
+      ],
+      "time_estimation": "8h",
+      "key_points": [
+        "A spliced mapping tool should be used on eukaryotic RNA-Seq data",
+        "Numerous factors should be taken into account when running a differential gene expression analysis"
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-viz-with-heatmap2",
+            "rna-seq-viz-with-volcanoplot",
+            "rna-seq-genes-to-pathways"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        },
+        {
+          "name": "Mallory Freeberg",
+          "joined": "2017-09",
+          "id": "malloryfreeberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/malloryfreeberg.json"
+        },
+        {
+          "name": "Mo Heydarian",
+          "email": "mheydarian@gmail.com",
+          "joined": "2017-09",
+          "id": "moheydarian",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/moheydarian.json"
+        },
+        {
+          "name": "Anika Erxleben",
+          "email": "anikaerxleben@gmail.com",
+          "orcid": "0000-0002-7427-6478",
+          "joined": "2017-09",
+          "id": "erxleben",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json"
+        },
+        {
+          "name": "Pavankumar Videm",
+          "joined": "2017-09",
+          "id": "pavanvidem",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json"
+        },
+        {
+          "name": "Clemens Blank",
+          "email": "blankclemens@gmail.com",
+          "joined": "2017-09",
+          "id": "blankclemens",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankclemens.json"
+        },
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        },
+        {
+          "name": "Nicola Soranzo",
+          "gitter": "nsoranzo",
+          "orcid": "0000-0003-3627-5340",
+          "twitter": "NicolaSoranzo",
+          "joined": "2017-09",
+          "id": "nsoranzo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json"
+        },
+        {
+          "name": "Peter van Heusden",
+          "twitter": "pvanheus",
+          "orcid": "0000-0001-6553-5274",
+          "joined": "2017-09",
+          "bio": "Research at the South African National Bioinformatics Institute",
+          "id": "pvanheus",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pvanheus.json"
+        }
+      ],
+      "last_modified_at": "09-Jul-21",
+      "url": "/topics/transcriptomics/tutorials/ref-based/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "ref-based",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "RNA Seq Counts to Viz in R",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/3477564/",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "rstudio"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "data-science",
+          "tutorials": [
+            "r-basics",
+            "r-advanced"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "ref-based"
+          ]
+        }
+      ],
+      "questions": [
+        "How can I create neat visualizations of the data?"
+      ],
+      "objectives": [
+        "Describe the role of data, aesthetics, geoms, and layers in `ggplot` functions.",
+        "Customize plot scales, titles, subtitles, themes, fonts, layout, and orientation."
+      ],
+      "time_estimation": "1H",
+      "tags": [
+        "interactive-tools"
+      ],
+      "key_points": [
+        "When creating plots with `ggplot2`, think about the graphics in layers (aesthetics, geometry, statistics, scale transformation, and grouping)."
+      ],
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        },
+        {
+          "name": "Fotis E. Psomopoulos",
+          "email": "fpsom@certh.gr",
+          "twitter": "fopsom",
+          "gitter": "fpsom",
+          "orcid": "0000-0002-0222-4273",
+          "linkedin": "fpsom",
+          "joined": "2019-03",
+          "id": "fpsom",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/fpsom.json"
+        },
+        {
+          "name": "Toby Hodges",
+          "email": "tbyhdgs@gmail.com",
+          "twitter": "tbyhdgs",
+          "orcid": "0000-0003-1766-456X",
+          "joined": "2019-07",
+          "id": "tobyhodges",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tobyhodges.json"
+        }
+      ],
+      "last_modified_at": "07-Oct-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-counts-to-viz-in-r",
+      "hands_on": true,
+      "slides": false,
+      "workflows": false,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "RNA-RNA interactome data analysis",
+      "zenodo_link": "https://zenodo.org/record/3709188",
+      "questions": [
+        "What are the difficulties in mapping chimeric reads from RNA interactome data?",
+        "How multi mapping is a big problem in these datasets?",
+        "How to filter for meaningful results from large analysis output files?"
+      ],
+      "objectives": [
+        "Quality control and data preparation",
+        "Mapping chimeric reads",
+        "Quantification of the mapped loci",
+        "Visualization and filtering of results"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Choosing the correct alignment parameters is one of the imporatant factor in the analysis.",
+        "For poorly annotated organisms use reference genome instead of trascriptome."
+      ],
+      "contributors": [
+        {
+          "name": "Pavankumar Videm",
+          "joined": "2017-09",
+          "id": "pavanvidem",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/rna-interactome/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-interactome",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "RNA-Seq analysis with AskOmics Interactive Tool",
+      "zenodo_link": "https://zenodo.org/record/3925863",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-counts-to-genes"
+          ]
+        }
+      ],
+      "questions": [
+        "How to integrate RNA-Seq results with other datasets using AskOmics?",
+        "How to query these datasets to answer a biological question?",
+        "How to exploit a distant SPARQL endpoint to retrieve information?"
+      ],
+      "objectives": [
+        "Launch an AskOmics Interactive Tool",
+        "Integrate RNA-Seq and reference datasets into AskOmics",
+        "Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL",
+        "Complete the query to get the human homologs and their location using neXtProt database"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "AskOmics helps to integrate multiple data sources into an RDF database without prior knowledge in the Semantic Web",
+        "It can also be connected to external SPARQL endpoints, such as [neXtProt](https://www.nextprot.org)",
+        "AskOmics helps to perform complex SPARQL queries without knowing SPARQL, using a user-friendly interface"
+      ],
+      "contributors": [
+        {
+          "name": "Xavier Garnier",
+          "email": "xavier.garnier@irisa.fr",
+          "joined": "2020-07",
+          "id": "xgaia",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/xgaia.json"
+        },
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        },
+        {
+          "name": "Anne Siegel",
+          "joined": "2020-07",
+          "id": "annesiegel",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annesiegel.json"
+        },
+        {
+          "name": "Olivier Dameron",
+          "joined": "2020-07",
+          "id": "odameron",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/odameron.json"
+        },
+        {
+          "name": "Mateo Boudet",
+          "email": "mateo.boudet@inrae.fr",
+          "orcid": "0000-0002-7028-7620",
+          "joined": "2021-05",
+          "id": "mboudet",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mboudet.json"
+        }
+      ],
+      "last_modified_at": "21-May-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-analysis-with-askomics-it",
+      "hands_on": true,
+      "slides": true,
+      "workflows": false,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Single-cell quality control with scater",
+      "subtopic": "single-cell",
+      "priority": 5,
+      "zenodo_link": "https://zenodo.org/record/3386291",
+      "tags": [
+        "single-cell"
+      ],
+      "questions": [
+        "How to ensure the quality of single-cell RNA-seq data?",
+        "What are the confounding factors that may affect the interpretation of downstream analyses?"
+      ],
+      "objectives": [
+        "Examine scRNA-seq data for low-quality cells",
+        "Visualise data with various types of plots",
+        "Filtering low-quality cells with the appropriate approach"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-plates-batches-barcodes"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-raceid"
+          ]
+        }
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Single-cell RNA-seq data is often noisy",
+        "scater can be used to apply the visualise-filter-visualise paradigm of quality control"
+      ],
+      "contributors": [
+        {
+          "name": "Graham Etherington",
+          "orcid": "0000-0002-5003-1425",
+          "joined": "2019-10",
+          "id": "ethering",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/ethering.json"
+        },
+        {
+          "name": "Nicola Soranzo",
+          "gitter": "nsoranzo",
+          "orcid": "0000-0003-3627-5340",
+          "twitter": "NicolaSoranzo",
+          "joined": "2017-09",
+          "id": "nsoranzo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-scater-qc",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Small Non-coding RNA Clustering using BlockClust",
+      "zenodo_link": "https://zenodo.org/record/1491876",
+      "questions": [
+        "What do the read profiles of small non-coding RNAs represent?",
+        "How to cluster the read profiles based on some intrinsic features?"
+      ],
+      "objectives": [
+        "Difference between mRNA-seq and smallRNA-seq",
+        "Unsupervised grouping of the adjacent reads into read profiles",
+        "Look and learn what the shapes of the read profiles represent",
+        "Clustering of the read profiles by machine learning algorithm"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Small non-coding RNA read profiles are often associate with function",
+        "Clusters of read profiles correlate with the ncRNA classes"
+      ],
+      "contributors": [
+        {
+          "name": "Pavankumar Videm",
+          "joined": "2017-09",
+          "id": "pavanvidem",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "small_ncrna_clustering",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Trajectory Analysis using Python (Jupyter Notebook) in Galaxy",
+      "subtopic": "single-cell-CS",
+      "priority": 3,
+      "zenodo_link": "https://zenodo.org/record/4726927",
+      "questions": [
+        "How can I infer lineage relationships between single cells based on their RNA, without a time series?"
+      ],
+      "objectives": [
+        "Execute multiple plotting methods designed to maintain lineage relationships between cells",
+        "Interpret these plots"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Trajectory analysis is less robust than pure plotting methods, as such 'inferred relationships' are a bigger mathematical leap",
+        "As always with single-cell analysis, you must know enough biology to deduce if your analysis is reasonable, before exploring or deducing novel insight"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "droplet-quantification-preprocessing",
+            "scrna-seq-basic-pipeline"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "galaxy-intro-jupyter"
+          ]
+        }
+      ],
+      "tags": [
+        "single-cell",
+        "10x",
+        "paper-replication",
+        "interactive-tools"
+      ],
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@ebi.ac.uk",
+          "joined": "2020-03",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        }
+      ],
+      "last_modified_at": "02-Sep-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-JUPYTER-trajectories",
+      "hands_on": true,
+      "slides": false,
+      "workflows": false,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Understanding Barcodes",
+      "subtopic": "single-cell",
+      "priority": 3,
+      "zenodo_link": "https://zenodo.org/record/2573177",
+      "tags": [
+        "single-cell"
+      ],
+      "questions": [
+        "What are barcodes?",
+        "What is their purpose?",
+        "How are barcodes formatted?"
+      ],
+      "objectives": [
+        "Demultiplex FASTQ data via UMI-tools",
+        "Understand and validate the extraction of barcodes"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Verifying the distribution of barcodes via a FASTQC plot",
+        "Relocating barcodes into headers",
+        "Removing unwanted barcodes"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-preprocessing"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-plates-batches-barcodes"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "23-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/scrna-umis/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-umis",
+      "hands_on": true,
+      "slides": false,
+      "workflows": false,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Visualization of RNA-Seq results with CummeRbund",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/1001880",
+      "questions": [
+        "How are RNA-Seq results stored?",
+        "Why are visualization techniques needed?",
+        "How to select genes for visualizing meaningful results of differential gene expression analysis?"
+      ],
+      "objectives": [
+        "Manage RNA-Seq results",
+        "Extract genes for producing differential gene expression analysis visualizations",
+        "Visualize meaningful information"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "Extract information from a SQLite CuffDiff database",
+        "Filter and sort results to highlight differential expressed genes of interest",
+        "Generate publication-ready visualizations of RNA-Seq analysis results"
+      ],
+      "contributors": [
+        {
+          "name": "Andrea Bagnacani",
+          "email": "andrea.bagnacani@gmail.com",
+          "joined": "2017-10",
+          "id": "bagnacan",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bagnacan.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-viz-with-cummerbund",
+      "hands_on": true,
+      "slides": true,
+      "workflows": false,
+      "tours": true,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Visualization of RNA-Seq results with heatmap2",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/2529926",
+      "questions": [
+        "How to generate heatmaps from RNA-seq data?"
+      ],
+      "objectives": [
+        "Create heatmaps of RNA-seq data"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "Heatmaps can be used to visualize the expression of genes in RNA-Seq samples"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        }
+      ],
+      "last_modified_at": "12-Mar-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-viz-with-heatmap2",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Visualization of RNA-Seq results with Volcano Plot",
+      "level": "Introductory",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/2529117",
+      "questions": [
+        "How to generate a volcano plot from RNA-seq data?"
+      ],
+      "objectives": [
+        "Create a volcano plot of RNA-seq data to visualize significant genes"
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "A volcano plot can be used to quickly visualize significant genes in RNA-seq results"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-counts-to-genes"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-viz-with-volcanoplot-r"
+          ]
+        }
+      ],
+      "last_modified_at": "14-Jun-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-viz-with-volcanoplot",
+      "hands_on": true,
+      "slides": false,
+      "workflows": true,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Visualization of RNA-Seq results with Volcano Plot in R",
+      "level": "Intermediate",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/2529117",
+      "questions": [
+        "How to customise Volcano plot output in R?"
+      ],
+      "objectives": [
+        "Learn how to use R to edit Volcano plot colours, points, labels and categories"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "R can be used to customise Volcano Plot output",
+        "The RStudio interactive tool can be used to run R inside Galaxy"
+      ],
+      "tags": [
+        "interactive-tools"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "rstudio"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "data-science",
+          "tutorials": [
+            "r-basics",
+            "r-advanced"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-viz-with-volcanoplot",
+            "rna-seq-counts-to-viz-in-r"
+          ]
+        }
+      ],
+      "last_modified_at": "07-Oct-21",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-viz-with-volcanoplot-r",
+      "hands_on": true,
+      "slides": false,
+      "workflows": false,
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial"
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Whole transcriptome analysis of Arabidopsis thaliana",
+      "zenodo_link": "https://zenodo.org/record/4710649",
+      "tags": [
+        "miRNA",
+        "plants"
+      ],
+      "questions": [
+        "Which miRNAs are upregulated in response to brassinosteroids?",
+        "Which genes are potential target of brassinosteroid-induced miRNAs?"
+      ],
+      "objectives": [
+        "Perform miRNA differential expression analysis",
+        "Understand the quasi-mapping-based Salmon method for quantifying the expression of transcripts using RNA-Seq data",
+        "Idenfity potential miRNAs involved in brassinosteroid-mediated regulation networks"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "MiRDeep2 in combination with the PmiREN database allows to quantify miRNA expression in plants",
+        "The use of the Salmon tool and the AtRTD2 transcriptome allows rapid and accurate quantification of transcripts in _Arabidopsis_",
+        "The combination of differential expression analysis and the TargetFinder tool is an effective strategy for the identification of miRNA target genes"
+      ],
+      "contributors": [
+        {
+          "name": "Cristóbal Gallardo",
+          "joined": "2020-11",
+          "id": "gallardoalba",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json"
+        },
+        {
+          "name": "Pavankumar Videm",
+          "joined": "2017-09",
+          "id": "pavanvidem",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json"
+        },
+        {
+          "name": "Beatriz Serrano-Solano",
+          "email": "beatrizserrano.galaxy@gmail.com",
+          "twitter": "Birthae",
+          "gitter": "beatrizserrano",
+          "joined": "2020-07",
+          "id": "beatrizserrano",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/beatrizserrano.json"
+        }
+      ],
+      "last_modified_at": "17-Jun-21",
+      "url": "/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "mirna-target-finder",
+      "hands_on": true,
+      "slides": true,
+      "workflows": true,
+      "tours": false,
+      "video": true,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "type": "tutorial"
+    }
+  ]
+}
