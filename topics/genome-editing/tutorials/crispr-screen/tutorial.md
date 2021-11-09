@@ -75,9 +75,9 @@ We will use fastq files containing 1% of reads from the original samples to demo
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      T0-Control https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T0-Control.fastq.gz
->      T8-APR-246 https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-APR-246.fastq.gz
->      T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-Vehicle.fastq.gz
+>      T0-Control https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T0-Control.fastq.gz
+>      T8-APR-246 https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-APR-246.fastq.gz
+>      T8-Vehicle https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-Vehicle.fastq.gz
 >      ```
 >  
 >    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
@@ -208,7 +208,7 @@ To count how many guides we have for each gene, we need a library file that tell
 > ### {% icon hands_on %} Hands-on: Count guides per gene
 > 1. Import the library file 
 >    ```
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/brunello.tsv
+>    https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/brunello.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -225,7 +225,7 @@ To count how many guides we have for each gene, we need a library file that tell
 >
 > 4. We have been using 1% of reads from the samples. Import the count summary file for the full dataset so you can see what the values look like.
 >    ```
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/kenji_mageck_count_summary.tsv
+>    https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/kenji_mageck_count_summary.tsv
 >    ```
 >
 {: .hands_on}
@@ -276,7 +276,7 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 > ### {% icon hands_on %} Hands-on: Test for enrichment
 > 1. Import the count file from the full dataset [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/kenji_mageck_counts.tsv
+>    https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/kenji_mageck_counts.tsv
 >    ```
 >
 > 2. {% tool [MAGeCKs test](toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1) %} with the following parameters:
