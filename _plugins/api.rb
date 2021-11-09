@@ -34,7 +34,6 @@ module Jekyll
       puts "[GTN/API] Tutorials"
       TopicFilter.topic_filter(site, 'does-not-matter')
       TopicFilter.list_topics(site).map{|topic|
-        puts "[GTN/API] Tutorials / #{topic}"
 
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map{|x|
@@ -71,6 +70,21 @@ module Jekyll
       page2.content = JSON.pretty_generate(topics)
       page2.data["layout"] = nil
       site.pages << page2
+
+      def filterInteresting(layout)
+        layout == 'tutorial_slides' or layout == 'base_slides' or layout == 'rdmbites_slides' or layout == 'tutorial_hands_on'
+      end
+
+      puts "[GTN/API] Tutorial and Slide pages"
+      site.pages.select{|page| filterInteresting(page.data['layout']) }
+        .each{|page|
+
+        page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{page.url[7..-6]}.json")
+        page5.content = JSON.pretty_generate(page.data)
+        page5.data["layout"] = nil
+        site.pages << page5
+      }
+
     end
   end
 end
