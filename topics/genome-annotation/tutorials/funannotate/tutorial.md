@@ -1,22 +1,27 @@
 ---
 layout: tutorial_hands_on
 
-title: Structural and functional genome annotation with Funannotate
+title: Genome annotation with Funannotate
 zenodo_link: https://zenodo.org/record/xxxx
+tags:
+  - eukaryote
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+  - How to annotate an eukaryotic genome with Funannotate?
+  - How to perform functional annotation?
+  - How to evaluate and visualize annotated genomic features?
+  - How to format the annotation for submission at NCBI?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+  - Load genome into Galaxy
+  - Annotate genome with Funannotate
+  - Perform functional annotation using eggNOG-mapper and InterProScan
+  - Evaluate annotation quality with BUSCO
+  - View annotations in JBrowse
+time_estimation: 8H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+  - Funannotate allows to perform structural annotatation of a eukaryotic genome.
+  - Functional annotation can be performed using eggNOG-mapper and InterProScan.
+  - BUSCO and JBrowse allow to inspect the quality of an annotation.
+  - Funannotate allows to format an annotation for sumission at NCBI.
 contributors:
 - abretaud
 
@@ -26,29 +31,22 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+In this tutorial we will use a software tool called Funannotate ({% cite jonathan_m_palmer_2020_4054262 %}) to annotate the genome sequence of a small eukaryote: [*Mucor mucedo*](https://en.wikipedia.org/wiki/Mucor_mucedo) (a fungal plant pathogen).
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+As explained on [Funannotate's website](https://funannotate.readthedocs.io/), "it was originally written to annotate fungal genomes (small eukaryotes ~ 30 Mb genomes), but has evolved over time to accomodate larger genomes". As other annotation tools like Maker or Braker, it works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.
 
+The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an RNASeq experiment for example). Funannotate is also able to take into account repeated elements.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+Funannotate uses ab-initio predictors ([Augustus](http://bioinf.uni-greifswald.de/augustus/), [SNAP](https://github.com/KorfLab/SNAP), [glimmerHMM](https://bio.tools/glimmer-hmm), [CodingQuarry](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-015-1344-4) and [GeneMark-ES/ET](http://exon.gatech.edu/GeneMark/) (optional due to licensing)) to improve its predictions: these software tools are able to make gene structure predictions by analysing only the genome sequence with a statistical model.
+
+While for [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}) you need to perform training steps for the ab-initio predictors, Funannotate is able to take care of that for you, which makes it much easier to use.
+
+In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using eggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI.
+
+Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise your new annotation.
 
 > ### Agenda
 >
@@ -59,108 +57,52 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Data upload
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+To annotate our genome using Funannotate, we will use the following files:
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial](todo). For this tutorial we will try to annotate the genome assemble in the [Flye assembly tutorial](todo).
+- A set of pre-aligned **RNASeq data** in BAM format. Typically, you will run a mapper like [**STAR**](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) to align on the genome RNASeq reads from multiple conditions, and merge it into a single BAM file.
+- A set of **protein sequences**, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that's why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+ Funannotate will take iinto account the position of mapped RNASeq reads, and the alignment of protein sequences on the genome sequence to determine gene positions.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.5653163) or from the shared data library
 >
 >    ```
->    https://zenodo.org/api/files/xxxxxxxxxxxxx
+>    https://zenodo.org/api/files/xxxx/assembly_masked.fasta
+>    https://zenodo.org/api/files/xxxx/RNASeq_downsampled_0.1.bam
+>    https://zenodo.org/api/files/xxxx/SwissProt_subset.fasta
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% include faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include faqs/galaxy/datasets_add_tag.md %}
->
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Preparing the genome sequence
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+Before annotating the genome, we want to make sure that the fasta file is properly formatted. We do it now to make sure we will not encounter unexpected errors later in the annotation process.
 
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Funannotate assembly clean**
+Funannotate provides two little tools to help us, let's run them one after the other.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Funannotate assembly clean** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Assembly to clean"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Assembly to clean"*: `assembly_masked.fasta` (Input dataset)
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Assembly to sort"*: `output` (output of **Funannotate assembly clean** {% icon tool %})
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+{: .hands_on}
 
 ## Sub-step with **Busco**
 
@@ -172,40 +114,6 @@ A big step can have several subsections or sub steps:
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - In *"Advanced Options"*:
 >        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Sort assembly**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Sort assembly** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Assembly to sort"*: `output` (output of **Funannotate assembly clean** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
