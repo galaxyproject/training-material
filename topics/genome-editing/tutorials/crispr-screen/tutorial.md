@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 enable: false
 
 title: CRISPR screen analysis
-zenodo_link: https://zenodo.org/record/5570011
+zenodo_link: https://zenodo.org/record/5658600
 questions:
 - What are the steps to process CRISPR screen data?
 - How to identify differentially enriched guides across multiple experimental conditions?
@@ -44,7 +44,7 @@ The CRISPR repeat sequences guide the Cas9 enzyme to introduce breaks in DNA. Wi
 
 CRISPR screens provide a high-throughput way to identify genes and pathways that enable cells to survive. In a CRISPR screen all the genes in the genome can be targeted (genome-wide screen) or just a selection (boutique screen). Knockout or activation screens can be performed. 
 
-![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr-screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
+![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
 Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}.
 
