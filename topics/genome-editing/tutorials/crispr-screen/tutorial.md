@@ -223,19 +223,49 @@ To count how many guides we have for each gene, we need a library file that tell
 >
 > 3. Inspect the Count Summary file
 >
->    > ### {% icon question %} Questions
->    >
->    > What percent of reads mapped?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > More than 80% reads mapped in each sample 
->    > >
->    > {: .solution}
->    >
->    {: .question}
+> 4. We have been using 1% of reads from the samples. Import the count summary file for the full dataset so you can see what the values look like.
+>    ```
+>    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/kenji_mageck_count_summary.tsv
+>    ```
 >
 {: .hands_on}
+
+The contents of the count summary file is explained on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/output/#count_summary_txt), also shown below. The columns are as follows. **To help you evaluate the quality of the data, recommended values are shown in bold.**
+
+Column | Content
+--- | ---
+File | The fastq (or the count table) file used.
+Label | The label of that fastq file assigned.
+Reads | Total number reads in the fastq file. **(Recommended: 100~300 times the number of sgRNAs)**
+Mapped | Total number of reads that can be mapped to library
+Percentage | Mapped percentage, calculated as Mapped/Reads **(Recommended: at least 60%)**
+TotalsgRNAs | Total number of sgRNAs in the library
+Zerocounts | Total number of missing sgRNAs (sgRNAs that have 0 counts) **(Recommended: no more than 1%)**
+GiniIndex | The Gini Index of the read count distribution. A smaller value indicates more eveness of the count distribution. **(Recommended: around 0.1 for plasmid or initial state samples, and around 0.2-0.3 for negative selection samples )**
+
+
+> ### {% icon question %} Questions
+>
+> Is the data quality good for the 3 samples? Use the count summary file for the full dataset, and the recommended values in the table above, to answer these questions.
+>
+> 1. Have we sequenced enough reads?
+> 2. Is the mapped percentage good?
+> 3. Is the sgRNA zero count value good?
+> 4. Is the Gini Index good?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The number of reads is ok. The lowest number of reads we have for a sample is 17,855,968 (T8-Vehicle), we have 77,441 guides so we have ~230 reads per guide (17,855,968/77,441). A minimum of 100 reads per guide, preferably 300, is recommended.
+> > 2. Yes, it is >80% in all 3 samples.
+> > 3. T0-Control has 0.69% (535/77441 * 100) which is good. The T8 samples are just slightly high at 2.1% (1659/77441 * 100) and 2.7% (2102/77441 * 100).
+> > 4. The Gini Index is 0.09 for T0-Control (initial state) which is good. The T8 samples are 0.12 and 0.13 which is good (not too high) as this is a negative selection experiment.
+> >
+> {: .solution}
+>
+{: .question}
+
+
+The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 # Testing
 
