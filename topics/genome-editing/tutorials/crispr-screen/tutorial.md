@@ -243,8 +243,18 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 >    - In *"Output Options"*:
 >        - *"Output normalized counts file"*: `Yes`
 >        - *"Output plots"*: `Yes`
->    - In *"Advanced Options"*:
->        - *"Method for normalization"*: `Total`
+>
+>
+>
+>    > ### {% icon details %} Normalization
+>    >
+>    > We are using MAGeCK's default normalization method "median" which is more robust to outliers.
+>    > Figure M1 from {% cite Li2014 %} shows a comparison of median ("median") versus total ("total") normalization for two CRISPR screen datasets. 
+>    > The distribution of the read counts of significant sgRNAs (FDR=1%) was compared with the mean read count distribution of all sgRNAs (“all”, black). The distribution of the significant sgRNAs should be similar to the distribution of all sgRNAs if the normalization method is unbiased. The difference is small for the leukemia dataset but in the melanoma dataset, where a few sgRNAs have very large read counts, the difference is larger, as “total” normalization will prefer sgRNAs with higher read-counts. In contrast, the distribution after “median” normalization is closer to the distribution of all sgRNAs.
+>    > 
+>    > ![Median versus Total normalization](../../images/crispr-screen/median_vs_total.png)
+>    >
+>    {: .details}
 >
 > 3. Inspect the PDF Report output.
 >
