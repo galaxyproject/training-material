@@ -526,6 +526,19 @@ Let's have a look at the HTML report.
 >
 {: .hands_on}
 
+> ### {% icon question %} Questions
+>
+> 1. Which percentage of Benchmarking Universal Single-Copy Orthologs (BUSCO) genes have been identified?
+> 2. How many BUSCOs gene are absent?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. According the report, our assembly contains the complete sequence of  99.3% of BUSCO genes.
+> > 2. 8 BUSCO genes are missing.
+> > 
+> {: .solution}
+>
+{: .question}
     
     
 # Post-assembly processing
