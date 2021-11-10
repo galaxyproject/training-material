@@ -133,7 +133,7 @@ To begin our analysis we will carry out the evaluation and pre-processing of our
 > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >      - *"Which tool was used generate logs?"*: `FastQC`
->      - {% icon param-collection %} *"Dataset collection"*: select the `FastQC on collection:Raw Data` dataset.
+>      - *"FastQC output"*: {% icon param-collection %} *"Dataset collection"*: select the `FastQC on collection:Raw Data` dataset.
 >    - In *"Report title"*: `HiFi quality report`
 > 3. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated HTML file
 >
@@ -312,7 +312,7 @@ Before jumping to the next section, we need to carry out some operation on the o
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `Column: 5`
 >
-> 6. {% tool [Parse parameter value](param_value_from_file) %}(param_value_from_file) with the following parameters:
+> 6. {% tool [Parse parameter value](param_value_from_file) %} (https://usegalaxy.eu/root?tool_id=param_value_from_file) with the following parameters:
 >    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
 >    - *"Select type of parameter to parse"*: `Integer`
 >
@@ -431,8 +431,8 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >    - *"Options for purging duplicates"*: `Specify`
 >       - *"Coverage upper bound"*: `63` (maximum depth previously obtained)
 >    - *"Options for Hi-C partition"*: `Specify`
->       - *"Hi-C R1 reads"*: `SRR7126301_1`
->       - *"Hi-C R2 reads"*: `SRR7126301_2`
+>       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
+>       - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
 > 2. Rename the `Hi-C hap1 balanced contig graph` as `Primary contig graph` and add a `#primary` tag
 > 3. Rename the `Hi-C hap2 balanced contig graph` as `Alternate contig graph` and  add a `#alternate` tag
@@ -514,8 +514,7 @@ Let's have a look at the HTML report.
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
 >       - *"Lineage"*: `Saccharomycetes`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: `short summary text`
+>    - *"Which outputs should be generated"*: `short summary text`
 >
 >    > ### {% icon comment %} Comment
 >    >
