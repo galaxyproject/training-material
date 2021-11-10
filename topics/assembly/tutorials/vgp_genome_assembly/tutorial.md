@@ -454,7 +454,7 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 >
 {: .hands_on}
 
-## Initial assembly evaluation with **Quast** and **BUSCO**
+## Initial assembly evaluation
 
 Once generated the draft assembly, it is a good idea to evaluate its quality. 
 
@@ -526,6 +526,31 @@ Let's have a look at the HTML report.
 >
 {: .hands_on}
 
+> ### {% icon question %} Questions
+>
+> 1. Which percentage of Benchmarking Universal Single-Copy Orthologs (BUSCO) genes have been identified?
+> 2. How many BUSCOs gene are absent?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. According the report, our assembly contains the complete sequence of  99.3% of BUSCO genes.
+> > 2. 8 BUSCO genes are missing.
+> > 
+> {: .solution}
+>
+{: .question}
+
+
+> ### {% icon hands_on %} Hands-on: K-mer based evaluation with Merqury
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"K-mer counts database"*: `Merged meryldb`
+>        - *"Number of assemblies"*: `Two assemblies
+>            - {% icon param-file %} *"First genome assembly"*: `Primary contig FASTA`
+>            - {% icon param-file %} *"Second genome assembly"*: `Alternate contig FASTA`    
+>
+{: .hands_on}
     
     
 # Post-assembly processing
@@ -603,7 +628,55 @@ This step includes 11 steps, summarized in the following scheme:
 >
 {: .hands_on}
 
+## Second assembly evaluation assembly evaluation
 
+Once we have purged the duplications, let's evaluate the assembly again. 
+
+> ### {% icon hands_on %} Hands-on: assembly evaluation with Quast
+>
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
+>    - *"Use customized names for the input files?"*: `Yes, specify custom names`
+>    - In *"1. Contigs/scaffolds"*:
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `Primary contig FASTA`
+>        - *"Name"*: `Primary assembly`
+>    - Click in *"Insert Contigs/scaffolds"*
+>    - In *"2. Contigs/scaffolds"*:
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `Alternate contig FASTA`
+>        - *"Name"*: `Alternate assembly`
+>    - *"Reads options"*: `Pacbio SMRT reads`
+>        - {% icon param-collection %} *"FASTQ file"*: `HiFi collection (trim)`
+>    - *"Type of assembly"*: `Genome`
+>        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060` (previously estimated)
+>        - *"Type of organism"*: `Eukaryote: use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding (--eukaryote)`
+>    - *"Is genome large (>100Mpb)?"*: `No`
+>
+>
+> 2. Rename the HTML report as `QUAST second report`
+>
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: assessing assembly completness with BUSCO
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Sequences to analyse"*: `Primary contig FASTA` and `Alternate contig FASTA`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>       - *"Lineage"*: `Saccharomycetes`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: `short summary text`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Remember to modify the lineage option if you are working with vertebrate genomes.
+>    {: .comment}
+>
+> 2. Rename the summary as `BUSCO initial report`
+>
+{: .hands_on}
+    
 ----
 
 <!--
@@ -621,27 +694,6 @@ purge_dups can significantly improve genome assemblies by removing overlaps and 
 Along with sequence similarity, purge_dups and purge_haplotigs take into account the coverage depth obtained by mapping short or long reads to the contigs. Coverage depth represents the number of reads covering a position in a contig (computed after mapping reads on the assembly). The contigs are then aligned to select duplicates accurately and remove them. While purge_dups sets its coverage thresholds automatically, purge_haplotigs requires user-provided values.
 
 -->
-
-## Sub-step with **Merqury**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 ## Sub-step with **Concatenate datasets**
 
