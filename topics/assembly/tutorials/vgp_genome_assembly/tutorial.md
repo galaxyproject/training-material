@@ -133,7 +133,7 @@ To begin our analysis we will carry out the evaluation and pre-processing of our
 > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >      - *"Which tool was used generate logs?"*: `FastQC`
->      - {% icon param-collection %} *"Dataset collection"*: select the `HiFi_collection` dataset.
+>      - {% icon param-collection %} *"Dataset collection"*: select the `FastQC on collection:Raw Data` dataset.
 >    - In *"Report title"*: `HiFi quality report`
 > 3. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated HTML file
 >
@@ -141,7 +141,7 @@ To begin our analysis we will carry out the evaluation and pre-processing of our
 
 ![fig3:HiFi Quality report](../../images/vgp_assembly/quality_plot.png "PacBio HiFi qualiry report")
 
-As we can see, the mean Phred score is over 80 in all the samples which means, which means that the base call accuracy is around 99.999999%!
+As we can see, the mean Phred score is over 80 in all the samples, which means that the base call accuracy is around 99.999999%!
 
 
 > ### {% icon comment %} Comments
@@ -173,7 +173,7 @@ According the quality report, less that 0.1% of the reads include adaptor sequen
 >    - In *"Filter Options"*:
 >        - *"Discard Trimmed Reads"*: `Yes`
 >
-> 2. Rename the output file as `HiFi_collection (trim)`
+> 2. Rename the output file as `HiFi_collection (trim)`. To rename an output file, click on the result, and then click again on the title to change it. After closing, you may need to refresh the history to see the name change.
 >
 {: .hands_on}
 
@@ -228,7 +228,7 @@ Meryl will allow us to perform the k-mer profiling by decomposing the sequencing
 >
 >    > ### {% icon comment %} Election of k-mer size
 >    >
->    > We used 21 as k-mer size, as this length is has demonstrated to be sufficiently long that most k-mers are not repetitive and is short enough that the analysis will be more robust to sequencing errors. For extremely large (haploid size over 10 Gb) and/or very repetitive genomes, it is recommended to use larger k-mer lengths to increase the number of unique k-mers. 
+>    > We used 21 as k-mer size, as this length has demonstrated to be sufficiently long that most k-mers are not repetitive and is short enough that the analysis will be more robust to sequencing errors. For extremely large (haploid size over 10 Gb) and/or very repetitive genomes, it is recommended to use larger k-mer lengths to increase the number of unique k-mers. 
 >    {: .comment}
 >
 > 2. Rename it `Collection meryldb`
