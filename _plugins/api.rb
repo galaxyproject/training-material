@@ -39,6 +39,17 @@ module Jekyll
         out['materials'] = TopicFilter.topic_filter(site, topic).map{|x|
           q = x.dup
           q['contributors'] = q['contributors'].dup.map{|c| mapContributor(site, c)}
+
+          q['urls'] = Hash.new
+
+          if ! q['hands_on'].nil?
+            q['urls']['hands_on'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][7..-6]}.json"
+          end
+
+          if ! q['slides'].nil?
+            q['urls']['slides'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][7..-6]}.json"
+          end
+
           q
         }
         out['maintainers'] = out['maintainers'].map{|c| mapContributor(site, c)}
@@ -80,7 +91,9 @@ module Jekyll
         .each{|page|
 
         page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{page.url[7..-6]}.json")
-        page5.content = JSON.pretty_generate(page.data)
+        p = page.data.dup
+        p['contributors'] = p['contributors'].dup.map{|c| mapContributor(site, c)}
+        page5.content = JSON.pretty_generate(p)
         page5.data["layout"] = nil
         site.pages << page5
       }
