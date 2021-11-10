@@ -840,13 +840,34 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 # Hybrid scaffolding based on a phased assembly and HiC mapping data
 
-In this section we map HiC reads to scaffold the genome assembly. The input assembly for this section can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order. For this section, we also need an estimate of genome length, which we can get from an earlier step using GenomeScope. The outputs from this section will be a scaffolded assembly FASTA file, contact maps of HiC reads pre- and post scaffolding, and reports from Busco and Quast. 
+In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. The DNA fragment is then sequenced from each end of this artifical junction, giving a forward and reverse read pair. Particular read pairs are seen more often if they are truly closer together in the genome. This information can be used to scaffold assembly contigs: if two contigs are frequently matched with HiC read pairs, they are likely also close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
 
-## Map the HiC reads to the assembly
+Inputs required for this section:
+
+* An assembly fasta file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
+* HiC reads, one set of forward reads and one set of reverse reads. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order.
+* Genome size estimate: we can get this from an earlier step using GenomeScope. This is the haploid length. 
+
+A summary of the 5 steps in this section: 
+
+* 1. Map the HiC reads to the assembly: Map forward and reverse reads, merge the BAM file, convert to a BED file, sort the BED file. 
+* 2. View a contact map of HiC reads: use this sorted BED file, generate a map of the reads against the assembly, convert to an image file. 
+* 3. Scaffold the assembly with HiC reads: using the assembly file, and the mapped HiC reads (as a sorted BED file). 
+* 4. Evaluate the scaffolding results: use Busco and Quast. 
+* 5. View a contact map of the HiC reads after scaffolding: using the scaffolded assembly file, and the mapped HiC reads (as a sorted BED file).  
+
+Outputs from this section:
+
+* A scaffolded assembly FASTA file
+* contact maps of HiC reads pre- and post scaffolding
+* post-scaffolding reports from Busco and Quast 
+
+
+## 1. Map the HiC reads to the assembly
 
 We will do this separately for the forward and reverse set of HiC reads. 
 
-### Map the forward HiC reads
+**Map the forward HiC reads:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -861,7 +882,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Map the reverse HiC reads
+**Map the reverse HiC reads:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -877,7 +898,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 {: .hands_on}
 
 
-### Merge the mapped reads
+**Merge the mapped reads:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -887,7 +908,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Convert the mapped BAM file to a BED file
+**Convert the mapped BAM file to a BED file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -897,7 +918,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Sort the BED file
+**Sort the BED file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -910,9 +931,9 @@ We will do this separately for the forward and reverse set of HiC reads.
 {: .hands_on}
 
 
-## View a contact map of the mapped HiC reads
+## 2. View a contact map of the mapped HiC reads
 
-### Generate a contact map
+**Generate a contact map:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -922,7 +943,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Convert the map to an image
+**Convert the map to an image:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -934,11 +955,11 @@ We will do this separately for the forward and reverse set of HiC reads.
 {: .hands_on}
 
 
-## Salsa scaffolding
+## 3. Salsa scaffolding
 
 Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. 
 
-### Prepare the assembly file
+**Prepare the assembly file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -951,7 +972,7 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 {: .hands_on}
 
 
-### Prepare the enzyme sequence file
+**Prepare the enzyme sequence file:**
 
 If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
 
@@ -964,7 +985,7 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 {: .hands_on}
 
 
-### **SALSA** scaffolding
+**SALSA scaffolding:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -978,11 +999,11 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 
 
 
-## Evaluate the Salsa scaffolding results
+## 4. Evaluate the Salsa scaffolding results
 
 The scaffolded assembly fasta file can then be analysed in Busco and Quast.
 
-### Busco
+**Busco:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -999,19 +1020,11 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast.
 
 There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos). 
 
-### Quast
+**Quast:**
 
 Inputs required for Quast: scaffolded assembly file from Salsa, estimated genome size.
 
-Format the value for genome size:
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->    - *"Select type of parameter to parse"*: `Integer`
-
-{: .hands_on}
+The estimated genome size is from an earlier step with GenomeScope - the haploid genome size. 
 
 Run Quast:
 
@@ -1034,7 +1047,7 @@ Run Quast:
 There are four outputs: the Quast report in three formats, and a log file. 
 
 
-## Generate a post-scaffolding contact map
+## 5. Generate a post-scaffolding contact map
 
 There are five steps: 
 
@@ -1044,7 +1057,7 @@ There are five steps:
 * Generate a contact map
 * Conver the map to an image
 
-### Map the forward HiC reads
+**Map the forward HiC reads:**
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -1059,7 +1072,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Map the reverse HiC reads
+**Map the reverse HiC reads:**
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -1074,7 +1087,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Merge the mapped reads
+**Merge the mapped reads:**
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -1086,7 +1099,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Generate a contact map
+**Generate a contact map:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1097,7 +1110,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Convert the map to an image
+**Convert the map to an image:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
