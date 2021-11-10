@@ -312,7 +312,7 @@ Before jumping to the next section, we need to carry out some operation on the o
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `Column: 5`
 >
-> 6. {% tool [Parse parameter value](param_value_from_file) %} (https://usegalaxy.eu/root?tool_id=param_value_from_file) with the following parameters:
+> 6. {% tool [Parse parameter value](param_value_from_file) %}(param_value_from_file) with the following parameters:
 >    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
 >    - *"Select type of parameter to parse"*: `Integer`
 >
