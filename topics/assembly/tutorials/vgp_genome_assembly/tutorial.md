@@ -964,7 +964,7 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 {: .hands_on}
 
 
-### Salsa scaffolding
+### **SALSA** scaffolding
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
