@@ -135,6 +135,8 @@ paths:
           description: successful operation
           content:
             text/plain:
+              schema:
+                type: string
 
 components:
   schemas:
@@ -155,15 +157,18 @@ components:
           description: A link to some datasets on Zenodo required for the tutorial
         questions:
           type: array
-          items: string
+          items:
+            type: string
           description: A list of questions students will answer when following this tutorial
         objectives:
           type: array
-          items: string
+          items:
+            type: string
           description: A list of objectives students will accomplish when following this tutorial
         key_points:
           type: array
-          items: string
+          items: 
+            type: string
           description: A list of take aways when completing this training
         time_estimation:
           type: string
@@ -280,15 +285,17 @@ components:
         subtopics:
           type: array
           items:
-            id:
-              type: string
-              description: Subtopic ID
-            title:
-              type: string
-              description: Subtopic title (presented in the UI to users)
-            description:
-              type: string
-              description: A helpful subtopic description.
+            type: object
+            properties:
+              id:
+                type: string
+                description: Subtopic ID
+              title:
+                type: string
+                description: Subtopic title (presented in the UI to users)
+              description:
+                type: string
+                description: A helpful subtopic description.
         maintainers:
           $ref: '#/components/schemas/ArrayOfUsers'
         materials:
