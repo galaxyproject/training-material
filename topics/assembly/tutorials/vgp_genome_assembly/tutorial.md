@@ -840,6 +840,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 # Hybrid scaffolding based on a phased assembly and HiC mapping data
 
+Inputs: HiC reads, assembly.fasta, genome length, lineage for Buso
+Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
+
+
 ## Sub-step with **Map with BWA-MEM**
 
 > ### {% icon hands_on %} Hands-on: Task description
