@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:14 +0000",
+  "dateModified": "1970-01-01 00:00:09 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "CRISPR screen analysis",
   "interactivityType": "mixed",
@@ -319,18 +319,6 @@
     "alternateName": "en"
   },
   "coursePrerequisites": [
-    {
-      "@type": "CreativeWork",
-      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
-      "name": "Introduction to Galaxy Analyses",
-      "description": "Introduction to Galaxy Analyses",
-      "provider": {
-        "@type": "Organization",
-        "email": "galaxytrainingnetwork@gmail.com",
-        "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
-      }
-    },
     {
       "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html",
@@ -519,16 +507,6 @@
         
         <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
         
-    
-    </li>
-
-        
-    <li>
-    
-        
-        
-        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
-        
             <ul>
                 
                     
@@ -571,6 +549,7 @@
     
     </li>
 
+        
     <li>
     
         
@@ -775,7 +754,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 14, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -801,7 +780,7 @@
 
 <p>CRISPR screens provide a high-throughput way to identify genes and pathways that enable cells to survive. In a CRISPR screen all the genes in the genome can be targeted (genome-wide screen) or just a selection (boutique screen). Knockout or activation screens can be performed.</p>
 
-<figure id="figure-1"><img src="../../images/crispr-screen/crispr-screen.jpg" alt="Illustration of CRISPR Screen Method. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> CRISPR knockout and activation methods (from <span class="citation"><a href="#Joung2016">Joung <i>et al.</i> 2016</a></span>)</figcaption></figure>
+<figure id="figure-1"><img src="../../images/crispr-screen/crispr_screen.jpg" alt="Illustration of CRISPR Screen Method. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> CRISPR knockout and activation methods (from <span class="citation"><a href="#Joung2016">Joung <i>et al.</i> 2016</a></span>)</figcaption></figure>
 
 <p>Here we will demonstrate analysing CRISPR screen using data from <span class="citation"><a href="#Fujihara2020">Fujihara <i>et al.</i> 2020</a></span>.</p>
 
@@ -844,9 +823,9 @@
         <li>
           <p>Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T0-Control https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T0-Control.fastq.gz
-T8-APR-246 https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-APR-246.fastq.gz
-T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-Vehicle.fastq.gz
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T0-Control https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T0-Control.fastq.gz
+T8-APR-246 https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-APR-246.fastq.gz
+T8-Vehicle https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-Vehicle.fastq.gz
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -945,11 +924,23 @@ T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-
 
 </blockquote>
 
-<p>We need to trim the adapters to leave just the 20bp guide sequences.</p>
-
 <h2 id="trim-adapters">Trim adapters</h2>
 
-<p>We’ll trim these sequences using <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>) and its linked adapter format <code class="language-plaintext highlighter-rouge">MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER</code>, as discussed <a href="https://github.com/marcelm/cutadapt/issues/261#issue-261019127">here</a>.</p>
+<p>We need to trim the adapters to leave just the 20bp guide sequences.  We’ll trim these sequences using <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>) and its linked adapter format <code class="language-plaintext highlighter-rouge">MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER</code>.</p>
+
+<blockquote class="details">
+  <h3 id="details-adapter-trimming"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Adapter trimming</h3>
+
+  <p>In this dataset the adapters are different lengths in the <span class="notranslate">reads</span>, as shown below.</p>
+
+  <figure id="figure-2"><img src="../../images/crispr-screen/adapter_sequences_dataset.png" alt="Adapter sequences dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> <span class="notranslate">Reads</span> from the T8-APR-246 sample with one of the guide sequences highlighted in blue. The adapter sequences are directly adjacent to the guide on the right and left.</figcaption></figure>
+
+  <p>MAGeCK count can trim adapters around the guide sequences. However, the adapters need to be the same length in the <span class="notranslate">reads</span>, as described on the MAGeCK website <a href="https://sourceforge.net/p/mageck/wiki/advanced_tutorial/">here</a>. An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn’t be able to trim the adapters properly and you would only get ~60% <span class="notranslate">reads</span> <span class="notranslate">mapping</span> instead of &gt;80%.</p>
+
+  <figure id="figure-3"><img src="../../images/crispr-screen/adapter_sequences_mageck.png" alt="Adapters MAGeCK can trim. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Example showing what MAGeCK count expects to be able to auto-detect and trim adapters - adapters the same length in every read. Guide sequence is in blue, with the adapter sequences directly adjacent on the right and left.</figcaption></figure>
+
+  <p>So for this dataset, as the adapters are not the same length in the <span class="notranslate">reads</span>, we need to trim the adapters before running MAGeCK count. To trim, we could run Cutadapt twice, first trimming the 5’ adapter sequence, then trimming the 3’ adapter. Alte<span class="notranslate">rna</span>tively, we can run Cutadapt just once using the linked adapter format <code class="language-plaintext highlighter-rouge">MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER</code>, as discussed <a href="https://github.com/marcelm/cutadapt/issues/261#issue-261019127">here</a>.</p>
+</blockquote>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-trim-adapters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Trim adapters</h3>
@@ -1027,7 +1018,7 @@ T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-
   <h3 id="hands_on-hands-on-count-guides-per-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count guides per gene</h3>
   <ol>
     <li>Import the library file
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/brunello.tsv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/brunello.tsv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1051,24 +1042,87 @@ T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-
     </li>
     <li>
       <p>Inspect the Count Summary file</p>
-
-      <blockquote class="question">
-        <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-        <p>What percent of <span class="notranslate">reads</span> mapped?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <p>More than 80% <span class="notranslate">reads</span> mapped in each sample</p>
-
-        </blockquote>
-
-      </blockquote>
+    </li>
+    <li>We have been using 1% of <span class="notranslate">reads</span> from the samples. Import the count summary file for the full dataset so you can see what the values look like.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/kenji_mageck_count_summary.tsv
+</code></pre></div>      </div>
     </li>
   </ol>
 
 </blockquote>
+
+<p>The contents of the count summary file is explained on the MAGeCK website <a href="https://sourceforge.net/p/mageck/wiki/output/#count_summary_txt">here</a>, also shown below. The columns are as follows. <strong>To help you evaluate the quality of the data, recommended values are shown in bold.</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td>The fastq (or the count table) file used.</td>
+    </tr>
+    <tr>
+      <td>Label</td>
+      <td>The label of that fastq file assigned.</td>
+    </tr>
+    <tr>
+      <td><span class="notranslate">Reads</span></td>
+      <td>Total number <span class="notranslate">reads</span> in the fastq file. <strong>(Recommended: 100~300 times the number of sg<span class="notranslate">RNA</span>s)</strong></td>
+    </tr>
+    <tr>
+      <td>Mapped</td>
+      <td>Total number of <span class="notranslate">reads</span> that can be mapped to library</td>
+    </tr>
+    <tr>
+      <td>Percentage</td>
+      <td>Mapped percentage, calculated as Mapped/<span class="notranslate">Reads</span> <strong>(Recommended: at least 60%)</strong></td>
+    </tr>
+    <tr>
+      <td>Totalsg<span class="notranslate">RNA</span>s</td>
+      <td>Total number of sg<span class="notranslate">RNA</span>s in the library</td>
+    </tr>
+    <tr>
+      <td>Zerocounts</td>
+      <td>Total number of missing sg<span class="notranslate">RNA</span>s (sg<span class="notranslate">RNA</span>s that have 0 counts) <strong>(Recommended: no more than 1%)</strong></td>
+    </tr>
+    <tr>
+      <td>GiniIndex</td>
+      <td>The Gini Index of the read count distribution. A smaller value indicates more eveness of the count distribution. <strong>(Recommended: around 0.1 for plasmid or initial state samples, and around 0.2-0.3 for negative selection samples )</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Is the data quality good for the 3 samples? Use the count summary file for the full dataset, and the recommended values in the table above, to answer these questions.</p>
+
+  <ol>
+    <li>Have we sequenced enough <span class="notranslate">reads</span>?</li>
+    <li>Is the mapped percentage good?</li>
+    <li>Is the sg<span class="notranslate">RNA</span> zero count value good?</li>
+    <li>Is the Gini Index good?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The number of <span class="notranslate">reads</span> is ok. The lowest number of <span class="notranslate">reads</span> we have for a sample is 17,855,968 (T8-Vehicle), we have 77,441 guides so we have ~230 <span class="notranslate">reads</span> per guide (17,855,968/77,441). A minimum of 100 <span class="notranslate">reads</span> per guide, preferably 300, is recommended.</li>
+      <li>Yes, it is &gt;80% in all 3 samples.</li>
+      <li>T0-Control has 0.69% (535/77441 * 100) which is good. The T8 samples are just slightly high at 2.1% (1659/77441 * 100) and 2.7% (2102/77441 * 100).</li>
+      <li>The Gini Index is 0.09 for T0-Control (initial state) which is good. The T8 samples are 0.12 and 0.13 which is good (not too high) as this is a negative selection experiment.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The paper by <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span> has more information on MAGeCK quality control.</p>
 
 <h1 id="testing">Testing</h1>
 
@@ -1079,13 +1133,13 @@ T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-test-for-enrichment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test for enrichment</h3>
   <ol>
-    <li>Import the count file from the full dataset <a href="https://zenodo.org/record/5570011">Zenodo</a> or the Shared Data library (if available):
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/mageck_counts_full.tsv
+    <li>Import the count file from the full dataset <a href="https://zenodo.org/record/5658600">Zenodo</a> or the Shared Data library (if available):
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/kenji_mageck_counts.tsv
 </code></pre></div>      </div>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1"><strong>MAGeCKs test</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Counts file”</em>: the <code class="language-plaintext highlighter-rouge">mageck_counts_full.tsv</code> file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Counts file”</em>: the <code class="language-plaintext highlighter-rouge">kenji_mageck_counts.tsv</code> file</li>
         <li><em>“Specify Treated samples or Control”</em>: <code class="language-plaintext highlighter-rouge">Treated samples</code>
           <ul>
             <li><em>“Treated Sample Labels (or Indexes)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
@@ -1098,12 +1152,18 @@ T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-
             <li><em>“Output plots”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
-        <li>In <em>“Advanced Options”</em>:
-          <ul>
-            <li><em>“Method for normalization”</em>: <code class="language-plaintext highlighter-rouge">Total</code></li>
-          </ul>
-        </li>
       </ul>
+
+      <blockquote class="details">
+        <h3 id="details-normalization"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Normalization</h3>
+
+        <p>We are using MAGeCK’s default normalization method “median” which is more robust to outliers.
+Figure M1 from <span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span> shows a comparison of median (“median”) versus total (“total”) normalization for two CRISPR screen datasets. 
+The distribution of the read counts of significant sg<span class="notranslate">RNA</span>s (FDR=1%) was compared with the mean read count distribution of all sg<span class="notranslate">RNA</span>s (“all”, black). The distribution of the significant sg<span class="notranslate">RNA</span>s should be similar to the distribution of all sg<span class="notranslate">RNA</span>s if the normalization method is unbiased. The difference is small for the leukemia dataset. However, in the melanoma dataset, where a few sg<span class="notranslate">RNA</span>s have very large read counts, the difference is larger, as “total” normalization will prefer sg<span class="notranslate">RNA</span>s with higher read-counts. In contrast, the distribution after “median” normalization is closer to the distribution of all sg<span class="notranslate">RNA</span>s.</p>
+
+        <p><img src="../../images/crispr-screen/median_vs_total.png" alt="Median versus Total normalization. " loading="lazy" /></p>
+
+      </blockquote>
     </li>
     <li>
       <p>Inspect the PDF Report output.</p>
@@ -1123,6 +1183,13 @@ T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-
       </blockquote>
     </li>
   </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-getting-help"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Getting help</h3>
+
+  <p>For questions about using <span class="notranslate">Galaxy</span>, you can ask in the <a href="https://help.galaxyproject.org/"><span class="notranslate">Galaxy</span> help forum</a>. For questions about MAGeCK, you can ask in the <a href="https://groups.google.com/g/mageck">MAGeCK Google group</a>.</p>
 
 </blockquote>
 
@@ -1218,8 +1285,8 @@ T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-
 author = "Maria Doyle and Kenji Fujihara",
 title = "CRISPR screen analysis (Galaxy Training Materials)",
 year = "2021",
-month = "10",
-day = "14"
+month = "11",
+day = "09"
 url = "\url{https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
