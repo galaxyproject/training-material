@@ -794,7 +794,7 @@ In this section we map HiC reads to scaffold the genome assembly. The input asse
 
 We will do this separately for the forward and reverse set of HiC reads. 
 
-### Forward HiC reads
+### Map the forward HiC reads
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -809,7 +809,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Reverse HiC reads
+### Map the reverse HiC reads
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -825,7 +825,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 {: .hands_on}
 
 
-### Merge and filter the mapped reads
+### Merge the mapped reads
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -860,7 +860,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 
 ## View a contact map of the mapped HiC reads
 
-### Generate the contact map
+### Generate a contact map
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -912,7 +912,7 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 {: .hands_on}
 
 
-### SALSA
+### Salsa scaffolding
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -926,7 +926,7 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 
 
 
-## Evaluate the SALSA scaffolding results
+## Evaluate the Salsa scaffolding results
 
 The scaffolded assembly fasta file can then be analysed in Busco and Quast.
 
@@ -1022,7 +1022,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Combine the two mapped read bam files 
+### Merge the mapped reads
 
 
 > ### {% icon hands_on %} Hands-on: Task description
