@@ -559,8 +559,8 @@ This step includes 11 steps, summarized in the following scheme:
 > 4. Rename the output as `Reads mapped to contigs`
 > 
 > 5. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
->    - *"Select the purge_dups function"*: `Calculate coverage cutoff and create read depth histogram and base-levelread depth for PacBio data (calcuts+pbcstats)`
->        - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
+>    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
+>        - {% icon param-collection %} *"PAF input file"*: `Reads mapped to contigs`
 >        - In *"Calcuts options"*:
 >            - *"Upper bound for read depth"*: `63` (the previously estimated maximum depth)
 >            - *"Ploidity"*: `Haploid`
@@ -572,8 +572,8 @@ This step includes 11 steps, summarized in the following scheme:
 >    {: .comment}
 >
 > 6. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `split FASTA file by 'N's (split_fa)`
->        - {% icon param-file %} *"Base-level coverage file"*: `Primary contig FASTA`
+>    - *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
+>        - {% icon param-file %} *"Assembly FASTA file"*: `Primary contig FASTA`
 >
 > 7. Rename the output as `Split FASTA`
 >
