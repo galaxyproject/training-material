@@ -840,7 +840,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 # Hybrid scaffolding based on a phased assembly and HiC mapping data
 
-In this section we map HiC reads to scaffold the genome assembly. The input assembly for this section can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section, and it should be in fasta format. The HiC reads need to be in two files: one for forward reads and one for reverse reads. If there is more than one set of each of these reads, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order. For this section we also need an estimate of genome length, which we can get from an earlier step using GenomeScope. The outputs from this section will be a scaffolded assembly.fasta file, contact maps of HiC reads pre- and post scaffolding, and reports from Busco and Quast. 
+In this section we map HiC reads to scaffold the genome assembly. The input assembly for this section can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order. For this section, we also need an estimate of genome length, which we can get from an earlier step using GenomeScope. The outputs from this section will be a scaffolded assembly FASTA file, contact maps of HiC reads pre- and post scaffolding, and reports from Busco and Quast. 
 
 ## Map the HiC reads to the assembly
 
