@@ -606,12 +606,12 @@
   <li><a href="#hifi-long-read-phased-assembly-with-hifiasm" id="markdown-toc-hifi-long-read-phased-assembly-with-hifiasm">HiFi long read phased assembly with hifiasm</a>    <ol>
       <li><a href="#genome-assembly-with-hifiasm" id="markdown-toc-genome-assembly-with-hifiasm">Genome assembly with <strong>hifiasm</strong></a></li>
       <li><a href="#convert-gfa-format-to-fasta-with-gfa-to-fasta" id="markdown-toc-convert-gfa-format-to-fasta-with-gfa-to-fasta">Convert GFA format to FASTA with <strong>GFA to FASTA</strong></a></li>
-      <li><a href="#initial-assembly-evaluation-with-quast-and-busco" id="markdown-toc-initial-assembly-evaluation-with-quast-and-busco">Initial assembly evaluation with <strong>Quast</strong> and <strong>BUSCO</strong></a></li>
+      <li><a href="#initial-assembly-evaluation" id="markdown-toc-initial-assembly-evaluation">Initial assembly evaluation</a></li>
     </ol>
   </li>
   <li><a href="#post-assembly-processing" id="markdown-toc-post-assembly-processing">Post-assembly processing</a>    <ol>
       <li><a href="#remove-haplotypic-duplication-with-purge_dups" id="markdown-toc-remove-haplotypic-duplication-with-purge_dups">Remove haplotypic duplication with <strong>purge_dups</strong></a></li>
-      <li><a href="#sub-step-with-merqury" id="markdown-toc-sub-step-with-merqury">Sub-step with <strong>Merqury</strong></a></li>
+      <li><a href="#second-assembly-evaluation-assembly-evaluation" id="markdown-toc-second-assembly-evaluation-assembly-evaluation">Second assembly evaluation assembly evaluation</a></li>
       <li><a href="#sub-step-with-concatenate-datasets" id="markdown-toc-sub-step-with-concatenate-datasets">Sub-step with <strong>Concatenate datasets</strong></a></li>
     </ol>
   </li>
@@ -1252,7 +1252,7 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
 
 </blockquote>
 
-<h2 id="initial-assembly-evaluation-with-quast-and-busco">Initial assembly evaluation with <strong>Quast</strong> and <strong>BUSCO</strong></h2>
+<h2 id="initial-assembly-evaluation">Initial assembly evaluation</h2>
 
 <p>Once generated the draft assembly, it is a good idea to evaluate its quality.</p>
 
@@ -1362,6 +1362,49 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
       </blockquote>
     </li>
     <li>Rename the summary as <code class="language-plaintext highlighter-rouge">BUSCO initial report</code></li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Which percentage of Benchmarking Universal Single-Copy Orthologs (BUSCO) genes have been identified?</li>
+    <li>How many BUSCOs gene are absent?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>According the report, our assembly contains the complete sequence of  99.3% of BUSCO genes.</li>
+      <li>8 BUSCO genes are missing.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-k-mer-based-evaluation-with-merqury"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: K-mer based evaluation with Merqury</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3"><strong>Merqury</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“K-mer counts database”</em>: <code class="language-plaintext highlighter-rouge">Merged meryldb</code></li>
+            <li><em>“Number of assemblies”</em>: `Two assemblies
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First genome assembly”</em>: <code class="language-plaintext highlighter-rouge">Primary contig FASTA</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second genome assembly”</em>: <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contig FASTA</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ol>
 
 </blockquote>
@@ -1493,6 +1536,88 @@ It will generate three outputs: the base-level coverage file (PBCSTAT base cover
 
 </blockquote>
 
+<h2 id="second-assembly-evaluation-assembly-evaluation">Second assembly evaluation assembly evaluation</h2>
+
+<p>Once we have purged the duplications, let’s evaluate the assembly again.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-assembly-evaluation-with-quast-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assembly evaluation with Quast</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">Yes, specify custom names</code></li>
+        <li>In <em>“1. Contigs/scaffolds”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Primary contig FASTA</code></li>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">Primary assembly</code></li>
+          </ul>
+        </li>
+        <li>Click in <em>“Insert Contigs/scaffolds”</em></li>
+        <li>In <em>“2. Contigs/scaffolds”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contig FASTA</code></li>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te assembly</code></li>
+          </ul>
+        </li>
+        <li><em>“<span class="notranslate">Reads</span> options”</em>: <code class="language-plaintext highlighter-rouge">Pacbio SMRT <span class="notranslate">reads</span></code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file”</em>: <code class="language-plaintext highlighter-rouge">HiFi collection (trim)</code></li>
+          </ul>
+        </li>
+        <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
+          <ul>
+            <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+              <ul>
+                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">12664060</code> (previously estimated)</li>
+              </ul>
+            </li>
+            <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote: use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding (--eukaryote)</code></li>
+          </ul>
+        </li>
+        <li><em>“Is genome large (&gt;100Mpb)?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li>Rename the HTML report as <code class="language-plaintext highlighter-rouge">QUAST second report</code></li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-assessing-assembly-completness-with-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assessing assembly completness with BUSCO</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">Primary contig FASTA</code> and <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contig FASTA</code></li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (<span class="notranslate">DNA</span>)</code>
+          <ul>
+            <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
+          </ul>
+        </li>
+        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
+          <ul>
+            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Saccharomycetes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">short summary text</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>Remember to modify the lineage option if you are working with vertebrate genomes.</p>
+      </blockquote>
+    </li>
+    <li>Rename the summary as <code class="language-plaintext highlighter-rouge">BUSCO initial report</code></li>
+  </ol>
+
+</blockquote>
+
 <hr />
 
 <!--
@@ -1511,44 +1636,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 -->
 
-<h2 id="sub-step-with-merqury">Sub-step with <strong>Merqury</strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3"><strong>Merqury</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“K-mer counts database”</em>: <code class="language-plaintext highlighter-rouge">read_db</code> (output of <strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><em>“Number of assemblies”</em>: <code class="language-plaintext highlighter-rouge">One assembly (pseudo-haplotype or mixed-haplotype)</code>
-              <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome assembly”</em>: <code class="language-plaintext highlighter-rouge">out_fa</code> (output of <strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
 <h2 id="sub-step-with-concatenate-datasets">Sub-step with <strong>Concatenate datasets</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
@@ -1584,7 +1675,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-bionano-hybrid-scaffold">Sub-step with <strong>Bionano Hybrid Scaffold</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2"><strong>Bionano Hybrid Scaffold</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1612,7 +1703,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Question1?</li>
@@ -1620,7 +1711,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Answer for question1</li>
@@ -1634,7 +1725,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-concatenate-datasets-1">Sub-step with <strong>Concatenate datasets</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
@@ -1668,7 +1759,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Question1?</li>
@@ -1676,7 +1767,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Answer for question1</li>
@@ -1690,7 +1781,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-parse-parameter-value">Sub-step with <strong>Parse parameter value</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
@@ -1716,7 +1807,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-quast">Sub-step with <strong>Quast</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1762,7 +1853,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-map-with-bwa-mem">Sub-step with <strong>Map with BWA-MEM</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
@@ -1799,7 +1890,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-map-with-bwa-mem-1">Sub-step with <strong>Map with BWA-MEM</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
@@ -1836,7 +1927,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-filter-and-merge">Sub-step with <strong>Filter and merge</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-8"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1862,7 +1953,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-pretextmap">Sub-step with <strong>PretextMap</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-9"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-8"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1888,7 +1979,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-pretext-snapshot">Sub-step with <strong>Pretext Snapshot</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-10"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-9"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1915,7 +2006,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-parse-parameter-value-1">Sub-step with <strong>Parse parameter value</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-11"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-10"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
@@ -1941,7 +2032,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-bedtools-bam-to-bed">Sub-step with <strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-12"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-11"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1"><strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_bamtobed/2.30.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1967,7 +2058,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-sort">Sub-step with <strong>Sort</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-13"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-12"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  with the following parameters:
@@ -1995,7 +2086,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-replace">Sub-step with <strong>Replace</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-14"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-13"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  with the following parameters:
@@ -2023,7 +2114,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-parse-parameter-value-2">Sub-step with <strong>Parse parameter value</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-15"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-14"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
@@ -2048,7 +2139,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-salsa">Sub-step with <strong>SALSA</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-16"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-15"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0"><strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2076,7 +2167,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-parse-parameter-value-3">Sub-step with <strong>Parse parameter value</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-17"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-16"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
@@ -2102,7 +2193,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-quast-1">Sub-step with <strong>Quast</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-18"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-17"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -2147,7 +2238,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-busco">Sub-step with <strong>Busco</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-19"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-18"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2183,7 +2274,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-map-with-bwa-mem-2">Sub-step with <strong>Map with BWA-MEM</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-20"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-19"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
@@ -2219,7 +2310,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-map-with-bwa-mem-3">Sub-step with <strong>Map with BWA-MEM</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-21"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-20"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
@@ -2255,7 +2346,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 <h2 id="sub-step-with-filter-and-merge-1">Sub-step with <strong>Filter and merge</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-22"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-21"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2270,54 +2361,6 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
       <blockquote class="comment">
         <h3 id="comment-comment-25"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
-
-<blockquote class="question">
-  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <ol>
-    <li>Question1?</li>
-    <li>Question2?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <ol>
-      <li>Answer for question1</li>
-      <li>Answer for question2</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h2 id="sub-step-with-pretextmap-1">Sub-step with <strong>PretextMap</strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-23"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-26"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
         <p>A comment about the tool or something else. This box can also be in the main text</p>
       </blockquote>
@@ -2348,10 +2391,58 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
+<h2 id="sub-step-with-pretextmap-1">Sub-step with <strong>PretextMap</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-22"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
+      </ul>
+
+      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
+
+      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-26"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>A comment about the tool or something else. This box can also be in the main text</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
+
+<blockquote class="question">
+  <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Question1?</li>
+    <li>Question2?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Answer for question1</li>
+      <li>Answer for question2</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
 <h2 id="sub-step-with-pretext-snapshot-1">Sub-step with <strong>Pretext Snapshot</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-24"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-23"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
