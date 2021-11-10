@@ -87,7 +87,9 @@ To annotate our genome using Funannotate, we will use the following files:
 
 Before annotating the genome, we want to make sure that the fasta file is properly formatted. We do it now to make sure we will not encounter unexpected errors later in the annotation process.
 
-Funannotate provides two little tools to help us, let's run them one after the other.
+Funannotate provides two little tools to help us. Let's run the two tools, one after the other.
+
+The first one (**Funannotate assembly clean**) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool will also remove any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -96,6 +98,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 >
 {: .hands_on}
 
+The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with `scaffold_`, then a number).
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -104,90 +107,51 @@ Funannotate provides two little tools to help us, let's run them one after the o
 >
 {: .hands_on}
 
-## Sub-step with **Busco**
+After this step, the genome is clean, sorted, and ready for the structural annotation.
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output` (Input dataset)
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+# Strutural annotation
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+We can now run **Funannotate predict annotation** to perform the structural annotation of the genome.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+We need to input the genome sequence, the RNASeq data, and the proteins to align on the genome. We also specify the name of the species and strain (they can be used later for submission to NCBI). Finally, as
 
-## Sub-step with **Funannotate predict annotation**
+There are other parameters to finely tune how Funannotate will run ab-initio predictors to predict genes, and to filter the final results based on various criteria. As Funannotate uses [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) for initial training of ab-initio predictors, we select a dataset close to the species we are annotating: `rhizopus_oryzae`.
+
+Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `output` (output of **Sort assembly** {% icon tool %})
+>    - *"Funannotate database"*: select the latest version available
 >    - In *"Organism"*:
 >        - *"Name of the species to annotate"*: `Mucor`
 >        - *"Strain name"*: `muc1`
 >        - *"Is it a fungus species?"*: `Yes`
 >    - In *"Evidences"*:
->        - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark-ET"*: `output` (Input dataset)
+>        - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark-ET"*: `RNASeq_downsampled_0.1.bam` (Input dataset)
 >        - *"Select protein evidences"*: `Custom protein sequences`
->            - {% icon param-file %} *"Proteins to map to genome"*: `output` (Input dataset)
->    - In *"EVM settings (advanced)"*:
->        - *"Split contigs into partitions for EVM processing?"*: `Yes`
->    - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>            - {% icon param-file %} *"Proteins to map to genome"*: `SwissProt_subset.fasta` (Input dataset)
+>    - In *"Busco"*:
+>        - *"Initial Augustus species training set for BUSCO alignment"*: `rhizopus_oryzae`
+>    - *"Which outputs should be generated"*: Select all
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analyis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+TODO describe outputs
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them as soon as the structural annotation is ready.
 
-## Sub-step with **eggNOG Mapper**
+# Functional annotation
+
+The aim of the previous step is to predict the position of the genes on the genome (structural annotation). Now we want to assign names and functions to the predicted genes. We can do this automatically using specialised tools: **eggNOG Mapper** and **InterProScan**.
+
+## **eggNOG Mapper**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -223,7 +187,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 >
 {: .question}
 
-## Sub-step with **Interproscan functional predictions of ORFs**
+## **InterProScan**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -270,6 +234,81 @@ Funannotate provides two little tools to help us, let's run them one after the o
 >    - {% icon param-file %} *"InterProScan5 XML file"*: `outfile` (output of **Interproscan functional predictions of ORFs** {% icon tool %})
 >    - *"Strain name"*: `muc1`
 >    - *"Which outputs should be generated"*: ``
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+# Evaluation and visualisation
+
+## Sub-step with **Busco**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `fa_proteins` (output of **Funannotate functional** {% icon tool %})
+>    - *"Mode"*: `annotated gene sets (protein)`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: ``
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Genome annotation statistics**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
+>    - {% icon param-file %} *"Annotation to analyse"*: `gff3` (output of **Funannotate functional** {% icon tool %})
+>    - *"Reference genome"*: `Use a genome from history`
+>        - {% icon param-file %} *"Corresponding genome sequence"*: `output` (Input dataset)
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -353,86 +392,8 @@ Funannotate provides two little tools to help us, let's run them one after the o
 >
 {: .question}
 
-## Sub-step with **Busco**
+# Submission to NCBI
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `fa_proteins` (output of **Funannotate functional** {% icon tool %})
->    - *"Mode"*: `annotated gene sets (protein)`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Genome annotation statistics**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
->    - {% icon param-file %} *"Annotation to analyse"*: `gff3` (output of **Funannotate functional** {% icon tool %})
->    - *"Reference genome"*: `Use a genome from history`
->        - {% icon param-file %} *"Corresponding genome sequence"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
