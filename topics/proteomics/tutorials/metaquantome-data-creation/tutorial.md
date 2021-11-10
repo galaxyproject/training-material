@@ -118,7 +118,7 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 > ### {% icon hands_on %} Hands-on: Pretreatments
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/main_workflow.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
