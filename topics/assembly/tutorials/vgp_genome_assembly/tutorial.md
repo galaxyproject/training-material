@@ -1022,85 +1022,36 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast, and 
 
 ### Busco
 
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Lineage"*: ``
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: ``
+>
+{: .hands_on}
+
+
+There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos). 
+
 ### Quast
 
+Inputs required for Quast: scaffolded assembly file from Salsa, estimated genome size.
 
-### Contact map
-
-
-
-
-## Format the value for genome size
+Format the value for genome size:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
 >    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
 >    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+
 {: .hands_on}
 
-
->
-{: .hands_on}
-
-## Sub-step with **Sort**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Sort](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `output` (output of **bedtools BAM to BED** {% icon tool %})
->    - *"on column"*: `c4`
->    - *"with flavor"*: `Alphabetical sort`
->    - *"everything in"*: `Ascending order`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-
-
-
-
-
-
-
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Sub-step with **Quast**
+Run Quast:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1115,44 +1066,24 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast, and 
 >    - In *"Genes"*:
 >        - *"Tool for gene prediction"*: `Don't predict genes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
-## Sub-step with **Busco**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: ``
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+There are four outputs: the Quast report in three formats, and a log file. 
 
 
+## Generate a post-scaffolding contact map
 
-## Sub-step with **Map with BWA-MEM**
+There are five steps: 
+
+* Map the forward HiC reads to the scaffolded assembly
+* Map the reverse HiC reads to the scaffolded assembly
+* Combine these bam files into a single file
+* Generate a contact map
+* Conver the map to an image
+
+### Map the forward HiC reads
+
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1175,8 +1106,8 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast, and 
 >
 {: .hands_on}
 
+### Map the reverse HiC reads
 
-## Sub-step with **Map with BWA-MEM**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1199,8 +1130,8 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast, and 
 >
 {: .hands_on}
 
+### Combine the two mapped read bam files 
 
-## Sub-step with **Filter and merge**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1219,23 +1150,7 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast, and 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **PretextMap**
+### Generate a contact map
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1254,23 +1169,7 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast, and 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Pretext Snapshot**
+### Convert the map to an image
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1289,6 +1188,43 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast, and 
 >    {: .comment}
 >
 {: .hands_on}
+
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
 
 # Conclusion
 {:.no_toc}
