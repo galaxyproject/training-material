@@ -108,7 +108,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Busco** {% icon tool %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `output` (Input dataset)
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
@@ -146,7 +146,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Funannotate predict annotation** {% icon tool %} with the following parameters:
+> 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `output` (output of **Sort assembly** {% icon tool %})
 >    - In *"Organism"*:
 >        - *"Name of the species to annotate"*: `Mucor`
@@ -191,7 +191,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **eggNOG Mapper** {% icon tool %} with the following parameters:
+> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Fasta sequences to annotate"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
 >    - In *"Diamond Options"*:
 >        - *"Scoring matrix and gap costs"*: `BLOSUM62`
@@ -227,7 +227,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Interproscan functional predictions of ORFs** {% icon tool %} with the following parameters:
+> 1. {% tool [Interproscan functional predictions of ORFs](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan5/interproscan/5.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Protein Fasta File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Output format"*: `XML`
 >
@@ -262,7 +262,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Funannotate functional** {% icon tool %} with the following parameters:
+> 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy1) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
 >        - {% icon param-file %} *"Genome annotation in genbank format"*: `annot_gbk` (output of **Funannotate predict annotation** {% icon tool %})
 >    - {% icon param-file %} *"NCBI submission template file"*: `output` (Input dataset)
@@ -302,7 +302,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
@@ -357,7 +357,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Busco** {% icon tool %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `fa_proteins` (output of **Funannotate functional** {% icon tool %})
 >    - *"Mode"*: `annotated gene sets (protein)`
 >    - In *"Advanced Options"*:
@@ -394,7 +394,7 @@ Funannotate provides two little tools to help us, let's run them one after the o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
+> 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `gff3` (output of **Funannotate functional** {% icon tool %})
 >    - *"Reference genome"*: `Use a genome from history`
 >        - {% icon param-file %} *"Corresponding genome sequence"*: `output` (Input dataset)
