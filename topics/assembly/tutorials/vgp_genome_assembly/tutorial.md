@@ -434,8 +434,8 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
 >       - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
-> 2. Rename the `Hi-C hap1 balanced contig graph` as `Primary contig graph` and add a `#primary` tag
-> 3. Rename the `Hi-C hap2 balanced contig graph` as `Alternate contig graph` and  add a `#alternate` tag
+> 2. Rename the `Hi-C hap1 contig graph` as `Primary contig graph` and add a `#primary` tag
+> 3. Rename the `Hi-C hap2 contig graph` as `Alternate contig graph` and  add a `#alternate` tag
 >
 {: .hands_on}
 
