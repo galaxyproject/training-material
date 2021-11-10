@@ -237,6 +237,9 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 rebuild-search-index: ## Rebuild search index
 	node bin/lunr-index.js > search.json
 
+api/swagger.json: metadata/swagger.yml
+	cat metadata/swagger.yml | python bin/yaml2json.py > api/swagger.json
+
 clean: ## clean up junk files
 	@rm -rf _site
 	@rm -rf .sass-cache
