@@ -840,9 +840,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 # Hybrid scaffolding based on a phased assembly and HiC mapping data
 
-Inputs: HiC reads, assembly.fasta, genome length, lineage for Buso
-Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
-
+In this section we map HiC reads to scaffold the genome assembly. The input assembly for this section can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section, and it should be in fasta format. The HiC reads need to be in two files: one for forward reads and one for reverse reads. If there is more than one set of each of these reads, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order. For this section we also need an estimate of genome length, which we can get from an earlier step using GenomeScope. The outputs from this section will be a scaffolded assembly.fasta file, contact maps of HiC reads pre- and post scaffolding, and reports from Busco and Quast. 
 
 ## Map the HiC reads to the assembly
 
@@ -861,15 +859,6 @@ We will do this separately for the forward and reverse set of HiC reads.
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 ### Reverse HiC reads
@@ -885,15 +874,6 @@ We will do this separately for the forward and reverse set of HiC reads.
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
@@ -905,15 +885,6 @@ We will do this separately for the forward and reverse set of HiC reads.
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 ### Convert the mapped BAM file to a BED file
@@ -924,14 +895,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+{: .hands_on}
 
 ### Sort the BED file
 
@@ -943,21 +907,12 @@ We will do this separately for the forward and reverse set of HiC reads.
 >    - *"with flavor"*: `Alphabetical sort`
 >    - *"everything in"*: `Ascending order`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
 ## View a contact map of the mapped HiC reads
 
-### Make the map using the merged bam file.
+### Generate the contact map
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -965,18 +920,9 @@ We will do this separately for the forward and reverse set of HiC reads.
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-### Convert the map to an image.
+### Convert the map to an image
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -985,21 +931,12 @@ We will do this separately for the forward and reverse set of HiC reads.
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
 ## Salsa scaffolding
 
-Files required: The assembly file (optional: and the assembly graph), the sorted BED file, the restriction enzyme sequence from the HiC sequencing. 
+Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. 
 
 ### Prepare the assembly file
 
@@ -1010,15 +947,6 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 >    - *"Find pattern"*: `:`
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -1032,14 +960,6 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 > 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
 >    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -1054,23 +974,13 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 >    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
 >    - *"Restriction enzyme sequence(s)"*: `{'id': 14, 'output_name': 'text_param'}`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
 
 ## Evaluate the SALSA scaffolding results
 
-
-The scaffolded assembly fasta file can then be analysed in Busco and Quast, and visualized in a contact map. 
+The scaffolded assembly fasta file can then be analysed in Busco and Quast.
 
 ### Busco
 
@@ -1147,15 +1057,6 @@ There are five steps:
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 ### Map the reverse HiC reads
@@ -1171,15 +1072,6 @@ There are five steps:
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 ### Combine the two mapped read bam files 
@@ -1191,14 +1083,6 @@ There are five steps:
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -1210,14 +1094,6 @@ There are five steps:
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -1230,14 +1106,6 @@ There are five steps:
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
