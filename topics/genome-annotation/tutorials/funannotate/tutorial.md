@@ -13,17 +13,21 @@ questions:
 objectives:
   - Load genome into Galaxy
   - Annotate genome with Funannotate
-  - Perform functional annotation using eggNOG-mapper and InterProScan
+  - Perform functional annotation using EggNOG-mapper and InterProScan
   - Evaluate annotation quality with BUSCO
   - View annotations in JBrowse
 time_estimation: 8H
 key_points:
   - Funannotate allows to perform structural annotatation of a eukaryotic genome.
-  - Functional annotation can be performed using eggNOG-mapper and InterProScan.
+  - Functional annotation can be performed using EggNOG-mapper and InterProScan.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
   - Funannotate allows to format an annotation for sumission at NCBI.
 contributors:
 - abretaud
+- alexcorm
+- lleroi
+- r1corre
+- stephanierobin
 
 ---
 
@@ -44,7 +48,7 @@ Funannotate uses ab-initio predictors ([Augustus](http://bioinf.uni-greifswald.d
 
 While for [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}) you need to perform training steps for the ab-initio predictors, Funannotate is able to take care of that for you, which makes it much easier to use.
 
-In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using eggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI.
+In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI.
 
 Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise your new annotation.
 
@@ -143,51 +147,41 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 >
 {: .hands_on}
 
-TODO describe outputs
+This tool produces several output dataset, in particular:
 
-This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them as soon as the structural annotation is ready.
+- the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the analysed genome.
+- the  CDS, transcript and protein sequences of all the genes predicted by Funannotate
+- some statistics and reports
+
+TODO explain validation report + question on this?
+
+This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.
 
 # Functional annotation
 
-The aim of the previous step is to predict the position of the genes on the genome (structural annotation). Now we want to assign names and functions to the predicted genes. We can do this automatically using specialised tools: **eggNOG Mapper** and **InterProScan**.
+The aim of the previous step is to predict the position of the genes on the genome (structural annotation). Now we want to assign names and functions to the predicted genes. We can do this automatically using specialised tools: **EggNOG Mapper** and **InterProScan**.
 
-## **eggNOG Mapper**
+## **EggNOG Mapper**
+
+**EggNOG Mapper** compares each protein sequence of the annotation to a huge set of ortholog groups from the [EggNOG database](http://eggnog5.embl.de). In this database, each ortholog group is associated with functional annotation like [Gene Ontology (GO)](http://www.geneontology.org/) terms or [KEGG pathways](https://www.genome.jp/kegg/pathway.html). When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Fasta sequences to annotate"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
->    - In *"Diamond Options"*:
->        - *"Scoring matrix and gap costs"*: `BLOSUM62`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Version of eggNOG Database"*: select the latest version available
+>    - In *"Output Options"*:
+>        - *"Exclude header lines and stats from output files"*: `No`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The output of this tool is a tabular file, where each line represents a gene from our annotation, with the functional annotation that was found by EggNOG-mapper. It includes a predicted protein name, GO terms, EC numbers, KEGG identifiers, ...
 
 ## **InterProScan**
+
+[InterPro](https://www.ebi.ac.uk/interpro/) is a huge integrated database of protein families. Each family is characterized by one or muliple signatures (i.e. sequence motifs) that are specific to the protein family, and corresponding functional annotation like protein names or [Gene Ontology (GO)](http://www.geneontology.org/). A good proportion of the signatures are manually curated, which means they are of very good quality.
+
+**InterProScan** is a tool that analyses each protein sequence from our annotation to determine if they contain one or several of the signatures from InterPro. When a protein contains a known signature, the corresponding functional annotation will be assigned to it by **InterProScan**.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -195,34 +189,13 @@ The aim of the previous step is to predict the position of the genes on the geno
 >    - {% icon param-file %} *"Protein Fasta File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Output format"*: `XML`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that ere found by InterProScan.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Integrating the results
 
-## Sub-step with **Funannotate functional**
+Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, we will now combine all this data into a single file that will contain the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -235,40 +208,17 @@ The aim of the previous step is to predict the position of the genes on the geno
 >    - *"Strain name"*: `muc1`
 >    - *"Which outputs should be generated"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 # Evaluation and visualisation
+
+TODO look at the "stats" output of funannotate predict
 
 ## Sub-step with **Busco**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `fa_proteins` (output of **Funannotate functional** {% icon tool %})
 >    - *"Mode"*: `annotated gene sets (protein)`
 >    - In *"Advanced Options"*:
@@ -284,58 +234,6 @@ The aim of the previous step is to predict the position of the genes on the geno
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Genome annotation statistics**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
->    - {% icon param-file %} *"Annotation to analyse"*: `gff3` (output of **Funannotate functional** {% icon tool %})
->    - *"Reference genome"*: `Use a genome from history`
->        - {% icon param-file %} *"Corresponding genome sequence"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **JBrowse**
 
@@ -376,21 +274,7 @@ The aim of the previous step is to predict the position of the genes on the geno
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Comparing annotations
 
 # Submission to NCBI
 
