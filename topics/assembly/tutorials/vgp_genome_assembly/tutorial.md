@@ -844,7 +844,11 @@ Inputs: HiC reads, assembly.fasta, genome length, lineage for Buso
 Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 
 
-## Sub-step with **Map with BWA-MEM**
+## Map the HiC reads to the assembly
+
+We will do this separately for the forward and reverse set of HiC reads. 
+
+### Forward HiC reads
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -868,7 +872,7 @@ Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 >
 {: .hands_on}
 
-## Sub-step with **Map with BWA-MEM**
+### Reverse HiC reads
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -893,7 +897,7 @@ Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 {: .hands_on}
 
 
-## Sub-step with **Filter and merge**
+### Merge and filter the mapped reads
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -912,8 +916,48 @@ Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 >
 {: .hands_on}
 
+### Convert the mapped BAM file to a BED file
 
-## Sub-step with **PretextMap**
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [bedtools BAM to BED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **Filter and merge** {% icon tool %})
+>    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+
+### Sort the BED file
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Sort](sort1) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Dataset"*: `output` (output of **bedtools BAM to BED** {% icon tool %})
+>    - *"on column"*: `c4`
+>    - *"with flavor"*: `Alphabetical sort`
+>    - *"everything in"*: `Ascending order`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## View a contact map of the mapped HiC reads
+
+### Make the map using the merged bam file.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -932,7 +976,7 @@ Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 >
 {: .hands_on}
 
-## Sub-step with **Pretext Snapshot**
+### Convert the map to an image.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -952,7 +996,93 @@ Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 >
 {: .hands_on}
 
-## Sub-step with **Parse parameter value**
+
+## Salsa scaffolding
+
+Files required: The assembly file (optional: and the assembly graph), the sorted BED file, the restriction enzyme sequence from the HiC sequencing. 
+
+### Prepare the assembly file
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
+>    - *"Find pattern"*: `:`
+>    - *"Replace all occurences of the pattern"*: `Yes`
+>    - *"Find and Replace text in"*: `entire line`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+### Prepare the enzyme sequence file
+
+If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+### SALSA
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
+>    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
+>    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
+>    - *"Restriction enzyme sequence(s)"*: `{'id': 14, 'output_name': 'text_param'}`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+
+## Evaluate the SALSA scaffolding results
+
+
+The scaffolded assembly fasta file can then be analysed in Busco and Quast, and visualized in a contact map. 
+
+### Busco
+
+### Quast
+
+
+### Contact map
+
+
+
+
+## Format the value for genome size
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -971,22 +1101,7 @@ Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 >
 {: .hands_on}
 
-## Sub-step with **bedtools BAM to BED**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [bedtools BAM to BED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **Filter and merge** {% icon tool %})
->    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -1011,67 +1126,12 @@ Outputs: Scaffolding heatmaps, scaffolds.fasta, Quast report, Busco report
 >
 {: .hands_on}
 
-## Sub-step with **Replace**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
->    - *"Find pattern"*: `:`
->    - *"Replace all occurences of the pattern"*: `Yes`
->    - *"Find and Replace text in"*: `entire line`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 
-## Sub-step with **SALSA**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
->    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
->    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
->    - *"Restriction enzyme sequence(s)"*: `{'id': 14, 'output_name': 'text_param'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+
 
 ## Sub-step with **Parse parameter value**
 
