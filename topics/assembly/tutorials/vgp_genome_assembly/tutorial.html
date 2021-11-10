@@ -623,25 +623,11 @@
     </ol>
   </li>
   <li><a href="#hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data" id="markdown-toc-hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data">Hybrid scaffolding based on a phased assembly and HiC <span class="notranslate">mapping</span> data</a>    <ol>
-      <li><a href="#sub-step-with-map-with-bwa-mem" id="markdown-toc-sub-step-with-map-with-bwa-mem">Sub-step with <strong>Map with BWA-MEM</strong></a></li>
-      <li><a href="#sub-step-with-map-with-bwa-mem-1" id="markdown-toc-sub-step-with-map-with-bwa-mem-1">Sub-step with <strong>Map with BWA-MEM</strong></a></li>
-      <li><a href="#sub-step-with-filter-and-merge" id="markdown-toc-sub-step-with-filter-and-merge">Sub-step with <strong>Filter and merge</strong></a></li>
-      <li><a href="#sub-step-with-pretextmap" id="markdown-toc-sub-step-with-pretextmap">Sub-step with <strong>PretextMap</strong></a></li>
-      <li><a href="#sub-step-with-pretext-snapshot" id="markdown-toc-sub-step-with-pretext-snapshot">Sub-step with <strong>Pretext Snapshot</strong></a></li>
-      <li><a href="#sub-step-with-parse-parameter-value-1" id="markdown-toc-sub-step-with-parse-parameter-value-1">Sub-step with <strong>Parse parameter value</strong></a></li>
-      <li><a href="#sub-step-with-bedtools-bam-to-bed" id="markdown-toc-sub-step-with-bedtools-bam-to-bed">Sub-step with <strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong></a></li>
-      <li><a href="#sub-step-with-sort" id="markdown-toc-sub-step-with-sort">Sub-step with <strong>Sort</strong></a></li>
-      <li><a href="#sub-step-with-replace" id="markdown-toc-sub-step-with-replace">Sub-step with <strong>Replace</strong></a></li>
-      <li><a href="#sub-step-with-parse-parameter-value-2" id="markdown-toc-sub-step-with-parse-parameter-value-2">Sub-step with <strong>Parse parameter value</strong></a></li>
-      <li><a href="#sub-step-with-salsa" id="markdown-toc-sub-step-with-salsa">Sub-step with <strong>SALSA</strong></a></li>
-      <li><a href="#sub-step-with-parse-parameter-value-3" id="markdown-toc-sub-step-with-parse-parameter-value-3">Sub-step with <strong>Parse parameter value</strong></a></li>
-      <li><a href="#sub-step-with-quast-1" id="markdown-toc-sub-step-with-quast-1">Sub-step with <strong>Quast</strong></a></li>
-      <li><a href="#sub-step-with-busco" id="markdown-toc-sub-step-with-busco">Sub-step with <strong>Busco</strong></a></li>
-      <li><a href="#sub-step-with-map-with-bwa-mem-2" id="markdown-toc-sub-step-with-map-with-bwa-mem-2">Sub-step with <strong>Map with BWA-MEM</strong></a></li>
-      <li><a href="#sub-step-with-map-with-bwa-mem-3" id="markdown-toc-sub-step-with-map-with-bwa-mem-3">Sub-step with <strong>Map with BWA-MEM</strong></a></li>
-      <li><a href="#sub-step-with-filter-and-merge-1" id="markdown-toc-sub-step-with-filter-and-merge-1">Sub-step with <strong>Filter and merge</strong></a></li>
-      <li><a href="#sub-step-with-pretextmap-1" id="markdown-toc-sub-step-with-pretextmap-1">Sub-step with <strong>PretextMap</strong></a></li>
-      <li><a href="#sub-step-with-pretext-snapshot-1" id="markdown-toc-sub-step-with-pretext-snapshot-1">Sub-step with <strong>Pretext Snapshot</strong></a></li>
+      <li><a href="#map-the-hic-reads-to-the-assembly" id="markdown-toc-map-the-hic-reads-to-the-assembly">Map the HiC <span class="notranslate">reads</span> to the assembly</a></li>
+      <li><a href="#view-a-contact-map-of-the-mapped-hic-reads" id="markdown-toc-view-a-contact-map-of-the-mapped-hic-reads">View a contact map of the mapped HiC <span class="notranslate">reads</span></a></li>
+      <li><a href="#salsa-scaffolding" id="markdown-toc-salsa-scaffolding">Salsa scaffolding</a></li>
+      <li><a href="#evaluate-the-salsa-scaffolding-results" id="markdown-toc-evaluate-the-salsa-scaffolding-results">Evaluate the Salsa scaffolding results</a></li>
+      <li><a href="#generate-a-post-scaffolding-contact-map" id="markdown-toc-generate-a-post-scaffolding-contact-map">Generate a post-scaffolding contact map</a></li>
     </ol>
   </li>
 </ol>
@@ -1850,7 +1836,13 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 <h1 id="hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data">Hybrid scaffolding based on a phased assembly and HiC <span class="notranslate">mapping</span> data</h1>
 
-<h2 id="sub-step-with-map-with-bwa-mem">Sub-step with <strong>Map with BWA-MEM</strong></h2>
+<p>In this section we map HiC <span class="notranslate">reads</span> to scaffold the genome assembly. The input assembly for this section can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward <span class="notranslate">reads</span> into one file, and the reverse <span class="notranslate">reads</span> into another file, in the same order. For this section, we also need an estimate of genome length, which we can get from an earlier step using GenomeScope. The outputs from this section will be a scaffolded assembly FASTA file, contact maps of HiC <span class="notranslate">reads</span> pre- and post scaffolding, and reports from Busco and Quast.</p>
+
+<h2 id="map-the-hic-reads-to-the-assembly">Map the HiC <span class="notranslate">reads</span> to the assembly</h2>
+
+<p>We will do this separately for the forward and reverse set of HiC <span class="notranslate">reads</span>.</p>
+
+<h3 id="map-the-forward-hic-reads">Map the forward HiC <span class="notranslate">reads</span></h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1872,22 +1864,12 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
         <li><em>“BAM sorting mode”</em>: <code class="language-plaintext highlighter-rouge">Sort by read names  (i.e., the QNAME field) </code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-9"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-map-with-bwa-mem-1">Sub-step with <strong>Map with BWA-MEM</strong></h2>
+<h3 id="map-the-reverse-hic-reads">Map the reverse HiC <span class="notranslate">reads</span></h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1909,22 +1891,12 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
         <li><em>“BAM sorting mode”</em>: <code class="language-plaintext highlighter-rouge">Sort by read names  (i.e., the QNAME field) </code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-10"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-filter-and-merge">Sub-step with <strong>Filter and merge</strong></h2>
+<h3 id="merge-the-mapped-reads">Merge the mapped <span class="notranslate">reads</span></h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1935,104 +1907,15 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-11"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-pretextmap">Sub-step with <strong>PretextMap</strong></h2>
+<h3 id="convert-the-mapped-bam-file-to-a-bed-file">Convert the mapped BAM file to a <span class="notranslate">BED</span> file</h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-8"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-12"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h2 id="sub-step-with-pretext-snapshot">Sub-step with <strong>Pretext Snapshot</strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-9"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">pretext_map_out</code> (output of <strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
-        <li><em>“Show grid?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-13"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h2 id="sub-step-with-parse-parameter-value-1">Sub-step with <strong>Parse parameter value</strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-10"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing parameter to parse out of”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-        <li><em>“Select type of parameter to parse”</em>: <code class="language-plaintext highlighter-rouge">Integer</code></li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-14"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h2 id="sub-step-with-bedtools-bam-to-bed">Sub-step with <strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-11"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1"><strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_bamtobed/2.30.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -2040,25 +1923,15 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert the following BAM file to <span class="notranslate">BED</span>”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“What type of <span class="notranslate">BED</span> output would you like”</em>: <code class="language-plaintext highlighter-rouge">Create a full, 12-column "blocked" <span class="notranslate">BED</span> file</code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-15"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-sort">Sub-step with <strong>Sort</strong></h2>
+<h3 id="sort-the-bed-file">Sort the <span class="notranslate">BED</span> file</h3>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-12"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-9"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  with the following parameters:
@@ -2068,25 +1941,54 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><em>“with flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort</code></li>
         <li><em>“everything in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-16"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-replace">Sub-step with <strong>Replace</strong></h2>
+<h2 id="view-a-contact-map-of-the-mapped-hic-reads">View a contact map of the mapped HiC <span class="notranslate">reads</span></h2>
+
+<h3 id="generate-a-contact-map">Generate a contact map</h3>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-13"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-10"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="convert-the-map-to-an-image">Convert the map to an image</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-11"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">pretext_map_out</code> (output of <strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
+        <li><em>“Show grid?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="salsa-scaffolding">Salsa scaffolding</h2>
+
+<p>Files required: The assembly file (optional: and the assembly graph), the sorted <span class="notranslate">BED</span> file, and the restriction enzyme sequence from the HiC sequencing.</p>
+
+<h3 id="prepare-the-assembly-file">Prepare the assembly file</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-12"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  with the following parameters:
@@ -2096,50 +1998,32 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-17"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-parse-parameter-value-2">Sub-step with <strong>Parse parameter value</strong></h2>
+<h3 id="prepare-the-enzyme-sequence-file">Prepare the enzyme sequence file</h3>
+
+<p>If you are using VGP GenomeArk data, you can get this information from the same file as the HiC <span class="notranslate">reads</span>, in a file called re_bases.txt.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-14"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-13"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing parameter to parse out of”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-18"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-salsa">Sub-step with <strong>SALSA</strong></h2>
+<h3 id="salsa-scaffolding-1"><strong>SALSA</strong> scaffolding</h3>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-15"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-14"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0"><strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2149,24 +2033,50 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence graphs”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
         <li><em>“Restriction enzyme sequence(s)”</em>: <code class="language-plaintext highlighter-rouge">{'id': 14, 'output_name': 'text_param'}</code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-19"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-parse-parameter-value-3">Sub-step with <strong>Parse parameter value</strong></h2>
+<h2 id="evaluate-the-salsa-scaffolding-results">Evaluate the Salsa scaffolding results</h2>
+
+<p>The scaffolded assembly fasta file can then be analysed in Busco and Quast.</p>
+
+<h3 id="busco">Busco</h3>
 
 <blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-15"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (<span class="notranslate">DNA</span>)</code>
+          <ul>
+            <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
+          </ul>
+        </li>
+        <li><em>“Lineage”</em>: ``</li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Which outputs should be generated”</em>: ``</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos).</p>
+
+<h3 id="quast">Quast</h3>
+
+<p>Inputs required for Quast: scaffolded assembly file from Salsa, estimated genome size.</p>
+
+<p>Format the value for genome size:</p>
+
+<blockquote>
   <h3 id="hands_on-hands-on-task-description-16"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
@@ -2175,22 +2085,11 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing parameter to parse out of”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
         <li><em>“Select type of parameter to parse”</em>: <code class="language-plaintext highlighter-rouge">Integer</code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-20"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
-
 </blockquote>
 
-<h2 id="sub-step-with-quast-1">Sub-step with <strong>Quast</strong></h2>
+<p class="hands_on">Run Quast:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-17"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -2220,58 +2119,52 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
           </ul>
         </li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-21"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-busco">Sub-step with <strong>Busco</strong></h2>
+<p>There are four outputs: the Quast report in three formats, and a log file.</p>
+
+<h2 id="generate-a-post-scaffolding-contact-map">Generate a post-scaffolding contact map</h2>
+
+<p>There are five steps:</p>
+
+<ul>
+  <li>Map the forward HiC <span class="notranslate">reads</span> to the scaffolded assembly</li>
+  <li>Map the reverse HiC <span class="notranslate">reads</span> to the scaffolded assembly</li>
+  <li>Combine these bam files into a single file</li>
+  <li>Generate a contact map</li>
+  <li>Conver the map to an image</li>
+</ul>
+
+<h3 id="map-the-forward-hic-reads-1">Map the forward HiC <span class="notranslate">reads</span></h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-18"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (<span class="notranslate">DNA</span>)</code>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
           <ul>
-            <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           </ul>
         </li>
-        <li><em>“Lineage”</em>: ``</li>
-        <li>In <em>“Advanced Options”</em>:
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
           <ul>
-            <li><em>“Which outputs should be generated”</em>: ``</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
           </ul>
         </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-22"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-map-with-bwa-mem-2">Sub-step with <strong>Map with BWA-MEM</strong></h2>
+<h3 id="map-the-reverse-hic-reads-1">Map the reverse HiC <span class="notranslate">reads</span></h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-19"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -2292,61 +2185,15 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
         <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
       </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-23"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="sub-step-with-map-with-bwa-mem-3">Sub-step with <strong>Map with BWA-MEM</strong></h2>
+<h3 id="merge-the-mapped-reads-1">Merge the mapped <span class="notranslate">reads</span></h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-20"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-          </ul>
-        </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-          </ul>
-        </li>
-        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
-        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-24"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h2 id="sub-step-with-filter-and-merge-1">Sub-step with <strong>Filter and merge</strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-21"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2354,16 +2201,39 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
+    </li>
+  </ol>
 
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
+</blockquote>
 
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
+<h3 id="generate-a-contact-map-1">Generate a contact map</h3>
 
-      <blockquote class="comment">
-        <h3 id="comment-comment-25"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-21"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="convert-the-map-to-an-image-1">Convert the map to an image</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-22"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">pretext_map_out</code> (output of <strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
+        <li><em>“Show grid?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
     </li>
   </ol>
 
@@ -2391,32 +2261,6 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h2 id="sub-step-with-pretextmap-1">Sub-step with <strong>PretextMap</strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-22"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-26"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
 <p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
 
 <blockquote class="question">
@@ -2436,33 +2280,6 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
     </ol>
 
   </blockquote>
-
-</blockquote>
-
-<h2 id="sub-step-with-pretext-snapshot-1">Sub-step with <strong>Pretext Snapshot</strong></h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-23"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">pretext_map_out</code> (output of <strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
-        <li><em>“Show grid?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-
-      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
-
-      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-27"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-        <p>A comment about the tool or something else. This box can also be in the main text</p>
-      </blockquote>
-    </li>
-  </ol>
 
 </blockquote>
 
