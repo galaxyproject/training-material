@@ -846,7 +846,7 @@ In this section we map HiC reads to scaffold the genome assembly. In HiC sequenc
 
 Inputs required for this section:
 
-* An assembly fasta file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
+* An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
 * HiC reads, one set of forward reads and one set of reverse reads. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order.
 * Genome size estimate: we can get this from an earlier step using GenomeScope. This is the haploid length. 
 
