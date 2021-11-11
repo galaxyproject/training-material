@@ -840,13 +840,36 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 # Hybrid scaffolding based on a phased assembly and HiC mapping data
 
-In this section we map HiC reads to scaffold the genome assembly. The input assembly for this section can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order. For this section, we also need an estimate of genome length, which we can get from an earlier step using GenomeScope. The outputs from this section will be a scaffolded assembly FASTA file, contact maps of HiC reads pre- and post scaffolding, and reports from Busco and Quast. 
+***TODO***: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the workflow but I think we want people to be able to run this step by step. I've taken out some of the steps that are "parse parameter value" etc. 
 
-## Map the HiC reads to the assembly
+In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A DNA fragment is then sequenced from each end of this artificial junction, giving a read pair. If reads from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
 
-We will do this separately for the forward and reverse set of HiC reads. 
+Inputs required for this section:
 
-### Map the forward HiC reads
+* An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
+* HiC reads, one set of forward reads and one set of reverse reads. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order.
+* Genome size estimate: we can get this from an earlier step using GenomeScope. This is the haploid length. 
+
+A summary of the 5 steps in this section: 
+
+* Map the HiC reads to the assembly 
+* View a contact map of HiC reads against the assembly, before scaffolding
+* Scaffold the assembly with HiC reads: using the assembly file, and the mapped HiC reads
+* Evaluate the scaffolding results: use Busco and Quast 
+* View a contact map of the HiC reads after scaffolding
+
+Outputs from this section:
+
+* A scaffolded assembly FASTA file
+* contact maps of HiC reads pre- and post scaffolding
+* post-scaffolding reports from Busco and Quast 
+
+
+## 1. Map the HiC reads to the assembly
+
+We will do this separately for the forward and reverse set of HiC reads. We have to do this separately because these are not standard paired-end reads. 
+
+**Map the forward HiC reads:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -861,7 +884,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Map the reverse HiC reads
+**Map the reverse HiC reads:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -877,7 +900,9 @@ We will do this separately for the forward and reverse set of HiC reads.
 {: .hands_on}
 
 
-### Merge the mapped reads
+**Merge the mapped reads:**
+
+Now we will merge these two BAM files:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -887,7 +912,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Convert the mapped BAM file to a BED file
+**Convert the mapped BAM file to a BED file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -897,7 +922,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Sort the BED file
+**Sort the BED file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -910,9 +935,11 @@ We will do this separately for the forward and reverse set of HiC reads.
 {: .hands_on}
 
 
-## View a contact map of the mapped HiC reads
+## 2. View a contact map of the mapped HiC reads
 
-### Generate a contact map
+Most of the paired reads from HiC will map to the same (or nearby) contigs. On a graph, with ordered contigs on each axis, a lot of the contacts will be along the diagonal (mapping to self), or nearby (around that diagonal line). But some may be in odd places - for example, showing a lot of reads mapped to both contig 4 and contig 19. We will now generate a contact map of the assembly before it is scaffolded, to compare to the contact map after scaffolding.
+
+**Generate a contact map:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -922,7 +949,7 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
-### Convert the map to an image
+**Convert the map to an image:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -933,12 +960,14 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
+***TODO***: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not). 
 
-## Salsa scaffolding
 
-Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. 
+## 3. Salsa scaffolding
 
-### Prepare the assembly file
+Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
+
+**Prepare the assembly file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -951,20 +980,7 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 {: .hands_on}
 
 
-### Prepare the enzyme sequence file
-
-If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->
->
-{: .hands_on}
-
-
-### **SALSA** scaffolding
+**SALSA scaffolding:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -972,17 +988,16 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 >    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
 >    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
 >    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
->    - *"Restriction enzyme sequence(s)"*: `{'id': 14, 'output_name': 'text_param'}`
+>    - *"Restriction enzyme sequence(s)"*: add the enzyme sequence(s) here
 >
 {: .hands_on}
 
 
-
-## Evaluate the Salsa scaffolding results
+## 4. Evaluate the Salsa scaffolding results
 
 The scaffolded assembly fasta file can then be analysed in Busco and Quast.
 
-### Busco
+**Busco:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -999,19 +1014,11 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast.
 
 There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos). 
 
-### Quast
+***TODO***: explain what these outputs mean; are the results "good" ?
 
-Inputs required for Quast: scaffolded assembly file from Salsa, estimated genome size.
+**Quast:**
 
-Format the value for genome size:
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->    - *"Select type of parameter to parse"*: `Integer`
-
-{: .hands_on}
+Inputs required for Quast: scaffolded assembly file from Salsa, and estimated genome size. The estimated genome size is obtained from an earlier step with GenomeScope.
 
 Run Quast:
 
@@ -1022,7 +1029,7 @@ Run Quast:
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 13, 'output_name': 'integer_param'}`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `enter estimated genome size`
 >        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - *"Is genome large (> 100 Mbp)?"*: `Yes`
 >    - In *"Genes"*:
@@ -1033,8 +1040,10 @@ Run Quast:
 
 There are four outputs: the Quast report in three formats, and a log file. 
 
+***TODO***: explain what these outputs mean; are the results "good" ?
 
-## Generate a post-scaffolding contact map
+
+## 5. Generate a post-scaffolding contact map
 
 There are five steps: 
 
@@ -1044,7 +1053,7 @@ There are five steps:
 * Generate a contact map
 * Conver the map to an image
 
-### Map the forward HiC reads
+**Map the forward HiC reads:**
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -1059,7 +1068,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Map the reverse HiC reads
+**Map the reverse HiC reads:**
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -1074,7 +1083,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Merge the mapped reads
+**Merge the mapped reads:**
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -1086,7 +1095,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Generate a contact map
+**Generate a contact map:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1097,7 +1106,7 @@ There are five steps:
 >
 {: .hands_on}
 
-### Convert the map to an image
+**Convert the map to an image:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1108,6 +1117,11 @@ There are five steps:
 >
 >
 {: .hands_on}
+
+
+***TODO***: explain the output here. What does the pretext map show. How does it compare to the pre-scaffolding map. 
+
+***TODO***: overall, explain what the scaffolding section results mean. What are the next possible steps.
 
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
