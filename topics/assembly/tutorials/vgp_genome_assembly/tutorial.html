@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:10 +0000",
+  "dateModified": "1970-01-01 00:00:11 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "VGP assembly pipeline",
   "interactivityType": "mixed",
@@ -556,7 +556,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 10, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 11, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -623,11 +623,11 @@
     </ol>
   </li>
   <li><a href="#hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data" id="markdown-toc-hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data">Hybrid scaffolding based on a phased assembly and HiC <span class="notranslate">mapping</span> data</a>    <ol>
-      <li><a href="#map-the-hic-reads-to-the-assembly" id="markdown-toc-map-the-hic-reads-to-the-assembly">Map the HiC <span class="notranslate">reads</span> to the assembly</a></li>
-      <li><a href="#view-a-contact-map-of-the-mapped-hic-reads" id="markdown-toc-view-a-contact-map-of-the-mapped-hic-reads">View a contact map of the mapped HiC <span class="notranslate">reads</span></a></li>
-      <li><a href="#salsa-scaffolding" id="markdown-toc-salsa-scaffolding">Salsa scaffolding</a></li>
-      <li><a href="#evaluate-the-salsa-scaffolding-results" id="markdown-toc-evaluate-the-salsa-scaffolding-results">Evaluate the Salsa scaffolding results</a></li>
-      <li><a href="#generate-a-post-scaffolding-contact-map" id="markdown-toc-generate-a-post-scaffolding-contact-map">Generate a post-scaffolding contact map</a></li>
+      <li><a href="#1-map-the-hic-reads-to-the-assembly" id="markdown-toc-1-map-the-hic-reads-to-the-assembly">1. Map the HiC <span class="notranslate">reads</span> to the assembly</a></li>
+      <li><a href="#2-view-a-contact-map-of-the-mapped-hic-reads" id="markdown-toc-2-view-a-contact-map-of-the-mapped-hic-reads">2. View a contact map of the mapped HiC <span class="notranslate">reads</span></a></li>
+      <li><a href="#3-salsa-scaffolding" id="markdown-toc-3-salsa-scaffolding">3. Salsa scaffolding</a></li>
+      <li><a href="#4-evaluate-the-salsa-scaffolding-results" id="markdown-toc-4-evaluate-the-salsa-scaffolding-results">4. Evaluate the Salsa scaffolding results</a></li>
+      <li><a href="#5-generate-a-post-scaffolding-contact-map" id="markdown-toc-5-generate-a-post-scaffolding-contact-map">5. Generate a post-scaffolding contact map</a></li>
     </ol>
   </li>
 </ol>
@@ -1836,13 +1836,41 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 <h1 id="hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data">Hybrid scaffolding based on a phased assembly and HiC <span class="notranslate">mapping</span> data</h1>
 
-<p>In this section we map HiC <span class="notranslate">reads</span> to scaffold the genome assembly. The input assembly for this section can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward <span class="notranslate">reads</span> into one file, and the reverse <span class="notranslate">reads</span> into another file, in the same order. For this section, we also need an estimate of genome length, which we can get from an earlier step using GenomeScope. The outputs from this section will be a scaffolded assembly FASTA file, contact maps of HiC <span class="notranslate">reads</span> pre- and post scaffolding, and reports from Busco and Quast.</p>
+<p><strong><em>TODO</em></strong>: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the <span class="notranslate">workflow</span> but I think we want people to be able to run this step by step. I’ve taken out some of the steps that are “parse parameter value” etc.</p>
 
-<h2 id="map-the-hic-reads-to-the-assembly">Map the HiC <span class="notranslate">reads</span> to the assembly</h2>
+<p>In this section we map HiC <span class="notranslate">reads</span> to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A <span class="notranslate">DNA</span> fragment is then sequenced from each end of this artificial junction, giving a read pair. If <span class="notranslate">reads</span> from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU</p>
 
-<p>We will do this separately for the forward and reverse set of HiC <span class="notranslate">reads</span>.</p>
+<p>Inputs required for this section:</p>
 
-<h3 id="map-the-forward-hic-reads">Map the forward HiC <span class="notranslate">reads</span></h3>
+<ul>
+  <li>An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section.</li>
+  <li>HiC <span class="notranslate">reads</span>, one set of forward <span class="notranslate">reads</span> and one set of reverse <span class="notranslate">reads</span>. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward <span class="notranslate">reads</span> into one file, and the reverse <span class="notranslate">reads</span> into another file, in the same order.</li>
+  <li>Genome size estimate: we can get this from an earlier step using GenomeScope. This is the haploid length.</li>
+</ul>
+
+<p>A summary of the 5 steps in this section:</p>
+
+<ul>
+  <li>Map the HiC <span class="notranslate">reads</span> to the assembly</li>
+  <li>View a contact map of HiC <span class="notranslate">reads</span> against the assembly, before scaffolding</li>
+  <li>Scaffold the assembly with HiC <span class="notranslate">reads</span>: using the assembly file, and the mapped HiC <span class="notranslate">reads</span></li>
+  <li>Evaluate the scaffolding results: use Busco and Quast</li>
+  <li>View a contact map of the HiC <span class="notranslate">reads</span> after scaffolding</li>
+</ul>
+
+<p>Outputs from this section:</p>
+
+<ul>
+  <li>A scaffolded assembly FASTA file</li>
+  <li>contact maps of HiC <span class="notranslate">reads</span> pre- and post scaffolding</li>
+  <li>post-scaffolding reports from Busco and Quast</li>
+</ul>
+
+<h2 id="1-map-the-hic-reads-to-the-assembly">1. Map the HiC <span class="notranslate">reads</span> to the assembly</h2>
+
+<p>We will do this separately for the forward and reverse set of HiC <span class="notranslate">reads</span>. We have to do this separately because these are not standard paired-end <span class="notranslate">reads</span>.</p>
+
+<p><strong>Map the forward HiC <span class="notranslate">reads</span>:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1869,7 +1897,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="map-the-reverse-hic-reads">Map the reverse HiC <span class="notranslate">reads</span></h3>
+<p><strong>Map the reverse HiC <span class="notranslate">reads</span>:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1896,7 +1924,9 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="merge-the-mapped-reads">Merge the mapped <span class="notranslate">reads</span></h3>
+<p><strong>Merge the mapped <span class="notranslate">reads</span>:</strong></p>
+
+<p>Now we will merge these two BAM files:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1912,7 +1942,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="convert-the-mapped-bam-file-to-a-bed-file">Convert the mapped BAM file to a <span class="notranslate">BED</span> file</h3>
+<p><strong>Convert the mapped BAM file to a <span class="notranslate">BED</span> file:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-8"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1928,7 +1958,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="sort-the-bed-file">Sort the <span class="notranslate">BED</span> file</h3>
+<p><strong>Sort the <span class="notranslate">BED</span> file:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-9"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1946,9 +1976,11 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h2 id="view-a-contact-map-of-the-mapped-hic-reads">View a contact map of the mapped HiC <span class="notranslate">reads</span></h2>
+<h2 id="2-view-a-contact-map-of-the-mapped-hic-reads">2. View a contact map of the mapped HiC <span class="notranslate">reads</span></h2>
 
-<h3 id="generate-a-contact-map">Generate a contact map</h3>
+<p>Most of the paired <span class="notranslate">reads</span> from HiC will map to the same (or nearby) contigs. On a graph, with ordered contigs on each axis, a lot of the contacts will be along the diagonal (<span class="notranslate">mapping</span> to self), or nearby (around that diagonal line). But some may be in odd places - for example, showing a lot of <span class="notranslate">reads</span> mapped to both contig 4 and contig 19. We will now generate a contact map of the assembly before it is scaffolded, to compare to the contact map after scaffolding.</p>
+
+<p><strong>Generate a contact map:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-10"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1964,7 +1996,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="convert-the-map-to-an-image">Convert the map to an image</h3>
+<p><strong>Convert the map to an image:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-11"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1981,11 +2013,13 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h2 id="salsa-scaffolding">Salsa scaffolding</h2>
+<p><strong><em>TODO</em></strong>: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not).</p>
 
-<p>Files required: The assembly file (optional: and the assembly graph), the sorted <span class="notranslate">BED</span> file, and the restriction enzyme sequence from the HiC sequencing.</p>
+<h2 id="3-salsa-scaffolding">3. Salsa scaffolding</h2>
 
-<h3 id="prepare-the-assembly-file">Prepare the assembly file</h3>
+<p>Files required: The assembly file (optional: and the assembly graph), the sorted <span class="notranslate">BED</span> file, and the restriction enzyme sequence from the HiC sequencing. If you are using VGP GenomeArk data, you can get this information from the same file as the HiC <span class="notranslate">reads</span>, in a file called re_bases.txt.</p>
+
+<p><strong>Prepare the assembly file:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-12"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -2003,27 +2037,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="prepare-the-enzyme-sequence-file">Prepare the enzyme sequence file</h3>
-
-<p>If you are using VGP GenomeArk data, you can get this information from the same file as the HiC <span class="notranslate">reads</span>, in a file called re_bases.txt.</p>
+<p><strong>SALSA scaffolding:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-13"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing parameter to parse out of”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h3 id="salsa-scaffolding-1"><strong>SALSA</strong> scaffolding</h3>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-14"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0"><strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2031,21 +2048,21 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Initial assembly file”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Bed</span> alignment”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence graphs”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-        <li><em>“Restriction enzyme sequence(s)”</em>: <code class="language-plaintext highlighter-rouge">{'id': 14, 'output_name': 'text_param'}</code></li>
+        <li><em>“Restriction enzyme sequence(s)”</em>: add the enzyme sequence(s) here</li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="evaluate-the-salsa-scaffolding-results">Evaluate the Salsa scaffolding results</h2>
+<h2 id="4-evaluate-the-salsa-scaffolding-results">4. Evaluate the Salsa scaffolding results</h2>
 
 <p>The scaffolded assembly fasta file can then be analysed in Busco and Quast.</p>
 
-<h3 id="busco">Busco</h3>
+<p><strong>Busco:</strong></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-15"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-14"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2070,29 +2087,16 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 <p>There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos).</p>
 
-<h3 id="quast">Quast</h3>
+<p><strong><em>TODO</em></strong>: explain what these outputs mean; are the results “good” ?</p>
 
-<p>Inputs required for Quast: scaffolded assembly file from Salsa, estimated genome size.</p>
+<p><strong>Quast:</strong></p>
 
-<p>Format the value for genome size:</p>
+<p>Inputs required for Quast: scaffolded assembly file from Salsa, and estimated genome size. The estimated genome size is obtained from an earlier step with GenomeScope.</p>
 
-<blockquote>
-  <h3 id="hands_on-hands-on-task-description-16"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing parameter to parse out of”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-        <li><em>“Select type of parameter to parse”</em>: <code class="language-plaintext highlighter-rouge">Integer</code></li>
-      </ul>
-    </li>
-  </ol>
-</blockquote>
-
-<p class="hands_on">Run Quast:</p>
+<p>Run Quast:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-17"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-15"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -2106,7 +2110,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
           <ul>
             <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">{'id': 13, 'output_name': 'integer_param'}</code></li>
+                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">enter estimated genome size</code></li>
               </ul>
             </li>
             <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding</code></li>
@@ -2126,7 +2130,9 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 <p>There are four outputs: the Quast report in three formats, and a log file.</p>
 
-<h2 id="generate-a-post-scaffolding-contact-map">Generate a post-scaffolding contact map</h2>
+<p><strong><em>TODO</em></strong>: explain what these outputs mean; are the results “good” ?</p>
+
+<h2 id="5-generate-a-post-scaffolding-contact-map">5. Generate a post-scaffolding contact map</h2>
 
 <p>There are five steps:</p>
 
@@ -2138,62 +2144,62 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
   <li>Conver the map to an image</li>
 </ul>
 
-<h3 id="map-the-forward-hic-reads-1">Map the forward HiC <span class="notranslate">reads</span></h3>
+<p><strong>Map the forward HiC <span class="notranslate">reads</span>:</strong></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-16"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong>Map the reverse HiC <span class="notranslate">reads</span>:</strong></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-17"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong>Merge the mapped <span class="notranslate">reads</span>:</strong></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-18"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-          </ul>
-        </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-          </ul>
-        </li>
-        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
-        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h3 id="map-the-reverse-hic-reads-1">Map the reverse HiC <span class="notranslate">reads</span></h3>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-19"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-          </ul>
-        </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-          </ul>
-        </li>
-        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
-        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h3 id="merge-the-mapped-reads-1">Merge the mapped <span class="notranslate">reads</span></h3>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-20"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2206,10 +2212,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="generate-a-contact-map-1">Generate a contact map</h3>
+<p><strong>Generate a contact map:</strong></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-21"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-19"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2222,10 +2228,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 </blockquote>
 
-<h3 id="convert-the-map-to-an-image-1">Convert the map to an image</h3>
+<p><strong>Convert the map to an image:</strong></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-22"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-task-description-20"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2238,6 +2244,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
   </ol>
 
 </blockquote>
+
+<p><strong><em>TODO</em></strong>: explain the output here. What does the pretext map show. How does it compare to the pre-scaffolding map.</p>
+
+<p><strong><em>TODO</em></strong>: overall, explain what the scaffolding section results mean. What are the next possible steps.</p>
 
 <p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
 
@@ -2392,7 +2402,7 @@ author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo",
 title = "VGP assembly pipeline (Galaxy Training Materials)",
 year = "2021",
 month = "11",
-day = "10"
+day = "11"
 url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
