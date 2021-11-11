@@ -133,7 +133,7 @@ To begin our analysis we will carry out the evaluation and pre-processing of our
 > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >      - *"Which tool was used generate logs?"*: `FastQC`
->      - *"FastQC output"*: {% icon param-collection %} *"Dataset collection"*: select the `FastQC on collection:Raw Data` dataset.
+>      - {% icon param-collection %} *"Dataset collection"*: select the `FastQC on collection:Raw Data` dataset.
 >    - In *"Report title"*: `HiFi quality report`
 > 3. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated HTML file
 >
