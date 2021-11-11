@@ -242,6 +242,61 @@
 
 
 
+<h2 id="gene"> <a href="#gene"> Gene </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> Why do we do dimension reduction and then clustering? Why not just cluster on the actual data? <a href="/training-material/topics/transcriptomics/faqs/dimension_reduction.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-do-we-do-dimension-reduction-and-then-clustering-why-not-just-cluster-on-the-actual-data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?</h3>  <p>The actual data has tens of thousands of genes, and so tens of thousands of variables to consider. Even after selecting for the most variable genes and the most high quality genes, we can still be left with &gt; 1000 genes. Performing clustering on a dataset with 1000s of variables is possible, but computationally expensive. It is therefore better to perform dimension reduction to reduce the number of variables to a latent representation of these variables. These latent variables are ideally more than 10 but less than 50 to capture the variability in the data to perform clustering upon.</p></blockquote>
+
+
+
+
+
+
+<h3 class="faq-area"> What exactly is a ‘Gene profile’? <a href="/training-material/topics/transcriptomics/faqs/gene_profile.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-what-exactly-is-a-gene-profile"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What exactly is a ‘Gene profile’?</h3>  <p>Think of it like a fingerprint that some cells exhibit and others don’t. It’s a small collection of genes which are up or down regulated in relation to one another. Their differences are not absolute, but relative. So if CellA has 100 counts of Gene1 and 50 counts of Gene2, this creates a relation of 2:1 between Gene1 and Gene2. If CellB has a 20 counts of Gene1 and 10 counts of Gene2, then they share the same relation. If CellA and CellB share other relations with other genes than this might be enough to say that they share a Gene profile, and will therefore likely cluster together as they describe the same cell type.</p></blockquote>
+
+
+
+
+
+
+<h3 class="faq-area"> Why do we only consider highly variable genes? <a href="/training-material/topics/transcriptomics/faqs/variable_genes.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-do-we-only-consider-highly-variable-genes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why do we only consider highly variable genes?</h3>  <p>The non-variable genes are likely housekeeping genes, which are expressed everywhere and are not so useful for distinguishing one cell type from another. However background genes are important to the analysis and are used to generate a background baseline model for measuring the variability of the other genes.</p></blockquote>
+
+
+
+
+
+ <br><br> 
+<h2 id="scRNA"> <a href="#scRNA"> Sc<span class="notranslate">rna</span> </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> Why is amplification more of an issue in sc<span class="notranslate">RNA</span>-seq than <span class="notranslate">RNA</span>-seq? <a href="/training-material/topics/transcriptomics/faqs/amplification.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-is-amplification-more-of-an-issue-in-scrna-seq-than-rna-seq"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why is amplification more of an issue in sc<span class="notranslate">RNA</span>-seq than <span class="notranslate">RNA</span>-seq?</h3>  <p>Due to the extremely small amount of starting material, the initial amplification is likely to be uneven due to the first cycle of amplified products being overrepresented in the second cycle of amplification leading to further bias. In Bulk <span class="notranslate">RNA</span>-seq, the larger selection of <span class="notranslate">RNA</span> molecules to amplify, evens out the odds that any one transcript will be amplified more than others.</p></blockquote>
+
+
+
+
+
+
+<h3 class="faq-area"> Can <span class="notranslate">RNA</span>-seq techniques be applied to sc<span class="notranslate">RNA</span>-seq? <a href="/training-material/topics/transcriptomics/faqs/techniques.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-can-rna-seq-techniques-be-applied-to-scrna-seq"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Can <span class="notranslate">RNA</span>-seq techniques be applied to sc<span class="notranslate">RNA</span>-seq?</h3>  <p>The short answer is ‘no, but yes’. At the beginning this was impossible due to the over-prevalence of dropout events (“zeroes”) in the data complicating the normalisation techniques, but this is not so much of a problem any more with newer methods.</p></blockquote>
+
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -259,7 +314,7 @@
         <p>
 The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
 </p>
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/3f60ce59d959661efbc2db7a4705e90ab292909a">3f60ce59d959661efbc2db7a4705e90ab292909a</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/1cb6e0822f673ffb0a7aaf02838bbcf3a1b3efd4">1cb6e0822f673ffb0a7aaf02838bbcf3a1b3efd4</a></p>
     </div>
 </footer>
 
