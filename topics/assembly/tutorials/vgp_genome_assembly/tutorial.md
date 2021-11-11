@@ -585,7 +585,7 @@ This step includes 11 steps, summarized in the following scheme:
 > 4. Rename the output as `Reads mapped to contigs`
 > 
 > 5. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
->    - *"Select the purge_dups function"*: `Calculate coverage cutoff and create read depth histogram and base-levelread depth for PacBio data (calcuts+pbcstats)`
+>    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
 >        - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
 >        - In *"Calcuts options"*:
 >            - *"Upper bound for read depth"*: `63` (the previously estimated maximum depth)
@@ -607,7 +607,7 @@ This step includes 11 steps, summarized in the following scheme:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA`
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-collection %} *"Select fastq dataset"*: `Split FASTA`
+>        - {% icon param-file %} *"Select fastq dataset"*: `Split FASTA`
 >        - *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
 >    - In *"Set advanced output options"*:
 >        - *"Select an output format"*: `PAF`
