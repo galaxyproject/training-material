@@ -560,7 +560,7 @@ This step includes 11 steps, summarized in the following scheme:
 > 
 > 5. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
 >    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
->        - {% icon param-collection %} *"PAF input file"*: `Reads mapped to contigs`
+>        - {% icon param-files %} *"PAF input file"*: `Reads mapped to contigs`
 >        - In *"Calcuts options"*:
 >            - *"Upper bound for read depth"*: `63` (the previously estimated maximum depth)
 >            - *"Ploidity"*: `Haploid`
