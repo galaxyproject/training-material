@@ -309,7 +309,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 
 ### Downloading Data
 
-> ### {% icon code-in %} Mask
+> ### {% icon code-in %} Make
 > <pre class="highlight"><code><span class="nb">%.fq.gz</span>:
 > 	<span class="s2">wget https://zenodo.org/record/5562251/files/$@</span>
 > </code></pre>
@@ -1664,7 +1664,7 @@ As a last step, we'll summarize all of the FastQC files. With all of the expands
 > >   - bioconda
 > >   - defaults
 > > dependencies:
-> >    -multiqc=1.11
+> >   - multiqc=1.11
 > > ```
 > {: .solution}
 {: .hands_on}
