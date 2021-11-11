@@ -515,8 +515,8 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 > 11. Click on the {% icon galaxy-gear %} (gear) icon at the top right
 > 12. Press **Auto Re-layout** to clean up our view
 >     ![Auto re-layouting](../../images/intro_07.png)
-> 13. Click on the {% icon galaxy-gear %} (gear) icon at the top right
-> 14. Press **Save** to save your changes
+> 13. Click on **Save** to save your changes  
+>     ![Save workflow button](/workspace/training-material/topics/contributing/images/save_workflow.png)
 >
 >    > ### {% icon tip %} Tip: Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
