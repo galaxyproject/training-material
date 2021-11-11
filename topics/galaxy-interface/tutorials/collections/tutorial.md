@@ -41,11 +41,11 @@ https://zenodo.org/record/5119008/files/M117C1-ch_1.fq.gz
 https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 ```
 
-> ### {% icon details %} Set format to `fastqsanger.gz`
+> ### {% icon hands_on %} Hands-on: Set format to `fastqsanger.gz`
 > The above datasets are in `fastqsanger.gz` format. It is necessary to explicitly set format in Galaxy. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it is difficult to guess them automatically.  
 >
 > {% snippet faqs/galaxy/dataset_upload_fastqsanger_via_urls.md %}
-{: .warning}
+{: .hands_on}
 
 ## About these datasets
 
@@ -106,11 +106,11 @@ By now we see that a collection can be used to bundle a large number of items in
 https://zenodo.org/record/5119008/files/chrM.fa.gz
 ```
 
-> ### {% icon details %} Set format to `fasta.gz`
+> ### {% icon hands_on %} Hands-on: Set format to `fasta.gz`
 > The above dataset is in `fasta.gz` format. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. 
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md reset_form="True" link="https://zenodo.org/record/5119008/files/chrM.fa.gz" format="fasta.gz" %}
-{: .warning}
+{: .hands_on}
 
 ## Mapping reads
 
@@ -146,7 +146,7 @@ You will see jobs being submitted and new datasets appearing in the history. Bec
 
 After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool `lofreq` will take a collection of BAM datasets (the one produced by `BWA-MEM`), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets. 
 
-> ### {% icon hands_on %} Hands-on: Call variants 
+> ### {% icon hands_on %} Hands-on: Call variants  
 >
 > Run {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `Map with BWA-MEM...` (output of **BWA-MEM** {% icon tool %})
