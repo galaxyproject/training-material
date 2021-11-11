@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 enable: false
 
 title: CRISPR screen analysis
-zenodo_link: https://zenodo.org/record/5570011
+zenodo_link: https://zenodo.org/record/5658600
 questions:
 - What are the steps to process CRISPR screen data?
 - How to identify differentially enriched guides across multiple experimental conditions?
@@ -20,11 +20,6 @@ contributors:
 - mblue9
 - kenjifujihara
 requirements:
-  -
-    type: "internal"
-    topic_name: introduction
-    tutorials:
-      - galaxy-intro-short
   -
     type: "internal"
     topic_name: sequence-analysis
@@ -49,7 +44,7 @@ The CRISPR repeat sequences guide the Cas9 enzyme to introduce breaks in DNA. Wi
 
 CRISPR screens provide a high-throughput way to identify genes and pathways that enable cells to survive. In a CRISPR screen all the genes in the genome can be targeted (genome-wide screen) or just a selection (boutique screen). Knockout or activation screens can be performed. 
 
-![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr-screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
+![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
 Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}.
 
@@ -80,9 +75,9 @@ We will use fastq files containing 1% of reads from the original samples to demo
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      T0-Control https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T0-Control.fastq.gz
->      T8-APR-246 https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-APR-246.fastq.gz
->      T8-Vehicle https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/T8-Vehicle.fastq.gz
+>      T0-Control https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T0-Control.fastq.gz
+>      T8-APR-246 https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-APR-246.fastq.gz
+>      T8-Vehicle https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-Vehicle.fastq.gz
 >      ```
 >  
 >    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
@@ -150,11 +145,25 @@ First we'll check the quality of the raw read sequences with [FastQC](https://ww
 >
 {: .hands_on}
 
-We need to trim the adapters to leave just the 20bp guide sequences.
 
 ## Trim adapters
 
-We'll trim these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) and its linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`, as discussed [here](https://github.com/marcelm/cutadapt/issues/261#issue-261019127).
+We need to trim the adapters to leave just the 20bp guide sequences.  We'll trim these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) and its linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`.
+
+
+> ### {% icon details %} Adapter trimming
+> 
+> In this dataset the adapters are different lengths in the reads, as shown below. 
+>
+> ![Adapter sequences dataset](../../images/crispr-screen/adapter_sequences_dataset.png "Reads from the T8-APR-246 sample with one of the guide sequences highlighted in blue. The adapter sequences are directly adjacent to the guide on the right and left.")
+>
+> MAGeCK count can trim adapters around the guide sequences. However, the adapters need to be the same length in the reads, as described on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/). An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn't be able to trim the adapters properly and you would only get ~60% reads mapping instead of >80%.
+>
+> ![Adapters MAGeCK can trim](../../images/crispr-screen/adapter_sequences_mageck.png "Example showing what MAGeCK count expects to be able to auto-detect and trim adapters - adapters the same length in every read. Guide sequence is in blue, with the adapter sequences directly adjacent on the right and left.")
+>
+> So for this dataset, as the adapters are not the same length in the reads, we need to trim the adapters before running MAGeCK count. To trim, we could run Cutadapt twice, first trimming the 5' adapter sequence, then trimming the 3' adapter. Alternatively, we can run Cutadapt just once using the linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`, as discussed [here](https://github.com/marcelm/cutadapt/issues/261#issue-261019127).
+{: .details}
+
 
 > ### {% icon hands_on %} Hands-on: Trim adapters
 >
@@ -199,7 +208,7 @@ To count how many guides we have for each gene, we need a library file that tell
 > ### {% icon hands_on %} Hands-on: Count guides per gene
 > 1. Import the library file 
 >    ```
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/brunello.tsv
+>    https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/brunello.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -214,19 +223,49 @@ To count how many guides we have for each gene, we need a library file that tell
 >
 > 3. Inspect the Count Summary file
 >
->    > ### {% icon question %} Questions
->    >
->    > What percent of reads mapped?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > More than 80% reads mapped in each sample 
->    > >
->    > {: .solution}
->    >
->    {: .question}
+> 4. We have been using 1% of reads from the samples. Import the count summary file for the full dataset so you can see what the values look like.
+>    ```
+>    https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/kenji_mageck_count_summary.tsv
+>    ```
 >
 {: .hands_on}
+
+The contents of the count summary file is explained on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/output/#count_summary_txt), also shown below. The columns are as follows. **To help you evaluate the quality of the data, recommended values are shown in bold.**
+
+Column | Content
+--- | ---
+File | The fastq (or the count table) file used.
+Label | The label of that fastq file assigned.
+Reads | Total number reads in the fastq file. **(Recommended: 100~300 times the number of sgRNAs)**
+Mapped | Total number of reads that can be mapped to library
+Percentage | Mapped percentage, calculated as Mapped/Reads **(Recommended: at least 60%)**
+TotalsgRNAs | Total number of sgRNAs in the library
+Zerocounts | Total number of missing sgRNAs (sgRNAs that have 0 counts) **(Recommended: no more than 1%)**
+GiniIndex | The Gini Index of the read count distribution. A smaller value indicates more eveness of the count distribution. **(Recommended: around 0.1 for plasmid or initial state samples, and around 0.2-0.3 for negative selection samples )**
+
+
+> ### {% icon question %} Questions
+>
+> Is the data quality good for the 3 samples? Use the count summary file for the full dataset, and the recommended values in the table above, to answer these questions.
+>
+> 1. Have we sequenced enough reads?
+> 2. Is the mapped percentage good?
+> 3. Is the sgRNA zero count value good?
+> 4. Is the Gini Index good?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The number of reads is ok. The lowest number of reads we have for a sample is 17,855,968 (T8-Vehicle), we have 77,441 guides so we have ~230 reads per guide (17,855,968/77,441). A minimum of 100 reads per guide, preferably 300, is recommended.
+> > 2. Yes, it is >80% in all 3 samples.
+> > 3. T0-Control has 0.69% (535/77441 * 100) which is good. The T8 samples are just slightly high at 2.1% (1659/77441 * 100) and 2.7% (2102/77441 * 100).
+> > 4. The Gini Index is 0.09 for T0-Control (initial state) which is good. The T8 samples are 0.12 and 0.13 which is good (not too high) as this is a negative selection experiment.
+> >
+> {: .solution}
+>
+{: .question}
+
+
+The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 # Testing
 
@@ -237,19 +276,29 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 > ### {% icon hands_on %} Hands-on: Test for enrichment
 > 1. Import the count file from the full dataset [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/efc64b27-6db2-4931-ba8c-f05393f520e3/mageck_counts_full.tsv
+>    https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/kenji_mageck_counts.tsv
 >    ```
 >
 > 2. {% tool [MAGeCKs test](toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1) %} with the following parameters:
->    - {% icon param-file %} *"Counts file"*: the `mageck_counts_full.tsv` file
+>    - {% icon param-file %} *"Counts file"*: the `kenji_mageck_counts.tsv` file
 >    - *"Specify Treated samples or Control"*: `Treated samples`
 >        - *"Treated Sample Labels (or Indexes)"*: `0`
 >    - *"Control Sample Labels (or Indexes)"*: `1`
 >    - In *"Output Options"*:
 >        - *"Output normalized counts file"*: `Yes`
 >        - *"Output plots"*: `Yes`
->    - In *"Advanced Options"*:
->        - *"Method for normalization"*: `Total`
+>
+>
+>
+>    > ### {% icon details %} Normalization
+>    >
+>    > We are using MAGeCK's default normalization method "median" which is more robust to outliers.
+>    > Figure M1 from {% cite Li2014 %} shows a comparison of median ("median") versus total ("total") normalization for two CRISPR screen datasets. 
+>    > The distribution of the read counts of significant sgRNAs (FDR=1%) was compared with the mean read count distribution of all sgRNAs (“all”, black). The distribution of the significant sgRNAs should be similar to the distribution of all sgRNAs if the normalization method is unbiased. The difference is small for the leukemia dataset. However, in the melanoma dataset, where a few sgRNAs have very large read counts, the difference is larger, as “total” normalization will prefer sgRNAs with higher read-counts. In contrast, the distribution after “median” normalization is closer to the distribution of all sgRNAs.
+>    > 
+>    > ![Median versus Total normalization](../../images/crispr-screen/median_vs_total.png)
+>    >
+>    {: .details}
 >
 > 3. Inspect the PDF Report output.
 >
@@ -266,6 +315,13 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 >    {: .question}
 >
 {: .hands_on}
+
+
+> ### {% icon tip %} Tip: Getting help
+>
+> For questions about using Galaxy, you can ask in the [Galaxy help forum](https://help.galaxyproject.org/). For questions about MAGeCK, you can ask in the [MAGeCK Google group](https://groups.google.com/g/mageck).
+>
+{: .tip}
 
 
 # Conclusion

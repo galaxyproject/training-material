@@ -54,7 +54,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 > 1. An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.
 > 1. A web browser. [Firefox](https://www.mozilla.org/firefox) and [Google Chrome](https://www.google.com/chrome/) work well, as does [Safari](https://www.apple.com/safari/).  Internet Explorer is known to have issues with Galaxy so avoid using that.
 > 1. Access to a Galaxy instance, and an account on that instance. Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use [usegalaxy.org](https://usegalaxy.org).
-> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use this history on usegalaxy.org.  Click **Import History** to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples.
+> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use [this history](https://usegalaxy.org/u/tnabtaf/h/overlapping-genes-on-opposite-strands). on usegalaxy.org.  Click **Import History** (top right) to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples.
 {: .comment}
 
 This tutorial is a good second step after running your first analysis on Galaxy.
@@ -93,7 +93,7 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 > 3. *Switch to* the history you want to extract a workflow from.
 >    - If the history that you want to create a repeatable workflow for is *not* your *current* history (the left-most one), then find the history you want and then *click* the **Switch to** button at the top of the history.
 >    - This makes that history the current history and moves it to the very left.
-> 4. *Click* the **Done** button at the top upper left of your histories view.
+> 4. *Click* on the Galaxy Icon or the {% icon galaxy-home %} Home Button  at the top upper left of your histories view.
 >    - This returns you to the Galaxy home page with the selected history as your current history.
 {: .hands_on}
 
@@ -135,7 +135,7 @@ This launches the workflow editor and shows a graphical representation of the in
 
 ![Workflow Editor](../../images/workflow_editor_landing_strand.png)
 
-While we could run this workflow right now, here are a few cleanup items we should do first.
+While we could run this workflow right now, here are a few cleanup steps we should do first.
 
 ### Rename input datasets
 
@@ -146,12 +146,12 @@ The *extract workflow* step assigns the name of input datasets in your history t
 > 1. *Click* on the first input dataset.
 >    - This changes the right panel to show information about the selected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an organism.
 > 2. *Set* the **Label** field to something more general, yet still informative.
->    - In the example workflow, we'll name this `Genome features` about as general as you can get.
+>    - In the example workflow, we'll name this `Genomic features` about as general as you can get.
 > 3. Add a *description* for your input datasets
 >     - This helps make your general input dataset name more informative.
 >     - *add* a description of the dataset in the **Annotation** box.
 >     - For the example, we'll use:
->        - `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **This must be at least a 6 column BED file,** as the workflow makes decisions based on column 6, the strand.`
+>        - `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **It must be at least a 6 column BED file,** as the workflow makes decisions based on column 6 (the strand).`
 >      ![Renamed and annotated input dataset](../../images/workflow_strand_renamed_plus_annot.png)
 {: .hands_on}
 
