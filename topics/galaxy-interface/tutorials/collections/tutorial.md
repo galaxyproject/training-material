@@ -118,7 +118,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 
 > ### {% icon hands_on %} Hands-on: Map sequencing reads to reference genome
 >
-> Run {% tool [BWA-MEM{% icon tool %}](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `chrM.fa.gz` (The mitochondrial genome we just uploaded)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
