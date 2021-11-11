@@ -840,7 +840,9 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 # Hybrid scaffolding based on a phased assembly and HiC mapping data
 
-In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. The DNA fragment is then sequenced from each end of this artifical junction, giving a forward and reverse read pair. Particular read pairs are seen more often if they are truly closer together in the genome. This information can be used to scaffold assembly contigs: if two contigs are frequently matched with HiC read pairs, they are likely also close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
+***TODO***: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the workflow but I think we want people to be able to run this step by step. I've taken out some of the steps that are "parse parameter value" etc. 
+
+In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A DNA fragment is then sequenced from each end of this artificial junction, giving a read pair. If reads from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
 
 Inputs required for this section:
 
@@ -865,7 +867,7 @@ Outputs from this section:
 
 ## 1. Map the HiC reads to the assembly
 
-We will do this separately for the forward and reverse set of HiC reads. 
+We will do this separately for the forward and reverse set of HiC reads. We have to do this separately because these are not standard paired-end reads. 
 
 **Map the forward HiC reads:**
 
@@ -900,6 +902,8 @@ We will do this separately for the forward and reverse set of HiC reads.
 
 **Merge the mapped reads:**
 
+Now we will merge these two BAM files:
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
@@ -933,6 +937,8 @@ We will do this separately for the forward and reverse set of HiC reads.
 
 ## 2. View a contact map of the mapped HiC reads
 
+Most of the paired reads from HiC will map to the same (or nearby) contigs. On a graph, with ordered contigs on each axis, a lot of the contacts will be along the diagonal (mapping to self), or nearby (around that diagonal line). But some may be in odd places - for example, showing a lot of reads mapped to both contig 4 and contig 19. We will now generate a contact map of the assembly before it is scaffolded, to compare to the contact map after scaffolding.
+
 **Generate a contact map:**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -954,10 +960,12 @@ We will do this separately for the forward and reverse set of HiC reads.
 >
 {: .hands_on}
 
+***TODO***: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not). 
+
 
 ## 3. Salsa scaffolding
 
-Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. 
+Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
 
 **Prepare the assembly file:**
 
@@ -972,19 +980,6 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 {: .hands_on}
 
 
-**Prepare the enzyme sequence file:**
-
-If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->
->
-{: .hands_on}
-
-
 **SALSA scaffolding:**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -993,10 +988,9 @@ If you are using VGP GenomeArk data, you can get this information from the same 
 >    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
 >    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
 >    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
->    - *"Restriction enzyme sequence(s)"*: `{'id': 14, 'output_name': 'text_param'}`
+>    - *"Restriction enzyme sequence(s)"*: add the enzyme sequence(s) here
 >
 {: .hands_on}
-
 
 
 ## 4. Evaluate the Salsa scaffolding results
@@ -1020,11 +1014,11 @@ The scaffolded assembly fasta file can then be analysed in Busco and Quast.
 
 There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos). 
 
+***TODO***: explain what these outputs mean; are the results "good" ?
+
 **Quast:**
 
-Inputs required for Quast: scaffolded assembly file from Salsa, estimated genome size.
-
-The estimated genome size is from an earlier step with GenomeScope - the haploid genome size. 
+Inputs required for Quast: scaffolded assembly file from Salsa, and estimated genome size. The estimated genome size is obtained from an earlier step with GenomeScope.
 
 Run Quast:
 
@@ -1035,7 +1029,7 @@ Run Quast:
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 13, 'output_name': 'integer_param'}`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `enter estimated genome size`
 >        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - *"Is genome large (> 100 Mbp)?"*: `Yes`
 >    - In *"Genes"*:
@@ -1045,6 +1039,8 @@ Run Quast:
 
 
 There are four outputs: the Quast report in three formats, and a log file. 
+
+***TODO***: explain what these outputs mean; are the results "good" ?
 
 
 ## 5. Generate a post-scaffolding contact map
@@ -1121,6 +1117,11 @@ There are five steps:
 >
 >
 {: .hands_on}
+
+
+***TODO***: explain the output here. What does the pretext map show. How does it compare to the pre-scaffolding map. 
+
+***TODO***: overall, explain what the scaffolding section results mean. What are the next possible steps.
 
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
