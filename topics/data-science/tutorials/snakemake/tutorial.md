@@ -438,7 +438,9 @@ Now that you have seen a few rules, let's write the rest.
 > ### {% icon hands_on %} Hands-on: Install Snakemake
 > We're about to start doing things really with snakemake, so, it's time to install it.
 > 1. [Install Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-> 2. Once you've done that and activated conda (you should see `(base)` in your terminal prompt), run `conda install snakemake`
+> 2. Once you've done that and activated conda (you should see `(base)` in your terminal prompt),
+> 3. lets create a conda enviorment for snakemake by using the command 'conda create -n snakemake', and activate by using: 'conda activate snakemake'.
+> 4. run `conda install snakemake` to install snakemake.
 {: .hands_on}
 
 
