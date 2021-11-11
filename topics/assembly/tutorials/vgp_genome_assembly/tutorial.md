@@ -173,7 +173,9 @@ According the quality report, less that 0.1% of the reads include adaptor sequen
 >    - In *"Filter Options"*:
 >        - *"Discard Trimmed Reads"*: `Yes`
 >
-> 2. Rename the output file as `HiFi_collection (trim)`. To rename an output file, click on the result, and then click again on the title to change it. After closing, you may need to refresh the history to see the name change.
+> 2. Rename the output file as `HiFi_collection (trim)`.
+>
+>     {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
