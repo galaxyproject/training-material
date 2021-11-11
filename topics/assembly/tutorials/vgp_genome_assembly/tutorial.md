@@ -852,11 +852,11 @@ Inputs required for this section:
 
 A summary of the 5 steps in this section: 
 
-* 1. Map the HiC reads to the assembly: Map forward and reverse reads, merge the BAM file, convert to a BED file, sort the BED file. 
-* 2. View a contact map of HiC reads: use this sorted BED file, generate a map of the reads against the assembly, convert to an image file. 
-* 3. Scaffold the assembly with HiC reads: using the assembly file, and the mapped HiC reads (as a sorted BED file). 
-* 4. Evaluate the scaffolding results: use Busco and Quast. 
-* 5. View a contact map of the HiC reads after scaffolding: using the scaffolded assembly file, and the mapped HiC reads (as a sorted BED file).  
+* Map the HiC reads to the assembly 
+* View a contact map of HiC reads against the assembly, before scaffolding
+* Scaffold the assembly with HiC reads: using the assembly file, and the mapped HiC reads
+* Evaluate the scaffolding results: use Busco and Quast 
+* View a contact map of the HiC reads after scaffolding
 
 Outputs from this section:
 
