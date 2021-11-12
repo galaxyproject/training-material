@@ -869,8 +869,10 @@ Outputs from this section:
 * post-scaffolding reports from Busco and Quast 
 
 
-A simplified image of the workflow for this section:
+A simplified image of the workflow for this section (not showing Quast and Busco):
 
+
+![Hic-wf-summary](../../images/vgp_assembly/hic-wf-summary.png "HiC workflow")
 
 
 
