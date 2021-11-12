@@ -58,6 +58,8 @@ In order to facilitate the development of the workflow, we will structure it in 
 - Hybrid scaffolding based on phased assembly and Bionano data
 - Hybrid scaffolding based on a phased assembly and Hi-C mapping data
 
+**TODO:** suggest including here something about how the Galaxy workflow has additional steps (e.g. parse parameter value), so that it can run automatically, but if run step by step in this tutorial, then some of those steps are just manually entered value (e.g. genome size parameter)
+
 ## Background on datasets
 
 In order to reduce processing times, we will use samples from _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. This organisms can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
@@ -844,6 +846,8 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A DNA fragment is then sequenced from each end of this artificial junction, giving a read pair. If reads from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
 
+**TODO**: add image here of HiC
+
 Inputs required for this section:
 
 * An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
@@ -863,6 +867,12 @@ Outputs from this section:
 * A scaffolded assembly FASTA file
 * contact maps of HiC reads pre- and post scaffolding
 * post-scaffolding reports from Busco and Quast 
+
+
+A simplified image of the workflow for this section:
+
+
+
 
 
 ## 1. Map the HiC reads to the assembly
