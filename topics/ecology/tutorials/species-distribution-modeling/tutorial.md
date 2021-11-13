@@ -90,7 +90,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    > How many occurrences have been conserved?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 64.55% of the occurrences (6,456) are conserved
+>    > > 63.06% of the occurrences (6,306) are conserved
 >    > {: .solution }
 >    {: .question}
 >
