@@ -14,7 +14,7 @@ module Jekyll
       site.pages << page3
 
       def mapContributor(site, c)
-        site.data['contributors'][c].merge({"id" => c, "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json"})
+        site.data['contributors'].fetch(c, {}).merge({"id" => c, "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json"})
       end
 
       # Contributors

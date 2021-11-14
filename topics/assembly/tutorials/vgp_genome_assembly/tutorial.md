@@ -58,6 +58,8 @@ In order to facilitate the development of the workflow, we will structure it in 
 - Hybrid scaffolding based on phased assembly and Bionano data
 - Hybrid scaffolding based on a phased assembly and Hi-C mapping data
 
+**TODO:** suggest including here something about how the Galaxy workflow has additional steps (e.g. parse parameter value), so that it can run automatically, but if run step by step in this tutorial, then some of those steps are just manually entered value (e.g. genome size parameter)
+
 ## Background on datasets
 
 In order to reduce processing times, we will use samples from _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. This organisms can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
@@ -454,7 +456,7 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 >
 {: .hands_on}
 
-## Initial assembly evaluation with **Quast** and **BUSCO**
+## Initial assembly evaluation
 
 Once generated the draft assembly, it is a good idea to evaluate its quality. 
 
@@ -525,6 +527,31 @@ Let's have a look at the HTML report.
 >
 {: .hands_on}
 
+> ### {% icon question %} Questions
+>
+> 1. Which percentage of Benchmarking Universal Single-Copy Orthologs (BUSCO) genes have been identified?
+> 2. How many BUSCOs gene are absent?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. According the report, our assembly contains the complete sequence of  99.3% of BUSCO genes.
+> > 2. 8 BUSCO genes are missing.
+> > 
+> {: .solution}
+>
+{: .question}
+
+
+> ### {% icon hands_on %} Hands-on: K-mer based evaluation with Merqury
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"K-mer counts database"*: `Merged meryldb`
+>        - *"Number of assemblies"*: `Two assemblies
+>            - {% icon param-file %} *"First genome assembly"*: `Primary contig FASTA`
+>            - {% icon param-file %} *"Second genome assembly"*: `Alternate contig FASTA`    
+>
+{: .hands_on}
     
     
 # Post-assembly processing
@@ -560,7 +587,7 @@ This step includes 11 steps, summarized in the following scheme:
 > 
 > 5. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
 >    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
->        - {% icon param-files %} *"PAF input file"*: `Reads mapped to contigs`
+>        - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
 >        - In *"Calcuts options"*:
 >            - *"Upper bound for read depth"*: `63` (the previously estimated maximum depth)
 >            - *"Ploidity"*: `Haploid`
@@ -581,7 +608,7 @@ This step includes 11 steps, summarized in the following scheme:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA`
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-collection %} *"Select fastq dataset"*: `Split FASTA`
+>        - {% icon param-file %} *"Select fastq dataset"*: `Split FASTA`
 >        - *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
 >    - In *"Set advanced output options"*:
 >        - *"Select an output format"*: `PAF`
@@ -602,7 +629,55 @@ This step includes 11 steps, summarized in the following scheme:
 >
 {: .hands_on}
 
+## Second assembly evaluation assembly evaluation
 
+Once we have purged the duplications, let's evaluate the assembly again. 
+
+> ### {% icon hands_on %} Hands-on: assembly evaluation with Quast
+>
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
+>    - *"Use customized names for the input files?"*: `Yes, specify custom names`
+>    - In *"1. Contigs/scaffolds"*:
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `Primary contig FASTA`
+>        - *"Name"*: `Primary assembly`
+>    - Click in *"Insert Contigs/scaffolds"*
+>    - In *"2. Contigs/scaffolds"*:
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `Alternate contig FASTA`
+>        - *"Name"*: `Alternate assembly`
+>    - *"Reads options"*: `Pacbio SMRT reads`
+>        - {% icon param-collection %} *"FASTQ file"*: `HiFi collection (trim)`
+>    - *"Type of assembly"*: `Genome`
+>        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060` (previously estimated)
+>        - *"Type of organism"*: `Eukaryote: use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding (--eukaryote)`
+>    - *"Is genome large (>100Mpb)?"*: `No`
+>
+>
+> 2. Rename the HTML report as `QUAST second report`
+>
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: assessing assembly completness with BUSCO
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Sequences to analyse"*: `Primary contig FASTA` and `Alternate contig FASTA`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>       - *"Lineage"*: `Saccharomycetes`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: `short summary text`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Remember to modify the lineage option if you are working with vertebrate genomes.
+>    {: .comment}
+>
+> 2. Rename the summary as `BUSCO initial report`
+>
+{: .hands_on}
+    
 ----
 
 <!--
@@ -620,27 +695,6 @@ purge_dups can significantly improve genome assemblies by removing overlaps and 
 Along with sequence similarity, purge_dups and purge_haplotigs take into account the coverage depth obtained by mapping short or long reads to the contigs. Coverage depth represents the number of reads covering a position in a contig (computed after mapping reads on the assembly). The contigs are then aligned to select duplicates accurately and remove them. While purge_dups sets its coverage thresholds automatically, purge_haplotigs requires user-provided values.
 
 -->
-
-## Sub-step with **Merqury**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 ## Sub-step with **Concatenate datasets**
 
@@ -787,7 +841,46 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 # Hybrid scaffolding based on a phased assembly and HiC mapping data
 
-## Sub-step with **Map with BWA-MEM**
+***TODO***: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the workflow but I think we want people to be able to run this step by step. I've taken out some of the steps that are "parse parameter value" etc. 
+
+In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A DNA fragment is then sequenced from each end of this artificial junction, giving a read pair. If reads from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
+
+**TODO**: add image here of HiC
+
+Inputs required for this section:
+
+* An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
+* HiC reads, one set of forward reads and one set of reverse reads. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order.
+* Genome size estimate: we can get this from an earlier step using GenomeScope. This is the haploid length. 
+
+A summary of the 5 steps in this section: 
+
+* Map the HiC reads to the assembly 
+* View a contact map of HiC reads against the assembly, before scaffolding
+* Scaffold the assembly with HiC reads: using the assembly file, and the mapped HiC reads
+* Evaluate the scaffolding results: use Busco and Quast 
+* View a contact map of the HiC reads after scaffolding
+
+Outputs from this section:
+
+* A scaffolded assembly FASTA file
+* contact maps of HiC reads pre- and post scaffolding
+* post-scaffolding reports from Busco and Quast 
+
+
+A simplified image of the workflow for this section (not showing Quast and Busco):
+
+
+![Hic-wf-summary](../../images/vgp_assembly/hic-wf-summary.png "HiC workflow")
+
+
+
+
+## 1. Map the HiC reads to the assembly
+
+We will do this separately for the forward and reverse set of HiC reads. We have to do this separately because these are not standard paired-end reads. 
+
+**Map the forward HiC reads:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -800,18 +893,9 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-## Sub-step with **Map with BWA-MEM**
+**Map the reverse HiC reads:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -824,19 +908,12 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
-## Sub-step with **Filter and merge**
+**Merge the mapped reads:**
+
+Now we will merge these two BAM files:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -844,77 +921,9 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-
-## Sub-step with **PretextMap**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
->    - *"Sort by"*: `Don't sort`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Sub-step with **Pretext Snapshot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
->    - *"Output image format"*: `png`
->    - *"Show grid?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Sub-step with **bedtools BAM to BED**
+**Convert the mapped BAM file to a BED file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -922,18 +931,9 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-## Sub-step with **Sort**
+**Sort the BED file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -943,18 +943,42 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"with flavor"*: `Alphabetical sort`
 >    - *"everything in"*: `Ascending order`
 >
->    ***TODO***: *Check parameter descriptions*
+{: .hands_on}
+
+
+## 2. View a contact map of the mapped HiC reads
+
+Most of the paired reads from HiC will map to the same (or nearby) contigs. On a graph, with ordered contigs on each axis, a lot of the contacts will be along the diagonal (mapping to self), or nearby (around that diagonal line). But some may be in odd places - for example, showing a lot of reads mapped to both contig 4 and contig 19. We will now generate a contact map of the assembly before it is scaffolded, to compare to the contact map after scaffolding.
+
+**Generate a contact map:**
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
+>    - *"Sort by"*: `Don't sort`
 >
 {: .hands_on}
 
-## Sub-step with **Replace**
+**Convert the map to an image:**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
+>    - *"Output image format"*: `png`
+>    - *"Show grid?"*: `Yes`
+>
+{: .hands_on}
+
+***TODO***: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not). 
+
+
+## 3. Salsa scaffolding
+
+Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
+
+**Prepare the assembly file:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -964,38 +988,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-
-## Sub-step with **SALSA**
+**SALSA scaffolding:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1003,66 +999,16 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
 >    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
 >    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
->    - *"Restriction enzyme sequence(s)"*: `{'id': 14, 'output_name': 'text_param'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Sub-step with **Quast**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->        - {% icon param-file %} *"Contigs/scaffolds file"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 13, 'output_name': 'integer_param'}`
->        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
->    - *"Is genome large (> 100 Mbp)?"*: `Yes`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Restriction enzyme sequence(s)"*: add the enzyme sequence(s) here
 >
 {: .hands_on}
 
 
-## Sub-step with **Busco**
+## 4. Evaluate the Salsa scaffolding results
+
+The scaffolded assembly fasta file can then be analysed in Busco and Quast.
+
+**Busco:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1074,20 +1020,52 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - In *"Advanced Options"*:
 >        - *"Which outputs should be generated"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
+{: .hands_on}
+
+
+There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos). 
+
+***TODO***: explain what these outputs mean; are the results "good" ?
+
+**Quast:**
+
+Inputs required for Quast: scaffolded assembly file from Salsa, and estimated genome size. The estimated genome size is obtained from an earlier step with GenomeScope.
+
+Run Quast:
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>    - *"Type of assembly"*: `Genome`
+>        - *"Use a reference genome?"*: `No`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `enter estimated genome size`
+>        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
+>    - *"Is genome large (> 100 Mbp)?"*: `Yes`
+>    - In *"Genes"*:
+>        - *"Tool for gene prediction"*: `Don't predict genes`
 >
 {: .hands_on}
 
 
+There are four outputs: the Quast report in three formats, and a log file. 
 
-## Sub-step with **Map with BWA-MEM**
+***TODO***: explain what these outputs mean; are the results "good" ?
+
+
+## 5. Generate a post-scaffolding contact map
+
+There are five steps: 
+
+* Map the forward HiC reads to the scaffolded assembly
+* Map the reverse HiC reads to the scaffolded assembly
+* Combine these bam files into a single file
+* Generate a contact map
+* Conver the map to an image
+
+**Map the forward HiC reads:**
+
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1099,19 +1077,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
+**Map the reverse HiC reads:**
 
-## Sub-step with **Map with BWA-MEM**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1123,19 +1092,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
+**Merge the mapped reads:**
 
-## Sub-step with **Filter and merge**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1143,34 +1103,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **PretextMap**
+**Generate a contact map:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1178,34 +1114,10 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Pretext Snapshot**
+**Convert the map to an image:**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -1214,16 +1126,50 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
+
+
+***TODO***: explain the output here. What does the pretext map show. How does it compare to the pre-scaffolding map. 
+
+***TODO***: overall, explain what the scaffolding section results mean. What are the next possible steps.
+
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
 
 # Conclusion
 {:.no_toc}
