@@ -433,11 +433,11 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >    - *"Options for purging duplicates"*: `Specify`
 >       - *"Coverage upper bound"*: `63` (maximum depth previously obtained)
 >    - *"Options for Hi-C partition"*: `Specify`
->       - *"Hi-C R1 reads"*: `SRR7126301_1`
->       - *"Hi-C R2 reads"*: `SRR7126301_2`
+>       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
+>       - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
-> 2. Rename the `Hi-C hap1 balanced contig graph` as `Primary contig graph` and add a `#primary` tag
-> 3. Rename the `Hi-C hap2 balanced contig graph` as `Alternate contig graph` and  add a `#alternate` tag
+> 2. Rename the `Hi-C hap1 contig graph` as `Primary contig graph` and add a `#primary` tag
+> 3. Rename the `Hi-C hap2 contig graph` as `Alternate contig graph` and  add a `#alternate` tag
 >
 {: .hands_on}
 
@@ -516,8 +516,7 @@ Let's have a look at the HTML report.
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
 >       - *"Lineage"*: `Saccharomycetes`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: `short summary text`
+>    - *"Which outputs should be generated"*: `short summary text`
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -600,8 +599,8 @@ This step includes 11 steps, summarized in the following scheme:
 >    {: .comment}
 >
 > 6. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `split FASTA file by 'N's (split_fa)`
->        - {% icon param-file %} *"Base-level coverage file"*: `Primary contig FASTA`
+>    - *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
+>        - {% icon param-file %} *"Assembly FASTA file"*: `Primary contig FASTA`
 >
 > 7. Rename the output as `Split FASTA`
 >
