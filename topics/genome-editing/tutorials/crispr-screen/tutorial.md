@@ -153,15 +153,15 @@ We need to trim the adapters to leave just the 20bp guide sequences.  We'll trim
 
 > ### {% icon details %} Adapter trimming
 > 
-> In this dataset the adapters are different lengths in the reads, as shown below. 
+> In this dataset the adapters are at different positions in the reads, as shown below.
 >
-> ![Adapter sequences dataset](../../images/crispr-screen/adapter_sequences_dataset.png "Reads from the T8-APR-246 sample with one of the guide sequences highlighted in blue. The adapter sequences are directly adjacent to the guide on the right and left.")
+> ![Adapter sequences dataset](../../images/crispr-screen/adapter_sequences_dataset.png "Reads from the T8-APR-246 sample with one of the guide sequences highlighted in blue (controlguide1 from Brunello library file). The adapter sequences are directly adjacent to the guide on the right and left.")
 >
-> MAGeCK count can trim adapters around the guide sequences. However, the adapters need to be the same length in the reads, as described on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/). An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn't be able to trim the adapters properly and you would only get ~60% reads mapping instead of >80%.
+> MAGeCK count can trim adapters around the guide sequences. However, the adapters need to be at the same position in each read, requiring the same trimming length, as described on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/). An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn't be able to trim the adapters properly and you would only get ~60% reads mapping instead of >80%.
 >
-> ![Adapters MAGeCK can trim](../../images/crispr-screen/adapter_sequences_mageck.png "Example showing what MAGeCK count expects to be able to auto-detect and trim adapters - adapters the same length in every read. Guide sequence is in blue, with the adapter sequences directly adjacent on the right and left.")
+> ![Adapters MAGeCK can trim](../../images/crispr-screen/adapter_sequences_mageck.png "Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is in blue, with the adapter sequences directly adjacent on the right and left.")
 >
-> So for this dataset, as the adapters are not the same length in the reads, we need to trim the adapters before running MAGeCK count. To trim, we could run Cutadapt twice, first trimming the 5' adapter sequence, then trimming the 3' adapter. Alternatively, we can run Cutadapt just once using the linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`, as discussed [here](https://github.com/marcelm/cutadapt/issues/261#issue-261019127).
+> So for this dataset, as the adapters are not at the same position in each read, we need to trim the adapters before running MAGeCK count. To trim, we could run Cutadapt twice, first trimming the 5' adapter sequence, then trimming the 3' adapter. Alternatively, we can run Cutadapt just once using the linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`, as discussed [here](https://github.com/marcelm/cutadapt/issues/261#issue-261019127).
 {: .details}
 
 
