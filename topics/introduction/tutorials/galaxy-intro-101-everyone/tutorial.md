@@ -285,6 +285,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 Now we have our answer! There are 3 different Iris species in our file.
 
 Like we mentioned before, there are often multiple ways to reach your answer in Galaxy. For example, we could have done this with just a single tool, **Group** {% icon tool %} as well.
+(This tool also can be searched for by the term "grouping" )
 
 
 > ### {% icon hands_on %} Exercise: Grouping dataset
