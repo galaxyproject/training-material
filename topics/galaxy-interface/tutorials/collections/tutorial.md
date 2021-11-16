@@ -138,7 +138,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 {: .hands_on}
 
-You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually four separate `BWA-MEM` jobs. In the end this `BWA-MEM` run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `BWA-MEM` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
+You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually generate four separate `BWA-MEM` jobs. In the end this `BWA-MEM` run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `BWA-MEM` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
 
 ![bwa_memCollection_ABC](../../images/collections/collection_expansion.svg)
 
