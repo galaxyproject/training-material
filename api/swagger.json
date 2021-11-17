@@ -1,0 +1,454 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Galaxy Training Network API",
+    "description": "A collection of tutorials generated and maintained by Galaxy Community Members across the world",
+    "license": {
+      "name": "MIT & CC-BY 4.0",
+      "url": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://training.galaxyproject.org/training-material/api/"
+    },
+    {
+      "url": "http://localhost:4000/training-material/api/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "materials",
+      "description": "Information about the topics available from the GTN"
+    },
+    {
+      "name": "contributors",
+      "description": "GTN Contributor Information"
+    },
+    {
+      "name": "internal",
+      "description": "Internal APIs that aren't much use outside."
+    }
+  ],
+  "paths": {
+    "/contributors.json": {
+      "get": {
+        "tags": [
+          "contributors"
+        ],
+        "summary": "List all Contributors",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfUsers"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contributors/{id}.json": {
+      "get": {
+        "tags": [
+          "contributors"
+        ],
+        "summary": "Get individual Contributors",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/topics.json": {
+      "get": {
+        "tags": [
+          "materials"
+        ],
+        "summary": "List topics",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Topic"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/topics/{topicId}.json": {
+      "get": {
+        "tags": [
+          "materials"
+        ],
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "ID of the topic",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get information about a specific topic",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopicDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/topics/{topicId}/tutorials/{tutorialId}/{material}.json": {
+      "get": {
+        "tags": [
+          "materials"
+        ],
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "ID of the topic",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tutorialId",
+            "in": "path",
+            "description": "ID of the tutorial",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "material",
+            "in": "path",
+            "description": "'slides' or 'tutorial', whichever material you want to request.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get information about a specific topic",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingMaterial"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/videos.json": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "List videos",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gtn.bib": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Get the full GTN bibliography library",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TrainingMaterial": {
+        "type": "object",
+        "required": [
+          "layout",
+          "title"
+        ],
+        "properties": {
+          "layout": {
+            "type": "string",
+            "description": "The internal layout of the material for rendering"
+          },
+          "title": {
+            "type": "string",
+            "description": "The human readable name of the material"
+          },
+          "zenodo_link": {
+            "type": "string",
+            "description": "A link to some datasets on Zenodo required for the tutorial"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of questions students will answer when following this tutorial"
+          },
+          "objectives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of objectives students will accomplish when following this tutorial"
+          },
+          "key_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of take aways when completing this training"
+          },
+          "time_estimation": {
+            "type": "string",
+            "description": "An estimate of the amount of time required to complete this tutorial."
+          },
+          "contributors": {
+            "$ref": "#/components/schemas/ArrayOfUsers"
+          },
+          "subtopic": {
+            "type": "string",
+            "description": "Which subtopic (see topic.json information)"
+          },
+          "last_modified_at": {
+            "type": "string",
+            "description": "When was this tutorial last modified"
+          },
+          "topic_name": {
+            "type": "string",
+            "description": "Internal/URL component for the topic"
+          },
+          "tutorial_name": {
+            "type": "string",
+            "description": "Internal/URL component for the tutorial"
+          },
+          "hands_on": {
+            "type": "boolean",
+            "description": "Is there a hands-on available for this material"
+          },
+          "slides": {
+            "type": "boolean",
+            "description": "Are there slides available for this material"
+          },
+          "workflows": {
+            "type": "boolean",
+            "description": "Are there workflows available for this material"
+          },
+          "tours": {
+            "type": "boolean",
+            "description": "Are there tours available for this material"
+          },
+          "video": {
+            "type": "boolean",
+            "description": "Is there a video being auto-generated from the slides"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "joined"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The user ID, usually their GitHub username"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name they wish to be refered to with."
+          },
+          "email": {
+            "type": "string",
+            "description": "Their email"
+          },
+          "orcid": {
+            "type": "string",
+            "description": "ORCID ID"
+          },
+          "twitter": {
+            "type": "string",
+            "description": "Twitter Handle"
+          },
+          "linkedin": {
+            "type": "string",
+            "description": "Linkedin Handle"
+          },
+          "github": {
+            "type": "boolean",
+            "description": "If their username is not equivalent to their github name"
+          },
+          "maintainer_contact": {
+            "type": "string",
+            "description": "Their preferred contact method"
+          },
+          "joined": {
+            "type": "string",
+            "description": "Year + Month (0 padded) when they joined the GTN"
+          }
+        }
+      },
+      "ArrayOfUsers": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/User"
+        }
+      },
+      "Topic": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "summary",
+          "maintainers"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The internal topic name (used in URLs)"
+          },
+          "title": {
+            "type": "string",
+            "description": "The human readable title"
+          },
+          "summary": {
+            "type": "string",
+            "description": "A human readable description of the topic's contents."
+          },
+          "maintainers": {
+            "$ref": "#/components/schemas/ArrayOfUsers"
+          }
+        }
+      },
+      "TopicDetail": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "summary",
+          "maintainers"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The internal topic name (used in URLs)"
+          },
+          "type": {
+            "type": "string",
+            "description": "Whether it is a science, admin-dev, or contributing topic"
+          },
+          "title": {
+            "type": "string",
+            "description": "The human readable title"
+          },
+          "summary": {
+            "type": "string",
+            "description": "A human readable description of the topic's contents."
+          },
+          "docker_image": {
+            "type": "string",
+            "description": "A docker image ID of a container with all of the dependencies required for this topic"
+          },
+          "subtopics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Subtopic ID"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Subtopic title (presented in the UI to users)"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A helpful subtopic description."
+                }
+              }
+            }
+          },
+          "maintainers": {
+            "$ref": "#/components/schemas/ArrayOfUsers"
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrainingMaterial"
+            }
+          }
+        }
+      }
+    }
+  }
+}
