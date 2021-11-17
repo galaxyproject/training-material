@@ -41,11 +41,11 @@ https://zenodo.org/record/5119008/files/M117C1-ch_1.fq.gz
 https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 ```
 
-> ### {% icon details %} Set format to `fastqsanger.gz`
+> ### {% icon hands_on %} Hands-on: Set format to `fastqsanger.gz`
 > The above datasets are in `fastqsanger.gz` format. It is necessary to explicitly set format in Galaxy. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it is difficult to guess them automatically.  
 >
 > {% snippet faqs/galaxy/dataset_upload_fastqsanger_via_urls.md %}
-{: .warning}
+{: .hands_on}
 
 ## About these datasets
 
@@ -106,11 +106,11 @@ By now we see that a collection can be used to bundle a large number of items in
 https://zenodo.org/record/5119008/files/chrM.fa.gz
 ```
 
-> ### {% icon details %} Set format to `fasta.gz`
+> ### {% icon hands_on %} Hands-on: Set format to `fasta.gz`
 > The above dataset is in `fasta.gz` format. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. 
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md reset_form="True" link="https://zenodo.org/record/5119008/files/chrM.fa.gz" format="fasta.gz" %}
-{: .warning}
+{: .hands_on}
 
 ## Mapping reads
 
@@ -138,7 +138,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 {: .hands_on}
 
-You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually four separate `BWA-MEM` jobs. In the end this `BWA-MEM` run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `BWA-MEM` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
+You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually generate four separate `BWA-MEM` jobs. In the end this `BWA-MEM` run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `BWA-MEM` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
 
 ![bwa_memCollection_ABC](../../images/collections/collection_expansion.svg)
 
@@ -146,7 +146,7 @@ You will see jobs being submitted and new datasets appearing in the history. Bec
 
 After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool `lofreq` will take a collection of BAM datasets (the one produced by `BWA-MEM`), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets. 
 
-> ### {% icon hands_on %} Hands-on: Call variants 
+> ### {% icon hands_on %} Hands-on: Call variants  
 >
 > Run {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `Map with BWA-MEM...` (output of **BWA-MEM** {% icon tool %})

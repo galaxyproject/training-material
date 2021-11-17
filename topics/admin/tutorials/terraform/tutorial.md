@@ -330,7 +330,7 @@ We should now have a keypair in our cloud!
 We now have:
 
 - Terraform installed
-- The OpenStack plugin intialized
+- The OpenStack plugin initialized
 - A keypair in OpenStack
 
 > ### {% icon comment %} Doing this training outside of a training event
