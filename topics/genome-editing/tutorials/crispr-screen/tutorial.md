@@ -45,8 +45,6 @@ Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting D
 
 ![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
-Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}.
-
 
 > ### Agenda
 >
@@ -61,7 +59,7 @@ Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihar
 
 ## Data upload
 
-We will use fastq files containing 1% of reads from the original samples to demonstrate the read processing steps. 
+Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}. We will use FASTQ files containing 1% of reads from the original samples to demonstrate the read processing steps.
 
 > ### {% icon hands_on %} Hands-on: Retrieve CRISPR screen fastq datasets
 >
@@ -202,7 +200,7 @@ We need to trim the adapters to leave just the 20bp guide sequences.  We'll trim
 
 For the rest of the CRISPR screen analysis, counting and testing, we'll use MAGeCK ({% cite Li2014 %}, {% cite Li2015 %}).
 
-To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library so we use that file. The file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
+To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library ({% cite Doench2016 %}) which contains 77,441 sgRNAs, an average of 4 sgRNAs per gene, and 1000 non-targeting control sgRNAs. The library file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
 
 > ### {% icon hands_on %} Hands-on: Count guides per gene
 > 1. Import the library file 
