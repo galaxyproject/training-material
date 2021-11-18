@@ -1,0 +1,2817 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Make & Snakemake</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: Make & Snakemake" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/snakemake/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/snakemake/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/snakemake/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/snakemake/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/snakemake/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/snakemake/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/snakemake/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/snakemake/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/data-science/tutorials/snakemake/tutorial.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/data-science/tutorials/snakemake/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/data-science/tutorials/snakemake/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Make & Snakemake",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / snakemake / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Make & Snakemake' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/snakemake/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "The questions this  addresses are:\n - What is Make & Snakemake\n - What is a Makefile/Snakefile\n - How do these improve pipelines over simple scripts?\n - Why is Snakemake better for scientific research and how can I use it\n - How do I use conda envs with Snakemake?\n\n\\nThe objectives are:\n - Write a snakefile that does a simple QC and Mapping workflow\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/cli-basics/tutorial.html",
+      "name": "CLI basics",
+      "description": "Hands-on for 'CLI basics' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/cli-advanced/tutorial.html",
+      "name": "Advanced CLI in Galaxy",
+      "description": "Hands-on for 'Advanced CLI in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    },
+    {
+      "@type": "Person",
+      "name": "Donny Vrins"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    },
+    {
+      "@type": "Person",
+      "name": "Donny Vrins"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Make & Snakemake</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+<a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=27" alt="Avatar">Bazante Sanders</a>
+
+
+<a href="/training-material/hall-of-fame/dirowa/" class="contributor-badge contributor-dirowa"><img src="https://avatars.githubusercontent.com/dirowa?s=27" alt="Avatar">Donny Vrins</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is Make &amp; Snakemake</p>
+</li>
+        
+        <li><p>What is a Makefile/Snakefile</p>
+</li>
+        
+        <li><p>How do these improve pipelines over simple scripts?</p>
+</li>
+        
+        <li><p>Why is Snakemake better for scientific research and how can I use it</p>
+</li>
+        
+        <li><p>How do I use conda envs with Snakemake?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Write a snakefile that does a simple QC and Mapping workflow</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> CLI basics:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/cli-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Advanced CLI in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/cli-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" href="https://zenodo.org/record/5562251">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 18, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+
+                <p>Here you will learn to write both Make and Snakemake workflows. We teach two <span class="notranslate">workflow</span> engines because Snakemake uses a lot of the concepts of Make, and these concepts are somewhat complex and a very different way of thinking than you might be used to with <span class="notranslate">workflow</span> design.</p>
+
+<p>This tutorial is aimed at students and <span class="notranslate">Galaxy</span> community members who might want to convert Snakemake workflows into <span class="notranslate">Galaxy</span> workflows, but need to understand how Snakemake workflows work.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#bash" id="markdown-toc-bash">Bash</a></li>
+  <li><a href="#make" id="markdown-toc-make">Make</a>    <ol>
+      <li><a href="#line-by-line-comparison" id="markdown-toc-line-by-line-comparison">Line-By-Line Comparison</a></li>
+      <li><a href="#why-make" id="markdown-toc-why-make">Why Make?</a></li>
+      <li><a href="#backwards" id="markdown-toc-backwards">Backwards</a></li>
+    </ol>
+  </li>
+  <li><a href="#snakemake" id="markdown-toc-snakemake">Snakemake</a>    <ol>
+      <li><a href="#line-by-line-comparison-1" id="markdown-toc-line-by-line-comparison-1">Line-By-Line Comparison</a></li>
+      <li><a href="#best-practices" id="markdown-toc-best-practices">Best Practices</a></li>
+      <li><a href="#final-pipeline" id="markdown-toc-final-pipeline">Final Pipeline</a></li>
+      <li><a href="#why-snakemake" id="markdown-toc-why-snakemake">Why Snakemake</a></li>
+      <li><a href="#the-case-of-the-missing-fastqc" id="markdown-toc-the-case-of-the-missing-fastqc">The Case of the Missing FastQC</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<p>We’re going to go through this tutorial as “the evolution of a pipeline” from a simple bash script that we might run as individual commands on the command line, all the way up to a Snakemake <span class="notranslate">workflow</span>. This should give you some perspective of why the systems exist, and what benefits each system brings.</p>
+
+<h1 id="bash">Bash</h1>
+
+<p>We’ve set up a simple bash pipeline. It downloads some read files from a website, decompresses them, builds an index for a <code class="language-plaintext highlighter-rouge">genome.fa</code> we already have, and then does the alignment against that genome.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Downloading our datasets</span>
+wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+wget https://zenodo.org/record/5562251/files/SRR2584866_1.fq.gz
+wget https://zenodo.org/record/5562251/files/SRR2584866_2.fq.gz
+wget https://zenodo.org/record/5562251/files/SRR2589044_1.fq.gz
+wget https://zenodo.org/record/5562251/files/SRR2589044_2.fq.gz
+
+<span class="c"># Generate FastQC Report</span>
+fastqc <span class="k">*</span>.fq
+
+<span class="c"># Run Trimmomatic to trim the bad <span class="notranslate">reads</span> out.</span>
+trimmomatic PE SRR2589044_1.fq.gz SRR2589044_2.fq.gz <span class="se">\</span>
+               SRR2589044_1.trim.fq SRR2589044_1un.trim.fq <span class="se">\</span>
+               SRR2589044_2.trim.fq SRR2589044_2un.trim.fq <span class="se">\</span>
+               SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+
+trimmomatic PE SRR2584866_1.fq.gz SRR2589044_2.fq.gz <span class="se">\</span>
+               SRR2584866_1.trim.fq SRR2589044_1un.trim.fq <span class="se">\</span>
+               SRR2584866_2.trim.fq SRR2589044_2un.trim.fq <span class="se">\</span>
+               SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+
+<span class="c"># Generate Updated FastQC Report</span>
+fastqc <span class="k">*</span>.trim.fq
+
+<span class="c"># Generate the genome index</span>
+bwa index GCA_000017985.1_ASM1798v1_genomic.fna
+
+<span class="c"># Align <span class="notranslate">reads</span> to the genome</span>
+bwa mem GCA_000017985.1_ASM1798v1_genomic.fna SRR2589044_1.trim.fq SRR2589044_2.trim.fq | samtools <span class="nb">sort</span> <span class="nt">-O</span> bam <span class="nt">-o</span> SRR2589044.bam
+bwa mem GCA_000017985.1_ASM1798v1_genomic.fna SRR2584866_1.trim.fq SRR2584866_2.trim.fq | samtools <span class="nb">sort</span> <span class="nt">-O</span> bam <span class="nt">-o</span> SRR2584866.bam
+</code></pre></div></div>
+
+<p>This is a fine start to our analysis pipeline, and might simply be summarising
+the commands we executed interactively at the command line.</p>
+
+<h1 id="make">Make</h1>
+
+<p>Make is a build automation tool that has been around since 1976. It lets you describe build processes, writing down the individual processes which will occur, and then providing you a single entrypoint to run your <span class="notranslate">workflow</span>, a lot like how Scientific <span class="notranslate">Workflow</span> Management System (SciWMS) work! But importantly it is declarative, rather than imperative which is a big change if you’re familiar with programming languages like bash or python.</p>
+
+<p>Instead of defining step by step all of the steps that should be executed like the bash example above,
+you instead write more general rules on how to produce individual files. We’ll look at them one-by-one.</p>
+
+<p>In bash scripts you write something like:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">command input</code> and it implicitly creates the output file automatically, often by adding a suffix (e.g. <code class="language-plaintext highlighter-rouge">bwa index genome.fa</code> produces an index you refer to with <code class="language-plaintext highlighter-rouge">genome</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">command input &gt; output</code> redirecting output of the command to a file</li>
+  <li><code class="language-plaintext highlighter-rouge">command input -O output</code> where we explicitly state where the output is</li>
+</ul>
+
+<p>In Make you’ll need to do that, but you’ll also need to declare the inputs and outputs of every step!</p>
+
+<pre class="highlight"><code><span class="nb">output</span>: <span class="kt">input</span>
+	<span class="s2">command [and here the correct variant from above]</span>
+</code></pre>
+
+<p>This may seem tedious, to annotate the inputs and outputs of each step, but because Make knows what input files need to exist before it can execute this step, and it knows precisely which output files you will generate. It needs this information so that when you have multiple rules, it can decide which dependencies need to be executed.</p>
+
+<h2 id="line-by-line-comparison">Line-By-Line Comparison</h2>
+
+<h3 id="downloading-data">Downloading Data</h3>
+
+<blockquote class="code-in">
+  <h3 id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Bash</h3>
+  <pre class="highlight"><code><span class="s2">wget https://.../GCA_000017985.1_ASM1798v1_genomic.fna.gz
+wget https://.../SRR2584866_1.fq.gz</span>
+</code></pre>
+  <p>With bash we download each read file one by one</p>
+</blockquote>
+<blockquote class="code-out">
+  <h3 id="code-out-make"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Make</h3>
+  <pre class="highlight"><code><span class="nb">%.gz</span>:
+	<span class="s2">wget https://.../$@ -O $@</span>
+</code></pre>
+  <p>But with Make we write is a generic rule which can be used any time you need to download a file for this project. <code class="language-plaintext highlighter-rouge">$@</code> is used as the name of the output file and in the templated source url we will download from. If you ran <code class="language-plaintext highlighter-rouge">make SRR2584866_1.fq.gz</code> it would template out the <code class="language-plaintext highlighter-rouge">wget</code> command and run it. <strong>Speed bonus</strong>: It can parallelise these download jobs for us!</p>
+</blockquote>
+
+<h3 id="fastqc">FastQC</h3>
+
+<blockquote class="code-in">
+  <h3 id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Bash</h3>
+  <pre class="highlight"><code><span class="s2">fastqc *.fq</span></code></pre>
+  <p>Generate ALL of the FastQC reports</p>
+</blockquote>
+<blockquote class="code-out">
+  <h3 id="code-out-make-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Make</h3>
+  <pre class="highlight"><code><span class="nb">%.fastqc.html</span>: <span class="kt">%.fq</span>
+	<span class="s2">fastqc $&lt;</span>
+</code></pre>
+  <p>Here is a rule to generate a single FastQC report from a single FastQ file</p>
+</blockquote>
+
+<h3 id="trimming-data">Trimming Data</h3>
+
+<blockquote class="code-in">
+  <h3 id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Bash</h3>
+  <pre class="highlight"><code><span class="s2">trimmomatic PE</span> <span class="kt">SRR2589044_1.fq.gz SRR2589044_2.fq.gz</span> \
+               <span class="nb">SRR2589044_1.trim.fq SRR2589044_1un.trim.fq \
+               SRR2589044_2.trim.fq SRR2589044_2un.trim.fq</span> \
+               <span class="s2">SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15</span>
+
+<span class="s2">trimmomatic PE</span> <span class="kt">SRR2584866_1.fq.gz SRR2584866_2.fq.gz</span> \
+               <span class="nb">SRR2584866_1.trim.fq SRR2584866_1un.trim.fq \
+               SRR2584866_2.trim.fq SRR2584866_2un.trim.fq</span> \
+               <span class="s2">SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15</span>
+</code></pre>
+  <p>Run these two individual trimmomatic commands with these hardcoded filenames. If you need to run a new file make sure to carefully change all of the uses of it!</p>
+</blockquote>
+<blockquote class="code-out">
+  <h3 id="code-out-make-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Make</h3>
+  <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
+	<span class="s2">trimmomatic PE $^ \
+		$(shell basename $(word 1,$^) .fq).trim.fq \
+		$(shell basename $(word 1,$^) .fq)un.trim.fq \
+		$(shell basename $(word 2,$^) .fq).trim.fq \
+		$(shell basename $(word 2,$^) .fq)un.trim.fq \
+		SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15</span>
+</code></pre>
+
+  <p>A more generic rule to generate the trimmed fastq files from whichever pair of sequence identifiers were provided. By using <code class="language-plaintext highlighter-rouge">%</code> we also get some safety in this function that we didn’t have in the bash version! We know for sure those are identical values, and no one accidentally made a small typo in any one of the <strong>6</strong> times the same identifier was repeated. <u>But it comes at the cost</u> of using some complex Make statements like <code class="language-plaintext highlighter-rouge">$(shell)</code> which lets us execute arbitrary shell commands inside our pipeline.</p>
+
+  <p>You’ll notice that what we’re really doing is extracting the inputs and outputs from the command and making them much more uniform</p>
+</blockquote>
+
+<p>So when we translated from Bash to Make, every time</p>
+
+<ul>
+  <li>we annotated inputs</li>
+  <li>we annotated outputs</li>
+  <li>we made the command a ‘template’</li>
+</ul>
+
+<blockquote class="comment">
+  <h3 id="comment-do-not-remember-this"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> DO NOT REMEMBER THIS</h3>
+  <p>There is a lot of Make specific things going on in the above examples. You do not need to know it! We just wanted to provide working, correct examples. This tutorial is focused on Snakemake, so read these for context and understanding of why we use Snakemake, not reading them to learn Makefiles.</p>
+</blockquote>
+
+<h2 id="why-make">Why Make?</h2>
+
+<p>So now comes the question, why Make? Why would you want to write the rules in this declarative way, rather than the imperative way that is so much easier and requires so much less work? <em>Speed!</em> Why would you want to write these generic rules that require learning a lot of Make’s syntax? <em>Reusability</em>.</p>
+
+<dl>
+  <dt>Speed</dt>
+  <dd>Every time you want to run your declarative pipeline, you either need to run it from start to finish every time (re-downloading sequence data, re-building genome indicies, re-<span class="notranslate">mapping</span> <span class="notranslate">reads</span>) or to write a lot of bash code to check if those files exist and only downloading/indexing/alinging as-needed.</dd>
+  <dt>Reusability</dt>
+  <dd>That pipeline can only download those specific files, unless you write additional code to template out the name of the <span class="notranslate">reads</span> and genome you want to align. By writing more generic rules, as soon as someone gives you new datasets, you can immediately start processing those with your re-usable pipeline.</dd>
+</dl>
+
+<p>However with <code class="language-plaintext highlighter-rouge">make</code>, you’ve written generic rules which can be used to download any fastq files. And best of all, make can check if the files already exist, and if they do, it skips the step and goes on to the next step, rather than re-creating the file. Make does this by checking the</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Bash</th>
+      <th>Make</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Language style</td>
+      <td>Individual steps performed line-by-line</td>
+      <td>Generic rules are written which say how to do the operation, but not on which data</td>
+    </tr>
+    <tr>
+      <td>Partial re-run</td>
+      <td>You must run the entire script every time (or write extra code)</td>
+      <td>Files are only created when you ask for them</td>
+    </tr>
+    <tr>
+      <td>How it is invoked</td>
+      <td><code class="language-plaintext highlighter-rouge">bash script.sh</code></td>
+      <td><code class="language-plaintext highlighter-rouge">make</code></td>
+    </tr>
+    <tr>
+      <td>Running with different data?</td>
+      <td>Edit the script to replace the identifiers, or support templated identifiers.</td>
+      <td><code class="language-plaintext highlighter-rouge">make read1111.sam read2222.sam read3333.same read4444.sam</code></td>
+    </tr>
+    <tr>
+      <td>Paralellisation?</td>
+      <td>None by default, you must edit the script to add it.</td>
+      <td><code class="language-plaintext highlighter-rouge">make -j 8</code> runs each build step on one thread, with 8 th<span class="notranslate">reads</span> available, until all tasks are finished.</td>
+    </tr>
+    <tr>
+      <td>Filename</td>
+      <td>Anything ending in <code class="language-plaintext highlighter-rouge">.sh</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Makefile</code> is the default name, and you should name your makefile this, unless you want people to have to type <code class="language-plaintext highlighter-rouge">make -f other-file.mk</code></td>
+    </tr>
+    <tr>
+      <td>Dependencies</td>
+      <td>Up to you to manage</td>
+      <td>Up to you to manage</td>
+    </tr>
+    <tr>
+      <td>Multiple output files per step</td>
+      <td>n/a</td>
+      <td><a href="https://www.gnu.org/software/automake/manual/html_node/Multiple-Outputs.html">Very tricky to get completely right</a>, Makefiles really expect one rule produces one output file (and can only check e.g. update times of a single file.)</td>
+    </tr>
+    <tr>
+      <td>Cluster/HPC Friendliness</td>
+      <td>Everything is manual</td>
+      <td>Everything is manual</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="backwards">Backwards</h2>
+
+<p>A full makefile example</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>all: SRR2589044.bam
+
+# Here we've hardcoded the genome name because it's less likely to change for a
+# single pipeline than the individual data files are.
+%.bam: %_1.trim.fq %_1.trim.fq GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
+	bwa mem GCA_000017985.1_ASM1798v1_genomic.fna $(word 1,$^) $(word 2,$^) | \
+		samtools sort -O bam -o $@
+
+# This indexing step however will work for any possible
+%.fna.gz.bwt: %.fna.gz
+	bwa index $&lt;
+
+# This handles ALL fastqc reporting, so we don't have to do it in two sections,
+# but, unless we ask for these reports they won't be generated.
+%.fastqc.html: %.fq
+	fastqc $&lt;
+
+# This rule violates some Makefile inte<span class="notranslate">rna</span>l expectations by having multiple
+# outputs which is not handled well by all implementations
+%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq: %_1.fq.gz %_2.fq.gz
+	trimmomatic PE $^ \
+		$(shell basename $(word 1,$^) .fq).trim.fq \
+		$(shell basename $(word 1,$^) .fq)un.trim.fq \
+		$(shell basename $(word 2,$^) .fq).trim.fq \
+		$(shell basename $(word 2,$^) .fq)un.trim.fq \
+		SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+
+# And here's finally our download step
+%:
+	https://zenodo.org/record/5562251/files/$(shell basename $@) \
+		-O $@
+</code></pre></div></div>
+
+<p>You’ll notice a couple things about this above example:</p>
+
+<ol>
+  <li>There is a new rule called <code class="language-plaintext highlighter-rouge">all</code>. In a makefile, by default, the very first rule is executed when you run <code class="language-plaintext highlighter-rouge">make</code>. If you want to execute other rules you can, but it defaults to the first one. By convention, many people name it <code class="language-plaintext highlighter-rouge">all</code>.</li>
+  <li>Inside there we’ve also written a file we’d like created, <code class="language-plaintext highlighter-rouge">SRR2589044.bam</code>, which doesn’t exist yet. Make sees this as a dependency to finishing the (empty) all rule, and then goes on to figure out how to create it.</li>
+  <li>It is written backwards, we’ve started with what we want to output, and for each line, we figured out what we needed for that, and wrote a rule on how to create it. This is relatively common in makefiles.</li>
+</ol>
+
+<p>You’ll also notice some weird additional things we’ve had to do like <code class="language-plaintext highlighter-rouge">$(word 2,$^)</code> to get the second input file to that rule, this is really kind of ugly and hard to understand and is a great motivation for learning Snakemake which helps address these issues.</p>
+
+<p>Make will read the above makefile like so:</p>
+
+<ol>
+  <li>You’re running <code class="language-plaintext highlighter-rouge">make</code> so I will find the first task and run it</li>
+  <li><code class="language-plaintext highlighter-rouge">all</code> is the first task and it depends on this BAM file</li>
+  <li>The BAM file needs me to run bwa-mem and bwa-index, in two separate steps
+    <ol>
+      <li>For bwa index I need to index the genome</li>
+      <li>And I need to download it first!</li>
+    </ol>
+  </li>
+  <li>Also I need the trimmed fastq files, both forward and reverse files.</li>
+  <li>And I need to have the untrimmed files to trim them</li>
+  <li>And I need to download those first!</li>
+</ol>
+
+<p>Notice that Make isn’t running every task, it’s reading the one task you asked for, and seeing what’s required for that based on your annotations of inputs and outputs.</p>
+
+<blockquote class="question">
+  <h3 id="question-check-your-understanding"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Check your understanding</h3>
+
+  <ol>
+    <li>If a file is not part of the final output, or not the requested task, will it be created?</li>
+    <li>Do you spot any omissions in the above pipeline?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>No, Make only runs the tasks for files it needs, it won’t run any of the other tasks. This is part of what makes <code class="language-plaintext highlighter-rouge">make</code> fast and easily parallelisable.</li>
+      <li>Yes! FastQC is missing, it won’t be created unless we ask for it.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>Reading the above you should be able to imagine a tree of tasks that Make is creating inte<span class="notranslate">rna</span>lly:</p>
+
+<p>TODO</p>
+
+<p>This is called a Directed Acyclic Graph (DAG), it is a graph of nodes (tasks that need to be executed), with connections between nodes that have a direction (this task depends on outputs of that task), and there are no cycles (no outputs depend on inputs.) These are very common in <abbr title="Scientific Workflow Management System">SciWMS</abbr>s because they make computation faster. Instead of executing step-by-step, we can build this graph of what work needs to be done, and then starting with the leaves of the graph (the end nodes without other dependencies) we can start executing and removing them.</p>
+
+<p>This also how we can really easily parallelise workflows: because we know the dependencies of each step, we know which can be executed right now, and we can execute them in parallel because we know for sure they do not depend on each other.</p>
+
+<h1 id="snakemake">Snakemake</h1>
+
+<blockquote class="quote">
+  <p>The Snakemake <span class="notranslate">workflow</span> management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid and cloud environments, without the need to modify the <span class="notranslate">workflow</span> definition. Finally, Snakemake workflows can entail a description of required software, which will be automatically deployed to any execution environment. <a href="https://snakemake.readthedocs.io/en/stable/index.html">source</a></p>
+</blockquote>
+
+<p>Snakemake addresses a lot of the issues with make for use in scientific contexts: clearer pipelines and dependencies. We did not talk about it in the previous section, but where did <code class="language-plaintext highlighter-rouge">bowtie2</code> and <code class="language-plaintext highlighter-rouge">bowtie2-build</code> come from? How did those get installed? What versions are they? None of that information is included in the Makefile</p>
+
+<p>Snakemake rules are a bit more complex, in Snakemake you will write rules that follow this form:</p>
+
+<pre class="highlight"><code>rule my-rule-name
+	<span class="kt">input:
+		"something",
+		"something-else"</span>
+	<span class="nb">output:
+		"output-1",
+		"output-2"</span>
+	<span class="s2">shell:
+		"cat {input} &gt; {output}"</span>
+</code></pre>
+
+<h2 id="line-by-line-comparison-1">Line-By-Line Comparison</h2>
+
+<h3 id="downloading-data-1">Downloading Data</h3>
+
+<blockquote class="code-in">
+  <h3 id="code-in-make"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Make</h3>
+  <pre class="highlight"><code><span class="nb">%.fq.gz</span>:
+	<span class="s2">wget https://zenodo.org/record/5562251/files/$@</span>
+</code></pre>
+
+  <p>Generic download rule, the <code>$@</code> and <code>%</code> used are a bit opaque, you need to know what they mean to understand how the rule works.</p>
+</blockquote>
+<blockquote class="code-out">
+  <h3 id="code-out-snakemake"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Snakemake</h3>
+  <pre class="highlight"><code>rule download:
+	<span class="nb">output:
+		"{sample}.fq.gz"</span>
+	<span class="s2">shell:
+		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output}"</span>
+</code></pre>
+
+  <p>This is much more explicit, the outputs are listed and <code class="language-plaintext highlighter-rouge">{sample}</code> is used as the variable to be templated out, a lot like you might recognise from Python’s <code class="language-plaintext highlighter-rouge">format</code> function or <code class="language-plaintext highlighter-rouge">f""</code> strings. The rule also has a name which serves as really nice documentation for what that step does, you don’t have to read the command to figure it out.</p>
+</blockquote>
+
+<h3 id="fastqc-1">FastQC</h3>
+
+<blockquote class="code-in">
+  <h3 id="code-in-mask"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Mask</h3>
+  <pre class="highlight"><code><span class="nb">%.fastqc.html</span>: <span class="kt">%.fq</span>
+	<span class="s2">fastqc $&lt;</span>
+</code></pre>
+
+  <p>Here is a rule to generate a single FastQC report from a single FastQ file</p>
+</blockquote>
+<blockquote class="code-out">
+  <h3 id="code-out-snakemake-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Snakemake</h3>
+  <pre class="highlight"><code>rule fastqc:
+	<span class="kt">input:
+		"{sample}.fq.gz"</span>
+	<span class="nb">output:
+		"{sample}_fastqc.html"</span>
+	<span class="s2">shell:
+		"fastqc {input} --outdir fastqc/"</span>
+</code></pre>
+
+  <p>Essentially the same, but now we’ve also added a Conda environment in which our job will run. This makes dependency management a lot simpler.</p>
+</blockquote>
+
+<h3 id="trimming-data-1">Trimming Data</h3>
+
+<blockquote class="code-in">
+  <h3 id="code-in-make-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Make</h3>
+  <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
+	<span class="s2">trimmomatic PE $^ \
+		$(shell basename $(word 1,$^) .fq).trim.fq \
+		$(shell basename $(word 1,$^) .fq)un.trim.fq \
+		$(shell basename $(word 2,$^) .fq).trim.fq \
+		$(shell basename $(word 2,$^) .fq)un.trim.fq \
+		SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15</span>
+</code></pre>
+
+  <p>Here we take our very complicated and hard to understand Make rule (shell? basename? word?) with ugly and potentially quite broken multiple output syntax</p>
+
+</blockquote>
+<blockquote class="code-out">
+  <h3 id="code-out-snakemake-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Snakemake</h3>
+  <pre class="highlight"><code>rule trimmomatic:
+	<span class="kt">input:
+		r1="{sample}_1.fq.gz",
+		r2="{sample}_2.fq.gz"</span>
+	<span class="nb">output:
+		o1="{sample}_1.trim.fq",
+		o2="{sample}_2.trim.fq",
+		o1un="{sample}_1un.trim.fq",
+		o2un="{sample}_2un.trim.fq"</span>
+	<span class="s2">shell:
+		"trimmomatic PE "
+		"{input.r1} {input.r2} "
+		"{output.o1} {output.o1un} "
+		"{output.o2} {output.o2un} "
+		"SLIDINGWINDOW:4:20 MINLEN:25 "
+		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15"</span>
+</code></pre>
+
+  <p>And turn it into a much more readable and clear Snakemake step! Now instead of using more opaque terms like <code class="language-plaintext highlighter-rouge">$(word 1,$^)</code> we can just declare “our output should have this name and use {sample} as part of the name” and Snakemake takes care of the rest. Then in our commandline we can clearly reference exactly what we want.</p>
+
+  <p>Note: We also use <code class="language-plaintext highlighter-rouge">fq.gz</code> as our input file because trimmomatic we know can accept gzipped fastq files, but we output plain fastq files because re-compressing those is another step and it’s not necessary right now for our small datasets. In a real world situation you might also choose not to compress intermediate datasets because you want better performance and you know you’ll throw away the intermediates and keep the source and final datasets.</p>
+</blockquote>
+
+<p>Now that you have seen a few rules, let’s write the rest.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-save-this-snakefile-to-the-filesystem"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Save this Snakefile to the filesystem</h3>
+  <p>From here on you are going to finish writing this Snakefile on your own! We’ll give you the bits you have seen up until now, and future tasks will require you to add your own rules and get to actually test out the pipeline!</p>
+
+  <pre><code class="language-Snakemake">rule download:
+	output:
+		"{sample}.fq.gz"
+	shell:
+		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output}"
+
+rule download_genome:
+	output:
+		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
+	shell:
+		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
+
+rule fastqc:
+	input:
+		"{sample}.fq.gz"
+	output:
+		"{sample}_fastqc.html"
+	shell:
+		"fastqc {input} --outdir fastqc/"
+
+rule trimmomatic:
+	input:
+		r1="{sample}_1.fq.gz",
+		r2="{sample}_2.fq.gz"
+	output:
+		o1="{sample}_1.trim.fq",
+		o2="{sample}_2.trim.fq",
+		o1un="{sample}_1un.trim.fq",
+		o2un="{sample}_2un.trim.fq"
+	shell:
+		"trimmomatic PE "
+		"{input.r1} {input.r2} "
+		"{output.o1} {output.o1un} "
+		"{output.o2} {output.o2un} "
+		"SLIDINGWINDOW:4:20 MINLEN:25 "
+		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15"
+</code></pre>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-install-snakemake"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install Snakemake</h3>
+  <p>We’re about to start doing things really with snakemake, so, it’s time to install it.</p>
+  <ol>
+    <li><a href="https://docs.conda.io/en/latest/miniconda.html">Install Miniconda</a></li>
+    <li>
+      <p>Create an environment for Snakemake:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">-n</span> snakemake
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Activate it</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate snakemake
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>And install snakemake in this environment</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">install </span><span class="nv">snakemake</span><span class="o">=</span>6.10.0
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-try-running-snakemake"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Try running snakemake!</h3>
+
+  <ol>
+    <li>
+      <p>Try running snakemake</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -c1
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-specify-the-maximum-number-of-jobs"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> “specify the maximum number of jobs”</h3>
+        <p>If you see an error like this it might be due to an outdated version of snakemake</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: you need to specify the maximum number of jobs to be queued or executed at the same time with --jobs.
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
+WorkflowError:
+Target rules may not contain wildcards. Please specify concrete files or a rule without wildcards at the command line, or have a rule without wildcards at the very top of your <span class="notranslate">workflow</span> (e.g. the typical "rule all" which just collects all results you want to generate in the end).
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Wait, that didn’t work! This is the <code class="language-plaintext highlighter-rouge">all</code> rule we also saw in the makefile. But we can use Snakemake to build individual rule outputs, so let’s try that now.</p>
+    </li>
+    <li>
+      <p>Run snakemake to download <code class="language-plaintext highlighter-rouge">SRR2584866_1.fq.gz</code> and <code class="language-plaintext highlighter-rouge">SRR2584866_2.fq.gz</code></p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -c1 SRR2584866_1.fq.gz SRR2584866_2.fq.gz
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out code-max-300">
+        <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more th<span class="notranslate">reads</span> will be scaled down.
+Conda environments: ignored
+Job stats:
+job         count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+--------  -------  -------------  -------------
+download        2              1              1
+total           2              1              1
+
+Select jobs to execute...
+
+[Fri Oct  8 16:06:32 2021]
+rule download:
+    output: SRR2584866_2.fq.gz
+    jobid: 1
+    wildcards: sample=SRR2584866_2
+    resources: tmpdir=/tmp
+
+--2021-10-08 16:06:32--  https://zenodo.org/record/5562251/SRR2584866_2.fq.gz
+Resolving localhost (localhost)... 127.0.0.1
+Connecting to localhost (localhost)|127.0.0.1|:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 6319969 (6,0M) [application/gzip]
+Saving to: ‘SRR2584866_2.fq.gz’
+
+2021-10-08 16:06:32 (538 MB/s) - ‘SRR2584866_2.fq.gz’ saved [6319969/6319969]
+
+[Fri Oct  8 16:06:32 2021]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+
+[Fri Oct  8 16:06:32 2021]
+rule download:
+    output: SRR2584866_1.fq.gz
+    jobid: 0
+    wildcards: sample=SRR2584866_1
+    resources: tmpdir=/tmp
+
+--2021-10-08 16:06:32--  https://zenodo.org/record/5562251/SRR2584866_1.fq.gz
+Resolving localhost (localhost)... 127.0.0.1
+Connecting to localhost (localhost)|127.0.0.1|:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 6586718 (6,3M) [application/gzip]
+Saving to: ‘SRR2584866_1.fq.gz’
+
+2021-10-08 16:06:32 (537 MB/s) - ‘SRR2584866_1.fq.gz’ saved [6586718/6586718]
+
+[Fri Oct  8 16:06:32 2021]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snakemake.log
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Check that it worked. Do you see files in your directory?</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Now that we’ve got our pipeline started, let’s do some more with it!</p>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How would you write the following task in Snakemake?</p>
+
+  <p>The command is</p>
+  <pre class="highlight"><code><span class="s2">bwa index</span> <span class="kt">GCA_000017985.1_ASM1798v1_genomic.fna</span></code></pre>
+  <p>and it creates <code class="language-plaintext highlighter-rouge">GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt</code></p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <pre class="highlight"><code>rule indexgenome:
+	<span class="kt">input:
+		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"</span>
+	<span class="nb">output:
+		"GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt"</span>
+	<span class="s2">shell:
+		"bwa index {input}"</span>
+</code></pre>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>The command is <code class="language-plaintext highlighter-rouge">bwa mem GCA_000017985.1_ASM1798v1_genomic.fna SRR2584866_1.trim.fq SRR2584866_2.trim.fq | samtools sort -O bam -o SRR2584866.bam</code></p>
+
+  <ol>
+    <li>What are the inputs?</li>
+    <li>What are the outputs?</li>
+    <li>How would you write the following task in Snakemake?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt</code>, the index file (but beware it does not get passed in as-is, the indexing tool expects just the <code class="language-plaintext highlighter-rouge">GCA_000017985.1_ASM1798v1_genomic.fna</code> portion.)</p>
+
+        <p>Also we have our two sequence files <code class="language-plaintext highlighter-rouge">SRR2584866_1.trim.fq SRR2584866_2.trim.fq</code></p>
+      </li>
+      <li>
+        <p>Our output is <code class="language-plaintext highlighter-rouge">SRR2584866.bam</code></p>
+      </li>
+      <li>
+        <p>There are a couple of options we have here, we can supply both the <code class="language-plaintext highlighter-rouge">.fna</code> and the <code class="language-plaintext highlighter-rouge">.fna.gz.bwt</code> file as inputs (not strictly true, we don’t need the fasta file) and then just use the <code class="language-plaintext highlighter-rouge">fna</code> file in the command line, or we can pass in just the <code class="language-plaintext highlighter-rouge">.fna.gz.bwt</code> file and try and calculate the <code class="language-plaintext highlighter-rouge">.fna</code> version that is expected as the index name. We will show the second option as it is more complicated.</p>
+      </li>
+    </ol>
+    <pre class="highlight"><code>rule align:
+	<span class="kt">input:
+		r1="{sample}_1.trim.fq",
+		r2="{sample}_1.trim.fq",
+		index="{genome}.fna.gz.bwt"</span>
+	<span class="nb">output:
+		"{genome}/{sample}.bam"</span>
+	<span class="s2">shell:
+		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} | "
+		"samtools sort -O bam -o {output}"</span>
+</code></pre>
+
+    <p>Here we used a number of features to accomplish what we need, and we’ll now go through them. First is <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#wildcards">Wildcards</a> which can be used to take a portion of the output name or a portion of the input name and to re-use that in the command line. Here we declared that the first part of the index name up to <code class="language-plaintext highlighter-rouge">.fna.gz.bwt</code> was going to be the <code class="language-plaintext highlighter-rouge">genome</code> wildcard.</p>
+
+    <p>Importantly, we also used this in our output. What would have happened if we didn’t? It would be unresolvable! We would run <code class="language-plaintext highlighter-rouge">snakemake ... output.bam</code> and it would say “I don’t know what value genome should be set to”, so we need to have that value somewhere in our output filename in order to be able to figure that out.</p>
+
+    <p>That isn’t the only way to solve that problem, we could also hardcode this or write it in a <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html">config file</a> that is used by snakemake.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-the-above-outputs-to-your-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add the above outputs to your Pipeline</h3>
+  <p>If you haven’t already, add the above outputs to your Snakemake pipeline. You should now have a few rules:</p>
+
+  <ul>
+    <li>download</li>
+    <li>fastqc</li>
+    <li>trimmomatic</li>
+    <li>indexgenome</li>
+    <li>align</li>
+  </ul>
+</blockquote>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<p>But this was our very first attempt at a <span class="notranslate">workflow</span>, so what might a best practice <span class="notranslate">workflow</span> look like?</p>
+
+<h3 id="conda-for-reproducibility">Conda for reproducibility</h3>
+
+<p>If you’re not already using conda, you should be! Much scientific software you might be interested in using is already in there, probably mostly provided by the <a href="https://anaconda.org/bioconda/repo">BioConda</a> repository. Writing an environment file can be pretty simple, you just need a file like this, which we customarily put in a folder named <code class="language-plaintext highlighter-rouge">envs/</code></p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-envsbwayaml"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> <code class="language-plaintext highlighter-rouge">envs/bwa.yaml</code></h3>
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">channels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">conda-forge</span>
+  <span class="pi">-</span> <span class="s">bioconda</span>
+  <span class="pi">-</span> <span class="s">defaults</span>
+<span class="na">dependencies</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">bwa=0.7.17</span>
+  <span class="pi">-</span> <span class="s">samtools=1.13</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>In the above code sample you can see <code class="language-plaintext highlighter-rouge">bwa=0.7.17</code>, that’s the version of the <code class="language-plaintext highlighter-rouge">bwa</code> mapper we want to use which was found on <a href="https://anaconda.org/bioconda/bwa">the conda repository page</a>. You’ll notice that after it is <code class="language-plaintext highlighter-rouge">=h5bf99c6_8</code>, this is a specific revision of the package that has been ‘pinned’ (i.e. we want to ensure conda installs specifically the version we know works.) That step is not necessary, but if you really care about reproducibility it can be good in a pipeline</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-conda"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add conda</h3>
+  <p>Now you should add Conda environments where appropriate. But where is appropriate? Unix built in tools (wget, curl, gzip, cat, head, tail) generally do not need to be in conda, because they’re very standard across all unix environments.</p>
+
+  <p>Bioinformatics tools on the other hand, these need conda envs.</p>
+
+  <p>Try and add these yourself, and check your work below.</p>
+
+  <p>Please use the following versions:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>Version</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>fastqc</td>
+        <td>0.11.9</td>
+      </tr>
+      <tr>
+        <td>trimmomatic</td>
+        <td>0.39</td>
+      </tr>
+      <tr>
+        <td>bwa</td>
+        <td>0.7.17</td>
+      </tr>
+      <tr>
+        <td>samtools</td>
+        <td>1.13</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><em>Hints</em></p>
+  <ol>
+    <li>see above for what a conda environment looks like.</li>
+    <li>You’ll need to install both <code class="language-plaintext highlighter-rouge">bwa</code> and <code class="language-plaintext highlighter-rouge">samtools</code> into the environment for the alignment step.</li>
+    <li>Create the <code class="language-plaintext highlighter-rouge">envs/</code> directory if it does not exist.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p><code class="language-plaintext highlighter-rouge">envs/bwa.yaml</code> should look like this:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">channels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">conda-forge</span>
+  <span class="pi">-</span> <span class="s">bioconda</span>
+  <span class="pi">-</span> <span class="s">defaults</span>
+<span class="na">dependencies</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">bwa=0.7.17</span>
+  <span class="pi">-</span> <span class="s">samtools=1.13</span>
+</code></pre></div>    </div>
+
+    <p>And here is the <code class="language-plaintext highlighter-rouge">envs/fastqc.yaml</code>:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">channels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">conda-forge</span>
+  <span class="pi">-</span> <span class="s">bioconda</span>
+  <span class="pi">-</span> <span class="s">defaults</span>
+<span class="na">dependencies</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">fastqc=0.11.9</span>
+</code></pre></div>    </div>
+
+    <p>And here is the <code class="language-plaintext highlighter-rouge">envs/trimmomatic.yaml</code>:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">channels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">conda-forge</span>
+  <span class="pi">-</span> <span class="s">bioconda</span>
+  <span class="pi">-</span> <span class="s">defaults</span>
+<span class="na">dependencies</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">trimmomatic=0.39</span>
+</code></pre></div>    </div>
+
+    <blockquote class="comment">
+      <h3 id="comment-how-to-read-diffs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> How to read diffs</h3>
+      <p>This is a ‘diff’, it shows you the difference between two versions of a text file. Everything added is highlighed in light blue. Anything deleted is shown in black with a strikethrough. Importantly it shows you the context, the bits that are not highlighted, and this helps you know where the changes should go.
+The first line shows the original file, and the second line shows the new file. If the names are different, it means the file has been renamed.</p>
+
+      <p>The <code class="language-plaintext highlighter-rouge">@@ ... @@</code> line shows the position in the file and how that changes, and often it will also show you the name of the function or in the case of Snakemake, the name of the rule that change appears in.</p>
+    </blockquote>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -9,6 +9,8 @@</span> rule fastqc:
+ 		"{sample}.fq.gz"
+ 	output:
+ 		"{sample}_fastqc.html"
+<span class="gi">+	conda:
++		"envs/fastqc.yaml"
+</span> 	shell:
+ 		"fastqc {input} --outdir fastqc/"
+
+@@ -21,6 +23,8 @@ rule trimmomatic:
+ 		o2="{sample}_2.trim.fq",
+ 		o1un="{sample}_1un.trim.fq",
+ 		o2un="{sample}_2un.trim.fq"
+<span class="gi">+	conda:
++		"envs/trimmomatic.yaml"
+</span> 	shell:
+ 		"trimmomatic PE "
+ 		"{input.r1} {input.r2} "
+<span class="p">@@ -34,6 +38,8 @@</span> rule indexgenome:
+ 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
+ 	output:
+ 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt"
+<span class="gi">+	conda:
++		"envs/bwa.yaml"
+</span> 	shell:
+ 		"bwa index {input}"
+
+@@ -44,6 +50,8 @@ rule align:
+ 		index="{genome}.fna.gz.bwt"
+ 	output:
+ 		"{genome}/{sample}.bam"
+<span class="gi">+	conda:
++		"envs/bwa.yaml"
+</span> 	shell:
+ 		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} | "
+ 		"samtools sort -O bam -o {output}"
+</code></pre></div>    </div>
+
+    <p>Here in the last two steps we used a single environment, this is a technical decision we made. We could have used a single environment for every step, but with conda the more packages you add, the more complicated it is for Conda to find a version of all of those packages that work together OK. So by isolating packages to single environments, you speed up the installation process. But in two out of four steps above, we have used a shared environment. This is because <code class="language-plaintext highlighter-rouge">bwa</code> was required in both, and one just needs the additional <code class="language-plaintext highlighter-rouge">samtools</code> package. For this there is no real technical reason, just a feeling of “it’s probably ok and won’t be too difficult to resolve”.</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="log-files">Log Files</h3>
+
+<p>Saving log files is key to making sure that you have a complete log of the execution of sotware. If you don’t save the log files, and you’re running a pipeline with 100 samples, it can be very easy to get confused about what went wrong and where. Unfortunately this is not a completely automatic process, and you’ll need to manually configure it:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-snakefile"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> <code class="language-plaintext highlighter-rouge">Snakefile</code></h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule indexgenome:
+	input:
+		"{sample}.fna.gz"
+	output:
+		"{sample}.fna.gz.bwt"
+	conda:
+		"envs/bwa.yaml"
+	log:
+		out="logs/bwa.index.{sample}.out",
+		err="logs/bwa.index.{sample}.err"
+	shell:
+		"bwa index {input} &gt;{log.out} 2&gt;{log.err}"
+</code></pre></div>  </div>
+</blockquote>
+
+<p>In the above rule we setup an <code class="language-plaintext highlighter-rouge">out</code> and <code class="language-plaintext highlighter-rouge">err</code> log file because every program that executes on Linux has two output streams known as <code class="language-plaintext highlighter-rouge">stderr</code> and <code class="language-plaintext highlighter-rouge">stdout</code>. By default these are just printed to your screen, and can be mixed together which is unhelpful when your program writes a lot of logging messages and you have to dig through it to find the one error message. So we setup the <code class="language-plaintext highlighter-rouge">out</code> and <code class="language-plaintext highlighter-rouge">err</code> files in a <code class="language-plaintext highlighter-rouge">logs/</code> directory with the name of the tool that will be executed as well.</p>
+
+<p>Additionally we need to change the <code class="language-plaintext highlighter-rouge">shell</code> step to redirect <code class="language-plaintext highlighter-rouge">stdout</code> and <code class="language-plaintext highlighter-rouge">stderr</code> to the appropriate files. Please see <a href="https://wiki.bash-hackers.org/howto/redirection_tutorial">this bash tutorial</a> for more information on how redirecting outputs works.</p>
+
+<p>But <strong>don’t just copy/paste</strong> the above example because:</p>
+
+<ul>
+  <li>Some tools produce output on stdout, e.g. <code class="language-plaintext highlighter-rouge">bwa mem .. | samtools</code>, there <code class="language-plaintext highlighter-rouge">bwa mem</code> is writing to <code class="language-plaintext highlighter-rouge">stdout</code> which is getting piped to <code class="language-plaintext highlighter-rouge">samtools</code>, so, you should not redirect its output into the logging file or your pipeline will break. There you would only want to redirect <code class="language-plaintext highlighter-rouge">2&gt;{log.err}</code>.</li>
+  <li>Sometimes you have multiple commands in a pipeline, these all should go to different log files or you will have more trouble figuring out where your error came from.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-log-files-to-every-step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add log files to every step</h3>
+
+  <p>Try and add log files everywhere (err and out where appropriate) to all of your rules. And use them in the <code class="language-plaintext highlighter-rouge">shell</code> sections as well. Also put your logs under the <code class="language-plaintext highlighter-rouge">logs/</code> folder!</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>This is again a diff, things in blue were added to the file named at the top, things with black highlight were deleted. Think “track changes” mode in Google Docs or Word, except harder to read.</p>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -1,14 +1,20 @@</span>
+ rule download:
+ 	output:
+ 		"{sample}.fq.gz"
+<span class="gi">+	log:
++		out="logs/download.{sample}.out",
++		err="logs/download.{sample}.err"
+</span> 	shell:
+<span class="gd">-		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output}"
+</span><span class="gi">+		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output} &gt;{log.out} 2&gt;{log.err}"
+</span>
+ rule download_genome:
+ 	output:
+ 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
+<span class="gi">+	log:
++		out="logs/download.out",
++		err="logs/download.err"
+</span> 	shell:
+<span class="gd">-		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
+</span><span class="gi">+		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output} &gt;{log.out} 2&gt;{log.err}"
+</span>
+ rule fastqc:
+ 	input:
+<span class="p">@@ -17,8 +23,11 @@</span> rule fastqc:
+ 		"{sample}_fastqc.html"
+ 	conda:
+ 		"envs/fastqc.yaml"
+<span class="gi">+	log:
++		out="logs/fastqc.{sample}.out",
++		err="logs/fastqc.{sample}.err"
+</span> 	shell:
+<span class="gd">-		"fastqc {input} --outdir fastqc/"
+</span><span class="gi">+		"fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
+</span>
+ rule trimmomatic:
+ 	input:
+<span class="p">@@ -31,13 +40,16 @@</span> rule trimmomatic:
+ 		o2un="{sample}_2un.trim.fq"
+ 	conda:
+ 		"envs/trimmomatic.yaml"
+<span class="gi">+	log:
++		out="logs/trimmomatic.{sample}.out",
++		err="logs/trimmomatic.{sample}.err"
+</span> 	shell:
+ 		"trimmomatic PE "
+ 		"{input.r1} {input.r2} "
+ 		"{output.o1} {output.o1un} "
+ 		"{output.o2} {output.o2un} "
+ 		"SLIDINGWINDOW:4:20 MINLEN:25 "
+<span class="gd">-		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15"
+</span><span class="gi">+		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 &gt;{log.out} 2&gt;{log.err}"
+</span>
+ rule indexgenome:
+ 	input:
+<span class="p">@@ -46,8 +58,11 @@</span> rule indexgenome:
+ 		"GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt"
+ 	conda:
+ 		"envs/bwa.yaml"
+<span class="gi">+	log:
++		out="logs/bwa.index.out",
++		err="logs/bwa.index.err"
+</span> 	shell:
+<span class="gd">-		"bwa index {input}"
+</span><span class="gi">+		"bwa index {input} &gt;{log.out} 2&gt;{log.err}"
+</span>
+ rule align:
+ 	input:
+<span class="p">@@ -58,6 +73,10 @@</span> rule align:
+ 		"{genome}/{sample}.bam"
+ 	conda:
+ 		"envs/bwa.yaml"
+<span class="gi">+	log:
++		bwaerr="logs/bwa.{genome}.{sample}.err",
++		out="logs/samtools.{genome}.{sample}.out",
++		err="logs/samtools.{genome}.{sample}.err"
+</span> 	shell:
+<span class="gd">-		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} | "
+-		"samtools sort -O bam -o {output}"
+</span><span class="gi">+		"bwa mem {wildcards.genome}.fna {input.r1} {input.r2} 2&gt;{log.bwaerr} | "
++		"samtools sort -O bam -o {output} &gt;{log.out} 2&gt;{log.err}"
+</span></code></pre></div>    </div>
+
+    <p>The last one is the most complicated. Here we have <code class="language-plaintext highlighter-rouge">bwa mem</code> which writes to <code class="language-plaintext highlighter-rouge">stdout</code>. We know that because a <code class="language-plaintext highlighter-rouge">|</code> character comes next which indicates we’re piping the output from one program to another, so there we want to store the error. However <code class="language-plaintext highlighter-rouge">samtools</code> has a <code class="language-plaintext highlighter-rouge">-o {output}</code> so we can infer from this that it writes to that output file by name. Anything it writes on <code class="language-plaintext highlighter-rouge">stdout</code> or <code class="language-plaintext highlighter-rouge">stderr</code> migth be important.</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="use-folders">Use Folders</h3>
+
+<p>You’ve seen a couple examples above but it’s best to use folders to help keep your data organised. Separate individual pipeline steps into different folders so you can more easily keep track of e.g. whether you’re working with trimmed or untrimmed data.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>What sort of folders would you establish for the example pipeline in this tutorial?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>One possible solution you could consider is:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Folder</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>envs</td>
+          <td>Conda environment files</td>
+        </tr>
+        <tr>
+          <td><span class="notranslate">reads</span></td>
+          <td>Your sequencing data</td>
+        </tr>
+        <tr>
+          <td>trim</td>
+          <td>Your sequences after they have been trimmed and cleaned</td>
+        </tr>
+        <tr>
+          <td>fastqc</td>
+          <td>The FastQC reports</td>
+        </tr>
+        <tr>
+          <td>alignments</td>
+          <td>All of your final output alignments</td>
+        </tr>
+        <tr>
+          <td>reference</td>
+          <td>Any reference data, indicies, etc.</td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-do-it"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Do it!</h3>
+  <p>Update your pipeline to have all of datasets stored nicely in folders.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/Snakefile b/Snakefile
+index 59b983c..31ebdff 100644
+</span><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -1,6 +1,6 @@</span>
+ rule download:
+ 	output:
+<span class="gd">-		"{sample}.fq.gz"
+</span><span class="gi">+		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+</span> 	log:
+ 		out="logs/download.{sample}.out",
+ 		err="logs/download.{sample}.err"
+<span class="p">@@ -9,7 +9,7 @@</span> rule download:
+
+ rule download_genome:
+ 	output:
+<span class="gd">-		"GCA_000017985.1_ASM1798v1_genomic.fa.gz"
+</span><span class="gi">+		"reference/GCA_000017985.1_ASM1798v1_genomic.fa.gz"
+</span> 	log:
+ 		out="logs/download.{sample}.out",
+ 		err="logs/download.{sample}.err"
+<span class="p">@@ -18,9 +18,9 @@</span> rule download_genome:
+
+ rule fastqc:
+ 	input:
+<span class="gd">-		"{sample}.fq"
+</span><span class="gi">+		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+</span> 	output:
+<span class="gd">-		"{sample}_fastqc.html"
+</span><span class="gi">+		"fastqc/{sample}_fastqc.html"
+</span> 	conda:
+ 		"envs/fastqc.yaml"
+ 	log:
+<span class="p">@@ -31,13 +31,13 @@</span> rule fastqc:
+
+ rule trimmomatic:
+ 	input:
+<span class="gd">-		r1="{sample}_1.fq",
+-		r2="{sample}_2.fq"
+</span><span class="gi">+		r1="<span class="notranslate">reads</span>/{sample}_1.fq",
++		r2="<span class="notranslate">reads</span>/{sample}_2.fq"
+</span> 	output:
+<span class="gd">-		o1="{sample}_1.trim.fq",
+-		o2="{sample}_2.trim.fq",
+-		o1un="{sample}_1un.trim.fq",
+-		o2un="{sample}_2un.trim.fq"
+</span><span class="gi">+		o1="trim/{sample}_1.trim.fq",
++		o2="trim/{sample}_2.trim.fq",
++		o1un="trim/{sample}_1un.trim.fq",
++		o2un="trim/{sample}_2un.trim.fq"
+</span> 	conda:
+ 		"envs/trimmomatic.yaml"
+ 	log:
+<span class="p">@@ -53,9 +53,9 @@</span> rule trimmomatic:
+
+ rule indexgenome:
+ 	input:
+<span class="gd">-		"GCA_000017985.1_ASM1798v1_genomic.fna"
+</span><span class="gi">+		"reference/GCA_000017985.1_ASM1798v1_genomic.fa"
+</span> 	output:
+<span class="gd">-		"GCA_000017985.1_ASM1798v1_genomic.fna.bwt"
+</span><span class="gi">+		"reference/GCA_000017985.1_ASM1798v1_genomic.fa.bwt"
+</span> 	conda:
+ 		"envs/bwa.yaml"
+ 	log:
+<span class="p">@@ -66,11 +66,11 @@</span> rule indexgenome:
+
+ rule align:
+ 	input:
+<span class="gd">-		r1="{sample}_1.trim.fq",
+-		r2="{sample}_1.trim.fq",
+-		index="{genome}.fna.bwt"
+</span><span class="gi">+		r1="trim/{sample}_1.trim.fq",
++		r2="trim/{sample}_1.trim.fq",
++		index="reference/{genome}.fna.bwt"
+</span> 	output:
+<span class="gd">-		"{genome}/{sample}.bam"
+</span><span class="gi">+		"alignments/{genome}/{sample}.bam"
+</span> 	conda:
+ 		"envs/bwa.yaml"
+ 	log:
+<span class="p">@@ -78,5 +78,5 @@</span> rule align:
+ 		out="logs/samtools.{genome}.{sample}.out",
+ 		err="logs/samtools.{genome}.{sample}.err"
+ 	shell:
+<span class="gd">-		"bwa mem {wildcard.genome}.fna {input.r1} {input.r2} 2&gt;{log.bwaerr} | "
+</span><span class="gi">+		"bwa mem reference/{wildcards.genome}.fna.gz {input.r1} {input.r2} 2&gt;{log.bwaerr} | "
+</span> 		"samtools sort -O bam -o {output} &gt;{log.out} 2&gt;{log.err}"
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>Notice how while updating data location, we only had to update the input and output boxes of the Snakefile, we didn’t need to change any commands because there we used <code class="language-plaintext highlighter-rouge">{input}</code> or <code class="language-plaintext highlighter-rouge">{output}</code> which are automatically templated for us. Except for the last command where we had to use a wildcard and manually construct the path to work around the issue of ‘fake’ inputs where the tool expected a filename that was the common subset of all of the files it would produce.</p>
+
+<h3 id="set-a-default-task">Set a Default Task</h3>
+
+<p>In the Makefile we had an <code class="language-plaintext highlighter-rouge">all</code> rule which was the first and default action to take. Let’s reproduce that.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-an-all-task"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add an all task</h3>
+  <p>It should build <code class="language-plaintext highlighter-rouge">alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam</code></p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We add this to the very top of our file.</p>
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -1,3 +1,7 @@</span>
+<span class="gi">+rule all:
++	input:
++		"alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam"
++
+</span> rule download:
+ 	output:
+ 		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+</code></pre></div>    </div>
+
+    <blockquote class="tip">
+      <h3 id="tip-why-input-and-not-output"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why Input and not Output?</h3>
+      <p>Because rule all is taking in some other outputs as an input to it. If we used outputs, rule all would do nothing (it has no pre-requisite steps), and since it produces nothing by itself, snakemake would see that the outputs you expected have not been created and flag it as an error.</p>
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="final-pipeline">Final Pipeline</h2>
+
+<p>This is starting to look like a pretty good <span class="notranslate">workflow</span>! Let’s preview how it will run:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ snakemake -np
+</code></pre></div>  </div>
+</blockquote>
+<blockquote class="code-out code-max-300">
+  <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
+Job stats:
+job                count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+---------------  -------  -------------  -------------
+align                  1              1              1
+all                    1              1              1
+download               2              1              1
+download_genome        1              1              1
+indexgenome            1              1              1
+trimmomatic            1              1              1
+total                  7              1              1
+
+
+[Fri Oct  8 16:59:39 2021]
+rule download:
+    output: <span class="notranslate">reads</span>/SRR2584863_2.fq.gz
+    log: logs/download.SRR2584863_2.out, logs/download.SRR2584863_2.err
+    jobid: 4
+    wildcards: sample=SRR2584863_2
+    resources: tmpdir=/tmp
+
+wget https://zenodo.org/record/5562251/SRR2584863_2.fq.gz -O <span class="notranslate">reads</span>/SRR2584863_2.fq.gz &gt;logs/download.SRR2584863_2.out 2&gt;logs/download.SRR2584863_2.err
+
+[Fri Oct  8 16:59:39 2021]
+rule download:
+    output: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz
+    log: logs/download.SRR2584863_1.out, logs/download.SRR2584863_1.err
+    jobid: 3
+    wildcards: sample=SRR2584863_1
+    resources: tmpdir=/tmp
+
+wget https://zenodo.org/record/5562251/SRR2584863_1.fq.gz -O <span class="notranslate">reads</span>/SRR2584863_1.fq.gz &gt;logs/download.SRR2584863_1.out 2&gt;logs/download.SRR2584863_1.err
+
+[Fri Oct  8 16:59:39 2021]
+rule download_genome:
+    output: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+    log: logs/download.out, logs/download.err
+    jobid: 6
+    resources: tmpdir=/tmp
+
+wget https://zenodo.org/record/5562251/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz &gt;logs/download.out 2&gt;logs/download.err
+
+[Fri Oct  8 16:59:39 2021]
+rule trimmomatic:
+    input: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz, <span class="notranslate">reads</span>/SRR2584863_2.fq.gz
+    output: trim/SRR2584863_1.trim.fq, trim/SRR2584863_2.trim.fq, trim/SRR2584863_1un.trim.fq, trim/SRR2584863_2un.trim.fq
+    log: logs/trimmomatic.SRR2584863.out, logs/trimmomatic.SRR2584863.err
+    jobid: 2
+    wildcards: sample=SRR2584863
+    resources: tmpdir=/tmp
+
+trimmomatic PE <span class="notranslate">reads</span>/SRR2584863_1.fq.gz <span class="notranslate">reads</span>/SRR2584863_2.fq.gz trim/SRR2584863_1.trim.fq trim/SRR2584863_1un.trim.fq trim/SRR2584863_2.trim.fq trim/SRR2584863_2un.trim.fq SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 &gt;logs/trimmomatic.SRR2584863.out 2&gt;logs/trimmomatic.SRR2584863.err
+
+[Fri Oct  8 16:59:39 2021]
+rule indexgenome:
+    input: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+    output: reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
+    log: logs/bwa.index.out, logs/bwa.index.err
+    jobid: 5
+    resources: tmpdir=/tmp
+
+bwa index reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz &gt;logs/bwa.index.out 2&gt;logs/bwa.index.err
+
+[Fri Oct  8 16:59:39 2021]
+rule align:
+    input: trim/SRR2584863_1.trim.fq, trim/SRR2584863_1.trim.fq, reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt
+    output: alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam
+    log: logs/bwa.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err, logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.out, logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err
+    jobid: 1
+    wildcards: genome=GCA_000017985.1_ASM1798v1_genomic, sample=SRR2584863
+    resources: tmpdir=/tmp
+
+bwa mem reference/GCA_000017985.1_ASM1798v1_genomic.fna.gz trim/SRR2584863_1.trim.fq trim/SRR2584863_1.trim.fq 2&gt;logs/bwa.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err | samtools sort -O bam -o alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam &gt;logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.out 2&gt;logs/samtools.GCA_000017985.1_ASM1798v1_genomic.SRR2584863.err
+
+[Fri Oct  8 16:59:39 2021]
+localrule all:
+    input: alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam
+    jobid: 0
+    resources: tmpdir=/tmp
+
+Job stats:
+job                count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+---------------  -------  -------------  -------------
+align                  1              1              1
+all                    1              1              1
+download               2              1              1
+download_genome        1              1              1
+indexgenome            1              1              1
+trimmomatic            1              1              1
+total                  7              1              1
+
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Gosh that’s a lot of output! Let’s build the <abbr title="Directed Acyclic Graph">DAG</abbr> to see a more concise representation of what is going to happen:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake <span class="nt">--dag</span> | dot <span class="nt">-Tsvg</span> <span class="o">&gt;</span> out.svg
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <p><img src="../../images/snakemake.dag.svg" alt="Image of the snakemake dag. Conspicuously missing is FastQC jobs!" loading="lazy" /></p>
+</blockquote>
+
+<p>But wait, where is FastQC? It’s missing! 😱 Let’s summarize the transition from a Makefile to a Snakemake file and then we’ll cover the case of the missing FastQC.</p>
+
+<h2 id="why-snakemake">Why Snakemake</h2>
+
+<p>So now comes the question, why Snakemake? <strong>Better for science</strong>. While it is quite similar to good old <code class="language-plaintext highlighter-rouge">make</code>, Snakemake adds several features that are important for science like dependency management with Conda/Docker/Singularity, and better execution on HPCs and Clusters.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Make</th>
+      <th>Snakemake</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Language style</td>
+      <td>Generic rules are written which say how to do the operation, but not on which data</td>
+      <td>Same</td>
+    </tr>
+    <tr>
+      <td>Partial re-run</td>
+      <td>Only the missing files are created</td>
+      <td>Same</td>
+    </tr>
+    <tr>
+      <td>How it is invoked</td>
+      <td><code class="language-plaintext highlighter-rouge">make</code></td>
+      <td><code class="language-plaintext highlighter-rouge">snakemake</code></td>
+    </tr>
+    <tr>
+      <td>Running with different data?</td>
+      <td><code class="language-plaintext highlighter-rouge">make read1111.sam read2222.sam</code></td>
+      <td><code class="language-plaintext highlighter-rouge">snakemake read1111.sam read2222.sam</code></td>
+    </tr>
+    <tr>
+      <td>Paralellisation?</td>
+      <td><code class="language-plaintext highlighter-rouge">make -j 8</code></td>
+      <td><code class="language-plaintext highlighter-rouge">snakemake --cores 8</code></td>
+    </tr>
+    <tr>
+      <td>Filename</td>
+      <td><code class="language-plaintext highlighter-rouge">Makefile</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Snakefile</code></td>
+    </tr>
+    <tr>
+      <td>Dependencies</td>
+      <td>Up to you to manage</td>
+      <td>Built-in dependency management with Conda</td>
+    </tr>
+    <tr>
+      <td>Multiple output files per step</td>
+      <td>A bit tricky</td>
+      <td>Incredibly easy</td>
+    </tr>
+    <tr>
+      <td>Cluster/HPC Friendliness</td>
+      <td>Everything is manual</td>
+      <td>Very good support</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="the-case-of-the-missing-fastqc">The Case of the Missing FastQC</h2>
+
+<p>If you were reading closely above you’ve noticed we mention several times:</p>
+
+<blockquote class="quote">
+  <p>outputs are only created when they’re needed</p>
+</blockquote>
+
+<p>This meant that if a file already existed on disk, Make and Snakemake would not re-run that step. Smart! But it <em>also</em> meant that if your <code class="language-plaintext highlighter-rouge">all</code> rule did not mention a file, or if any of the tasks that were required to make the final output didn’t include or use the output of FastQC, then that file would not be created.</p>
+
+<p>So naturally when we request the final <code class="language-plaintext highlighter-rouge">bam</code> file, and none of the steps leading up to it need that FastQC output, of course it doesn’t run. To fix that, we need to declare FastQC as one of our pipeline’s outputs. Let’s look at how to solve this.</p>
+
+<h3 id="expand">expand</h3>
+
+<p>You can use this function in inputs and outputs to help you list all expected files, without having to write out or hardcode that list of files. Here we define a <code class="language-plaintext highlighter-rouge">sorted_<span class="notranslate">reads</span>/{sample}.bam</code> and then this is repeated for every value of samples</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-snakemake-code"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Snakemake Code</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SAMPLES = ["a", "b", "c"]
+expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMPLES)
+</code></pre></div>  </div>
+</blockquote>
+<blockquote class="code-out">
+  <h3 id="code-out-snakemake-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Snakemake Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["sorted_<span class="notranslate">reads</span>/a.bam", "sorted_<span class="notranslate">reads</span>/b.bam", "sorted_<span class="notranslate">reads</span>/c.bam"]
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This can also be used with multiple variables:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>expand("sorted_<span class="notranslate">reads</span>/{sample}.{replicate}.bam", sample=SAMPLES, replicate=[0, 1])
+</code></pre></div></div>
+
+<p>We should use something exactly like this for our samples. We can have a <code class="language-plaintext highlighter-rouge">SAMPLES</code> variable representing our final output bam files we wish to generate, and then instead of <code class="language-plaintext highlighter-rouge">replicates</code> we’ll have <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> or so. First let’s make the change to use the <code class="language-plaintext highlighter-rouge">SAMPLES</code> and expand just for our final output.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-update-all-task-to-use-expand"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Update <code class="language-plaintext highlighter-rouge">all</code> task to use expand</h3>
+  <p>And while you’re at it, define <code class="language-plaintext highlighter-rouge">SAMPLES</code> to be a list (like in python) with two elements:</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">SRR2584863</code></li>
+    <li><code class="language-plaintext highlighter-rouge">SRR2589044</code></li>
+  </ul>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -1,6 +1,8 @@</span>
+<span class="gi">+SAMPLES = ['SRR2584863', 'SRR2589044']
++
+</span> rule all:
+ 	input:
+<span class="gd">-		"alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam"
+</span><span class="gi">+		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+</span>
+ rule download:
+ 	output:
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-the-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run the pipeline</h3>
+  <p>Run <code class="language-plaintext highlighter-rouge">snakemake -c4 --use-conda</code>. Did it work?</p>
+</blockquote>
+
+<h3 id="adding-all-fastqc-reports">Adding all FastQC reports</h3>
+
+<p>Now that you’ve done one expand, let’s do a more complicated one. The expand function can take multiple variables which we can use to expand both our samples AND our expected extensions</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-fastqc-outputs-to-all"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add FastQC outputs to <code class="language-plaintext highlighter-rouge">all</code></h3>
+  <p>Which file extensions do we expect to see? (e.g. <code class="language-plaintext highlighter-rouge">_1.fastqc</code>) Make a single expand that uses two variables, <code class="language-plaintext highlighter-rouge">{sample}</code> and <code class="language-plaintext highlighter-rouge">{ext}</code>? Add an expand that uses our previously defined <code class="language-plaintext highlighter-rouge">SAMPLES</code> and now also a list of the extensions we expect.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -2,7 +2,8 @@</span> SAMPLES = ['SRR2584863', 'SRR2589044']
+
+ rule all:
+ 	input:
+<span class="gd">-		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
+</span><span class="gi">+		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
++		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+</span>
+ rule download:
+ 	output:
+</code></pre></div>    </div>
+
+    <blockquote class="tip">
+      <h3 id="tip-why-not-_1fastqchtml"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why not <code class="language-plaintext highlighter-rouge">_1.fastqc.html</code>?</h3>
+
+      <p>There’s not always a good answer for this, some tools will mangle names in unexpected ways. The best way to discover this in a <abbr title="Scientific Workflow Management System">SciWMS</abbr> like Snakemake is to just write what you expect, and run it, and see how it fails. Here the filenames were not as expected, so, we updated the <code class="language-plaintext highlighter-rouge">ext</code> to use <code class="language-plaintext highlighter-rouge">_1_fastqc.html</code> and everything works. This was done by <code class="language-plaintext highlighter-rouge">fastqc</code> so if we really wanted the other style of naming we could read the FastQC manual to maybe determine why.</p>
+
+      <p>Here Snakemake failed, complaining “the output files weren’t created”, but we could ee they were, just not with the expected filename.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>Success! We’ve got a bunch of FastQC reports. But something is wrong, we only have the pre-trimming reports, none of the post-trimming reports. You can see why in our FastQC rule:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule fastqc:
+	input:
+		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+</code></pre></div></div>
+
+<p>This rule only knows how to input files from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span></code> directory. We have some options:</p>
+
+<ol>
+  <li>We can probably most easily solve this by simply replacing our <code class="language-plaintext highlighter-rouge">trimmed</code> folder with the <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span></code> folder and making them the same. This way all fastq files will be in the same place, but perhaps it will be less clear later which files we can delete if we need to clean up. Right now we know we can remove the <code class="language-plaintext highlighter-rouge">trimmed</code> folder if we need some space, and our pipeline can re-create the data. If we mixed them, it would be slightly more complicated.</li>
+  <li>
+    <p>We could probably use <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span></code> as a wildcard (like our <code class="language-plaintext highlighter-rouge">{genome}</code> or <code class="language-plaintext highlighter-rouge">{sample}</code>), but here we’d have to have some additional complexity as a result, like the folder name would en up part of the <code class="language-plaintext highlighter-rouge">output</code> name, as is required by <code class="language-plaintext highlighter-rouge">Snakemake</code> to prevent accidental conflicts.</p>
+
+    <blockquote class="tip">
+      <h3 id="tip-how-would-this-look"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How would this look?</h3>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--- a/Snakefile
++++ b/Snakefile
+@@ -16,16 +16,16 @@ rule download:
+
+ rule fastqc:
+        input:
+-               "<span class="notranslate">reads</span>/{sample}.fq.gz"
++               "{folder}/{sample}.fq.gz"
+        output:
+-               "fastqc/{sample}_fastqc.html"
++               "fastqc/{folder}-{sample}_fastqc.html"
+        conda:
+                "envs/fastqc.yaml"
+        log:
+-               out="logs/fastqc.{sample}.out",
+-               err="logs/fastqc.{sample}.err"
++               out="logs/fastqc.{folder}-{sample}.out",
++               err="logs/fastqc.{folder}-{sample}.err"
+        shell:
+                "fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
+</code></pre></div>      </div>
+    </blockquote>
+  </li>
+  <li>Or, we could duplicate the fastqc rule, and have a separate rule for <code class="language-plaintext highlighter-rouge">fastqc-trimmed</code> that also outputs to a separate folder</li>
+</ol>
+
+<p>So with that said, let’s go with option three, duplicate our fastqc rule to have a <code class="language-plaintext highlighter-rouge">fastqc-trimmed</code> version</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-fastqc-outputs-to-all-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add FastQC outputs to <code class="language-plaintext highlighter-rouge">all</code></h3>
+  <p>Copy the rule and rename it appropriately, changing all of the variables where necessary to take in trimmed fastq files.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -3,7 +3,8 @@</span> SAMPLES = ['SRR2584863', 'SRR2589044']
+ rule all:
+ 	input:
+ 		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+<span class="gd">-		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
+</span><span class="gi">+		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
++		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
+</span>
+ rule download:
+ 	output:
+<span class="p">@@ -36,6 +37,19 @@</span> rule fastqc:
+ 	shell:
+ 		"fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
+
++rule fastqc_trim:
+<span class="gi">+	input:
++		"<span class="notranslate">reads</span>/{sample}.fq.gz"
++	output:
++		"fastqc/{sample}_fastqc.html"
++	conda:
++		"envs/fastqc.yaml"
++	log:
++		out="logs/fastqc.{sample}.out",
++		err="logs/fastqc.{sample}.err"
++	shell:
++		"fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
++
+</span> rule trimmomatic:
+ 	input:
+ 		r1="<span class="notranslate">reads</span>/{sample}_1.fq.gz",
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<p>Ok! That’s hopefully went successfully. Run your pipeline to check.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li>Dry-run snakemake
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -np
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-out-output-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
+AmbiguousRuleException:
+Rules fastqc_trim and fastqc are ambiguous for the file fastqc/SRR2584863_1_fastqc.html.
+Consider starting rule output with a unique prefix, constrain your wildcards, or use the ruleorder directive.
+Wildcards:
+	fastqc_trim: sample=SRR2584863_1
+	fastqc: sample=SRR2584863_1
+Expected input files:
+	fastqc_trim: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz
+	fastqc: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz
+Expected output files:
+	fastqc_trim: fastqc/SRR2584863_1_fastqc.html
+	fastqc: fastqc/SRR2584863_1_fastqc.html
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Uhoh! There was an error. If we read the error message we see <strong>Rules fastqc_trim and fastqc are ambiguous for the file fastqc/SRR2584863_1_fastq</strong>, because both rules produce the same file. We should rename the folder, <code class="language-plaintext highlighter-rouge">fastqc-trimmed</code>.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -28,7 +28,7 @@</span> rule fastqc:
+ 	input:
+ 		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+ 	output:
+<span class="gd">-		"fastqc/{sample}_fastqc.html"
+</span><span class="gi">+		"fastqc-trim/{sample}_fastqc.html"
+</span> 	conda:
+ 		"envs/fastqc.yaml"
+ 	log:
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Re-run the dry-run.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -np
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+Job stats:
+job         count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+--------  -------  -------------  -------------
+all             1              1              1
+download        4              1              1
+fastqc          8              1              1
+total          13              1              1
+
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>That looks good!</li>
+  </ol>
+</blockquote>
+
+<p>Now that we’ve got a pipeline successfully completing the dry-run, let’s try it again.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-the-pipeline-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run the pipeline!</h3>
+  <ol>
+    <li>
+      <p>Run the pipeline</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake --use-conda -c4
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in rule download:
+Removing output files of failed job download since they might be corrupted:
+<span class="notranslate">reads</span>/SRR2584863_2un.fq.gz
+    jobid: 24
+    output: <span class="notranslate">reads</span>/SRR2589044_1un.fq.gz
+    log: logs/download.SRR2589044_1un.out, logs/download.SRR2589044_1un.err (check log file(s) for error message)
+    shell:
+        wget https://zenodo.org/record/5562251/SRR2589044_1un.fq.gz -O <span class="notranslate">reads</span>/SRR2589044_1un.fq.gz &gt;logs/download.SRR2589044_1un.out 2&gt;logs/download.SRR2589044_1un.err
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job download since they might be corrupted:
+<span class="notranslate">reads</span>/SRR2589044_1un.fq.gz
+[Fri Oct  8 17:15:46 2021]
+Error in rule download:
+    jobid: 26
+    output: <span class="notranslate">reads</span>/SRR2589044_2un.fq.gz
+    log: logs/download.SRR2589044_2un.out, logs/download.SRR2589044_2un.err (check log file(s) for error message)
+    shell:
+        wget https://zenodo.org/record/5562251/SRR2589044_2un.fq.gz -O <span class="notranslate">reads</span>/SRR2589044_2un.fq.gz &gt;logs/download.SRR2589044_2un.out 2&gt;logs/download.SRR2589044_2un.err
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job download since they might be corrupted:
+<span class="notranslate">reads</span>/SRR2589044_2un.fq.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
+Job Missing files after 5 seconds:
+fastqc-trim/SRR2589044_1_fastqc.html
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Job id: 21 completed successfully, but some output files are missing. 21
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Now it is complaining that it cannot download the requested files, we didn’t even want to download new read files, we should have used the files from the <code class="language-plaintext highlighter-rouge">trimmed</code> folder. Let’s fix our rule again.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -26,7 +26,7 @@</span> rule download_genome:
+
+ rule fastqc:
+ 	input:
+<span class="gd">-		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+</span><span class="gi">+		"trim/{sample}.fq.gz"
+</span> 	output:
+ 		"fastqc-trim/{sample}_fastqc.html"
+ 	conda:
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>And dry-run</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -np
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-in-cli-8"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
+MissingInputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
+Missing input files for rule fastqc:
+trim/SRR2584863_1.fq.gz
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Ok, now it says it can’t find the input file. The <code class="language-plaintext highlighter-rouge">.gz</code> suffix wasn’t part of the <code class="language-plaintext highlighter-rouge">trim</code> output filenames, and if we look there they all have <code class="language-plaintext highlighter-rouge">.trim.fq</code> as the suffix. Let’s use that.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -26,7 +26,7 @@</span> rule download_genome:
+
+ rule fastqc:
+ 	input:
+<span class="gd">-		"trim/{sample}.fq.gz"
+</span><span class="gi">+		"trim/{sample}.trim.fq"
+</span> 	output:
+ 		"fastqc-trim/{sample}_fastqc.html"
+ 	conda:
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>And finally? Success?</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-9"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake --use-conda -c4
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-in-cli-10"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   raise IOError(
+OSError: Missing files after 5 seconds:
+fastqc-trim/SRR2589044_1_fastqc.html
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+ File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/scheduler.py", line 529, in _finish_jobs
+   self.get_executor(job).handle_job_success(job)
+ File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 608, in handle_job_success
+   super().handle_job_success(job)
+ File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 265, in handle_job_success
+   job.postprocess(
+ File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/jobs.py", line 1011, in postprocess
+   self.dag.check_and_touch_output(
+ File "/home/hxr/arbeit/deps/miniconda3.9/envs/gtn-test/lib/python3.9/site-packages/snakemake/dag.py", line 500, in check_and_touch_output
+   raise MissingOutputException(
+snakemake.exceptions.MissingOutputException: Job Missing files after 5 seconds:
+fastqc-trim/SRR2589044_1_fastqc.html
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Job id: 19 completed successfully, but some output files are missing. 19
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Shoot! No, ok. If we read this message it says <strong>Job Missing files after 5 seconds</strong> which means it couldn’t find the file. Specifically it tells us it is missing <code class="language-plaintext highlighter-rouge">fastqc-trim/SRR2589044_1_fastqc.html</code> and that makes sense, since all of our output fastqc reports had the full input name, so those should have <code class="language-plaintext highlighter-rouge">trim</code> in them too.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-filesystem-latency"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Filesystem Latency?</h3>
+        <p>On servers with shared directories using Network File Systems, it can happen that when you run a job on one machine, it may take time for the files to be visible on other machines, it isn’t instantaneous. In our case this is <strong>not</strong> the issue.</p>
+      </blockquote>
+    </li>
+    <li>Let’s see what files are available, so we know how to fix the command.
+      <blockquote class="code-in">
+        <h3 id="code-in-cli-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls fastqc-trim
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-in-cli-12"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> CLI</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR2584863_1.trim_fastqc.html    SRR2584863_2.trim_fastqc.html
+SRR2589044_1.trim_fastqc.html    SRR2589044_2.trim_fastqc.html
+SRR2584863_1.trim_fastqc.zip     SRR2584863_2.trim_fastqc.zip
+SRR2589044_1.trim_fastqc.zip     SRR2589044_2.trim_fastqc.zip
+SRR2584863_1un.trim_fastqc.html  SRR2584863_2un.trim_fastqc.html
+SRR2589044_1un.trim_fastqc.html  SRR2589044_2un.trim_fastqc.html
+SRR2584863_1un.trim_fastqc.zip   SRR2584863_2un.trim_fastqc.zip
+SRR2589044_1un.trim_fastqc.zip   SRR2589044_2un.trim_fastqc.zip
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>So we need to adjust our <code class="language-plaintext highlighter-rouge">all</code> rule where we requested the files with the wrong names.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -4,7 +4,7 @@</span> rule all:
+ 	input:
+ 		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+ 		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
+<span class="gd">-		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
+</span><span class="gi">+		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.html", "_2.trim_fastqc.html", "_1un.trim_fastqc.html", "_2un.trim_fastqc.html"])
+</span>
+ rule download:
+ 	output:
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Maybe it works now? Yes! Huzzah!</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Fri Oct  8 17:25:41 2021]
+Finished job 0.
+15 of 15 steps (100%) done
+Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snakemake.log
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This interactive debugging of your pipeline is <strong>very common</strong>, if you need to write a pipeline expect to go through a development cycle like this, where you make a change or write a rule, dry-run, and run, and find errors that you need to fix.</p>
+
+<p>This is why we always work with test datasets to confirm our pipeline works first, and then we scale up to big data.</p>
+
+<h3 id="multiqc">MultiQC</h3>
+
+<p>As a last step, we’ll summarize all of the FastQC files. With all of the expands at the top, we’re now receiving 4 trimmed FastQC reports plus 2 untrimmed FastQC reports per sample which is a lot of data to go through! So we can use MultiQC to aggregate all of these files and generate a single summary file which makes analysis much easier.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-the-multiqc-step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add the MultiQC step</h3>
+  <p>The command we need to run is: <code class="language-plaintext highlighter-rouge">multiqc --outdir multiqc *fastqc.zip</code>. You cannot use wildcards like that in Snakemake, so write this out as a proper rule that accepts all of the same inputs as you used in the <code class="language-plaintext highlighter-rouge">rule all</code>. It outputs a file named <code class="language-plaintext highlighter-rouge">multiqc/multiqc_report.html</code> (set by the <code class="language-plaintext highlighter-rouge">--outdir</code> flag)</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>You’ll notice that we now need to replace our <code class="language-plaintext highlighter-rouge">.html</code> outputs from the FastQC rules with the <code class="language-plaintext highlighter-rouge">.zip</code> outputs which we need instead. We didn’t have to update the command line, because the output file name was thankfully not part of it.</p>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
+</span><span class="gi">+++ b/Snakefile
+</span><span class="p">@@ -3,8 +3,7 @@</span> SAMPLES = ['SRR2584863', 'SRR2589044']
+ rule all:
+ 	input:
+ 		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
+<span class="gd">-		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
+-		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.html", "_2.trim_fastqc.html", "_1un.trim_fastqc.html", "_2un.trim_fastqc.html"])
+</span><span class="gi">+		"multiqc/multiqc_report.html"
+</span>
+ rule download:
+ 	output:
+<span class="p">@@ -28,7 +27,7 @@</span> rule fastqc:
+ 	input:
+ 		"trim/{sample}.trim.fq"
+ 	output:
+<span class="gd">-		"fastqc-trim/{sample}_fastqc.html"
+</span><span class="gi">+		"fastqc-trim/{sample}_fastqc.zip"
+</span> 	conda:
+ 		"envs/fastqc.yaml"
+ 	log:
+<span class="p">@@ -41,7 +40,7 @@</span> rule fastqc_trim:
+ 	input:
+ 		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+ 	output:
+<span class="gd">-		"fastqc/{sample}_fastqc.html"
+</span><span class="gi">+		"fastqc/{sample}_fastqc.zip"
+</span> 	conda:
+ 		"envs/fastqc.yaml"
+ 	log:
+<span class="p">@@ -50,6 +49,21 @@</span> rule fastqc_trim:
+ 	shell:
+ 		"fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
+
++rule multiqc:
+<span class="gi">+	input:
++		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.zip", "_2_fastqc.zip"]),
++		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.zip", "_2.trim_fastqc.zip", "_1un.trim_fastqc.zip", "_2un.trim_fastqc.zip"])
++	output:
++		"multiqc/multiqc_report.html"
++	conda:
++		"envs/multiqc.yaml"
++	log:
++		out="logs/multiqc.out",
++		err="logs/multiqc.err"
++	shell:
++		"multiqc --outdir multiqc {input} &gt;{log.out} 2&gt;{log.err}"
++
++
+</span> rule trimmomatic:
+ 	input:
+ 		r1="<span class="notranslate">reads</span>/{sample}_1.fq.gz",
+</code></pre></div>    </div>
+
+    <p>And your new <code class="language-plaintext highlighter-rouge">envs/multiqc.yaml</code> should look like this:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">channels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">conda-forge</span>
+  <span class="pi">-</span> <span class="s">bioconda</span>
+  <span class="pi">-</span> <span class="s">defaults</span>
+<span class="na">dependencies</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">multiqc=1.11</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>And with that, you should have a working pipeline! Test it out.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-the-pipeline-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run the pipeline</h3>
+  <p>Run <code class="language-plaintext highlighter-rouge">snakemake -c4 --use-conda</code></p>
+</blockquote>
+
+<p>Let’s check our <abbr title="Directed Acyclic Graph">DAG</abbr> again</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake <span class="nt">--dag</span> | dot <span class="nt">-Tsvg</span> <span class="o">&gt;</span> out.svg
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-5"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <p><img src="../../images/snakemake.dag2.svg" alt="Image of the snakemake dag. FastQC and MultiQC are now there which add about 7 new boxes and a bunch of new arrows. This makes the graph very wide and quite hard to read." loading="lazy" /></p>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>With this you’ve made a real pipeline in Snakemake and hopefully learned a bit about how to manage jobs on the command line. If you’re going to work at the command line to do your bioinformatics or other analyses, this (or another <abbr title="Scientific Workflow Management System">SciWMS</abbr>) is the way to do it! They all have pros and cons which you should evaluate.</p>
+
+<p>But for those of you who have done <span class="notranslate">Galaxy</span> work before, you’ll notice there is a <strong>lot</strong> of overhead, things you need to take care of yourself. Is the program installed, are the dependencies correct, how many cores would you like this job to use, what is precisely the command line you would like to run. How would you like to batch your data, by sample? By another method? And this is one of the major benefits of using a system like <span class="notranslate">Galaxy</span>, it abstracts away all of the command line, all of the resource management for you. Our administrators check things like how much memory each step should have, or how many cores, the tool developers work to make sure the interface has all of the options that are available on the command line. You get less control over your data and the processes, but in exchange you don’t need to worry about these intricate details of low level bioinformatics.</p>
+
+<p>Let’s do a final comparison table for the systems, and since this is the <span class="notranslate">Galaxy</span> Training Network we’ll include <span class="notranslate">Galaxy</span> in the comparison. Here we categorise features as ‘manual’ if you can accomplish those features with manual work, ‘automatic’ if they’re built in parts of the system, <code class="language-plaintext highlighter-rouge">none</code> if the concept doesn’t really apply</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Bash</th>
+      <th>Make</th>
+      <th>Snakemake</th>
+      <th><span class="notranslate">Galaxy</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Language style</td>
+      <td>Line-by-line</td>
+      <td>Custom Generic Rules</td>
+      <td>Custom Generic Rules</td>
+      <td>Pre-built rules via <span class="notranslate">Galaxy</span> Tools</td>
+    </tr>
+    <tr>
+      <td>Partial re-run</td>
+      <td>Manual</td>
+      <td>Manual</td>
+      <td>Automatic</td>
+      <td>Automatic (but requires a user preference.)</td>
+    </tr>
+    <tr>
+      <td>How it is invoked</td>
+      <td><code class="language-plaintext highlighter-rouge">bash script.sh</code></td>
+      <td><code class="language-plaintext highlighter-rouge">make</code></td>
+      <td><code class="language-plaintext highlighter-rouge">snakemake</code></td>
+      <td>Clicking ‘execute’</td>
+    </tr>
+    <tr>
+      <td>Running with different data?</td>
+      <td>Manual</td>
+      <td>Automatic</td>
+      <td>Automatic</td>
+      <td>Automatic</td>
+    </tr>
+    <tr>
+      <td>Paralellisation?</td>
+      <td>Manual</td>
+      <td>Automatic</td>
+      <td>Automatic</td>
+      <td>Automatic</td>
+    </tr>
+    <tr>
+      <td>Memory / CPU core Management</td>
+      <td>Manual</td>
+      <td>Manual</td>
+      <td>Manual</td>
+      <td>Autoamtic</td>
+    </tr>
+    <tr>
+      <td>Filename</td>
+      <td><code class="language-plaintext highlighter-rouge">*.sh</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Makefile</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Snakefile</code> or <code class="language-plaintext highlighter-rouge">*.snk</code></td>
+      <td>Workflows stored in website, downloadable as <code class="language-plaintext highlighter-rouge">.ga</code> files.</td>
+    </tr>
+    <tr>
+      <td>Dependencies</td>
+      <td>None</td>
+      <td>None+Difficult</td>
+      <td>Conda is integrated</td>
+      <td>Automatic, done by tool devs for you.</td>
+    </tr>
+    <tr>
+      <td>Multiple output files per step</td>
+      <td>n/a</td>
+      <td>Complicated</td>
+      <td>Yes!</td>
+      <td>Automatic, done by tool devs for you.</td>
+    </tr>
+    <tr>
+      <td>Cluster/HPC Friendliness</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Yes, but manual</td>
+      <td>Automatic, handled by <span class="notranslate">Galaxy</span> Admins</td>
+    </tr>
+    <tr>
+      <td>Installation/Maintenance</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Requires regular updates and management.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The author’s biases are probably quite clear in the above table, and you can find an alte<span class="notranslate">rna</span>tive viewpoint from Snakemake’s documentation, but it comes down to different audiences. If you care how many CPU cores a job receives and need precise control over the command line, or can’t/don’t want to deploy <span class="notranslate">Galaxy</span> and just want a quick command line tool.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Make and Snakemake are ways to write pipelines in a declarative format</p>
+</li>
+                        
+                        <li><p>Instead of writing individual actions you wish to take, you describe how to produce each file you need, and the system executes those steps only if they’re needed</p>
+</li>
+                        
+                        <li><p>If you’re doing scientific research you should use Snakemake</p>
+</li>
+                        
+                        <li><p>Snakemake can significantly speed up your command line pipelines by providing automatic detection of inputs, and not re-creating them if they don’t need</p>
+</li>
+                        
+                        <li><p>Snakemake also provides very easy access to paralellisation without complexity.</p>
+</li>
+                        
+                        <li><p>But it is more complex than using Galaxy</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>DAG</dt>
+                    <dd>Directed Acyclic Graph</dd>
+                    
+                    <dt>SciWMS</dt>
+                    <dd>Scientific Workflow Management System</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Make & Snakemake (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Helena Rasche, Bazante Sanders, Donny Vrins, 2021 <b>Make & Snakemake (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/snakemake/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/snakemake/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-snakemake,
+author = "Helena Rasche and Bazante Sanders and Donny Vrins",
+title = "Make & Snakemake (Galaxy Training Materials)",
+year = "2021",
+month = "11",
+day = "18"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/snakemake/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
