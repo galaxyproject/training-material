@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # nightly builds to keep in sync with changes to the video library
+    - cron:  '0 0 * * *'
+
 
 jobs:
   deploy:
