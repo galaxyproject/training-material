@@ -438,7 +438,24 @@ Now that you have seen a few rules, let's write the rest.
 > ### {% icon hands_on %} Hands-on: Install Snakemake
 > We're about to start doing things really with snakemake, so, it's time to install it.
 > 1. [Install Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-> 2. Once you've done that and activated conda (you should see `(base)` in your terminal prompt), run `conda install snakemake`
+> 2. Create an environment for Snakemake:
+>
+>    ```bash
+>    conda create -n snakemake
+>    ```
+>
+> 3. Activate it
+>
+>    ```bash
+>    conda activate snakemake
+>    ```
+>
+> 4. And install snakemake in this environment
+>
+>    ```bash
+>    conda install snakemake=6.10.0
+>    ```
+>
 {: .hands_on}
 
 
@@ -451,6 +468,13 @@ Now that you have seen a few rules, let's write the rest.
 >    > snakemake -c1
 >    > ```
 >    {: .code-in}
+>
+>    > ### {% icon tip %} "specify the maximum number of jobs"
+>    > If you see an error like this it might be due to an outdated version of snakemake
+>    > ```
+>    > Error: you need to specify the maximum number of jobs to be queued or executed at the same time with --jobs.
+>    > ```
+>    {: .tip}
 >
 >    > ### {% icon code-out %} Output
 >    > ```
@@ -1010,6 +1034,11 @@ In the Makefile we had an `all` rule which was the first and default action to t
 > >  	output:
 > >  		"reads/{sample}.fq.gz"
 > > ```
+> >
+> > > ### {% icon tip %} Why Input and not Output?
+> > > Because rule all is taking in some other outputs as an input to it. If we used outputs, rule all would do nothing (it has no pre-requisite steps), and since it produces nothing by itself, snakemake would see that the outputs you expected have not been created and flag it as an error.
+> > {: .tip}
+> >
 > {: .solution}
 {: .hands_on}
 
