@@ -77,8 +77,9 @@ To annotate our genome using Funannotate, we will use the following files:
 > 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.5653163) or from the shared data library
 >
 >    ```
->    https://zenodo.org/api/files/xxxx/assembly_masked.fasta
->    https://zenodo.org/api/files/xxxx/RNASeq_downsampled_0.1.bam
+>    https://zenodo.org/api/files/xxxx/genome_masked.fasta
+>    https://zenodo.org/api/files/xxxx/rnaseq_R1.fq.gz
+>    https://zenodo.org/api/files/xxxx/rnaseq_R2.fq.gz
 >    https://zenodo.org/api/files/xxxx/SwissProt_subset.fasta
 >    ```
 >
@@ -113,6 +114,52 @@ The second tool will ensure that our fasta file is sorted, based on the length o
 
 After this step, the genome is clean, sorted, and ready for the structural annotation.
 
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0) %} with the following parameters:
+>    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: `output` (Input dataset)
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `output` (Input dataset)
+>    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
+>        - {% icon param-file %} *"Select a reference genome"*: `output` (Input dataset)
+>        - *"Length of the SA pre-indexing string"*: `11`
+>        - *"Build index with or without known splice junctions annotation"*: `build index without gene-model`
+>    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `No`
+>    - *"Per gene/transcript output"*: `No per gene or transcript output`
+>    - In *"Output filter criteria"*:
+>        - *"Exclude the following records from the BAM output"*: ``
+>        - *"Would you like to set additional output filters?"*: `No`
+>    - In *"Algorithmic settings"*:
+>        - *"Configure seed, alignment and limits options"*: `Use Defaults`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
 # Strutural annotation
 
 We can now run **Funannotate predict annotation** to perform the structural annotation of the genome.
@@ -133,7 +180,7 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 >        - *"Strain name"*: `muc1`
 >        - *"Is it a fungus species?"*: `Yes`
 >    - In *"Evidences"*:
->        - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark-ET"*: `RNASeq_downsampled_0.1.bam` (Input dataset)
+>        - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark-ET"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >        - *"Select protein evidences"*: `Custom protein sequences`
 >            - {% icon param-file %} *"Proteins to map to genome"*: `SwissProt_subset.fasta` (Input dataset)
 >    - In *"Busco"*:
@@ -185,9 +232,11 @@ The output of this tool is a tabular file, where each line represents a gene fro
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Interproscan functional predictions of ORFs](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan5/interproscan/5.0.0) %} with the following parameters:
->    - {% icon param-file %} *"Protein Fasta File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
+> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Protein FASTA File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
+>    - *"InterProScan database"*: select the latest version available
 >    - *"Output format"*: `XML`
+>    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you use InterProScan for commercial use)
 >
 {: .hands_on}
 
@@ -204,7 +253,7 @@ Now we have a structural annotation, and the results of both **EggNOG Mapper** a
 >        - {% icon param-file %} *"Genome annotation in genbank format"*: `annot_gbk` (output of **Funannotate predict annotation** {% icon tool %})
 >    - {% icon param-file %} *"NCBI submission template file"*: `output` (Input dataset)
 >    - {% icon param-file %} *"Eggnog-mapper annotations file"*: `annotations` (output of **eggNOG Mapper** {% icon tool %})
->    - {% icon param-file %} *"InterProScan5 XML file"*: `outfile` (output of **Interproscan functional predictions of ORFs** {% icon tool %})
+>    - {% icon param-file %} *"InterProScan5 XML file"*: `outfile_xml` (output of **InterProScan** {% icon tool %})
 >    - *"Strain name"*: `muc1`
 >    - *"Which outputs should be generated"*: ``
 >
@@ -260,7 +309,7 @@ TODO look at the "stats" output of funannotate predict
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BAM Pileups`
->                        - {% icon param-file %} *"BAM Track Data"*: `output` (Input dataset)
+>                        - {% icon param-file %} *"BAM Track Data"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >                        - *"Autogenerate SNP Track"*: `Yes`
 >
 >    ***TODO***: *Check parameter descriptions*
