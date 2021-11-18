@@ -60,7 +60,7 @@ The environment_variables would be needed to retrieve data from Galaxy History. 
 
 This tutorial demonstrates how to build and deploy a Galaxy Interactive Tool (GxIT). GxITs are accessible through the Galaxy tool panel, like any installed Galaxy tool. Our example application is a simple R Shiny app that we call `Tabulator`.
 
-There are three elements to a GxIT - an application script, a Docker container and a Galaxy tool XML file. This tutorial will take you through creating those components, and installing them as new interactive tools into a local Galaxy instance and an existing Galaxy instance.
+There are three elements to a GxIT - an application script, a Docker container and a Galaxy tool XML file. This tutorial will take you through creating those components, and installing them as a new interactive tool into a local Galaxy instance and an existing Galaxy instance.
 
 
 > ### {% icon comment %} If you plan to use an existing Galaxy instance
