@@ -55,7 +55,7 @@ Due to its vital biochemical role as a chaperone protein involved in facilitatin
 
 In the structure which will be examined during this tutorial, the ligand of concern is a resorcinol, a common class of compounds with affinity for the Hsp90 N-terminal domain. It is registered in the PubChem database under the compound ID 135508238 ({% cite ligand_resorcinol %}). As can be seen by viewing the PDB structure, the resorcinol part of the structure is embedded in the binding site, bound by a hydrogen bond to residue aspartate-93. The ligand structure also contains a triazole and a fluorophenyl ring, which lie nearer to the surface of the protein.
 
-![Hsp90 structure, with a ligand bound]({% link topics/computational-chemistry/images/hsp90lig.png %} "Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. ({% cite ngl %})")
+![Image showing Hsp90 structure, with a ligand bound]({% link topics/computational-chemistry/images/hsp90lig.png %} "Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. ({% cite ngl %})")
 
 
 ## Get data
@@ -284,7 +284,7 @@ As an aside, we can use the `Extract energy components` tool to plot the converg
 
 The resulting plot should resemble the figure below. The system first drops rapidly in energy, before slowly converging on the minimized state.
 
-![Energy potential during the EM simulation]({% link topics/computational-chemistry/images/empot.png %} "Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a Galaxy visualization")
+![Snapshot of Energy potential during the EM simulation]({% link topics/computational-chemistry/images/empot.png %} "Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a Galaxy visualization")
 
 ## Equilibration
 

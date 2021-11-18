@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: CLI basics in Galaxy
+title: CLI basics
 level: Introductory
 zenodo_link: ""
 requirements: []
