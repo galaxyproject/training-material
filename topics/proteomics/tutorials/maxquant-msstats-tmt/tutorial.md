@@ -63,8 +63,7 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) via Rule-based upload. Select "Collection" in "Upload data as" and "Pasted Table" in "Load tabular data from" and press "Build".
->
+> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) as a 'Collection'. Set 'File Type' as 'thermo.raw' and click 'Start' and then 'Build'. Name the collection 'raw_files' and create it via 'Create collection'.
 >    ```
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
@@ -79,7 +78,6 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
 >    ```
-> 5. Click on "+Column" and select "Basename of Path of URL". Select column "A" and click "Apply". Next click on "Rules" and select "Add / Modify Column Definitions". Click on "Add Definition", select "URL" and define column "A". Click on "Add Definition" again and select "Name" and define column "B". Click "Apply". Finally, select "thermo.raw" an "Type" and press "Upload". 
 {: .hands_on}
 
 
