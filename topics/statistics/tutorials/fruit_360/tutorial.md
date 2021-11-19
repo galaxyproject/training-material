@@ -1,24 +1,19 @@
 ---
 layout: tutorial_hands_on
 
-title: Deep Learning (Part 3) - Convolutional neural networks (CNN)
-zenodo_link: https://zenodo.org/record/4697906
+title: Image classification in Galaxy with fruit 360 dataset
+zenodo_link: https://zenodo.org/record/5702887
 questions:
-- What is a convolutional neural network (CNN)?
-- What are some applications of CNN?
+- How to solve an image classification problem using convolutional neural network (CNN)?
 objectives:
-- Understand the inspiration behind CNN and learn the CNN architecture
-- Learn the convolution operation and its parameters
 - Learn how to create a CNN using Galaxy's deep learning tools
-- Solve an image classification problem on MNIST digit classification dataset using CNN in Galaxy
+- Solve an image classification problem on fruit 360 dataset using CNN in Galaxy
 requirements:
   -
     type: internal
     topic_name: statistics
     tutorials:
-      - intro_deep_learning
-      - FNN
-      - RNN
+      - CNN
 time_estimation: 2H
 contributors:
 - kxk302
@@ -28,13 +23,16 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Artificial neural networks are a machine learning discipline that have been successfully applied to problems
-in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control {% cite JainEtAl %}.
-With the increasing popularity of social media in the past decade, image and video processing tasks have become very
-important. The previous neural network architectures (e.g. feedforward neural networks) could not scale up to handle
-image and video processing tasks. This gave way to the development of convolutional neural networks that are specifically
-tailored to image and video processing tasks. In this tutorial, we explain what convolutional neural networks are, discuss
-their architecture, and solve an image classification problem using MNIST digit classification dataset using a CNN in Galaxy.
+The classification of fruits and vegetables offers many useful applications such as 
+automated harvesting by robots, building up stocks for supermarkets, effective detection 
+of specific defects, and determining fruit ripeness ({% cite Duong2020 %}, 
+{% cite NaranjoTorres2020 %}, {% cite Iswari2017 %}). Machine Learning (ML) techniques 
+such as Deep Learning (DL) are commonly used for image classification problems in various 
+domains, including in agriculture ({% cite Kamilaris2018 %}). DL is a technique inspired 
+by how a human brain operates. Due to the increased availability of compute capacity and 
+training data, DL techniques have become very popular in recent years. In this tutorial,
+we will use Galaxy's ML toolkit to build a DL model to classify fruit and vegetable 
+images. Our DL model is trained and evaluated on Fruit 360 dataset ({% cite Murean2018 %})  
 
 > ### Agenda
 >
@@ -44,32 +42,6 @@ their architecture, and solve an image classification problem using MNIST digit 
 > {:toc}
 >
 {: .agenda}
-
-## Limitations of feedforward neural networks (FNN) for image processing
-
-In a fully connected FNN (Figure 1), all the nodes in a layer are connected to all the nodes in the next layer. Each connection has a weight
-$$ w_{i,j} $$ that needs to be learned by the learning algorithm. Lets say our input is a 64 pixel by 64 pixel grayscale image. Each grayscale
-pixel is represented by 1 value, usually between 0 to 255, where 0 represents black, 255 represents white, and the values in between represent
-various shades of gray. Since each grayscale pixel can be represented by 1 value, we say the *channel* size is 1. Such an image can be represented
-by 64 X 64 X 1 = 4,096 values (rows X columns X channels). Hence, the input layer of a FNN processing such an image has 4096 nodes.
-
-Lets assume the next layer has 500 nodes. Since all the nodes in subsequent layers are fully connected, we will have 4,096 X 500 = 2,048,000 weights
-between the input and the first hidden layer. For complex problems, we usually need multiple hidden layers in our FNN, as a simpler FNN may not be
-able to learn the model mapping the inputs to outputs in the training data. Having multiple hidden layers compounds the problem of having many weights
-in our FNN. Having many weights makes the learning process more difficult as the dimension of the search space is increased. It also makes the training
-more time and resource consuming and increases the likelihood of overfitting. This problem is further compunded for color images. Unlike grayscale
-images, each pixel in a color image is represented by 3 values, representing red, green, and blue colors (Called RGB color mode), where every color
-can be represented by various combination of these primary colors. Since each color pixel can be represented by 3 values, we say the **channel** size
-is 3. Such an image can be represented by 64 X 64 X 3 = 12,288 values (rows X columns X channels). The number of weights between the input layer and
-the first hidden layer with 500 nodes is now 12,288 X 500 = 6,144,000. It is clear that a FNN cannot scale to handle larger images
-({% cite OSheaEtAl %}) and that we need a more scalable architecture.
-
-![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
-
-Another problem with using FNN for image processing is that a 2 dimensional image is represented as a 1 dimensional vector in the input layer,
-hence, any spatial relationship in the data is ignored. CNN, on the other hand, maintains the spatial structure of the data, and is better suited
-for finding spatial relationships in the image data.
-
 ## Inspiration for convolutional neural networks
 
 In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information ({% cite HubelWiesel %}).
@@ -191,12 +163,30 @@ edges. The filters in the next layer could detect shapes, and the filters in the
 initialized and are learned by the learning algorithm. This makes CNN very powerful as they not only do classification, but can also automatically do
 feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.
 
-## MNIST dataset
+## Fruit 360 dataset
 
-The MNIST database of handwritten digits ({% cite LeCunMnist %}) is composed of a training set of 60,000 images and a test set of 10,000 images. The digits
-have been size-normalized and centered in a fixed-size image (28 by 28 pixels). Images are grayscale, where each pixel is represented by a number between
-0 and 255 (0 for black, 255 for white, and other values for different shades of gray). MNIST database is a standard image classification dataset and is used
-to compare various Machine Learning techniques.
+Fruit 360 is a dataset with 90380 images of 131 fruits and vegetables 
+(https://www.kaggle.com/moltean/fruits). Images are 100 pixel by 100 pixel and are color 
+(RGB) images (Hence, 3 values for each pixel). There are 67,692 images in the training 
+dataset and 22,688 images in the test dataset. The dataset we use for this tutorial is a 
+subset of fruit 360 dataset, containing only 10 fruits/vegetables (Strawberry, 
+Apple_Red_Delicious, Pepper_Green, Corn, Banana, Tomato_1, Potato_White, Pineapple, 
+Orange, and Peach). We selected a subset of fruits/vegetables, so the dataset size is 
+smaller and the neural network can be trained faster. Our training dataset has 5,015 images 
+and our testing dataset has 1,679 images.
+
+The utilities used to create the subset dataset, along with step by step instructions, can 
+be found here: https://github.com/kxk302/fruit_dataset_utilities. First, we created feature 
+vectors for each image. Images are 100 pixel by 100 pixel and are color (RGB) images 
+(3 values for each pixel). Hence, each image can be represented by 30,000 values 
+(100 X 100 X 3). Second, we selected a subset of 10 fruit/vegetable images. Training and 
+testing dataset sizes go from 7 GB and 2.5 GB for 131 fruits/vegetables to 500 MB and 
+177 MB for 10 fruits/vegetables, respectively. Third, we created separate files for feature 
+vectors and labels. Finally, we mapped the labels for the 10 selected fruits/vegetables to 
+a range of 0 to 9. Full dataset labels are in the 0 to 130 range, as the full dataset 
+includes 131 fruits/vegetabes. The 10 labels for out dataset are as follows: Strawberry:0, 
+Apple_Red_Delicious:1, Pepper_Green:2, Corn:3, Banana:4, Tomato_1:5, Potato_White:6, Pineapple:7, 
+Orange:8, Peach:9.  
 
 ## Get data
 
@@ -223,15 +213,15 @@ to compare various Machine Learning techniques.
 > 3. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    {{ page.zenodo_link }}/files/X_train.tsv
->    {{ page.zenodo_link }}/files/y_train.tsv
->    {{ page.zenodo_link }}/files/X_test.tsv
->    {{ page.zenodo_link }}/files/y_test.tsv
+>    {{ page.zenodo_link }}/files/train_X_10.tsv
+>    {{ page.zenodo_link }}/files/train_y_10.tsv
+>    {{ page.zenodo_link }}/files/test_X_10.tsv
+>    {{ page.zenodo_link }}/files/test_y_10.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 4. Rename the datasets as `X_train`, `y_train`, `X_test`, and `y_test` respectively.
+> 4. Rename the datasets as `train_X`, `train_y`, `test_X`, and `test_y` respectively.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
@@ -241,10 +231,12 @@ to compare various Machine Learning techniques.
 >
 {: .hands_on}
 
-## Classification of MNIST dataset images with CNN
+## Classification of fruit 360 dataset images with CNN
 
-In this section, we define a CNN and train it using MNIST dataset training data. The goal is to learn a model such that given an image
-of a digit we can predict whether the digit (0 to 9). We then evaluate the trained CNN on the test dataset and plot the confusion matrix.
+In this section, we define a CNN and train it using fruit 360 dataset training data. The 
+goal is to learn a model such that given an image of a fruit/vegetable, we can predict 
+wat fruit/vegetable it is (Labels are in the range of 0 to 9). We then evaluate the trained 
+CNN on the test dataset and plot the confusion matrix.
 
 ### **Create a deep learning model architecture**
 
@@ -252,44 +244,62 @@ of a digit we can predict whether the digit (0 to 9). We then evaluate the train
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
->    - *"input_shape"*: `(784,)`
+>    - *"input_shape"*: `(30000,)`
 >    - In *"LAYER"*:
 >        - {% icon param-repeat %} *"1: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Reshape`
->                - *"target_shape"*: `(28,28,1)`
+>                - *"target_shape"*: `(100,100,3)`
 >        - {% icon param-repeat %} *"2: LAYER"*:
 >            - *"Choose the type of layer"*: `Convolutional -- Conv2D`
->                - *"filters"*: `64`
->                - *"kernel_size"*: `3`
+>                - *"filters"*: `16`
+>                - *"kernel_size"*: `5`
 >                - *"Activation function"*: `relu`
->                - *"Type in key words arguments if different from the default"*: `padding='same'`
+>                - *"Type in key words arguments if different from the default"*: `input_shape=(100, 100, 3)`
 >        - {% icon param-repeat %} *"3: LAYER"*:
 >            - *"Choose the type of layer"*: `Pooling -- MaxPooling2D`
 >                - *"pool_size"*: `(2,2)`
 >        - {% icon param-repeat %} *"4: LAYER"*:
 >            - *"Choose the type of layer"*: `Convolutional -- Conv2D`
 >                - *"filters"*: `32`
->                - *"kernel_size"*: `3`
+>                - *"kernel_size"*: `5`
 >                - *"Activation function"*: `relu`
 >        - {% icon param-repeat %} *"5: LAYER"*:
 >            - *"Choose the type of layer"*: `Pooling -- MaxPooling2D`
 >                - *"pool_size"*: `(2,2)`
 >        - {% icon param-repeat %} *"6: LAYER"*:
->            - *"Choose the type of layer"*: `Core -- Flatten`
+>            - *"Choose the type of layer"*: `Convolutional -- Conv2D`
+>                - *"filters"*: `64`
+>                - *"kernel_size"*: `5`
+>                - *"Activation function"*: `relu`
 >        - {% icon param-repeat %} *"7: LAYER"*:
+>            - *"Choose the type of layer"*: `Pooling -- MaxPooling2D`
+>                - *"pool_size"*: `(2,2)`
+>        - {% icon param-repeat %} *"8: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Flatten`
+>        - {% icon param-repeat %} *"9: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*": `256`
+>                - *"Activation function"*: `relu`
+>        - {% icon param-repeat %} *"10: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `10`
 >                - *"Activation function"*: `softmax`
 >    - Click *"Execute"*
 {: .hands_on}
 
-Each image is passed in as a 784 dimensional vector (28 x 28 = 784). The reshape layer reshapes it into (28, 28, 1) dimensions -- 28 rows (image height), 28 columns (image width), and
-1 channel. Channel is 1 since the image is grayscale and each pixel can be represented by one integer. Color images are represented by 3 integers (RGB
-values) and have channel size 3. Our CNN then has 2 convolution + pooling layers. First convolution layer has 64 filters (output would be 64 dimensional),
-and filter size is 3 x 3. Second convolutional layer has 32 filters (output would be 32 dimensional), and filter size is 3 x 3. Both pooling layers are
-MaxPool layers with pool size of 2 by 2. Afterwards, we flatten the previous layers output (every row/colum/channel would be an individual node). Finally,
-we add a fully connected layer with 10 nodes and use a softmax activation function to get the probability of each digit. Digit with the highest
-probability is predicted by CNN. The model config can be downloaded as a JSON file.
+Each image is passed in as a vector of size 30,000 (100 x 100 X 3 = 30,000). The reshape 
+layer reshapes it into (100, 100, 3) dimensions -- 100 rows (image height), 100 columns 
+(image width), and 3 channels. Channel size is 3 since the image is color (RGB) and each 
+color pixel can be represented by 3 integers, representing the Red, Green, and Blue 
+primary colors. Our CNN then has 3 convolution + pooling layers. The first convolution layer 
+has 64 filters (output channel size would be 64), and filter size is 5 x 5. The second convolutional 
+layer has 32 filters (output channel size would be 32), and filter size is 5 x 5. The third 
+convolutional layer has 128 filters (output channel size would be 128), and filter size is 5 x 5. All 
+3 pooling layers are MaxPool layers with pool size of 2 x 2. Afterwards, we flatten the previous layer's 
+output (every row/colum/channel would be an individual node), then add a fully connected layer with 256 
+nodes and relu activation function. Finally, we add a fully connected layers with 10 nodes, and use 
+softmax activation function to get the probability of each fruit/vegetable. Fruit/vegetable with the 
+highest probability is predicted by CNN. The model config can be downloaded as a JSON file.
 
 ### **Create a deep learning model**
 
@@ -304,17 +314,17 @@ probability is predicted by CNN. The model config can be downloaded as a JSON fi
 >        - *"Select an optimizer"*: `Adam - Adam optimizer `
 >        - *"Select metrics"*: `acc/accuracy`
 >    - In *"Fit Parameters"*:
->        - *"epochs"*: `2`
->        - *"batch_size"*: `500`
+>        - *"epochs"*: `40`
+>        - *"batch_size"*: `50`
 >    - Click *"Execute"*
 {: .hands_on}
 
-A loss function measures how different the predicted output is versus the expected output. For multi-class classification problems, we use
-*categorical cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2
-means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is
-feed to the network, the training will be very slow (as we have 60000 training examples in our dataset). To speed up the training, we present
-only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset.
-The model builder can be downloaded as a zip file.
+A loss function measures how different the predicted output is from the expected output. For multi-class classification problems, 
+we use *categorical cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the 
+model. Setting *epochs* to 40 means each training example in our dataset is used 40 times to train our model. If we update network 
+weights/biases after all the training data is feed to the network, the training will be very slow (as we have 5014 training examples 
+in our dataset). To speed up the training, we present only a subset of the training examples to the network, after which we update 
+the weights/biases. *batch_size* decides the size of this subset. The model builder can be downloaded as a zip file.
 
 ### **Deep learning training and evaluation**
 
@@ -324,17 +334,17 @@ The model builder can be downloaded as a zip file.
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
->        - *"Training samples dataset"*: Select `X_train` dataset
+>        - *"Training samples dataset"*: Select `train_X_10` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
+>        - *"Dataset containing class labels or target values"*: Select `train_y_10` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Execute"*
 >
 >
 {: .hands_on}
 
-The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained
-model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.
+The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 
+3) the trained model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.
 
 ### **Model Prediction**
 
@@ -345,13 +355,14 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
 >    - *"Select input data type for prediction"*: `tabular data`
->    - *"Training samples dataset"*: Select `X_test` dataset
+>    - *"Training samples dataset"*: Select `test_X_10` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Execute"*
 >
 {: .hands_on}
 
-The prediction step generates 1 dataset. It's a file that has predictions (0 to 9 for the predicted digits) for every image in the test dataset.
+The prediction step generates 1 dataset. It's a file that has predictions (0 to 9 for the predicted fruit/vegetable) for every image 
+in the test dataset.
 
 ### **Machine Learning Visualization Extension**
 
@@ -359,7 +370,7 @@ The prediction step generates 1 dataset. It's a file that has predictions (0 to 
 >
 > - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
->    - *"Select dataset containing the true labels"*": `y_test`
+>    - *"Select dataset containing the true labels"*": `test_y_10`
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
@@ -367,13 +378,14 @@ The prediction step generates 1 dataset. It's a file that has predictions (0 to 
 >
 {: .hands_on}
 
-**Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of examples that were correctly
-classified by the model, True positives (TP) and true negatives (TN). It also lists the number of examples that were classified as positive that
-were actually negative (False positive, FP, or Type I error), and the number of examples that were classified as negative that were actually
-positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and
-**recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
-is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
-to use the **F score**, which is the harmonic mean of precision and recall
+**Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of examples that were 
+correctly classified by the model, True positives (TP) and true negatives (TN). It also lists the number of examples that were 
+classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were 
+classified as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can 
+calculate **precision** and **recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true 
+positives (Precision = TP / (TP + FP)). Recall is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). 
+One way to describe the confusion matrix with just one value is to use the **F score**, which is the harmonic mean of precision 
+and recall 
 
 $$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} $$
 
@@ -381,31 +393,34 @@ $$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}
 
 $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} $$
 
-![Confusion matrix for MNIST image classification problem](../../images/Conv_confusion_matrix.png "Image classification confusion matrix")
+![Confusion matrix for fruit 360 image classification problem](../../images/Fruit_confusion_matrix.png "Fruits/vegetables image classification confusion matrix")
 
-Figure 11 is the resultant confusion matrix for our image problem. The first row in the table represents the *true* digit 0 class labels (we have
-967 + 2 + 1 + 8 + 2 = 980 digit 0 images). The second row represents the *true* digit 1 class labels (Again, we have 1,132 + 1 + 2 = 1,135 digit 1
-images). Similarly, you can count the true class labels for digits 2 to 9 by adding up the numbers in the coresponding row. The first column from the
-left represents the *predicted* digit 0 class labels (Our CNN predicted 967 + 4 + 2 + 8 +7 + 2 = 990 images as being digit 0). The second column from
-the left represents the *predicted* digit 1 class labels (Our CNN predicted 1,132 + 7 + 3 + 12 + 3 + 5 = 1,162 images as being digit 1). Similarly,
-you can count the predicted class labels for digits 2 to 9 by adding up the numbers in the corresponding column.
+Figure 1 is the resultant confusion matrix for our image classification problem. The first row in the table represents the *true* 
+fruit/vegetable with 0 as class label, which is strawberry (we have 164 strawberry images with 0 as class label). The second row 
+represents the *true* fruit/vegetable with 1 as class label, which is Apple_Red_Delicious (We have 166 Apple_Red_Delicious images 
+with 1 as class label). Similarly, you can count the true class labels for fruits/vegetables with class label of 2 to 9 by adding 
+up the numbers in the coresponding row. The first column from the left represents the *predicted* fruit/vegetable with 0 as class 
+label, which is strawberry (Our CNN predicted 164 images as being strawberry, and having class label 0). The second column from 
+the left represents the *predicted* fruit/vegetable with 1 as class label, which is Apple_Red_Delicious (Our CNN predicted 166 
+images as being Apple_Red_Delicious, and having class label 1). Similarly, you can count the predicted class labels for 
+fruits/vegetables with class labels 2 to 9 by adding up the numbers in the corresponding column.
 
-For digit 0, looking at the top-left green cell, we see that our CNN has correctly predicted 967 images as digit 0 (True positives). Adding the numbers
-in the left most column besides the True positives (4 + 2 + 8 + 7 + 2 = 23), we see that our CNN has incorrectly predicted 23 images as being digit 0
-(False positives). Adding the numbers on the top row besides the True positives (2 + 1 + 8 + 2 = 13), we see that our CNN has incorrectly predicted
-13 digits 0 images as not being digit 0 (False negatives). Given these numbers we can calculate Precision, Recall, and the F score for digit 0 as
-follows:
+For label 3, which is corn, looking at the green cell in the 4th row and 4th column, we see that our CNN has correctly 
+predicted 118 images as being a corn image (True positives). Adding the numbers in the other rows in column 4, we see that 
+our CNN has incorrectly predicted 16 images as being corn (False positives). Adding the numbers on the 4th row besides the 
+True positives, we see that our CNN has incorrectly predicted 32 corn images as being label Potato_White (False negatives). 
+Given these numbers we can calculate Precision, Recall, and the F score for digit 0 as follows:
 
-$$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{967}{967 + 23} = 0.97 $$
+$$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{118}{118 + 16} = 0.88 $$
 
-$$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}} = \frac{967}{967 + 13} = 0.98 $$
+$$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}} = \frac{118}{118 + 32} = 0.78 $$
 
-$$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.97 * 0.98}{0.97 + 0.98} = 0.97 $$
+$$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.88 * 0.78}{0.88 + 0.78} = 0.82 $$
 
 You can calculate the Precision, Recall, and F score for other digits in a similar manner.
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we explained the motivation for convolutional neural networks, explained their architecture, and discussed convolution
-operator and its parameters. We then used Galaxy to solve an image classification problem using CNN on MNIST dataset.
+In this tutorial, we briefly described convolutional neural networks (CNN) and their application to image classification problems.
+We then used Galaxy's ML toolkit to solve an image classification problem using CNN on fruit 360 dataset.
