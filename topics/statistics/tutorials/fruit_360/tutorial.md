@@ -42,21 +42,16 @@ images. Our DL model is trained and evaluated on Fruit 360 dataset ({% cite Mure
 > {:toc}
 >
 {: .agenda}
-## Inspiration for convolutional neural networks
+## Overview of convolutional neural networks (CNN)
 
-In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information ({% cite HubelWiesel %}).
-They recorded the activity of the neurons in the visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire
-when the bright line is shown at a particular angle and a particular location (They called these **simple** cells). Other neurons fired when the bright
-line was shown regardless of the angle/location and seemed to detect movement (They called these **complex** cells). It seemed complex cells receive
-inputs from multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
-
-In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed *Neocognitron* ({% cite Fukishima %}), a hierarchical neural
-network used for handwritten Japanese character recognition. Neocognitron was the first CNN, and had its own training algorithm. In 1989, LeCun et. al.
-({% cite LeCunEtAl %}) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other
-models at ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ILSVRC is a competition in object classification and detection on hundreds of
-object categories and millions of images. The challenge has been run annually from 2010 to present, attracting participation from more than fifty
-institutions ({% cite RussakovskyEtAl %}). Notable CNN architectures that won ILSVRC are AlexNet in 2012 ({% cite KrizhevskyEtAl %}), ZFNet in 2013 (
-{% cite ZeilerEtAl %}), GoogLeNet and VGG in 2014 ({% cite SzegedyEtAl %}, {% cite SimonyanEtAl %}), and ResNet in 2015 ({% cite HeEtAl %}).
+Here we provide a brief overview of CNN. For a more in depth discussion, please refer to the CNN tutorial cited in the requirements 
+section. CNN were inspired by how the visual cortex of the brain processes visual information ({% cite HubelWiesel %}). There are 
+two types of cells in our visual cortex: **simple cells** detect objects at certain angles/locations, and **complex** cells,
+which receive inputs from multiple simple cells, and detect movement. In 1980, inspired by hierarchical structure of complex and 
+simple cells, Fukushima proposed *Neocognitron* ({% cite Fukishima %}), a hierarchical neural network used for handwritten Japanese 
+character recognition. In 1989, LeCun et. al. ({% cite LeCunEtAl %}) proposed a CNN that could be trained by backpropagation 
+algorithm. CNN gained immense popularity when they outperformed other models at ImageNet Challenge, a competition in object 
+classification and detection on hundreds of object categories and millions of images.
 
 ## Architecture of CNN
 
@@ -71,23 +66,22 @@ Please note that we will explain a 2 dimensional (2D) CNN here. But the same con
 
 ### Input layer
 
-The input layer represents the input to the CNN. An example input, could be a 28 pixel by 28 pixel grayscale image. Unlike FNN, we do not
-"flatten" the input to a 1D vector, and the input is presented to the network in 2D as a 28 x 28 matrix. This makes capturing
-spatial relationships easier.
+The input layer represents the input to the CNN. An example input, could be a 28 by 28 pixel grayscale image. We do not
+"flatten" the input to a 1D vector. This makes capturing spatial relationships easier.
 
 ### Convolution layer
 
-The convolution layer is composed of multiple filters (also called kernels). Filters for a 2D image are also 2D. Suppose we have
-a 28 pixel by 28 pixel grayscale image. Each pixel is represented by a number between 0 and 255, where 0 represents the color black,
-255 represents the color white, and the values in between represent different shades of gray. Suppose we have a 3 by 3 filter (9
-values in total), and the values are randomly set to 0 or 1. Convolution is the process of placing the 3 by 3 filter on the top left
-corner of the image, multiplying filter values by the pixel values and adding the results, moving the filter to the right one pixel at
-a time and repeating this process. When we get to the top right corner of the image, we simply move the filter down one pixel and
-restart from the right. This process ends when we get to the bottom right corner of the image.
+The convolution layer is composed of multiple **filters** (also called **kernels**). Filters for a 2D image are also 2D. Suppose 
+we have a 28 by 28 pixel grayscale image. Each pixel is represented by a number between 0 and 255, where 0 represents the color 
+black, 255 represents the color white, and the values in between represent different shades of gray. Suppose we have a 3 by 3 
+filter (9 values in total), and the values are randomly set to 0 or 1. Convolution is the process of placing the 3 by 3 filter 
+on the top left corner of the image, multiplying filter values by the pixel values and adding the results, moving the filter to 
+the right one pixel at a time and repeating this process (Figure 1). When we get to the top right corner of the image, we simply 
+move the filter down one pixel and restart from the right. This process ends when we get to the bottom right corner of the image.
 
 ![A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image](../../images/Conv_no_padding_no_strides.gif "A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image ({% cite DumoulinVisin %})")
 
-Covolution operator has the following parameters:
+Covolution operator has several parameters. 
 
 1. Filter size
 2. Padding
@@ -95,73 +89,72 @@ Covolution operator has the following parameters:
 4. Dilation
 5. Activation function
 
-Filter size can be 5 by 5, 3 by 3, and so on. Larger filter sizes should be avoided as the learning algorithm needs to learn filter values (weights),
-and larger filters increase the number of weights to be learned (more compute capacity, more training time, more chance of overfitting). Also, odd
-sized filters are preferred to even sized filters, due to the nice geometric property of all the input pixels being around the output pixel.
+Filter size can be 5 by 5, 3 by 3, and so on. Larger filter sizes should be avoided as more weights need to be learned (more 
+compute capacity, more training time, more chance of overfitting). Also, odd sized filters are preferred to even sized filters, 
+due to the nice geometric property of all the input pixels being around the output pixel.
 
-If you look at Figure 2 you see that after applying a 3 by 3 filter to a 4 by 4 image, we end up with a 2 by 2 image -- the size of the image has gone
-down. If we want to keep the resultant image size the same, we can use *padding*. We pad the input in every direction with 0's before applying the
-filter. If the padding is 1 by 1, then we add 1 zero in evey direction. If its 2 by 2, then we add 2 zeros in every direction, and so on.
+If you look at Figure 1 you see that after applying a 3 by 3 filter to a 4 by 4 image, we end up with a 2 by 2 image -- the 
+size of the image has gone down. If we want to keep the image size the same, we can use *padding* (Figure 2). We pad the input 
+in every direction with 0's before applying the filter. If the padding is 1 by 1, then we add 1 zero in evey direction. If its 
+2 by 2, then we add 2 zeros in every direction, and so on.
 
 ![A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image](../../images/Conv_same_padding_no_strides.gif "A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image ({% cite DumoulinVisin %})")
 
-As mentioned before, we start the convolution by placing the filter on the top left corner of the image, and after multiplying filter and image
-values (and adding them), we move the filter to the right and repeat the process. How many pixels we move to the right (or down) is the *stride*.
-In figure 2 and 3, the stride of the filter is 1. We move the filter one pixel to the right (or down). But we could use a different stride. Figure 4
-shows an example of using stride of 2.
+As mentioned before, we start the convolution by placing the filter on the top left corner of the image, and after multiplying 
+filter and image values (and adding them), we move the filter to the right and repeat the process. How many pixels we move to 
+the right (or down) is the *stride*. In figure 1 and 2, the stride of the filter is 1. We move the filter one pixel to the right 
+(or down). But we could use a different stride. Figure 3 shows an example of using stride of 2.
 
 ![A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image](../../images/Conv_no_padding_strides.gif "A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image ({% cite DumoulinVisin %})")
 
-When we apply a, say 3 by 3, filter to an image, our filter's output is affected by pixels in a 3 by 3 subset of the image. If we like to have a
-larger *receptive field* (portion of the image that affect our filter's output), we could use *dilation*. If we set the dilation to 2 (Figure 5),
-instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 5 subset of the image affects the filter's output.
+When we apply a, say 3 by 3, filter to an image, our filter's output is affected by pixels in a 3 by 3 subset of the image. If we 
+like to have a larger *receptive field* (portion of image that affect filter's output), we could use *dilation*. If we set the 
+dilation to 2 (Figure 4), instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 5 subset of the image 
+affects the filter's output.
 
 ![A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image](../../images/Conv_dilation.gif "A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image ({% cite DumoulinVisin %})")
 
-After the filter scans the whole image, we apply an activation function to filter output to introduce non-linearlity. The preferred activation function
-used in CNN is ReLU or one its variants like Leaky ReLU ({% cite NwankpaEtAl %}). ReLU leaves pixels with positive values in filter output as is, and
-replacing negative values with 0 (or a small number in case of Leaky ReLU). Figure 6 shows the results of applying ReLU activation function to a filter
-output.
+After the filter scans the whole image, we apply an activation function to filter output to introduce non-linearlity. The preferred 
+activation function used in CNN is ReLU ({% cite NwankpaEtAl %}). ReLU leaves pixels with positive values in filter output as is, 
+and replaces negative values with 0. Figure 5 shows the results of applying ReLU activation function to a filter output.
 
 ![Two matrices representing filter output before and after ReLU activation function is applied](../../images/Conv_ReLU.png "Applying ReLU activation function to filter output")
 
-Given the input size, filter size, padding, stride and dilation you can calculate the output size of the convolution operation as below.
+![One matrix representing an input and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation](../../images/Conv_single_input_channel.png "Illustration of single input channel two dimensional convolution")
 
-$$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 1)})) + (2*padding)}{stride} + 1 $$
+Figure 6 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input 
+(5 x 5 x 1). Figure 7 illustrates the calculations when the input has 3 channels. To show this in 2 dimensions, we are 
+displaying each channel in input and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. 
 
-![One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation](../../images/Conv_single_input_channel.png "Illustration of single input channel two dimensional convolution")
+![Three matrices representing an input and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
 
-Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8
-illustrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
-vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. 
+As Figures 7 and 8 show the output of a multi-channel 2D filter is a single channel 2D image. Applying *multiple* filters to the 
+input image results in a multi-channel 2D image for the output. For example, if the input image is 28 by 28 by 3 
+(rows x columns x channels), and we apply a 3 by 3 filter with 1 by 1 padding, we would get a 28 by 28 by 1 image. If we apply 15 
+filters to the input image, our output would be 28 by 28 by 15. Hence, the number of filters in a convolution layer allows us to 
+increase or decrease the channel size.
 
-![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
-
-As Figures 8 and 9 show the output of a multi-channel 2 dimensional filter is a single channel 2 dimensional image. Applying *multiple* filters to the
-input image results in a multi-channel 2 dimensional image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels),
-and we apply a 3 by 3 filter with 1 by 1 padding, we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28
-by 28 by 15. Hence, the number of filters in a convolution layer allows us to increase or decrease the channel size.
-
-![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of multiple input channel two dimensional convolution (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
+![Multiple cubes representing input, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of multiple input channel two dimensional convolution (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
 
 ### Pooling layer
 
-The pooling layer performs down sampling to reduce the spatial dimensionality of the input. This decreases the number of parameters, which in turn
-reduces the learning time and computation, and the likelihood of overfitting. The most popular type of pooling is *max pooling*. Its usually a 2 by 2
-filter with a stride of 2 that returns the maximum value as it slides over the input data (similar to convolution filters).
+The pooling layer performs down sampling to reduce the spatial dimensionality of the input. This decreases the number of parameters, 
+which in turn reduces the learning time and computation, and the likelihood of overfitting. The most popular type of pooling is 
+*max pooling*. Its usually a 2 by 2 filter with a stride of 2 that returns the maximum value as it slides over the input data, 
+similar to convolution filters.
 
 ### Fully connected layer
 
-The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
-for classification of the image.
+The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, 
+which is responsible for classification of the image.
 
 ![A convolutional neural network with 3 convolution layers followed by 3 pooling layers](../../images/Conv_CNN.png "A convolutional neural network with 3 convolution layers followed by 3 pooling layers ({% cite OSheaEtAl %})")
 
-As shown in Figure 10, a typical CNN usually has more than one convolution layer plus pooling layer. Each convolution plus pooling layer is responsible
-for feature extraction at a different level of abstraction. For example, the filters in the first layer could detect horizental, vertical, and diagonal
-edges. The filters in the next layer could detect shapes, and the filters in the last layer could detect collection of shapes. Filter values are randomly
-initialized and are learned by the learning algorithm. This makes CNN very powerful as they not only do classification, but can also automatically do
-feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.
+As shown in Figure 9, a typical CNN usually has more than one convolution plus pooling layer. Each convolution plus pooling layer 
+is responsible for feature extraction at a different level of abstraction. For example, the filters in the first layer could detect 
+horizental, vertical, and diagonal edges. The filters in the next layer could detect shapes, and the filters in the last layer could 
+detect collection of shapes. Filter values are randomly initialized and are learned by the learning algorithm. This makes CNN very 
+powerful as they not only do classification, but can also automatically do feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.
 
 ## Fruit 360 dataset
 
