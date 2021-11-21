@@ -152,7 +152,7 @@ which is responsible for classification of the image.
 
 As shown in Figure 9, a typical CNN usually has more than one convolution plus pooling layer. Each convolution plus pooling layer 
 is responsible for feature extraction at a different level of abstraction. For example, the filters in the first layer could detect 
-horizental, vertical, and diagonal edges. The filters in the next layer could detect shapes, and the filters in the last layer could 
+horizontal, vertical, and diagonal edges. The filters in the next layer could detect shapes, and the filters in the last layer could 
 detect collection of shapes. Filter values are randomly initialized and are learned by the learning algorithm. This makes CNN very 
 powerful as they not only do classification, but can also automatically do feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.
 
