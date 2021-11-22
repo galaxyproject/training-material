@@ -224,6 +224,11 @@ _site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(shell npm bin)/http-server _site -p 9876 & \
 	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
+_site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
+
 video: ## Build all videos
 	bash bin/ari-make.sh
 
