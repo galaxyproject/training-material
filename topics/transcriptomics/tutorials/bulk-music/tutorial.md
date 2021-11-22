@@ -211,7 +211,7 @@ Instead of selecting marker genes, MuSiC gives weights to each gene. The weighti
 
 The deconvolution of 89 subjects from {%cite fadista2014global %} are performed with the bulk data GSE50244 expression set and single cell reference EMTAB. The estimation was constrained on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.
 
-### Sub-step with **MuSiC**
+### Cell Type estimation with **MuSiC**
 
   In this section we will use one of the factors from the bulk RNA-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the `hba1c` factor described in phenotype data.
     
@@ -299,12 +299,17 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 # Estimation of cell type proportions with pre-grouping of cell types
 
-   In the previous
-
-
-Solid tissues often contain closely related cell types, and correlation of gene expression between these cell types leads to collinearity, making it difficult to resolve their relative proportions in bulk data. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, we first group similar cell types into the same cluster and estimate cluster proportions, then recursively repeat this procedure within each cluster. At each recursion stage, we only use genes that have low within-cluster variance, a.k.a. the cross-cell consistent genes. This is critical as the mean expression estimates of genes with high variance are affected by the pervasive bias in cell capture of scRNA-seq experiments, and thus cannot serve as reliable reference.
+  In the previous section we estimated cell types under the assumption that that the gene expression between cell types was largely independent.
+  
+  However, solid tissues often contain closely related cell types, and correlation of gene expression between these cell types leads to collinearity, which makes it difficult to resolve their relative proportions in bulk data. 
+  
+  To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. 
+  
+  Briefly, similar cell types are grouped into the same cluster and their cluster proportions are estimated, then this procedure is recursively repeated within each cluster. At each recursion stage, only genes that have low within-cluster variance are used, as they are used as consistent genes across cell types. This is critical as the mean expression estimates of genes with high variance are affected by the pervasive bias in cell capture of scRNA-seq experiments, and thus cannot serve as reliable reference.
 
   In this section we will use mouse data as well as known epithelial and immune cell markers.
+  
+## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -346,7 +351,14 @@ Solid tissues often contain closely related cell types, and correlation of gene 
 >
 {: .hands_on}
 
+### Exploring the Datasets
 
+  As before, you may choose to explore the bulk and scrna datasets.
+  
+  TODO Tooltip here for exploring the expression sets and phenotype datasets
+
+
+### Colinearity Dendrogram with **MuSiC**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -385,6 +397,17 @@ Solid tissues often contain closely related cell types, and correlation of gene 
 >    {: .comment}
 >
 {: .hands_on}
+
+
+![dendrogram](../../images/bulk-music/dendrogram.png "TODO something meaningful")
+
+![dendro_jitter](../../images/bulk-music/dendro_jitter.png "TODO something meaningful")
+
+![dendro_boxplot](../../images/bulk-music/dendro_boxplot.png "TODO something meaningful")
+
+![dendro_heatmap](../../images/bulk-music/dendro_heatmap.png "TODO something meaningful")
+
+
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
