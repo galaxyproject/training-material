@@ -401,12 +401,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 ![dendrogram](../../images/bulk-music/dendrogram.png "TODO something meaningful")
 
-![dendro_jitter](../../images/bulk-music/dendro_jitter.png "TODO something meaningful")
-
-![dendro_boxplot](../../images/bulk-music/dendro_boxplot.png "TODO something meaningful")
-
-![dendro_heatmap](../../images/bulk-music/dendro_heatmap.png "TODO something meaningful")
-
+![dendro_jitboxheat](../../images/bulk-music/dendro_jitboxheat.png "TODO something meaningful")
 
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
