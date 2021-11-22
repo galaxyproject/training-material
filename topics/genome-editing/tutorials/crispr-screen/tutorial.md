@@ -45,8 +45,6 @@ Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting D
 
 ![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
-Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}.
-
 
 > ### Agenda
 >
@@ -61,7 +59,7 @@ Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihar
 
 ## Data upload
 
-We will use fastq files containing 1% of reads from the original samples to demonstrate the read processing steps. 
+Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}. We will use FASTQ files containing 1% of reads from the original samples to demonstrate the read processing steps.
 
 > ### {% icon hands_on %} Hands-on: Retrieve CRISPR screen fastq datasets
 >
@@ -202,7 +200,7 @@ We need to trim the adapters to leave just the 20bp guide sequences.  We'll trim
 
 For the rest of the CRISPR screen analysis, counting and testing, we'll use MAGeCK ({% cite Li2014 %}, {% cite Li2015 %}).
 
-To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library so we use that file. The file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
+To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library ({% cite Doench2016 %}) which contains 77,441 sgRNAs, an average of 4 sgRNAs per gene, and 1000 non-targeting control sgRNAs. The library file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
 
 > ### {% icon hands_on %} Hands-on: Count guides per gene
 > 1. Import the library file 
@@ -270,7 +268,11 @@ The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 We have been using 1% of reads from the samples in the original dataset to save time as FASTQ files are large. As counts files are small, here we will import and use the MAGeCK counts file generated using all the reads for the samples.
 
-We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehicle). We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren't allowed. We can also specify by their positions in the counts file with the first sample column being 0.
+## Two conditions
+
+If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8-Vehicle) we can use MAGeCK test. MAGeCK test uses a robust ranking aggregation (RRA) algorithm ({% cite Li2014 %}).
+
+We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren't allowed. We can also specify by their positions in the counts file with the first sample column being 0.
 
 > ### {% icon hands_on %} Hands-on: Test for enrichment
 > 1. Import the count file from the full dataset [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
@@ -286,8 +288,6 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 >    - In *"Output Options"*:
 >        - *"Output normalized counts file"*: `Yes`
 >        - *"Output plots"*: `Yes`
->
->
 >
 >    > ### {% icon details %} Normalization
 >    >
@@ -314,6 +314,91 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 >    {: .question}
 >
 {: .hands_on}
+
+MAGeCK test outputs a gene summary file that contains the columns described below.
+
+Column number | Column name | Content
+--- | --- | ---
+1 | id | Gene ID
+2 | num | The number of targeting sgRNAs for each gene
+3 | neg\|score | The RRA lo value of this gene in negative selection
+4 | neg\|p-value | The raw p-value (using permutation) of this gene in negative selection
+5 | neg\|fdr | The false discovery rate of this gene in negative selection
+6 | neg\|rank  | The ranking of this gene in negative selection
+7 | neg\|goodsgrna | The number of "good" sgRNAs, i.e., sgRNAs whose ranking is below the alpha cutoff (determined by the --gene-test-fdr-threshold option), in negative selection.
+8 | neg\|lfc | The log2 fold change of this gene in negative selection. The way to calculate gene lfc is controlled by the --gene-lfc-method option
+9 | pos\|score | The RRA lo value of this gene in positive selection
+10 | pos\|p-value | The raw p-value (using permutation) of this gene in positive selection
+11 | pos\|fdr | The false discovery rate of this gene in positive selection
+12 | pos\|rank  | The ranking of this gene in positive selection
+13 | pos\|goodsgrna | The number of "good" sgRNAs, i.e., sgRNAs whose ranking is below the alpha cutoff (determined by the --gene-test-fdr-threshold option), in positive selection.
+14 | pos\|lfc | The log fold change of this gene in positive selection
+
+Genes are ranked by the p.neg field (by default). If you need a ranking by the p.pos, you can use the **Sort** data in ascending or descending order tool in Galaxy.
+
+We can create a volcano plot to visualise the output, plotting the magnitude of change for drug treatment versus vehicle control (lfc) versus significance (p-value). As we have two columns for lfc and p-value, one for negative selection and one for positive, we first combine these into one column for each using the **awk** tool. If the `neg|p-value` is smaller than the `pos|p-value` the gene is negatively selected. If the `neg|p-value` is larger than the `pos|p-value` the gene is positively selected. Then we create the plot using the **Volcano plot** tool.
+
+
+> ### {% icon hands_on %} Hands-on: Create volcano plot
+> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `MAGeCK test Gene Summary`
+>    - *"AWK Program"*: Copy and paste the text in the grey box below into this field
+>
+>    ```
+>    # Print new header for first line
+>    NR == 1 { print "gene", "pval", "fdr", "lfc" }
+>
+>    # Only process lines after first
+>    NR > 1 {
+>        # check if neg pval < pos pval
+>        if ($4 < $10){
+>           # if it is, print negative selection values
+>            print $1, $4, $5, $8
+>        } else {
+>           # if it's not, print positive selection values
+>            print $1, $10, $11, $14
+>        }
+>    }
+>    ```
+>  2. Inspect the file output. It should look like below.
+> ```
+> gene    pval        fdr       lfc
+> ESD     1.7977e-05  0.279703  -1.9404
+> MTHFD1L 2.7827e-05  0.279703  -0.90207
+> SHMT2   8.9391e-05  0.454208  -1.1307
+> FLI1    9.0376e-05  0.454208  -0.085192
+> ```
+>
+> 3. {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5) %} to create a volcano plot
+>    - {% icon param-file %} *"Specify an input file"*: the Text reformatting output file
+>    - {% icon param-file %} *"File has header?"*: `Yes`
+>    - {% icon param-select %} *"FDR (adjusted P value)"*: `Column 3`
+>    - {% icon param-select %} *"P value (raw)"*: `Column 2`
+>    - {% icon param-select %} *"Log Fold Change"*: `Column 4`
+>    - {% icon param-select %} *"Labels"*: `Column 1`
+>    - {% icon param-select %} *"Points to label"*: `Significant`
+>        - {% icon param-text %} *"Only label top most significant"*: `10`
+>
+> 4. Inspect the plot in the PDF output.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > What is the most significant gene?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > ATP5E as it is the gene nearest the top of the plot.
+>    > >
+>    > > ![Volcano plot](../../images/crispr-screen/volcanoplot.png)
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+> For more details on using the volcano plot tool, see the [tutorial here]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}). For how to customise the volcano plot tool output using R, see the [tutorial here]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.md %}).
+>
+{: .hands_on}
+
 
 
 > ### {% icon tip %} Tip: Getting help
