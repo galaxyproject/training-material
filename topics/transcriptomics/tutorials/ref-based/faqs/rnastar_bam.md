@@ -1,6 +1,6 @@
 ---
 title:  Is it possible to visualize the RNA STAR bam file using the JBrowse tool?
-area: Reference-based RNA-seq
+area: mapping
 box_type: tip
 layout: faq
 ---

@@ -1,6 +1,6 @@
 ---
 title:  I have RNAseq data for pilot experiment for differential expression in host associated bacterium. One dataset is obtained from bacterial culture, but the other comes from bacteria obtained from the host (plant). I expect strong contamination of the second sample with host RNA reads. Should I filter out reads from the host before performing the analysis (if so, what tools I could use for that), or could I just ignore the contamination (since I will use the bacterial genome to map the reads, it will disregard any host associated reads)?
-area: Reference-based RNA-seq
+area: RNA-seq 
 box_type: tip
 layout: faq
 ---

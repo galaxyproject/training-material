@@ -1,6 +1,6 @@
 ---
 title:  I am trying to check the strandedness of my libraries and I get unequal numbers in the infer experiments, but in the IGV it looks like it is unstranded. What does this mean?
-area: Reference-based RNA-seq
+area: estimation of strandedness
 box_type: tip
 layout: faq
 ---
