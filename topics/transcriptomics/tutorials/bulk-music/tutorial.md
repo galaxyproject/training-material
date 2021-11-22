@@ -351,23 +351,37 @@ Solid tissues often contain closely related cell types, and correlation of gene 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [MuSiC](music_deconvolution) %} with the following parameters:
->    - {% icon param-file %} *"scRNA Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
->    - {% icon param-file %} *"Bulk RNA Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
+>    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
+>    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Compute Dendrogram`
+>        - *"Cell Types Label from scRNA Dataset"*: `cellType`
+>        - *"Cluster Types Label from scRNA dataset"*: `clusterType`
+>        - *"Samples Identifier from scRNA dataset"*: `sampleID`
+>        - *"Comma list of cell types to use from scRNA dataset"*:  
+>           `Endo,Podo,PT,LOH,DCT,CD-PC,CD-IC,Fib,Macro,Neutro,B lymph,T lymph,NK`
 >        - In *"Cluster Groups"*:
 >            - {% icon param-repeat %} *"Insert Cluster Groups"*
 >                - *"Cluster ID"*: `C1`
+>                - *"Comma list of cell types to use from scRNA dataset"*: `Neutro`
 >            - {% icon param-repeat %} *"Insert Cluster Groups"*
 >                - *"Cluster ID"*: `C2`
->                - {% icon param-file %} *"List of Gene Markers"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>                - *"Comma list of cell types to use from scRNA dataset"*: `Podo`
+>            - {% icon param-repeat %} *"Insert Cluster Groups"*
+>                - *"Cluster ID"*: `C3`
+>                - *"Comma list of cell types to use from scRNA dataset"*:  
+>                   `Endo,CD-PC,LOH,CD-IC,DCT,PT`
+>                - *"Marker Gene Group Name"*:`Epithelial`
+>                - {% icon param-file %} *"List of Gene Markers"*: `epith.markers` (Input dataset)
+>            - {% icon param-repeat %} *"Insert Cluster Groups"*
+>                - *"Cluster ID"*: `C4`
+>                - *"Comma list of cell types to use from scRNA dataset"*:   
+>                   `Macro,Fib,B lymph,NK,T lymph`
+>                - *"Marker Gene Group Name"*:`Immune`
+>                - {% icon param-file %} *"List of Gene Markers"*: `immune.markers` (Input dataset)
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The C1 (Neutrophil) and C2 (Podocyte) clusters do not use marker genes for the dendrogram clustering in this dataset.
 >    {: .comment}
 >
 {: .hands_on}
