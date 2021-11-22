@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Funannotate
-zenodo_link: https://zenodo.org/record/xxxx
+zenodo_link: https://zenodo.org/record/5653163
 tags:
   - eukaryote
 questions:
@@ -16,7 +16,8 @@ objectives:
   - Perform functional annotation using EggNOG-mapper and InterProScan
   - Evaluate annotation quality with BUSCO
   - View annotations in JBrowse
-time_estimation: 8H
+time_estimation: 8h
+level: Intermediate
 key_points:
   - Funannotate allows to perform structural annotatation of a eukaryotic genome.
   - Functional annotation can be performed using EggNOG-mapper and InterProScan.
@@ -65,22 +66,24 @@ Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome bro
 
 To annotate our genome using Funannotate, we will use the following files:
 
-- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial](todo). For this tutorial we will try to annotate the genome assemble in the [Flye assembly tutorial](todo).
-- A set of pre-aligned **RNASeq data** in BAM format. Typically, you will run a mapper like [**STAR**](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) to align on the genome RNASeq reads from multiple conditions, and merge it into a single BAM file.
+- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial](todo). For this tutorial we will try to annotate the genome assembled in the [Flye assembly tutorial](todo).
+- Some RNASeq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.
 - A set of **protein sequences**, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that's why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.
 
- Funannotate will take iinto account the position of mapped RNASeq reads, and the alignment of protein sequences on the genome sequence to determine gene positions.
+ Funannotate will take into account the position of mapped RNASeq reads, and the alignment of protein sequences on the genome sequence to determine gene positions.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.5653163) or from the shared data library
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/xxxx/genome_masked.fasta
->    https://zenodo.org/api/files/xxxx/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/xxxx/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/xxxx/SwissProt_subset.fasta
+>    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/genome_masked.fasta
+>    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/rnaseq_R1.fq.gz
+>    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/rnaseq_R2.fq.gz
+>    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/SwissProt_subset.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -94,7 +97,7 @@ Before annotating the genome, we want to make sure that the fasta file is proper
 
 Funannotate provides two little tools to help us. Let's run the two tools, one after the other.
 
-The first one (**Funannotate assembly clean**) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool will also remove any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
+The first one (**Funannotate assembly clean**) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -114,47 +117,43 @@ The second tool will ensure that our fasta file is sorted, based on the length o
 
 After this step, the genome is clean, sorted, and ready for the structural annotation.
 
+# Preparing RNASeq data
+
+When you sequence a new genome, you usually sequence a few libraries of RNASeq data, from different tissues and in different conditions, because this data will help you in annotating the genome. Here, we are using data from one RNASeq dataset that is available on [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra): [SRR8534859](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534859).
+
+You would normally get the Fastq files directly from SRA and use them in the following step. To speed up the tutorial (without impairing too much the quality of the results), we have reduced the size of the dataset into a single pair of (smaller) fastq files, available from Zenodo (or the GTN Data Libraries).
+
+To make use of this RNASeq data, we need to map it on the genome. We will get a result in the form of a BAM file, that we will use in the rest of the tutorial.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
->        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: `output` (Input dataset)
->        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `output` (Input dataset)
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: `rnaseq_R1.fq.gz` (Input dataset)
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `rnaseq_R2.fq.gz` (Input dataset)
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Select a reference genome"*: `genome` (output of **Sort assembly** {% icon tool %})
 >        - *"Length of the SA pre-indexing string"*: `11`
->        - *"Build index with or without known splice junctions annotation"*: `build index without gene-model`
->    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `No`
->    - *"Per gene/transcript output"*: `No per gene or transcript output`
->    - In *"Output filter criteria"*:
->        - *"Exclude the following records from the BAM output"*: ``
->        - *"Would you like to set additional output filters?"*: `No`
->    - In *"Algorithmic settings"*:
->        - *"Configure seed, alignment and limits options"*: `Use Defaults`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+We select `11` for the *"Length of the SA pre-indexing string"* parameter as it is the recommended value for a small genome of this size. If you select 14 (the default value), STAR will advise you to use `11` instead in its logs.
 
-> ### {% icon question %} Questions
+> ### {% icon comment %} What if I want to use multiple RNASeq libraries
 >
-> 1. Question1?
-> 2. Question2?
+> To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the {% tool [SamToFastq](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1) %} tool. This single BAM file can then be used by Funannotate like we do in the next steps.
+{: .comment}
+
+Before we move on to the next step, we need to make sure that the mapping went well. Have a look at the `log` output of `RNA STAR`.
+
+> ### {% icon question %} Question
+>
+> What proportion of reads were correctly mapped to the genome? Do you think it is enough to continue with tihs tutorial?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > Look for `Uniquely mapped reads %`: you should get ~96%. This is a very good score, because while reducing the size of the dataset for this tutorial, we have kept mostly reads properly mapping.
+> > Anyway, with real data, you expect to have a vast majority of reads mapping uniquely on the genome. If it's not the case, check that you're using the correct RNASeq files, with the correct genome sequence.
 > >
 > {: .solution}
 >
@@ -164,35 +163,37 @@ After this step, the genome is clean, sorted, and ready for the structural annot
 
 We can now run **Funannotate predict annotation** to perform the structural annotation of the genome.
 
-We need to input the genome sequence, the RNASeq data, and the proteins to align on the genome. We also specify the name of the species and strain (they can be used later for submission to NCBI). Finally, as
+We need to input the genome sequence, the mapped RNASeq data, and the proteins to align on the genome. We also specify the name of the species and strain (they can be used later for submission to NCBI).
 
-There are other parameters to finely tune how Funannotate will run ab-initio predictors to predict genes, and to filter the final results based on various criteria. As Funannotate uses [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) for initial training of ab-initio predictors, we select a dataset close to the species we are annotating: `rhizopus_oryzae`.
+There are other parameters to finely tune how Funannotate will run ab-initio predictors to predict genes, and to filter the final results based on various criteria. As Funannotate uses [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) for initial training of ab-initio predictors, we select datasets close to the species we are annotating: `mucorales (orthodb 10)` and `rhizopus_oryzae`.
 
 Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to annotate"*: `output` (output of **Sort assembly** {% icon tool %})
+>    - {% icon param-file %} *"Assembly to annotate"*: `genome` (output of **Sort assembly** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
 >    - In *"Organism"*:
->        - *"Name of the species to annotate"*: `Mucor`
+>        - *"Name of the species to annotate"*: `Mucor mucedo`
 >        - *"Strain name"*: `muc1`
->        - *"Is it a fungus species?"*: `Yes`
+>        - *"Is it a fungus species?"*: `No`
 >    - In *"Evidences"*:
 >        - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark-ET"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >        - *"Select protein evidences"*: `Custom protein sequences`
 >            - {% icon param-file %} *"Proteins to map to genome"*: `SwissProt_subset.fasta` (Input dataset)
 >    - In *"Busco"*:
+>        - *BUSCO models to align"*": `mucorales (orthodb 10)`
 >        - *"Initial Augustus species training set for BUSCO alignment"*: `rhizopus_oryzae`
 >    - *"Which outputs should be generated"*: Select all
 >
->    > ### {% icon comment %} Comment
->    >
->    > For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analyis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
->    {: .comment}
->
 {: .hands_on}
+
+> ### {% icon comment %} Comments
+>
+> - For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analyis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
+> - It is possible to enable the *"Is it a fungus species?"* option in Funannotate: it launched an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the RNASeq data available. For this tutorial we leave this option to `No`. You can test it with real data, but be sure to compare the result with and without this option.
+{: .comment}
 
 This tool produces several output dataset, in particular:
 
