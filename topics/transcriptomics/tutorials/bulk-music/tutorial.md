@@ -24,7 +24,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- @Wendi - I'm using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
+<!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
 Bulk RNA-seq expression data obtained from RNA-sequencing contains a mixture of the expression of several types of cells. We wish to deconvolve this data to obtain more precise estimates of the proportions of this type of data.
 
@@ -82,7 +82,7 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
+> 1. Create a new history for this tutorial *"Deconvolution: Cell Type inference of Human Pancreas Data"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
@@ -299,9 +299,49 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 # Estimation of cell type proportions with pre-grouping of cell types
 
+   In the previous
+
+
 Solid tissues often contain closely related cell types, and correlation of gene expression between these cell types leads to collinearity, making it difficult to resolve their relative proportions in bulk data. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, we first group similar cell types into the same cluster and estimate cluster proportions, then recursively repeat this procedure within each cluster. At each recursion stage, we only use genes that have low within-cluster variance, a.k.a. the cross-cell consistent genes. This is critical as the mean expression estimates of genes with high variance are affected by the pervasive bias in cell capture of scRNA-seq experiments, and thus cannot serve as reliable reference.
 
-**TODO**: Users start a new history here and get new bulk and single cell data
+  In this section we will use mouse data.
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. Create a new history for this tutorial *"Deconvolution: Dendrogram of Mouse Data"*
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+>
+>    * bulk RNA datasets (tag: `#bulk`)
+>
+>      ```
+>      https://zenodo.org/record/5554814/files/GSE50244bulkeset.expression.tabular
+>      https://zenodo.org/record/5554814/files/GSE50244bulkeset.phenotype.tabular
+>      ```
+>    * single-cell RNA datasets (tag: `#scrna`)
+>      ```
+>      https://zenodo.org/record/5554814/files/EMTABesethealthy.expression.tabular
+>      https://zenodo.org/record/5554814/files/EMTABesethealthy.phenotype.tabular
+>      ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 3. Rename the datasets
+> 
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+> 5. Add to each `expression` file a tag corresponding to `#bulk` and `#scrna`
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
