@@ -177,7 +177,7 @@ testing dataset sizes go from 7 GB and 2.5 GB for 131 fruits/vegetables to 500 M
 177 MB for 10 fruits/vegetables, respectively. Third, we created separate files for feature 
 vectors and labels. Finally, we mapped the labels for the 10 selected fruits/vegetables to 
 a range of 0 to 9. Full dataset labels are in the 0 to 130 range, as the full dataset 
-includes 131 fruits/vegetabes. The 10 labels for out dataset are as follows: Strawberry:0, 
+includes 131 fruits/vegetables. The 10 labels for out dataset are as follows: Strawberry:0, 
 Apple_Red_Delicious:1, Pepper_Green:2, Corn:3, Banana:4, Tomato_1:5, Potato_White:6, Pineapple:7, 
 Orange:8, Peach:9.  
 
@@ -228,7 +228,7 @@ Orange:8, Peach:9.
 
 In this section, we define a CNN and train it using fruit 360 dataset training data. The 
 goal is to learn a model such that given an image of a fruit/vegetable, we can predict 
-wat fruit/vegetable it is (Labels are in the range of 0 to 9). We then evaluate the trained 
+what fruit/vegetable it is (Labels are in the range of 0 to 9). We then evaluate the trained 
 CNN on the test dataset and plot the confusion matrix.
 
 ### **Create a deep learning model architecture**
@@ -392,7 +392,7 @@ Figure 1 is the resultant confusion matrix for our image classification problem.
 fruit/vegetable with 0 as class label, which is strawberry (we have 164 strawberry images with 0 as class label). The second row 
 represents the *true* fruit/vegetable with 1 as class label, which is Apple_Red_Delicious (We have 166 Apple_Red_Delicious images 
 with 1 as class label). Similarly, you can count the true class labels for fruits/vegetables with class label of 2 to 9 by adding 
-up the numbers in the coresponding row. The first column from the left represents the *predicted* fruit/vegetable with 0 as class 
+up the numbers in the corresponding row. The first column from the left represents the *predicted* fruit/vegetable with 0 as class 
 label, which is strawberry (Our CNN predicted 164 images as being strawberry, and having class label 0). The second column from 
 the left represents the *predicted* fruit/vegetable with 1 as class label, which is Apple_Red_Delicious (Our CNN predicted 166 
 images as being Apple_Red_Delicious, and having class label 1). Similarly, you can count the predicted class labels for 
