@@ -253,6 +253,48 @@
 
 
  <br><br> 
+<h2 id="DESeq2"> <a href="#DESeq2"> Deseq2 </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> Regarding DESeq2, in the tutorial you used the normalised count table. Some people use VST normalised counts or rlog normalised counts for visualisation (heatmaps),  would you recommend it ? And second question, regarding the heatmap2, I think this depends on the data you analyse but do you have any advise on how to select the clustering method and the distance method? <a href="/training-material/topics/transcriptomics/tutorials/ref-based/faqs/deseq2.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-regarding-deseq2-in-the-tutorial-you-used-the-normalised-count-table-some-people-use-vst-normalised-counts-or-rlog-normalised-counts-for-visualisation-heatmaps--would-you-recommend-it--and-second-question-regarding-the-heatmap2-i-think-this-depends-on-the-data-you-analyse-but-do-you-have-any-advise-on-how-to-select-the-clustering-method-and-the-distance-method"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Regarding DESeq2, in the tutorial you used the normalised count table. Some people use VST normalised counts or rlog normalised counts for visualisation (heatmaps),  would you recommend it ? And second question, regarding the heatmap2, I think this depends on the data you analyse but do you have any advise on how to select the clustering method and the distance method?</h3>  <p>this depends on what you would like to do with the table. The DESeq2 wrapper in <span class="notranslate">Galaxy</span> can output all of these, and there is a nice discussion in the <a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#count-data-transformations">DESeq2 vignette</a> about this topic.</p></blockquote>
+
+
+
+
+
+ <br><br> 
+<h2 id="De novo transcriptome reconstruction with RNA-Seq"> <a href="#De novo transcriptome reconstruction with RNA-Seq"> De novo transcriptome reconstruction with <span class="notranslate">rna</span>-seq </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> I’m using the same training data, tools, and parameters as the tutorial, but I get a different number of transcripts with a significant change in gene <span class="notranslate">expression</span> between the G1E and megakaryocyte cellular states. Why? <a href="/training-material/topics/transcriptomics/faqs/transcript.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-im-using-the-same-training-data-tools-and-parameters-as-the-tutorial-but-i-get-a-different-number-of-transcripts-with-a-significant-change-in-gene-expression-between-the-g1e-and-megakaryocyte-cellular-states-why"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: I’m using the same training data, tools, and parameters as the tutorial, but I get a different number of transcripts with a significant change in gene <span class="notranslate">expression</span> between the G1E and megakaryocyte cellular states. Why?</h3>  <p>This is okay! Many aspects of the tutorial can potentially affect the exact results you obtain. For example, the reference genome version used and versions of tools. It’s less important to get the exact results shown in the tutorial, and more important to understand the concepts so you can apply them to your own data.</p></blockquote>
+
+
+
+
+
+ <br><br> 
+<h2 id="RNA-seq"> <a href="#RNA-seq"> <span class="notranslate">Rna</span>-seq </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> I have <span class="notranslate">RNA</span>seq data for pilot experiment for differential <span class="notranslate">expression</span> in host associated bacterium. One dataset is obtained from bacterial culture, but the other comes from bacteria obtained from the host (plant). I expect strong contamination of the second sample with host <span class="notranslate">RNA</span> <span class="notranslate">reads</span>. Should I filter out <span class="notranslate">reads</span> from the host before performing the analysis (if so, what tools I could use for that), or could I just ignore the contamination (since I will use the bacterial genome to map the <span class="notranslate">reads</span>, it will disregard any host associated <span class="notranslate">reads</span>)? <a href="/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnaseq_data.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-i-have-rnaseq-data-for-pilot-experiment-for-differential-expression-in-host-associated-bacterium-one-dataset-is-obtained-from-bacterial-culture-but-the-other-comes-from-bacteria-obtained-from-the-host-plant-i-expect-strong-contamination-of-the-second-sample-with-host-rna-reads-should-i-filter-out-reads-from-the-host-before-performing-the-analysis-if-so-what-tools-i-could-use-for-that-or-could-i-just-ignore-the-contamination-since-i-will-use-the-bacterial-genome-to-map-the-reads-it-will-disregard-any-host-associated-reads"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: I have <span class="notranslate">RNA</span>seq data for pilot experiment for differential <span class="notranslate">expression</span> in host associated bacterium. One dataset is obtained from bacterial culture, but the other comes from bacteria obtained from the host (plant). I expect strong contamination of the second sample with host <span class="notranslate">RNA</span> <span class="notranslate">reads</span>. Should I filter out <span class="notranslate">reads</span> from the host before performing the analysis (if so, what tools I could use for that), or could I just ignore the contamination (since I will use the bacterial genome to map the <span class="notranslate">reads</span>, it will disregard any host associated <span class="notranslate">reads</span>)?</h3>  <p>You could map both sets of <span class="notranslate">reads</span> to the reference genome. You are right - no pre-filtering required as the host <span class="notranslate">reads</span> shouldn’t map to the ref and will be excluded.</p></blockquote>
+
+
+
+
+
+ <br><br> 
 <h2 id="analysis"> <a href="#analysis"> Analysis </a></h2>
 <hr/>
 
@@ -651,6 +693,29 @@ Some datasets can be transformed into a different format. <span class="notransla
 <h3 class="faq-area"> Upload many files (>10) via FTP <a href="/training-material/faqs/galaxy/datasets_upload_ftp.html"><i class="fas fa-external-link-alt"></i></a> </h3>
 
 <!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-upload-many-files-10-via-ftp"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload many files (&gt;10) via FTP</h3>  <ol>  <li>    <p>Make sure to have an FTP client installed</p>    <p>There are many options. We can recommend <a href="https://filezilla-project.org/">FileZilla</a>, a free FTP client that is available on Windows, MacOS, and Linux.</p>  </li>  <li>Establish FTP connection to the <span class="notranslate">Galaxy</span> server    <ol>      <li>Provide the <span class="notranslate">Galaxy</span> server’s FTP server name (e.g. <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.org</code>, <code class="language-plaintext highlighter-rouge">ftp.use<span class="notranslate">galaxy</span>.eu</code>)</li>      <li>Provide the <strong>use<span class="notranslate">rna</span>me</strong> (usually the email address) and the <strong>password</strong> on the <span class="notranslate">Galaxy</span> server</li>      <li>Connect</li>    </ol>  </li>  <li>    <p>Add the files to the FTP server by dragging/dropping them or right clicking on them and uploading them</p>    <p>The FTP transfer will start. We need to wait until they are done.</p>  </li>  <li>Open the Upload menu on the <span class="notranslate">Galaxy</span> server</li>  <li>Click on <strong>Choose FTP file</strong> on the bottom</li>  <li>Select files to import into the history</li>  <li>Click on <strong>Start</strong></li></ol></blockquote>
+
+
+
+
+
+ <br><br> 
+<h2 id="estimation of strandedness"> <a href="#estimation of strandedness"> Estimation of strandedness </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> Infer experiment, is it ever used in practice? I mean, most often you are aware if the <span class="notranslate">RNA</span>-seq data is stranded or not in the first place, right, because you sequenced it yourself or ordered it from a company. <a href="/training-material/topics/transcriptomics/tutorials/ref-based/faqs/infer_experiments.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-infer-experiment-is-it-ever-used-in-practice-i-mean-most-often-you-are-aware-if-the-rna-seq-data-is-stranded-or-not-in-the-first-place-right-because-you-sequenced-it-yourself-or-ordered-it-from-a-company"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Infer experiment, is it ever used in practice? I mean, most often you are aware if the <span class="notranslate">RNA</span>-seq data is stranded or not in the first place, right, because you sequenced it yourself or ordered it from a company.</h3>  <p>This can happen in cases where you get the data from someone else, and they don’t know.</p></blockquote>
+
+
+
+
+
+
+<h3 class="faq-area"> I am trying to check the strandedness of my libraries and I get unequal numbers in the infer experiments, but in the IGV it looks like it is unstranded. What does this mean? <a href="/training-material/topics/transcriptomics/tutorials/ref-based/faqs/strandedness.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-i-am-trying-to-check-the-strandedness-of-my-libraries-and-i-get-unequal-numbers-in-the-infer-experiments-but-in-the-igv-it-looks-like-it-is-unstranded-what-does-this-mean"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: I am trying to check the strandedness of my libraries and I get unequal numbers in the infer experiments, but in the IGV it looks like it is unstranded. What does this mean?</h3>  <p>It’s also often the case that elimination of the second strand is not perfect, and there are genuine cases of bidirectional transcription in the genome. 70 / 30 % as in your report is not a good result for a stranded library. You can treat this as a stranded library in your analysis, but for instance you couldn’t make the conclusion that a given gene is actually transcribed from the reverse strand. Likely that the library preparation didn’t work perfectly. This can depend on many factors, one is that you need to completely digest your <span class="notranslate">DNA</span> using a high quality <span class="notranslate">DNa</span>se before doing the reverse transcription.</p></blockquote>
 
 
 
@@ -1127,6 +1192,29 @@ undelete your deleted histories
 
 
  <br><br> 
+<h2 id="mapping"> <a href="#mapping"> <span class="notranslate">Mapping</span> </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> Is it possible to visualize the <span class="notranslate">RNA</span> STAR bam file using the JBrowse tool? <a href="/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_bam.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-is-it-possible-to-visualize-the-rna-star-bam-file-using-the-jbrowse-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Is it possible to visualize the <span class="notranslate">RNA</span> STAR bam file using the JBrowse tool?</h3>  <p>Yes, that should work.</p></blockquote>
+
+
+
+
+
+
+<h3 class="faq-area"> I am using the <span class="notranslate">RNA</span> STAR tool to map my <span class="notranslate">reads</span> on the reference genome. while filling in the details for , I have to fill in "Length of the genomic sequence around annotated junctions", which apparently has to be 36. I'm lost for a moment why this is 36, what is meant by it, and why is it relevant? Does anyone have any ideas? Why should it be the length of the <span class="notranslate">reads</span> -1? <a href="/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_tool.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-i-am-using-the-rna-star-tool-to-map-my-reads-on-the-reference-genome-while-filling-in-the-details-for--i-have-to-fill-in-length-of-the-genomic-sequence-around-annotated-junctions-which-apparently-has-to-be-36-im-lost-for-a-moment-why-this-is-36-what-is-meant-by-it-and-why-is-it-relevant-does-anyone-have-any-ideas-why-should-it-be-the-length-of-the-reads--1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: I am using the <span class="notranslate">RNA</span> STAR tool to map my <span class="notranslate">reads</span> on the reference genome. while filling in the details for , I have to fill in “Length of the genomic sequence around annotated junctions”, which apparently has to be 36. I’m lost for a moment why this is 36, what is meant by it, and why is it relevant? Does anyone have any ideas? Why should it be the length of the <span class="notranslate">reads</span> -1?</h3>  <p><span class="notranslate">RNA</span> STAR is using the gene model to create the database of splice junctions, and that these don’t “need” to have a length longer than the <span class="notranslate">reads</span> (37bp).</p></blockquote>
+
+
+
+
+
+ <br><br> 
 <h2 id="markdown"> <a href="#markdown"> Markdown </a></h2>
 <hr/>
 
@@ -1369,6 +1457,29 @@ undelete your deleted histories
 
 
  <br><br> 
+<h2 id="transcriptome analysis of Arabidopsis thaliana"> <a href="#transcriptome analysis of Arabidopsis thaliana"> Transcriptome analysis of arabidopsis thaliana </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> Could I use a different p-adj value for filtering differentially expressed genes? <a href="/training-material/topics/transcriptomics/faqs/p_adj.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-could-i-use-a-different-p-adj-value-for-filtering-differentially-expressed-genes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Could I use a different p-adj value for filtering differentially expressed genes?</h3>  <p>Yes, you can modify this value, to perform a more rigorous analysis, or extend the range of genes selected. A higher p-value will significantly increase the number of genes selected, at the expense of including possible false positives.</p></blockquote>
+
+
+
+
+
+
+<h3 class="faq-area"> Could I use a different tool for performing the quantification step? <a href="/training-material/topics/transcriptomics/faqs/quantification.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-could-i-use-a-different-tool-for-performing-the-quantification-step"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Could I use a different tool for performing the quantification step?</h3>  <p>There are some alte<span class="notranslate">rna</span>tives to Salmon for reference transcriptome-based <span class="notranslate">RNA</span> quantification. Kallisto and Sailfish use a similar approach, known as pseudoalignment.</p></blockquote>
+
+
+
+
+
+ <br><br> 
 <h2 id="user interface"> <a href="#user interface"> User interface </a></h2>
 <hr/>
 
@@ -1550,7 +1661,7 @@ When creating a <span class="notranslate">workflow</span> in <span class="notran
         <p>
 The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
 </p>
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/f967dba5244306ff3ef8c23ab65f184a96df48b6">f967dba5244306ff3ef8c23ab65f184a96df48b6</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/bb67a790258786c1a65651a0caed475b451caa3d">bb67a790258786c1a65651a0caed475b451caa3d</a></p>
     </div>
 </footer>
 
