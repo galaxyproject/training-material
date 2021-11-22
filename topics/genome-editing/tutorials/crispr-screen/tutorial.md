@@ -268,7 +268,11 @@ The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 We have been using 1% of reads from the samples in the original dataset to save time as FASTQ files are large. As counts files are small, here we will import and use the MAGeCK counts file generated using all the reads for the samples.
 
-We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehicle). We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren't allowed. We can also specify by their positions in the counts file with the first sample column being 0.
+## Two conditions
+
+If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8-Vehicle) we can use MAGeCK test. MAGeCK test uses a robust ranking aggregation (RRA) algorithm ({% cite Li2014 %}).
+
+We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren't allowed. We can also specify by their positions in the counts file with the first sample column being 0.
 
 > ### {% icon hands_on %} Hands-on: Test for enrichment
 > 1. Import the count file from the full dataset [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
@@ -284,8 +288,6 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 >    - In *"Output Options"*:
 >        - *"Output normalized counts file"*: `Yes`
 >        - *"Output plots"*: `Yes`
->
->
 >
 >    > ### {% icon details %} Normalization
 >    >
@@ -312,6 +314,26 @@ We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehic
 >    {: .question}
 >
 {: .hands_on}
+
+MAGeCK test outputs a gene summary file that contains the columns described below.
+
+Column number |Column name| Content
+--- | ---
+1 | id | Gene ID
+2 | num | The number of targeting sgRNAs for each gene
+3 | neg|score | The RRA lo value of this gene in negative selection
+4 | neg|p-value | The raw p-value (using permutation) of this gene in negative selection
+5 | neg|fdr | The false discovery rate of this gene in negative selection
+6 | neg|rank  | The ranking of this gene in negative selection
+7 | neg|goodsgrna | The number of "good" sgRNAs, i.e., sgRNAs whose ranking is below the alpha cutoff (determined by the --gene-test-fdr-threshold option), in negative selection.
+8 | neg|lfc | The log2 fold change of this gene in negative selection. The way to calculate gene lfc is controlled by the --gene-lfc-method option
+9 | pos|score | The RRA lo value of this gene in positive selection
+10 | pos|p-value | The raw p-value (using permutation) of this gene in positive selection
+11 | pos|fdr | The false discovery rate of this gene in positive selection
+12 | pos|rank  | The ranking of this gene in positive selection
+13 | pos|goodsgrna | The number of "good" sgRNAs, i.e., sgRNAs whose ranking is below the alpha cutoff (determined by the --gene-test-fdr-threshold option), in positive selection.
+14 | pos|lfc | The log fold change of this gene in positive selection
+Genes are ranked by the p.neg field (by default). If you need a ranking by the p.pos, you can use the **Sort** data in ascending or descending order tool in Galaxy.
 
 
 > ### {% icon tip %} Tip: Getting help
