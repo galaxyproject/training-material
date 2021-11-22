@@ -76,7 +76,7 @@ Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabula
 
 # Cell Proportion Estimation
 
-Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** from **CITE ET AL**, using a single cell dataset from **CITE ET AL** containing **XXX LIST OF CELL TYPES**. If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
+Here we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancrease dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subject and 4 with Type-II diabetes (T2D). If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
 
 ## Get data
 
@@ -128,7 +128,6 @@ Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** fr
     
    Section here about the phenotype data for the bulk data. Talk about the factors, and how hba1c is related to type-II diabetes (T2D), and we will look for the proportions of this factor in the deconvolved data.
     
-    <!-- this text is repeated below, try to make it more distinct -->
    It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. Let’s look at the beta cell proportions with HbA1c level.
 
 
