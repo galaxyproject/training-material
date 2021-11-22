@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Bulk RNA Deconvolution with MuSiC
-zenodo_link: https://zenodo.org/record/5554814
+zenodo_link: https://zenodo.org/record/5719154
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
@@ -76,7 +76,7 @@ Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabula
 
 # Cell Proportion Estimation
 
-Here we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancrease dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subject and 4 with Type-II diabetes (T2D). If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
+Here we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancreas dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subject and 4 with Type-II diabetes (T2D). If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
 
 ## Get data
 
@@ -87,16 +87,16 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
->    * bulk RNA datasets (tag: `#bulk`)
+>    * Human pancreas bulk RNA datasets (tag: `#bulk`)
 >
 >      ```
->      https://zenodo.org/record/5554814/files/GSE50244bulkeset.expression.tabular
->      https://zenodo.org/record/5554814/files/GSE50244bulkeset.phenotype.tabular
+>      https://zenodo.org/record/5719154/files/GSE50244bulkeset.expression.tabular
+>      https://zenodo.org/record/5719154/files/GSE50244bulkeset.phenotype.tabular
 >      ```
->    * single-cell RNA datasets (tag: `#scrna`)
+>    * Human pancreas single-cell RNA datasets (tag: `#scrna`)
 >      ```
->      https://zenodo.org/record/5554814/files/EMTABesethealthy.expression.tabular
->      https://zenodo.org/record/5554814/files/EMTABesethealthy.phenotype.tabular
+>      https://zenodo.org/record/5719154/files/EMTABesethealthy.expression.tabular
+>      https://zenodo.org/record/5719154/files/EMTABesethealthy.phenotype.tabular
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -313,16 +313,16 @@ Solid tissues often contain closely related cell types, and correlation of gene 
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
->    * bulk RNA datasets (tag: `#bulk`)
+>    * Mouse kidney bulk RNA datasets (tag: `#bulk`)
 >
 >      ```
->      https://zenodo.org/record/5554814/files/GSE50244bulkeset.expression.tabular
->      https://zenodo.org/record/5554814/files/GSE50244bulkeset.phenotype.tabular
+>      https://zenodo.org/record/5719154/files/Mousebulkeset.expression.tabular
+>      https://zenodo.org/record/5719154/files/Mousebulkeset.phenotype.tabular
 >      ```
->    * single-cell RNA datasets (tag: `#scrna`)
+>    * Mouse kidney single-cell RNA datasets (tag: `#scrna`)
 >      ```
->      https://zenodo.org/record/5554814/files/EMTABesethealthy.expression.tabular
->      https://zenodo.org/record/5554814/files/EMTABesethealthy.phenotype.tabular
+>      https://zenodo.org/record/5719154/files/Mousesubeset.expression.tabular
+>      https://zenodo.org/record/5719154/files/Mousesubeset.phenotype.tabular
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
