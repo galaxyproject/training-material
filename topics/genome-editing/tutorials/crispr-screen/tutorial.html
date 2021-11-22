@@ -793,7 +793,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 16, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 22, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -818,8 +818,6 @@ Cas9 induces double-stranded breaks (DSB) within the target <span class="notrans
 
 <figure id="figure-1"><img src="../../images/crispr-screen/crispr_screen.jpg" alt="Illustration of CRISPR Screen Method. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> CRISPR knockout and activation methods (from <span class="citation"><a href="#Joung2016">Joung <i>et al.</i> 2016</a></span>)</figcaption></figure>
 
-<p>Here we will demonstrate analysing CRISPR screen using data from <span class="citation"><a href="#Fujihara2020">Fujihara <i>et al.</i> 2020</a></span>.</p>
-
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
@@ -833,7 +831,10 @@ Cas9 induces double-stranded breaks (DSB) within the target <span class="notrans
     </ol>
   </li>
   <li><a href="#counting" id="markdown-toc-counting">Counting</a></li>
-  <li><a href="#testing" id="markdown-toc-testing">Testing</a></li>
+  <li><a href="#testing" id="markdown-toc-testing">Testing</a>    <ol>
+      <li><a href="#two-conditions" id="markdown-toc-two-conditions">Two conditions</a></li>
+    </ol>
+  </li>
 </ol>
 
 </blockquote>
@@ -842,7 +843,7 @@ Cas9 induces double-stranded breaks (DSB) within the target <span class="notrans
 
 <h2 id="data-upload">Data upload</h2>
 
-<p>We will use fastq files containing 1% of <span class="notranslate">reads</span> from the original samples to demonstrate the read processing steps.</p>
+<p>Here we will demonstrate analysing CRISPR screen using data from <span class="citation"><a href="#Fujihara2020">Fujihara <i>et al.</i> 2020</a></span>. We will use FASTQ files containing 1% of <span class="notranslate">reads</span> from the original samples to demonstrate the read processing steps.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-retrieve-crispr-screen-fastq-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieve CRISPR screen fastq datasets</h3>
@@ -1048,7 +1049,7 @@ T8-Vehicle https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-
 
 <p>For the rest of the CRISPR screen analysis, counting and testing, we’ll use MAGeCK (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span>).</p>
 
-<p>To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library so we use that file. The file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in <span class="notranslate">Galaxy</span> that can format the file removing spaces and converting commas to tabs.</p>
+<p>To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the Brunello library (<span class="citation"><a href="#Doench2016">Doench <i>et al.</i> 2016</a></span>) which contains 77,441 sg<span class="notranslate">RNA</span>s, an average of 4 sg<span class="notranslate">RNA</span>s per gene, and 1000 non-targeting control sg<span class="notranslate">RNA</span>s. The library file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in <span class="notranslate">Galaxy</span> that can format the file removing spaces and converting commas to tabs.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-count-guides-per-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count guides per gene</h3>
@@ -1164,7 +1165,11 @@ T8-Vehicle https://zenodo.org/api/files/646f76fa-dc6b-404a-9a74-c371a43aacd5/T8-
 
 <p>We have been using 1% of <span class="notranslate">reads</span> from the samples in the original dataset to save time as FASTQ files are large. As counts files are small, here we will import and use the MAGeCK counts file generated using all the <span class="notranslate">reads</span> for the samples.</p>
 
-<p>We want to compare the drug treated sample (T8-APR-246) to the control (T8-Vehicle). We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren’t allowed. We can also specify by their positions in the counts file with the first sample column being 0.</p>
+<h2 id="two-conditions">Two conditions</h2>
+
+<p>If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8-Vehicle) we can use MAGeCK test. MAGeCK test uses a robust ranking aggregation (RRA) algorithm (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>).</p>
+
+<p>We could specify them using their names, which must match the names used in the columns of the counts file, but hypens aren’t allowed. We can also specify by their positions in the counts file with the first sample column being 0.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-test-for-enrichment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test for enrichment</h3>
@@ -1222,6 +1227,167 @@ The distribution of the read counts of significant sg<span class="notranslate">R
 
 </blockquote>
 
+<p>MAGeCK test outputs a gene summary file that contains the columns described below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column number</th>
+      <th>Column name</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>id</td>
+      <td>Gene ID</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>num</td>
+      <td>The number of targeting sg<span class="notranslate">RNA</span>s for each gene</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>neg|score</td>
+      <td>The RRA lo value of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>neg|p-value</td>
+      <td>The raw p-value (using permutation) of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>neg|fdr</td>
+      <td>The false discovery rate of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>neg|rank</td>
+      <td>The ranking of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>neg|goodsg<span class="notranslate">rna</span></td>
+      <td>The number of “good” sg<span class="notranslate">RNA</span>s, i.e., sg<span class="notranslate">RNA</span>s whose ranking is below the alpha cutoff (determined by the –gene-test-fdr-threshold option), in negative selection.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>neg|lfc</td>
+      <td>The log2 fold change of this gene in negative selection. The way to calculate gene lfc is controlled by the –gene-lfc-method option</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>pos|score</td>
+      <td>The RRA lo value of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>pos|p-value</td>
+      <td>The raw p-value (using permutation) of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>pos|fdr</td>
+      <td>The false discovery rate of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>pos|rank</td>
+      <td>The ranking of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>pos|goodsg<span class="notranslate">rna</span></td>
+      <td>The number of “good” sg<span class="notranslate">RNA</span>s, i.e., sg<span class="notranslate">RNA</span>s whose ranking is below the alpha cutoff (determined by the –gene-test-fdr-threshold option), in positive selection.</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>pos|lfc</td>
+      <td>The log fold change of this gene in positive selection</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Genes are ranked by the p.neg field (by default). If you need a ranking by the p.pos, you can use the <strong>Sort</strong> data in ascending or descending order tool in <span class="notranslate">Galaxy</span>.</p>
+
+<p>We can create a volcano plot to visualise the output, plotting the magnitude of change for drug treatment versus vehicle control (lfc) versus significance (p-value). As we have two columns for lfc and p-value, one for negative selection and one for positive, we first combine these into one column for each using the <strong>awk</strong> tool. If the <code class="language-plaintext highlighter-rouge">neg|p-value</code> is smaller than the <code class="language-plaintext highlighter-rouge">pos|p-value</code> the gene is negatively selected. If the <code class="language-plaintext highlighter-rouge">neg|p-value</code> is larger than the <code class="language-plaintext highlighter-rouge">pos|p-value</code> the gene is positively selected. Then we create the plot using the <strong>Volcano plot</strong> tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create volcano plot</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">MAGeCK test Gene Summary</code></li>
+        <li><em>“AWK Program”</em>: Copy and paste the text in the grey box below into this field</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Print new header for first line
+NR == 1 { print "gene", "pval", "fdr", "lfc" }
+
+# Only process lines after first
+NR &gt; 1 {
+    # check if neg pval &lt; pos pval
+    if ($4 &lt; $10){
+       # if it is, print negative selection values
+        print $1, $4, $5, $8
+    } else {
+       # if it's not, print positive selection values
+        print $1, $10, $11, $14
+    }
+}
+</code></pre></div>      </div>
+    </li>
+    <li>Inspect the file output. It should look like below.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gene    pval        fdr       lfc
+ESD     1.7977e-05  0.279703  -1.9404
+MTHFD1L 2.7827e-05  0.279703  -0.90207
+SHMT2   8.9391e-05  0.454208  -1.1307
+FLI1    9.0376e-05  0.454208  -0.085192
+</code></pre></div>      </div>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5</span></span>  to create a volcano plot
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: the Text reformatting output file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File has header?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“FDR (adjusted P value)”</em>: <code class="language-plaintext highlighter-rouge">Column 3</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“P value (raw)”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Log Fold Change”</em>: <code class="language-plaintext highlighter-rouge">Column 4</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labels”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Significant</code>
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the plot in the PDF output.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What is the most significant gene?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>ATP5E as it is the gene nearest the top of the plot.</p>
+
+          <p><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot. " loading="lazy" /></p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+  <p>For more details on using the volcano plot tool, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">tutorial here</a>. For how to customise the volcano plot tool output using R, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html">tutorial here</a>.</p>
+
+</blockquote>
+
 <blockquote class="tip">
   <h3 id="tip-tip-getting-help"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Getting help</h3>
 
@@ -1258,6 +1424,7 @@ The distribution of the read counts of significant sg<span class="notranslate">R
                 <ol class="bibliography"><li id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12. <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a></li>
 <li id="Li2014">Li, W., H. Xu, T. Xiao, L. Cong, M. I. Love <i>et al.</i>, 2014 <b>MAGeCK enables robust identification of essential genes from genome-scale CRISPR/Cas9 knockout screens</b>. 15: <a href="https://doi.org/10.1186/s13059-014-0554-4">10.1186/s13059-014-0554-4</a></li>
 <li id="Li2015">Li, W., J. Köster, H. Xu, C.-H. Chen, T. Xiao <i>et al.</i>, 2015 <b>Quality control,  modeling,  and visualization of CRISPR screens with MAGeCK-VISPR</b>. 16: <a href="https://doi.org/10.1186/s13059-015-0843-6">10.1186/s13059-015-0843-6</a></li>
+<li id="Doench2016">Doench, J. G., N. Fusi, M. Sullender, M. Hegde, E. W. Vaimberg <i>et al.</i>, 2016 <b>Optimized sgRNA design to maximize activity and minimize off-target effects of CRISPR-Cas9</b>. Nature Biotechnology 34: 184–191. <a href="https://doi.org/10.1038/nbt.3437">10.1038/nbt.3437</a></li>
 <li id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048. <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a></li>
 <li id="Joung2016">Joung, J., S. Konermann, J. S. Gootenberg, O. O. Abudayyeh, R. J. Platt <i>et al.</i>, 2016 <b>Protocol: Genome-scale CRISPR-Cas9 Knockout and Transcriptional Activation Screening</b>. <a href="https://doi.org/10.1101/059626">10.1101/059626</a></li>
 <li id="Fujihara2020">Fujihara, K. M., B. Zhang, T. D. Jackson, B. Nijiagel, C.-S. Ang <i>et al.</i>, 2020 <b>Genome-wide CRISPR screens reveal APR-246 (Eprenetapopt) triggers ferroptosis and inhibits iron-sulfur cluster biogenesis</b>. <a href="https://doi.org/10.1101/2020.11.29.398867">10.1101/2020.11.29.398867</a></li></ol>
@@ -1322,7 +1489,7 @@ author = "Maria Doyle and Kenji Fujihara and Twishi Gulati",
 title = "CRISPR screen analysis (Galaxy Training Materials)",
 year = "2021",
 month = "11",
-day = "16"
+day = "22"
 url = "\url{https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
