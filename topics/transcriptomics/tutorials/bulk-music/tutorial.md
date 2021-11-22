@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Bulk RNA Deconvolution with MuSiC
-zenodo_link: https://zenodo.org/record/5719154
+zenodo_link: https://zenodo.org/record/5719228
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
@@ -90,13 +90,13 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 >    * Human pancreas bulk RNA datasets (tag: `#bulk`)
 >
 >      ```
->      https://zenodo.org/record/5719154/files/GSE50244bulkeset.expression.tabular
->      https://zenodo.org/record/5719154/files/GSE50244bulkeset.phenotype.tabular
+>      https://zenodo.org/record/5719228/files/GSE50244bulkeset.expression.tabular
+>      https://zenodo.org/record/5719228/files/GSE50244bulkeset.phenotype.tabular
 >      ```
 >    * Human pancreas single-cell RNA datasets (tag: `#scrna`)
 >      ```
->      https://zenodo.org/record/5719154/files/EMTABesethealthy.expression.tabular
->      https://zenodo.org/record/5719154/files/EMTABesethealthy.phenotype.tabular
+>      https://zenodo.org/record/5719228/files/EMTABesethealthy.expression.tabular
+>      https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -304,7 +304,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 Solid tissues often contain closely related cell types, and correlation of gene expression between these cell types leads to collinearity, making it difficult to resolve their relative proportions in bulk data. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, we first group similar cell types into the same cluster and estimate cluster proportions, then recursively repeat this procedure within each cluster. At each recursion stage, we only use genes that have low within-cluster variance, a.k.a. the cross-cell consistent genes. This is critical as the mean expression estimates of genes with high variance are affected by the pervasive bias in cell capture of scRNA-seq experiments, and thus cannot serve as reliable reference.
 
-  In this section we will use mouse data.
+  In this section we will use mouse data as well as known epithelial and immune cell markers.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -316,13 +316,18 @@ Solid tissues often contain closely related cell types, and correlation of gene 
 >    * Mouse kidney bulk RNA datasets (tag: `#bulk`)
 >
 >      ```
->      https://zenodo.org/record/5719154/files/Mousebulkeset.expression.tabular
->      https://zenodo.org/record/5719154/files/Mousebulkeset.phenotype.tabular
+>      https://zenodo.org/record/5719228/files/Mousebulkeset.expression.tabular
+>      https://zenodo.org/record/5719228/files/Mousebulkeset.phenotype.tabular
 >      ```
 >    * Mouse kidney single-cell RNA datasets (tag: `#scrna`)
 >      ```
->      https://zenodo.org/record/5719154/files/Mousesubeset.expression.tabular
->      https://zenodo.org/record/5719154/files/Mousesubeset.phenotype.tabular
+>      https://zenodo.org/record/5719228/files/Mousesubeset.expression.tabular
+>      https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
+>      ```
+>    * Marker Genes
+>      ```
+>      https://zenodo.org/record/5719228/files/epith.markers
+>      https://zenodo.org/record/5719228/files/immune.markers
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
