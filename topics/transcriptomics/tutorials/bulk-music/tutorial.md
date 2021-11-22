@@ -199,7 +199,7 @@ We can also extract specific information pertaining to Samples or Features:
 <!-- Maybe this goes in a comment? -->
 Instead of selecting marker genes, MuSiC gives weights to each gene. The weighting scheme is based on cross-subject variation: up-weigh genes with low variation and down-weigh genes with high variation. Here we demonstrate step by step with the human pancreas datasets.
 
-The deconvolution of 89 subjects from Fadista et al. (2014) are preformed with bulk data GSE50244.bulk.eset and single cell reference EMTAB.eset. We constrained our estimation on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.
+The deconvolution of 89 subjects from {%cite fadista2014global %} are performed with the bulk data GSE50244 expression set and single cell reference EMTAB. The estimation was constrained on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.
 
 ## Sub-step with **MuSiC**
 
