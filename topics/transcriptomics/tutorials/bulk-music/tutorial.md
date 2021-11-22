@@ -88,14 +88,17 @@ Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** fr
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
->    ```
->    # bulk RNA datasets
->    https://zenodo.org/record/5554814/files/GSE50244bulkeset.expression.tabular
->    https://zenodo.org/record/5554814/files/GSE50244bulkeset.phenotype.tabular
->    # single-cell RNA datasets
->    https://zenodo.org/record/5554814/files/EMTABesethealthy.expression.tabular
->    https://zenodo.org/record/5554814/files/EMTABesethealthy.phenotype.tabular
->    ```
+>    * bulk RNA datasets (tag: `#bulk`)
+>
+>      ```
+>      https://zenodo.org/record/5554814/files/GSE50244bulkeset.expression.tabular
+>      https://zenodo.org/record/5554814/files/GSE50244bulkeset.phenotype.tabular
+>      ```
+>    * single-cell RNA datasets (tag: `#scrna`)
+>      ```
+>      https://zenodo.org/record/5554814/files/EMTABesethealthy.expression.tabular
+>      https://zenodo.org/record/5554814/files/EMTABesethealthy.phenotype.tabular
+>      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
