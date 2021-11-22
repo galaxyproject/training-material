@@ -41,13 +41,13 @@ In this tutorial we will be using sample bulk and single-cell RNA-seq assays/mat
 >
 {: .agenda}
 
-# Bulk RNA-seq Cell Type Deconvolution
+## Bulk RNA-seq Cell Type Deconvolution
 
 The heterogeneity that exists in the cellular composition of bulk RNA-seq can add bias to the results from differential expression analysis. In order to circumvent this limitation, RNA-seq deconvolution aims to infer cell type abundances by modelling the gene expressions levels as weighted sums of cell type specific expression profiles. 
 
 Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) tool suite {% cite wang2019bulk %} to estimate the proportion of individual cell types in our bulk RNA-seq datasets.
 
-## MusiC
+### MusiC
 
 MuSiC utilizes cell-type specific gene expression from single-cell RNA sequencing (RNA-seq) data to characterize cell type compositions from bulk RNA-seq data in complex tissues. By appropriate weighting of genes showing cross-subject and cross-cell consistency, MuSiC enables the transfer of cell type-specific gene expression information from one dataset to another.
 
@@ -55,7 +55,7 @@ Solid tissues often contain closely related cell types which leads to collineari
 
 ![muse1](../../images/bulk-music/figure_method.jpg "Overview of MuSiC Suite")
 
-## Expression Set
+### Expression Set
 
 Expression Set objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. ExpressionSet class is derived from eSet, and requires a matrix named exprs as assayData member.
 
@@ -63,8 +63,7 @@ The ExpressionSet class is designed to combine several different sources of info
 
 The data in an ExpressionSet is complicated, consisting of expression data from microarray experiments (assayData; assayData is used to hint at the methods used to access different data components, as we will see below), ‘meta-data’ describing samples in the experiment (phenoData), annotations and meta-data about the features on the chip or technology used for the experiment (featureData, annotation), information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData), and a flexible structure to describe the experiment (experimentData). The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
 
-
-# Workflow Overview 
+## Workflow Overview 
 
 In this tutorial we will be constructing  ExpressionSet objects, inspecting, and annotating them, and then finally processing them with the MuSiC RNA-Deconvolution analysis suite.
 
@@ -116,7 +115,7 @@ Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** fr
 >
 {: .hands_on}
 
-## Exploring the Datasets
+### Exploring the Datasets
 
    Section here about what the single cell data looks like. Dimensions, how many cells, etc.
     
@@ -137,7 +136,7 @@ Here we will extract cell proportions from a bulk data of **XXX TISSUE TYPE** fr
 
 Here we shall build two ExpressionSet objects corresponding to the bulk and single-cell datatypes. 
 
-## **Construct Expression Set Object**
+### **Construct Expression Set Object**
 
 > ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
 >
@@ -156,7 +155,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 >
 {: .hands_on}
 
-## **Inspect Expression Set Object**
+#### **Inspect Expression Set Object**
 
 We will now inspect these objects we juset created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
 
@@ -206,17 +205,16 @@ We can also extract the general information itself as a standalone text-file
 {: .question}
 
 
-
-# Estimating Cell Type proportions
+## Estimating Cell Type proportions
 
 <!-- Maybe this goes in a comment? -->
 Instead of selecting marker genes, MuSiC gives weights to each gene. The weighting scheme is based on cross-subject variation, by up-weighing genes with low variation and down-weighing genes with high variation. Here we demonstrate this step-by-step with the human pancreas datasets.
 
 The deconvolution of 89 subjects from {%cite fadista2014global %} are performed with the bulk data GSE50244 expression set and single cell reference EMTAB. The estimation was constrained on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.
 
-## Sub-step with **MuSiC**
+### Sub-step with **MuSiC**
 
-    In this section we will use one of the factors from the bulk RNA-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the `hba1c` factor described in phenotype data.
+  In this section we will use one of the factors from the bulk RNA-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the `hba1c` factor described in phenotype data.
     
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -253,7 +251,7 @@ MuSic by compares itself against a previous method of deconvolution known as Non
 In the above image you can see that (a) the estimated proportion of cells for each of the 6 declared types, as calculated by MuSiC and the NNLS methods respectively. In the (b) section, this is better represented as a box plot to show you where the distribution of cell type proportions lie.
 
 
-![ctprop](../../images/bulk-music/ctprop_plot.png "Cell Type Proportions")
+![ctprop](../../images/bulk-music/ctprop_plot.png "(top) cell type proportions by disease factor, and (bottom) hba1c factor expression against beta cell type proportion")
 
 As stated previously, it is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. In the above image we can see in the (a) section that we have the same information as previous, but we also distinguish between cells that show a high affinity to T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with Hba1c expression, where we see that there is a significant negative correlation between HbA1c levels and beta cell proportions, after adjusted Age, BMI and Gender. 
 
@@ -293,19 +291,11 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 > > ### {% icon solution %} Solution
 > >
 > > 1. Here it is evident that the previous NNLS method over-represents the Alpha cell type compared to the MuSiC method which gives more weight to the Beta and Ductal cell types, which were under-represented in the NNLS method.
-> > 2. Delta and Gamma remain empty in both.
+> > 2. The Delta and Gamma cell types appear empty in both.
 > >
 > {: .solution}
 >
 {: .question}
-
-
-
-
-
-
-
-
 
 
 # Estimation of cell type proportions with pre-grouping of cell types
