@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # nightly builds to keep in sync with changes to the video library
+    - cron:  '0 0 * * *'
+
 
 jobs:
   deploy:
@@ -54,6 +58,7 @@ jobs:
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           GTN_FORK: ${{ github.repository_owner }}
