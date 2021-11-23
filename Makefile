@@ -70,8 +70,12 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 .PHONY: serve-quick
 
 serve-gitpod: bundle-install api/swagger.json  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+	bundle exec jekyll serve --config _config.yml --incremental
 .PHONY: serve-gitpod
+
+build-gitpod: bundle-install api/swagger.json  ## run a build on a gitpod.io environment
+	bundle exec jekyll build --config _config.yml
+.PHONY: build-gitpod
 
 build: clean api/swagger.json ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
