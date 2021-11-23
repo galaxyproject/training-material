@@ -36,7 +36,7 @@ contributors:
 - pclo
 - beatrizserrano
 - npalopoli
-#Lorena
+- lgallegovillar
 
 lang: es
 
