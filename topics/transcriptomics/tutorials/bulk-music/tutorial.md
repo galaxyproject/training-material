@@ -1,8 +1,14 @@
 ---
 layout: tutorial_hands_on
-
-title: Bulk RNA Deconvolution with MuSiC
+title: "Bulk RNA Deconvolution with MuSiC"
+subtopic: single-cell
+priority: 10
 zenodo_link: https://zenodo.org/record/5719228
+tags:
+  - single-cell
+  - mouse
+  - human
+  - deconvolution
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
