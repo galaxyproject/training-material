@@ -246,6 +246,29 @@ to compare various Machine Learning techniques.
 In this section, we define a CNN and train it using MNIST dataset training data. The goal is to learn a model such that given an image
 of a digit we can predict whether the digit (0 to 9). We then evaluate the trained CNN on the test dataset and plot the confusion matrix.
 
+In order to train the CNN, we must have the One-Hot Encoding (OHE) representation of the training
+labels. This is needed to calculate the categorical cross entropy loss function. OHE encodes labels
+as a **one-hot** numeric array, where only one element is 1 and the rest are 0's. For example, if
+we had 3 fruits (apple, orange, banana) and their labels were 1, 2, and 3, the OHE
+represntation of apple would be (1,0,0), the OHE representation of orange would be (0,1,0), and the
+OHE representation of banana would be (0,0,1). For apple with label 1, the first element of array
+is 1 (and the rest are 0's); For Orange with label 2, the second element of the array is 1 (and the
+rest are 0's); And for Banana with label 3, the third element of the array is 1 (and the rest are 0's).
+We have 10 digits in our dataset and we would just have an array of size 10, where only one
+element is 1, corresponding to the digit, and the rest are 0's.
+
+### **Create One-Hot Encoding (OHE) representation of training labels**
+
+> ### {% icon hands_on %} Hands-on: One-Hot Encoding
+>
+> - {% tool [To categorical](https://usegalaxy.org/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
+>    - *"Input file"* : Select `y_train`
+>    - *"Does the dataset contain header?"* : Select `No`
+>    - *"Total number of classes"*: Select `10`
+>    - Click *"Execute"*
+>
+{: .hands_on}
+
 ### **Create a deep learning model architecture**
 
 > ### {% icon hands_on %} Hands-on: Model config
@@ -326,7 +349,7 @@ The model builder can be downloaded as a zip file.
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `X_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
+>        - *"Dataset containing class labels or target values"*: Select the OHE representation of `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Execute"*
 >
