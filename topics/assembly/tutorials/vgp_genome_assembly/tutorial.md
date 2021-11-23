@@ -58,6 +58,8 @@ In order to facilitate the development of the workflow, we will structure it in 
 - Hybrid scaffolding based on phased assembly and Bionano data
 - Hybrid scaffolding based on a phased assembly and Hi-C mapping data
 
+**TODO:** suggest including here something about how the Galaxy workflow has additional steps (e.g. parse parameter value), so that it can run automatically, but if run step by step in this tutorial, then some of those steps are just manually entered value (e.g. genome size parameter)
+
 ## Background on datasets
 
 In order to reduce processing times, we will use samples from _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. This organisms can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
@@ -431,11 +433,11 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >    - *"Options for purging duplicates"*: `Specify`
 >       - *"Coverage upper bound"*: `63` (maximum depth previously obtained)
 >    - *"Options for Hi-C partition"*: `Specify`
->       - *"Hi-C R1 reads"*: `SRR7126301_1`
->       - *"Hi-C R2 reads"*: `SRR7126301_2`
+>       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
+>       - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
-> 2. Rename the `Hi-C hap1 balanced contig graph` as `Primary contig graph` and add a `#primary` tag
-> 3. Rename the `Hi-C hap2 balanced contig graph` as `Alternate contig graph` and  add a `#alternate` tag
+> 2. Rename the `Hi-C hap1 contig graph` as `Primary contig graph` and add a `#primary` tag
+> 3. Rename the `Hi-C hap2 contig graph` as `Alternate contig graph` and  add a `#alternate` tag
 >
 {: .hands_on}
 
@@ -514,8 +516,7 @@ Let's have a look at the HTML report.
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
 >       - *"Lineage"*: `Saccharomycetes`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: `short summary text`
+>    - *"Which outputs should be generated"*: `short summary text`
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -585,7 +586,7 @@ This step includes 11 steps, summarized in the following scheme:
 > 4. Rename the output as `Reads mapped to contigs`
 > 
 > 5. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
->    - *"Select the purge_dups function"*: `Calculate coverage cutoff and create read depth histogram and base-levelread depth for PacBio data (calcuts+pbcstats)`
+>    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
 >        - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
 >        - In *"Calcuts options"*:
 >            - *"Upper bound for read depth"*: `63` (the previously estimated maximum depth)
@@ -598,8 +599,8 @@ This step includes 11 steps, summarized in the following scheme:
 >    {: .comment}
 >
 > 6. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `split FASTA file by 'N's (split_fa)`
->        - {% icon param-file %} *"Base-level coverage file"*: `Primary contig FASTA`
+>    - *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
+>        - {% icon param-file %} *"Assembly FASTA file"*: `Primary contig FASTA`
 >
 > 7. Rename the output as `Split FASTA`
 >
@@ -607,7 +608,7 @@ This step includes 11 steps, summarized in the following scheme:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA`
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-collection %} *"Select fastq dataset"*: `Split FASTA`
+>        - {% icon param-file %} *"Select fastq dataset"*: `Split FASTA`
 >        - *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
 >    - In *"Set advanced output options"*:
 >        - *"Select an output format"*: `PAF`
@@ -844,6 +845,8 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A DNA fragment is then sequenced from each end of this artificial junction, giving a read pair. If reads from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
 
+**TODO**: add image here of HiC
+
 Inputs required for this section:
 
 * An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
@@ -863,6 +866,14 @@ Outputs from this section:
 * A scaffolded assembly FASTA file
 * contact maps of HiC reads pre- and post scaffolding
 * post-scaffolding reports from Busco and Quast 
+
+
+A simplified image of the workflow for this section (not showing Quast and Busco):
+
+
+![Hic-wf-summary](../../images/vgp_assembly/hic-wf-summary.png "HiC workflow")
+
+
 
 
 ## 1. Map the HiC reads to the assembly

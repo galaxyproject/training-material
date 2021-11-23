@@ -19,7 +19,7 @@ tags:
 subtopic: upload
 contributors:
   - jontrow
-  - Arhodes-NCBI
+  - RareSeas
 requirements:
   -
     type: "internal"
