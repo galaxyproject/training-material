@@ -234,7 +234,7 @@ CNN on the test dataset and plot the confusion matrix.
 In order to train the CNN, we must have the One-Hot Encoding (OHE) representation of the training
 labels. This is needed to calculate the categorical cross entropy loss function. OHE encodes labels
 as a **one-hot** numeric array, where only one element is 1 and the rest are 0's. For example, if
-we had 3 fruits (apple, orange, banana) and their labels were 1, 2, and 3. The OHE
+we had 3 fruits (apple, orange, banana) and their labels were 1, 2, and 3, the OHE
 represntation of apple would be (1,0,0), the OHE representation of orange would be (0,1,0), and the
 OHE representation of banana would be (0,0,1). For apple with label 1, the first element of array
 is 1 (and the rest are 0's); For Orange with label 2, the second element of the array is 1 (and the
