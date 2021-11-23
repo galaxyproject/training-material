@@ -3,7 +3,7 @@ layout: rdmbites_slides
 logo: /assets/images/elixir-uk.png
 video: true
 
-title: "What is Data Stewardship?"
+title: "How to Name Files"
 questions:
 objectives:
 key_points:
@@ -19,88 +19,169 @@ voice:
   neural: true
 ---
 
-## Learning Objectives and Notes
+## Learning Objective and Notes
 
-- To be familiar with the term Data Stewardship
+- To be able to create filenames that are machine-readable.
 
-- To understand the three different Data Stewardship roles in the Life Sciences
+- To use filenames to group files.
+
+- To be able to create filenames that are human-readable.
+
+- Although we refer to file naming, information in this RDMbite refers also to directory/folder naming.
 
 ???
 
-- In this RDMbite we define Data Stewardship and the role of the Data Steward in the Life Sciences.  
+- In this RDM bite you will learn to how name files so that they can be read and interpreted by yourself and others.  
 
-- We will also define the 3 broad areas of Data Stewardship.
+- Filenames that are machine readable can be easily read and interpreted by code. 
+
+- Human readable filenames help you and others record and understand the contents of a file.  
+
+- You will also learn that filenames can contain punctuation enabling groups of files to be ordered and searched.
 
 ---
 
-## What is Data Stewardship?
+## Characters in Filenames to Avoid: Special Characters
 
-.pull-left[
-Data Stewardship includes all activities necessary to ensure research data are FAIR (<span style="color:rgb(241, 160, 8)">F</span>indable, <span style="color:rgb(241, 160, 8)">A</span>ccessible, <span style="color:rgb(241, 160, 8)">I</span>nteroperable, <span style="color:rgb(241, 160, 8)">R</span>eusable).  These activities include all 7 spokes of the Data Life Cycle (Plan, Collect, Process, Analyse, Preserve, Share, Reuse)
-]
+.left[Special characters to avoid]
 
-.pull-right[.image-75[![Image of the data lifecycle](../../images/0013/lifecycle.png)]]
+![special characters to avoid](../../images/0013/01.png)
+
+.left[Three special characters that can be use to delimit words in your filename]
+
+![special characters to use](../../images/0013/02.png)
 
 ???
 
-- So what is Data Stewardship?  
+- A filename can be both human and machine readable and as a general rule the use of special characters is avoided.  
 
-- Data Stewardship is a term used to mean the management of data.  Data Stewardship includes things like data accessibility and usability, so people can take data and trust and use it easily and safely.  
+- So, what is a special character?  
 
-- You may have heard of the term FAIR data which deals with these principles.  
+- A special character is any character that isn’t a number or a letter.  
 
-- The requirement for effective Data Stewardship has grown in the Life Sciences.  This is because people now work with large and complex and sensitive datasets.  
-
-- Growth in Data Stewardship accompanies the professionalisation of the Data Stewardship role in the Life Sciences, where this role often acts as a single point of contact for people within an organization.
-
- - This role is advisory and is able to help people manage their data better.  Commonly this role is performed by bioinformaticians or data savvy researchers, and IT and facility support staff.
+- Although we avoid the use of special characters in filenames, we will explain later that the use of the full stop, the underscore, and the minus sign are commonplace and useful.
 
 ---
 
-## What are the Three Data Steward Roles?
+## Characters in Filenames to Avoid: Special Characters
 
-**Data Steward: Policy**
+.left[The forward slash (/) denotes a directory]
 
-Research data management (RDM) policy and strategy for an institution.
-
-**Data Stewards: Infrastructure**
-
-Infrastructure building, such as building IT data storage, to support RDM policy and practice.
-
-**Data Stewards: Research (including researchers)**
-
-RDM planning, support and implementation on the ground.
+![cat command](../../images/0013/03.png)
 
 ???
 
-- Data Stewardship in the Life Sciences falls into three categories though it could be argued that there are four if we include data savvy researchers performing Data Stewardship as part of their research.   
+- Special characters are often used by programming languages to denote a special property or function.
 
-- So what are these 3 categories?    
-    
-- In policy, Data Stewards work at the level of developing, implementing and monitoring research data management policy within an institution.    These Data Stewards work closely with researchers and support staff as well as finance and legal teams.   
+- One example you may know is the forward slash which denotes a directory.  A filename containing a forward slash character causes problems.  
 
-- In Infrastructure, Data Stewards are usually IT support staff.  They maintain research infrastructure such as secure storage and tools enabling reproducible research such as analysis workflow and pipelines.   
+- In this example the Unix cat command is used to read the contents of a file.   Here the command throws an error because the filename contains a forward slash.  The command instead tries to look for a file called post qc dot txt under a directory called pre. 
 
-- Lastly Data Stewards in Research cover a spectrum of professionals within a department or institute, from fulltime staff dedicated to FAIR Data Stewardship or more commonly a go-to person in the department who advises on good data management practice.
+## Characters to Avoid: Spaces
+
+.left[Space characters are interpreted as spaces between different files]
+
+![cat command](../../images/0013/04.png)
+
+???
+
+- A space character can also cause problems in a filename even though it is used frequently
+
+- A file with a single space character in its filename can sometimes be interpreted by a script as two separate files. 
+
+- In this example there is a filename with three space characters.  Where we try to read the contents of this using the cat command in Unix, we get an error because the cat command thinks there are four separate files.
 
 ---
 
-## Professionalisation of Data Stewardship
+## Characters to Avoid: Spaces
 
-.pull-left[
-Role Profiles
-![RDMKit Logo](../../images/0013/rdmkit.png)
-]
+.left[Using characters to separate words in a filename]
 
-.pull-right[
-Competency Frameworks
-![National Programme Open Science Logo](../../images/0013/npos.png)
-]
+![cat command](../../images/0013/05.png)
 
 ???
 
-- Professionalisation of Data Stewardship is an evolving process.
+---
 
-- Role profiles and competency frameworks enable institutions to recruit and embed Data Stewards into daily research.  These can be found on the ELIXIR RDMkit website and the EBI Competency Hub.
+## Characters to Avoid: Spaces
+
+.left[Using dot (.) underscore (_) and dash (-) in different contexts]
+
+![cat command](../../images/0013/06.png)
+
+???
+
+---
+
+## Machine-readable Filenames
+
+![cat command](../../images/0013/07.png)
+
+???
+
+---
+
+## Machine-readable Filenames
+
+![cat command](../../images/0013/08.png)
+
+???
+
+---
+
+## Using Numbers at the Beginning of Filenames
+
+.left[Padding with zeros]
+
+![cat command](../../images/0013/09.png)
+
+???
+
+---
+
+## Using Dates at the Beginning of Filenames
+
+.left[Placing dates at the beginning of the filename]
+
+![cat command](../../images/0013/10.png)
+
+.left[ISO standard]
+
+![cat command](../../images/0013/11.png)
+
+???
+
+---
+
+## Human-readable Filenames
+
+.left[Bad]
+
+![cat command](../../images/0013/12.png)
+
+.left[Better]
+
+![cat command](../../images/0013/13.png)
+
+???
+
+---
+
+## File Versioning
+
+.left[Bad]
+
+![cat command](../../images/0013/14.png)
+
+.left[Better]
+
+![cat command](../../images/0013/15.png)
+
+???
+
+
+
+
+
 
 
