@@ -14,7 +14,7 @@ footer: no
 {% assign associated_slides = false %}
 {% assign own_material = null %}
 {% for material in topic_material %}
-    {% if material.enable != "false" %}
+    {% if material.enable != "false" or jekyll.environment != "production"  %}
         {% if material.tutorial_name == page.tutorial_name %}
             {% assign own_material = material %}
             {% if material.slides  %}
@@ -339,7 +339,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     {% assign topic = site.data[page.topic_name] %}
                     <ol>
                     {% for material in topic_material %}
-                        {% if material.enable != "false" %}
+                        {% if material.enable != "false" or jekyll.environment != "production" %}
                             {% if material.type == "introduction" %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
                             {% elsif material.type == "tutorial" %}

@@ -157,9 +157,15 @@ module TopicFilter
       # make it future proof.
       page_obj['type'] = 'tutorial'
 
-      if not page_obj.has_key?("enable") or page_obj['enable'] then
-        resource_pages.push(page_obj)
+      if page_obj.has_key?("enable") and !page_obj['enable'] then
+        if ! page_obj.has_key? 'tags'
+          page_obj['tags'] = Array.new
+        end
+        page_obj['tags'].append('work-in-progress')
       end
+
+      # Push onto our stack.
+      resource_pages.push(page_obj)
     end
 
     # The complete resources we'll return is the introduction slides first
