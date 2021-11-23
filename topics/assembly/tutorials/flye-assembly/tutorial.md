@@ -3,22 +3,26 @@ layout: tutorial_hands_on
 
 title: 'Genome assembly using PacBio data'
 zenodo_link: 'https://zenodo.org/record/5702408#.YZUb5uvjIiU'
+tags:
+  - assembly
+  - pacbio
 questions:
 - How to perform genome assembly with PacBio data ?
 - How to check assembly quality ?
 objectives:
 - Assemble a Genome
 - Assess assembly quality
-time_estimation: 3H
+time_estimation: 6h
+level: Intermediate
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 contributors:
-- Anthony Bretaudeau
-- Alexandre Cormier
-- Erwan Corre
-- Laura Leroi
-- Stéphanie Robin
+- abretaud
+- alexcorm
+- r1corre
+- lleroi
+- stephanierobin
 
 ---
 
@@ -26,8 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-In this tutorial, we will assemble a Mucor mucedo genome from PacBio sequencing data. These data were obtained from NCBI (SRR8534473 SRR8534474 SRR8534475). The quality of the assembly obtained will be analyzed, in particular by comparing it to a reference assembly.
+In this tutorial, we will assemble a genome of a species of fungi in the family Mucoraceae, *Mucor mucedo*, from PacBio sequencing data. These data were obtained from NCBI (SRR8534473 SRR8534474 SRR8534475). The quality of the assembly obtained will be analyzed, in particular by comparing it to a reference assembly, obtained with Falcon assembler, and available on [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
 
 
 > ### Agenda
@@ -42,11 +45,11 @@ In this tutorial, we will assemble a Mucor mucedo genome from PacBio sequencing 
 
 
 # Get data
-We will use long reads sequencing data (PacBio sequencing) which are a subset data from NCBI
+We will use long reads sequencing data (PacBio sequencing) of Mucor mucedo genome. These data are a subset of data from NCBI. We will also use a reference genome assembly downloaded from from [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
 
 ## Get data from Zenodo
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload from Zenodo
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo](https://zenodo.org/record/5702408)
@@ -56,11 +59,9 @@ We will use long reads sequencing data (PacBio sequencing) which are a subset da
 >   https://zenodo.org/record/5702408/files/SRR8534474_subreads.fastq.gz?download=1
 >   https://zenodo.org/record/5702408/files/SRR8534475_subreads.fastq.gz?download=1
 >    ```
->    
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype are  `fastqsanger.gz`
@@ -70,10 +71,24 @@ We will use long reads sequencing data (PacBio sequencing) which are a subset da
 >
 {: .hands_on}
 
+## Get data from JGI website
+
+> ### {% icon hands_on %} Hands-on: Data upload from JGI website
+>
+> 1. Create a JGI account in registration page of JGI : [JGI registration](https://contacts.jgi.doe.gov/registration/new)
+> 2. Sign in JGI Genome Portal [JGI Genome Portal](https://genome.jgi.doe.gov/portal/)
+> 3. Genome assembly is available here : [JGI Mucor mucedo](https://genome.jgi.doe.gov/portal/Mucmuc1/Mucmuc1.download.html)
+> 4. Import fasta assembly file `Mucmuc1_AssemblyScaffolds.fasta` on your computer locally
+> 5. Upload this file on Galaxy
+>
+> 2. Check that the datatype is `fasta`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+>
+{: .hands_on}
+
 # Genome Assembly
-
-
-
 
 ## Assembly with **Flye**
 
@@ -87,57 +102,66 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 >    - *"Number of polishing iterations"*: `1`
 >    - *"Reduced contig assembly coverage"*: `Disable reduced coverage for initial disjointing assembly`
 >    
->     The tool produces four dataset outputs : consensus, assembly graph, graphical fragment assembly and assembly info
+>     The tool produces four datasets : consensus, assembly graph, graphical fragment assembly and assembly info
 
 
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> ### {% icon question %} Question
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What the different datasets obtained correspond to ?
+
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The first dataset (consensus) is a fasta file containing the final assembly (1397 contigs/scaffolds).
+> > The second and third dataset are assembly graph files
+> > The fourth dataset is a tabular file (assembly_info) containing extra information about contigs/scaffolds.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Assembly metrics with **Fasta Statistics**
+## Genome assembly metrics with **Fasta Statistics**
 
-*Fasta statistics* displays the summary statistics for a fasta file. In the case of a genome assembly, we need to calculate different metrics such as assembly size, scaffolds number or N50 value. These metrics will allow us to evaluate the quality of this assembly.
+***Fasta statistics*** displays the summary statistics for a fasta file. In the case of a genome assembly, we need to calculate different metrics such as assembly size, scaffolds number or N50 value. These metrics will allow us to evaluate the quality of this assembly.
 
-> ### {% icon hands_on %} Hands-on: Fasta statistics
+> ### {% icon hands_on %} Hands-on: Fasta statistics on Flye assembly
 >
 > 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"fasta or multifasta file"*: `consensus` (output of **Flye** {% icon tool %})
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> ### {% icon hands_on %} Hands-on: Fasta statistics on reference assembly
+>
+> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.3) %} with the following parameters:
+>    - {% icon param-file %} *"fasta or multifasta file"*: `Mucmuc1_AssemblyScaffolds.fasta`
+>
+
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Compare the different metrics obtained for Flye assembly and reference genome.
+> 2. What can you conclude about the quality of this new assembly ?
+
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. We compare the metrics of the two genome assembly :
+> > The Flye assembly : 1397 contigs/scaffolds, N50 = 201 kb, length max = 776 kb, size = 48.8 Mb, 36.6% GC
+> > The reference genome : 456 contigs/scaffolds, N50 = 202 kb, length max = 776 kb, size = 46.1 Mb, 36.7% GC
+> >
+> > 2. Metrics are very similar, Flye generated an assembly with a quality similar to that of the reference genome
 > >
 > {: .solution}
 >
 {: .question}
 
-## Assemblies comparison with **Quast**
+## Genome assemblies comparison with **Quast**
 
-QUAST = QUality ASsessment Tool is a tool to evaluate genome assemblies by computing various metrics. We will use to compare our genome assembly with a reference genome.
+Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessment Tool***. Quast is a tool to evaluate genome assemblies by computing various metrics and to compare genome assembly with a reference genome. The manual of Quast is here : [Quast](http://quast.sourceforge.net/docs/manual.html#sec3)
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -146,22 +170,26 @@ QUAST = QUality ASsessment Tool is a tool to evaluate genome assemblies by compu
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `consensus` (output of **Flye** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `Yes`
->        - {% icon param-file %} *"Reference genome"*: `Mucmuc1_AssemblyScaffolds.fasta"
+>        - {% icon param-file %} *"Reference genome"*: `Mucmuc1_AssemblyScaffolds.fasta`
 >        - *"Type of organism"*: `Fungus: use of GeneMark-ES for gene finding, ...`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> ### {% icon question %} Question
 >
-> 1. Question1?
-> 2. Question2?
+> What additional informations are generated by Quast, by comparing the Fasta statistics outputs ?
+
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > Quast allows us to compare Flye assembly to the reference genome :
+> > Genome fraction (90.456 %) is the percentage of aligned bases in the reference genome.
+> > Duplication ratio (1.097) is the total number of aligned bases in the assembly divided by the total number of aligned bases in the reference genome  
+> > Largest alignment (698141) is the length of the largest continuous alignment in the assembly.
+> > Total aligned length (45.4 Mb) is the total number of aligned bases in the assembly.
+> > Quast also generates some plots :
+> > Cumulative length plot shows the growth of contig lengths. On the x-axis, contigs are ordered from the largest to smallest. The y-axis gives the size of the x largest contigs in the assembly.
+> > GC content plot shows the distribution of GC content in the contigs
 > >
 > {: .solution}
 >
@@ -169,7 +197,9 @@ QUAST = QUality ASsessment Tool is a tool to evaluate genome assemblies by compu
 
 ## Genome assembly assessment with **BUSCO**
 
-> ### {% icon hands_on %} Hands-on: BUSCO
+***BUSCO (Benchmarking Universal Single-Copy Orthologs)*** allows a measure for quantitative assessment of genome assembly based on evolutionarily informed expectations of gene content. Details for this tool are here : [Busco website](https://busco.ezlab.org/)
+
+> ### {% icon hands_on %} Hands-on: BUSCO on Flye assembly
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `consensus` (output of **Flye** {% icon tool %})
@@ -180,32 +210,32 @@ QUAST = QUality ASsessment Tool is a tool to evaluate genome assemblies by compu
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: BUSCO on reference assembly
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `Mucmuc1_AssemblyScaffolds.fasta`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage"*: `Select lineage`
+>        - *"Lineage"*: `Mucorales`
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> Compare the number of BUSCO genes identified in the Flye assembly and the reference genome. What do you observe ?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > Short summary generated by BUSCO indicates that reference genome contains 2327 Complete BUSCOs (of which 2302 are single-copy and 25 are duplicated), 13 fragmented ans 109 missing BUSCOs. Flye assembly contains 2345 complete BUSCOs (2312 single-copy and 33 duplicated), 15 fragmented and 89 missing BUSCOs. These two assemblies have similar number of complete, fragmented and missing BUSCOs genes.
 > >
 > {: .solution}
 >
 {: .question}
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This pipeline shows how generate and evaluate genome assembly from long reads PacBio data.
