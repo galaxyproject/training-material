@@ -80,10 +80,10 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/genome_masked.fasta
->    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/dea7d889-8baa-4c58-87b9-6a26d7147688/SwissProt_subset.fasta
+>    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/genome_masked.fasta
+>    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/rnaseq_R1.fq.gz
+>    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/rnaseq_R2.fq.gz
+>    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/SwissProt_subset.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -191,19 +191,60 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 
 > ### {% icon comment %} Comments
 >
-> - For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analyis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
+> - For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analysis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
 > - It is possible to enable the *"Is it a fungus species?"* option in Funannotate: it launched an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the RNASeq data available. For this tutorial we leave this option to `No`. You can test it with real data, but be sure to compare the result with and without this option.
+> - For real data analysis you can consider enabling the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"*. If you have enough data, you might get better results as there will be an additional training step for augustus (at the cost of a longer runtime).
 {: .comment}
 
 This tool produces several output dataset, in particular:
 
-- the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the analysed genome.
+- the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the genome.
 - the  CDS, transcript and protein sequences of all the genes predicted by Funannotate
 - some statistics and reports
 
-TODO explain validation report + question on this?
+> ### {% icon comment %} Comments
+>
+> This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.
+{: .comment}
 
-This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.
+Let's have a closer look at the output of our annotation. First display the `stats` dataset: the first par of the file contains some information on how funannotate was launched. If you go to the bottom, you'll find a few interesting numbers in the `annotation` section:
+
+- the total number of genes and mRNA
+- the average length of genes, exons, proteins
+- the number of single/multiple exon transcripts
+
+These number alone are interesting, but not fully informative on the quality of the annotation. For example, for the number of genes, you want a 'good' number based on what you expect for this species (a too big number can mean that genes are fragmented, and a too small number can mean that some genes were not annotated at all). These numbers can help when comparing an annotation with other ones performed with other parameters or tools.
+
+To get a better picture of the quality of the result, we will run BUSCO.
+
+## Evaluation with **Busco**
+
+[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of an annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `fa_proteins` (output of **Funannotate functional** {% icon tool %})
+>    - *"Mode"*: `annotated gene sets (protein)`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: `shortsummary text` and `summary image`
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?
+>
+> > ### {% icon solution %} Solution
+> >
+> > You should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.
+> >
+> > That's a quite good result as running BUSCO on the genome itself gives a very close number () (see Fly assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
+> >
+> > To improve the result you can consider using more RNASeq data, and using the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"* option.
+> {: .solution}
+>
+{: .question}
 
 # Functional annotation
 
@@ -225,6 +266,8 @@ The aim of the previous step is to predict the position of the genes on the geno
 
 The output of this tool is a tabular file, where each line represents a gene from our annotation, with the functional annotation that was found by EggNOG-mapper. It includes a predicted protein name, GO terms, EC numbers, KEGG identifiers, ...
 
+Display the file and explore which kind of identifiers were found by EggNOG Mapper.
+
 ## **InterProScan**
 
 [InterPro](https://www.ebi.ac.uk/interpro/) is a huge integrated database of protein families. Each family is characterized by one or muliple signatures (i.e. sequence motifs) that are specific to the protein family, and corresponding functional annotation like protein names or [Gene Ontology (GO)](http://www.geneontology.org/). A good proportion of the signatures are manually curated, which means they are of very good quality.
@@ -236,12 +279,22 @@ The output of this tool is a tabular file, where each line represents a gene fro
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
->    - *"Output format"*: `XML`
->    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you use InterProScan for commercial use)
+>    - *"Applications to run"*: unselect `PROSITE Profiles` and `SUPERFAMILY` (see why below)
+>    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
+>    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
 >
 {: .hands_on}
 
-The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that ere found by InterProScan.
+> ### {% icon comment %} Comments
+>
+> Due to bugs in InterProScan, `PROSITE Profiles` and `SUPERFAMILY` don't work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.
+{: .comment}
+
+The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that were found by InterProScan.
+
+Display the TSV file and explore which kind of results were found by InterProScan.
+
+The XML file will be used in the next step.
 
 ## Integrating the results
 
@@ -260,32 +313,7 @@ Now we have a structural annotation, and the results of both **EggNOG Mapper** a
 >
 {: .hands_on}
 
-# Evaluation and visualisation
-
-TODO look at the "stats" output of funannotate predict
-
-## Sub-step with **Busco**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `fa_proteins` (output of **Funannotate functional** {% icon tool %})
->    - *"Mode"*: `annotated gene sets (protein)`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Sub-step with **JBrowse**
+# Visualisation with a genome browser
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -312,15 +340,6 @@ TODO look at the "stats" output of funannotate predict
 >                    - *"Track Type"*: `BAM Pileups`
 >                        - {% icon param-file %} *"BAM Track Data"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >                        - *"Autogenerate SNP Track"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
