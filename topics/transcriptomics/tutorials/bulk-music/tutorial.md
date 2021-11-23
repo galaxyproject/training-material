@@ -570,3 +570,5 @@ Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabula
 
 
 ![workflow_dendro.png](../../images/bulk-music/workflow_dendro.png "Workflow for generating a dendrogram and clustering cells upon it")
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
