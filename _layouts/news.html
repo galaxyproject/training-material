@@ -20,7 +20,7 @@ layout: page
  {% assign coverimagealt = "GTN logo with a multi-coloured star and the words Galaxy Training Network" %}
 {% endif %}
 
-<div class="newsitem flex-row">
+<div class="newsitem">
 {% if page.contributors %}
 <div class="contributors-line">By: {% include _includes/contributor-list.html contributors=page.contributors badge=true %}</div>
 {% endif %}
@@ -31,11 +31,9 @@ layout: page
 
 
 <hr/>
-<div class="col-md-12">
-  <img class="float-right" alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
-</div>
 
-<div class="col-md-8">
+<div class="row">
+  <div class="col-md-8">
 
   {{content}}
 
@@ -46,6 +44,11 @@ layout: page
   {% if page.tutorial %}
   <a href="{{site.baseurl}}/{{page.tutorial}}" class="btn btn-primary">View Tutorial</a>
   {% endif %}
+  </div>
+
+  <div class="col-md-4">
+    <img alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
+  </div>
 </div>
 </div>
 
