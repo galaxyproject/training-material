@@ -4,16 +4,17 @@ layout: tutorial_hands_on
 title: "Quality Control"
 zenodo_link: "https://doi.org/10.5281/zenodo.61771"
 questions:
-  - How to perform quality control of NGS raw data (FASTQ)?
+  - How to perform quality control of NGS raw data?
   - What are the quality parameters to check for a dataset?
   - How to improve the quality of a dataset?
 objectives:
-  - Assess FASTQ quality using FASTQE 🧬😎 and FastQC
-  - Perform quality correction with Cutadapt
+  - Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC
+  - Assess long reads FASTQ quality using Nanoplot and PycoQC
+  - Perform quality correction with Cutadapt (short reads)
   - Summarise quality metrics MultiQC
   - Process single-end and paired-end data
 follow_up_training:
-  -
+  - 
     type: "internal"
     topic_name: sequence-analysis
     tutorials:
@@ -29,12 +30,13 @@ key_points:
 contributors:
   - bebatut
   - mblue9
+  - alexcorm
 ---
 
 # Introduction
 {:.no_toc}
 
-During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a short sequence is generated, also called a **read**, which is simply a succession of nucleotides.
+During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.
 
 Modern sequencing technologies can generate a massive number of sequence reads in a single experiment. However, no sequencing technology is perfect, and each instrument will generate different types and amount of errors, such as incorrect nucleotides being called. These wrongly called bases are due to the technical limitations of each sequencing platform.
 
@@ -139,7 +141,7 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 When looking at the file in Galaxy, it looks like most the nucleotides have a high score (`G` corresponding to a score 38). Is it true for all sequences? And along the full sequence length?
 
 
-# Assess quality with FASTQE 🧬😎
+# Assess quality with FASTQE 🧬😎 - short reads only
 
 To take a look at sequence quality along all sequences, we can use [FASTQE](https://fastqe.com/). It is an open-source tool that provides a simple and fun way to quality control raw sequence data and print them as emoji. You can use it to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
 
@@ -193,14 +195,14 @@ Phred Quality Score | ASCII code | Emoji
 {: .question}
 
 
-# Assess quality with FastQC
+# Assess quality with FastQC - short & long reads
 
 An additional or alternative way we can check sequence quality is with [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). It provides a modular set of analyses which you can use to check whether your data has any problems of which you should be aware before doing any further analysis.  We can use it, for example, to assess whether there are known adapters present in the data. We'll run it on the FASTQ file.
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
 > 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters
->    - {% icon param-files %} *"Short read data from your current history"*: `Cutadapt Read 1 Output`
+>    - {% icon param-files %} *"Short read data from your current history"*: `female_oral2.fastq-4143.gz`
 >
 > 2. Inspect the generated HTML file
 >
@@ -544,8 +546,106 @@ We tried to explain here there different FastQC reports and some use cases. More
 > You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding reads then will be filtered out and you lose them.
 {: .comment}
 
+# Assess quality with Nanoplot - Long reads only
 
-# Trim and filter
+In case of long reads, we can check sequence quality with [Nanoplot](https://github.com/wdecoster/NanoPlot/). It provides a basic statistics with nice plots for a fast quality control overview for long reads.
+
+> ### {% icon hands_on %} Hands-on: Quality check of long reads
+> 1. Create a new history for this part and give it a proper name
+> 
+> 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5720492)
+>
+>    ```
+>    https://zenodo.org/record/5720492/files/m64011_190830_220126.Q20.subsample.fastq.gz
+>    ```
+> 
+> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+> - {% icon param-files %} *"Files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
+> - {% icon param-select %} *"Specify the bivariate format of the plots."*: `Select all`
+> - {% icon param-select %} *"Show the N50 mark in the read length histogram."*: `Yes`
+>
+> 4. Inspect the generated HTML file
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1 - What is the mean Qscore ?
+> 
+> > ### {% icon solution %} Solution
+> > The Qscore is around Q32.
+> > In case of PacBio CLR and Nanopore, it's around Q12 and close to Q31 for Illumina (NovaSeq 6000).
+> {: .solution }
+> 
+> 2 - What is the median, mean and N50?
+> > ### {% icon solution %} Solution
+> > The median, the mean read length and the N50 as well are close to 18,000bp. 
+> > For PacBio HiFi reads, the majority of the reads are generally near this value as the library preparation include a size selection step.
+> > For other technologies like PacBio CLR and Nanopore, is larger and mostly depends on the quality of your DNA extraction.
+> {: .solution }
+> 
+> 3 - Looking at "Read lengths vs Average read quality plot using dots plot". Did you notice something unusually with the Qscore? Can you explain it?
+> > ### {% icon solution %} Solution
+> > There is no reads under Q20. 
+> > The qualification for HiFi reads is 1) A minimal number of pass >= 3; 2) A final Qscore >=20.
+> {: .solution }
+{: .question}
+
+# Assess quality with PycoQC - Nanopore only
+
+[PycoQC](https://github.com/tleonardi/pycoQC) is a data visualisation and quality control tool for nanopore data. In contrast to FastQC/Nanoplot it needs a specific sequencing_summary.txt file generated by Oxford nanopore basecallers such as Guppy or the older albacore basecaller.
+
+One of the strengths of PycoQC is that it is interactive and highly customizable, e.g., plots can be cropped, you can zoom in and out, sub-select areas and export figures.
+
+> ### {% icon hands_on %} Hands-on: Quality check of Nanopore reads
+> 1. Create a new history for this part and give it a proper name
+> 
+> 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5720492)
+>
+>    ```
+>    https://zenodo.org/record/5720492/files/nanopore_basecalled-guppy.fastq.gz
+>    https://zenodo.org/record/5720492/files/sequencing_summary.txt
+>    ```
+>
+> 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
+> 
+>    - {% icon param-files %} *"A sequencing_summary file "*: `sequencing_summary.txt`
+>
+> 4. Inspect the webpage output from PycoQC
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1 - How many reads do you have in total?
+> > ### {% icon solution %} Solution
+> > ~270k reads in total (see the Basecall summary table, "All reads")
+> > For most of basecalling profiles, Guppy will assign reads as "Pass" if the read Qscore is at least equal to 7.
+> {: .solution }
+> 
+> 2 - What is the median, minimum and maximum read length, what is the N50?
+> > ### {% icon solution %} Solution
+> > The median read length and the N50 can be found for all as well as for all passed reads, i.e., reads that passed Guppy quality settings (Qscore >= 7), in the basecall summary table
+> > For the minimum (195bp) and maximum (256kbp)read lengths, it can be found with the read lengths plot.
+> {: .solution }
+> 
+> 3 - What do the mean quality and the quality distribution of the run look like?
+> > ### {% icon solution %} Solution
+> > The majority of the reads are between 8< Qscore of <11 which is standard for Nanopore data.
+> > Beware that for the same data, the basecaller (Albacor, Guppy) used, the model (fast, hac, sup) and the tool version can give different results.
+> {: .solution }
+> 
+> 4 - Did the read length change over time? What could the reason be?
+> > ### {% icon solution %} Solution
+> > In the current example the read length increases over the time of the sequencing run.
+> > One explanation is that the adapter density is higher for lots of short fragments and therefore the chance of a shorter fragment to attach to a pore is higher. Also, shorter molecules may move faster over the chip. 
+> > Over time, however, the shorter fragments are becoming rarer and thus more long fragments attach to pores and are sequenced.
+> {: .solution }
+{: .question}
+
+For detailed usage and examples see the [PycoQC documentation](https://a-slide.github.io/pycoQC/) 
+
+# Trim and filter - short reads
 
 The quality drops in the middle of these sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. Trimming can help to increase the number of reads the aligner or assembler are able to succesfully use, reducing the number of reads that are unmapped or unassembled. In general, quality treatments include:
 
@@ -872,7 +972,9 @@ These datasets can be used for the downstream analysis, e.g. mapping.
 # Conclusion
 {:.no_toc}
 
-In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information. This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:
+In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information.
+This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. 
+Quality control steps are similar for any type of sequencing data:
 
-- Quality assessment with tools like **FASTQE** {% icon tool %} and **FastQC** {% icon tool %}
-- Trimming and filtering with a tool like **Cutadapt** {% icon tool %}
+- Quality assessment with tools like **FASTQE** {% icon tool %}, **FastQC** {% icon tool %}, **Nanoplot** {% icon tool %} and **PycoQC** {% icon tool %}
+- Trimming and filtering for **short reads** with a tool like **Cutadapt** {% icon tool %}
