@@ -1,0 +1,31 @@
+name: Send news to Matrix
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # We'll run this daily at noon.
+    - cron:  '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  runner-job:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # BEGIN Dependencies
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.5"
+      # END Dependencies
+
+      - name: Send announcements to matrix
+        run: |
+            commit=$(git log --since "24 hours ago" --format=%H | tail -n 1)
+            ruby bin/news.rb -p "${commit}~1" --matrix-post
+        env:
+            MATRIX_ACCESS_TOKEN: ${{ github.matrix_access_token }}

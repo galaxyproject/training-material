@@ -62,7 +62,7 @@ We have now a tabular file with about 10,001 lines and many columns.
 
 > ### {% icon question %} Questions
 > 1. What do the lines in the files represent?
-> 2. What are the columns 1, 2, 3 and 51 of the generated file?
+> 2. What are the columns 1, 2, 3 and 54 of the generated file?
 >
 > > ### {% icon solution %} Solution
 > > 1. Each line represent an observation of Chrysemys picta, with its location, and some other metadata
@@ -74,7 +74,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. **Cut columns** {% icon tool %} with the following parameters
->    - *"Cut columns"*: `c1,c2,c3,c51`
+>    - *"Cut columns"*: `c1,c2,c3,c54`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Get species occurrences data**
 >
@@ -90,7 +90,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    > How many occurrences have been conserved?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 64.55% of the occurrences (6,456) are conserved
+>    > > 63.06% of the occurrences (6,306) are conserved
 >    > {: .solution }
 >    {: .question}
 >

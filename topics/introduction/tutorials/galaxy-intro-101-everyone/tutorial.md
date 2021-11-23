@@ -60,7 +60,7 @@ Not everyone has the same background and that's ok!
 ## What does Galaxy look like?
 
 > ### {% icon hands_on %} Hands-on: Log in or register
-> 1. Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)
+> 1. Open your favorite browser (Chrome/Chromium, Safari, or Firefox, but not Internet Explorer/Edge!)
 > 2. Browse to a [Galaxy instance](https://galaxyproject.org/use/) of your choice
 > 3. Choose *Login or Register* from the navigation bar at the top of the page
 > 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
@@ -70,7 +70,7 @@ Not everyone has the same background and that's ok!
 >   > ### {% icon comment %} Different Galaxy servers
 >   > The particular Galaxy server that you are using may look slightly different than the one shown in this training.
 >   > Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look and feel to some extent.
->   > The basic functionaity will be rather similar across instances, so don't worry!
+>   > The basic functionality will be rather similar across instances, so don't worry!
 >   {: .comment}
 >
 {: .hands_on}
@@ -92,7 +92,7 @@ Galaxy allows you to create analysis histories. A **history** can be thought of 
 Think of a workflow as a cooking recipe with a list of ingredients (datasets) and a set of instructions
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
-a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterwards.
+a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterward.
 That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.
 
 The finalized pipelines can be generalized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
@@ -149,8 +149,8 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 # Pre-processing
 
-Often, one or more data pre-processing step(s) may be required to proceed with an analysis.
-In our case, the tools we will use require tab-separated input data, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:
+Often, one or more data pre-processing step(s) may be required to proceed with the analysis.
+In our case, the tools we will use require tab-separated input data and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:
 
 - Format conversion
 - Header removal
@@ -285,6 +285,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 Now we have our answer! There are 3 different Iris species in our file.
 
 Like we mentioned before, there are often multiple ways to reach your answer in Galaxy. For example, we could have done this with just a single tool, **Group** {% icon tool %} as well.
+(This tool also can be searched for by the term "grouping" )
 
 
 > ### {% icon hands_on %} Exercise: Grouping dataset
