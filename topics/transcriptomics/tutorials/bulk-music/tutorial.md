@@ -14,9 +14,17 @@ time_estimation: '2H'
 key_points:
 - Deconvolution tools show individual cell type proportions in bulk RNA-seq data
 - Bulk RNA-seq can be complimented by scRNA-seq data
+requirements:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-intro
 contributors:
 - mtekman
 - nomadscientist
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
