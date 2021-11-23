@@ -214,7 +214,7 @@ Orange:8, Peach:9.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 4. Rename the datasets as `train_X`, `train_y`, `test_X`, and `test_y` respectively.
+> 4. Rename the datasets as `train_X_10`, `train_y_10`, `test_X_10`, and `test_y_10` respectively.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
@@ -230,6 +230,49 @@ In this section, we define a CNN and train it using fruit 360 dataset training d
 goal is to learn a model such that given an image of a fruit/vegetable, we can predict 
 what fruit/vegetable it is (Labels are in the range of 0 to 9). We then evaluate the trained 
 CNN on the test dataset and plot the confusion matrix.
+
+In order to train the CNN, we must have the One-Hot Encoding (OHE) representation of the training
+labels. This is needed to calculate the categorical cross entropy loss function. OHE encodes labels
+as a **one-hot** numeric array, where only one element is 1 and the rest are 0's. For example, if
+we had 3 fruits (apple, orange, banana) and their labels were 1, 2, and 3. The OHE
+represntation of apple would be (1,0,0), the OHE representation of orange would be (0,1,0), and the
+OHE representation of banana would be (0,0,1). For apple with label 1, the first element of array
+is 1 (and the rest are 0's); For Orange with label 2, the second element of the array is 1 (and the
+rest are 0's); And for Banana with label 3, the third element of the array is 1 (and the rest are 0's).
+We have 10 fruits/vegetables in our dataset and we would just have an array of size 10, where only one
+element is 1, corresponding to fruit/vegetable label, and the rest are 0's.
+
+
+In order to calculate the OHE of labels, we must first extract the labels column from train_y_10 file.
+train_y_10 file has 3 columns: Label_name (string representation of label), file_name (name of fruit/vegetable
+image file), and Label (integer representation of label). We extract Label from train_y_10, and then calcuate
+its OHE representation.
+
+### **Extract the Label column from train_y_10**
+
+> ### {% icon hands_on %} Hands-on: Advanced Cut
+>
+> - {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
+>    - *"File to cut"* : Select `train_y_10`
+>    - *"Operation"* : Select `Keep`
+>    - *"Delimited by"*: Select `Tab`
+>    - *"Cut by"*: Select `fields`
+>    - *"List of fields"*: Select `Column: 3`
+>    - Click *"Execute"*
+>
+{: .hands_on}
+
+### **Create One-Hot Encoding (OHE) representation of training labels**
+
+> ### {% icon hands_on %} Hands-on: One-Hot Encoding
+>
+> - {% tool [To categorical](https://usegalaxy.org/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
+>    - *"Input file"* : Select the output of the previous step.
+>    - *"Does the dataset contain header?"* : Select `Yes`
+>    - *"Total number of classes"*: Select `10`
+>    - Click *"Execute"*
+>
+{: .hands_on}
 
 ### **Create a deep learning model architecture**
 
@@ -329,7 +372,7 @@ the weights/biases. *batch_size* decides the size of this subset. The model buil
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `train_X_10` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->        - *"Dataset containing class labels or target values"*: Select `train_y_10` dataset
+>        - *"Dataset containing class labels or target values"*: Select the OHE representation of `train_y_10` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Execute"*
 >
@@ -364,7 +407,8 @@ in the test dataset.
 > - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `test_y_10`
->    - *"Choose how to select data by column:"*: `All columns`
+>    - *"Choose how to select data by column:"*: `Select columns by column header name(s)`
+>    	- *"Type header name(s):"*: `Label`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
 >    - Click *"Execute"*
