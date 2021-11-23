@@ -102,7 +102,7 @@ The first one (**Funannotate assembly clean**) compares all the sequences betwee
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to clean"*: `assembly_masked.fasta` (Input dataset)
+>    - {% icon param-file %} *"Assembly to clean"*: `genome_masked.fasta` (Input dataset)
 >
 {: .hands_on}
 
@@ -179,7 +179,7 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 >        - *"Strain name"*: `muc1`
 >        - *"Is it a fungus species?"*: `No`
 >    - In *"Evidences"*:
->        - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark-ET"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>        - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark-ET"*: `mapped.bam` (output of **RNA STAR** {% icon tool %})
 >        - *"Select protein evidences"*: `Custom protein sequences`
 >            - {% icon param-file %} *"Proteins to map to genome"*: `SwissProt_subset.fasta` (Input dataset)
 >    - In *"Busco"*:
@@ -215,7 +215,9 @@ Let's have a closer look at the output of our annotation. First display the `sta
 
 These number alone are interesting, but not fully informative on the quality of the annotation. For example, for the number of genes, you want a 'good' number based on what you expect for this species (a too big number can mean that genes are fragmented, and a too small number can mean that some genes were not annotated at all). These numbers can help when comparing an annotation with other ones performed with other parameters or tools.
 
-To get a better picture of the quality of the result, we will run BUSCO.
+To get a better picture of the quality of the result, we will run BUSCO in the next step.
+
+Before moving on, have a quick look at the `tbl2asn error summary report` output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identifid potential problems in the `tbl2asn genome validation report` dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to anually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.
 
 ## Evaluation with **Busco**
 
@@ -279,7 +281,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
->    - *"Applications to run"*: unselect `PROSITE Profiles` and `SUPERFAMILY` (see why below)
+>    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY` (see why below)
 >    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
 >
@@ -287,7 +289,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > ### {% icon comment %} Comments
 >
-> Due to bugs in InterProScan, `PROSITE Profiles` and `SUPERFAMILY` don't work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.
+> Due to bugs in InterProScan, `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY` don't work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.
 {: .comment}
 
 The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that were found by InterProScan.
@@ -300,26 +302,37 @@ The XML file will be used in the next step.
 
 Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, we will now combine all this data into a single file that will contain the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
 
+If you plan to submit this annotation to NCBI, you need to prepare a file containing a few metadata. This can be done online on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):
+
+![NCBI submission template](../../images/ncbi_template.png "Example of a filled form to generate an NCBI submission template.")
+
+When filled, you can click on the **Create template** button: you will be able to download an `.sbt` file that you should then upload to your Galaxy history.
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy1) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
->        - {% icon param-file %} *"Genome annotation in genbank format"*: `annot_gbk` (output of **Funannotate predict annotation** {% icon tool %})
->    - {% icon param-file %} *"NCBI submission template file"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Genome annotation in genbank format"*: `annotation (genbank)` (output of **Funannotate predict annotation** {% icon tool %})
+>    - {% icon param-file %} *"NCBI submission template file"*: `template.sbt` (the fie downloaded from NCBI website)
 >    - {% icon param-file %} *"Eggnog-mapper annotations file"*: `annotations` (output of **eggNOG Mapper** {% icon tool %})
->    - {% icon param-file %} *"InterProScan5 XML file"*: `outfile_xml` (output of **InterProScan** {% icon tool %})
+>    - {% icon param-file %} *"InterProScan5 XML file"*: `InterProScan XML` (output of **InterProScan** {% icon tool %})
+>    - {% icon param-file %} *"BUSCO models"*: `mucorales (orthodb 10)`
 >    - *"Strain name"*: `muc1`
->    - *"Which outputs should be generated"*: ``
+>    - *"Which outputs should be generated"*: Select all
 >
 {: .hands_on}
 
+TODO explain https://funannotate.readthedocs.io/en/latest/predict.html#submitting-to-ncbi-what-should-i-know
+
 # Visualisation with a genome browser
+
+With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with **RNA STAR** {% icon tool %}.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Select the reference genome"*: `genome_masked.fasta` (Input dataset)
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
@@ -328,28 +341,31 @@ Now we have a structural annotation, and the results of both **EggNOG Mapper** a
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `gff3` (output of **Funannotate functional** {% icon tool %})
->                        - *"This is match/match_part data"*: `Yes`
->                        - *"JBrowse Track Type [Advanced]"*: `Neat HTML Features`
->                        - In *"JBrowse Feature Score Scaling & Coloring Options [Advanced]"*:
->                            - *"Color Score Algorithm"*: `Ignore score`
->                                - *"Color Selection"*: `Automatically selected`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `RNASeq`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BAM Pileups`
->                        - {% icon param-file %} *"BAM Track Data"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>                        - {% icon param-file %} *"BAM Track Data"*: `mapped.bam` (output of **RNA STAR** {% icon tool %})
 >                        - *"Autogenerate SNP Track"*: `Yes`
 >
 {: .hands_on}
 
+Click on the newly created dataset's eye to display it. You will see a JBrowse genome browser. You can have a look at the [JBrowse tutorial]({% link topics/visualisation/tutorials/jbrowse/tutorial.md %}) for a more in-depth description of JBrowse.
+
+Enable the annotation track, and the SNPs/Coverage tracks on the left side of JBrowse, then navigate along the genome. You will see the different gene models predicted by Funannotate.
+
+If you zoom to a specific gene, and look at the RNASeq tracks, you will see light grey regions corresponding to portions of the genomes where RNASeq were mapped, and darker grey regions corresponding to introns (= regions were some reads were found to match both the end of an exon, and the start of the next one). You can enable the other RNASeq track to display each individual read that was mapped on the genome.
+
+If you navigate along the genome, you will find genes with very low RNASeq coverage: this demonstrate how Funannotate is able to predict genes not only with RNASeq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using RNASeq data.
+
 # Comparing annotations
 
-# Submission to NCBI
-
+TODO write this (if time allow)
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Congratulations for reaching the end of this tutorial! Now you know how to perform a structural and functional annotation of a new eukaryotic genome, using Funannotate, EggNOG mapper and InterProScan. You also learned how Funannotate can help you in the submission process to NCBI. And you learned how to visualise your new annotation using JBrowse.
+
+An automatic annotation of an eukaryotic genome is unfortunately rarely perfect. If you inspect some predicted genes (or look at the `tbl2asn genome validation report` output of Funannotate), you may find some mistakes made by Funannotate, or potential problems, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) can help a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) for more details.
