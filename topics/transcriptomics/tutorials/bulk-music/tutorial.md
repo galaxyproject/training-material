@@ -9,7 +9,6 @@ tags:
   - mouse
   - human
   - deconvolution
-  - transcriptomics
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
