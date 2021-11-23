@@ -8,10 +8,11 @@ function cleanup(){
 trap cleanup EXIT
 
 # We have an old commit ID, so we need to figure out which slides to build.
+videos="$(find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_*ES.html')"
 if [[ "${PREVIOUS_COMMIT_ID}" != "none" ]]; then
-	changed_slides="$(join <(find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_ES.html' | xargs ./bin/filter-resource-metadata video | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
+	changed_slides="$(join <(echo "$videos" | xargs ./bin/filter-resource-metadata video | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
 else
-	changed_slides="$(find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_ES.html' | xargs ./bin/filter-resource-metadata video)"
+	changed_slides="$(echo "$videos" | xargs ./bin/filter-resource-metadata video)"
 fi
 
 $(npm bin)/http-server -p 9876 _site &

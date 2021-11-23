@@ -81,7 +81,13 @@ contents = lines[end_meta..-1]
 # This will be our final script
 blocks = [[metadata['title']]]
 if has_requirements
-  blocks.push(['Before diving into this slide deck, we recommend you to have a look at the following.'])
+  if m_lang == "en" then
+    blocks.push(['Before diving into this slide deck, we recommend you to have a look at the following.'])
+  elsif m_lang == "es" then
+    blocks.push(["Antes de profundizar en el contenido de estas diapositivas, te recomendamos que le des un vistazo a"])
+  else
+    blocks.push(['Before diving into this slide deck, we recommend you to have a look at the following.'])
+  end
 end
 if has_questions
   blocks.push(metadata['questions'])
