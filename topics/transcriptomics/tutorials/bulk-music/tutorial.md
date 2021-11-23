@@ -55,14 +55,6 @@ Solid tissues often contain closely related cell types which leads to collineari
 
 ![muse1](../../images/bulk-music/figure_method.jpg "Overview of MuSiC Suite")
 
-### Expression Set
-
-Expression Set objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. ExpressionSet class is derived from eSet, and requires a matrix named exprs as assayData member.
-
-The ExpressionSet class is designed to combine several different sources of information into a single convenient structure. An ExpressionSet can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
-
-The data in an ExpressionSet is complicated, consisting of expression data from microarray experiments (assayData; assayData is used to hint at the methods used to access different data components, as we will see below), ‘meta-data’ describing samples in the experiment (phenoData), annotations and meta-data about the features on the chip or technology used for the experiment (featureData, annotation), information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData), and a flexible structure to describe the experiment (experimentData). The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
-
 # Cell Proportion Estimation
 
 Here we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancreas dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subject and 4 with Type-II diabetes (T2D). If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
@@ -106,23 +98,123 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 
 ### Exploring the Datasets
 
-   TODO, exploring the datasets
+  We are told before we download the data, that:
+  * The bulk human pancreas dataset is 89 samples across 56 638 genes
+  * The single cell human pancreas datasets is 2209 cells across 24 453 genes.
+  
+  But what does this actually look like in the data?
+  
+> ### {% icon comment %} Comment: Inspecting Datasets
+> 
+> Note that at any time you can visually inspect the input datasets yourself by either:
+> * Expanding the dataset in the history panel clicking on the name of the dataset
+> * Or clicking on {% icon galaxy-eye %} icon to load them into the main window.
+{: .comment}
+
+Words 
+
+> ### {% icon hands_on %} Hands-on: Exploring the Datasets
+>
+> 1. Inspect the `#scrna` expression file
+>  
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What do the rows and columns correspond to?
+>    > 2. What do the values at each position mean?
+>    > 3. Has the data been normalised?
+>    > 4. Why are there so many zeroes?
+>    >
+>    > > ### {% icon solution  %} Solution
+>    > >
+>    > > ![expr_tab](../../images/bulk-music/peek_tabular_scrna_expr.png "Peeking at the tabular scRNA expression dataset")
+>    > >
+>    > > 1. Rows correspond to gene names, and columns to cell identifiers
+>    > > 2. These are the number of reads or counts for each gene for each cell
+>    > > 3. The data has not been normalised since the counts are integer and not decimal
+>    > > 4. Single-cell datasets can be very sparse for a variety of reasons relating to dropouts and biological factors. For more information, please see the [introduction single-cell RNA-seq slides#41](../../tutorials/scrna-intro/slides.html).
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 2. Inspect the `#bulk` expression file
+>  
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What do the rows and columns correspond to?
+>    > 2. In which field is there likely to be overlap with the `#scrna` dataset?
+>    >
+>    > > ### {% icon solution  %} Solution
+>    > >
+>    > > ![bulk_tab](../../images/bulk-music/peek_tabular_bulk_expr.png "Peeking at the tabular bulk RNA-seq expression dataset")
+>    > >
+>    > > 1. As before with the `#scrna` dataset, rows correspond to gene names and columns to sample identifiers.
+>    > > 2. The sample identifiers and the cell identifiers are completely different, but the gene names appear to be using the same symbols as the `#scrna` dataset, so the gene field is the common factor here.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 3. Inspect the `#scrna` phenotype file
+>  
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Does the phenotypes file describe genes or cells?
+>    > 2. What does the `SubjectName` field describe?
+>    > 3. What does the `cellType` field describe?
+>    >
+>    > > ### {% icon solution  %} Solution
+>    > >
+>    > > ![peek_tabular_scrna_pheno.png](../../images/bulk-music/peek_tabular_scrna_pheno.png "Peeking at the tabular scRNA phenotype dataset")
+>    > >
+>    > > 1. The first column is the index column, which uses the cell identifiers in the header of the `#scrna` expression file, so the phenotypes file describes the cells.
+>    > > 2. `SubjectName` tells us whether the cell (on that row) is labelled as Type-II diabetes or not, "Non T2D" or "T2D" respectively.
+>    > > 3. `cellType` tells us which cell type the cell was assigned to. This could be the results of prior-clustering and then labelling, or the cells could be labelled before analysis.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 4. Inspect the `#bulk` phenotype file
+>  
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Does the phenotypes file describe genes or samples?
+>    > 2. Is the `SubjectName` field related to the `SubjectName` field in the `#scrna` phenotypes file?
+>    > 3. What other factors are in the phenotypes file?
+>    > 4. Is the `tissue` field related to the `cellType` field in the `#scrna` phenotypes file?
+>    >
+>    > > ### {% icon solution  %} Solution
+>    > >
+>    > > ![peek_tabular_bulk_pheno.png](../../images/bulk-music/peek_tabular_bulk_pheno.png "Peeking at the tabular bulk RNA-seq phenotype dataset")
+>    > >
+>    > > 1. The first column is the index column, which uses the sample identifiers in the header of the `#bulk` expression file, so the phenotypes file describes the samples.
+>    > > 2. The `SubjectName` column uses a completely different set of identifiers from the `#scrna` phenotypes file so they should be assumed to be unrelated.
+>    > > 3. We see `age`, `bmi`, `hba1c`, `gender`, `tissue`. HbA1c appears to be a gene of interest related to a known phenotype.
+>    > > 4. **This is the question we wish to answer in the analysis**. Visually, there appears to be no overlap, but the "pancreatic islets" tissue likely consists of several cell types that show expressions profiles with some affinity  to the single cell types described in the `#scrna` phenotypes file.
+>    > >
+>    > {: .solution}
+>    {: .question}
+> 
+{: .hands_on}
+
+   The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions with HbA1c level in this analysis.
    
-   Section here about what the single cell data looks like. Dimensions, how many cells, etc.
-    
-   Section here about what the bulk cell data looks like. There are 89 subjects that we wish to assign cell types to.
-    
-   Section here about the phenotype data for the single cell data. Data has been clustered, important. 
-   How many unique cell types are there?
-   Maybe here we detect how many unique cell types there are?
-   Which ones will we be using for the next analysis?
-    
-   Section here about the phenotype data for the bulk data. Talk about the factors, and how hba1c is related to type-II diabetes (T2D), and we will look for the proportions of this factor in the deconvolved data.
-    
-   It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. Let’s look at the beta cell proportions with HbA1c level.
-
-
 ## Building the Expression Set objects
+
+For now we need to construct our Expression set objects that will be consumed by MuSiC. 
+
+> ### {% icon details %} Details: Expression Set
+>
+> ![expression_set](../../images/bulk-music/expressionset.png "Image from Stefano Monti") 
+>
+>
+> Expression Set objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. ExpressionSet class is derived from eSet, and requires a matrix named exprs as assayData member.
+> 
+> The ExpressionSet class is designed to combine several different sources of information into a single convenient structure. An ExpressionSet can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
+> 
+> The data in an ExpressionSet is complicated, consisting of expression data from microarray experiments (assayData; assayData is used to hint at the methods used to access different data components, as we will see below), ‘meta-data’ describing samples in the experiment (phenoData), annotations and meta-data about the features on the chip or technology used for the experiment (featureData, annotation), information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData), and a flexible structure to describe the experiment (experimentData). The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
+>
+> For more information please [read the specification](http://www.bioconductor.org/packages/release/bioc/vignettes/Biobase/inst/doc/ExpressionSetIntroduction.pdf) as well as the [image source](https://montilab.github.io/BS831/articles/docs/ExpressionSet.html).
+>
+{: .details}
 
 Here we shall build two ExpressionSet objects corresponding to the bulk and single-cell datatypes. 
 
@@ -405,11 +497,11 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. {% tool [MuSiC](music_deconvolution) %} with the following parameters:
->    - **Note: Shortcut!**
->      > ### {% icon tip %} Tip
+>    - **Note**
+>      > ### {% icon warning %} Shortcut!
 >      >
->      > Here we actually re-use all the inputs from the previous **MuSiC** {% icon tool %} step, plus add a few extra. To speed this up, you can simply click on the re-run icon {% icon galaxy-refresh %} under any of its outputs.
->      {: .tip}
+>      > Here we need to re-use all the inputs from the previous **MuSiC** {% icon tool %} step, plus add a few extra. To speed this up, you can simply click on the re-run icon {% icon galaxy-refresh %} under any of its outputs.
+>      {: .warning}
 >    
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
