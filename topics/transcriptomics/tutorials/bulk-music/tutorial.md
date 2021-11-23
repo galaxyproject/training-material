@@ -63,17 +63,6 @@ The ExpressionSet class is designed to combine several different sources of info
 
 The data in an ExpressionSet is complicated, consisting of expression data from microarray experiments (assayData; assayData is used to hint at the methods used to access different data components, as we will see below), ‘meta-data’ describing samples in the experiment (phenoData), annotations and meta-data about the features on the chip or technology used for the experiment (featureData, annotation), information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData), and a flexible structure to describe the experiment (experimentData). The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
 
-## Workflow Overview 
-
-In this tutorial we will be constructing  ExpressionSet objects, inspecting, and annotating them, and then finally processing them with the MuSiC RNA-Deconvolution analysis suite.
-
-Below is an overview of the workflow that will be used throughout this tutorial.
-
-![workflow1](../../images/bulk-music/workflow1.png "Workflow of Steps")
-
-Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabular assay data, and the other from single-cell RNA-seq tabular assay data. A blind analysis of cell proportion estimation is performed, along side a guided analysis using pre-grouped cell types.
-
-
 # Cell Proportion Estimation
 
 Here we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancreas dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subject and 4 with Type-II diabetes (T2D). If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
@@ -117,6 +106,8 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 
 ### Exploring the Datasets
 
+   TODO, exploring the datasets
+   
    Section here about what the single cell data looks like. Dimensions, how many cells, etc.
     
    Section here about what the bulk cell data looks like. There are 89 subjects that we wish to assign cell types to.
@@ -329,11 +320,6 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 >      https://zenodo.org/record/5719228/files/Mousesubeset.expression.tabular
 >      https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
 >      ```
->    * Marker Genes
->      ```
->      https://zenodo.org/record/5719228/files/epith.markers
->      https://zenodo.org/record/5719228/files/immune.markers
->      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -358,11 +344,73 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
   TODO Tooltip here for exploring the expression sets and phenotype datasets
 
 
-### Colinearity Dendrogram with **MuSiC**
+### Colinearity Dendrogram with **MuSiC** to determine cell type similarities
+
+ Determining cell type similarities reqzures first producing a design matrix as well as a cross-subject mean of relative abundance, using a tree-blased clustering method of the cell types we wish to cluster.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [MuSiC](music_deconvolution) %} with the following parameters:
+>    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
+>    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
+>    - *"Purpose"*: `Compute Dendrogram`
+>        - *"Cell Types Label from scRNA Dataset"*: `cellType`
+>        - *"Cluster Types Label from scRNA dataset"*: `clusterType`
+>        - *"Samples Identifier from scRNA dataset"*: `sampleID`
+>        - *"Comma list of cell types to use from scRNA dataset"*:  
+>           `Endo,Podo,PT,LOH,DCT,CD-PC,CD-IC,Fib,Macro,Neutro,B lymph,T lymph,NK`
+>
+{: .hands_on}
+
+![dendrogram](../../images/bulk-music/dendrogram.png "Dendrogram of Design Matrix and Cross-Subject Mean of Relative Abundance")
+
+> ### {% icon question %} Questions
+>
+> 1. What do you notice about the cells clustering?
+> 2. How many clusters can you see with a height threshold above 650 in the "Cluster log(Design Matrix)"?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The immune cells are clustered together and the kidney specific cells are clustered together. Notice that DCT and PT are within the same high-level grouping. 
+> > 2. The cut-off of 650. Here we cut 13 cell types into 4 groups:
+> >
+> >    ```
+> >    Group 1: Neutro
+> >    Group 2: Podo
+> >    Group 3: Endo, CD-PC, CD-IC, LOH, DCT, PT
+> >    Group 4: Fib, Macro, NK, B lymph, T lymph
+> >    ```
+> >
+> {: .solution}
+>
+{: .question}
+
+
+### Heatmap of Cell Type Similarities using **MuSiC**
+   
+We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To improve the clustering, we shall upload known Epithelial and Immune cell markers.
+
+   
+> ### {% icon hands_on %} Hands-on: Upload marker genes and generate heatmap
+> 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+> 
+>    ```
+>    https://zenodo.org/record/5719228/files/epith.markers
+>    https://zenodo.org/record/5719228/files/immune.markers
+>    ```
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 2. {% tool [MuSiC](music_deconvolution) %} with the following parameters:
+>    - **Note: Shortcut!**
+>      > ### {% icon tip %} Tip
+>      >
+>      > Here we actually re-use all the inputs from the previous **MuSiC** {% icon tool %} step, plus add a few extra. To speed this up, you can simply click on the re-run icon {% icon galaxy-refresh %} under any of its outputs.
+>      {: .tip}
+>    
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Compute Dendrogram`
@@ -399,37 +447,35 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 {: .hands_on}
 
 
-![dendrogram](../../images/bulk-music/dendrogram.png "TODO something meaningful")
-
-![dendro_jitboxheat](../../images/bulk-music/dendro_jitboxheat.png "TODO something meaningful")
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![dendro_jitboxheat](../../images/bulk-music/dendro_jitboxheat.png "Jitter and Boxplots of all cell types followed by a heatmap of each RNA sample against cell type. Note that the y-axis for each of the plots above are not constant across cell types.")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> Most of the expression in the above plot appears to be derived from one cell type.
+> 
+> 1. Which cell type dominates the plot?
+> 2. What does this tell you about the bulk RNA?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The PT cells appear to dominate.
+> > 2. Most of the expression in the bulk RNA dataset is derived solely from the PT cells, and could be a monogenic cell line.
 > >
 > {: .solution}
 >
 {: .question}
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial we constructed ExpressionSet objects, inspected, and annotated them, and then finally processing them with the MuSiC RNA-Deconvolution analysis suite.
+
+Below is an overview of the workflow that was used throughout this tutorial.
+
+![workflow1](../../images/bulk-music/workflow1.png "Workflow for estimating cell types")
+
+Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabular assay data, and the other from single-cell RNA-seq tabular assay data. A blind analysis of cell proportion estimation is performed, along side a guided analysis using pre-grouped cell types.
+
+
+![workflow_dendro.png](../../images/bulk-music/workflow_dendro.png "Workflow for generating a dendrogram and clustering cells upon it")
