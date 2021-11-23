@@ -188,14 +188,14 @@ Words
 >    > > 1. The first column is the index column, which uses the sample identifiers in the header of the `#bulk` expression file, so the phenotypes file describes the samples.
 >    > > 2. The `SubjectName` column uses a completely different set of identifiers from the `#scrna` phenotypes file so they should be assumed to be unrelated.
 >    > > 3. We see `age`, `bmi`, `hba1c`, `gender`, `tissue`. HbA1c appears to be a gene of interest related to a known phenotype.
->    > > 4. **This is the question we wish to answer in the analysis**. Visually, there appears to be no overlap, but the "pancreatic islets" tissue likely consists of several cell types that show expressions profiles with some affinity  to the single cell types described in the `#scrna` phenotypes file.
+>    > > 4. **This is the question we wish to answer in the deconvolution**. Visually, there appears to be no overlap, but the "pancreatic islets" tissue likely consists of several cell types that show expressions profiles with some affinity  to the single cell types described in the `#scrna` phenotypes file.
 >    > >
 >    > {: .solution}
 >    {: .question}
 > 
 {: .hands_on}
 
-   The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions with HbA1c level in this analysis.
+   The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions with HbA1c level in this deconvolution analysis.
    
 ## Building the Expression Set objects
 
@@ -241,48 +241,40 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 
 We will now inspect these objects we juset created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
 
-> ### {% icon hands_on %} Hands-on: Viewing General Information
-> 1. {% icon galaxy-eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
-{: .hands_on}
-
-From these datasets we can also extract specific information pertaining to Samples or Features:
-
-> ### {% icon hands_on %} Hands-on: Extracting a List of Features
-> 1. {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
->    - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
->    - *"Inspect"*: `Feature Data Table`
+> ### {% icon hands_on %} Hands-on: Inspect and Describe the scRNA ExpressionSet Object
+>
+> 1. Obtain General Info about the data set
+>    - {% icon galaxy-eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
+> 
+> 1. Obtain Feature Information about the data set
+>    - {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
+>       - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
+>       - *"Inspect"*: `Feature Data Table`
+>         > ### {% icon comment %} Comment: Features or Genes?
+>         >
+>         > "Features" are synonymous with "Genes" in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.
+>         >
+>         {: .comment}
 >
 >
-{: .hands_on}
-
-We can also extract the general information itself as a standalone text-file
-
-> ### {% icon hands_on %} Hands-on: Dimensional information as a tabular file
->
-> 1. {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
->    - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
->    - *"Inspect"*: `Dimension`
->    {: .comment}
+> 1. Obtain Dimensional Information about the data set
+>    - {% tool [Inspect Expression Set Object](music_inspect_eset) %} with the following parameters:
+>      - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
+>      - *"Inspect"*: `Dimension`
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. How many samples are in dataset?
-> 2. How many genes?
+> 1. How many samples are in dataset, and how many genes?
+> 2. Does this agree with the original input tabular expression data set?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 1097 samples
-> > 2. 25 453 genes
+> > 1. 1097 samples and 25 453 genes
+> > 2. Yes!
 > >
 > {: .solution}
->
-> > ### {% icon comment %} Comment
-> >
-> > "Features" are synonymous with "genes" in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.
-> >
-> {: .comment}
 >
 {: .question}
 
@@ -390,7 +382,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
   
   Briefly, similar cell types are grouped into the same cluster and their cluster proportions are estimated, then this procedure is recursively repeated within each cluster. At each recursion stage, only genes that have low within-cluster variance are used, as they are used as consistent genes across cell types. This is critical as the mean expression estimates of genes with high variance are affected by the pervasive bias in cell capture of scRNA-seq experiments, and thus cannot serve as reliable reference.
 
-  In this section we will use mouse data as well as known epithelial and immune cell markers.
+  In this section we will use mouse kidney single-cell RNA-seq data from {% cite park2018single %} described by 16 273 genes over a trimmed subset of 10 000 cells, giving 16 unique cell type (2 of which are novel) across 7 subjects. The bulk RNA-seq dataset is from {% cite beckerman2017transgenic %} and contains mouse kidney tissue described by 19 033 genes over 10 samples.
   
 ## Get data
 
@@ -429,11 +421,11 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 >
 {: .hands_on}
 
-### Exploring the Datasets
-
-  As before, you may choose to explore the bulk and scrna datasets.
-  
-  TODO Tooltip here for exploring the expression sets and phenotype datasets
+> ### {% icon details %} Exploring the Datasets
+>
+> As before, you may choose to explore the bulk and scrna datasets and try to determine their factors from the phenotypes as well as any overlapping fields that will be used to guide the deconvolution.
+> 
+{: .details}
 
 
 ### Colinearity Dendrogram with **MuSiC** to determine cell type similarities
@@ -467,10 +459,10 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 > > 2. The cut-off of 650. Here we cut 13 cell types into 4 groups:
 > >
 > >    ```
-> >    Group 1: Neutro
-> >    Group 2: Podo
-> >    Group 3: Endo, CD-PC, CD-IC, LOH, DCT, PT
-> >    Group 4: Fib, Macro, NK, B lymph, T lymph
+> >    C1: Neutro
+> >    C2: Podo
+> >    C3: Endo, CD-PC, CD-IC, LOH, DCT, PT
+> >    C4: Fib, Macro, NK, B lymph, T lymph
 > >    ```
 > >
 > {: .solution}
@@ -480,8 +472,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 ### Heatmap of Cell Type Similarities using **MuSiC**
    
-We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To improve the clustering, we shall upload known Epithelial and Immune cell markers.
-
+We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C3 groups.
    
 > ### {% icon hands_on %} Hands-on: Upload marker genes and generate heatmap
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
