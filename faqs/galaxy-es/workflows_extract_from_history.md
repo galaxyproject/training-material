@@ -1,3 +1,4 @@
+---
 title: Extraer un flujo de trabajo de tu historial
 description: Galaxy puede crear automáticamente un flujo de trabajo basado en un análisis almacenado en tu historial. Esto significa que una vez que hayas realizado un análisis manualmente, puedes extraer fácilmente un flujo de trabajo para repetirlo con diferentes datos.
 area: workflows
