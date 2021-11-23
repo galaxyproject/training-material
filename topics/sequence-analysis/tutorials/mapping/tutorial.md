@@ -162,7 +162,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 > ### {% icon hands_on %} Hands-on: Summary of mapping quality
 > 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
->    - *"Use reference sequence"*: `Locally cached`
+>    - *"Use reference sequence"*: `Locally cached/Use a built-in genome`
 >      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
 >
 > 2. Inspect the {% icon param-file %} `Stats` file

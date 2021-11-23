@@ -149,7 +149,7 @@ check-yaml: ## lint yaml files
 .PHONY: check-yaml
 
 check-diffs: ## lint diffs in tutorials
-	find ./topics -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
+	find ./topics/admin/ -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
 .PHONY: check-diffs
 
 check-tool-links: ## lint tool links
@@ -220,6 +220,11 @@ _site/%/slides.pdf: _site/%/slides.html
 	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 _site/%/slides_ES.pdf: _site/%/slides_ES.html
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
+
+_site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 	$(ACTIVATE_ENV) && \
 	$(shell npm bin)/http-server _site -p 9876 & \
 	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
