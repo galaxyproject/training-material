@@ -26,6 +26,6 @@ jobs:
       - name: Send announcements to matrix
         run: |
             commit=$(git log --since "24 hours ago" --format=%H | tail -n 1)
-            ruby bin/news.rb -p "${commit}~1" --matrix-post
+            bundle exec ruby bin/news.rb -p "${commit}~1" --matrix-post
         env:
             MATRIX_ACCESS_TOKEN: ${{ github.matrix_access_token }}
