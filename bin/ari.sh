@@ -49,6 +49,10 @@ meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors 
 meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
 REVISION="$(git log -1 --format=%H)"
 
+# This is digusting, but the safest way to get a fresh ffmpeg.
+FFMPEG_PATH=$(echo "const ffmpeg = require('@ffmpeg-installer/ffmpeg');console.log(ffmpeg.path.split('/').slice(0, -1).join('/'));" | node -)
+export PATH="$FFMPEG_PATH:$PATH"
+
 # We'll cache audio locally.
 ffmpeglog=warning
 
