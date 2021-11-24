@@ -50,8 +50,10 @@ meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
 REVISION="$(git log -1 --format=%H)"
 
 # This is digusting, but the safest way to get a fresh ffmpeg.
-FFMPEG_PATH=$(echo "const ffmpeg = require('@ffmpeg-installer/ffmpeg');console.log(ffmpeg.path.split('/').slice(0, -1).join('/'));" | node -)
+FFMPEG_PATH=$(echo "const ffmpeg = require('ffmpeg-static');console.log(ffmpeg.split('/').slice(0, -1).join('/'));" | node -)
+echo "Located FFMPEG at $FFMPEG_PATH"
 export PATH="$FFMPEG_PATH:$PATH"
+which ffmpeg
 
 # We'll cache audio locally.
 ffmpeglog=warning
@@ -68,13 +70,14 @@ voice=$(cat "$script" | jq .voice.id)
 # Now explode that into individual lines, synthesize, and re-assemble them into
 # our editly.json5 script
 # This will read the environment variable EDITLY_FAST=true and set fast in the script, if requested.
-ruby bin/ari-prep-script.rb "${script}" "${build_dir}" "${engine}"
+ruby bin/ari-prep-script.rb "${build_dir}" "${engine}"
 
 # Generate images for use.
 echo "  Extracting slides"
 convert "${slides}" -resize 1920x1080 "${build_dir}/slides.%03d.png"
 
 echo "  Building Video | $(npm bin)/editly --json ${build_dir}/editly.json5"
+$FFMPEG_PATH/ffmpeg -version
 $(npm bin)/editly --json "${build_dir}/editly.json5"
 
 # Mux it together

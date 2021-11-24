@@ -8,9 +8,9 @@ require 'fileutils'
 require 'digest'
 require 'json'
 
-script = JSON.parse(File.open(ARGV[0], 'r').read)
-dir = ARGV[1]
-engine = ARGV[2]
+dir = ARGV[0]
+script = JSON.parse(File.open(File.join(ARGV[0], "script.json"), 'r').read)
+engine = ARGV[1]
 
 END_OF_SENTENCE_DURATION = script['voice'].fetch('endOfSentencePause', 0.2)
 END_OF_SLIDE_DURATION = script['voice'].fetch('endOfSlidePause', 1.04)
@@ -52,12 +52,12 @@ def timefmt(t, fmt)
 end
 
 def split_sentence(sentence, timing)
-  split_sentence = sentence.split(' ')
-
-  chunks = split_sentence.each_slice(20).to_a.length
-  split_sentence.each_slice(20).each_with_index.map{|chunk, idx|
-    t0 = timing * (idx / chunks)
-    tf = timing * ((1 + idx) / chunks)
+  res = sentence.split(' ')
+  chunk_size = (res.length.to_f / (res.length.to_f / 20).ceil).ceil
+  chunks = res.each_slice(chunk_size).to_a.length
+  res.each_slice(chunk_size).each_with_index.map{|chunk, idx|
+    t0 = timing * (idx / chunks.to_f)
+    tf = timing * ((1 + idx) / chunks.to_f)
    [chunk, t0, tf]
   }
 end
@@ -116,7 +116,7 @@ editly['clips'] = script['blocks'].map.with_index{ |phrases, idx|
   parts.push({
     'transition' => {
       'name' => 'fadegrayscale',
-      'duration' => 2,
+      'duration' => END_OF_SLIDE_DURATION,
     },
     'duration' => END_OF_SLIDE_DURATION,
     'layers' => [{
@@ -137,15 +137,20 @@ editly['clips'].each{|layer|
     subtitle_timings += split_sentence(layer[:caption], layer['duration']).map{|sen_part, time_prev, time_next|
       [sen_part.join(' '), offset + time_prev, offset + time_next]
     }
+    offset += layer['duration']
+  elsif layer.has_key? 'transition'
+    # End of slide.
+    offset += 1.04 / 2 # The true transition time.
+  else
+    offset += layer['duration']
   end
-  offset += layer['duration']
 }
 
 # Remove our :caption key.
-editly['clips'].map!{|layer|
-  layer.delete(:caption)
-  layer
-}
+#editly['clips'].map!{|layer|
+  #layer.delete(:caption)
+  #layer
+#}
 
 video_script = File.open(File.join(dir, 'editly.json5'), 'w')
 video_script.write(JSON.generate(editly))
