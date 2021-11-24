@@ -39,8 +39,14 @@ def filterSlides(x)
 end
 
 def onlyEnabled(x)
-  d = YAML.load_file(x)
-  d.fetch('enabled', true)
+  tutorial_meta = YAML.load_file(x)
+  tutorial_enabled = tutorial_meta.fetch('enable', true)
+
+  topic = x.split('/')[1]
+  topic_meta = YAML.load_file("metadata/#{topic}.yaml")
+  topic_enabled = topic_meta.fetch('enable', true)
+
+  tutorial_enabled and topic_enabled
 end
 
 def printableMaterial(path)
