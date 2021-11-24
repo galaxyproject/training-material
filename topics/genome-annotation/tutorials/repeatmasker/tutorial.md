@@ -1,13 +1,13 @@
 ---
 layout: tutorial_hands_on
 
-title: Repeat masking with RepeatMasker
+title: Masking repeats with RepeatMasker
 zenodo_link: https://zenodo.org/record/5721490
 tags:
   - eukaryote
 questions:
 - How to mask repeats in a genome?
-- Wjhat is the difference between hard and soft masking?
+- What is the difference between hard and soft masking?
 objectives:
 - Use RepeatMasker to soft mask a newly assmbled genome
 time_estimation: 3H

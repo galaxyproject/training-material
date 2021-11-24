@@ -66,7 +66,7 @@ Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome bro
 
 To annotate our genome using Funannotate, we will use the following files:
 
-- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial we will try to annotate the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}).
+- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial we will try to annotate the genome assembled in the [Flye assembly tutorial]({xx% link topics/assembly/tutorials/flye-assembly/tutorial.md %xx}).
 - Some RNASeq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.
 - A set of **protein sequences**, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that's why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.
 
@@ -276,12 +276,14 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 **InterProScan** is a tool that analyses each protein sequence from our annotation to determine if they contain one or several of the signatures from InterPro. When a protein contains a known signature, the corresponding functional annotation will be assigned to it by **InterProScan**.
 
+**InterProScan** itself runs multiple applications to search for the signatures in the protein sequences. It is possible to select exactly which ones we want to use when launching the analysis (by default all will be run).
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
->    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY` (see why below)
+>    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern`, `SUPERFAMILY`,  (see why below)
 >    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
 >
@@ -290,6 +292,10 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 > ### {% icon comment %} Comments
 >
 > Due to bugs in InterProScan, `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY` don't work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.
+>
+> To speed up the processing by InterProScan during this tutorial, you can also disable `Pfam` and `PANTHER` applications. When analysing real data, it is adviced to keep them enabled.
+>
+> When some applications are disabled, you will of course miss the corresponding results in the output of **InterProScan**.
 {: .comment}
 
 The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that were found by InterProScan.
