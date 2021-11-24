@@ -22,33 +22,36 @@ contributors:
 - r1corre
 - stephanierobin
 
+abbreviations:
+    SINEs: Short Interspersed Nuclear Elements
+    LINEs: Long Interspersed Nuclear Elements
 ---
 
 
 # Introduction
 {:.no_toc}
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+- Tandem repeats: small sequences (<60 base pairs) repeated next to each other, found in many places in the genome, in particular centromeres and telomeres
+- Interspersed repeats: sequences repeated in distant positions, including transposons, retrotransposons, {SINEs} or {LINEs}
 
+These repeats are interesting on their own: they can originate from transposons or viral insertions, and they can have direct effects on the expression of genes. But they are also the source of a lot of trouble when you work on genomics data. First when sequencing a genome, assembly tools often have problems reconstructing the genome sequence in regions containing repeats (in particular when repeats are longer than the read size). Then, when you have a good assembly, you want to annotate it to find the location of genes. Unfortunately annotation tools have trouble identifying gene locations in regions rich in repeats.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+The aim of repeat masking is to identify the location of all repeated elements along a genome sequence. Other tools (like annotation pipelines) can then take this information into account when producing their results.
+
+The output of repeat masking tools is mot often composed of a fasta file (with sometimes a GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:
+
+- Soft masking: repeat elements are written in lower case
+- Hard masking: repeat elements are replaced by stretches of the letter N
+
+Normal (non-repeated) sequences are always kept in uppercase. Doing hard masking is destructive beacause you lose large parts of the sequence which are replaced by stretches of N. If you want to perform an annotation, it is best to choose soft masking.
+
+Multiple tools exist to perform the masking: [RepeatMasker](https://www.repeatmasker.org/), [RepeatModeler](https://www.repeatmasker.org/RepeatModeler/), [REPET](https://urgi.versailles.inra.fr/Tools/REPET), ... Each one have specificities: some can be trained on specific genomes, some rely on existing databases of repeated elements signatures ([Dfam](https://www.dfam.org/), [RepBase](https://www.girinst.org/repbase/)).
+
+In this tutorial you will learn how to soft mask the genome that can be assembled in the [Flye assembly tutorial]({xx% link topics/assembly/tutorials/flye-assembly/tutorial.md %xx}). We will use RepeatMasker, which is probably the simplest solution which gives a good enough result before annotating the genome in the [Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
 > ### Agenda
 >
@@ -59,28 +62,7 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+# Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -100,6 +82,13 @@ have fun!
 
 # Soft-masking using RepeatMasker
 
+Let's run RepeatMasker, by selected theinput assembly in fasta format. We select the soft masking option, and we choose to use the DFam database.
+
+> ### {% icon comment %} Choosing the right species
+>
+> We select the `Human (Homo sapiens)` species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organism. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tool like RepeatModeler..
+{: .comment}
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
@@ -111,9 +100,30 @@ have fun!
 >
 {: .hands_on}
 
+RepeatMasker produces 4 output files:
+
+- `masked sequence`: this is the fasta file that you will use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regiosn that were identified as repeat.
+- `repeat statistics`: this one contains some statistics on the number of repeats found in each category, and the total number of base pairs masked
+- `output log`: this is a tabular file listing all repeats
+- `repeat catalogue`: this one contains the list of all repeat sequences that were identified, with their position, and their similarity with known repeats from the DFam database
+
+> ### {% icon question %} Question
+>
+> What proportion of the whole genome sequence was masked?
+>
+> > ### {% icon solution %} Solution
+> >
+> > You should find it in the `repeat statistics` output. It should be ~2.33%.
+> >
+> {: .solution}
+>
+{: .question}
+
+As we have used a generic species (Human), we only identified the most common repeats, not very specific to this species. Other tools might mask a greater proportion of the genome, at the cost of a more complex workflow with training steps. But this result is sufficient to perform an annotation by following the [Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+By following this tutorial you have learn how to mask an eukaryotic genome using RepeatMasker, after assembling ([Flye assembly tutorial]({xx% link topics/assembly/tutorials/flye-assembly/tutorial.md %xx})) an before annotating it ([Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %})).
+
+Often times, annotation tools prefer to use soft masked genomes, as they primarily search for genes in non repeated regions, but tolerate that some genes overlap partially with these regions.
