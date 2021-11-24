@@ -18,8 +18,8 @@ if options[:previousCommit].nil?
   exit 1
 end
 
-addedfiles =`git diff --cached --name-only --diff-filter=A #{options[:previousCommit]}`.split("\n")
-modifiedfiles =`git diff --cached --name-only --diff-filter=M #{options[:previousCommit]}`.split("\n")
+addedfiles =`git diff --cached --name-only --ignore-all-space --diff-filter=A #{options[:previousCommit]}`.split("\n")
+modifiedfiles =`git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
 
 NOW = Time.now
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
@@ -58,8 +58,8 @@ data = {
     #'slides': modifiedfiles.select{|x| filterSlides(x)},
     #'tutorials': modifiedfiles.select{|x| filterTutorials(x)},
   #},
-  'contributors': `git diff --unified #{options[:previousCommit]} CONTRIBUTORS.yaml`
-    .split("\n").select{|line| line =~ /^+[^ ]+:\s*$/}.map{|x| x.strip()[1..-2]}
+  'contributors': `git diff --unified --ignore-all-space #{options[:previousCommit]} CONTRIBUTORS.yaml`
+    .split("\n").select{|line| line =~ /^\+[^ ]+:\s*$/}.map{|x| x.strip()[1..-2]}
 }
 
 output = "# GTN News for #{NOW.strftime("%b %d")}"
