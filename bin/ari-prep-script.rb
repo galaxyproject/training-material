@@ -12,8 +12,8 @@ script = JSON.parse(File.open(ARGV[0], 'r').read)
 dir = ARGV[1]
 engine = ARGV[2]
 
-END_OF_SENTENCE_DURATION = 0.2
-END_OF_SLIDE_DURATION = 1.04
+END_OF_SENTENCE_DURATION = script['voice'].fetch('endOfSentencePause', 0.2)
+END_OF_SLIDE_DURATION = script['voice'].fetch('endOfSlidePause', 1.04)
 
 editly = {
   'width' => 1920,
