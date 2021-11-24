@@ -338,7 +338,7 @@ This module will raise a warning if all sequences are not the same length. This 
 
 ???
 
-For long reads, the distribution is much more important and  depends from the fragment size selection, primers, DNA weight and quality, etc
+For long reads, the distribution is much more important and depends from the fragment size selection, primers, DNA weight and quality, etc
  
 ---
 
@@ -425,7 +425,9 @@ This plot give a 2D visualisation of quality score for reads according to reads 
 
 ???
 
-It's a similar representation as FastQC sequence length distribution. The length distribution can be then used as quality measure as you would expect a normal distribution for the best result. Also, at least for PacBio HiFi, the pic should be centered near 15kb.
+It's a similar representation as FastQC sequence length distribution.
+The length distribution can be then used as quality measure as you would expect a normal distribution for the best result.
+Also, at least for PacBio HiFi, the pic should be centered near 15kb.
 
 ---
 
@@ -472,8 +474,8 @@ A interactive quality control tool for basecalled Nanopore data
 ???
 
 The 2 tables give general information about the run itself like the duration of the run, the number of active channels (pores), run ids and number of barcodes if necessary.
-
 It's also provide information about the reads themself, like the total reads, bases, N50, median and median PHRED score.
+Reads with a Qscore >= 7 (default with Guppy) are marked as "Pass"
 
 ---
 
@@ -495,7 +497,8 @@ It's also provide information about the reads themself, like the total reads, ba
 
 ???
 
-As for NanoPlot, this representation give a 2D visualisation of quality score for reads according to reads length. It allows quickly and easily to detect bias.
+As for NanoPlot, this representation give a 2D visualisation of quality score for reads according to reads length.
+It allows quickly and easily to detect bias.
 
 ---
 
@@ -513,6 +516,7 @@ This representation give information about sequenced reads over the time.
   - Saturation of pores
   - Material degradation
   - ...
+- In this example, the contribution of refuling is very low and it can be considered as a bad run.
 
 Unlike all other technologies, with Nanopore you can refuel the flow cell with biological material without needed to make another run.
 
@@ -524,7 +528,9 @@ Unlike all other technologies, with Nanopore you can refuel the flow cell with b
 
 ???
 
-The read length over experiment time should be stable. It can slight decrease over the time.
+The read length over experiment time should be stable.
+It can slight increase over the time as short fragments are tend to be over sequenced at the beginning and are less present over the time.
+
 
 ---
 
@@ -534,7 +540,7 @@ The read length over experiment time should be stable. It can slight decrease ov
 
 ???
 
-As for the length, read quality should be stable over the time.
+The read quality should be stable over the time.
 
 ---
 
@@ -544,7 +550,8 @@ As for the length, read quality should be stable over the time.
 
 ???
 
-It's give an overview of pore usage during the experiment. It's can be used to see if the loading of the flow cell is good (almost pore are used), the flow cell quality (who many pores are available), etc
+It's give an overview of available pore, pore usage during the experiment and to see if the loading of the flow cell is good (almost pore are used).
+In this case, the run can be considered bad as the number of used pores decreasing over the time.
 
 ---
 
