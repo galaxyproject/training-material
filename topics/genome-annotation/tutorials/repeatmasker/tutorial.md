@@ -73,6 +73,7 @@ In this tutorial you will learn how to soft mask the genome that can be assemble
 >
 >    ```
 >    https://zenodo.org/api/files/8458db9c-d517-4c6f-8a91-0ebadbb5a722/genome_raw.fasta
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
