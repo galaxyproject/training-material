@@ -58,7 +58,7 @@ We start with the question: In human chromosome 22, which exon has the highest n
 > - **Chromosomes** can be thought of as a very long piece of DNA (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.
 > - **Features** are regions of the chromosome that are interesting for one reason or another. Some examples of features include genes, terminators, transcription start sites, and repeat regions.
 > - **Genes** are one kind of interesting feature, a region that will be [transcribed](https://en.wikipedia.org/wiki/Transcription_(biology)) into RNA before being [translated](https://en.wikipedia.org/wiki/Translation_(biology)) into proteins.
-> - **Exons** are fundamental components of [eukaryotic](https://en.wikipedia.org/wiki/Eukaryote) [genes](https://en.wikipedia.org/wiki/Gene#Structure_and_function). A typical eukaryotic gene contains numerous *exons* separated by *introns*. An entire gene containing both exons and introns is *transcribed* into a pre-messenger RNA or pre-mRNA. During maturation introns are excised from the pre-mRNA in a process called *[splicing](https://www.nature.com/scitable/topicpage/rna-splicing-introns-exons-and-spliceosome-12375/)*.  A mature messenger RNA, or simply mRNA, is then *translated* into protein during the process of *translation*. 
+> - **Exons** are fundamental components of [eukaryotic](https://en.wikipedia.org/wiki/Eukaryote) [genes](https://en.wikipedia.org/wiki/Gene#Structure_and_function). A typical eukaryotic gene contains numerous *exons* separated by *introns*. An entire gene containing both exons and introns is *transcribed* into a pre-messenger RNA or pre-mRNA. During maturation introns are excised from the pre-mRNA in a process called *[splicing](https://www.nature.com/scitable/topicpage/rna-splicing-introns-exons-and-spliceosome-12375/)*.  A mature messenger RNA, or simply mRNA, is then *translated* into protein during the process of *translation*.
 >
 >
 >   ![Eukaryotic gene model](../../images/DNA_exons_introns.png "An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)")
@@ -69,11 +69,7 @@ We start with the question: In human chromosome 22, which exon has the highest n
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
 But even with your data in hand, you still have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
-The following video shows all steps of this tutorial:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/D5HgJWdfOWw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. 
+Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
 
 {% snippet faqs/galaxy/creating_account.md %}
 
@@ -240,8 +236,8 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
-> 
-> To find intersection we will be using `intersect intervals` tool from [BEDTools](https://bedtools.readthedocs.io/en/latest/content/overview.html) package. 
+>
+> To find intersection we will be using `intersect intervals` tool from [BEDTools](https://bedtools.readthedocs.io/en/latest/content/overview.html) package.
 >
 > 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} the intervals of two datasets side-by-side:
 >

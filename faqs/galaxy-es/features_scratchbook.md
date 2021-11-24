@@ -1,5 +1,5 @@
 ---
-title: UUso del cuaderno de apuntes para ver varios conjuntos de datos
+title: Uso del cuaderno de apuntes para ver varios conjuntos de datos
 area: features
 box_type: tip
 layout: faq
