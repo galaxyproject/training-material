@@ -49,16 +49,25 @@ def onlyEnabled(x)
   tutorial_enabled and topic_enabled
 end
 
+def linkify(text, path)
+  return "[#{text}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news)"
+end
+
 def printableMaterial(path)
   d = YAML.load_file(path)
-  return "[#{d['title']}](#{path.gsub(/.md/, ".html")})"
+  return linkify(d['title'], path.gsub(/.md/, ".html"))
+end
+
+def fixNews(n)
+  # news/_posts/2021-11-10-api.html => news/2021/11/10/api.html
+  n.gsub(/news\/_posts\/(....)-(..)-(..)-(.*.html)/, 'news/\1/\2/\3/\4')
 end
 
 data = {
   'added': {
     'slides': addedfiles.select{|x| filterSlides(x)}.select{|x| onlyEnabled(x)}.map{|x| printableMaterial(x)},
     'tutorials': addedfiles.select{|x| filterTutorials(x)}.select{|x| onlyEnabled(x)}.map{|x| printableMaterial(x)},
-    'news': addedfiles.select{|x| x =~ /news\/_posts\/.*\.md/}.map{|x| printableMaterial(x)}
+    'news': addedfiles.select{|x| x =~ /news\/_posts\/.*\.md/}.map{|x| printableMaterial(x)}.map{|n| fixNews(n) }
   },
   #'modified': {
     #'slides': modifiedfiles.select{|x| filterSlides(x)},
@@ -92,7 +101,7 @@ end
 if data[:contributors].length > 0
   newsworthy = true
   output += "\n\n## #{data[:contributors].length} new contributors!\n\n"
-  output += data[:contributors].join("\n").gsub(/^(.*)$/, '- [\1](https://training.galaxyproject.org/hall-of-fame/\1)')
+  output += data[:contributors].map{|c| linkify("@#{c}", "hall-of-fame/#{c}")}.join("\n").gsub(/^/, '- ')
 end
 
 if newsworthy
