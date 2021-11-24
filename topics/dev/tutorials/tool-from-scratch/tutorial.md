@@ -31,8 +31,6 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/2wW3yqEclko" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
 Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 Although Galaxy has thousands of tools readily available, new software and packages will always be useful.
 This tutorial is designed to allow anyone to create, run, and deploy new tools in a Galaxy environment.
@@ -60,8 +58,6 @@ with many command line tools, other times, there may be several. The first part 
 the creation and deployment of these packages, making them available for Galaxy to retrieve.
 
 ## Writing a Bioconda Recipe
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/UtNErGKw8SI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Bioconda is a repository of conda packages for software and tools relevant to the life sciences. Using conda
 packages ensures better reproducibility, since each conda package is usually immutable, an exception being
@@ -338,8 +334,6 @@ anyone wrapping a tool, a more complete list is available in [the Galaxy tool do
 
 ## Initializing a Tool Wrapper
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/a6XZgEy6hlg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
 Initializing a tool wrapper to be run in Galaxy is simple
 
 > ### {% icon hands_on %}  Hands-on: Creating a Tool Wrapper Skeleton
@@ -379,8 +373,6 @@ Initializing a tool wrapper to be run in Galaxy is simple
 {: .hands_on}
 
 ## Galaxy Tool Wrappers
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/FdtD8vBLK5k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Galaxy tool wrapper xml files are made up of several sections:
 
@@ -925,8 +917,6 @@ With all sections complete, the final wrapper for bellerophon can be found [here
 
 ## Toolshed file
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/WFSQE8bq5qI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
 The .shed.yml file is placed in the same directory as the tool's xml file and saves metadata for the tool. It enables
 toolshed organization and search by using tags and descriptions.
 
@@ -965,8 +955,6 @@ In the case where the directory represents a group of tools or a 'suite', there 
 For more information on how to write automatic tool suites, visit the [Galaxy docs](https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/shed_yml.html).
 
 # Testing Galaxy tool with `planemo`
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/19mKUENz_i0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 `planemo` is a command line utility that helps developing Galaxy tools.
 Among many other tasks it can:
@@ -1139,8 +1127,6 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 {: .tip}
 
 # Publishing Galaxy tools
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/hg0YreA8W1I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Galaxy tools are installed from the [Galaxy toolshed](https://toolshed.g2.bx.psu.edu/). With the help of `planemo` tools can be added to the toolshed ([documentation](https://planemo.readthedocs.io/en/latest/publishing.html)). But usually the sources of the tools are maintained in public source code repositories, for instance:
 
