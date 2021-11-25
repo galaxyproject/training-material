@@ -198,7 +198,7 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 This tool produces several output dataset, in particular:
 
 - the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the genome.
-- the  CDS, transcript and protein sequences of all the genes predicted by Funannotate
+- the CDS, transcript and protein sequences of all the genes predicted by Funannotate
 - some statistics and reports
 
 > ### {% icon comment %} Comments
@@ -305,15 +305,27 @@ Display the TSV file and explore which kind of results were found by InterProSca
 
 The XML file will be used in the next step.
 
-## Integrating the results
+# Submission to NCBI
 
-Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, we will now combine all this data into a single file that will contain the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
+If you plan to submit the final genome sequence and annotation to NCBI, there are a few steps to follow.
 
-If you plan to submit this annotation to NCBI, you need to prepare a file containing a few metadata. This can be done online on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):
+In this tutorial we will not perform a real submission, but here's a description of the main steps, and how Funannotate can help you in this process. NCBI provides a complete documentation for [genome and annotation submission](https://www.ncbi.nlm.nih.gov/genbank/genomesubmit/).
+
+- First, you should have created a BioProject and a BioSample [on the NCBI portal](https://submit.ncbi.nlm.nih.gov/subs/bioproject/), corresponding to your scientific project, and the sample(s) you have sequenced
+- The raw reads used for the assembly, and the RNASeq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids
+- Ideally you should start submitting the assembly *before* performing the annotation. The reason is simple: NCBI performs some validation on the genome sequence before accepting it into GenBank. It means that you may be forced to make modifications to the genome sequence (e.g. remove contigs, split contigs where you have adapter contamination, etc). You will save time and trouble doing the annotation on a fully validated and freezed genome sequence.
+- You should get a `locus_tag` for your genome: it is the unique prefix that is used at the beginning of each gene name. By default, Funannotate uses `FUN_` (e.g. `FUN_000001`), but to submit to NCBI you need to have a prefix specific to your genome. NCBI should provide it to you when you create your BioProject.
+- You then need to prepare a file containing a few metadata. This can be done online on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):
 
 ![NCBI submission template](../../images/ncbi_template.png "Example of a filled form to generate an NCBI submission template.")
 
-When filled, you can click on the **Create template** button: you will be able to download an `.sbt` file that you should then upload to your Galaxy history.
+When filled, you can click on the **Create template** button: you will be able to download a `.sbt` file that you should then upload to your Galaxy history.
+
+The next step will show you how Funannotate can use this `.sbt` file, and the `locus_tag`, to generate the needed file for the submission of the annotation to the NCBI. These files will need to be submitted on the [NCBI genome submission portal](https://submit.ncbi.nlm.nih.gov/subs/genome/).
+
+# Integrating structural and functional annotation
+
+Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -321,17 +333,24 @@ When filled, you can click on the **Create template** button: you will be able t
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
 >        - {% icon param-file %} *"Genome annotation in genbank format"*: `annotation (genbank)` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
->    - {% icon param-file %} *"NCBI submission template file"*: `template.sbt` (the fie downloaded from NCBI website)
+>    - {% icon param-file %} *"NCBI submission template file"*: `template.sbt` (the file downloaded from NCBI website, or leave empty if you didn't generate it)
 >    - {% icon param-file %} *"Eggnog-mapper annotations file"*: `annotations` (output of **eggNOG Mapper** {% icon tool %})
 >    - {% icon param-file %} *"InterProScan5 XML file"*: `InterProScan XML` (output of **InterProScan** {% icon tool %})
 >    - {% icon param-file %} *"BUSCO models"*: `mucorales (orthodb 10)`
 >    - *"Strain name"*: `muc1`
->    - *"locus_tag from NCBI to rename GFF gene models with"*: `MMUCEDO_`
+>    - *"locus_tag from NCBI to rename GFF gene models with"*: `MMUCEDO_` (we consider NCBI has assigned us this `locus_tag`)
 >    - *"Which outputs should be generated"*: Select all
 >
 {: .hands_on}
 
-TODO explain https://funannotate.readthedocs.io/en/latest/predict.html#submitting-to-ncbi-what-should-i-know
+This tool produces several output dataset, in particular:
+
+- The full structural and functional annotation in Genbank and GFF3 format
+- NCBI tbl and sqn (`NCBI Sequin genome`) formats: these files can be used for submission to NCBI
+- The CDS, transcript and protein sequences of all the genes predicted by Funannotate
+- Some statistics and reports
+
+If you display the GFF3 output, you will notice that the functional information, including gene names, is now stored in this file.
 
 # Visualisation with a genome browser
 
