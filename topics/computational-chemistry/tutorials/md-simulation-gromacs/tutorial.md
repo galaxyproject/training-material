@@ -198,7 +198,7 @@ Here, and in the later steps, two options are presented under 'Parameter input'.
 
 At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant **n**umber of particles, **v**olume and **t**emperature, while the NPT ensemble maintains constant **n**umber of particles, **p**ressure and **t**emperature. (The NVT ensemble is also known as the isothermal-isochoric ensemble, while the NPT ensemble is also known as the isothermal-isobaric ensemble).
 
-For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.
+During the first equilibration step (NVT), the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished. During the second NPT step, we remove the restraints.
 
 ## NVT equilibration
 Firstly, we perform equilibration using classical NVT dynamics.
@@ -243,8 +243,8 @@ Note that we can continue where the last simulation left off (with new parameter
 >    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
 >    - {% icon param-file %} *"Checkpoint (CPT) file"*: Checkpoint file produced by NVT equilibration
 >    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
->    - *"Apply position restraints"*: `Apply position restraints`
->    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
+>    - *"Apply position restraints"*: `No position restraints`
+>    - {% icon param-file %} *"Position restraint file"*: None
 >    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
 >    - *"Trajectory output"*: `Return no trajectory output`
 >    - *"Structure output"*: `Return .gro file`

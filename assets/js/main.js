@@ -37,3 +37,7 @@ $("section.tutorial.topic-admin div.language-diff pre code .gi,section.tutorial.
   var fixed = $(e).text().split('\n').map(q => { return q.slice(1) }).join('\n');
   $(e).text(fixed);
 })
+$("section.tutorial.topic-data-science div.language-diff pre code .gi,section.tutorial.topic-data-science div.language-diff pre code .gd").each((x, e) => {
+  var fixed = $(e).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+  $(e).text(fixed);
+})

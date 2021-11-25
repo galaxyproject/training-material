@@ -106,7 +106,7 @@ It turns out that for this particular question (and for many others), most **Gal
 
 The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, tool forms, and dataset content.
 
-![Galaxy interface](../../images/galaxy_interface.png)
+![Galaxy interface showing history panel on the right, tools panel on the left and main panel at the center](../../images/galaxy_interface.png)
 
 > ### {% icon hands_on %} Hands-on: Start with an empty history
 >
@@ -124,7 +124,7 @@ There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-i
 >
 > 1. *Click* on the **Get Data** toolbox to expand it.
 >
->    ![The Get Data toolbox](../../images/101_01.png)
+>    ![The Get Data toolbox](../../images/getdata.PNG)
 >
 {: .hands_on}
 
@@ -215,7 +215,7 @@ Watch your new history item.  It will go through three statuses before it's done
 | **Grey** | Clock | Item is waiting to start (waiting for data transfer to start) | ![Status: Queued](../../images/status_queued.png) |
 | **Yellow** | Spinner | Item is running (data is actively being transferred). | ![Status: Running](../../images/status_running.png) |
 | **Green** | None | Item has finished successfully (data transfer complete). | ![Status: Successfully finished](../../images/status_finished_success.png) |
-| **Red**  | Cross | The job has failed. There can be [many reasons](https://galaxyproject.org/support/tool-error/). | ![Status: Successfully finished](../../images/status_failed.png) |
+| **Red**  | Cross | The job has failed. There can be [many reasons](https://galaxyproject.org/support/tool-error/). | ![Status: Failed](../../images/status_failed.png) |
 | ---- | ---- | ---- |
 
 You can find more information in the [Undestanding Galaxy history system](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) training.
@@ -336,10 +336,12 @@ It doesn't say anything about **Filter** being able to split a file into multipl
 >
 > * The filter tool has 3 fields:
 >
->   1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset.  Make sure this is set to your `Genes chr22` dataset.
->   2. **Condition**: this free text field is where we specify which records we want in the output dataset.  *Enter* `c6 == "+"` in the text box.
->      This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
->   3. **Header lines to skip**: Leave this as `0`. Our dataset does not have any header lines.
+>   1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset. {% icon param-files %} *"filter"*: `Genes chr22` .
+>   2. **Condition**: this free text field is where we specify which records we want in the output dataset. Put in *"Condition"*:  `c6 == "+" ` .
+>       This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
+>   3.  *"Header lines to skip"*:  `0 `
+>
+>       Our dataset does not have any header lines.
 >
 > * Finally, *click* the **Execute** button.
 >
@@ -357,7 +359,8 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 >
 > 1. Open the dataset preview by *clicking* on the name of the `Genes, forward strand` dataset.  This shows an icon than the uploaded `Genes chr22` dataset did not: a looping arrow.
 > 1. *Click* the **looping arrow** ("Run this job again") icon.  This won't actually run the job again.  What it will do is bring up the Filter tool form with *the exact same settings that were used to produce this dataset.*
-> 1. Rather than run Filter again with the same settings, *change* **Condition** to `c6 == "-"`
+> 1. Rerun {% tool [Filter](Filter1) %} but with
+>    - *"Condition"*:  `c6 == "-" `
 > 1. *Click* the **Execute** button.
 >
 > **Method 2**
@@ -412,12 +415,13 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 > ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
 > 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
->     - **Return** to `Overlapping Intervals`.
->       - This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
->     - **of** (the first dataset) to `Genes, forward strand`
->     - **that intersect** (the second dataset) to `Genes, reverse strand`
->     - **for at least** to `1`
->       - This will return genes with even just one position overlapping.
+>     - *"Return"*:  `Overlapping Intervals`.
+>       This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
+>     - {% icon param-files %}*"of"*:  `Genes, forward strand` (the first dataset)
+>     - {% icon param-files %} *"that intersect"* : `Genes, reverse strand` (the second dataset)
+>     - *"for at least"*: `1`
+>       
+>       This will return genes with even just one position overlapping.
 >     - *Click* **Execute**.
 >
 >     ![Run Intersect](../../images/genes_human_intersect_strands.png)
@@ -448,9 +452,14 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 > 1. *Open* the **Text Manipulation** toolbox.
 > 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
 > 3. {% tool [Concatenate](cat1) %} with the following parameters:
->   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
->   * *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
->   * *Select* `Overlapping forward genes` as the second dataset.
+>   - {% icon param-files %} *"Concatenate Dataset"*: `Overlapping reverse genes`.
+>   - *"Dataset*"
+>      - Click on {% icon param-repeat %} *"Insert Dataset"*
+>      
+>         This adds a second dataset pull-down menu to the form.
+>
+>      - In *"1: Dataset"*      
+>         - {% icon param-files %} *"Select"*: `Overlapping forward genes` as the second dataset.
 > 4. *Click* **Execute**
 > 5. *Rename* the resulting dataset something informative like `Overlapping genes`
 {: .hands_on}

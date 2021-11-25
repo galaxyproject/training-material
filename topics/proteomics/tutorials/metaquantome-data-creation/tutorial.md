@@ -113,6 +113,27 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 {: .hands_on}
 
+We have a choice to run all these steps using a single workflow, then discuss each step and the results in more detail.
+
+> ### {% icon hands_on %} Hands-on: Pretreatments
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/main_workflow.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Input Dataset collection"*: `MZML dataset collection`
+>    - {% icon param-file %} *"2: Experimental Design"*: `Experimental Design.tsv`
+>    - {% icon param-file %} *"3: FASTA_db"*: `ProteinDB_cRAP.fasta`
+>    - {% icon param-file %} *"4: In FlashLFQ - control condition for Bayesian protein fold-change analysis"*: `S1`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
+
 
 # **Match peptide sequences**
 

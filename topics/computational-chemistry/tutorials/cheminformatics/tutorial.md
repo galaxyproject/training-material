@@ -335,7 +335,7 @@ It can be useful to visualize the compounds generated. There is a tool available
 
 This produces an SVG image of all the structures generated ordered by molecular weight.
 
-![Hsp90 N-terminus structure]({% link topics/computational-chemistry/images/compound_library.png %} "Structures of the compounds from ChEMBL.")
+![Image showing structures of compounds from ChEMBL]({% link topics/computational-chemistry/images/compound_library.png %} "Structures of the compounds from ChEMBL.")
 
 ### Calculation of fingerprints and clustering
 
@@ -360,7 +360,7 @@ Before clustering, let's label each compound. To do so add a second column to th
 
 Taylor-Butina clustering  ({% cite Butina1999 %}) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.
 
-![Fingerprinting]({% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.")
+![Image showing a Fingerprinting System]({% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.")
 
 > ### {% icon hands_on %} Hands-on: Cluster molecules using molecular fingerprints
 > 1. {% tool [Taylor-Butina clustering](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5) %} with the following parameters:

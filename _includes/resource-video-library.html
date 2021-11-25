@@ -1,0 +1,48 @@
+{% assign locale = site.data.lang[page.lang] %}
+
+{% assign id-tutorial = page.url | remove: '/topics/' | remove: "/tutorials" | remove: '.html' %}
+{% assign id-slides = id-tutorial | replace: '/tutorial', '/slides' %}
+{% assign id-both = id-tutorial | replace: '/tutorial', '' %}
+
+{% assign hasvideo-tutorial = site.data['video-library'][id-tutorial] %}
+{% assign hasvideo-slides = site.data['video-library'][id-slides] %}
+{% assign hasvideo-both = site.data['video-library'][id-both]%}
+{% assign hassession = site.data['session-library'][id-tutorial]%}
+
+  {% if hasvideo-tutorial or hasvideo-slides or hasvideo-both or hassession %}
+  <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Video Library for these Training Materials">
+        {% icon video %} GTN Video Library
+    </a>
+    <ul class="dropdown-menu">
+        {% if hasvideo-both %}
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-both}}" title="View GTN Video Library for this Tutorial">
+                {% icon video %} Lecture & Tutorial
+            </a>
+        </li>
+        {% endif %}
+        {% if hasvideo-tutorial %}
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-tutorial}}" title="View GTN Video Library for this Tutorial">
+                {% icon video %} Tutorial
+            </a>
+        </li>
+        {% endif %}
+        {% if hasvideo-slides %}
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-slides}}" title="View GTN Video Library for these Slides">
+                {% icon video %} Lecture
+            </a>
+        </li>
+        {% endif %}
+        {% if hassession %}
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/sessions/{{id-tutorial}}" title="View GTN Video Library session for this tutorial ">
+                {% icon video %} Multi-video Tutorial
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+   </li>
+   {% endif %}
