@@ -42,7 +42,7 @@ Potential audience poll ideas:
 Comments:
 
 - Process of removing low quality sequences that might corrupt downstream analyses
-- Assembler like Spades have auto-correction process and ask to give raw data
+- Some assemblers like Spades have an auto-correction process and ask for raw data
 
 ---
 
@@ -231,28 +231,28 @@ A versatile tool for short and long reads quality control
 
 ### Per-base Quality - Nanopore
 
-![A graph for Nanopore reads (R9.4) basecalled with guppy. Almost all bases are in the red region bellow 20.](../../images/per_base_sequence_quality_nanopore.png)
+![A graph for Nanopore reads (R9.4) basecalled with guppy. Almost all bases are in the red region below 20.](../../images/per_base_sequence_quality_nanopore.png)
 
 <i class="fa fa-thumbs-up"></i> Good quality score
 
 ???
 
-- Nanopore reads have higher error rate, around 5% while it's ~0.5% for Illumina
+- Nanopore reads have an higher error rate, around 5% while it's ~0.5% for Illumina
 - Q10 -> Q14 with recent versions of Guppy
-- Q20+ sequencing kit by the end of 2021 (new chemistry)
+- Q20+ with new sequencing kit by the end of 2021 (new chemistry)
 
 ---
 
 ### Per-base Quality - PacBio HiFi
 
-![A graph for PacBio HiFi reads. All reads are in the green region and quality score are encoded up to 92.](../../images/per_base_sequence_quality_pacbio_hifi_good.png) 
+![A graph for PacBio HiFi reads. All reads are in the green region and quality score are encoded up to 92.](../../images/per_base_sequence_quality_pacbio_hifi_good.png)
 
 <i class="fa fa-thumbs-up"></i> Good quality score
 
 ???
 
-- PacBio encode quality with a higher range than Illumina to increase precision in base quality assessment
-- Warning: there is not quality information for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. "!")
+- PacBio encodes quality with a higher range than Illumina to increase precision in base quality assessment
+- Warning: there is no quality information for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. "!")
 
 ---
 
@@ -263,7 +263,7 @@ A versatile tool for short and long reads quality control
 ???
 
 - For Illumina, the pic should be near 30
-- For Nanopore, the pic it's generally between 10 and 12. Depends on pore (R9 vs R10) and basecaller version and models (fast, hac, sup).
+- For Nanopore, the pic is generally between 10 and 12. It depends on pore (R9 vs R10) and basecaller version and models (fast, hac, sup).
 - For PacBio HiFi, the pic should be near 90.
 
 ---
@@ -338,8 +338,8 @@ This module will raise a warning if all sequences are not the same length. This 
 
 ???
 
-For long reads, the distribution is much more important and depends from the fragment size selection, primers, DNA weight and quality, etc
- 
+For long reads, the distribution is much more important and depends on the fragment size selection, primers, DNA weight and quality, etc
+
 ---
 
 ### Duplicated sequences
@@ -394,7 +394,7 @@ A quality control tool for long reads (Nanopore/PacBio)
 ???
 
 - Analyses your fastq/bam files
-- Report on different aspects of the reads
+- Reports on different aspects of the reads
 
 - Modules include:
   - Summary Statistics
@@ -409,13 +409,13 @@ A quality control tool for long reads (Nanopore/PacBio)
 
 ---
 
-### Read length vs read quality score
+### Read length *vs* Read quality score
 
 ![Distribution for HiFi reads with a default filter >= Q20 ](../../images/LengthvsQualityScatterPlot_dot.png)
 
 ???
 
-This plot give a 2D visualisation of quality score for reads according to reads length. It allows quickly and easily to detect bias.
+This plot give a 2D visualisation of quality score for reads according to reads length. It allows to detect bias quickly and easily.
 
 ---
 
@@ -426,7 +426,7 @@ This plot give a 2D visualisation of quality score for reads according to reads 
 ???
 
 It's a similar representation as FastQC sequence length distribution.
-The length distribution can be then used as quality measure as you would expect a normal distribution for the best result.
+The length distribution can then be used as quality measure, as you would expect a normal distribution for the best result.
 Also, at least for PacBio HiFi, the pic should be centered near 15kb.
 
 ---
@@ -437,18 +437,19 @@ Also, at least for PacBio HiFi, the pic should be centered near 15kb.
 
 ???
 
-- Very long reads represents only a small part of total bases pairs generated. In case of HiFi reads, the contribution of long reads starts to decrease after 10kb and 50% of the data correspond to the N50.
+- Very long reads represent only a small part of the total bases pairs generated.
+- In case of HiFi reads, the contribution of long reads starts to decrease after 10kb and 50% of the data correspond to the N50.
 - Used to evaluate the contribution of each size fraction
 
 ---
 
 ## PycoQC
 
-A interactive quality control tool for basecalled Nanopore data
+An interactive quality control tool for basecalled Nanopore data
 
 ???
 
-- Analyse your run after basecalling 
+- Analyse your run after basecalling
 - Has many modules
 - Dynamics plot
 - They report on different aspects of the sequence
@@ -461,20 +462,20 @@ A interactive quality control tool for basecalled Nanopore data
   - Output reads over experiment time
   - Read length over experiment time
   - Read quality over experiment time
-  - Channel activity over time 
+  - Channel activity over time
   - Number of reads per barcode (optional)
 
 ---
 
 ### General and basecalled summary
 
-![General summary about a Nanopore run from PycoQC. It's include general information about the run itself (duration, channels, run ids and barcode in case of barcoded runs).](../../images/general_run_summary-pycoqc.png)
+![General summary about a Nanopore run from PycoQC. It includes general information about the run itself (duration, channels, run ids and barcode in case of barcoded runs).](../../images/general_run_summary-pycoqc.png)
 ![General summary about the reads.](../../images/basecall_summary-pycoqc.png)
 
 ???
 
 The 2 tables give general information about the run itself like the duration of the run, the number of active channels (pores), run ids and number of barcodes if necessary.
-It's also provide information about the reads themself, like the total reads, bases, N50, median and median PHRED score.
+It also provides information about the reads themself, like the total reads, bases, N50, median and median PHRED score.
 Reads with a Qscore >= 7 (default with Guppy) are marked as "Pass"
 
 ---
@@ -491,14 +492,14 @@ Reads with a Qscore >= 7 (default with Guppy) are marked as "Pass"
 
 ---
 
-### Basecalled reads length vs reads PHRED quality
+### Basecalled reads length *vs* reads PHRED quality
 
 ![Standard distribution for Nanopore reads.](../../images/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png)
 
 ???
 
 As for NanoPlot, this representation give a 2D visualisation of quality score for reads according to reads length.
-It allows quickly and easily to detect bias.
+It allows to detect bias quickly and easily.
 
 ---
 
@@ -508,8 +509,8 @@ It allows quickly and easily to detect bias.
 
 ???
 
-This representation give information about sequenced reads over the time.
-- Each pic indicate a new loading of the flow cell (3 + the first load).
+This representation gives information about sequenced reads over the time.
+- Each pic indicates a new loading of the flow cell (3 + the first load).
 - The contribution in total reads for each "refuel".
 - The production of reads is decreasing over time:
   - Most of material (DNA/RNA) is sequenced
@@ -518,7 +519,7 @@ This representation give information about sequenced reads over the time.
   - ...
 - In this example, the contribution of refuling is very low and it can be considered as a bad run.
 
-Unlike all other technologies, with Nanopore you can refuel the flow cell with biological material without needed to make another run.
+Unlike all other technologies, with Nanopore you can refuel the flow cell with biological material without needing to make another run.
 
 ---
 
@@ -529,8 +530,7 @@ Unlike all other technologies, with Nanopore you can refuel the flow cell with b
 ???
 
 The read length over experiment time should be stable.
-It can slight increase over the time as short fragments are tend to be over sequenced at the beginning and are less present over the time.
-
+It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.
 
 ---
 
@@ -550,8 +550,8 @@ The read quality should be stable over the time.
 
 ???
 
-It's give an overview of available pore, pore usage during the experiment and to see if the loading of the flow cell is good (almost pore are used).
-In this case, the run can be considered bad as the number of used pores decreasing over the time.
+It gives an overview of available pores, pore usage during the experiment and shows if the loading of the flow cell is good (almost all pores are used).
+In this case, the run can be considered bad as the number of used pores is decreasing over the time.
 
 ---
 
@@ -570,4 +570,4 @@ In this case, the run can be considered bad as the number of used pores decreasi
 
 ???
 
-- Trimming is not always recommended (see Spades documentation)
+- Trimming is not always recommended (e.g. see Spades documentation)
