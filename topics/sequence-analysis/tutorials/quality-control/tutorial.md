@@ -14,7 +14,7 @@ objectives:
   - Summarise quality metrics MultiQC
   - Process single-end and paired-end data
 follow_up_training:
-  - 
+  -
     type: "internal"
     topic_name: sequence-analysis
     tutorials:
@@ -327,7 +327,7 @@ We can run an trimming tool such as Cutadapt to remove this adapter. We will exp
 > for the type of data you're working with, as discussed below and [here](https://rtsf.natsci.msu.edu/genomics/tech-notes/fastqc-tutorial-and-faq/).
 > The other plots give us information to more deeply understand the quality of the data, and to see if changes could be made in the lab to get higher-quality data in the future.
 > These sections are **optional**, and if you would like to skip these you can:
->   - Jump straight to the [next section](#trim-and-filter) to learn about trimming paired-end data
+>   - Jump straight to the [next section](#trim-and-filter---short-reads) to learn about trimming paired-end data
 {: .comment}
 
 #### Per tile sequence quality
@@ -553,13 +553,13 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 
 > ### {% icon hands_on %} Hands-on: Quality check of long reads
 > 1. Create a new history for this part and give it a proper name
-> 
+>
 > 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5720492)
 >
 >    ```
 >    https://zenodo.org/record/5720492/files/m64011_190830_220126.Q20.subsample.fastq.gz
 >    ```
-> 
+>
 > 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
 > - {% icon param-files %} *"Files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
 > - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
@@ -572,16 +572,16 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 > ### {% icon question %} Questions
 >
 > What is the mean Qscore ?
-> 
+>
 > > ### {% icon solution %} Solution
 > > The Qscore is around Q32.
 > > In case of PacBio CLR and Nanopore, it's around Q12 and close to Q31 for Illumina (NovaSeq 6000).
 > > ![Plot of Qscore between Illumina, PacBio and Nanopore](../../images/quality-control/qscore-illumina-pacbio-nanopore.png "Comparison of Qscore between Illumina, PacBio and Nanopore")
 > {: .solution }
-> 
+>
 > What is the median, mean and N50?
 > > ### {% icon solution %} Solution
-> > The median, the mean read length and the N50 as well are close to 18,000bp. 
+> > The median, the mean read length and the N50 as well are close to 18,000bp.
 > > For PacBio HiFi reads, the majority of the reads are generally near this value as the library preparation include a size selection step.
 > > For other technologies like PacBio CLR and Nanopore, is larger and mostly depends on the quality of your DNA extraction.
 > {: .solution }
@@ -589,8 +589,8 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 
 ## Histogram of read lengths
 
-This plot shows the distribution of fragment sizes in the file which was analysed. 
-Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment. 
+This plot shows the distribution of fragment sizes in the file which was analysed.
+Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
 In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
 
 ![Histogram of read lengths](../../images/quality-control/HistogramReadlength.png "Histogram of read length")
@@ -606,7 +606,7 @@ In runs with a lot of short reads these the shorter reads are sometimes of lower
 > ### {% icon question %} Questions
 > Looking at "Read lengths vs Average read quality plot using dots plot". Did you notice something unusually with the Qscore? Can you explain it?
 > > ### {% icon solution %} Solution
-> > There is no reads under Q20. 
+> > There is no reads under Q20.
 > > The qualification for HiFi reads is 1) A minimal number of pass >= 3; 2) A final Qscore >=20.
 > > ![PacBio HiFi sequencing](../../images/quality-control/pacbio-css-hifi-sequencing.png "PacBio HiFi sequencing")
 > {: .solution }
@@ -620,7 +620,7 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 
 > ### {% icon hands_on %} Hands-on: Quality check of Nanopore reads
 > 1. Create a new history for this part and give it a proper name
-> 
+>
 > 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5720492)
 >
 >    ```
@@ -629,7 +629,7 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 >    ```
 >
 > 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
-> 
+>
 >    - {% icon param-files %} *"A sequencing_summary file "*: `sequencing_summary.txt`
 >
 > 4. Inspect the webpage output from PycoQC
@@ -643,10 +643,10 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 > > ~270k reads in total (see the Basecall summary table, "All reads")
 > > For most of basecalling profiles, Guppy will assign reads as "Pass" if the read Qscore is at least equal to 7.
 > {: .solution }
-> 
+>
 > What is the median, minimum and maximum read length, what is the N50?
 > > ### {% icon solution %} Solution
-> > The median read length and the N50 can be found for all as well as for all passed reads, i.e., reads that passed Guppy quality settings (Qscore >= 7), in the basecall summary table. 
+> > The median read length and the N50 can be found for all as well as for all passed reads, i.e., reads that passed Guppy quality settings (Qscore >= 7), in the basecall summary table.
 > > For the minimum (195bp) and maximum (256kbp) read lengths, it can be found with the read lengths plot.
 > {: .solution }
 {: .question}
@@ -681,7 +681,7 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 > Did the read length change over time? What could the reason be?
 > > ### {% icon solution %} Solution
 > > In the current example the read length increases over the time of the sequencing run.
-> > One explanation is that the adapter density is higher for lots of short fragments and therefore the chance of a shorter fragment to attach to a pore is higher. Also, shorter molecules may move faster over the chip. 
+> > One explanation is that the adapter density is higher for lots of short fragments and therefore the chance of a shorter fragment to attach to a pore is higher. Also, shorter molecules may move faster over the chip.
 > > Over time, however, the shorter fragments are becoming rarer and thus more long fragments attach to pores and are sequenced.
 > {: .solution }
 {: .question}
@@ -1021,7 +1021,7 @@ These datasets can be used for the downstream analysis, e.g. mapping.
 {:.no_toc}
 
 In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information.
-This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. 
+This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data.
 Quality control steps are similar for any type of sequencing data:
 
 - Quality assessment with tools like **FASTQE** {% icon tool %}, **FastQC** {% icon tool %}, **Nanoplot** {% icon tool %} and **PycoQC** {% icon tool %}
