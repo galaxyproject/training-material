@@ -140,7 +140,7 @@ We select `11` for the *"Length of the SA pre-indexing string"* parameter as it 
 
 > ### {% icon comment %} What if I want to use multiple RNASeq libraries
 >
-> To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the {% tool [SamToFastq](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1) %} tool. This single BAM file can then be used by Funannotate like we do in the next steps.
+> To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the {% tool [MergeSamFiles](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1) %} tool. This single BAM file can then be used by Funannotate like we do in the next steps.
 {: .comment}
 
 Before we move on to the next step, we need to make sure that the mapping went well. Have a look at the `log` output of `RNA STAR`.
@@ -225,8 +225,10 @@ Before moving on, have a quick look at the `tbl2asn error summary report` output
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `fa_proteins` (output of **Funannotate functional** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
 >    - *"Mode"*: `annotated gene sets (protein)`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>        - *"Lineage"*: `Mucorales`
 >    - In *"Advanced Options"*:
 >        - *"Which outputs should be generated"*: `shortsummary text` and `summary image`
 >
@@ -258,7 +260,7 @@ The aim of the previous step is to predict the position of the genes on the geno
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Fasta sequences to annotate"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
+>    - {% icon param-file %} *"Fasta sequences to annotate"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Version of eggNOG Database"*: select the latest version available
 >    - In *"Output Options"*:
 >        - *"Exclude header lines and stats from output files"*: `No`
@@ -279,8 +281,8 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Protein FASTA File"*: `fasta_proteins` (output of **Funannotate predict annotation** {% icon tool %})
+> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
 >    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern`, `SUPERFAMILY`,  (see why below)
 >    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
@@ -318,11 +320,13 @@ When filled, you can click on the **Create template** button: you will be able t
 > 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy1) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
 >        - {% icon param-file %} *"Genome annotation in genbank format"*: `annotation (genbank)` (output of **Funannotate predict annotation** {% icon tool %})
+>    - *"Funannotate database"*: select the latest version available
 >    - {% icon param-file %} *"NCBI submission template file"*: `template.sbt` (the fie downloaded from NCBI website)
 >    - {% icon param-file %} *"Eggnog-mapper annotations file"*: `annotations` (output of **eggNOG Mapper** {% icon tool %})
 >    - {% icon param-file %} *"InterProScan5 XML file"*: `InterProScan XML` (output of **InterProScan** {% icon tool %})
 >    - {% icon param-file %} *"BUSCO models"*: `mucorales (orthodb 10)`
 >    - *"Strain name"*: `muc1`
+>    - *"locus_tag from NCBI to rename GFF gene models with"*: `MMUCEDO_`
 >    - *"Which outputs should be generated"*: Select all
 >
 {: .hands_on}
@@ -337,8 +341,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `genome_masked.fasta` (Input dataset)
->    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
+>        - {% icon param-file %} *"Select the reference genome"*: `genome` (output of **Sort assembly** {% icon tool %})
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Annotation`
@@ -359,6 +362,8 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 Click on the newly created dataset's eye to display it. You will see a JBrowse genome browser. You can have a look at the [JBrowse tutorial]({% link topics/visualisation/tutorials/jbrowse/tutorial.md %}) for a more in-depth description of JBrowse.
 
 Enable the annotation track, and the SNPs/Coverage tracks on the left side of JBrowse, then navigate along the genome. You will see the different gene models predicted by Funannotate.
+
+If you click on a gene, a popup will appear with detailed information on the selected gene: position and sequence, but also the functional information retrieved from the **EggNOG mapper** and **InterProScan** results.
 
 If you zoom to a specific gene, and look at the RNASeq tracks, you will see light grey regions corresponding to portions of the genomes where RNASeq were mapped, and darker grey regions corresponding to introns (= regions were some reads were found to match both the end of an exon, and the start of the next one). You can enable the other RNASeq track to display each individual read that was mapped on the genome.
 
