@@ -96,7 +96,7 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 
 > ### {% icon hands_on %} Hands-on: Assembly
 >
-> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.8.3+galaxy0) %} with the following parameters:
+> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input reads"*: the three sequencing datasets
 >    - *"Mode"*: `PacBio raw`
 >    - *"Number of polishing iterations"*: `1`
@@ -114,7 +114,7 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The first dataset (consensus) is a fasta file containing the final assembly (1397 contigs/scaffolds).
+> > 1. The first dataset (consensus) is a fasta file containing the final assembly (1461 contigs).
 > > The second and third dataset are assembly graph files
 > > The fourth dataset is a tabular file (assembly_info) containing extra information about contigs/scaffolds.
 > >
@@ -128,14 +128,14 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 
 > ### {% icon hands_on %} Hands-on: Fasta statistics on Flye assembly
 >
-> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.3) %} with the following parameters:
+> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0) %} with the following parameters:
 >    - {% icon param-file %} *"fasta or multifasta file"*: `consensus` (output of **Flye** {% icon tool %})
 >
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Fasta statistics on reference assembly
 >
-> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.3) %} with the following parameters:
+> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0) %} with the following parameters:
 >    - {% icon param-file %} *"fasta or multifasta file"*: `Mucmuc1_AssemblyScaffolds.fasta`
 >
 
@@ -150,10 +150,10 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 > > ### {% icon solution %} Solution
 > >
 > > 1. We compare the metrics of the two genome assembly :
-> > The Flye assembly : 1397 contigs/scaffolds, N50 = 201 kb, length max = 776 kb, size = 48.8 Mb, 36.6% GC
+> > The Flye assembly : 1461 contigs/scaffolds, N50 = 222 kb, length max = 897 kb, size = 48.6 Mb, 36.6% GC
 > > The reference genome : 456 contigs/scaffolds, N50 = 202 kb, length max = 776 kb, size = 46.1 Mb, 36.7% GC
 > >
-> > 2. Metrics are very similar, Flye generated an assembly with a quality similar to that of the reference genome
+> > 2. Metrics are very similar, Flye generated an assembly with a quality similar to that of the reference genome.
 > >
 > {: .solution}
 >
@@ -173,6 +173,7 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 >        - {% icon param-file %} *"Reference genome"*: `Mucmuc1_AssemblyScaffolds.fasta`
 >        - *"Type of organism"*: `Fungus: use of GeneMark-ES for gene finding, ...`
 >
+
 {: .hands_on}
 
 > ### {% icon question %} Question
@@ -183,13 +184,14 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 > > ### {% icon solution %} Solution
 > >
 > > Quast allows us to compare Flye assembly to the reference genome :
-> > Genome fraction (90.456 %) is the percentage of aligned bases in the reference genome.
-> > Duplication ratio (1.097) is the total number of aligned bases in the assembly divided by the total number of aligned bases in the reference genome  
-> > Largest alignment (698141) is the length of the largest continuous alignment in the assembly.
-> > Total aligned length (45.4 Mb) is the total number of aligned bases in the assembly.
+> > 1. Genome fraction (90.192 %) is the percentage of aligned bases in the reference genome.
+> > 2. Duplication ratio (1.094) is the total number of aligned bases in the assembly divided by the total number of aligned bases in the reference genome.  
+> > 3. Largest alignment (698452) is the length of the largest continuous alignment in the assembly.
+> > 4. Total aligned length (45.2 Mb) is the total number of aligned bases in the assembly.
+> >
 > > Quast also generates some plots :
-> > Cumulative length plot shows the growth of contig lengths. On the x-axis, contigs are ordered from the largest to smallest. The y-axis gives the size of the x largest contigs in the assembly.
-> > GC content plot shows the distribution of GC content in the contigs
+> > 1. Cumulative length plot shows the growth of contig lengths. On the x-axis, contigs are ordered from the largest to smallest. The y-axis gives the size of the x largest contigs in the assembly.
+> > 2. GC content plot shows the distribution of GC content in the contigs.
 > >
 > {: .solution}
 >
@@ -227,7 +229,17 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 >
 > > ### {% icon solution %} Solution
 > >
-> > Short summary generated by BUSCO indicates that reference genome contains 2327 Complete BUSCOs (of which 2302 are single-copy and 25 are duplicated), 13 fragmented ans 109 missing BUSCOs. Flye assembly contains 2345 complete BUSCOs (2312 single-copy and 33 duplicated), 15 fragmented and 89 missing BUSCOs. These two assemblies have similar number of complete, fragmented and missing BUSCOs genes.
+> > Short summary generated by BUSCO indicates that reference genome contains :
+> > 1. 2327 Complete BUSCOs (of which 2302 are single-copy and 25 are duplicated),
+> > 2. 13 fragmented BUSCOs,
+> > 3. 109 missing BUSCOs.
+> >
+> > Short summary generated by BUSCO indicates that Flye assembly contains :
+> > 1. 2348 complete BUSCOs (2310 single-copy and 38 duplicated),
+> > 2. 8 fragmented BUSCOs
+> > 3. 93 missing BUSCOs.
+> >
+> > BUSCO analysis confirms that these two assemblies are of similar quality, with similar number of complete, fragmented and missing BUSCOs genes.
 > >
 > {: .solution}
 >
