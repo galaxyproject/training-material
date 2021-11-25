@@ -561,9 +561,10 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 >    ```
 >
 > 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
-> - {% icon param-files %} *"Files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
-> - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
-> - {% icon param-select %} *"Show the N50 mark in the read length histogram."*: `Yes`
+>    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
+>    - *"Options for filtering or transforming input prior to plotting"*
+>        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
+>        - {% icon param-select %} *"Show the N50 mark in the read length histogram."*: `Yes`
 >
 > 4. Inspect the generated HTML file
 >
@@ -583,13 +584,13 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 > > ### {% icon solution %} Solution
 > > The median, the mean read length and the N50 as well are close to 18,000bp.
 > > For PacBio HiFi reads, the majority of the reads are generally near this value as the library preparation include a size selection step.
-> > For other technologies like PacBio CLR and Nanopore, is larger and mostly depends on the quality of your DNA extraction.
+> > For other technologies like PacBio CLR and Nanopore, it is larger and mostly depends on the quality of your DNA extraction.
 > {: .solution }
 {: .question}
 
 ## Histogram of read lengths
 
-This plot shows the distribution of fragment sizes in the file which was analysed.
+This plot shows the distribution of fragment sizes in the file that was analyzed.
 Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
 In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
 
@@ -599,12 +600,12 @@ In this example, the distribution of read length is centered near 15kbp but the 
 
 This plot shows the distribution of fragment sizes according to the Qscore in the file which was analysed.
 In general, there is no link between read length and read quality but this representation allows to visualise both information into a single plot and detect possible aberration.
-In runs with a lot of short reads these the shorter reads are sometimes of lower quality than the rest.
+In runs with a lot of short reads the shorter reads are sometimes of lower quality than the rest.
 
 ![Read lengths vs Average read quality plot using dots](../../images/quality-control/LengthvsQualityScatterPlot_dot.png "Histogram of read length")
 
 > ### {% icon question %} Questions
-> Looking at "Read lengths vs Average read quality plot using dots plot". Did you notice something unusually with the Qscore? Can you explain it?
+> Looking at "Read lengths vs Average read quality plot using dots plot". Did you notice something unusual with the Qscore? Can you explain it?
 > > ### {% icon solution %} Solution
 > > There is no reads under Q20.
 > > The qualification for HiFi reads is 1) A minimal number of pass >= 3; 2) A final Qscore >=20.
@@ -664,7 +665,7 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 > ### {% icon question %} Questions
 > What do the mean quality and the quality distribution of the run look like?
 > > ### {% icon solution %} Solution
-> > The majority of the reads are between 8< Qscore of <11 which is standard for Nanopore data.
+> > The majority of the reads have a Qscore between 8 and 11 which is standard for Nanopore data.
 > > Beware that for the same data, the basecaller used (Albacor, Guppy, Bonito), the model (fast, hac, sup) and the tool version can give different results.
 > {: .solution }
 {: .question}
