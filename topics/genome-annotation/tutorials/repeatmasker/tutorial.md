@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Masking repeats with RepeatMasker
-zenodo_link: https://zenodo.org/record/5721490
+zenodo_link: https://zenodo.org/record/5726723
 tags:
   - eukaryote
 questions:
@@ -72,7 +72,7 @@ In this tutorial you will learn how to soft mask the genome that can be assemble
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/8458db9c-d517-4c6f-8a91-0ebadbb5a722/genome_raw.fasta
+>    https://zenodo.org/api/files/71333591-99bd-4d99-bbdf-664cc18fd422/genome_raw.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
