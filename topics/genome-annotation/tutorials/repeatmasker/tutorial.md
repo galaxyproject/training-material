@@ -31,9 +31,7 @@ abbreviations:
 # Introduction
 {:.no_toc}
 
-When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky.
-
-However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:
+When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky. However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:
 
 - Tandem repeats: small sequences (<60 base pairs) repeated next to each other, found in many places in the genome, in particular centromeres and telomeres
 - Interspersed repeats: sequences repeated in distant positions, including transposons, retrotransposons, {SINEs} or {LINEs}
@@ -47,11 +45,13 @@ The output of repeat masking tools is most often composed of a fasta file (with 
 - Soft masking: repeat elements are written in lower case
 - Hard masking: repeat elements are replaced by stretches of the letter N
 
-Normal (non-repeated) sequences are always kept in uppercase. Doing hard masking is destructive beacause you lose large parts of the sequence which are replaced by stretches of N. If you want to perform an annotation, it is best to choose soft masking.
+Normal (non-repeated) sequences are always kept in uppercase. Doing hard masking is destructive because you lose large parts of the sequence which are replaced by stretches of N. If you want to perform an annotation, it is best to choose soft masking.
+
+We call this operation "masking" because, by making repeats lowercase, or replacing them with Ns, you make them "invisible" by annotation tools (they are written to mostly ignore the regions marked like this).
 
 Multiple tools exist to perform the masking: [RepeatMasker](https://www.repeatmasker.org/), [RepeatModeler](https://www.repeatmasker.org/RepeatModeler/), [REPET](https://urgi.versailles.inra.fr/Tools/REPET), ... Each one have specificities: some can be trained on specific genomes, some rely on existing databases of repeated elements signatures ([Dfam](https://www.dfam.org/), [RepBase](https://www.girinst.org/repbase/)).
 
-In this tutorial you will learn how to soft mask the genome that can be assembled in the [Flye assembly tutorial]({xx% link topics/assembly/tutorials/flye-assembly/tutorial.md %xx}). We will use RepeatMasker, which is probably the simplest solution giving an acceptable result before annotating the genome in the [Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
+In this tutorial you will learn how to soft mask the genome sequence of a small eukaryote: Mucor mucedo (a fungal plant pathogen). You can learn how this genome sequence was assembled by following the [Flye assembly tutorial]({xx% link topics/assembly/tutorials/flye-assembly/tutorial.md %xx}). We will use RepeatMasker, which is probably the simplest solution giving an acceptable result before annotating the genome in the [Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
 > ### Agenda
 >
@@ -110,7 +110,7 @@ RepeatMasker produces 4 output files:
 
 > ### {% icon question %} Question
 >
-> What proportion of the whole genome sequence was masked?
+> What proportion of the whole genome sequence is masked?
 >
 > > ### {% icon solution %} Solution
 > >
