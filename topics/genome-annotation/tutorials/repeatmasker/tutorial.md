@@ -10,7 +10,7 @@ questions:
 - What is the difference between hard and soft masking?
 objectives:
 - Use RepeatMasker to soft mask a newly assmbled genome
-time_estimation: 3H
+time_estimation: 1H
 level: Introductory
 key_points:
 - RepeatMasker can be used to soft-mask a genome
@@ -114,7 +114,7 @@ RepeatMasker produces 4 output files:
 >
 > > ### {% icon solution %} Solution
 > >
-> > You should find it in the `repeat statistics` output. It should be ~2.33%.
+> > You should find it in the `repeat statistics` output. It should be ~2.41%.
 > >
 > {: .solution}
 >

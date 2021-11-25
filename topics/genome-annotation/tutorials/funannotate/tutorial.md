@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Funannotate
-zenodo_link: https://zenodo.org/record/5653163
+zenodo_link: https://zenodo.org/record/5726818
 tags:
   - eukaryote
 questions:
@@ -79,10 +79,10 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/genome_masked.fasta
->    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/0aa2c0c9-8418-4def-9688-11ada4e4b183/SwissProt_subset.fasta
+>    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/genome_masked.fasta
+>    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/rnaseq_R1.fq.gz
+>    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/rnaseq_R2.fq.gz
+>    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/SwissProt_subset.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
