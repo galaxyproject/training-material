@@ -42,7 +42,7 @@ These repeats are interesting on their own: they can originate from transposons 
 
 The aim of repeat masking is to identify the location of all repeated elements along a genome sequence. Other tools (like annotation pipelines) can then take this information into account when producing their results.
 
-The output of repeat masking tools is mot often composed of a fasta file (with sometimes a GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:
+The output of repeat masking tools is most often composed of a fasta file (with sometimes a GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:
 
 - Soft masking: repeat elements are written in lower case
 - Hard masking: repeat elements are replaced by stretches of the letter N
@@ -51,7 +51,7 @@ Normal (non-repeated) sequences are always kept in uppercase. Doing hard masking
 
 Multiple tools exist to perform the masking: [RepeatMasker](https://www.repeatmasker.org/), [RepeatModeler](https://www.repeatmasker.org/RepeatModeler/), [REPET](https://urgi.versailles.inra.fr/Tools/REPET), ... Each one have specificities: some can be trained on specific genomes, some rely on existing databases of repeated elements signatures ([Dfam](https://www.dfam.org/), [RepBase](https://www.girinst.org/repbase/)).
 
-In this tutorial you will learn how to soft mask the genome that can be assembled in the [Flye assembly tutorial]({xx% link topics/assembly/tutorials/flye-assembly/tutorial.md %xx}). We will use RepeatMasker, which is probably the simplest solution which gives a good enough result before annotating the genome in the [Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
+In this tutorial you will learn how to soft mask the genome that can be assembled in the [Flye assembly tutorial]({xx% link topics/assembly/tutorials/flye-assembly/tutorial.md %xx}). We will use RepeatMasker, which is probably the simplest solution giving an acceptable result before annotating the genome in the [Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
 > ### Agenda
 >
@@ -87,7 +87,7 @@ Let's run RepeatMasker, by selected theinput assembly in fasta format. We select
 
 > ### {% icon comment %} Choosing the right species
 >
-> We select the `Human (Homo sapiens)` species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organism. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tool like RepeatModeler..
+> We select the `Human (Homo sapiens)` species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organisms. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tools like RepeatModeler..
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -103,7 +103,7 @@ Let's run RepeatMasker, by selected theinput assembly in fasta format. We select
 
 RepeatMasker produces 4 output files:
 
-- `masked sequence`: this is the fasta file that you will use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regiosn that were identified as repeat.
+- `masked sequence`: this is the fasta file that you will use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regions that were identified as repeats.
 - `repeat statistics`: this one contains some statistics on the number of repeats found in each category, and the total number of base pairs masked
 - `output log`: this is a tabular file listing all repeats
 - `repeat catalogue`: this one contains the list of all repeat sequences that were identified, with their position, and their similarity with known repeats from the DFam database
