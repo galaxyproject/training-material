@@ -25,7 +25,7 @@ key_points:
 - The functions for selecting data are a lot easier to understand than R's built in alternatives.
 contributors:
 - hexylena
-subtopic: sql
+subtopic: R
 notebook:
     language: r
 tags:
@@ -35,7 +35,7 @@ tags:
 license: MIT
 ---
 
-dplyr is a powerful R-package to transform and summarize tabular data with rows and columns. For further exploration please see the dplyr package vignette: [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+dplyr ({% cite r-dplyr %}) is a powerful R-package to transform and summarize tabular data with rows and columns. It is part of a group of packages (including `ggplot2`) called the `tidyverse` ({% cite r-tidyverse %}), a collection of packages for data processing and visualisation. For further exploration please see the dplyr package vignette: [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
 > ### {% icon comment %} Comment
 >
@@ -66,13 +66,28 @@ If you are familiar with R, you are probably familiar with base R functions such
 
 ## How Do I Get dplyr?
 
-To install and load the required packages:
+To load the required packages:
 
 ```r
-install.packages(c("dplyr", "readr"))
-library(dplyr) # This provides data processing functions
-library(readr) # This provides the `read_csv` function
+library(tidyverse)
 ```
+
+> ### {% icon tip %} Package not found?
+> Remember that you can install new packages by running
+> ```
+> install.packages("tidyverse")
+> ```
+> Or by using the Install button on the RStudio Packages interface
+{: .tip}
+
+Here we've imported the entire suite of tidyverse packages. We'll specifically be using:
+
+Package    | Use
+---        | ---
+`readr`    | This provides the `read_csv` function which is identical to `read.csv` except it returns a tibble
+`dplyr`    | All of the useful functions we'll be covering are part of dplyr
+`magrittr` | A dependency of `dplyr` that provides the `%>%` operator
+`ggplot2`  | The famous plotting library which we'll use at the very end to plot our aggregated data.
 
 # Data: Mammals Sleep
 
@@ -143,6 +158,19 @@ Now in this case, we will pipe the msleep tibble to the function that will selec
 ```r
 msleep %>% select(name, sleep_total) %>% head(2)
 ```
+
+> ### {% icon question %} Question
+> How would you rewrite the following code to use the pipe operator?
+> ```
+> prcomp(tail(read.csv("file.csv"), 10))
+> ```
+> > ### {% icon solution %} Solution
+> > Just read from inside to outside, starting with the innermost `()` and use `%>%` between each step.
+> > ```
+> > read.csv("file.csv") %>% tail(10) %>% prcomp()
+> > ```
+> {: .solution}
+{: .question}
 
 ## Selecting Columns Using `select()`
 
@@ -294,9 +322,10 @@ msleep %>%
 
 ## ggplot2
 
-Most people want to slice and dice their data before plotting, so let's demonstrate that quickly by plotting our last dataset
+Most people want to slice and dice their data before plotting, so let's demonstrate that quickly by plotting our last dataset.
 
 ```r
+library(ggplot2)
 msleep %>%
     group_by(order) %>%
     summarise(avg_sleep = mean(sleep_total),

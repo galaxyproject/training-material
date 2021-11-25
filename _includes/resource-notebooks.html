@@ -1,7 +1,12 @@
 {% assign locale = site.data.lang[page.lang] %}
 
 {% if include.material.notebook %}
-    <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md.ipynb" title="Notebooks" alt="{{ include.material.title }} workflows">
+    <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md.ipynb" title="Jupyter Notebook" alt="{{ include.material.title }} Notebook">
         {% icon notebook aria=false %}{% if include.label %} {{locale['notebooks'] | default: "Jupyter Notebook"}}{% endif %}
     </a>
+    {% if page.notebook.language == "r" %}
+        <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.Rmd" title="R markdown notebook" alt="{{ include.material.title }} Notebook">
+            {% icon notebook aria=false %}{% if include.label %} {{locale['notebooks'] | default: "RMarkdown Notebook"}}{% endif %}
+        </a>
+    {% endif %}
 {% endif %}

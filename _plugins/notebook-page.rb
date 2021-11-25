@@ -41,6 +41,8 @@ module Jekyll
             "\n",
             "by #{by_line}\n",
             "\n",
+            "#{metadata.fetch('license', 'CC-BY')} licensed content from the [Galaxy Training Network](https://training.galaxyproject.org/)\n",
+            "\n",
             "**Objectives**\n",
             "\n",
           ] + metadata['questions'].map{|q| "- #{q}\n"} + [
@@ -295,6 +297,7 @@ module Jekyll
         page2 = PageWithoutAFile.new(site, "", dir, "tutorial.md.ipynb")
         page2.content = JSON.pretty_generate(notebook)
         page2.data["layout"] = nil
+        page2.data["citation_target"] = 'jupyter'
         site.pages << page2
       end
     end
