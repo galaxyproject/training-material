@@ -103,7 +103,7 @@ Why do we need to correct those?
 
 ## Quality control
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >   - *"Short read data from your current history"*: `fastq_raw` (collection)
@@ -112,7 +112,7 @@ Why do we need to correct those?
 
 <!-- ## Quality control with **MultiQC** - step 2/2
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **MultiQC** {% icon tool %} with the following parameters:
 >    - In *"Results"*:
@@ -131,7 +131,7 @@ Why do we need to correct those?
 
 ## Read cleaning with **Trimmomatic**
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trimmomatic** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads?"*: `Paired-end (as collection)`
@@ -172,7 +172,7 @@ Why do we need to correct those?
 
 ## Quality control after cleaning
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >   - *"Short read data from your current history"*: `fastqc_cleaned` (collection)
@@ -183,7 +183,7 @@ Why do we need to correct those?
 
 ## Assembly with **Trinity**
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trinity** {% icon tool %} with the following parameters:
 >    - *"Are you pooling sequence datasets?"*: `Yes`
@@ -203,7 +203,7 @@ Why do we need to correct those?
 
 ## Checking of the assembly statistics
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trinity Statistics** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_raw.fasta`
@@ -216,7 +216,7 @@ Why do we need to correct those?
 
 ## Remapping on the raw transcriptome
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Align reads and estimate abundance** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_raw.fasta`
@@ -261,7 +261,7 @@ Why do we need to correct those?
 
 ## Merge the mapping tables and compute normalizations
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
 >    - *"Abundance estimates"*: `A1_raw`, `A2_raw`, `A3_raw`, `B1_raw`, `B2_raw`, `B3_raw`
@@ -285,7 +285,7 @@ Why do we need to correct those?
 
 ## Compute contig Ex90N50 statistic and Ex90 transcript count
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Compute contig Ex90N50 statistic and Ex90 transcript count** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: matrix of TMM-normalized expression values`
@@ -306,7 +306,7 @@ Why do we need to correct those?
 
 ## Transcriptome annotation completeness
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
 >    - *"Sequence to analyse"*: `transcriptome_raw.fasta`
@@ -319,7 +319,7 @@ Why do we need to correct those?
 
 ## Filter low expression transcripts
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Filter low expression transcripts** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_raw.fasta`
@@ -346,7 +346,7 @@ Why do we need to correct those?
 
 ## Checking of the assembly statistics after cleaning
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trinity Statistics** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_filtered.fasta`
@@ -357,7 +357,7 @@ Why do we need to correct those?
 # Annotation
 ## Generate gene to transcript map
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Generate gene to transcript map** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_filtered.fasta`
@@ -366,7 +366,7 @@ Why do we need to correct those?
 
 ## Peptide prediction
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **TransDecoder** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_filtered.fasta`
@@ -377,7 +377,7 @@ Why do we need to correct those?
 
 ## Similarity search
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Diamond** {% icon tool %} with the following parameters:
 >    - *"What do you want to align?"*: `Align amino acid query sequences (blastp)`
@@ -407,7 +407,7 @@ Why do we need to correct those?
 
 ## Find signal peptides
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **SignalP 3.0** {% icon tool %} with the following parameters:
 >    - *"Fasta file of protein sequences"*: `TransDecoder on data XXX: pep`
@@ -416,7 +416,7 @@ Why do we need to correct those?
 
 ## Find transmembrane domains
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **TMHMM 2.0** {% icon tool %} with the following parameters:
 >    - *"FASTA file of protein sequences"*: `TransDecoder on data XXX: pep`
@@ -425,7 +425,7 @@ Why do we need to correct those?
 
 ## Search again profile database
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **hmmscan** {% icon tool %} with the following parameters:
 >    - *"Sequence file"*: `TransDecoder on data XXX: pep`
@@ -434,7 +434,7 @@ Why do we need to correct those?
 
 ## Transcriptome annotation using **Trinotate**
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trinotate** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_filtered.fasta`
@@ -453,7 +453,7 @@ Why do we need to correct those?
 
 ## Remapping on the filtered transcriptome using
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Align reads and estimate abundance** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_filtered.fasta`
@@ -496,7 +496,7 @@ Why do we need to correct those?
 
 ## Merge the mapping tables and compute a TMM normalization
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
 >    - *"Abundance estimates"*: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`
@@ -518,7 +518,7 @@ Why do we need to correct those?
 
 ## RNASeq samples quality check
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 > 1. **RNASeq samples quality check** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
 >    - *"Samples description"*: `Describe samples`
@@ -527,7 +527,7 @@ Why do we need to correct those?
 
 ## Differential expression analysis
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 > 1. **Differential expression analysis** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
 >    - *"Sample description"*: `Describe samples` (the last one)
@@ -537,7 +537,7 @@ Why do we need to correct those?
 
 ## Extract and cluster differentially expressed transcripts
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Extract and cluster differentially expressed transcripts** {% icon tool %} with the following parameters:
 >    - In *"Additional Options"*:
@@ -557,7 +557,7 @@ Why do we need to correct those?
 
 ## Partition genes into expression clusters
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Partition genes into expression clusters** {% icon tool %} with the following parameters:
 >    - *"RData file"*: `Extract and cluster differentially expressed transcripts: RData file`

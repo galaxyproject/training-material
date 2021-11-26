@@ -253,7 +253,7 @@ the mapping sensitivity. Quantification needs 2 files containing read segements 
 this information, `ChiRA quanitify` tries to infer the correct origin of reads and calculates the expression of the loci
 using a simple expectation-maximization algorithm.
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **ChiRA qauntify** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BED file of aligned segments"*: `ChiRA aligned read segments` (output of **ChiRA merge** {% icon tool %})
@@ -268,7 +268,7 @@ partners for each read. All the combinations of the transcripts that are overlap
 reported. If there is more than one locus with the equal best score then all the best hits are reported. If you have the
 genomic fasta file the tool can hybridize the interacting loci sequences using `IntaRNA`.
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **ChiRA extract** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File containing CRLs information"*: `ChiRA quantified loci` (output of **ChiRA qauntify** {% icon tool %})

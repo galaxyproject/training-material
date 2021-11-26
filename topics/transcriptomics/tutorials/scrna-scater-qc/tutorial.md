@@ -197,7 +197,7 @@ Another filtering approach is to identify outliers in the data and remove them. 
 
 As we are using a rather small test dataset, it's unlikely that PCA filtering will make any difference; for a larger, noisier dataset this is what we would perform instead:
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} Hands-on: Task description
 > 1. {% tool [Scater: filter SCE](toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >    - *"Type of filter"*: `automatic`
