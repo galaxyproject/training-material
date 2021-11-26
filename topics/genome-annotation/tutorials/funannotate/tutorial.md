@@ -24,15 +24,20 @@ key_points:
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
   - Funannotate allows to format an annotation for sumission at NCBI.
 contributors:
-- abretaud
-- alexcorm
-- lleroi
-- r1corre
-- stephanierobin
+  - abretaud
+  - alexcorm
+  - lleroi
+  - r1corre
+  - stephanierobin
 
 abbreviations:
     NMDS: Non-metric multidimensional scaling
 
+requirements:
+ - type: internal
+   topic_name: genome-annotation
+   tutorials:
+     - repeatmasker
 ---
 
 
@@ -51,9 +56,7 @@ Funannotate uses ab-initio predictors ([Augustus](http://bioinf.uni-greifswald.d
 
 While for [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}) you need to perform training steps for the ab-initio predictors, Funannotate is able to take care of that for you, which makes it much easier to use.
 
-In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI.
-
-Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise your new annotation.
+In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI. Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise your new annotation.
 
 > ### Agenda
 >
@@ -103,18 +106,14 @@ Funannotate provides two little tools to help us. Let's run the two tools, one a
 
 The first one (**Funannotate assembly clean**) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
 
-> ### {% icon hands_on %} Hands-on
+The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with `scaffold_`, then a number).
+
+> ### {% icon hands_on %} Polish the assembly
 >
 > 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to clean"*: `genome_masked.fasta` (Input dataset)
 >
-{: .hands_on}
-
-The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with `scaffold_`, then a number).
-
-> ### {% icon hands_on %} Hands-on
->
-> 1. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2) %} with the following parameters:
+> 2. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to sort"*: `output` (output of **Funannotate assembly clean** {% icon tool %})
 >
 {: .hands_on}
@@ -306,15 +305,32 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that were found by InterProScan.
 
-Display the TSV file and explore which kind of results were found by InterProScan.
+If you display the TSV file you should see something like this:
 
-The XML file will be used in the next step.
+![InterProScan TSV output](../../images/interproscan_output.png "Extract of an InterProScan TSV output")
+
+Each line correspond to a motif found in one of the annotated proteins. The most intersting columns are:
+
+- Column 1: the protein identifier
+- Column 5: the identifier of the signature that was found in the protein sequence
+- Column 4: the databank where this signature comes from (InterProScan regroups several motifs databanks)
+- Column 6: the human readable description of the motif
+- Columns 7 and 8: the position where the motif was found
+- Column 9: a score for the match (if available)
+- Column 12 and 13: identifier of the signature integrated in InterPro (if available). Have a look an example webpage for [IPR036859](https://www.ebi.ac.uk/interpro/entry/InterPro/IPR036859/) on InterPro.
+- The following columns contains various identifiers that were assigned to the protein based on the match with the signature (Gene ntology term, Reactome, ...)
+
+The XML output file contains the same information in a computer-friendly format, we will use it in the next step.
 
 # Submission to NCBI
 
 If you plan to submit the final genome sequence and annotation to NCBI, there are a few steps to follow.
 
-In this tutorial we will not perform a real submission, but here's a description of the main steps, and how Funannotate can help you in this process. NCBI provides a complete documentation for [genome and annotation submission](https://www.ncbi.nlm.nih.gov/genbank/genomesubmit/).
+> ### {% icon warning %} Please do not submit this genome to NCBI!
+> In this tutorial we will **not** perform a real submission, as we don't want to duplicate the annotation in Genbank every time someone follows this tutorial!
+>
+> But here's a description of the main steps, and how Funannotate can help you in this process. NCBI provides a complete documentation for [genome and annotation submission](https://www.ncbi.nlm.nih.gov/genbank/genomesubmit/).
+{: .warning}
 
 - First, you should have created a BioProject and a BioSample [on the NCBI portal](https://submit.ncbi.nlm.nih.gov/subs/bioproject/), corresponding to your scientific project, and the sample(s) you have sequenced
 - The raw reads used for the assembly, and the RNASeq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids

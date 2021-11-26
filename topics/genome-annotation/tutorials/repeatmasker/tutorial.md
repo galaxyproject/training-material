@@ -6,25 +6,31 @@ zenodo_link: https://zenodo.org/record/5726723
 tags:
   - eukaryote
 questions:
-- How to mask repeats in a genome?
-- What is the difference between hard and soft masking?
+  - How to mask repeats in a genome?
+  - What is the difference between hard and soft masking?
 objectives:
-- Use RepeatMasker to soft mask a newly assmbled genome
+  - Use RepeatMasker to soft mask a newly assmbled genome
 time_estimation: 1H
 level: Introductory
 key_points:
-- RepeatMasker can be used to soft-mask a genome
-- It is an essential first step before running structural annotation pipelines
+  - RepeatMasker can be used to soft-mask a genome
+  - It is an essential first step before running structural annotation pipelines
 contributors:
-- abretaud
-- alexcorm
-- lleroi
-- r1corre
-- stephanierobin
+  - abretaud
+  - alexcorm
+  - lleroi
+  - r1corre
+  - stephanierobin
 
 abbreviations:
     SINEs: Short Interspersed Nuclear Elements
     LINEs: Long Interspersed Nuclear Elements
+
+follow_up_training:
+- type: "internal"
+  topic_name: genome-annotation
+  tutorials:
+    - funannotate
 ---
 
 
