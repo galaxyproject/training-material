@@ -161,7 +161,7 @@ module TopicFilter
         if ! page_obj.has_key? 'tags'
           page_obj['tags'] = Array.new
         end
-        page_obj['tags'].append('work-in-progress')
+        page_obj['tags'].push('work-in-progress')
       end
 
       # Push onto our stack.
