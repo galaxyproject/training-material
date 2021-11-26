@@ -178,6 +178,17 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ---
 
+## PacBio CLR *vs* HiFi
+
+![Comparison between PacBio HiFi and CLR sequencing methods](../../images/quality-control/pacbio_hifi_vs_clr.png)
+
+???
+
+- HiFi read is the result of a consensus of subreads from the same molecule (i.e. multiple pass over the same molecule). It's imply to have shorter sequences to allow multiple pass on a single molecule by the polymerase.
+- CLR read come from a single pass from a single molecule. It's allow to have longer reads but with a lower read quality. Warning: Absence of encoded quality since Sequel I into fastq files with CLR.
+
+---
+
 ## Identifying Potential Quality Issues
 
 ---
@@ -252,7 +263,13 @@ A versatile tool for short and long reads quality control
 ???
 
 - PacBio encodes quality with a higher range than Illumina to increase precision in base quality assessment
-- Warning: there is no quality information for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. "!")
+---
+
+### Per-base Quality - PacBio CLR
+
+![A graph for PacBio CLR reads. It's empty as quality is set to 0 for all bases!](../../images/per_base_sequence_quality_pacbio_clr.png)
+
+Quality information is "absent" for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. "!")!
 
 ---
 
@@ -409,9 +426,11 @@ A quality control tool for long reads (Nanopore/PacBio)
 
 ---
 
-### Read length *vs* Read quality score
+### Read length *vs* Read quality score (Qscores)
 
 ![Distribution for HiFi reads with a default filter >= Q20 ](../../images/LengthvsQualityScatterPlot_dot.png)
+
+Qscores: it is the average per-base error probability, expressed on the log (Phred) scale
 
 ???
 
@@ -482,17 +501,19 @@ Reads with a Qscore >= 7 (default with Guppy) are marked as "Pass"
 
 ### Basecalled reads length
 
-![A graph with a read length distribution between 200bp and 50kbp.](../../images/basecalled_reads_length-pycoqc.png)
+![A graph with a read length distribution between 200bp and 150kbp.](../../images/basecalled_reads_length-pycoqc.png)
 
 ---
 
-### Basecalled reads PHRED quality
+### Basecalled reads PHRED quality (Qscores)
 
-![A graph of PHRED quality with a distribution centered around 10.](../../images/basecalled_reads_PHRED_quality-pycoqc.png)
+![A graph of PHRED quality (Qscore) with a distribution centered around 10.](../../images/basecalled_reads_PHRED_quality-pycoqc.png)
+
+Reminder: Qscores is the average per-base error probability, expressed on the log (Phred) scale
 
 ---
 
-### Basecalled reads length *vs* reads PHRED quality
+### Basecalled reads length *vs* reads PHRED quality (Qscores)
 
 ![Standard distribution for Nanopore reads.](../../images/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png)
 
