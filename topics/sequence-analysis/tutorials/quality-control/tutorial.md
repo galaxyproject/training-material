@@ -882,7 +882,7 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 > 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5720492)
 >
 >    ```
->    https://zenodo.org/record/5720492/files/m64011_190830_220126.Q20.subsample.fastq.gz
+>    https://zenodo.org/api/files/cd127200-b68f-402d-925b-720622e8e89b/m64011_190830_220126.Q20.subsample.fastq.gz
 >    ```
 >
 > 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
@@ -954,8 +954,8 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 > 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5720492)
 >
 >    ```
->    https://zenodo.org/record/5720492/files/nanopore_basecalled-guppy.fastq.gz
->    https://zenodo.org/record/5720492/files/sequencing_summary.txt
+>    https://zenodo.org/api/files/cd127200-b68f-402d-925b-720622e8e89b/nanopore_basecalled-guppy.fastq.gz
+>    https://zenodo.org/api/files/cd127200-b68f-402d-925b-720622e8e89b/sequencing_summary.txt
 >    ```
 >
 > 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
