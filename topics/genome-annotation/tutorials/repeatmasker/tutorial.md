@@ -93,7 +93,7 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 
 > ### {% icon comment %} Choosing the right species
 >
-> We select the `Human (Homo sapiens)` species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organisms. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tools like RepeatModeler..
+> We select the `Human (Homo sapiens)` species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organisms. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tools like RepeatModeler.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on
