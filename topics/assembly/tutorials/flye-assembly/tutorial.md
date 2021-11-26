@@ -7,10 +7,10 @@ tags:
   - assembly
   - pacbio
 questions:
-- How to perform genome assembly with PacBio data ?
+- How to perform a genome assembly with PacBio data ?
 - How to check assembly quality ?
 objectives:
-- Assemble a Genome
+- Assemble a Genome with PacBio data
 - Assess assembly quality
 time_estimation: 6h
 level: Intermediate
@@ -30,7 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial, we will assemble a genome of a species of fungi in the family Mucoraceae, *Mucor mucedo*, from PacBio sequencing data. These data were obtained from NCBI (SRR8534473 SRR8534474 SRR8534475). The quality of the assembly obtained will be analyzed, in particular by comparing it to a reference assembly, obtained with Falcon assembler, and available on [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
+In this tutorial, we will assemble a genome of a species of fungi in the family Mucoraceae, *Mucor mucedo*, from PacBio sequencing data. These data were obtained from NCBI ([SRR8534473](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534473), [SRR8534474](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534474) and [SRR8534475](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534475)). The quality of the assembly obtained will be analyzed, in particular by comparing it to a reference assembly, obtained with Falcon assembler, and available on the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
 
 
 > ### Agenda
@@ -45,7 +45,7 @@ In this tutorial, we will assemble a genome of a species of fungi in the family 
 
 
 # Get data
-We will use long reads sequencing data (PacBio sequencing) of Mucor mucedo genome. These data are a subset of data from NCBI. We will also use a reference genome assembly downloaded from from [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
+We will use long reads sequencing data (PacBio sequencing) of Mucor mucedo genome. These data are a subset of data from NCBI. We will also use later a reference genome assembly downloaded from the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
 
 ## Get data from Zenodo
 
@@ -55,16 +55,16 @@ We will use long reads sequencing data (PacBio sequencing) of Mucor mucedo genom
 > 2. Import the files from [Zenodo](https://zenodo.org/record/5702408)
 >
 >    ```
->   https://zenodo.org/record/5702408/files/SRR8534473_subreads.fastq.gz?download=1
->   https://zenodo.org/record/5702408/files/SRR8534474_subreads.fastq.gz?download=1
->   https://zenodo.org/record/5702408/files/SRR8534475_subreads.fastq.gz?download=1
+>    https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534473_subreads.fastq.gz
+>    https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534474_subreads.fastq.gz
+>    https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_subreads.fastq.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >
 > 3. Rename the datasets
-> 4. Check that the datatype are  `fastqsanger.gz`
+> 4. Check that the datatype are `fastqsanger.gz`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -92,7 +92,7 @@ We will use long reads sequencing data (PacBio sequencing) of Mucor mucedo genom
 
 ## Assembly with **Flye**
 
-We will use *Flye*, a de novo assembler for single molecule sequencing reads, such as those produced by PacBio and Oxford Nanopore Technologies. It is designed for a wide range of datasets, from small bacterial projects to large mammalian-scale assemblies. The package represents a complete pipeline: it takes raw PacBio / ONT reads as input and outputs polished contigs. Flye also has a special mode for metagenome assembly. All informations about Flye assembler are here : [Flye](https://github.com/fenderglass/Flye/)
+We will use *Flye*, a de novo assembler for single molecule sequencing reads, such as those produced by PacBio and Oxford Nanopore Technologies. It is designed for a wide range of datasets, from small bacterial projects to large mammalian-scale assemblies. The package represents a complete pipeline: it takes raw PacBio / ONT reads as input and outputs polished contigs. Flye also has a special mode for metagenome assembly. All informations about Flye assembler are here : [Flye](https://github.com/fenderglass/Flye/).
 
 > ### {% icon hands_on %} Hands-on: Assembly
 >
@@ -101,7 +101,7 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 >    - *"Mode"*: `PacBio raw`
 >    - *"Number of polishing iterations"*: `1`
 >    - *"Reduced contig assembly coverage"*: `Disable reduced coverage for initial disjointing assembly`
->    
+>
 >     The tool produces four datasets : consensus, assembly graph, graphical fragment assembly and assembly info
 
 
@@ -109,14 +109,13 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 
 > ### {% icon question %} Question
 >
-> 1. What the different datasets obtained correspond to ?
-
+> 1. What do the different output datasets correspond to?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The first dataset (consensus) is a fasta file containing the final assembly (1461 contigs).
-> > The second and third dataset are assembly graph files
-> > The fourth dataset is a tabular file (assembly_info) containing extra information about contigs/scaffolds.
+> > - The first dataset (consensus) is a fasta file containing the final assembly (1461 contigs).
+> > - The second and third dataset are assembly graph files.
+> > - The fourth dataset is a tabular file (assembly_info) containing extra information about contigs/scaffolds.
 > >
 > {: .solution}
 >
@@ -145,13 +144,12 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 >
 > 1. Compare the different metrics obtained for Flye assembly and reference genome.
 > 2. What can you conclude about the quality of this new assembly ?
-
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. We compare the metrics of the two genome assembly :
-> > The Flye assembly : 1461 contigs/scaffolds, N50 = 222 kb, length max = 897 kb, size = 48.6 Mb, 36.6% GC
-> > The reference genome : 456 contigs/scaffolds, N50 = 202 kb, length max = 776 kb, size = 46.1 Mb, 36.7% GC
+> > - The Flye assembly : 1461 contigs/scaffolds, N50 = 222 kb, length max = 897 kb, size = 48.6 Mb, 36.6% GC
+> > - The reference genome : 456 contigs/scaffolds, N50 = 202 kb, length max = 776 kb, size = 46.1 Mb, 36.7% GC
 > >
 > > 2. Metrics are very similar, Flye generated an assembly with a quality similar to that of the reference genome.
 > >
@@ -173,19 +171,17 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 >        - {% icon param-file %} *"Reference genome"*: `Mucmuc1_AssemblyScaffolds.fasta`
 >        - *"Type of organism"*: `Fungus: use of GeneMark-ES for gene finding, ...`
 >
-
 {: .hands_on}
 
 > ### {% icon question %} Question
 >
-> What additional informations are generated by Quast, by comparing the Fasta statistics outputs ?
-
+> What additional informations are generated by Quast, by compared to the **Fasta Statistics** outputs ?
 >
 > > ### {% icon solution %} Solution
 > >
 > > Quast allows us to compare Flye assembly to the reference genome :
 > > 1. Genome fraction (90.192 %) is the percentage of aligned bases in the reference genome.
-> > 2. Duplication ratio (1.094) is the total number of aligned bases in the assembly divided by the total number of aligned bases in the reference genome.  
+> > 2. Duplication ratio (1.094) is the total number of aligned bases in the assembly divided by the total number of aligned bases in the reference genome.
 > > 3. Largest alignment (698452) is the length of the largest continuous alignment in the assembly.
 > > 4. Total aligned length (45.2 Mb) is the total number of aligned bases in the assembly.
 > >
@@ -250,4 +246,4 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 # Conclusion
 {:.no_toc}
 
-This pipeline shows how generate and evaluate genome assembly from long reads PacBio data.
+This pipeline shows how to generate and evaluate a genome assembly from long reads PacBio data.
