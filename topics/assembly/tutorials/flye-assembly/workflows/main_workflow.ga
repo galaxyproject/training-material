@@ -1,1 +1,481 @@
-{"a_galaxy_workflow": "true", "annotation": "", "creator": [{"class": "Person", "identifier": "", "name": "Erwan Corre"}, {"class": "Person", "identifier": "", "name": "St\u00e9phanie Robin"}, {"class": "Person", "identifier": "", "name": "Anthony Bretaudeau"}, {"class": "Person", "identifier": "", "name": "Alexandre Cormier"}], "format-version": "0.1", "name": "Genome Assembly", "steps": {"0": {"annotation": "", "content_id": null, "errors": null, "id": 0, "input_connections": {}, "inputs": [{"description": "", "name": "single reads"}], "label": "single reads", "name": "Input dataset", "outputs": [], "position": {"bottom": 381.3000030517578, "height": 61.80000305175781, "left": 369.5, "right": 569.5, "top": 319.5, "width": 200, "x": 369.5, "y": 319.5}, "tool_id": null, "tool_state": "{\"optional\": false, \"format\": [\"fastqsanger.gz\"]}", "tool_version": null, "type": "data_input", "uuid": "022ec16e-3c15-45db-99c0-167a7d3121fe", "workflow_outputs": []}, "1": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0", "errors": null, "id": 1, "input_connections": {"inputs": {"id": 0, "output_name": "output"}}, "inputs": [{"description": "runtime parameter for tool Flye", "name": "inputs"}], "label": null, "name": "Flye", "outputs": [{"name": "consensus", "type": "fasta"}, {"name": "assembly_graph", "type": "graph_dot"}, {"name": "assembly_gfa", "type": "txt"}, {"name": "assembly_info", "type": "tabular"}], "position": {"bottom": 861.7999877929688, "height": 306.79998779296875, "left": 620.5, "right": 820.5, "top": 555, "width": 200, "x": 620.5, "y": 555}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.8.3+galaxy0", "tool_shed_repository": {"changeset_revision": "e27815e82dd4", "name": "flye", "owner": "bgruening", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"asm\": {\"asm_select\": \"false\", \"__current_case__\": 1}, \"generate_log\": \"false\", \"hifi_error\": null, \"inputs\": {\"__class__\": \"RuntimeValue\"}, \"iterations\": \"1\", \"keep_haplotypes\": \"false\", \"meta\": \"false\", \"min_overlap\": null, \"mode\": \"--nano-raw\", \"plasmids\": \"false\", \"trestle\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "2.8.3+galaxy0", "type": "tool", "uuid": "4285044c-a817-4c14-bcef-8b6ab3e4d901", "workflow_outputs": [{"label": "Flye on input dataset(s): graphical fragment assembly", "output_name": "assembly_gfa", "uuid": "bec4979c-9e83-4839-b3e1-dafd14ddf7ca"}, {"label": "Flye on input dataset(s): assembly graph", "output_name": "assembly_graph", "uuid": "b4863d72-1a3a-494b-8f5e-857e9da8eb55"}, {"label": "Flye on input dataset(s): consensus", "output_name": "consensus", "uuid": "b364f141-e551-4bbd-8678-bdeb1da7ad09"}, {"label": "Flye on input dataset(s): assembly info", "output_name": "assembly_info", "uuid": "913fccc6-1c5d-4389-84b6-1c9744d95dc4"}]}, "2": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0", "errors": null, "id": 2, "input_connections": {"dataset": {"id": 1, "output_name": "consensus"}}, "inputs": [], "label": null, "name": "Fasta Statistics", "outputs": [{"name": "stats", "type": "tabular"}], "position": {"bottom": 387.8999938964844, "height": 154.39999389648438, "left": 1062, "right": 1262, "top": 233.5, "width": 200, "x": 1062, "y": 233.5}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.3", "tool_shed_repository": {"changeset_revision": "56022eb50bbd", "name": "fasta_stats", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"dataset\": {\"__class__\": \"ConnectedValue\"}, \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.0.3", "type": "tool", "uuid": "3c49d022-c386-4cf9-a084-64e42e9dcc59", "workflow_outputs": [{"label": "Fasta Statistics on input dataset(s): Fasta summary stats", "output_name": "stats", "uuid": "5014ac3b-4f09-451b-b831-d6cf47bf68f8"}]}, "3": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1", "errors": null, "id": 3, "input_connections": {"in|inputs": {"id": 1, "output_name": "consensus"}}, "inputs": [], "label": null, "name": "Quast", "outputs": [{"name": "quast_tabular", "type": "tabular"}, {"name": "report_html", "type": "html"}, {"name": "report_pdf", "type": "pdf"}, {"name": "log", "type": "txt"}], "position": {"bottom": 741.7000122070312, "height": 327.20001220703125, "left": 1068.5, "right": 1268.5, "top": 414.5, "width": 200, "x": 1068.5, "y": 414.5}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1", "tool_shed_repository": {"changeset_revision": "ebb0dcdb621a", "name": "quast", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"al\": {\"use_all_alignments\": \"false\", \"min_alignment\": \"65\", \"min_identity\": \"95.0\", \"ambiguity_usage\": \"one\", \"ambiguity_score\": \"0.99\", \"fragmented\": \"false\", \"fragmented_max_indent\": \"50\", \"upper_bound_assembly\": \"false\", \"upper_bound_min_con\": \"2\"}, \"assembly\": {\"type\": \"genome\", \"__current_case__\": 0, \"ref\": {\"use_ref\": \"false\", \"__current_case__\": 1, \"est_ref_size\": null}, \"orga_type\": \"\"}, \"circos\": \"false\", \"contig_thresholds\": \"0,1000\", \"extensive_mis_size\": \"1000\", \"genes\": {\"gene_finding\": {\"tool\": \"none\", \"__current_case__\": 0}, \"rna_finding\": \"false\", \"conserved_genes_finding\": \"false\"}, \"in\": {\"custom\": \"false\", \"__current_case__\": 1, \"inputs\": {\"__class__\": \"ConnectedValue\"}}, \"k_mer\": {\"k_mer_stats\": \"\", \"__current_case__\": 1}, \"large\": \"false\", \"min_contig\": \"500\", \"scaffold_gap_max_size\": \"1000\", \"skip_unaligned_mis_contigs\": \"true\", \"split_scaffolds\": \"false\", \"strict_NA\": \"false\", \"unaligned_part_size\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "5.0.2+galaxy1", "type": "tool", "uuid": "1b460c75-f557-44d5-b837-ecb93894d077", "workflow_outputs": [{"label": "Quast on input dataset(s):  PDF report", "output_name": "report_pdf", "uuid": "7623ccb4-6173-4fdb-b92b-1d99c60e4bb1"}, {"label": "Quast on input dataset(s):  HTML report", "output_name": "report_html", "uuid": "27a258b6-c1af-4aba-8ee6-263aa9caf519"}, {"label": "Quast on input dataset(s): Log", "output_name": "log", "uuid": "a2ea73dc-b61c-4904-a961-bd88563a9e40"}, {"label": "Quast on input dataset(s): tabular report", "output_name": "quast_tabular", "uuid": "0be21622-4677-4c77-a90e-f65ea42b124f"}]}, "4": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0", "errors": null, "id": 4, "input_connections": {"input": {"id": 1, "output_name": "consensus"}}, "inputs": [], "label": null, "name": "Busco", "outputs": [{"name": "busco_table", "type": "tabular"}], "position": {"bottom": 907.5, "height": 134, "left": 1072.5, "right": 1272.5, "top": 773.5, "width": 200, "x": 1072.5, "y": 773.5}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0", "tool_shed_repository": {"changeset_revision": "0d243f458b53", "name": "busco", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"auto_lineage\": null, \"outputs\": null}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage_dataset\": \"acidobacteria_odb10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "5.2.2+galaxy0", "type": "tool", "uuid": "7ef8e447-ff0a-4564-9199-7ee322cb8f2f", "workflow_outputs": [{"label": "Busco on input dataset(s): full table", "output_name": "busco_table", "uuid": "bd413388-fcf7-4b8d-9e65-ee8ad232abb0"}]}}, "tags": [], "uuid": "2a699ca5-035b-4c84-b7f0-9c3103c035a3", "version": 8}
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Genome Assembly using PacBio data and Flye assembler",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Erwan Corre"
+        },
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "St\u00e9phanie Robin"
+        },
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Anthony Bretaudeau"
+        },
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Alexandre Cormier"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "Genome Assembly using PacBio data",
+    "steps": {
+        "0": {
+            "annotation": "PacBio reads in fastq format",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "PacBio reads in fastq format",
+                    "name": "PacBio reads"
+                }
+            ],
+            "label": "PacBio reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 305.1999969482422,
+                "height": 82.19999694824219,
+                "left": 549.5,
+                "right": 749.5,
+                "top": 223,
+                "width": 200,
+                "x": 549.5,
+                "y": 223
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fastqsanger.gz\"]}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "022ec16e-3c15-45db-99c0-167a7d3121fe",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Reference genome from JGI",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Reference genome from JGI",
+                    "name": "Reference genome"
+                }
+            ],
+            "label": "Reference genome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 481.1999969482422,
+                "height": 82.19999694824219,
+                "left": 551,
+                "right": 751,
+                "top": 399,
+                "width": 200,
+                "x": 551,
+                "y": 399
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "abf0462d-3f02-4be7-8079-a97f496b4683",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "32f996de-2311-43fe-893c-4c6573a8ccbb"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "inputs": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Flye",
+            "outputs": [
+                {
+                    "name": "consensus",
+                    "type": "fasta"
+                },
+                {
+                    "name": "assembly_graph",
+                    "type": "graph_dot"
+                },
+                {
+                    "name": "assembly_gfa",
+                    "type": "txt"
+                },
+                {
+                    "name": "assembly_info",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 504.8999938964844,
+                "height": 286.3999938964844,
+                "left": 843.5,
+                "right": 1043.5,
+                "top": 218.5,
+                "width": 200,
+                "x": 843.5,
+                "y": 218.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "276f5d8712d5",
+                "name": "flye",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"asm\": {\"asm_select\": \"false\", \"__current_case__\": 1}, \"generate_log\": \"false\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"iterations\": \"1\", \"keep_haplotypes\": \"false\", \"meta\": \"false\", \"min_overlap\": null, \"mode_conditional\": {\"mode\": \"--pacbio-raw\", \"__current_case__\": 3}, \"scaffold\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.9+galaxy0",
+            "type": "tool",
+            "uuid": "b46b2319-5fa8-4055-817f-15eea86c4049",
+            "workflow_outputs": [
+                {
+                    "label": "Flye on input dataset(s): graphical fragment assembly",
+                    "output_name": "assembly_gfa",
+                    "uuid": "d62b5ffd-66b6-407d-a6cd-e7a256374338"
+                },
+                {
+                    "label": "Flye on input dataset(s): consensus",
+                    "output_name": "consensus",
+                    "uuid": "40557cf3-cec1-4f2d-9d54-42ee06abe6d4"
+                },
+                {
+                    "label": "Flye on input dataset(s): assembly info",
+                    "output_name": "assembly_info",
+                    "uuid": "675c3ae6-b4de-48a7-9eca-a76ac0902a64"
+                },
+                {
+                    "label": "Flye on input dataset(s): assembly graph",
+                    "output_name": "assembly_graph",
+                    "uuid": "7d44bfac-fd79-4e62-abe9-ce98c03f92db"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "fasta": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Fasta Statistics",
+            "outputs": [
+                {
+                    "name": "stats_output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 720.3999938964844,
+                "height": 154.39999389648438,
+                "left": 843,
+                "right": 1043,
+                "top": 566,
+                "width": 200,
+                "x": 843,
+                "y": 566
+            },
+            "post_job_actions": {
+                "HideDatasetActionstats_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "stats_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0dbb995c7d35",
+                "name": "fasta_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fasta\": {\"__class__\": \"ConnectedValue\"}, \"gaps_option\": \"false\", \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "9a9a702c-f355-44c8-b8fa-3b9e5600fa10",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 957.1999969482422,
+                "height": 205.1999969482422,
+                "left": 845.5,
+                "right": 1045.5,
+                "top": 752,
+                "width": 200,
+                "x": 845.5,
+                "y": 752
+            },
+            "post_job_actions": {
+                "HideDatasetActionbusco_sum": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "HideDatasetActionbusco_table": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "busco_table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "46ae58b1d792",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"mucorales_odb10\"}, \"outputs\": [\"short_summary\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.2.2+galaxy2",
+            "type": "tool",
+            "uuid": "297abfe6-38d3-4494-98f5-5fdbeb17d6ae",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "fasta": {
+                    "id": 2,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Fasta Statistics",
+            "outputs": [
+                {
+                    "name": "stats_output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 341.3999938964844,
+                "height": 154.39999389648438,
+                "left": 1201,
+                "right": 1401,
+                "top": 187,
+                "width": 200,
+                "x": 1201,
+                "y": 187
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0dbb995c7d35",
+                "name": "fasta_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fasta\": {\"__class__\": \"ConnectedValue\"}, \"gaps_option\": \"false\", \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "6ec5c36e-0b3d-41b9-9cc8-899350540545",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "stats_output",
+                    "uuid": "0703e175-8db4-4641-ae0d-e4167a799717"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "assembly|ref|r": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "in|inputs": {
+                    "id": 2,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Quast",
+            "outputs": [
+                {
+                    "name": "report_html",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "bottom": 656,
+                "height": 266,
+                "left": 1198.5,
+                "right": 1398.5,
+                "top": 390,
+                "width": 200,
+                "x": 1198.5,
+                "y": 390
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "342a1d1fed7b",
+                "name": "quast",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"contig_thresholds\": \"0,1000\", \"strict_NA\": \"false\", \"extensive_mis_size\": \"1000\", \"scaffold_gap_max_size\": \"1000\", \"unaligned_part_size\": \"500\", \"skip_unaligned_mis_contigs\": \"true\", \"fragmented_max_indent\": null}, \"al\": {\"ambiguity_score\": \"0.99\", \"ambiguity_usage\": \"one\", \"fragmented\": \"false\", \"fragmented_max_indent\": \"50\", \"min_alignment\": \"65\", \"min_identity\": \"95.0\", \"upper_bound_assembly\": \"false\", \"upper_bound_min_con\": \"2\", \"use_all_alignments\": \"false\"}, \"alignments\": {\"use_all_alignments\": \"false\", \"min_alignment\": \"65\", \"min_identity\": \"95.0\", \"ambiguity_usage\": \"one\", \"ambiguity_score\": \"0.99\", \"fragmented\": \"false\", \"upper_bound_assembly\": \"false\", \"upper_bound_min_con\": null}, \"assembly\": {\"type\": \"genome\", \"__current_case__\": 0, \"ref\": {\"use_ref\": \"true\", \"__current_case__\": 0, \"r\": {\"__class__\": \"RuntimeValue\"}, \"features\": {\"__class__\": \"RuntimeValue\"}, \"operons\": {\"__class__\": \"RuntimeValue\"}, \"k_mer\": {\"k_mer_stats\": \"\", \"__current_case__\": 1}, \"circos\": \"false\"}, \"orga_type\": \"--fungus\"}, \"circos\": \"false\", \"contig_thresholds\": \"0,1000\", \"extensive_mis_size\": \"1000\", \"genes\": {\"gene_finding\": {\"tool\": \"none\", \"__current_case__\": 0}, \"rna_finding\": \"false\", \"conserved_genes_finding\": \"false\"}, \"in\": {\"custom\": \"false\", \"__current_case__\": 1, \"inputs\": {\"__class__\": \"ConnectedValue\"}}, \"k_mer\": {\"__current_case__\": 1, \"k_mer_stats\": \"\"}, \"large\": \"false\", \"min_contig\": \"500\", \"output_files\": \"html\", \"reads\": {\"reads_option\": \"disabled\", \"__current_case__\": 0}, \"scaffold_gap_max_size\": \"1000\", \"skip_unaligned_mis_contigs\": \"true\", \"split_scaffolds\": \"false\", \"strict_NA\": \"false\", \"unaligned_part_size\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0.2+galaxy2",
+            "type": "tool",
+            "uuid": "479ca47e-99d3-4491-86b3-d45856b2275e",
+            "workflow_outputs": [
+                {
+                    "label": "Quast on input dataset(s):  PDF report",
+                    "output_name": "report_pdf",
+                    "uuid": "08bdf215-f086-4732-b476-a1f240fd8368"
+                },
+                {
+                    "label": "Quast on input dataset(s): Log",
+                    "output_name": "log",
+                    "uuid": "2ba09fdf-400f-4949-8069-7e43ac7392cb"
+                },
+                {
+                    "label": "Quast on input dataset(s):  HTML report",
+                    "output_name": "report_html",
+                    "uuid": "a480d903-9e2b-4dfb-b862-5c716814072a"
+                },
+                {
+                    "label": "Quast on input dataset(s): tabular report",
+                    "output_name": "quast_tabular",
+                    "uuid": "9c6f2178-843a-455b-be44-1d921d2e3afd"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 910.1999969482422,
+                "height": 205.1999969482422,
+                "left": 1202.5,
+                "right": 1402.5,
+                "top": 705,
+                "width": 200,
+                "x": 1202.5,
+                "y": 705
+            },
+            "post_job_actions": {
+                "HideDatasetActionbusco_table": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "busco_table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "46ae58b1d792",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"mucorales_odb10\"}, \"outputs\": [\"short_summary\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.2.2+galaxy2",
+            "type": "tool",
+            "uuid": "fb896bc9-5ebd-41a1-82a7-1dae23e23dac",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "busco_sum",
+                    "uuid": "9c1a3804-7e46-41f2-9a7d-e953672bf543"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "assembly"
+    ],
+    "uuid": "bc09ff28-f09f-45dd-9a5e-8646762bee45",
+    "version": 10
+}
