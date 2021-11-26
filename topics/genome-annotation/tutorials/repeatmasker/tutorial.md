@@ -34,7 +34,7 @@ abbreviations:
 When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky. However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:
 
 - Tandem repeats: small sequences (<60 base pairs) repeated next to each other, found in many places in the genome, in particular centromeres and telomeres
-- Interspersed repeats: sequences repeated in distant positions, including transposons, retrotransposons, {SINEs} or {LINEs}
+- Interspersed repeats: sequences repeated in distant positions, including transposons, {SINEs} or {LINEs}
 
 These repeats are interesting on their own: they can originate from transposons or viral insertions, and they can have direct effects on the expression of genes. But they are also the source of a lot of trouble when you work on genomics data. First when sequencing a genome, assembly tools often have problems reconstructing the genome sequence in regions containing repeats (in particular when repeats are longer than the read size). Then, when you have a good assembly, you want to annotate it to find the location of genes. Unfortunately annotation tools have trouble identifying gene locations in regions rich in repeats.
 
@@ -83,7 +83,7 @@ In this tutorial you will learn how to soft mask the genome sequence of a small 
 
 # Soft-masking using RepeatMasker
 
-Let's run RepeatMasker, by selected theinput assembly in fasta format. We select the soft masking option, and we choose to use the DFam database.
+Let's run RepeatMasker, by selected the input assembly in fasta format. We select the soft masking option, and we choose to use the DFam database.
 
 > ### {% icon comment %} Choosing the right species
 >
