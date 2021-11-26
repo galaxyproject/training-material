@@ -42,7 +42,6 @@ notebook:
 tags:
 - SQL
 - R
-- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment

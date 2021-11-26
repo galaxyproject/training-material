@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: dplyr & tidyverse for data processing
 level: Advanced
-enable: false
 zenodo_link:
 requirements:
 - type: "internal"
@@ -25,12 +24,12 @@ key_points:
 - The functions for selecting data are a lot easier to understand than R's built in alternatives.
 contributors:
 - hexylena
-subtopic: R
+subtopic: r
 notebook:
     language: r
+priority: 3
 tags:
 - R
-- jupyter-notebook
 
 license: MIT
 ---

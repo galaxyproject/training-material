@@ -68,7 +68,6 @@ contributors:
   - hexylena
   - bazante1
 tags:
-- jupyter-notebook
 - bash
 ---
 

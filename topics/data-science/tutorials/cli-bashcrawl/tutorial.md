@@ -31,7 +31,6 @@ contributors:
 - hexylena
 tags:
 - game
-- jupyter-notebook
 - bash
 ---
 

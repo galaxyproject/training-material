@@ -92,6 +92,11 @@ module Jekyll
         # https://bookdown.org/yihui/rmarkdown/
 
         puts "[GTN/Notebooks/R] Rendering RMarkdown #{fn}"
+        if ! page.data.has_key? 'tags'
+          page.data['tags'] = []
+        end
+        page.data['tags'].push('rmarkdown-notebook')
+
         fnparts = fn.split('/')
         rmddata = {
           'title' => page.data['title'],

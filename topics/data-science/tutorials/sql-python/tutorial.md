@@ -37,7 +37,6 @@ notebook:
 tags:
 - SQL
 - Python
-- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment

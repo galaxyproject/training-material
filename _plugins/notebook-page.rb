@@ -255,6 +255,10 @@ module Jekyll
         notebook_language = page.data['notebook'].fetch('language', 'python')
 
         puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
+        if ! page.data.has_key? 'tags'
+          page.data['tags'] = []
+        end
+        page.data['tags'].push('jupyter-notebook')
 
         # Here we read use `notedown` to convert the tutorial to a Hash
         # representing the notebook
