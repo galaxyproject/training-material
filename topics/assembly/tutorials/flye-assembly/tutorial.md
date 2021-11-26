@@ -15,8 +15,8 @@ objectives:
 time_estimation: 6h
 level: Intermediate
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- PacBio data allows to perform good quality genome assembly
+- Quast and BUSCO make it easy to compare the quality of assemblies
 contributors:
 - abretaud
 - alexcorm
@@ -45,7 +45,7 @@ In this tutorial, we will assemble a genome of a species of fungi in the family 
 
 
 # Get data
-We will use long reads sequencing data (PacBio sequencing) of Mucor mucedo genome. These data are a subset of data from NCBI. We will also use later a reference genome assembly downloaded from the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
+We will use long reads sequencing data : CLR (continus long reads) sequencing PacBio of Mucor mucedo genome. These data are a subset of data from NCBI. We will also use later a reference genome assembly downloaded from the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
 
 ## Get data from Zenodo
 
@@ -113,8 +113,8 @@ We will use *Flye*, a de novo assembler for single molecule sequencing reads, su
 >
 > > ### {% icon solution %} Solution
 > >
-> > - The first dataset (consensus) is a fasta file containing the final assembly (1461 contigs).
-> > - The second and third dataset are assembly graph files.
+> > - The first dataset (consensus) is a fasta file containing the final assembly (1461 contigs). You may notice that the result (contigs number) you obtained is sligthy different from the one presented here. This is due to the assembly algorithm.
+> > - The second and third dataset are assembly graph files. These graphs are used to represent the final assembly of a genome, they are based on reads and their overlap information. Some tools such as [Bandage](http://rrwick.github.io/Bandage/) allow to visualize the assembly graph.
 > > - The fourth dataset is a tabular file (assembly_info) containing extra information about contigs/scaffolds.
 > >
 > {: .solution}
