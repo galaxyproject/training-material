@@ -233,7 +233,7 @@ Lets now use that metadata to fetch the sequence data from SRA.  SRA provides to
 
 First we need to find a good dataset to play with. The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  operated by the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies. Let's do that:
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
@@ -305,7 +305,7 @@ Now that we have identifiers of datasets we want we need to download the actual 
 
 ## Download sequencing data with **Faster Download and Extract Reads in FASTQ**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
@@ -374,7 +374,7 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 
 Removing sequencing adapters improves alignments and variant calling. **fastp** {% icon tool %} can automatically detect widely used sequencing adapters.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. **fastp** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`

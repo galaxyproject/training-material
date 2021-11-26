@@ -140,7 +140,7 @@ We can inspect the labels of this dataset by clicking on the {% icon galaxy-eye 
 Is each batch equally populated? We can investigate this ourselves by extracting the headers, and reformatting them to see how many unique types we can detect:
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %}  with the following parameters:
 >    - {% icon param-file %} *"File to select"*: imported tabular file
@@ -361,7 +361,7 @@ We will attempt to perform some normalisation and clustering using the recommend
 Here we assume that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Clustering using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Initial processing using RaceID** {% icon tool %})
@@ -590,7 +590,7 @@ The top 10 defining genes from each cluster (above only `c1`-`c4` are shown) giv
 
 The previous section produced plots that spoke about the quality of the clustering without really showing us the clusters projected into an understandable 2D space. To perform this, we must feed the clustered data into the cluster inspection tool.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
@@ -745,7 +745,7 @@ We will now look at some genes of interest to see how prevalent or unique they a
 
 Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* which all had adjusted P-values of less than $$1 \cdot 10^{-15}$$ in cluster 1.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})

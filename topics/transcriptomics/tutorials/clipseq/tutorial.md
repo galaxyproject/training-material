@@ -581,7 +581,7 @@ Sometimes it is wise to take a look at individual peaks; maybe to check the peak
 
 We will first generate coverage files that gives us a better visualization for our read coverage along the genome. SAM or BAM files can be used too, but they are often to big and harder to handle, if you try to inspect the read coverage. Therefore we are going to generate a bigWig (binary form of a BedGraph) file.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. **Extract alignment ends** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Alignments in SAM or BAM format"*: `bam` (output of **UMI-tools deduplicate** {% icon tool %})
