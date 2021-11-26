@@ -10,7 +10,7 @@ on:
 jobs:
   runner-job:
     if: github.repository_owner == 'galaxyproject'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     services:
       # Label used to access the service container
       mozillatts:
@@ -57,7 +57,7 @@ jobs:
       - name: Install rendering stuff
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libfontconfig ffmpeg sox libsox-fmt-mp3 ghostscript
+          sudo apt-get install -y xvfb libfontconfig ghostscript
 
       - name: Change ImageMagick policy to allow pdf->png conversion.
         run: |
