@@ -101,7 +101,7 @@ Before annotating the genome, we want to make sure that the fasta file is proper
 
 Funannotate provides two little tools to help us. Let's run the two tools, one after the other.
 
-The first one (**Funannotate assembly clean**) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
+The first one ({% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %}) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -221,7 +221,7 @@ These number alone are interesting, but not fully informative on the quality of 
 
 To get a better picture of the quality of the result, we will run BUSCO in the next step.
 
-Before moving on, have a quick look at the `tbl2asn error summary report` output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identifid potential problems in the `tbl2asn genome validation report` dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to anually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.
+Before moving on, have a quick look at the `tbl2asn error summary report` output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identified potential problems in the `tbl2asn genome validation report` dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to manually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.
 
 ## Evaluation with **Busco**
 
@@ -318,7 +318,7 @@ In this tutorial we will not perform a real submission, but here's a description
 
 - First, you should have created a BioProject and a BioSample [on the NCBI portal](https://submit.ncbi.nlm.nih.gov/subs/bioproject/), corresponding to your scientific project, and the sample(s) you have sequenced
 - The raw reads used for the assembly, and the RNASeq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids
-- Ideally you should start submitting the assembly *before* performing the annotation. The reason is simple: NCBI performs some validation on the genome sequence before accepting it into GenBank. It means that you may be forced to make modifications to the genome sequence (e.g. remove contigs, split contigs where you have adapter contamination, etc). You will save time and trouble doing the annotation on a fully validated and freezed genome sequence.
+- Ideally you should start submitting the assembly *before* performing the annotation. The reason is simple: NCBI performs some validation on the genome sequence before accepting it into GenBank. It means that you may be forced to make modifications to the genome sequence (e.g. remove contigs, split contigs where you have adapter contamination, etc). You will save time and trouble doing the annotation on a fully validated and frozen genome sequence.
 - You should get a `locus_tag` for your genome: it is the unique prefix that is used at the beginning of each gene name. By default, Funannotate uses `FUN_` (e.g. `FUN_000001`), but to submit to NCBI you need to have a prefix specific to your genome. NCBI should provide it to you when you create your BioProject.
 - You then need to prepare a file containing a few metadata. This can be done online on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):
 
