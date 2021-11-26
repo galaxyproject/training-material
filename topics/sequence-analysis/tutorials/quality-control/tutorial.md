@@ -108,7 +108,7 @@ But what does this quality score mean?
 
 The quality score for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-identification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
 
-![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/quality_score_encoding.png)
+![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/fastq-quality-encoding.png)
 
 So there is an ASCII character associated with each nucleotide, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
 
@@ -547,152 +547,6 @@ We tried to explain here there different FastQC reports and some use cases. More
 > You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding reads then will be filtered out and you lose them.
 {: .comment}
 
-# Assess quality with Nanoplot - Long reads only
-
-In case of long reads, we can check sequence quality with [Nanoplot](https://github.com/wdecoster/NanoPlot/). It provides a basic statistics with nice plots for a fast quality control overview.
-
-> ### {% icon hands_on %} Hands-on: Quality check of long reads
-> 1. Create a new history for this part and give it a proper name
->
-> 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5720492)
->
->    ```
->    https://zenodo.org/record/5720492/files/m64011_190830_220126.Q20.subsample.fastq.gz
->    ```
->
-> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
->    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
->    - *"Options for filtering or transforming input prior to plotting"*
->        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
->        - {% icon param-select %} *"Show the N50 mark in the read length histogram."*: `Yes`
->
-> 4. Inspect the generated HTML file
->
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> What is the mean Qscore ?
->
-> > ### {% icon solution %} Solution
-> > The Qscore is around Q32.
-> > In case of PacBio CLR and Nanopore, it's around Q12 and close to Q31 for Illumina (NovaSeq 6000).
-> > ![Plot of Qscore between Illumina, PacBio and Nanopore](../../images/quality-control/qscore-illumina-pacbio-nanopore.png "Comparison of Qscore between Illumina, PacBio and Nanopore")
-> {: .solution }
->
-> What is the median, mean and N50?
-> > ### {% icon solution %} Solution
-> > The median, the mean read length and the N50 as well are close to 18,000bp.
-> > For PacBio HiFi reads, the majority of the reads are generally near this value as the library preparation include a size selection step.
-> > For other technologies like PacBio CLR and Nanopore, it is larger and mostly depends on the quality of your DNA extraction.
-> {: .solution }
-{: .question}
-
-## Histogram of read lengths
-
-This plot shows the distribution of fragment sizes in the file that was analyzed.
-Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
-In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
-
-![Histogram of read lengths](../../images/quality-control/HistogramReadlength.png "Histogram of read length")
-
-## Read lengths vs Average read quality plot using dots
-
-This plot shows the distribution of fragment sizes according to the Qscore in the file which was analysed.
-In general, there is no link between read length and read quality but this representation allows to visualise both information into a single plot and detect possible aberration.
-In runs with a lot of short reads the shorter reads are sometimes of lower quality than the rest.
-
-![Read lengths vs Average read quality plot using dots](../../images/quality-control/LengthvsQualityScatterPlot_dot.png "Histogram of read length")
-
-> ### {% icon question %} Questions
-> Looking at "Read lengths vs Average read quality plot using dots plot". Did you notice something unusual with the Qscore? Can you explain it?
-> > ### {% icon solution %} Solution
-> > There is no reads under Q20.
-> > The qualification for HiFi reads is 1) A minimal number of pass >= 3; 2) A final Qscore >=20.
-> > ![PacBio HiFi sequencing](../../images/quality-control/pacbio-css-hifi-sequencing.png "PacBio HiFi sequencing")
-> {: .solution }
-{: .question}
-
-# Assess quality with PycoQC - Nanopore only
-
-[PycoQC](https://github.com/tleonardi/pycoQC) is a data visualisation and quality control tool for nanopore data. In contrast to FastQC/Nanoplot it needs a specific sequencing_summary.txt file generated by Oxford nanopore basecallers such as Guppy or the older albacore basecaller.
-
-One of the strengths of PycoQC is that it is interactive and highly customizable, e.g., plots can be cropped, you can zoom in and out, sub-select areas and export figures.
-
-> ### {% icon hands_on %} Hands-on: Quality check of Nanopore reads
-> 1. Create a new history for this part and give it a proper name
->
-> 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5720492)
->
->    ```
->    https://zenodo.org/record/5720492/files/nanopore_basecalled-guppy.fastq.gz
->    https://zenodo.org/record/5720492/files/sequencing_summary.txt
->    ```
->
-> 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
->
->    - {% icon param-files %} *"A sequencing_summary file "*: `sequencing_summary.txt`
->
-> 4. Inspect the webpage output from PycoQC
->
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> How many reads do you have in total?
-> > ### {% icon solution %} Solution
-> > ~270k reads in total (see the Basecall summary table, "All reads")
-> > For most of basecalling profiles, Guppy will assign reads as "Pass" if the read Qscore is at least equal to 7.
-> {: .solution }
->
-> What is the median, minimum and maximum read length, what is the N50?
-> > ### {% icon solution %} Solution
-> > The median read length and the N50 can be found for all as well as for all passed reads, i.e., reads that passed Guppy quality settings (Qscore >= 7), in the basecall summary table.
-> > For the minimum (195bp) and maximum (256kbp) read lengths, it can be found with the read lengths plot.
-> {: .solution }
-{: .question}
-
-## Basecalled reads length
-
-![Basecalled reads length](../../images/quality-control/basecalled_reads_length-pycoqc.png "Basecalled reads length")
-
-### Basecalled reads PHRED quality
-
-![Basecalled reads PHRED quality](../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png "Basecalled reads PHRED quality")
-
-## Basecalled reads length vs reads PHRED quality
-
-> ### {% icon question %} Questions
-> What do the mean quality and the quality distribution of the run look like?
-> > ### {% icon solution %} Solution
-> > The majority of the reads have a Qscore between 8 and 11 which is standard for Nanopore data.
-> > Beware that for the same data, the basecaller used (Albacor, Guppy, Bonito), the model (fast, hac, sup) and the tool version can give different results.
-> {: .solution }
-{: .question}
-
-![Basecalled reads length vs reads PHRED quality](../../images/quality-control/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png "Basecalled reads length vs reads PHRED quality")
-
-## Output over experiment time
-
-![Output over experiment time](../../images/quality-control/output_over_experiment_time-pycoqc.png "Output over experiment time")
-
-### Read length over experiment time
-
-> ### {% icon question %} Questions
-> Did the read length change over time? What could the reason be?
-> > ### {% icon solution %} Solution
-> > In the current example the read length increases over the time of the sequencing run.
-> > One explanation is that the adapter density is higher for lots of short fragments and therefore the chance of a shorter fragment to attach to a pore is higher. Also, shorter molecules may move faster over the chip.
-> > Over time, however, the shorter fragments are becoming rarer and thus more long fragments attach to pores and are sequenced.
-> {: .solution }
-{: .question}
-
-![Read length over experiment time](../../images/quality-control/read_length_over_experiment_time-pycoqc.png "Read length over experiment time")
-
-## Channel activity over time
-
-![Channel activity over time](../../images/quality-control/channel_activity_over_time-pycoqc.png "Channel activity over time")
-
 # Trim and filter - short reads
 
 The quality drops in the middle of these sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. Trimming can help to increase the number of reads the aligner or assembler are able to succesfully use, reducing the number of reads that are unmapped or unassembled. In general, quality treatments include:
@@ -1017,6 +871,209 @@ These datasets can be used for the downstream analysis, e.g. mapping.
 > >
 > {: .solution}
 {: .question}
+
+# Assess quality with Nanoplot - Long reads only
+
+In case of long reads, we can check sequence quality with [Nanoplot](https://github.com/wdecoster/NanoPlot/). It provides a basic statistics with nice plots for a fast quality control overview.
+
+> ### {% icon hands_on %} Hands-on: Quality check of long reads
+> 1. Create a new history for this part and give it a proper name
+>
+> 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5720492)
+>
+>    ```
+>    https://zenodo.org/record/5720492/files/m64011_190830_220126.Q20.subsample.fastq.gz
+>    ```
+>
+> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+>    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
+>    - *"Options for filtering or transforming input prior to plotting"*
+>        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
+>        - {% icon param-select %} *"Show the N50 mark in the read length histogram."*: `Yes`
+>
+> 4. Inspect the generated HTML file
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> What is the mean Qscore ?
+>
+> > ### {% icon solution %} Solution
+> > The Qscore is around Q32.
+> > In case of PacBio CLR and Nanopore, it's around Q12 and close to Q31 for Illumina (NovaSeq 6000).
+> > ![Plot of Qscore between Illumina, PacBio and Nanopore](../../images/quality-control/qscore-illumina-pacbio-nanopore.png "Comparison of Qscore between Illumina, PacBio and Nanopore")
+> > 
+> > Definition: Qscores is the average per-base error probability, expressed on the log (Phred) scale
+> {: .solution }
+>
+> What is the median, mean and N50?
+> > ### {% icon solution %} Solution
+> > The median, the mean read length and the N50 as well are close to 18,000bp.
+> > For PacBio HiFi reads, the majority of the reads are generally near this value as the library preparation include a size selection step.
+> > For other technologies like PacBio CLR and Nanopore, it is larger and mostly depends on the quality of your DNA extraction.
+> {: .solution }
+{: .question}
+
+## Histogram of read lengths
+
+This plot shows the distribution of fragment sizes in the file that was analyzed.
+Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
+In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
+
+![Histogram of read lengths](../../images/quality-control/HistogramReadlength.png "Histogram of read length")
+
+## Read lengths vs Average read quality plot using dots
+
+This plot shows the distribution of fragment sizes according to the Qscore in the file which was analysed.
+In general, there is no link between read length and read quality but this representation allows to visualise both information into a single plot and detect possible aberration.
+In runs with a lot of short reads the shorter reads are sometimes of lower quality than the rest.
+
+![Read lengths vs Average read quality plot using dots](../../images/quality-control/LengthvsQualityScatterPlot_dot.png "Histogram of read length")
+
+> ### {% icon question %} Questions
+> Looking at "Read lengths vs Average read quality plot using dots plot". Did you notice something unusual with the Qscore? Can you explain it?
+> > ### {% icon solution %} Solution
+> > There is no reads under Q20.
+> > The qualification for HiFi reads is:
+> > - A minimal number of 3 subreads
+> > - A read Qscore >=20
+> > ![PacBio HiFi sequencing](../../images/quality-control/pacbio-css-hifi-sequencing.png "PacBio HiFi sequencing")
+> {: .solution }
+{: .question}
+
+# Assess quality with PycoQC - Nanopore only
+
+[PycoQC](https://github.com/tleonardi/pycoQC) is a data visualisation and quality control tool for nanopore data. In contrast to FastQC/Nanoplot it needs a specific sequencing_summary.txt file generated by Oxford nanopore basecallers such as Guppy or the older albacore basecaller.
+
+One of the strengths of PycoQC is that it is interactive and highly customizable, e.g., plots can be cropped, you can zoom in and out, sub-select areas and export figures.
+
+> ### {% icon hands_on %} Hands-on: Quality check of Nanopore reads
+> 1. Create a new history for this part and give it a proper name
+>
+> 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5720492)
+>
+>    ```
+>    https://zenodo.org/record/5720492/files/nanopore_basecalled-guppy.fastq.gz
+>    https://zenodo.org/record/5720492/files/sequencing_summary.txt
+>    ```
+>
+> 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
+>
+>    - {% icon param-files %} *"A sequencing_summary file "*: `sequencing_summary.txt`
+>
+> 4. Inspect the webpage output from PycoQC
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> How many reads do you have in total?
+> > ### {% icon solution %} Solution
+> > ~270k reads in total (see the Basecall summary table, "All reads")
+> > For most of basecalling profiles, Guppy will assign reads as "Pass" if the read Qscore is at least equal to 7.
+> {: .solution }
+>
+> What is the median, minimum and maximum read length, what is the N50?
+> > ### {% icon solution %} Solution
+> > The median read length and the N50 can be found for all as well as for all passed reads, i.e., reads that passed Guppy quality settings (Qscore >= 7), in the basecall summary table.
+> > For the minimum (195bp) and maximum (256kbp) read lengths, it can be found with the read lengths plot.
+> {: .solution }
+{: .question}
+
+## Basecalled reads length
+
+As for FastQC and Nanoplot, this plot shows the distribution of fragment sizes in the file that was analyzed.
+As for PacBio CLR/HiFi, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
+In this example, the distribution of read length quite dispersed with a minimum read length for the passed reads is about 200bp and the maximum length ~150,000bp.
+
+![Basecalled reads length](../../images/quality-control/basecalled_reads_length-pycoqc.png "Basecalled reads length")
+
+### Basecalled reads PHRED quality
+
+This plot shows the distribution of the Qscores (Q) for each read. This score aims to give a global quality score for each read. 
+The exact definition of Qscores is: the average per-base error probability, expressed on the log (Phred) scale.
+In case of Nanopore data, the distribution is generally centered around 10 or 12. 
+For old runs, the distribution can be lower, as basecalling models are less precise than recent models.
+
+![Basecalled reads PHRED quality](../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png "Basecalled reads PHRED quality")
+
+## Basecalled reads length vs reads PHRED quality
+
+> ### {% icon question %} Questions
+> What do the mean quality and the quality distribution of the run look like?
+> > ### {% icon solution %} Solution
+> > The majority of the reads have a Qscore between 8 and 11 which is standard for Nanopore data.
+> > Beware that for the same data, the basecaller used (Albacor, Guppy, Bonito), the model (fast, hac, sup) and the tool version can give different results.
+> {: .solution }
+{: .question}
+
+As for NanoPlot, this representation give a 2D visualisation of read Qscore according to the length.
+
+![Basecalled reads length vs reads PHRED quality](../../images/quality-control/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png "Basecalled reads length vs reads PHRED quality")
+
+## Output over experiment time
+
+This representation gives information about sequenced reads over the time for a single run:
+
+- Each pic indicates a new loading of the flow cell (3 + the first load).
+- The contribution in total reads for each "refuel".
+- The production of reads is decreasing over time:
+  - Most of the material (DNA/RNA) is sequenced
+  - Saturation of pores
+  - Material/pores degradation
+  - ... 
+  
+
+In this example, the contribution of each refueling is very low, and it can be considered as a bad run. 
+The “Cummulative” plot area (light blue) indicates that 50% of all reads and almost 50% of all bases were produced in the first 5h of the 25h experiment.
+Although it is normal that yield decreases over time a decrease like this is not a good sign.
+
+![Output over experiment time](../../images/quality-control/output_over_experiment_time-pycoqc.png "Output over experiment time")
+
+> ### {% icon details %} Other "Output over experiment time" profile
+>
+> In this example, the data production over the time only slightly decreased over the 12h with a continuous increasing of cumulative data.
+> This absence of a decreasing curve at the end of the run indicate that there is still biological material on the flow cell. The run was ended before all was sequenced.
+> It's an excellent run, even can be considered as exceptional. 
+> 
+> ![Output over experiment time good profile](../../images/quality-control/output_over_experiment_time-pycoqc-good.png)
+>
+{: .details}
+
+### Read length over experiment time
+
+> ### {% icon question %} Questions
+> Did the read length change over time? What could the reason be?
+> > ### {% icon solution %} Solution
+> > In the current example the read length increases over the time of the sequencing run.
+> > One explanation is that the adapter density is higher for lots of short fragments and therefore the chance of a shorter fragment to attach to a pore is higher. Also, shorter molecules may move faster over the chip.
+> > Over time, however, the shorter fragments are becoming rarer and thus more long fragments attach to pores and are sequenced.
+> {: .solution }
+{: .question}
+
+The read length over experiment time should be stable. 
+It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.
+
+![Read length over experiment time](../../images/quality-control/read_length_over_experiment_time-pycoqc.png "Read length over experiment time")
+
+## Channel activity over time
+
+It gives an overview of available pores, pore usage during the experiment, inactive pores and shows if the loading of the flow cell is good (almost all pores are used).
+In this case, the vast majority of channels/pores are in-active (white) throughout the sequencing run, so the run can be considered as bad.
+
+You would hope for a plot that is dark on the X-axis and with higher Y-values (increasing time) doesn’t get too light/white. 
+Depending if you chose “Reads” or “Bases” on the left the colour indicates either number fo bases or reads per time interval
+
+![Channel activity over time](../../images/quality-control/channel_activity_over_time-pycoqc.png "Channel activity over time")
+
+> ### {% icon details %} Other "Channel activity over time" profile
+>
+> In this example, almost all pores are active all along the run (yellow/red profile) which indicate an excellent run.
+> 
+> ![Channel activity over time good profile](../../images/quality-control/channel_activity_over_time-pycoqc-good.png)
+>
+{: .details}
 
 # Conclusion
 {:.no_toc}
