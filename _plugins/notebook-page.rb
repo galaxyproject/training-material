@@ -231,6 +231,8 @@ module Jekyll
           # Additionally leading spaces are sometimes interpreted as <pre>s and
           # end up causing paragraphs to be rendered as code. So we wipe out
           # all leading space.
+          # 'editable' is actually CoCalc specific but oh well.
+          cell['metadata'] = {"editable" => false, "collapsed" => false}
           cell['source'].gsub!(/\$/, '&#36;')
         end
         cell
@@ -284,7 +286,7 @@ module Jekyll
         notebook['cells'] = notebook['cells'] + [{
           "cell_type" => "markdown",
           "id" => "final-ending-cell",
-          "metadata" => {},
+          "metadata" => {"editable" => false, "collapsed" => false},
           "source" => [
             "# Key Points\n\n",
           ] + metadata['key_points'].map{|k| "- #{k}\n"} + [
