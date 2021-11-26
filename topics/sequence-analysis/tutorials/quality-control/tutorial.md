@@ -874,7 +874,7 @@ These datasets can be used for the downstream analysis, e.g. mapping.
 
 # Assess quality with Nanoplot - Long reads only
 
-In case of long reads, we can check sequence quality with [Nanoplot](https://github.com/wdecoster/NanoPlot/). It provides a basic statistics with nice plots for a fast quality control overview.
+In case of long reads, we can check sequence quality with [Nanoplot](https://github.com/wdecoster/NanoPlot/). It provides basic statistics with nice plots for a fast quality control overview.
 
 > ### {% icon hands_on %} Hands-on: Quality check of long reads
 > 1. Create a new history for this part and give it a proper name
@@ -903,14 +903,14 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 > > The Qscore is around Q32.
 > > In case of PacBio CLR and Nanopore, it's around Q12 and close to Q31 for Illumina (NovaSeq 6000).
 > > ![Plot of Qscore between Illumina, PacBio and Nanopore](../../images/quality-control/qscore-illumina-pacbio-nanopore.png "Comparison of Qscore between Illumina, PacBio and Nanopore")
-> > 
+> >
 > > Definition: Qscores is the average per-base error probability, expressed on the log (Phred) scale
 > {: .solution }
 >
 > What is the median, mean and N50?
 > > ### {% icon solution %} Solution
 > > The median, the mean read length and the N50 as well are close to 18,000bp.
-> > For PacBio HiFi reads, the majority of the reads are generally near this value as the library preparation include a size selection step.
+> > For PacBio HiFi reads, the majority of the reads are generally near this value as the library preparation includes a size selection step.
 > > For other technologies like PacBio CLR and Nanopore, it is larger and mostly depends on the quality of your DNA extraction.
 > {: .solution }
 {: .question}
@@ -926,7 +926,7 @@ In this example, the distribution of read length is centered near 15kbp but the 
 ## Read lengths vs Average read quality plot using dots
 
 This plot shows the distribution of fragment sizes according to the Qscore in the file which was analysed.
-In general, there is no link between read length and read quality but this representation allows to visualise both information into a single plot and detect possible aberration.
+In general, there is no link between read length and read quality but this representation allows to visualize both information into a single plot and detect possible aberrations.
 In runs with a lot of short reads the shorter reads are sometimes of lower quality than the rest.
 
 ![Read lengths vs Average read quality plot using dots](../../images/quality-control/LengthvsQualityScatterPlot_dot.png "Histogram of read length")
@@ -985,15 +985,15 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 
 As for FastQC and Nanoplot, this plot shows the distribution of fragment sizes in the file that was analyzed.
 As for PacBio CLR/HiFi, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
-In this example, the distribution of read length quite dispersed with a minimum read length for the passed reads is about 200bp and the maximum length ~150,000bp.
+In this example, the distribution of read length is quite dispersed with a minimum read length for the passed reads around 200bp and a maximum length ~150,000bp.
 
 ![Basecalled reads length](../../images/quality-control/basecalled_reads_length-pycoqc.png "Basecalled reads length")
 
 ### Basecalled reads PHRED quality
 
-This plot shows the distribution of the Qscores (Q) for each read. This score aims to give a global quality score for each read. 
+This plot shows the distribution of the Qscores (Q) for each read. This score aims to give a global quality score for each read.
 The exact definition of Qscores is: the average per-base error probability, expressed on the log (Phred) scale.
-In case of Nanopore data, the distribution is generally centered around 10 or 12. 
+In case of Nanopore data, the distribution is generally centered around 10 or 12.
 For old runs, the distribution can be lower, as basecalling models are less precise than recent models.
 
 ![Basecalled reads PHRED quality](../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png "Basecalled reads PHRED quality")
@@ -1022,10 +1022,10 @@ This representation gives information about sequenced reads over the time for a 
   - Most of the material (DNA/RNA) is sequenced
   - Saturation of pores
   - Material/pores degradation
-  - ... 
-  
+  - ...
 
-In this example, the contribution of each refueling is very low, and it can be considered as a bad run. 
+
+In this example, the contribution of each refueling is very low, and it can be considered as a bad run.
 The “Cummulative” plot area (light blue) indicates that 50% of all reads and almost 50% of all bases were produced in the first 5h of the 25h experiment.
 Although it is normal that yield decreases over time a decrease like this is not a good sign.
 
@@ -1035,8 +1035,8 @@ Although it is normal that yield decreases over time a decrease like this is not
 >
 > In this example, the data production over the time only slightly decreased over the 12h with a continuous increasing of cumulative data.
 > This absence of a decreasing curve at the end of the run indicate that there is still biological material on the flow cell. The run was ended before all was sequenced.
-> It's an excellent run, even can be considered as exceptional. 
-> 
+> It's an excellent run, even can be considered as exceptional.
+>
 > ![Output over experiment time good profile](../../images/quality-control/output_over_experiment_time-pycoqc-good.png)
 >
 {: .details}
@@ -1052,7 +1052,7 @@ Although it is normal that yield decreases over time a decrease like this is not
 > {: .solution }
 {: .question}
 
-The read length over experiment time should be stable. 
+The read length over experiment time should be stable.
 It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.
 
 ![Read length over experiment time](../../images/quality-control/read_length_over_experiment_time-pycoqc.png "Read length over experiment time")
@@ -1060,17 +1060,17 @@ It can slightly increase over the time as short fragments tend to be over-sequen
 ## Channel activity over time
 
 It gives an overview of available pores, pore usage during the experiment, inactive pores and shows if the loading of the flow cell is good (almost all pores are used).
-In this case, the vast majority of channels/pores are in-active (white) throughout the sequencing run, so the run can be considered as bad.
+In this case, the vast majority of channels/pores are inactive (white) throughout the sequencing run, so the run can be considered as bad.
 
-You would hope for a plot that is dark on the X-axis and with higher Y-values (increasing time) doesn’t get too light/white. 
-Depending if you chose “Reads” or “Bases” on the left the colour indicates either number fo bases or reads per time interval
+You would hope for a plot that it is dark near the X-axis, and with higher Y-values (increasing time) doesn’t get too light/white.
+Depending if you chose “Reads” or “Bases” on the left the colour indicates either number of bases or reads per time interval
 
 ![Channel activity over time](../../images/quality-control/channel_activity_over_time-pycoqc.png "Channel activity over time")
 
 > ### {% icon details %} Other "Channel activity over time" profile
 >
 > In this example, almost all pores are active all along the run (yellow/red profile) which indicate an excellent run.
-> 
+>
 > ![Channel activity over time good profile](../../images/quality-control/channel_activity_over_time-pycoqc-good.png)
 >
 {: .details}
