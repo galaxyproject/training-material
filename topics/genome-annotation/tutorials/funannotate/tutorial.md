@@ -30,6 +30,9 @@ contributors:
 - r1corre
 - stephanierobin
 
+abbreviations:
+    NMDS: Non-metric multidimensional scaling
+
 ---
 
 
@@ -100,7 +103,7 @@ Funannotate provides two little tools to help us. Let's run the two tools, one a
 
 The first one (**Funannotate assembly clean**) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to clean"*: `genome_masked.fasta` (Input dataset)
@@ -109,7 +112,7 @@ The first one (**Funannotate assembly clean**) compares all the sequences betwee
 
 The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with `scaffold_`, then a number).
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to sort"*: `output` (output of **Funannotate assembly clean** {% icon tool %})
@@ -126,7 +129,7 @@ You would normally get the Fastq files directly from SRA and use them in the fol
 
 To make use of this RNASeq data, we need to map it on the genome. We will get a result in the form of a BAM file, that we will use in the rest of the tutorial.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
@@ -170,7 +173,7 @@ There are other parameters to finely tune how Funannotate will run ab-initio pre
 
 Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `genome` (output of **Sort assembly** {% icon tool %})
@@ -224,7 +227,7 @@ Before moving on, have a quick look at the `tbl2asn error summary report` output
 
 [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of an annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
@@ -259,7 +262,7 @@ The aim of the previous step is to predict the position of the genes on the geno
 
 **EggNOG Mapper** compares each protein sequence of the annotation to a huge set of ortholog groups from the [EggNOG database](http://eggnog5.embl.de). In this database, each ortholog group is associated with functional annotation like [Gene Ontology (GO)](http://www.geneontology.org/) terms or [KEGG pathways](https://www.genome.jp/kegg/pathway.html). When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Fasta sequences to annotate"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
@@ -281,7 +284,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 **InterProScan** itself runs multiple applications to search for the signatures in the protein sequences. It is possible to select exactly which ones we want to use when launching the analysis (by default all will be run).
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
@@ -329,7 +332,7 @@ The next step will show you how Funannotate can use this `.sbt` file, and the `l
 
 Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
@@ -358,7 +361,7 @@ If you display the GFF3 output, you will notice that the functional information,
 
 With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with **RNA STAR** {% icon tool %}.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -392,33 +395,84 @@ If you navigate along the genome, you will find genes with very low RNASeq cover
 
 # Comparing annotations
 
-Earlier, we have seen how general statistics and BUSCO results can help to evaluate the quality of an annotation. But when annnotating a new genome, you might want to try different annotation methods and parameters. We will see now how to compare multiple annotations between them. As an example, we will compare the annotation we have generated, with an alternate one, that you have uploaded from Zenodo at the beginning of the tutorial.
+Earlier, we have seen how general statistics and BUSCO results can help to evaluate the quality of an annotation. But when annnotating a new genome, you might want to try different annotation methods and parameters. We will see now how to compare multiple annotations between them. As an example, we will compare the annotation we have generated, with an alternate one, that you have uploaded from Zenodo at the beginning of the tutorial. Comparison is only possible for annotations performed on the same genome sequence.
 
-## Sub-step with **Funannotate compare**
+## Comparing with **AEGeAn ParsEval**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2) %} with the following parameters:
->    - {% icon param-files %} *"Genome annotations in genbank format"*: `output` (Input dataset), `gbk` (output of **Funannotate functional** {% icon tool %})
->    - *"Maximum Likelihood method"*: `iqtree`
->
->
-{: .hands_on}
+Let's run **AEGeAn ParsEval** first: it compares two annotations in GFF3 format.
 
-## Sub-step with **AEGeAn ParsEval**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [AEGeAn ParsEval](toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0) %} with the following parameters:
 >    - {% icon param-file %} *"Reference GFF3 file"*: `gff3` (output of **Funannotate functional** {% icon tool %})
->    - {% icon param-file %} *"Prediction GFF3 file"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Prediction GFF3 file"*: `alternate_annotation.gff3` (Input dataset)
 >    - *"Select the output type"*: `HTML`
 >
 {: .hands_on}
 
+**AEGeAn ParsEval** {% icon tool %} compares gene loci spread all along the genome sequence, each locus containing gene(s) on the "reference" (=the annotation we have generated) and/or the "prediction" (=the alternate one) annotation.
+
+The output is a web page where you can see how many loci or genes are identical or different between the two annotations. By clicking on the `(+)` links, or on the scaffold names, you can see the results more in detail, even at the gene level.
+
+> ### {% icon hands_on %} Hands-on
+>
+> 1. Display the report
+> 2. Click on `scaffold_11`
+> 3. Click on the first locus (between positions 637 and 7730)
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> What can you tell from the comparison at this gene locus?
+>
+> > ### {% icon solution %} Solution
+> >
+> > You should see something like this:
+> >
+> > ![Scaffold 11 - 637..7730](../../images/aegean_scaffold_11_637-7730.png "Comparison of the two annotations on Scaffold 11 - 637..7730")
+> >
+> > As you can see, at this position, the alternate annotation as found only one big gene, while the annotation you have generated has found 4 different genes, not all on the same strand.
+> >
+> > This can be explained by the way the alternate annotation was performed: it was done by running Funannotate without any RNASeq data, and choosing a wrong value (`insecta`) in the busco parameter. The annotation you have generated is probably the good one here.
+> {: .solution}
+>
+{: .question}
+
+## Comparing with **Funannotate compare**
+
+**Funannotate compare** {% icon tool %} is another tool to compare several annotations. It uses genbank files, as generated by **Funannotate functional** {% icon tool %}.
+
+> ### {% icon hands_on %} Hands-on
+>
+> 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2) %} with the following parameters:
+>    - {% icon param-files %} *"Genome annotations in genbank format"*: `alternate_annotation.gbk` (Input dataset) and `gbk` (output of **Funannotate functional** {% icon tool %})
+>    - *"Funannotate database"*: select the latest version available
+>
+{: .hands_on}
+
+The output is a web page with different tabs:
+
+- `Stats`: general statistics on the two annotations.
+- `Orthologs`: orthology relations between genes of the two annotations.
+- `InterPro` and `PFAM`: count the number of times each InterPro/PFAM signature is identified in each annotation. You can download a PDF file at the top, showing an {NMDS} analysis of this data.
+- `Merops` and `CAZymes`: count the number of members of each Merops/CAZymes family in each annotation. You can download PDF files at the top, showing colorful representations of this data.
+- `GO`: list Gene Ontology terms that were found to be over or under represented in each annotation.
+
+> ### {% icon question %} Question
+>
+> What can you tell from this report?
+>
+> > ### {% icon solution %} Solution
+> >
+> > The alternate annotation contains less genes than the one you generated, and misses a lot of functional annotations. It confirms that this alternate annotation have a lower quality than the one you performed.
+> {: .solution}
+>
+{: .question}
+
 # Conclusion
 {:.no_toc}
 
-Congratulations for reaching the end of this tutorial! Now you know how to perform a structural and functional annotation of a new eukaryotic genome, using Funannotate, EggNOG mapper and InterProScan. You also learned how Funannotate can help you in the submission process to NCBI. And you learned how to visualise your new annotation using JBrowse.
+Congratulations for reaching the end of this tutorial! Now you know how to perform a structural and functional annotation of a new eukaryotic genome, using Funannotate, EggNOG mapper and InterProScan. You also learned how Funannotate can help you in the submission process to NCBI. And you learned how to visualise your new annotation using JBrowse, and how to compare it with another annotation.
 
 An automatic annotation of an eukaryotic genome is unfortunately rarely perfect. If you inspect some predicted genes (or look at the `tbl2asn genome validation report` output of Funannotate), you may find some mistakes made by Funannotate, or potential problems, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) can help a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) for more details.
