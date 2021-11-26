@@ -79,10 +79,12 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/genome_masked.fasta
->    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/adc61a72-9e35-4e0c-9659-681bc923610a/SwissProt_subset.fasta
+>    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/genome_masked.fasta
+>    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/rnaseq_R1.fq.gz
+>    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/rnaseq_R2.fq.gz
+>    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/SwissProt_subset.fasta
+>    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alternate_annotation.gbk
+>    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alternate_annotation.gff3
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -100,7 +102,7 @@ The first one (**Funannotate assembly clean**) compares all the sequences betwee
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy1) %} with the following parameters:
+> 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to clean"*: `genome_masked.fasta` (Input dataset)
 >
 {: .hands_on}
@@ -109,7 +111,7 @@ The second tool will ensure that our fasta file is sorted, based on the length o
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy1) %} with the following parameters:
+> 1. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to sort"*: `output` (output of **Funannotate assembly clean** {% icon tool %})
 >
 {: .hands_on}
@@ -170,7 +172,7 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy1) %} with the following parameters:
+> 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `genome` (output of **Sort assembly** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
 >    - In *"Organism"*:
@@ -329,7 +331,7 @@ Now we have a structural annotation, and the results of both **EggNOG Mapper** a
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy1) %} with the following parameters:
+> 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
 >        - {% icon param-file %} *"Genome annotation in genbank format"*: `annotation (genbank)` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
@@ -390,7 +392,29 @@ If you navigate along the genome, you will find genes with very low RNASeq cover
 
 # Comparing annotations
 
-TODO write this (if time allow)
+Earlier, we have seen how general statistics and BUSCO results can help to evaluate the quality of an annotation. But when annnotating a new genome, you might want to try different annotation methods and parameters. We will see now how to compare multiple annotations between them. As an example, we will compare the annotation we have generated, with an alternate one, that you have uploaded from Zenodo at the beginning of the tutorial.
+
+## Sub-step with **Funannotate compare**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2) %} with the following parameters:
+>    - {% icon param-files %} *"Genome annotations in genbank format"*: `output` (Input dataset), `gbk` (output of **Funannotate functional** {% icon tool %})
+>    - *"Maximum Likelihood method"*: `iqtree`
+>
+>
+{: .hands_on}
+
+## Sub-step with **AEGeAn ParsEval**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [AEGeAn ParsEval](toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0) %} with the following parameters:
+>    - {% icon param-file %} *"Reference GFF3 file"*: `gff3` (output of **Funannotate functional** {% icon tool %})
+>    - {% icon param-file %} *"Prediction GFF3 file"*: `output` (Input dataset)
+>    - *"Select the output type"*: `HTML`
+>
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}
