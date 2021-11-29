@@ -780,8 +780,37 @@ We have demonstrated how to pass an input file to the Docker container. But what
 >
 {: .tip}
 
+
+## Available environment variables
+_GALAXY_JOB_TMP_DIR
+_GALAXY_JOB_HOME_DIR
+GALAXY_SLOTS
+GALAXY_MEMORY_MB_PER_SLOT
+
+
+## Logging
+Not sure how to log effectively from the IT container to the Galaxy server?
+
+
 ## Self-destruct script
-To watch container HTTP traffic and kill the container process when the connection to Galaxy is lost - this is good practice to prevent "zombie" containers that hang around after the user has stopped or deleted the tool run.
+Web server applications will tend to keep running after the user has terminated the tool in Galaxy, which can result in "zombie" containers haning around and clogging up the Galaxy server. It is therefore good practice to implement a script that will end the server process when the connection to Galaxy has been terminated. The following script will watch Galaxy's binding to the container port and kill the container when the connection terminates (e.g. the user has ended the job). Just change `RUN_COMMAND_NAME` to the run command for your application.
+
+```sh
+RUN_COMMAND_NAME='my_run_script.sh'
+while true; do
+    sleep 60
+    if [ `netstat -t | grep -v CLOSE_WAIT | grep ':8888' | wc -l` -lt 1 ]; then
+        pkill $RUN_COMMAND_NAME
+    fi
+done
+```
+
+This script can then be built into the docker image and called in the tool XML `<command>` before the main application call. Alternatively, it can be called within a `run.sh` script inside the container itself (see below).
+
+```sh
+/scripts/monitor_traffic.sh &
+bash my_run_script.sh
+```
 
 ## Run script
 In the case of our `Tabulator` application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML. However, some web apps might require more elaborate commands to be run. In this situation there are a number of solutions demonstrated in the `<command>` section of [existing GxITs](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive):
