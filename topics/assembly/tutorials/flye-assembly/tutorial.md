@@ -163,7 +163,7 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3) %} with the following parameters:
 >    - *"Use customized names for the input files?"*: `No, use dataset names`
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `consensus` (output of **Flye** {% icon tool %})
 >    - *"Type of assembly"*: `Genome`
