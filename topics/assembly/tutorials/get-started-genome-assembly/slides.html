@@ -30,7 +30,7 @@ level: Introductory
 
 ---
 
-## Build a wide community for the project (*if it's possible*)
+### Build a wide community for the project (*if it's possible*)
 
 .left[
 Aim of a genome projects is to **sequence the entire target genome** for a wide **range of genomics applications**
@@ -50,7 +50,7 @@ Aim of a genome projects is to **sequence the entire target genome** for a wide 
 
 ---
 
-## Genome information: Genome size
+### Genome information: Genome size
 
 .pull-left[
 **How to collect informations?** 
@@ -68,14 +68,15 @@ Aim of a genome projects is to **sequence the entire target genome** for a wide 
   ![variation in estimated genome sizes in base pairs](../../images/genomes-size.png)
 ]]
 
-TODO: Ref
+.footnote[https://commons.wikimedia.org/w/index.php?curid=19537795]
+
 
 ---
 
-## Genome information: GC content
+### Genome information: GC content
 
 .pull-left[
-Why?
+**Why?**
 
 .left[
 Sequencing is not random!
@@ -83,7 +84,7 @@ GC and AT rich regions are under sequenced.
 ]
 
 
-How to solve?
+**How to solve?**
 - Chemistry quirks
 - Increase the sequencing depth
 - Technologies combination (both long and short reads)
@@ -94,17 +95,22 @@ How to solve?
   ![Sequencing coverage by GC content](../../images/coverage-x-GC.png)
 ]]
 
-.left[
 .footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]
-]
 
 ---
 
-## Genome information: Ploidy level
+### Genome information: Ploidy level
 
-.left[
-**Ploidy (N):** Number of sets of chromosomes in a cell 
-]
+.pull-right[
+.image-55[
+  ![Heterozigous genotype](../../images/ploidy.png)
+]]
+
+.pull-left[
+
+**Ploidy (N):** 
+
+Number of sets of chromosomes in a cell 
 
 
 | Organism                  | Ploidy    |
@@ -116,11 +122,15 @@ How to solve?
 | **Autopolyploid**         | .         |
 | **Hybrids**               | .         |
 
+]
+
 **Higher ploidy -> harder to assemble => Increase of sequencing depth**
+
+.footnote[Daniel Hartl. Essential Genetics: A Genomics Perspective. Jones & Bartlett Learning. p. 177. ISBN 978-0-7637-7364-9. (2011).]
 
 ---
 
-## Genome information: Heterozygosity level
+### Genome information: Heterozygosity level
 
 .pull-left[
 .left[
@@ -138,25 +148,21 @@ How to solve?
 
 **Higher heterozygosity -> harder to assemble => Increase of sequencing depth**
 
-.left[
 .footnote[https://www.genome.gov/genetics-glossary/heterozygous]
-]
 
 ---
 
-## Genome information: Heterozygosity level
+### Genome information: Heterozygosity level
 
 .image-125[
   ![Concepts in phased assemblies](../../images/phased-assemblies.png)
 ]
 
-.left[
 .footnote[Heng Li’s blog: lh3.github.io/2021/04/17/concepts-in-phased-assemblies]
-]
 
 ---
 
-## Genome information: Complexity aka repeats elements
+### Genome information: Complexity aka repeats elements
 
 .left[
 **It is impossible to resolve repeats of length L unless you have reads longer than L**
@@ -164,11 +170,19 @@ How to solve?
 
 Most common source of assembly errors: 
  
-TODO: add figure
+.pull-left[
+.image-65[
+  ![Collapsed consensus from repeat copies](../../images/collapsed-consensus.png)
+]]
+
+.pull-right[
+.image-65[
+  ![Collapsed, excision and rearrangement consensus](../../images/excision-rearrangement-consensus.png)
+]]
 
 ---
 
-## Genome information: Others
+### Genome information: Others
 
 - **Karyotype:** chromosome number
 - **Sex chromosome system:** None, XY, ZW, UV,…
@@ -177,20 +191,21 @@ TODO: add figure
 
 ---
 
-## Genome information: Tips
+### Genome information: Tips
 
-.left[
+.pull-left[
 - **Flux cytometry** :  genome size and ploidy level
 - **k-mer frequency from Illumina reads** : genome size, ploidy level, GC content, heterozygosity and even repeats composition!
 ]
 
-.image-80[
-  ![k-mers coverage frequency](../../images/kmers-frequency.png)
-]
+.pull-right[
+.image-20[
+  ![GenomeScope Profile](../../images/kmers-frequency.png)
+]]
 
 ---
 
-## The best possible DNA
+### The best possible DNA
 
 .left[
 Select the best possible DNA source and extraction.
@@ -201,7 +216,7 @@ The **lack of a good starting material** will limit the choice of sequencing tec
 
 ---
 
-## The best possible DNA: Chemical purity of DNA
+### The best possible DNA: Chemical purity of DNA
 
 .left[
 **Sample-related contaminants:**
@@ -219,7 +234,7 @@ All these contaminants **can impair the efficacy of library preparation** in any
 
 ---
 
-## The best possible DNA: Quantity of DNA
+### The best possible DNA: Quantity of DNA
 
 .left[
 Different technologies require different amount of DNA:
@@ -232,15 +247,15 @@ Different technologies require different amount of DNA:
 
 ---
 
-## The best possible DNA: Structural integrity of DNA
+### The best possible DNA: Structural integrity of DNA
 
 .left[
-High Molecular Weight (HMW) for Nanopore/PacBio (obtained mainly from fresh material)
+High Molecular Weight (**HMW**) for Nanopore/PacBio (obtained mainly from fresh material)
 ]
 
 ---
 
-## The best possible DNA: Tips
+### The best possible DNA: Tips
 
 .left[
 - Many *DNA extraction protocol* available for a lot of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
@@ -250,7 +265,7 @@ High Molecular Weight (HMW) for Nanopore/PacBio (obtained mainly from fresh mate
 
 ---
 
-## Appropriate sequencing technology
+### Appropriate sequencing technology
 
 .left[
 Mostly **dependant of the quantity and quality of DNA and the cost** but many parameters need to be considered prior to running an NGS experiment:
@@ -265,7 +280,7 @@ Mostly **dependant of the quantity and quality of DNA and the cost** but many pa
 
 ---
 
-## Appropriate sequencing technology: Primary assembly
+### Appropriate sequencing technology: Primary assembly
 
 .left[
 - **Illumina:** short reads (up to 2x250bp) with high quality reads. Sequencing bias with AT/GC rich regions
@@ -279,7 +294,7 @@ Mostly **dependant of the quantity and quality of DNA and the cost** but many pa
 
 ---
 
-## Appropriate sequencing technology: Scaffolding
+### Appropriate sequencing technology: Scaffolding
 
 .left[
 - **HiC:** single or double **restriction enzyme fragmentation.** Need huge amount of coverage.
@@ -288,31 +303,41 @@ Mostly **dependant of the quantity and quality of DNA and the cost** but many pa
 
 ---
 
-## Appropriate sequencing technology: Short vs long reads
+### Appropriate sequencing technology: Short vs long reads
 
 .left[
 Read length and output
 ]
-TODO : image
+
+.image-50[
+  ![Gigabase per run per read length](../../images/gigabase-read-length.png)
+]
 
 ---
 
-## Appropriate sequencing technology: Short vs long reads
+### Appropriate sequencing technology: Short vs long reads
 
 .left[
 Read accuracy distribution
 ]
-TODO : image
+
+.image-50[
+  ![Reads accuracy distribution](../../images/reads-accuracy-distribution.png)
+]
 
 ---
 
-## Appropriate sequencing technology: 
+### Appropriate sequencing technology
 
-TODO : image
+.image-100[
+  ![Several sequencing technologies](../../images/sequencing-technologies.png)
+]
+
+.footnote[Stark, R., Grzelak, M. & Hadfield, J. RNA sequencing: the teenage years. Nat Rev Genetics 20, 631–656 (2019).]
 
 ---
 
-## Appropriate sequencing technology: Coverage versus depth
+### Appropriate sequencing technology: Coverage versus depth
 
 .left[
 **Coverage:** fraction of the genome sequenced at least by one read
@@ -322,31 +347,36 @@ TODO : image
 Intuitively, more reads should increase coverage and depth.TODO : image
 ]
 
-TODO: image
+.image-40[
+  ![Sequencing coverage by GC content](../../images/coverage-x-GC.png)
+]
+
+.footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]
 
 ---
 
-## Computational resources and requirements
+### Computational resources and requirements
 
 .left[
-To succeed you need to have **sufficient compute resources (CPUS, RAM, walltime and storage)**. The resource are **different** between:
-- Assembly
-- Annotation
-- Tools
+To succeed you need to have **sufficient compute resources (CPUS, RAM, walltime and storage)**. 
+- The resource are **different** between:
+  - Assembly
+  - Annotation
+  - Tools
 
-For genome **assembly:**
-- Running times and RAM increase with the **type** and **amount of data**
-- More data for large genomes, increase **running time/RAM/Storage**
-- Most of tools **running** on a **single node:** parallelized but not distributed
+- For genome **assembly:**
+  - Running times and RAM increase with the **type** and **amount of data**
+  - More data for large genomes, increase **running time/RAM/Storage**
+  - Most of tools **running** on a **single node:** parallelized but not distributed
 
-For genome **annotation:**
-- Mapping/alignment of external data (RNA-seq, proteins) can be parallelized and distributed
-- Annotation process can be parallelized and distributed
+- For genome **annotation:**
+  - Mapping/alignment of external data (RNA-seq, proteins) can be parallelized and distributed
+  - Annotation process can be parallelized and distributed
 ]
 
 ---
 
-## Typical sequencing strategies: Bacterial genomes
+### Typical sequencing strategies: Bacterial genomes
 
 .left[
 - PacBio CLR or Oxford Nanopore reads at 40-50x coverage, self-correction and/or hybrid correction (using Illumina data)
@@ -356,7 +386,7 @@ For genome **annotation:**
 
 ---
 
-## Typical sequencing strategies: Larger genomes
+### Typical sequencing strategies: Larger genomes
 
 .left[
 - PacBio CLR or Oxford Nanopore reads at 100x coverage, hybrid correction using Illumina data and scaffolding using HiC or Omni-C
