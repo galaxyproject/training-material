@@ -400,6 +400,34 @@ The training step generates 3 datasets. 1) accuracy of the trained model, 2) the
 The prediction step generates 1 dataset. It's a file that has predictions (0 to 9 for the predicted fruit/vegetable) for every image 
 in the test dataset.
 
+### **Extract the Label column from test_y_10**
+
+> ### {% icon hands_on %} Hands-on: Advanced Cut
+>
+> - {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
+>    - *"File to cut"* : Select `test_y_10`
+>    - *"Operation"* : Select `Keep`
+>    - *"Delimited by"*: Select `Tab`
+>    - *"Cut by"*: Select `fields`
+>    - *"List of fields"*: Select `Column: 3`
+>    - Click *"Execute"*
+>
+{: .hands_on}
+
+### **Create One-Hot Encoding (OHE) representation of test labels**
+
+> ### {% icon hands_on %} Hands-on: One-Hot Encoding
+>
+> - {% tool [To categorical](https://usegalaxy.org/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
+>    - *"Input file"* : Select the output of the previous step.
+>    - *"Does the dataset contain header?"* : Select `Yes`
+>    - *"Total number of classes"*: Select `10`
+>    - Click *"Execute"*
+>
+{: .hands_on}
+
+
+
 ### **Machine Learning Visualization Extension**
 
 > ### {% icon hands_on %} Hands-on: Creating the confusion matrix
