@@ -795,7 +795,7 @@
 
 <p>In this tutorial we will use a software tool called Funannotate (<span class="citation"><a href="#jonathan_m_palmer_2020_4054262">Palmer and Stajich 2020</a></span>) to annotate the genome sequence of a small eukaryote: <a href="https://en.wikipedia.org/wiki/Mucor_mucedo"><em>Mucor mucedo</em></a> (a fungal plant pathogen).</p>
 
-<p>As explained on <a href="https://funannotate.readthedocs.io/">Funannotate’s website</a>, “it was originally written to annotate fungal genomes (small eukaryotes ~ 30 Mb genomes), but has evolved over time to accomodate larger genomes”. As other annotation tools like Maker or Braker, it works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.</p>
+<p>As explained on <a href="https://funannotate.readthedocs.io/">Funannotate’s website</a>, “it was originally written to annotate fungal genomes (small eukaryotes ~ 30 Mb genomes), but has evolved over time to accomodate larger genomes”. As other annotation tools like <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">Maker</a> (<span class="citation"><a href="#Campbell2014">Campbell <i>et al.</i> 2014</a></span>) or Braker (<span class="citation"><a href="#braker">Brůna <i>et al.</i> 2021</a></span>), it works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.</p>
 
 <p>The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an <span class="notranslate">RNA</span>Seq experiment for example). Funannotate is also able to take into account repeated elements.</p>
 
@@ -803,7 +803,7 @@
 
 <p>While for <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">Maker</a> you need to perform training steps for the ab-initio predictors, Funannotate is able to take care of that for you, which makes it much easier to use.</p>
 
-<p>In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI. Finally, you will learn how to use the <a href="http://jbrowse.org/">JBrowse</a> genome browser to visualise your new annotation.</p>
+<p>In this tutorial, you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then, you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI. Finally, you will learn how to use the <a href="http://jbrowse.org/">JBrowse</a> genome browser to visualise your new annotation.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -840,9 +840,9 @@
 <p>To annotate our genome using Funannotate, we will use the following files:</p>
 
 <ul>
-  <li>The <strong>genome sequence</strong> in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker tutorial</a>. For this tutorial we will try to annotate the genome assembled in the <a href="">Flye assembly tutorial</a>.</li>
+  <li>The <strong>genome sequence</strong> in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker tutorial</a>. For this tutorial, we will try to annotate the genome assembled in the <a href="">Flye assembly tutorial</a>.</li>
   <li>Some <span class="notranslate">RNA</span>Seq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.</li>
-  <li>A set of <strong>protein sequences</strong>, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that’s why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.</li>
+  <li>A set of <strong>protein sequences</strong>, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that’s why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial, we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.</li>
 </ul>
 
 <p>Funannotate will take into account the position of mapped <span class="notranslate">RNA</span>Seq <span class="notranslate">reads</span>, and the alignment of protein sequences on the genome sequence to determine gene positions.</p>
@@ -851,7 +851,12 @@
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+    </li>
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/5726818">Zenodo</a> or from
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">genome-annotation</code>
@@ -904,13 +909,27 @@ https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alte<span clas
 
 <p>After this step, the genome is clean, sorted, and ready for the structural annotation.</p>
 
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How many sequences are removed by this cleaning step ?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The repeat masked genome contains 1461 sequences, while the cleand one only contains 1425, so 36 were removed.</p>
+
+  </blockquote>
+
+</blockquote>
+
 <h1 id="preparing-rnaseq-data">Preparing <span class="notranslate">RNA</span>Seq data</h1>
 
 <p>When you sequence a new genome, you usually sequence a few libraries of <span class="notranslate">RNA</span>Seq data, from different tissues and in different conditions, because this data will help you in annotating the genome. Here, we are using data from one <span class="notranslate">RNA</span>Seq dataset that is available on <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a>: <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534859">SRR8534859</a>.</p>
 
 <p>You would normally get the Fastq files directly from SRA and use them in the following step. To speed up the tutorial (without impairing too much the quality of the results), we have reduced the size of the dataset into a single pair of (smaller) fastq files, available from Zenodo (or the GTN Data Libraries).</p>
 
-<p>To make use of this <span class="notranslate">RNA</span>Seq data, we need to map it on the genome. We will get a result in the form of a BAM file, that we will use in the rest of the tutorial.</p>
+<p>To make use of this <span class="notranslate">RNA</span>Seq data, we need to map it on the genome. We will use <strong><span class="notranslate">RNA</span> star</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and get a result in the form of a BAM file, that we will use in the rest of the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -947,12 +966,12 @@ https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alte<span clas
 <p>Before we move on to the next step, we need to make sure that the <span class="notranslate">mapping</span> went well. Have a look at the <code class="language-plaintext highlighter-rouge">log</code> output of <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span> STAR</code>.</p>
 
 <blockquote class="question">
-  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>What proportion of <span class="notranslate">reads</span> were correctly mapped to the genome? Do you think it is enough to continue with tihs tutorial?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>Look for <code class="language-plaintext highlighter-rouge">Uniquely mapped <span class="notranslate">reads</span> %</code>: you should get ~96%. This is a very good score, because while reducing the size of the dataset for this tutorial, we have kept mostly <span class="notranslate">reads</span> properly <span class="notranslate">mapping</span>.
 Anyway, with real data, you expect to have a vast majority of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> uniquely on the genome. If it’s not the case, check that you’re using the correct <span class="notranslate">RNA</span>Seq files, with the correct genome sequence.</p>
@@ -1029,7 +1048,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <ul>
   <li>the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the genome.</li>
-  <li>the CDS, transcript and protein sequences of all the genes predicted by Funannotate</li>
+  <li>the CDS, transcript and protein sequences of all the genes predicted by Funannotate (fasta files)</li>
   <li>some statistics and reports</li>
 </ul>
 
@@ -1041,7 +1060,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <li>the number of single/multiple exon transcripts</li>
 </ul>
 
-<p>These number alone are interesting, but not fully informative on the quality of the annotation. For example, for the number of genes, you want a ‘good’ number based on what you expect for this species (a too big number can mean that genes are fragmented, and a too small number can mean that some genes were not annotated at all). These numbers can help when comparing an annotation with other ones performed with other parameters or tools.</p>
+<p>These number alone are interesting, but not fully informative on the quality of the annotation. For example, for the number of genes, you want a ‘good’ number based on what you expect for this species (a too big number can mean that genes are fragmented, and a too small number can mean that some genes were not annotated at all). These numbers can help when comparing an annotation with other ones performed with other parameters or tools. You can also compare these numbers with annotation of closely related species.</p>
 
 <p>To get a better picture of the quality of the result, we will run BUSCO in the next step.</p>
 
@@ -1049,7 +1068,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <h2 id="evaluation-with-busco">Evaluation with <strong>Busco</strong></h2>
 
-<p><a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of an annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the annotation.</p>
+<p><a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the annotation.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -1076,16 +1095,16 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>You should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.</p>
+    <p>On a total of 2449, you should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.</p>
 
-    <p>That’s a quite good result as running BUSCO on the genome itself gives a very close number () (see Fly assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.</p>
+    <p>That’s a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.</p>
 
     <p>To improve the result you can consider using more <span class="notranslate">RNA</span>Seq data, and using the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em> option.</p>
   </blockquote>
@@ -1164,7 +1183,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <figure id="figure-1"><img src="../../images/interproscan_output.png" alt="InterProScan TSV output. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Extract of an InterProScan TSV output</figcaption></figure>
 
-<p>Each line correspond to a motif found in one of the annotated proteins. The most intersting columns are:</p>
+<p>Each line correspond to a motif found in one of the annotated proteins. The most interesting columns are:</p>
 
 <ul>
   <li>Column 1: the protein identifier</li>
@@ -1195,7 +1214,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <li>The raw <span class="notranslate">reads</span> used for the assembly, and the <span class="notranslate">RNA</span>Seq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids</li>
   <li>Ideally you should start submitting the assembly <em>before</em> performing the annotation. The reason is simple: NCBI performs some validation on the genome sequence before accepting it into GenBank. It means that you may be forced to make modifications to the genome sequence (e.g. remove contigs, split contigs where you have adapter contamination, etc). You will save time and trouble doing the annotation on a fully validated and frozen genome sequence.</li>
   <li>You should get a <code class="language-plaintext highlighter-rouge">locus_tag</code> for your genome: it is the unique prefix that is used at the beginning of each gene name. By default, Funannotate uses <code class="language-plaintext highlighter-rouge">FUN_</code> (e.g. <code class="language-plaintext highlighter-rouge">FUN_000001</code>), but to submit to NCBI you need to have a prefix specific to your genome. NCBI should provide it to you when you create your BioProject.</li>
-  <li>You then need to prepare a file containing a few metadata. This can be done online on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):</li>
+  <li>You then need to prepare a file containing a few metadata. This can be done online on <a href="https://submit.ncbi.nlm.nih.gov/genbank/template/submission/">https://submit.ncbi.nlm.nih.gov/genbank/template/submission/</a>. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):</li>
 </ul>
 
 <figure id="figure-2"><img src="../../images/ncbi_template.png" alt="NCBI submission template. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Example of a filled form to generate an NCBI submission template.</figcaption></figure>
@@ -1246,7 +1265,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <h1 id="visualisation-with-a-genome-browser">Visualisation with a genome browser</h1>
 
-<p>With <span class="notranslate">Galaxy</span>, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an <span class="notranslate">RNA</span>Seq track, using the BAM file created with <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+<p>With <span class="notranslate">Galaxy</span>, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an <span class="notranslate">RNA</span>Seq track, using the BAM file created with <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -1314,7 +1333,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <p>If you zoom to a specific gene, and look at the <span class="notranslate">RNA</span>Seq tracks, you will see light grey regions corresponding to portions of the genomes where <span class="notranslate">RNA</span>Seq were mapped, and darker grey regions corresponding to introns (= regions were some <span class="notranslate">reads</span> were found to match both the end of an exon, and the start of the next one). You can enable the other <span class="notranslate">RNA</span>Seq track to display each individual read that was mapped on the genome.</p>
 
-<p>If you navigate along the genome, you will find genes with very low <span class="notranslate">RNA</span>Seq coverage: this demonstrate how Funannotate is able to predict genes not only with <span class="notranslate">RNA</span>Seq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using <span class="notranslate">RNA</span>Seq data.</p>
+<p>If you navigate along the genome, you will find genes with very low <span class="notranslate">RNA</span>Seq coverage: this demonstrates how Funannotate is able to predict genes not only with <span class="notranslate">RNA</span>Seq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using <span class="notranslate">RNA</span>Seq data.</p>
 
 <h1 id="comparing-annotations">Comparing annotations</h1>
 
@@ -1355,12 +1374,12 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>What can you tell from the comparison at this gene locus?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>You should see something like this:</p>
 
@@ -1402,12 +1421,12 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 </ul>
 
 <blockquote class="question">
-  <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>What can you tell from this report?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>The alte<span class="notranslate">rna</span>te annotation contains less genes than the one you generated, and misses a lot of functional annotations. It confirms that this alte<span class="notranslate">rna</span>te annotation have a lower quality than the one you performed.</p>
   </blockquote>
@@ -1451,7 +1470,9 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li id="jonathan_m_palmer_2020_4054262">Palmer, J. M., and J. Stajich, 2020 <b>Funannotate v1.8.1: Eukaryotic genome annotation</b>. <a href="https://doi.org/10.5281/zenodo.4054262">10.5281/zenodo.4054262</a></li></ol>
+                <ol class="bibliography"><li id="Campbell2014">Campbell, M. S., C. Holt, B. Moore, and M. Yandell, 2014 <b>Genome annotation and curation using MAKER and MAKER-P</b>. Current Protocols in Bioinformatics 48: 4–11. <a href="https://doi.org/10.1002/0471250953.bi0411s48">10.1002/0471250953.bi0411s48</a></li>
+<li id="jonathan_m_palmer_2020_4054262">Palmer, J. M., and J. Stajich, 2020 <b>Funannotate v1.8.1: Eukaryotic genome annotation</b>. <a href="https://doi.org/10.5281/zenodo.4054262">10.5281/zenodo.4054262</a></li>
+<li id="braker">Brůna, T., K. J. Hoff, A. Lomsadze, M. Stanke, and M. Borodovsky, 2021 <b>BRAKER2: automatic eukaryotic genome annotation with GeneMark-EP+ and AUGUSTUS supported by a protein database</b>. NAR Genomics and Bioinformatics 3: lqaa108. <a href="https://doi.org/10.1093/nargab/lqaa108">10.1093/nargab/lqaa108</a></li></ol>
                 
 
                 
