@@ -192,11 +192,16 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comments
+> ### {% icon comment %} Comments on parameters
 >
 > - For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analysis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
 > - It is possible to enable the *"Is it a fungus species?"* option in Funannotate: it launched an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the RNASeq data available. For this tutorial we leave this option to `No`. You can test it with real data, but be sure to compare the result with and without this option.
 > - For real data analysis you can consider enabling the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"*. If you have enough data, you might get better results as there will be an additional training step for augustus (at the cost of a longer runtime).
+{: .comment}
+
+> ### {% icon comment %} Don't wait
+>
+> This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.
 {: .comment}
 
 This tool produces several output dataset, in particular:
@@ -204,11 +209,6 @@ This tool produces several output dataset, in particular:
 - the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the genome.
 - the CDS, transcript and protein sequences of all the genes predicted by Funannotate
 - some statistics and reports
-
-> ### {% icon comment %} Comments
->
-> This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.
-{: .comment}
 
 Let's have a closer look at the output of our annotation. First display the `stats` dataset: the first par of the file contains some information on how funannotate was launched. If you go to the bottom, you'll find a few interesting numbers in the `annotation` section:
 
@@ -288,9 +288,9 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
->    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern`, `SUPERFAMILY`,  (see why below)
->    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
+>    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY`  (see why below)
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
+>    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
 >
 {: .hands_on}
 
