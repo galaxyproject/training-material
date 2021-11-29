@@ -48,7 +48,7 @@ Genome annotation of eukaryotes is a little more complicated than for prokaryote
 
 In this tutorial we will use a software tool called Funannotate ({% cite jonathan_m_palmer_2020_4054262 %}) to annotate the genome sequence of a small eukaryote: [*Mucor mucedo*](https://en.wikipedia.org/wiki/Mucor_mucedo) (a fungal plant pathogen).
 
-As explained on [Funannotate's website](https://funannotate.readthedocs.io/), "it was originally written to annotate fungal genomes (small eukaryotes ~ 30 Mb genomes), but has evolved over time to accomodate larger genomes". As other annotation tools like Maker or Braker, it works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.
+As explained on [Funannotate's website](https://funannotate.readthedocs.io/), "it was originally written to annotate fungal genomes (small eukaryotes ~ 30 Mb genomes), but has evolved over time to accomodate larger genomes". As other annotation tools like [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}) ({% cite Campbell2014 %}) or Braker ({% cite braker %}), it works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.
 
 The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an RNASeq experiment for example). Funannotate is also able to take into account repeated elements.
 
@@ -56,7 +56,7 @@ Funannotate uses ab-initio predictors ([Augustus](http://bioinf.uni-greifswald.d
 
 While for [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}) you need to perform training steps for the ab-initio predictors, Funannotate is able to take care of that for you, which makes it much easier to use.
 
-In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI. Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise your new annotation.
+In this tutorial, you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then, you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI. Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise your new annotation.
 
 > ### Agenda
 >
@@ -71,15 +71,18 @@ In this tutorial you will learn how to perform a structural genome annotation, a
 
 To annotate our genome using Funannotate, we will use the following files:
 
-- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial we will try to annotate the genome assembled in the [Flye assembly tutorial]({{ TODO link topics/assembly/tutorials/flye-assembly/tutorial.md }}).
+- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial, we will try to annotate the genome assembled in the [Flye assembly tutorial]({{ TODO link topics/assembly/tutorials/flye-assembly/tutorial.md }}).
 - Some RNASeq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.
-- A set of **protein sequences**, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that's why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.
+- A set of **protein sequences**, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that's why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial, we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.
 
  Funannotate will take into account the position of mapped RNASeq reads, and the alignment of protein sequences on the genome sequence to determine gene positions.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
@@ -120,13 +123,25 @@ The second tool will ensure that our fasta file is sorted, based on the length o
 
 After this step, the genome is clean, sorted, and ready for the structural annotation.
 
+> ### {% icon question %} Question
+>
+> How many sequences are removed by this cleaning step ?
+>
+> > ### {% icon solution %} Solution
+> >
+> > The repeat masked genome contains 1461 sequences, while the cleand one only contains 1425, so 36 were removed.
+> >
+> {: .solution}
+>
+{: .question}
+
 # Preparing RNASeq data
 
 When you sequence a new genome, you usually sequence a few libraries of RNASeq data, from different tissues and in different conditions, because this data will help you in annotating the genome. Here, we are using data from one RNASeq dataset that is available on [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra): [SRR8534859](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534859).
 
 You would normally get the Fastq files directly from SRA and use them in the following step. To speed up the tutorial (without impairing too much the quality of the results), we have reduced the size of the dataset into a single pair of (smaller) fastq files, available from Zenodo (or the GTN Data Libraries).
 
-To make use of this RNASeq data, we need to map it on the genome. We will get a result in the form of a BAM file, that we will use in the rest of the tutorial.
+To make use of this RNASeq data, we need to map it on the genome. We will use **RNA star** {% icon tool %} and get a result in the form of a BAM file, that we will use in the rest of the tutorial.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -207,7 +222,7 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 This tool produces several output dataset, in particular:
 
 - the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the genome.
-- the CDS, transcript and protein sequences of all the genes predicted by Funannotate
+- the CDS, transcript and protein sequences of all the genes predicted by Funannotate (fasta files)
 - some statistics and reports
 
 Let's have a closer look at the output of our annotation. First display the `stats` dataset: the first par of the file contains some information on how funannotate was launched. If you go to the bottom, you'll find a few interesting numbers in the `annotation` section:
@@ -216,7 +231,7 @@ Let's have a closer look at the output of our annotation. First display the `sta
 - the average length of genes, exons, proteins
 - the number of single/multiple exon transcripts
 
-These number alone are interesting, but not fully informative on the quality of the annotation. For example, for the number of genes, you want a 'good' number based on what you expect for this species (a too big number can mean that genes are fragmented, and a too small number can mean that some genes were not annotated at all). These numbers can help when comparing an annotation with other ones performed with other parameters or tools.
+These number alone are interesting, but not fully informative on the quality of the annotation. For example, for the number of genes, you want a 'good' number based on what you expect for this species (a too big number can mean that genes are fragmented, and a too small number can mean that some genes were not annotated at all). These numbers can help when comparing an annotation with other ones performed with other parameters or tools. You can also compare these numbers with annotation of closely related species.
 
 To get a better picture of the quality of the result, we will run BUSCO in the next step.
 
@@ -224,7 +239,7 @@ Before moving on, have a quick look at the `tbl2asn error summary report` output
 
 ## Evaluation with **Busco**
 
-[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of an annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
+[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -244,9 +259,9 @@ Before moving on, have a quick look at the `tbl2asn error summary report` output
 >
 > > ### {% icon solution %} Solution
 > >
-> > You should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.
+> > On a total of 2449, you should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.
 > >
-> > That's a quite good result as running BUSCO on the genome itself gives a very close number () (see Fly assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
+> > That's a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
 > >
 > > To improve the result you can consider using more RNASeq data, and using the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"* option.
 > {: .solution}
@@ -309,7 +324,7 @@ If you display the TSV file you should see something like this:
 
 ![InterProScan TSV output](../../images/interproscan_output.png "Extract of an InterProScan TSV output")
 
-Each line correspond to a motif found in one of the annotated proteins. The most intersting columns are:
+Each line correspond to a motif found in one of the annotated proteins. The most interesting columns are:
 
 - Column 1: the protein identifier
 - Column 5: the identifier of the signature that was found in the protein sequence
@@ -336,7 +351,7 @@ If you plan to submit the final genome sequence and annotation to NCBI, there ar
 - The raw reads used for the assembly, and the RNASeq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids
 - Ideally you should start submitting the assembly *before* performing the annotation. The reason is simple: NCBI performs some validation on the genome sequence before accepting it into GenBank. It means that you may be forced to make modifications to the genome sequence (e.g. remove contigs, split contigs where you have adapter contamination, etc). You will save time and trouble doing the annotation on a fully validated and frozen genome sequence.
 - You should get a `locus_tag` for your genome: it is the unique prefix that is used at the beginning of each gene name. By default, Funannotate uses `FUN_` (e.g. `FUN_000001`), but to submit to NCBI you need to have a prefix specific to your genome. NCBI should provide it to you when you create your BioProject.
-- You then need to prepare a file containing a few metadata. This can be done online on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):
+- You then need to prepare a file containing a few metadata. This can be done online on [https://submit.ncbi.nlm.nih.gov/genbank/template/submission/](https://submit.ncbi.nlm.nih.gov/genbank/template/submission/). You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):
 
 ![NCBI submission template](../../images/ncbi_template.png "Example of a filled form to generate an NCBI submission template.")
 
@@ -375,7 +390,7 @@ If you display the GFF3 output, you will notice that the functional information,
 
 # Visualisation with a genome browser
 
-With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with **RNA STAR** {% icon tool %}.
+With Galaxy, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with **RNA STAR** {% icon tool %}.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -407,7 +422,7 @@ If you click on a gene, a popup will appear with detailed information on the sel
 
 If you zoom to a specific gene, and look at the RNASeq tracks, you will see light grey regions corresponding to portions of the genomes where RNASeq were mapped, and darker grey regions corresponding to introns (= regions were some reads were found to match both the end of an exon, and the start of the next one). You can enable the other RNASeq track to display each individual read that was mapped on the genome.
 
-If you navigate along the genome, you will find genes with very low RNASeq coverage: this demonstrate how Funannotate is able to predict genes not only with RNASeq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using RNASeq data.
+If you navigate along the genome, you will find genes with very low RNASeq coverage: this demonstrates how Funannotate is able to predict genes not only with RNASeq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using RNASeq data.
 
 # Comparing annotations
 

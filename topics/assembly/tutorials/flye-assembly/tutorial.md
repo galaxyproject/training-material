@@ -199,14 +199,13 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 
 > ### {% icon hands_on %} Hands-on: BUSCO on Flye assembly
 >
+> **First on the Flye assembly:**
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `consensus` (output of **Flye** {% icon tool %})
 >    - *"Auto-detect or select lineage"*: `Select lineage`
 >        - *"Lineage"*: `Mucorales`
 >
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on: BUSCO on the reference assembly
+> **Then, on the reference assembly:**
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `Mucmuc1_AssemblyScaffolds.fasta`
