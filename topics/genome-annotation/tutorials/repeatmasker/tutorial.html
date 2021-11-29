@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Masking repeats with RepeatMasker</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:title" content="Galaxy Training: Masking repeats with RepeatMasker" />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/repeatmasker/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/repeatmasker/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/repeatmasker/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/repeatmasker/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/repeatmasker/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/repeatmasker/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/repeatmasker/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/genome-annotation/tutorials/repeatmasker/tutorial.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/genome-annotation/tutorials/repeatmasker/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/genome-annotation/tutorials/repeatmasker/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxy-genome-annotation/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Masking repeats with RepeatMasker",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+  },
+  "courseCode": "genome-annotation / repeatmasker / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Masking repeats with RepeatMasker' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "eukaryote",
+  "description": "The questions this  addresses are:\n - How to mask repeats in a genome?\n - What is the difference between hard and soft masking?\n\n\\nThe objectives are:\n - Use RepeatMasker to soft mask a newly assmbled genome\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+</script>
+
+<section class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>Masking repeats with RepeatMasker</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to mask repeats in a genome?</p>
+</li>
+        
+        <li><p>What is the difference between hard and soft masking?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Use RepeatMasker to soft mask a newly assmbled genome</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/genome-annotation/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" href="https://zenodo.org/record/5726723">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/repeatmasker/workflows/" title="Workflows" alt="Masking repeats with RepeatMasker workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
+            Metagenomics
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
+            Plant Anaylsis Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://virology.usegalaxy.eu/" title="Virology">
+            Virology
+        </a>
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 29, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky. However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:</p>
+
+<ul>
+  <li>Tandem repeats: small sequences (&lt;60 base pairs) repeated next to each other, found in many places in the genome, in particular centromeres and telomeres</li>
+  <li>Interspersed repeats: sequences repeated in distant positions, including transposons, Short Interspersed Nuclear Elements (SINEs) or Long Interspersed Nuclear Elements (LINEs)</li>
+</ul>
+
+<p>These repeats are interesting on their own: they can originate from transposons or viral insertions, and they can have direct effects on the <span class="notranslate">expression</span> of genes. But they are also the source of a lot of trouble when you work on genomics data. First when sequencing a genome, assembly tools often have problems reconstructing the genome sequence in regions containing repeats (in particular when repeats are longer than the read size). Then, when you have a good assembly, you want to annotate it to find the location of genes. Unfortunately annotation tools have trouble identifying gene locations in regions rich in repeats.</p>
+
+<p>The aim of repeat masking is to identify the location of all repeated elements along a genome sequence. Other tools (like annotation pipelines) can then take this information into account when producing their results.</p>
+
+<p>The output of repeat masking tools is most often composed of a fasta file (with sometimes a GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:</p>
+
+<ul>
+  <li>Soft masking: repeat elements are written in lower case</li>
+  <li>Hard masking: repeat elements are replaced by stretches of the letter N</li>
+</ul>
+
+<p>Normal (non-repeated) sequences are always kept in uppercase. Doing hard masking is destructive because you lose large parts of the sequence which are replaced by stretches of N. If you want to perform an annotation, it is best to choose soft masking.</p>
+
+<p>We call this operation “masking” because, by making repeats lowercase, or replacing them with Ns, you make them “invisible” by annotation tools (they are written to mostly ignore the regions marked like this).</p>
+
+<p>Multiple tools exist to perform the masking: <a href="https://www.repeatmasker.org/">RepeatMasker</a>, <a href="https://www.repeatmasker.org/RepeatModeler/">RepeatModeler</a>, <a href="https://urgi.versailles.inra.fr/Tools/REPET">REPET</a>, … Each one have specificities: some can be trained on specific genomes, some rely on existing databases of repeated elements signatures (<a href="https://www.dfam.org/">Dfam</a>, <a href="https://www.girinst.org/repbase/">RepBase</a>).</p>
+
+<p>In this tutorial you will learn how to soft mask the genome sequence of a small eukaryote: Mucor mucedo (a fungal plant pathogen). You can learn how this genome sequence was assembled by following the <a href="">Flye assembly tutorial</a>. We will use RepeatMasker, which is probably the simplest solution giving an acceptable result before annotating the genome in the <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">Funannotate annotation tutorial</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#soft-masking-using-repeatmasker" id="markdown-toc-soft-masking-using-repeatmasker">Soft-masking using RepeatMasker</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-data">Get data</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/5726723">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">genome-annotation</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Masking repeats with RepeatMasker</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/71333591-99bd-4d99-bbdf-664cc18fd422/genome_raw.fasta
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="soft-masking-using-repeatmasker">Soft-masking using RepeatMasker</h1>
+
+<p>Let’s run RepeatMasker, by selected the input assembly in fasta format. We select the soft masking option, and we choose to use the DFam database.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-choosing-the-right-species"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Choosing the right species</h3>
+
+  <p>We select the <code class="language-plaintext highlighter-rouge">Human (Homo sapiens)</code> species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organisms. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tools like RepeatModeler.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genomic <span class="notranslate">DNA</span>”</em>: <code class="language-plaintext highlighter-rouge">genome_raw.fasta</code> (Input dataset)</li>
+        <li><em>“Repeat library source”</em>: <code class="language-plaintext highlighter-rouge">DFam (curated only, bundled with RepeatMasker)</code>
+          <ul>
+            <li><em>“Select species name from a list?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“Species”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Perform softmasking instead of hardmasking”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>RepeatMasker produces 4 output files:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">masked sequence</code>: this is the fasta file that you will use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regions that were identified as repeats.</li>
+  <li><code class="language-plaintext highlighter-rouge">repeat statistics</code>: this one contains some statistics on the number of repeats found in each category, and the total number of base pairs masked</li>
+  <li><code class="language-plaintext highlighter-rouge">output log</code>: this is a tabular file listing all repeats</li>
+  <li><code class="language-plaintext highlighter-rouge">repeat catalogue</code>: this one contains the list of all repeat sequences that were identified, with their position, and their similarity with known repeats from the DFam database</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>What proportion of the whole genome sequence is masked?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>You should find it in the <code class="language-plaintext highlighter-rouge">repeat statistics</code> output. It should be ~2.41%.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>As we have used a generic species (Human), we only identified the most common repeats, not very specific to this species. Other tools might mask a greater proportion of the genome, at the cost of a more complex <span class="notranslate">workflow</span> with training steps. But this result is sufficient to perform an annotation by following the <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">Funannotate annotation tutorial</a>.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>By following this tutorial you have learn how to mask an eukaryotic genome using RepeatMasker, after assembling (<a href="">Flye assembly tutorial</a>) an before annotating it (<a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">Funannotate annotation tutorial</a>).</p>
+
+<p>Often times, annotation tools prefer to use soft masked genomes, as they primarily search for genes in non repeated regions, but tolerate that some genes overlap partially with these regions.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>RepeatMasker can be used to soft-mask a genome</p>
+</li>
+                        
+                        <li><p>It is an essential first step before running structural annotation pipelines</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>LINEs</dt>
+                    <dd>Long Interspersed Nuclear Elements</dd>
+                    
+                    <dt>SINEs</dt>
+                    <dd>Short Interspersed Nuclear Elements</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Masking repeats with RepeatMasker (Genome Annotation)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anthony Bretaudeau, Alexandre Cormier, Laura Leroi, Erwan Corre, Stéphanie Robin, 2021 <b>Masking repeats with RepeatMasker (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{genome-annotation-repeatmasker,
+author = "Anthony Bretaudeau and Alexandre Cormier and Laura Leroi and Erwan Corre and Stéphanie Robin",
+title = "Masking repeats with RepeatMasker (Galaxy Training Materials)",
+year = "2021",
+month = "11",
+day = "29"
+url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/genome-annotation">Genome Annotation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Genome annotation with Funannotate:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

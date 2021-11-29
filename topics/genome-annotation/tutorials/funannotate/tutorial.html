@@ -1,0 +1,1601 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Genome annotation with Funannotate</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:title" content="Galaxy Training: Genome annotation with Funannotate" />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/funannotate/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/funannotate/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/funannotate/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/funannotate/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/funannotate/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/funannotate/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/funannotate/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/genome-annotation/tutorials/funannotate/tutorial.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/genome-annotation/tutorials/funannotate/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/genome-annotation/tutorials/funannotate/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxy-genome-annotation/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Genome annotation with Funannotate",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+  },
+  "courseCode": "genome-annotation / funannotate / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Genome annotation with Funannotate' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html",
+  "timeRequired": "PT8H",
+  "keywords": "eukaryote",
+  "description": "The questions this  addresses are:\n - How to annotate an eukaryotic genome with Funannotate?\n - How to perform functional annotation?\n - How to evaluate and visualize annotated genomic features?\n - How to format the annotation for submission at NCBI?\n\n\\nThe objectives are:\n - Load genome into Galaxy\n - Annotate genome with Funannotate\n - Perform functional annotation using EggNOG-mapper and InterProScan\n - Evaluate annotation quality with BUSCO\n - View annotations in JBrowse\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html",
+      "name": "Masking repeats with RepeatMasker",
+      "description": "Hands-on for 'Masking repeats with RepeatMasker' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>Genome annotation with Funannotate</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to annotate an eukaryotic genome with Funannotate?</p>
+</li>
+        
+        <li><p>How to perform functional annotation?</p>
+</li>
+        
+        <li><p>How to evaluate and visualize annotated genomic features?</p>
+</li>
+        
+        <li><p>How to format the annotation for submission at NCBI?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Load genome into Galaxy</p>
+</li>
+        
+        <li><p>Annotate genome with Funannotate</p>
+</li>
+        
+        <li><p>Perform functional annotation using EggNOG-mapper and InterProScan</p>
+</li>
+        
+        <li><p>Evaluate annotation quality with BUSCO</p>
+</li>
+        
+        <li><p>View annotations in JBrowse</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/genome-annotation">Genome Annotation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Masking repeats with RepeatMasker:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 8 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/genome-annotation/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" href="https://zenodo.org/record/5726818">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/funannotate/workflows/" title="Workflows" alt="Genome annotation with Funannotate workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 29, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.</p>
+
+<p>In this tutorial we will use a software tool called Funannotate (<span class="citation"><a href="#jonathan_m_palmer_2020_4054262">Palmer and Stajich 2020</a></span>) to annotate the genome sequence of a small eukaryote: <a href="https://en.wikipedia.org/wiki/Mucor_mucedo"><em>Mucor mucedo</em></a> (a fungal plant pathogen).</p>
+
+<p>As explained on <a href="https://funannotate.readthedocs.io/">Funannotate’s website</a>, “it was originally written to annotate fungal genomes (small eukaryotes ~ 30 Mb genomes), but has evolved over time to accomodate larger genomes”. As other annotation tools like Maker or Braker, it works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.</p>
+
+<p>The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an <span class="notranslate">RNA</span>Seq experiment for example). Funannotate is also able to take into account repeated elements.</p>
+
+<p>Funannotate uses ab-initio predictors (<a href="http://bioinf.uni-greifswald.de/augustus/">Augustus</a>, <a href="https://github.com/KorfLab/SNAP">SNAP</a>, <a href="https://bio.tools/glimmer-hmm">glimmerHMM</a>, <a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-015-1344-4">CodingQuarry</a> and <a href="http://exon.gatech.edu/GeneMark/">GeneMark-ES/ET</a> (optional due to licensing)) to improve its predictions: these software tools are able to make gene structure predictions by analysing only the genome sequence with a statistical model.</p>
+
+<p>While for <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">Maker</a> you need to perform training steps for the ab-initio predictors, Funannotate is able to take care of that for you, which makes it much easier to use.</p>
+
+<p>In this tutorial you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI. Finally, you will learn how to use the <a href="http://jbrowse.org/">JBrowse</a> genome browser to visualise your new annotation.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+  <li><a href="#preparing-the-genome-sequence" id="markdown-toc-preparing-the-genome-sequence">Preparing the genome sequence</a></li>
+  <li><a href="#preparing-rnaseq-data" id="markdown-toc-preparing-rnaseq-data">Preparing <span class="notranslate">RNA</span>Seq data</a></li>
+  <li><a href="#strutural-annotation" id="markdown-toc-strutural-annotation">Strutural annotation</a>    <ol>
+      <li><a href="#evaluation-with-busco" id="markdown-toc-evaluation-with-busco">Evaluation with <strong>Busco</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#functional-annotation" id="markdown-toc-functional-annotation">Functional annotation</a>    <ol>
+      <li><a href="#eggnog-mapper" id="markdown-toc-eggnog-mapper"><strong>EggNOG Mapper</strong></a></li>
+      <li><a href="#interproscan" id="markdown-toc-interproscan"><strong>InterProScan</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#submission-to-ncbi" id="markdown-toc-submission-to-ncbi">Submission to NCBI</a></li>
+  <li><a href="#integrating-structural-and-functional-annotation" id="markdown-toc-integrating-structural-and-functional-annotation">Integrating structural and functional annotation</a></li>
+  <li><a href="#visualisation-with-a-genome-browser" id="markdown-toc-visualisation-with-a-genome-browser">Visualisation with a genome browser</a></li>
+  <li><a href="#comparing-annotations" id="markdown-toc-comparing-annotations">Comparing annotations</a>    <ol>
+      <li><a href="#comparing-with-aegean-parseval" id="markdown-toc-comparing-with-aegean-parseval">Comparing with <strong>AEGeAn ParsEval</strong></a></li>
+      <li><a href="#comparing-with-funannotate-compare" id="markdown-toc-comparing-with-funannotate-compare">Comparing with <strong>Funannotate compare</strong></a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-upload">Data upload</h1>
+
+<p>To annotate our genome using Funannotate, we will use the following files:</p>
+
+<ul>
+  <li>The <strong>genome sequence</strong> in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker tutorial</a>. For this tutorial we will try to annotate the genome assembled in the <a href="">Flye assembly tutorial</a>.</li>
+  <li>Some <span class="notranslate">RNA</span>Seq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.</li>
+  <li>A set of <strong>protein sequences</strong>, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that’s why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.</li>
+</ul>
+
+<p>Funannotate will take into account the position of mapped <span class="notranslate">RNA</span>Seq <span class="notranslate">reads</span>, and the alignment of protein sequences on the genome sequence to determine gene positions.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/5726818">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">genome-annotation</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Genome annotation with Funannotate</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/genome_masked.fasta
+https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/<span class="notranslate">rna</span>seq_R1.fq.gz
+https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/<span class="notranslate">rna</span>seq_R2.fq.gz
+https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/SwissProt_subset.fasta
+https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alte<span class="notranslate">rna</span>te_annotation.gbk
+https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alte<span class="notranslate">rna</span>te_annotation.gff3
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="preparing-the-genome-sequence">Preparing the genome sequence</h1>
+
+<p>Before annotating the genome, we want to make sure that the fasta file is properly formatted. We do it now to make sure we will not encounter unexpected errors later in the annotation process.</p>
+
+<p>Funannotate provides two little tools to help us. Let’s run the two tools, one after the other.</p>
+
+<p>The first one (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2"><strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+<span class="notranslate">galaxy</span>2</span></span> ) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).</p>
+
+<p>The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with <code class="language-plaintext highlighter-rouge">scaffold_</code>, then a number).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-polish-the-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Polish the assembly</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2"><strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to clean”</em>: <code class="language-plaintext highlighter-rouge">genome_masked.fasta</code> (Input dataset)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2"><strong>Sort assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to sort”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>After this step, the genome is clean, sorted, and ready for the structural annotation.</p>
+
+<h1 id="preparing-rnaseq-data">Preparing <span class="notranslate">RNA</span>Seq data</h1>
+
+<p>When you sequence a new genome, you usually sequence a few libraries of <span class="notranslate">RNA</span>Seq data, from different tissues and in different conditions, because this data will help you in annotating the genome. Here, we are using data from one <span class="notranslate">RNA</span>Seq dataset that is available on <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a>: <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534859">SRR8534859</a>.</p>
+
+<p>You would normally get the Fastq files directly from SRA and use them in the following step. To speed up the tutorial (without impairing too much the quality of the results), we have reduced the size of the dataset into a single pair of (smaller) fastq files, available from Zenodo (or the GTN Data Libraries).</p>
+
+<p>To make use of this <span class="notranslate">RNA</span>Seq data, we need to map it on the genome. We will get a result in the form of a BAM file, that we will use in the rest of the tutorial.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0"><strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/rg<span class="notranslate">rna</span>star/<span class="notranslate">rna</span>_star/2.7.8a+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Single-end or paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as individual datasets)</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, forward <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq_R1.fq.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, reverse <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq_R2.fq.gz</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Custom or built-in reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use reference genome from history and create temporary index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">genome</code> (output of <strong>Sort assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Length of the SA pre-indexing string”</em>: <code class="language-plaintext highlighter-rouge">11</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We select <code class="language-plaintext highlighter-rouge">11</code> for the <em>“Length of the SA pre-indexing string”</em> parameter as it is the recommended value for a small genome of this size. If you select 14 (the default value), STAR will advise you to use <code class="language-plaintext highlighter-rouge">11</code> instead in its logs.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-what-if-i-want-to-use-multiple-rnaseq-libraries"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> What if I want to use multiple <span class="notranslate">RNA</span>Seq libraries</h3>
+
+  <p>To get the best possible annotation, it is adviced to use multiple <span class="notranslate">RNA</span>Seq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per <span class="notranslate">RNA</span>Seq library, and you can then easily merge them into a single BAM file by using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1"><strong>MergeSamFiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1</span></span>  tool. This single BAM file can then be used by Funannotate like we do in the next steps.</p>
+</blockquote>
+
+<p>Before we move on to the next step, we need to make sure that the <span class="notranslate">mapping</span> went well. Have a look at the <code class="language-plaintext highlighter-rouge">log</code> output of <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span> STAR</code>.</p>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>What proportion of <span class="notranslate">reads</span> were correctly mapped to the genome? Do you think it is enough to continue with tihs tutorial?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Look for <code class="language-plaintext highlighter-rouge">Uniquely mapped <span class="notranslate">reads</span> %</code>: you should get ~96%. This is a very good score, because while reducing the size of the dataset for this tutorial, we have kept mostly <span class="notranslate">reads</span> properly <span class="notranslate">mapping</span>.
+Anyway, with real data, you expect to have a vast majority of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> uniquely on the genome. If it’s not the case, check that you’re using the correct <span class="notranslate">RNA</span>Seq files, with the correct genome sequence.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="strutural-annotation">Strutural annotation</h1>
+
+<p>We can now run <strong>Funannotate predict annotation</strong> to perform the structural annotation of the genome.</p>
+
+<p>We need to input the genome sequence, the mapped <span class="notranslate">RNA</span>Seq data, and the proteins to align on the genome. We also specify the name of the species and strain (they can be used later for submission to NCBI).</p>
+
+<p>There are other parameters to finely tune how Funannotate will run ab-initio predictors to predict genes, and to filter the final results based on various criteria. As Funannotate uses <a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) for initial training of ab-initio predictors, we select datasets close to the species we are annotating: <code class="language-plaintext highlighter-rouge">mucorales (orthodb 10)</code> and <code class="language-plaintext highlighter-rouge">rhizopus_oryzae</code>.</p>
+
+<p>Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every <span class="notranslate">Galaxy</span> instance. We will ignore this for this tutorial, it will not impact the results too much.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2"><strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to annotate”</em>: <code class="language-plaintext highlighter-rouge">genome</code> (output of <strong>Sort assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Funannotate database”</em>: select the latest version available</li>
+        <li>In <em>“Organism”</em>:
+          <ul>
+            <li><em>“Name of the species to annotate”</em>: <code class="language-plaintext highlighter-rouge">Mucor mucedo</code></li>
+            <li><em>“Strain name”</em>: <code class="language-plaintext highlighter-rouge">muc1</code></li>
+            <li><em>“Is it a fungus species?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Evidences”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-seq mapped to genome to train Augustus/GeneMark-ET”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> (output of <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Select protein evidences”</em>: <code class="language-plaintext highlighter-rouge">Custom protein sequences</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteins to map to genome”</em>: <code class="language-plaintext highlighter-rouge">SwissProt_subset.fasta</code> (Input dataset)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Busco”</em>:
+          <ul>
+            <li><em>BUSCO models to align”</em>”: <code class="language-plaintext highlighter-rouge">mucorales (orthodb 10)</code></li>
+            <li><em>“Initial Augustus species training set for BUSCO alignment”</em>: <code class="language-plaintext highlighter-rouge">rhizopus_oryzae</code></li>
+          </ul>
+        </li>
+        <li><em>“Which outputs should be generated”</em>: Select all</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comments-on-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments on parameters</h3>
+
+  <ul>
+    <li>For <em>“Select protein evidences”</em> we select <code class="language-plaintext highlighter-rouge">Custom protein sequences</code> to reduce the computing time, but for real data analysis, you should select the default value: <code class="language-plaintext highlighter-rouge">Use UniProtKb/SwissProt (from selected Funannotate database)</code>.</li>
+    <li>It is possible to enable the <em>“Is it a fungus species?”</em> option in Funannotate: it launched an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the <span class="notranslate">RNA</span>Seq data available. For this tutorial we leave this option to <code class="language-plaintext highlighter-rouge">No</code>. You can test it with real data, but be sure to compare the result with and without this option.</li>
+    <li>For real data analysis you can consider enabling the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em>. If you have enough data, you might get better results as there will be an additional training step for augustus (at the cost of a longer runtime).</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-dont-wait"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Don’t wait</h3>
+
+  <p>This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. <span class="notranslate">Galaxy</span> will run them automatically as soon as the structural annotation is ready.</p>
+</blockquote>
+
+<p>This tool produces several output dataset, in particular:</p>
+
+<ul>
+  <li>the full structural annotation in Genbank, GFF3 or NCBI tbl formats: these files contain the position of all the genes that were found on the genome.</li>
+  <li>the CDS, transcript and protein sequences of all the genes predicted by Funannotate</li>
+  <li>some statistics and reports</li>
+</ul>
+
+<p>Let’s have a closer look at the output of our annotation. First display the <code class="language-plaintext highlighter-rouge">stats</code> dataset: the first par of the file contains some information on how funannotate was launched. If you go to the bottom, you’ll find a few interesting numbers in the <code class="language-plaintext highlighter-rouge">annotation</code> section:</p>
+
+<ul>
+  <li>the total number of genes and m<span class="notranslate">RNA</span></li>
+  <li>the average length of genes, exons, proteins</li>
+  <li>the number of single/multiple exon transcripts</li>
+</ul>
+
+<p>These number alone are interesting, but not fully informative on the quality of the annotation. For example, for the number of genes, you want a ‘good’ number based on what you expect for this species (a too big number can mean that genes are fragmented, and a too small number can mean that some genes were not annotated at all). These numbers can help when comparing an annotation with other ones performed with other parameters or tools.</p>
+
+<p>To get a better picture of the quality of the result, we will run BUSCO in the next step.</p>
+
+<p>Before moving on, have a quick look at the <code class="language-plaintext highlighter-rouge">tbl2asn error summary report</code> output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identified potential problems in the <code class="language-plaintext highlighter-rouge">tbl2asn genome validation report</code> dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to manually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.</p>
+
+<h2 id="evaluation-with-busco">Evaluation with <strong>Busco</strong></h2>
+
+<p><a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of an annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the annotation.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">annotated gene sets (protein)</code></li>
+        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
+          <ul>
+            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Mucorales</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">shortsummary text</code> and <code class="language-plaintext highlighter-rouge">summary image</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>You should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.</p>
+
+    <p>That’s a quite good result as running BUSCO on the genome itself gives a very close number () (see Fly assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.</p>
+
+    <p>To improve the result you can consider using more <span class="notranslate">RNA</span>Seq data, and using the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em> option.</p>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="functional-annotation">Functional annotation</h1>
+
+<p>The aim of the previous step is to predict the position of the genes on the genome (structural annotation). Now we want to assign names and functions to the predicted genes. We can do this automatically using specialised tools: <strong>EggNOG Mapper</strong> and <strong>InterProScan</strong>.</p>
+
+<h2 id="eggnog-mapper"><strong>EggNOG Mapper</strong></h2>
+
+<p><strong>EggNOG Mapper</strong> compares each protein sequence of the annotation to a huge set of ortholog groups from the <a href="http://eggnog5.embl.de">EggNOG database</a>. In this database, each ortholog group is associated with functional annotation like <a href="http://www.geneontology.org/">Gene Ontology (GO)</a> terms or <a href="https://www.genome.jp/kegg/pathway.html">KEGG pathways</a>. When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1"><strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/eggnog_mapper/eggnog_mapper/2.0.1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fasta sequences to annotate”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Version of eggNOG Database”</em>: select the latest version available</li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Exclude header lines and stats from output files”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of this tool is a tabular file, where each line represents a gene from our annotation, with the functional annotation that was found by EggNOG-mapper. It includes a predicted protein name, GO terms, EC numbers, KEGG identifiers, …</p>
+
+<p>Display the file and explore which kind of identifiers were found by EggNOG Mapper.</p>
+
+<h2 id="interproscan"><strong>InterProScan</strong></h2>
+
+<p><a href="https://www.ebi.ac.uk/interpro/">InterPro</a> is a huge integrated database of protein families. Each family is characterized by one or muliple signatures (i.e. sequence motifs) that are specific to the protein family, and corresponding functional annotation like protein names or <a href="http://www.geneontology.org/">Gene Ontology (GO)</a>. A good proportion of the signatures are manually curated, which means they are of very good quality.</p>
+
+<p><strong>InterProScan</strong> is a tool that analyses each protein sequence from our annotation to determine if they contain one or several of the signatures from InterPro. When a protein contains a known signature, the corresponding functional annotation will be assigned to it by <strong>InterProScan</strong>.</p>
+
+<p><strong>InterProScan</strong> itself runs multiple applications to search for the signatures in the protein sequences. It is possible to select exactly which ones we want to use when launching the analysis (by default all will be run).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1"><strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein FASTA File”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“InterProScan database”</em>: select the latest version available</li>
+        <li><em>“Applications to run”</em>: unselect <code class="language-plaintext highlighter-rouge">PROSITE Profiles</code>, <code class="language-plaintext highlighter-rouge">PROSITE Pattern</code> and <code class="language-plaintext highlighter-rouge">SUPERFAMILY</code>  (see why below)</li>
+        <li><em>“Use applications with restricted license, only for non-commercial use?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (set it to <code class="language-plaintext highlighter-rouge">No</code> if you run InterProScan for commercial use)</li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Tab-separated values format (TSV)</code> and <code class="language-plaintext highlighter-rouge">XML</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+
+  <p>Due to bugs in InterProScan, <code class="language-plaintext highlighter-rouge">PROSITE Profiles</code>, <code class="language-plaintext highlighter-rouge">PROSITE Pattern</code> and <code class="language-plaintext highlighter-rouge">SUPERFAMILY</code> don’t work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.</p>
+
+  <p>To speed up the processing by InterProScan during this tutorial, you can also disable <code class="language-plaintext highlighter-rouge">Pfam</code> and <code class="language-plaintext highlighter-rouge">PANTHER</code> applications. When analysing real data, it is adviced to keep them enabled.</p>
+
+  <p>When some applications are disabled, you will of course miss the corresponding results in the output of <strong>InterProScan</strong>.</p>
+</blockquote>
+
+<p>The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that were found by InterProScan.</p>
+
+<p>If you display the TSV file you should see something like this:</p>
+
+<figure id="figure-1"><img src="../../images/interproscan_output.png" alt="InterProScan TSV output. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Extract of an InterProScan TSV output</figcaption></figure>
+
+<p>Each line correspond to a motif found in one of the annotated proteins. The most intersting columns are:</p>
+
+<ul>
+  <li>Column 1: the protein identifier</li>
+  <li>Column 5: the identifier of the signature that was found in the protein sequence</li>
+  <li>Column 4: the databank where this signature comes from (InterProScan regroups several motifs databanks)</li>
+  <li>Column 6: the human readable description of the motif</li>
+  <li>Columns 7 and 8: the position where the motif was found</li>
+  <li>Column 9: a score for the match (if available)</li>
+  <li>Column 12 and 13: identifier of the signature integrated in InterPro (if available). Have a look an example webpage for <a href="https://www.ebi.ac.uk/interpro/entry/InterPro/IPR036859/">IPR036859</a> on InterPro.</li>
+  <li>The following columns contains various identifiers that were assigned to the protein based on the match with the signature (Gene ntology term, Reactome, …)</li>
+</ul>
+
+<p>The XML output file contains the same information in a computer-friendly format, we will use it in the next step.</p>
+
+<h1 id="submission-to-ncbi">Submission to NCBI</h1>
+
+<p>If you plan to submit the final genome sequence and annotation to NCBI, there are a few steps to follow.</p>
+
+<blockquote class="warning">
+  <h3 id="warning-please-do-not-submit-this-genome-to-ncbi"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Please do not submit this genome to NCBI!</h3>
+  <p>In this tutorial we will <strong>not</strong> perform a real submission, as we don’t want to duplicate the annotation in Genbank every time someone follows this tutorial!</p>
+
+  <p>But here’s a description of the main steps, and how Funannotate can help you in this process. NCBI provides a complete documentation for <a href="https://www.ncbi.nlm.nih.gov/genbank/genomesubmit/">genome and annotation submission</a>.</p>
+</blockquote>
+
+<ul>
+  <li>First, you should have created a BioProject and a BioSample <a href="https://submit.ncbi.nlm.nih.gov/subs/bioproject/">on the NCBI portal</a>, corresponding to your scientific project, and the sample(s) you have sequenced</li>
+  <li>The raw <span class="notranslate">reads</span> used for the assembly, and the <span class="notranslate">RNA</span>Seq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids</li>
+  <li>Ideally you should start submitting the assembly <em>before</em> performing the annotation. The reason is simple: NCBI performs some validation on the genome sequence before accepting it into GenBank. It means that you may be forced to make modifications to the genome sequence (e.g. remove contigs, split contigs where you have adapter contamination, etc). You will save time and trouble doing the annotation on a fully validated and frozen genome sequence.</li>
+  <li>You should get a <code class="language-plaintext highlighter-rouge">locus_tag</code> for your genome: it is the unique prefix that is used at the beginning of each gene name. By default, Funannotate uses <code class="language-plaintext highlighter-rouge">FUN_</code> (e.g. <code class="language-plaintext highlighter-rouge">FUN_000001</code>), but to submit to NCBI you need to have a prefix specific to your genome. NCBI should provide it to you when you create your BioProject.</li>
+  <li>You then need to prepare a file containing a few metadata. This can be done online on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):</li>
+</ul>
+
+<figure id="figure-2"><img src="../../images/ncbi_template.png" alt="NCBI submission template. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Example of a filled form to generate an NCBI submission template.</figcaption></figure>
+
+<p>When filled, you can click on the <strong>Create template</strong> button: you will be able to download a <code class="language-plaintext highlighter-rouge">.sbt</code> file that you should then upload to your <span class="notranslate">Galaxy</span> history.</p>
+
+<p>The next step will show you how Funannotate can use this <code class="language-plaintext highlighter-rouge">.sbt</code> file, and the <code class="language-plaintext highlighter-rouge">locus_tag</code>, to generate the needed file for the submission of the annotation to the NCBI. These files will need to be submitted on the <a href="https://submit.ncbi.nlm.nih.gov/subs/genome/">NCBI genome submission portal</a>.</p>
+
+<h1 id="integrating-structural-and-functional-annotation">Integrating structural and functional annotation</h1>
+
+<p>Now we have a structural annotation, and the results of both <strong>EggNOG Mapper</strong> and <strong>InterProScan</strong>. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural <em>and</em> the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2"><strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Input format”</em>: <code class="language-plaintext highlighter-rouge">GenBank (from 'Funannotate predict annotation' tool)</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome annotation in genbank format”</em>: <code class="language-plaintext highlighter-rouge">annotation (genbank)</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Funannotate database”</em>: select the latest version available</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“NCBI submission template file”</em>: <code class="language-plaintext highlighter-rouge">template.sbt</code> (the file downloaded from NCBI website, or leave empty if you didn’t generate it)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Eggnog-mapper annotations file”</em>: <code class="language-plaintext highlighter-rouge">annotations</code> (output of <strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“InterProScan5 XML file”</em>: <code class="language-plaintext highlighter-rouge">InterProScan XML</code> (output of <strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BUSCO models”</em>: <code class="language-plaintext highlighter-rouge">mucorales (orthodb 10)</code></li>
+        <li><em>“Strain name”</em>: <code class="language-plaintext highlighter-rouge">muc1</code></li>
+        <li><em>“locus_tag from NCBI to rename GFF gene models with”</em>: <code class="language-plaintext highlighter-rouge">MMUCEDO_</code> (we consider NCBI has assigned us this <code class="language-plaintext highlighter-rouge">locus_tag</code>)</li>
+        <li><em>“Which outputs should be generated”</em>: Select all</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This tool produces several output dataset, in particular:</p>
+
+<ul>
+  <li>The full structural and functional annotation in Genbank and GFF3 format</li>
+  <li>NCBI tbl and sqn (<code class="language-plaintext highlighter-rouge">NCBI Sequin genome</code>) formats: these files can be used for submission to NCBI</li>
+  <li>The CDS, transcript and protein sequences of all the genes predicted by Funannotate</li>
+  <li>Some statistics and reports</li>
+</ul>
+
+<p>If you display the GFF3 output, you will notice that the functional information, including gene names, is now stored in this file.</p>
+
+<h1 id="visualisation-with-a-genome-browser">Visualisation with a genome browser</h1>
+
+<p>With <span class="notranslate">Galaxy</span>, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an <span class="notranslate">RNA</span>Seq track, using the BAM file created with <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">genome</code> (output of <strong>Sort assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li>In <em>“Track Group”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Annotation</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span> Features</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: <code class="language-plaintext highlighter-rouge">gff3</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>Seq</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">BAM Pileups</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM Track Data”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> (output of <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                            <li><em>“Autogenerate SNP Track”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Click on the newly created dataset’s eye to display it. You will see a JBrowse genome browser. You can have a look at the <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">JBrowse tutorial</a> for a more in-depth description of JBrowse.</p>
+
+<p>Enable the annotation track, and the SNPs/Coverage tracks on the left side of JBrowse, then navigate along the genome. You will see the different gene models predicted by Funannotate.</p>
+
+<p>If you click on a gene, a popup will appear with detailed information on the selected gene: position and sequence, but also the functional information retrieved from the <strong>EggNOG mapper</strong> and <strong>InterProScan</strong> results.</p>
+
+<p>If you zoom to a specific gene, and look at the <span class="notranslate">RNA</span>Seq tracks, you will see light grey regions corresponding to portions of the genomes where <span class="notranslate">RNA</span>Seq were mapped, and darker grey regions corresponding to introns (= regions were some <span class="notranslate">reads</span> were found to match both the end of an exon, and the start of the next one). You can enable the other <span class="notranslate">RNA</span>Seq track to display each individual read that was mapped on the genome.</p>
+
+<p>If you navigate along the genome, you will find genes with very low <span class="notranslate">RNA</span>Seq coverage: this demonstrate how Funannotate is able to predict genes not only with <span class="notranslate">RNA</span>Seq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using <span class="notranslate">RNA</span>Seq data.</p>
+
+<h1 id="comparing-annotations">Comparing annotations</h1>
+
+<p>Earlier, we have seen how general statistics and BUSCO results can help to evaluate the quality of an annotation. But when annnotating a new genome, you might want to try different annotation methods and parameters. We will see now how to compare multiple annotations between them. As an example, we will compare the annotation we have generated, with an alte<span class="notranslate">rna</span>te one, that you have uploaded from Zenodo at the beginning of the tutorial. Comparison is only possible for annotations performed on the same genome sequence.</p>
+
+<h2 id="comparing-with-aegean-parseval">Comparing with <strong>AEGeAn ParsEval</strong></h2>
+
+<p>Let’s run <strong>AEGeAn ParsEval</strong> first: it compares two annotations in GFF3 format.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0"><strong>AEGeAn ParsEval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference GFF3 file”</em>: <code class="language-plaintext highlighter-rouge">gff3</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prediction GFF3 file”</em>: <code class="language-plaintext highlighter-rouge">alte<span class="notranslate">rna</span>te_annotation.gff3</code> (Input dataset)</li>
+        <li><em>“Select the output type”</em>: <code class="language-plaintext highlighter-rouge">HTML</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong>AEGeAn ParsEval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> compares gene loci spread all along the genome sequence, each locus containing gene(s) on the “reference” (=the annotation we have generated) and/or the “prediction” (=the alte<span class="notranslate">rna</span>te one) annotation.</p>
+
+<p>The output is a web page where you can see how many loci or genes are identical or different between the two annotations. By clicking on the <code class="language-plaintext highlighter-rouge">(+)</code> links, or on the scaffold names, you can see the results more in detail, even at the gene level.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-8"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li>Display the report</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">scaffold_11</code></li>
+    <li>Click on the first locus (between positions 637 and 7730)</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>What can you tell from the comparison at this gene locus?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>You should see something like this:</p>
+
+    <figure id="figure-3"><img src="../../images/aegean_scaffold_11_637-7730.png" alt="Scaffold 11 - 637..7730. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Comparison of the two annotations on Scaffold 11 - 637..7730</figcaption></figure>
+
+    <p>As you can see, at this position, the alte<span class="notranslate">rna</span>te annotation as found only one big gene, while the annotation you have generated has found 4 different genes, not all on the same strand.</p>
+
+    <p>This can be explained by the way the alte<span class="notranslate">rna</span>te annotation was performed: it was done by running Funannotate without any <span class="notranslate">RNA</span>Seq data, and choosing a wrong value (<code class="language-plaintext highlighter-rouge">insecta</code>) in the busco parameter. The annotation you have generated is probably the good one here.</p>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="comparing-with-funannotate-compare">Comparing with <strong>Funannotate compare</strong></h2>
+
+<p><strong>Funannotate compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is another tool to compare several annotations. It uses genbank files, as generated by <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-9"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2"><strong>Funannotate compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Genome annotations in genbank format”</em>: <code class="language-plaintext highlighter-rouge">alte<span class="notranslate">rna</span>te_annotation.gbk</code> (Input dataset) and <code class="language-plaintext highlighter-rouge">gbk</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Funannotate database”</em>: select the latest version available</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output is a web page with different tabs:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Stats</code>: general statistics on the two annotations.</li>
+  <li><code class="language-plaintext highlighter-rouge">Orthologs</code>: orthology relations between genes of the two annotations.</li>
+  <li><code class="language-plaintext highlighter-rouge">InterPro</code> and <code class="language-plaintext highlighter-rouge">PFAM</code>: count the number of times each InterPro/PFAM signature is identified in each annotation. You can download a PDF file at the top, showing an Non-metric multidimensional scaling (NMDS) analysis of this data.</li>
+  <li><code class="language-plaintext highlighter-rouge">Merops</code> and <code class="language-plaintext highlighter-rouge">CAZymes</code>: count the number of members of each Merops/CAZymes family in each annotation. You can download PDF files at the top, showing colorful representations of this data.</li>
+  <li><code class="language-plaintext highlighter-rouge">GO</code>: list Gene Ontology terms that were found to be over or under represented in each annotation.</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>What can you tell from this report?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The alte<span class="notranslate">rna</span>te annotation contains less genes than the one you generated, and misses a lot of functional annotations. It confirms that this alte<span class="notranslate">rna</span>te annotation have a lower quality than the one you performed.</p>
+  </blockquote>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Congratulations for reaching the end of this tutorial! Now you know how to perform a structural and functional annotation of a new eukaryotic genome, using Funannotate, EggNOG mapper and InterProScan. You also learned how Funannotate can help you in the submission process to NCBI. And you learned how to visualise your new annotation using JBrowse, and how to compare it with another annotation.</p>
+
+<p>An automatic annotation of an eukaryotic genome is unfortunately rarely perfect. If you inspect some predicted genes (or look at the <code class="language-plaintext highlighter-rouge">tbl2asn genome validation report</code> output of Funannotate), you may find some mistakes made by Funannotate, or potential problems, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using <a href="http://genomearchitect.org/">Apollo</a> can help a lot to manually fix these errors. Check out the <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">Apollo tutorial</a> for more details.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Funannotate allows to perform structural annotatation of a eukaryotic genome.</p>
+</li>
+                        
+                        <li><p>Functional annotation can be performed using EggNOG-mapper and InterProScan.</p>
+</li>
+                        
+                        <li><p>BUSCO and JBrowse allow to inspect the quality of an annotation.</p>
+</li>
+                        
+                        <li><p>Funannotate allows to format an annotation for sumission at NCBI.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="jonathan_m_palmer_2020_4054262">Palmer, J. M., and J. Stajich, 2020 <b>Funannotate v1.8.1: Eukaryotic genome annotation</b>. <a href="https://doi.org/10.5281/zenodo.4054262">10.5281/zenodo.4054262</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>NMDS</dt>
+                    <dd>Non-metric multidimensional scaling</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Genome annotation with Funannotate (Genome Annotation)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anthony Bretaudeau, Alexandre Cormier, Laura Leroi, Erwan Corre, Stéphanie Robin, 2021 <b>Genome annotation with Funannotate (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{genome-annotation-funannotate,
+author = "Anthony Bretaudeau and Alexandre Cormier and Laura Leroi and Erwan Corre and Stéphanie Robin",
+title = "Genome annotation with Funannotate (Galaxy Training Materials)",
+year = "2021",
+month = "11",
+day = "29"
+url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
