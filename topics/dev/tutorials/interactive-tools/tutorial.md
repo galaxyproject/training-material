@@ -121,7 +121,7 @@ architecture of GxITs requires a local instance or a development server to be bu
 test and run the tool.
 In addition, they are currently not supported by the Galaxy ToolShed and have to be installed
 manually. This means that distributed GxITs can be found in (https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive)[the Galaxy core codebase],
-and they can be manually enabled by the Galaxy administrators of each Galaxy server.
+and they can be manually enabled by the Galaxy server administrator.
 
 However, the build process itself is not too complex!
 We can break it down into just a few steps:
@@ -155,7 +155,7 @@ allows the user to upload `csv` and `tsv` files, manipulate them and download
 them back into Galaxy. Our application uses a R Shiny server.
 
 Note that there is no link between this interactive tool and the Galaxy history.
-This is a more complex task that could be adressed in another tutorial.
+This is a more complex task that could be addressed in another tutorial.
 
 Our example can already be found [online (TODO: change repo)](https://github.com/Lain-inrae/geoc-gxit).
 In the following sections, we will study how it was built.
@@ -396,7 +396,12 @@ and pushing images.
 >    > This requires you to
 >    > [make a pull request](https://biocontainers-edu.readthedocs.io/en/latest/contributing.html)
 >    > against the Biocontainers GitHub repository, so this should only be done when an
->    > image is considered production-ready.
+>    > image is considered production-ready. You can also push your image to a
+>    > repository on
+>    > [hub.docker.com](https://hub.docker.com) or
+>    > [quay.io](https://quay.io)
+>    > but please ensure that it links to a public code repository
+>    > (e.g. GitHub) to enable maintenance of the image by the Galaxy community!
 >    {: .tip}
 {: .hands_on}
 
@@ -509,7 +514,7 @@ our new Docker container as a Galaxy tool.
 >    > {% endraw  %}
 >    {: .solution}
 >
-> Don't forget to change the container path (see the `$REMOTE` variable above) and the citation to fit your project settings.
+> Don't forget to change the image path (see the `$REMOTE` variable above) and the citation to fit your project settings.
 {: .hands_on}
 
 ---
