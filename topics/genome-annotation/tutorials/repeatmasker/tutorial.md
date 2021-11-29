@@ -89,7 +89,7 @@ In this tutorial you will learn how to soft mask the genome sequence of a small 
 
 # Soft-masking using RepeatMasker
 
-Let's run RepeatMasker, by selected the input assembly in fasta format. We select the soft masking option, and we choose to use the DFam database.
+Let's run RepeatMasker, by selected the input assembly in fasta format. We select the soft masking option, and we choose to use the Dfam database.
 
 > ### {% icon comment %} Choosing the right species
 >
@@ -110,9 +110,9 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 RepeatMasker produces 4 output files:
 
 - `masked sequence`: this is the fasta file that you will use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regions that were identified as repeats.
-- `repeat statistics`: this one contains some statistics on the number of repeats found in each category, and the total number of base pairs masked
-- `output log`: this is a tabular file listing all repeats
-- `repeat catalogue`: this one contains the list of all repeat sequences that were identified, with their position, and their similarity with known repeats from the DFam database
+- `repeat statistics`: this one contains some statistics on the number of repeats found in each category, and the total number of base pairs masked.
+- `output log`: this is a tabular file listing all repeats.
+- `repeat catalogue`: this one contains the list of all repeat sequences that were identified, with their position, and their similarity with known repeats from the Dfam database.
 
 > ### {% icon question %} Question
 >
