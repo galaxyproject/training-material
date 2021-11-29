@@ -10,14 +10,14 @@ SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-main}")
-MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
 RUBY_VERSION=2.4.4
 CONDA_ENV=galaxy_training_material
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-	MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+	MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 endif
 
 CONDA=$(shell which conda)
@@ -70,8 +70,12 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 .PHONY: serve-quick
 
 serve-gitpod: bundle-install api/swagger.json  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+	bundle exec jekyll serve --config _config.yml --incremental
 .PHONY: serve-gitpod
+
+build-gitpod: bundle-install api/swagger.json  ## run a build on a gitpod.io environment
+	bundle exec jekyll build --config _config.yml
+.PHONY: build-gitpod
 
 build: clean api/swagger.json ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
