@@ -50,7 +50,7 @@ In this tutorial, we will assemble a genome of a species of fungi in the family 
 
 # Get data
 
-We will use long reads sequencing data: CLR (continus long reads) from PacBio sequencing of Mucor mucedo genome. This data is a subset of data from NCBI. We will also use later a reference genome assembly downloaded from the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html). This reference genome was assembled using the same PacBio data, we will use it as a comparison with our own assembly.
+We will use long reads sequencing data: CLR (continuous long reads) from PacBio sequencing of *Mucor mucedo* genome. This data is a subset of data from NCBI. We will also use later a reference genome assembly downloaded from the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html). This reference genome was assembled using the same PacBio data, we will use it as a comparison with our own assembly.
 
 ## Get data from Zenodo
 
