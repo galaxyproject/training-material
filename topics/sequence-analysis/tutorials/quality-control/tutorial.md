@@ -1085,7 +1085,7 @@ Depending if you chose “Reads” or “Bases” on the left the colour indicat
 {: .details}
 
 
-> ### {% icon comment %} Try it on!
+> ### {% icon comment %} Try it out!
 > Do the quality control with **FastQC** {% icon tool %} and/or **Nanoplot** {% icon tool %} on `nanopore_basecalled-guppy.fastq.gz` and compare the results!
 {: .comment}
 
