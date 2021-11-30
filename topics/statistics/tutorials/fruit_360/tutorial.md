@@ -266,7 +266,7 @@ its OHE representation.
 
 > ### {% icon hands_on %} Hands-on: One-Hot Encoding
 >
-> - {% tool [To categorical](https://usegalaxy.org/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
+> - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
 >    - *"Input file"* : Select the output of the previous step.
 >    - *"Does the dataset contain header?"* : Select `Yes`
 >    - *"Total number of classes"*: Select `10`
@@ -407,6 +407,7 @@ in the test dataset.
 > - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `test_y_10`
+>    - *"Does the dataset contain header:"*: `Yes`
 >    - *"Choose how to select data by column:"*: `Select columns by column header name(s)`
 >    	- *"Type header name(s):"*: `Label`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
