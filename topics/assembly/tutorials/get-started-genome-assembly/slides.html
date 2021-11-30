@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>An introduction to get started in genome assembly and annotation</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
+    <meta property="og:title" content="Galaxy Training: An introduction to get started in genome assembly and ann..." />
+    <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "An introduction to get started in genome assembly and annotation",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org//training-material/topics/assembly/"
+  },
+  "courseCode": "assembly / get-started-genome-assembly / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'An introduction to get started in genome assembly and annotation' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/assembly/tutorials/get-started-genome-assembly/slides.html",
+  "description": "The questions this  addresses are:\n - What are the guidelines before starting a Genome Assembly and Annotation project?\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org//training-material/topics/assembly/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/assembly" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/get-started-genome-assembly/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# An introduction to get started in genome assembly and annotation
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
+
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+
+</div>
+
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Nov 30, 2021</div>
+<div class="footnote" style="bottom: 2em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Or view the plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+    
+        
+        
+            
+        
+- [Sequence analysis](/training-material/topics/sequence-analysis)
+    - Quality Control: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What are the guidelines before starting a Genome Assembly and Annotation project?
+
+
+---
+
+
+
+
+# Steps before starting a genome project
+
+.left[
+- Step 1: Build a wide community for the project if possible
+
+- Step 2: Gather information about the target genome
+
+- Step 3: Select the best possible DNA source and extraction
+
+- Step 5: Choose an appropriate sequencing technology
+
+- Step 6: Check the computational resources and requirements
+]
+
+---
+
+### Build a wide community for the project (*if it's possible*)
+
+.left[
+The aim of a genome project is to **sequence the entire target genome** for a wide **range of genomics applications**.
+]
+
+.left[
+**Analyses**, **reanalyses** and **integration** of genomic and other phenotype information require:
+]
+
+- **Facilities:** Wet lab, sequencing, bioinformatics,…
+- **Personnel:** Skill intensive
+- **Software:** Knowledge intensive
+
+.left[
+&lt;i class=&quot;fas fa-exclamation-triangle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;warning&lt;/span&gt; Data storage, maintenance, transfer, and analysis costs will also likely remain substantial and represent an increasing proportion of overall sequencing costs in the future.
+]
+
+---
+
+### Genome information: Genome size
+
+.pull-left[
+**How to collect informations?** 
+
+- Flux cytometry
+- Databases: 
+  - Fungi: [http://www.zbi.ee/fungalgenomesize](http://www.zbi.ee/fungalgenomesize)
+  - Animals: [http://www.genomesize.com](http://www.genomesize.com)
+  - Plants: [http://data.kew.org/cvalues ](http://data.kew.org/cvalues)
+- Bibliography
+]
+
+.pull-right[
+.image-100[
+  ![variation in estimated genome sizes in base pairs](../../images/genomes-size.png)
+]]
+
+.footnote[https://commons.wikimedia.org/w/index.php?curid=19537795]
+
+
+---
+
+### Genome information: GC content
+
+.pull-left[
+**Why?**
+
+.left[
+Sequencing is not random!
+GC and AT rich regions are under-represented.
+]
+
+
+**How to solve?**
+- Chemistry quirks
+- Increase the sequencing depth
+- Technologies combination (both long and short reads)
+]
+
+.pull-right[
+.image-100[
+  ![Sequencing coverage by GC content](../../images/coverage-x-GC.png)
+]]
+
+.footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]
+
+---
+
+### Genome information: Ploidy level
+
+.pull-right[
+.image-55[
+  ![Heterozigous genotype](../../images/ploidy.png)
+]]
+
+.pull-left[
+
+**Ploidy (N):** 
+
+Number of sets of chromosomes in a cell 
+
+
+| Organism                  | Ploidy    |
+|:--------------------------|:---------:|
+| Bacteria                  | 1N        |
+| Human, mouse, rat         | 2N        |
+| Amphibians (*Xenopus*)    | 2N to 12N |
+| Plants (wheat)            | 6N        |
+| **Autopolyploid**         | .         |
+| **Hybrids**               | .         |
+
+]
+
+**Higher ploidy -&gt; harder to assemble =&gt; Increase of sequencing depth**
+
+.footnote[Daniel Hartl. Essential Genetics: A Genomics Perspective. Jones &amp; Bartlett Learning. p. 177. ISBN 978-0-7637-7364-9. (2011).]
+
+---
+
+### Genome information: Heterozygosity level
+
+.pull-left[
+.left[
+**Heterozygous:** Locus-specific,  diploid (2N) organism has two different alleles of a particular gene at the same locus
+]]
+
+.pull-right[
+.image-100[
+  ![Heterozigous genotype](../../images/heterozygous.jpg)
+]]
+
+.left[
+**Heterozygosity** is a metric used to denote the probability an individual will be heterozygous for a particular allele
+]
+
+**Higher heterozygosity -&gt; harder to assemble =&gt; Increase of sequencing depth**
+
+.footnote[https://www.genome.gov/genetics-glossary/heterozygous]
+
+---
+
+### Genome information: Heterozygosity level
+
+.image-125[
+  ![Concepts in phased assemblies](../../images/phased-assemblies.png)
+]
+
+.footnote[Heng Li’s blog: lh3.github.io/2021/04/17/concepts-in-phased-assemblies]
+
+---
+
+### Genome information: Complexity aka repeats elements
+
+.left[
+**It is impossible to resolve repeats of length L unless you have reads longer than L**
+]
+
+Most common source of assembly errors: 
+ 
+.pull-left[
+.image-65[
+  ![Collapsed consensus from repeat copies](../../images/collapsed-consensus.png)
+]]
+
+.pull-right[
+.image-65[
+  ![Collapsed, excision and rearrangement consensus](../../images/excision-rearrangement-consensus.png)
+]]
+
+---
+
+### Genome information: Others
+
+- **Karyotype:** chromosome number
+- **Sex chromosome system:** None, XY, ZW, UV,…
+- **Purity:** possible presence of contaminants and/or symbionts?
+- Is there any other **useful data (NCBI, SRA, ENA, etc)** that could improve my assembly?
+
+---
+
+### Genome information: Tips
+
+.pull-left[
+- **Flux cytometry** :  genome size and ploidy level
+- **k-mer frequency from Illumina reads** : genome size, ploidy level, GC content, heterozygosity and even repeats composition!
+]
+
+.pull-right[
+.image-20[
+  ![GenomeScope Profile](../../images/kmers-frequency.png)
+]]
+
+---
+
+### The best possible DNA
+
+.left[
+Select the best possible DNA source and extraction.
+The extraction of **high-quality DNA** is the **most important** aspect of a successful genome project
+
+The **lack of a good starting material** will limit the choice of sequencing technology and will **affect the quality of obtained data**
+]
+
+---
+
+### The best possible DNA: Chemical purity of DNA
+
+.left[
+**Sample-related contaminants:**
+- Polysaccharides
+- Proteoglycans
+- Proteins
+- Secondary metabolites
+- Polyphenols
+- Humic acids
+- Pigments
+- Etc,...
+
+All these contaminants **can impair the efficacy of library preparation** in any technology, especially true **for PCR-free libraries** (both PacBio and ONT)
+]
+
+---
+
+### The best possible DNA: Quantity of DNA
+
+.left[
+Different technologies require different amount of DNA:
+- Illumina and 10x &gt; 3 ng
+- BioNano &gt; 200 ng
+- ONT &gt; 1 μg
+- Dovetail (Hic) &gt; 5 μg
+- PacBio &gt; 15 μg
+]
+
+---
+
+### The best possible DNA: Structural integrity of DNA
+
+.left[
+High Molecular Weight (**HMW**) for Nanopore/PacBio (obtained mainly from fresh material)
+]
+
+---
+
+### The best possible DNA: Tips
+
+.left[
+- Many *DNA extraction protocol* available for a lot of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
+- **Keep DNA samples** from the same individual in case of library preparation/sequencing fail, need more coverage, new sequencing technology, etc
+- Use a **single individual** and sequence a **haploid, highly inbred diploid** organism, or **isogenic** individual
+]
+
+---
+
+### Appropriate sequencing technology
+
+.left[
+Mostly **dependant on the quantity and quality of DNA and the cost** but many parameters need to be considered prior to running an NGS experiment:
+
+- Short versus long reads or both
+- Read length
+- Read quality/error rate
+- Genome read coverage/depth
+- Library preparation
+- Downstream applications
+]
+
+---
+
+### Appropriate sequencing technology: Primary assembly
+
+.left[
+- **Illumina:** short reads (up to 2x250bp) with high quality reads. Sequencing bias with AT/GC rich regions
+- **IonTorrent:** short reads (up to 500bp) with medium quality reads
+- **Nanopore:** long reads (average ~15kbp) with low quality reads. Errors are not randomly distributed!
+- **PacBio:**
+  - CLR: long reads (average ~20kbp) with low quality reads
+  - HiFi: long reads (average ~15kbp) with high quality reads
+]
+
+---
+
+### Appropriate sequencing technology: Scaffolding
+
+.left[
+- **HiC:** single or double **restriction enzyme fragmentation.** Need huge amount of coverage.
+- **Omni-C: sequence-independent endonuclease**
+]
+
+---
+
+### Appropriate sequencing technology: Short vs long reads
+
+.pull-left[
+Depending on the sequencing technology reads length and sequencing depth are different.
+- More sequencing depth but shorter reads
+- Longer reads but less sequencing depth
+]
+
+.pull-rigth[
+.image-40[
+  ![Gigabase per run per read length](../../images/gigabase-read-length.png)
+]]
+
+.footnote[https://github.com/alexcorm/developments-in-next-generation-sequencing]
+
+---
+
+### Appropriate sequencing technology: Short vs long reads
+
+.pull-left[
+Reads accuracy differs depending on the sequencing technology:
+- Illumina and PacBio HiFi: more accurate
+- ONT and PacBio CLR: less accurate (but longer)
+]
+
+.pull-rigth[
+.image-40[
+  ![Reads accuracy distribution](../../images/reads-accuracy-distribution.png)
+]]
+
+---
+
+### Appropriate sequencing technology
+
+.image-100[
+  ![Several sequencing technologies](../../images/sequencing-technologies.png)
+]
+
+.footnote[Stark, R., Grzelak, M. &amp; Hadfield, J. RNA sequencing: the teenage years. Nat Rev Genetics 20, 631–656 (2019).]
+
+---
+
+### Appropriate sequencing technology: Coverage versus depth
+
+.left[
+**Coverage:** fraction of the genome sequenced at least by one read
+
+**Depth:** average number of reads that cover any given region
+
+Intuitively, more reads should increase coverage and depth.
+]
+
+.image-40[
+  ![Sequencing coverage by GC content](../../images/coverage-x-GC.png)
+]
+
+.footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]
+
+---
+
+### Computational resources and requirements
+
+.left[
+To succeed you need to have **sufficient compute resources (CPUS, RAM, walltime and storage)**. 
+- The resource are **different** between:
+  - Assembly
+  - Annotation
+  - Other analysis tools
+
+- For genome **assembly:**
+  - Running times and RAM increase with the **type** and **amount of data**
+  - More data for large genomes, increase **running time/RAM/Storage**
+  - Most of tools **running** on a **single node:** parallelized but not distributed
+
+- For genome **annotation:**
+  - Mapping/alignment of external data (RNA-seq, proteins) can be parallelized and distributed
+  - Annotation process can be parallelized and distributed
+]
+
+---
+
+### Typical sequencing strategies: Bacterial genomes
+
+.left[
+- PacBio CLR or Oxford Nanopore reads at 40-50x coverage, self-correction and/or hybrid correction (using Illumina data)
+- PacBio HiFi reads at 20-30x coverage
+- Illumina 2x250bp paired-end reads from MiSeq
+]
+
+---
+
+### Typical sequencing strategies: Larger genomes
+
+.left[
+- PacBio CLR or Oxford Nanopore reads at 100x coverage, hybrid correction using Illumina data and scaffolding using HiC or Omni-C
+- PacBio HiFi reads at 30x coverage and scaffolding using HiC or Omni-C
+- PacBio HiFi reads at 30x coverage, 120x Oxford Nanopore ultra long reads
+]
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
+
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
