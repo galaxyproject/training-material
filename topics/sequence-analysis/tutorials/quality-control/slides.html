@@ -178,9 +178,12 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ---
 
-## PacBio CLR *vs* HiFi
+## PacBio HiFi *vs* CLR
 
 ![Comparison between PacBio HiFi and CLR sequencing methods](../../images/quality-control/pacbio_hifi_vs_clr.png)
+
+- **HiFi (CCS)**: 99%+ accurate read achieve by multiple passes of the polymerase over a **single molecule**
+- **CLR**: 90% accurate read from **multiples molecules**
 
 ???
 
@@ -408,6 +411,8 @@ A quality control tool for long reads (Nanopore/PacBio)
 
 ![Header of a NanoPlot html report ](../../images/nanoplot_report.png)
 
+Qscores (Qx): it is the average per-base error probability, expressed on the log (Phred) scale
+
 ???
 
 - Analyses your fastq/bam files
@@ -430,7 +435,7 @@ A quality control tool for long reads (Nanopore/PacBio)
 
 ![Distribution for HiFi reads with a default filter >= Q20 ](../../images/LengthvsQualityScatterPlot_dot.png)
 
-Qscores: it is the average per-base error probability, expressed on the log (Phred) scale
+In case of PacBio HiFi, the minimum Qscore is fixed to 20 which explain the absence of any dot under this score.
 
 ???
 
@@ -453,6 +458,8 @@ Also, at least for PacBio HiFi, the pic should be centered near 15kb.
 ### Run yield by Length
 
 ![Yield for HiFi run ](../../images/Yield_By_Length.png)
+
+This plot shows the total number of bases read in the run, as a function of the length of the read that contained them. It decreases quickly for HiFi reads as there is a size selection of the DNA fragments.
 
 ???
 
