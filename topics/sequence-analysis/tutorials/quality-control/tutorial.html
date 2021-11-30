@@ -312,7 +312,7 @@
   "name": "Hands-on for 'Quality Control' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
   "timeRequired": "PT1H30M",
-  "description": "The questions this  addresses are:\n - How to perform quality control of NGS raw data (FASTQ)?\n - What are the quality parameters to check for a dataset?\n - How to improve the quality of a dataset?\n\n\\nThe objectives are:\n - Assess FASTQ quality using FASTQE 🧬😎 and FastQC\n - Perform quality correction with Cutadapt\n - Summarise quality metrics MultiQC\n - Process single-end and paired-end data\n\n",
+  "description": "The questions this  addresses are:\n - How to perform quality control of NGS raw data?\n - What are the quality parameters to check for a dataset?\n - How to improve the quality of a dataset?\n\n\\nThe objectives are:\n - Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC\n - Assess long reads FASTQ quality using Nanoplot and PycoQC\n - Perform quality correction with Cutadapt (short reads)\n - Summarise quality metrics MultiQC\n - Process single-end and paired-end data\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -343,6 +343,26 @@
     {
       "@type": "Person",
       "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
     }
   ],
   "contributor": [
@@ -353,6 +373,26 @@
     {
       "@type": "Person",
       "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Alexandre Cormier"
+    },
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Laura Leroi"
+    },
+    {
+      "@type": "Person",
+      "name": "Erwan Corre"
+    },
+    {
+      "@type": "Person",
+      "name": "Stéphanie Robin"
     }
   ],
   "about": [
@@ -379,6 +419,21 @@
 <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-mblue9"><img src="https://avatars.githubusercontent.com/mblue9?s=27" alt="Avatar">Maria Doyle</a>
 
 
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
+
 <a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
 
 </div>
@@ -392,7 +447,7 @@
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
-        <li><p>How to perform quality control of NGS raw data (FASTQ)?</p>
+        <li><p>How to perform quality control of NGS raw data?</p>
 </li>
         
         <li><p>What are the quality parameters to check for a dataset?</p>
@@ -406,10 +461,13 @@
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>Assess FASTQ quality using FASTQE 🧬😎 and FastQC</p>
+        <li><p>Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC</p>
 </li>
         
-        <li><p>Perform quality correction with Cutadapt</p>
+        <li><p>Assess long reads FASTQ quality using Nanoplot and PycoQC</p>
+</li>
+        
+        <li><p>Perform quality correction with Cutadapt (short reads)</p>
 </li>
         
         <li><p>Summarise quality metrics MultiQC</p>
@@ -670,13 +728,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="http://galaxy.migale.inra.fr/" title="Migale">
             Migale
         </a>
-        
-    
         
     
         
@@ -749,7 +803,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 28, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 30, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -769,7 +823,7 @@
 
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>During sequencing, the nucleotide bases in a <span class="notranslate">DNA</span> or <span class="notranslate">RNA</span> sample (library) are determined by the sequencer. For each fragment in the library, a short sequence is generated, also called a <strong>read</strong>, which is simply a succession of nucleotides.</p>
+<p>During sequencing, the nucleotide bases in a <span class="notranslate">DNA</span> or <span class="notranslate">RNA</span> sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a <strong>read</strong>, which is simply a succession of nucleotides.</p>
 
 <p>Modern sequencing technologies can generate a massive number of sequence <span class="notranslate">reads</span> in a single experiment. However, no sequencing technology is perfect, and each instrument will generate different types and amount of errors, such as incorrect nucleotides being called. These wrongly called bases are due to the technical limitations of each sequencing platform.</p>
 
@@ -783,8 +837,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 <ol id="markdown-toc">
   <li><a href="#inspect-a-raw-sequence-file" id="markdown-toc-inspect-a-raw-sequence-file">Inspect a raw sequence file</a></li>
-  <li><a href="#assess-quality-with-fastqe-" id="markdown-toc-assess-quality-with-fastqe-">Assess quality with FASTQE 🧬😎</a></li>
-  <li><a href="#assess-quality-with-fastqc" id="markdown-toc-assess-quality-with-fastqc">Assess quality with FastQC</a>    <ol>
+  <li><a href="#assess-quality-with-fastqe----short-reads-only" id="markdown-toc-assess-quality-with-fastqe----short-reads-only">Assess quality with FASTQE 🧬😎 - short <span class="notranslate">reads</span> only</a></li>
+  <li><a href="#assess-quality-with-fastqc---short--long-reads" id="markdown-toc-assess-quality-with-fastqc---short--long-reads">Assess quality with FastQC - short &amp; long <span class="notranslate">reads</span></a>    <ol>
       <li><a href="#per-base-sequence-quality" id="markdown-toc-per-base-sequence-quality">Per base sequence quality</a></li>
       <li><a href="#per-sequence-quality-scores" id="markdown-toc-per-sequence-quality-scores">Per sequence quality scores</a></li>
       <li><a href="#per-base-sequence-content" id="markdown-toc-per-base-sequence-content">Per base sequence content</a></li>
@@ -793,9 +847,21 @@ Sequence quality control is therefore an essential first step in your analysis. 
       <li><a href="#over-represented-sequences" id="markdown-toc-over-represented-sequences">Over-represented sequences</a></li>
     </ol>
   </li>
-  <li><a href="#trim-and-filter" id="markdown-toc-trim-and-filter">Trim and filter</a></li>
+  <li><a href="#trim-and-filter---short-reads" id="markdown-toc-trim-and-filter---short-reads">Trim and filter - short <span class="notranslate">reads</span></a></li>
   <li><a href="#processing-multiple-datasets" id="markdown-toc-processing-multiple-datasets">Processing multiple datasets</a>    <ol>
       <li><a href="#process-paired-end-data" id="markdown-toc-process-paired-end-data">Process paired-end data</a></li>
+    </ol>
+  </li>
+  <li><a href="#assess-quality-with-nanoplot---long-reads-only" id="markdown-toc-assess-quality-with-nanoplot---long-reads-only">Assess quality with Nanoplot - Long <span class="notranslate">reads</span> only</a>    <ol>
+      <li><a href="#histogram-of-read-lengths" id="markdown-toc-histogram-of-read-lengths">Histogram of read lengths</a></li>
+      <li><a href="#read-lengths-vs-average-read-quality-plot-using-dots" id="markdown-toc-read-lengths-vs-average-read-quality-plot-using-dots">Read lengths vs Average read quality plot using dots</a></li>
+    </ol>
+  </li>
+  <li><a href="#assess-quality-with-pycoqc---nanopore-only" id="markdown-toc-assess-quality-with-pycoqc---nanopore-only">Assess quality with PycoQC - Nanopore only</a>    <ol>
+      <li><a href="#basecalled-reads-length" id="markdown-toc-basecalled-reads-length">Basecalled <span class="notranslate">reads</span> length</a></li>
+      <li><a href="#basecalled-reads-length-vs-reads-phred-quality" id="markdown-toc-basecalled-reads-length-vs-reads-phred-quality">Basecalled <span class="notranslate">reads</span> length vs <span class="notranslate">reads</span> PHRED quality</a></li>
+      <li><a href="#output-over-experiment-time" id="markdown-toc-output-over-experiment-time">Output over experiment time</a></li>
+      <li><a href="#channel-activity-over-time" id="markdown-toc-channel-activity-over-time">Channel activity over time</a></li>
     </ol>
   </li>
 </ol>
@@ -890,7 +956,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <p>The quality score for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-identification of each base. The score is encoded using the ASCII character table (with <a href="https://en.wikipedia.org/wiki/FASTQ_format#Encoding">some historical differences</a>):</p>
 
-<p><img src="../../../sequence-analysis/images/quality_score_encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina. " loading="lazy" /></p>
+<p><img src="../../../sequence-analysis/images/fastq-quality-encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina. " loading="lazy" /></p>
 
 <p>So there is an ASCII character associated with each nucleotide, representing its <a href="https://en.wikipedia.org/wiki/Phred_quality_score">Phred quality score</a>, the probability of an incorrect base call:</p>
 
@@ -963,7 +1029,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <p>When looking at the file in <span class="notranslate">Galaxy</span>, it looks like most the nucleotides have a high score (<code class="language-plaintext highlighter-rouge">G</code> corresponding to a score 38). Is it true for all sequences? And along the full sequence length?</p>
 
-<h1 id="assess-quality-with-fastqe-">Assess quality with FASTQE 🧬😎</h1>
+<h1 id="assess-quality-with-fastqe----short-reads-only">Assess quality with FASTQE 🧬😎 - short <span class="notranslate">reads</span> only</h1>
 
 <p>To take a look at sequence quality along all sequences, we can use <a href="https://fastqe.com/">FASTQE</a>. It is an open-source tool that provides a simple and fun way to quality control raw sequence data and print them as emoji. You can use it to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.</p>
 
@@ -1111,7 +1177,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
   </blockquote>
 </blockquote>
 
-<h1 id="assess-quality-with-fastqc">Assess quality with FastQC</h1>
+<h1 id="assess-quality-with-fastqc---short--long-reads">Assess quality with FastQC - short &amp; long <span class="notranslate">reads</span></h1>
 
 <p>An additional or alte<span class="notranslate">rna</span>tive way we can check sequence quality is with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>. It provides a modular set of analyses which you can use to check whether your data has any problems of which you should be aware before doing any further analysis.  We can use it, for example, to assess whether there are known adapters present in the data. We’ll run it on the FASTQ file.</p>
 
@@ -1277,7 +1343,7 @@ for the type of data you’re working with, as discussed below and <a href="http
 The other plots give us information to more deeply understand the quality of the data, and to see if changes could be made in the lab to get higher-quality data in the future.
 These sections are <strong>optional</strong>, and if you would like to skip these you can:</p>
   <ul>
-    <li>Jump straight to the <a href="#trim-and-filter">next section</a> to learn about trimming paired-end data</li>
+    <li>Jump straight to the <a href="#trim-and-filter---short-reads">next section</a> to learn about trimming paired-end data</li>
   </ul>
 </blockquote>
 
@@ -1520,7 +1586,7 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
   <p>You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding <span class="notranslate">reads</span> then will be filtered out and you lose them.</p>
 </blockquote>
 
-<h1 id="trim-and-filter">Trim and filter</h1>
+<h1 id="trim-and-filter---short-reads">Trim and filter - short <span class="notranslate">reads</span></h1>
 
 <p>The quality drops in the middle of these sequences. This could cause bias in <span class="notranslate">downstream</span> analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in <span class="notranslate">downstream</span> analysis. Trimming can help to increase the number of <span class="notranslate">reads</span> the aligner or assembler are able to succesfully use, reducing the number of <span class="notranslate">reads</span> that are unmapped or unassembled. In general, quality treatments include:</p>
 
@@ -1972,13 +2038,273 @@ https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
   </blockquote>
 </blockquote>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<h1 id="assess-quality-with-nanoplot---long-reads-only">Assess quality with Nanoplot - Long <span class="notranslate">reads</span> only</h1>
 
-<p>In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information. This step is the usual first step for analyses such as <span class="notranslate">RNA</span>-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:</p>
+<p>In case of long <span class="notranslate">reads</span>, we can check sequence quality with <a href="https://github.com/wdecoster/NanoPlot/">Nanoplot</a> (<span class="citation"><a href="#10.1093/bioinformatics/bty149">De Coster <i>et al.</i> 2018</a></span>). It provides basic statistics with nice plots for a fast quality control overview.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-check-of-long-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality check of long <span class="notranslate">reads</span></h3>
+  <ol>
+    <li>
+      <p>Create a new history for this part and give it a proper name</p>
+    </li>
+    <li>
+      <p>Import the PacBio HiFi <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">m64011_190830_220126.Q20.subsample.fastq.gz</code> from <a href="https://zenodo.org/record/5730295">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/m64011_190830_220126.Q20.subsample.fastq.gz
+</code></pre></div>      </div>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1"><strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“files”</em>: <code class="language-plaintext highlighter-rouge">m64011_190830_220126.Q20.subsample.fastq.gz</code></li>
+        <li><em>“Options for customizing the plots created”</em>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify the bivariate format of the plots.”</em>: <code class="language-plaintext highlighter-rouge">dot</code>, <code class="language-plaintext highlighter-rouge">kde</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Show the N50 mark in the read length histogram.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the generated HTML file</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-14"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What is the mean Qscore ?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The Qscore is around Q32.
+In case of PacBio CLR and Nanopore, it’s around Q12 and close to Q31 for Illumina (NovaSeq 6000).</p>
+    <figure id="figure-16"><img src="../../images/quality-control/qscore-illumina-pacbio-nanopore.png" alt="Plot of Qscore between Illumina, PacBio and Nanopore. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Comparison of Qscore between Illumina, PacBio and Nanopore</figcaption></figure>
+
+    <p>Definition: Qscores is the average per-base error probability, expressed on the log (Phred) scale</p>
+  </blockquote>
+
+  <p>What is the median, mean and N50?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The median, the mean read length and the N50 as well are close to 18,000bp.
+For PacBio HiFi <span class="notranslate">reads</span>, the majority of the <span class="notranslate">reads</span> are generally near this value as the library preparation includes a size selection step.
+For other technologies like PacBio CLR and Nanopore, it is larger and mostly depends on the quality of your <span class="notranslate">DNA</span> extraction.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="histogram-of-read-lengths">Histogram of read lengths</h2>
+
+<p>This plot shows the distribution of fragment sizes in the file that was analyzed.
+Unlike most of Illumina runs, long <span class="notranslate">reads</span> have a variable length and this will show the relative amounts of each different size of sequence fragment.
+In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.</p>
+
+<figure id="figure-17"><img src="../../images/quality-control/HistogramReadlength.png" alt="Histogram of read lengths. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Histogram of read length</figcaption></figure>
+
+<h2 id="read-lengths-vs-average-read-quality-plot-using-dots">Read lengths vs Average read quality plot using dots</h2>
+
+<p>This plot shows the distribution of fragment sizes according to the Qscore in the file which was analysed.
+In general, there is no link between read length and read quality but this representation allows to visualize both information into a single plot and detect possible aberrations.
+In runs with a lot of short <span class="notranslate">reads</span> the shorter <span class="notranslate">reads</span> are sometimes of lower quality than the rest.</p>
+
+<figure id="figure-18"><img src="../../images/quality-control/LengthvsQualityScatterPlot_dot.png" alt="Read lengths vs Average read quality plot using dots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Histogram of read length</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-15"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <p>Looking at “Read lengths vs Average read quality plot using dots plot”. Did you notice something unusual with the Qscore? Can you explain it?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-16"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>There is no <span class="notranslate">reads</span> under Q20.
+The qualification for HiFi <span class="notranslate">reads</span> is:</p>
+    <ul>
+      <li>A minimal number of 3 sub<span class="notranslate">reads</span></li>
+      <li>A read Qscore &gt;=20</li>
+    </ul>
+    <figure id="figure-19"><img src="../../images/quality-control/pacbio-css-hifi-sequencing.png" alt="PacBio HiFi sequencing. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> PacBio HiFi sequencing</figcaption></figure>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-try-it-on"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Try it on!</h3>
+  <p>Do the quality control with <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on <code class="language-plaintext highlighter-rouge">m64011_190830_220126.Q20.subsample.fastq.gz</code> and compare the results!</p>
+</blockquote>
+
+<h1 id="assess-quality-with-pycoqc---nanopore-only">Assess quality with PycoQC - Nanopore only</h1>
+
+<p><a href="https://github.com/tleonardi/pycoQC">PycoQC</a> (<span class="citation"><a href="#Leger2019">Leger and Leonardi 2019</a></span>) is a data visualisation and quality control tool for nanopore data. In contrast to FastQC/Nanoplot it needs a specific sequencing_summary.txt file generated by Oxford nanopore basecallers such as Guppy or the older albacore basecaller.</p>
+
+<p>One of the strengths of PycoQC is that it is interactive and highly customizable, e.g., plots can be cropped, you can zoom in and out, sub-select areas and export figures.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-check-of-nanopore-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality check of Nanopore <span class="notranslate">reads</span></h3>
+  <ol>
+    <li>
+      <p>Create a new history for this part and give it a proper name</p>
+    </li>
+    <li>
+      <p>Import the nanopore <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">nanopore_basecalled-guppy.fastq.gz</code> and <code class="language-plaintext highlighter-rouge">sequencing_summary.txt</code> from <a href="https://zenodo.org/record/5730295">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/nanopore_basecalled-guppy.fastq.gz
+https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/sequencing_summary.txt
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0"><strong>PycoQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters</p>
+
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“A sequencing_summary file “</em>: <code class="language-plaintext highlighter-rouge">sequencing_summary.txt</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the webpage output from PycoQC</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-16"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How many <span class="notranslate">reads</span> do you have in total?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-17"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>~270k <span class="notranslate">reads</span> in total (see the Basecall summary table, “All <span class="notranslate">reads</span>”)
+For most of basecalling profiles, Guppy will assign <span class="notranslate">reads</span> as “Pass” if the read Qscore is at least equal to 7.</p>
+  </blockquote>
+
+  <p>What is the median, minimum and maximum read length, what is the N50?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-18"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The median read length and the N50 can be found for all as well as for all passed <span class="notranslate">reads</span>, i.e., <span class="notranslate">reads</span> that passed Guppy quality settings (Qscore &gt;= 7), in the basecall summary table.
+For the minimum (195bp) and maximum (256kbp) read lengths, it can be found with the read lengths plot.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="basecalled-reads-length">Basecalled <span class="notranslate">reads</span> length</h2>
+
+<p>As for FastQC and Nanoplot, this plot shows the distribution of fragment sizes in the file that was analyzed.
+As for PacBio CLR/HiFi, long <span class="notranslate">reads</span> have a variable length and this will show the relative amounts of each different size of sequence fragment.
+In this example, the distribution of read length is quite dispersed with a minimum read length for the passed <span class="notranslate">reads</span> around 200bp and a maximum length ~150,000bp.</p>
+
+<figure id="figure-20"><img src="../../images/quality-control/basecalled_reads_length-pycoqc.png" alt="Basecalled reads length. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Basecalled <span class="notranslate">reads</span> length</figcaption></figure>
+
+<h3 id="basecalled-reads-phred-quality">Basecalled <span class="notranslate">reads</span> PHRED quality</h3>
+
+<p>This plot shows the distribution of the Qscores (Q) for each read. This score aims to give a global quality score for each read.
+The exact definition of Qscores is: the average per-base error probability, expressed on the log (Phred) scale.
+In case of Nanopore data, the distribution is generally centered around 10 or 12.
+For old runs, the distribution can be lower, as basecalling models are less precise than recent models.</p>
+
+<figure id="figure-21"><img src="../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png" alt="Basecalled reads PHRED quality. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Basecalled <span class="notranslate">reads</span> PHRED quality</figcaption></figure>
+
+<h2 id="basecalled-reads-length-vs-reads-phred-quality">Basecalled <span class="notranslate">reads</span> length vs <span class="notranslate">reads</span> PHRED quality</h2>
+
+<blockquote class="question">
+  <h3 id="question-questions-17"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <p>What do the mean quality and the quality distribution of the run look like?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-19"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The majority of the <span class="notranslate">reads</span> have a Qscore between 8 and 11 which is standard for Nanopore data.
+Beware that for the same data, the basecaller used (Albacor, Guppy, Bonito), the model (fast, hac, sup) and the tool version can give different results.</p>
+  </blockquote>
+</blockquote>
+
+<p>As for NanoPlot, this representation give a 2D visualisation of read Qscore according to the length.</p>
+
+<figure id="figure-22"><img src="../../images/quality-control/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" alt="Basecalled reads length vs reads PHRED quality. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Basecalled <span class="notranslate">reads</span> length vs <span class="notranslate">reads</span> PHRED quality</figcaption></figure>
+
+<h2 id="output-over-experiment-time">Output over experiment time</h2>
+
+<p>This representation gives information about sequenced <span class="notranslate">reads</span> over the time for a single run:</p>
 
 <ul>
-  <li>Quality assessment with tools like <strong>FASTQE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-  <li>Trimming and filtering with a tool like <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+  <li>Each pic indicates a new loading of the flow cell (3 + the first load).</li>
+  <li>The contribution in total <span class="notranslate">reads</span> for each “refuel”.</li>
+  <li>The production of <span class="notranslate">reads</span> is decreasing over time:
+    <ul>
+      <li>Most of the material (<span class="notranslate">DNA</span>/<span class="notranslate">RNA</span>) is sequenced</li>
+      <li>Saturation of pores</li>
+      <li>Material/pores degradation</li>
+      <li>…</li>
+    </ul>
+  </li>
+</ul>
+
+<p>In this example, the contribution of each refueling is very low, and it can be considered as a bad run.
+The “Cummulative” plot area (light blue) indicates that 50% of all <span class="notranslate">reads</span> and almost 50% of all bases were produced in the first 5h of the 25h experiment.
+Although it is normal that yield decreases over time a decrease like this is not a good sign.</p>
+
+<figure id="figure-23"><img src="../../images/quality-control/output_over_experiment_time-pycoqc.png" alt="Output over experiment time. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Output over experiment time</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-other-output-over-experiment-time-profile"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other “Output over experiment time” profile</h3>
+
+  <p>In this example, the data production over the time only slightly decreased over the 12h with a continuous increasing of cumulative data.
+This absence of a decreasing curve at the end of the run indicate that there is still biological material on the flow cell. The run was ended before all was sequenced.
+It’s an excellent run, even can be considered as exceptional.</p>
+
+  <p><img src="../../images/quality-control/output_over_experiment_time-pycoqc-good.png" alt="Output over experiment time good profile. " loading="lazy" /></p>
+
+</blockquote>
+
+<h3 id="read-length-over-experiment-time">Read length over experiment time</h3>
+
+<blockquote class="question">
+  <h3 id="question-questions-18"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <p>Did the read length change over time? What could the reason be?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-20"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>In the current example the read length increases over the time of the sequencing run.
+One explanation is that the adapter density is higher for lots of short fragments and therefore the chance of a shorter fragment to attach to a pore is higher. Also, shorter molecules may move faster over the chip.
+Over time, however, the shorter fragments are becoming rarer and thus more long fragments attach to pores and are sequenced.</p>
+  </blockquote>
+</blockquote>
+
+<p>The read length over experiment time should be stable.
+It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.</p>
+
+<figure id="figure-24"><img src="../../images/quality-control/read_length_over_experiment_time-pycoqc.png" alt="Read length over experiment time. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Read length over experiment time</figcaption></figure>
+
+<h2 id="channel-activity-over-time">Channel activity over time</h2>
+
+<p>It gives an overview of available pores, pore usage during the experiment, inactive pores and shows if the loading of the flow cell is good (almost all pores are used).
+In this case, the vast majority of channels/pores are inactive (white) throughout the sequencing run, so the run can be considered as bad.</p>
+
+<p>You would hope for a plot that it is dark near the X-axis, and with higher Y-values (increasing time) doesn’t get too light/white.
+Depending if you chose “<span class="notranslate">Reads</span>” or “Bases” on the left the colour indicates either number of bases or <span class="notranslate">reads</span> per time interval</p>
+
+<figure id="figure-25"><img src="../../images/quality-control/channel_activity_over_time-pycoqc.png" alt="Channel activity over time. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Channel activity over time</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-other-channel-activity-over-time-profile"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other “Channel activity over time” profile</h3>
+
+  <p>In this example, almost all pores are active all along the run (yellow/red profile) which indicate an excellent run.</p>
+
+  <p><img src="../../images/quality-control/channel_activity_over_time-pycoqc-good.png" alt="Channel activity over time good profile. " loading="lazy" /></p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-try-it-out"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Try it out!</h3>
+  <p>Do the quality control with <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and/or <strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on <code class="language-plaintext highlighter-rouge">nanopore_basecalled-guppy.fastq.gz</code> and compare the results!</p>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information.
+This step is the usual first step for analyses such as <span class="notranslate">RNA</span>-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data.
+Quality control steps are similar for any type of sequencing data:</p>
+
+<ul>
+  <li>Quality assessment with tools like:
+    <ul>
+      <li><em>Short <span class="notranslate">Reads</span></em>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2"><strong>FASTQE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+<span class="notranslate">galaxy</span>2</span></span></li>
+      <li><em>Short+Long</em>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FASTQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+<span class="notranslate">galaxy</span>0</span></span></li>
+      <li><em>Long <span class="notranslate">Reads</span></em>:  <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1"><strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+<span class="notranslate">galaxy</span>1</span></span></li>
+      <li><em>Nanopore only</em>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0"><strong>PycoQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+<span class="notranslate">galaxy</span>0</span></span></li>
+    </ul>
+  </li>
+  <li>Trimming and filtering for <strong>short <span class="notranslate">reads</span></strong> with a tool like <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
 </ul>
 
 
@@ -2020,6 +2346,8 @@ https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12. <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a></li>
 <li id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048. <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a></li>
+<li id="10.1093/bioinformatics/bty149">De Coster, W., S. D’Hert, D. T. Schultz, M. Cruts, and C. Van Broeckhoven, 2018 <b>NanoPack: visualizing and processing long-read sequencing data</b>. Bioinformatics 34: 2666–2669. <a href="https://doi.org/10.1093/bioinformatics/bty149">10.1093/bioinformatics/bty149</a></li>
+<li id="Leger2019">Leger, A., and T. Leonardi, 2019 <b>pycoQC, interactive quality control for Oxford Nanopore Sequencing </b>. Journal of Open Source Software 4: 1236. <a href="https://doi.org/10.21105/joss.01236">10.21105/joss.01236</a></li>
 <li id="StJacques2021">Jacques, R. M. S., W. M. Maza, S. D. Robertson, A. Lonsdale, C. S. Murray <i>et al.</i>, 2021 <b>A Fun Introductory Command Line Lesson: Next Generation Sequencing Quality Analysis with Emoji!</b> CourseSource 8: <a href="https://doi.org/10.24918/cs.2021.17">10.24918/cs.2021.17</a></li></ol>
                 
 
@@ -2063,7 +2391,7 @@ https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Bérénice Batut, Maria Doyle, 2021 <b>Quality Control (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Bérénice Batut, Maria Doyle, Alexandre Cormier, Anthony Bretaudeau, Laura Leroi, Erwan Corre, Stéphanie Robin, 2021 <b>Quality Control (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -2078,11 +2406,11 @@ https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{sequence-analysis-quality-control,
-author = "Bérénice Batut and Maria Doyle",
+author = "Bérénice Batut and Maria Doyle and Alexandre Cormier and Anthony Bretaudeau and Laura Leroi and Erwan Corre and Stéphanie Robin",
 title = "Quality Control (Galaxy Training Materials)",
 year = "2021",
-month = "10",
-day = "28"
+month = "11",
+day = "30"
 url = "\url{https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

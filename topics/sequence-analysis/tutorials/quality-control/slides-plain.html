@@ -221,6 +221,21 @@
 		
 <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
 
+ 
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+ 
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+ 
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+ 
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+ 
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
 
 
 		
@@ -246,13 +261,13 @@
 		<li><p>Manipulate FASTQ files</p>
 </li>
 		
-		<li><p>Control quality from a FASTQ file</p>
+		<li><p>Control quality from a FASTQ file for short and long reads</p>
 </li>
 		
-		<li><p>Use FastQC tool</p>
+		<li><p>Use FastQC/NanoPlot/PycoQC</p>
 </li>
 		
-		<li><p>Understand FastQC output</p>
+		<li><p>Understand output</p>
 </li>
 		
 		<li><p>Use tools for quality correction</p>
@@ -263,7 +278,7 @@
 
 		
 
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 30, 2021 </div>
 
 	<hr />
 
@@ -283,6 +298,7 @@
 
 <ul>
   <li>Process of removing low quality sequences that might corrupt downstream analyses</li>
+  <li>Some assemblers like Spades have an auto-correction process and ask for raw data</li>
 </ul>
 
 <hr />
@@ -450,7 +466,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="quality-score-encoding">Quality score encoding</h3>
 
-<p><img src="../../../sequence-analysis/images/quality_score_encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina. " loading="lazy" /></p>
+<p><img src="../../../sequence-analysis/images/fastq-quality-encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina. " loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -464,11 +480,35 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <hr />
 
+<h2 id="pacbio-hifi-vs-clr">PacBio HiFi <em>vs</em> CLR</h2>
+
+<p><img src="../../images/quality-control/pacbio_hifi_vs_clr.png" alt="Comparison between PacBio HiFi and CLR sequencing methods. " loading="lazy" /></p>
+
+<ul>
+  <li><strong>HiFi (CCS)</strong>: 99%+ accurate read achieved by multiple passes of the polymerase over a <strong>single molecule</strong></li>
+  <li><strong>CLR</strong>: 90% accurate read from <strong>multiples molecules</strong></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>HiFi read is the result of a consensus of subreads from the same molecule (i.e. multiple pass over the same molecule). It’s imply to have shorter sequences to allow multiple pass on a single molecule by the polymerase.</li>
+  <li>CLR read come from a single pass from a single molecule. It’s allow to have longer reads but with a lower read quality. Warning: Absence of encoded quality since Sequel I into fastq files with CLR.</li>
+</ul>
+
+<hr />
+
 <h2 id="identifying-potential-quality-issues">Identifying Potential Quality Issues</h2>
 
 <hr />
 
-<h3 id="fastqc">FastQC</h3>
+<h2 id="fastqc">FastQC</h2>
+
+<p>A versatile tool for short and long reads quality control</p>
+
+<hr />
+
+<h3 id="fastqc-1">FastQC</h3>
 
 <p><img src="../../../sequence-analysis/images/fastqc-report.png" alt="Screenshot of FastQC report, showing the table of contents with green checks on nearly every result, and the base statistics and per-base sequence quality graphs shown." loading="lazy" /></p>
 
@@ -515,17 +555,55 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <hr />
 
-<h3 id="per-base-quality-1">Per-base Quality</h3>
+<h3 id="per-base-quality---nanopore">Per-base Quality - Nanopore</h3>
 
-<p><img src="../../images/per_base_sequence_quality_medium.png" alt="A graph in between the previous two, mostly green, but gts to yellow  by base 30 and red by base 33." loading="lazy" /></p>
+<p><img src="../../images/per_base_sequence_quality_nanopore.png" alt="A graph for Nanopore reads (R9.4) basecalled with guppy. Almost all bases are in the red region below 20." loading="lazy" /></p>
 
-<p><i class="fa fa-thumbs-up"></i> <i class="fa fa-thumbs-down"></i> Intermediate quality score</p>
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good quality score</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Nanopore reads have an higher error rate, around 5% while it’s ~0.5% for Illumina</li>
+  <li>Q10 -&gt; Q14 with recent versions of Guppy</li>
+  <li>Q20+ with new sequencing kit by the end of 2021 (new chemistry)</li>
+</ul>
+
+<hr />
+
+<h3 id="per-base-quality---pacbio-hifi">Per-base Quality - PacBio HiFi</h3>
+
+<p><img src="../../images/per_base_sequence_quality_pacbio_hifi_good.png" alt="A graph for PacBio HiFi reads. All reads are in the green region and quality score are encoded up to 92." loading="lazy" /></p>
+
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good quality score</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>
+    <h2 id="pacbio-encodes-quality-with-a-higher-range-than-illumina-to-increase-precision-in-base-quality-assessment">PacBio encodes quality with a higher range than Illumina to increase precision in base quality assessment</h2>
+  </li>
+</ul>
+
+<h3 id="per-base-quality---pacbio-clr">Per-base Quality - PacBio CLR</h3>
+
+<p><img src="../../images/per_base_sequence_quality_pacbio_clr.png" alt="A graph for PacBio CLR reads. It's empty as quality is set to 0 for all bases!" loading="lazy" /></p>
+
+<p>Quality information is “absent” for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. “!”)!</p>
 
 <hr />
 
 <h3 id="per-sequence-quality">Per-sequence Quality</h3>
 
 <p><img src="../../images/per_sequence_quality.png" alt="A per-sequence quality showing quality score distribution histogram with average quality per read plotted. Most reads pile up around quality 30, but another peak appears at 17. very few reads have quality less than 10." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For Illumina, the pic should be near 30</li>
+  <li>For Nanopore, the pic is generally between 10 and 12. It depends on pore (R9 vs R10) and basecaller version and models (fast, hac, sup).</li>
+  <li>For PacBio HiFi, the pic should be near 90.</li>
+</ul>
 
 <hr />
 
@@ -595,6 +673,16 @@ Some high throughput sequencers generate sequence fragments of uniform length, w
 
 <hr />
 
+<h3 id="sequence-length-distribution---pacbio--nanopore">Sequence length distribution - PacBio / Nanopore</h3>
+
+<p><img src="../../images/sequence_length_distribution_long-reads.png" alt="A graph with a main peak around 15,000bp for PacBio HiFi run." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>For long reads, the distribution is much more important and depends on the fragment size selection, primers, DNA weight and quality, etc</p>
+
+<hr />
+
 <h3 id="duplicated-sequences">Duplicated sequences</h3>
 
 <p><img src="../../images/sequence_duplication_levels.png" alt="Two line graphs, deduplicated sequences in red, and total sequences in blue. They start off near 100 and go rapidly to zero by sequence duplication level 2 and 3." loading="lazy" /></p>
@@ -636,6 +724,213 @@ Another way to find tag sequences is to look at the K-mer content, and find thos
 
 <hr />
 
+<h2 id="nanoplot">NanoPlot</h2>
+
+<p>A quality control tool for long reads (Nanopore/PacBio)</p>
+
+<hr />
+
+<h3 id="nanoplot-report">NanoPlot report</h3>
+
+<p><img src="../../images/nanoplot_report.png" alt="Header of a NanoPlot html report . " loading="lazy" /></p>
+
+<p>Qscores (Qx): it is the average per-base error probability, expressed on the log (Phred) scale</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Analyses your fastq/bam files</li>
+  <li>
+    <p>Reports on different aspects of the reads</p>
+  </li>
+  <li>Modules include:
+    <ul>
+      <li>Summary Statistics
+        <ul>
+          <li>Mean / Median / N50 reads length</li>
+          <li>Mean / Median / N50 reads quality</li>
+          <li>Number of reads</li>
+          <li>Total of bases generated</li>
+        </ul>
+      </li>
+      <li>Plots (depends on parameters)
+        <ul>
+          <li>Histogram of read lengths</li>
+          <li>Yield by length</li>
+          <li>Read lengths vs Average read quality</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="read-length-vs-read-quality-score-qscores">Read length <em>vs</em> Read quality score (Qscores)</h3>
+
+<p><img src="../../images/LengthvsQualityScatterPlot_dot.png" alt="Distribution for HiFi reads with a default filter &gt;= Q20 . " loading="lazy" /></p>
+
+<p>Each dot represents a read. In the case of PacBio HiFi, the minimum Qscore is fixed to 20 which explains the absence of any dot under this score.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This plot give a 2D visualisation of quality score for reads according to reads length. It allows to detect bias quickly and easily.</p>
+
+<hr />
+
+<h3 id="histogram-of-read-length">Histogram of read length</h3>
+
+<p><img src="../../images/HistogramReadlength.png" alt="Distribution around 15 / 20kb in HiFi mode . " loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>It’s a similar representation as FastQC sequence length distribution.
+The length distribution can then be used as quality measure, as you would expect a normal distribution for the best result.
+Also, at least for PacBio HiFi, the pic should be centered near 15kb.</p>
+
+<hr />
+
+<h3 id="run-yield-by-length">Run yield by Length</h3>
+
+<p><img src="../../images/Yield_By_Length.png" alt="Yield for HiFi run . " loading="lazy" /></p>
+
+<p>This plot shows the total number of bases read in the run, as a function of the length of the read that contained them. The Y-axis is scaled based on the quantity of data in the fastq/a that was analyzed (20Gbp in this example).</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Very long reads represent only a small part of the total bases pairs generated.</li>
+  <li>In case of HiFi reads, the contribution of long reads starts to decrease after 10kb and 50% of the data correspond to the N50.</li>
+  <li>Used to evaluate the contribution of each size fraction</li>
+</ul>
+
+<hr />
+
+<h2 id="pycoqc">PycoQC</h2>
+
+<p>An interactive quality control tool for basecalled Nanopore data</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Analyse your run after basecalling</li>
+  <li>Has many modules</li>
+  <li>Dynamics plot</li>
+  <li>
+    <p>They report on different aspects of the sequence</p>
+  </li>
+  <li>Modules include:
+    <ul>
+      <li>Basic Statistics</li>
+      <li>Basecalled reads length</li>
+      <li>Basecalled reads PHRED quality</li>
+      <li>Basecalled reads length vs reads PHRED quality</li>
+      <li>Output reads over experiment time</li>
+      <li>Read length over experiment time</li>
+      <li>Read quality over experiment time</li>
+      <li>Channel activity over time</li>
+      <li>Number of reads per barcode (optional)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="general-and-basecalled-summary">General and basecalled summary</h3>
+
+<p><img src="../../images/general_run_summary-pycoqc.png" alt="General summary about a Nanopore run from PycoQC. It includes general information about the run itself (duration, channels, run ids and barcode in case of barcoded runs)." loading="lazy" />
+<img src="../../images/basecall_summary-pycoqc.png" alt="General summary about the reads." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The 2 tables give general information about the run itself like the duration of the run, the number of active channels (pores), run ids and number of barcodes if necessary.
+It also provides information about the reads themself, like the total reads, bases, N50, median and median PHRED score.
+Reads with a Qscore &gt;= 7 (default with Guppy) are marked as “Pass”</p>
+
+<hr />
+
+<h3 id="basecalled-reads-length">Basecalled reads length</h3>
+
+<p><img src="../../images/basecalled_reads_length-pycoqc.png" alt="A graph with a read length distribution between 200bp and 150kbp." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="basecalled-reads-phred-quality-qscores">Basecalled reads PHRED quality (Qscores)</h3>
+
+<p><img src="../../images/basecalled_reads_PHRED_quality-pycoqc.png" alt="A graph of PHRED quality (Qscore) with a distribution centered around 10." loading="lazy" /></p>
+
+<p>Reminder: Qscores is the average per-base error probability, expressed on the log (Phred) scale</p>
+
+<hr />
+
+<h3 id="basecalled-reads-length-vs-reads-phred-quality-qscores">Basecalled reads length <em>vs</em> reads PHRED quality (Qscores)</h3>
+
+<p><img src="../../images/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" alt="Standard distribution for Nanopore reads." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>As for NanoPlot, this representation give a 2D visualisation of quality score for reads according to reads length.
+It allows to detect bias quickly and easily.</p>
+
+<hr />
+
+<h3 id="output-over-experiment-time">Output over experiment time</h3>
+
+<p><img src="../../images/output_over_experiment_time-pycoqc.png" alt="Sequenced reads over time for a single run." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This representation gives information about sequenced reads over the time.</p>
+<ul>
+  <li>Each pic indicates a new loading of the flow cell (3 + the first load).</li>
+  <li>The contribution in total reads for each “refuel”.</li>
+  <li>The production of reads is decreasing over time:
+    <ul>
+      <li>Most of material (DNA/RNA) is sequenced</li>
+      <li>Saturation of pores</li>
+      <li>Material degradation</li>
+      <li>…</li>
+    </ul>
+  </li>
+  <li>In this example, the contribution of refuling is very low and it can be considered as a bad run.</li>
+</ul>
+
+<p>Unlike all other technologies, with Nanopore you can refuel the flow cell with biological material without needing to make another run.</p>
+
+<hr />
+
+<h3 id="read-length-over-experiment-time">Read length over experiment time</h3>
+
+<p><img src="../../images/read_length_over_experiment_time-pycoqc.png" alt="Read length during an experiment." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The read length over experiment time should be stable.
+It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.</p>
+
+<hr />
+
+<h3 id="read-quality-over-experiment-time">Read quality over experiment time</h3>
+
+<p><img src="../../images/read_quality_over_experiment_time-pycoqc.png" alt="Read quality over the time." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The read quality should be stable over the time.</p>
+
+<hr />
+
+<h3 id="channel-activity-over-time">Channel activity over time</h3>
+
+<p><img src="../../images/channel_activity_over_time-pycoqc.png" alt="View of the activity of each pore from the flow cell over the time." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>It gives an overview of available pores, pore usage during the experiment and shows if the loading of the flow cell is good (almost all pores are used).
+In this case, the run can be considered bad as the number of used pores is decreasing over the time.</p>
+
+<hr />
+
 <h2 id="improving-the-quality-of-sequences">Improving the quality of sequences</h2>
 
 <ul>
@@ -655,6 +950,12 @@ Another way to find tag sequences is to look at the K-mer content, and find thos
       <li>…</li>
     </ul>
   </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Trimming is not always recommended (e.g. see Spades documentation)</li>
 </ul>
 
 
@@ -704,7 +1005,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         <p>
 The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
 </p>
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/754bd978738f508d26e4515ac86f03e9e55a53d3">754bd978738f508d26e4515ac86f03e9e55a53d3</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/346580b40cfc4e9ba1e4cdf54643f916ceff9d69">346580b40cfc4e9ba1e4cdf54643f916ceff9d69</a></p>
     </div>
 </footer>
 
