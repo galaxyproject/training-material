@@ -892,7 +892,7 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 >
 > 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
 >    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
->    - *"Options for filtering or transforming input prior to plotting"*
+>    - *"Options for customizing the plots created"*
 >        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
 >        - {% icon param-select %} *"Show the N50 mark in the read length histogram."*: `Yes`
 >
@@ -1098,7 +1098,7 @@ Quality control steps are similar for any type of sequencing data:
 
 - Quality assessment with tools like:
   - *Short Reads*: {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}
-  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}
   - *Short+Long*: {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
+  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}
   - *Nanopore only*: {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %}
 - Trimming and filtering for **short reads** with a tool like **Cutadapt** {% icon tool %}
