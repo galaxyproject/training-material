@@ -1096,5 +1096,9 @@ In this tutorial we checked the quality of FASTQ files to ensure that their data
 This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data.
 Quality control steps are similar for any type of sequencing data:
 
-- Quality assessment with tools like **FASTQE** {% icon tool %}, **FastQC** {% icon tool %}, **Nanoplot** {% icon tool %} and **PycoQC** {% icon tool %}
+- Quality assessment with tools like:
+  - *Short Reads*: {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}
+  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}
+  - *Short+Long*: {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
+  - *Nanopore only*: {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %}
 - Trimming and filtering for **short reads** with a tool like **Cutadapt** {% icon tool %}
