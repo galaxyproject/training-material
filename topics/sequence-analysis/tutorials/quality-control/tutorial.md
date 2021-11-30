@@ -879,7 +879,7 @@ These datasets can be used for the downstream analysis, e.g. mapping.
 
 # Assess quality with Nanoplot - Long reads only
 
-In case of long reads, we can check sequence quality with [Nanoplot](https://github.com/wdecoster/NanoPlot/) {% cite 10.1093/bioinformatics/bty149 %}. It provides basic statistics with nice plots for a fast quality control overview.
+In case of long reads, we can check sequence quality with [Nanoplot](https://github.com/wdecoster/NanoPlot/) ({% cite 10.1093/bioinformatics/bty149 %}). It provides basic statistics with nice plots for a fast quality control overview.
 
 > ### {% icon hands_on %} Hands-on: Quality check of long reads
 > 1. Create a new history for this part and give it a proper name
