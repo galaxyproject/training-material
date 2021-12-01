@@ -179,11 +179,11 @@
             
             <div id="archive-selector">
             
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html" title="Version 2021-12-01">2021-12-01</a>
+            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html" title="Version 2021-11-01">2021-11-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-10-01/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html" title="Version 2021-10-01">2021-10-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-09-01/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html" title="Version 2021-09-01">2021-09-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
             </div>
@@ -1143,7 +1143,7 @@
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">job_file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">job</span> <span class="o">=</span> <span class="n">yaml</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="p">.</span><span class="n">CLoader</span><span class="p">)</span>
 
-<span class="n">vcf_paths</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">batch_directory</span><span class="si">}</span><span class="s">/*.vcf'</span><span class="p">)</span>
+<span class="n">vcf_paths</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">batch_directory</span><span class="si">}</span><span class="s">/*.vcf'</span><span class="p">)</span>
 <span class="n">elements</span> <span class="o">=</span> <span class="p">[{</span><span class="s">'class'</span><span class="p">:</span> <span class="s">'File'</span><span class="p">,</span> <span class="s">'identifier'</span><span class="p">:</span> <span class="n">Path</span><span class="p">(</span><span class="n">vcf_path</span><span class="p">).</span><span class="n">stem</span><span class="p">,</span> <span class="s">'path'</span><span class="p">:</span> <span class="n">vcf_path</span><span class="p">}</span> <span class="k">for</span> <span class="n">vcf_path</span> <span class="ow">in</span> <span class="n">vcf_paths</span><span class="p">]</span>
 <span class="n">job</span><span class="p">[</span><span class="s">'Variant calls'</span><span class="p">][</span><span class="s">'elements'</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements</span>
 
