@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Image classification in Galaxy with fruit 360 dataset</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+    <meta property="og:title" content="Galaxy Training: Image classification in Galaxy with fruit 360 dataset" />
+    <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:41 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Image classification in Galaxy with fruit 360 dataset",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+  },
+  "courseCode": "statistics / fruit_360 / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Image classification in Galaxy with fruit 360 dataset' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/fruit_360/slides.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - How to solve an image classification problem using convolutional neural network (CNN)?\n\n\\nThe objectives are:\n - Learn how to create a CNN using Galaxy's deep learning tools\n - Solve an image classification problem on fruit 360 dataset using CNN in Galaxy\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/CNN/slides.html",
+      "name": "Convolutional neural networks (CNN) \n Deep Learning - Part 3",
+      "description": "Slides for 'Convolutional neural networks (CNN) \n Deep Learning - Part 3' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/CNN/tutorial.html",
+      "name": "Deep Learning (Part 3) - Convolutional neural networks (CNN)",
+      "description": "Hands-on for 'Deep Learning (Part 3) - Convolutional neural networks (CNN)' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/CNN/slides.html",
+      "name": "Convolutional neural networks (CNN) \n Deep Learning - Part 3",
+      "description": "Slides for 'Convolutional neural networks (CNN) \n Deep Learning - Part 3' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Kaivan Kamali"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Kaivan Kamali"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/statistics" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/fruit_360/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Image classification in Galaxy with fruit 360 dataset
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/kxk302/" class="contributor-badge contributor-kxk302"><img src="https://avatars.githubusercontent.com/kxk302?s=27" alt="Avatar">Kaivan Kamali</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+
+</div>
+
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Dec 1, 2021</div>
+<div class="footnote" style="bottom: 2em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Or view the plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+    
+        
+        
+            
+        
+- [Statistics and machine learning](/training-material/topics/statistics)
+    - Deep Learning (Part 3) - Convolutional neural networks (CNN): [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/statistics/tutorials/CNN/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/statistics/tutorials/CNN/tutorial.html)
+    
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How to solve an image classification problem using convolutional neural network (CNN)?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Learn how to create a CNN using Galaxy's deep learning tools
+
+- Solve an image classification problem on fruit 360 dataset using CNN in Galaxy
+
+
+---
+
+
+# What is a convolutional neural network (CNN)?
+
+???
+
+What is a convolutional neural network (CNN)?
+
+---
+
+# Convolutional Neural Network (CNN)
+
+- Increasing popularity of social media in past decade
+	- Image and video processing tasks have become very important
+- FNN could not scale up to image and video processing tasks
+- CNN specifically tailored for image and video processing tasks
+
+---
+
+# Inspiration for CNN
+
+- In 1959 Hubel &amp; Wiesel did an experiment to understand how visual cortex of brain processes visual info
+	- Recorded activity of neurons in visual cortex of a cat
+	- While moving a bright line in front of the cat
+- Some cells fired when bright line is shown at a particular angle/location
+	- Called these *simple* cells
+- Other cells fired when bright line was shown regardless of angle/location
+	- Seemed to detect movement
+	- Called these *complex* cells
+- Seemed complex cells receive inputs from multiple simple cells
+	- Have an hierarchical structure
+- Hubel and Wiesel won Noble prize in 1981
+
+---
+
+# Inspiration for CNN
+
+- Inspired by complex/simple cells, Fukushima proposed *Neocognitron* (1980)
+	- Hierarchical neural network used for handwritten Japanese character recognition
+	- First CNN, had its own training algorithm
+- In 1989, LeCun proposed CNN that was trained by backpropagation
+- CNN got popular when outperformed other models at ImageNet Challenge
+	- Competition in object classification/detection
+	- On hundreds of object categories and millions of images
+	- Run annually from 2010 to present
+- Notable CNN architectures that won ImageNet challenge
+	- AlexNet (2012), ZFNet (2013), GoogLeNet &amp; VGG (2014), ResNet (2015)
+
+---
+
+# Architecture of CNN
+
+- A typical CNN has 4 layers
+	- Input layer
+	- Convolution layer
+	- Pooling layer
+	- Fully connected layer
+
+- We will explain a 2D CNN here
+	- Same concepts apply to a 1 (or 3) dimensional CNN
+
+---
+
+# Input layer
+
+- Example input a 28 pixel by 28 pixel grayscale image
+- Unlike FNN, we do not “flatten” the input to a 1D vector
+	- input is presented to network in 2D as 28 x 28 matrix
+	- This makes capturing spatial relationships easier
+
+---
+
+# Convolution layer
+
+- Composed of multiple filters (kernels)
+- Filters for 2D image are also 2D
+- Suppose we have a 3 by 3 filter (9 values in total)
+	- Values are randomly set to 0 or 1
+- Convolution: placing 3 by 3 filter on the top left corner of image
+	- Multiply filter values by pixel values, add the results
+	- Move filter to right one pixel at a time, and repeat this process
+	- When at top right corner, move filter down one pixel and repeat process
+	- Process ends when we get to bottom right corner of image
+
+---
+
+# 3 by 3 Filter
+
+![A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image](/training-material/topics/statistics/images/Conv_no_padding_no_strides.gif) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Convolution operator parameters
+
+- Filter size
+- Padding
+- Stride
+- Dilation
+- Activation function
+
+---
+
+# Filter size
+
+- Filter size can be 5 by 5, 3 by 3, and so on
+- Larger filter sizes should be avoided
+	- As learning algorithm needs to learn filter values (weights)
+- Odd sized filters are preferred to even sized filters
+	- Nice geometric property of all input pixels being around output pixel
+
+---
+
+# Padding
+
+- After applying 3 by 3 filter to 4 by 4 image, we get a 2 by 2 image
+	– Size of the image has gone down
+- If we want to keep image size the same, we can use padding
+	- We pad input in every direction with 0’s before applying filter
+	- If padding is 1 by 1, then we add 1 zero in every direction
+	- If padding is 2 by 2, then we add 2 zeros in every direction, and so on
+
+---
+
+# 3 by 3 filter with padding of 1
+
+![A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image](/training-material/topics/statistics/images/Conv_same_padding_no_strides.gif) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Stride
+
+- How many pixels we move filter to the right/down is stride
+- Stride 1: move filter one pixel to the right/down
+- Stride 2: move filter two pixels to the right/down
+
+---
+
+# 3 by 3 filter with stride of 2
+
+![A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image](/training-material/topics/statistics/images/Conv_no_padding_strides.gif) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Dilation
+
+- When we apply 3 by 3 filter, output affected by pixels in 3 by 3 subset of image
+- Dilation: To have a larger receptive field (portion of image affecting filter’s output)
+- If dilation set to 2, instead of contiguous 3 by 3 subset of image, every other pixel of a 5 by 5 subset of image affects output
+
+---
+
+# 3 by 3 filter with dilation of 2
+
+![A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image](/training-material/topics/statistics/images/Conv_dilation.gif) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Activation function
+
+- After filter applied to whole image, apply activation function to output to introduce non-linearity
+- Preferred activation function in CNN is ReLU
+- ReLU leaves outputs with positive values as is, replaces negative values with 0
+
+---
+
+# Relu activation function
+
+![Two matrices representing filter output before and after ReLU activation function is applied](/training-material/topics/statistics/images/Conv_ReLU.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Single channel 2D convolution
+
+![One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation](/training-material/topics/statistics/images/Conv_single_input_channel.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Triple channel 2D convolution
+
+![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation](/training-material/topics/statistics/images/Conv_multiple_input_channel.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Triple channel 2D convolution in 3D
+
+![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](/training-material/topics/statistics/images/Conv_multiple_channel_3d.gif) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Change channel size
+
+- Output of a multi-channel 2D filter is a single channel 2D image
+- Applying *multiple* filters results in a multi-channel 2D image
+- E.g., if input image is 28 x 28 x 3 (rows x columns x channels)
+	- We apply a 3 x 3 filter with 1 x 1 padding, we get a 28 x 28 x 1 image
+	- If we apply 15 such filters, we get a 28 x 28 x 15
+- Number of filters allows us to increase or decrease channel size
+
+---
+
+# Pooling layer
+
+- Pooling layer performs down sampling to reduce spatial dimensionality of input
+- This decreases number of parameters
+	- Reduces learning time/computation
+	- Reduces likelihood of overfitting
+- Most popular type is *max* pooling
+	- Usually a 2 x 2 filter with a stride of 2 
+	- Returns maximum value as it slides over input data
+
+---
+
+# Fully connected layer
+
+- Last layer in a CNN
+- Connect all nodes from previous layer to this fully connected layer
+	- Which is responsible for classification of the image
+
+---
+
+# An example CNN
+
+![A convolutional neural network with 3 convolution layers followed by 3 pooling layers](/training-material/topics/statistics/images/Conv_CNN.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# An example CNN
+
+- A typical CNN has several convolution plus pooling layers
+	- Each responsible for feature extraction at different levels of abstraction
+	- E.g., filters in first layer detect horizental, vertical, and diagonal edges
+	- Filters in the next layer detect shapes
+	- Filters in the last layer detect collection of shapes
+- Filter values randomly initialized, learned by learning algorithm
+- CNN not only do classification, but can also automatically do feature extraction
+	- Distinguishes CNN from other classification techniques (like Support Vector Machines)
+
+---
+
+# Fruit 360 dataset
+
+- A dataset with 90,380 images of 131 fruits and vegetables
+	- Images are 100 by 100 pixel and are color (RGB) images (3 values per pixel)
+	- 67,692 images in training dataset and 22,688 images in test dataset
+	- https://www.kaggle.com/moltean/fruits
+- This tutorial's dataset is a subset of fruit 360 dataset
+	- Containing only 10 fruits/vegetables 
+	- Selected a subset of images, so dataset size is smaller and CNN trains faster 
+	- 5,015 images in training dataset, and 1,679 images in test dataset
+---
+
+# Utilities for creating a subset of fruit 360 dataset
+
+- The utilities and instructions at https://github.com/kxk302/fruit_dataset_utilities
+- First, creat feature vectors for each image 
+	- Images are 100 by 100 pixel color (RGB) images
+	- Each image represented by 30,000 values (100 X 100 X 3)
+- Second, we selected a subset of 10 fruit/vegetable images
+	- Training and test dataset sizes went from 7 GB and 2.5 GB to 500 MB and 177 MB
+- Third, we created separate files for feature vectors and labels 
+- Finally, mapped labels for 10 selected fruits/vegetables to a 0 to 9 range 
+	- Full dataset labels are in the 0 to 130 range
+---
+
+# Classification of fruit/vegetable images with CNN
+
+- We define a CNN and train it using fruit 360 dataset training data
+- Goal is to learn a model such that given image of a fruit/vegetable we predict its label (0 to 9)
+- We then evaluate the trained CNN on test dataset and plot the confusion matrix
+---
+
+# For references, please see tutorial's References section
+
+---
+
+- Galaxy Training Materials ([training.galaxyproject.org](https://training.galaxyproject.org))
+
+![Screenshot of the gtn stats page with 21 topics, 170 tutorials, 159 contributors, 16 scientific topics, and a growing community](/training-material/topics/introduction/images/gtn_stats.png)
+
+???
+
+- If you would like to learn more about Galaxy, there are a large number of tutorials available.
+- These tutorials cover a wide range of scientific domains.
+
+---
+
+# Getting Help
+
+- **Help Forum** ([help.galaxyproject.org](https://help.galaxyproject.org))
+
+
+  ![Galaxy Help](/training-material/topics/introduction/images/galaxy_help.png)
+
+
+- **Gitter Chat**
+    - [Main Chat](https://gitter.im/galaxyproject/Lobby)
+    - [Galaxy Training Chat](https://gitter.im/Galaxy-Training-Network/Lobby)
+    - Many more channels (scientific domains, developers, admins)
+
+???
+
+- If you get stuck, there are ways to get help.
+- You can ask your questions on the help forum.
+- Or you can chat with the community on Gitter.
+
+---
+
+# Join an event
+
+- Many Galaxy events across the globe
+- Event Horizon: [galaxyproject.org/events](https://galaxyproject.org/events)
+
+![Event schedule](/training-material/topics/introduction/images/event_horizon.png)
+
+???
+
+- There are frequent Galaxy events all around the world.
+- You can find upcoming events on the Galaxy Event Horizon.
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/kxk302/" class="contributor-badge contributor-kxk302"><img src="https://avatars.githubusercontent.com/kxk302?s=27" alt="Avatar">Kaivan Kamali</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
