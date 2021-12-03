@@ -160,13 +160,11 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many differentially regulated proteins were detected in the MSstatsTMT group comparison? 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 7139 (numbers might slightly vary with different MSstatsTMT versions); number of lines minus header line in the MSstatsTMT group comparison output
 > >
 > {: .solution}
 >
