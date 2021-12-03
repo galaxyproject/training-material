@@ -63,7 +63,7 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) as a 'Collection'. Set 'File Type' as 'thermo.raw' and click 'Start' and then 'Build'. Name the collection 'raw_files' and create it via 'Create collection'.
+> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) as a 'Collection'.
 >    ```
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
@@ -78,6 +78,8 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
 >    ```
+>    
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List" collection_name="raw_files" format="thermo.raw" %}
 {: .hands_on}
 
 
