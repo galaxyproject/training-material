@@ -312,7 +312,7 @@
   "name": "Hands-on for 'MaxQuant and MSstats for the analysis of TMT data' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html",
   "timeRequired": "PT1H",
-  "keywords": "DDA, TMT, work-in-progress",
+  "keywords": "DDA, TMT",
   "description": "The questions this  addresses are:\n - How to analyze tandem-mass-tag (TMT) labelled shotgun (DDA) data analysis in MaxQuant and MSstats?\n - Which proteins are differentially abundant between KMT9α knock-down and control cells?\n\n\\nThe objectives are:\n - Learn how to use MaxQuant and MSstats for the analysis of TMT labelled shotgun (DDA) data\n - Learn how to create an experimental design template for fractionated data in MaxQuant\n - Learn how to create an annotation file for MSstatsTMT\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -384,12 +384,6 @@
 
 <section class="tutorial topic-proteomics">
     <h1 data-toc-skip>MaxQuant and MSstats for the analysis of TMT data</h1>
-    
-    <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Under Development!</h4>
-        <p>This tutorial is not in its final state. The content may change a lot in the next months.
-        Because of this status, it is also not listed in the topic pages.</p>
-    </div>
     
 
 
@@ -691,7 +685,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 13, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 3, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -760,42 +754,25 @@ https://zenodo.org/record/5195800/files/MSstatsTMT%20annotation%20file.tabular
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
     </li>
     <li>
-      <p>To run MaxQuant, import the raw data from <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD014145">PRIDE</a>.</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
- ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
+      <p>To run MaxQuant, import the raw data from <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD014145">PRIDE</a> as a ‘Collection’.</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
+ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
 </code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Rename the raw datasets into ‘MFA380.raw’, ‘MFA381.raw’, etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
-    </li>
-    <li>
-      <p>Control that the data type of the raw files is ‘thermo.raw’ otherwise change the datatype into ‘thermo.raw’</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">thermo.raw</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
-    </li>
-    <li>
-      <p>Generate a collection for all raw files and name it ‘raw_files’, hide the individual raw files</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>    <p>Click on <strong>Collection</strong> on the top</p>  </li>  <li>    <p>Click on <strong>Collection Type</strong> and select <code class="language-plaintext highlighter-rouge">List</code></p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">thermo.raw</code></p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p>Click on <strong>Build</strong> when available</p>  </li>  <li>    <p>Enter a name for the collection</p>    <ul>      <li>raw_files</li>    </ul>  </li>  <li>    <p>Click on <strong>Create list</strong> (and wait a bit)</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
     </li>
   </ol>
-
 </blockquote>
 
 <h1 id="maxquant-analysis">MaxQuant analysis</h1>
@@ -923,16 +900,14 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>Question1?</li>
-    <li>Question2?</li>
+    <li>How many differentially regulated proteins were detected in the MSstatsTMT group comparison?</li>
   </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Answer for question1</li>
-      <li>Answer for question2</li>
+      <li>7139 (numbers might slightly vary with different MSstatsTMT versions); number of lines minus header line in the MSstatsTMT group comparison output</li>
     </ol>
 
   </blockquote>
@@ -1332,8 +1307,8 @@ Please bear in mind that TMT quantitation suffers from ratio compression. There 
 author = "Klemens Fröhlich and Melanie Föll and Matthias Fahrner",
 title = "MaxQuant and MSstats for the analysis of TMT data (Galaxy Training Materials)",
 year = "2021",
-month = "08",
-day = "13"
+month = "12",
+day = "03"
 url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
