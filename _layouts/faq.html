@@ -16,4 +16,9 @@ layout: page
 
     {{content | regex_replace: '<hr.*—<\/p>', '' }}
 
+    {% if page.cited %}
+    <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+    {% bibliography --cited %}
+    {% endif %}
+
 </section>

@@ -32,7 +32,8 @@ module Jekyll
 
       puts "[GTN/scholar] Creating global bib cache"
       global_bib = BibTeX::Bibliography.new
-      Find.find('./topics') do |path|
+      bib_paths = [Find.find('./topics'), Find.find('./faqs')].lazy.flat_map(&:lazy)
+      bib_paths.each{|path|
         if FileTest.directory?(path)
           if File.basename(path).start_with?('.')
             Find.prune       # Don't look any further into this directory.
@@ -47,7 +48,7 @@ module Jekyll
             end
           end
         end
-      end
+      }
       site.config['cached_global_bib'] = global_bib
       puts "[GTN/scholar] Done"
       style = CSL::Style.load("_layouts/g3.csl")

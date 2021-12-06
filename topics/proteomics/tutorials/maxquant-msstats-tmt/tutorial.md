@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: false
+enable: true
 
 title: MaxQuant and MSstats for the analysis of TMT data
 zenodo_link: 'https://zenodo.org/record/5195800'
@@ -63,34 +63,23 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145).
->
+> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) as a 'Collection'.
 >    ```
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
 >    ```
-> 5. Rename the raw datasets into 'MFA380.raw', 'MFA381.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
->
->    {% snippet faqs/galaxy/datasets_rename.md %}
->
-> 6. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
->
-> 7. Generate a collection for all raw files and name it 'raw_files', hide the individual raw files
->
->    {% snippet faqs/galaxy/collections_build_list.md %}
->
+>    
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List" collection_name="raw_files" format="thermo.raw" %}
 {: .hands_on}
 
 
@@ -173,13 +162,11 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many differentially regulated proteins were detected in the MSstatsTMT group comparison? 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 7139 (numbers might slightly vary with different MSstatsTMT versions); number of lines minus header line in the MSstatsTMT group comparison output
 > >
 > {: .solution}
 >
