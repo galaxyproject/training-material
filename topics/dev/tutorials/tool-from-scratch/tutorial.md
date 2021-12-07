@@ -435,8 +435,8 @@ bellerophon: chimeric reads from Arima Genomics
 ### Macros section
 
 The macros section serves two functions -- to create meta-variables for inside both the xml text and the command text, called
-tokens, and xml sections that can be slotted in repeatedly. Although this tool will only use the tokens, the xml macros are very
-useful for tools which have multiple options/modes that reuse parameters.
+tokens, and xml sections that can be slotted in repeatedly. In this section we will only use tokens, but xml macros are very
+useful for tools which have multiple options/modes that reuse parameters. We will use a simple xml macro in the following section.
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. Each need their own 'token' line, resulting in
 
@@ -472,6 +472,48 @@ One would then use that macro at any point in the xml it is relevant using the `
 ```
 
 This would add both of the `<param/>` tags at that location. Though inputs are used as an example macro here, any tag or group of tags can be made into a macro.
+
+
+### Bio.tools ID
+
+We will now add a useful macro entry. With the Galaxy ecosystem is becoming more reliant on metadata, a bio.tools ID can help Galaxy to pull standardized metadata for your tool. This enables users to find and use the tool more easily from across the web, so we highly recommend setting a bio.tools identifier. If an entry already exists on [https://bio.tools](https://bio.tools), it's a simple task.
+
+> ### {% icon hands_on %} Hands-on: Setting a bio.tools ID:
+>
+> If we go to [https://bio.tools](https://bio.tools) and search "Bellerophon", we find that it already has a bio.tools entry:
+>
+> ![Bellerophon bio.tools webpage](../../images/biotools-profile.png)
+>
+> We just have to add the biotools ID as a `<macro>` tag.
+>
+> Let's create a macro xml file next to our tool xml: `bellerophon_macros.xml`
+>
+> ```xml
+> <macros>
+>   <xml name="bio_tools">
+>     <xrefs>
+>         <xref type="bio.tools">Bellerophon</xref>
+>     </xrefs>
+>   </xml>
+> </macros>
+> ```
+>
+> Now we can expand the `bio_tools` macro in our tool XML, beneath the tokens:
+>
+> ```xml
+> <macros>
+>     <token name="@TOOL_VERSION@">1.0</token>
+>     <token name="@VERSION_SUFFIX@">0</token>
+> </macros>
+>
+> <expand macro="bio_tools"/>
+>
+> ```
+>
+> If your tool does not yet have an entry in bio.tools, we highly encourage you to create one!
+> It takes just 5 minutes to register with bio.tools to start contributing towards this global registry of computational resources.
+>
+{: .hands_on}
 
 ### Requirements section
 
