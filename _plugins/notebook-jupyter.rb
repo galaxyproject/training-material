@@ -1,22 +1,12 @@
 require 'json'
-require 'mkmf'
 require 'fileutils'
 require './_plugins/notebook'
-
-module MakeMakefile::Logging
-  @logfile = File::NULL
-end
 
 module Jekyll
   class JupyterNotebookGenerator < Generator
     safe true
 
     def generate(site)
-      if find_executable('notedown').nil?
-        puts '[GTN/Notebooks] We could not find the notedown executable, so, notebooks will not be rendered.'
-        return
-      end
-
       # For every tutorial with the 'notebook' key in the page data
       site.pages.select { |page| GTNNotebooks.notebook_filter(page.data) }.each do |page|
         # We get the path to the tutorial source

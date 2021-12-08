@@ -42,11 +42,6 @@ module GTNNotebooks
     }.join("\n")
   end
 
-  def self.convert_notebook_notedown(tutorial, language)
-    notebook_json = `notedown --match=#{language} #{tutorial}`
-    JSON.parse(notebook_json)
-  end
-
   def self.convert_notebook_markdown(content, language)
     out = []
     inside_block = false
@@ -357,7 +352,7 @@ module GTNNotebooks
   end
 
   def self.render_jupyter_notebook(data, content, url, last_modified, notebook_language, site)
-    # Here we read use `notedown` to convert the tutorial to a Hash
+    # Here we read use internal methods to convert the tutorial to a Hash
     # representing the notebook
     notebook = self.convert_notebook_markdown(content, notebook_language)
 
