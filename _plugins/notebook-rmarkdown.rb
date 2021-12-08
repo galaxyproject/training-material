@@ -111,7 +111,7 @@ module Jekyll
                 "collapsed" => false,
                 "smooth_scroll" => false,
               },
-              'theme' => {'bootswatch' => 'journal'}
+              # 'theme' => {'bootswatch' => 'journal'}
             },
             'word_document' => {
               'toc' => true,
