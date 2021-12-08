@@ -71,9 +71,20 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 - test
 - about
 
+Let's write a Bioconda recipe for the tool we want to package: [bellerophon](https://github.com/davebx/bellerophon)
+
+> ### {% icon warning %} Naming collision
+> As this tool is already packaged in Bioconda, to prevent any naming collision, we will slightly modify its name from `bellerophon` to `bellerophon_bis` in the recipe.
+> **This should never be done in real life, we only do it for this exercise!**
+{: .warning}
+
 > ### {% icon hands_on %} Hands-on: Writing a Bioconda Recipe
 >
-> 1. The first thing we should do is prepare our workspace. We create a branch in git, a conda environment with pip and
+> 1. The first thing we should do is prepare our workspace. [Create a fork](https://help.github.com/articles/fork-a-repo/) of the [Bioconda repository](https://github.com/bioconda/bioconda-recipes/) on GitHub
+>
+> 2. Clone your fork of this repository to create a local copy on your computer
+>
+> 3. We create a branch in git, a conda environment with pip and
 > conda-build preinstalled, and a folder for the meta.yaml file.
 >
 >    > ### {% icon code-in %} Input: Bash
@@ -81,11 +92,11 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    > git checkout -b bellerophon_bioconda
 >    > conda create -y --name bellerophon_bioconda pip python conda-build
 >    > conda activate bellerophon_bioconda
->    > mkdir recipes/bellerophon
+>    > mkdir recipes/bellerophon_bis
 >    > ```
 >    {: .code-in}
 >
-> 2. Next we determine the SHA-256 checksum of the source tarball.
+> 4. Next we determine the SHA-256 checksum of the source tarball.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
@@ -100,14 +111,14 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    > ```
 >    {: .code-out}
 >
-> 3. Using the above information, we create the meta.yaml file where we'll then define the
+> 5. Using the above information, we create the meta.yaml file where we'll then define the
 > parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
-> With these definitions, bioconda's automatic version updater should recognize when a new version has been released and
-> create a pull request to update the bioconda package.
+> With these definitions, Bioconda's automatic version updater should recognize when a new version has been released and
+> create a pull request to update the Bioconda package.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > vim recipes/bellerophon/meta.yaml # vim can of course be replaced with any other editor.
+>    > vim recipes/bellerophon_bis/meta.yaml # vim can of course be replaced with any other editor.
 >    > ```
 >    {: .code-in}
 >
@@ -115,13 +126,13 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >
 >    {% raw %}
 >    ```yaml
->    {% set name = "bellerophon" %}
+>    {% set name = "bellerophon_bis" %}
 >    {% set version = "1.0" %}
 >    {% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
 >    ```
 >    {% endraw %}
 >
-> 3. Now we define the conda package metadata. This will be shown as bellerophon-1.0 in anaconda and `conda search`. We
+> 6. Now we define the conda package metadata. This will be shown as bellerophon_bis-1.0 in anaconda and `conda search`. We
 > plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
 > lowercase.
 >
@@ -133,7 +144,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >     ```
 >     {% endraw %}
 >
-> 4. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
+> 7. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
 > github, updates can be automated with the variables we defined in the second step, while the SHA-256 checksum ensures
 > that conda-build is getting the right source code every time.
 >
@@ -147,8 +158,8 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >
 >     {% endraw %}
 >
-> 5. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
-> We use the externally defined `{{ PYTHON }}` variable, which defines which python conda-build is using, to install it
+> 8. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
+> We use the externally defined `{% raw %}{{ PYTHON }}{% endraw %}` variable, which defines which python conda-build is using, to install it
 > to the build prefix. The --no-deps and --ignore-installed flags are needed to ensure that conda-build only packages
 > bellerophon itself. In this section, if necessary, we can also define patches that should be applied to the source code,
 > with the `patches:` token under `build:`, and specify that the package should not be built for a given architecture with
@@ -158,12 +169,12 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    build:
 >      noarch: python
 >      number: 0
->      script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+>      script: {% raw %}{{ PYTHON }}{% endraw %} -m pip install . --no-deps --ignore-installed -vv
 >      #patches: /dev/null # Not used in this tutorial
 >      #skip: True [osx] # Not used in this tutorial
 >    ```
 >
-> 6. After the build metadata has been defined, we need to specify dependencies for at least building and running, with
+> 9. After the build metadata has been defined, we need to specify dependencies for at least building and running, with
 > build-time dependencies specified in the `host:` section, and runtime dependencies in the `run:` section. With
 > bellerophon, we know that it's a python package that uses pysam to operate on SAM/BAM files, so the only runtime
 > dependencies we need are python and pysam.
@@ -178,7 +189,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >        - pysam
 >    ```
 >
-> 7. No recipe is complete without tests, and this recipe is no exception. Normally, it's sufficient to confirm that the
+> 9. No recipe is complete without tests, and this recipe is no exception. Normally, it's sufficient to confirm that the
 > program actually runs, e.g. with a `--version` command. Some software also has a self-test flag or parameter, though
 > bellerophon is not among them, and we could even define a test script that uses test data either from the recipe or from
 > the source archive.
@@ -189,7 +200,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >        - bellerophon --version
 >    ```
 >
-> 8. Finally, we add information about the software, such as code's is license type, the program's
+> 9. Finally, we add information about the software, such as code's is license type, the program's
 > homepage, and optionally the github username of the person responsible for maintaining the recipe.
 >
 >    ```yaml
@@ -212,7 +223,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 > > > {% raw %}
 > > >
 > > > ```yaml
-> > > {% set name = "bellerophon" %}
+> > > {% set name = "bellerophon_bis" %}
 > > > {% set version = "1.0" %}
 > > > {% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
 > > >
@@ -254,9 +265,59 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 > {: .question}
 {: .hands_on}
 
+> ### {% icon comment %} Using build.sh
+>
+> In this recipe, the command to execute for installing the package is very short, that's why we write it directly in the `meta.yaml` file. When you need to run more complex commands (like compilation steps), it is preferable to remove the `build > script` entry in the `meta.yaml` file, and write all the commands in a script named `build.sh` in the same directory.
+>
+{: .comment}
+
+## Building the recipe locally
+
+Now that your recipe is written, you can try to build it locally.
+
+> ### {% icon hands_on %} Hands-on: Building the recipe locally
+>
+> 1. Run conda-build
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > conda build recipes/bellerophon_bis
+>    > ```
+>    {: .code-in}
+>
+> 2. Conda build will try to build the recipe locally and will run the the test to check if the package was successfully built.
+> At the end, you should see something like this:
+>
+>    > ### {% icon code-out %} Output
+>    >
+>    > ```
+>    > TEST END: /home/abretaud/miniconda3/conda-bld/noarch/bellerophon-1.0-py_0.tar.bz2
+>    > Renaming work directory [...]
+>    > # Automatic uploading is disabled
+>    > # If you want to upload package(s) to anaconda.org later, type:
+>    >
+>    > # To have conda build upload to anaconda.org automatically, use
+>    > # conda config --set anaconda_upload yes
+>    > anaconda upload \
+>    >    /home/xxxxx/miniconda3/conda-bld/noarch/bellerophon_bis-1.0-py_0.tar.bz2
+>    > anaconda_upload is not set.  Not uploading wheels: []
+>    > ```
+>    {: .code-out}
+>
+> 3. In this example, the build was successful, and the resulting package is placed in `/home/xxxxx/miniconda3/conda-bld/noarch/bellerophon_bis-1.0-py_0.tar.bz2`. This is the file that gets uploaded to the bioconda channel when you create a Pull Request on the Bioconda GitHub repository.
+{: .hands_on}
+
+> ### {% icon comment %} Note on building locally
+>
+> While building locally is a quick way to check if a recipe is working, it's not the most reliable way.
+> That's because the build is occurring directly on your system, which means you might get interference between the conda requirements in the recipe and your system-wide installed libraries and system configuration.
+> The automatic testing of your recipe on GitHub when you create a Pull Request is more reliable as it is performed in a controlled and isolated environment.
+>
+{: .comment}
+
 ## Creating a Pull Request
 
-After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into bioconda.
+After the recipe is complete, and when we have checked that it builds locally, we can commit and push to our fork, so that the recipe can eventually be integrated into Bioconda.
 
 > ### {% icon hands_on %} Hands-on: Creating the PR
 >
@@ -307,12 +368,18 @@ After the recipe is complete, we can commit and push to our fork, so that the re
 >    > ```
 >    {: .code-out}
 >
-> Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.
+> > ### {% icon warning %} Don't create the Pull request for real!
+> >
+> > You can click on the link to see the diff of what would be included in the Pull Request, and how the form looks like. But please don't click on the `Create pull request` button! We don't want to get duplicate versions of this recipe integrated in bioconda everytime someone follows this tutorial!
+> >
+> {: .warning}
+>
+> Once on the github pull request page, you see a preview of the changes we propose, and you can write a short description of the recipe we want to merge. Have a look at the guidelines in the text box to understand how to properly fill the form, and get your Pull Request merged in the end. In real life, when creating a real new recipe, you would then click the `Create pull request` button.
 >
 > ![Github PR](../../images/create_pr.png "An open pull request for the bellerophon conda recipe")
 {: .hands_on}
 
-## Deploying a Conda Package
+## Installing a Conda Package
 
 Once our new recipe has been merged, installing the package should be fairly painless. Galaxy, if configured to do so,
 will automatically install any conda dependencies a tool asks for, whereas manual installation can be as easy as using
@@ -539,7 +606,7 @@ This specifies the
 > ```
 {: .hands_on}
 
-This uses the macro token for @TOOL_VERSION@ for the bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
+This uses the macro token for @TOOL_VERSION@ for the Bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
 
 > ### {% icon question %} Question
 >
@@ -701,7 +768,7 @@ It also defines the format of that file and the name shown to the user in the hi
 This generates a history item called "bellerophon on `<input file name>`", as the ${tool.name} and ${on_string} are reserved values
 for the tool's label and the input file labels.
 
-As the name is hard-set using the output flag, and is output into the working directoy, the name attribute can be used for the file
+As the name is hard-set using the output flag, and is output into the working directory, the name attribute can be used for the file
 search. Alternatively, the attribute "from_work_dir" allows a lower directory to be specified.
 
 #### *Filtering the output*
