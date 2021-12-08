@@ -21,14 +21,7 @@ Learning with RMarkdown is a bit different than you might be used to. Instead of
 
 You're now ready to view the RMarkdown notebook! Each notebook starts with a lot of metadata about how to build the notebook for viewing, but you can ignore this for now and **scroll down to the content of the tutorial**.
 
-You'll see codeblocks scattered throughout the text which look like this:
-
-    ```{r}
-    # some R Code
-    library(dplyr)
-    ```
-
-And these are all runnable snippets that appear like this in the document:
+You'll see codeblocks scattered throughout the text, and these are all runnable snippets that appear like this in the document:
 
 ![Screenshot of the RMarkdown document in the viewer, a cell is visible between markdown text reading library tidyverse. It is slightly more grey than the background region, and it has a run button at the right of the cell in a contextual menu.]({% link topics/data-science/images/rstudio/r-run-cell.png %})
 
