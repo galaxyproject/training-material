@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:00:08 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Creating Galaxy tools from Conda Through Deployment",
   "interactivityType": "mixed",
@@ -515,7 +515,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 24, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 8, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -552,8 +552,9 @@ Although this will include specific tools, the training is generalizable.</p>
 <ol id="markdown-toc">
   <li><a href="#galaxy-tools-and-conda" id="markdown-toc-galaxy-tools-and-conda"><span class="notranslate">Galaxy</span> Tools and Conda</a>    <ol>
       <li><a href="#writing-a-bioconda-recipe" id="markdown-toc-writing-a-bioconda-recipe">Writing a Bioconda Recipe</a></li>
+      <li><a href="#building-the-recipe-locally" id="markdown-toc-building-the-recipe-locally">Building the recipe locally</a></li>
       <li><a href="#creating-a-pull-request" id="markdown-toc-creating-a-pull-request">Creating a Pull Request</a></li>
-      <li><a href="#deploying-a-conda-package" id="markdown-toc-deploying-a-conda-package">Deploying a Conda Package</a></li>
+      <li><a href="#installing-a-conda-package" id="markdown-toc-installing-a-conda-package">Installing a Conda Package</a></li>
     </ol>
   </li>
   <li><a href="#galaxy-tool-wrappers" id="markdown-toc-galaxy-tool-wrappers"><span class="notranslate">Galaxy</span> Tool Wrappers</a>    <ol>
@@ -605,12 +606,26 @@ Recipes should always define the following 6 sections in the <code class="langua
   <li>about</li>
 </ul>
 
+<p>Let’s write a Bioconda recipe for the tool we want to package: <a href="https://github.com/davebx/bellerophon">bellerophon</a></p>
+
+<blockquote class="warning">
+  <h3 id="warning-naming-collision"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Naming collision</h3>
+  <p>As this tool is already packaged in Bioconda, to prevent any naming collision, we will slightly modify its name from <code class="language-plaintext highlighter-rouge">bellerophon</code> to <code class="language-plaintext highlighter-rouge">bellerophon_bis</code> in the recipe.
+<strong>This should never be done in real life, we only do it for this exercise!</strong></p>
+</blockquote>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-writing-a-bioconda-recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Writing a Bioconda Recipe</h3>
 
   <ol>
     <li>
-      <p>The first thing we should do is prepare our workspace. We create a branch in git, a conda environment with pip and
+      <p>The first thing we should do is prepare our workspace. <a href="https://help.github.com/articles/fork-a-repo/">Create a fork</a> of the <a href="https://github.com/bioconda/bioconda-recipes/">Bioconda repository</a> on GitHub</p>
+    </li>
+    <li>
+      <p>Clone your fork of this repository to create a local copy on your computer</p>
+    </li>
+    <li>
+      <p>We create a branch in git, a conda environment with pip and
 conda-build preinstalled, and a folder for the meta.yaml file.</p>
 
       <blockquote class="code-in">
@@ -618,7 +633,7 @@ conda-build preinstalled, and a folder for the meta.yaml file.</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> bellerophon_bioconda
 conda create <span class="nt">-y</span> <span class="nt">--name</span> bellerophon_bioconda pip python conda-build
 conda activate bellerophon_bioconda
-<span class="nb">mkdir </span>recipes/bellerophon
+<span class="nb">mkdir </span>recipes/bellerophon_bis
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -641,24 +656,24 @@ conda activate bellerophon_bioconda
     <li>
       <p>Using the above information, we create the meta.yaml file where we’ll then define the
 parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
-With these definitions, bioconda’s automatic version updater should recognize when a new version has been released and
-create a pull request to update the bioconda package.</p>
+With these definitions, Bioconda’s automatic version updater should recognize when a new version has been released and
+create a pull request to update the Bioconda package.</p>
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim recipes/bellerophon/meta.yaml <span class="c"># vim can of course be replaced with any other editor.</span>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim recipes/bellerophon_bis/meta.yaml <span class="c"># vim can of course be replaced with any other editor.</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <p>and set the following content:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "bellerophon" %</span><span class="pi">}</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "bellerophon_bis" %</span><span class="pi">}</span>
 <span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "1.0" %</span><span class="pi">}</span>
 <span class="pi">{</span><span class="err">%</span> <span class="nv">set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %</span><span class="pi">}</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Now we define the conda package metadata. This will be shown as bellerophon-1.0 in anaconda and <code class="language-plaintext highlighter-rouge">conda search</code>. We
+      <p>Now we define the conda package metadata. This will be shown as bellerophon_bis-1.0 in anaconda and <code class="language-plaintext highlighter-rouge">conda search</code>. We
 plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
 lowercase.</p>
 
@@ -679,7 +694,7 @@ that conda-build is getting the right source code every time.</p>
     </li>
     <li>
       <p>Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
-We use the exte<span class="notranslate">rna</span>lly defined `` variable, which defines which python conda-build is using, to install it
+We use the exte<span class="notranslate">rna</span>lly defined <code class="language-plaintext highlighter-rouge">{{ PYTHON }}</code> variable, which defines which python conda-build is using, to install it
 to the build prefix. The –no-deps and –ignore-installed flags are needed to ensure that conda-build only packages
 bellerophon itself. In this section, if necessary, we can also define patches that should be applied to the source code,
 with the <code class="language-plaintext highlighter-rouge">patches:</code> token under <code class="language-plaintext highlighter-rouge">build:</code>, and specify that the package should not be built for a given architecture with
@@ -688,7 +703,7 @@ the <code class="language-plaintext highlighter-rouge">skip:</code> directive.</
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
   <span class="na">noarch</span><span class="pi">:</span> <span class="s">python</span>
   <span class="na">number</span><span class="pi">:</span> <span class="m">0</span>
-  <span class="na">script</span><span class="pi">:</span>  <span class="s">-m pip install . --no-deps --ignore-installed -vv</span>
+  <span class="na">script</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">PYTHON</span> <span class="pi">}}</span> <span class="s">-m pip install . --no-deps --ignore-installed -vv</span>
   <span class="c1">#patches: /dev/null # Not used in this tutorial</span>
   <span class="c1">#skip: True [osx] # Not used in this tutorial</span>
 </code></pre></div>      </div>
@@ -743,7 +758,7 @@ homepage, and optionally the github use<span class="notranslate">rna</span>me of
     <blockquote class="solution">
       <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "bellerophon" %</span><span class="pi">}</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "bellerophon_bis" %</span><span class="pi">}</span>
 <span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "1.0" %</span><span class="pi">}</span>
 <span class="pi">{</span><span class="err">%</span> <span class="nv">set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %</span><span class="pi">}</span>
 
@@ -784,9 +799,68 @@ homepage, and optionally the github use<span class="notranslate">rna</span>me of
   </blockquote>
 </blockquote>
 
+<blockquote class="comment">
+  <h3 id="comment-using-buildsh"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using build.sh</h3>
+
+  <p>In this recipe, the command to execute for installing the package is very short, that’s why we write it directly in the <code class="language-plaintext highlighter-rouge">meta.yaml</code> file. When you need to run more complex commands (like compilation steps), it is preferable to remove the <code class="language-plaintext highlighter-rouge">build &gt; script</code> entry in the <code class="language-plaintext highlighter-rouge">meta.yaml</code> file, and write all the commands in a script named <code class="language-plaintext highlighter-rouge">build.sh</code> in the same directory.</p>
+
+</blockquote>
+
+<h2 id="building-the-recipe-locally">Building the recipe locally</h2>
+
+<p>Now that your recipe is written, you can try to build it locally.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-building-the-recipe-locally"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Building the recipe locally</h3>
+
+  <ol>
+    <li>
+      <p>Run conda-build</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda build recipes/bellerophon_bis
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Conda build will try to build the recipe locally and will run the the test to check if the package was successfully built.
+At the end, you should see something like this:</p>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TEST END: /home/abretaud/miniconda3/conda-bld/noarch/bellerophon-1.0-py_0.tar.bz2
+Renaming work directory [...]
+# Automatic uploading is disabled
+# If you want to upload package(s) to anaconda.org later, type:
+
+# To have conda build upload to anaconda.org automatically, use
+# conda config --set anaconda_upload yes
+anaconda upload \
+   /home/xxxxx/miniconda3/conda-bld/noarch/bellerophon_bis-1.0-py_0.tar.bz2
+anaconda_upload is not set.  Not uploading wheels: []
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>In this example, the build was successful, and the resulting package is placed in <code class="language-plaintext highlighter-rouge">/home/xxxxx/miniconda3/conda-bld/noarch/bellerophon_bis-1.0-py_0.tar.bz2</code>. This is the file that gets uploaded to the bioconda channel when you create a Pull Request on the Bioconda GitHub repository.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-note-on-building-locally"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note on building locally</h3>
+
+  <p>While building locally is a quick way to check if a recipe is working, it’s not the most reliable way.
+That’s because the build is occurring directly on your system, which means you might get interference between the conda requirements in the recipe and your system-wide installed libraries and system configuration.
+The automatic testing of your recipe on GitHub when you create a Pull Request is more reliable as it is performed in a controlled and isolated environment.</p>
+
+</blockquote>
+
 <h2 id="creating-a-pull-request">Creating a Pull Request</h2>
 
-<p>After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into bioconda.</p>
+<p>After the recipe is complete, and when we have checked that it builds locally, we can commit and push to our fork, so that the recipe can eventually be integrated into Bioconda.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-the-pr"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the PR</h3>
@@ -796,13 +870,13 @@ homepage, and optionally the github use<span class="notranslate">rna</span>me of
       <p>We start by making sure we’re on a branch, and that <code class="language-plaintext highlighter-rouge">recipes/bellerophon/meta.yaml</code> is the only modified file.</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch bellerophon_bioconda
 Untracked files:
@@ -818,7 +892,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
       <p>Add your recipes folder, commit, and push it.</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add recipes/bellerophon
 git commit <span class="nt">-m</span> <span class="s1">'Add recipe for bellerophon 1.0'</span>
 git push origin <span class="nt">-u</span> bellerophon_bioconda
@@ -828,7 +902,7 @@ git push origin <span class="nt">-u</span> bellerophon_bioconda
       <p>Git will give you a url for creating the pull request, which can be clicked to be taken to github.</p>
 
       <blockquote class="code-out">
-        <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin <span class="nt">-u</span> bellerophon_bioconda
 Total 0 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
 remote:
@@ -843,12 +917,19 @@ Branch bellerophon_bioconda <span class="nb">set </span>up to track remote branc
     </li>
   </ol>
 
-  <p>Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.</p>
+  <blockquote class="warning">
+    <h3 id="warning-dont-create-the-pull-request-for-real"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Don’t create the Pull request for real!</h3>
+
+    <p>You can click on the link to see the diff of what would be included in the Pull Request, and how the form looks like. But please don’t click on the <code class="language-plaintext highlighter-rouge">Create pull request</code> button! We don’t want to get duplicate versions of this recipe integrated in bioconda everytime someone follows this tutorial!</p>
+
+  </blockquote>
+
+  <p>Once on the github pull request page, you see a preview of the changes we propose, and you can write a short description of the recipe we want to merge. Have a look at the guidelines in the text box to understand how to properly fill the form, and get your Pull Request merged in the end. In real life, when creating a real new recipe, you would then click the <code class="language-plaintext highlighter-rouge">Create pull request</code> button.</p>
 
   <figure id="figure-1"><img src="../../images/create_pr.png" alt="Github PR. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> An open pull request for the bellerophon conda recipe</figcaption></figure>
 </blockquote>
 
-<h2 id="deploying-a-conda-package">Deploying a Conda Package</h2>
+<h2 id="installing-a-conda-package">Installing a Conda Package</h2>
 
 <p>Once our new recipe has been merged, installing the package should be fairly painless. <span class="notranslate">Galaxy</span>, if configured to do so,
 will automatically install any conda dependencies a tool asks for, whereas manual installation can be as easy as using
@@ -983,8 +1064,8 @@ The description is simply presented as plaintext between the tags. Bellerophon�
 <h3 id="macros-section">Macros section</h3>
 
 <p>The macros section serves two functions – to create meta-variables for inside both the xml text and the command text, called
-tokens, and xml sections that can be slotted in repeatedly. Although this tool will only use the tokens, the xml macros are very
-useful for tools which have multiple options/modes that reuse parameters.</p>
+tokens, and xml sections that can be slotted in repeatedly. In this section we will only use tokens, but xml macros are very
+useful for tools which have multiple options/modes that reuse parameters. We will use a simple xml macro in the following section.</p>
 
 <p>The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. Each need their own ‘token’ line, resulting in</p>
 
@@ -1019,6 +1100,46 @@ of the requirement would change the value for <code class="language-plaintext hi
 
 <p>This would add both of the <code class="language-plaintext highlighter-rouge">&lt;param/&gt;</code> tags at that location. Though inputs are used as an example macro here, any tag or group of tags can be made into a macro.</p>
 
+<h3 id="biotools-id">Bio.tools ID</h3>
+
+<p>We will now add a useful macro entry. With the <span class="notranslate">Galaxy</span> ecosystem is becoming more reliant on metadata, a bio.tools ID can help <span class="notranslate">Galaxy</span> to pull standardized metadata for your tool. This enables users to find and use the tool more easily from across the web, so we highly recommend setting a bio.tools identifier. If an entry already exists on <a href="https://bio.tools">https://bio.tools</a>, it’s a simple task.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-a-biotools-id"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting a bio.tools ID:</h3>
+
+  <p>If we go to <a href="https://bio.tools">https://bio.tools</a> and search “Bellerophon”, we find that it already has a bio.tools entry:</p>
+
+  <p><img src="../../images/biotools-profile.png" alt="Bellerophon bio.tools webpage. " loading="lazy" /></p>
+
+  <p>We just have to add the biotools ID as a <code class="language-plaintext highlighter-rouge">&lt;macro&gt;</code> tag.</p>
+
+  <p>Let’s create a macro xml file next to our tool xml: <code class="language-plaintext highlighter-rouge">bellerophon_macros.xml</code></p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;macros&gt;</span>
+  <span class="nt">&lt;xml</span> <span class="na">name=</span><span class="s">"bio_tools"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;xrefs&gt;</span>
+        <span class="nt">&lt;xref</span> <span class="na">type=</span><span class="s">"bio.tools"</span><span class="nt">&gt;</span>Bellerophon<span class="nt">&lt;/xref&gt;</span>
+    <span class="nt">&lt;/xrefs&gt;</span>
+  <span class="nt">&lt;/xml&gt;</span>
+<span class="nt">&lt;/macros&gt;</span>
+</code></pre></div>  </div>
+
+  <p>Now we can expand the <code class="language-plaintext highlighter-rouge">bio_tools</code> macro in our tool XML, beneath the tokens:</p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;macros&gt;</span>
+    <span class="nt">&lt;token</span> <span class="na">name=</span><span class="s">"@TOOL_VERSION@"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/token&gt;</span>
+    <span class="nt">&lt;token</span> <span class="na">name=</span><span class="s">"@VERSION_SUFFIX@"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/token&gt;</span>
+<span class="nt">&lt;/macros&gt;</span>
+
+<span class="nt">&lt;expand</span> <span class="na">macro=</span><span class="s">"bio_tools"</span><span class="nt">/&gt;</span>
+
+</code></pre></div>  </div>
+
+  <p>If your tool does not yet have an entry in bio.tools, we highly encourage you to create one!
+It takes just 5 minutes to register with bio.tools to start contributing towards this global registry of computational resources.</p>
+
+</blockquote>
+
 <h3 id="requirements-section">Requirements section</h3>
 
 <p>The requirement section is where conda packages and docker/singularity containers are set. As this is a very basic tutorial,
@@ -1051,7 +1172,7 @@ This specifies the</p>
 </code></pre></div>  </div>
 </blockquote>
 
-<p>This uses the macro token for @TOOL_VERSION@ for the bioconda package version to retrieve the version number for bellerophon, while samtools’ version is set manually.</p>
+<p>This uses the macro token for @TOOL_VERSION@ for the Bioconda package version to retrieve the version number for bellerophon, while samtools’ version is set manually.</p>
 
 <blockquote class="question">
   <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1271,7 +1392,7 @@ It also defines the format of that file and the name shown to the user in the hi
 <p>This generates a history item called “bellerophon on <code class="language-plaintext highlighter-rouge">&lt;input file name&gt;</code>”, as the ${tool.name} and ${on_string} are reserved values
 for the tool’s label and the input file labels.</p>
 
-<p>As the name is hard-set using the output flag, and is output into the working directoy, the name attribute can be used for the file
+<p>As the name is hard-set using the output flag, and is output into the working directory, the name attribute can be used for the file
 search. Alte<span class="notranslate">rna</span>tively, the attribute “from_work_dir” allows a lower directory to be specified.</p>
 
 <h4 id="filtering-the-output"><em>Filtering the output</em></h4>
@@ -1646,13 +1767,13 @@ If you not have conda installed we suggest to use <code class="language-plaintex
       <p>In order to test if the installation worked execute</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo <span class="nt">--version</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <h3 id="code-out-output-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
         <p>This should output the version of <code class="language-plaintext highlighter-rouge">planemo</code>, e.g.</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo, version 0.74.3
 </code></pre></div>        </div>
@@ -1877,7 +1998,7 @@ the development branch may have the name <code class="language-plaintext highlig
       <p>In order to obtain a clone (i.e. a local copy of your fork) click the green button with text “Code” and copy the link. And execute the following commands on your computer</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
 git clone LINK_TO_YOUR_FORK
 <span class="nb">cd </span>tools-iuc/
@@ -2072,8 +2193,8 @@ Test tools: planemo test – contains the output of <code class="language-plaint
 author = "Alex Ostrovsky and Dave B. and Matthias Bernt",
 title = "Creating Galaxy tools from Conda Through Deployment (Galaxy Training Materials)",
 year = "2021",
-month = "11",
-day = "24"
+month = "12",
+day = "08"
 url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
