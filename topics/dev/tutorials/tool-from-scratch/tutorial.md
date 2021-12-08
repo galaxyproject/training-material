@@ -102,8 +102,8 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >
 > 3. Using the above information, we create the meta.yaml file where we'll then define the
 > parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
-> With these definitions, bioconda's automatic version updater should recognize when a new version has been released and
-> create a pull request to update the bioconda package.
+> With these definitions, Bioconda's automatic version updater should recognize when a new version has been released and
+> create a pull request to update the Bioconda package.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
@@ -256,7 +256,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 
 ## Creating a Pull Request
 
-After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into bioconda.
+After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into Bioconda.
 
 > ### {% icon hands_on %} Hands-on: Creating the PR
 >
@@ -539,7 +539,7 @@ This specifies the
 > ```
 {: .hands_on}
 
-This uses the macro token for @TOOL_VERSION@ for the bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
+This uses the macro token for @TOOL_VERSION@ for the Bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
 
 > ### {% icon question %} Question
 >
