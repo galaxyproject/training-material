@@ -166,7 +166,7 @@ Before we move on to the next step, we need to make sure that the mapping went w
 
 > ### {% icon question %} Question
 >
-> What proportion of reads were correctly mapped to the genome? Do you think it is enough to continue with tihs tutorial?
+> What proportion of reads were correctly mapped to the genome? Do you think it is enough to continue with this tutorial?
 >
 > > ### {% icon solution %} Solution
 > >
