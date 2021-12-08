@@ -148,7 +148,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >     {% endraw %}
 >
 > 5. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
-> We use the externally defined `{{ PYTHON }}` variable, which defines which python conda-build is using, to install it
+> We use the externally defined `{% raw %}{{ PYTHON }}{% endraw %}` variable, which defines which python conda-build is using, to install it
 > to the build prefix. The --no-deps and --ignore-installed flags are needed to ensure that conda-build only packages
 > bellerophon itself. In this section, if necessary, we can also define patches that should be applied to the source code,
 > with the `patches:` token under `build:`, and specify that the package should not be built for a given architecture with
@@ -158,7 +158,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    build:
 >      noarch: python
 >      number: 0
->      script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+>      script: {% raw %}{{ PYTHON }}{% endraw %} -m pip install . --no-deps --ignore-installed -vv
 >      #patches: /dev/null # Not used in this tutorial
 >      #skip: True [osx] # Not used in this tutorial
 >    ```
