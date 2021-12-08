@@ -22,7 +22,6 @@ jobs:
         with:
           ruby-version: "2.5"
       - uses: actions/cache@v2
-        id: setup-cache
         with:
           path: |
             vendor/bundle
@@ -38,10 +37,7 @@ jobs:
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          pip install -r requirements.txt
-          npm install
           bundle pristine ffi
-        if: steps.setup-cache.outputs.cache-hit != 'true'
       # END Dependencies
 
       - name: Send announcements to matrix
