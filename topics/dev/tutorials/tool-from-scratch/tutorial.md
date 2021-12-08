@@ -75,7 +75,7 @@ Let's write a Bioconda recipe for the tool we want to package: [bellerophon](htt
 
 > ### {% icon warning %} Naming collision
 > As this tool is already packaged in Bioconda, to prevent any naming collision, we will slightly modify its name from `bellerophon` to `bellerophon_bis` in the recipe.
-> This should never be done in real life, we only do it for this exercise!
+> **This should never be done in real life, we only do it for this exercise!**
 {: .warning}
 
 > ### {% icon hands_on %} Hands-on: Writing a Bioconda Recipe
