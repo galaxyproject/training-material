@@ -34,6 +34,7 @@ jobs:
         with:
           node-version: '14'
       - uses: actions/cache@v2
+        id: setup-cache
         with:
           path: |
             vendor/bundle
@@ -52,8 +53,8 @@ jobs:
           pip install -r requirements.txt
           npm install
           bundle pristine ffi
+        if: steps.setup-cache.outputs.cache-hit != 'true'
       # END Dependencies
-      #
 
       - name: Check that all slides extract presenter notes successfully
         run: |
