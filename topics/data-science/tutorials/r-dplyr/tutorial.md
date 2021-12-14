@@ -25,6 +25,8 @@ key_points:
 - The functions for selecting data are a lot easier to understand than R's built in alternatives.
 contributors:
 - hexylena
+- erasmusplus
+- avans-atgm
 subtopic: sql
 notebook:
     language: r

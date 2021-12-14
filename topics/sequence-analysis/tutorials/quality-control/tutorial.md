@@ -14,7 +14,7 @@ objectives:
   - Summarise quality metrics MultiQC
   - Process single-end and paired-end data
 follow_up_training:
-  - 
+  -
     type: "internal"
     topic_name: sequence-analysis
     tutorials:
@@ -35,6 +35,7 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
+  - erasmusplus
 
 ---
 

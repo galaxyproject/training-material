@@ -23,6 +23,7 @@ contributors:
 - r1corre
 - lleroi
 - stephanierobin
+- erasmusplus
 
 follow_up_training:
  - type: internal

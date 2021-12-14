@@ -45,6 +45,7 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
+  - erasmusplus
 tags:
 - R
 ---

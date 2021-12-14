@@ -75,6 +75,7 @@ key_points:
 contributors:
 - carpentries
 - hexylena
+- avans-atgm
 
 subtopic: sql
 
