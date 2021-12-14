@@ -26,6 +26,8 @@ subtopic: sql
 contributors:
 - hexylena
 - NUKnightLab
+- erasmusplus
+- avans-atgm
 tags:
 - game
 - SQL

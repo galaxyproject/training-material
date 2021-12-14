@@ -28,6 +28,7 @@ contributors:
   - hexylena
   - nathandunn
   - mboudet
+  - erasmusplus
 
 requirements:
   - type: "internal"

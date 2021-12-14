@@ -29,6 +29,7 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
+  - erasmusplus
 
 abbreviations:
     NMDS: Non-metric multidimensional scaling
