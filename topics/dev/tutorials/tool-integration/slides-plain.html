@@ -23,9 +23,9 @@
         
         
         
-        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
         <meta property="og:title" content="Galaxy Training: Tool development and integration into Galaxy" />
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
@@ -100,6 +100,10 @@
 
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -288,13 +292,13 @@
 
 <h2 id="tools-in-the-galaxy-ui">Tools in the Galaxy UI</h2>
 
-<p><img src="../../images/galaxy_instance_detailed_screenshot.png" alt="Screenshot of galaxy with the three main panels labelled list of available tools on left, 'wrapper' in center, and history with results as datasets on right" /></p>
+<p><img src="../../images/galaxy_instance_detailed_screenshot.png" alt="Screenshot of galaxy with the three main panels labelled list of available tools on left, 'wrapper' in center, and history with results as datasets on right. " loading="lazy" /></p>
 
 <hr />
 
 <h2 id="galaxy-tool--wrapper">Galaxy tool / wrapper</h2>
 
-<p><img src="../../images/graphlan_screenshot.png" alt="Screenshot of tool interface in Galaxy for GraPhlAn showing a variety of input types like file selection, select, text, numbers." /></p>
+<p><img src="../../images/graphlan_screenshot.png" alt="Screenshot of tool interface in Galaxy for GraPhlAn showing a variety of input types like file selection, select, text, numbers." loading="lazy" /></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graphlan.py <span class="nt">--format</span> <span class="s2">"png"</span> <span class="nt">--size</span> 7 input_tree.txt png_image.png
 </code></pre></div></div>
@@ -316,7 +320,7 @@
 
 <h2 id="tool-execution">Tool execution</h2>
 
-<p><img src="../../images/wrapper_layers.png" alt="A flowchart is depicated with the galaxy interface pointing to a bowtie2-wrapper.xml file which has a command, inputs, and outputs. Inputs points back to the tool interface. The command block points to the Operating System with an image of servers and the bowtie2 binary. This points back to outputs, and back to the history within the galaxy interface" /></p>
+<p><img src="../../images/wrapper_layers.png" alt="A flowchart is depicated with the galaxy interface pointing to a bowtie2-wrapper.xml file which has a command, inputs, and outputs. Inputs points back to the tool interface. The command block points to the Operating System with an image of servers and the bowtie2 binary. This points back to outputs, and back to the history within the galaxy interface. " loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -331,7 +335,7 @@
 
 <h2 id="tool-execution-1">Tool execution</h2>
 
-<p><img src="../../images/wrapper_big_picture_1.png" alt="An XML file as an image. The tool id is on the first line, then a description element, a command block running &quot;echo Hello World $mystring to $output&quot;, an inputs section with a mystring text input, and an output1 tabular data file. A help block is shown last." /></p>
+<p><img src="../../images/wrapper_big_picture_1.png" alt="An XML file as an image. The tool id is on the first line, then a description element, a command block running &quot;echo Hello World $mystring to $output&quot;, an inputs section with a mystring text input, and an output1 tabular data file. A help block is shown last." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -344,13 +348,13 @@
 
 <h2 id="tool-execution-2">Tool execution</h2>
 
-<p><img src="../../images/wrapper_big_picture_2.png" alt="The previous image, but the input parameter named 'mystring' is shown pointing to its place in the command block. Same for the output pointing to the command block. An overlay shows the Job Command Line /bin/echo Hello world you are amazing &gt; a/path.dat" /></p>
+<p><img src="../../images/wrapper_big_picture_2.png" alt="The previous image, but the input parameter named 'mystring' is shown pointing to its place in the command block. Same for the output pointing to the command block. An overlay shows the Job Command Line /bin/echo Hello world you are amazing &gt; a/path.dat. " loading="lazy" /></p>
 
 <hr />
 
 <h2 id="tool-execution-3">Tool execution</h2>
 
-<p><img src="../../images/wrapper_big_picture_3.png" alt="The previous image but now there is an overlay showing the output text Hello world you are amazing" /></p>
+<p><img src="../../images/wrapper_big_picture_3.png" alt="The previous image but now there is an overlay showing the output text Hello world you are amazing. " loading="lazy" /></p>
 
 <hr />
 
@@ -431,7 +435,7 @@ graphlan.py
 
 <h2 id="inputs--param--data"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">data</code></h2>
 
-<p><img src="../../images/input_data.png" alt="Screenshot of the file selection input in Galaxy permitting selection of a single file, multiple files, or a collection. In bold text a label appears above the component describing its use. Below the component in light grey is a help message. This applies to every input in Galaxy" /></p>
+<p><img src="../../images/input_data.png" alt="Screenshot of the file selection input in Galaxy permitting selection of a single file, multiple files, or a collection. In bold text a label appears above the component describing its use. Below the component in light grey is a help message. This applies to every input in Galaxy. " loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
@@ -442,12 +446,12 @@ graphlan.py
 
 <h2 id="inputs--param--integer--float"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">integer</code> | <code class="language-plaintext highlighter-rouge">float</code></h2>
 
-<p><img src="../../images/input_integer.png" alt="Screenshot of the float input, it's just an input field set to 7." /></p>
+<p><img src="../../images/input_integer.png" alt="Screenshot of the float input, it's just an input field set to 7." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">value=</span><span class="s">"7"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p><img src="../../images/input_integer_range.png" alt="Screenshot of the float input again, but this time a slider appears due to addition of min and max" /></p>
+<p><img src="../../images/input_integer_range.png" alt="Screenshot of the float input again, but this time a slider appears due to addition of min and max. " loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"float"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">max=</span><span class="s">"10"</span> <span class="na">value=</span><span class="s">"1"</span> <span class="na">label=</span><span class="s">"..."</span>
     <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
@@ -464,7 +468,7 @@ graphlan.py
 
 <h2 id="inputs--param--text"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">text</code></h2>
 
-<p><img src="../../images/input_text.png" alt="Screenshot of a textbox" /></p>
+<p><img src="../../images/input_text.png" alt="Screenshot of a textbox. " loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"..."</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
@@ -473,7 +477,7 @@ graphlan.py
 
 <h2 id="inputs--param--select"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">select</code></h2>
 
-<p><img src="../../images/input_select.png" alt="Screenshot of a select drop down with several image formats." /></p>
+<p><img src="../../images/input_select.png" alt="Screenshot of a select drop down with several image formats." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">&gt;</span>
     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"png"</span> <span class="na">selected=</span><span class="s">"true"</span><span class="nt">&gt;</span>PNG<span class="nt">&lt;/option&gt;</span>
@@ -490,7 +494,7 @@ graphlan.py
 
 <h2 id="inputs--param--select-1"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">select</code></h2>
 
-<p><img src="../../images/input_select_checkboxes.png" alt="The select is now a set of checkboxes." /></p>
+<p><img src="../../images/input_select_checkboxes.png" alt="The select is now a set of checkboxes." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">display=</span><span class="s">"radio"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">&gt;</span>
     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"min"</span> <span class="na">selected=</span><span class="s">"true"</span><span class="nt">&gt;</span>Minimum<span class="nt">&lt;/option&gt;</span>
@@ -504,7 +508,7 @@ graphlan.py
 
 <h2 id="inputs--param--select-2"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">select</code></h2>
 
-<p><img src="../../images/input_select_multiple.png" alt="A select/unselect all checkbox appears before a box with numerous selections inside, appearing as badges that can be added or removed." /></p>
+<p><img src="../../images/input_select_multiple.png" alt="A select/unselect all checkbox appears before a box with numerous selections inside, appearing as badges that can be added or removed." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">multiple=</span><span class="s">"true"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">&gt;</span>
     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"ld"</span> <span class="na">selected=</span><span class="s">"true"</span><span class="nt">&gt;</span>Length distribution<span class="nt">&lt;/option&gt;</span>
@@ -517,7 +521,7 @@ graphlan.py
 
 <h2 id="inputs--param--boolean"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">boolean</code></h2>
 
-<p><img src="../../images/input_boolean.png" alt="A yes/no box is shown" /></p>
+<p><img src="../../images/input_boolean.png" alt="A yes/no box is shown. " loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"boolean"</span> <span class="na">checked=</span><span class="s">"false"</span> <span class="na">truevalue=</span><span class="s">"--log"</span> <span class="na">falsevalue=</span><span class="s">""</span>
     <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span> <span class="nt">/&gt;</span>
@@ -529,7 +533,7 @@ graphlan.py
 
 <h2 id="inputs--param--conditional"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">conditional</code></h2>
 
-<p>.image-75[ <img src="../../images/input_conditional.png" alt="Two screenshots are shown side by side. In the left a select box is set to Paired and two file inputs appear below. On the right the same select box is set to single, and only a single file input appears below it." /> ]</p>
+<p>.image-75[ <img src="../../images/input_conditional.png" alt="Two screenshots are shown side by side. In the left a select box is set to Paired and two file inputs appear below. On the right the same select box is set to single, and only a single file input appears below it." loading="lazy" /> ]</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[
 #if $fastq_input.selector == 'paired':
@@ -561,7 +565,7 @@ graphlan.py
 
 <h2 id="inputs--param--repeat"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">repeat</code></h2>
 
-<p><img src="../../images/input_repeat.png" alt="Two boxes appear labelled 1: Series and 2: Series, with an insert series button below them. Each series box has two inputs in it, a file input and a select box." /></p>
+<p><img src="../../images/input_repeat.png" alt="Two boxes appear labelled 1: Series and 2: Series, with an insert series button below them. Each series box has two inputs in it, a file input and a select box." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[
 #for $i, $s in enumerate($series):
@@ -589,7 +593,7 @@ graphlan.py
 
 <p>Which files the tool will produce as output?</p>
 
-<p><img src="../../images/output.png" alt="Screenshot of a galaxy history with three outputs." /></p>
+<p><img src="../../images/output.png" alt="Screenshot of a galaxy history with three outputs." loading="lazy" /></p>
 
 <hr />
 
@@ -665,7 +669,7 @@ graphlan.py
 
 <h2 id="help"><code class="language-plaintext highlighter-rouge">help</code></h2>
 
-<p><img src="../../images/help.png" alt="Screenshot of a help block in a galaxy tool, it shows the below text block rendered according to restructured text rules. What it does is bold, and user manual is a hyperlink to the bitbucket url." /></p>
+<p><img src="../../images/help.png" alt="Screenshot of a help block in a galaxy tool, it shows the below text block rendered according to restructured text rules. What it does is bold, and user manual is a hyperlink to the bitbucket url." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
 **What it does**
@@ -686,7 +690,7 @@ For more information, check the `user manual
 
 <h2 id="citations"><code class="language-plaintext highlighter-rouge">citations</code></h2>
 
-<p><img src="../../images/citations.png" alt="Screenshot of the citations box showing 5 nicely formatted citations with italics, and hyperlinked DOIs." /></p>
+<p><img src="../../images/citations.png" alt="Screenshot of the citations box showing 5 nicely formatted citations with italics, and hyperlinked DOIs." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;citations&gt;</span>
     <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts611<span class="nt">&lt;/citation&gt;</span>
@@ -755,7 +759,7 @@ echo "Yeah it worked!"
 
 <p>Use sections to group related parameters</p>
 
-<p><img src="../../images/input_section.png" alt="Screenshot of the same section twice, in the first it shows Additional Options and is collapsed. In the second it is expanded and an integer input can be seen." /></p>
+<p><img src="../../images/input_section.png" alt="Screenshot of the same section twice, in the first it shows Additional Options and is collapsed. In the second it is expanded and an integer input can be seen." loading="lazy" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">"advanced"</span> <span class="na">title=</span><span class="s">"Advanced options"</span> <span class="na">expanded=</span><span class="s">"False"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">argument=</span><span class="s">"--size"</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">value=</span><span class="s">"7"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
@@ -765,7 +769,7 @@ echo "Yeah it worked!"
 
 <hr />
 
-<p><img src="../../images/planemo-logo.png" alt="Planemo logo, the E mimics the galaxy logo with three bars, the bottom most offset" /></p>
+<p><img src="../../images/planemo-logo.png" alt="Planemo logo, the E mimics the galaxy logo with three bars, the bottom most offset. " loading="lazy" /></p>
 
 <blockquote>
   <p>Command-line utilities to assist in building and publishing Galaxy tools.</p>
@@ -778,13 +782,13 @@ echo "Yeah it worked!"
 
 <hr />
 
-<p>##.image-25[<img src="../../images/planemo-logo.png" alt="Planemo logo" />]</p>
+<p>##.image-25[<img src="../../images/planemo-logo.png" alt="Planemo logo. " loading="lazy" />]</p>
 
-<p><img src="../../images/big_picture.png" alt="An overly complicated flowchart with 11 steps and a three level hierarchy. The gist is that planemo tool_init lets a wrapper be created, planemo lint is then used. Planemo conda installs packages from a conda repository. This is then run with planemo test and planemo serve. Afterwards planemo shed_test, shed_create, and shed_update upload the wrapper to the galaxy toolshed. Then it is installed to a galaxy instance where it can be tested, and fetches the conda env from conda." /></p>
+<p><img src="../../images/big_picture.png" alt="An overly complicated flowchart with 11 steps and a three level hierarchy. The gist is that planemo tool_init lets a wrapper be created, planemo lint is then used. Planemo conda installs packages from a conda repository. This is then run with planemo test and planemo serve. Afterwards planemo shed_test, shed_create, and shed_update upload the wrapper to the galaxy toolshed. Then it is installed to a galaxy instance where it can be tested, and fetches the conda env from conda." loading="lazy" /></p>
 
 <hr />
 
-<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again" />]</p>
+<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again. " loading="lazy" />]</p>
 
 <p><code class="language-plaintext highlighter-rouge">planemo tool_init</code></p>
 
@@ -813,7 +817,7 @@ echo "Yeah it worked!"
 
 <p>class: packed</p>
 
-<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again" />]</p>
+<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again. " loading="lazy" />]</p>
 
 <p><code class="language-plaintext highlighter-rouge">planemo lint</code></p>
 
@@ -844,7 +848,7 @@ Applying linter citations... CHECK
 
 <hr />
 
-<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again" />]</p>
+<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again. " loading="lazy" />]</p>
 
 <p><code class="language-plaintext highlighter-rouge">planemo serve</code></p>
 
@@ -857,11 +861,11 @@ Applying linter citations... CHECK
 
 <hr />
 
-<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again" />]</p>
+<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again. " loading="lazy" />]</p>
 
 <p>Building Galaxy Tools</p>
 
-<p><img src="../../images/planemo_tool_building_lint.png" alt="flowchart with planemo tool_init creating a wrapper tool.xml and planemo lint being run repeatedly." /></p>
+<p><img src="../../images/planemo_tool_building_lint.png" alt="flowchart with planemo tool_init creating a wrapper tool.xml and planemo lint being run repeatedly." loading="lazy" /></p>
 
 <hr />
 
@@ -1010,7 +1014,7 @@ Applying linter citations... CHECK
 
 <hr />
 
-<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo yet again" />]</p>
+<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo yet again. " loading="lazy" />]</p>
 
 <p><code class="language-plaintext highlighter-rouge">planemo test</code></p>
 
@@ -1023,11 +1027,11 @@ Applying linter citations... CHECK
 
 <hr />
 
-<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo" />]</p>
+<p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo. " loading="lazy" />]</p>
 
 <p>Test Galaxy Tools</p>
 
-<p><img src="../../images/planemo_tool_building_test.png" alt="flowchart with planemo tool_init creating a wrapper tool.xml and planemo lint being run repeatedly, and now planemo test as well." /></p>
+<p><img src="../../images/planemo_tool_building_test.png" alt="flowchart with planemo tool_init creating a wrapper tool.xml and planemo lint being run repeatedly, and now planemo test as well." loading="lazy" /></p>
 
 <hr />
 
@@ -1039,7 +1043,7 @@ Applying linter citations... CHECK
 
 <p>How Galaxy will deal with dependencies?</p>
 
-<p><img src="../../images/galaxy_instance.png" alt="schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications &amp; libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed" /></p>
+<p><img src="../../images/galaxy_instance.png" alt="schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications &amp; libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed. " loading="lazy" /></p>
 
 <hr />
 
@@ -1055,7 +1059,7 @@ Applying linter citations... CHECK
 
 <hr />
 
-<p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo, the C is textured." />]</p>
+<p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo, the C is textured." loading="lazy" />]</p>
 
 <ul>
   <li>Package, dependency and environment manager</li>
@@ -1118,7 +1122,7 @@ quit
 
 <h2 id="macros"><code class="language-plaintext highlighter-rouge">macros</code></h2>
 
-<p>![Another schemating with many arrows. Macros.xml is on the left with token and xml blocks. The token block points to examples like @THREADS@ and @HELP_ABOUT@. The xml block points to examples like <expand macro="requirements">. Both of these examples point to three blast tools which make use of the macros.](../../images/macro.png)</expand></p>
+<p><img src="../../images/macro.png" alt="Another schemating with many arrows. Macros.xml is on the left with token and xml blocks. The token block points to examples like @THREADS@ and @HELP_ABOUT@. The xml block points to examples like &lt;expand macro=&quot;requirements&quot;&gt;. Both of these examples point to three blast tools which make use of the macros." loading="lazy" /></p>
 
 <p>.footnote[<a href="https://planemo.readthedocs.io/en/latest/writing_advanced.html#macros-reusable-elements">Planemo documentation about macros</a>]</p>
 
@@ -1243,11 +1247,11 @@ echo '$__app__.config.user_library_import_dir'
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p><img src="../../images/input_data.png" alt="File selector input" /></p>
+<p><img src="../../images/input_data.png" alt="File selector input. " loading="lazy" /></p>
 
 <p>Possible to select multiple dataset:</p>
 
-<p><img src="../../images/input_data_multiple.png" alt="File selector input screenshot, but now the middle &quot;multiple files&quot; button is checked." /></p>
+<p><img src="../../images/input_data_multiple.png" alt="File selector input screenshot, but now the middle &quot;multiple files&quot; button is checked." loading="lazy" /></p>
 
 <ul>
   <li>Useful to launch the same tool on multiple datasets independently</li>
@@ -1261,7 +1265,7 @@ echo '$__app__.config.user_library_import_dir'
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">multiple=</span><span class="s">"true"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p><img src="../../images/input_data_multiple2.png" alt="A multi-select file input field is shown, different than the normal file input there is no single file option." /></p>
+<p><img src="../../images/input_data_multiple2.png" alt="A multi-select file input field is shown, different than the normal file input there is no single file option." loading="lazy" /></p>
 
 <p>In the command:</p>
 
@@ -1335,7 +1339,7 @@ echo '$__app__.config.user_library_import_dir'
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"inputs"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"bam"</span> <span class="na">label=</span><span class="s">"Input BAM(s)"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p><img src="../../images/input_data_collection.png" alt="The normal file selector is shown however now the collection input is clicked." /></p>
+<p><img src="../../images/input_data_collection.png" alt="The normal file selector is shown however now the collection input is clicked." loading="lazy" /></p>
 
 <p>Single execution:</p>
 <ul>
@@ -1384,7 +1388,7 @@ echo '$__app__.config.user_library_import_dir'
 
 <h2 id="use-multiple-cpus">Use multiple CPUs</h2>
 
-<p><img src="../../images/job_conf.xml_2.png" alt="Screenshot of two xml files. In the top is the jb_conf.xml where a command line job submission specification indicates that it will be submitted with 4 threads. A single tool, ncbi blastn wrapper is assigned to that destination. In the second xml file the blastn command uses the GALAXY_SLOTS variable to control how many threads are supplied to the tool." /></p>
+<p><img src="../../images/job_conf.xml_2.png" alt="Screenshot of two xml files. In the top is the jb_conf.xml where a command line job submission specification indicates that it will be submitted with 4 threads. A single tool, ncbi blastn wrapper is assigned to that destination. In the second xml file the blastn command uses the GALAXY_SLOTS variable to control how many threads are supplied to the tool." loading="lazy" /></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blastn <span class="nt">-query</span> foo_bar <span class="nt">-num_threads</span> 4
 </code></pre></div></div>
@@ -1406,7 +1410,7 @@ echo '$__app__.config.user_library_import_dir'
 
 <h2 id="using-a-data-table-in-a-tool">Using a data table in a tool</h2>
 
-<p><img src="../../images/tool_data_table_conf.xml.png" alt="Three xml files are shown. At the top is the tool data table conf which mentions a tool-data/bowtie2_indices.loc. Below is that bowtie2 loc file which indicates that hg19 will be found at a specific location in the /db directory. And the third is the bowtie2 wrapper which loads options from a data table, and points to the bowtie2_indexes named table in the first xml." /></p>
+<p><img src="../../images/tool_data_table_conf.xml.png" alt="Three xml files are shown. At the top is the tool data table conf which mentions a tool-data/bowtie2_indices.loc. Below is that bowtie2 loc file which indicates that hg19 will be found at a specific location in the /db directory. And the third is the bowtie2 wrapper which loads options from a data table, and points to the bowtie2_indexes named table in the first xml." loading="lazy" /></p>
 
 <hr />
 
@@ -1449,7 +1453,7 @@ echo '$__app__.config.user_library_import_dir'
 
 <h2 id="iuc-intergalactic-utilities-commission">IUC: Intergalactic Utilities Commission</h2>
 
-<p>.image-50[<img src="../../images/iuc_logo.png" alt="IUC logo" />]</p>
+<p>.image-50[<img src="../../images/iuc_logo.png" alt="IUC logo. " loading="lazy" />]</p>
 
 <ul>
   <li>A team maintaining high quality tools</li>
@@ -1500,13 +1504,13 @@ echo '$__app__.config.user_library_import_dir'
 
 <h2 id="continuous-integration">Continuous Integration</h2>
 
-<p>.image-50[<img src="../../images/github_logo.png" alt="Github logo" />]</p>
+<p>.image-50[<img src="../../images/github_logo.png" alt="Github logo. " loading="lazy" />]</p>
 
-<p>.image-50[<img src="../../images/travis_ci_logo.png" alt="Travis CI logo" />]</p>
+<p>.image-50[<img src="../../images/travis_ci_logo.png" alt="Travis CI logo. " loading="lazy" />]</p>
 
-<p>.image-50[<img src="../../images/planemo-logo.png" alt="Planemo logo" />]</p>
+<p>.image-50[<img src="../../images/planemo-logo.png" alt="Planemo logo. " loading="lazy" />]</p>
 
-<p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo" />]</p>
+<p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo. " loading="lazy" />]</p>
 
 <hr />
 
@@ -1524,13 +1528,13 @@ echo '$__app__.config.user_library_import_dir'
 
 <h2 id="github-side">GitHub side</h2>
 
-<p><img src="../../images/github_travis_github.png" alt="Screenshot of a .travis.yml file with badges and logos over it. It runs several planemo commands during before install, install, and script portions." /></p>
+<p><img src="../../images/github_travis_github.png" alt="Screenshot of a .travis.yml file with badges and logos over it. It runs several planemo commands during before install, install, and script portions." loading="lazy" /></p>
 
 <hr />
 
 <h2 id="travis-ci-side">Travis CI side</h2>
 
-<p><img src="../../images/github_travis_travis.png" alt="Screenshot of travis CI shown a tool test passing." /></p>
+<p><img src="../../images/github_travis_travis.png" alt="Screenshot of travis CI shown a tool test passing." loading="lazy" /></p>
 
 <hr />
 
@@ -1600,17 +1604,17 @@ Applying linter readme... CHECK
 
 <hr />
 
-<p>.image-50[<img src="../../../../shared/images/ansible_logo.png" alt="Ansible logo" />]</p>
+<p>.image-50[<img src="../../../../shared/images/ansible_logo.png" alt="Ansible logo. " loading="lazy" />]</p>
 
-<p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo" />]</p>
+<p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo. " loading="lazy" />]</p>
 
-<p>.image-50[<img src="../../../../shared/images/docker_logo.png" alt="Docker logo" />]</p>
+<p>.image-50[<img src="../../../../shared/images/docker_logo.png" alt="Docker logo. " loading="lazy" />]</p>
 
 <hr />
 
 <h2 id="docker-galaxy-flavors">Docker Galaxy Flavors</h2>
 
-<p><img src="../../images/galaxydocker_logo.png" alt="Galaxy docker logo, the docker logo with several containers replaced by galaxy logos." /></p>
+<p><img src="../../images/galaxydocker_logo.png" alt="Galaxy docker logo, the docker logo with several containers replaced by galaxy logos." loading="lazy" /></p>
 
 <p>.footnote[<a href="https://github.com/bgruening/docker-galaxy-stable">Docker Galaxy Stable</a>]</p>
 
