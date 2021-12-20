@@ -1,6 +1,7 @@
 {% assign locale = site.data.lang[page.lang] %}
 
-{% assign id-tutorial = page.url | remove: '/topics/' | remove: "/tutorials" | remove: '.html' %}
+{% assign tut = include.material.url | default: page.url %}
+{% assign id-tutorial = tut | remove: '/topics/' | remove: "/tutorials" | remove: '.html' %}
 {% assign id-slides = id-tutorial | replace: '/tutorial', '/slides' %}
 {% assign id-both = id-tutorial | replace: '/tutorial', '' %}
 
@@ -11,8 +12,8 @@
 
   {% if hasvideo-tutorial or hasvideo-slides or hasvideo-both or hassession %}
   <li class="btn btn-default supporting_material">
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Video Library for these Training Materials">
-        {% icon video %} GTN Video Library
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        {% icon video %} {% if include.label %}Recordings{% endif %}
     </a>
     <ul class="dropdown-menu">
         {% if hasvideo-both %}
@@ -21,6 +22,7 @@
         {% assign sortedversions = allversions | sort: 'date' | reverse %}
 
         <li>
+
             <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-both}}" title="View GTN Video Library for this Tutorial">
                 {% icon video %} Lecture & Tutorial ({{sortedversions[0].date | date: "%B %Y" }})
             </a>
