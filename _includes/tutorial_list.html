@@ -49,30 +49,7 @@
           {% if material.type == "introduction" %}
             <td>
             {% if material.slides %}
-              <span class="btn-group">
-                <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">
-                    {% icon slides %}
-                </a>
-                <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="sr-only">Toggle Dropdown</span>
-                </a>
-                <ul class="dropdown-menu">
-                  {% for lang in language %}
-                    <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Fslides%2F{{ material.tutorial_name }}.html&edit-text=&act=url" title="{{ inst[0] }}">
-                      {{ lang[1] }}
-                    </a>
-                  {% endfor %}
-                  <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Fslides%2F{{ material.tutorial_name }}.html&edit-text=&act=url" title="{{ inst[0] }}">
-                      And more!
-                  </a>
-                </ul>
-                {% if material.video %}
-                /
-                <a class="topic-icon" href="{{ site.baseurl }}/videos/watch.html?v={{ topic.name }}/slides/{{ material.tutorial_name }}">
-                    {% icon video %}
-                </a>
-                {% endif %}
-              </span>
+              {% include _includes/resource-slides.html material=material topic=topic.name %}
             {% endif %}
             </td>
             <td></td>
