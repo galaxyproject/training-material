@@ -56,6 +56,7 @@ contributors:
 - hexylena
 - dirowa
 - bazante1
+- avans-atgm
 
 subtopic: sql
 

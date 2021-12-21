@@ -21,6 +21,7 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
+  - erasmusplus
 
 abbreviations:
     SINEs: Short Interspersed Nuclear Elements

@@ -33,6 +33,7 @@ contributors:
   - hexylena
   - bazante1
   - dirowa
+  - avans-atgm
 abbreviations:
   SciWMS: Scientific Workflow Management System
   DAG: Directed Acyclic Graph

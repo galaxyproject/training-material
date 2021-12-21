@@ -27,6 +27,7 @@ contributors:
   - mcmaniou
   - fpsom
   - carpentries
+  - erasmusplus
 
 priority: 3
 notebook:
