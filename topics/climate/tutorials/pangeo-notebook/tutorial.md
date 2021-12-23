@@ -1,29 +1,33 @@
 ---
 layout: tutorial_hands_on
 
-title: The Pangeo ecosystem
+title: Pangeo Notebook in Galaxy
 zenodo_link: ''
+requirements:
+  - type: "external"
+    title: Programming with Python
+    link: https://swcarpentry.github.io/python-novice-inflammation/
+  - type: "external"
+    title: Data Carpentry Geospatial Workshop
+    link: https://datacarpentry.org/geospatial-workshop/
 questions:
-- What Pangeo data can I access from Galaxy?
-- What Pangeo Tools can I use?
-- What is Xarray?
-- How do I use Xarray?
-- What is Dask?
-- Why using Dask?
-- What is lazy computation?
-- How to analyze Pangeo Data?
-- How to visualize Pangeo Data?
+- What is Pangeo notebook?
+- What are the main software components of the Pangeo ecosystem?
+- How to manipulate xarray?
+- How to use dask to speed up computation?
+- What is Lazy computation?
+- Where to go next?
 objectives:
-- Learn to select data from Pangeo Catalog
-- Understand the Pangeo software ecosystem
-- Learn to get metadata from Pangeo data
-- Learn to select data
-- Learn to visualize data
-time_estimation: 30m
+- The learning objectives are the goals of the tutorial
+- They will be informed by your audience and will communicate to them and to yourself
+  what you should focus on during the course
+- They are single sentences describing what a learner should be able to do once they
+  have completed the tutorial
+- You can use Bloom's Taxonomy to write effective learning objectives
+time_estimation: 1H
 key_points:
-- Pangeo software ecosystem and its usage in Galaxy
-- Learn about Analysis Ready, Cloud Optimized Data (ARCO)
-- Understand lazy computation
+- The take-home messages
+- They will appear at the end of the tutorial
 contributors:
 - annefou
 
