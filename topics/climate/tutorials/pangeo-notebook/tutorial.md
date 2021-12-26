@@ -32,8 +32,8 @@ objectives:
 - Learn to cite and contribute to Pangeo
 time_estimation: 1H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Pangeo and Xarray
+- Read, select, mask and plot netCDF data using Xarray
 tags:
   - interactive-tools
 contributors:
@@ -942,3 +942,11 @@ We can then make the same multi-plot as earlier (over Italy) but with a `where` 
 > Use `groupby` instead of `resample` when you wish to group over a dimension that is not `time`. `groupby` is very similar to resample but can be applied to any coordinates and not only to time. 
 >
 {: .comment}
+
+
+# Conclusion
+{:.no_toc}
+
+{% icon trophy %} Well done! [Pangeo](https://pangeo.io/) is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo {% cite Abernathey2017 %}, {% cite Abernathey2021 %}, {% cite Gentemann2021 %} and {% cite Sambasivan2021 %}!
+
+Have a look at the [Pangeo Tutorial Gallery](https://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/) to pick up your next Pangeo training material!
