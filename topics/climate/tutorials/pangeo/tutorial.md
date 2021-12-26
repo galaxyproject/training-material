@@ -1,29 +1,27 @@
 ---
 layout: tutorial_hands_on
 
-title: The Pangeo ecosystem
+title: Pangeo ecosystem 101 for everyone
 zenodo_link: ''
 questions:
-- What Pangeo data can I access from Galaxy?
-- What Pangeo Tools can I use?
+- What Pangeo Tools can I use in Galaxy?
 - What is Xarray?
-- How do I use Xarray?
-- What is Dask?
-- Why using Dask?
-- What is lazy computation?
-- How to analyze Pangeo Data?
-- How to visualize Pangeo Data?
+- How do I use Xarray in Galaxy?
+- How to get metadata information?
+- How to make a selection?
+- How to visualize?
+- How to filter? 
+- How to make reduction operations (mean, max, min)?
+- How to resample my data?
 objectives:
-- Learn to select data from Pangeo Catalog
-- Understand the Pangeo software ecosystem
-- Learn to get metadata from Pangeo data
+- Learn to get metadata information using Xarray Galaxy Tools
 - Learn to select data
 - Learn to visualize data
+- Learn to filter, make reduction operations (mean, max, min)
+- Learn to resample my data
 time_estimation: 30m
 key_points:
-- Pangeo software ecosystem and its usage in Galaxy
-- Learn about Analysis Ready, Cloud Optimized Data (ARCO)
-- Understand lazy computation
+- Xarray Tools in Galaxy
 contributors:
 - annefou
 
