@@ -236,8 +236,6 @@ In `info file` output file, we can identify 4 different sections:
 > ### {% icon hands_on %} Hands-on: Map plot
 >  We will use Xarray mapplot Galaxy Tool to plot PM2.5 on December 22, 2021.
 >
-> ### {% icon hands_on %} Hands-on: Task description
->
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
 >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222.netcdf`
@@ -307,12 +305,8 @@ In `info file` output file, we can identify 4 different sections:
 >            - *"Comparator"*: `slice(threshold1,threshold2)`
 >                - *"Choose the start value for slice"*: `0 days 00:00:00`
 >                - *"Choose the end value for slice"*: `1 days 00:00:00`
->
 > 2. Rename the output dataset to `CAMS-PM2_5-20211222_fc0-23h.netcdf`
 > 3.  Add a tag corresponding to `0-23h`
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
 > 4. {% tool [NetCDF xarray Coordinate Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc0-23h.netcdf`
 > 5. Check the generated outputs and in particular `time`. We see that the tabular file `time` only contains **24** lines with times from `0 days 00:00:00` to `0 days 23:00:00`
@@ -328,10 +322,10 @@ In `info file` output file, we can identify 4 different sections:
 
 > ### {% icon question %} PM2.5 over Italy region
 >
-> Using a selection and making plots of PM2.5 over Italy (latitudes: 43.N, 40.N and longitudes: 11.E,15.E), can you tell us if the forecasted PM2.5 will increase or decrease during the first 24 hours?
+> Using a selection and making plots of PM2.5 over Italy (latitudes: 43.N, 40.N and longitudes: 11.E,15.E), can you tell us if the forecasted PM2.5 will increase or decrease during the next 24 hours between 10:00 UTC and 17:00 UTC? Over which town in Italy do you see high values?
 >
 > > ### {% icon solution %} Solution
-> >  {% tool [NetCDF xarray operations](toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0) %} with the following parameters:
+> > 1. {% tool [NetCDF xarray operations](toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0) %} with the following parameters:
 > >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
 > >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222.netcdf`
 > >   - *"Choose the variable to extract"*: `pm2p5_conc`
@@ -339,8 +333,8 @@ In `info file` output file, we can identify 4 different sections:
 > >       - {% icon param-repeat %} *"Insert additional filter"*
 > >           - *"Dimensions"*: `time`
 > >           - *"Comparator"*: `slice(threshold1,threshold2)`
-> >               - *"Choose the start value for slice"*: `0 days 00:00:00`
-> >               - *"Choose the end value for slice"*: `1 days 00:00:00`
+> >               - *"Choose the start value for slice"*: `0 days 10:00:00`
+> >               - *"Choose the end value for slice"*: `0 days 18:00:00`
 > >       - {% icon param-repeat %} *"Insert additional filter"*
 > >           - *"Dimensions"*: `latitude`
 > >           - *"Comparator"*: `slice(threshold1,threshold2)`
@@ -351,34 +345,33 @@ In `info file` output file, we can identify 4 different sections:
 > >           - *"Comparator"*: `slice(threshold1,threshold2)`
 > >               - *"Choose the start value for slice"*: `11`
 > >               - *"Choose the end value for slice"*: `15`
-> >
-> > 2. Rename the output dataset to `CAMS-PM2_5-20211222_fc0-23h_Italy.netcdf`
+> > 2. Rename the output dataset to `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > > 3.  Add a tag corresponding to `0-23h-Italy`
-> >
-> >   {% snippet faqs/galaxy/datasets_add_tag.md %}
 > > 4. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
-> >
-> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc0-23h_Italy.netcdf`
+> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > > 5. {% tool [NetCDF xarray Coordinate Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0) %} with the following parameters:
-> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc0-23h_Italy.netcdf`
+> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > > 6.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
-> >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc0-23h_Italy.netcdf`
-> >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc0-23h_Italy.netcdf`
+> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-18h_Italy.netcdf`
+> >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > >   - *"Choose the variable to plot"*: `pm2p5_conc`
 > >   - *"Name of latitude coordinate"*: `latitude`
 > >   - *"Name of longitude coordinate"*: `longitude`
 > >   - *"Datetime selection"*: `Yes`
 > >       - {% icon param-file %} *"Tabular of time values"*: `time` 
-> >       - *"Choose the times to plot"*: **Tick Select all**
+> >       - *"Choose the times to plot"*: **Tick Select all** 
 > >   - *"Shift longitudes [0,360] --> [-180,180]"*: `No`
 > >   - *"Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)"*: `0,35`
 > >   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
 > >   - *"Add coastline with alpha value [0-1] (optional)"*: `0.5`
-> >   - *"Specify which colormap to use for plotting (optional)"*: `roma_r`
-> >   
-> > 7. {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
-> > 8. 
+> >   - *"Specify which colormap to use for plotting (optional)"*: `roma_r` 
+> > 8. {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
+> >   - {% icon param-files %} *"Images"*: `Map plots`
+> >   - {% icon param-text %} *"# of images wide"*: `4`
+> > 
+> > ![CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021](../../images/PM2_5_galaxy_20211222_Italy-10-17UTC.png)
 > >
+> > From the plot there is no obvious trend over this entire region of Italy. Howver, we clearly see that PM2.5 is always higher over Naples and tend to increase during the day (on that particular date).
 > {: .solution }
 {: .question }
 
@@ -392,20 +385,58 @@ In `info file` output file, we can identify 4 different sections:
 # Masking with Where statement
 
 - Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this we use `where`.
-- For instance, we may want to only keep PM2.5 if values are greater than 25 μm.m-3 (or any threshold you would like to choose)
+- For instance, we may want to only keep PM2.5 if values are greater than a chosen threshold.
 
-> ### {% icon hands_on %} Hands-on: Plot where PM2.5 is greater than 0
-> 
+> ### {% icon hands_on %} Hands-on: Plot where PM2.5 is greater than 30 μm.m-3
+> 1.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
+>   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
+>   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
+>   - *"Choose the variable to plot"*: `pm2p5_conc`
+>   - *"Name of latitude coordinate"*: `latitude`
+>   - *"Name of longitude coordinate"*: `longitude`
+>   - *"Datetime selection"*: `Yes`
+>        - {% icon param-file %} *"Tabular of time values"*: `time` 
+>        - *"Choose the times to plot"*: `0 days 10:00:00` 
+>   - *"Shift longitudes [0,360] --> [-180,180]"*: `No`
+>   - *"Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)"*: `0,35`
+>   - *"Do not plot values below this threshold (optional)"*: `30`
+>   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
+>   - *"Add coastline with alpha value [0-1] (optional)"*: `0.5`
+>   - *"Specify which colormap to use for plotting (optional)"*: `roma_r`
+>    ![CAMS PM2.5 Italy 10:00  December 22, 2021](../../images/PM2_5_galaxy_20211222_Italy-10UTC-30.png)
+> Now we clearly see that values of PM2.5 >  30 μm.m-3 are only found over Naples on December 22, 10:00 UTC.
+>
 {: .hands_on}
 
 
 
-> ### {% icon question %} PM2.5 over Italy over 35 μm.m-3
+> ### {% icon question %} PM2.5 over Italy over 30 μm.m-3
 >
-> Over the first 24 hour forecast, will PM2.5 exceed 35 μm.m-3?
+>Using the same geographical region over Italy, can you tell us if the forecasted PM2.5 will exceed 30 μm.m-3 between 10:00 UTC and 17:00 UTC on december 22, 2021? 
 >
-> > ### {% icon solution %} Solution00:00 UTC so we need to add 2 days and 12 hours to select the correct time index.`
-> >
+> > ### {% icon solution %} Solution
+> > 1.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
+> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
+> >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
+> >   - *"Choose the variable to plot"*: `pm2p5_conc`
+> >   - *"Name of latitude coordinate"*: `latitude`
+> >   - *"Name of longitude coordinate"*: `longitude`
+> >   - *"Datetime selection"*: `Yes`
+> >         - {% icon param-file %} *"Tabular of time values"*: `time` 
+> >         - *"Choose the times to plot"*: **Tick Select all** 
+> >   - *"Shift longitudes [0,360] --> [-180,180]"*: `No`
+> >   - *"Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)"*: `0,35`
+> >   - *"Do not plot values below this threshold (optional)"*: `30`
+> >   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
+> >   - *"Add coastline with alpha value [0-1] (optional)"*: `0.5`
+> >   - *"Specify which colormap to use for plotting (optional)"*: `roma_r`
+> >   
+> > 7. {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
+> >   - {% icon param-files %} *"Images"*: `Map plots`
+> >   - {% icon param-text %} *"# of images wide"*: `4`
+> > 
+> > ![CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021 with PM2.5 > 30 μm.m-3](../../images/PM2_5_galaxy_20211222_Italy-10-17UTC_30.png)
+> > Using thresholds, we can clearly identify areas if any where we have "high" values of PM2.5. On that particular day, PM2.5 is not very high but there are a few pixels where we have values greater than 30 μm.m-3.
 > {: .solution }
 {: .question }
 
@@ -413,6 +444,44 @@ In `info file` output file, we can identify 4 different sections:
 
 > ### {% icon hands_on %} Hands-on: Xarray selection
 > 
+> % icon hands_on %} Hands-on: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF
+> We will select a single location: Naples (40.8518° N, 14.2681° E)
+> 1. {% tool [NetCDF xarray operations](toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
+>    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222.netcdf`
+>    - *"Choose the variable to extract"*: `pm2p5_conc`
+>    - In *"additional filter"*:
+>        - {% icon param-repeat %} *"Insert additional filter"*
+>            - *"Dimensions"*: `latitude`
+>            - *"Comparator"*: `slice(threshold1,threshold2)`
+>                - *"Choose the start value for slice"*: `40.95`
+>                - *"Choose the end value for slice"*: `40.85`
+>        - {% icon param-repeat %} *"Insert additional filter"*
+>            - *"Dimensions"*: `longitude`
+>            - *"Comparator"*: `slice(threshold1,threshold2)`
+>                - *"Choose the start value for slice"*: `14.25`
+>                - *"Choose the end value for slice"*: `14.35`
+> 2. Rename the output dataset to `CAMS-PM2_5-20211222_Naples.netcdf`
+> 3.  Add a tag corresponding to `Naples`
+> 4. {% tool [NetCDF xarray Selection](toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1) %} with the following parameters:
+>    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_Naples.netcdf`
+>    - *"Choose the variable to extract"*: `pm2p5_conc`
+>    - *"Source of coordinates"*: `Manually enter coordinates`
+>        - *"Geographical area"*: `Whole available region`
+>    - In *"Select Time series"*:
+>        - *"Datetime selection"*: `No`
+>
+> 2. View {% icon galaxy-eye%} the generated file. It is a tabular with timeseries of PM2.4 concentrations over Naples. The total number of lines is 97.
+> > ### {% icon code-out %} Output
+> > ```bash
+> > 	time	level	latitude	longitude	pm2p5_conc
+> > 0	0 days 00:00:00.000000000	0.0	40.95000076293945	14.25	24.00212
+> > 1	0 days 01:00:00.000000000	0.0	40.95000076293945	14.25	23.5767
+> > 2	0 days 02:00:00.000000000	0.0	40.95000076293945	14.25	21.383186
+> > 3	0 days 03:00:00.000000000	0.0	40.95000076293945	14.25	20.04839
+> > 4	0 days 04:00:00.000000000	0.0	40.95000076293945	14.25	18.347801
+> > ```
+> {: .code-out}
 {: .hands_on}
 
 
@@ -422,8 +491,50 @@ In `info file` output file, we can identify 4 different sections:
 > From a qualitative point of view, can you say if PM2.5 may increase or decrease over the 4 forecasted days?
 >
 > > ### {% icon solution %} Solution
-> >  - Select a single location with Xarray selection, use a scatter plot with ggplot2 and/or climate stripes
-> >
+> >  - We can make a simple plot using Scatterplot with ggplot2 ot climate stripes:
+> > 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2) %} with the following parameters:
+> >   - *"Column to plot on x-axis"*: `1`
+> >   - *"Column to plot on y-axis"*: `6`
+> >   - *"Label for x axis"*: `Forecast time (hour) from December, 22 2021`
+> >   - *"Label for y axis"*: `Particule Matter < 2.5 um-3`
+> >   - In *"Advanced Options"*:
+> >       - *"Type of plot"*: `Lines only `
+> >       - *"Data point options"*: `User defined point options`
+> >           - *"Transparency of points (On a scale of 0-1; 0=transparent, 1=default)"*: `0.7`
+> >       - *"Plotting multiple groups"*: `No thanks - just plot the data as one group`
+> >       - *"Axis title options"*: `Default`
+> >       - *"Axis text options"*: `Default`
+> >       - *"Plot title options"*: `Default`
+> >       - *"Axis scaling"*: `Automatic axis scaling`
+> >     ![CAMS PM2.5 Naples](../../images/PM2_5_galaxy_20211222_Naples_ggplot2.png)
+> > 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1) %} with the following parameters:
+> >   - *"using column"*: `c2`
+> >   - In *"Check"*:
+> >       - {% icon param-repeat %} *"Insert Check"*
+> >           - *"Find Regex"*: `0 days`
+> >           - *"Replacement"*: `20211222`
+> >       - {% icon param-repeat %} *"Insert Check"*
+> >           - *"Find Regex"*: `1 days`
+> >           - *"Replacement"*: `20211223`
+> >       - {% icon param-repeat %} *"Insert Check"*
+> >           - *"Find Regex"*: `2 days`
+> >           - *"Replacement"*: `20211224`
+> >       - {% icon param-repeat %} *"Insert Check"*
+> >           - *"Find Regex"*: `3 days`
+> >           - *"Replacement"*: `20211225`
+> >       - {% icon param-repeat %} *"Insert Check"*
+> >           - *"Find Regex"*: `4 days`
+> >           - *"Replacement"*: `20211226`
+> > 3. {% tool [climate stripes](toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1) %} with the following parameters:
+> >   - *"column name to use for plotting"*: `pm2p5_conc`
+> >   - *"plot title"*: `PM2.5 4 days forecast from December 22 2021 over Naples`
+> >   - In *"Advanced Options"*:
+> >       - *"column name to use for x-axis"*: `time`
+> >       - *"format for input date/time column"*: `%Y%m%d %H:%M:%S.%f`
+> >       - *"format for plotting dates on the x-axis"*: `%d %b %H hours`
+> >       - *""*: `winter`
+> >  ![CAMS PM2.5 Naples Stripes](../../images/PM2_5_galaxy_20211222_Naples_stripes.png)
+> > From December 24, 2021 at 00:00 UTC and onwards, PM2-5 concentration are much lower than at the beginning. This is bothe visible on the 1D plot and stripes.
 > {: .solution }
 {: .question }
 
