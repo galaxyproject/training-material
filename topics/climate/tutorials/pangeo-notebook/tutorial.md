@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Pangeo Notebook in Galaxy - Introduction to Xarray
-zenodo_link: ''
+zenodo_link: 'https://doi.org/10.5281/zenodo.5805953'
 requirements:
   - type: "external"
     title: Programming with Python
@@ -47,8 +47,8 @@ contributors:
 
 In this tutorial, we will learn about [Xarray](https://xarray.pydata.org/), one of the most used Python library from the [Pangeo](https://pangeo.io/) ecosystem. 
 
-We will be using data from [Copernicus Ar Monitoring Service](https://ads.atmosphere.copernicus.eu/)
-and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter)) 4 days forecast from December, 22 2021.
+We will be using data from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/)
+and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter)) 4 days forecast from December, 22 2021. Parallel data analysis with Pangeo is not covered in this tutorial. 
 
 > ### {% icon comment %} Remark
 >
@@ -84,8 +84,7 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 
 ## Upload CAMS PM2.5 data
 
-Data can be retrieved directly from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/) but to make it easier, you can
-download the tutorial data from Zenodo.
+Data can be retrieved directly from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/) but to make it easier, you can download the tutorial data from [Zenodo](https://zenodo.org/record/5805953/files/CAMS-PM2_5-20211222.netcdf).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -95,11 +94,8 @@ download the tutorial data from Zenodo.
 >     -> `{{ page.title }}`):
 >
 >    ```
->    
+>    https://zenodo.org/record/5805953/files/CAMS-PM2_5-20211222.netcdf
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -244,7 +240,7 @@ We can also get metadata information for each coordinate and data variables usin
 > What is the name of the variable for Particle matter < 2.5 μm and its physical units?
 >
 > > ### {% icon solution %} Solution
-> > 1. To get metadata information from `pm2p5_conc`Data variable, we use its variable name and print it. Printing it will only print metadata, not the values.
+> > 1. To get metadata information from `pm2p5_conc` Data variable, we use its variable name and print it. Printing it will only print metadata, not the values.
 > >      - Variable name: `mass_concentration_of_pm2p5_ambient_aerosol_in_air`
 > >      - Units: `µg/m3`
 > >
@@ -493,7 +489,7 @@ We can also get metadata information for each coordinate and data variables usin
 >    >                                                                                    vmin = 0, vmax = 35,
 >    >                                                                                    cmap=cmc.roma_r)
 >    >  # One way to customize your title
->    >  plt.title("Copernicus Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC", fontsize=18)
+>    >  plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC", fontsize=18)
 >    >  plt.savefig("CAMS-PM2_5-fc-20211224.png")
 >    >  ```
 >    {: .code-in}
@@ -684,7 +680,7 @@ Let's plot one time to better see what happened:
 >    >                                                                      vmin = 0, vmax = 35,
 >    >                                                                      cmap=cmc.roma_r)
 >    >  # One way to customize your title
->    >  plt.title("Copernicus Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC\n only values > 25", fontsize=18)
+>    >  plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC\n only values > 25", fontsize=18)
 >    >  plt.savefig("CAMS-PM2_5-fc-20211224-25.png")
 >    >  ```
 >    {: .code-in}
