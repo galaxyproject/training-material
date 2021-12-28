@@ -93,8 +93,8 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets to `CAMS-PM2_5-20211222.netcdf`
-> 4. Check that the datatype
+> 3. If needed rename the datasets to `CAMS-PM2_5-20211222.netcdf`
+> 4. Check that the datatype is `netcdf`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -127,7 +127,7 @@ To understand what is contained in our dataset, we will first use Xarray metadat
 >
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
 > 2. View {% icon galaxy-eye%} the two generated outputs:
->    - Metadata infos is a `tabular` providing the list of variables, their dimension names and number of elements per dimension. This file is used by other Xarray Tools. 
+>    - `Metadata infos` is a `tabular` providing the list of variables, their dimension names and number of elements per dimension. This file is used by other Xarray Tools. 
 >    - The second file `info file` provide a summary of the **Xarray Dataset** contained in your netCDF file.
 {: .hands_on}
 
@@ -205,7 +205,7 @@ In `info file` output file, we can identify 4 different sections:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool returns as many tabular files as the number of coordinates and variables present in your input file. The values are decoded from the netCDF input file and no further processing is done. So units for instance for latitudes, longitudes, level and time may vary from one file to another depending on how it was coded in the original input file.
+>    > This tool returns as many tabular files as the number of coordinate variables present in your input file. The values are decoded from the netCDF input file and no further processing is done. So units for instance for latitudes, longitudes, level and time may vary from one file to another depending on how it was coded in the original input file.
 >    {: .comment}
 >
 {: .hands_on}
@@ -345,8 +345,8 @@ In `info file` output file, we can identify 4 different sections:
 > >       - {% icon param-repeat %} *"Insert additional filter"*
 > >           - *"Dimensions"*: `longitude`
 > >           - *"Comparator"*: `slice(threshold1,threshold2)`
-> >               - *"Choose the start value for slice"*: `11`
-> >               - *"Choose the end value for slice"*: `15`
+> >               - *"Choose the start value for slice"*: `11.05`
+> >               - *"Choose the end value for slice"*: `15.05`
 > > 2. Rename the output dataset to `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > > 3.  Add a tag corresponding to `0-23h-Italy`
 > > 4. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
@@ -360,8 +360,8 @@ In `info file` output file, we can identify 4 different sections:
 > >   - *"Name of latitude coordinate"*: `latitude`
 > >   - *"Name of longitude coordinate"*: `longitude`
 > >   - *"Datetime selection"*: `Yes`
-> >       - {% icon param-file %} *"Tabular of time values"*: `time` 
-> >       - *"Choose the times to plot"*: **Tick Select all** 
+> >   - {% icon param-file %} *"Tabular of time values"*: `time`
+> >   - *"Choose the times to plot"*: **Tick Select all**
 > >   - *"Shift longitudes [0,360] --> [-180,180]"*: `No`
 > >   - *"Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)"*: `0,35`
 > >   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
@@ -397,8 +397,8 @@ In `info file` output file, we can identify 4 different sections:
 >   - *"Name of latitude coordinate"*: `latitude`
 >   - *"Name of longitude coordinate"*: `longitude`
 >   - *"Datetime selection"*: `Yes`
->        - {% icon param-file %} *"Tabular of time values"*: `time` 
->        - *"Choose the times to plot"*: `0 days 10:00:00` 
+>   - {% icon param-file %} *"Tabular of time values"*: `time` 
+>   - *"Choose the times to plot"*: `0 days 10:00:00` 
 >   - *"Shift longitudes [0,360] --> [-180,180]"*: `No`
 >   - *"Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)"*: `0,35`
 >   - *"Do not plot values below this threshold (optional)"*: `30`
@@ -446,8 +446,7 @@ In `info file` output file, we can identify 4 different sections:
 
 > ### {% icon hands_on %} Hands-on: Xarray selection
 > 
-> % icon hands_on %} Hands-on: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF
-> We will select a single location: Naples (40.8518° N, 14.2681° E)
+> We will select a single location: Naples (40.8518° N, 14.2681° E) and select the grid point that is closest to Naples.
 > 1. {% tool [NetCDF xarray operations](toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
 >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222.netcdf`
@@ -473,17 +472,20 @@ In `info file` output file, we can identify 4 different sections:
 >    - In *"Select Time series"*:
 >        - *"Datetime selection"*: `No`
 >
-> 2. View {% icon galaxy-eye%} the generated file. It is a tabular with timeseries of PM2.4 concentrations over Naples. The total number of lines is 97.
-> > ### {% icon code-out %} Output
-> > ```bash
-> > 	time	level	latitude	longitude	pm2p5_conc
-> > 0	0 days 00:00:00.000000000	0.0	40.95000076293945	14.25	24.00212
-> > 1	0 days 01:00:00.000000000	0.0	40.95000076293945	14.25	23.5767
-> > 2	0 days 02:00:00.000000000	0.0	40.95000076293945	14.25	21.383186
-> > 3	0 days 03:00:00.000000000	0.0	40.95000076293945	14.25	20.04839
-> > 4	0 days 04:00:00.000000000	0.0	40.95000076293945	14.25	18.347801
-> > ```
-> {: .code-out}
+> 5. Rename the output dataset to `CAMS-PM2_5-20211222_Naples.tabular`
+> 6. View {% icon galaxy-eye%} the generated file. It is a tabular with timeseries of PM2.4 concentrations over Naples. The total number of lines is 97 but we only print the first 5 lines.
+>
+>    > ### {% icon code-out %} Output
+>    > ```bash
+>    > 	time	level	latitude	longitude	pm2p5_conc
+>    > 	0	0 days 00:00:00.000000000	0.0	40.95000076293945	14.25	24.00212
+>    > 	1	0 days 01:00:00.000000000	0.0	40.95000076293945	14.25	23.5767
+>    > 	2	0 days 02:00:00.000000000	0.0	40.95000076293945	14.25	21.383186
+>    > 	3	0 days 03:00:00.000000000	0.0	40.95000076293945	14.25	20.04839
+>    > 	4	0 days 04:00:00.000000000	0.0	40.95000076293945	14.25	18.347801
+>    > ```
+>    {: .code-out}
+>
 {: .hands_on}
 
 
@@ -493,8 +495,9 @@ In `info file` output file, we can identify 4 different sections:
 > From a qualitative point of view, can you say if PM2.5 may increase or decrease over the 4 forecasted days?
 >
 > > ### {% icon solution %} Solution
-> >  - We can make a simple plot using Scatterplot with ggplot2 ot climate stripes:
+> >  We can make a simple plot using Scatterplot with ggplot2 ot climate stripes:
 > > 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2) %} with the following parameters:
+> >   - {% icon param-file %} *Input in tabular format"*: `CAMS-PM2_5-20211222_Naples.tabular`
 > >   - *"Column to plot on x-axis"*: `1`
 > >   - *"Column to plot on y-axis"*: `6`
 > >   - *"Label for x axis"*: `Forecast time (hour) from December, 22 2021`
@@ -510,6 +513,7 @@ In `info file` output file, we can identify 4 different sections:
 > >       - *"Axis scaling"*: `Automatic axis scaling`
 > >     ![CAMS PM2.5 Naples](../../images/PM2_5_galaxy_20211222_Naples_ggplot2.png)
 > > 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1) %} with the following parameters:
+> >   - {% icon param-file %} *"Select cells from"*: `CAMS-PM2_5-20211222_Naples.tabular`
 > >   - *"using column"*: `c2`
 > >   - In *"Check"*:
 > >       - {% icon param-repeat %} *"Insert Check"*
@@ -527,7 +531,8 @@ In `info file` output file, we can identify 4 different sections:
 > >       - {% icon param-repeat %} *"Insert Check"*
 > >           - *"Find Regex"*: `4 days`
 > >           - *"Replacement"*: `20211226`
-> > 3. {% tool [climate stripes](toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1) %} with the following parameters:
+> > 3. Rename your dataset to `CAMS-PM2_5-20211222_Naples_with_dates.tabular`
+> > 4. {% tool [climate stripes](toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1) %} with the following parameters:
 > >   - *"column name to use for plotting"*: `pm2p5_conc`
 > >   - *"plot title"*: `PM2.5 4 days forecast from December 22 2021 over Naples`
 > >   - In *"Advanced Options"*:
