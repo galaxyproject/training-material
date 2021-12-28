@@ -23,6 +23,8 @@ objectives:
 time_estimation: '1H'
 key_points:
 - Xarray Tools in Galaxy
+tags:
+  - pangeo
 contributors:
 - annefou
 

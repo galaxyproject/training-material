@@ -4,12 +4,30 @@ layout: tutorial_hands_on
 title: Pangeo Notebook in Galaxy - Introduction to Xarray
 zenodo_link: 'https://doi.org/10.5281/zenodo.5805953'
 requirements:
-  - type: "external"
-    title: Programming with Python
-    link: https://swcarpentry.github.io/python-novice-inflammation/
-  - type: "external"
-    title: Data Carpentry Geospatial Workshop
-    link: https://datacarpentry.org/geospatial-workshop/
+- 
+  type: internal
+  topic_name: data-science
+  tutorials:
+    - python-basics
+- 
+  type: internal
+  topic_name: data-science
+  tutorials:
+    - python-plotting
+    - python-advanced-np-pd
+- 
+  type: "external"
+  title: Data Carpentry Geospatial Workshop
+  link: https://datacarpentry.org/geospatial-workshop/
+follow_up_training:
+- 
+  type: "external"
+  title: Pangeo Tutorial Gallery
+  link: http://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/index.html
+- 
+  type: "external"
+  title: Pangeo Gallery
+  link: http://gallery.pangeo.io/index.html
 questions:
 - What is Pangeo notebook?
 - How to start Pangeo Notebook in Galaxy?
@@ -35,7 +53,9 @@ key_points:
 - Pangeo and Xarray
 - Read, select, mask and plot netCDF data using Xarray
 tags:
+  - pangeo
   - interactive-tools
+  - jupyter-notebook
 contributors:
 - annefou
 
