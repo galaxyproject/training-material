@@ -1,0 +1,280 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Genome assembly quality control."
+questions:
+  - "Is my genome assembly is ready for annotation?"
+contributors:
+  - abretaud
+  - alexcorm
+  - stephanierobin
+  - r1corre
+  - lleroi 
+level: Introductory
+
+---
+
+# Genome assembly quality control or the 3C
+
+
+<br>
+<br>
+
+.image-100[
+  ![The 3C for genome assembly quality control](../../images/genome-qc/3C.png)
+]
+
+---
+
+# **C**ontiguity
+
+---
+
+### **C**ontiguity
+
+.pull-left[
+
+**Desire**
+- Fewer sequences
+- Longer sequences
+]
+
+.pull-right[
+**Metrics**:
+- Number of sequences
+- Average sequences length
+- Median sequences length
+- Minimum and maximum sequences length
+- N50, NG50, L50, LG50
+- Proportion of bases that are G or C (i.e. GC content)
+- Number and proportion of bases that are N
+
+]
+
+---
+
+### N50
+
+**N50: given a set of sequences of varying lengths, the N50 length is defined as the length N for which 50% of all bases in the sequences are in sequences of length L < N**
+
+.pull-left[
+Example:
+- Genome size = 100
+- Sequence sorted by size list L = (25, 10, 10, 8 , 7, 7 , 6 , 5, 5, 5, 5, 3, 2, 2 ) = 100
+- We have 50% of total length contains into sequences at least of 8: 25 + 10 + 10 + 8 ≥ 50
+- **N50 = 8**
+]
+
+.image-100[
+  ![Schematic explanation of N50](../../images/genome-qc/N50.png)
+]
+
+---
+
+### N50
+
+N50 may not reflect some improvements to the assembly.
+If we connect two sequences longer than N50 or connect two sequences shorter than N50, N50 is not changed. N50 is only improved if we connect a sequence shorter than N50 and a sequence longer than N50.
+
+.image-40[
+![Schematic explanation of N50 and it limits](../../images/genome-qc/N50-limitation.png)
+]
+
+---
+
+### Nx curve
+
+« 50 » is a single point on the Nx curve. The entire Nx curve in fact gives us a better sense of contiguity.
+
+.pull-left[
+![Example of Nx graph for Drosophila assemblies](../../images/genome-qc/Nx-curve.png)
+]
+
+.pull-right[
+![Example of cumulative sequence length graph for Drosophila assemblies](../../images/genome-qc/cumulative-length.png)
+]
+
+---
+
+### QUAST - A tool to evaluate genome assemblies
+
+- **QUAST**: for genome assemblies.
+- **MetaQUAST**: for metagenomic datasets.
+- **QUAST-LG**: for large genomes (e.g., mammalians).
+- **rnaQUAST**: for RNAseq.
+- **Icarus**: an interactive visualizer for these tools.
+
+
+It also includes:
+- Reads mapping (mi-assemblies evaluation).
+- Kmer representation (KMC)
+- Structural prediction modules (GeneMark,  GlimmerHMM, Barrnap and BUSCO).
+- For metagnomics dataset: MetaGeneMark, Krona tools, BLAST, and SILVA 16S rRNA database.
+
+---
+
+# **C**ompleteness
+
+---
+
+### Assembly size vs estimated
+
+Proportion of the original genome represented by the assembly:
+<br>
+
+.image-100[
+![Formula to estimate assembly size completeness](../../images/genome-qc/assembly-size-qc-formula.png)
+]
+
+<br>
+- "*" it’s an estimation, so not perfect
+
+---
+
+### Core genes
+
+Quantitative assessment of genome assembly based on evolutionarily informed expectations of gene content from near-universal single-copy orthologs.
+
+.pull-left[
+.image-70[
+![Formula to estimate assembly completeness for core genes](../../images/genome-qc/busco-formula.png)
+]
+]
+.pull-right[
+.image-60[
+![Example of BUSCO plot for Nosema species (Microsporidia) ](../../images/genome-qc/BUSCO-scores.png)
+]]
+
+Tips: Reference databases are constructed using known genomes. Species with few/no close genomes available can have very bad scores.
+
+---
+
+### Core genes evalutation software
+
+**BUSCO**: Assessing genome assembly and annotation completeness with **B**enchmarking **U**niversal **S**ingle-**C**opy **O**rthologs
+
+.image-40[
+![Explanation of orthology classification for creation of BUSCO sets](../../images/genome-qc/busco_sampling.png)
+]
+
+.footnote[Waterhouse, R. M., Zdobnov, E. M. & Kriventseva, E. V. Correlating Traits of Gene Retention, Sequence Divergence, Duplicability and Essentiality in Vertebrates, Arthropods, and Fungi. Genome Biol Evol 3, 75–86 (2011).]
+
+---
+
+### BUSCO limitations
+
+**The value of the BUSCO is only as good as its reference database.**
+<br>
+<br>
+Example with BUSCO Eukaryotic set:
+.pull-left[
+.image-70[
+![Limitation of BUSCO orthoDB for eukaOrthoDB - part A](../../images/genome-qc/BUSCO_limitations_A.png)
+]]
+.pull-right[
+.image-70[
+![Limitation of BUSCO orthoDB for eukaOrthoDB - part B](../../images/genome-qc/BUSCO_limitations_B.png)
+]]
+
+.footnote[Saary, P., Mitchell, A. L. & Finn, R. D. Estimating the quality of eukaryotic genomes recovered from metagenomic analysis with EukCC. Genome Biol 21, 244 (2020).]
+
+---
+
+### Assembly kmer content
+
+The aim is to check assembly coherence against the content within reads that were used to produce the assembly. Basically, how many elements of each frequency on the read’s spectrum ended up not included in the assembly, included once, included twice etc.
+<br>
+<br>
+
+- KAT spectra-cn plot
+- Histogram is build with read kmer content.
+- Colors come from assembly:
+  - **Black = not in the assembly** (heterozygous part, second haplotype).
+  - **Red = once in the assembly.**
+
+---
+
+### Assembly kmer content - Homozygous genomes
+
+.image-80[
+![KAT spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/pe_v_asm_clean.png)
+]
+
+{% icon congratulations %} Good kmer representation of reads in the assembly
+
+---
+
+### Assembly kmer content - Homozygous genomes
+
+.image-80[
+![KAT spectra-cn plot for S.cerevesiae S288C assembly but with a too short kmer used with the assembler](../../images/genome-qc/pe_v_asm_wrong.png)
+]
+
+<i class="fa fa-thumbs-down"></i> Bad kmer representation of reads in the assembly
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+
+.image-40[
+![KAT spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed.](../../images/genome-qc/heterozygous_perfect_1.png)
+]
+
+{% icon congratulations %} Good kmer representation of reads in the assembly
+
+The lost content (the black peak) represents the half of the heterozygous content that is lost when bubbles are collapsed.
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+
+.image-40[
+![KAT spectra-cn plot for highly heterozygous assembly and for which both haplotypes are present.](../../images/genome-qc/heterozygous_perfect_2.png)
+]
+
+{% icon congratulations %} Good kmer representation of reads in the assembly
+
+In this case, haplotypes are separated by duplicating all the homozygous regions and allowing us to fully capture the heterozygous content.
+We don’t typically, aim for this scenario when assembling genomes or at least, we split both haplotypes in 2 separated files.
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+
+.image-80[
+![KAT spectra-cn plot for an actual highly heterozygous assembly with an awful kmer representation ](../../images/genome-qc/heterozygous_real.png)
+]
+
+<i class="fa fa-thumbs-down"></i> Extremely bad kmer representation of reads in the assembly
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+
+.image-80[
+![KAT spectra-cn plot for second haplotype of C. gigas.](../../images/genome-qc/kmer-cn_c.gigas-hap2.png)
+]
+
+<i class="fa fa-thumbs-down"></i> Bad kmer representation of reads in the assembly
+
+---
+
+
+# **C**orrectness
+
+---
+
+### Mistakes into the assembly
+
+** Proportion of the assembly that is free from mistakes**
+- Mis-joins
+- Repeat compressions
+- Unnecessary duplications
+- Indels / SNPs caused by assembler
+
+Align back reads to the assembly and check for inconsistencies
+
+---
+
+### Switch and hamming errors (phased assemblies)
