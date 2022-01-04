@@ -328,11 +328,11 @@ layer reshapes it into (100, 100, 3) dimensions -- 100 rows (image height), 100 
 (image width), and 3 channels. Channel size is 3 since the image is color (RGB) and each 
 color pixel can be represented by 3 integers, representing the Red, Green, and Blue 
 primary colors. Our CNN then has 3 convolution + pooling layers. The first convolution layer 
-has 64 filters (output channel size would be 64), and filter size is 5 x 5. The second convolutional 
+has 16 filters (output channel size would be 16), and filter size is 5 x 5. The second convolutional
 layer has 32 filters (output channel size would be 32), and filter size is 5 x 5. The third 
-convolutional layer has 128 filters (output channel size would be 128), and filter size is 5 x 5. All 
+convolutional layer has 64 filters (output channel size would be 64), and filter size is 5 x 5. All
 3 pooling layers are MaxPool layers with pool size of 2 x 2. Afterwards, we flatten the previous layer's 
-output (every row/colum/channel would be an individual node), then add a fully connected layer with 256 
+output (every row/column/channel would be an individual node), then add a fully connected layer with 256
 nodes and relu activation function. Finally, we add a fully connected layers with 10 nodes, and use 
 softmax activation function to get the probability of each fruit/vegetable. Fruit/vegetable with the 
 highest probability is predicted by CNN. The model config can be downloaded as a JSON file.
