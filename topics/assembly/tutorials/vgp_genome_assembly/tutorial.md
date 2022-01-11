@@ -62,7 +62,7 @@ In order to facilitate the development of the workflow, we will structure it in 
 
 The pipeline proposed in this training is an adaption of the [current workflow versions](https://github.com/Delphine-L/iwc/tree/VGP/workflows/VGP-assembly-v2), whose purpuse is to explain each of the stages in with VGP assembly pipeline is structured. If you desire to run the *state-of-art* VGP pipelines, just follow the following instructions:
 
-> ### {% icon hands_on %} Hands-on: Quality check
+> ### {% icon hands_on %} Hands-on: Run workflow
 >
 > 1. Dowload the worflow files (whose extesion is *ga*) from this [GitHub repository](https://github.com/Delphine-L/iwc/tree/VGP/workflows/VGP-assembly-v2).
 > 2. Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.
@@ -141,7 +141,7 @@ The high-throughput chromosome conformation capture (Hi-C) technology is based o
 
     
 
-# Data quality assessment
+# Primer removal from HiFi reads
 
 Firsly, we will trim the residual adaptors sequences by using Cutadapt, in order to avoid potential reads which could interfer in the subsequent steps.
 
