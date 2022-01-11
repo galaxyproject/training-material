@@ -65,18 +65,18 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >
 > 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) as a 'Collection'.
 >    ```
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA380.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA381.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA382.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA383.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA384.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA385.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA386.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA387.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA388.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA389.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA390.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA391.raw
 >    ```
 >    
 >    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List" collection_name="raw_files" format="thermo.raw" %}
