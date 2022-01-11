@@ -5,15 +5,15 @@ title: VGP assembly pipeline
 zenodo_link: ''
 enable: false
 questions:
-- what combination of tools can produce the highest quality assembly of vertebrate genomes?
-- How can we evaluate how good it is? 
+- "what combination of tools can produce the highest quality assembly of vertebrate genomes?"
+- "How can we evaluate how good it is?"
 objectives:
-- Learn the tools necessary to perform a de novo assembly of a vertebrate genome
-- Evaluate the quality of the assembly
+- "Learn the tools necessary to perform a de novo assembly of a vertebrate genome"
+- "Evaluate the quality of the assembly"
 time_estimation: '2h'
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies"
+- "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
 contributors:
 - delphine-l
 - astrovsky01
@@ -58,8 +58,27 @@ In order to facilitate the development of the workflow, we will structure it in 
 - Hybrid scaffolding based on phased assembly and Bionano data
 - Hybrid scaffolding based on a phased assembly and Hi-C mapping data
 
-**TODO:** suggest including here something about how the Galaxy workflow has additional steps (e.g. parse parameter value), so that it can run automatically, but if run step by step in this tutorial, then some of those steps are just manually entered value (e.g. genome size parameter)
+## Run the VGP workflows automatically
 
+The pipeline proposed in this training is an adaption of the [current workflow versions](https://github.com/Delphine-L/iwc/tree/VGP/workflows/VGP-assembly-v2), whose purpuse is to explain each of the stages in with VGP assembly pipeline is structured. If you desire to run the *state-of-art* VGP pipelines, just follow the following instructions:
+
+> ### {% icon hands_on %} Hands-on: Quality check
+>
+> 1. Dowload the worflow files (whose extesion is *ga*) from this [GitHub repository](https://github.com/Delphine-L/iwc/tree/VGP/workflows/VGP-assembly-v2).
+> 2. Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.
+> 3. Click on the upload icon {% icon galaxy-upload %} at the top-right of the screen.
+> ![Import Workflow](../../images/vgp_assembly/import_workflow.png "Import workflow from a file or URL.")
+> 4. Provide your workflow:
+>    - Option 1: Upload the workflow file in the box labelled “Archived Workflow File”
+>    - Option 2: Paste the URL of the workflow into the box labelled “Archived Workflow URL”
+> 5. Click the **import workflow** button.
+>
+{: .hands_on}
+
+> ### {% icon comment %} Comments
+> The Galaxy workflows include additional steps (e.g. parse parameter value) required for running it automatically, but which are not necessary when we run the pipeline step by step manually.
+{: .comment}
+    
 ## Background on datasets
 
 In order to reduce processing times, we will use samples from _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. This organisms can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
@@ -73,8 +92,6 @@ PacBio HiFi reads rely on the Single Molecule Real-Time (SMRT) sequencing techno
 Optical genome mapping is a method for detecting structural variants. The generation of Bionano optical maps starts with high molecular weight DNA, which is labeled at specific sequences motif with a fluorescent dye, resulting in a unique fluorescence pattern for each individual genome. The comparison of the labelled fragments among different samples enables the detection of structural variants. Optical maps are integrated with the primary assemby sequence in order to identify and correct potential chimeric joints, and estimate the gap sizes.
 
 The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin conformation, enabling the identification of topological domains. Hi-C chromatin interaction maps methods first crosslink the chromatin in its 3D conformation. The crosslinked DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. Next, the blunt ends  of spatially proximal digested end are ligated, preserving the chromosome interaction regions. Finally, the DNA is purified to assure that only fragments originating from ligation events are sequenced. 
-
-# Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -122,37 +139,13 @@ The high-throughput chromosome conformation capture (Hi-C) technology is based o
 >
 {: .hands_on}
 
+    
 
 # Data quality assessment
 
-To begin our analysis we will carry out the evaluation and pre-processing of our data. In order to identify potential anomalies in the data, we are going to use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an open-source tool that provides a simple way to quality control raw sequence data.
+Firsly, we will trim the residual adaptors sequences by using Cutadapt, in order to avoid potential reads which could interfer in the subsequent steps.
 
-> ### {% icon hands_on %} Hands-on: Quality check
->
-> 1. Run **FastQC** {% icon tool %} with the following parameters
->    - {% icon param-collection %} *"Raw read data from your current history"*: `HiFi_collection`
->
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
->    - In *"Results"*:
->      - *"Which tool was used generate logs?"*: `FastQC`
->      - {% icon param-collection %} *"Dataset collection"*: select the `FastQC on collection:Raw Data` dataset.
->    - In *"Report title"*: `HiFi quality report`
-> 3. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated HTML file
->
-{: .hands_on}
-
-![fig3:HiFi Quality report](../../images/vgp_assembly/quality_plot.png "PacBio HiFi qualiry report")
-
-As we can see, the mean Phred score is over 80 in all the samples, which means that the base call accuracy is around 99.999999%!
-
-
-> ### {% icon comment %} Comments
-> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
-{: .comment}
-
-According the quality report, less that 0.1% of the reads include adaptor sequences. Despide of this, we will trim the residual adaptors sequences by using Cutadapt, in order to avoid potential reads which could interfer in the subsequent steps.
-
-> ### {% icon hands_on %} Hands-on: Optional step: primer removal
+> ### {% icon hands_on %} Hands-on: Primer removal
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -314,11 +307,7 @@ Before jumping to the next section, we need to carry out some operation on the o
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `Column: 5`
 >
-> 6. {% tool [Parse parameter value](param_value_from_file) %}(param_value_from_file) with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
->    - *"Select type of parameter to parse"*: `Integer`
->
-> 7. Rename the output as `Estimated genome size`.
+> 6. Rename the output as `Estimated genome size`.
 >
 > > ### {% icon question %} Questions
 > >
@@ -357,11 +346,7 @@ Now let's parse the `upper bound for the read depth estimation` parameter.
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `Column 8`
 >
-> 5. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
->    - *"Select type of parameter to parse"*: `Integer`
->
-> 6. Rename it as `Maximum depth`
+> 6. Rename the output as `Maximum depth`
 >
 > > ### {% icon question %} Questions
 > >
@@ -385,11 +370,7 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `Column 7`
 >
-> 2. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: output of **Advanced Cut** {% icon tool %}
->    - *"Select type of parameter to parse"*: `Integer`
->
-> 3. Rename it as `Transition parameter`
+> 2. Rename the output as `Transition parameter`
 >
 > > ### {% icon question %} Questions
 > >
@@ -443,6 +424,8 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 
 Hifiasm generates four outputs in GFA format; this format is specially designed to capture sequence graphs as the product of an assembly, a representation of variation in genomes, splice graphs in genes, or even overlap between reads from long-read sequencing technology.
 
+
+    
 ## Convert GFA format to FASTA with **GFA to FASTA** 
 
 We have obtained the fully phased contig graphs of the primary and alternate haplotypes, but the output format of **hifiasm** is not adequate for the subsequent steps, so we will convert them into fasta format.
@@ -678,8 +661,9 @@ Once we have purged the duplications, let's evaluate the assembly again.
 >
 {: .hands_on}
     
-----
 
+![fig5:Under construction](../../images/vgp_assembly/under_construction.png "We are working in the following sections.")
+    
 <!--
 
 Bibliography https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3409271/
@@ -694,7 +678,7 @@ purge_dups can significantly improve genome assemblies by removing overlaps and 
 
 Along with sequence similarity, purge_dups and purge_haplotigs take into account the coverage depth obtained by mapping short or long reads to the contigs. Coverage depth represents the number of reads covering a position in a contig (computed after mapping reads on the assembly). The contigs are then aligned to select duplicates accurately and remove them. While purge_dups sets its coverage thresholds automatically, purge_haplotigs requires user-provided values.
 
--->
+
 
 ## Sub-step with **Concatenate datasets**
 
@@ -1169,7 +1153,7 @@ There are five steps:
 >
 {: .question}
 
-
+-->
 
 # Conclusion
 {:.no_toc}
