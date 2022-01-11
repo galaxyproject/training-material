@@ -5,15 +5,15 @@ title: VGP assembly pipeline
 zenodo_link: ''
 enable: false
 questions:
-- what combination of tools can produce the highest quality assembly of vertebrate genomes?
-- How can we evaluate how good it is? 
+- "what combination of tools can produce the highest quality assembly of vertebrate genomes?"
+- "How can we evaluate how good it is?"
 objectives:
-- Learn the tools necessary to perform a de novo assembly of a vertebrate genome
-- Evaluate the quality of the assembly
+- "Learn the tools necessary to perform a de novo assembly of a vertebrate genome"
+- "Evaluate the quality of the assembly"
 time_estimation: '2h'
 key_points:
-- The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies.
-- The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding.
+- "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies"
+- "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
 contributors:
 - delphine-l
 - astrovsky01
