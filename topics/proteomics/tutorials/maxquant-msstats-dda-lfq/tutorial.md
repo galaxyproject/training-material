@@ -73,28 +73,29 @@ The annotation file, group comparison file and FASTA file for this training is d
 > 4. Steps 4 to 7 can be skipped to save time and storage capacity by not running MaxQuant. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD006914).
 >
 >    ```
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment105_metast_cSCC1.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment106_metast_cSCC2.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment107_metast_cSCC3.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment109_metast_cSCC4.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment116_metast_cSCC5.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment117_metast_cSCC6.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment118_metast_cSCC7.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment119_metast_cSCC8.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment120_metast_cSCC9.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment121_metast_cSCC10.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment122_metast_cSCC11.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment123_metast_cSCC12.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment124_metast_cSCC13.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment110_RDEB_cSCC1.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment111_RDEB_cSCC2.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment112_RDEB_cSCC3.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment113_RDEB_cSCC4.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment114_RDEB_cSCC5.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDEB_cSCC6.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment105_metast_cSCC1.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment106_metast_cSCC2.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment107_metast_cSCC3.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment109_metast_cSCC4.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment116_metast_cSCC5.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment117_metast_cSCC6.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment118_metast_cSCC7.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment119_metast_cSCC8.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment120_metast_cSCC9.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment121_metast_cSCC10.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment122_metast_cSCC11.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment123_metast_cSCC12.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment124_metast_cSCC13.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment110_RDEB_cSCC1.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment111_RDEB_cSCC2.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment112_RDEB_cSCC3.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment113_RDEB_cSCC4.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment114_RDEB_cSCC5.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment115_RDEB_cSCC6.raw
 >
 >    ```
 > 5. Rename the raw datasets into 'metast_cSCC1.raw', 'metast_cSCC2.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
+> 
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 6. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
