@@ -136,27 +136,27 @@ Let's write a Bioconda recipe for the tool we want to package: [bellerophon](htt
 > plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
 > lowercase.
 >
->     {% raw %}
->     ```yaml
->     package:
->       name: {{ name|lower }}
->       version: {{ version }}
->     ```
->     {% endraw %}
+>    {% raw %}
+>    ```yaml
+>    package:
+>      name: {{ name|lower }}
+>      version: {{ version }}
+>    ```
+>    {% endraw %}
 >
 > 7. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
 > github, updates can be automated with the variables we defined in the second step, while the SHA-256 checksum ensures
 > that conda-build is getting the right source code every time.
 >
->     {% raw %}
+>    {% raw %}
 >
->     ```yaml
->     source:
->       url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
->       sha256: {{ sha256 }}
->     ```
+>    ```yaml
+>    source:
+>      url: https://github.com/davebx/bellerophon/archive/{{ version }}.tar.gz
+>      sha256: {{ sha256 }}
+>    ```
 >
->     {% endraw %}
+>    {% endraw %}
 >
 > 8. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
 > We use the externally defined `{% raw %}{{ PYTHON }}{% endraw %}` variable, which defines which python conda-build is using, to install it
@@ -232,7 +232,7 @@ Let's write a Bioconda recipe for the tool we want to package: [bellerophon](htt
 > > >   version: {{ version }}
 > > >
 > > > source:
-> > >   url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
+> > >   url: https://github.com/davebx/bellerophon/archive/{{ version }}.tar.gz
 > > >   sha256: {{ sha256 }}
 > > >
 > > > build:
@@ -336,7 +336,7 @@ After the recipe is complete, and when we have checked that it builds locally, w
 >    > Untracked files:
 >    >   (use "git add <file>..." to include in what will be committed)
 >    >
->    > 	recipes/bellerophon/
+>    > 	recipes/bellerophon_bis/
 >    >
 >    > no changes added to commit (use "git add" and/or "git commit -a")
 >    > ```
@@ -346,7 +346,7 @@ After the recipe is complete, and when we have checked that it builds locally, w
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > git add recipes/bellerophon
+>    > git add recipes/bellerophon_bis
 >    > git commit -m 'Add recipe for bellerophon 1.0'
 >    > git push origin -u bellerophon_bioconda
 >    > ```
