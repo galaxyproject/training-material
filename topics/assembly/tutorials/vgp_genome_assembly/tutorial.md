@@ -31,9 +31,9 @@ Deciphering the structural organisation of complex vertebrate genomes is current
 
 Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR), that occur at a single locus ({% cite Trresen2019 %}). Repetitive elements are an important component of eukariotyc genomes, constituting over a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tamdem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). TE content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as its content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, TR usually lead to local genome assembly collapse, especially when their length is close to that of the reads ({% cite Trresen2019 %}).
 
-Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). A common strategy to overcome these difficulties is to remap genomes to a single haplotype, which represents the whole genome. This approach is useful for highly inbred samples that are nearly homozygous, but when applied to highly heterozygous genomes, such as aquatic organism, it missses potential differences in sequence, structure, and gene presence, usually leading to ambiguties and redundancies in the initial contig-level assemblies ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}).
+Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When there's not a reference sequence available, the *state-of-the--art* strategy consist in constructing a string graph with vertexes representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozigous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
-To address these problems, the G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species currently present on planet Earth ({% cite Rhie2021 %}). The protocol proposed in this tutorial, the VGP assembly pipeline, is the result of years of study and analysis of the available tools and data sources.
+The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species ({% cite Rhie2021 %}). Thhis tutorial will guide you step by step to assemble a high-quality referece genome by using the VGP assembly pipeline.
 
 
 > ### Agenda
@@ -51,12 +51,12 @@ The figure 1 represents the VGP assembly pipeline.
 
 ![fig1:VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0")
 
-In order to facilitate the development of the workflow, we will structure it in four main sections:
+The tutorial is structured in four main sections:
 
 - Genome profile analysis
-- HiFi long read phased assembly with Hifiasm
-- Hybrid scaffolding based on phased assembly and Bionano data
-- Hybrid scaffolding based on a phased assembly and Hi-C mapping data
+- HiFi phased assembly with Hifiasm
+- Hybrid scaffolding based using Bionano data
+- Hi-C scaffolding
 
 ## Run the VGP workflows automatically
 
@@ -81,18 +81,27 @@ The pipeline proposed in this training is an adaption of the [current workflow v
     
 ## Background on datasets
 
-In order to reduce processing times, we will use samples from _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. This organisms can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
+To reduce compute times, we will use samples from the yeast _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. Yeast can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
 
-The VGP assembly pipeline requires datasets generated by three different technologies: PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
+The VGP assembly pipeline uses data generated by a variery of technologies, including PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
 
-PacBio HiFi reads rely on the Single Molecule Real-Time (SMRT) sequencing technology. It is based on real-time imaging of fluorescently tagged nucleotides as they are synthesized along individual DNA template molecules, combining multiple subreads of the same circular template using a statistical model to produce one highly accurate consensus sequence, along with base quality values (figure 2). This technology allows to generate long-read sequencing dataseets with read lengths averaging 10-25 kb and accuracies greater than 99.5%.
+PacBio HiFi reads rely on the Single Molecule Real-Time (SMRT) sequencing technology. SMRT is based on real-time imaging of fluorescently tagged nucleotides as they are added to a newly synthesized DNA strand. HiFi further combine multiple subreads from the same circular template to produce one highly accurate consensus sequence (fig. 3). This technology allows to generate long-read sequencing data with read lengths in the range of 10-25 kb and minimum read consensus accuracy  greater than 99% (Q20).
 
 ![fig2:PacBio sequencing technolgoy](../../images/vgp_assembly/pacbio_hifi.png "PacBio HiFi sequencing")
+    
+Bionano technology relies on the isolation of kilobase-long DNA fragments, which are labeled at specific sequence motifs with a fluorescent dye, resulting in a unique fluorescent pattern for each genome. DNA molecules are stretched into nanoscale channels and imaged with a high-resolution camera, allowing to build optical maps based on the distance between motif-specific patterns ({% cite Lam2012 %}, {% cite Giani2020 %}).
 
-Optical genome mapping is a method for detecting structural variants. The generation of Bionano optical maps starts with high molecular weight DNA, which is labeled at specific sequences motif with a fluorescent dye, resulting in a unique fluorescence pattern for each individual genome. The comparison of the labelled fragments among different samples enables the detection of structural variants. Optical maps are integrated with the primary assemby sequence in order to identify and correct potential chimeric joints, and estimate the gap sizes.
+Linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs (fig. 4).
+    
+    
+![Bionano optical maps](../../images/vgp_assembly/bionano.png "Bionano optical maps")
+    
+Finally, the thigh-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin three-dimensional. During Hi-C library preparation, DNA is crosslinked the chromatin in its 3D conformation. The crosslinked DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. Next, the blunt ends of spatially proximal digested end are ligated. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome ({% cite Giani2020 %}).
 
-The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin conformation, enabling the identification of topological domains. Hi-C chromatin interaction maps methods first crosslink the chromatin in its 3D conformation. The crosslinked DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. Next, the blunt ends  of spatially proximal digested end are ligated, preserving the chromosome interaction regions. Finally, the DNA is purified to assure that only fragments originating from ligation events are sequenced. 
+# Get data
 
+Now we can start with the pipeline. The first step is to get the datasets from Zenodo:
+    
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
@@ -141,9 +150,9 @@ The high-throughput chromosome conformation capture (Hi-C) technology is based o
 
     
 
-# Primer removal from HiFi reads
+## Primer removal from HiFi reads
 
-Firsly, we will trim the residual adaptors sequences by using Cutadapt, in order to avoid potential reads which could interfer in the subsequent steps.
+Now, we will trim the residual adaptors sequences by using Cutadapt, in order remove the reads  that could interfere with the assembly process.
 
 > ### {% icon hands_on %} Hands-on: Primer removal
 >
@@ -174,9 +183,7 @@ Firsly, we will trim the residual adaptors sequences by using Cutadapt, in order
 
 # Genome profile analysis
 
-An important step before starting a de novo genome assembly project is to proceed with the analysis of the genome profile. Determining these characteristics in advance has the potential to reveal whether an analysis is not reflecting the full complexity of the genome, for example, if the number of variants is underestimated or a significant fraction of the genome is not assembled ({% cite Vurture2017 %}).
-
-Traditionally DNA flow citometry was considered the golden standart for estimating the genome size, one of the most important factors to determine the required coverage level. However, nowadays experimental methods have been replaced by computational approaches {% cite wang2020estimation %}. One of the most widely used procedures for undertaking genomic profiling is the analyis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality. In addition, k-mer spectra analysis can be used in a reference-free manner for assessing genome assembly quality metrics ({% cite Rhie2020 %}).
+Before starting a de novo genome assembly project, it useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally DNA flow citometry was considered the golden standard for estimating the genome size. Nowadays experimental methods have been replaced by computational approaches {% cite wang2020estimation %}. One of the widely used genome profilling methods is based on the analysis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality.
 
 > ### {% icon details %} K-mer size, sequencing coverage and genome size
 >
@@ -204,33 +211,33 @@ In section we will use two basic tools to computationally estimate the genome fe
 
 ## Generation of k-mer spectra with **Meryl**
 
-Meryl will allow us to perform the k-mer profiling by decomposing the sequencing data into k-lenght substrings and determining its frequency. The original version was developed for use in the Celera Assembler, and it comprises three modules: one for generating k-mer databases, one for filtering and combining databases, and one for searching databases. The k-mer database is stored in sorted order, similar to words in a dictionary ({% cite Rhie2020 %}).
+Meryl will allow us to generate the *k*-mer profile by decomposing the sequencing data into *k*-lenght substrings, counting the ocurrence of each *k*-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version compises three main modules: one for generating *k*-mer databases, one for filtering and combining databases, and one for searching databases. *K*-mers are stored in lexicographical order in the database, similar to words in a dictionary ({% cite Rhie2020 %}).
 
-> ### {% icon comment %} K-mer size estimation
+> ### {% icon comment %} *k*-mer size estimation
 >
 >  Given an estimated genome size (G) and a tolerable collision rate (p), an appropriate k can be computed as k = log4 (G(1 − p)/p).
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Generate k-mers count distribution
+> ### {% icon hands_on %} Hands-on: Generate *k*-mers count distribution
 >
 > 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
->        - *"Count operations"*: `Count: count the ocurrences of canonical k-mers`
+>        - *"Count operations"*: `Count: count the ocurrences of canonical *k*-mers`
 >        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
->        - *"K-mer size selector"*: `Set a k-mer size`
->            - "*K-mer size*": `21`
+>        - *"*k*-mer size selector"*: `Set a *k*-mer size`
+>            - "**k*-mer size*": `21`
 >
->    > ### {% icon comment %} Election of k-mer size
+>    > ### {% icon comment %} Election of *k*-mer size
 >    >
->    > We used 21 as k-mer size, as this length has demonstrated to be sufficiently long that most k-mers are not repetitive and is short enough that the analysis will be more robust to sequencing errors. For extremely large (haploid size over 10 Gb) and/or very repetitive genomes, it is recommended to use larger k-mer lengths to increase the number of unique k-mers. 
+>    > We used 21 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers. 
 >    {: .comment}
 >
 > 2. Rename it `Collection meryldb`
 >
 > 3. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1) %} with the following parameters:
->    - *"Operation type selector"*: `Operations on sets of k-mers`
->        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
+>    - *"Operation type selector"*: `Operations on sets of *k*-mers`
+>        - *"Operations on sets of *k*-mers"*: `Union-sum: return *k*-mers that occur in any input, set the count to the sum of the counts`
 >        - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
 > 4. Rename it as `Merged meryldb`    
@@ -246,13 +253,13 @@ Meryl will allow us to perform the k-mer profiling by decomposing the sequencing
 
 ## Genome profiling with **GenomeScope2**
 
-The next step is to computationally infer the genome properties from the k-mer count distribution generated by Meryl, for which we'll use GenomeScope2. It relies in a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
+The next step is to infer the genome properties from the *k*-mer histogram generated by Meryl, for which we willl use GenomeScope2. Genomescope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
 
 > ### {% icon hands_on %} Hands-on: Estimate genome properties
 >
 > 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input histogram file"*: `Meryldb histogram`
->    - *"K-mer length used to calculate k-mer spectra"*: `21`
+>    - *"*k*-mer length used to calculate *k*-mer spectra"*: `21`
 >
 >   - In "*Output options*": mark `Summary of the analysis`
 >   - In "*Advanced options*":
@@ -265,20 +272,20 @@ The next step is to computationally infer the genome properties from the k-mer c
 Genomescope will generate six outputs:
     
 - Plots
-    - *Linear plot*: K-mer spectra and fitted models: frequency (y-axis) versus coverage.
+    - *Linear plot*: *k*-mer spectra and fitted models: frequency (y-axis) versus coverage.
     - *Log plot*: logarithmic transformation of the previous plot.
-    - Transformed linear plot: K-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). It allows to increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
+    - Transformed linear plot: *k*-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). It allows to increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
     - Transformed log plot: logarithmic transformation of the previous plot.
 - Model: this file includes a detailed report about the model fitting.
 - Summary: it includes the properties infered from the model, such as genome haploid length and the percentage of heterozygosity.
 
-Now, let's analyze the k-mer profiles, fitted models and estimated parameters:
+Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters:
 
 ![fig3:Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "Genomescope2 plot")
 
-As we can see, there is an unique peak centered around 28, which is the coverage with the highest number of different 21-mers. According the normal-like k-mer spectra, we can infer that it is a haploid genome. The large number of unique k-mers on the left side with frequence around one is due to error during the sequencing process.
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, there is an unique peak centered around 28x, the modal *k*-mer coverage. The absence of a secondary peak at half diploid coverage is suggestive of the haploid nature of this genome, but could generally result also from very low heterozygosity. Low frequency *k*-mers are the result of sequencing errors.
 
-Before jumping to the next section, we need to carry out some operation on the output generated by Genomescope2. The goal is to generate some parameters which at a later stage will be used by **purge_dups** ({% cite Guan2019 %}). Lets start with the `estimated genome size`.
+Before proceeding to the next section, we need to carry out some operations on the output generated by GenomeScope2. The goal is to extract some parameters which at a later stage will be used by **purge_dups** ({% cite Guan2019 %}). The first relevant parameter is the `estimated genome size`.
 
 > ### {% icon hands_on %} Hands-on: Get estimated genome size
 >
@@ -387,7 +394,7 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 {: .hands_on}
 
 
-# HiFi long read phased assembly with hifiasm
+# HiFi phased assembly with hifiasm
 
 Once we have finished the genome profiling stage, we can start the genome assembly with **hifiasm**,  a fast open-source de novo assembler specifically developed for PacBio HiFi reads.
 
@@ -525,11 +532,11 @@ Let's have a look at the HTML report.
 {: .question}
 
 
-> ### {% icon hands_on %} Hands-on: K-mer based evaluation with Merqury
+> ### {% icon hands_on %} Hands-on: *k*-mer based evaluation with Merqury
 >
 > 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
 >    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `Merged meryldb`
+>        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
 >        - *"Number of assemblies"*: `Two assemblies
 >            - {% icon param-file %} *"First genome assembly"*: `Primary contig FASTA`
 >            - {% icon param-file %} *"Second genome assembly"*: `Alternate contig FASTA`    
@@ -702,7 +709,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 {: .hands_on}
 
 
-# Hybrid scaffolding based on phased assembly and Bionano data
+# Hybrid scaffolding based using Bionano data
 
 
 ## Sub-step with **Bionano Hybrid Scaffold**
