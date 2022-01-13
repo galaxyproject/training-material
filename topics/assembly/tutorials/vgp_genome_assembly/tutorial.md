@@ -396,19 +396,19 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 
 # HiFi phased assembly with hifiasm
 
-Once we have finished the genome profiling stage, we can start the genome assembly with **hifiasm**,  a fast open-source de novo assembler specifically developed for PacBio HiFi reads.
+Once we have done genome profiling stage, we can start the genome assembly with **hifiasm**,  a fast open-source de novo assembler specifically developed for PacBio HiFi reads.
 
 ## Genome assembly with **hifiasm**
 
-One of the key focus of hifiams is to different copies of a segmental duplication involving a single segregating site, allowing to resolve near-identical, but not exactly identical, repeats and segmental duplications ({% cite Cheng2021 %}).
+One of the key advantages of hifiasm is that it allows to resolve near-identical, but not exacly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
 
 > ### {% icon comment %} Hifiasm algorithm details
 >
->By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are tow different nucleotides at the position of the alignment, and each type is supported by at least tree reads.
+>By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are two different nucleotides at that position in the alignment, and each allele is supported by at least tree reads.
 >
 > ![fig4:Hifiasm algorithm overview](../../images/vgp_assembly/hifiasm_algorithm.png "Hifiasm algorithm overview. Orange and blue bars represent the reads with heterozygous alleles carrying local phasing information, while green bars come from the homozygous regions without any heterozygous alleles.")
 >
->Then, hifiasm builds a phased assembly string graph with local phasing information from the corrected reads. Only the reads coming from the same haplotype are connected in the phased assembly graph. After transitive reduction, a pair of heterozygous alleles will be represented by a _bubble_ in the string graph. If there are no additional data, hifiasm arbitrarily selects one side of each bubble and outputs a primary assembly. For a heterozygous genome, the primary assembly generated at this step may still contain haplotigs from more than one homologous haplotype.
+>Then, hifiasm builds a phased assembly string graph with local phasing information from the corrected reads. Only the reads coming from the same haplotype are connected in the phased assembly graph. After transitive reduction, a pair of heterozygous alleles is represented by a _bubble_ in the string graph. If there is no additional data, hifiasm arbitrarily selects one side of each bubble and outputs a primary assembly. In the case of a heterozygous genome, the primary assembly generated at this step may still retain haplotigs from the alternate allele.
 >
 >
 {: .comment}
@@ -429,7 +429,7 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >
 {: .hands_on}
 
-Hifiasm generates four outputs in GFA format; this format is specially designed to capture sequence graphs as the product of an assembly, a representation of variation in genomes, splice graphs in genes, or even overlap between reads from long-read sequencing technology.
+Hifiasm generates four outputs in GFA format; this format is designed to represent genome variation, splice graphs in genes, and even overlaps between reads.
 
 
     
@@ -448,7 +448,7 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 
 ## Initial assembly evaluation
 
-Once generated the draft assembly, it is a good idea to evaluate its quality. 
+The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO, Merqury and Pretext. QUAST will generate summary statistics, BUSC will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using k-mers, and Pretext will be used to evaluate the assembly contiguity. At this step is particulary useful to run QUAST, BUSCO and Merqury.
 
 > ### {% icon hands_on %} Hands-on: assembly evaluation with Quast
 >
@@ -546,7 +546,7 @@ Let's have a look at the HTML report.
     
 # Post-assembly processing
 
-An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes (haplotype contigs), as well as all hemizygous regions from both haplomes. However, the allelic relationship between haplotypes still present a problem for *de novo* genome assembly, specially in high heterozygous genomes; sequence divergence between pair of allelic sequences can lead to assemble there regions as separate contigs, rather than the expected single haplotype-fused contig. It can result in assemblies signicantly larger than the haploid genome size, which can lead to interferences in downstream stages, such as scaffolding and gene annotation ({% cite Guan2019 %}, {% cite Roach2018 %}). 
+The ideal haploid representation consists of one copy of all heterozygous regions and of one copy of all homozygous regions. However, identifying the allelic relationships is still challenging, particularly in high heterozygous genomes. This can result in assemblies that retain additional copies of some genomic regions, which can lead to issues in downstream analyses, such as scaffolding, gene annotation, and read mapping in general ({% cite Guan2019 %}, {% cite Roach2018 %}). 
 
 Usually, allelic relationships are inferred at the post-assembly stage. Despite the haplotig processing requites multiple steps, the approach used in this tutorial can be summaryzed in two steps: firstly we will identify the syntenic contigs by using the mapped read coverage and **minimap2** ({% cite Li2018 %}) alignments. Then, we will resolve the haplotigs and overlaps in the primary assembly by using **purge_dups**.
 
@@ -584,8 +584,8 @@ This step includes 11 steps, summarized in the following scheme:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In the case you are working with a diploid orgasm, you should select `diploid` in the ploidity option.
->    > It will generate three outputs: the base-level coverage file (PBCSTAT base coverage), the cutoff file (calcuts cutoff) and a histogram plot.
+>    > In case you are working with a diploid organism, you should select `diploid` in the ploidy option.
+>    > This will generate three outputs: the base-level coverage file (PBCSTAT base coverage), the cutoff file (calcuts cutoff) and a histogram plot.
 >    {: .comment}
 >
 > 6. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
@@ -619,9 +619,9 @@ This step includes 11 steps, summarized in the following scheme:
 >
 {: .hands_on}
 
-## Second assembly evaluation assembly evaluation
+## Second round of assembly evaluation
 
-Once we have purged the duplications, let's evaluate the assembly again. 
+Once we have run purge_dups, we can evaluate assembly again, and compare the results before and after purging.
 
 > ### {% icon hands_on %} Hands-on: assembly evaluation with Quast
 >
@@ -661,7 +661,7 @@ Once we have purged the duplications, let's evaluate the assembly again.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Remember to modify the lineage option if you are working with vertebrate genomes.
+>    > Remember to modify the lineage option according to your organism.
 >    {: .comment}
 >
 > 2. Rename the summary as `BUSCO initial report`
@@ -834,46 +834,16 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 ***TODO***: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the workflow but I think we want people to be able to run this step by step. I've taken out some of the steps that are "parse parameter value" etc. 
 
-In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A DNA fragment is then sequenced from each end of this artificial junction, giving a read pair. If reads from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
+In this section we map Hi-C reads to scaffold the genome assembly. During Hi-C library preparation, the DNA is fragmented and re-ligated, leading to region of the genome that are closer in the 3D space being prefentially joined. Each DNA fragment is then sequenced from each end of this artificial junction, generating read pairs, with most of the contacts in the kpb range, bu with many contacts in the Mbp range as well. This information can be used to reconstruct the order and orientation of the contigs/scaffolds generated in the previous steps.
+    
 
-**TODO**: add image here of HiC
+## Pre-processing Hi-C data
 
-Inputs required for this section:
+Even though Hi-C generated paired-end reads, we need to map each read separately. The reason is that most aligners assumes that the ends of a single continuous genomic fragment are being sequenced, and the distance between these two ends
+fits a known distribution, but in Hi-C data,  the insert size of the ligation product can vary between
+1bp to hundreds of megabases ({% cite Lajoie2015 %}).
 
-* An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
-* HiC reads, one set of forward reads and one set of reverse reads. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order.
-* Genome size estimate: we can get this from an earlier step using GenomeScope. This is the haploid length. 
-
-A summary of the 5 steps in this section: 
-
-* Map the HiC reads to the assembly 
-* View a contact map of HiC reads against the assembly, before scaffolding
-* Scaffold the assembly with HiC reads: using the assembly file, and the mapped HiC reads
-* Evaluate the scaffolding results: use Busco and Quast 
-* View a contact map of the HiC reads after scaffolding
-
-Outputs from this section:
-
-* A scaffolded assembly FASTA file
-* contact maps of HiC reads pre- and post scaffolding
-* post-scaffolding reports from Busco and Quast 
-
-
-A simplified image of the workflow for this section (not showing Quast and Busco):
-
-
-![Hic-wf-summary](../../images/vgp_assembly/hic-wf-summary.png "HiC workflow")
-
-
-
-
-## 1. Map the HiC reads to the assembly
-
-We will do this separately for the forward and reverse set of HiC reads. We have to do this separately because these are not standard paired-end reads. 
-
-**Map the forward HiC reads:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Mapping Hi-C forward reads
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -886,9 +856,9 @@ We will do this separately for the forward and reverse set of HiC reads. We have
 >
 {: .hands_on}
 
-**Map the reverse HiC reads:**
+Now, we will map the rest of the reads.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Mapping Hi-C reverse reads
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -901,12 +871,9 @@ We will do this separately for the forward and reverse set of HiC reads. We have
 >
 {: .hands_on}
 
+Once we have mapped the reads, the next step the BAM files:
 
-**Merge the mapped reads:**
-
-Now we will merge these two BAM files:
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Merge the BAM files
 >
 > 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
@@ -914,21 +881,15 @@ Now we will merge these two BAM files:
 >
 {: .hands_on}
 
-**Convert the mapped BAM file to a BED file:**
+Finally, we need to convert the BAM file to BED format, and sorting it.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: BAM to BED conversion
 >
 > 1. {% tool [bedtools BAM to BED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
 >
-{: .hands_on}
-
-**Sort the BED file:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Sort](sort1) %} with the following parameters:
+> 2. {% tool [Sort](sort1) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `output` (output of **bedtools BAM to BED** {% icon tool %})
 >    - *"on column"*: `c4`
 >    - *"with flavor"*: `Alphabetical sort`
@@ -937,25 +898,17 @@ Now we will merge these two BAM files:
 {: .hands_on}
 
 
-## 2. View a contact map of the mapped HiC reads
+## Generate Hi-C contact map
 
-Most of the paired reads from HiC will map to the same (or nearby) contigs. On a graph, with ordered contigs on each axis, a lot of the contacts will be along the diagonal (mapping to self), or nearby (around that diagonal line). But some may be in odd places - for example, showing a lot of reads mapped to both contig 4 and contig 19. We will now generate a contact map of the assembly before it is scaffolded, to compare to the contact map after scaffolding.
+Most of the paired reads from HiC will map to the same  contigs. In a typic Hi-C contact map, contigs are ordered by size and are evaluated against each other in a triangular matrix. Most contacts should appear close to the diagonal (mapping to self). Off-diagonal signal is indicative of chromosomal interactions in non-chromosome level assemblies, or of assembly mis-joints. We will now generate a Hi-C contact map before scaffolding the assembly to compare the Hi-C contact map after scaffolding.
 
-**Generate a contact map:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Generate a contact map with PretextMap
 >
 > 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
-{: .hands_on}
-
-**Convert the map to an image:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
+> 2. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
@@ -965,13 +918,9 @@ Most of the paired reads from HiC will map to the same (or nearby) contigs. On a
 ***TODO***: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not). 
 
 
-## 3. Salsa scaffolding
+## Salsa scaffolding
 
-Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
-
-**Prepare the assembly file:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Salsa scaffolding
 >
 > 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
@@ -979,14 +928,7 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
-{: .hands_on}
-
-
-**SALSA scaffolding:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
+> 2. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
 >    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
 >    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
@@ -995,13 +937,11 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 {: .hands_on}
 
 
-## 4. Evaluate the Salsa scaffolding results
+## Evaluate the Salsa scaffolding results
 
-The scaffolded assembly fasta file can then be analysed in Busco and Quast.
+Now, the scaffolded assembly will be evaluated using BUSCO and QUAST.
 
-**Busco:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Evaluation with BUSCO
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
@@ -1018,13 +958,7 @@ There are four outputs: short summary, summary as an image, and two tables (full
 
 ***TODO***: explain what these outputs mean; are the results "good" ?
 
-**Quast:**
-
-Inputs required for Quast: scaffolded assembly file from Salsa, and estimated genome size. The estimated genome size is obtained from an earlier step with GenomeScope.
-
-Run Quast:
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Evaluation with QUAST
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
 >    - *"Use customized names for the input files?"*: `No, use dataset names`
@@ -1045,20 +979,11 @@ There are four outputs: the Quast report in three formats, and a log file.
 ***TODO***: explain what these outputs mean; are the results "good" ?
 
 
-## 5. Generate a post-scaffolding contact map
+## Generate a Hi-C contact map after Salsa2 scaffolding
 
-There are five steps: 
-
-* Map the forward HiC reads to the scaffolded assembly
-* Map the reverse HiC reads to the scaffolded assembly
-* Combine these bam files into a single file
-* Generate a contact map
-* Conver the map to an image
-
-**Map the forward HiC reads:**
-
-
-> ### {% icon hands_on %} Hands-on: Task description
+Now, we repeat the producedure described previously for generating the optical maps, but in that case, we will use the scaffold generated by Salsa2.
+    
+> ### {% icon hands_on %} Hands-on: Mapping reads against the scaffold
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -1068,14 +993,7 @@ There are five steps:
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
-{: .hands_on}
-
-**Map the reverse HiC reads:**
-
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 2. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >    - *"Single or Paired-end reads"*: `Single`
@@ -1083,36 +1001,16 @@ There are five steps:
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
-{: .hands_on}
-
-**Merge the mapped reads:**
-
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+> 3. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
 >
-{: .hands_on}
-
-**Generate a contact map:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
+> 4. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
->
-{: .hands_on}
-
-**Convert the map to an image:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
+> 5. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
