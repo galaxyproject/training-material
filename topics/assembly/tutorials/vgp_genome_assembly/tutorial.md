@@ -31,9 +31,9 @@ Deciphering the structural organisation of complex vertebrate genomes is current
 
 Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR), that occur at a single locus ({% cite Trresen2019 %}). Repetitive elements are an important component of eukariotyc genomes, constituting over a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tamdem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). TE content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as its content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, TR usually lead to local genome assembly collapse, especially when their length is close to that of the reads ({% cite Trresen2019 %}).
 
-Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). A common strategy to overcome these difficulties is to remap genomes to a single haplotype, which represents the whole genome. This approach is useful for highly inbred samples that are nearly homozygous, but when applied to highly heterozygous genomes, such as aquatic organism, it missses potential differences in sequence, structure, and gene presence, usually leading to ambiguties and redundancies in the initial contig-level assemblies ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}).
+Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When there's not a reference sequence available, the *state-of-the--art* strategy consist in constructing a string graph with vertexes representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozigous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
-To address these problems, the G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species currently present on planet Earth ({% cite Rhie2021 %}). The protocol proposed in this tutorial, the VGP assembly pipeline, is the result of years of study and analysis of the available tools and data sources.
+The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species ({% cite Rhie2021 %}). Thhis tutorial will guide you step by step to assemble a high-quality referece genome by using the VGP assembly pipeline.
 
 
 > ### Agenda
@@ -51,12 +51,12 @@ The figure 1 represents the VGP assembly pipeline.
 
 ![fig1:VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0")
 
-In order to facilitate the development of the workflow, we will structure it in four main sections:
+The tutorial is structured in four main sections:
 
 - Genome profile analysis
-- HiFi long read phased assembly with Hifiasm
-- Hybrid scaffolding based on phased assembly and Bionano data
-- Hybrid scaffolding based on a phased assembly and Hi-C mapping data
+- HiFi phased assembly with Hifiasm
+- Hybrid scaffolding based using Bionano data
+- Hi-C scaffolding
 
 ## Run the VGP workflows automatically
 
@@ -81,18 +81,30 @@ The pipeline proposed in this training is an adaption of the [current workflow v
     
 ## Background on datasets
 
-In order to reduce processing times, we will use samples from _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. This organisms can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
+To reduce compute times, we will use samples from the yeast _Saccharomyces cerevisiae_, one of the most intensively studied eukaryotic model organisms in molecular and cell biology. Yeast can be haploid or diploid, depending the stage of its life cycle. Both cell types are stable and can reproduce asexually by mitosis.
 
-The VGP assembly pipeline requires datasets generated by three different technologies: PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
+The VGP assembly pipeline uses data generated by a variery of technologies, including PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
 
-PacBio HiFi reads rely on the Single Molecule Real-Time (SMRT) sequencing technology. It is based on real-time imaging of fluorescently tagged nucleotides as they are synthesized along individual DNA template molecules, combining multiple subreads of the same circular template using a statistical model to produce one highly accurate consensus sequence, along with base quality values (figure 2). This technology allows to generate long-read sequencing dataseets with read lengths averaging 10-25 kb and accuracies greater than 99.5%.
+PacBio HiFi reads rely on the Single Molecule Real-Time (SMRT) sequencing technology. SMRT is based on real-time imaging of fluorescently tagged nucleotides as they are added to a newly synthesized DNA strand. HiFi further combine multiple subreads from the same circular template to produce one highly accurate consensus sequence (fig. 3). This technology allows to generate long-read sequencing data with read lengths in the range of 10-25 kb and minimum read consensus accuracy  greater than 99% (Q20).
 
+<!--
 ![fig2:PacBio sequencing technolgoy](../../images/vgp_assembly/pacbio_hifi.png "PacBio HiFi sequencing")
+-->
+    
+Bionano technology relies on the isolation of kilobase-long DNA fragments, which are labeled at specific sequence motifs with a fluorescent dye, resulting in a unique fluorescent pattern for each genome. DNA molecules are stretched into nanoscale channels and imaged with a high-resolution camera, allowing to build optical maps based on the distance between motif-specific patterns ({% cite Lam2012 %}, {% cite Giani2020 %}).
 
-Optical genome mapping is a method for detecting structural variants. The generation of Bionano optical maps starts with high molecular weight DNA, which is labeled at specific sequences motif with a fluorescent dye, resulting in a unique fluorescence pattern for each individual genome. The comparison of the labelled fragments among different samples enables the detection of structural variants. Optical maps are integrated with the primary assemby sequence in order to identify and correct potential chimeric joints, and estimate the gap sizes.
+Linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs (fig. 4).
+    
+<!--
+![Bionano optical maps](../../images/vgp_assembly/bionano.png "Bionano optical maps")
+-->
+    
+Finally, the thigh-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin three-dimensional. During Hi-C library preparation, DNA is crosslinked the chromatin in its 3D conformation. The crosslinked DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. Next, the blunt ends of spatially proximal digested end are ligated. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome ({% cite Giani2020 %}).
 
-The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin conformation, enabling the identification of topological domains. Hi-C chromatin interaction maps methods first crosslink the chromatin in its 3D conformation. The crosslinked DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. Next, the blunt ends  of spatially proximal digested end are ligated, preserving the chromosome interaction regions. Finally, the DNA is purified to assure that only fragments originating from ligation events are sequenced. 
+# Get data
 
+Now we can start with the pipeline. The first step is to get the datasets from Zenodo:
+    
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
@@ -141,9 +153,9 @@ The high-throughput chromosome conformation capture (Hi-C) technology is based o
 
     
 
-# Primer removal from HiFi reads
+## Primer removal from HiFi reads
 
-Firsly, we will trim the residual adaptors sequences by using Cutadapt, in order to avoid potential reads which could interfer in the subsequent steps.
+Now, we will trim the residual adaptors sequences by using Cutadapt, in order remove the reads  that could interfere with the assembly process.
 
 > ### {% icon hands_on %} Hands-on: Primer removal
 >
@@ -174,9 +186,7 @@ Firsly, we will trim the residual adaptors sequences by using Cutadapt, in order
 
 # Genome profile analysis
 
-An important step before starting a de novo genome assembly project is to proceed with the analysis of the genome profile. Determining these characteristics in advance has the potential to reveal whether an analysis is not reflecting the full complexity of the genome, for example, if the number of variants is underestimated or a significant fraction of the genome is not assembled ({% cite Vurture2017 %}).
-
-Traditionally DNA flow citometry was considered the golden standart for estimating the genome size, one of the most important factors to determine the required coverage level. However, nowadays experimental methods have been replaced by computational approaches {% cite wang2020estimation %}. One of the most widely used procedures for undertaking genomic profiling is the analyis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality. In addition, k-mer spectra analysis can be used in a reference-free manner for assessing genome assembly quality metrics ({% cite Rhie2020 %}).
+Before starting a de novo genome assembly project, it useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally DNA flow citometry was considered the golden standard for estimating the genome size. Nowadays experimental methods have been replaced by computational approaches {% cite wang2020estimation %}. One of the widely used genome profilling methods is based on the analysis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality.
 
 > ### {% icon details %} K-mer size, sequencing coverage and genome size
 >
@@ -204,33 +214,33 @@ In section we will use two basic tools to computationally estimate the genome fe
 
 ## Generation of k-mer spectra with **Meryl**
 
-Meryl will allow us to perform the k-mer profiling by decomposing the sequencing data into k-lenght substrings and determining its frequency. The original version was developed for use in the Celera Assembler, and it comprises three modules: one for generating k-mer databases, one for filtering and combining databases, and one for searching databases. The k-mer database is stored in sorted order, similar to words in a dictionary ({% cite Rhie2020 %}).
+Meryl will allow us to generate the *k*-mer profile by decomposing the sequencing data into *k*-lenght substrings, counting the ocurrence of each *k*-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version compises three main modules: one for generating *k*-mer databases, one for filtering and combining databases, and one for searching databases. *K*-mers are stored in lexicographical order in the database, similar to words in a dictionary ({% cite Rhie2020 %}).
 
-> ### {% icon comment %} K-mer size estimation
+> ### {% icon comment %} *k*-mer size estimation
 >
 >  Given an estimated genome size (G) and a tolerable collision rate (p), an appropriate k can be computed as k = log4 (G(1 − p)/p).
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Generate k-mers count distribution
+> ### {% icon hands_on %} Hands-on: Generate *k*-mers count distribution
 >
 > 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
->        - *"Count operations"*: `Count: count the ocurrences of canonical k-mers`
+>        - *"Count operations"*: `Count: count the ocurrences of canonical *k*-mers`
 >        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
->        - *"K-mer size selector"*: `Set a k-mer size`
->            - "*K-mer size*": `21`
+>        - *"*k*-mer size selector"*: `Set a *k*-mer size`
+>            - "**k*-mer size*": `21`
 >
->    > ### {% icon comment %} Election of k-mer size
+>    > ### {% icon comment %} Election of *k*-mer size
 >    >
->    > We used 21 as k-mer size, as this length has demonstrated to be sufficiently long that most k-mers are not repetitive and is short enough that the analysis will be more robust to sequencing errors. For extremely large (haploid size over 10 Gb) and/or very repetitive genomes, it is recommended to use larger k-mer lengths to increase the number of unique k-mers. 
+>    > We used 21 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers. 
 >    {: .comment}
 >
 > 2. Rename it `Collection meryldb`
 >
 > 3. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1) %} with the following parameters:
->    - *"Operation type selector"*: `Operations on sets of k-mers`
->        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
+>    - *"Operation type selector"*: `Operations on sets of *k*-mers`
+>        - *"Operations on sets of *k*-mers"*: `Union-sum: return *k*-mers that occur in any input, set the count to the sum of the counts`
 >        - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
 > 4. Rename it as `Merged meryldb`    
@@ -246,13 +256,13 @@ Meryl will allow us to perform the k-mer profiling by decomposing the sequencing
 
 ## Genome profiling with **GenomeScope2**
 
-The next step is to computationally infer the genome properties from the k-mer count distribution generated by Meryl, for which we'll use GenomeScope2. It relies in a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
+The next step is to infer the genome properties from the *k*-mer histogram generated by Meryl, for which we willl use GenomeScope2. Genomescope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
 
 > ### {% icon hands_on %} Hands-on: Estimate genome properties
 >
 > 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input histogram file"*: `Meryldb histogram`
->    - *"K-mer length used to calculate k-mer spectra"*: `21`
+>    - *"*k*-mer length used to calculate *k*-mer spectra"*: `21`
 >
 >   - In "*Output options*": mark `Summary of the analysis`
 >   - In "*Advanced options*":
@@ -265,20 +275,20 @@ The next step is to computationally infer the genome properties from the k-mer c
 Genomescope will generate six outputs:
     
 - Plots
-    - *Linear plot*: K-mer spectra and fitted models: frequency (y-axis) versus coverage.
+    - *Linear plot*: *k*-mer spectra and fitted models: frequency (y-axis) versus coverage.
     - *Log plot*: logarithmic transformation of the previous plot.
-    - Transformed linear plot: K-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). It allows to increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
+    - Transformed linear plot: *k*-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). It allows to increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
     - Transformed log plot: logarithmic transformation of the previous plot.
 - Model: this file includes a detailed report about the model fitting.
 - Summary: it includes the properties infered from the model, such as genome haploid length and the percentage of heterozygosity.
 
-Now, let's analyze the k-mer profiles, fitted models and estimated parameters:
+Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters:
 
 ![fig3:Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "Genomescope2 plot")
 
-As we can see, there is an unique peak centered around 28, which is the coverage with the highest number of different 21-mers. According the normal-like k-mer spectra, we can infer that it is a haploid genome. The large number of unique k-mers on the left side with frequence around one is due to error during the sequencing process.
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, there is an unique peak centered around 28x, the modal *k*-mer coverage. The absence of a secondary peak at half diploid coverage is suggestive of the haploid nature of this genome, but could generally result also from very low heterozygosity. Low frequency *k*-mers are the result of sequencing errors.
 
-Before jumping to the next section, we need to carry out some operation on the output generated by Genomescope2. The goal is to generate some parameters which at a later stage will be used by **purge_dups** ({% cite Guan2019 %}). Lets start with the `estimated genome size`.
+Before proceeding to the next section, we need to carry out some operations on the output generated by GenomeScope2. The goal is to extract some parameters which at a later stage will be used by **purge_dups** ({% cite Guan2019 %}). The first relevant parameter is the `estimated genome size`.
 
 > ### {% icon hands_on %} Hands-on: Get estimated genome size
 >
@@ -387,21 +397,21 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 {: .hands_on}
 
 
-# HiFi long read phased assembly with hifiasm
+# HiFi phased assembly with hifiasm
 
-Once we have finished the genome profiling stage, we can start the genome assembly with **hifiasm**,  a fast open-source de novo assembler specifically developed for PacBio HiFi reads.
+Once we have done genome profiling stage, we can start the genome assembly with **hifiasm**,  a fast open-source de novo assembler specifically developed for PacBio HiFi reads.
 
 ## Genome assembly with **hifiasm**
 
-One of the key focus of hifiams is to different copies of a segmental duplication involving a single segregating site, allowing to resolve near-identical, but not exactly identical, repeats and segmental duplications ({% cite Cheng2021 %}).
+One of the key advantages of hifiasm is that it allows to resolve near-identical, but not exacly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
 
 > ### {% icon comment %} Hifiasm algorithm details
 >
->By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are tow different nucleotides at the position of the alignment, and each type is supported by at least tree reads.
+>By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are two different nucleotides at that position in the alignment, and each allele is supported by at least tree reads.
 >
 > ![fig4:Hifiasm algorithm overview](../../images/vgp_assembly/hifiasm_algorithm.png "Hifiasm algorithm overview. Orange and blue bars represent the reads with heterozygous alleles carrying local phasing information, while green bars come from the homozygous regions without any heterozygous alleles.")
 >
->Then, hifiasm builds a phased assembly string graph with local phasing information from the corrected reads. Only the reads coming from the same haplotype are connected in the phased assembly graph. After transitive reduction, a pair of heterozygous alleles will be represented by a _bubble_ in the string graph. If there are no additional data, hifiasm arbitrarily selects one side of each bubble and outputs a primary assembly. For a heterozygous genome, the primary assembly generated at this step may still contain haplotigs from more than one homologous haplotype.
+>Then, hifiasm builds a phased assembly string graph with local phasing information from the corrected reads. Only the reads coming from the same haplotype are connected in the phased assembly graph. After transitive reduction, a pair of heterozygous alleles is represented by a _bubble_ in the string graph. If there is no additional data, hifiasm arbitrarily selects one side of each bubble and outputs a primary assembly. In the case of a heterozygous genome, the primary assembly generated at this step may still retain haplotigs from the alternate allele.
 >
 >
 {: .comment}
@@ -422,7 +432,7 @@ One of the key focus of hifiams is to different copies of a segmental duplicatio
 >
 {: .hands_on}
 
-Hifiasm generates four outputs in GFA format; this format is specially designed to capture sequence graphs as the product of an assembly, a representation of variation in genomes, splice graphs in genes, or even overlap between reads from long-read sequencing technology.
+Hifiasm generates four outputs in GFA format; this format is designed to represent genome variation, splice graphs in genes, and even overlaps between reads.
 
 
     
@@ -441,7 +451,7 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 
 ## Initial assembly evaluation
 
-Once generated the draft assembly, it is a good idea to evaluate its quality. 
+The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO, Merqury and Pretext. QUAST will generate summary statistics, BUSC will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using k-mers, and Pretext will be used to evaluate the assembly contiguity. At this step is particulary useful to run QUAST, BUSCO and Merqury.
 
 > ### {% icon hands_on %} Hands-on: assembly evaluation with Quast
 >
@@ -525,11 +535,11 @@ Let's have a look at the HTML report.
 {: .question}
 
 
-> ### {% icon hands_on %} Hands-on: K-mer based evaluation with Merqury
+> ### {% icon hands_on %} Hands-on: *k*-mer based evaluation with Merqury
 >
 > 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
 >    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `Merged meryldb`
+>        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
 >        - *"Number of assemblies"*: `Two assemblies
 >            - {% icon param-file %} *"First genome assembly"*: `Primary contig FASTA`
 >            - {% icon param-file %} *"Second genome assembly"*: `Alternate contig FASTA`    
@@ -539,7 +549,7 @@ Let's have a look at the HTML report.
     
 # Post-assembly processing
 
-An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes (haplotype contigs), as well as all hemizygous regions from both haplomes. However, the allelic relationship between haplotypes still present a problem for *de novo* genome assembly, specially in high heterozygous genomes; sequence divergence between pair of allelic sequences can lead to assemble there regions as separate contigs, rather than the expected single haplotype-fused contig. It can result in assemblies signicantly larger than the haploid genome size, which can lead to interferences in downstream stages, such as scaffolding and gene annotation ({% cite Guan2019 %}, {% cite Roach2018 %}). 
+The ideal haploid representation consists of one copy of all heterozygous regions and of one copy of all homozygous regions. However, identifying the allelic relationships is still challenging, particularly in high heterozygous genomes. This can result in assemblies that retain additional copies of some genomic regions, which can lead to issues in downstream analyses, such as scaffolding, gene annotation, and read mapping in general ({% cite Guan2019 %}, {% cite Roach2018 %}). 
 
 Usually, allelic relationships are inferred at the post-assembly stage. Despite the haplotig processing requites multiple steps, the approach used in this tutorial can be summaryzed in two steps: firstly we will identify the syntenic contigs by using the mapped read coverage and **minimap2** ({% cite Li2018 %}) alignments. Then, we will resolve the haplotigs and overlaps in the primary assembly by using **purge_dups**.
 
@@ -577,8 +587,8 @@ This step includes 11 steps, summarized in the following scheme:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In the case you are working with a diploid orgasm, you should select `diploid` in the ploidity option.
->    > It will generate three outputs: the base-level coverage file (PBCSTAT base coverage), the cutoff file (calcuts cutoff) and a histogram plot.
+>    > In case you are working with a diploid organism, you should select `diploid` in the ploidy option.
+>    > This will generate three outputs: the base-level coverage file (PBCSTAT base coverage), the cutoff file (calcuts cutoff) and a histogram plot.
 >    {: .comment}
 >
 > 6. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
@@ -612,9 +622,9 @@ This step includes 11 steps, summarized in the following scheme:
 >
 {: .hands_on}
 
-## Second assembly evaluation assembly evaluation
+## Second round of assembly evaluation
 
-Once we have purged the duplications, let's evaluate the assembly again. 
+Once we have run purge_dups, we can evaluate assembly again, and compare the results before and after purging.
 
 > ### {% icon hands_on %} Hands-on: assembly evaluation with Quast
 >
@@ -654,7 +664,7 @@ Once we have purged the duplications, let's evaluate the assembly again.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Remember to modify the lineage option if you are working with vertebrate genomes.
+>    > Remember to modify the lineage option according to your organism.
 >    {: .comment}
 >
 > 2. Rename the summary as `BUSCO initial report`
@@ -702,7 +712,7 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 {: .hands_on}
 
 
-# Hybrid scaffolding based on phased assembly and Bionano data
+# Hybrid scaffolding based using Bionano data
 
 
 ## Sub-step with **Bionano Hybrid Scaffold**
@@ -827,46 +837,16 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 
 ***TODO***: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the workflow but I think we want people to be able to run this step by step. I've taken out some of the steps that are "parse parameter value" etc. 
 
-In this section we map HiC reads to scaffold the genome assembly. In HiC sequencing, parts of the genome that are close together are artificially joined. A DNA fragment is then sequenced from each end of this artificial junction, giving a read pair. If reads from this read pair map to two contigs, it indicates that those two contigs are close together in the genome. A good short video showing the HiC process is here: https://youtu.be/-MxEw3IXUWU
+In this section we map Hi-C reads to scaffold the genome assembly. During Hi-C library preparation, the DNA is fragmented and re-ligated, leading to region of the genome that are closer in the 3D space being prefentially joined. Each DNA fragment is then sequenced from each end of this artificial junction, generating read pairs, with most of the contacts in the kpb range, bu with many contacts in the Mbp range as well. This information can be used to reconstruct the order and orientation of the contigs/scaffolds generated in the previous steps.
+    
 
-**TODO**: add image here of HiC
+## Pre-processing Hi-C data
 
-Inputs required for this section:
+Even though Hi-C generated paired-end reads, we need to map each read separately. The reason is that most aligners assumes that the ends of a single continuous genomic fragment are being sequenced, and the distance between these two ends
+fits a known distribution, but in Hi-C data,  the insert size of the ligation product can vary between
+1bp to hundreds of megabases ({% cite Lajoie2015 %}).
 
-* An assembly FASTA file. This can be the output of the phased assembly section, and/or the output of the Bionano scaffolding section. 
-* HiC reads, one set of forward reads and one set of reverse reads. If there is more than one set of Hi-C pair-read datasets, concatenate all the forward reads into one file, and the reverse reads into another file, in the same order.
-* Genome size estimate: we can get this from an earlier step using GenomeScope. This is the haploid length. 
-
-A summary of the 5 steps in this section: 
-
-* Map the HiC reads to the assembly 
-* View a contact map of HiC reads against the assembly, before scaffolding
-* Scaffold the assembly with HiC reads: using the assembly file, and the mapped HiC reads
-* Evaluate the scaffolding results: use Busco and Quast 
-* View a contact map of the HiC reads after scaffolding
-
-Outputs from this section:
-
-* A scaffolded assembly FASTA file
-* contact maps of HiC reads pre- and post scaffolding
-* post-scaffolding reports from Busco and Quast 
-
-
-A simplified image of the workflow for this section (not showing Quast and Busco):
-
-
-![Hic-wf-summary](../../images/vgp_assembly/hic-wf-summary.png "HiC workflow")
-
-
-
-
-## 1. Map the HiC reads to the assembly
-
-We will do this separately for the forward and reverse set of HiC reads. We have to do this separately because these are not standard paired-end reads. 
-
-**Map the forward HiC reads:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Mapping Hi-C forward reads
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -879,9 +859,9 @@ We will do this separately for the forward and reverse set of HiC reads. We have
 >
 {: .hands_on}
 
-**Map the reverse HiC reads:**
+Now, we will map the rest of the reads.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Mapping Hi-C reverse reads
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -894,12 +874,9 @@ We will do this separately for the forward and reverse set of HiC reads. We have
 >
 {: .hands_on}
 
+Once we have mapped the reads, the next step the BAM files:
 
-**Merge the mapped reads:**
-
-Now we will merge these two BAM files:
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Merge the BAM files
 >
 > 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
@@ -907,21 +884,15 @@ Now we will merge these two BAM files:
 >
 {: .hands_on}
 
-**Convert the mapped BAM file to a BED file:**
+Finally, we need to convert the BAM file to BED format, and sorting it.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: BAM to BED conversion
 >
 > 1. {% tool [bedtools BAM to BED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Convert the following BAM file to BED"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
 >
-{: .hands_on}
-
-**Sort the BED file:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Sort](sort1) %} with the following parameters:
+> 2. {% tool [Sort](sort1) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `output` (output of **bedtools BAM to BED** {% icon tool %})
 >    - *"on column"*: `c4`
 >    - *"with flavor"*: `Alphabetical sort`
@@ -930,25 +901,17 @@ Now we will merge these two BAM files:
 {: .hands_on}
 
 
-## 2. View a contact map of the mapped HiC reads
+## Generate Hi-C contact map
 
-Most of the paired reads from HiC will map to the same (or nearby) contigs. On a graph, with ordered contigs on each axis, a lot of the contacts will be along the diagonal (mapping to self), or nearby (around that diagonal line). But some may be in odd places - for example, showing a lot of reads mapped to both contig 4 and contig 19. We will now generate a contact map of the assembly before it is scaffolded, to compare to the contact map after scaffolding.
+Most of the paired reads from HiC will map to the same  contigs. In a typic Hi-C contact map, contigs are ordered by size and are evaluated against each other in a triangular matrix. Most contacts should appear close to the diagonal (mapping to self). Off-diagonal signal is indicative of chromosomal interactions in non-chromosome level assemblies, or of assembly mis-joints. We will now generate a Hi-C contact map before scaffolding the assembly to compare the Hi-C contact map after scaffolding.
 
-**Generate a contact map:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Generate a contact map with PretextMap
 >
 > 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
-{: .hands_on}
-
-**Convert the map to an image:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
+> 2. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
@@ -958,13 +921,9 @@ Most of the paired reads from HiC will map to the same (or nearby) contigs. On a
 ***TODO***: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not). 
 
 
-## 3. Salsa scaffolding
+## Salsa scaffolding
 
-Files required: The assembly file (optional: and the assembly graph), the sorted BED file, and the restriction enzyme sequence from the HiC sequencing. If you are using VGP GenomeArk data, you can get this information from the same file as the HiC reads, in a file called re_bases.txt.
-
-**Prepare the assembly file:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Salsa scaffolding
 >
 > 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
@@ -972,14 +931,7 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
-{: .hands_on}
-
-
-**SALSA scaffolding:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
+> 2. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
 >    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
 >    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
@@ -988,13 +940,11 @@ Files required: The assembly file (optional: and the assembly graph), the sorted
 {: .hands_on}
 
 
-## 4. Evaluate the Salsa scaffolding results
+## Evaluate the Salsa scaffolding results
 
-The scaffolded assembly fasta file can then be analysed in Busco and Quast.
+Now, the scaffolded assembly will be evaluated using BUSCO and QUAST.
 
-**Busco:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Evaluation with BUSCO
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
@@ -1011,13 +961,7 @@ There are four outputs: short summary, summary as an image, and two tables (full
 
 ***TODO***: explain what these outputs mean; are the results "good" ?
 
-**Quast:**
-
-Inputs required for Quast: scaffolded assembly file from Salsa, and estimated genome size. The estimated genome size is obtained from an earlier step with GenomeScope.
-
-Run Quast:
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Evaluation with QUAST
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
 >    - *"Use customized names for the input files?"*: `No, use dataset names`
@@ -1038,20 +982,11 @@ There are four outputs: the Quast report in three formats, and a log file.
 ***TODO***: explain what these outputs mean; are the results "good" ?
 
 
-## 5. Generate a post-scaffolding contact map
+## Generate a Hi-C contact map after Salsa2 scaffolding
 
-There are five steps: 
-
-* Map the forward HiC reads to the scaffolded assembly
-* Map the reverse HiC reads to the scaffolded assembly
-* Combine these bam files into a single file
-* Generate a contact map
-* Conver the map to an image
-
-**Map the forward HiC reads:**
-
-
-> ### {% icon hands_on %} Hands-on: Task description
+Now, we repeat the producedure described previously for generating the optical maps, but in that case, we will use the scaffold generated by Salsa2.
+    
+> ### {% icon hands_on %} Hands-on: Mapping reads against the scaffold
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -1061,14 +996,7 @@ There are five steps:
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
-{: .hands_on}
-
-**Map the reverse HiC reads:**
-
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 2. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >    - *"Single or Paired-end reads"*: `Single`
@@ -1076,36 +1004,16 @@ There are five steps:
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
-{: .hands_on}
-
-**Merge the mapped reads:**
-
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+> 3. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >
 >
-{: .hands_on}
-
-**Generate a contact map:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
+> 4. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
 >    - *"Sort by"*: `Don't sort`
 >
->
-{: .hands_on}
-
-**Convert the map to an image:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
+> 5. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
