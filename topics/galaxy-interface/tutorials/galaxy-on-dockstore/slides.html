@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Galaxy workflows in Dockstore</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="A collection of microtutorials explaining various feature..." />
+    <meta property="og:title" content="Galaxy Training: Galaxy workflows in Dockstore" />
+    <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Galaxy workflows in Dockstore",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Using Galaxy and Managing your Data",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+  },
+  "courseCode": "galaxy-interface / galaxy-on-dockstore / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Galaxy workflows in Dockstore' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.html",
+  "description": "The objectives are:\n - What is Dockstore?\n - Why use Dockstore?\n - How to find workflows on Dockstore?\n - How to launch workflows from Dockstore?\n - Getting started with Galaxy workflows on Dockstore\n - Register your Galaxy workflow on Dockstore\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Avani Khadilkar"
+    },
+    {
+      "@type": "Person",
+      "name": "Elizabeth Sheets"
+    },
+    {
+      "@type": "Person",
+      "name": "Charles Overbeck"
+    },
+    {
+      "@type": "Person",
+      "name": "Enis Afgan"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Avani Khadilkar"
+    },
+    {
+      "@type": "Person",
+      "name": "Elizabeth Sheets"
+    },
+    {
+      "@type": "Person",
+      "name": "Charles Overbeck"
+    },
+    {
+      "@type": "Person",
+      "name": "Enis Afgan"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Using Galaxy and Managing your Data",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/galaxy-interface" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Galaxy workflows in Dockstore
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/avani-k/" class="contributor-badge contributor-avani-k"><img src="https://avatars.githubusercontent.com/avani-k?s=27" alt="Avatar">Avani Khadilkar</a>
+
+
+<a href="/training-material/hall-of-fame/bethsheets/" class="contributor-badge contributor-bethsheets"><img src="https://avatars.githubusercontent.com/bethsheets?s=27" alt="Avatar">Elizabeth Sheets</a>
+
+
+<a href="/training-material/hall-of-fame/coverbeck/" class="contributor-badge contributor-coverbeck"><img src="https://avatars.githubusercontent.com/coverbeck?s=27" alt="Avatar">Charles Overbeck</a>
+
+
+<a href="/training-material/hall-of-fame/afgane/" class="contributor-badge contributor-afgane"><img src="https://avatars.githubusercontent.com/afgane?s=27" alt="Avatar">Enis Afgan</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+
+</div>
+
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jan 14, 2022</div>
+<div class="footnote" style="bottom: 2em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Or view the plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- What is Dockstore?
+
+- Why use Dockstore?
+
+- How to find workflows on Dockstore?
+
+- How to launch workflows from Dockstore?
+
+- Getting started with Galaxy workflows on Dockstore
+
+- Register your Galaxy workflow on Dockstore
+
+
+---
+
+
+# What is Dockstore?
+
+---
+
+## Dockstore: “an app store for bioinformatics”
+
+.pull-left[
+
+- Open-source platform for sharing reusable bioinformatics workflows
+
+- Easy and reliable way to find and use relevant workflows as well as publish your own workflows
+
+- Dockstore integrates source control repositories like GitHub, Bitbucket, and GitLab for version control and automatic updates.
+
+- Integration with several cloud environments such as the usegalaxy.org, Galaxy Project's public server provides a succinct infrastructure to host high quality workflows
+
+]
+
+.pull-right[
+
+.image-40[
+  ![Structure of Dockstore](/training-material/topics/galaxy-interface/images/Dockstore-Schematic.png)
+]
+
+[dockstore.org](https://dockstore.org/)
+
+]
+
+---
+
+# What is Dockstore?
+
+---
+
+## Why use Dockstore?
+
+Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).
+
+## Findable
+
+- Dockstore parses provided metadata and allows it to be searchable.
+
+- With the faceted search feature, user can find workflows using search terms and filter using workflow language, author, organization, labels, etc.
+
+- Institutions and organizations can showcase their work by research theme in the Organizations and Collections page. For example, [IWCG](https://dockstore.org/organizations/iwc)
+
+---
+
+## Why use Dockstore?
+
+Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).
+
+## Accessible
+
+- Dockstore never requires a user to log in to search and inspect contents for workflows and tools.
+
+- Once found, analyses can be launched in different environments using the Launch with feature of Dockstore. Workflows can just as easily be downloaded to run on local machines.
+
+- Users can also request a DOI via Zenodo for their workflows for reference in published research.
+
+---
+
+## Why use Dockstore?
+
+Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).
+
+## Interoperable
+
+- Users are strongly encouraged to provide clear instructions, test data and checker workflows to ensure that their workflows are usable in any environment.
+
+- The GA4GH TRS API enable the simple launching of workflows to a variety of compute platforms.
+
+---
+
+## Why use Dockstore?
+
+Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).
+
+## Reusable
+
+- Contributors are encouraged to provide clear documentation and the exact version of the components in their descriptor files so that others can find, reuse and build upon the workflows.
+
+- The Dockstore GitHub App provides support for registering workflows, version control/tagging and automatically syncing workflows and services.
+
+---
+
+# How to find workflows on [Dockstore](https://dockstore.org/)?
+
+---
+
+## How to find workflows on [Dockstore](https://dockstore.org/)?
+
+You can find relevant workflows using the Faceted Search option:
+
+Scan the code below or simply click on it to be directed to the detailed documentation.
+
+.image-40[
+  ![Faceted Search QR](/training-material/topics/galaxy-interface/images/FacetedSearchQR.png)] (https://docs.dockstore.org/en/stable/end-user-topics/faceted-search.html)
+
+]
+
+pull-right[
+
+![Faceted Search Screenshot](/training-material/topics/galaxy-interface/images/FacetedSearchScreenshot.png)
+
+]
+
+---
+
+
+## How to find workflows on [Dockstore](https://dockstore.org/)?
+
+You can also find workflows through the Organizations/Collections feature:
+
+Scan the code below or simply click on it to be directed to the detailed documentation.
+
+.image-40[
+  ![Organizations/Collections QR](/training-material/topics/galaxy-interface/images/OrgCollectnQR.png)](https://docs.dockstore.org/en/stable/advanced-topics/organizations-and-collections.html)
+
+]
+
+pull-right[
+
+![Organizations/Collections Screenshot](/training-material/topics/galaxy-interface/images/OrgCollectnScreenshot.png)
+
+]
+
+---
+
+## How to launch workflows from [Dockstore](https://dockstore.org/)?
+
+You can use the Launch With feature to launch the workflow in your choice of environment:
+
+Scan the code below or simply click on it to be directed to the detailed documentation.
+
+.image-40[
+  ![Launch With QR](/training-material/topics/galaxy-interface/images/LaunchWithQR.png)](https://docs.dockstore.org/en/stable/launch-with/galaxy-launch-with.html)
+
+]
+
+pull-right[
+
+![Launch With Screenshot](/training-material/topics/galaxy-interface/images/LaunchWithScreenshot.png)
+
+]
+
+---
+
+## How to launch workflows from within [Galaxy](https://usegalaxy.org/)?
+
+You can use the [GA4GH Tool Registry Server (TRS) Workflow Search](https://usegalaxy.org/workflows/trs_search) using keywords in the description of the workflows on Dockstore.
+Alternatively, you can use the [GA4GH Tool Registry Server (TRS) Workflow Import](https://usegalaxy.org/workflows/trs_import) using the TRS ID from workflow description on Dockstore.
+
+
+![Launch From Galaxy Search](/training-material/topics/galaxy-interface/images/LaunchGalaxySearch.png)
+![Launch From Galaxy TRS ID](/training-material/topics/galaxy-interface/images/LaunchGalaxyTRSID.png)
+
+
+---
+
+## Getting started with Galaxy workflows on [Dockstore](https://dockstore.org/)?
+
+Get started on writing and publishing Galaxy workflows, refer to the Getting Started with Galaxy doc.
+
+Scan the code below or simply click on it to be directed to the detailed documentation.
+
+.image-40[
+  ![Getting Started QR](/training-material/topics/galaxy-interface/images/GettingStartedQR.png)](https://docs.dockstore.org/en/stable/getting-started/getting-started-with-galaxy.html)
+
+]
+
+pull-right[
+
+![Getting Started Screenshot](/training-material/topics/galaxy-interface/images/GettingStartedScreenshot.png)
+
+]
+
+---
+
+## Register your Galaxy workflow on [Dockstore](https://dockstore.org/)
+
+If you have a workflow you want to register, you can follow the Getting Started with Workflows doc.
+
+Scan the code below or simply click on it to be directed to the detailed documentation.
+
+.image-40[
+  ![Getting Started with Workflows QR](/training-material/topics/galaxy-interface/images/GettingStartedWorkflowsQR.png)](https://docs.dockstore.org/en/stable/getting-started/dockstore-workflows.html)
+
+]
+
+pull-right[
+
+![Getting Started with Workflows Screenshot](/training-material/topics/galaxy-interface/images/GettingStartedWorkflowsScreenshot.png)]
+
+---
+
+## You can also watch the &quot;How to launch Galaxy workflows from Dockstore&quot; videos linked below:
+
+[How to launch Galaxy workflows from Dockstore - Part 1 (Using the default cloud environment options)](https://youtu.be/U8rQiwLceZg)
+
+[How to launch Galaxy workflows from Dockstore - Part 2 (Using custom cloud environment options)](https://youtu.be/aYShFs9tZ6s)
+
+---
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/avani-k/" class="contributor-badge contributor-avani-k"><img src="https://avatars.githubusercontent.com/avani-k?s=27" alt="Avatar">Avani Khadilkar</a>
+
+
+<a href="/training-material/hall-of-fame/bethsheets/" class="contributor-badge contributor-bethsheets"><img src="https://avatars.githubusercontent.com/bethsheets?s=27" alt="Avatar">Elizabeth Sheets</a>
+
+
+<a href="/training-material/hall-of-fame/coverbeck/" class="contributor-badge contributor-coverbeck"><img src="https://avatars.githubusercontent.com/coverbeck?s=27" alt="Avatar">Charles Overbeck</a>
+
+
+<a href="/training-material/hall-of-fame/afgane/" class="contributor-badge contributor-afgane"><img src="https://avatars.githubusercontent.com/afgane?s=27" alt="Avatar">Enis Afgan</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

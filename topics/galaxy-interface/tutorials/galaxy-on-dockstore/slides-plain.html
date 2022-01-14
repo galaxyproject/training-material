@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy workflows in Dockstore</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy workflows in Dockstore" />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides-plain.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy workflows in Dockstore</h1>
+		<h2>Contributors</h2>
+		
+<a href="/training-material/hall-of-fame/avani-k/" class="contributor-badge contributor-avani-k"><img src="https://avatars.githubusercontent.com/avani-k?s=27" alt="Avatar">Avani Khadilkar</a>
+
+ 
+<a href="/training-material/hall-of-fame/bethsheets/" class="contributor-badge contributor-bethsheets"><img src="https://avatars.githubusercontent.com/bethsheets?s=27" alt="Avatar">Elizabeth Sheets</a>
+
+ 
+<a href="/training-material/hall-of-fame/coverbeck/" class="contributor-badge contributor-coverbeck"><img src="https://avatars.githubusercontent.com/coverbeck?s=27" alt="Avatar">Charles Overbeck</a>
+
+ 
+<a href="/training-material/hall-of-fame/afgane/" class="contributor-badge contributor-afgane"><img src="https://avatars.githubusercontent.com/afgane?s=27" alt="Avatar">Enis Afgan</a>
+
+
+
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>What is Dockstore?</p>
+</li>
+		
+		<li><p>Why use Dockstore?</p>
+</li>
+		
+		<li><p>How to find workflows on Dockstore?</p>
+</li>
+		
+		<li><p>How to launch workflows from Dockstore?</p>
+</li>
+		
+		<li><p>Getting started with Galaxy workflows on Dockstore</p>
+</li>
+		
+		<li><p>Register your Galaxy workflow on Dockstore</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 14, 2022 </div>
+
+	<hr />
+
+
+	<h1 id="what-is-dockstore">What is Dockstore?</h1>
+
+<hr />
+
+<h2 id="dockstore-an-app-store-for-bioinformatics">Dockstore: “an app store for bioinformatics”</h2>
+
+<p>.pull-left[</p>
+
+<ul>
+  <li>
+    <p>Open-source platform for sharing reusable bioinformatics workflows</p>
+  </li>
+  <li>
+    <p>Easy and reliable way to find and use relevant workflows as well as publish your own workflows</p>
+  </li>
+  <li>
+    <p>Dockstore integrates source control repositories like GitHub, Bitbucket, and GitLab for version control and automatic updates.</p>
+  </li>
+  <li>
+    <p>Integration with several cloud environments such as the usegalaxy.org, Galaxy Project’s public server provides a succinct infrastructure to host high quality workflows</p>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p>.image-40[
+  <img src="/training-material/topics/galaxy-interface/images/Dockstore-Schematic.png" alt="Structure of Dockstore. " loading="lazy" />
+]</p>
+
+<p><a href="https://dockstore.org/">dockstore.org</a></p>
+
+<p>]</p>
+
+<hr />
+
+<h1 id="what-is-dockstore-1">What is Dockstore?</h1>
+
+<hr />
+
+<h2 id="why-use-dockstore">Why use Dockstore?</h2>
+
+<p>Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).</p>
+
+<h2 id="findable">Findable</h2>
+
+<ul>
+  <li>
+    <p>Dockstore parses provided metadata and allows it to be searchable.</p>
+  </li>
+  <li>
+    <p>With the faceted search feature, user can find workflows using search terms and filter using workflow language, author, organization, labels, etc.</p>
+  </li>
+  <li>
+    <p>Institutions and organizations can showcase their work by research theme in the Organizations and Collections page. For example, <a href="https://dockstore.org/organizations/iwc">IWCG</a></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="why-use-dockstore-1">Why use Dockstore?</h2>
+
+<p>Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).</p>
+
+<h2 id="accessible">Accessible</h2>
+
+<ul>
+  <li>
+    <p>Dockstore never requires a user to log in to search and inspect contents for workflows and tools.</p>
+  </li>
+  <li>
+    <p>Once found, analyses can be launched in different environments using the Launch with feature of Dockstore. Workflows can just as easily be downloaded to run on local machines.</p>
+  </li>
+  <li>
+    <p>Users can also request a DOI via Zenodo for their workflows for reference in published research.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="why-use-dockstore-2">Why use Dockstore?</h2>
+
+<p>Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).</p>
+
+<h2 id="interoperable">Interoperable</h2>
+
+<ul>
+  <li>
+    <p>Users are strongly encouraged to provide clear instructions, test data and checker workflows to ensure that their workflows are usable in any environment.</p>
+  </li>
+  <li>
+    <p>The GA4GH TRS API enable the simple launching of workflows to a variety of compute platforms.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="why-use-dockstore-3">Why use Dockstore?</h2>
+
+<p>Dockstore follows the FAIR Guiding Principles (Findable, Accessible, Interoperable and Reusable).</p>
+
+<h2 id="reusable">Reusable</h2>
+
+<ul>
+  <li>
+    <p>Contributors are encouraged to provide clear documentation and the exact version of the components in their descriptor files so that others can find, reuse and build upon the workflows.</p>
+  </li>
+  <li>
+    <p>The Dockstore GitHub App provides support for registering workflows, version control/tagging and automatically syncing workflows and services.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="how-to-find-workflows-on-dockstore">How to find workflows on <a href="https://dockstore.org/">Dockstore</a>?</h1>
+
+<hr />
+
+<h2 id="how-to-find-workflows-on-dockstore-1">How to find workflows on <a href="https://dockstore.org/">Dockstore</a>?</h2>
+
+<p>You can find relevant workflows using the Faceted Search option:</p>
+
+<p>Scan the code below or simply click on it to be directed to the detailed documentation.</p>
+
+<p>.image-40[
+  <img src="/training-material/topics/galaxy-interface/images/FacetedSearchQR.png" alt="Faceted Search QR. " loading="lazy" />] (https://docs.dockstore.org/en/stable/end-user-topics/faceted-search.html)</p>
+
+<p>]</p>
+
+<p>pull-right[</p>
+
+<p><img src="/training-material/topics/galaxy-interface/images/FacetedSearchScreenshot.png" alt="Faceted Search Screenshot. " loading="lazy" /></p>
+
+<p>]</p>
+
+<hr />
+
+<h2 id="how-to-find-workflows-on-dockstore-2">How to find workflows on <a href="https://dockstore.org/">Dockstore</a>?</h2>
+
+<p>You can also find workflows through the Organizations/Collections feature:</p>
+
+<p>Scan the code below or simply click on it to be directed to the detailed documentation.</p>
+
+<p>.image-40<a href="https://docs.dockstore.org/en/stable/advanced-topics/organizations-and-collections.html">
+  <img src="/training-material/topics/galaxy-interface/images/OrgCollectnQR.png" alt="Organizations/Collections QR. " loading="lazy" /></a></p>
+
+<p>]</p>
+
+<p>pull-right[</p>
+
+<p><img src="/training-material/topics/galaxy-interface/images/OrgCollectnScreenshot.png" alt="Organizations/Collections Screenshot. " loading="lazy" /></p>
+
+<p>]</p>
+
+<hr />
+
+<h2 id="how-to-launch-workflows-from-dockstore">How to launch workflows from <a href="https://dockstore.org/">Dockstore</a>?</h2>
+
+<p>You can use the Launch With feature to launch the workflow in your choice of environment:</p>
+
+<p>Scan the code below or simply click on it to be directed to the detailed documentation.</p>
+
+<p>.image-40<a href="https://docs.dockstore.org/en/stable/launch-with/galaxy-launch-with.html">
+  <img src="/training-material/topics/galaxy-interface/images/LaunchWithQR.png" alt="Launch With QR. " loading="lazy" /></a></p>
+
+<p>]</p>
+
+<p>pull-right[</p>
+
+<p><img src="/training-material/topics/galaxy-interface/images/LaunchWithScreenshot.png" alt="Launch With Screenshot. " loading="lazy" /></p>
+
+<p>]</p>
+
+<hr />
+
+<h2 id="how-to-launch-workflows-from-within-galaxy">How to launch workflows from within <a href="https://usegalaxy.org/">Galaxy</a>?</h2>
+
+<p>You can use the <a href="https://usegalaxy.org/workflows/trs_search">GA4GH Tool Registry Server (TRS) Workflow Search</a> using keywords in the description of the workflows on Dockstore.
+Alternatively, you can use the <a href="https://usegalaxy.org/workflows/trs_import">GA4GH Tool Registry Server (TRS) Workflow Import</a> using the TRS ID from workflow description on Dockstore.</p>
+
+<p><img src="/training-material/topics/galaxy-interface/images/LaunchGalaxySearch.png" alt="Launch From Galaxy Search. " loading="lazy" />
+<img src="/training-material/topics/galaxy-interface/images/LaunchGalaxyTRSID.png" alt="Launch From Galaxy TRS ID. " loading="lazy" /></p>
+
+<hr />
+
+<h2 id="getting-started-with-galaxy-workflows-on-dockstore">Getting started with Galaxy workflows on <a href="https://dockstore.org/">Dockstore</a>?</h2>
+
+<p>Get started on writing and publishing Galaxy workflows, refer to the Getting Started with Galaxy doc.</p>
+
+<p>Scan the code below or simply click on it to be directed to the detailed documentation.</p>
+
+<p>.image-40<a href="https://docs.dockstore.org/en/stable/getting-started/getting-started-with-galaxy.html">
+  <img src="/training-material/topics/galaxy-interface/images/GettingStartedQR.png" alt="Getting Started QR. " loading="lazy" /></a></p>
+
+<p>]</p>
+
+<p>pull-right[</p>
+
+<p><img src="/training-material/topics/galaxy-interface/images/GettingStartedScreenshot.png" alt="Getting Started Screenshot. " loading="lazy" /></p>
+
+<p>]</p>
+
+<hr />
+
+<h2 id="register-your-galaxy-workflow-on-dockstore">Register your Galaxy workflow on <a href="https://dockstore.org/">Dockstore</a></h2>
+
+<p>If you have a workflow you want to register, you can follow the Getting Started with Workflows doc.</p>
+
+<p>Scan the code below or simply click on it to be directed to the detailed documentation.</p>
+
+<p>.image-40<a href="https://docs.dockstore.org/en/stable/getting-started/dockstore-workflows.html">
+  <img src="/training-material/topics/galaxy-interface/images/GettingStartedWorkflowsQR.png" alt="Getting Started with Workflows QR. " loading="lazy" /></a></p>
+
+<p>]</p>
+
+<p>pull-right[</p>
+
+<p><img src="/training-material/topics/galaxy-interface/images/GettingStartedWorkflowsScreenshot.png" alt="Getting Started with Workflows Screenshot. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="you-can-also-watch-the-how-to-launch-galaxy-workflows-from-dockstore-videos-linked-below">You can also watch the “How to launch Galaxy workflows from Dockstore” videos linked below:</h2>
+
+<p><a href="https://youtu.be/U8rQiwLceZg">How to launch Galaxy workflows from Dockstore - Part 1 (Using the default cloud environment options)</a></p>
+
+<p><a href="https://youtu.be/aYShFs9tZ6s">How to launch Galaxy workflows from Dockstore - Part 2 (Using custom cloud environment options)</a></p>
+
+<hr />
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9a36fbb32c69adba35c899d4d2d18ad33ecda4c0">9a36fbb32c69adba35c899d4d2d18ad33ecda4c0</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
