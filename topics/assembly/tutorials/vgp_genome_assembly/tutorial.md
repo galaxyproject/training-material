@@ -693,9 +693,6 @@ Once we have run purge_dups, we can evaluate assembly again, and compare the res
 >
 {: .hands_on}
     
-
-![fig5:Under construction](../../images/vgp_assembly/under_construction.png "We are working in the following sections.")
-    
 <!--
 
 Bibliography https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3409271/
@@ -710,7 +707,7 @@ purge_dups can significantly improve genome assemblies by removing overlaps and 
 
 Along with sequence similarity, purge_dups and purge_haplotigs take into account the coverage depth obtained by mapping short or long reads to the contigs. Coverage depth represents the number of reads covering a position in a contig (computed after mapping reads on the assembly). The contigs are then aligned to select duplicates accurately and remove them. While purge_dups sets its coverage thresholds automatically, purge_haplotigs requires user-provided values.
 
-
+-->
 
 ## Sub-step with **Concatenate datasets**
 
@@ -811,25 +808,6 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
 >
 {: .question}
 
-## Sub-step with **Parse parameter value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
 ## Sub-step with **Quast**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -868,7 +846,7 @@ Even though Hi-C generated paired-end reads, we need to map each read separately
 fits a known distribution, but in Hi-C data,  the insert size of the ligation product can vary between
 1bp to hundreds of megabases ({% cite Lajoie2015 %}).
 
-> ### {% icon hands_on %} Hands-on: Mapping Hi-C forward reads
+> ### {% icon hands_on %} Hands-on: Mapping Hi-C reads
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -879,13 +857,9 @@ fits a known distribution, but in Hi-C data,  the insert size of the ligation pr
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
-{: .hands_on}
-
-Now, we will map the rest of the reads.
-
-> ### {% icon hands_on %} Hands-on: Mapping Hi-C reverse reads
+> 2. Rename the output as `BAM forward`
 >
-> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 3. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Single`
@@ -894,16 +868,13 @@ Now, we will map the rest of the reads.
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
-{: .hands_on}
-
-Once we have mapped the reads, the next step the BAM files:
-
-> ### {% icon hands_on %} Hands-on: Merge the BAM files
+> 4. Rename the output as `BAM reverse`
 >
-> 1. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
->    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+> 5. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"First set of reads"*: `BAM forward` 
+>    - {% icon param-file %} *"Second set of reads"*: `Bam reverse`
 >
+> 6. Rename it as `BAM Hi-C reads`
 {: .hands_on}
 
 Finally, we need to convert the BAM file to BED format, and sorting it.
@@ -1083,7 +1054,7 @@ Now, we repeat the producedure described previously for generating the optical m
 >
 {: .question}
 
--->
+
 
 # Conclusion
 {:.no_toc}
