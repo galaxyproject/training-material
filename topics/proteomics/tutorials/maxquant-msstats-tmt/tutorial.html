@@ -311,7 +311,7 @@
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'MaxQuant and MSstats for the analysis of TMT data' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html",
-  "timeRequired": "PT1H",
+  "timeRequired": "PT3H",
   "keywords": "DDA, TMT",
   "description": "The questions this  addresses are:\n - How to analyze tandem-mass-tag (TMT) labelled shotgun (DDA) data analysis in MaxQuant and MSstats?\n - Which proteins are differentially abundant between KMT9α knock-down and control cells?\n\n\\nThe objectives are:\n - Learn how to use MaxQuant and MSstats for the analysis of TMT labelled shotgun (DDA) data\n - Learn how to create an experimental design template for fractionated data in MaxQuant\n - Learn how to create an annotation file for MSstatsTMT\n\n",
   "inLanguage": {
@@ -450,7 +450,7 @@
         
 
         
-        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
         
 
         
@@ -644,8 +644,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -687,7 +685,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 11, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 16, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -799,6 +797,7 @@ ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA391.raw
         </li>
         <li>In <em>“Parameter Group”</em>:
           <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Infiles”</em>: <code class="language-plaintext highlighter-rouge">MFA380.raw</code> <code class="language-plaintext highlighter-rouge">MFA381.raw</code> <code class="language-plaintext highlighter-rouge">MFA382.raw</code> <code class="language-plaintext highlighter-rouge">MFA383.raw</code> <code class="language-plaintext highlighter-rouge">MFA384.raw</code> <code class="language-plaintext highlighter-rouge">MFA385.raw</code> <code class="language-plaintext highlighter-rouge">MFA386.raw</code> <code class="language-plaintext highlighter-rouge">MFA387.raw</code> <code class="language-plaintext highlighter-rouge">MFA388.raw</code> <code class="language-plaintext highlighter-rouge">MFA389.raw</code> <code class="language-plaintext highlighter-rouge">MFA390.raw</code> <code class="language-plaintext highlighter-rouge">MFA391.raw</code></li>
             <li><em>“Quantitation Methods”</em>: <code class="language-plaintext highlighter-rouge">reporter ion MS2</code>
               <ul>
                 <li><em>“isobaric labeling”</em>: <code class="language-plaintext highlighter-rouge">TMT11plex</code></li>
@@ -880,7 +879,7 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
         </li>
         <li>In <em>“Plot Output Options”</em>:
           <ul>
-            <li><em>“Select protein IDs to draw plots”</em>: <code class="language-plaintext highlighter-rouge">generate all plots for each protein</code></li>
+            <li><em>“Select protein IDs to draw plots”</em>: <code class="language-plaintext highlighter-rouge">Option for QC plot: "allonly" will generate one QC plot with all proteins</code></li>
           </ul>
         </li>
         <li><em>“Compare Groups”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
@@ -892,10 +891,15 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
             </li>
           </ul>
         </li>
-        <li><em>“Select Outputs”</em>: <code class="language-plaintext highlighter-rouge">QC Plot</code></li>
+        <li><em>“Select Outputs”</em>: <code class="language-plaintext highlighter-rouge">MSstatsTMT summarization log</code> <code class="language-plaintext highlighter-rouge">Protein Abundance</code> <code class="language-plaintext highlighter-rouge">QC Plot</code></li>
       </ul>
     </li>
   </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-waiting-for-msstatstmt-result"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Waiting for MSstatsTMT result</h3>
+  <p>This training consists of a real proteomics experiments. Therefore, calculation times take longer than in usual <span class="notranslate">Galaxy</span> tutorials. You may want to come back later to the training or use the time to prepare your own data for the analysis with MaxQuant and MSstatsTMT with the tips provided in this training (yellow boxes).</p>
 </blockquote>
 
 <blockquote class="question">
@@ -1212,7 +1216,7 @@ You fractionate all 3 experiments / mixtures into 3 fractions each and measure e
 <h1 id="follow-up-on-msstatstmt-results">Follow up on MSstatsTMT results</h1>
 
 <p>We obtain several output files from MSstatsTMT. MSstats log file contains the MSstats report with warnings and information about the analysis steps. 
-The QC report allows to visualize protein abundance of conditions for all proteins (first page) or for each individual protein (following pages).</p>
+The QC report allows to visualize protein abundance of conditions for all proteins (first page) or if enabled for each individual protein (following pages).</p>
 
 <figure id="figure-1"><img src="../../images/maxquant-msstats-tmt/QC_plot.png" alt="QC report. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
 
@@ -1310,7 +1314,7 @@ author = "Klemens Fröhlich and Melanie Föll and Matthias Fahrner",
 title = "MaxQuant and MSstats for the analysis of TMT data (Galaxy Training Materials)",
 year = "2022",
 month = "01",
-day = "11"
+day = "16"
 url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
