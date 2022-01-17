@@ -635,13 +635,25 @@ Finally, we will use the `Reads mapped to contigs` PAF file for calculating some
 Purge_dups generates three outputs:
 
 - PBCSTAT base coverage: it contains the base-level coverage information.
-- Calcuts-cutoff: it includes the thresholds calculated by purge_dups. You can find additional details about de algorithm used for calculating the read depth cutoff in the [purge_dups paper supplementary note](https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/bioinformatics/36/9/10.1093_bioinformatics_btaa025/1/btaa025_supplementary_data.pdf?Expires=1645437655&Signature=3~wj5TkGIaRb4Rbr92NesByzZtzMDRpeNTOBUQ3c3~pgQoIbb6~IoDFfohtbHbdgyTGi1-Wc24fvU0epmmTb3Aaxn7Agvw2Ge-62mdRuinJJpIuCxnQmpKbatoQCsZYgIceejdDxZFvD62yXfm4ajxDf9-A~ICL7LdJEjtRY62dPYYY5Q3hioFj4TE99vBQzqT1vARoI-76sOCCdhfStznnabe8oKcnZ956LLxk6svd1guBOBrjEW0EYb8O9rGytzItiJc66lriqD6~5LKynTIlXxnnKSq8qg3Ma1mpScchFlRQiPdzG1wrtEL6ILN6GDGNmw1vcrszaJjwmHVeU9g__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA).
+- Calcuts-cutoff: it includes the thresholds calculated by purge_dups.
+- Histagram plot.
+
+As we can see in the histogram plot, the read depth distribution follows a simetric and unimodal distribution (fig. 11). This result is expected, since we are assemblying an haploid genome.
     
 ![fi9:purge_dups plot](../../images/vgp_assembly/purge_dups_plot.png "purge_dups histogram plot")
-    
+
+> ### {% icon details %} Expected results in diploid organisms
+>
+> For diploid organisms, it is frequent to observe bimodal distributions when allelic sequences from the same genomic region are assembled separately.
+>
+> ![fi9:purge_dups plot](../../images/vgp_assembly/purge_dups_plot2.png "purge_dups histogram generated in diploid genomes.")
+>
+{: .details}
+
+
 ### Generation of all versus all self-alignmnet
 
-Along with sequence similarity, purge_dups and purge_haplotigs take into account the coverage depth obtained by mapping short or long reads to the contigs. Coverage depth represents the number of reads covering a position in a contig (computed after mapping reads on the assembly). The contigs are then aligned to select duplicates accurately and remove them. While purge_dups sets its coverage thresholds automatically, purge_haplotigs requires user-provided values.
+Now, we will segment the draft assembly into contigs by cutting at blocks of ‘N’s, and use minimap2 to generate an all by all self-alignment.
 
 > ### {% icon hands_on %} Hands-on: purge_dups pipeline    
 > 1. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
@@ -665,9 +677,13 @@ Along with sequence similarity, purge_dups and purge_haplotigs take into account
         
 ### Resolution of haplotigs and overlaps        
 
-We next recognize and remove haplotigs in essentially the same way as purge_haplotigs, and remove all matches associated with haplotigs from the self-alignment set.
+Given a matching set of all versus all self alignments from minimap2, and read depth cutoffs from the previous section, purge dups uses the following steps to identify the haplotypic duplications in a draft primary assembly:
 
-Finally we chain consistent matches in the remainder to find overlaps, then calculate the average coverage of the matching intervals for each overlap, and mark an unambiguous overlap as heterozygous when the average coverage on both contigs is less than the read depth cutoff found in step 1, removing the sequence corresponding to the matching interval in the shorter contig.
+Contained haplotig identification: purge dups uses essentially the same way as purge haplotigs to detect the contained haplotigs. If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is binned into the potential junk bin. Otherwise if more than 80% bases are in the diploid depth interval it is labelled as a primary contig, otherwise it is considered further as a possible haplotig. Next for each possible haplotig, we consider its best alignment to another contig. If its alignment score is larger than s (default 70) and max match score larger than m (default 200), it is marked as a repeat and is placed in the haplotig bin; if the alignment score is larger than s and max match score not larger than m, it is marked as a haplotig and also placed in the haplotig bin. Otherwise it is left as a candidate primary contig.
+
+Haplotypic overlap identification: after purging the junk and contained haplotigs, purge dups chains the matches between remaining candidate primary contigs to find collinear matches.
+
+Calculate average read depth for the matching intervals in both the query and target, and only keep matches both of whose average read depths are below the diploid cutoff. Remove secondary and overlapping matches, defined as those for which the query region is contained within less than 85% of the matching region of another match from the same query, or no more than 85% of its sequence overlaps with another match. For remaining matches, move the sequence corresponding to the matching interval of the shorter contig into the haplotigs bin.
     
 > ### {% icon hands_on %} Hands-on: purge_dups pipeline
 >    
@@ -746,8 +762,6 @@ Once we have run purge_dups, we can evaluate assembly again, and compare the res
 > 2. Rename the summary as `BUSCO initial report`
 >
 {: .hands_on}
-
-## Sub-step with **Concatenate datasets**
 
 
 # Hybrid scaffolding based using Bionano data
