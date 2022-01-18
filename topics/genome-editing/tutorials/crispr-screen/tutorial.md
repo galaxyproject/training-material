@@ -388,6 +388,14 @@ If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8
 >
 {: .hands_on}
 
+> ### {% icon comment %} Replicates
+>
+> If we have biological and/or technical replicates we can handle them in a similar way to that described on the [MAGeCK website](https://sourceforge.net/p/mageck/wiki/QA/#how-to-deal-with-biological-replicates-and-technical-replicates).
+For biological replicates, we input them in MAGeCK test Treated Sample Labels/Control Sample Labels fields separated by a comma.
+For technical replicates, we could combine the fastqs for each sample/biological replicate, for example with the **Concatenate datasets** tool, before running MAGeCK count.
+>
+{: .comment}
+
 > ### {% icon details %} Normalization
 >
 > We are using MAGeCK's default normalization method "median" which is more robust to outliers.
