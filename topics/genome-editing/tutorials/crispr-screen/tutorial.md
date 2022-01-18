@@ -626,7 +626,7 @@ The rules of the design matrix are:
 * The design matrix file must include a header line of condition labels
 * The first column is the sample labels that must match labels in read count file
 * The second column must be a "baseline" column that sets all values to "1"
-* The element in the design matrix is either "0" or "1"
+* The value in the design matrix is either "0" or "1"
 * You must have at least one sample of "initial state" (e.g., day 0 or plasmid) that has only one "1" in the corresponding row. That only "1" must be in the baseline column
 * The initial state (baseline) sample must be the 1st sample listed, under the header row, for mageck mle
 
@@ -638,6 +638,8 @@ T0-Control  1         0       0
 T8-Vehicle  1         1       0
 T8-APR-246  1         0       1
 ```
+
+Examples of more complicated design matrices, for e.g. time series experiments, can be seen on the [MAGeCK website](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-4-make-full-use-of-mageck-mle-for-more-complicated-experimental-design-eg-paired-samples-time-series).
 
 > ### {% icon hands_on %} Hands-on: Test for enrichment with MLE
 > 1. Import the design matrix file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
