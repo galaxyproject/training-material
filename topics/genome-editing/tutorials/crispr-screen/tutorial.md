@@ -697,3 +697,8 @@ Similar to what we did with the MAGeCK test output, we can create a volcano plot
 {:.no_toc}
 
 CRISPR Screen reads can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using MAGeCK. Downstream analysis can include visualisations, such as volcano plot, and pathway analysis with tools like fgsea.
+
+# Acknowledgements
+{:.no_toc}
+
+Thanks to Mehmet Tekman for suggesting the awk tool and Jennifer Devlin for comments on the tutorial.
