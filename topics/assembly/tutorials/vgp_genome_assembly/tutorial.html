@@ -630,6 +630,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -651,6 +653,8 @@
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
+        
+    
         
     
         
@@ -738,6 +742,10 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
     
         
     
@@ -755,7 +763,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 13, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 18, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -814,6 +822,20 @@
   <li><a href="#post-assembly-processing" id="markdown-toc-post-assembly-processing">Post-assembly processing</a>    <ol>
       <li><a href="#remove-haplotypic-duplication-with-purge_dups" id="markdown-toc-remove-haplotypic-duplication-with-purge_dups">Remove haplotypic duplication with <strong>purge_dups</strong></a></li>
       <li><a href="#second-round-of-assembly-evaluation" id="markdown-toc-second-round-of-assembly-evaluation">Second round of assembly evaluation</a></li>
+    </ol>
+  </li>
+  <li><a href="#hybrid-scaffolding-based-using-bionano-data" id="markdown-toc-hybrid-scaffolding-based-using-bionano-data">Hybrid scaffolding based using Bionano data</a>    <ol>
+      <li><a href="#sub-step-with-bionano-hybrid-scaffold" id="markdown-toc-sub-step-with-bionano-hybrid-scaffold">Sub-step with <strong>Bionano Hybrid Scaffold</strong></a></li>
+      <li><a href="#sub-step-with-concatenate-datasets" id="markdown-toc-sub-step-with-concatenate-datasets">Sub-step with <strong>Concatenate datasets</strong></a></li>
+      <li><a href="#sub-step-with-quast" id="markdown-toc-sub-step-with-quast">Sub-step with <strong>Quast</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data" id="markdown-toc-hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data">Hybrid scaffolding based on a phased assembly and HiC <span class="notranslate">mapping</span> data</a>    <ol>
+      <li><a href="#pre-processing-hi-c-data" id="markdown-toc-pre-processing-hi-c-data">Pre-processing Hi-C data</a></li>
+      <li><a href="#generate-hi-c-contact-map" id="markdown-toc-generate-hi-c-contact-map">Generate Hi-C contact map</a></li>
+      <li><a href="#salsa-scaffolding" id="markdown-toc-salsa-scaffolding">Salsa scaffolding</a></li>
+      <li><a href="#evaluate-the-salsa-scaffolding-results" id="markdown-toc-evaluate-the-salsa-scaffolding-results">Evaluate the Salsa scaffolding results</a></li>
+      <li><a href="#generate-a-hi-c-contact-map-after-salsa2-scaffolding" id="markdown-toc-generate-a-hi-c-contact-map-after-salsa2-scaffolding">Generate a Hi-C contact map after Salsa2 scaffolding</a></li>
     </ol>
   </li>
 </ol>
@@ -881,9 +903,7 @@
 
 <p>Linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs (fig. 4).</p>
 
-<!--
-<figure id="figure-4"><img src="../../images/vgp_assembly/bionano.png" alt="Bionano optical maps. "  loading="lazy"><figcaption><span class="figcaption-prefix">Figure 4:</span> Bionano optical maps</figcaption></figure>
--->
+<figure id="figure-4"><img src="../../images/vgp_assembly/bionano.png" alt="Bionano optical maps. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Bionano optical maps</figcaption></figure>
 
 <p>Finally, the thigh-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin three-dimensional. During Hi-C library preparation, <span class="notranslate">DNA</span> is crosslinked the chromatin in its 3D conformation. The crosslinked <span class="notranslate">DNA</span> is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. Next, the blunt ends of spatially proximal digested end are ligated. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome (<span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>).</p>
 
@@ -1268,7 +1288,7 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6"><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6</span></span>  with the following parameters:
       <ul>
         <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">3*c7</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: output of <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: output of the previous step.</li>
         <li><em>“Round result?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Input has a header line with column names?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
@@ -1278,7 +1298,7 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Parsing temporal output</code> (output of <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Parsing temporal output</code></li>
         <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
           <ul>
             <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column 8</code></li>
@@ -1312,7 +1332,7 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Parsing temporal output</code> (output of <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Parsing temporal output</code></li>
         <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
           <ul>
             <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column 7</code></li>
@@ -1410,10 +1430,26 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
 
 <h2 id="initial-assembly-evaluation">Initial assembly evaluation</h2>
 
-<p>The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO, Merqury and Pretext. QUAST will generate summary statistics, BUSC will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using k-mers, and Pretext will be used to evaluate the assembly contiguity. At this step is particulary useful to run QUAST, BUSCO and Merqury.</p>
+<p>The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO, Merqury and Pretext. QUAST will generate summary statistics, BUSCO will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using k-mers, and Pretext will be used to evaluate the assembly contiguity.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-quast-statistics"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> QUAST statistics</h3>
+
+  <p>QUAST will provide us with the following statistics:</p>
+
+  <ul>
+    <li>No. of contigs: The total number of contigs in the assembly.</li>
+    <li>Largest contig: The length of the largest contig in the assembly.</li>
+    <li>Total length: The total number of bases in the assembly.</li>
+    <li>Nx: The largest contig length, L, such that using contigs of length &gt;= L accounts for at least x% of the bases of the assembly.</li>
+    <li>NGx: The contig length such that using equal or longer length contigs produces x% of the length of the reference genome, rather than x% of the assembly length.</li>
+    <li>GC content: the percentage of nitrogenous bases which are either guanine or cytosine.</li>
+  </ul>
+
+</blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assembly-evaluation-with-quast"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assembly evaluation with Quast</h3>
+  <h3 id="hands_on-hands-on-assembly-evaluation-with-quast"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assembly evaluation with QUAST</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1461,9 +1497,9 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
 
 </blockquote>
 
-<p>Let’s have a look at the HTML report.</p>
+<p>Let’s have a look at the report generated by QUAST.</p>
 
-<figure id="figure-7"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="fig5:QUAST plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Quast initial report.</figcaption></figure>
+<figure id="figure-7"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="fig5:QUAST plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> QUAST initial report.</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1486,6 +1522,8 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
   </blockquote>
 
 </blockquote>
+
+<p>Next, we will use BUSCO, which will allow us to quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies in the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses (<span class="citation"><a href="#Simo2015">Simão <i>et al.</i> 2015</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assessing-assembly-completness-with-busco"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assessing assembly completness with BUSCO</h3>
@@ -1518,6 +1556,12 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
 
 </blockquote>
 
+<p>BUSCO generates two outputs, a tabular file which contains the complete results with scores, descriptions, lengths and coordinates of matches (fig. 8), and a short summary.</p>
+
+<figure id="figure-8"><img src="../../images/vgp_assembly/BUSCO_full_table.png" alt="fig8:BUSCO plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> BUSCO full table</figcaption></figure>
+
+<p>As we can see in the report, the results are simplified into four categories: <em>complete and single-copy</em>, <em>complete and duplicated</em>, <em>fragmented</em> and  <em>Missing BUSCOs</em>.</p>
+
 <blockquote class="question">
   <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
@@ -1537,6 +1581,8 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
   </blockquote>
 
 </blockquote>
+
+<p>Despite BUSCO is robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belong to taxas that are not well represented in the <a href="https://www.orthodb.org/">OrtologDB</a>. Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via k-mer copy number analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-k-mer-based-evaluation-with-merqury"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <em>k</em>-mer based evaluation with Merqury</h3>
@@ -1561,20 +1607,32 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
 
 </blockquote>
 
+<p>By default, Merqury generates three collections as output: stats, plots and QV stats.</p>
+
+<p>The copy number spectum plot, known as <em>spectra-cn</em> plot (fig. 9a), tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly . Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve. Remember that the histogram dataset was generated previously by Meryl.</p>
+
+<figure id="figure-9"><img src="../../images/vgp_assembly/merqury_cn_plot.png" alt="fi9:Merqury plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Merqury CN plot</figcaption></figure>
+
+<p>The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although also can be indicative of missing sequences in the assembly. The read area represents one-copy k-mers in the genome, while blue area represents two-copy k-mers originating. from homozygous sequence or haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 30x.</p>
+
+<p>The figure 1b corresponds to the assembly spectrum plot. This plot is helpful for measuring diploid assembly completeness as it shows the fraction of k-mers specific to both the primary and alte<span class="notranslate">rna</span>te assemblies (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>).</p>
+
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
 
-<p>The ideal haploid representation consists of one copy of all heterozygous regions and of one copy of all homozygous regions. However, identifying the allelic relationships is still challenging, particularly in high heterozygous genomes. This can result in assemblies that retain additional copies of some genomic regions, which can lead to issues in <span class="notranslate">downstream</span> analyses, such as scaffolding, gene annotation, and read <span class="notranslate">mapping</span> in general (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>, <span class="citation"><a href="#Roach2018">Roach <i>et al.</i> 2018</a></span>).</p>
-
-<p>Usually, allelic relationships are inferred at the post-assembly stage. Despite the haplotig processing requites multiple steps, the approach used in this tutorial can be summaryzed in two steps: firstly we will identify the syntenic contigs by using the mapped read coverage and <strong>minimap2</strong> (<span class="citation"><a href="#Li2018">Li 2018</a></span>) alignments. Then, we will resolve the haplotigs and overlaps in the primary assembly by using <strong>purge_dups</strong>.</p>
+<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in high heterozygous genomes, assembly algorithms are frequently not able identify the highly divergent allelic sequences, resulting in the assembly of those regions as separate contigs, which can lead to issues in <span class="notranslate">downstream</span> analysis, such as scaffolding, gene annotation and read <span class="notranslate">mapping</span> in general (<span class="citation"><a href="#Small2007">Small <i>et al.</i> 2007</a></span>, <span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>, <span class="citation"><a href="#Roach2018">Roach <i>et al.</i> 2018</a></span>). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.</p>
 
 <h2 id="remove-haplotypic-duplication-with-purge_dups">Remove haplotypic duplication with <strong>purge_dups</strong></h2>
 
-<p>This step includes 11 steps, summarized in the following scheme:</p>
+<p>This stage can consist in three substages: coverage related calculation, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 10).</p>
 
-<figure id="figure-8"><img src="../../images/vgp_assembly/purge_dupspipeline.png" alt="fig4:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Purge_dups pipeline</figcaption></figure>
+<figure id="figure-10"><img src="../../images/vgp_assembly/purge_dupspipeline.png" alt="fig4:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Purge_dups pipeline. Adapted from github.com/dfguan/purge_dups.</figcaption></figure>
+
+<h3 id="read-depth-analysis">Read-depth analysis</h3>
+
+<p>Initially we need to collapse the collection into a single dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-purge_dups-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: purge_dups pipeline</h3>
+  <h3 id="hands_on-hands-on-collapse-the-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Collapse the collection</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
@@ -1582,9 +1640,16 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>:<code class="language-plaintext highlighter-rouge">HiFi_collection (trim)</code></li>
       </ul>
     </li>
-    <li>
-      <p>Rename de output as <code class="language-plaintext highlighter-rouge">HiFi <span class="notranslate">reads</span> collapsed</code></p>
-    </li>
+    <li>Rename de output as <code class="language-plaintext highlighter-rouge">HiFi <span class="notranslate">reads</span> collapsed</code></li>
+  </ol>
+</blockquote>
+
+<p>Now, we will map the <span class="notranslate">reads</span> against the primary assembly by using Minimap2 (<span class="citation"><a href="#Li2018">Li 2018</a></span>), an alignment program designed to map long sequences.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-map-the-reads-to-contigs-with-minimap2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map the <span class="notranslate">reads</span> to contigs with <strong>Minimap2</strong></h3>
+
+  <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4"><strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
@@ -1605,9 +1670,15 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
         </li>
       </ul>
     </li>
-    <li>
-      <p>Rename the output as <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> mapped to contigs</code></p>
-    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> mapped to contigs</code></li>
+  </ol>
+</blockquote>
+
+<p>Finally, we will use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> mapped to contigs</code> PAF file for calculating some statistics required in a later stage. In this step, purge_dups initially produces a read-depth histogram from base-level coverages. This information is used for estimating the coverage cutoffs, taking on the fact that for collapsed haplotype contigs the <span class="notranslate">reads</span> from both alleles will map, whereas if the alleles have assembled as separate contigs the <span class="notranslate">reads</span> will be split over the two contigs, resulting in half the read-depth (<span class="citation"><a href="#Roach2018">Roach <i>et al.</i> 2018</a></span>).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-read-depth-analsys"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Read-depth analsys</h3>
+  <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3"><strong>purge_dups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
       <ul>
         <li><em>“Function mode”</em>: <code class="language-plaintext highlighter-rouge">Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)</code>
@@ -1630,6 +1701,37 @@ SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps
 This will generate three outputs: the base-level coverage file (PBCSTAT base coverage), the cutoff file (calcuts cutoff) and a histogram plot.</p>
       </blockquote>
     </li>
+  </ol>
+</blockquote>
+
+<p>Purge_dups generates three outputs:</p>
+
+<ul>
+  <li>PBCSTAT base coverage: it contains the base-level coverage information.</li>
+  <li>Calcuts-cutoff: it includes the thresholds calculated by purge_dups.</li>
+  <li>Histagram plot.</li>
+</ul>
+
+<p>As we can see in the histogram plot, the read depth distribution follows a simetric and unimodal distribution (fig. 11). This result is expected, since we are assemblying an haploid genome.</p>
+
+<figure id="figure-11"><img src="../../images/vgp_assembly/purge_dups_plot.png" alt="fi9:purge_dups plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> purge_dups histogram plot</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-expected-results-in-diploid-organisms"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Expected results in diploid organisms</h3>
+
+  <p>For diploid organisms, it is frequent to observe bimodal distributions when allelic sequences from the same genomic region are assembled separately.</p>
+
+  <figure id="figure-12"><img src="../../images/vgp_assembly/purge_dups_plot2.png" alt="fi9:purge_dups plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> purge_dups histogram generated in diploid genomes.</figcaption></figure>
+
+</blockquote>
+
+<h3 id="generation-of-all-versus-all-self-alignmnet">Generation of all versus all self-alignmnet</h3>
+
+<p>Now, we will segment the draft assembly into contigs by cutting at blocks of ‘N’s, and use minimap2 to generate an all by all self-alignment.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-purge_dups-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: purge_dups pipeline</h3>
+  <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2"><strong>purge_dups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
       <ul>
         <li><em>“Function mode”</em>: <code class="language-plaintext highlighter-rouge">split assembly FASTA file by 'N's (split_fa)</code>
@@ -1662,26 +1764,88 @@ This will generate three outputs: the base-level coverage file (PBCSTAT base cov
         </li>
       </ul>
     </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Self-homology map</code></li>
+  </ol>
+</blockquote>
+
+<h3 id="resolution-of-haplotigs-and-overlaps">Resolution of haplotigs and overlaps</h3>
+
+<p>During the final step of the purge_dups pipeline, it will use the self alignments and the cutoffs for identifying the haplotypic duplications.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-purge_dups-algorithm-details"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Purge_dups algorithm details</h3>
+
+  <p>In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according the following criteria:</p>
+  <ul>
+    <li>If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is discarted.</li>
+    <li>If more than 80% bases are in the diploid depth interval, it is labelled as a primary contig, otherwise it is considered further as a possible haplotig.</li>
+  </ul>
+
+  <p>Contigs that were flagged for further analysis according to read-depth are then evaluated to attempt to identify synteny with its allelic companion contig. In this step, purge_dups uses the information contained in the self alignments:</p>
+  <ul>
     <li>
-      <p>Rename the output as <code class="language-plaintext highlighter-rouge">Self-homology map</code></p>
+      <p>If the alignment score is larger than the cutoff <em>s</em> (default 70), the contig is marked for reassignment as haplotig. Contigs marked for reassignment with a maximum match score greater than the cutoff <em>m</em> (default 200) are further flagged as repetitive regions.</p>
     </li>
+    <li>
+      <p>Otherwise contigs are considered as a candidate primary contig.</p>
+    </li>
+  </ul>
+
+  <p>Once all matches associated with haplotigs have been removed from the self-alignment set, purge_dups ties consistent matches between the remaining candidates to find collinear matches, filtering all the matches whose score is less than the minimum chaining score <em>l</em>.</p>
+
+  <p>Finally, purge-dups calculates the average coverage of the matching intervals for each overlap, and mark an unambiguous overlap as heterozygous when the average coverage on both contigs is less than the read-depth cutoff, removing the sequences corresponding to the matching interval in the shorter contig.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-resolution-of-haplotigs-and-overlaps"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Resolution of haplotigs and overlaps</h3>
+
+  <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5"><strong>purge_dups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+<span class="notranslate">galaxy</span>5</span></span>  with the following parameters:
       <ul>
-        <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Purge haplotigs and overlaps for an assembly (purge_dups)</code></li>
-      </ul>
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PAF input file”</em>: <code class="language-plaintext highlighter-rouge">Self-homology map</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Base-level coverage file”</em>: <code class="language-plaintext highlighter-rouge">PBCSTAT base coverage</code> (output of the fifth step)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cutoffs file”</em>: <code class="language-plaintext highlighter-rouge">calcuts cutoff</code> (output of the fifth step)</li>
+        <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Purge haplotigs and overlaps for an assembly (purge_dups)</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PAF input file”</em>: <code class="language-plaintext highlighter-rouge">Self-homology map</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Base-level coverage file”</em>: <code class="language-plaintext highlighter-rouge">PBCSTAT base coverage</code> (output of the fifth step)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cutoffs file”</em>: <code class="language-plaintext highlighter-rouge">calcuts cutoff</code> (output of the fifth step)</li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2"><strong>purge_dups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
       <ul>
-        <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Obtain sequences after purging (get_seqs)</code></li>
+        <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Obtain sequences after purging (get_seqs)</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Primary contig FASTA</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">BED</span> input file”</em>: <code class="language-plaintext highlighter-rouge">purge_dups <span class="notranslate">BED</span></code> (output of the previous step)</li>
+          </ul>
+        </li>
       </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As a result, we have got a purged primary and haplotig sequences.</p>
+
+<p>Finally, we should contatenate the results:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Primary contig FASTA</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">BED</span> input file”</em>: <code class="language-plaintext highlighter-rouge">purge_dups <span class="notranslate">BED</span></code> (output of the previous step)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">get_seqs_hap</code> (output of <strong>Purge overlaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Dataset”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: <code class="language-plaintext highlighter-rouge">out_fa</code> (output of <strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ol>
@@ -1693,7 +1857,7 @@ This will generate three outputs: the base-level coverage file (PBCSTAT base cov
 <p>Once we have run purge_dups, we can evaluate assembly again, and compare the results before and after purging.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assembly-evaluation-with-quast-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assembly evaluation with Quast</h3>
+  <h3 id="hands_on-hands-on-assembly-evaluation-with-quast-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assembly evaluation with QUAST</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1770,396 +1934,480 @@ This will generate three outputs: the base-level coverage file (PBCSTAT base cov
 
 </blockquote>
 
-<figure id="figure-9"><img src="../../images/vgp_assembly/under_construction.png" alt="fig5:Under construction. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> We are working in the following sections.</figcaption></figure>
+<h1 id="hybrid-scaffolding-based-using-bionano-data">Hybrid scaffolding based using Bionano data</h1>
 
-<!--
+<h2 id="sub-step-with-bionano-hybrid-scaffold">Sub-step with <strong>Bionano Hybrid Scaffold</strong></h2>
 
-Bibliography https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3409271/
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
-We segment the input draft assembly into contigs by cutting at blocks ‘N’s, and use minimap2 to generate an all by all self-alignment.
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2"><strong>Bionano Hybrid Scaffold</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“NGS FASTA”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BioNano CMAP”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        <li><em>“Configuration mode”</em>: <code class="language-plaintext highlighter-rouge">VGP mode</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Conflict resolution file”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+      </ul>
 
-We next recognize and remove haplotigs in essentially the same way as purge_haplotigs, and remove all matches associated with haplotigs from the self-alignment set.
+      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
 
-Finally we chain consistent matches in the remainder to find overlaps, then calculate the average coverage of the matching intervals for each overlap, and mark an unambiguous overlap as heterozygous when the average coverage on both contigs is less than the read depth cutoff found in step 1, removing the sequence corresponding to the matching interval in the shorter contig.
+      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
 
-purge_dups can significantly improve genome assemblies by removing overlaps and haplotigs caused by sequence divergence in heterozygous regions. This both removes false duplications in primary draft assemblies while retaining completeness and sequence integrity, and can improve scaffolding. 
+      <blockquote class="comment">
+        <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-Along with sequence similarity, purge_dups and purge_haplotigs take into account the coverage depth obtained by mapping short or long reads to the contigs. Coverage depth represents the number of reads covering a position in a contig (computed after mapping reads on the assembly). The contigs are then aligned to select duplicates accurately and remove them. While purge_dups sets its coverage thresholds automatically, purge_haplotigs requires user-provided values.
+        <p>A comment about the tool or something else. This box can also be in the main text</p>
+      </blockquote>
+    </li>
+  </ol>
 
+</blockquote>
 
+<p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
 
-## Sub-step with **Concatenate datasets**
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description
->
-> 1. <span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Concatenate Dataset"*: `get_seqs_hap` (output of **Purge overlaps** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - In *"Dataset"*:
->        - <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> *"Insert Dataset"*
->            - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Select"*: `out_fa` (output of **GFA to FASTA** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### <i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+  <ol>
+    <li>Question1?</li>
+    <li>Question2?</li>
+  </ol>
 
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-# Hybrid scaffolding based using Bionano data
+    <ol>
+      <li>Answer for question1</li>
+      <li>Answer for question2</li>
+    </ol>
 
+  </blockquote>
 
-## Sub-step with **Bionano Hybrid Scaffold**
+</blockquote>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2"><strong>Bionano Hybrid Scaffold</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"NGS FASTA"*: `output` (Input dataset)
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"BioNano CMAP"*: `output` (Input dataset)
->    - *"Configuration mode"*: `VGP mode`
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Conflict resolution file"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### <i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+<h2 id="sub-step-with-concatenate-datasets">Sub-step with <strong>Concatenate datasets</strong></h2>
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
-> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+  <ol>
+    <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">ngs_contigs_scaffold_trimmed</code> (output of <strong>Bionano Hybrid Scaffold</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Dataset”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: <code class="language-plaintext highlighter-rouge">ngs_contigs_not_scaffolded_trimmed</code> (output of <strong>Bionano Hybrid Scaffold</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
-## Sub-step with **Concatenate datasets**
+      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description
->
-> 1. <span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Concatenate Dataset"*: `ngs_contigs_scaffold_trimmed` (output of **Bionano Hybrid Scaffold** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - In *"Dataset"*:
->        - <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> *"Insert Dataset"*
->            - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Select"*: `ngs_contigs_not_scaffolded_trimmed` (output of **Bionano Hybrid Scaffold** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### <i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+      <blockquote class="comment">
+        <h3 id="comment-comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+        <p>A comment about the tool or something else. This box can also be in the main text</p>
+      </blockquote>
+    </li>
+  </ol>
 
-## Sub-step with **Parse parameter value**
+</blockquote>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description
->
-> 1. <span class="tool" data-tool="param_value_from_file" title="Tested with param_value_from_file"><strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: param_value_from_file</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Input file containing parameter to parse out of"*: `output` (Input dataset)
->    - *"Select type of parameter to parse"*: `Integer`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### <i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+<p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
 
-## Sub-step with **Quast**
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Contigs/scaffolds file"*: `out_file1` (output of **Concatenate datasets** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `{'id': 7, 'output_name': 'integer_param'}`
->        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### <i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+  <ol>
+    <li>Question1?</li>
+    <li>Question2?</li>
+  </ol>
 
-# Hybrid scaffolding based on a phased assembly and HiC <span class="notranslate">mapping</span> data
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-***TODO***: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the <span class="notranslate">workflow</span> but I think we want people to be able to run this step by step. I've taken out some of the steps that are "parse parameter value" etc. 
+    <ol>
+      <li>Answer for question1</li>
+      <li>Answer for question2</li>
+    </ol>
 
-In this section we map Hi-C <span class="notranslate">reads</span> to scaffold the genome assembly. During Hi-C library preparation, the <span class="notranslate">DNA</span> is fragmented and re-ligated, leading to region of the genome that are closer in the 3D space being prefentially joined. Each <span class="notranslate">DNA</span> fragment is then sequenced from each end of this artificial junction, generating read pairs, with most of the contacts in the kpb range, bu with many contacts in the Mbp range as well. This information can be used to reconstruct the order and orientation of the contigs/scaffolds generated in the previous steps.
-    
+  </blockquote>
 
-## Pre-processing Hi-C data
+</blockquote>
 
-Even though Hi-C generated paired-end <span class="notranslate">reads</span>, we need to map each read separately. The reason is that most aligners assumes that the ends of a single continuous genomic fragment are being sequenced, and the distance between these two ends
+<h2 id="sub-step-with-quast">Sub-step with <strong>Quast</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
+          <ul>
+            <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+              <ul>
+                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">{'id': 7, 'output_name': 'integer_param'}</code></li>
+              </ul>
+            </li>
+            <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Genes”</em>:
+          <ul>
+            <li><em>“Tool for gene prediction”</em>: <code class="language-plaintext highlighter-rouge">Don't predict genes</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><strong><em>TODO</em></strong>: <em>Check parameter descriptions</em></p>
+
+      <p><strong><em>TODO</em></strong>: <em>Consider adding a comment or tip box</em></p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>A comment about the tool or something else. This box can also be in the main text</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="hybrid-scaffolding-based-on-a-phased-assembly-and-hic-mapping-data">Hybrid scaffolding based on a phased assembly and HiC <span class="notranslate">mapping</span> data</h1>
+
+<p><strong><em>TODO</em></strong>: need to re-name a lot of the inputs and outputs here. They have been auto-generated from the <span class="notranslate">workflow</span> but I think we want people to be able to run this step by step. I’ve taken out some of the steps that are “parse parameter value” etc.</p>
+
+<p>In this section we map Hi-C <span class="notranslate">reads</span> to scaffold the genome assembly. During Hi-C library preparation, the <span class="notranslate">DNA</span> is fragmented and re-ligated, leading to region of the genome that are closer in the 3D space being prefentially joined. Each <span class="notranslate">DNA</span> fragment is then sequenced from each end of this artificial junction, generating read pairs, with most of the contacts in the kpb range, bu with many contacts in the Mbp range as well. This information can be used to reconstruct the order and orientation of the contigs/scaffolds generated in the previous steps.</p>
+
+<h2 id="pre-processing-hi-c-data">Pre-processing Hi-C data</h2>
+
+<p>Even though Hi-C generated paired-end <span class="notranslate">reads</span>, we need to map each read separately. The reason is that most aligners assumes that the ends of a single continuous genomic fragment are being sequenced, and the distance between these two ends
 fits a known distribution, but in Hi-C data,  the insert size of the ligation product can vary between
-1bp to hundreds of megabases (<span class="citation"><a href="#Lajoie2015">Lajoie <i>et al.</i> 2015</a></span>).
+1bp to hundreds of megabases (<span class="citation"><a href="#Lajoie2015">Lajoie <i>et al.</i> 2015</a></span>).</p>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping Hi-C forward reads
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
->    - *"Single or Paired-end reads"*: `Single`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Select fastq dataset"*: `output` (Input dataset)
->    - *"Set read groups information?"*: `Do not set`
->    - *"Select analysis mode"*: `1.Simple Illumina mode`
->    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
->
-{: .hands_on}
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-mapping-hi-c-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <span class="notranslate">Mapping</span> Hi-C <span class="notranslate">reads</span></h3>
 
-Now, we will map the rest of the reads.
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+        <li><em>“BAM sorting mode”</em>: <code class="language-plaintext highlighter-rouge">Sort by read names  (i.e., the QNAME field) </code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">BAM forward</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+        <li><em>“BAM sorting mode”</em>: <code class="language-plaintext highlighter-rouge">Sort by read names  (i.e., the QNAME field) </code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">BAM reverse</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">BAM forward</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Bam reverse</code></li>
+      </ul>
+    </li>
+    <li>Rename it as <code class="language-plaintext highlighter-rouge">BAM Hi-C <span class="notranslate">reads</span></code></li>
+  </ol>
+</blockquote>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping Hi-C reverse reads
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
->    - *"Single or Paired-end reads"*: `Single`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Select fastq dataset"*: `output` (Input dataset)
->    - *"Set read groups information?"*: `Do not set`
->    - *"Select analysis mode"*: `1.Simple Illumina mode`
->    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
->
-{: .hands_on}
+<p>Finally, we need to convert the BAM file to <span class="notranslate">BED</span> format, and sorting it.</p>
 
-Once we have mapped the reads, the next step the BAM files:
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-bam-to-bed-conversion"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: BAM to <span class="notranslate">BED</span> conversion</h3>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Merge the BAM files
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"First set of <span class="notranslate">reads</span>"*: `bam_output` (output of **Map with BWA-MEM** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Second set of <span class="notranslate">reads</span>"*: `bam_output` (output of **Map with BWA-MEM** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->
-{: .hands_on}
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1"><strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_bamtobed/2.30.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert the following BAM file to <span class="notranslate">BED</span>”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“What type of <span class="notranslate">BED</span> output would you like”</em>: <code class="language-plaintext highlighter-rouge">Create a full, 12-column "blocked" <span class="notranslate">BED</span> file</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+        <li><em>“with flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort</code></li>
+        <li><em>“everything in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+      </ul>
+    </li>
+  </ol>
 
-Finally, we need to convert the BAM file to BED format, and sorting it.
+</blockquote>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: BAM to BED conversion
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1"><strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_bamtobed/2.30.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Convert the following BAM file to <span class="notranslate">BED</span>"*: `outfile` (output of **Filter and merge** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
->
-> 2. <span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Sort Dataset"*: `output` (output of **<span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span>** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"on column"*: `c4`
->    - *"with flavor"*: `Alphabetical sort`
->    - *"everything in"*: `Ascending order`
->
-{: .hands_on}
+<h2 id="generate-hi-c-contact-map">Generate Hi-C contact map</h2>
 
+<p>Most of the paired <span class="notranslate">reads</span> from HiC will map to the same  contigs. In a typic Hi-C contact map, contigs are ordered by size and are evaluated against each other in a triangular matrix. Most contacts should appear close to the diagonal (<span class="notranslate">mapping</span> to self). Off-diagonal signal is indicative of chromosomal interactions in non-chromosome level assemblies, or of assembly mis-joints. We will now generate a Hi-C contact map before scaffolding the assembly to compare the Hi-C contact map after scaffolding.</p>
 
-## Generate Hi-C contact map
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generate-a-contact-map-with-pretextmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate a contact map with PretextMap</h3>
 
-Most of the paired reads from HiC will map to the same  contigs. In a typic Hi-C contact map, contigs are ordered by size and are evaluated against each other in a triangular matrix. Most contacts should appear close to the diagonal (mapping to self). Off-diagonal signal is indicative of chromosomal interactions in non-chromosome level assemblies, or of assembly mis-joints. We will now generate a Hi-C contact map before scaffolding the assembly to compare the Hi-C contact map after scaffolding.
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">pretext_map_out</code> (output of <strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
+        <li><em>“Show grid?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate a contact map with PretextMap
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Sort by"*: `Don't sort`
->
-> 2. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Output image format"*: `png`
->    - *"Show grid?"*: `Yes`
->
-{: .hands_on}
+</blockquote>
 
-***TODO***: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not). 
+<p><strong><em>TODO</em></strong>: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not).</p>
 
+<h2 id="salsa-scaffolding">Salsa scaffolding</h2>
 
-## Salsa scaffolding
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-salsa-scaffolding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Salsa scaffolding</h3>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Salsa scaffolding
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"File to process"*: `output` (Input dataset)
->    - *"Find pattern"*: `:`
->    - *"Replace all occurences of the pattern"*: `Yes`
->    - *"Find and Replace text in"*: `entire line`
->
-> 2. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0"><strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Initial assembly file"*: `outfile` (output of **Replace** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"<span class="notranslate">Bed</span> alignment"*: `out_file1` (output of **Sort** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Sequence graphs"*: `output` (Input dataset)
->    - *"Restriction enzyme sequence(s)"*: add the enzyme sequence(s) here
->
-{: .hands_on}
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">:</code></li>
+        <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0"><strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Initial assembly file”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Bed</span> alignment”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence graphs”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        <li><em>“Restriction enzyme sequence(s)”</em>: add the enzyme sequence(s) here</li>
+      </ul>
+    </li>
+  </ol>
 
+</blockquote>
 
-## Evaluate the Salsa scaffolding results
+<h2 id="evaluate-the-salsa-scaffolding-results">Evaluate the Salsa scaffolding results</h2>
 
-Now, the scaffolded assembly will be evaluated using BUSCO and QUAST.
+<p>Now, the scaffolded assembly will be evaluated using BUSCO and QUAST.</p>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Evaluation with BUSCO
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: ``
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
->
-{: .hands_on}
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-evaluation-with-busco"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Evaluation with BUSCO</h3>
 
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (<span class="notranslate">DNA</span>)</code>
+          <ul>
+            <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
+          </ul>
+        </li>
+        <li><em>“Lineage”</em>: ``</li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Which outputs should be generated”</em>: ``</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
 
-There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos). 
+</blockquote>
 
-***TODO***: explain what these outputs mean; are the results "good" ?
+<p>There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos).</p>
 
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Evaluation with QUAST
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Contigs/scaffolds file"*: `scaffolds_fasta` (output of **SALSA** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `enter estimated genome size`
->        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
->    - *"Is genome large (> 100 Mbp)?"*: `Yes`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
->
-{: .hands_on}
+<p><strong><em>TODO</em></strong>: explain what these outputs mean; are the results “good” ?</p>
 
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-evaluation-with-quast"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Evaluation with QUAST</h3>
 
-There are four outputs: the Quast report in three formats, and a log file. 
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
+          <ul>
+            <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+              <ul>
+                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">enter estimated genome size</code></li>
+              </ul>
+            </li>
+            <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding</code></li>
+          </ul>
+        </li>
+        <li><em>“Is genome large (&gt; 100 Mbp)?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>In <em>“Genes”</em>:
+          <ul>
+            <li><em>“Tool for gene prediction”</em>: <code class="language-plaintext highlighter-rouge">Don't predict genes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
 
-***TODO***: explain what these outputs mean; are the results "good" ?
+</blockquote>
 
+<p>There are four outputs: the Quast report in three formats, and a log file.</p>
 
-## Generate a Hi-C contact map after Salsa2 scaffolding
+<p><strong><em>TODO</em></strong>: explain what these outputs mean; are the results “good” ?</p>
 
-Now, we repeat the producedure described previously for generating the optical maps, but in that case, we will use the scaffold generated by Salsa2.
-    
-> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping reads against the scaffold
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Single or Paired-end reads"*: `Single`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Select fastq dataset"*: `output` (Input dataset)
->    - *"Set read groups information?"*: `Do not set`
->    - *"Select analysis mode"*: `1.Simple Illumina mode`
->
-> 2. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Single or Paired-end reads"*: `Single`
->        - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Select fastq dataset"*: `output` (Input dataset)
->    - *"Set read groups information?"*: `Do not set`
->    - *"Select analysis mode"*: `1.Simple Illumina mode`
->
-> 3. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"First set of <span class="notranslate">reads</span>"*: `bam_output` (output of **Map with BWA-MEM** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Second set of <span class="notranslate">reads</span>"*: `bam_output` (output of **Map with BWA-MEM** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->
->
-> 4. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Sort by"*: `Don't sort`
->
-> 5. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - *"Output image format"*: `png`
->    - *"Show grid?"*: `Yes`
->
->
-{: .hands_on}
+<h2 id="generate-a-hi-c-contact-map-after-salsa2-scaffolding">Generate a Hi-C contact map after Salsa2 scaffolding</h2>
 
+<p>Now, we repeat the producedure described previously for generating the optical maps, but in that case, we will use the scaffold generated by Salsa2.</p>
 
-***TODO***: explain the output here. What does the pretext map show. How does it compare to the pre-scaffolding map. 
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-mapping-reads-against-the-scaffold"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <span class="notranslate">Mapping</span> <span class="notranslate">reads</span> against the scaffold</h3>
 
-***TODO***: overall, explain what the scaffolding section results mean. What are the next possible steps.
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">pretext_map_out</code> (output of <strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
+        <li><em>“Show grid?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
 
+</blockquote>
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+<p><strong><em>TODO</em></strong>: explain the output here. What does the pretext map show. How does it compare to the pre-scaffolding map.</p>
 
-> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+<p><strong><em>TODO</em></strong>: overall, explain what the scaffolding section results mean. What are the next possible steps.</p>
 
+<p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
 
+<blockquote class="question">
+  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+  <ol>
+    <li>Question1?</li>
+    <li>Question2?</li>
+  </ol>
 
-> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
--->
+    <ol>
+      <li>Answer for question1</li>
+      <li>Answer for question2</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p><strong><em>TODO</em></strong>: <em>Consider adding a question to test the learners understanding of the previous exercise</em></p>
+
+<blockquote class="question">
+  <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Question1?</li>
+    <li>Question2?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Answer for question1</li>
+      <li>Answer for question2</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -2192,10 +2440,12 @@ pipeline used.</p>
                 
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="Marcotte1999">Marcotte, E. M., M. Pellegrini, T. O. Yeates, and D. Eisenberg, 1999 <b>A census of protein repeats</b>. Journal of Molecular Biology 293: 151–160. <a href="https://doi.org/10.1006/jmbi.1999.3136">10.1006/jmbi.1999.3136</a></li>
+<li id="Small2007">Small, K. S., M. Brudno, M. M. Hill, and A. Sidow, 2007 <b>A haplome alignment and reference sequence of the highly polymorphic Ciona savignyi genome</b>. Genome Biology 8: R41. <a href="https://doi.org/10.1186/gb-2007-8-3-r41">10.1186/gb-2007-8-3-r41</a></li>
 <li id="Frenkel2012">Frenkel, S., V. Kirzhner, and A. Korol, 2012 <b>Organizational Heterogeneity of Vertebrate Genomes</b> (V. Laudet, Ed.). PLoS ONE 7: e32076. <a href="https://doi.org/10.1371/journal.pone.0032076">10.1371/journal.pone.0032076</a></li>
 <li id="Lam2012">Lam, E. T., A. Hastie, C. Lin, D. Ehrlich, S. K. Das <i>et al.</i>, 2012 <b>Genome mapping on nanochannel arrays for structural variation analysis and sequence assembly</b>. Nature Biotechnology 30: 771–776. <a href="https://doi.org/10.1038/nbt.2303">10.1038/nbt.2303</a></li>
 <li id="Chalopin2015">Chalopin, D., M. Naville, F. Plard, D. Galiana, and J.-N. Volff, 2015 <b>Comparative Analysis of Transposable Elements Highlights Mobilome Diversity and Evolution in Vertebrates</b>. Genome Biology and Evolution 7: 567–580. <a href="https://doi.org/10.1093/gbe/evv005">10.1093/gbe/evv005</a></li>
 <li id="Lajoie2015">Lajoie, B. R., J. Dekker, and N. Kaplan, 2015 <b>The Hitchhiker’s guide to Hi-C analysis: Practical guidelines</b>. Methods 72: 65–75. <a href="https://doi.org/10.1016/j.ymeth.2014.10.031">10.1016/j.ymeth.2014.10.031</a></li>
+<li id="Simo2015">Simão, F. A., R. M. Waterhouse, P. Ioannidis, E. V. Kriventseva, and E. M. Zdobnov, 2015 <b>BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs</b>. Bioinformatics 31: 3210–3212. <a href="https://doi.org/10.1093/bioinformatics/btv351">10.1093/bioinformatics/btv351</a></li>
 <li id="SoteroCaio2017">Sotero-Caio, C. G., R. N. Platt, A. Suh, and D. A. Ray, 2017 <b>Evolution and Diversity of Transposable Elements in Vertebrate Genomes</b>. Genome Biology and Evolution 9: 161–177. <a href="https://doi.org/10.1093/gbe/evw264">10.1093/gbe/evw264</a></li>
 <li id="DominguezDelAngel2018">Angel, V. D. D., E. Hjerde, L. Sterck, S. Capella-Gutierrez, C. Notredame <i>et al.</i>, 2018 <b>Ten steps to get started in Genome Assembly and Annotation</b>. F1000Research 7: 148. <a href="https://doi.org/10.12688/f1000research.13598.1">10.12688/f1000research.13598.1</a></li>
 <li id="Li2018">Li, H., 2018 <b>Minimap2: pairwise alignment for nucleotide sequences</b> (I. Birol, Ed.). Bioinformatics 34: 3094–3100. <a href="https://doi.org/10.1093/bioinformatics/bty191">10.1093/bioinformatics/bty191</a></li>
@@ -2272,7 +2522,7 @@ author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo",
 title = "VGP assembly pipeline (Galaxy Training Materials)",
 year = "2022",
 month = "01",
-day = "13"
+day = "18"
 url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
