@@ -677,15 +677,26 @@ Now, we will segment the draft assembly into contigs by cutting at blocks of ‘
         
 ### Resolution of haplotigs and overlaps        
 
-Given a matching set of all versus all self alignments from minimap2, and read depth cutoffs from the previous section, purge dups uses the following steps to identify the haplotypic duplications in a draft primary assembly:
+During the final step of the purge_dups pipeline, it will use the self alignments and the cutoffs for identifying the haplotypic duplications.
 
-Contained haplotig identification: purge dups uses essentially the same way as purge haplotigs to detect the contained haplotigs. If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is binned into the potential junk bin. Otherwise if more than 80% bases are in the diploid depth interval it is labelled as a primary contig, otherwise it is considered further as a possible haplotig. Next for each possible haplotig, we consider its best alignment to another contig. If its alignment score is larger than s (default 70) and max match score larger than m (default 200), it is marked as a repeat and is placed in the haplotig bin; if the alignment score is larger than s and max match score not larger than m, it is marked as a haplotig and also placed in the haplotig bin. Otherwise it is left as a candidate primary contig.
+> ### {% icon comment %} Purge_dups algorithm details
+>
+> In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according the following criteria:
+> - If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is discarted.
+> - If more than 80% bases are in the diploid depth interval, it is labelled as a primary contig, otherwise it is considered further as a possible haplotig.
+>
+> Contigs that were flagged for further analysis according to read-depth are then evaluated to attempt to identify synteny with its allelic companion contig. In this step, purge_dups uses the information contained in the self alignments:
+> - If the alignment score is larger than the cutoff *s* (default 70), the contig is marked for reassignment as haplotig. Contigs marked for reassignment with a maximum match score greater than the cutoff *m* (default 200) are further flagged as repetitive regions.
+> 
+> - Otherwise contigs are considered as a candidate primary contig.
+>
+> Once all matches associated with haplotigs have been removed from the self-alignment set, purge_dups ties consistent matches between the remaining candidates to find collinear matches, filtering all the matches whose score is less than the minimum chaining score *l*.
+>
+> Finally, purge-dups calculates the average coverage of the matching intervals for each overlap, and mark an unambiguous overlap as heterozygous when the average coverage on both contigs is less than the read-depth cutoff, removing the sequences corresponding to the matching interval in the shorter contig.
+>
+{: .comment}
 
-Haplotypic overlap identification: after purging the junk and contained haplotigs, purge dups chains the matches between remaining candidate primary contigs to find collinear matches.
-
-Calculate average read depth for the matching intervals in both the query and target, and only keep matches both of whose average read depths are below the diploid cutoff. Remove secondary and overlapping matches, defined as those for which the query region is contained within less than 85% of the matching region of another match from the same query, or no more than 85% of its sequence overlaps with another match. For remaining matches, move the sequence corresponding to the matching interval of the shorter contig into the haplotigs bin.
-    
-> ### {% icon hands_on %} Hands-on: purge_dups pipeline
+> ### {% icon hands_on %} Hands-on: Resolution of haplotigs and overlaps
 >    
 > 1. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
@@ -701,6 +712,8 @@ Calculate average read depth for the matching intervals in both the query and ta
 >
 {: .hands_on}
 
+As a result, we have got a purged primary and haplotig sequences. 
+    
 Finally, we should contatenate the results:
     
 > ### {% icon hands_on %} Hands-on: Task description
