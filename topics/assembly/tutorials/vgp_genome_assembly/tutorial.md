@@ -956,7 +956,7 @@ Now, let's evaluate the assembly:
     
 ## Hybrid scaffolding based on Hi-C mapping data
 
-Hi-C is a sequencing-based molecular assay designed to identify regions of frequente physical interaction in the genome, allowing to provide an insight into the three-dimensional organisation of a genome  ({% cite Dixon2012 %}). In this final stage, we will use the Hi-C data to identify cis-chromosome Hi-C interactions with the objetive of linking the Bionano scaffolds to a chromosome scale. 
+Hi-C is a sequencing-based molecular assay designed to identify regions of frequente physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing to provide an insight into the three-dimensional organisation of a genome  ({% cite Dixon2012 %}, {% cite LiebermanAiden2009 %}). In this final stage, we will explote the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them  with the objetive of linking the Bionano scaffolds to a chromosome scale,. 
 
 > ### {% icon comment %} Background about Hi-C data
 >
@@ -964,7 +964,7 @@ Hi-C is a sequencing-based molecular assay designed to identify regions of frequ
 >
 > ![fig4:Post-processing step](../../images/vgp_assembly/hi-c_protocol.png "Hi-C protocol. Adapted from Rao et al. 2014")
 >
-> Next, the blunt ends of spatially proximal digested end are ligated. Each DNA fragment is then sequenced from each end of this artificial junction, generating read pairs. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome ({% cite Giani2020 %}). Hi-C data are in the form of two-dimensional matrices (contact maps) whose entries quantifiy the intensity of the physical interaction between genome regions.
+> Next, the blunt ends of spatially proximal digested end are ligated. Each DNA fragment is then sequenced from each end of this artificial junction, generating read pairs. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome ({% cite Giani2020 %}). Hi-C data are in the form of two-dimensional matrices (contact maps) whose entries quantifiy the intensity of the physical interaction between genome regions. 
 >
 {: .comment}
 
@@ -1016,44 +1016,49 @@ After mapping the Hi-C reads, the next step is to generate an initial Hi-C conta
 > Hi-C contact maps reflect the interaction frequency between genomic locus. In order to understand the Hi-C contacts maps, it is necessary to take in account two factors: the higher interaction frequency between loci that reside in the same chromosome (i.e. in cis), and the distance-dependent decay of interaction frequency ({% cite Lajoie2015 %}).
 >
 > The higher interaction between cis regions can be explained, at least in part, by the territorial organization of chromosomes in interphase (chromosome territories), and in a genome-wide contact map, this pattern appears as blocks of high interaction centered along the diagonal and matching individual chromosomes (fig. 15) ({% cite Cremer2010 %}, {% cite Lajoie2015 %}).
-> 
+>
 > ![fig4:Post-processing step](../../images/vgp_assembly/hic_map.png "Hi-C map")
 >   
-> In a genome-wide interaction matrix, this pattern appears as square blocks, of high interaction centered along the diagonal and matching individual chromosomes (Figure 6). The pattern is likely due, at least in part, to a phenomenon known as chromosome territories, where chromosomes are physically separated and occupy a distinct volume in the nucleus.    
->
 > On the other hand, the distance-dependent decay may be due to random movment of the chromosomes, and in the contact map appears as a gradual decrease of the interaction frequency the further away from the diagonal it moves ({% cite Lajoie2015 %}).
+>
 >
 {: .comment}
 
-    
-    
-
-    
-Most of the paired reads from HiC will map to the same  contigs. In a typic Hi-C contact map, contigs are ordered by size and are evaluated against each other in a triangular matrix. Most contacts should appear close to the diagonal (mapping to self). Off-diagonal signal is indicative of chromosomal interactions in non-chromosome level assemblies, or of assembly mis-joints. We will now generate a Hi-C contact map before scaffolding the assembly to compare the Hi-C contact map after scaffolding.
-
-> ### {% icon hands_on %} Hands-on: Generate a contact map with PretextMap
+  
+> ### {% icon hands_on %} Hands-on: Generate a contact map with **PretextMap** and **Pretext Snapshot**
 >
 > 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads`
 >    - *"Sort by"*: `Don't sort`
 >
+> 3. Rename the output as `PretextMap output`
+>
 > 2. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
+>    - {% icon param-file %} *"Input Pretext map file"*: `PretextMap output`
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
->
 {: .hands_on}
 
-
-Accordingly, observing a “smooth” interaction matrix that shows little position-specific structure does not rule out the existence of structure in the underlying genomes - it simply means that if such structures exist, they are not consistent between cells. 
-
-it is important to remember that Hi-C measures interaction frequency between loci, not distance. Formaldehyde crosslinking will occur only between loci which physically interact. Thus, a weak Hi-C signal between two loci indicates that the interaction occurred in a small fraction of the population, but we cannot determine the distance between the two loci without making some simplifying assumptions about how interaction frequencies relate to physical distances. 
-        
-***TODO***: explain the output here. What does it mean. What does this show about our data/assembly so far (e.g. do the contigs look fairly well ordered, or not). 
+Let's have a look at the Hi-C contact maps generated by Pretext Snapshot.
+    
+![fig4:Post-processing step](../../images/vgp_assembly/hic_map_pretext.png "Hi-C map generated by Pretext. Full map (a) and Super-Scaffold_100003 (b)")
 
 
-### Salsa scaffolding
+### SALSA2 scaffolding
 
+SALSA2 is an open source software that make use of Hi-C to linearly orient and order assembled contigs along entire chromosomes.
+
+> ### {% icon comment %} SALSA2 algoritm overview
+>
+> Initially SALSA2 uses the physical coverage of Hi-C pairs to identify suspicious regions and break the sequence at the likely point of mis-assembly. Then, a hybrid scaffold graph is constructed using edges from the Hi-C reads, scoring the edges according to a *best buddy* scheme (fig. 16a).
+>
+> ![fig4:Post-processing step](../../images/vgp_assembly/salsa2_algorithm.png "Overview of the SALSA2 algorithm. Solid edges indicate the linkages between different contigs and dotted edges indicate the links between the ends of the same contig. B and E denote the start and end of contigs, respectively. Adapted from Ghurye et al. 2019.")
+>
+> From this graph scaffolds are iteratively constructed using a greedy weighted maximum matching. After each iteration a mis-join detection step is performed to check if any of the joins made during this round are incorrect. Incorrect joins are broken and the edges blacklisted during subsequent iterations. This process continues until the majority of joins made in the prior iteration are incorrect. This provides a natural stopping condition, when accurate Hi-C links have been exhausted ({% cite Ghurye2019 %}).
+>
+{: .comment}
+
+Before launching SALSA2, we need to carry out some modifications on our datasets.
 
 > ### {% icon hands_on %} Hands-on: BAM to BED conversion
 >
@@ -1062,79 +1067,101 @@ it is important to remember that Hi-C measures interaction frequency between loc
 >    - *"What type of BED output would you like"*: `Create a full, 12-column "blocked" BED file`
 >
 > 2. Rename the output as `BED unsorted`
-> 2. {% tool [Sort](sort1) %} with the following parameters:
+>
+> 3. {% tool [Sort](sort1) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `BED unsorted`
->    - *"on column"*: `c4`
+>    - *"on column"*: `Column: 4`
 >    - *"with flavor"*: `Alphabetical sort`
 >    - *"everything in"*: `Ascending order`
 >
 > 4. Rename the output as `BED sorted`
-{: .hands_on}
-
-
-    
-> ### {% icon hands_on %} Hands-on: Salsa scaffolding
 >
-> 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
+> 5. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `Primary assembly bionano`
 >    - *"Find pattern"*: `:`
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
-> 2. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Initial assembly file"*: `outfile` (output of **Replace** {% icon tool %})
->    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
->    - {% icon param-file %} *"Sequence graphs"*: `output` (Input dataset)
->    - *"Restriction enzyme sequence(s)"*: add the enzyme sequence(s) here
+> 6. Rename the output as `Primary assembly bionano edited`
+{: .hands_on}
+
+Now we can launch SALSA2 in order to generate the hybrid scaffolding based on the Hi-C data.
+    
+> ### {% icon hands_on %} Hands-on: Salsa scaffolding
+>
+>
+> 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Initial assembly file"*: `Primary assembly bionano edited`
+>    - {% icon param-file %} *"Bed alignment"*: `BED sorted`
+>    - *"Restriction enzyme sequence(s)"*: `CTTAAG`
+>
+> 2. Rename the output as `SALSA2 scaffold FASTA` and `SALSA2 scaffold AGP`
 >
 {: .hands_on}
 
-
+Finally, let's evaluate the hybrid scaffolded assembly generated by SALSA2.
+    
 ### Evaluate the Salsa scaffolding results
 
-Now, the scaffolded assembly will be evaluated using BUSCO and QUAST.
+In order to evaluate the results, we will use QUAST and Pretext.
 
 > ### {% icon hands_on %} Hands-on: Evaluation with BUSCO
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `SALSA2 scaffold FASTA`
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: ``
+>    - *"Lineage"*: `Saccharomycetes`
 >    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
+>        - *"Which outputs should be generated"*: `short summary text`
 >
+> 2. Rename the output as `BUSCO final assembly`
 {: .hands_on}
 
+> ### {% icon question %} Questions
+>
+> How many complete BUSCO genes have been identified?
+>
+> > ### {% icon solution %} Solution
+> >
+> > The final assembly includes 2021 complete BUSCO genes.
+> >
+> {: .solution}
+>
+{: .question}
 
-There are four outputs: short summary, summary as an image, and two tables (full results and missing buscos). 
-
-***TODO***: explain what these outputs mean; are the results "good" ?
+Now, let's run QUAST.
 
 > ### {% icon hands_on %} Hands-on: Evaluation with QUAST
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
 >    - *"Use customized names for the input files?"*: `No, use dataset names`
->        - {% icon param-file %} *"Contigs/scaffolds file"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `SALSA2 scaffold FASTA`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `enter estimated genome size`
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060` (previouly estimated)
 >        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
->    - *"Is genome large (> 100 Mbp)?"*: `Yes`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
+>    - *"Is genome large (> 100 Mbp)?"*: `No`
 >
 {: .hands_on}
 
+> ### {% icon question %} Questions
+>
+> 1. What is the size of the largest contig?
+> 2. How many scaffolds includes the final assembly?
+> 3. What is the N50 statistic?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The largest contig has 1.906.138 bp.
+> > 2. The final assembly includes 16 scaffolds.
+> > 3. The N50 value is 980.453.
+> >
+> {: .solution}
+>
+{: .question}
 
-There are four outputs: the Quast report in three formats, and a log file. 
-
-***TODO***: explain what these outputs mean; are the results "good" ?
-
-
-### Generate a Hi-C contact map after Salsa2 scaffolding
-
-Now, we repeat the producedure described previously for generating the optical maps, but in that case, we will use the scaffold generated by Salsa2.
+Finally, we repeat the producedure described previously for generating the optical maps, but in that case, we will use the scaffold generated by SALSA2.
     
 > ### {% icon hands_on %} Hands-on: Mapping reads against the scaffold
 >
@@ -1142,61 +1169,44 @@ Now, we repeat the producedure described previously for generating the optical m
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_F`
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
-> 2. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 2. Rename the output as `BAM forward SALSA2`
+>
+> 3. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `SALSA2 scaffold FASTA`
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_R`
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
-> 3. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"First set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
->    - {% icon param-file %} *"Second set of reads"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+> 4. Rename the output as `BAM reverse SALSA2`
 >
+> 5. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"First set of reads"*: `BAM forward SALSA2`
+>    - {% icon param-file %} *"Second set of reads"*: `BAM reverse SALSA2`
 >
-> 4. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
+> 6. Rename the output as `BAM Hi-C reads SALSA2`
+>
+> 7. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads SALSA2`
 >    - *"Sort by"*: `Don't sort`
 >
-> 5. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
+> 8. Rename the output as `PretextMap output SALSA2`
+>
+> 9. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input Pretext map file"*: `PretextMap output SALSA2`
 >    - *"Output image format"*: `png`
 >    - *"Show grid?"*: `Yes`
 >
->
 {: .hands_on}
 
-
-***TODO***: explain the output here. What does the pretext map show. How does it compare to the pre-scaffolding map. 
-
-***TODO***: overall, explain what the scaffolding section results mean. What are the next possible steps.
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-
-# Conclusion
+![fig4:Post-processing step](../../images/vgp_assembly/hi-c_pretext_final.png "Hi-C map generated by Pretext after the hybrid scaffolding based on Hi-C data."){:width="80%"}
+    
+    
 {:.no_toc}
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
