@@ -34,6 +34,8 @@ contributors:
   - eancelet
   - yvanlebras
   - neoformit
+  - Lain-inrae
+  - abretaud
 
 ---
 
@@ -120,7 +122,7 @@ Where Planemo is typically used for tool linting and testing, the complex
 architecture of GxITs requires a local instance or a development server to be built to manually
 test and run the tool.
 In addition, they are currently not supported by the Galaxy ToolShed and have to be installed
-manually. This means that distributed GxITs can be found in (https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive)[the Galaxy core codebase],
+manually. This means that distributed GxITs can be found in [the Galaxy core codebase](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive),
 and they can be manually enabled by the Galaxy server administrator.
 
 However, the build process itself is not too complex!
@@ -157,7 +159,7 @@ them back into Galaxy. Our application uses a R Shiny server.
 Note that there is no link between this interactive tool and the Galaxy history.
 This is a more complex task that could be addressed in another tutorial.
 
-Our example can already be found [online (TODO: change repo)](https://github.com/Lain-inrae/geoc-gxit).
+Our example can already be found [online](https://github.com/Lain-inrae/geoc-gxit).
 In the following sections, we will study how it was built.
 
 
@@ -202,7 +204,7 @@ In the following sections, we will study how it was built.
 >    `sudo docker build -t <image_name> .`
 > 3. View existing images with
 >
->    `sudo docker image list`.
+>    `sudo docker image list`
 > 4. Run a container with a specified command:
 >
 >    `sudo docker run <image_name> <command>`
@@ -301,8 +303,7 @@ COPY ./gxit /gxit
 CMD R -e "shiny::runApp('/gxit', host='0.0.0.0', port=${PORT})" 2>&1 > "${LOG_PATH}"
 ```
 
-This image is already hosted on Docker Hub at
-[TODO:DOCKER_HUB_REPO_LINK](https://hub.docker.com/)
+This image is already hosted on [Docker Hub](https://hub.docker.com/r/ancelete/first-gxit)
 , but anyone can use this Dockerfile to rebuild the image if necessary.
 If so, don't forget to create a `gxit` folder containing `app.R` and `install.R`
 next to your Dockerfile.
@@ -327,8 +328,8 @@ next to your Dockerfile.
 > ```
 >
 >    > ### {% icon tip %} Automating the build
->    > While developing the Docker container you may find yourself tweaking and rebuilding the container image many times.
->    > In the GitHub repository linked above, you'll notice that the author has used a `Makefile` to accelerate the build and deploy process.
+>    > While developing the Docker container you may find yourself tweaking and rebuilding the container image many times.  
+>    > In the GitHub repository linked above, you'll notice that the author has used a `Makefile` to accelerate the build and deploy process.  
 >    > This allows the developer to simply run `make docker` and `make push_hub` to build and push the container, or `make` to rebuild the container after making changes during development. Check out the `Makefile` to see what commands can be run using `make` in this repository.
 >    >
 >    {: .tip}
