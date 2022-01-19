@@ -48,6 +48,3 @@ layout: faq
 {% else %}
 * **Close** the window
 {% endif %}
-{% if include.renaming == undefined or include.renaming == true %}
-* By default, Galaxy uses the URL as the name, so rename the files with a more useful name.
-{% endif %}
