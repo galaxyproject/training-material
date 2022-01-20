@@ -21,6 +21,7 @@ key_points:
 subtopic: python-modular
 contributors:
   - hexylena
+  - carpentries
 
 priority: 1
 notebook:
@@ -74,9 +75,10 @@ You'll notice when we assign things to a variable, nothing is printed out. If we
 
 ```python
 print(x)
-print(y)
-print(z)
+print(y, z)
 ```
+
+You can print out multiple variables if you separate them with a comma `,`.
 
 
 > ### {% icon tip %} Tip: Variable Names
@@ -126,6 +128,10 @@ Time to check what we've learned!
 
 ```python
 # Test solutions here!
+# By the way, lines starting with a # are comment lines!
+# You can use that to take notes, and not affect how your code runes
+# People use it for documentation: explaining what the function does,
+# what a variable means, why they chose this or that algorithm.
 ```
 
 ## Functions
@@ -154,9 +160,54 @@ Just like you might have done in math, we can have functions in Python. You do n
 {: .code-2col}
 
 
+## Libraries
+
+A library is a collection of files (called modules) that contains functions for use by other programs. It may also contain data values (e.g., numerical constants) and other things. A library's contents are supposed to be related, but there's no way to enforce that. The Python standard library is an extensive suite of modules that comes with Python itself. Many additional libraries are available from [PyPI (the Python Package Index)](https://pypi.org/).
+
+### Libraries and modules
+
+A library is a collection of modules, but the terms are often used interchangeably, especially since many libraries only consist of a single module, so don't worry if you mix them.
+
+### A program must import a library module before using it.
+
+You can use `import` to load a library module into a program's memory, then refer to things from the `module as module_name.thing_name`. Python uses `.` to mean “part of”. For example, using `datetime`, one of the modules in the standard library:
+
+```python
+import datetime
+
+# it is currently
+datetime.datetime.now()
+```
+
+
+You can use `help` to learn about the contents of a library module. it works just like help for a function.
+
+```python
+help(datetime)
+```
+
+You can import specific items from a library module to shorten programs. You can use `from ... import ...` to load only specific items from a library module. Then refer to them directly without library name as prefix.
+
+
+```python
+from datetime.datetime import now
+
+now()
+```
+
+
+You can create an alias for a library module when importing it to shorten programs. Use `import ... as ...` to give a library a short alias while importing it. Then refer to items in the library using that shortened name.
+
+```python
+import datetime.datetime as dt
+
+dt.now()
+```
+
+
 ## Math Module
 
-For some of the more interesting mathematics functions, we need to import a module. Python includes a lot of functionality, but it isn't available by default. If you want to use it, you need to tell Python you'd like to use that module.
+Let's import the math module:
 
 ```python
 import math
