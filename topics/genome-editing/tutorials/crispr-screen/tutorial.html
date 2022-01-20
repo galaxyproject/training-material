@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "CRISPR screen analysis",
   "interactivityType": "mixed",
@@ -991,7 +991,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 6, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 18, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1289,7 +1289,7 @@ As we know the guide sequence is 20bp, we will only keep sequences that are 20bp
         <p>In the 5’ trimmed sequences plot, we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) (<a href="https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf">see sequencing protocol</a>). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. There are a few <span class="notranslate">reads</span> trimmed which may have arisen from errors acquired during sequencing or sample generation.
 The 3’ trimmed sequence shows a similar dip at 28bp as that is the read length that corresponds to the nonexistent 5bp stagger: 75bp (read length) - (5bp (stagger) + 22bp (adapter) + 20bp (sg<span class="notranslate">RNA</span>)) = 28bp.</p>
 
-        <p><img src="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" alt=". " loading="lazy" /></p>
+        <p><img src="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" alt=". " width="70%" loading="lazy" /></p>
 
       </blockquote>
     </li>
@@ -1521,6 +1521,15 @@ distribution of the remaining sg<span class="notranslate">RNA</span>s that haven
 
 </blockquote>
 
+<blockquote class="comment">
+  <h3 id="comment-replicates"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Replicates</h3>
+
+  <p>If we have biological and/or technical replicates we can handle them in a similar way to that described on the <a href="https://sourceforge.net/p/mageck/wiki/QA/#how-to-deal-with-biological-replicates-and-technical-replicates">MAGeCK website</a>.
+For biological replicates, we input them in MAGeCK test Treated Sample Labels/Control Sample Labels fields separated by a comma.
+For technical replicates, we could combine the fastqs for each sample/biological replicate, for example with the <strong>Concatenate datasets</strong> tool, before running MAGeCK count.</p>
+
+</blockquote>
+
 <blockquote class="details">
   <h3 id="details-normalization"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Normalization</h3>
 
@@ -1716,7 +1725,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
 
 <p>The PDF also shows plots with the sg<span class="notranslate">RNA</span> counts for the top 10 genes. These values are the normalized counts for each sg<span class="notranslate">RNA</span> from the sg<span class="notranslate">RNA</span> summary file. With these plots we can see if the counts of all the sg<span class="notranslate">RNA</span>s for these top genes are changing similarly.</p>
 
-<p><img src="../../images/crispr-screen/esd_plot.png" alt="ESD counts. " width="80%" loading="lazy" /></p>
+<p><img src="../../images/crispr-screen/esd_plot.png" alt="ESD counts. " width="50%" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1734,7 +1743,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
       <li>None. One reason for this is likely the large number of genes being tested (&gt;20,000). You could try to increase sensitivity with the procedures described <a href="https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do">here</a>.</li>
     </ol>
 
-    <p><img src="../../images/crispr-screen/fli1_plot.png" alt="MAGeCK test pvalues. " width="80%" loading="lazy" /></p>
+    <p><img src="../../images/crispr-screen/fli1_plot.png" alt="MAGeCK test pvalues. " width="50%" loading="lazy" /></p>
 
   </blockquote>
 
@@ -1805,7 +1814,7 @@ FLI1    9.0376e-05  0.454208  -0.08872
 
           <p>ATP5E as it is the gene nearest the top of the plot.</p>
 
-          <p><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot. " width="80%" loading="lazy" /></p>
+          <p><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot. " width="50%" loading="lazy" /></p>
 
         </blockquote>
 
@@ -1887,7 +1896,7 @@ The rules of the design matrix are:</p>
   <li>The design matrix file must include a header line of condition labels</li>
   <li>The first column is the sample labels that must match labels in read count file</li>
   <li>The second column must be a “baseline” column that sets all values to “1”</li>
-  <li>The element in the design matrix is either “0” or “1”</li>
+  <li>The value in the design matrix is either “0” or “1”</li>
   <li>You must have at least one sample of “initial state” (e.g., day 0 or plasmid) that has only one “1” in the corresponding row. That only “1” must be in the baseline column</li>
   <li>The initial state (baseline) sample must be the 1st sample listed, under the header row, for mageck mle</li>
 </ul>
@@ -1899,6 +1908,8 @@ T0-Control  1         0       0
 T8-Vehicle  1         1       0
 T8-APR-246  1         0       1
 </code></pre></div></div>
+
+<p>Examples of more complicated design matrices, for e.g. time series experiments, can be seen on the <a href="https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-4-make-full-use-of-mageck-mle-for-more-complicated-experimental-design-eg-paired-samples-time-series">MAGeCK website</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-test-for-enrichment-with-mle"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test for enrichment with MLE</h3>
@@ -1989,7 +2000,7 @@ T8-APR-246  1         0       1
     </li>
   </ol>
 
-  <p><img src="../../images/crispr-screen/mageck_mle_apr_volcano.png" alt="Volcano plot mle. " width="80%" loading="lazy" /></p>
+  <p><img src="../../images/crispr-screen/mageck_mle_apr_volcano.png" alt="Volcano plot mle. " width="50%" loading="lazy" /></p>
 
   <p>Similarly, you could create a plot for the vehicle vs T0 using the gene summary file columns <code class="language-plaintext highlighter-rouge">Gene</code> <code class="language-plaintext highlighter-rouge">Vehicle|beta</code> <code class="language-plaintext highlighter-rouge">Vehicle|wald-p-value</code>  <code class="language-plaintext highlighter-rouge">Vehicle|wald-fdr</code></p>
 
@@ -2005,6 +2016,10 @@ T8-APR-246  1         0       1
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 <p>CRISPR Screen <span class="notranslate">reads</span> can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using MAGeCK. <span class="notranslate">Downstream</span> analysis can include visualisations, such as volcano plot, and pathway analysis with tools like fgsea.</p>
+
+<h1 class="no_toc" id="acknowledgements">Acknowledgements</h1>
+
+<p>Thanks to Mehmet Tekman for suggesting the awk tool and Jennifer Devlin for comments on the tutorial.</p>
 
 
                 
@@ -2081,7 +2096,7 @@ T8-APR-246  1         0       1
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Maria Doyle, Kenji Fujihara, Twishi Gulati, 2021 <b>CRISPR screen analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Maria Doyle, Kenji Fujihara, Twishi Gulati, 2022 <b>CRISPR screen analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -2098,9 +2113,9 @@ T8-APR-246  1         0       1
 <code id="citation-code">@misc{genome-editing-crispr-screen,
 author = "Maria Doyle and Kenji Fujihara and Twishi Gulati",
 title = "CRISPR screen analysis (Galaxy Training Materials)",
-year = "2021",
-month = "12",
-day = "06"
+year = "2022",
+month = "01",
+day = "18"
 url = "\url{https://training.galaxyproject.org/training-material/topics/genome-editing/tutorials/crispr-screen/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
