@@ -249,6 +249,20 @@ Notice that we also haven't filled out the end value. If you don't supply an end
 # Check your answers here!
 ```
 
+## Stride
+
+However, list slicing can be more complicated. You can additionally use a 'stride' parameter, which is how Python should strep through the list. To take every other element from a list:
+
+```python
+values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+print(values[0:12:2]) # every other value
+print(values[1:12:2]) # every other value from the second value
+print(values[::2]) # the start and end are optional
+print(values[::3]) # every third value in the list.
+```
+
+So list slicing together is either `list[low:high]` or `list[low:high:stride]`, where low and high are optional if you just want to go to the end of the list.
+
 # Type Conversion
 
 Just list with converting `"1.5"` to an float with the `float()` function, or `3.1` to a string with `str()`, we can do the same with lists using the `list()` function, and sets with `set()`:
