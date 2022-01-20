@@ -22,7 +22,6 @@ enable: false
 subtopic: python
 contributors:
   - hexylena
-  - carpentries
   - dirowa
 
 priority: 1
