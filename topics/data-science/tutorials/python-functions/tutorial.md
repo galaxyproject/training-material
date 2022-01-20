@@ -26,10 +26,12 @@ key_points:
 - Functions are foundational in Python
 - Everything you do will require functions
 
-subtopic: python-modular
+enable: false
+subtopic: python
 contributors:
   - hexylena
   - carpentries
+  - dirowa
 
 priority: 1
 notebook:
@@ -165,7 +167,7 @@ For a function this small, with such a descriptive name (`fahr_to_kelvin`) it fe
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test out solutions here!
 def average2(a, b):
     c =
@@ -176,7 +178,7 @@ print(average2(32326, 631))
 
 > ### {% icon question %} Question: A more complicated example
 >
-> The formula for a 90° triangle can be expressed as: $c = \sqrt{a^2 + b^2}$
+> The formula for a 90° triangle can be expressed as: $$c = \sqrt{a^2 + b^2}$$
 >
 > 1. Write a function which takes `a` and `b`, and calculates `c`
 > 2. Name this function "pythagorus"
@@ -191,7 +193,7 @@ print(average2(32326, 631))
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test out solutions here!
 
 
@@ -218,6 +220,7 @@ Watch out for scope issues:
 
 - Variables created inside a function will stay inside the function
 - Variables created outside of the function can be accessible inside the function, but you should not do this!
+- Ensure that variables are properly scoped will prevent later errors when working with modules or testing big projects.
 
 
 ```python
@@ -289,7 +292,7 @@ display(c=77)
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test things out here!
 def signedSaying # Fix this function!
 

@@ -18,10 +18,12 @@ key_points:
 - In real life you'll occasionally need to do this, either converting from a formula you read in a paper, or a description of an algorithm, into code that you'll re-use.
 - Did you forget how a particular module or function works? Try `help()`
 
-subtopic: python-modular
+enable: false
+subtopic: python
 contributors:
   - hexylena
   - carpentries
+  - dirowa
 
 priority: 1
 notebook:
@@ -110,7 +112,7 @@ Time to check what we've learned!
 > ### {% icon question %} Exercise 0: Simple Equations
 > Given the equation:
 >
-> $y = x * 921 + 534$
+> $$y = x * 921 + 534$$
 >
 > What is the value of `y` when `x = 452`
 >
@@ -151,7 +153,8 @@ Just like you might have done in math, we can have functions in Python. You do n
 > > ```
 > > # Define our function
 > > def f(x):
-> >    return 3 * x
+> >    answer = 3 * x
+> >    return answer
 > > # Compute some value
 > > f(3)
 > > ```
@@ -190,9 +193,9 @@ You can import specific items from a library module to shorten programs. You can
 
 
 ```python
-from datetime.datetime import now
+from datetime import datetime
 
-now()
+datetime.now()
 ```
 
 
@@ -229,7 +232,7 @@ math.sqrt(9)
 > When we import a module like `import math`, we need to use that as a prefix. Imagine we had two different modules, `math` and `other_math`, and both have a `sqrt` function. How would Python know which `sqrt` function we wanted? So we use `math.sqrt` to be explicit about which function we need.
 {: .tip}
 
-You might also have done powers (e.g. 2 cubed, or $2^3$) in the past, too:
+You might also have done powers (e.g. 2 cubed, or $$2^3$$) in the past, too:
 
 ```python
 math.pow(2, 3)
@@ -247,7 +250,7 @@ That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let
 > ### {% icon question %} Exercise 1: Basics
 > Please convert this function from an equation, into python code:
 >
-> $x = 2^8$
+> $$x = 2^8$$
 >
 > > ### {% icon solution %} Solution
 > > ```
@@ -283,7 +286,7 @@ That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let
 > ### {% icon question %} Exercise 3: Round-trip
 > Please convert this function from an equation, into python code. Remember, you can assign values to variables, if you want to split this into multiple steps.
 >
-> $x = \sqrt{9^2}$
+> $$x = \sqrt{9^2}$$
 >
 > > ### {% icon solution %} Solution
 > > ```
@@ -306,9 +309,9 @@ That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let
 > ### {% icon question %} Exercise 4: Pythagorean Theorem
 > The formula for a 90° triangle can be expressed as:
 >
-> $a^2 + b^2 = c^2$
+> $$a^2 + b^2 = c^2$$
 >
-> Or, expressed in terms of c, $c = \sqrt{a^2 + b^2}$
+> Or, expressed in terms of c, $$c = \sqrt{a^2 + b^2}$$
 >
 > Please convert this to python and find `c` when
 >
@@ -332,7 +335,7 @@ That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let
 > ### {% icon question %} Exercise 5: Quadratic Roots
 > Way back in algebra class, you might have been given a quadratic equation, something like:
 >
-> $y = 2*x^2 + x - 1$ and were told to find the roots of this function, using a complicated equation. So challenge time: reproduce this equation in Python:
+> $$y = 2*x^2 + x - 1$$ and were told to find the roots of this function, using a complicated equation. So challenge time: reproduce this equation in Python:
 >
 > Given the following variables:
 >
@@ -342,7 +345,7 @@ That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let
 >
 > Convert the following formulas to Python, and find the answers
 >
-> $\dfrac{-b + \sqrt{b^2 - 4ac}}{2a}$ and $\dfrac{-b - \sqrt{b^2 - 4ac}}{2a}$
+> $$\dfrac{-b + \sqrt{b^2 - 4ac}}{2a}$$ and $$\dfrac{-b - \sqrt{b^2 - 4ac}}{2a}$$
 >
 > Since we're checking your ability to write Python, not do math, it should give `-1` and `0.5` to let you check your work. If you got those values, you got it right!
 >
