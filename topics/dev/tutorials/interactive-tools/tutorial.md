@@ -224,7 +224,7 @@ In the following sections, we will study how it was built.
 
 
 Let's check out
-[the Dockerfile](https://github.com/Lain-inrae/geoc-gxit/blob/master/dockerfile)
+[the Dockerfile](https://github.com/Lain-inrae/geoc-gxit/blob/master/Dockerfile)
 that we'll use to containerize our application.
 
 This container recipe can be used to build a Docker image which can be pushed to a
@@ -490,9 +490,11 @@ our new Docker container as a Galaxy tool.
 >    >     </inputs>
 >    >
 >    >     <outputs>
->    >         ## Even if our IT doesn't export to Galaxy history,
->    >         ## adding an output ensures to keep track of the IT 
->    >         ## execution in the history
+>    >         <!--
+>    >             Even if our IT doesn't export to Galaxy history,
+>    >             adding an output ensures to keep track of the IT 
+>    >             execution in the history
+>    >         -->
 >    >
 >    >         <data name="file_output" format="txt"/>
 >    >     </outputs>
