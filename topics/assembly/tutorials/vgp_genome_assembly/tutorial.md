@@ -120,9 +120,12 @@ Now we can start with the pipeline. The first step is to get the datasets from Z
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
->   SRR13577846_1    https://zenodo.org/record/5550653/files/SRR13577846_1.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
->   SRR13577846_2    https://zenodo.org/record/5550653/files/SRR13577846_2.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
->   SRR13577846_3    https://zenodo.org/record/5550653/files/SRR13577846_3.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>   SRR13577846_1    https://zenodo.org/record/5886813/files/SRR13577846_1.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>   SRR13577846_2    https://zenodo.org/record/5886813/files/SRR13577846_2.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>   SRR13577846_3    https://zenodo.org/record/5886813/files/SRR13577846_3.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>   SRR13577846_4    https://zenodo.org/record/5886813/files/SRR13577846_4.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>   SRR13577846_5    https://zenodo.org/record/5886813/files/SRR13577846_5.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
+>   SRR13577846_6    https://zenodo.org/record/5886813/files/SRR13577846_6.30x.wgaps.fastq.gz?download=1  fastqsanger.gz    HiFi  HiFi_collection
 >       ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
