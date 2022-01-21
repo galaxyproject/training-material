@@ -50,14 +50,14 @@ The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is
 
 The figure 1 represents the VGP assembly pipeline. 
 
-![fig1:VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0")
+![Figure 1:VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0")
 
 The tutorial is structured in four main sections:
 
 - Genome profile analysis
-- HiFi phased assembly with Hifiasm
-- Hybrid scaffolding based using Bionano data
-- Hi-C scaffolding
+- HiFi phased assembly with hifiasm
+- Post-assembly processing
+- Hybrid scaffolding
 
 ## Run the VGP workflows automatically
 
@@ -68,7 +68,7 @@ The pipeline proposed in this training is an adaption of the [current workflow v
 > 1. Dowload the worflow files (whose extesion is *ga*) from this [GitHub repository](https://github.com/Delphine-L/iwc/tree/VGP/workflows/VGP-assembly-v2).
 > 2. Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.
 > 3. Click on the upload icon {% icon galaxy-upload %} at the top-right of the screen.
-> ![Import Workflow](../../images/vgp_assembly/import_workflow.png "Import workflow from a file or URL.")
+> ![Figure 2: Import Workflow](../../images/vgp_assembly/import_workflow.png "Import workflow from a file or URL into Galaxy.")
 > 4. Provide your workflow:
 >    - Option 1: Upload the workflow file in the box labelled “Archived Workflow File”
 >    - Option 2: Paste the URL of the workflow into the box labelled “Archived Workflow URL”
@@ -136,22 +136,21 @@ Now we can start with the pipeline. The first step is to get the datasets from Z
 {: .hands_on}
     
 
+### HiFi reads preprocessing with **Cutadapt**
+    
+Once we have retrieved the data, we need trimming residual adaptor sequences from the PacBio HiFi reads, in order remove the reads that could interfere with the assembly process. For this purpose, we are going to use Cutadapt, and open-source tool written mainly in Python language.
+
 > ### {% icon comment %} Background on PacBio HiFi reads
 >
 > PacBio HiFi reads rely on the Single Molecule Real-Time (SMRT) sequencing technology. SMRT is based on real-time imaging of fluorescently tagged nucleotides as they are added to a newly synthesized DNA strand. HiFi further combine multiple subreads from the same circular template to produce one highly accurate consensus sequence (fig. 3). This technology allows to generate long-read sequencing data with read lengths in the range of 10-25 kb and minimum read consensus accuracy  greater than 99% (Q20).
 > 
 > 
-> ![fig2:PacBio sequencing technolgoy](../../images/vgp_assembly/pacbio_hifi.png "PacBio HiFi sequencing. Adapted from Wenger et al., 2019")
+> ![Figure 3: PacBio sequencing technolgoy](../../images/vgp_assembly/pacbio_hifi.png "PacBio HiFi sequencing. Adapted from Wenger et al., 2019")
 >
 >
 {: .comment}
 
-
-### HiFi reads preprocessing with **Cutadapt**
-    
-Once we have retrieved the data, we need trimming residual adaptor sequences from the PacBio HiFi reads, in order remove the reads  that could interfere with the assembly process.
-
-> ### {% icon hands_on %} Hands-on: Primer removal
+> ### {% icon hands_on %} Hands-on: Primer removal with Cutadapt
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -181,10 +180,10 @@ Once we have retrieved the data, we need trimming residual adaptor sequences fro
     
 # Genome profile analysis
 
-Before starting a de novo genome assembly project, it useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally DNA flow citometry was considered the golden standard for estimating the genome size. Nowadays experimental methods have been replaced by computational approaches {% cite wang2020estimation %}. One of the widely used genome profilling methods is based on the analysis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality.
+Before starting a de novo genome assembly project, it useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally DNA flow citometry was considered the golden standard for estimating the genome size. Nowadays experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profilling methods is based on the analysis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality.
 
     
-> ### {% icon details %} K-mer size, sequencing coverage and genome size
+> ### {% icon comment %} K-mer size, sequencing coverage and genome size
 >
 >K-mers are unique substrings of length k contained within a DNA sequence. For example, the DNA sequence *TCGATCACA* can be decomposed into six unique k-mers that have five bases long: *TCGAT*, *CGATC*, *GATCA*, *ATCAC* and *TCACA*. A sequence of length L will have  L-k+1 k-mers. On the other hand, the number of possible k-mers can be calculated as  n<sup>k</sup>, where n is number of possible monomers and k is the k-mer size.
 >
@@ -203,14 +202,14 @@ Before starting a de novo genome assembly project, it useful to collect metrics 
 > Thus, the k-mer size is a key parameter, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. In the case of the human genome, k-mers of 31 bases in length lead to 96.96% of unique k-mers.
 >
 >Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.
-{: .details}
+{: .comment}
 
     
 In section we will use two basic tools to computationally estimate the genome features: Meryl and GenomeScope.
 
 ## Generation of k-mer spectra with **Meryl**
 
-Meryl will allow us to generate the *k*-mer profile by decomposing the sequencing data into *k*-lenght substrings, counting the ocurrence of each *k*-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version compises three main modules: one for generating *k*-mer databases, one for filtering and combining databases, and one for searching databases. *K*-mers are stored in lexicographical order in the database, similar to words in a dictionary ({% cite Rhie2020 %}).
+**Meryl** will allow us to generate the *k*-mer profile by decomposing the sequencing data into *k*-lenght substrings, counting the ocurrence of each *k*-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version compises three main modules: one for generating *k*-mer databases, one for filtering and combining databases, and one for searching databases. *K*-mers are stored in lexicographical order in the database, similar to words in a dictionary ({% cite Rhie2020 %}).
 
 > ### {% icon comment %} *k*-mer size estimation
 >
@@ -252,7 +251,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 ## Genome profiling with **GenomeScope2**
 
-The next step is to infer the genome properties from the *k*-mer histogram generated by Meryl, for which we willl use GenomeScope2. Genomescope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
+The next step is to infer the genome properties from the *k*-mer histogram generated by Meryl, for which we willl use **GenomeScope2**. Genomescope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
 
 > ### {% icon hands_on %} Hands-on: Estimate genome properties
 >
@@ -284,7 +283,7 @@ Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters:
 
 This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, there is an unique peak centered around 28x, the modal *k*-mer coverage. The absence of a secondary peak at half diploid coverage is suggestive of the haploid nature of this genome, but could generally result also from very low heterozygosity. Low frequency *k*-mers are the result of sequencing errors.
 
-Before proceeding to the next section, we need to carry out some operations on the output generated by GenomeScope2. The goal is to extract some parameters which at a later stage will be used by **purge_dups** ({% cite Guan2019 %}). The first relevant parameter is the `estimated genome size`.
+Before proceeding to the next section, we need to carry out some operations on the output generated by GenomeScope2. The goal is to extract some parameters which at a later stage will be used by **purge_dups**. The first relevant parameter is the `estimated genome size`.
 
 > ### {% icon hands_on %} Hands-on: Get estimated genome size
 >
@@ -295,7 +294,7 @@ Before proceeding to the next section, we need to carry out some operations on t
 >    - *"Find and Replace text in"*: `entire line`
 >
 > 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: output file of **Replace** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: output file of **Replace** {% icon tool %}
 >    - *"Find pattern"*: `,`
 >    - *"Replace all occurences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
