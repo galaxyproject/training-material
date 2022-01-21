@@ -318,7 +318,7 @@ Before proceeding to the next section, we need to carry out some operations on t
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > The estimated genome size is 12664060 bp.
+> > > The estimated genome size is 12792715 bp.
 > > >
 > > {: .solution}
 > >
@@ -474,7 +474,7 @@ The VGP assembly pipeline contains several built-in QC steps, including QUAST, B
 >        - {% icon param-collection %} *"FASTQ file"*: `HiFi collection (trim)`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060` (previously estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12792715` (previously estimated)
 >        - *"Type of organism"*: `Eukaryote: use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding (--eukaryote)`
 >    - *"Is genome large (>100Mpb)?"*: `No`
 >
@@ -812,7 +812,7 @@ Once we have run purge_dups, we can evaluate assembly again, and compare the res
 >        - {% icon param-collection %} *"FASTQ file"*: `HiFi reads collapsed`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060` (previously estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12792715` (previously estimated)
 >        - *"Type of organism"*: `Eukaryote: use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding (--eukaryote)`
 >    - *"Is genome large (>100Mpb)?"*: `No`
 >
@@ -927,7 +927,7 @@ Now, let's evaluate the assembly:
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `Primary assembly bionano`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060` (previously estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12792715` (previously estimated)
 >        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - In *"Genes"*:
 >        - *"Tool for gene prediction"*: `Don't predict genes`
@@ -1119,7 +1119,7 @@ In order to evaluate the results, we will use QUAST and Pretext.
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `SALSA2 scaffold FASTA`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12664060` (previouly estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `12792715` (previouly estimated)
 >        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - *"Is genome large (> 100 Mbp)?"*: `No`
 >
