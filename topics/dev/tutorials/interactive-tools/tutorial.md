@@ -152,11 +152,7 @@ cycle.
 
 The application that we will wrap in this tutorial is a simple web tool which
 allows the user to upload `csv` and `tsv` files, manipulate them and download
-<<<<<<< Updated upstream
-them back into Galaxy. Our application uses a R Shiny server.
-=======
 them. Our application is based on an R Shiny App hosted with Shiny server.
->>>>>>> Stashed changes
 
 Note that there is no link between this interactive tool and the Galaxy history.
 More complex applications might be able to read and write outputs to the user's
@@ -494,15 +490,12 @@ our new Docker container as a Galaxy tool.
 >    >     </inputs>
 >    >
 >    >     <outputs>
-<<<<<<< Updated upstream
-=======
 >    >         <!--
 >    >             Even if our IT doesn't export to Galaxy history,
 >    >             adding an output ensures to keep track of the IT
 >    >             execution in the history
 >    >         -->
 >    >
->>>>>>> Stashed changes
 >    >         <data name="file_output" format="txt"/>
 >    >     </outputs>
 >    >
@@ -787,34 +780,7 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 
 ---
 
-<<<<<<< Updated upstream
-# Additional components - TODO
-Some extra complexity that comes up GxIT development - not necessary for all GxITs
-
-## Galaxy history interaction
-We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user's Galaxy history? For example, if the user creates a file within the application. That's where the environment variables created in the tool XML become useful.
-
-> ### {% icon tip %} Access histories in R
-> From the [R-Studio]() GxIT we can see that there is an R library that allows us to communicate with Galaxy histories:
->
-> "The convenience functions `gx_put()` and `gx_get()` are available to you to interact with your current Galaxy history. You can save your workspace with `gx_save()`"
->
->
-{: .tip}
-
-
-## Available environment variables
-_GALAXY_JOB_TMP_DIR
-_GALAXY_JOB_HOME_DIR
-GALAXY_SLOTS
-GALAXY_MEMORY_MB_PER_SLOT
-
-
-## Logging
-Not sure how to log effectively from the IT container to the Galaxy server?
-=======
 # Additional components
->>>>>>> Stashed changes
 
 The GxIT that we wrapped in this tutorial was a simple example, and should now understand what is required to create an interactive tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
 
