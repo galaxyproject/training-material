@@ -260,9 +260,10 @@ For now we need to construct our Expression set objects that will be consumed by
 > The *ExpressionSet* class is designed to combine several different sources of information into a single convenient structure. An *ExpressionSet* can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
 >
 > The data in an *ExpressionSet* is complicated, consisting of:
-> - expression data from microarray experiments (*exprs* assayData; assayData is used to hint at the methods used to access different data components, as we will see below);
-> - ‘meta-data’ describing samples in the experiment (phenoData, *PData*) which includes information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData);
-> - annotations and (meta)data about the features on the chip or technology used for the experiment (featureData, annotation, *fData*);
+> - expression data (*exprs* assayData; assayData is used to hint at the methods used to access different data components, as we will see below);
+> - metadata describing samples in the experiment (phenoData, *PData*)
+> - information related to the protocol used for processing each sample and usually extracted from manufacturer files (protocolData);
+> - annotations and metadatadata about the features on the chip or technology used for the experiment (featureData, annotation, *fData*);
 > - and a flexible structure to describe the experiment (experimentData).
 >
 > The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
