@@ -42,7 +42,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 Bulk RNA-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain more precise estimates of the proportions of cell types within the bulk sample.
 
-To do this, we can use single cell expression data (scRNA-seq) as a reference for estimating the cell type proportions within the bulk data.
+To do this, we can use single cell RNA-seq data as a reference for estimating the cell type proportions within the bulk data.
 
 In this tutorial, we will use bulk and single-cell RNA-seq assays, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk RNA-seq.
 
@@ -57,15 +57,50 @@ In this tutorial, we will use bulk and single-cell RNA-seq assays, including mat
 
 ## Bulk RNA-seq Cell Type Deconvolution
 
-The heterogeneity that exists in the cellular composition of bulk RNA-seq can add bias to the results from differential expression analysis. In order to circumvent this limitation, RNA-seq deconvolution aims to infer cell type abundances by modelling the gene expressions levels as weighted sums of cell type specific expression profiles.
+The heterogeneity that exists in the cellular composition of bulk RNA-seq can add bias to the results from differential expression analysis. In order to circumvent this limitation, RNA-seq deconvolution aims to infer cell type abundances by modelling the gene expressions levels as 'weighted sums' of cell type specific expression profiles.
+
+> ### {% icon details %} More details on 'Sums'
+>
+> So you fancy some maths do you? Good! This is important, as you'll see variations of that phrase if you ever look at any papers in the field!
+> If we think about the total expression of a given gene you might get from bulk RNA-seq, you could also think about it as the sum of the expression of each cell, for example,
+>
+> *Total = cell<sub>a</sub> expression + cell<sub>b</sub> expression ... (and so forth)*
+>
+> This is a *'sum'*, because we're adding up all the cells. If we now think about how we expect similar expression from similar cell types, we could change this to the following:
+>
+> *Total = cell_type<sub>a</sub> expression + cell_type<sub>b</sub> expression*  ... (and so forth)
+>
+> **BUT WAIT!** That's not strictly true, because the cell types are not all in equal proportion (if only!). So we have to take into account another variable, the proportion a given cell type takes up in a sample. So we now have:
+>
+> *Total = Proportion<sub>a</sub> x cell_type<sub>a</sub> expression + Proportion<sub>b</sub> x cell_type<sub>b</sub> expression*
+>
+> So now, we are *'weighting'* the sums of expression based off of the cell proportion. And if you're a mathematician, you might instead put this as
+>
+> **T = C x P**
+> or some fancier formulas...(read more [in-depth here](https://academic.oup.com/bioinformatics/article/34/11/1969/4813737) if you like!)
+>
+> The point is, if we have an idea of what the average expression should be for each gene (what we can get from single cell RNA-seq data, *C*), and we have the total expression (from the bulk RNA-seq, *C*), then we can infer the cell proportions (*P*).
+>
+{: .details}
 
 Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) tool suite {% cite wang2019bulk %} to estimate the proportion of individual cell types in our bulk RNA-seq datasets.
 
 ### MusiC
 
-MuSiC utilizes cell-type specific gene expression from single-cell RNA sequencing (RNA-seq) data to characterize cell type compositions from bulk RNA-seq data in complex tissues. By appropriate weighting of genes showing cross-subject and cross-cell consistency, MuSiC enables the transfer of cell type-specific gene expression information from one dataset to another.
+MuSiC uses cell-type specific gene expression from single-cell RNA seq data to characterize cell type compositions (proportions) from bulk RNA-seq data in complex tissues. By appropriate weighting of genes showing cross-subject (sample to sample) and cross-cell (cells of the same cell type within a sample) consistency, MuSiC enables the transfer of cell type-specific gene expression information from one dataset to another.
 
-Solid tissues often contain closely related cell types which leads to collinearity. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, MuSic first groups similar cell types into the same cluster and estimate cluster proportions, then recursively repeats this procedure within each cluster.
+> ### {% icon question %} Question
+>
+> 1. What is a weighted sum? *Hint*: What kinds of genes would be best for distinguishing cell types, and what kinds of genes would make it difficult?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. So you know what the *Sum* is from above - the total expression of a given gene in a bulk RNA-seq sample depends on the proportion of cell types and the average expression level of each of those cell types (**T = C x P**). However, single cell RNA-seq data is highly variable. Cell-type specific expression if genes with lower variation from sample to sample (i.e. person to person or organism to organism) and cell to cell (i.e. within a sample) will be the most useful for distinguishing cells, while genes that vary heavily (i.e. high in cell type<sub>a</sub> in one sample, but low in cell type<sub>a</sub> in another sample, will be the least useful in accurately distinguishing cells. Therefore, to use the mean expression level in a cell_type, MusiC weights the sums, favouring more consistently expressed genes in cell types.
+> >
+> {: .solution}
+{: .question}
+
+Solid tissues often contain closely related cell types that are difficult to distinguish from one another, a phenomenon known as *"collinearity"*. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, MuSic first groups similar cell types into the same cluster and estimate cluster proportions, then recursively repeats this procedure within each cluster.
 
 ![muse1](../../images/bulk-music/figure_method.jpg "Overview of MuSiC Suite")
 
