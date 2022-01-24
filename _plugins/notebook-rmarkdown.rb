@@ -23,8 +23,11 @@ module Jekyll
         last_modified = begin page.last_modified.to_s rescue Time.new.to_s end
         notebook = GTNNotebooks.render_rmarkdown(page.data, page.content, page.url, last_modified, fn)
 
+        topic_id = dir.split('/')[-3]
+        tutorial_id = dir.split('/')[-1]
+
         # Write it out!
-        page2 = PageWithoutAFile.new(site, '', dir, 'tutorial.Rmd')
+        page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}.Rmd")
         page2.content = notebook
         page2.data['layout'] = nil
         page2.data['citation_target'] = 'R'
