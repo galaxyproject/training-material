@@ -255,7 +255,7 @@ For now we need to construct our Expression set objects that will be consumed by
 > ![expression_set](../../images/bulk-music/expressionset.png "Image from Stefano Monti")
 >
 >
-> *Expression Set* objects are a datatype class to contain and describe high-throughput expression level assays. *ExpressionSet* class is derived from *eSet*, and requires a matrix named *exprs*.
+> *Expression Set* objects are a container for high-throughput assays and experimental metadata. The *ExpressionSet* class is derived from *eSet*, and requires a matrix named *exprs*.
 >
 > The *ExpressionSet* class is designed to combine several different sources of information into a single convenient structure. An *ExpressionSet* can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
 >
