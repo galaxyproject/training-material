@@ -174,6 +174,7 @@ footer: no
             </div>
             <div class="col-sm-10">
                  {% if page.notebook %}
+                     {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                     {% if page.notebook.language ==  "r" %}
                         <blockquote class="comment">
                             <h3>{% icon comment aria=false %} {{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</h3>
@@ -203,7 +204,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                             </ol>
                             <p><b>Alternative Formats</b></p>
                             <ol>
-                                <li>This tutorial is also available as a RStudio Notebook: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb">tutorial.ipynb</a></li>
+                                <li>This tutorial is also available as a <a href="{{ ipynbpath }}">Jupyter Notebook</a></li>
                             </ol>
                         </blockquote>
 
@@ -224,13 +225,13 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                                 <ol>
                                     <li><a href="{% link faqs/galaxy/interactive_tools_jupyter_launch.md %}">Instructions to Launch JupyterLab</a></li>
                                     <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
-                                    <li>Run <code>wget {{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb</code></li>
+                                    <li>Run <code>wget {{ ipynbpath }}</code></li>
                                     <li>Select the notebook that appears in the list of files on the left.</li>
                                 </ol>
                             </p>
                             <p><b>Downloading the notebook</b>
                                 <ol>
-                                    <li>Right click this link: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb">tutorial.ipynb</a></li>
+                                    <li>Right click this link: <a href="{{ ipynbpath }}">Jupyter Notebook</a></li>
                                     <li>Save Link As..</li>
                                 </ol>
                             </p>

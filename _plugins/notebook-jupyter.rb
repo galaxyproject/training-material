@@ -22,8 +22,11 @@ module Jekyll
         last_modified = begin page.last_modified.to_s rescue Time.new.to_s end
         notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified, notebook_language, site)
 
+        topic_id = dir.split('/')[-3]
+        tutorial_id = dir.split('/')[-1]
+
         # Write it out!
-        page2 = PageWithoutAFile.new(site, '', dir, 'tutorial.md.ipynb')
+        page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}.ipynb")
         page2.content = notebook
         page2.data['layout'] = nil
         page2.data['citation_target'] = 'jupyter'
