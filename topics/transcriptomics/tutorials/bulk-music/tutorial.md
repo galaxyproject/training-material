@@ -15,7 +15,7 @@ questions:
 objectives:
 - Construct Bulk and scRNA Expression Set Objects
 - Inspect these objects for various properties
-- Measure the abundance of certain cell type cluster markers compared to another
+- Measure the abundance of certain cell type cluster markers compared to others
 time_estimation: '2H'
 key_points:
 - Deconvolution tools show individual cell type proportions in bulk RNA-seq data
@@ -40,11 +40,11 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 <!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
-Bulk RNA-seq expression data obtained from RNA-sequencing contains a mixture of the expression of several types of cells. We wish to deconvolve this data to obtain more precise estimates of the proportions of this type of data.
+Bulk RNA-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain more precise estimates of the proportions of cell types within the bulk sample.
 
-By combining bulk data with multi-subject single cell expression data obtained from single-cell RNA-sequencing, we can use this as a reference for estimating the cell type proportions in the bulk data.
+To do this, we can use single cell expression data (scRNA-seq) as a reference for estimating the cell type proportions within the bulk data.
 
-In this tutorial we will be using sample bulk and single-cell RNA-seq assays/matrices of similar tissues from different sources to illustrate how one can infer cell type abundances in the RNA-seq.
+In this tutorial, we will use bulk and single-cell RNA-seq assays, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk RNA-seq.
 
 > ### Agenda
 >
@@ -57,7 +57,7 @@ In this tutorial we will be using sample bulk and single-cell RNA-seq assays/mat
 
 ## Bulk RNA-seq Cell Type Deconvolution
 
-The heterogeneity that exists in the cellular composition of bulk RNA-seq can add bias to the results from differential expression analysis. In order to circumvent this limitation, RNA-seq deconvolution aims to infer cell type abundances by modelling the gene expressions levels as weighted sums of cell type specific expression profiles. 
+The heterogeneity that exists in the cellular composition of bulk RNA-seq can add bias to the results from differential expression analysis. In order to circumvent this limitation, RNA-seq deconvolution aims to infer cell type abundances by modelling the gene expressions levels as weighted sums of cell type specific expression profiles.
 
 Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) tool suite {% cite wang2019bulk %} to estimate the proportion of individual cell types in our bulk RNA-seq datasets.
 
@@ -99,7 +99,7 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 
+>
 > 4. Check that the datatype
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
@@ -115,17 +115,17 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
   We are told before we download the data, that:
   * The bulk human pancreas dataset is 89 samples across 56 638 genes
   * The single cell human pancreas datasets is 2209 cells across 24 453 genes.
-  
+
   But what does this actually look like in the data?
-  
+
 > ### {% icon comment %} Comment: Inspecting Datasets
-> 
+>
 > Note that at any time you can visually inspect the input datasets yourself by either:
 > * Expanding the dataset in the history panel clicking on the name of the dataset
 > * Or clicking on {% icon galaxy-eye %} icon to load them into the main window.
 {: .comment}
 
-Words 
+Words
 
 > ### {% icon hands_on %} Hands-on: Exploring the Datasets
 >
@@ -206,31 +206,31 @@ Words
 >    > >
 >    > {: .solution}
 >    {: .question}
-> 
+>
 {: .hands_on}
 
    The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions with HbA1c level in this deconvolution analysis.
-   
+
 ## Building the Expression Set objects
 
-For now we need to construct our Expression set objects that will be consumed by MuSiC. 
+For now we need to construct our Expression set objects that will be consumed by MuSiC.
 
 > ### {% icon details %} Details: Expression Set
 >
-> ![expression_set](../../images/bulk-music/expressionset.png "Image from Stefano Monti") 
+> ![expression_set](../../images/bulk-music/expressionset.png "Image from Stefano Monti")
 >
 >
 > Expression Set objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. ExpressionSet class is derived from eSet, and requires a matrix named exprs as assayData member.
-> 
+>
 > The ExpressionSet class is designed to combine several different sources of information into a single convenient structure. An ExpressionSet can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
-> 
+>
 > The data in an ExpressionSet is complicated, consisting of expression data from microarray experiments (assayData; assayData is used to hint at the methods used to access different data components, as we will see below), ‘meta-data’ describing samples in the experiment (phenoData), annotations and meta-data about the features on the chip or technology used for the experiment (featureData, annotation), information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData), and a flexible structure to describe the experiment (experimentData). The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
 >
 > For more information please [read the specification](http://www.bioconductor.org/packages/release/bioc/vignettes/Biobase/inst/doc/ExpressionSetIntroduction.pdf) as well as the [image source](https://montilab.github.io/BS831/articles/docs/ExpressionSet.html).
 >
 {: .details}
 
-Here we shall build two ExpressionSet objects corresponding to the bulk and single-cell datatypes. 
+Here we shall build two ExpressionSet objects corresponding to the bulk and single-cell datatypes.
 
 ### **Construct Expression Set Object**
 
@@ -259,7 +259,7 @@ We will now inspect these objects we juset created to see what information we ca
 >
 > 1. Obtain General Info about the data set
 >    - {% icon galaxy-eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
-> 
+>
 > 1. Obtain Feature Information about the data set
 >    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy1) %} with the following parameters:
 >       - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
@@ -303,7 +303,7 @@ The deconvolution of 89 subjects from {%cite fadista2014global %} are performed 
 ### Cell Type estimation with **MuSiC**
 
   In this section we will use one of the factors from the bulk RNA-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the `hba1c` factor described in phenotype data.
-    
+
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -341,13 +341,13 @@ In the above image you can see that (a) the estimated proportion of cells for ea
 
 ![ctprop](../../images/bulk-music/ctprop_plot.png "(top) cell type proportions by disease factor, and (bottom) hba1c factor expression against beta cell type proportion")
 
-As stated previously, it is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. In the above image we can see in the (a) section that we have the same information as previous, but we also distinguish between cells that show a high affinity to T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with Hba1c expression, where we see that there is a significant negative correlation between HbA1c levels and beta cell proportions, after adjusted Age, BMI and Gender. 
+As stated previously, it is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. In the above image we can see in the (a) section that we have the same information as previous, but we also distinguish between cells that show a high affinity to T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with Hba1c expression, where we see that there is a significant negative correlation between HbA1c levels and beta cell proportions, after adjusted Age, BMI and Gender.
 
 
 > ### {%icon comment %} Comment
 >
 >  We can extract the coefficients of this fitting by looking at the `Log of Music Fitting Data` in the `Summaries and Logs` output collection:
-> 
+>
 >  ```
 >  Coefficients:
 >               Estimate Std. Error t value Pr(>|t|)    
@@ -361,7 +361,7 @@ As stated previously, it is well known that the beta cell proportions is related
 >
 {: .comment}
 
-### Proportions of Cell Type to each Bulk RNA sample 
+### Proportions of Cell Type to each Bulk RNA sample
 
 One question we might wish to ask is that what affinity did each of the 6 single cell types have to each of the 89 subjects in the bulk data?
 
@@ -389,15 +389,15 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 # Estimation of cell type proportions with pre-grouping of cell types
 
   In the previous section we estimated cell types under the assumption that that the gene expression between cell types was largely independent.
-  
-  However, solid tissues often contain closely related cell types, and correlation of gene expression between these cell types leads to collinearity, which makes it difficult to resolve their relative proportions in bulk data. 
-  
-  To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. 
-  
+
+  However, solid tissues often contain closely related cell types, and correlation of gene expression between these cell types leads to collinearity, which makes it difficult to resolve their relative proportions in bulk data.
+
+  To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types.
+
   Briefly, similar cell types are grouped into the same cluster and their cluster proportions are estimated, then this procedure is recursively repeated within each cluster. At each recursion stage, only genes that have low within-cluster variance are used, as they are used as consistent genes across cell types. This is critical as the mean expression estimates of genes with high variance are affected by the pervasive bias in cell capture of scRNA-seq experiments, and thus cannot serve as reliable reference.
 
   In this section we will use mouse kidney single-cell RNA-seq data from {% cite park2018single %} described by 16 273 genes over a trimmed subset of 10 000 cells, giving 16 unique cell type (2 of which are novel) across 7 subjects. The bulk RNA-seq dataset is from {% cite beckerman2017transgenic %} and contains mouse kidney tissue described by 19 033 genes over 10 samples.
-  
+
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -424,7 +424,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 
+>
 > 4. Check that the datatype
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
@@ -438,7 +438,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 > ### {% icon details %} Exploring the Datasets
 >
 > As before, you may choose to explore the bulk and scrna datasets and try to determine their factors from the phenotypes as well as any overlapping fields that will be used to guide the deconvolution.
-> 
+>
 {: .details}
 
 
@@ -469,7 +469,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The immune cells are clustered together and the kidney specific cells are clustered together. Notice that DCT and PT are within the same high-level grouping. 
+> > 1. The immune cells are clustered together and the kidney specific cells are clustered together. Notice that DCT and PT are within the same high-level grouping.
 > > 2. The cut-off of 650. Here we cut 13 cell types into 4 groups:
 > >
 > >    ```
@@ -485,14 +485,14 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 
 ### Heatmap of Cell Type Similarities using **MuSiC**
-   
+
 We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C3 groups.
-   
+
 > ### {% icon hands_on %} Hands-on: Upload marker genes and generate heatmap
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
-> 
+>
 >    ```
 >    https://zenodo.org/record/5719228/files/epith.markers
 >    https://zenodo.org/record/5719228/files/immune.markers
@@ -549,7 +549,7 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 > ### {% icon question %} Questions
 >
 > Most of the expression in the above plot appears to be derived from one cell type.
-> 
+>
 > 1. Which cell type dominates the plot?
 > 2. What does this tell you about the bulk RNA?
 >
