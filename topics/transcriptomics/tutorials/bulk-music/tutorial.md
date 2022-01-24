@@ -236,7 +236,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 
 > ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
 >
-> 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `GSE50244bulkeset.expression.tabular` (Input dataset)
 >    - {% icon param-file %} *"Phenotype Data"*: `GSE50244bulkeset.phenotype.tabular` (Input dataset)
 >
@@ -245,7 +245,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 >    > An ExpressionSet object has many data slots, the principle of which are the experiment data, the phenotype data, as well more "meta" data pertaining to experiment information and additional annotations.
 >    {: .comment}
 >
-> 2. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy0) %} with the following parameters:
+> 2. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `EMTABesethealthy.expression.tabular` (Input dataset)
 >    - {% icon param-file %} *"Phenotype Data"*: `EMTABesethealthy.phenotype.tabular` (Input dataset)
 >
@@ -261,7 +261,7 @@ We will now inspect these objects we juset created to see what information we ca
 >    - {% icon galaxy-eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
 > 
 > 1. Obtain Feature Information about the data set
->    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy0) %} with the following parameters:
+>    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy1) %} with the following parameters:
 >       - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >       - *"Inspect"*: `Feature Data Table`
 >         > ### {% icon comment %} Comment: Features or Genes?
@@ -272,7 +272,7 @@ We will now inspect these objects we juset created to see what information we ca
 >
 >
 > 1. Obtain Dimensional Information about the data set
->    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy0) %} with the following parameters:
+>    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy1) %} with the following parameters:
 >      - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >      - *"Inspect"*: `Dimension`
 >
@@ -307,7 +307,7 @@ The deconvolution of 89 subjects from {%cite fadista2014global %} are performed 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy0) %} with the following parameters:
+> 1. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Estimate Proportions`
@@ -448,7 +448,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy0) %} with the following parameters:
+> 1. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Compute Dendrogram`
@@ -501,7 +501,7 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 2. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy0) %} with the following parameters:
+> 2. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy1) %} with the following parameters:
 >    - **Note**
 >      > ### {% icon warning %} Shortcut!
 >      >
