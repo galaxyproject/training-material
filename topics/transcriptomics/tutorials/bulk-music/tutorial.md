@@ -106,7 +106,7 @@ Solid tissues often contain closely related cell types that are difficult to dis
 
 # Cell Proportion Estimation
 
-Here we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancreas dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subject and 4 with Type-II diabetes (T2D). If the deconvolution is good, and that datasets are compatible with sufficient enough overlap, we should be able to reprise the same cell types from the bulk data.
+Here we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancreas dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subjects and 4 with Type-II diabetes (T2D). If the deconvolution is good, and the datasets are compatible with sufficient enough overlap, we should be able to identify the same cell types from the bulk data.
 
 ## Get data
 
