@@ -244,7 +244,7 @@ Words
 >
 {: .hands_on}
 
-   The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important test for T2D is HbA1c (hemoglobin A1c) test. When HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions with HbA1c level in this deconvolution analysis.
+   The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions are related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important tests for T2D is the HbA1c (hemoglobin A1c) test. When the HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions relationship with HbA1c level in this deconvolution analysis.
 
 ## Building the Expression Set objects
 
@@ -255,11 +255,17 @@ For now we need to construct our Expression set objects that will be consumed by
 > ![expression_set](../../images/bulk-music/expressionset.png "Image from Stefano Monti")
 >
 >
-> Expression Set objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. ExpressionSet class is derived from eSet, and requires a matrix named exprs as assayData member.
+> *Expression Set* objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. *ExpressionSet* class is derived from *eSet*, and requires a matrix named *exprs*.
 >
-> The ExpressionSet class is designed to combine several different sources of information into a single convenient structure. An ExpressionSet can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
+> The *ExpressionSet* class is designed to combine several different sources of information into a single convenient structure. An *ExpressionSet* can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
 >
-> The data in an ExpressionSet is complicated, consisting of expression data from microarray experiments (assayData; assayData is used to hint at the methods used to access different data components, as we will see below), ‘meta-data’ describing samples in the experiment (phenoData), annotations and meta-data about the features on the chip or technology used for the experiment (featureData, annotation), information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData), and a flexible structure to describe the experiment (experimentData). The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
+> The data in an *ExpressionSet* is complicated, consisting of:
+> - expression data from microarray experiments (*exprs* assayData; assayData is used to hint at the methods used to access different data components, as we will see below);
+> - ‘meta-data’ describing samples in the experiment (phenoData, *PData*) which includes information related to the protocol used for processing each sample (and usually extracted from manufacturer files, protocolData);
+> - annotations and (meta)data about the features on the chip or technology used for the experiment (featureData, annotation, *fData*);
+> - and a flexible structure to describe the experiment (experimentData).
+>
+> The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
 >
 > For more information please [read the specification](http://www.bioconductor.org/packages/release/bioc/vignettes/Biobase/inst/doc/ExpressionSetIntroduction.pdf) as well as the [image source](https://montilab.github.io/BS831/articles/docs/ExpressionSet.html).
 >
@@ -277,7 +283,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > An ExpressionSet object has many data slots, the principle of which are the experiment data, the phenotype data, as well more "meta" data pertaining to experiment information and additional annotations.
+>    > An ExpressionSet object has many data slots, the principle of which are the experiment data (*exprs*), the phenotype data (*pData*), as well metadata pertaining to experiment information and additional annotations (*fData*).
 >    {: .comment}
 >
 > 2. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy1) %} with the following parameters:
@@ -288,7 +294,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 
 #### **Inspect Expression Set Object**
 
-We will now inspect these objects we juset created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
+We will now inspect these objects we just created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
 
 > ### {% icon hands_on %} Hands-on: Inspect and Describe the scRNA ExpressionSet Object
 >
