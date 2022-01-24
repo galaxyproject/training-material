@@ -255,15 +255,15 @@ For now we need to construct our Expression set objects that will be consumed by
 > ![expression_set](../../images/bulk-music/expressionset.png "Image from Stefano Monti")
 >
 >
-> *Expression Set* objects are a datatype class to contain and describe high-throughput expression level assays. They are a container for high-throughput assays and experimental metadata. *ExpressionSet* class is derived from *eSet*, and requires a matrix named *exprs*.
+> *Expression Set* objects are a datatype class to contain and describe high-throughput expression level assays. *ExpressionSet* class is derived from *eSet*, and requires a matrix named *exprs*.
 >
 > The *ExpressionSet* class is designed to combine several different sources of information into a single convenient structure. An *ExpressionSet* can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.
 >
 > The data in an *ExpressionSet* is complicated, consisting of:
-> - expression data (*exprs* assayData; assayData is used to hint at the methods used to access different data components, as we will see below);
-> - metadata describing samples in the experiment (phenoData, *PData*)
+> - expression data (*exprs*, or assayData; assayData is used to hint at the methods used to access different data components, as we will see below);
+> - metadata describing samples in the experiment (phenoData, *pData*)
 > - information related to the protocol used for processing each sample and usually extracted from manufacturer files (protocolData);
-> - annotations and metadatadata about the features on the chip or technology used for the experiment (featureData, annotation, *fData*);
+> - annotations and metadata about the features on the chip or technology used for the experiment (featureData, annotation, *fData*);
 > - and a flexible structure to describe the experiment (experimentData).
 >
 > The ExpressionSet class coordinates all of this data, so that you do not usually have to worry about the details.
@@ -301,9 +301,11 @@ We will now inspect these objects we just created to see what information we can
 >
 > 1. Obtain General Info about the data set
 >    - {% icon galaxy-eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
->
 > 1. Obtain Feature Information about the data set
 >    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy1) %} with the following parameters:
+> > ### {% icon warning %} Danger: This tool has needs!
+> > You will need to click the dataset from your history and drag it into the input of this tool. Some browsers don't allow this - we recommend GoogleChrome!
+> {: .warning}  
 >       - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >       - *"Inspect"*: `Feature Data Table`
 >         > ### {% icon comment %} Comment: Features or Genes?
@@ -311,9 +313,9 @@ We will now inspect these objects we just created to see what information we can
 >         > "Features" are synonymous with "Genes" in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.
 >         >
 >         {: .comment}
+> By inspecting the `Feature Data Table`, you should see a list of gene names.
 >
->
-> 1. Obtain Dimensional Information about the data set
+> 1. Obtain the dimensions of the data set
 >    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy1) %} with the following parameters:
 >      - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >      - *"Inspect"*: `Dimension`
@@ -322,7 +324,7 @@ We will now inspect these objects we just created to see what information we can
 
 > ### {% icon question %} Questions
 >
-> 1. How many samples are in dataset, and how many genes?
+> 1. How many samples are in the dataset, and how many genes?
 > 2. Does this agree with the original input tabular expression data set?
 >
 > > ### {% icon solution %} Solution
@@ -338,9 +340,9 @@ We will now inspect these objects we just created to see what information we can
 ## Estimating Cell Type proportions
 
 <!-- Maybe this goes in a comment? -->
-Instead of selecting marker genes, MuSiC gives weights to each gene. The weighting scheme is based on cross-subject variation, by up-weighing genes with low variation and down-weighing genes with high variation. Here we demonstrate this step-by-step with the human pancreas datasets.
+Instead of selecting marker genes, MuSiC gives weights to each gene. The weighting scheme is based on cross-subject variation, by up-weighing genes with low variation and down-weighing genes with high variation in a cell type. Here we demonstrate this step-by-step with the human pancreas datasets.
 
-The deconvolution of 89 subjects from {%cite fadista2014global %} are performed with the bulk data GSE50244 expression set and single cell reference EMTAB. The estimation was constrained on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.
+The deconvolution of 89 subjects from {%cite fadista2014global %} is performed with the bulk data GSE50244 expression set and single cell reference EMTAB. The estimation was constrained on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.
 
 ### Cell Type estimation with **MuSiC**
 
@@ -350,6 +352,7 @@ The deconvolution of 89 subjects from {%cite fadista2014global %} are performed 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy1) %} with the following parameters:
+>    - *MuSiC sometimes does not show up from the tool search box. You may need to look for it under the **Single Cell** heading
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Estimate Proportions`
@@ -371,19 +374,15 @@ The deconvolution of 89 subjects from {%cite fadista2014global %} are performed 
 >
 {: .hands_on}
 
-The estimated proportions are normalized to sum to 1 across included cell types. Here we use GSE50244.bulk.eset as the bulk.eset input and EMTAB.eset as sc.eset input. The clusters is specified as cellType while samples is sampleID. As stated before, we only included 6 major cell types as select.ct.
-
-MuSic by compares itself against a previous method of deconvolution known as Non-negative Least-Squares (NNLS), which MuSic supercededs via its Weighted Non-negative Least-Squares (W-NNLS) methodology.
-
+The estimated proportions are normalized such that the proportions of cell types within each sample sum to 1. MuSic compares itself against a previous method of deconvolution known as Non-negative Least-Squares (NNLS), which MuSic supercededs via its Weighted Non-negative Least-Squares (W-NNLS) methodology.
 
 ![jitter_plot](../../images/bulk-music/jitter_plot.png "Jitter plot of Estimated Proportions")
 
-In the above image you can see that (a) the estimated proportion of cells for each of the 6 declared types, as calculated by MuSiC and the NNLS methods respectively. In the (b) section, this is better represented as a box plot to show you where the distribution of cell type proportions lie.
+In the above image you can see (a) the estimated proportion of cells for each of the 6 declared types, as calculated by MuSiC and the NNLS methods, respectively. In the (b) section, this information is better represented as a box plot to show you the distribution of cell type proportions.
 
+![ctprop](../../images/bulk-music/ctprop_plot.png "(top) Cell type proportions by disease factor, and (bottom) hba1c factor expression against beta cell type proportion")
 
-![ctprop](../../images/bulk-music/ctprop_plot.png "(top) cell type proportions by disease factor, and (bottom) hba1c factor expression against beta cell type proportion")
-
-As stated previously, it is well known that the beta cell proportions is related to T2D disease status. In the progress of T2D, the number of beta cells decreases. In the above image we can see in the (a) section that we have the same information as previous, but we also distinguish between cells that show a high affinity to T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with Hba1c expression, where we see that there is a significant negative correlation between HbA1c levels and beta cell proportions, after adjusted Age, BMI and Gender.
+As stated previously, it is well known that the beta cell proportions are related to T2D disease status. As T2D progresses, the number of beta cells decreases. In the above image we can see in (a) that we have the same information as previous, but we also distinguish between cells that show a high affinity to T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with Hba1c expression, where we see that there is a significant negative correlation between HbA1c levels, beta cell proportions, and gender (after adjusted Age and BMI). This is unsurprising, as gender is related to Hba1c levels.
 
 
 > ### {%icon comment %} Comment
@@ -483,6 +482,26 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 >
 {: .details}
 
+You will need to again create ExpressionSet objects, as before.
+
+### **Construct Expression Set Object**
+
+> ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
+>
+> 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Assay Data"*: `Mousebulkeset.expression.tabular` (Input dataset)
+>    - {% icon param-file %} *"Phenotype Data"*: `Mousebulkeset.phenotype.tabular` (Input dataset)
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > An ExpressionSet object has many data slots, the principle of which are the experiment data (*exprs*), the phenotype data (*pData*), as well metadata pertaining to experiment information and additional annotations (*fData*).
+>    {: .comment}
+>
+> 2. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Assay Data"*: `Mousesubeset.expression.tabular` (Input dataset)
+>    - {% icon param-file %} *"Phenotype Data"*: `Mousesubeset.phenotype.tabular` (Input dataset)
+>
+{: .hands_on}
 
 ### Colinearity Dendrogram with **MuSiC** to determine cell type similarities
 
