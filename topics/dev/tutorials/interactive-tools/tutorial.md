@@ -152,10 +152,17 @@ cycle.
 
 The application that we will wrap in this tutorial is a simple web tool which
 allows the user to upload `csv` and `tsv` files, manipulate them and download
+<<<<<<< Updated upstream
 them back into Galaxy. Our application uses a R Shiny server.
+=======
+them. Our application is based on an R Shiny App hosted with Shiny server.
+>>>>>>> Stashed changes
 
 Note that there is no link between this interactive tool and the Galaxy history.
-This is a more complex task that could be addressed in another tutorial.
+More complex applications might be able to read and write outputs to the user's
+history to create a more integrated experience - see the
+[Additional components section](#galaxy-history-interaction)
+to see an example of how this can be done.
 
 Our example can already be found [online (TODO: change repo)](https://github.com/Lain-inrae/geoc-gxit).
 In the following sections, we will study how it was built.
@@ -487,6 +494,15 @@ our new Docker container as a Galaxy tool.
 >    >     </inputs>
 >    >
 >    >     <outputs>
+<<<<<<< Updated upstream
+=======
+>    >         <!--
+>    >             Even if our IT doesn't export to Galaxy history,
+>    >             adding an output ensures to keep track of the IT
+>    >             execution in the history
+>    >         -->
+>    >
+>>>>>>> Stashed changes
 >    >         <data name="file_output" format="txt"/>
 >    >     </outputs>
 >    >
@@ -771,6 +787,7 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 
 ---
 
+<<<<<<< Updated upstream
 # Additional components - TODO
 Some extra complexity that comes up GxIT development - not necessary for all GxITs
 
@@ -795,10 +812,14 @@ GALAXY_MEMORY_MB_PER_SLOT
 
 ## Logging
 Not sure how to log effectively from the IT container to the Galaxy server?
+=======
+# Additional components
+>>>>>>> Stashed changes
 
+The GxIT that we wrapped in this tutorial was a simple example, and should now understand what is required to create an interactive tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
 
 ## Self-destruct script
-Web server applications will tend to keep running after the user has terminated the tool in Galaxy, which can result in "zombie" containers haning around and clogging up the Galaxy server. It is therefore good practice to implement a script that will end the server process when the connection to Galaxy has been terminated. The following script will watch Galaxy's binding to the container port and kill the container when the connection terminates (e.g. the user has ended the job). Just change `RUN_COMMAND_NAME` to the run command for your application.
+Web server applications will tend to keep running after the user has terminated the tool in Galaxy, which can result in "zombie" containers hanging around and clogging up the Galaxy server. It is therefore good practice to implement a script that will end the server process when the connection to Galaxy has been terminated. The following script will watch Galaxy's binding to the container port and kill the container when the connection terminates (e.g. the user has ended the job). Just change `RUN_COMMAND_NAME` to the run command for your application.
 
 ```sh
 RUN_COMMAND_NAME='my_run_script.sh'
@@ -826,10 +847,39 @@ In the case of our `Tabulator` application, the run script is simply the R scrip
 ## Templated config files
 Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the applcation by templating a run script or configuration file to be read by the application. In this application for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
 
+## Galaxy history interaction
+We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user's Galaxy history? For example, if the user creates a file within the application. That's where the environment variables created in the tool XML become useful.
+
+> ### {% icon tip %} Access histories in R
+> From the [R-Studio]() GxIT we can see that there is an R library that allows us to communicate with Galaxy histories:
+>
+> "The convenience functions `gx_put()` and `gx_get()` are available to you to interact with your current Galaxy history. You can save your workspace with `gx_save()`"
+>
+>
+{: .tip}
+
+
+## Reserved environment variables
+
+There are a few environment variables
+that are accessible in the command section of the tool XML - these can be handy when writing your tool script.
+[check the docs](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables) for a full reference on the tool XML.
+
+```sh
+$__tool_directory__
+$__root_dir__
+$__user_id__
+$__user_email__
+```
+
 ---
 
 # Troubleshooting
 
----
+Having issues with you interactive tool? Here are a few ideas for how to troubleshoot your application. Remember that Galaxy Interactive Tools are a work in progress, so feel free to get creative with your solutions here!
 
-# Conclusion
+- Getting an error in the Galaxy History? Click on the "view" icon to see details of the tool run, including the tool command, `stdout` and `stderr`.
+- If the tool's `stdout`/`stderr` is not enough, consider modifying the Docker image to make it more verbose. Add print/log statements and assertions. Write an an application log to a file that can be collected as Galaxy output.
+- Try running the container with Docker directly on your development machine. If the application doesn't work independantly it certainly won't work inside Galaxy!
+- If you need to debug the Docker container itself, it can be useful to write output/logging to a [mounted volume](https://docs.docker.com/storage/volumes/) that can be inspected after the tool has run.
+- You can also open a `bash` terminal inside the container to check the container state while the application is running: `docker exec -it mycontainer /bin/bash`
