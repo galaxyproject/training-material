@@ -68,12 +68,6 @@ else:
 print('done')
 ```
 
-```python
-not greater
-done
-```
-{: .output}
-
 The second line of this code uses the keyword `if` to tell Python that we want to make a choice.
 If the test that follows the `if` statement is true,
 the body of the `if`
@@ -250,7 +244,7 @@ if not not True:
 > 3.  C
 > 4.  B and C
 >
-> > ## Solution
+> > ### {% icon solution %} Solution
 > > C gets printed because the first two conditions, `4 > 5` and `4 == 5`, are not true,
 > > but `4 < 5` is true.
 > {: .solution}
