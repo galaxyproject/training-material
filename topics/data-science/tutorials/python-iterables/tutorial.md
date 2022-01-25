@@ -460,8 +460,8 @@ print('second time:', values) # [should print 3, 5]
 > > ## Solution
 > > The list `values[start:stop]` has up to `stop - start` elements.  For example,
 > > `values[1:4]` has the 3 elements `values[1]`, `values[2]`, and `values[3]`.
-> > Why 'up to'? As we saw in [episode 2]({{ page.root }}/02-variables/),
-> > if `stop` is greater than the total length of the list `values`,
+> > Why 'up to'?
+> > If `stop` is greater than the total length of the list `values`,
 > > we will still get a list back but it will be shorter than expected.
 > {: .solution}
 {: .question}
