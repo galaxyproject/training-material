@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Python - Types & Type Conversion
+title: Python - Basic Types & Type Conversion
 level: Introductory
 requirements: []
 follow_up_training: []
