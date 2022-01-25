@@ -397,6 +397,10 @@
     {
       "@type": "Person",
       "name": "Linelle Abueg"
+    },
+    {
+      "@type": "Person",
+      "name": "Brandon Pickett"
     }
   ],
   "contributor": [
@@ -419,6 +423,10 @@
     {
       "@type": "Person",
       "name": "Linelle Abueg"
+    },
+    {
+      "@type": "Person",
+      "name": "Brandon Pickett"
     }
   ],
   "about": [
@@ -457,6 +465,9 @@
 
 
 <a href="/training-material/hall-of-fame/abueg/" class="contributor-badge contributor-abueg"><img src="https://avatars.githubusercontent.com/abueg?s=27" alt="Avatar">Linelle Abueg</a>
+
+
+<a href="/training-material/hall-of-fame/pickettbd/" class="contributor-badge contributor-pickettbd"><img src="https://avatars.githubusercontent.com/pickettbd?s=27" alt="Avatar">Brandon Pickett</a>
 
 
 <a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
@@ -737,8 +748,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -814,15 +823,15 @@
 
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>Advances in sequencing technologies over the last few decades have revolutionised the field of genomics, allowing for a reduction in both the time and resources required for <em>de novo</em> genome assembly. Until recently, second-generation sequencing technologies (also known as Next Generation Sequencing or NGS) allowed the production of highly accurate but short <span class="notranslate">reads</span> (around 300 base pairs), which are usually not long enough to span highly repetitive regions, one of the main problems faced by assembly programs. Today, so-called third-generation sequencing (TGS) technologies, characterized by long <span class="notranslate">reads</span> spanning several kbps to hundreds of kbps, have become dominant in de novo assembly of large genomes. TGS can use native <span class="notranslate">DNA</span> without amplification, reducing sequencing error and bias (<span class="citation"><a href="#Hon2020">Hon <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>). The two main TGS sequencing approaches are single-molecule real-time (SMRT) sequencing and Nanopore sequencing. Very recently, Pacific Biosciences introduced High-Fidelity (HiFi) sequencing, which is based on SMRT technology and produces <span class="notranslate">reads</span> that are 10-20 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial, you will use HiFi <span class="notranslate">reads</span> in combination with data from additional sequencing technologies to generate a high-quality reference genome assembly.</p>
+<p>Advances in sequencing technologies over the last few decades have revolutionised the field of genomics, allowing for a reduction in both the time and resources required to <em>de novo</em> genome assembly. Until recently, second-generation sequencing technologies (also known as Next Generation Sequencing or NGS) allowed to produce highly accurate but short (up to 800bp), whose extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called third-generation sequencing (TGS) technologies, usually known as single-molecule real-time (SMRT) sequencing, have become dominant in <em>de novo</em> assembly of large genomes. TGS can use native <span class="notranslate">DNA</span> without amplification, reducing sequencing error and bias (<span class="citation"><a href="#Hon2020">Hon <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>). Very recently, Pacific Biosciences introduced High-Fidelity (HiFi) sequencing, which produces <span class="notranslate">reads</span> 10-25 kpb in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi <span class="notranslate">reads</span> in combination with data from additional sequencing technologies to generate a high-quality genome assembly.</p>
 
-<p>Deciphering the structural organisation of complex vertebrate genomes is currently one of the most challenging problems in genomics (<span class="citation"><a href="#Frenkel2012">Frenkel <i>et al.</i> 2012</a></span>). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer it, it is necessary to analyse two of the main factors that determine the difficulty of a genome assembly: repetitive content and heterozygosity.</p>
+<p>Deciphering the structural organisation of complex vertebrate genomes is currently one of the largest challenges in genomics (<span class="citation"><a href="#Frenkel2012">Frenkel <i>et al.</i> 2012</a></span>). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repetitive content and heterozygosity.</p>
 
-<p>Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR), that occur at a single locus (<span class="citation"><a href="#Trresen2019">Tørresen <i>et al.</i> 2019</a></span>). Repetitive elements are an important component of eukaryotic genomes, constituting over a third of the genome in the case of mammals (<span class="citation"><a href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Chalopin2015">Chalopin <i>et al.</i> 2015</a></span>). In the case of tandem repeats, various estimates suggest that they are present in at least one third of human protein sequences (<span class="citation"><a href="#Marcotte1999">Marcotte <i>et al.</i> 1999</a></span>). TE content is one of the main factors that contribute to a lack of continuity in the reconstruction of genomes, especially in the case of large ones, as TE content is highly correlated with genome size (<span class="citation"><a href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a></span>). On the other hand, TRs usually lead to local genome assembly collapse, especially when their length is close to that of the <span class="notranslate">reads</span> (<span class="citation"><a href="#Trresen2019">Tørresen <i>et al.</i> 2019</a></span>).</p>
+<p>Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR) that occur at a single locus (<span class="citation"><a href="#Trresen2019">Tørresen <i>et al.</i> 2019</a></span>). Repetitive elements are an important component of eukaryotic genomes, constituting over a third of the genome in the case of mammals (<span class="citation"><a href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Chalopin2015">Chalopin <i>et al.</i> 2015</a></span>). In the case of tandem repeats, various estimates suggest that they are present in at least one third of human protein sequences (<span class="citation"><a href="#Marcotte1999">Marcotte <i>et al.</i> 1999</a></span>). TE content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as TE content is highly correlated with genome size (<span class="citation"><a href="#SoteroCaio2017">Sotero-Caio <i>et al.</i> 2017</a></span>). On the other hand, TR usually lead to local genome assembly collapse, especially when their length is close to that of the <span class="notranslate">reads</span> (<span class="citation"><a href="#Trresen2019">Tørresen <i>et al.</i> 2019</a></span>).</p>
 
-<p>Heterozygosity is also an important factor in genome assembly. Haplotype phasing, which is the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies (<span class="citation"><a href="#Zhang2020">Zhang <i>et al.</i> 2020</a></span>). When there is no reference sequence available, the state-of-the–art strategy consists of constructing a string graph with vertexes representing <span class="notranslate">reads</span> and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction (<span class="citation"><a href="#DominguezDelAngel2018">Angel <i>et al.</i> 2018</a></span>, <span class="citation"><a href="#Zhang2020">Zhang <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#Dida2021">Dida and Yi 2021</a></span>).</p>
+<p>Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies (<span class="citation"><a href="#Zhang2020">Zhang <i>et al.</i> 2020</a></span>). When no reference sequence is available, the <em>state-of-the-art</em> strategy consists of constructing a string graph with vertexes representing <span class="notranslate">reads</span> and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction (<span class="citation"><a href="#DominguezDelAngel2018">Angel <i>et al.</i> 2018</a></span>, <span class="citation"><a href="#Zhang2020">Zhang <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#Dida2021">Dida and Yi 2021</a></span>).</p>
 
-<p>The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating a high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assembly for each of the vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2021</a></span>). This tutorial will guide you step by step to assemble a high-quality reference genome by using the VGP assembly pipeline.</p>
+<p>The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2021</a></span>). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -842,7 +851,6 @@
   </li>
   <li><a href="#hifi-phased-assembly-with-hifiasm" id="markdown-toc-hifi-phased-assembly-with-hifiasm">HiFi phased assembly with hifiasm</a>    <ol>
       <li><a href="#genome-assembly-with-hifiasm" id="markdown-toc-genome-assembly-with-hifiasm">Genome assembly with <strong>hifiasm</strong></a></li>
-      <li><a href="#convert-gfa-format-to-fasta-with-gfa-to-fasta" id="markdown-toc-convert-gfa-format-to-fasta-with-gfa-to-fasta">Convert GFA format to FASTA with <strong>GFA to FASTA</strong></a></li>
       <li><a href="#initial-assembly-evaluation" id="markdown-toc-initial-assembly-evaluation">Initial assembly evaluation</a></li>
     </ol>
   </li>
@@ -853,7 +861,7 @@
   </li>
   <li><a href="#hybrid-scaffolding" id="markdown-toc-hybrid-scaffolding">Hybrid scaffolding</a>    <ol>
       <li><a href="#hybrid-scaffolding-using-bionano-data" id="markdown-toc-hybrid-scaffolding-using-bionano-data">Hybrid scaffolding using Bionano data</a></li>
-      <li><a href="#scaffolding-based-on-hi-c-mapping-data" id="markdown-toc-scaffolding-based-on-hi-c-mapping-data">Scaffolding based on Hi-C <span class="notranslate">mapping</span> data</a></li>
+      <li><a href="#hybrid-scaffolding-based-on-hi-c-mapping-data" id="markdown-toc-hybrid-scaffolding-based-on-hi-c-mapping-data">Hybrid scaffolding based on Hi-C <span class="notranslate">mapping</span> data</a></li>
     </ol>
   </li>
 </ol>
@@ -879,7 +887,7 @@
 
 <p>The pipeline presented in this training is an adaption of the <a href="https://github.com/Delphine-L/iwc/tree/VGP/workflows/VGP-assembly-v2">current <span class="notranslate">workflow</span> versions</a>. This tutorial will manually take you through the steps in the VGP pipeline, with a goal of explaining the pipeline step by step. If you desire to run the <em>state-of-the-art</em> VGP pipeline as workflows (<em>i.e.</em>, not manually), just follow the following instructions:</p>
 
-<blockquote class="notranslate hands_on">
+<blockquote>
   <h3 id="hands_on-hands-on-run-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run <span class="notranslate">workflow</span></h3>
 
   <ol>
@@ -887,6 +895,9 @@
     <li>Click on <span class="notranslate">Workflow</span> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>
     <li>Click on the import button <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen.</li>
   </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
   <figure id="figure-2"><img src="../../images/vgp_assembly/import_workflow.png" alt="Figure 2: Import Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Import <span class="notranslate">workflow</span> from a file or URL into <span class="notranslate">Galaxy</span>.</figcaption></figure>
   <ol>
     <li>Provide your <span class="notranslate">workflow</span>:
@@ -936,7 +947,7 @@ Bionano_dataset    https://zenodo.org/record/5550653/files/bionano.cmap?download
             <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name</code>: column <code class="language-plaintext highlighter-rouge">A</code></li>
             <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></li>
             <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Type</code>: column <code class="language-plaintext highlighter-rouge">C</code></li>
-            <li>Clich <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name Tag</code>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name Tag</code>: column <code class="language-plaintext highlighter-rouge">D</code></li>
           </ul>
         </li>
         <li>Click <code class="language-plaintext highlighter-rouge">Apply</code> and press <kbd>Upload</kbd></li>
@@ -963,8 +974,8 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
             <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>: column <code class="language-plaintext highlighter-rouge">A</code></li>
             <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></li>
             <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Type</code>: column <code class="language-plaintext highlighter-rouge">C</code></li>
-            <li>Clich <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Group Tag</code>: column <code class="language-plaintext highlighter-rouge">D</code></li>
-            <li>Clich <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Collection Name</code>: column <code class="language-plaintext highlighter-rouge">E</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Group Tag</code>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Collection Name</code>: column <code class="language-plaintext highlighter-rouge">E</code></li>
           </ul>
         </li>
         <li>Click <code class="language-plaintext highlighter-rouge">Apply</code> and press <kbd>Upload</kbd></li>
@@ -981,7 +992,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 <blockquote class="comment">
   <h3 id="comment-background-on-pacbio-hifi-reads"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background on PacBio HiFi <span class="notranslate">reads</span></h3>
 
-  <p>PacBio HiFi <span class="notranslate">reads</span> rely on Single Molecule Real-Time (SMRT) sequencing technology. SMRT is based on real-time imaging of fluorescently tagged nucleotides as they are added to a newly synthesized <span class="notranslate">DNA</span> strand. This approach ligates SMRTbell adapters to double stranded <span class="notranslate">DNA</span> to create a circular template <span class="notranslate">DNA</span>, which is sequenced in multiple passes creating sub<span class="notranslate">reads</span>. These sub<span class="notranslate">reads</span> from the same circular template are used to produce one highly accurate consensus sequence (fig. 3). This technology allows for the generation of long <span class="notranslate">reads</span> with read lengths in the range of 10-25 kb and minimum read consensus accuracy greater than 99% (Q20).</p>
+  <p>PacBio HiFi <span class="notranslate">reads</span> rely on the Single Molecule Real-Time (SMRT) sequencing technology. SMRT is based on real-time imaging of fluorescently tagged nucleotides as they are added to a newly synthesized <span class="notranslate">DNA</span> strand. HiFi further combine multiple sub<span class="notranslate">reads</span> from the same circular template to produce one highly accurate consensus sequence (fig. 3). This technology allows to generate long-read sequencing data with read lengths in the range of 10-25 kb and minimum read consensus accuracy  greater than 99% (Q20).</p>
 
   <figure id="figure-3"><img src="../../images/vgp_assembly/pacbio_hifi.png" alt="Figure 3: PacBio sequencing technolgoy. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> PacBio HiFi sequencing. Adapted from Wenger et al., 2019</figcaption></figure>
 
@@ -1048,12 +1059,12 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <h1 id="genome-profile-analysis">Genome profile analysis</h1>
 
-<p>Before starting a <em>de novo</em> genome assembly, it useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally, <span class="notranslate">DNA</span> flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches (<span class="citation"><a href="#wang2020estimation">Wang <i>et al.</i> 2020</a></span>). One widely used genome profiling method is based on the analysis of k-mer frequencies. This provides information not only about the genomic complexity (such as genome size, levels of heterozygosity and repeat content), but also about the data quality.</p>
+<p>Before starting a <em>de novo</em> genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally, <span class="notranslate">DNA</span> flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches (<span class="citation"><a href="#wang2020estimation">Wang <i>et al.</i> 2020</a></span>). One of the widely used genome profiling methods is based on the analysis of k-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-k-mer-size-sequencing-coverage-and-genome-size"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> <em>K</em>-mer size, sequencing coverage and genome size</h3>
+  <h3 id="comment-k-mer-size-sequencing-coverage-and-genome-size"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> K-mer size, sequencing coverage and genome size</h3>
 
-  <p><em>K</em>-mers are unique substrings of length <em>k</em> contained within a <span class="notranslate">DNA</span> sequence. For example, the <span class="notranslate">DNA</span> sequence <em>TCGATCACA</em> can be decomposed into six unique <em>k</em>-mers that are five bases long: <em>TCGAT</em>, <em>CGATC</em>, <em>GATCA</em>, <em>ATCAC</em> and <em>TCACA</em>. A sequence of length <em>L</em> will have L-(k+1) <em>k</em>-mers. On the other hand, the number of possible <em>k</em>-mers can be calculated as  n<sup>k</sup>, where <em>n</em> is number of possible monomers and <em>k</em> is the <em>k</em>-mer size.</p>
+  <p><em>K</em>-mers are unique substrings of length k contained within a <span class="notranslate">DNA</span> sequence. For example, the <span class="notranslate">DNA</span> sequence <em>TCGATCACA</em> can be decomposed into six unique <em>k</em>-mers that have five bases long: <em>TCGAT</em>, <em>CGATC</em>, <em>GATCA</em>, <em>ATCAC</em> and <em>TCACA</em>. A sequence of length L will have  L-k+1 <em>k</em>-mers. On the other hand, the number of possible <em>k</em>-mers can be calculated as  n<sup>k</sup>, where n is number of possible monomers and k is the k-mer size.</p>
 
   <table>
     <thead>
@@ -1097,16 +1108,16 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
     </tbody>
   </table>
 
-  <p>Thus, the k-mer size is a key parameter, which must be large enough to generate k-mers that map uniquely to the genome, but not too large, since this can lead to wasting computational resources. In the case of the human genome, k-mers of 31 bases in length lead to 96.96% of those k-mers being unique.</p>
+  <p>Thus, the k-mer size is a key parameter, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. In the case of the human genome, <em>k</em>-mers of 31 bases in length lead to 96.96% of unique <em>k</em>-mers.</p>
 
-  <p>Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence. This will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can easily be computed.</p>
+  <p>Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.</p>
 </blockquote>
 
-<p>In section we will use two basic tools to computationally estimate the genome features: Meryl and GenomeScope.</p>
+<p>In this section we will use two basic tools to computationally estimate the genome features: Meryl and GenomeScope.</p>
 
 <h2 id="generation-of-k-mer-spectra-with-meryl">Generation of k-mer spectra with <strong>Meryl</strong></h2>
 
-<p><strong>Meryl</strong> will allow us to generate the <em>k</em>-mer profile by decomposing the sequencing data into <em>k</em>-length substrings, counting the ocurrence of each <em>k</em>-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version comprises three main modules: one for generating <em>k</em>-mer databases, one for filtering and combining databases, and one for searching databases. <em>K</em>-mers are stored in lexicographical order in the database, similar to words in a dictionary (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>).</p>
+<p><strong>Meryl</strong> will allow us to generate the <em>k</em>-mer profile by decomposing the sequencing data into <em>k</em>-length substrings, counting the occurrence of each <em>k</em>-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version comprises three main modules: one for generating <em>k</em>-mer databases, one for filtering and combining databases, and one for searching databases. <em>K</em>-mers are stored in lexicographical order in the database, similar to words in a dictionary (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="comment">
   <h3 id="comment-k-mer-size-estimation"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> <em>k</em>-mer size estimation</h3>
@@ -1137,7 +1148,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
       <blockquote class="comment">
         <h3 id="comment-selection-of-k-mer-size"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Selection of <em>k</em>-mer size</h3>
 
-        <p>We used 21 as <em>k</em>-mer size, as this length has been demonstrated to be sufficiently long that most <em>k</em>-mers are not repetitive, yet is short enough to be more robust to sequencing errors. For very large (haploid size &gt; 10 Gb) and/or very repetitive genomes, larger <em>k</em>-mer length is recommended to increase the number of unique <em>k</em>-mers.</p>
+        <p>We used 21 as <em>k</em>-mer size, as this length has demonstrated to be sufficiently long that most <em>k</em>-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size &gt; 10 Gb) and/or very repetitive genomes, larger <em>k</em>-mer length is recommended to increase the number of unique <em>k</em>-mers.</p>
       </blockquote>
     </li>
     <li>
@@ -1172,7 +1183,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <h2 id="genome-profiling-with-genomescope2">Genome profiling with <strong>GenomeScope2</strong></h2>
 
-<p>The next step is to infer the genome properties from the <em>k</em>-mer histogram generated by Meryl, for which we will use <strong>GenomeScope2</strong>. Genomescope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness and heterozygosity rates (<span class="citation"><a href="#RanalloBenavidez2020">Ranallo-Benavidez <i>et al.</i> 2020</a></span>).</p>
+<p>The next step is to infer the genome properties from the <em>k</em>-mer histogram generated by Meryl, for which we will use <strong>GenomeScope2</strong>. Genomescope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates (<span class="citation"><a href="#RanalloBenavidez2020">Ranallo-Benavidez <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-estimate-genome-properties"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Estimate genome properties</h3>
@@ -1216,7 +1227,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <figure id="figure-4"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="fig3:Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Genomescope2 plot.</figcaption></figure>
 
-<p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, there is an unique peak centered around 28x, the modal <em>k</em>-mer coverage. The absence of a secondary peak at half diploid coverage is suggestive of the haploid nature of this genome, but could generally also result from very low heterozygosity. Low frequency <em>k</em>-mers are the result of sequencing errors (as indicated by the red line).</p>
+<p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, there is a unique peak centered around 28x, the modal <em>k</em>-mer coverage. The absence of a secondary peak at half diploid coverage is suggestive of the haploid nature of this genome, although it could also result from very low heterozygosity. Low frequency <em>k</em>-mers are the result of sequencing errors.</p>
 
 <p>Before proceeding to the next section, we need to carry out some operations on the output generated by GenomeScope2. The goal is to extract some parameters which at a later stage will be used by <strong>purge_dups</strong>. The first relevant parameter is the <code class="language-plaintext highlighter-rouge">estimated genome size</code>.</p>
 
@@ -1228,7 +1239,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">summary</code> (output of <strong>GenomeScope</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">bp</code></li>
-        <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Replace all occurrences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
       </ul>
     </li>
@@ -1236,7 +1247,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output file of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">,</code></li>
-        <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Replace all occurrences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
       </ul>
     </li>
@@ -1371,16 +1382,16 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <h1 id="hifi-phased-assembly-with-hifiasm">HiFi phased assembly with hifiasm</h1>
 
-<p>Once we are finished with the genome profile, we can start the genome assembly with <strong>hifiasm</strong>,  a fast, open-source <em>de novo</em> assembler specifically developed for PacBio HiFi <span class="notranslate">reads</span>.</p>
+<p>Once we have done genome profiling stage, we can start the genome assembly with <strong>hifiasm</strong>,  a fast open-source <em>de novo</em> assembler specifically developed for PacBio HiFi <span class="notranslate">reads</span>.</p>
 
 <h2 id="genome-assembly-with-hifiasm">Genome assembly with <strong>hifiasm</strong></h2>
 
-<p>One of the key advantages of hifiasm is that it resolves near-identical, but not exactly identical sequences, such as repeats and segmental duplications (<span class="citation"><a href="#Cheng2021">Cheng <i>et al.</i> 2021</a></span>).</p>
+<p>One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical sequences, such as repeats and segmental duplications (<span class="citation"><a href="#Cheng2021">Cheng <i>et al.</i> 2021</a></span>).</p>
 
 <blockquote class="comment">
   <h3 id="comment-hifiasm-algorithm-details"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Hifiasm algorithm details</h3>
 
-  <p>By default, hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors while keeping heterozygous alleles. A position on the target read is considered informative if there are two different nucleotides at that position in the alignment, and each allele is supported by at least three <span class="notranslate">reads</span>.</p>
+  <p>By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are two different nucleotides at that position in the alignment, and each allele is supported by at least three <span class="notranslate">reads</span>.</p>
 
   <figure id="figure-5"><img src="../../images/vgp_assembly/hifiasm_algorithm.png" alt="fig4:Hifiasm algorithm overview. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Hifiasm algorithm overview. Orange and blue bars represent the <span class="notranslate">reads</span> with heterozygous alleles carrying local phasing information, while green bars come from the homozygous regions without any heterozygous alleles.</figcaption></figure>
 
@@ -1420,9 +1431,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <p>Hifiasm generates four outputs in Graphical Fragment Assembly (GFA) format; this format is designed to represent genome variation, splice graphs in genes, and even overlaps between <span class="notranslate">reads</span>.</p>
 
-<h2 id="convert-gfa-format-to-fasta-with-gfa-to-fasta">Convert GFA format to FASTA with <strong>GFA to FASTA</strong></h2>
-
-<p>We have obtained the fully phased contig graphs of the primary and alte<span class="notranslate">rna</span>te haplotypes, but the GFA output format of <strong>hifiasm</strong> is not suitable for the subsequent steps, so we will convert these files into fasta format.</p>
+<p>We have obtained the fully phased contig graphs of the primary and alte<span class="notranslate">rna</span>te haplotypes, but the output format of <strong>hifiasm</strong> must be converted to FASTA format for the subsequent steps.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-convert-gfa-to-fasta"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: convert GFA to FASTA</h3>
@@ -1430,7 +1439,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2"><strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input GFA file”</em>: select <code class="language-plaintext highlighter-rouge">Primary contig graph</code> and the <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contigs graph</code> datasets</li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input GFA file”</em>: select <code class="language-plaintext highlighter-rouge">Primary contigs graph</code> and the <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contigs graph</code> datasets</li>
       </ul>
     </li>
     <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">Primary contigs FASTA</code> and <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contigs FASTA</code></li>
@@ -1440,7 +1449,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <h2 id="initial-assembly-evaluation">Initial assembly evaluation</h2>
 
-<p>The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO, Merqury and Pretext. QUAST will generate summary statistics, BUSCO will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using k-mers, and</p>
+<p>The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO, Merqury, and Pretext. QUAST will generate summary statistics, BUSCO will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using <em>k</em>-mers, and Pretext will be used to evaluate the assembly contiguity.</p>
 
 <blockquote class="comment">
   <h3 id="comment-quast-statistics"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> QUAST statistics</h3>
@@ -1511,7 +1520,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <figure id="figure-6"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="fig5:QUAST plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> QUAST initial report.</figcaption></figure>
 
-<p>According to the plot, the primary assembly includes 40 contigs, whose cumulative length is around 12 Mbp. On the other hand, the cumulative length of the secondary assembly is much smaller, despite being comprised of more than 120 contigs. This is expected, since we are working with an haploid organism.</p>
+<p>According with the plot, the primary assembly includes 40 contigs, whose accumulative length is around 12 Mbp. On the other hand, the accumulative length of the secondary assembly is much smaller, despite including more than 120 contigs. This is expected, since we are working with a haploid organism.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1535,10 +1544,10 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 </blockquote>
 
-<p>Next, we will use BUSCO, which will allow us to quantitatively assess of the completeness of a genome assembly in terms of expected gene content. It relies on detecting genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses (<span class="citation"><a href="#Simo2015">Simão <i>et al.</i> 2015</a></span>).</p>
+<p>Next, we will use BUSCO, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies in the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses (<span class="citation"><a href="#Simo2015">Simão <i>et al.</i> 2015</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assessing-assembly-completness-with-busco"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assessing assembly completness with BUSCO</h3>
+  <h3 id="hands_on-hands-on-assessing-assembly-completeness-with-busco"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assessing assembly completeness with BUSCO</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1572,7 +1581,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <figure id="figure-7"><img src="../../images/vgp_assembly/BUSCO_full_table.png" alt="fig8:BUSCO plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> BUSCO full table</figcaption></figure>
 
-<p>As we can see in the report, the results are simplified into four categories: <em>complete and single-copy</em>, <em>complete and duplicated</em>, <em>fragmented</em> and <em>missing</em> BUSCOs.</p>
+<p>As we can see in the report, the results are simplified into four categories: <em>complete and single-copy</em>, <em>complete and duplicated</em>, <em>fragmented</em> and  <em>Missing BUSCOs</em>.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1594,7 +1603,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 </blockquote>
 
-<p>While BUSCO is robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxa that is not well represented in the <a href="https://www.orthodb.org/">OrtologDB</a>. Merqury provides a complementary approach for assessing genome assembly quality in a reference-free manner via k-mer copy number analysis. We will be using the k-mer databases previously generated by Meryl for this.</p>
+<p>Despite BUSCO being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in <a href="https://www.orthodb.org/">OrthoDB</a>. Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via <em>k</em>-mer copy number analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-k-mer-based-evaluation-with-merqury"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <em>k</em>-mer based evaluation with Merqury</h3>
@@ -1621,11 +1630,11 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <p>By default, Merqury generates three collections as output: stats, plots and QV stats. The “stats” collection contains the completeness statistics, while the “QV stats” collection contains the quality value statistics.</p>
 
-<p>The copy number spectum plot, known as the <em>spectra-cn</em> plot (fig. 9a), tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve.</p>
+<p>The copy number spectum plot, known as the <em>spectra-cn</em> plot (fig. 9a), tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve. Remember that the histogram dataset was generated previously by Meryl.</p>
 
 <figure id="figure-8"><img src="../../images/vgp_assembly/merqury_cn_plot.png" alt="fi9:Merqury plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Merqury CN plot</figcaption></figure>
 
-<p>The black region on the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy k-mers in the genome, while the blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From this figure, we can state that the sequencing coverage is around 30x.</p>
+<p>The black region in the left side corresponds to <em>k</em>-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The read area represents one-copy <em>k</em>-mers in the genome, while blue area represents two-copy <em>k</em>-mers originating from homozygous sequence or haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 30x.</p>
 
 <p>The figure 1b corresponds to the assembly spectrum plot (<em>spectra-asm</em> in the outputs). This plot is helpful for measuring diploid assembly completeness as it shows the fraction of k-mers specific to both the primary and alte<span class="notranslate">rna</span>te assemblies, as well as k-mers shared between them (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>).</p>
 
@@ -1641,7 +1650,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <h3 id="read-depth-analysis">Read-depth analysis</h3>
 
-<p>First, we need to collapse our HiFi trimmed <span class="notranslate">reads</span> collection into a single dataset.</p>
+<p>Initially, we need to collapse our HiFi trimmed <span class="notranslate">reads</span> collection into a single dataset.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-collapse-the-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Collapse the collection</h3>
@@ -1652,7 +1661,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>:<code class="language-plaintext highlighter-rouge">HiFi_collection (trim)</code></li>
       </ul>
     </li>
-    <li>Rename de output as <code class="language-plaintext highlighter-rouge">HiFi <span class="notranslate">reads</span> collapsed</code></li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">HiFi <span class="notranslate">reads</span> collapsed</code></li>
   </ol>
 </blockquote>
 
@@ -1721,10 +1730,10 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 <ul>
   <li>PBCSTAT base coverage: it contains the base-level coverage information.</li>
   <li>Calcuts-cutoff: it includes the thresholds calculated by purge_dups.</li>
-  <li>Histagram plot.</li>
+  <li>Histogram plot.</li>
 </ul>
 
-<p>As we can see in the histogram plot, the read depth distribution follows a symmetric and unimodal distribution (fig. 11). This result is expected, since we are assembling an haploid genome.</p>
+<p>As we can see in the histogram plot, the read depth distribution follows a symmetric and unimodal distribution (fig. 11). This result is expected, since we are assembling a haploid genome.</p>
 
 <figure id="figure-10"><img src="../../images/vgp_assembly/purge_dups_plot.png" alt="fi9:purge_dups plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> purge_dups histogram plot</figcaption></figure>
 
@@ -1787,10 +1796,10 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 <blockquote class="comment">
   <h3 id="comment-purge_dups-algorithm-details"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Purge_dups algorithm details</h3>
 
-  <p>In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according to the following criteria:</p>
+  <p>In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according the following criteria:</p>
   <ul>
     <li>If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is discarded.</li>
-    <li>If more than 80% bases are in the diploid depth interval, it is labelled as a primary contig; otherwise it is considered further as a possible haplotig.</li>
+    <li>If more than 80% bases are in the diploid depth interval, it is labelled as a primary contig, otherwise it is considered further as a possible haplotig.</li>
   </ul>
 
   <p>Contigs that were flagged for further analysis according to read-depth are then evaluated to attempt to identify synteny with its allelic companion contig. In this step, purge_dups uses the information contained in the self alignments:</p>
@@ -2035,7 +2044,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <p>In the figure 13 we can see the cumulative length plot corresponding to the primary assembly after being processed.</p>
 
-<figure id="figure-12"><img src="../../images/vgp_assembly/QUAST_cummulative.png" alt="fig4:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> QUAST cumulative plot</figcaption></figure>
+<figure id="figure-12"><img src="../../images/vgp_assembly/QUAST_cummulative.png" alt="fig12:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> QUAST cumulative plot</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2057,10 +2066,10 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 </blockquote>
 
-<p>Now, let’s evaluate the assemby with BUSCO.</p>
+<p>Now, let’s evaluate the assembly with BUSCO.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assessing-assembly-completness-with-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assessing assembly completness with BUSCO</h3>
+  <h3 id="hands_on-hands-on-assessing-assembly-completeness-with-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assessing assembly completeness with BUSCO</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2108,16 +2117,16 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 <h2 id="hybrid-scaffolding-using-bionano-data">Hybrid scaffolding using Bionano data</h2>
 
-<p>In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins and estimate the length of gaps between adjacent contigs. One of the advantages of optical maps is that they can easily span genomic regions that are difficult to resolve using <span class="notranslate">DNA</span> sequencing technologies (<span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Yuan2020">Yuan <i>et al.</i> 2020</a></span>).</p>
+<p>In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantage of optical maps is that can easily span genomic regions that are difficult to resolve using <span class="notranslate">DNA</span> sequencing technologies (<span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Yuan2020">Yuan <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="comment">
   <h3 id="comment-background-on-bionano-optical-maps"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background on Bionano optical maps</h3>
 
-  <p>Bionano technology relies on the isolation of kilobase-long <span class="notranslate">DNA</span> fragments, which are labeled at specific sequence motifs with a fluorescent dye, resulting in a unique fluorescent pattern for each genome. <span class="notranslate">DNA</span> molecules are stretched into nanoscale channels and imaged with a high-resolution camera, building optical maps that include the physical locations of labels, rather than base-level information (<span class="citation"><a href="#Lam2012">Lam <i>et al.</i> 2012</a></span>, <span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>).</p>
+  <p>Bionano technology relies on the isolation of kilobase-long <span class="notranslate">DNA</span> fragments, which are labeled at specific sequence motifs with a fluorescent dye, resulting in a unique fluorescent pattern for each genome. <span class="notranslate">DNA</span> molecules are stretched into nanoscale channels and imaged with a high-resolution camera, allowing us to build optical maps that include the physical locations of labels rather than base-level information (<span class="citation"><a href="#Lam2012">Lam <i>et al.</i> 2012</a></span>, <span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>).</p>
 
   <figure id="figure-13"><img src="../../images/vgp_assembly/bionano.png" alt="Bionano optical maps. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Bionano optical maps. Source: https://bionanogenomics.com</figcaption></figure>
 
-  <p>The average optical map molecule length, around 225 kbp, is substantially larger than PacBio HiFi <span class="notranslate">reads</span>, with read lengths averaging 10-25 kbp.</p>
+  <p>The average optical map molecule length, around 225 kbp, is substantially larger than the PacBio HiFi <span class="notranslate">reads</span>, with read lengths averaging 10-25 kbp.</p>
 
 </blockquote>
 
@@ -2224,18 +2233,18 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
 </blockquote>
 
-<h2 id="scaffolding-based-on-hi-c-mapping-data">Scaffolding based on Hi-C <span class="notranslate">mapping</span> data</h2>
+<h2 id="hybrid-scaffolding-based-on-hi-c-mapping-data">Hybrid scaffolding based on Hi-C <span class="notranslate">mapping</span> data</h2>
 
-<p>High-throughput chromosome conformation capture (Hi-C) is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing to provide an insight into the three-dimensional organisation of a genome  (<span class="citation"><a href="#Dixon2012">Dixon <i>et al.</i> 2012</a></span>, <span class="citation"><a href="#LiebermanAiden2009">Lieberman-Aiden <i>et al.</i> 2009</a></span>). In this final step of the assembly pipeline, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them, with the objetive of linking the Bionano scaffolds to create chromosome-scale scaffolds.</p>
+<p>Hi-C is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing us to provide an insight into the three-dimensional organisation of a genome  (<span class="citation"><a href="#Dixon2012">Dixon <i>et al.</i> 2012</a></span>, <span class="citation"><a href="#LiebermanAiden2009">Lieberman-Aiden <i>et al.</i> 2009</a></span>). In this final stage, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.</p>
 
 <blockquote class="comment">
   <h3 id="comment-background-about-hi-c-data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background about Hi-C data</h3>
 
-  <p>Hi-C technology is based on the capture of chromatin’s three-dimensional conformation. During Hi-C library preparation, <span class="notranslate">DNA</span> is crosslinked in its 3D conformation. Then, the <span class="notranslate">DNA</span> is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides (fig. 14). The biotinylated nucleotides enable the specific purification of the ligation junctions, preventing the sequecncing of mostly uninformative <span class="notranslate">DNA</span> molecules that do not contain ligation junctures. (<span class="citation"><a href="#Lajoie2015">Lajoie <i>et al.</i> 2015</a></span>).</p>
+  <p>The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin in three-dimensional space. During Hi-C library preparation, <span class="notranslate">DNA</span> is crosslinked in its 3D conformation. Then, the <span class="notranslate">DNA</span> is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides (fig. 14). The biotinylated nucleotides enable the specific purification of the ligation junctions, preventing the sequencing of <span class="notranslate">DNA</span> molecules that do not contain such junctions which are thus mostly uninformative (<span class="citation"><a href="#Lajoie2015">Lajoie <i>et al.</i> 2015</a></span>).</p>
 
   <figure id="figure-14"><img src="../../images/vgp_assembly/hi-c_protocol.png" alt="fig4:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Hi-C protocol. Adapted from Rao et al. 2014</figcaption></figure>
 
-  <p>Next, the blunt ends of spatially proximal digested ends are ligated. Each <span class="notranslate">DNA</span> fragment is then sequenced from each end of this artificial junction, generating read pairs. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome (<span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>). Hi-C data are visualized using two-dimensional matrices (contact maps) whose entries quantifiy the intensity of the physical interaction between genome regions.</p>
+  <p>Next, the blunt ends of spatially proximal digested end are ligated. Each <span class="notranslate">DNA</span> fragment is then sequenced from each end of this artificial junction, generating read pairs. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome (<span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>). Hi-C data are in the form of two-dimensional matrices (contact maps) whose entries quantify the intensity of the physical interaction between genome regions.</p>
 
 </blockquote>
 
@@ -2290,14 +2299,14 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">BAM forward</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Bam reverse</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">BAM  reverse</code></li>
       </ul>
     </li>
     <li>Rename it as <code class="language-plaintext highlighter-rouge">BAM Hi-C <span class="notranslate">reads</span></code></li>
   </ol>
 </blockquote>
 
-<p>Finally, we need to convert the BAM file to <span class="notranslate">BED</span> format, and then sort it.</p>
+<p>Finally, we need to convert the BAM file to <span class="notranslate">BED</span> format and sort it.</p>
 
 <h3 id="generate-initial-hi-c-contact-map">Generate initial Hi-C contact map</h3>
 
@@ -2312,7 +2321,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
   <figure id="figure-15"><img src="../../images/vgp_assembly/hic_map.png" alt="fig4:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> An example of a Hi-C map. Genomic regions are arranged along the x and y axes, and contacts are colored on the matrix like a heat map; here darker color indicates greater interaction frequency.</figcaption></figure>
 
-  <p>On the other hand, the distance-dependent decay may be due to random movment of the chromosomes, and in the contact map appears as a gradual decrease of the interaction frequency the further away from the diagonal it moves (<span class="citation"><a href="#Lajoie2015">Lajoie <i>et al.</i> 2015</a></span>).</p>
+  <p>On the other hand, the distance-dependent decay may be due to random movement of the chromosomes, and in the contact map appears as a gradual decrease of the interaction frequency the farther away from the diagonal it moves (<span class="citation"><a href="#Lajoie2015">Lajoie <i>et al.</i> 2015</a></span>).</p>
 
 </blockquote>
 
@@ -2348,13 +2357,13 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 <p>SALSA2 is an open source software that makes use of Hi-C to linearly orient and order assembled contigs along entire chromosomes.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-salsa2-algoritm-overview"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> SALSA2 algoritm overview</h3>
+  <h3 id="comment-salsa2-algorithm-overview"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> SALSA2 algorithm overview</h3>
 
   <p>Initially SALSA2 uses the physical coverage of Hi-C pairs to identify suspicious regions and break the sequence at the likely point of mis-assembly. Then, a hybrid scaffold graph is constructed using edges from the Hi-C <span class="notranslate">reads</span>, scoring the edges according to a <em>best buddy</em> scheme (fig. 16a).</p>
 
   <figure id="figure-17"><img src="../../images/vgp_assembly/salsa2_algorithm.png" alt="fig4:Post-processing step. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Overview of the SALSA2 algorithm. Solid edges indicate the linkages between different contigs and dotted edges indicate the links between the ends of the same contig. B and E denote the start and end of contigs, respectively. Adapted from Ghurye et al. 2019.</figcaption></figure>
 
-  <p>From this graph scaffolds are iteratively constructed using a greedy weighted maximum matching. After each iteration a mis-join detection step is performed to check if any of the joins made during this round are incorrect. Incorrect joins are broken and the edges blacklisted during subsequent iterations. This process continues until the majority of joins made in the prior iteration are incorrect. This provides a natural stopping condition, when accurate Hi-C links have been exhausted (<span class="citation"><a href="#Ghurye2019">Ghurye <i>et al.</i> 2019</a></span>).</p>
+  <p>From this graph scaffolds are iteratively constructed using a greedy weighted maximum matching. After each iteration, a mis-join detection step is performed to check if any of the joins made during this round are incorrect. Incorrect joins are broken and the edges blacklisted during subsequent iterations. This process continues until the majority of joins made in the prior iteration are incorrect. This provides a natural stopping condition, when accurate Hi-C links have been exhausted (<span class="citation"><a href="#Ghurye2019">Ghurye <i>et al.</i> 2019</a></span>).</p>
 
 </blockquote>
 
@@ -2388,7 +2397,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Primary assembly bionano</code></li>
         <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">:</code></li>
-        <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Replace all occurrences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
       </ul>
     </li>
@@ -2454,7 +2463,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
           <ul>
             <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">12792715</code> (previouly estimated)</li>
+                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">12792715</code> (previously estimated)</li>
               </ul>
             </li>
             <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding</code></li>
@@ -2666,7 +2675,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Delphine Lariviere, Alex Ostrovsky, Cristóbal Gallardo, Anna Syme, Linelle Abueg, 2022 <b>VGP assembly pipeline (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Delphine Lariviere, Alex Ostrovsky, Cristóbal Gallardo, Anna Syme, Linelle Abueg, Brandon Pickett, 2022 <b>VGP assembly pipeline (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -2681,7 +2690,7 @@ SRR13577847_2    https://zenodo.org/record/5887339/files/SRR13577847_2.fastq.gz?
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{assembly-vgp_genome_assembly,
-author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo and Anna Syme and Linelle Abueg",
+author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo and Anna Syme and Linelle Abueg and Brandon Pickett",
 title = "VGP assembly pipeline (Galaxy Training Materials)",
 year = "2022",
 month = "01",
