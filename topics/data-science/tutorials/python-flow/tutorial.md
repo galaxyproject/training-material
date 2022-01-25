@@ -210,7 +210,26 @@ if 1:
     print('one is true')
 ```
 
-> ## How Many Paths?
+## Inverting Conditions
+
+Sometimes it is useful to check whether some condition is not true.
+The Boolean operator `not` can do this explicitly.
+After reading and running the code below,
+write some `if` statements that use `not` to test the rule
+that you formulated in the previous question.
+
+```python
+if not '':
+    print('empty string is not true')
+if not 'word':
+    print('word is not true')
+if not not True:
+    print('not not True is true')
+```
+
+
+
+> ### {% icon question %} Question: How Many Paths?
 >
 > Consider this code:
 >
@@ -237,23 +256,9 @@ if 1:
 > {: .solution}
 {: .question}
 
-> ### {% icon tip %} Tip: That's Not Not What I Meant
->
-> Sometimes it is useful to check whether some condition is not true.
-> The Boolean operator `not` can do this explicitly.
-> After reading and running the code below,
-> write some `if` statements that use `not` to test the rule
-> that you formulated in the previous question.
->
-> ```
-> if not '':
->     print('empty string is not true')
-> if not 'word':
->     print('word is not true')
-> if not not True:
->     print('not not True is true')
-> ```
-{: .tip}
+```
+# Test code here.
+```
 
 > ### {% icon question %} Question: Close Enough
 >
