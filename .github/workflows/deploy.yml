@@ -3,32 +3,51 @@ name: Deploy Website
 on:
   push:
     branches:
-      - master
+      - main
+  schedule:
+    # nightly builds to keep in sync with changes to the video library
+    - cron:  '0 0 * * *'
+
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby: [2.5]
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/setup-ruby@v1
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v2
         with:
-          ruby-version: ${{ matrix.ruby }}
+          python-version: '3.7'
+          architecture: 'x64'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.5"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - uses: actions/cache@v2
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          path: |
+            vendor/bundle
+            ~/.cache/pip
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py--node-
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+          pip install -r requirements.txt
+          npm install
+          bundle pristine ffi
+      # END Dependencies
 
       - name: Build Site
         run: |
@@ -37,6 +56,11 @@ jobs:
           pip install requests ephemeris
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
+          npm install
+          make rebuild-search-index ACTIVATE_ENV=pwd
+          cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           GTN_FORK: ${{ github.repository_owner }}

@@ -50,7 +50,7 @@ The closest thing we could find is a file in GEO containing a list of the region
 
 The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -72,7 +72,7 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 
 The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the tools and datasets.
 
-![Galaxy interface](../../images/galaxy_interface.png "The Galaxy interface")
+![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center](../../images/galaxy_interface.png "The Galaxy interface")
 
 Let's start with a fresh history.
 
@@ -80,7 +80,7 @@ Let's start with a fresh history.
 >
 > 1. Make sure you have an empty analysis history.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Rename your history** to make it easy to recognize
 >
@@ -104,7 +104,7 @@ Let's start with a fresh history.
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left ot the interface
 >
->    ![Upload icon](../../../galaxy-interface/images/upload_button.png)
+>    ![Upload data icon](../../../galaxy-interface/images/upload_button.png)
 >
 > 3. Press **Choose local file** and search for your file on your computer
 > 4. Select `interval` as **Type**
@@ -118,7 +118,8 @@ Let's start with a fresh history.
 >    ![History section](../../images/intro_01.png)
 >
 >    Directly uploading files is not the only way to get data into Galaxy
->    {% include snippets/import_via_link.md format="interval" %}
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="interval" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
 >    > There are [more options]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) for advanced users.
@@ -158,7 +159,8 @@ Let's start with a fresh history.
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
->    {% include snippets/add_tag.md %}
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    The dataset should now look like below in the history
 >
@@ -203,7 +205,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > 7. Wait for the upload to finish
 > 8. Rename our dataset to something more recognizable like `Genes`
 >
->    {% include snippets/rename_dataset.md name="Genes" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes" %}
 >
 > 9. Add a tag called `#genes` to the dataset to make it easier to track in the history
 >
@@ -460,25 +462,26 @@ Since we have some nice data, let's draw a barchart out of it!
 
 ## Extracting workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
+When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
 Wouldn't it be nice to just convert this history into a workflow that we'll be able to execute again and again?
 
 Galaxy makes this very simple with the `Extract workflow` option. This means that any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to easily share or publish your analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
->    If you had any failed jobs (red), please remove those datasets from your history by clicking on the {% icon galaxy-cross %} (cross) button. This will make the creation of a workflow easier.
+>    This will make the creation of the workflow easier.
 >
-> 2. Go to the history **History options** ({% icon galaxy-gear %} (gear) icon)
-> 3. Select the `Extract Workflow` option.
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
->    ![Extracting workflow in history menu](../../images/history_menu_extract_workflow.png)
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
->    The central panel will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
-> 4. **Uncheck** any steps that shouldn't be included in the workflow
+> 3. Replace the **Workflow name** to something more descriptive, for example: `From peaks to genes`
+>
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
 >    Since we did some steps which where specific to our custom peak file, we might want to exclude:
 >    - **Select last** {% icon tool %}
@@ -486,17 +489,15 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >    - **Convert Genomic Intervals to BED**
 >    - **Get flanks** {% icon tool %}
 >
-> 5. Rename the workflow to something descriptive, e.g. `From peaks to genes`
->
-> 6. Click on the **Create Workflow** button near the top.
+> 5. Click on the **Create Workflow** button near the top.
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 7. Click on **Workflow** in the top menu of Galaxy
+> 6. Click on **Workflow** in the top menu of Galaxy
 >
 >    Here you have a list of all your workflows
 >
-> 8. Select the newly generated workflow and click on **Edit**
+> 7. Select the newly generated workflow and click on **Edit**
 >
 >    You should see something similar to this:
 >
@@ -508,13 +509,13 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 >     Although we have our two inputs in the workflow they are missing their connection to the first tool (**Intersect** {% icon tool %}), because we didn't carry over some of the intermediate steps.
 >
-> 9. Connect each input dataset to the **Intersect** {% icon tool %} tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
-> 10. Rename the input datasets to `Reference regions` and `Peak regions`
-> 11. Click on the {% icon galaxy-gear %} (gear) icon at the top right
-> 12. Press **Auto Re-layout** to clean up our view
+> 8. Connect each input dataset to the **Intersect** {% icon tool %} tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
+> 9. Rename the input datasets to `Reference regions` and `Peak regions`
+> 10. Click on the {% icon galaxy-gear %} (gear) icon at the top right
+> 11. Press **Auto Re-layout** to clean up our view
 >     ![Auto re-layouting](../../images/intro_07.png)
-> 13. Click on the {% icon galaxy-gear %} (gear) icon at the top right
-> 14. Press **Save** to save your changes
+> 12. Click on the {% icon galaxy-gear %} (gear) icon at the top right
+> 13. Press **Save** to save your changes
 >
 >    > ### {% icon tip %} Tip: Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
@@ -540,14 +541,14 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >
 > 1. Create a new history and give it a new name like `Galaxy Introduction Part 2`
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
 >
 >       You should see both of your histories side-by-side now
 >
 > 3. Drag and drop the edited peak file (`Peak regions`, after the replace steps), which contains the summit information, to your new history.
-> 4. Click on **Analyze Data** in the top menu bar to go back to your analysis window
+> 4. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) in the top menu bar to go back to your analysis window
 >
 {: .hands_on}
 
@@ -577,7 +578,7 @@ We need to generate a new BED file from the original peak file that contains the
 Now we cut out just the chromosome plus the start and end of the summit:
 
 > ### {% icon hands_on %} Hands-on: Cut out columns
-> 1. {% tool [Cut](cut1) %} columns from a table with the following settings:
+> 1. {% tool [Cut](Cut1) %} columns from a table with the following settings:
 >   - *"Cut columns"*: `c1,c8,c9`
 >   - *"Delimited by Tab"*: `Tab`
 >   - *"From"*: `Peak summit regions`
@@ -586,7 +587,7 @@ Now we cut out just the chromosome plus the start and end of the summit:
 >
 > 2. Change the format to `interval` (use the {% icon galaxy-pencil %}) since that's what the tool **Intersect** expects.
 >
->    {% include snippets/change_datatype.md datatype="interval" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="interval" %}
 >
 >    The output should look like below:
 >
@@ -609,9 +610,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
 >    ```
 >
->    {% include snippets/import_via_link.md genome="mm9" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md genome="mm9" %}
 >
->    {% include snippets/import_from_data_library.md path='Click on "Training data" and then "Introduction - From peaks to genes"' %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md path='Click on "Training data" and then "Introduction - From peaks to genes"' %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >

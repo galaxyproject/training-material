@@ -40,7 +40,7 @@ This practical aims at familiarizing you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
 Not everyone has the same background and that's ok!
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -60,7 +60,7 @@ Not everyone has the same background and that's ok!
 ## What does Galaxy look like?
 
 > ### {% icon hands_on %} Hands-on: Log in or register
-> 1. Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)
+> 1. Open your favorite browser (Chrome/Chromium, Safari, or Firefox, but not Internet Explorer/Edge!)
 > 2. Browse to a [Galaxy instance](https://galaxyproject.org/use/) of your choice
 > 3. Choose *Login or Register* from the navigation bar at the top of the page
 > 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
@@ -70,7 +70,7 @@ Not everyone has the same background and that's ok!
 >   > ### {% icon comment %} Different Galaxy servers
 >   > The particular Galaxy server that you are using may look slightly different than the one shown in this training.
 >   > Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look and feel to some extent.
->   > The basic functionaity will be rather similar across instances, so don't worry!
+>   > The basic functionality will be rather similar across instances, so don't worry!
 >   {: .comment}
 >
 {: .hands_on}
@@ -82,7 +82,7 @@ The Galaxy interface consists of three main parts:
 2. Your analysis history is recorded on the right
 3. The central panel will let you run analyses and view outputs
 
-![Galaxy ecosystem]({% link shared/images/galaxy_interface.png %})
+![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center]({% link shared/images/galaxy_interface.png %})
 
 
 # Create a history
@@ -92,7 +92,7 @@ Galaxy allows you to create analysis histories. A **history** can be thought of 
 Think of a workflow as a cooking recipe with a list of ingredients (datasets) and a set of instructions
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
-a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterwards.
+a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterward.
 That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.
 
 The finalized pipelines can be generalized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
@@ -102,10 +102,12 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >
 > 1. Make sure you start from an empty analysis history.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history.
->    {% include snippets/rename_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
 {: .hands_on}
 
 ## Upload the Iris dataset
@@ -118,13 +120,13 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    https://zenodo.org/record/1319069/files/iris.csv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Check the **datatype**
 >    - Click on the history item to expand it to get more information.
@@ -133,12 +135,12 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >      - Option 1: Datatypes can be **autodetected**
 >      - Option 2: Datatypes can be **manually set**
 >
->    {% include snippets/detect_datatype.md datatype="datatypes" %}
->    {% include snippets/change_datatype.md datatype="csv" %}
+>    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 > 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    Make sure the tag starts with a hash symbol (`#`), which will make the tag stick not only to this dataset, but also to any results derived from it.
 >    This will help you make sense of your history.
@@ -147,8 +149,8 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 # Pre-processing
 
-Often, one or more data pre-processing step(s) may be required to proceed with an analysis.
-In our case, the tools we will use require tab-separated input data, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:
+Often, one or more data pre-processing step(s) may be required to proceed with the analysis.
+In our case, the tools we will use require tab-separated input data and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:
 
 - Format conversion
 - Header removal
@@ -163,11 +165,11 @@ First, we will convert the file from comma-separated to tab-separated format. Ga
 >
 > 1. **Convert** {% icon galaxy-pencil %} the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)
 >
->    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the resulting dataset to `iris tabular`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** the generated file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
@@ -198,7 +200,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 
 > ### {% icon hands_on %} Hands-on: Removing header
 >
-> 1. {% tool [Remove Beginning](Remove+beginning1) %} with the following parameters:
+> 1. {% tool [Remove Beginning](Remove beginning1) %} with the following parameters:
 >    - *Remove first*: `1` (to remove the first line only)
 >    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
 >    - Click **Execute**
@@ -212,7 +214,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris clean`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Click on the new history item to expand it
 >
@@ -253,7 +255,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris species column`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** {% icon galaxy-eye %} the resulting file
 >
@@ -283,6 +285,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 Now we have our answer! There are 3 different Iris species in our file.
 
 Like we mentioned before, there are often multiple ways to reach your answer in Galaxy. For example, we could have done this with just a single tool, **Group** {% icon tool %} as well.
+(This tool also can be searched for by the term "grouping" )
 
 
 > ### {% icon hands_on %} Exercise: Grouping dataset
@@ -329,7 +332,7 @@ Looking at the tool help for **Group** {% icon tool %}, we see that we can also 
 >      - *"Type"*: `Count`
 >      - *"On column"*: `Column: 1`
 >
->    {% include snippets/rerun_tool.md %}
+>    {% snippet faqs/galaxy/tools_rerun.md %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris samples per species group`
 >
@@ -374,7 +377,7 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon comment %} petal and sepal
 > The image below shows you what the terms sepal and petal mean.
-> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
+> ![Iris flower image showing Petal and Sepal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
 {: .comment}
 
 ## Generate summary and descriptive statistics with
@@ -417,7 +420,7 @@ In our dataset, we have the following features measured for each sample:
 >
 > 2. Rename the dataset to `iris summary and statistics`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** {% icon galaxy-eye %} the generated file
 >
@@ -517,37 +520,38 @@ check whether we can spot any immediate patterns.
 
 ## Convert your analysis history into a workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
+When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
 
 Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history.
->    - If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button.
->    - This will make the creation of a workflow easier.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
-> 2. Go to the **History Options menu**  {% icon galaxy-gear %} menu
->    - Select the **Extract Workflow** option.
+>    This will make the creation of the workflow easier.
 >
->      ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
->    - The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_foreveryone_workflow_create.png)
 >
-> 3. **Rename** the workflow to something descriptive
->    - For example: `Exploring Iris dataset with statistics and scatterplots`.
->    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+> 3. Replace the **Workflow name** to something more descriptive, for example: `Exploring Iris dataset with statistics and scatterplots`.
 >
-> 4. Click on the **Create Workflow** button near the top.
->    - You will get a message that the workflow was created. But where did it go?
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
-> 5. Click on **Workflow** in the top menu of Galaxy.
+> 5. Click on the **Create Workflow** button near the top.
+>
+>    You will get a message that the workflow was created. But where did it go?
+>
+>    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
+>
+> 6. Click on **Workflow** in the top menu of Galaxy.
 >    - Here you have a list of all your workflows.
 >    - Your newly created workflow should be listed at the top:
 >
->    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
 >    ![`Your workflows` list](../../images/101_foreveryone_workflow_list.png)
 {: .hands_on}
 
@@ -558,7 +562,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 > If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
-> {% include snippets/import_workflow.md %}
+> {% snippet faqs/galaxy/workflows_import.md %}
 >
 {: .comment}
 
@@ -581,30 +585,30 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 3. **Hiding intermediate outputs**
 >    - We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.
 >    - By default, all outputs will be shown
->    - Click the **asterisk** for outputs to mark them as important:
->        - `out_file` in  **Unique** {% icon tool %}
+>    - Click the **checkbox** next to the outputs to mark them as important:
+>        - `outfile` in  **Unique** {% icon tool %}
 >        - `out_file1` in **Group** {% icon tool%} step
 >            - This should be the Group tool where we performed the counting, you can check which one that is by clicking on it and looking at the parameter settings in the **Details** box on the right.
 >        - `png` in both **Scatterplot w ggplot2** {% icon tool %} steps
 >    - Now, when we run the workflow, we will only see these final outputs
 >        - i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
->    {% include snippets/workflow_hide_intermediate_steps.md %}
+>    {% snippet faqs/galaxy/workflows_hide_intermediate_steps.md %}
 >
 > 4. **Renaming output datasets**
 >    - When we performed the analysis manually, we often renamed output datasets to something more meaningful
 >    - We can do the same in a workflow (see the tip box below)
->    - Let's rename the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
->        - **Unique** {% icon tool%}, output `out_file`: rename to `categories` tool
+>    - Let's rename the outputs we marked as important with the checkbox (and thus do not hide) to more meaningful names:
+>        - **Unique** {% icon tool%}, output `outfile`: rename to `categories` tool
 >        - **Group** {% icon tool %}, output `out_file1`: rename to `samples per category`
 >        - Rename the scatterplot outputs as well, remember to choose a generic name, since we can now also run this on data other than iris plants.
 >
->    {% include snippets/workflow_rename_output.md %}
+>    {% snippet faqs/galaxy/workflows_rename_output.md %}
 >
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
 >
-> 6. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
+> 6. **Return** to the analysis view by clicking on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top menu bar.
 >
 {: .hands_on}
 
@@ -621,7 +625,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 1. Create a **new history** and give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. {% tool [Import](upload1) %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
 >
@@ -629,16 +633,16 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    https://zenodo.org/record/3540705/files/diamonds.csv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the dataset to `diamonds`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Add a propagating tag {% icon galaxy-tags %} (e.g. `#diamonds`)
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 {: .hands_on}
 
 The `diamonds` dataset comes from the well-known [ggplot2](https://ggplot2.tidyverse.org/reference/diamonds.html) package developed by Hadley Wickham and was initially collected from the Diamond Search Engine in 2008.

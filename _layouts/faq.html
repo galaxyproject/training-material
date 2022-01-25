@@ -1,16 +1,24 @@
 ---
-layout: base
+layout: page
 ---
 
-{% include _includes/default-header.html %}
+{% assign contributors = site.data['contributors'] %}
 
-<div class="container main-content">
-    <section>
-        <h1>Frequently asked questions</h1>
+<section class="tutorial">
+  {% if page.contributors %}
+    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include
+        _includes/contributor-list.html
+        contributors=page.contributors badge=true newcontributors=true %}</div>
+  {% endif %}
 
-        {{ content }}
+    {{ page.description }}
+    <hr>
 
-    </section>
-</div>
+    {{content | regex_replace: '<hr.*—<\/p>', '' }}
 
-{% include _includes/default-footer.html %}
+    {% if page.cited %}
+    <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+    {% bibliography --cited %}
+    {% endif %}
+
+</section>

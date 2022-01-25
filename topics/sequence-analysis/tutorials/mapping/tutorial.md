@@ -64,8 +64,8 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
@@ -74,14 +74,14 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 >    https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 3. Rename the files to `reads_1` and `reads_2`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -104,7 +104,7 @@ We need a reference genome to map the reads on.
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
 > ### {% icon hands_on %} Hands-on: Mapping with Bowtie2
-> 1. **Bowtie2** {% icon tool %} with the following parameters
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters
 >    - *"Is this single or paired library"*: `Paired-end`
 >       - {% icon param-file %} *"FASTA/Q file #1"*: `reads_1`
 >       - {% icon param-file %} *"FASTA/Q file #2"*: `reads_2`
@@ -160,9 +160,9 @@ After that, you should have a look at the reads and inspect the BAM file where t
 The BAM file includes a lot of information about each read, particularly the quality of mapping.
 
 > ### {% icon hands_on %} Hands-on: Summary of mapping quality
-> 1. **Samtools stats - generate statistics for BAM dataset** {% icon tool %} with the following parameters
+> 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
->    - *"Use reference sequence"*: `Locally cached`
+>    - *"Use reference sequence"*: `Locally cached/Use a built-in genome`
 >      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
 >
 > 2. Inspect the {% icon param-file %} `Stats` file
@@ -197,7 +197,7 @@ The Integrative Genomics Viewer (IGV) is a high-performance visualization tool f
 
 # Visualization using a Genome Browser (JBrowse)
 
-JBrowse is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
+{% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0) %} is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
 
 {% include topics/sequence-analysis/tutorials/mapping/jbrowse.md tool="Bowtie2" region_to_zoom="chr2:98,666,236-98,667,473" %}
 

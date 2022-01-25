@@ -19,6 +19,9 @@ contributors:
   - bgruening
   - shiltemann
   - hexylena
+abbreviations:
+  API: Application Programming Interface
+  JSON: JavaScript Object Notation
 ---
 
 # Introduction
@@ -231,7 +234,7 @@ The generated tutorial is structured with:
 {: .hands_on}
 
 ## Adding images with captions
-To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
+To add an image in Markdown file, we need to use the markdown syntax for this: `![proper alt text describing the image for visually impaired learners](../../images/image.png)`.
 
 We have also added a small plugin to handle captions for each image:
 
@@ -253,13 +256,21 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 > illustrative.**
 >
 > [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
-{: .blockquote}
+{: .quote}
 
-As an example:
+As an example for this image:
+
+![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
+
 
 ```markdown
-![Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
+![Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
 ```
+
+Field          | Appropriate Contents
+----           | -----
+alt text       | Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.
+figure caption | Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)
 
 ## Writing mathematical expressions
 
@@ -789,6 +800,171 @@ Rendered:
 > ```
 {: .code-out}
 
+
+## FAQs (snippets)
+
+Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of *snippets*.
+
+### Finding snippets
+These are available in folders named `faqs`, either at the project level, topic level, or tutorial level.
+
+- **Project-level FAQs:** `faqs/`
+  - `faqs/galaxy/` for general Galaxy questions
+  - `faqs/gtn/` for questions regarding the GTN website itself
+
+- **Topic-level FAQs:** `topics/<topic>/faqs/`
+  - for questions pertaining to that specific topic
+
+- **Tutorial-level FAQs:** `topics/<topic>/tutorials/<tutorial>/faqs/`
+  - for questions pertaining to that specific tutorial
+  - if this is present, it is linked to from the tutorial overview box at the top, and from the end of the tutorial
+
+
+
+### Including FAQs/snippets in your tutorials
+
+To include one of these snippets in your tutorial, you can use the following syntax:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md %}{% endraw %}
+```
+
+Which will be rendered as:
+
+{% snippet faqs/galaxy/histories_create_new.md %}
+
+The advantage of this approach is that when the Galaxy interface updates, we only have to update the snippet, rather than every tutorial. Please try to use snippets whenever you can!
+
+You could also specify the box type you want the snippet to be rendered in:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}
+
+or without a box altogether:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+
+
+### Creating new FAQs/snippets
+
+Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it
+
+Each snippet (question) is a separate file, with some metadata, residing in one of the `faqs` folders:
+
+```yaml
+---
+title: How do I run a workflow?
+area: workflows      # FAQs will be grouped by these areas on the FAQ page
+box_type: tip        # tip/comment/hands_on; optional, if you want the content to be in a box
+layout: faq          # if you set this the snippet will get its own page and be included in the FAQs page
+---
+
+Here you can write the snippet / answer to the FAQ in Markdown
+
+- Go to `Workflows` on the top menu bar
+- Click on ..
+- ..
+
+```
+
+### FAQ pages
+
+All FAQs will also be collected on their own page, this makes it easy for and teachers to prepare the session, and for participants to quickly find the answers to common questions.
+
+
+To do this, create a file named `index.md` inside the faq folder:
+
+```yaml
+---
+layout: faq-page
+---
+```
+
+If you would like to enforce an order of the faq areas, you can do so:
+
+```yaml
+---
+layout: faq-page
+area_order: [introduction, learners, instructors, contributors, other]
+---
+```
+
+(just make sure you list all existing areas in the folder)
+
+If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/index.md`) it will be automatically linked to from the overview box at the top of the tutorial, and at the end of the tutorial. Have a look at this tutorial to see it in action.
+
+## Footnotes
+
+> > ### {% icon code-in %} Input: Markdown
+> >
+> > ```
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > ```
+> > {: .pre-break-lines}
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> {: .code-out}
+{: .code-2col}
+
+
+## Icons
+
+To use these icons, take the name of the icon, 'details' in this example, and write something like this in your tutorial:
+
+```markdown
+{% raw %}{% icon details %}{% endraw %}
+```
+
+<div class="row">
+{% for icon in site["icon-tag"] %}
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%">{% icon_var icon[0] %}</div>
+		<div>{{ icon[0] }}</div>
+	</div>
+{% endfor %}
+</div>
+
+## Abbreviations
+
+Oftentimes there are terms you'll use over and over again where there is an acronym or abbreviation you'll use consistently. However for learners new to the material, they might need to scroll up to the first definition every time to remember what it meant. It would be annoying as an author to have to re-define it every time, so we've implemented some very simple syntax to allow you to create a list of definitions and then use those in the text.
+
+In your tutorial metadata you can add an abbreviations section like:
+
+```yaml
+---
+title: My awesome tutorial
+...
+abbreviations:
+  API: Application Programming Interface
+  JSON: JavaScript Object Notation
+---
+```
+
+And in your text you can use braces to refer to the term
+
+> > ### {% icon code-in %} Input: Markdown
+> > <code>
+> > The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.
+> > </code>
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> >
+> > The `/jobs` {API} will return {JSON}. When we call the {API} we'll get back this result {JSON}.
+> >
+> {: .code-out}
+{: .code-2col}
+
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 
@@ -810,6 +986,13 @@ If you would like to cite any articles, books or websites in your tutorial, you 
   url = {https://training.galaxyproject.org},
   note = {Accessed 2019-04-08},
   title = {Galaxy Training materials website}
+}
+
+@online{Galaxy-P_Metaproteomics,
+  author = {Galaxy-P Team},
+  title = {Galaxy-P Metaproteomics instance},
+  url = {https://proteomics.usegalaxy.eu/},
+  urldate = {2020-10-13}
 }
 ```
 {% endraw %}
@@ -835,5 +1018,75 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 {: .tip}
 
 
+# Automatic Jupyter Notebooks
+
+If your tutorial is primarily focused on teaching students how to write code (Bash, Python, SQL, etc) you can take advantage of the GTN's ability to automatically export Jupyter Notebooks from the tutorial content. In this system, you pick a single language for your tutorial, and then all code blocks tagged with that language become runnable. E.g.
+
+    Here is some explanation
+
+    ```bash
+    some code that students should execute
+    ```
+
+To use this system, you need to take care of a few things:
+
+- Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
+- Do not use snippets
+- Do not use the built in citation system
+- Do not use a terminal or prompt character
+- Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
+
+And be aware that the output will look a little bit different than the GTN, e.g. solution boxes cannot be hidden by default.
+
+## Enabling the system
+
+Add metadata to your `tutorial.md` header like:
+
+
+```
+notebook:
+  language: python
+```
+
+
+
+# Spanish Translation Project
+
+We have started [a trial for translating tutorials into Spanish]({{site.baseurl}}/news/2021/05/20/spanish_project_begins.html). Below are instructions on how to add translations of slides and/or hands-on tutorials in Spanish.
+
+1. **Add a new file** with the translated material, next to the English version.
+   - Add suffix `_ES` suffix
+       - i.e. `tutorial_ES.md` or `slides_ES.html`
+
+
+2. **Add metadata** to the **English version** (at the top of the file):
+     ```yaml
+     tags:
+       - español
+     translations:
+       - es
+     ```
+
+3. **Add metadata** to the **translated version** of the file:
+     ```yaml
+     lang: es
+     translations:
+       - en
+     ```
+
+If all worked well, it should look something like this, with a dropdown menu on the slides and/or tutorial showing the presence of a curated tutorial:
+
+![example of the view in the topic page for a tutorial with a Spanish translation](../../images/curated-translations.png)
+
+## Other Languages
+Would you like to add a different language to the GTN? Please contact us first (e.g. on [Gitter]({{site.gitter_url}})), to discuss a long-term sustainability plan!
+
 # Conclusion
 {:.no_toc}
+
+
+## Footnotes (Rendered)
+
+[^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
+
+

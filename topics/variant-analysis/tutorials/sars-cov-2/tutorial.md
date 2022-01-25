@@ -50,7 +50,7 @@ At the completion of this tutorial you will know:
 	- Quality Control (QC) of Illumina data
 	- Mapping
 	- Removal of duplicates
-	- Variant calling with `lofreq` 
+	- Variant calling with `lofreq`
 	- Variant annotation
 - Using datasets collections
 - Importing data to Jupyter
@@ -68,7 +68,7 @@ At the completion of this tutorial you will know:
 
 ## Two paths through this tutorial
 
-We created twoi trajectories that you can follow through this tutorial. 
+We created twoi trajectories that you can follow through this tutorial.
 
 1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [here](#the-sequence-read-archive)
 2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [here](#back-in-galaxy)
@@ -238,18 +238,19 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
 > ![Find data](../../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
-> 3. The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
-> 4. Download metadata describing these datasets by:
+> 3. Note that some of the datasets found say "ARTICv3 amplicon sequencing". This is a sequencing technique that requires addition analysis steps not discussed in this tutorial. The data that we will analyse (datasets mentioned below) uses a technique called "metagenomic sequencing".
+> 4. The web page will show a large number of SRA datasets (at the time of writing there were 3,927). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
+> 5. Download metadata describing these datasets by:
 >   - clicking on **Send to:** dropdown
 >   - Selecting `File`
 >   - Changing **Format** to `RunInfo`
 >   - Clicking **Create file**
 > Here is how it should look like:
 > ![GetRunInfo](../../images/get_runinfo.png)
-> 5. This would create a rather large `SraRunInfo.csv` file in your `Downloads` folder.
+> 6. This would create a rather large `SraRunInfo.csv` file in your `Downloads` folder.
 {: .hands_on}
 
-Now that we have downloaded this file we can go to a Galaxy instance and start processing it. 
+Now that we have downloaded this file we can go to a Galaxy instance and start processing it.
 
 > ### {% icon comment %} Comment
 >
@@ -269,13 +270,13 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 > 1. Find and select `SraRunInfo.csv` file from your computer
 > 1. Click *Start* button
 > 1. Close dialog by pressing **Close** button
-> 1. You can now look at the content of this file by clicking {% icon galaxy-eye %} (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.  
+> 1. You can now look at the content of this file by clicking {% icon galaxy-eye %} (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.
 {: .hands_on}
 
 Galaxy can process all 2,000+ datasets but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
 
 > ### {% icon comment %} Beware of **Cut**s
-> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface. 
+> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Creating a subset of data
@@ -356,13 +357,13 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 
 > ### {% icon hands_on %} Hands-on: Get the reference genome data
 >
-> 1.  Import the following file into your history:
+> 1. Import the following file into your history:
 >
->     ```
->https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
->     ```
+>    ```
+>    https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
+>    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 

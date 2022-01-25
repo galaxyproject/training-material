@@ -17,6 +17,7 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
+  - erasmusplus
 ---
 
 # Introduction
@@ -55,7 +56,7 @@ This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will 
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the datasets we will visualize:
 >
@@ -72,7 +73,7 @@ This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will 
 >    https://zenodo.org/record/3591856/files/variants.vcf
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
@@ -196,7 +197,7 @@ This is the next major category of data that people wish to visualize: sequencin
 
 Next we will add a sequencing dataset, a BAM file which maps some sequencing reads against various locations along the genome. JBrowse helpfully highlights which reads have mapping issues, and any changes in bases between the reads and the genome. We "Autogenerate a SNP track", which produces an extra track we can enable in JBrowse. This track reads the same BAM file used for visualising reads, and then produces a SNP and coverage visualisation. **NB**: This only works for small BAM files, if your files are large (>200 Mb), then you should consider generating these coverage and SNP tracks by other means (e.g. `bamCoverage` and `FreeBayes` or similar tools) as it will be significantly faster. You can learn more about generating these files in [the Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`

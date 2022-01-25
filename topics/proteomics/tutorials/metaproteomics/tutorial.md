@@ -21,6 +21,8 @@ contributors:
   - jj-umn
   - blankclemens
   - subinamehta
+subtopic: multi-omics
+tags: [microbiome]
 ---
 
 # Introduction
@@ -61,12 +63,19 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    ```
+>    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_45.mgf
+>    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_46.mgf
+>    https://zenodo.org/record/839701/files/2016_Jan_12_QE2_47.mgf
+>    https://zenodo.org/record/839701/files/FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.fasta
+>    https://zenodo.org/record/839701/files/Gene_Ontology_Terms.tabular
+>    ```
 >
 >    As default, Galaxy takes the link as name.
 >
@@ -76,7 +85,27 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 3. Build a **Dataset list** for the three MGF files
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+{: .hands_on}
+
+We have a choice to run all these steps using a single workflow, then discuss each step and the results in more detail.
+
+> ### {% icon hands_on %} Hands-on: Pretreatments
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: SixGill generated protein fasta file"*: `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.fasta`
+>    - {% icon param-file %} *"2: Dataset collection of Bering Strait MGF files"*: `Dataset collection of bering MGF`
+>    - {% icon param-file %} *"3: GeneOntology terms (selected)"*: `Gene_Ontology_terms.tabular`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
@@ -94,7 +123,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 
 > ### {% icon hands_on %} Hands-on: SearchGUI
 >
-> 1. **SearchGUI** {% icon tool %}: Run **SearchGUI** with:
+> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - **Protein Database**: `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA`(or however you named the `FASTA` file)
 >    - **Input Peak lists (mgf)**: `MGF files` dataset collection.
 >
@@ -178,7 +207,7 @@ outputs.
 
 > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
-> 1. **PeptideShaker** {% icon tool %}: Run **PeptideShaker** with:
+> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >   - **Compressed SearchGUI results**: The SearchGUI archive file
 >   - **Specify Advanced PeptideShaker Processing Options**: `Default Processing Options`
 >   - **Specify Advanced Filtering Options**: `Advanced Filtering Options`
@@ -243,7 +272,7 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >
 >    - **Database Table**: Click on `+ Insert Database Table`:
 >    - **Tabular Dataset for Table**: The PSM report
@@ -317,7 +346,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 
 > ### {% icon hands_on %} Hands-on: SQLite to tabular
 >
-> 1. **SQLite to tabular** {% icon tool %}: Run **SQLite to tabular** with:
+> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
 >
 >    - **SQL Query**:
 >
@@ -330,7 +359,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >          GROUP BY sequence
 >
 >          ORDER BY sequence
-> 
+>
 >
 > 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
 >
@@ -344,7 +373,7 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 
 > ### {% icon hands_on %} Hands-on: Unipept
 >
-> 1. **Unipept** {% icon tool %}: Run **Unipept** with:
+> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
 >
 >    - **Unipept application**: `pept2lca: lowest common ancestor`
 >    - **Peptides input format**: `tabular`
@@ -379,7 +408,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >
 >    - **Database Table**: Click on `+ Insert Database Table`
 >    - **Tabular Dataset for Table**: The PSM report
@@ -502,6 +531,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 > In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
 > one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
+> You could also upload the Gene Ontology Terms by copying this link on to the Upload Data - Paste/Fetch data `https://zenodo.org/record/839701/files/Gene_Ontology_Terms_full_07.08.2017.tabular`
 >
 {: .details}
 
@@ -513,7 +543,7 @@ for each protein.
 
 > ### {% icon hands_on %} Hands-on: Unipept
 >
-> 1. **Unipept** {% icon tool %}: Run **Unipept** with:
+> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
 >
 >    - **Unipept application**: `pept2prot: UniProt entries containing a given tryptic peptide`
 >    - **retrieve extra information**: `Yes`
@@ -548,7 +578,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >
 >    - **Database Table**: Click on `+ Insert Database Table`
 >    - **Tabular Dataset for Table**: The `Gene Ontology Terms` file
@@ -668,7 +698,7 @@ With this we have combined all the data into a single database which we can now 
 
 > ### {% icon hands_on %} Hands-on: SQLite to tabular
 >
-> 1. **SQLite to tabular** {% icon tool %}: Run **SQLite to tabular** with:
+> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
 >
 >    - **SQLite Database**: The created SQLite database from the former step
 >    - **SQL Query**:

@@ -24,6 +24,7 @@ contributors:
   - abretaud
 tags:
   - ansible
+  - interactive-tools
 requirements:
   - type: "internal"
     topic_name: admin
@@ -31,6 +32,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - job-destinations
 ---
 
 > ### {% icon warning %} Evolving Topic

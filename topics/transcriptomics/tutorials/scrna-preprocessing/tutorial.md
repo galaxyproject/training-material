@@ -130,7 +130,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq single batch tutorial)
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
@@ -139,7 +139,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    https://zenodo.org/record/3253142/files/SRR5683689_2.subset.fastq
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
 > 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
@@ -277,7 +277,7 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 >  1. Click on the {% icon galaxy-eye %} symbol of the BAM output from STAR.
 >  2. There are many header lines that begin with `@` which we are not interested in.
 >  3. Look at 10th read directly below the header lines:
-> 
+>
 >         SRR5683689.38437_GCATTC_CTTCGT	16	chr1	3439991	255	70M	*	0	0	CTTTGAATCTCTTCTTCCCAGCTAGTCATCTTCCTGCTTTTCTCTCTGTCTGTCTGTCTGTCTGTCTGTC	'0'<B<''B77<BFBBBBB7'FBFB0F7FBB<B'''<IFFBF<FBFB<FBBFBB0<BFFFBB0BBFFB<<	NH:i:1 HI:i:1 AS:i:66 nM:i:1
 >
 >
@@ -555,8 +555,9 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 1. Rename a matrix
 >    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tsv`* file
@@ -602,7 +603,8 @@ Let us now merge our matrices from different batches. In order to ensure that ou
 > ### {% icon hands_on %} Hands-on: Table Merge
 >
 > 1. **Create a Dataset List**
->    {% include snippets/build_list_collection.md %}
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
 >   - *"Tabular Files"*: (Select the Dataset Collection icon {% icon param-collection %}, and select the Collection from the previous step each of the matrices that you wish to join)
@@ -763,3 +765,5 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 
 ![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).

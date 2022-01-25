@@ -1,9 +1,7 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: Statistical analysis of DIA data
-zenodo_link: 'https://zenodo.org/record/4302084'
+zenodo_link: 'https://zenodo.org/record/4307758'
 level: Intermediate
 questions:
 - How to perform statistical analysis on DIA mass spectrometry data?
@@ -26,17 +24,19 @@ requirements:
 contributors:
 - matthias313
 - foellmelanie
+subtopic: post-process
+tags: [DIA]
 
 ---
 
 # Introduction
 {:.no_toc}
 
-This training covers the statistical analysis of data independent acquisition (DIA) mass spectrometry (MS) data, after successfull identification and quantification of peptides and proteins. We therefore recommend to first go through the [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html) as well as the [DIA analysis tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html), which teach the principles and characteristics of DIA data analysis. 
+This training covers the statistical analysis of data independent acquisition (DIA) mass spectrometry (MS) data, after successfull identification and quantification of peptides and proteins. We therefore recommend to first go through the [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html) as well as the [DIA analysis tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html), which teach the principles and characteristics of DIA data analysis.
 
-Modern mass spectrometry approaches enables the identification and quantification of thousands of proteins and tens of thousands of peptides in single measurements. This provides immense potential to in-depth explorative analysis of a variety of biological samples. However, often the number of available samples is limited leading to large proteomic datasets with only a few numbers of replicates or samples per condition. Thus, the statistical analysis remains challenging in such in-depth proteomic studies. 
+Modern mass spectrometry approaches enables the identification and quantification of thousands of proteins and tens of thousands of peptides in single measurements. This provides immense potential to in-depth explorative analysis of a variety of biological samples. However, often the number of available samples is limited leading to large proteomic datasets with only a few numbers of replicates or samples per condition. Thus, the statistical analysis remains challenging in such in-depth proteomic studies.
 
-Here we will use **MSstats**, which enables the statistical analysis and processing of proteomic data ({% cite Choi2014 %}). 
+Here we will use **MSstats**, which enables the statistical analysis and processing of proteomic data ({% cite Choi2014 %}).
 
 > ### Agenda
 >
@@ -52,19 +52,21 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the DIA analysis results, the sample annotation and the comparison matrix from [Zenodo](https://zenodo.org/record/4302084)
+> 2. Import the DIA analysis results, the sample annotation and the comparison matrix from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/PyProphet_export.tabular
->    https://zenodo.org/record/4302084/files/Sample_annot_MSstats.txt
->    https://zenodo.org/record/4302084/files/Comp_matrix_HEK_Ecoli.txt
->    https://zenodo.org/record/4302084/files/PyProphet_msstats_input.tabular
+>    https://zenodo.org/record/4307758/files/PyProphet_export.tabular
+>    https://zenodo.org/record/4307758/files/Sample_annot_MSstats.txt
+>    https://zenodo.org/record/4307758/files/Comp_matrix_HEK_Ecoli.txt
+>    https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 >    ```
->    {% include snippets/import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Once the files are green, rename the sample annotation file in 'Sample_annot_MSstats', the comparison matrix file in 'Comp_matrix_HEK_Ecoli' and the two DIA analysis results files in 'PyProphet_export' and 'PyProphet_msstats_input'
->    {% include snippets/rename_dataset.md %}
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -105,9 +107,9 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 > ### {% icon tip %} Tip: Continue with results from Zenodo
 >
 > In case the **MSstats** run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4302084)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_export_tabular.tsv
+>    https://zenodo.org/record/4307758/files/MSstats_ComparisonResult_export_tabular.tsv
 >    ```
 {: .tip}
 
@@ -117,7 +119,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `MSstats_ComparisonResult_export_tabular` (output of **MSstats** {% icon tool %})
->    - *"the pattern"*: `(ECOLI)|(logFC)`
+>    - *"the pattern"*: `(ECOLI)|(log2FC)`
 >
 > 2. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Select_Ecoli` (output of **Select** {% icon tool %})
@@ -133,7 +135,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 >
 >    > ### {% icon comment %} Comment: Extracting Ecoli information
->    >First we only select rows containing specific terms such as "Ecoli" from the complete ComparisonResults file. Afterwards, the table is filtered to containg only proteins with valid statistical information (e.g. p-value). Using the log2 Fold change values from all remaining Ecoli proteins we can observe the distribution of log2FC values from the comparison of the two Spike-in conditions. 
+>    >First we only select rows containing specific terms such as "Ecoli" from the complete ComparisonResults file. Afterwards, the table is filtered to containg only proteins with valid statistical information (e.g. p-value). Using the log2 Fold change values from all remaining Ecoli proteins we can observe the distribution of log2FC values from the comparison of the two Spike-in conditions.
 >    {: .comment}
 >
 {: .hands_on}
@@ -146,7 +148,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 > > ### {% icon solution %} Solution
 > >
 > > 1. In total, over 800 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions.
-> > 2. We can see a gaussian distribution of the log2FC values around a positive value of 3. Since we compared Spike_in_2 / Spike_in_1 we can directly see that Spike_in_2 contained higher amounts of Ecoli. Furthermore, since the apex of the distribution is around 3 and we compared log2 intensities, we could estimate that Spike_in_2 contained approx. 8-times more Ecoli than Spike_in_1. 
+> > 2. We can see a gaussian distribution of the log2FC values around a positive value of 3. Since we compared Spike_in_2 / Spike_in_1 we can directly see that Spike_in_2 contained higher amounts of Ecoli. Furthermore, since the apex of the distribution is around 3 and we compared log2 intensities, we could estimate that Spike_in_2 contained approx. 8-times more Ecoli than Spike_in_1.
 > >
 > {: .solution}
 >
@@ -164,7 +166,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 >
 >    > ### {% icon comment %} Comment: MSstats input format
->    >For the statistical analysis using MSstats the input must be in the long format, containing all relevant information in 10 predefined columns. The conversion of the **PyProphet export** output can either be done using **MSstats** (as we did above), or during the **Pyprophet export** step by using another R package called swath2stats ({% cite Blattmann2016 %}). Prior to the conversion the data can be processed and filtered using the swath2stats functionalities. 
+>    >For the statistical analysis using MSstats the input must be in the long format, containing all relevant information in 10 predefined columns. The conversion of the **PyProphet export** output can either be done using **MSstats** (as we did above), or during the **Pyprophet export** step by using another R package called swath2stats ({% cite Blattmann2016 %}). Prior to the conversion the data can be processed and filtered using the swath2stats functionalities.
 >    {: .comment}
 >
 {: .hands_on}
@@ -186,9 +188,9 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 > ### {% icon tip %} Tip: Continue with results from Zenodo
 >
 > In case the **MSstats** run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4302084)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_msstats_input.tsv
+>    https://zenodo.org/record/4307758/files/MSstats_ComparisonResult_msstats_input.tsv
 >    ```
 {: .tip}
 
@@ -198,7 +200,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `MSstats_ComparisonResult_msstats_input` (output of the second **MSstats** {% icon tool %})
->    - *"the pattern"*: `(ECOLI)|(logFC)`
+>    - *"the pattern"*: `(ECOLI)|(log2FC)`
 >
 > 2. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Select_Ecoli` (output of the second **Select** {% icon tool %})
@@ -224,8 +226,8 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. In total, over 600 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions. Here we identify 200 Ecoli proteins less than before, however, the number of proteins for which a p-value was calculated differs only slightly. 
-> > 2. Generally, the two log2FC distribution look very similar, showing a gaussian distribution of the log2FC values around a positive value of 3. There seems to be a slight difference of the apex of the distribution, in the first **MSstats** analysis it seems to be higher than 3, whereas in the second **MSstats** analysis the apex seems to be lower than 3. 
+> > 1. In total, over 600 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions. Here we identify 200 Ecoli proteins less than before, however, the number of proteins for which a p-value was calculated differs only slightly.
+> > 2. Generally, the two log2FC distribution look very similar, showing a gaussian distribution of the log2FC values around a positive value of 3. There seems to be a slight difference of the apex of the distribution, in the first **MSstats** analysis it seems to be higher than 3, whereas in the second **MSstats** analysis the apex seems to be lower than 3.
 > >
 > {: .solution}
 >
@@ -238,6 +240,6 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 
 ![DIA_MSstats_pipe](../../images/DIA_MSstats_sum.png "All-in one workflow for DIA analysis in Galaxy. The statistical analysis using MSstats is highlighted in green.")
 
-Using **MSstats** we were able to identify and quantify differentially regulated proteins between two Spike-in conditions in a HEK/Ecoli Benchmark DIA datatset. Furthermore, the preprocessing of the proteomic data prior to the statistical analysis can directly impact results. Thus, it might be beneficial to try various ways of intermediate data processing and statistical analysis to increase the sensitivity and specificity of the investigation. 
+Using **MSstats** we were able to identify and quantify differentially regulated proteins between two Spike-in conditions in a HEK/Ecoli Benchmark DIA datatset. Furthermore, the preprocessing of the proteomic data prior to the statistical analysis can directly impact results. Thus, it might be beneficial to try various ways of intermediate data processing and statistical analysis to increase the sensitivity and specificity of the investigation.
 
 ![DIA_MSstats_galaxy](../../images/DIA_MSstats_galaxy.png "Galaxy worfklow containing all necessary steps for the statistical analysis of DIA data using MSstats")

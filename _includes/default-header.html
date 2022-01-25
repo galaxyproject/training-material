@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark">
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="{{ site.baseurl }}/">
                 <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
@@ -12,20 +12,58 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                         <a class="nav-link" href="{{ site.baseurl }}/hall-of-fame" title="Hall of Fame">
-                            {% icon hall-of-fame %} Contributors
+                        {% if page.layout == "tutorial_hands_on" %}
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
+                            {% icon topic aria=false %} {{ topic.title }}
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}" title="View on GitHub">
-                            {% icon github %} View on GitHub
+                        {% else %}
+                        <a class="nav-link" href="{{ site.baseurl }}/hall-of-fame" title="Hall of Fame">
+                           {% icon hall-of-fame %} Contributors
                         </a>
+
+                        {% endif %}
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            {% icon language %} Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            {% if page.translations %}
+                              <strong class="dropdown-header">Curated Translations</strong>
+                              {% for lang in page.translations %}
+                                  {% if lang == "en" %}
+                                      {% capture fixed_final %}_{{ page.lang | upcase }}.html{% endcapture %}
+                                      <a class="dropdown-item" href="{{ site.baseurl }}{{ page.url | replace: fixed_final,".html"}}">
+                                        {{site.other_languages[lang]}}
+                                      </a>
+                                  {% else %}
+                                      {% capture fixed_final %}_{{ lang | upcase }}.html{% endcapture %}
+                                      <a class="dropdown-item" href="{{ site.baseurl }}{{ page.url | replace: '_ES', '' | replace: ".html",fixed_final}}">
+                                        {{site.other_languages[lang]}}
+                                      </a>
+                                  {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            {% for lang in site.other_languages %}{% unless lang[0]=='en' %}
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{lang[0]}}&u=https%3A%2F%2Ftraining.galaxyproject.org{{page.url}}&edit-text=&act=url">
+                            {{lang[1]}}
+                            </a>
+                            {% endunless %}{% endfor %}
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org{{ page.url }}&edit-text=&act=url" title="{{ inst[0] }}">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
                     {% include _includes/help.html %}
+
+                    {% include _includes/extras.html %}
 
                     <!-- Search bar-->
                     <li class="nav-item">
-                      <div id="navbarSupportedContent">
+                      <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
                         <form class="form-inline mr-auto" method="GET" action="{{site.baseurl}}/search">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>

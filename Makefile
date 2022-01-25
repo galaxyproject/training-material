@@ -9,15 +9,15 @@ PDF_HOST?=127.0.0.1
 SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
-BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
-MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+BRANCH=$(shell echo "$${ORIGIN_BRANCH:-main}")
+MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
 RUBY_VERSION=2.4.4
 CONDA_ENV=galaxy_training_material
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-	MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+	MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 endif
 
 CONDA=$(shell which conda)
@@ -44,11 +44,15 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
-		gem update --system && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
+		gem update --no-document --system && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby
 .PHONY: install
 
-serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpod.io)
+	bundle install
+.PHONE: bundle-install
+
+serve: api/swagger.json ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
 	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
 	$(ACTIVATE_ENV) && \
@@ -57,7 +61,7 @@ serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set th
 		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
-serve-quick: ## run a local server (faster, some plugins disabled for speed)
+serve-quick: api/swagger.json ## run a local server (faster, some plugins disabled for speed)
 	@echo "This will build the website with citations and other content disabled, and incremental on by default. To run the full preview (slower), use make serve" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
@@ -65,7 +69,15 @@ serve-quick: ## run a local server (faster, some plugins disabled for speed)
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
-build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
+serve-gitpod: bundle-install api/swagger.json  ## run a server on a gitpod.io environment
+	bundle exec jekyll serve --config _config.yml --incremental
+.PHONY: serve-gitpod
+
+build-gitpod: bundle-install api/swagger.json  ## run a build on a gitpod.io environment
+	bundle exec jekyll build --config _config.yml
+.PHONY: build-gitpod
+
+build: clean api/swagger.json ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
@@ -77,14 +89,19 @@ check-frontmatter: ## Validate the frontmatter
 		bundle exec ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
 
+check-contributors: ## Validate the contributors.yaml file
+	$(ACTIVATE_ENV) && \
+		bundle exec ruby bin/validate-contributors.rb
+.PHONY: check-contributors
+
 _check-html: # Internal
 	$(ACTIVATE_ENV) && \
 	  	htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
 	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--allow-hash-href \
 	      	./_site
 .PHONY: _check-html
@@ -106,9 +123,9 @@ _check-html-internal: # Internal
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/","/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--disable-external \
 	      	--allow-hash-href \
 	      	./_site
@@ -135,13 +152,13 @@ check-yaml: ## lint yaml files
 	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
 .PHONY: check-yaml
 
+check-diffs: ## lint diffs in tutorials
+	find ./topics/admin/ -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
+.PHONY: check-diffs
+
 check-tool-links: ## lint tool links
 	@bash ./bin/check-broken-tool-links.sh
 .PHONY: check-tool-links
-
-check-snippets: ## lint snippets
-	./bin/check-for-trailing-newline
-.PHONY: check-snippets
 
 check-framework:
 	$(ACTIVATE_ENV) && \
@@ -155,7 +172,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: check-frontmatter check-workflows check-snippets check-tool-links ## run linting checks which do not require a built site
+lint: check-frontmatter check-workflows check-tool-links ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
@@ -164,7 +181,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 			--assume-extension \
 			--http-status-ignore 405,503,999 \
 			--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-			--file-ignore "/.*\/files\/.*/" \
+			--file-ignore "/.*\/files\/.*/","/\/tutorials\/.*\/docker\//" \
 			--allow-hash-href \
 			. && \
 		find . -path "**/slides*.html" \
@@ -195,27 +212,26 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
+
 _site/%/introduction.pdf: _site/%/introduction.html
-	if ! grep 'http-equiv="refresh"' $< --quiet; then \
-		$(ACTIVATE_ENV) && \
-		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
-		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
-		wkhtmltopdf \
-		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
-			--user-style-sheet bin/slides-fix.css \
-			- $@; \
-	fi
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 _site/%/slides.pdf: _site/%/slides.html
-	if ! grep 'http-equiv="refresh"' $< --quiet; then \
-		$(ACTIVATE_ENV) && \
-		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
-		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
-		wkhtmltopdf \
-		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
-			--user-style-sheet bin/slides-fix.css \
-			- $@; \
-	fi
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
+
+_site/%/slides_ES.pdf: _site/%/slides_ES.html
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
+
+_site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
+	$(ACTIVATE_ENV) && \
+	$(shell npm bin)/http-server _site -p 9876 & \
+	$(shell npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/$(<:_site/%=%) $@; \
 
 video: ## Build all videos
 	bash bin/ari-make.sh
@@ -226,6 +242,12 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 	python bin/add_galaxy_instance_annotations.py && \
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
+
+rebuild-search-index: ## Rebuild search index
+	node bin/lunr-index.js > search.json
+
+api/swagger.json: metadata/swagger.yaml
+	cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
 
 clean: ## clean up junk files
 	@rm -rf _site

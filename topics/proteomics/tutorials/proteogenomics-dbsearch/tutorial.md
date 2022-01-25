@@ -31,6 +31,8 @@ contributors:
   - jraysajulga
   - jj-umn
   - pravs3683
+subtopic: multi-omics
+tags: [proteogenomics]
 ---
 
 # Introduction
@@ -66,12 +68,12 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets to something more recognizable (strip the URL prefix)
 > 4. Build a **Dataset list** for the three MGF files, name it as "**Mo_Tai_MGFs**"
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -83,15 +85,23 @@ will be used to match MS/MS to peptide sequences via a sequence database search.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.The generated dataset collection of the three *MGF files* in the history is used as the MS/MS input. We will walk through a number of these settings in order to utilize SearchGUI on these example MGF files.
 
+### {% icon comment %} Comment: Tool Versions
+>
+> The tools are subjected to changes while being upgraded. Here we have used an older version of SearchGUI (v3.3.10.1)-Peptide Shaker (v1.16.36.3).
+> The new versions are available in Galaxy.
+>
+{: .comment}
+
+
 ## SearchGUI
 
 > ### {% icon hands_on %} Hands-on: SearchGUI
 >
-> 1. **SearchGUI** {% icon tool %} with the following parameters:
+> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` (Or however you named the `FASTA` file)
 >
 >        > ### {% icon comment %} Comment:
->        >    The "Uniprot_cRAP_SAV_indel_translatedbed" FASTA database is obtained when you run the first proteogenomics workflow. 
+>        >    The "Uniprot_cRAP_SAV_indel_translatedbed" FASTA database is obtained when you run the first proteogenomics workflow.
 >        >    Please make sure to run the 1st workflow.
 >        {: .comment}
 >
@@ -184,7 +194,7 @@ outputs.
 
 > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
-> 1. **PeptideShaker** {% icon tool %} with the following parameters:
+> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >   - {% icon param-file %} *"Compressed SearchGUI results"*: The SearchGUI archive file
 >   - {% icon param-select %} *"Specify Advanced PeptideShaker Processing Options"*: `Default Processing Options`
 >   - {% icon param-select %} *"Specify Advanced Filtering Options"*: `Default Filtering Options`
@@ -214,7 +224,7 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 >
 > This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
 >
-> 1. **mz to sqlite** {% icon tool %} with the following parameters:
+> 1. {% tool [mz to sqlite](toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Proteomics identification files"*: `PeptideShaker_mzidentml`
 >    - {% icon param-file %} *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
 >    - {% icon param-file %} *"Proteomics Search Database Fasta"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
@@ -378,11 +388,10 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 # **Conclusion**
 {:.no_toc}
 
-This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN "Proteogenomics Novel Peptide Analysis". 
+This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN "Proteogenomics Novel Peptide Analysis".
 Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
 
 
 {: .comment}
-

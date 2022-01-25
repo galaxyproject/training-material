@@ -47,7 +47,7 @@ Prokka requires assembled contigs.
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1156405) or from the shared data library
 >
@@ -55,8 +55,8 @@ Prokka requires assembled contigs.
 >    https://zenodo.org/record/1156405/files/contigs.fasta
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -122,3 +122,9 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >      - you can download the FASTA sequence by clicking on the disk icon
 > ![JBrowse](../../images/jbrowse6.png)
 {: .hands_on}
+
+## What's Next
+
+After automatic annotation of prokaryotic genome, if inspection of predicted genes with JBrowse introduced mistakes, e.g. wrong exon/intron limits, splitted genes, or merged genes -- or simply if you wish to rename genes or provide additional functional (e.g., Gene Ontology) data, setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors.
+
+The [Apollo training]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) should provide additional guidance.

@@ -32,7 +32,7 @@ In this section we will look at practical aspects of manipulation of next-genera
 
 ## FASTQ manipulation and quality control
 
-[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [here](https://en.wikipedia.org/wiki/FASTQ_format) (below you will explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [here](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
 
 The FASTQ format looks like this:
 
@@ -253,7 +253,7 @@ The following table explains the format and content of each field. The `FLAG`, `
 
 ### `FLAG` field
 
-The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE reads. It contains an integer that is generated from a sequence of Boolean bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.
+The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE reads. It contains an integer that is generated from a sequence of bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.
 
 The following table gives an overview of the different properties that can be encoded in the FLAG field. The developers of the SAM format and samtools tend to use the hexadecimal encoding as a means to refer to the different bits in their documentation. The value of the FLAG field in a given SAM file, however, will always be the decimal representation of the sum of the underlying binary values (as shown in Table below, row 2).
 
@@ -414,7 +414,7 @@ Finally, datasets can be uploaded directly from NCBI's short read archive:
 
 In primary analysis we start with raw sequencing data (e.g., fastq reads) and convert them into a dataset for secondary analysis. Such dataset can be a list of sequence variants, a collection of ChIP-seq peaks, a list of differentially expressed genes and so on.
 
-SARS-CoV-2 is undoubtedly the most talked about biological system of the day. We will use SARS-CoV-2 sequencing data to demonstrate how Galaxy handles NGS data. In this case we will going from fastq data to a list of variants.
+SARS-CoV-2 is undoubtedly the most talked about biological system of the day. We will use SARS-CoV-2 sequencing data to demonstrate how Galaxy handles NGS data. In this case we will go from FASTQ data to a list of variants.
 
 ## Find necessary data in SRA
 
@@ -489,10 +489,6 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 
 Now that we have identifiers of datasets we want we need to download the actual sequencing data. You can also watch [this video](#from-ncbi-short-read-archive).
 
-The remaining portion of this tutorial can also be viewed as a video:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9mIL0tIfZ_o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Download sequencing data
 
 > ### {% icon hands_on %} Hands-on: Get data from SRA
@@ -500,7 +496,7 @@ The remaining portion of this tutorial can also be viewed as a video:
 > 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0) %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
 >        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
->    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
+>    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
 >
 > 2. Several entries are created in your history panel when you submit this job:
 >    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
@@ -509,7 +505,7 @@ The remaining portion of this tutorial can also be viewed as a video:
 >    - **`fasterq-dump log`** Contains Information about the tool execution
 {: .hands_on}
 
-The first three items are actually *collections* of datasets.  *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis.  In this case the tool creates a separate collection each for paired-end reads, single reads, and *other*. See the [Collections tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
+The first three items are actually *collections* of datasets. *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end reads, single reads, and *other*. See the [Collections tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
 
 Explore the collections by first **clicking** on the collection name in the history panel. This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.
 
@@ -542,13 +538,13 @@ This data is available from directly from GenBank using the following [link](htt
 
 > ### {% icon hands_on %} Hands-on: Get the reference genome data
 >
-> 1.  Import the following file into your history:
+> 1. Import the following file into your history:
 >
->     ```
->https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
->     ```
+>    ```
+>    https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
+>    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
@@ -880,5 +876,3 @@ We can also import data directly into Google Colab:
 {:.no_toc}
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.
-
-

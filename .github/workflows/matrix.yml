@@ -1,0 +1,48 @@
+name: Send news to Matrix
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # We'll run this daily at noon.
+    - cron:  '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  runner-job:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # BEGIN Dependencies
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.5"
+      - uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+            ~/.cache/pip
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py--node-
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle pristine ffi
+      # END Dependencies
+
+      - name: Send announcements to matrix
+        run: |
+            commit=$(git log --since "24 hours ago" --format=%H | tail -n 1)
+            bundle exec ruby bin/news.rb -p "${commit}~1" --matrix-post
+        env:
+            MATRIX_ACCESS_TOKEN: ${{ secrets.matrix_access_token }}

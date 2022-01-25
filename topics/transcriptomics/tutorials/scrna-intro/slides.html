@@ -5,11 +5,14 @@ title: "An introduction to scRNA-seq data analysis"
 
 subtopic: single-cell
 priority: 1
-
+level: Intermediate
 video: yes
 zenodo_link: ""
 tags:
   - single-cell
+  - español
+translations:
+  - es
 questions:
   - How are samples compared?
   - How are cells captured?
@@ -38,7 +41,6 @@ follow_up_training:
 contributors:
   - mtekman
 
-
 ---
 
 # Single-cell RNA-seq
@@ -54,17 +56,17 @@ An introduction to scRNA-seq data analysis
 
 ## Bulk RNA-Seq
 
-.pull-left-large[![](../../images/scrna-intro/rna_cells_bulkrez.svg)]
+.pull-left[![Two blobs labelled tissue A and tissue B are shown, on the right they are summarised into tables of Gene A, B, and X and their different average expression per tissue.](../../images/scrna-intro/rna_cells_bulkrez.svg)]
 
 .pull-right[
 .reduce90[
-.center[*Summary*]
 
-| | |
+|Attribute| Summary |
 |-:|:-|
-| Resolution| Entire tissues |
-| Signal | Average gene expression per tissue |
-| Differential Expression | Difference between average gene expression between tissues |
+|Resolution| Entire tissues |
+|Signal | Average gene expression per tissue |
+|Differential Expression | Difference between average gene expression between tissues |
+
 ]
 ]
 
@@ -79,17 +81,17 @@ An introduction to scRNA-seq data analysis
 
 ## Single Cell RNA-Seq
 
-.pull-left-large[![](../../images/scrna-intro/rna_cells_singlerez.svg)]
+.pull-left[![Red and blue clusters of cells are shown resembling the tissue blob from the previous slide. Now the graphs on the right for expression in Genes A, B, X are shown per cell instead of per tissue.](../../images/scrna-intro/rna_cells_singlerez.svg)]
 
 .pull-right[
 .reduce90[
-.center[*Summary*]
 
-| | |
+|Attribute| Summary |
 |-:|:-|
 | Resolution| Individual cells within tissues |
 | Signal | Individual gene expression per cell |
 | Differential Expression | Some cells express the same set of genes in the same way; comparing one set of cells against another |
+
 ]
 ]
 
@@ -108,7 +110,7 @@ An introduction to scRNA-seq data analysis
 
 # From Bulk RNA to Single Cell RNA
 
-.image-50[![](../../images/scrna-intro/rna_cells_bulk2single.svg)]
+.image-50[![Tissue A and B from the first slide are shown as the collections of cells from the second slide.](../../images/scrna-intro/rna_cells_bulk2single.svg)]
 
 .reduce90[
 * In order to quantify RNA at the level of individual cells:
@@ -179,10 +181,11 @@ __Biological Replicates__
 .center[
 .reduce90[
 
-|  |  |
+|Type|Notes|
 |--------:|:-----------|
 | **Bulk RNA-seq** | Each tissue slice is a sample, can take another slice |
 | **Single-cell RNA-seq** | Each cell is sample, cannot directly replicate because unique |
+
 ]
 ]
 
@@ -203,7 +206,7 @@ Cell isolation can be performed in different ways.
 
 --
 
-.pull-right[.image-90[![](../../images/scrna-intro/mouthpipette.jpg)]]
+.pull-right[.image-90[![A black and white image of a woman in the lab using her mouth to pipette cells from one test tube to another.](../../images/scrna-intro/mouthpipette.jpg)]]
 
 .pull-left[
 .reduce90[
@@ -248,7 +251,7 @@ Another method is flow cytometry, which reduces the human-error component of thi
 
 # Capture / Sorting: Flow Cytometry
 
-.pull-right[![](../../images/scrna-intro/opticssystem.png)]
+.pull-right[![Cartoon of a fluidics system with two lasers pointing through the fluidics system and filters and detectors detecting the amount of light reflected out of the system with an optics system. This goes through a detector to an electronics system.](../../images/scrna-intro/opticssystem.png)]
 
 .pull-left[
 .reduce90[
@@ -285,7 +288,7 @@ Another method is flow cytometry, which reduces the human-error component of thi
 # Capture / Sorting: Size and Type
 
 .pull-right[
-  ![](../../images/scrna-intro/opticssystem.png)
+  ![The same cartoon as previously](../../images/scrna-intro/opticssystem.png)
 ]
 
 
@@ -318,7 +321,7 @@ Another method is flow cytometry, which reduces the human-error component of thi
 ]
 ]
 
-.image-75[.pull-right[![](../../images/scrna-intro/FlowJo_Layouts__01-Mar-2017.jpg)]]
+.image-75[.pull-right[![A coloured scatter plot showing two clumps of points labelled monocytes and lymphocytes.](../../images/scrna-intro/FlowJo_Layouts__01-Mar-2017.jpg)]]
 
 
 ???
@@ -338,7 +341,7 @@ Another method is flow cytometry, which reduces the human-error component of thi
 ]
 ]
 
-.image-75[.pull-right[![](../../images/scrna-intro/Granulocytes_vs_Monocytes_scatter.jpg)]]
+.image-75[.pull-right[![The same scatter plot but now monocytes and graunlocytes are shown as blobs.](../../images/scrna-intro/Granulocytes_vs_Monocytes_scatter.jpg)]]
 
 
 ???
@@ -349,7 +352,7 @@ Side scatter is perpendicular to the main laser, and measures the granularity of
 # Capture / Sorting: FACS
 
 .pull-left[
-![](../../images/scrna-intro/CD8vsCD3.png)
+![A scatter plot cut into four regions of CD4+/- and CD8+/-](../../images/scrna-intro/CD8vsCD3.png)
 .footnote[.reduce70[Image from BD Biosciences]]
 ]
 
@@ -375,7 +378,7 @@ Side scatter is perpendicular to the main laser, and measures the granularity of
 
 # Barcoding Cells
 
-.center[![](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)]
+.center[![Groups of GGG and TCT are added to two different cells to label them.](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)]
 
 .footnote[Add unique barcodes to every transcript in a cell]
 
@@ -391,7 +394,7 @@ Side scatter is perpendicular to the main laser, and measures the granularity of
 
 .footnote[Place cells into sequencing plate]
 
-.pull-left-large[![](../../images/scrna-intro/scrna_pbb_barcodes_overview.svg)]
+.pull-left[![Cells with barcodes are plated into individual wells based on their barcode.](../../images/scrna-intro/scrna_pbb_barcodes_overview.svg)]
 
 .pull-right[
 .reduce90[
@@ -409,7 +412,7 @@ Once the RNA molecules have been tagged by cell barcodes, they can be amplified,
 
 ### Sequencing Issues: Amplification
 
-.center[.image-75[![](../../images/scrna-intro/amplification_errors.svg)]]
+.center[.image-75[![A cartoon of a cell with a red and blue strand. The red strand amplifies well, the blue does not.](../../images/scrna-intro/amplification_errors.svg)]]
 
 .reduce90[
 * Polymerase Chain Reaction (PCR)
@@ -429,7 +432,7 @@ Once the RNA molecules have been tagged by cell barcodes, they can be amplified,
 
 ### Sequencing Issues: Amp. + UMIs
 
-.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left[![The same cartoon but now red and blue strands are labelled with pink and grey adapters. The red and blue both amplify but at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 
 .pull-right[
 .reduce90[
@@ -455,7 +458,7 @@ Once the RNA molecules have been tagged by cell barcodes, they can be amplified,
 
 ### Sequencing Issues: Amp. + UMIs
 
-.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left[![The same cartoon, red and blue amplify at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 
 .pull-right[
 
@@ -476,7 +479,7 @@ Once the RNA molecules have been tagged by cell barcodes, they can be amplified,
 
 --
 
-.pull-left-large[
+.pull-left[
 
 .center[Grouping Reads by Gene and UMI
 
@@ -511,7 +514,7 @@ However if we group the reads by their UMIs, and then count only the number of u
 ### Sequencing Issues: Unique UMIs?
 
 
-.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left[![The same cartoon, red and blue amplify at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 .pull-right[
 
 |          | **UMIs** | **#Reads** |
@@ -528,7 +531,7 @@ However if we group the reads by their UMIs, and then count only the number of u
 
 ???
 - UMIs are relatively random, but not truly random.
-- Notice that the pink UMI appears twice: once in the blue transcript and once in the pink transcript.
+- Notice that the pink UMI appears twice: once in the blue transcript and once in the red transcript.
 
 
 --
@@ -601,7 +604,7 @@ Edit distances guard against **sequencing errors.**
 
 # Sequencing Issues: Unique UMIs?
 
-.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left[![The same cartoon, red and blue amplify at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 .pull-right[
 
 |          | **UMIs**      | **# Reads** |
@@ -640,7 +643,7 @@ In the context of amplification, UMIs do not need to be unique, they just need t
 For Each Cell:
 
 1. Add Cell Barcodes to Cells
-![](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)
+![Groups of GGG and TCT are added to two different cells to label them.](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)
 
 ???
 So let's just recap what we've learned: First each cell has cell barcodes added to each RNA molecule in each cell.
@@ -653,7 +656,7 @@ For Each Cell:
 
 1. Add Cell Barcodes to Cells
 1. Add UMIs to Cell Barcoded Cells
-![](../../images/scrna-intro/scrna_umi_add.svg)
+![Random mixtures of three letter barcodes are shown, in addition to the two cells from the last cartoon which had GGG in one and TCT labelled reads in the other cell. Now they all have random prefixes before the GGG in one cell and TCT in the other.](../../images/scrna-intro/scrna_umi_add.svg)
 
 
 ???
@@ -667,7 +670,7 @@ For Each Cell:
 
 
 
-.center[![](../../images/scrna-intro/raceid_libsize.svg)]
+.center[![A matrix of Genes 1, 2, 3 and cells per column is changed into two matrices, one with counts of genes detected per cell, and counts of cells detected per gene](../../images/scrna-intro/raceid_libsize.svg)]
 
 * Num. features per cell, and library size should follow a normal curve.
 * Min-Max filtering helps clip off the fat-tails of a distribution.
@@ -685,7 +688,7 @@ For Each Cell:
 
 # Normalisation: Bulk vs Single-Cell
 
-.pull-left-large[
+.pull-left[
 
 *Bulk RNA-seq*: High Coverage
 
@@ -745,7 +748,7 @@ Can't divide by zero!
 
 .footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
 
-.pull-left[![](../../images/scrna-intro/scran_pooling_left.svg)]
+.pull-left[![Blue and red bubbles are mixed, then separated into two groups, and then arranged around a circle, red going from small to large around the right half, blue from small to large around the left. The bottom of the circle is labelled 6, the top is labelled 12.](../../images/scrna-intro/scran_pooling_left.svg)]
 
 
 .pull-right[
@@ -770,7 +773,7 @@ Can't divide by zero!
 
 .footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
 
-.pull-right[![](../../images/scrna-intro/scran_pooling_right.svg)]
+.pull-right[![The same final graph with blue and red circles of increasing size with an arrow pointing to a large number of formulas that overlap.](../../images/scrna-intro/scran_pooling_right.svg)]
 
 .pull-left[
 .reduce90[
@@ -797,7 +800,7 @@ Can't divide by zero!
 
 .footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
 
-.center[![](../../images/scrna-intro/scran_pooling.svg)]
+.center[![The two previous graphs now in one graph.](../../images/scrna-intro/scran_pooling.svg)]
 
 ???
 - By this method, the issue of low sequence coverage is worked around by turning cells with low library sizes into useful components of a size factor that can be applied to similar cells.
@@ -808,7 +811,7 @@ Can't divide by zero!
 
 # Wanted vs Unwanted Variation
 
-.pull-right[![](../../images/scrna-intro/variance.svg)]
+.pull-right[![Three overlapping line graphs mapping contributing variance to density. Top N genes is shown increasing in density as contributing variance increases, which genes per cell, transcripts, and batch source decrease.](../../images/scrna-intro/variance.svg)]
 
 .pull-left[
 .reduce90[
@@ -834,7 +837,7 @@ Can't divide by zero!
 
 # Confounding Variation: Biological
 
-.center[![](../../images/scrna-intro/raceid_cellcycle.svg)]
+.center[![A cartoon on the left shows a question mark with arrows to nothing and to transcripts shown. On the right are the cell cycle phases and different amounts of transcripts in each phase.](../../images/scrna-intro/raceid_cellcycle.svg)]
 
 .pull-left[
 .reduce90[
@@ -864,7 +867,7 @@ Can't divide by zero!
 
 # Confounding Variation: Technical
 
-.center[![](../../images/scrna-intro/raceid_technical_variation.svg)]
+.center[![Library size variation points to two cells with red and blue transcripts in identical numbers. However during amplification in one cell it produces results, while in the other blue is dropped.](../../images/scrna-intro/raceid_technical_variation.svg)]
 
 .pull-left[
 .reduce90[
@@ -891,7 +894,7 @@ Can't divide by zero!
 
 # Confounding Variation: Technical
 
-.center[![](../../images/scrna-intro/raceid_technical_variation.svg)]
+.center[![Library size variation points to two cells with red and blue transcripts in identical numbers. However during amplification in one cell it produces results, while in the other blue is dropped.](../../images/scrna-intro/raceid_technical_variation.svg)]
 
 *Library Size Variation*
 * Cells have different transcription rates and capture rates
@@ -928,7 +931,7 @@ Note:
 
 # Distance Matrix
 
-![](../../images/scrna-intro/raceid_distance.svg)
+![A count matrix of genes vs cells is plotted in N-dimensional space with each gene representing the different axes. A distance formula for 3 dimensions is shown, and then a final table is shown from the count matrix with the distances between each of the cells, based on their genes.](../../images/scrna-intro/raceid_distance.svg)
 
 ???
 - A distance matrix does just this, defining the distance between any two cells by a single score.
@@ -940,7 +943,7 @@ Note:
 
 # Relatedness of Cells: KNN
 
-![](../../images/scrna-intro/scrna_knn.svg)
+![A plot of cells across three genes is shown with the label high dimensional dataset of cells. This produces a distance matrix (symmetric), and then via KNN with k=2, a non-symmetric matrix. This is then plotted again in the gene-dimensional space to show connections between cells.](../../images/scrna-intro/scrna_knn.svg)
 
 * Perform *K-nearest neighbours* to connect edges to cell vertices.
 
@@ -954,7 +957,7 @@ Note:
 
 # Dimensional Reduction
 
-![](../../images/scrna-intro/raceid_dimred.svg)
+![Matrix of genes vs cells is plotted in gene-dimensions, and then reduced into 2 dimensions.](../../images/scrna-intro/raceid_dimred.svg)
 
 .pull-left[
 .reduce90[
@@ -984,7 +987,7 @@ Note:
 
 ### Clustering
 
-.pull-left-large[.image-100[![](../../images/scrna-intro/singlecellplot3.png)]]
+.pull-left[.image-100[![A scatter plot with many groups of cells labelled by different colours. The cells are largely clustered well, with few outlying cells.](../../images/scrna-intro/singlecellplot3.png)]]
 
 .pull-right[
 .reduce90[
@@ -1005,7 +1008,7 @@ Note:
 
 ### Clustering
 
-.pull-left-large[.image-100[![](../../images/scrna-intro/singlecellplot4.png)]]
+.pull-left[.image-100[![Same scatter plot with clustering as before, but now the clusters are labelled things like Neurons, NSC, Glial Prog., Astrocytes, etc.](../../images/scrna-intro/singlecellplot4.png)]]
 
 .pull-right[
 .reduce90[
@@ -1027,7 +1030,7 @@ Note:
 
 ### Clustering
 
-.pull-left-large[.image-100[![](../../images/scrna-intro/singlecellplot6.png)]]
+.pull-left[.image-100[![The same labelled graph, but now arrows connect the next nearest groups of cell types.](../../images/scrna-intro/singlecellplot6.png)]]
 
 .pull-right[
 .reduce90[
@@ -1052,7 +1055,7 @@ We can also further derive the relationships between these clusters by computing
 
 |  |  |
 |--|--|
-| .image-100[![](../../images/scrna-intro/singlecellplot3.png)] | .image-100[![](../../images/scrna-intro/10xdata.png)] |
+| .image-100[![Same set of distinct clusters with very clear separation](../../images/scrna-intro/singlecellplot3.png)] | .image-100[![Clusters now bleed into one another, and the separate is not clear.](../../images/scrna-intro/10xdata.png)] |
 | .center[**Hard**] | .center[**Soft**] |
 | Big spaces between clusters | Clusters bleed into one another |
 | Cell types are well defined and the clustering reflects that | Cell types seem to intermingle with one another. |
@@ -1066,7 +1069,7 @@ We can also further derive the relationships between these clusters by computing
 
 # Continuous Phenotypes:
 
-.center[![](../../images/scrna-intro/raceid_contpheno.svg)]
+.center[![The graph charts development time of reticulocytes as they pass through an intermediate or rare cell phase, into their final form: red blood cells.](../../images/scrna-intro/raceid_contpheno.svg)]
 .reduce90[
 * Cells aren't discrete, they transition
 * Continuously changing over time from a less mature type to more mature type
@@ -1079,8 +1082,8 @@ Soft clustering is to be expected, since although clustering is a statistical me
 
 ## Performing Clustering
 
-.pull-left-large[
-![](../../images/raceid_mountains.svg)
+.pull-left[
+![Discrete expression profiles: Three mountains are shown with clouds, we just see three peaks. Cells in red, green, and blue are shown at the peaks. Continuous expression landscape: the clouds are removed and we see the mountains are actually connected and there are cells in between in various intermediate colours.](../../images/scrna-intro/raceid_mountains.svg)
 ]
 
 .pull-right[
@@ -1111,7 +1114,7 @@ Soft clustering is to be expected, since although clustering is a statistical me
 
 ### Performing Clustering: K-means
 
-.pull-right[![](../../images/scrna-intro/kmeans.gif)]
+.pull-right[![An animated figure showing several iteration of an algorithm that is optimising a 3-way split between a scatter plot of cells. There is no clear boundary making the final result appear only marginally better.](../../images/scrna-intro/kmeans.gif)]
 
 .pull-left[
 .reduce90[
@@ -1139,7 +1142,7 @@ Soft clustering is to be expected, since although clustering is a statistical me
 
 ## Performing Clustering: Hierarchical
 
-.pull-left-large[![](../../images/scrna-intro/hierarchal1.png)]
+.pull-left[![A many-step figure starting with a number of individual dots. The text reads "identify the two clusters that are closest" and "merge the two most similar clusters." The process repeats a number of times until all clusters are absorbed into the one large blob.](../../images/scrna-intro/hierarchal1.png)]
 
 .pull-right[
 .reduce90[
@@ -1148,10 +1151,8 @@ Soft clustering is to be expected, since although clustering is a statistical me
 
 * Yields a dendrogram
   * Hierarchy of clusters:
-]
 
-.image-90[![](../../images/scrna-intro/hierarchal2.png)]
-]
+.image-90[![Several points in a square are labelled A through F, on the right a dendogram is shown with lengths indicating how close each letter is to each other.](../../images/scrna-intro/hierarchal2.png)]
 
 ???
 - Hierarchical clustering is more flexible and does not need an initial parameter to define the number of resulting clusters.
@@ -1164,7 +1165,7 @@ Soft clustering is to be expected, since although clustering is a statistical me
 
 ## Community Clustering: Louvain
 
-.center[![](../../images/scrna-intro/commgraph1.svg)]
+.center[![A graph is shown with dots connected by lines. Below, those dots have expanded and pink touches orange and nearly touches purple. It asks pink by iteself? And notes 4 external links and 0 internal links. Two hypothetical options are shown, if pink absorbs purple, we see 5 external connections and 1 internal, so, it's added new connections. An X suggests this is wrong. Below is the pink absorbs orange option, where we see 3 external and 1 internal connection, so one connection has become internal, and no new nodes are connected. A check mark indicates this was right.](../../images/scrna-intro/commgraph1.svg)]
 
 .reduce90[
 Aim: Maximise internal links and minimise external links
@@ -1180,7 +1181,7 @@ Aim: Maximise internal links and minimise external links
 
 ## Community Clustering: Louvain
 
-.center[![](../../images/scrna-intro/commgraph2.svg)]
+.center[![Same Graph as previously, but now there are more, larger clusters. Blue and purple were absorbed, yellow and red were absorbed, and we see a simplified 4 node graph.](../../images/scrna-intro/commgraph2.svg)]
 
 .reduce90[
 * Randomly pick a cell and try to place it in a neighbour's cluster
@@ -1195,7 +1196,7 @@ If the new configuration has instead increased the number of external links, the
 
 # Summary
 
-.pull-left-large[![](../../images/scrna-intro/rna_cells_singlerez.svg)]
+.pull-left[![Red and blue clusters of cells are shown resembling the tissue blobs. Graphs on the right for expression in Genes A, B, X are shown per cell](../../images/scrna-intro/rna_cells_singlerez.svg)]
 
 .pull-right[
 .reduce90[
@@ -1224,9 +1225,8 @@ If the new configuration has instead increased the number of external links, the
 
 ### Further scRNA-seq Data Analysis
 
-![](../../images/scrna-intro/training_single_cell.png)
+![Screenshot of the galaxy training materials that cover single cell](../../images/scrna-intro/training_single_cell.png)
 
 ???
 - In this regard, the vast UseGalaxy resources can be put to good use by testing out the many different paths of the analysis, and the Galaxy Training Network provides tutorials and hands-on trainings to assist you in this regard.
 - Please explore them to better develop your understanding.
-

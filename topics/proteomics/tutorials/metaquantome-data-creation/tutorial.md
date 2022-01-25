@@ -30,7 +30,8 @@ follow_up_training:
         tutorials:
             - metaproteomics
 
-
+subtopic: multi-omics
+tags: [microbiome]
 ---
 
 
@@ -78,8 +79,8 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files: 6 MZML files, a Protein FASTA file, and an Experimental Design file from [Zenodo]({{ page.zenodo_link }})
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
@@ -92,23 +93,44 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    https://zenodo.org/record/4037137/files/T7A_1.mzml
 >    https://zenodo.org/record/4037137/files/T7B_1.mzml
 >    ```
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 3. Rename the datasets (If needed)
 > 4. Check that the datatype ( Make sure they are in the correct formats).
 > 6 MZML files (format=`mzml`, a Protein FASTA file (format=`fasta`), and an Experimental Design file (format=`tabular`)
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to the name of the input data (optional).
 > 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > 7. Rename the dataset collection as `MZML dataset collection`.
+>
+{: .hands_on}
+
+We have a choice to run all these steps using a single workflow, then discuss each step and the results in more detail.
+
+> ### {% icon hands_on %} Hands-on: Pretreatments
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/main_workflow.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Input Dataset collection"*: `MZML dataset collection`
+>    - {% icon param-file %} *"2: Experimental Design"*: `Experimental Design.tsv`
+>    - {% icon param-file %} *"3: FASTA_db"*: `ProteinDB_cRAP.fasta`
+>    - {% icon param-file %} *"4: In FlashLFQ - control condition for Bayesian protein fold-change analysis"*: `S1`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
@@ -269,7 +291,7 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >
 > 2. Rename {% icon galaxy-pencil %} to output file to `PSM_Report_no_contaminants`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report

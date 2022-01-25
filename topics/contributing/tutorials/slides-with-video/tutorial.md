@@ -60,19 +60,9 @@ Every slide must have some narration in the presenter notes. It does not make se
 
 ### Sentence Structure
 
-Use short and uncomplex sentences whenever possible. Break up ideas into easy to digest bits. Students will be listening to this spoken and possibly reading the captions.
+Use simple and uncomplex sentences whenever possible. Break up ideas into easy to digest bits. Students will be listening to this spoken and possibly reading the captions.
 
-The captioning process is completely automated, but it means that for very long sentences, we do not currently break them up into multiple captions. So please keep your sentences under ~120 characters where possible.
-
-> > **Good**
-> > - Configuration management manages the configuration of machines.
-> > - It specifies what software should be installed, and how it should be configured.
-> {: .code-in}
->
-> > **Bad**
-> > Configuration management manages the configuration of machines, it specifies what software should be installed, and how it should be configured
-> {: .code-out}
-{: .code-2col}
+*2021-05-01* There used to be a limit of ~120 characters per sentence, but this is no longer an issue. We now break up sentences which are too long in the captions and show them over multiple timepoints. So if you need to write a really long sentence, you can, but we still advise to simplify sentences where possible.
 
 ### Captions per Slide
 
@@ -130,6 +120,29 @@ Lastly, we need to tell the GTN framework we would like videos to be generated.
 
 That's it! With this, videos can be automatically generated.
 
+
+# How it works: In Detail
+
+1. We take our markdown slides, e.g. [`topics/introduction/tutorials/galaxy-intro-short/slides.html`](https://github.com/galaxyproject/training-material/blob/main/topics/introduction/tutorials/galaxy-intro-short/slides.html)
+2. In order for them to be processed, slides must have an annotation saying `video: true` in the header metadata, and then 'speaker notes' (everything after the ??? before the ---)
+3. This is turned into our 'plain text slides' which just renders the markdown a bit more nicely ([example](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html))
+4. Then we run ari.sh which does the following:
+
+	- `make video` is run which runs [`bin/ari-make.sh`](https://github.com/galaxyproject/training-material/blob/main/bin/ari-make.sh)
+	- This builds PDFs for any slides which have changed
+	- And runs `./bin/ari.sh` with the PDF, the original Slides, and where the mp4 should be saved.
+		- In [`./bin/ari.sh`](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh)
+		- It [extracts metadata](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L38) from the tutorial (title, authors, etc.)
+		- It [builds a 'script'](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L51), a json document with blocks for every line of the speaker notes that were in the slides.
+		- [Those get converted into mp3 files](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L55) by AWS Polly (or MozillaTTS), one per slide.
+		- The PDFs get turned into [a series of PNG images](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L60)
+		- We take the timings of the mp3 files together with the json 'script' to [write out webvtt / srt subtitles](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L69) which get embedded into the video, and supplied next to it.
+		- [editly is used](https://github.com/mifi/editly) to knit together the PNGs + mp3s with appropriate delay
+
+
+All of this is run on cron by [`.github/workflows/video.yml`](https://github.com/galaxyproject/training-material/blob/main/.github/workflows/video.yml) which handles building all of these videos and then later uploading them to s3.
+
+Many of the scripts internally are prefixed with `ari`, we named our internal version after [github.com/jhudsl/ari/](https://github.com/jhudsl/ari/) which inspired it, but we wanted a version that would be more closely tied to the GTN and integrate with our infrastructure nicely, so we ended up writing our own.
 
 # Conclusion
 {:.no_toc}

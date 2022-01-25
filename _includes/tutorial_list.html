@@ -29,7 +29,7 @@
     {% endif %}
 
     {% if include.sub == nil or show == true %}
-      {% if material.enable == nil or material.enable == true %}
+      {% if material.enable != false or jekyll.environment != "production" %}
         <tr>
           <td class="tutorial_title">
           {{ material.title}}
@@ -66,6 +66,12 @@
                       And more!
                   </a>
                 </ul>
+                {% if material.video %}
+                /
+                <a class="topic-icon" href="{{ site.baseurl }}/videos/watch.html?v={{ topic.name }}/slides/{{ material.tutorial_name }}">
+                    {% icon video %}
+                </a>
+                {% endif %}
               </span>
             {% endif %}
             </td>

@@ -78,7 +78,7 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 # Preparing the inputs
 
@@ -94,16 +94,17 @@ We will use three files for this analysis:
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
->     To import the files, there are two options:
+>    To import the files, there are two options:
 >     - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
 >     - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
 >
->     {% include snippets/import_via_link.md %}
+>       {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
@@ -116,8 +117,7 @@ We will use three files for this analysis:
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -464,7 +464,7 @@ When there is a lot of differential expression, sometimes we may want to cut-off
 >          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
 > 2. Add a tag `#treat` to the `Report` output and inspect the report
 >
-> {% include snippets/add_tag.md type="name" %}
+> {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
 >
 {: .hands_on}
 

@@ -74,12 +74,12 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 > ### {% icon hands_on %} Hands-on: Upload an initial structure
 > 1. First of all, create a new history and give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Use the **Get PDB** {% icon tool %} tool to download a PDB file for simulation:
+> 2. Use the {% tool [Get PDB](toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0) %} tool to download a PDB file for simulation:
 >    - *"PDB accession code"*: `1AKI`
 >
-> 3. Use the **grep** {% icon tool %} text processing tool to remove all lines that refer to non-protein atoms.
+> 3. Use the {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} text processing tool to remove all lines that refer to non-protein atoms.
 >    - *"Select lines from"*: uploaded PDB file
 >    - *"that"*: `Don't Match`
 >    - *"Regular Expression"*: `HETATM`
@@ -88,10 +88,11 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 
 > ### {% icon comment %} Alternative upload
 > As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
->    ```
->    https://zenodo.org/record/2598415/files/1AKI_clean.pdb
->    ```
->    {% include snippets/import_via_link.md %}
+> ```
+> https://zenodo.org/record/2598415/files/1AKI_clean.pdb
+> ```
+>
+> {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .comment}
 
 > ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?
@@ -124,7 +125,7 @@ After these files have been generated, a further step is required to define a si
 
 > ### {% icon hands_on %} Hands-on: perform initial processing
 >
-> 1. Run **GROMACS initial setup** {% icon tool %} with the following parameters:
+> 1. Run {% tool [GROMACS initial setup](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"PDB input file"*: `1AKI_clean.pdb` (Input dataset)
 >    - *"Water model"*: `SPC/E`
 >    - *"Force field"*: `OPLS/AA`
@@ -140,7 +141,7 @@ After these files have been generated, a further step is required to define a si
 > > {: .solution}
 > {: .question}
 >
-> 2. Run **GROMACS structure configuration** {% icon tool %} with the following parameters:
+> 2. Run {% tool [GROMACS structure configuration](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0) %} with the following parameters:
 >    - *"Input structure"*: GRO output from initial setup tool
 >    - *"Output format"*: `GRO file`
 >    - *"Configure box?"*: `Yes`
@@ -158,10 +159,12 @@ The next stage is protein solvation, performed using **GROMACS solvation and add
 
 > ### {% icon hands_on %} Hands-on: solvation
 >
-> **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
+> {% tool [GROMACS solvation and adding ions](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by the structure configuration tool
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology produced by setup
 >    - *"Water model for solvation"*: `SPC`
+>    - *"Add ions to neutralise system?"*: `Yes, add ions`
+>    - *"Specify salt concentration (sodium chloride) to add, in mol/liter"*: `0`
 >    - *"Generate detailed log"*: `Yes`
 >
 {: .hands_on}
@@ -174,7 +177,7 @@ Here, and in the later steps, two options are presented under 'Parameter input'.
 
 > ### {% icon hands_on %} Hands-on: energy minimization
 >
-> **GROMACS energy minimization** {% icon tool %} with the following parameters:
+> {% tool [GROMACS energy minimization](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by solvation tool
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
@@ -195,14 +198,14 @@ Here, and in the later steps, two options are presented under 'Parameter input'.
 
 At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant **n**umber of particles, **v**olume and **t**emperature, while the NPT ensemble maintains constant **n**umber of particles, **p**ressure and **t**emperature. (The NVT ensemble is also known as the isothermal-isochoric ensemble, while the NPT ensemble is also known as the isothermal-isobaric ensemble).
 
-For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.
+During the first equilibration step (NVT), the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished. During the second NPT step, we remove the restraints.
 
 ## NVT equilibration
 Firstly, we perform equilibration using classical NVT dynamics.
 
 > ### {% icon hands_on %} Hands-on: NVT dynamics
 >
-> **GROMACS simulation** {% icon tool %} with the following parameters:
+> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Use a checkpoint (CPT) file"*: `No CPT input`
@@ -234,14 +237,14 @@ Note that we can continue where the last simulation left off (with new parameter
 
 > ### {% icon hands_on %} Hands-on: NPT dynamics
 >
-> **GROMACS simulation** {% icon tool %} with the following parameters:
+> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
 >    - {% icon param-file %} *"Checkpoint (CPT) file"*: Checkpoint file produced by NVT equilibration
 >    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
->    - *"Apply position restraints"*: `Apply position restraints`
->    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
+>    - *"Apply position restraints"*: `No position restraints`
+>    - {% icon param-file %} *"Position restraint file"*: None
 >    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
 >    - *"Trajectory output"*: `Return no trajectory output`
 >    - *"Structure output"*: `Return .gro file`
@@ -275,7 +278,7 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 > ### {% icon hands_on %} Hands-on: Production simulation
 >
-> 1. **GROMACS simulation** {% icon tool %} with the following parameters:
+> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`

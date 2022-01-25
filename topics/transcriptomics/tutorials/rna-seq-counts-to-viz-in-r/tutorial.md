@@ -13,7 +13,7 @@ requirements:
         - rstudio
   -
     type: "internal"
-    topic_name: introduction
+    topic_name: data-science
     tutorials:
         - r-basics
         - r-advanced
@@ -29,18 +29,21 @@ objectives:
 - Describe the role of data, aesthetics, geoms, and layers in `ggplot` functions.
 - Customize plot scales, titles, subtitles, themes, fonts, layout, and orientation.
 time_estimation: 1H
+tags:
+  - interactive-tools
 key_points:
 - When creating plots with `ggplot2`, think about the graphics in layers (aesthetics, geometry, statistics, scale transformation, and grouping).
 contributors:
   - bebatut
   - fpsom
   - tobyhodges
+  - erasmusplus
 ---
 
 # Introduction
 {:.no_toc}
 
-{% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
+{% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
 With RNA-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
@@ -92,7 +95,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 >
 {: .agenda}
 
-{% include snippets/launch_rstudio.md %}
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
 # Visualization
 

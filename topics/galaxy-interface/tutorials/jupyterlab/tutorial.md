@@ -18,6 +18,8 @@ objectives:
 - "Use put() to export datasets from the notebook to your history"
 - "Save your notebook into your history"
 time_estimation: 1H
+tags:
+  - interactive-tools
 key_points:
 - How to work with JupyterLab interactively within Galaxy
 contributors:
@@ -46,9 +48,9 @@ We will introduce additional benefits of using JupyterLab as you cover the lesso
 
 # JupyterLab
 
-## Opening up JupyterLab
+Opening up {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} is quite easy:
 
-{% include snippets/launch_jupyterlab.md %}
+{% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
 
 You should now be looking at a page with the JupyterLab interface:
 
@@ -161,6 +163,13 @@ Once you are done with you analysis or anytime during the editing process, you c
 
 This will create a new notebook `.pynb` file in your history every time you click on this icon.
 
+> ### {% icon hands_on %} Hands-on: Closing JupyterLab
+>
+> 1. Click **User**: **Active Interactive Tools**
+>
+> 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**
+>
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}

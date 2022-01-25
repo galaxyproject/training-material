@@ -1,0 +1,63 @@
+@startuml
+
+!include plantuml_options.txt
+participant Browser
+participant "ASGI Server"
+participant FastAPI
+participant Starlette
+participant Middleware
+participant router
+
+note over "ASGI Server", router: Framework
+note over Controller, Manager: Galaxy Backend
+
+Browser -> "ASGI Server": TCP/IP Request
+activate "ASGI Server"
+note left of Browser: Static content\nCSS, JS, Image
+"ASGI Server" --> Browser
+deactivate "ASGI Server"
+
+Browser -> "ASGI Server": TCP/IP Request
+activate "ASGI Server"
+"ASGI Server" -> FastAPI: asgi args
+activate FastAPI
+
+FastAPI -> Starlette: asgi args
+activate Starlette
+
+Starlette -> Middleware: asgi args
+activate Middleware
+
+Middleware -> router: asgi args
+activate router
+
+router -> Controller: pydantic models
+activate Controller
+Controller -> Manager: Python objects
+activate Manager
+
+note left of Browser: API Request
+note right of Manager: Vanilla Python function calls.\nUse application components\nto perform "business logic"
+
+Manager --> Controller: Python objects
+deactivate Manager
+
+Controller --> router: pydantic models
+deactivate Controller
+
+router --> Middleware:
+deactivate router
+
+Middleware --> Starlette
+deactivate Middleware
+
+Starlette --> FastAPI
+deactivate Starlette
+
+FastAPI --> "ASGI Server"
+deactivate FastAPI
+
+"ASGI Server" --> Browser
+deactivate "ASGI Server"
+
+@enduml

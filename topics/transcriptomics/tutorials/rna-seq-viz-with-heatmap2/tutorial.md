@@ -50,8 +50,8 @@ We will use three files for this analysis:
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq heatmap`
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the normalized counts table.
 >
@@ -60,8 +60,8 @@ We will use three files for this analysis:
 >    - Option 2: From [Zenodo](https://zenodo.org/record/2529926)
 >
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 >    - You can paste the links below into the **Paste/Fetch** box:
@@ -78,7 +78,7 @@ We will use three files for this analysis:
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 

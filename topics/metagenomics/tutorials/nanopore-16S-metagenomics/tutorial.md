@@ -16,6 +16,8 @@ key_points:
 - We preprocessed Nanopore sequences in order to improve their quality
 contributors:
 - gallardoalba
+tags:
+  - nanopore
 
 ---
 
@@ -97,8 +99,8 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 >     ```
 >     - Assign a name to the new collection: `soil collection`
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 {: .hands_on}
@@ -262,7 +264,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 ## Taxonomic classification with Kraken2
 
-To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
+To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
 
 
 > ### {% icon comment %} Comments
@@ -311,7 +313,7 @@ Once we have assigned the corresponding taxa to each sequence, the next step is 
 >            - *"Find pattern"*: `\|`
 >            - *"Replace with"*: `\t`
 >
-> 3. {% tool [Remove beginning](Remove+beginning1) %} with the following parameters:
+> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Replace Text on collection`
 >
 {: .hands_on}
@@ -341,7 +343,7 @@ Let's take a look at the result. Using the search bar we can check if certain ta
 > > ### {% icon solution %} Solution
 > >
 > > 1. The low presence of _Alphaproteobacteria_ (including members of the order _Rhizobiales_), as well as the abundance of _Bacteroidetes_ and _Gammaproteobacteria_, suggest that the soil is highly exposed to phosphorus. This mineral is strongly associated with the anthropogenic activity as it is an important component of agrochemicals.
-> > 2. We can observe that there are important differences in the structure of the bacterial populations between the soil and rhizosphere samples. Particularly significant is the increase in phylum _Plactomycetes_, which are usually abundant in the rhizosphere.
+> > 2. We can observe that there are important differences in the structure of the bacterial populations between the soil and rhizosphere samples. Particularly significant is the increase in phylum _Planctomycetes_, which are usually abundant in the rhizosphere.
 > >
 > {: .solution}
 >
