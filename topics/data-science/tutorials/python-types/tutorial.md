@@ -26,7 +26,7 @@ key_points:
 - "Variables only change value when something is assigned to them."
 
 enable: false
-subtopic: python
+subtopic: python-modular
 contributors:
   - carpentries
   - hexylena

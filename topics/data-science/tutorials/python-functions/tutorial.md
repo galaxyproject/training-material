@@ -14,7 +14,7 @@ questions:
 - How do I write functions in Python?
 - What is a function?
 - What do they look like?
-#- Fill in the missing part of a function (exercise)
+- Fill in the missing part of a function
 #- Discussion of the results
 #- Write a new function that does a sepcific computation, building on previous portion (exercise)
 
@@ -27,10 +27,10 @@ key_points:
 - Everything you do will require functions
 
 enable: false
-subtopic: python
+subtopic: python-modular
 contributors:
-  - hexylena
   - carpentries
+  - hexylena
   - dirowa
 
 priority: 1

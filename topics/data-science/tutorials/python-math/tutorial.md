@@ -19,7 +19,7 @@ key_points:
 - Did you forget how a particular module or function works? Try `help()`
 
 enable: false
-subtopic: python
+subtopic: python-modular
 contributors:
   - hexylena
   - dirowa

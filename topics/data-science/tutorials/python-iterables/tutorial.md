@@ -26,7 +26,7 @@ key_points:
 - "Indexing beyond the end of the collection is an error."
 
 enable: false
-subtopic: python
+subtopic: python-modular
 contributors:
   - carpentries
   - hexylena
@@ -205,14 +205,75 @@ Python considers the string to be a single value with parts, not a collection of
 element[0] = 'C'
 ```
 
-Lists and strings are both *collections*.
-
 ## Bounds
 
 You cannot access values beyond the end of the list, this will result in an error. Python reports an `IndexError` if we attempt to access a value that doesn't exist. This is a kind of **runtime error**, as it cannot be detected as the code is parsed. Imagine if you had a script which let you read in a file, depending on how many lines were in the file, whether index 90 was valid or invalid, would depend on how big your file was.
 
 ```python
 print('99th element of element is:', element[99])
+```
+
+## Exercises
+
+> ### {% icon question %} Question: Checking suffixes
+>
+> 1. How could you check that the extension of a filename is `.csv`
+> 2. Can you find another way? Maybe check the help page for `str`
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. `a[-4:] == "csv"` (Here we use `==` for comparing two values)
+> > 2. `a.endswith('.csv')`
+> >
+> {: .solution}
+{: .question}
+
+```
+# Test code here!
+a = "1234.csv"
+b = "1273.tsv"
+c = "9382.csv"
+d = "1239.csv"
+```
+
+> ### {% icon question %} Question: Say it loud!
+>
+> 1. Can you find a method in the `str`'s help that converts the string to upper case
+> 2. or lower case?
+> 3. Can you use it to fix mixed case DNA sequence?
+>
+> > ### {% icon solution %} Solution
+> > 1. `"shout it out".upper()`
+> > 2. `"WHISPER THIS".lower()`
+> > 3. `terrible_sequence.upper()`
+> {: .solution}
+{: .question}
+
+```
+# Test answers here!
+print("shout it out")
+print("WHISPER THIS")
+# Fix this mess to be all capital
+terrible_sequence = "AcTGAGccGGTt"
+print(terrible_sequence)
+```
+
+
+> ### {% icon question %} Question: Splitting
+> 1. We use `.split()` to split a string by some character. Here we have a comma separated list of values, try splitting that up by a comma, but we actually wanted it separated by `|` characters. Can you split it up, and then re-join it with that new character?
+> 2. Does `help(str)` give you another option for replacing a character like that.
+> 3. What happens if you split by another value like `3`?
+>
+> > ### {% icon solution %} Solution
+> > 1. `data.split(",")`
+> > 2. `data.replace(",", "|")`
+> > 3. Those characters will disappear! If you want to reconstruct the same string
+> {: .solution}
+{: .question}
+
+```
+# Split me
+data = "0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0"
 ```
 
 # Tuples
