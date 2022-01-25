@@ -21,7 +21,7 @@ requirements:
       - tool-from-scratch
   - type: "none"
     title: "Docker basics"
-time_estimation: '5h'
+time_estimation: '3h'
 subtopic: tooldev
 key_points:
   - "Galaxy Interactive Tools (GxIT) provide an interface for external web applications to be embedded in Galaxy"
@@ -535,7 +535,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 
 > ### {% icon comment %} A note on the OS
 > This part of the tutorial has been tested on Ubuntu and Debian and there is no guaranteed success for other operating systems.
-> If you have another OS on your machine (like Windows), you will have to use a virtual machine with either Ubuntu or Debian on it.
+> If you have another OS on your machine (i.e. Windows or MacOS), you may need to use an Ubuntu virtual machine or perhaps try <a href="https://docs.microsoft.com/en-us/windows/wsl/install" target="_blank">Windows subsystem for Linux</a>).
 {: .comment}
 
 ## Docker installation
