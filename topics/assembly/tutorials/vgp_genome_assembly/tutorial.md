@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: VGP assembly pipeline
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/5887339'
 enable: false
 questions:
 - "what combination of tools can produce the highest quality assembly of vertebrate genomes?"
@@ -19,6 +19,7 @@ contributors:
 - astrovsky01
 - gallardoalba
 - annasyme
+- abueg
     
 ---
 
