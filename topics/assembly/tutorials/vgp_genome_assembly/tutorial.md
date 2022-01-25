@@ -138,11 +138,6 @@ The first step is to get the datasets from Zenodo. The VGP assembly pipeline use
 >
 {: .hands_on}
 
-
-### HiFi reads preprocessing with **Cutadapt**
-
-Once we have retrieved the data, we need to trim residual adaptor sequences from the PacBio HiFi reads, in order remove the bases that could interfere with the assembly process. For this purpose, we are going to use Cutadapt, an open-source tool written mainly in Python language.
-
 ### HiFi reads preprocessing with **Cutadapt**
     
 Once we have retrieved the data, we need to do adapter trimming using Cutadapt, an open-source tool written mainly in Python language. Adapter trimming usually means trimming the adapter sequence off the ends of reads, which is where the adapter sequence is usually located in NGS reads. For these HiFi reads, the adapter does not have a specific, predictable location in the read, due to the nature of SMRT sequencing. Additionally, the reads containing adapter sequence could be of generally lower quality compared to the rest of the reads. Thus, we will use Cutadapt not to trim, but to remove the entire read if a read is found to have an adapter inside of it. For this purpose, we are going to use Cutadapt, an open-source tool written mainly in Python language.
@@ -306,13 +301,13 @@ Before proceeding to the next section, we need to carry out some operations on t
 >    - *"Replace all occurrences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
-> 3. {% tool [Search in text files (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+> 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: output file of the previous step.
 >    - *"Type of regex"*: `Basic`
 >    - *"Regular Expression"*: `Haploid`
 >
 > 4. {% tool [Convert delimiters to TAB](Convert characters1) %} with the following parameters:
->    - {% icon param-file %} *"in Dataset"*: output of **Search in text files** {% icon tool %}
+>    - {% icon param-file %} *"in Dataset"*: output of **Search in textfiles** {% icon tool %}
 >
 > 5. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: output of **Convert delimiters to TAB** {% icon tool %}
@@ -1005,7 +1000,7 @@ Despite Hi-C generating paired-end reads, we need to map each read separately. T
 >
 > 5. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `BAM forward`
->    - {% icon param-file %} *"Second set of reads"*: `Bam reverse`
+>    - {% icon param-file %} *"Second set of reads"*: `BAM  reverse`
 >
 > 6. Rename it as `BAM Hi-C reads`
 {: .hands_on}
