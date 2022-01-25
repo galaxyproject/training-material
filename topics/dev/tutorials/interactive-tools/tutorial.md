@@ -387,7 +387,7 @@ and pushing images.
 > # Authenticate your DockerHub account
 > docker login  # >>> Enter username and token for your account
 >
-> # Push the container
+> # Push the image
 > docker push $REMOTE:latest
 > ```
 >
@@ -706,7 +706,7 @@ Have a look in the web interface of your Galaxy instance. You should find the ne
 > - the Galaxy tool XML
 > - the Docker image
 >
-> We have already pushed the Docker image to the cloud (thought it should be hosted on an [approved registry](#push-the-container) for production use).
+> We have already pushed the Docker image to the cloud (thought it should be hosted on an [approved registry](#push-the-image) for production use).
 >
 > All that's left is to distribute the tool XML. This would conventionally be done through the ToolShed. But the ToolShed doesn't support GxITs yet! This leaves us only two options for distributing the tool XML:
 > - Make a pull request against [Galaxy core](https://github.com/galaxyproject/galaxy) to include the XML file under `tools/interactive/`
