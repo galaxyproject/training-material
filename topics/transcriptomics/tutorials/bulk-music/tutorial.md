@@ -304,9 +304,9 @@ We will now inspect these objects we just created to see what information we can
 >    - {% icon galaxy-eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
 > 1. Obtain Feature Information about the data set
 >    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy2) %} with the following parameters:
-> > ### {% icon warning %} Danger: This tool has needs!
-> > You will need to click the dataset from your history and drag it into the input of this tool. Some browsers don't allow this - we recommend GoogleChrome!
-> {: .warning}  
+>         > ### {% icon warning %} Danger: This tool has needs!
+>         > You will need to click the dataset from your history and drag it into the input of this tool. Some browsers don't allow this!
+>         {: .warning}  
 >       - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >       - *"Inspect"*: `Feature Data Table`
 >         > ### {% icon comment %} Comment: Features or Genes?
