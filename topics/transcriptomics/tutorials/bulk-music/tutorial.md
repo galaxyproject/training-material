@@ -9,6 +9,7 @@ tags:
   - mouse
   - human
   - deconvolution
+  - bulk
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
@@ -61,7 +62,7 @@ The heterogeneity that exists in the cellular composition of bulk RNA-seq can ad
 
 > ### {% icon details %} More details on 'Sums'
 >
-> So you fancy some maths do you? Good! This is important, as you'll see variations of that phrase if you ever look at any papers in the field!
+> **So!** You fancy some maths do you? Good! This is important, as you'll see variations of that phrase if you ever look at any papers in the field!
 > If we think about the total expression of a given gene you might get from bulk RNA-seq, you could also think about it as the sum of the expression of each cell, for example,
 >
 > *Total = cell<sub>a</sub> expression + cell<sub>b</sub> expression ... (and so forth)*
@@ -160,7 +161,7 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 > * Or clicking on {% icon galaxy-eye %} icon to load them into the main window.
 {: .comment}
 
-Words
+Let's start exploring the datasets
 
 > ### {% icon hands_on %} Hands-on: Exploring the Datasets
 >
