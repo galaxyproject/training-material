@@ -362,11 +362,12 @@ The deconvolution of 89 subjects from {%cite fadista2014global %} is performed w
 >        - *"Comma list of cell types to use from scRNA dataset"*: `alpha,beta,delta,gamma,acinar,ductal`
 >        - *"Phenotype factors"*: `(leave blank)`
 >        - *"Excluded phenotype factors"*: `sampleID,SubjectName`
->        - *"Phenotype Target"*: `hba1c`
->        - *"Phenotype Target Threshold"*: `6.5`
->        - *"Sample Disease Group"*: `T2D`
->        - *"Sample Disease Group (Scale)"*: `5`
->        - *"Plot Title"*: `HbA1c vs Beta Cell Type Proportion`
+>        - Under *"Show proportions of a disease factor?"*: `Yes`
+>          - *"Phenotype Target"*: `hba1c`
+>          - *"Phenotype Target Threshold"*: `6.5`
+>          - *"Sample Disease Group"*: `T2D`
+>          - *"Sample Disease Group (Scale)"*: `5`
+>          - *"Plot Title"*: `HbA1c vs Beta Cell Type Proportion`
 >
 >    > ### {% icon comment %} Comment
 >    >
