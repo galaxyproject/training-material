@@ -349,7 +349,7 @@ The deconvolution of 89 subjects from {%cite fadista2014global %} is performed w
 
 The deconvolution process can be performed by simply inputting the bulk RNA-seq and scRNA-seq datasets, and hitting execute, but in this section we will be tracing the effect of a disease phenotype across both datasets.
 
-Here we will use one of the factors from the bulk RNA-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the `hba1c` factor described in bulk phenotype data, compared against the `T2D` factor in the single cell phenotype data.
+Here we will use one of the factors from the bulk RNA-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the `hba1c` factor described in bulk phenotype data, compared against the `T2D` factor in the single cell phenotype data, and displaying both in the subset of `beta` cells from the scRNA-seq data.
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -365,11 +365,11 @@ Here we will use one of the factors from the bulk RNA-seq phenotypes related to 
 >        - *"Phenotype factors"*: `(leave blank)`
 >        - *"Excluded phenotype factors"*: `sampleID,SubjectName`
 >        - Under *"Show proportions of a disease factor?"*: `Yes`
->          - *"Phenotype Target"*: `hba1c` (**Factor from Bulk**)
->          - *"Phenotype Target Threshold"*: `6.5`
->          - *"Sample Disease Group"*: `T2D` (**Factor from scRNA**)
->          - *"Sample Disease Group (Scale)"*: `5`
->          - *"Plot Title"*: `HbA1c vs Beta Cell Type Proportion`
+>          - *"scRNA Phenotype Cell Target"*: `beta`
+>          - *"Bulk Phenotype Target"*: `hba1c` (**Factor from Bulk Phenotype**)
+>          - *"Bulk Phenotype Target Threshold"*: `6.5`
+>          - *"scRNA Sample Disease Group"*: `T2D` (**Factor from scRNA Phenotype**)
+>          - *"scRNA Sample Disease Group (Scale)"*: `5`
 >
 >    > ### {% icon comment %} Comment
 >    >
