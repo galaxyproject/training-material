@@ -89,12 +89,12 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/genome_masked.fasta
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/SwissProt_subset.fasta
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alternate_annotation.gbk
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alternate_annotation.gff3
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/genome_masked.fasta
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R1.fq.gz
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R2.fq.gz
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/SwissProt_subset.fasta
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gbk
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gff3
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
