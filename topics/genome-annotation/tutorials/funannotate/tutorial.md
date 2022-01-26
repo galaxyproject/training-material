@@ -279,7 +279,7 @@ The aim of the previous step is to predict the position of the genes on the geno
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1) %} with the following parameters:
+> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Fasta sequences to annotate"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Version of eggNOG Database"*: select the latest version available
 >    - In *"Output Options"*:
