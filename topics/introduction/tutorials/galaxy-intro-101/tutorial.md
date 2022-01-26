@@ -368,7 +368,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. {% tool [Select first](Show beginning1) %} lines from a dataset:
+> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %} lines from a dataset:
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
