@@ -178,7 +178,7 @@ where it came from. Every computation happens line-by-line.
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test out solutions here!
 
 ```
@@ -203,7 +203,7 @@ where it came from. Every computation happens line-by-line.
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test out solutions here!
 
 ```
@@ -274,7 +274,7 @@ where it came from. Every computation happens line-by-line.
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test out solutions here!
 ```
 
@@ -348,7 +348,7 @@ where it came from. Every computation happens line-by-line.
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test out solutions here!
 ```
 
@@ -376,6 +376,6 @@ where it came from. Every computation happens line-by-line.
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test out solutions here!
 ```

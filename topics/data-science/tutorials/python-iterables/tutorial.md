@@ -71,7 +71,7 @@ print('fourth item of pressures:', pressures[4])
 
 Lists' values can be changed or replaced by assigning a new value to the position in the list.
 
-```
+```python
 pressures[0] = 0.265
 print('pressures is now:', pressures)
 ```
@@ -178,7 +178,7 @@ The empty list contains no values. When you want to make a new list, use `[]` on
 
 Lists may contain values of different types. A single list may contain numbers, strings, and anything else.
 
-```
+```python
 goals = [1, 'Create lists.', 2, 'Extract items from lists.', 3, 'Modify lists.']
 ```
 
@@ -228,7 +228,7 @@ print('99th element of element is:', element[99])
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test code here!
 a = "1234.csv"
 b = "1273.tsv"
@@ -249,7 +249,7 @@ d = "1239.csv"
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test answers here!
 print("shout it out")
 print("WHISPER THIS")
@@ -271,7 +271,7 @@ print(terrible_sequence)
 > {: .solution}
 {: .question}
 
-```
+```python
 # Split me
 data = "0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0"
 ```
@@ -370,7 +370,7 @@ Notice that we also haven't filled out the end value. If you don't supply an end
 > {: .solution}
 {: .question}
 
-```
+```python
 # Check your answers here!
 ```
 
@@ -440,7 +440,7 @@ It takes the string you called it on, and uses that as a separator. Then for the
 > {: .solution}
 {: .question}
 
-```
+```python
 # Fill in the blanks here!
 
 values = ____
@@ -490,6 +490,10 @@ print('second time:', values) # [should print 3, 5]
 > {: .solution}
 {: .question}
 
+```python
+# Test code here
+```
+
 > ## Working With the End
 >
 > What does the following program print?
@@ -518,6 +522,10 @@ print('second time:', values) # [should print 3, 5]
 > {: .solution}
 {: .question}
 
+```python
+# Test code here
+```
+
 > ## Stepping Through a List
 >
 > What does the following program print?
@@ -545,6 +553,10 @@ print('second time:', values) # [should print 3, 5]
 > {: .solution}
 {: .question}
 
+```python
+# Test code here
+```
+
 > ## Slice Bounds
 >
 > What does the following program print?
@@ -564,6 +576,10 @@ print('second time:', values) # [should print 3, 5]
 > The second statement returns an empty string, because the slice goes "out of bounds" of the string.
 > {: .solution}
 {: .question}
+
+```python
+# Test code here
+```
 
 # Dictionaries
 
@@ -631,7 +647,7 @@ print(populations["Namibia"])
 
 And just like lists, if you try an access a key that isn't there or an index outside of the range of the list:
 
-```
+```python
 print(populations["Mars"])
 ```
 
@@ -648,7 +664,7 @@ print(populations["Mars"])
 
 Adding new values to a dictionary is easy, it's very similar to replacing a value in a list.
 
-```
+```python
 # For lists we did
 x = ['x', 'y', 'z']
 x[0] = 'a'
@@ -657,21 +673,21 @@ print(x)
 
 For dictionaries, it's essentially the same, we access the 'place' in the dictionary just like we did with a list, and set it to a value
 
-```
+```python
 populations["Mars"] = 6 # robots
 print(populations)
 ```
 
 And similarly, removing items is the same as it was for lists:
 
-```
+```python
 del x[0] # Removes the first item
 print(x)
 ```
 
 And with dictionaries you delete by specifying which position/key you want to remove
 
-```
+```python
 del populations['Australia']
 print(populations)
 ```
@@ -697,6 +713,14 @@ print(populations)
 > > ```
 > {: .solution}
 {: .question}
+
+```python
+# Test code here!
+translation = {
+
+}
+print(translation)
+```
 
 > ### {% icon question %} Question: Modifying an array
 >
@@ -737,6 +761,23 @@ print(populations)
 > >
 > {: .solution}
 {: .question}
+
+```python
+# Test code here!
+variants = {
+  'B.1.1.7': 26267,
+  'B.1.351': 439,
+}
+variants[_____] =  _____
+print(variants) # Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384}
+__________
+print(variants) # Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384, 'B.1.617.2': 43486}
+# Maybe we've exterminated B.1.1.7 and B.1.351, remove their numbers.
+del _______
+del _______
+print(variants[______]) # Should print 384
+print(variants[______]) # Should print 43486
+```
 
 
 # Choosing the Right Data Type
