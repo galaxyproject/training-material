@@ -4,17 +4,15 @@ logo: "GTN"
 title: "The Pangeo ecosystem"
 video: false
 questions:
-  - What is Pangeo?
-  - Why Pangeo?
-  - What is the Pangeo Software Ecosystem?
-  - What is Pangeo Cloud Data Catalog?
-  - What is ARCO (Analysis Ready, Cloud Optimized) Data?
-  - What is Cloud Optimized?
-  - What is Pangeo forge?
-  - What is STAC?
-  - How do Pangeo forge and STAC relate to each other?
-  - How can I use and/or contribute to Pangeo?
-  - Where to go to learn more about Pangeo?
+- What is Pangeo?
+- What is the Pangeo Software Ecosystem?
+- What is ARCO (Analysis Ready, Cloud Optimized) Data?
+- What is Pangeo forge?
+- What is STAC?
+- Why and how to use STAC?
+- How do Pangeo forge and STAC relate to each other?
+- How can I use and/or contribute to Pangeo?
+- Where to go to learn more about Pangeo?
 objectives:
   - Understand Pangeo, its community, software ecosystem, infrastructure and cloud optimized data ecosystem.
   - Understand SpatioTemporal Asset Catalog (STAC) and how it relates to Pangeo.
@@ -24,9 +22,21 @@ time_estimation: "15m"
 key_points:
   - Pangeo is an inclusive community promoting open, reproducible and scalable science.
 contributors:
+  - BasileGoussard
+  - rabernat
   - annefou
 tags:
   - climate
+---
+
+## About this presentation
+
+.left[ This presentation is a summary of: ]
+
+- [Unlocking the Potential of Cloud Native Science with Pangeo](https://speakerdeck.com/rabernat/unlocking-the-potential-of-cloud-native-science-with-pangeo) by Ryan Abernathey (Co-founder of Pangeo);
+- [Introduction to DASK](https://docs.google.com/presentation/d/e/2PACX-1vSTH2kAR0DCR0nw8pFBe5kuYbOk3inZ9cQfZbzOIRjyzQoVaOoMfI2JONGBz-qsvG_P6g050ddHxSXT/pub?start=false&loop=false&delayms=60000&slide=id.g646705d04f_0_0) by the Dask Community;
+- [STAC for Earth Observation](https://doi.org/10.5281/zenodo.5896445) by Basile Goussard ([netCarbon](https://www.netcarbon.fr/)).
+
 ---
 
 ## Pangeo in a nutshell
@@ -52,12 +62,11 @@ Pangeo is first and foremost a community promoting open, reproducible, and scala
 This community provides documentation, develops and maintains software, and deploys computing infrastructure to make scientific research and programming easier.
 The Pangeo software ecosystem involves open source tools such as xarray, iris, dask, jupyter, and many other packages. There is no single software package called pangeo; rather, the Pangeo project serves as a coordination point between scientists, software, and computing infrastructure.
 
-
 ---
 
 ## Motivations
 
-There are several building crises facing the geoscience community:
+.left[ There are several building crises facing the geoscience community: ]
 
 .left[- *Big Data*: datasets are growing too rapidly and legacy software tools for scientific analysis can’t handle them. This is a major obstacle to scientific progress.]
 .left[- *Technology Gap*: a growing gap between the technological sophistication of industry solutions (high) and scientific software (low).]
@@ -129,11 +138,138 @@ challenges of big data, and these solutions should leverage the existing experti
 
 ## iris
 
+*A powerful, format-agnostic, community-driven Python package for analysing and visualising Earth science data.*
+
+.pull-left[
+- Data model based on the [CF conventions](http://cfconventions.org/);
+- Unit conversion;
+- visualization interface base on [matplotlib](https://matplotlib.org/) and [cartopy](https://scitools.org.uk/cartopy/docs/latest/);
+- efficient from single-machine through to multi-core clusters and HPC. 
+]
+
+.pull-right[
+
+.image-40[
+![IRIS logo](https://scitools-iris.readthedocs.io/en/latest/_static/iris-logo-title.png) 
+]
+
+]
+
+.left[*Source:* [Scitools Iris documentation](https://scitools-iris.readthedocs.io/en/latest/#)]
+---
+
+## Dask
+
+
+.pull-left[
+
+*Enabling performance at scale for the tools you love*
+
+- **Powerful**: Leading platform today for analytics
+- **Scalable**: Natively scales to clusters and cloud
+- **Flexible**: Bridges prototyping to production
+
+**Dask accelerates the existing Python ecosystem (Numpy, Pandas, Scikit-learn)**
+]
+
+.pull-right[
+
+.image-40[
+![DASK logo](https://docs.dask.org/en/stable/_images/dask_stacked.svg
+) 
+]
+
+]
+
+.left[*Source*: [Dask documentation](https://docs.dask.org/en/stable/)]
+
 ???
 
 ---
 
-## dask
+## How does Dask accelerate Numpy?
+
+.image-40[
+![Dask and Numpy](https://examples.dask.org/_images/dask-array-black-text.svg) 
+]
+
+.pull-left[
+```python
+import numpy as np
+
+x = np.ones((1000, 1000))
+x + x.T - x.mean(axis=0)
+```
+]
+
+
+.pull-right[
+
+```python
+import dask.array as da
+
+x = da.ones((1000, 1000))
+x + x.T - x.mean(axis=0)
+```
+]
+
+
+---
+
+## How does Dask accelerate Pandas?
+
+.image-25[
+![Dask and Pandas](https://examples.dask.org/_images/dask-dataframe.svg) 
+]
+
+.pull-left[
+
+```python
+import pandas as pd
+
+df = pd.read_csv("file.csv")
+df.groupby("x").y.mean()
+```
+]
+
+
+.pull-right[
+
+```python
+import dask.dataframe as dd
+
+df = dd.read_csv("s3://*.csv")
+df.groupby("x").y.mean()
+```
+]
+
+---
+
+## How does Dask accelerate Scikit-Learn?
+
+.image-40[
+![Dask and Scikit-Learn](https://scikit-learn.org/stable/_images/sphx_glr_plot_classifier_comparison_001.png) 
+]
+
+.pull-left[
+
+```python
+from scikit_learn.linear_model import LogisticRegression
+
+lr = LogisticRegression()
+lr.fit(data, labels)
+```
+]
+
+.pull-right[
+
+```python
+from dask_ml.linear_model import LogisticRegression
+
+lr = LogisticRegression()
+lr.fit(data, labels)
+```
+]
 
 ???
 
@@ -200,7 +336,157 @@ Pangeo Forge is inspired directly by Conda Forge, a community-led collection of 
 
 ## STAC
 
-???
+.center[STAC stands for **SpatioTemporal Asset Catalog**.]
+
+---
+
+## Why STAC?
+
+*Each provider has its <span style="color:green">catalog and interface</span>*.
+
+.pull-left[
+
+Just searching the relevant data for your project could be a tough work...
+
+- **Lot of data providers …**
+- **Each interface is unique …**
+
+]
+
+.pull-right[ ![Why STAC](../../images/why_STAC.png) ]
+
+---
+
+## Why STAC?
+
+*Each provider has its own <span style="color:green">Application Programming Interface (API)</span>*.
+
+.pull-left[
+
+If you are a programmer that’s exactly the same...
+
+You should design a new data connector each time...
+
+- **Lot of data providers …**
+- **Each API is unique …**
+
+]
+
+.pull-right[ ![Why STAC](../../images/why_STAC-API.png) ]
+
+---
+
+
+## Why STAC?
+
+*Let's work <span style="color:green">together</span>*.
+
+.pull-left[
+
+The main purpose of STAC is:
+
+- **Build an commun language to catalog geospatial data**
+
+]
+
+.pull-right[ ![STAC](../../images/STAC-logo.png) ]
+
+---
+
+## Why STAC?
+
+*Let's work <span style="color:green">together</span>*.
+
+.pull-left[
+
+It’s extremely simple, STAC catalogs are composed of three layers :  
+
+- **Catalogs**
+    - **Collections**
+        - **Items**
+
+]
+
+.pull-right[ 
+
+**It’s already used for Sentinel 2 in AWS**
+
+.image-90[
+![Sentinel 2](../../images/sentinel2_AWS.png) 
+]
+
+**It’s already used for Landsat 8 in MICROSOFT**
+
+.image-90[
+![Landsat 8](../../images/landsat8_microsoft.png) 
+]
+
+]
+
+---
+
+
+## How to use STAC
+
+*Depending on <span style="color:green">your needs</span>*.
+
+.pull-left[
+**Storing your data**
+
+.image-40[
+   ![Storing data](../../images/storing_data.png) 
+  ]
+]
+
+.pull-right[
+
+**Searching data**
+
+.image-40[
+   ![Searching data](../../images/searching_data.png) 
+  ]
+
+]
+---
+
+## Searching data
+
+*Let's search data over the main region (France) between the 1st January 2019 and the 4th June 2019*.
+
+.image-100[
+   ![Search data over main and specific dates](../../images/search_maine_data.png) 
+  ]
+
+
+---
+
+## Searching and processing
+  
+
+  .image-100[
+     ![Search and process](../../images/search_process.png) 
+    ]
+
+
+---
+
+## STAC ecosystem
+    
+*A lot of project are now build around <span style="color:green">STAC</span>*.
+
+- All the STAC Catalog available are at [https://stacindex.org/catalogs](https://stacindex.org/catalogs)
+- Lot of tutorial can be found at [https://stacindex.org/learn](https://stacindex.org/learn)
+- All packages that rely or work extremely well with STAC are at [https://stacindex.org/ecosystem](https://stacindex.org/ecosystem)
+
+---
+
+## A lot of contributors!
+
+Join and contrinute to STAC: [https://github.com/radiantearth/stac-spec](https://github.com/radiantearth/stac-spec)
+
+.image-100[
+     ![STAC contributors](../../images/STAC_contributors.png) 
+    ]
 
 ---
 
@@ -211,7 +497,9 @@ Pangeo Forge is inspired directly by Conda Forge, a community-led collection of 
 ---
 ## Using and/or contributing to Pangeo
 
-The pangeo project is completely open to involvement from anyone with interest. There are many ways to get involved:
+.left[The pangeo project is completely open to involvement from anyone with interest. 
+
+There are many ways to get involved:]
 
 - *Science users*: read the [Guide for Scientists](https://pangeo.io/quickstart.html#quickstart), browse the [Pangeo Gallery](https://pangeo.io/gallery.html#use-cases), read about the [Packages](https://pangeo.io/packages.html#packages), or try it yourself on Galaxy!
 - *Developers / system administrators*: learn about the [Technical Architecture](https://pangeo.io/architecture.html#architecture) or read the [Deployment Setup Guides](https://pangeo.io/setup_guides/index.html#setup-guides).
