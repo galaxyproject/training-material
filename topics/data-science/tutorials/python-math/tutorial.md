@@ -177,7 +177,7 @@ datetime.datetime.now()
 > You can create an alias for a library module when importing it to shorten programs. Use `import ... as ...` to give a library a short alias while importing it. Then refer to items in the library using that shortened name.
 >
 > ```
-> import datetime.datetime as dt
+> from datetime import datetime as dt
 >
 > dt.now()
 > ```
