@@ -111,7 +111,7 @@ a 28 pixel by 28 pixel grayscale image. Each pixel is represented by a number be
 values in total), and the values are randomly set to 0 or 1. Convolution is the process of placing the 3 by 3 filter on the top left
 corner of the image, multiplying filter values by the pixel values and adding the results, moving the filter to the right one pixel at
 a time and repeating this process. When we get to the top right corner of the image, we simply move the filter down one pixel and
-restart from the right. This process ends when we get to the bottom right corner of the image.
+restart from the left. This process ends when we get to the bottom right corner of the image.
 
 ![A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image](../../images/Conv_no_padding_no_strides.gif "A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image ({% cite DumoulinVisin %})")
 
