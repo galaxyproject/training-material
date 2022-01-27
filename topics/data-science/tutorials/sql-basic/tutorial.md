@@ -68,7 +68,6 @@ abbreviations:
 
 tags:
 - SQL
-- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment

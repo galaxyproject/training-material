@@ -173,34 +173,71 @@ footer: no
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
-                {% if page.notebook %}
-                <blockquote class="comment">
-                    <h3>{% icon comment aria=false %} {{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</h3>
-                    <p>
-                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
-                    </p>
-                    <!--
-                    <p><b>Launching on MyBinder</b>
-                        Click here and the notebook will launch on MyBinder.org
-                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath={{ site.baseurl | replace: '/','' }}%2F{{ page.path | replace: '/','%2F' }}.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
-                    </p>
-                    -->
-                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
-                        <ol>
-                            <li><a href="{% link faqs/galaxy/interactive_tools_jupyter_launch.md %}">Instructions to Launch JupyterLab</a></li>
-                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
-                            <li>Run <code>wget {{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb</code></li>
-                            <li>Select the notebook that appears in the list of files on the left.</li>
-                        </ol>
-                    </p>
-                    <p><b>Downloading the notebook</b>
-                        <ol>
-                            <li>Right click this link: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb">tutorial.ipynb</a></li>
-                            <li>Save Link As..</li>
-                        </ol>
-                    </p>
-                </blockquote>
-                {% endif %}
+                 {% if page.notebook %}
+                     {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
+                    {% if page.notebook.language ==  "r" %}
+                        <blockquote class="comment">
+                            <h3>{% icon comment aria=false %} {{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</h3>
+                            <p>
+                                This tutorial is available as an RMarkdown file and best viewed in RStudio! You can load this notebook in RStudio on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <p><b>Launching the notebook in RStudio in Galaxy</b></p>
+                            <ol>
+                                <li><a href="{% link faqs/galaxy/interactive_tools_rstudio_launch.md %}">Instructions to Launch RStudio</a></li>
+                                <li>Access the R console in RStudio (bottom left quarter of the screen)</li>
+                                <li>Run the following code:
+{% capture howtodownload %}
+```R
+download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", ""}}{{ page.topic_name }}-{{ own_material.tutorial_name }}.Rmd", "{{ page.topic_name }}-{{ own_material.tutorial_name }}.Rmd")
+download.file("{{ site.url }}{{ site.baseurl }}/assets/css/r-notebook.css", "gtn.css"){% if page.cited %}
+download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", ".bib"}}", "{{ page.topic_name }}-{{ own_material.tutorial_name }}.bib"){% endif %}
+```
+{% endcapture %}
+                                {{ howtodownload | markdownify }}
+                                </li>
+                                <li>Double click the RMarkdown document that appears in the list of files on the right.</li>
+                            </ol>
+                            <p><b>Downloading the notebook</b></p>
+                            <ol>
+                                <li>Right click this link: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.url | replace: ".html", ".Rmd"}}">tutorial.Rmd</a></li>
+                                <li>Save Link As...</li>
+                            </ol>
+                            <p><b>Alternative Formats</b></p>
+                            <ol>
+                                <li>This tutorial is also available as a <a href="{{ ipynbpath }}">Jupyter Notebook</a></li>
+                            </ol>
+                        </blockquote>
+
+                        {% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
+                    {% else %}
+                        <blockquote class="comment">
+                            <h3>{% icon comment aria=false %} {{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</h3>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath={{ site.baseurl | replace: '/','' }}%2F{{ page.path | replace: '/','%2F' }}.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="{% link faqs/galaxy/interactive_tools_jupyter_launch.md %}">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget {{ ipynbpath }}</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click this link: <a href="{{ ipynbpath }}">Jupyter Notebook</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    {% endif %}
+                 {% endif %}
 
                 {{ content
                     | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
