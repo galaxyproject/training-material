@@ -301,6 +301,7 @@ You won't need sets very often, but once you get comfortable with python there w
 ```python
 data = ['a', 'a', 'b', 'c', 'c', 'c']
 unique_data = list(set(data))
+print(unique_data)
 ```
 
 in order to get the unique values in the list. Here we convert it to a set (unique), before converting it back to a list, so it behaves like we except. Sets are created with `{1, 2, 3, ...}` instead of `[1, 2, 3, ...]`

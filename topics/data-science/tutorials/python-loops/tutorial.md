@@ -34,6 +34,7 @@ subtopic: python-modular
 contributors:
   - carpentries
   - hexylena
+  - Dirowa
 
 priority: 1
 notebook:
@@ -279,7 +280,7 @@ print(range(-3, 8)[0:4])
 
 The easiest way to see what numbers are actually in there is to convert it to a `list`:
 
-```
+```python
 print(list(range(5)))
 print(list(range(-3, 8)))
 print(list(range(0, 10, 2)))
@@ -328,7 +329,11 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 > > | 3    | total = 3 char = 'n' |
 > {: .solution}
 {: .question}
-
+```python
+#Test your code here!
+total = 0
+for char in "tin":
+    total = total + 1
 > ### {% icon question %} Question: Reversing a String
 >
 > Fill in the blanks in the program below so that it prints "stressed"
@@ -352,6 +357,13 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 > {: .solution}
 {: .question}
 
+```python
+ #Test your code here !
+original = "stressed"
+result = ____
+for char in original:
+    result = ____
+print(result)
 > ### {% icon question %} Question: Practice Accumulating
 >
 > Fill in the blanks in each of the programs below
@@ -422,6 +434,8 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 > {: .solution}
 {: .question}
 
+```python
+#Test your code here!
 > ## Cumulative Sum
 >
 > Reorder and properly indent the lines of code below
@@ -450,6 +464,8 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 > {: .solution}
 {: .question}
 
+```python
+#test your code here!~
 > ## Identifying Variable Name Errors
 >
 > 1. Read the code below and try to identify what the errors are

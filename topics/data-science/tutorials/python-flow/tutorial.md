@@ -250,7 +250,7 @@ if not not True:
 > {: .solution}
 {: .question}
 
-```
+```python
 # Test code here.
 ```
 
