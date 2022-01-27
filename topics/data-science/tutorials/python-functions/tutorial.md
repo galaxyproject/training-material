@@ -103,9 +103,30 @@ Let’s try running our function.
 
 ```python
 fahr_to_celsius(32)
-print('freezing point of water:', fahr_to_celsius(32), 'C')
-print('boiling point of water:', fahr_to_celsius(212), 'C')
+print(f"freezing point of water: {fahr_to_celsius(32)}C")
+print(f"boiling point of water: {fahr_to_celsius(212)}C")
 ```
+
+> ### {% icon tip %} Formatting Strings
+> There are several ways to print out a few values in python. We'd recommend you to use `f-strings` as it's the cleanest and most modern way to do it.
+>
+> `f`-strings start with an `f` (very descriptive name eh?). Within the text between the single or double quotes (`'`/`"`) you can use curly braces to refer to variables or python code which will be placed there in the string.
+>
+> ```
+> a = 10
+> b = f"Here is the value of a: {a}"
+> print(b)
+> print(f"Here is the value of a: {5 + 5}")
+> print(f"Here is the value of a: {function_that_returns_10()}")
+> ```
+>
+> All of those would print out `Here is the value of a: 10`.
+>
+> f-strings can be a lot fancier for formatting decimal places, but we don't need that for now. Just know:
+>
+> 1. Start with an `f`
+> 2. Use braces to use the value of a variable, a function, or some python expression.
+{: .tip}
 
 We’ve successfully called the function that we defined, and we have access to the value that we returned.
 
@@ -115,8 +136,12 @@ Now that we’ve seen how to turn Fahrenheit into Celsius, we can also write the
 def celsius_to_kelvin(temp_c):
     return temp_c + 273.15
 
-print('freezing point of water in Kelvin:', celsius_to_kelvin(0.))
+print(f'freezing point of water in Kelvin: {celsius_to_kelvin(0.)}')
 ```
+
+> ### {% icon tip %} Tip: What is `0.`
+> That's a float! A `.` in a number makes it a float, rather than an integer.
+{: .tip}
 
 What about converting Fahrenheit to Kelvin? We could write out both formulae, but we don’t need to. Instead, we can *compose* the two functions we have already created:
 
@@ -126,7 +151,7 @@ def fahr_to_kelvin(temp_f):
     temp_k = celsius_to_kelvin(temp_c)
     return temp_k
 
-print('boiling point of water in Kelvin:', fahr_to_kelvin(212.0))
+print(f'boiling point of water in Kelvin: {fahr_to_kelvin(212.0)}')
 ```
 
 This is our first taste of how larger programs are built: we define basic operations, then combine them in ever-larger chunks to get the effect we want. Real-life functions will usually be larger than the ones shown here — typically half a dozen to a few dozen lines — but they shouldn’t ever be much longer than that, or the next person who reads it won’t be able to understand what’s going on.
@@ -148,7 +173,7 @@ def fahr_to_kelvin(temp_f):
     temp_k = celsius_to_kelvin(temp_c)
     return temp_k
 
-print('boiling point of water in Kelvin:', fahr_to_kelvin(212.0))
+print(f'boiling point of water in Kelvin: {fahr_to_kelvin(212.0)}')
 ```
 
 For a function this small, with such a descriptive name (`fahr_to_kelvin`) it feels quite obvious what the function should do, what inputs it takes, what outputs it produces. However
@@ -206,14 +231,14 @@ print(pythagorus(1234, 4321)) # Should return 4493.750883170984
 In composing our temperature conversion functions, we created variables inside of those functions, `temp`, `temp_c`, `temp_f`, and `temp_k`. We refer to these variables as local variables because they no longer exist once the function is done executing. If we try to access their values outside of the function, we will encounter an error:
 
 ```python
-print('Again, temperature in Kelvin was:', temp_k)
+print(f'Again, temperature in Kelvin was: {temp_k}')
 ```
 
 If you want to reuse the temperature in Kelvin after you have calculated it with fahr_to_kelvin, you can store the result of the function call in a variable:
 
 ```python
 temp_kelvin = fahr_to_kelvin(212.0)
-print('temperature in Kelvin was:', temp_kelvin)
+print(f'temperature in Kelvin was: {temp_kelvin}')
 ```
 
 Watch out for scope issues:
@@ -255,7 +280,7 @@ If we usually want a function to work one way, but occasionally need it to do so
 
 ```python
 def display(a=1, b=2, c=3):
-    print('a:', a, 'b:', b, 'c:', c)
+    print(f'a: {a}, b: {b}, c: {c}')
 
 # no parameters:
 display()

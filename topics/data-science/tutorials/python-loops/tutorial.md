@@ -46,7 +46,7 @@ A *for loop* tells Python to execute some statements once for each value in a li
 > ### {% icon comment %} Comment
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/), [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/), and [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/), which are licensed CC-BY 4.0.
 >
-> Adaptations have been made to make this work better in a GTN/Galaxy environment, or to otherwise improve the content.
+> Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
 
 > ### Agenda
@@ -525,14 +525,14 @@ print(message)
 >
 > ```
 > seasons = ['Spring', 'Summer', 'Fall', 'Winter']
-> print('My favorite season is ', seasons[4])
+> print(f'My favorite season is {seasons[4]}')
 > ```
 >
 > > ### {% icon solution %} Solution
 > > This list has 4 elements and the index to access the last element in the list is `3`.
 > > ```
 > > seasons = ['Spring', 'Summer', 'Fall', 'Winter']
-> > print('My favorite season is ', seasons[3])
+> > print(f'My favorite season is {seasons[3]}')
 > > ```
 > {: .solution}
 {: .question}
@@ -540,5 +540,5 @@ print(message)
 ```
 # Fix me!
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
-print('My favorite season is ', seasons[4])
+print(f'My favorite season is {seasons[4]}')
 ```

@@ -140,8 +140,8 @@ print(str(1) + '2')
 Integers and floating-point numbers can be mixed in arithmetic. Python 3 (which we use) automatically converts integers to floats as needed.
 
 ```python
-print('half is', 1 / 2.0)
-print('three squared is', 3.0 ** 2)
+print(f'half is {1 / 2.0}')
+print(f''three squared is' {3.0 ** 2}')
 ```
 
 
@@ -154,7 +154,7 @@ the former updates automatically. However, this does **not** happen in programmi
 variable_one = 1
 variable_two = 5 * variable_one
 variable_one = 2
-print('first is', variable_one, 'and second is', variable_two)
+print(f'first is {variable_one} and second is {variable_two}')
 ```
 
 The computer reads the value of `first` when doing the multiplication, creates
@@ -194,7 +194,7 @@ where it came from. Every computation happens line-by-line.
 > >
 > > ```
 > > result = 3.25 + 4
-> > print(result, 'is', type(result))
+> > print(f'result is {type(result)}')
 > > ```
 > >
 > > ```
@@ -238,9 +238,9 @@ where it came from. Every computation happens line-by-line.
 > division, and the `%` (or *modulo*) operator calculates and returns the remainder from integer division:
 >
 > ```python
-> print('5 // 3:', 5 // 3)
-> print('5 / 3:', 5 / 3)
-> print('5 % 3:', 5 % 3)
+> print(f'5 // 3: {5 // 3}')
+> print(f'5 / 3: {5 / 3}')
+> print(f'5 % 3: {5 % 3}')
 > ```
 >
 > ```

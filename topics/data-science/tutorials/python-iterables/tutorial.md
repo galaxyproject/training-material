@@ -54,8 +54,8 @@ Doing calculations with a hundred variables called `pressure_001`, `pressure_002
 
 ```python
 pressures = [0.273, 0.275, 0.277, 0.275, 0.276]
-print('pressures:', pressures)
-print('length:', len(pressures))
+print(f'pressures: {pressures}')
+print(f'length: {len(pressures)}')
 ```
 
 ## Indexing
@@ -63,8 +63,8 @@ print('length:', len(pressures))
 You can use an item's index to fetch it from a list.
 
 ```python
-print('zeroth item of pressures:', pressures[0])
-print('fourth item of pressures:', pressures[4])
+print(f'zeroth item of pressures: {pressures[0]}')
+print(f'fourth item of pressures: {pressures[4]}')
 ```
 
 ## Replacement
@@ -73,7 +73,7 @@ Lists' values can be changed or replaced by assigning a new value to the positio
 
 ```python
 pressures[0] = 0.265
-print('pressures is now:', pressures)
+print(f'pressures is now: {pressures}')
 ```
 
 Note how the first item has changed from `0.273`
@@ -84,9 +84,9 @@ Appending items to a list lengthens it. You can do `list_name.append()` to add i
 
 ```python
 primes = [2, 3, 5]
-print('primes is initially:', primes)
+print(f'primes is initially: {primes}')
 primes.append(7)
-print('primes has become:', primes)
+print(f'primes has become: {primes}')
 ```
 
 
@@ -97,11 +97,11 @@ We will meet other methods of lists as we go along. Use `help(list)` for a previ
 ```python
 teen_primes = [11, 13, 17, 19]
 middle_aged_primes = [37, 41, 43, 47]
-print('primes is currently:', primes)
+print(f'primes is currently: {primes}')
 primes.extend(teen_primes)
-print('primes has now become:', primes)
+print(f'primes has now become: {primes}')
 primes.append(middle_aged_primes)
-print('primes has finally become:', primes)
+print(f'primes has finally become: {primes}')
 ```
 
 Note that while `extend` maintains the "flat" structure of the list, appending a list to a list makes the result two-dimensional - the last element in `primes` is a list, not an integer.
@@ -165,9 +165,9 @@ You can use `del` to remove items from a list entirely. We use `del list_name[in
 
 ```python
 primes = [2, 3, 5, 7, 9]
-print('primes before removing last item:', primes)
+print(f'primes before removing last item: {primes}')
 del primes[4]
-print('primes after removing last item:', primes)
+print(f'primes after removing last item: {primes}')
 ```
 
 ## Empty Lists
@@ -192,8 +192,8 @@ Still, many of the operations you use on lists, can also be used on strings as w
 
 ```python
 element = 'carbon'
-print('zeroth character:', element[0])
-print('third character:', element[3])
+print(f'zeroth character: {element[0]}')
+print(f'third character: {element[3]}')
 ```
 
 ## Strings are immutable.
@@ -210,7 +210,7 @@ element[0] = 'C'
 You cannot access values beyond the end of the list, this will result in an error. Python reports an `IndexError` if we attempt to access a value that doesn't exist. This is a kind of **runtime error**, as it cannot be detected as the code is parsed. Imagine if you had a script which let you read in a file, depending on how many lines were in the file, whether index 90 was valid or invalid, would depend on how big your file was.
 
 ```python
-print('99th element of element is:', element[99])
+print(f'99th element of element is: {element[99]}')
 ```
 
 ## Exercises
@@ -418,9 +418,9 @@ It takes the string you called it on, and uses that as a separator. Then for the
 > values.____(1)
 > values.____(3)
 > values.____(5)
-> print('first time:', values)
+> print(f'first time: {values}')
 > values = values[____]
-> print('second time:', values)
+> print(f'second time: {values}')
 > ```
 >
 > ```
@@ -434,9 +434,9 @@ It takes the string you called it on, and uses that as a separator. Then for the
 > > values.append(1)
 > > values.append(3)
 > > values.append(5)
-> > print('first time:', values)
+> > print(f'first time: {values}')
 > > values = values[1:]
-> > print('second time:', values)
+> > print(f'second time: {values}')
 > > ```
 > {: .solution}
 {: .question}
@@ -448,9 +448,9 @@ values = ____
 values.____(1)
 values.____(3)
 values.____(5)
-print('first time:', values) # Should print [1, 3, 5]
+print(f'first time: {values}') # Should print [1, 3, 5]
 values = values[____]
-print('second time:', values) # [should print 3, 5]
+print(f'second time: {values}') # should print [3, 5]
 ```
 
 > ## How Large is a Slice?
@@ -472,12 +472,8 @@ print('second time:', values) # [should print 3, 5]
 > Given this:
 >
 > ```
-> print('string to list:', list('tin'))
-> print('list to string:', ''.join(['g', 'o', 'l', 'd']))
-> ```
-> ```
-> string to list: ['t', 'i', 'n']
-> list to string: gold
+> print(f'string to list: {list('tin')}')
+> print(f'list to string: {''.join(['g', 'o', 'l', 'd'])}')
 > ```
 >
 > 1.  What does `list('some string')` do?
