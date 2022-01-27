@@ -312,7 +312,7 @@
   "name": "Hands-on for 'dplyr & tidyverse for data processing' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/r-dplyr/tutorial.html",
   "timeRequired": "PT1H",
-  "keywords": "R, jupyter-notebook, work-in-progress",
+  "keywords": "R, jupyter-notebook, rmarkdown-notebook",
   "description": "The questions this  addresses are:\n - How can I load tabular data into R?\n - How can I slice and dice the data to ask questions?\n\n\\nThe objectives are:\n - Read data with the built-in `read.csv`\n - Read data with dplyr's `read_csv`\n - Use dplyr and tidyverse functions to cleanup data.\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -394,12 +394,6 @@
 
 <section class="tutorial topic-data-science">
     <h1 data-toc-skip>dplyr & tidyverse for data processing</h1>
-    
-    <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Under Development!</h4>
-        <p>This tutorial is not in its final state. The content may change a lot in the next months.
-        Because of this status, it is also not listed in the topic pages.</p>
-    </div>
     
 
 
@@ -586,9 +580,14 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/r-dplyr/tutorial.md.ipynb" title="Notebooks" alt="dplyr & tidyverse for data processing workflows">
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/r-dplyr/data-science-r-dplyr.ipynb" title="Jupyter Notebook" alt="dplyr & tidyverse for data processing Notebook">
         <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
     </a>
+    
+        <a class="topic-icon" href="/training-material/topics/data-science/tutorials/r-dplyr/data-science-r-dplyr.Rmd" title="R markdown notebook" alt="dplyr & tidyverse for data processing Notebook">
+            <i class="far fa-file-code" aria-hidden="true"></i> RMarkdown Notebook
+        </a>
+    
 
 </li>
             
@@ -617,7 +616,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 21, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             Tutorial Content is licensed under MIT
@@ -633,36 +632,45 @@
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
-                
-                <blockquote class="comment">
-                    <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
-                    <p>
-                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
-                    </p>
-                    <!--
-                    <p><b>Launching on MyBinder</b>
-                        Click here and the notebook will launch on MyBinder.org
-                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fr-dplyr%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
-                    </p>
-                    -->
-                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
-                        <ol>
-                            <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
-                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
-                            <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.md.ipynb</code></li>
-                            <li>Select the notebook that appears in the list of files on the left.</li>
-                        </ol>
-                    </p>
-                    <p><b>Downloading the notebook</b>
-                        <ol>
-                            <li>Right click this link: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.md.ipynb">tutorial.ipynb</a></li>
-                            <li>Save Link As..</li>
-                        </ol>
-                    </p>
-                </blockquote>
-                
+                 
+                     
+                    
+                        <blockquote class="comment">
+                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in RStudio</h3>
+                            <p>
+                                This tutorial is available as an RMarkdown file and best viewed in RStudio! You can load this notebook in RStudio on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <p><b>Launching the notebook in RStudio in Galaxy</b></p>
+                            <ol>
+                                <li><a href="/training-material/faqs/galaxy/interactive_tools_rstudio_launch.html">Instructions to Launch RStudio</a></li>
+                                <li>Access the R console in RStudio (bottom left quarter of the screen)</li>
+                                <li>Run the following code:
 
-                <p>dplyr is a powerful R-package to transform and summarize tabular data with rows and columns. For further exploration please see the dplyr package vignette: <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">Introduction to dplyr</a></p>
+                                
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">download.file</span><span class="p">(</span><span class="s2">"https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/data-science-r-dplyr.Rmd"</span><span class="p">,</span><span class="w"> </span><span class="s2">"data-science-r-dplyr.Rmd"</span><span class="p">)</span><span class="w">
+</span><span class="n">download.file</span><span class="p">(</span><span class="s2">"https://training.galaxyproject.org/training-material/assets/css/r-notebook.css"</span><span class="p">,</span><span class="w"> </span><span class="s2">"gtn.css"</span><span class="p">)</span><span class="w">
+</span><span class="n">download.file</span><span class="p">(</span><span class="s2">"https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.bib"</span><span class="p">,</span><span class="w"> </span><span class="s2">"data-science-r-dplyr.bib"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+                                </li>
+                                <li>Double click the RMarkdown document that appears in the list of files on the right.</li>
+                            </ol>
+                            <p><b>Downloading the notebook</b></p>
+                            <ol>
+                                <li>Right click this link: <a href="https://training.galaxyproject.org/training-material//topics/data-science/tutorials/r-dplyr/tutorial.Rmd">tutorial.Rmd</a></li>
+                                <li>Save Link As...</li>
+                            </ol>
+                            <p><b>Alternative Formats</b></p>
+                            <ol>
+                                <li>This tutorial is also available as a <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/data-science-r-dplyr.ipynb">Jupyter Notebook</a></li>
+                            </ol>
+                        </blockquote>
+
+                        <!--SNIPPET--><blockquote class="hands_on">  <h3 data-toc-skip id="-hands-on-learning-with-rmarkdown-in-rstudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Learning with RMarkdown in RStudio</h3>  <p>Learning with RMarkdown is a bit different than you might be used to. Instead of copying and pasting code from the GTN into a document you’ll instead be able to run the code directly as it was written, inside RStudio! You can now focus just on the code and reading within RStudio.</p>  <ol>  <li>    <p><strong>Load the notebook</strong> if you have not already, following the tip box at the top of the tutorial</p>    <p><img src="/training-material/topics/data-science/images/rstudio/r-download-file.png" alt="Screenshot of the Console in RStudio. There are three lines visible of not-yet-run R code with the download.file statements which were included in the setup tip box." /></p>  </li>  <li>    <p><strong>Open it</strong> by clicking on the <code class="language-plaintext highlighter-rouge">.Rmd</code> file in the file browser (bottom right)</p>    <p><img src="/training-material/topics/data-science/images/rstudio/r-file-menu.png" alt="Screenshot of Files tab in RStudio, here there are three files listed, a data-science-r-dplyr.Rmd file, a css and a bib file." /></p>  </li>  <li>    <p>The RMarkdown document will appear in the document viewer (top left)</p>    <p><img src="/training-material/topics/data-science/images/rstudio/r-document-view.png" alt="Screenshot of an open document in RStudio. There is some yaml metadata above the tutorial showing the title of the tutorial." /></p>  </li></ol>  <p>You’re now ready to view the RMarkdown notebook! Each notebook starts with a lot of metadata about how to build the notebook for viewing, but you can ignore this for now and <strong>scroll down to the content of the tutorial</strong>.</p>  <p>You’ll see codeblocks scattered throughout the text, and these are all runnable snippets that appear like this in the document:</p>  <p><img src="/training-material/topics/data-science/images/rstudio/r-run-cell.png" alt="Screenshot of the RMarkdown document in the viewer, a cell is visible between markdown text reading library tidyverse. It is slightly more grey than the background region, and it has a run button at the right of the cell in a contextual menu." /></p>  <p>And you have a few options for how to run them:</p>  <ol>  <li>Click the green arrow</li>  <li><kbd>ctrl+enter</kbd></li>  <li>    <p>Using the menu at the top to run all</p>    <p><img src="/training-material/topics/data-science/images/rstudio/r-run-all.png" alt="Screenshot of the run dropdown menu in R, the first item is run selected lines showing the mentioned shortcut above, the second is run next chunk, and then it also mentions a 'run all chunks below' and 'restart r and run all chunks' option." /></p>  </li></ol>  <p>When you run cells, the output will appear below in the Console. RStudio essentially copies the code from the RMarkdown document, to the console, and runs it, just as if you had typed it out yourself!</p>  <p><img src="/training-material/topics/data-science/images/rstudio/r-cell-output.png" alt="Screenshot of a run cell, its output is included below in the RMarkdown document and the same output is visible below in the console. It shows a log of loading the tidyverse library." /></p>  <p>One of the best features of RMarkdown documents is that they include a very nice table browser which makes previewing results a lot easier! Instead of needing to use <code class="language-plaintext highlighter-rouge">head</code> every time to preview the result, you get an interactive table browser for any step which outputs a table.</p>  <p><img src="/training-material/topics/data-science/images/rstudio/r-table.png" alt="Screenshot of the table browser. Below a code chunk is a large white area with two images, the first reading 'r console' and the second reading 'tbl_df'. The tbl_df is highlighted like it is active. Below that is a pretty-printed table with bold column headers like name and genus and so on. At the right of the table is a small arrow indicating you can switch to seeing more columns than just the initial three. At the bottom of the table is 1-10 of 83 rows written, and buttons for switching between each page of results." /></p></blockquote>
+                    
+                 
+
+                <p>dplyr (<span class="citation"><a href="#r-dplyr">Wickham <i>et al.</i> 2021</a></span>) is a powerful R-package to transform and summarize tabular data with rows and columns. It is part of a group of packages (including <code class="language-plaintext highlighter-rouge">ggplot2</code>) called the <code class="language-plaintext highlighter-rouge">tidyverse</code> (<span class="citation"><a href="#r-tidyverse">Wickham <i>et al.</i> 2019</a></span>), a collection of packages for data processing and visualisation. For further exploration please see the dplyr package vignette: <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">Introduction to dplyr</a></p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -709,12 +717,47 @@
 
 <h2 id="how-do-i-get-dplyr">How Do I Get dplyr?</h2>
 
-<p>To install and load the required packages:</p>
+<p>To load the required packages:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"dplyr"</span><span class="p">,</span><span class="w"> </span><span class="s2">"readr"</span><span class="p">))</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w"> </span><span class="c1"># This provides data processing functions</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span><span class="w"> </span><span class="c1"># This provides the `read_csv` function</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-package-not-found"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Package not found?</h3>
+  <p>Remember that you can install new packages by running</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>install.packages("tidyverse")
+</code></pre></div>  </div>
+  <p>Or by using the Install button on the RStudio Packages interface</p>
+</blockquote>
+
+<p>Here we’ve imported the entire suite of tidyverse packages. We’ll specifically be using:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Package</th>
+      <th>Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">readr</code></td>
+      <td>This provides the <code class="language-plaintext highlighter-rouge">read_csv</code> function which is identical to <code class="language-plaintext highlighter-rouge">read.csv</code> except it returns a tibble</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dplyr</code></td>
+      <td>All of the useful functions we’ll be covering are part of dplyr</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">magrittr</code></td>
+      <td>A dependency of <code class="language-plaintext highlighter-rouge">dplyr</code> that provides the <code class="language-plaintext highlighter-rouge">%&gt;%</code> operator</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ggplot2</code></td>
+      <td>The famous plotting library which we’ll use at the very end to plot our aggregated data.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h1 id="data-mammals-sleep">Data: Mammals Sleep</h1>
 
@@ -853,6 +896,19 @@
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">sleep_total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">head</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>How would you rewrite the following code to use the pipe operator?</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prcomp(tail(read.csv("file.csv"), 10))
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Just read from inside to outside, starting with the innermost <code class="language-plaintext highlighter-rouge">()</code> and use <code class="language-plaintext highlighter-rouge">%&gt;%</code> between each step.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read.csv("file.csv") %&gt;% tail(10) %&gt;% prcomp()
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
 
 <h2 id="selecting-columns-using-select">Selecting Columns Using <code class="language-plaintext highlighter-rouge">select()</code></h2>
 
@@ -1004,9 +1060,10 @@
 
 <h2 id="ggplot2">ggplot2</h2>
 
-<p>Most people want to slice and dice their data before plotting, so let’s demonstrate that quickly by plotting our last dataset</p>
+<p>Most people want to slice and dice their data before plotting, so let’s demonstrate that quickly by plotting our last dataset.</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">msleep</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
     </span><span class="n">group_by</span><span class="p">(</span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
     </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
               </span><span class="n">min_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">sleep_total</span><span class="p">),</span><span class="w">
@@ -1040,6 +1097,10 @@
 
                 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="r-tidyverse">Wickham, H., M. Averick, J. Bryan, W. Chang, L. D. A. McGowan <i>et al.</i>, 2019 <b>Welcome to the tidyverse</b>. Journal of Open Source Software 4: 1686. <a href="https://doi.org/10.21105/joss.01686">10.21105/joss.01686</a></li>
+<li id="r-dplyr">Wickham, H., R. François, L. Henry, and K. Müller, 2021 <b>dplyr: A Grammar of Data Manipulation</b>. R package version 1.0.7. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a></li></ol>
                 
 
                 
@@ -1101,7 +1162,7 @@ author = "Helena Rasche and Erasmus+ Programme and Avans Hogeschool",
 title = "dplyr & tidyverse for data processing (Galaxy Training Materials)",
 year = "2021",
 month = "12",
-day = "14"
+day = "21"
 url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-dplyr/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
