@@ -157,29 +157,31 @@ datetime.datetime.now()
 ```
 
 
-You can use `help` to learn about the contents of a library module. it works just like help for a function.
-
-```python
-help(datetime)
-```
-
-You can import specific items from a library module to shorten programs. You can use `from ... import ...` to load only specific items from a library module. Then refer to them directly without library name as prefix.
-
-
-```python
-from datetime import datetime
-
-datetime.now()
-```
-
-
-You can create an alias for a library module when importing it to shorten programs. Use `import ... as ...` to give a library a short alias while importing it. Then refer to items in the library using that shortened name.
-
-```python
-import datetime.datetime as dt
-
-dt.now()
-```
+> ### {% icon tip %} Tip: More complicated importing
+>
+> First, you can use `help` to learn about the contents of a library module. it works just like help for a function.
+>
+> ```
+> help(datetime)
+> ```
+>
+> You can import specific items from a library module to shorten programs. You can use `from ... import ...` to load only specific items from a library module. Then refer to them directly without library name as prefix.
+>
+>
+> ```
+> from datetime import datetime
+>
+> datetime.now()
+> ```
+>
+> You can create an alias for a library module when importing it to shorten programs. Use `import ... as ...` to give a library a short alias while importing it. Then refer to items in the library using that shortened name.
+>
+> ```
+> import datetime.datetime as dt
+>
+> dt.now()
+> ```
+{: .tip}
 
 
 ## Math Module
