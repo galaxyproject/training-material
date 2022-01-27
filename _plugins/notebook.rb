@@ -81,7 +81,7 @@ module GTNNotebooks
     notebook['cells'] = out.map.with_index{|data, index|
       res = {
         'id' => "cell-#{index}",
-        'source' => data[0].map{|x| x.strip + "\n"}
+        'source' => data[0].map{|x| x.rstrip + "\n"}
       }
       # Strip the trailing newline in the last cell.
       if res['source'].length > 0
