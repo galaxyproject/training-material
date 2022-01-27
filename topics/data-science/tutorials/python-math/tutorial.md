@@ -115,6 +115,8 @@ Time to check what we've learned!
 >
 > What is the value of `y` when `x = 452`
 >
+> You can test out solutions in the box below this question.
+>
 > > ### {% icon solution %} Solution
 > > ```
 > > x = 452
@@ -134,33 +136,6 @@ Time to check what we've learned!
 # People use it for documentation: explaining what the function does,
 # what a variable means, why they chose this or that algorithm.
 ```
-
-## Functions
-
-Just like you might have done in math, we can have functions in Python. You do not need to know this now, but it's help you understand what's going on underneath. The important thing to notice is how we call our function, just like in math, we write `f(3)` to call a function named `f` with the value `3`!
-
-> > ### {% icon code-in %} Math
-> > ```
-> > # Define our function
-> > f(x) = 3 * x
-> > # Compute some value
-> > f(3) # is 9
-> > ```
-> {: .code-in}
->
-> > ### {% icon code-out %} Python
-> > ```
-> > # Define our function
-> > def f(x):
-> >    answer = 3 * x
-> >    return answer
-> > # Compute some value
-> > f(3)
-> > ```
-> {: .code-out}
->
-{: .code-2col}
-
 
 ## Libraries
 
