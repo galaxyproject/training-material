@@ -325,14 +325,22 @@ That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let
 >
 > Since we're checking your ability to write Python, not do math, it should give `-1` and `0.5` to let you check your work. If you got those values, you got it right!
 >
+> Make sure you save each root as it's own variable, and then print them out.
+>
 > > ### {% icon solution %} Solution
 > > ```
-> > (-b + math.sqrt(math.pow(b, 2) - 4 * a * c))/(2 * a)
-> > (-b - math.sqrt(math.pow(b, 2) - 4 * a * c))/(2 * a)
+> > root1 = (-b + math.sqrt(math.pow(b, 2) - 4 * a * c))/(2 * a)
+> > root2 = (-b - math.sqrt(math.pow(b, 2) - 4 * a * c))/(2 * a)
+> > print(root1)
+> > print(root2)
 > > ```
 > {: .solution}
 {: .question}
 
 ```python
 # Test solutions here!
+root1 =
+root2 =
+print(root1)
+print(root2)
 ```
