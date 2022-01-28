@@ -44,7 +44,7 @@ In this tutorial, you will learn how to manipulate [netCDF](https://en.wikipedia
 
 
 > ### {% icon comment %} Xarray and Earth Science
-> Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. However, in this training material, we focus on the usage of Xarray for Earth Science data following [CF-Convention](https://cfconventions.org/). However, some Galaxy Tools also work for non Earth Science datasets and if needed current Xarray Galaxy Tools could be extended to accomodate new usage.
+> Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following [CF-Convention](https://cfconventions.org/). However, some Galaxy Tools also work for non Earth Science datasets and if needed current Xarray Galaxy Tools could be extended to accomodate new usage.
 {: .comment}
 
 In this tutorial, we will be using data from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/)
@@ -79,8 +79,7 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+> 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
@@ -93,12 +92,12 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. If needed rename the datasets to `CAMS-PM2_5-20211222.netcdf`
-> 4. Check that the datatype is `netcdf`
+> 2. If needed rename the datasets to `CAMS-PM2_5-20211222.netcdf`
+> 3. Check that the datatype is `netcdf`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add a tag corresponding to ads (for Atmosphere Data Service)
+> 4. Add a tag corresponding to ads (for Atmosphere Data Service)
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
