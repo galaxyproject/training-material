@@ -145,61 +145,58 @@ Data can be retrieved directly from [Copernicus Atmosphere Monitoring Service](h
 
 ## Import Python packages
 
-> ### {% icon hands_on %} Hands-on: Import Python packages
->    > ### {% icon code-in %} Input: Python
->    > ```python
->    > import numpy as np
->    > import xarray as xr
->    > import cartopy.crs as ccrs
->    > import matplotlib.pyplot as plt
->    > import cmcrameri.cm as cmc
->    > import pandas as pd
->    >  ```
->    {: .code-in}
-{: .hands_on}
+
+```python
+import numpy as np
+import xarray as xr
+import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
+import cmcrameri.cm as cmc
+import pandas as pd
+```
 
 ## Open and read metadata
 
-> ### {% icon hands_on %} Hands-on: netCDF dataset with Xarray
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    > dset = xr.open_dataset("CAMS-PM2_5-20211222.netcdf")
->    >  ```
->    {: .code-in}
-{: .hands_on}
+The netCDF dataset can now be opened with Xarray:
 
+```python
+dset = xr.open_dataset("CAMS-PM2_5-20211222.netcdf")
+```
 
 Once opened, we can get metadata using `print` statement.
 
-> ### {% icon hands_on %} Hands-on: Get metadata
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset)
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    >   <xarray.Dataset>
->    >   Dimensions:     (longitude: 700, latitude: 400, level: 1, time: 97)
->    >   Coordinates:
->    >     * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
->    >     * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
->    >     * level       (level) float32 0.0
->    >     * time        (time) timedelta64[ns] 00:00:00 01:00:00 ... 4 days 00:00:00
->    >   Data variables:
->    >       pm2p5_conc  (time, level, latitude, longitude) float32 0.4202 ... 7.501
->    >   Attributes:
->    >       title:        PM25 Air Pollutant FORECAST at the Surface
->    >       institution:  Data produced by Meteo France
->    >       source:       Data from ENSEMBLE model
->    >       history:      Model ENSEMBLE FORECAST
->    >       FORECAST:     Europe, 20211222+[0H_96H]
->    >       summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
->    >       project:      MACC-RAQ (http://macc-raq.gmes-atmosphere.eu)
->    > ```
->    {: .code-out}
-{: .hands_on}
+```python
+print(dset)
+```
+
+Below is what you should get if everything goes fine.
+
+> ### {% icon code-out %} Output
+> ```
+>  <xarray.Dataset>
+>  Dimensions:     (longitude: 700, latitude: 400, level: 1, time: 97)
+>  Coordinates:
+>    * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
+>    * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
+>    * level       (level) float32 0.0
+>    * time        (time) timedelta64[ns] 00:00:00 01:00:00 ... 4 days 00:00:00
+> Data variables:
+>   pm2p5_conc  (time, level, latitude, longitude) float32 0.4202 ... 7.501
+> Attributes:
+>   title:        PM25 Air Pollutant FORECAST at the Surface
+>   institution:  Data produced by Meteo France
+>   source:       Data from ENSEMBLE model
+>   history:      Model ENSEMBLE FORECAST
+>   FORECAST:     Europe, 20211222+[0H_96H]
+>   summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
+>   project:      MACC-RAQ (http://macc-raq.gmes-atmosphere.eu)
+> ```
+{: .code-out}
+
+> ### {% icon tip %} Command not found
+> If you get an error with the previous command, first check the location of the input file `CAMS-PM2_5-20211222.netcdf`:
+> it needs to be in the smae directory than your Jupyter Notebook.
+{: .tip }
 
 We can identify 4 different sections:
 1. **Dimensions**: name of dimensions and corresponding number of elements;
@@ -209,51 +206,9 @@ We can identify 4 different sections:
 
 We can also get metadata information for each coordinate and data variables using "." followed by the coordinate or data variable name.
 
-
-> ### {% icon hands_on %} Hands-on: get metadata of a coordinate or data variable
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.time)
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.DataArray 'time' (time: 97)>
->    > array([              0,   3600000000000,   7200000000000,  10800000000000,
->    >         14400000000000,  18000000000000,  21600000000000,  25200000000000,
->    >         28800000000000,  32400000000000,  36000000000000,  39600000000000,
->    >         43200000000000,  46800000000000,  50400000000000,  54000000000000,
->    >         57600000000000,  61200000000000,  64800000000000,  68400000000000,
->    >         72000000000000,  75600000000000,  79200000000000,  82800000000000,
->    >         86400000000000,  90000000000000,  93600000000000,  97200000000000,
->    >        100800000000000, 104400000000000, 108000000000000, 111600000000000,
->    >        115200000000000, 118800000000000, 122400000000000, 126000000000000,
->    >        129600000000000, 133200000000000, 136800000000000, 140400000000000,
->    >        144000000000000, 147600000000000, 151200000000000, 154800000000000,
->    >        158400000000000, 162000000000000, 165600000000000, 169200000000000,
->    >        172800000000000, 176400000000000, 180000000000000, 183600000000000,
->    >        187200000000000, 190800000000000, 194400000000000, 198000000000000,
->    >        201600000000000, 205200000000000, 208800000000000, 212400000000000,
->    >        216000000000000, 219600000000000, 223200000000000, 226800000000000,
->    >        230400000000000, 234000000000000, 237600000000000, 241200000000000,
->    >        244800000000000, 248400000000000, 252000000000000, 255600000000000,
->    >        259200000000000, 262800000000000, 266400000000000, 270000000000000,
->    >        273600000000000, 277200000000000, 280800000000000, 284400000000000,
->    >        288000000000000, 291600000000000, 295200000000000, 298800000000000,
->    >        302400000000000, 306000000000000, 309600000000000, 313200000000000,
->    >        316800000000000, 320400000000000, 324000000000000, 327600000000000,
->    >        331200000000000, 334800000000000, 338400000000000, 342000000000000,
->    >        345600000000000], dtype='timedelta64[ns]')
->    > Coordinates:
->    >   * time     (time) timedelta64[ns] 00:00:00 01:00:00 ... 4 days 00:00:00
->    > Attributes:
->    >     long_name:  FORECAST time from 20211222
->    > ```
->    {: .code-out}
-{: .hands_on}
-
-
+```python
+print(dset.time)
+```
 
 > ### {% icon question %} Questions CAM PM2.5 Dataset
 >
@@ -292,99 +247,47 @@ We can also get metadata information for each coordinate and data variables usin
 > ### {% icon comment %} Different ways to access Data variables
 >
 > To access a variable or coordinate, we can use "." or specify its name as a string between squared brackets "[" "]". For example:
->  > ### {% icon code-in %} Input: Python
->  > ```python
->  > print(dset['pm2p5_conc'])
->  > ```
-> {: .code-in}
->
-> > ### {% icon code-out %} Output
->  > ```bash
->  >   <xarray.DataArray 'pm2p5_conc' (time: 97, level: 1, latitude: 400, longitude: 700)>
->  >   [27160000 values with dtype=float32]
->  >   Coordinates:
->  >     * longitude  (longitude) float32 335.0 335.1 335.2 335.4 ... 44.75 44.85 44.95
->  >     * latitude   (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
->  >     * level      (level) float32 0.0
->  >     * time       (time) timedelta64[ns] 00:00:00 01:00:00 ... 4 days 00:00:00
->  >   Attributes:
->  >       species:        PM2.5 Aerosol
->  >       units:          µg/m3
->  >       value:          hourly values
->  >       standard_name:  mass_concentration_of_pm2p5_ambient_aerosol_in_air
->  > ```
-> {: .code-out}
->
-{: .comment}
 
+
+```python
+print(dset['pm2p5_conc'])
+```
+
+or 
+
+```python
+print(dset.pm2p5_conc)
+```
+
+When we print a variable or coordinate, we don't get all the individual values but a `DataArray` that contains a lot of very useful metadata such 
+as coordinates (if they have some), all the attributes such as the name, the physical units, etc.
 
 ## Select / Subset from coordinates
 
-> ### {% icon hands_on %} Hands-on: Select elements from coordinates by index
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.isel(time=0))
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.Dataset>
->    > Dimensions:     (longitude: 700, latitude: 400, level: 1)
->    > Coordinates:
->    >   * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
->    >   * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
->    >   * level       (level) float32 0.0
->    >     time        timedelta64[ns] 00:00:00
->    > Data variables:
->    >     pm2p5_conc  (level, latitude, longitude) float32 0.4202 0.4331 ... 14.22
->    > Attributes:
->    >     title:        PM25 Air Pollutant FORECAST at the Surface
->    >     institution:  Data produced by Meteo France
->    >     source:       Data from ENSEMBLE model
->    >     history:      Model ENSEMBLE FORECAST
->    >     FORECAST:     Europe, 20211222+[0H_96H]
->    >     summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
->    >     project:      MACC-RAQ (http://macc-raq.gmes-atmosphere.eu)
->    > ```
->    {: .code-out}
-{: .hands_on}
+We often want to select elements from the coordinates for instance to subset a geographical area or select specific times or time range.
 
+There are two different ways to select:
+- by index
+- by value
 
+### Select elements from coordinate by index
 
-> ### {% icon hands_on %} Hands-on: Select elements from coordinates by value
-> When selecting elements by the value of the coordinate, we need to use the same datatype. For instance, to select and element from
-> `time`, we need to use `timedelta64`. The code below will give the same result than `isel(time=0)`.
->
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.sel(time=np.timedelta64(0)))
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.Dataset>
->    > Dimensions:     (longitude: 700, latitude: 400, level: 1)
->    > Coordinates:
->    >   * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
->    >   * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
->    >   * level       (level) float32 0.0
->    >     time        timedelta64[ns] 00:00:00
->    > Data variables:
->    >     pm2p5_conc  (level, latitude, longitude) float32 0.4202 0.4331 ... 14.22
->    > Attributes:
->    >     title:        PM25 Air Pollutant FORECAST at the Surface
->    >     institution:  Data produced by Meteo France
->    >     source:       Data from ENSEMBLE model
->    >     history:      Model ENSEMBLE FORECAST
->    >     FORECAST:     Europe, 20211222+[0H_96H]
->    >     summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
->    >     project:      MACC-RAQ (http://macc-raq.gmes-atmosphere.eu)
->    > ```
->    {: .code-out}
-{: .hands_on}
+```python
+print(dset.isel(time=0))
+```
 
+You should see that the coordinate `time` "disappeared" from the `Dimensions` and now the variable `pm2p5_conc` is a 3D field with level, latitude and longitude.
+
+### Select elements from coordinates by value
+
+When selecting elements by the value of the coordinate, we need to use the same datatype. For instance, to select and element from
+`time`, we need to use `timedelta64`. The code below will give the same result than `isel(time=0)`.
+
+```python
+print(dset.sel(time=np.timedelta64(0)))
+```
+
+The output will be very similar to what we did previously when selecting from coordinates by index.
 
 > ### {% icon question %} Select a single time for PM2.5
 >
@@ -429,54 +332,34 @@ We can also get metadata information for each coordinate and data variables usin
 - To plot a map, you need to select a variable with data on geographical coordinates (latitude, longitude).
 - In addition coordinates need to be sorted (preferably in increasing order). This is not the case for "longitude" because they are expressed as 0 to 360. Let's shift them to -180 to 180.
 
-> ### {% icon hands_on %} Hands-on: Shift longitude from (0, 360) to (-180, 180)
-> 
-> We print the longitudes before and after shifting them so we can see what is happening.
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.longitude)
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.DataArray 'longitude' (longitude: 700)>
->    > array([335.05, 335.15, 335.25, ...,  44.75,  44.85,  44.95], dtype=float32)
->    > Coordinates:
->    >   * longitude  (longitude) float32 335.0 335.1 335.2 335.4 ... 44.75 44.85 44.95
->    > ```
->    {: .code-out}
->
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    > dset.coords['longitude'] = (dset['longitude'] + 180) % 360 - 180
->    > print(dset.longitude)
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.DataArray 'longitude' (longitude: 700)>
->    > array([-24.950012, -24.849976, -24.75    , ...,  44.75    ,  44.850006,
->    >         44.949997], dtype=float32)
->    > Coordinates:
->    >   * longitude  (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
->    > ```
->    {: .code-out}
-> 
-{: .hands_on}
+### Shift longitudes
+
+We print the longitudes before and after shifting them so we can see what is happening.
+
+```python
+print(dset.longitude)
+```
+
+The longitude values are between `335.05` and `44.95` degrees.
 
 
-> ### {% icon hands_on %} Hands-on: Visualize on a map PM2.5 for December, 24th 2021 at 12:00 UTC
-> 
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  dset.sel(time=(np.timedelta64(2,'D')+ np.timedelta64(12,'h'))).pm2p5_conc.plot()
->    >  ```
->    {: .code-in}
->
->  ![CAMS PM2.5 December, 24th 2021 at 12:00 UTC](../../images/PM2_5_default.png)
-{: .hands_on}
+Let's now shift the longitudes to get values between `-180`, `180` degrees.
+
+```python
+dset.coords['longitude'] = (dset['longitude'] + 180) % 360 - 180
+print(dset.longitude)
+```
+
+Indeed, the longitudes have been shifted and now the values are between `-24.95` and `44.95`.
+
+### Visualize on a map PM2.5 for December, 24th 2021 at 12:00 UTC
+
+```python
+dset.sel(time=(np.timedelta64(2,'D')+ np.timedelta64(12,'h'))).pm2p5_conc.plot()
+```
+We will get a figure like the one below:
+
+[CAMS PM2.5 December, 24th 2021 at 12:00 UTC](../../images/PM2_5_default.png)
 
 
 > ### {% icon comment %} What about `level`
@@ -484,110 +367,89 @@ We can also get metadata information for each coordinate and data variables usin
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Customize your plot
-> There are many ways to customize your plots and here we only give you what we think is important for creating publication ready figures:
-> - Define the size of the figure
-> - Choose to project data on a different projection.
-> - Add coastline
-> - Set the min and max values for plotting
-> - Add a title, change colorbar title
-> - Save figure into png
->
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  fig = plt.figure(1, figsize=[15,10])
->    >  
->    >  # We're using cartopy to project our data.
->    >  # (see documentation on cartopy)
->    >  ax = plt.subplot(1, 1, 1, projection=ccrs.Mercator())
->    >  ax.coastlines(resolution='10m')
->    >  
->    >  # We need to project our data to the new projection and for this we use `transform`.
->    >  # we set the original data projection in transform (here PlateCarree)
->    >  dset.sel(time=(np.timedelta64(2,'D') + np.timedelta64(12,'h')))['pm2p5_conc'].plot(ax=ax, 
->    >                                                                                    transform=ccrs.PlateCarree(),
->    >                                                                                    vmin = 0, vmax = 35,
->    >                                                                                    cmap=cmc.roma_r)
->    >  # One way to customize your title
->    >  plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC", fontsize=18)
->    >  plt.savefig("CAMS-PM2_5-fc-20211224.png")
->    >  ```
+### Customize your plot
+
+There are many ways to customize your plots and here we only give you what we think is important for creating publication ready figures:
+- Define the size of the figure
+- Choose to project data on a different projection.
+- Add coastline
+- Set the min and max values for plotting
+- Add a title, change colorbar title
+- Save figure into png
+
+ ```python
+fig = plt.figure(1, figsize=[15,10])
+ 
+# We're using cartopy to project our data.
+# (see documentation on cartopy)
+ax = plt.subplot(1, 1, 1, projection=ccrs.Mercator())
+ax.coastlines(resolution='10m')
+  
+# We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+dset.sel(time=(np.timedelta64(2,'D') + np.timedelta64(12,'h')))['pm2p5_conc'].plot(ax=ax, 
+                                                                                    transform=ccrs.PlateCarree(),
+                                                                                    vmin = 0, vmax = 35,
+                                                                                    cmap=cmc.roma_r)
+# One way to customize your title
+plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC", fontsize=18)
+plt.savefig("CAMS-PM2_5-fc-20211224.png")
+```
 >    {: .code-in}
->
->  ![Customized plot for CAMS PM2.5 December, 24th 2021 at 12:00 UTC](../../images/CAMS-PM2_5-fc-20211224.png)
-{: .hands_on}
+
+And you should get the following plot:
+
+![Customized plot for CAMS PM2.5 December, 24th 2021 at 12:00 UTC](../../images/CAMS-PM2_5-fc-20211224.png)
+
+### Multi-plots
+
+- Here we would like to plot several times on the same figure in different sub-plots
+- We will not plots all the times (too many) but the first 24 forecasted values.
+
+1. Make a list of times and convert to pandas datetime to make it easier to format times when plotting
+ 
+```python
+list_times = np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))
+print(pd.to_datetime(list_times).strftime("%d %b %H:%S UTC"))
+```
+
+2. We use the same plotting method than earlier but we pass additional parameters:
+        - `vmin = 0`and `vmax = 35` to set the minimum and maximum values when plotting (this is useful to highlight features in your plot);
+        - `subplot_kws={"projection": proj_plot}` to project data on a non-default projection. See [cartopy projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for more information about projections;
+        - `col='time'` because we will plot several `time`;
+        -  `col_wrap=4` to have a maximum of 4 plots per row. If we have more times to plot, then the next figures will be on another row;
+        - `robust=True` and `aspect=dset.dims["longitude"] / dset.dims["latitude"]` are additional parameters to make each subplot with a "sensible" figsize;
+        - `cmap=cmc.roma_r` to select a non-default and color-blind driendly colormap (see [scientific colormaps](https://www.fabiocrameri.ch/colourmaps/)).
 
 
-> ### {% icon hands_on %} Hands-on: Multi-plots
-> - Here we would like to plot several times on the same figure in different sub-plots
-> - We will not plots all the times (too many) but the first 24 forecasted values.
->
->  1. Make a list of times and convert to pandas datetime to make it easier to format times when plotting
->
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  list_times = np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))
->    >  print(pd.to_datetime(list_times).strftime("%d %b %H:%S UTC"))
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > Index(['22 Dec 00:00 UTC', '22 Dec 01:00 UTC', '22 Dec 02:00 UTC',
->    >        '22 Dec 03:00 UTC', '22 Dec 04:00 UTC', '22 Dec 05:00 UTC',
->    >        '22 Dec 06:00 UTC', '22 Dec 07:00 UTC', '22 Dec 08:00 UTC',
->    >        '22 Dec 09:00 UTC', '22 Dec 10:00 UTC', '22 Dec 11:00 UTC',
->    >        '22 Dec 12:00 UTC', '22 Dec 13:00 UTC', '22 Dec 14:00 UTC',
->    >        '22 Dec 15:00 UTC', '22 Dec 16:00 UTC', '22 Dec 17:00 UTC',
->    >        '22 Dec 18:00 UTC', '22 Dec 19:00 UTC', '22 Dec 20:00 UTC',
->    >        '22 Dec 21:00 UTC', '22 Dec 22:00 UTC', '22 Dec 23:00 UTC',
->    >        '23 Dec 00:00 UTC'],
->    >       dtype='object')
->    > ```
->    {: .code-out}
->
->   2. We use the same plotting method than earlier but we pass additional parameters:
->        - `vmin = 0`and `vmax = 35` to set the minimum and maximum values when plotting (this is useful to highlight features in your plot);
->        - `subplot_kws={"projection": proj_plot}` to project data on a non-default projection. See [cartopy projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for more information about projections;
->        - `col='time'` because we will plot several `time`;
->        -  `col_wrap=4` to have a maximum of 4 plots per row. If we have more times to plot, then the next figures will be on another row;
->        - `robust=True` and `aspect=dset.dims["longitude"] / dset.dims["latitude"]` are additional parameters to make each subplot with a "sensible" figsize;
->        - `cmap=cmc.roma_r` to select a non-default and color-blind driendly colormap (see [scientific colormaps](https://www.fabiocrameri.ch/colourmaps/)).
->
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  fig = plt.figure(1, figsize=[10,10])
->    >  
->    >  # We're using cartopy to project our data.
->    >  # (see documentation on cartopy)
->    >  proj_plot = ccrs.Mercator()
->    >  
->    >  # We need to project our data to the new projection and for this we use `transform`.
->    >  # we set the original data projection in transform (here PlateCarree)
->    >  p = dset.sel(time=slice(np.timedelta64(1,'h'),np.timedelta64(1,'D')))['pm2p5_conc'].plot(transform=ccrs.PlateCarree(),
->    >                                                                                       vmin = 0, vmax = 35,
->    >                                                                                       subplot_kws={"projection": proj_plot},
->    >                                                                                       col='time', col_wrap=4,
->    >                                                                                       robust=True,
->    >                                                                                       aspect=dset.dims["longitude"] / dset.dims["latitude"],  # for a sensible figsize
->    >                                                                                       cmap=cmc.roma_r)
->    >  # We have to set the map's options on our axes
->    >  for ax,i in zip(p.axes.flat,  (np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))).values):
->    >      ax.coastlines('10m')
->    >      ax.set_title("CAMS PM2.5 " + pd.to_datetime(i).strftime("%d %b %H:%S UTC"), fontsize=12)
->    >  # Save your figure
->    >  plt.savefig("CAMS-PM2_5-fc-multi.png")
->    >  ```
->    {: .code-in}
->
->  In the second part of our plot, we customize each subplot (this is why we loop for each of them and get their axes) by adding:
->         -  `coastlines`: we pass a parameter `10m` to get coastlines with a high resolution (non-default);
->         - `set_title` to set a title for each subplot.
->    
->  ![Customized multi-plot](../../images/CAMS-PM2_5-fc-multi.png)
-> 
-{: .hands_on}
-
+```python
+fig = plt.figure(1, figsize=[10,10])
+  
+# We're using cartopy to project our data.
+# (see documentation on cartopy)
+proj_plot = ccrs.Mercator()
+  
+# We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+p = dset.sel(time=slice(np.timedelta64(1,'h'),np.timedelta64(1,'D')))['pm2p5_conc'].plot(transform=ccrs.PlateCarree(),
+                                                                                       vmin = 0, vmax = 35,
+                                                                                       subplot_kws={"projection": proj_plot},
+                                                                                       col='time', col_wrap=4,
+                                                                                       robust=True,
+                                                                                      aspect=dset.dims["longitude"] / dset.dims["latitude"],  # for a sensible figsize
+                                                                                       cmap=cmc.roma_r)
+# We have to set the map's options on our axes
+for ax,i in zip(p.axes.flat,  (np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))).values):
+      ax.coastlines('10m')
+      ax.set_title("CAMS PM2.5 " + pd.to_datetime(i).strftime("%d %b %H:%S UTC"), fontsize=12)
+# Save your figure
+plt.savefig("CAMS-PM2_5-fc-multi.png")
+```
+In the second part of our plot, we customize each subplot (this is why we loop for each of them and get their axes) by adding:
+         -  `coastlines`: we pass a parameter `10m` to get coastlines with a high resolution (non-default);
+         - `set_title` to set a title for each subplot.
+    
+![Customized multi-plot](../../images/CAMS-PM2_5-fc-multi.png)
 
 
 > ### {% icon question %} PM2.5 over Italy
@@ -642,37 +504,11 @@ We can also get metadata information for each coordinate and data variables usin
 - Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this we use `where`.
 - For instance, we may want to only keep PM2.5 if values are greater than 25 μm.m-3 (or any threshold you would like to choose)
 
-> ### {% icon hands_on %} Hands-on: Mask values that do not meet a criteria with `Where`
-> 
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.where(dset['pm2p5_conc'] > 25))
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.Dataset>
->    > Dimensions:     (time: 97, level: 1, latitude: 400, longitude: 700)
->    > Coordinates:
->    >   * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
->    >   * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
->    >   * level       (level) float32 0.0
->    >   * time        (time) timedelta64[ns] 00:00:00 01:00:00 ... 4 days 00:00:00
->    > Data variables:
->    >     pm2p5_conc  (time, level, latitude, longitude) float32 nan nan ... nan nan
->    > Attributes:
->    >     title:        PM25 Air Pollutant FORECAST at the Surface
->    >     institution:  Data produced by Meteo France
->    >     source:       Data from ENSEMBLE model
->    >     history:      Model ENSEMBLE FORECAST
->    >     FORECAST:     Europe, 20211222+[0H_96H]
->    >     summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
->    >     project:      MACC-RAQ (http://macc-raq.gmes-atmosphere.eu)
->    > ```
->    {: .code-out}
-{: .hands_on}
+### Mask values that do not meet a criteria with `Where`
 
+```python
+print(dset.where(dset['pm2p5_conc'] > 25))
+```
 
 > ### {% icon comment %} What happened?
 > You may not see any changes but if you look carefuly to `pm2p5_conc` values, you will see that many `nan`. In fact, we now have 
@@ -682,91 +518,80 @@ We can also get metadata information for each coordinate and data variables usin
 
 Let's plot one time to better see what happened:
 
-> ### {% icon hands_on %} Hands-on: Plotting with mask
-> 
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  fig = plt.figure(1, figsize=[15,10])
->    >  
->    >  # We're using cartopy to project our data.
->    >  # (see documentation on cartopy)
->    >  ax = plt.subplot(1, 1, 1, projection=ccrs.Mercator())
->    >  ax.coastlines(resolution='10m')
->    >  
->    >  # We need to project our data to the new projection and for this we use `transform`.
->    >  # we set the original data projection in transform (here PlateCarree)
->    >  dset.where(dset['pm2p5_conc'] > 25).isel(time=0)['pm2p5_conc'].plot(ax=ax,
->    >                                                                      transform=ccrs.PlateCarree(),
->    >                                                                      vmin = 0, vmax = 35,
->    >                                                                      cmap=cmc.roma_r)
->    >  # One way to customize your title
->    >  plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC\n only values > 25", fontsize=18)
->    >  plt.savefig("CAMS-PM2_5-fc-20211224-25.png")
->    >  ```
->    {: .code-in}
->
->  ![PM2.5 over Italy with threshold at 25](../../images/CAMS-PM2_5-fc-20211224-25.png)
-{: .hands_on}
+### Plotting with mask
+ 
+```python
+fig = plt.figure(1, figsize=[15,10])
+ 
+# We're using cartopy to project our data.
+# (see documentation on cartopy)
+ax = plt.subplot(1, 1, 1, projection=ccrs.Mercator())
+ax.coastlines(resolution='10m')
+  
+# We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+dset.where(dset['pm2p5_conc'] > 25).isel(time=0)['pm2p5_conc'].plot(ax=ax,
+                                                                     transform=ccrs.PlateCarree(),
+                                                                     vmin = 0, vmax = 35,
+                                                                     cmap=cmc.roma_r)
+# One way to customize your title
+plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC\n only values > 25", fontsize=18)
+plt.savefig("CAMS-PM2_5-fc-20211224-25.png")
+```
+![PM2.5 over Italy with threshold at 25](../../images/CAMS-PM2_5-fc-20211224-25.png)
+
 
 We can then make the same multi-plot as earlier (over Italy) but with a `where` statement to mask values lower than 25 μm.m-3:
 
-> ### {% icon hands_on %} Hands-on: Multi-plot over Italy using a mask
-> 
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  fig = plt.figure(1, figsize=[10,10])
->    >  
->    >  # We're using cartopy to project our data.
->    >  # (see documentation on cartopy)
->    >  proj_plot = ccrs.Mercator()
->    >  
->    >  # We need to project our data to the new projection and for this we use `transform`.
->    >  # we set the original data projection in transform (here PlateCarree)
->    >  p = dset.where(dset['pm2p5_conc'] > 25).sel(time=slice(np.timedelta64(1,'h'),np.timedelta64(1,'D'))).sel(latitude=slice(43., 40.),
->    >                                                                            longitude=slice(11.,15.))['pm2p5_conc'].plot(transform=ccrs.PlateCarree(),
->    >                                                                                       vmin = 0, vmax = 35,
->    >                                                                                       subplot_kws={"projection": proj_plot},
->    >                                                                                       col='time', col_wrap=4,
->    >                                                                                       robust=True,
->    >                                                                                       aspect=dset.dims["longitude"] / dset.dims["latitude"],  # for a sensible figsize
->    >                                                                                       cmap=cmc.roma_r)
->    >  # We have to set the map's options on all four axes
->    >  for ax,i in zip(p.axes.flat,  (np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))).values):
->    >      ax.coastlines('10m')
->    >      ax.set_title("PM2.5 > 25 μm.m-3" + pd.to_datetime(i).strftime("%d %b %H:%S UTC"), fontsize=12)
->    >  # Save your figure
->    >  plt.savefig("CAMS-PM2_5-fc-multi-Italy-25.png")
->    >  ```
->    {: .code-in}
->
->  ![Multi-plot of PM2.5 over Italy with threshold at 25](../../images/CAMS-PM2_5-fc-multi-Italy-25.png)
->
-{: .hands_on}
+### Multi-plot over Italy using a mask
+ 
+```python
+fig = plt.figure(1, figsize=[10,10])
+ 
+# We're using cartopy to project our data.
+# (see documentation on cartopy)
+proj_plot = ccrs.Mercator()
+  
+# We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+p = dset.where(dset['pm2p5_conc'] > 25).sel(time=slice(np.timedelta64(1,'h'),np.timedelta64(1,'D'))).sel(latitude=slice(43., 40.),
+                                                                           longitude=slice(11.,15.))['pm2p5_conc'].plot(transform=ccrs.PlateCarree(),
+                                                                                      vmin = 0, vmax = 35,
+                                                                                     subplot_kws={"projection": proj_plot},
+                                                                                     col='time', col_wrap=4,
+                                                                                     robust=True,
+                                                                                     aspect=dset.dims["longitude"] / dset.dims["latitude"],  # for a sensible figsize
+                                                                                     cmap=cmc.roma_r)
+# We have to set the map's options on all four axes
+for ax,i in zip(p.axes.flat,  (np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))).values):
+     ax.coastlines('10m')
+     ax.set_title("PM2.5 > 25 μm.m-3" + pd.to_datetime(i).strftime("%d %b %H:%S UTC"), fontsize=12)
+# Save your figure
+plt.savefig("CAMS-PM2_5-fc-multi-Italy-25.png")
+```
+
+![Multi-plot of PM2.5 over Italy with threshold at 25](../../images/CAMS-PM2_5-fc-multi-Italy-25.png)
 
 
 ## Reduction operations
 - We often want to compute the mean of all our dataset, or along a dimension (for instance time).
 - If you do not pass any argument to the operation then it is done over all dimension.
 
+### Mean
+When we do not specify any paramters, we get a single value
 
-> ### {% icon hands_on %} Hands-on: Mean
->  When we do not specify any paramters, we get a single value
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.Dataset>
->    > Dimensions:     ()
->    > Data variables:
->    >     pm2p5_conc  float32 9.118
->    > ```
->    {: .code-out}
-{: .hands_on}
+```python
+print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
+```
 
+> ### {% icon code-out %} Output
+> ```bash
+> <xarray.Dataset>
+> Dimensions:     ()
+>  Data variables:
+>     pm2p5_conc  float32 9.118
+>```
+{: .code-out}
 
 
 > ### {% icon question %} Maximum PM2.5 over Italy
@@ -843,59 +668,33 @@ We can then make the same multi-plot as earlier (over Italy) but with a `where` 
     - if your resampling frequency is lower than your original data, you would need to apply an operation on the data you group together, such as mean, min, max;
     - if your resampling frequency is higher than your original data, you would need to indicate how to fill the gaps, for instance interpolate and indicate which interpolation method to apply or select nearest values, etc.
 
-> ### {% icon hands_on %} Hands-on: 1 day Resampling
-> 
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.resample(time='1D').mean())
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.Dataset>
->    > Dimensions:     (time: 5, longitude: 700, latitude: 400, level: 1)
->    > Coordinates:
->    >   * time        (time) timedelta64[ns] 0 days 1 days 2 days 3 days 4 days
->    >   * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
->    >   * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
->    >   * level       (level) float32 0.0
->    > Data variables:
->    >     pm2p5_conc  (time, level, latitude, longitude) float32 0.4298 ... 7.501
->    > ```
->    {: .code-out}
-{: .hands_on}
+### 1 day Resampling
+ 
+```python
+print(dset.resample(time='1D').mean())
+```
 
-> ### {% icon hands_on %} Hands-on: 30 minute resampling
-> 
->    > ### {% icon code-in %} Input: Python
->    >  ```python
->    >  print(dset.resample(time='30min').interpolate('linear'))
->    >  ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > ```bash
->    > <xarray.Dataset>
->    > Dimensions:     (longitude: 700, latitude: 400, level: 1, time: 193)
->    > Coordinates:
->    >   * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
->    >   * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
->    >   * level       (level) float32 0.0
->    >   * time        (time) timedelta64[ns] 00:00:00 00:30:00 ... 4 days 00:00:00
->    > Data variables:
->    >     pm2p5_conc  (time, level, latitude, longitude) float64 0.4202 ... 7.501
->    > Attributes:
->    >     title:        PM25 Air Pollutant FORECAST at the Surface
->    >     institution:  Data produced by Meteo France
->    >     source:       Data from ENSEMBLE model
->    >     history:      Model ENSEMBLE FORECAST
->    >     FORECAST:     Europe, 20211222+[0H_96H]
->    >     summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
->    >     project:      MACC-RAQ (http://macc-raq.gmes-atmosphere.eu)
->    > ```
->    {: .code-out}
-{: .hands_on}
+> ### {% icon code-out %} Output
+> ```bash
+> <xarray.Dataset>
+> Dimensions:     (time: 5, longitude: 700, latitude: 400, level: 1)
+> Coordinates:
+>   * time        (time) timedelta64[ns] 0 days 1 days 2 days 3 days 4 days
+>   * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
+>   * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
+>   * level       (level) float32 0.0
+> Data variables:
+>     pm2p5_conc  (time, level, latitude, longitude) float32 0.4298 ... 7.501
+> ```
+{: .code-out}
+
+
+### 30 minute resampling
+ 
+
+```python
+print(dset.resample(time='30min').interpolate('linear'))
+```
 
 
 
