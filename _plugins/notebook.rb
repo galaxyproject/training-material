@@ -51,7 +51,7 @@ module GTNNotebooks
     data.each{|line|
       if line == "```#{language}"
         if inside_block
-          raise "Error! we're already in a block"
+          raise "[GTN/Notebook] Error! we're already in a block"
         end
         # End the previous block
         out.append([val, inside_block])
@@ -452,14 +452,34 @@ module GTNNotebooks
         # fab, but in a notebook this doesn't make sense as it will live
         # outside of the GTN. We need real URLs.
         #
-        # But we'll only do this if it's in "deploy" mode, in order to have
-        # the images also work locally.
-        cell['source'].gsub!(/<img src="(\.\.[^"]*)/) { |img|
-          path = img[11..-1]
-          image_path = File.join(dir, '..', path)
-          data = Base64.encode64(File.open(image_path, "rb").read)
-          "<img src=\"data:#{data}"
-        }
+        # So either we'll embed the images directly via base64 encoding (cool,
+        # love it) or we'll link to the production images and folks can live
+        # without their images for a bit until it's merged.
+
+        if cell['source'].match(/<img src="\.\./)
+          cell['source'].gsub!(/<img src="(\.\.[^"]*)/) { |img|
+            path = img[10..-1]
+            image_path = File.join(dir, path)
+
+            if img[-3..-1].downcase == 'png'
+              #puts "[GTN/Notebook/Images] Embedding png: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/png;base64,#{data}")
+            elsif img[-3..-1].downcase == 'jpg' or img[-4..-1].downcase == 'jpeg'
+              #puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/jpeg;base64,#{data}")
+            elsif img[-3..-1].downcase == 'svg'
+              #puts "[GTN/Notebook/Images] Embedding svg: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/svg+xml;base64,#{data}")
+            else
+              #puts "[GTN/Notebook/Images] Fallback for #{img}"
+              # Falling back to non-embedded images
+              '<img src="https://training.galaxyproject.org/training-material/' + page_url.split('/')[0..-2].join('/') + '/..'
+            end
+          }
+        end
 
         # Strip out the highlighting as it is bad on some platforms.
         cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: white">')
