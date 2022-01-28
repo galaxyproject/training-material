@@ -34,7 +34,7 @@ subtopic: python-modular
 contributors:
   - carpentries
   - hexylena
-  - Dirowa
+  - dirowa
 
 priority: 1
 notebook:
