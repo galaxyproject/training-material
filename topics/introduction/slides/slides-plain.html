@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a scientific workflow, data integration, and da..." />
+        <meta property="og:title" content="Galaxy Training: Introduction to Galaxy" />
+        <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and da..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/slides/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/slides/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/slides/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/slides/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/slides/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/introduction/slides/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/introduction/faqs/" title="Check our FAQs for the Introduction to Galaxy Analyses topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/introduction/slides/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/introduction/slides/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/introduction/slides/slides-plain.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/introduction/slides/slides-plain.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/introduction/slides/slides-plain.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/introduction/slides/slides.html">View markdown source on GitHub</a>
+	<h1>Introduction to Galaxy</h1>
+		<h2>Contributors</h2>
+		
+<a href="/training-material/hall-of-fame/bagnacan/" class="contributor-badge contributor-bagnacan"><img src="https://avatars.githubusercontent.com/bagnacan?s=27" alt="Avatar">Andrea Bagnacani</a>
+
+ 
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+ 
+<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=27" alt="Avatar">Saskia Hiltemann</a>
+
+ 
+<a href="/training-material/hall-of-fame/pajanne/" class="contributor-badge contributor-pajanne"><img src="https://avatars.githubusercontent.com/pajanne?s=27" alt="Avatar">Anne Pajon</a>
+
+ 
+<a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=27" alt="Avatar">Nicola Soranzo</a>
+
+ 
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+ 
+<a href="/training-material/hall-of-fame/chrisbarnettster/" class="contributor-badge contributor-chrisbarnettster"><img src="https://avatars.githubusercontent.com/chrisbarnettster?s=27" alt="Avatar">Christopher Barnett</a>
+
+ 
+<a href="/training-material/hall-of-fame/michelemaroni89/" class="contributor-badge contributor-michelemaroni89"><img src="https://avatars.githubusercontent.com/michelemaroni89?s=27" alt="Avatar">Michele Maroni</a>
+
+ 
+<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="https://avatars.githubusercontent.com/annefou?s=27" alt="Avatar">Anne Fouilloux</a>
+
+ 
+<a href="/training-material/hall-of-fame/nagoue/" class="contributor-badge contributor-nagoue"><img src="https://avatars.githubusercontent.com/nagoue?s=27" alt="Avatar">Nadia Goué</a>
+
+ 
+<a href="/training-material/hall-of-fame/olanag1/" class="contributor-badge contributor-olanag1"><img src="https://avatars.githubusercontent.com/olanag1?s=27" alt="Avatar">Olha Nahorna</a>
+
+ 
+<a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge contributor-tnabtaf"><img src="https://avatars.githubusercontent.com/tnabtaf?s=27" alt="Avatar">Dave Clements</a>
+
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 25, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="what-is-galaxy">What is Galaxy?</h1>
+
+<hr />
+
+<p><a href="https://galaxyproject.org/"><img src="../../../shared/images/galaxy_logo_25percent_transparent.png" alt="Galaxy. " loading="lazy" /></a></p>
+
+<p><strong>Data Intensive <em>analysis</em> for everyone</strong></p>
+<ul>
+  <li>Versatile and reproducible workflows</li>
+  <li><strong>Web</strong> platform</li>
+  <li><strong>Open source</strong> under <a href="https://opensource.org/licenses/AFL-3.0">Academic Free License</a></li>
+  <li>Developed at Penn State, Johns Hopkins, OHSU and Cleveland Clinic with substantial outside contributions</li>
+</ul>
+
+<p><img src="../images/titleless-use-resource-banner.png" alt="Galaxy resources. " loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The Galaxy Team is composed by bioinformaticians and software engineers</li>
+  <li>OHSU = Oregon Health &amp; Science University</li>
+  <li>Workflows are similar to cooking recipes. This metaphor helps comprehension of workflows for users researchers, citizens and hobbyists that are not familiar with data intensive research.</li>
+</ul>
+
+<hr />
+
+<h3 id="core-values">Core values</h3>
+
+<ul>
+  <li><strong>Accessibility</strong>
+    <ul>
+      <li>Users without programming experience can easily upload/retrieve data, run complex tools and workflows, and visualize data</li>
+    </ul>
+  </li>
+  <li><strong>Reproducibility</strong>
+    <ul>
+      <li>Galaxy captures information so that any user can understand and repeat a complete computational analysis</li>
+    </ul>
+  </li>
+  <li><strong>Transparency</strong>
+    <ul>
+      <li>Users can share or publish their analyses (histories, workflows, visualizations)</li>
+      <li>Pages: online Methods for your paper</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p><strong>accessible</strong> <strong>reproducible</strong> <strong>transparent</strong> research means <em>sharing everything</em>.</p>
+
+<p>The Galaxy framework aims to make as simple as possible for researchers to:</p>
+<ul>
+  <li>share their analyses</li>
+  <li>track all used tools and versions</li>
+  <li>check all parameters</li>
+  <li>justify each step in the analysis</li>
+  <li>publish the findings with all aforementioned information</li>
+</ul>
+
+<p>Pages: interactive, web-based documents that describe a complete analysis.</p>
+
+<hr />
+
+<h2 id="galaxy-growth">Galaxy growth</h2>
+<ul>
+  <li>More than 8,400 ready to use tools for users</li>
+  <li>More than 11,700 <a href="https://www.zotero.org/groups/1732893/galaxy">citations</a></li>
+  <li>More than 170 <a href="https://galaxyproject.org/use/">public Galaxy resources</a></li>
+  <li>
+    <ul>
+      <li>130+ public servers, many more non-public</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>Both general-purpose and domain-specific</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The number of public Galaxy resources should be regularly updated.</li>
+</ul>
+
+<p><img src="../images/galaxy_timeline.png" alt="Galaxy timeline. " loading="lazy" /></p>
+
+<h1 id="galaxy-ecosystem">Galaxy ecosystem</h1>
+
+<h2><img src="/training-material/shared/images/ecosystem_main_scheme.png" alt="Galaxy ecosystem. " loading="lazy" /></h2>
+
+<h1 id="user-interface">User Interface</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>So now that we know what Galaxy and the Galaxy Project are all about, let’s
+look at the Galaxy interface.</p>
+
+<hr />
+
+<h3 id="main-galaxy-interface">Main Galaxy interface</h3>
+
+<p><img src="../images/galaxy_interface.png" alt="Galaxy user interface. " loading="lazy" /></p>
+
+<p>Home page divided into 3 panels</p>
+
+<hr />
+
+<h3 id="top-menu">Top menu</h3>
+
+<p><img src="../images/galaxy_interface_menu.png" alt="Top menu. " loading="lazy" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <em>Analyze Data</em>)</td>
+      <td>go back to the homepage</td>
+    </tr>
+    <tr>
+      <td><em>Workflow</em></td>
+      <td>access existing workflows or create new one using the editable diagrammatic pipeline</td>
+    </tr>
+    <tr>
+      <td><em>Visualize</em></td>
+      <td>create new visualisations and launch Interactive Environments</td>
+    </tr>
+    <tr>
+      <td><em>Shared Data</em></td>
+      <td>access data libraries, histories, workflows, visualizations and pages shared with you</td>
+    </tr>
+    <tr>
+      <td><em>Help</em></td>
+      <td>links to Galaxy Help Forum (Q&amp;A), Galaxy Community Hub (Wiki), and Interactive Tours</td>
+    </tr>
+    <tr>
+      <td><em>User</em></td>
+      <td>your preferences and saved histories, datasets, pages and visualizations</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="tools">Tools</h3>
+
+<p><img src="../images/101_11.png" alt="Tool interface. " loading="lazy" /></p>
+
+<ul>
+  <li>The tool search helps in finding a tool in a crowded toolbox</li>
+</ul>
+
+<hr />
+
+<h3 id="tool-interface">Tool interface</h3>
+
+<p>.pull-left[.image-50[<img src="../images/galaxy_tool.png" alt="Screenshot of the tool interface for the Sort tool showing some inputs and an execute button." loading="lazy" />]]
+.pull-right[</p>
+<ul>
+  <li>A tool form contains:
+    <ul>
+      <li>input datasets and parameters</li>
+      <li>help, citations, metadata</li>
+      <li>an <code class="language-plaintext highlighter-rouge">Execute</code> button to start a job, which will add some output datasets to the history</li>
+    </ul>
+  </li>
+  <li>New tool versions can be installed without removing old ones to ensure reproducibility
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The tool form is generated from a simple XML file describing:</p>
+<ul>
+  <li>the input datasets and their datatypes</li>
+  <li>the tool parameters (numerical, text, boolean, selections, colour)</li>
+  <li>the dependencies required to run the tool</li>
+  <li>how to generate a command to execute the tool with the specified inputs and parameters</li>
+  <li>the output datasets the tool should produce and their datatypes</li>
+  <li>tests</li>
+  <li>help, citations</li>
+  <li>various metadata (e.g. the tool version)</li>
+</ul>
+
+<p>Tools can be viewed as tiny LEGO pieces: each one solves a specific problem, and they can be combined together to build complex analysis pipelines.</p>
+
+<hr />
+
+<h3 id="tool-shed">Tool Shed</h3>
+
+<p>.image-50[<img src="../images/galaxy_ts.png" alt="Screenshot of the toolshed homepage. " loading="lazy" />]</p>
+<ul>
+  <li>Free “app” store: <a href="https://toolshed.g2.bx.psu.edu/">Galaxy Tool Shed</a>
+    <ul>
+      <li>Thousands of tools already available</li>
+      <li>Most software can be integrated
+        <ul>
+          <li>If a tool is not available, ask the Galaxy community for help!</li>
+        </ul>
+      </li>
+      <li>Only a Galaxy admin can install tools</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="history">History</h3>
+
+<ul>
+  <li>Location of all analyses <img style="float: right;" alt="History" src="../images/history.png" />
+    <ul>
+      <li>collects all datasets produced by tools</li>
+      <li>collects all operations performed on the data</li>
+    </ul>
+  </li>
+  <li>For each dataset (the heart of Galaxy’s reproducibility), the history tracks
+    <ul>
+      <li>name, format, size, creation time, datatype-specific metadata</li>
+      <li>tool id, version, inputs, parameters</li>
+      <li>standard output (<code class="language-plaintext highlighter-rouge">stdout</code>) and error (<code class="language-plaintext highlighter-rouge">stderr</code>)</li>
+      <li>state (<span style="background-color: grey">waiting</span>, <span style="background-color: yellow">running</span>, <span style="background-color: green">success</span>, <span style="background-color: red">failed</span>)</li>
+      <li>hidden, deleted, purged</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We say <em>datasets</em> to refer to files as well as databases</li>
+  <li>Purged means permanently deleted</li>
+</ul>
+
+<hr />
+
+<h3 id="multiple-histories">Multiple histories</h3>
+
+<ul>
+  <li>You can have as many histories as you want
+    <ul>
+      <li>each history should correspond to a <strong>different analysis</strong></li>
+      <li>and should have a meaningful <strong>name</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-75[<img src="../images/galaxy_interface_multiple_histories.png" alt="Screenshot of galaxy showing multiple histories next to each other in the multi-history view. " loading="lazy" />]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Give it a good name so you can find it later, which can otherwise become difficult when you have a large number of old histories.</li>
+  <li>You can drag and drop datasets between histories</li>
+</ul>
+
+<hr />
+
+<h3 id="history-options-menu">History options menu</h3>
+
+<p>.pull-left[
+History behavior is controlled by the <em>History options</em> (gear icon)
+<img src="../images/galaxy_interface_history_long_menu.png" alt="History menu. " loading="lazy" />
+]
+.pull-right[
+.image-75[<img src="../images/galaxy_interface_history_menu.png" alt="History options gear button. " loading="lazy" />]</p>
+<ul>
+  <li><em>Create new history</em> (+ icon) will <strong>not</strong> make your current history disappear</li>
+  <li>
+    <p>To see all of your histories, use the history switcher</p>
+
+    <p>.image-75[<img src="../images/galaxy_interface_history_switch.png" alt="History Switcher. " loading="lazy" />]</p>
+  </li>
+  <li><em>Copy Datasets</em> from one history to another and save disk space for your quota
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Copying datasets between histories does not affect your quota, only a single copy of the file is stored on disk because datasets are never modified after creation.</li>
+</ul>
+
+<hr />
+
+<h1 id="loading-data">Loading data</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>So now you know about the tools to manipulate data and the history where you
+can see your data, your inputs and outputs. Let’s discuss how to get data into
+Galaxy</p>
+
+<hr />
+
+<h3 id="importing-data">Importing data</h3>
+
+<ul>
+  <li>Copy/paste some text</li>
+  <li>Upload files from your local computer</li>
+  <li>Upload data from an internet URL</li>
+  <li>Upload data from online databases: UCSC, BioMart, ENCODE, modENCODE, Flymine etc.</li>
+  <li>Import from Shared Data (libraries, histories, pages)</li>
+  <li>Upload data from FTP</li>
+</ul>
+
+<p>See <a href="../../galaxy-interface/tutorials/get-data/slides.html">Getting data into Galaxy</a></p>
+
+<hr />
+
+<h3 id="datatypes">Datatypes</h3>
+
+<ul>
+  <li>Tools only accept input datasets with the appropriate datatypes</li>
+  <li>When uploading a dataset, its datatype can be either:
+    <ul>
+      <li>automatically detected</li>
+      <li>assigned by the user</li>
+    </ul>
+  </li>
+  <li>Datasets produced by a tool have their datatype assigned by the tool</li>
+  <li>To change the datatype of a dataset, either:
+    <ul>
+      <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <em>Edit attributes</em> and <em>Datatypes</em> (if original wrong), or</li>
+      <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <em>Edit attributes</em> and <em>Convert</em></li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>When you upload data, Galaxy will try to autodetect the format of the data, but can sometimes get it wrong, so you may need to correct it later.</li>
+  <li>Edit Attributes → Datatype is used to fix a wrongly assigned datatype</li>
+  <li>Edit Attributes → Convert Formats creates a new dataset using a tool that converts the original dataset in the new format</li>
+  <li>New datatypes can be added to the Galaxy code base, if missing</li>
+</ul>
+
+<hr />
+
+<h3 id="reference-datasets">Reference datasets</h3>
+
+<h4 id="example-reference-genome">Example: reference Genome</h4>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Genome build specifies which genome assembly a dataset is associated with
+    <ul>
+      <li>e.g. mm10, hg38…</li>
+    </ul>
+  </li>
+  <li>Can be assigned by a tool or by the user</li>
+  <li>Users can create custom genome builds</li>
+  <li>New builds can be added by the admin
+]</li>
+</ul>
+
+<p>.pull-right[
+<img src="../images/galaxy_interface_build.png" alt="Genome Builds. " loading="lazy" />
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Just like datatypes, you can specify which genome assembly your dataset is about. Some tools need to know this, and Galaxy can tell the tool for you.</li>
+</ul>
+
+<hr />
+
+<h1 id="workflows">Workflows</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Now that you’ve got data into Galaxy, you know you can use tools to manipulate
+this data, and histories to keep track of what you’ve done. You’re only missing one key part:
+workflows. These help you easily reproduce the exact analysis that you ran.</p>
+
+<hr />
+
+<h3 id="workflow-editor">Workflow Editor</h3>
+
+<p><img src="../images/RNA-Seq_workflow_editing.png" alt="Workflow interface. " loading="lazy" /></p>
+
+<ul>
+  <li><strong>Extracted</strong> from a history</li>
+  <li><strong>Built manually</strong> by adding and configuring tools using the canvas</li>
+  <li><strong>Imported</strong> using an existing shared workflow</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Biologist:</p>
+<ul>
+  <li>workflows are great</li>
+  <li>single button to run all of these 50 different tools</li>
+  <li>a lot of work once to figure out analysis, but easy in the future to just rerun, go get coffee and wait for thing to be done :)</li>
+</ul>
+
+<p>Bioinf / dev:</p>
+<ul>
+  <li>Boxes are workflow steps
+    <ul>
+      <li>2 types: <em>input</em> and <em>tool</em> steps</li>
+    </ul>
+  </li>
+  <li>Steps are connected by arrows representing the flow of datasets</li>
+  <li>Tool panel on the left with Inputs on top (to add input datasets and collections)</li>
+  <li>Small tool form on the right</li>
+  <li>Extracting a workflow from a history allows to easily convert an existing history into an analysis workflow</li>
+</ul>
+
+<hr />
+
+<h3 id="why-would-you-want-to-create-workflows">Why would you want to create workflows?</h3>
+
+<ul>
+  <li><strong>Re-run</strong> the same analysis on different input data sets</li>
+  <li><strong>Change parameters</strong> before re-running a similar analysis</li>
+  <li>Make use of the workflow job <strong>scheduling</strong>
+    <ul>
+      <li>jobs are submitted as soon as their inputs are ready</li>
+    </ul>
+  </li>
+  <li>Create <strong>sub</strong>-workflows: a workflow inside another workflow</li>
+  <li><strong>Share</strong> workflows for publication and with the community</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Potential information overload for newbies</p>
+
+<hr />
+
+<h3 id="visualizations">Visualizations</h3>
+
+<p>.image-75[<img src="../../dev/images/charts_examples2.png" alt="Examples of 6 different visualisations in galaxy features an MSA, a couple graphs, RNA structure, and 3d visualisations of proteins. " loading="lazy" />]</p>
+
+<ul>
+  <li>Datatypes know what tools can be used to visualize datasets:
+    <ul>
+      <li>Sequencing data has a button for visualizing in IGV</li>
+      <li>Tabular data will prompt you to build charts</li>
+      <li>Protein data can be seen in a 3D viewer</li>
+    </ul>
+  </li>
+  <li>Interactive environments: Jupyter, RStudio, etc</li>
+</ul>
+
+<hr />
+
+<h3 id="sharing-data">Sharing data</h3>
+
+<ul>
+  <li>Share everything you do in Galaxy - histories, workflows, and visualizations
+    <ul>
+      <li>Directly using a Galaxy account’s email addresses on the same instance</li>
+      <li>Using a web link, with anyone who knows the link</li>
+      <li>Using a web link and publishing it to make it accessible to everyone from the <em>Shared Data</em> menu</li>
+    </ul>
+  </li>
+</ul>
+
+<p>See <a href="/training-material/faqs/galaxy/histories_sharing.html">Sharing your History in Galaxy</a></p>
+
+<hr />
+
+<h3 id="community">Community</h3>
+
+<ul>
+  <li>
+    <p>Support forum: <a href="https://help.galaxyproject.org/">Galaxy Help</a></p>
+
+    <p><img src="../images/galaxy_help.png" alt="Galaxy Help. " loading="lazy" /></p>
+  </li>
+  <li>Community curated documentation: <a href="https://galaxyproject.org/">Galaxy Community Hub</a></li>
+  <li><a href="https://galaxyproject.org/events/">Events</a> all around the world</li>
+  <li>Galaxy Training for scientists, developers, admins, instructors: <a href="/training-material/">Galaxy Training Community</a>
+    <ul>
+      <li>Training questions? Chat with us on <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>know was a lot</li>
+  <li>we’ll come back</li>
+  <li>slides are always available online</li>
+  <li>first real analysis after the coffee?</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/faaf91a768f673eb43ceea5b4c81ed2725553132">faaf91a768f673eb43ceea5b4c81ed2725553132</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

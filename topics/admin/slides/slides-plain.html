@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy from an administrator's point of view</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy from an administrator's point of view" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/slides/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/slides/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/slides/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/slides/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/slides/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/slides/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/slides/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/slides/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/admin/slides/slides-plain.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/admin/slides/slides-plain.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/admin/slides/slides-plain.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/slides/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy from an administrator's point of view</h1>
+		<h2>Contributors</h2>
+		
+<a href="/training-material/hall-of-fame/valentinmarcon/" class="contributor-badge contributor-valentinmarcon"><img src="https://avatars.githubusercontent.com/valentinmarcon?s=27" alt="Avatar">Valentin Marcon</a>
+
+ 
+<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a>
+
+ 
+<a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar">Björn Grüning</a>
+
+ 
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What options to deploy Galaxy do I have?</p>
+</li>
+		
+		<li><p>Which platforms are supported by Galaxy?</p>
+</li>
+		
+		<li><p>What requirements does Galaxy have?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn about different options about Galaxy deployment.</p>
+</li>
+		
+		<li><p>Make an educated decision about your preferred deployment model.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2021 </div>
+
+	<hr />
+
+
+	<p><img src="../images/use-resource-banner.png" alt="Picture with 125+ platforms for using galaxy written and a number of screenshots of those galaxies." loading="lazy" /></p>
+
+<hr />
+
+<h1 id="where-can-galaxy-run">Where can Galaxy run?</h1>
+
+<ul>
+  <li>Cloud (SaaS)
+    <ul>
+      <li>A usegalaxy.* site <a href="https://usegalaxy.org">Main</a> <a href="https://usegalaxy.eu">Europe</a> <a href="https://usegalaxy.org.au/">Australia</a></li>
+      <li><a href="https://galaxyproject.org/use">Public Galaxy Servers</a></li>
+      <li><a href="https://launch.usegalaxy.org/">Amazon EC2 or MS Azure</a></li>
+      <li>Semi-private cloud (e.g.: <a href="https://nectar.org.au/">NeCTAR</a>, <a href="http://jetstream-cloud.org/">Jetstream</a>)</li>
+    </ul>
+  </li>
+  <li>Private cloud (build your own Galaxy SaaS)</li>
+  <li>Cloud (IaaS)
+    <ul>
+      <li>Any cloud</li>
+    </ul>
+  </li>
+  <li>Scalable Local Server
+    <ul>
+      <li>Dedicated or shared compute cluster(s)</li>
+      <li>Cloud compute resources</li>
+    </ul>
+  </li>
+  <li>Standalone Local Server</li>
+</ul>
+
+<hr />
+
+<h1 id="choosing-where-to-run">Choosing where to run</h1>
+
+<p><a href="https://galaxyproject.org/use/">Resource Directory</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Supported</th>
+      <th>Main</th>
+      <th>Local</th>
+      <th>Cloud</th>
+      <th>Appliance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Your data sets are moderately sized</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>Your computation requirements are moderate</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>You want to share your Galaxy objects with others</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>All needed Tools are installed on Main</td>
+      <td>yes</td>
+      <td>?</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>Your data sets are very large</td>
+      <td>no</td>
+      <td>?</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>Your computation requirements are very large</td>
+      <td>no</td>
+      <td>?</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>You have absolute data security requirements</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>No network transfer of data</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="reasons-to-install-your-own-galaxy">Reasons to Install Your Own Galaxy</h2>
+
+<ul>
+  <li>You want to run a local <a href="https://docs.galaxyproject.org/en/latest/admin/production.html">production Galaxy</a></li>
+  <li>You want to develop <a href="https://galaxyproject.org/admin/tools/add-tool-tutorial">Galaxy tools</a></li>
+  <li>You want to <a href="https://galaxyproject.org/develop/">Develop Galaxy</a> itself</li>
+  <li><a href="https://galaxyproject.org/admin/tools/add-tool-tutorial">Install</a> and use tools unavailable on <a href="https://galaxyproject.org/public-galaxy-servers">public Galaxies</a></li>
+  <li>Use sensitive data (e.g. clinical)</li>
+  <li>Process large datasets that are too big for public Galaxies</li>
+  <li><a href="https://galaxyproject.org/admin/internals/data-sources">plug-in</a> new datasources</li>
+</ul>
+
+<hr />
+
+<h1 id="software-requirements">Software Requirements</h1>
+
+<p>Required:</p>
+<ul>
+  <li>Galaxy is written in Python and depends on <strong>Python 3.5</strong> or newer</li>
+</ul>
+
+<p>Minimal <a href="https://docs.galaxyproject.org/en/master/admin/production.html">production</a> requirements:</p>
+<ul>
+  <li><a href="../tutorials/database/slides.html">PostgreSQL</a></li>
+  <li>Reverse proxy server (NGINX, Apache)</li>
+</ul>
+
+<hr />
+
+<h1 id="hardware-requirements">Hardware Requirements</h1>
+
+<p>This depends:</p>
+
+<ul>
+  <li>What do you intend to run?</li>
+  <li>Where do you intend to run it?</li>
+</ul>
+
+<p>If possible, run the Galaxy server <strong>separate</strong> from Galaxy jobs</p>
+
+<p><strong>Storage</strong> will usually be the biggest concern</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Depends on your available infrastructure</li>
+  <li>If you are storage limited, can be addressed by policy of deleting old/unused histories</li>
+  <li>If you are compute limited, can be addressed with queue limits</li>
+</ul>
+
+<hr />
+<h1 id="server-hardware-requirements">Server Hardware Requirements</h1>
+
+<p>Based on concurrent user count and assuming separate compute for jobs:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Users</th>
+      <th>Resource estimate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1 - 5</td>
+      <td>1 core, 1GB, 10 TB</td>
+    </tr>
+    <tr>
+      <td>5 - 20</td>
+      <td>2 cores, 2 GB, 40 TB</td>
+    </tr>
+    <tr>
+      <td>20 - 40</td>
+      <td>8 cores, 8 GB, 200 TB</td>
+    </tr>
+    <tr>
+      <td>40+</td>
+      <td>multiple hosts, 16 GB/host, 500 TB, dedicated DB host</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Storage is more difficult to estimate since it is, like compute, <strong>analysis</strong> and <strong>policy</strong> dependent</p>
+
+<hr />
+<p>template: left-aligned</p>
+
+<h1 id="galaxy-storage-philosophy">Galaxy Storage Philosophy</h1>
+
+<ul>
+  <li>Foster transparency and reproducibility</li>
+  <li>Data is always created, <em>never overwritten</em></li>
+  <li>Copying history or library datasets associate them with the original file on disk without an actual copy</li>
+  <li>By default, data is never really deleted unless <em>explicitly instructed</em></li>
+  <li>Even deleted data can be undeleted unless <em>forcibly purged</em></li>
+</ul>
+
+<hr />
+
+<p>template: left-aligned</p>
+
+<h1 id="storage-requirements">Storage Requirements</h1>
+
+<p>An “average” 2018 NGS analysis (by Anton Nekrutenko): <strong>66 GB</strong></p>
+
+<p>10 users, 10 histories: <strong>&gt; 6 TB</strong></p>
+
+<p>Solutions:</p>
+
+<ul>
+  <li>Quotas</li>
+  <li>Set job limits in <code class="language-plaintext highlighter-rouge">job_conf.xml</code></li>
+  <li>Clean up deleted data (with a cron job)</li>
+  <li>Forced removal based on age</li>
+  <li>Users can configure their workflows to delete intermediate tool outputs</li>
+  <li>Data libraries for common data</li>
+  <li>Public servers: require email verification (and watch for duplicates)</li>
+  <li>Plug in more/heterogeneous storage using Object Store configuration</li>
+</ul>
+
+<hr />
+
+<h1 id="compute-requirements">Compute Requirements</h1>
+
+<p>This depends:</p>
+
+<ul>
+  <li>What tools will your users be using?
+    <ul>
+      <li>What are their requirements?</li>
+    </ul>
+  </li>
+  <li>In general, the most commonly used tools use a single core
+    <ul>
+      <li>But can use lots of memory!</li>
+    </ul>
+  </li>
+  <li>Some compute-intensive tools use multiple cores</li>
+</ul>
+
+<p>usegalaxy.org allocates from <strong>8 GB/core</strong> to <strong>16 GB/core</strong></p>
+
+<p>Connecting Galaxy to clusters/HPC is covered in the advanced section.</p>
+
+<hr />
+
+<h1 id="making-plans">Making plans</h1>
+
+<p><strong>Before</strong> deploying your first Galaxy server:</p>
+
+<ul>
+  <li>Figure out where Galaxy will be stored
+    <ul>
+      <li>Make sure it will be accessible to any eventual compute</li>
+    </ul>
+  </li>
+  <li>Figure out where data will be stored
+    <ul>
+      <li>Make sure it will be accessible to any eventual compute</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="galaxy-deployment-options">Galaxy deployment options</h1>
+
+<ul>
+  <li>As developer: <code class="language-plaintext highlighter-rouge">git clone https://github.com/galaxyproject/galaxy.git</code></li>
+  <li>Ready-to-use locally: <a href="https://github.com/bgruening/docker-galaxy-stable/">Docker</a></li>
+  <li>Production server: configuration management (e.g. Ansible)</li>
+</ul>
+
+<p>In future:</p>
+
+<ul>
+  <li>Alternative to git clone: Galaxy wheel in PyPI</li>
+</ul>
+
+<hr />
+
+<h1 id="deployment-best-practices">Deployment Best Practices</h1>
+
+<ul>
+  <li><strong>Use configuration management</strong>
+    <ul>
+      <li><a href="http://docs.ansible.com">Ansible</a> for which Galaxy Project maintains roles (<a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html">tutorial</a>)</li>
+      <li>Other systems are possible (Chef, Puppet, SaltStack, CFEngine) but do not have project-maintained roles.</li>
+    </ul>
+  </li>
+  <li>Whether you use configuration management or not, <em>record every change you make on a version control system</em> (e.g. git):
+    <ul>
+      <li>Large, complex deployments grow organically</li>
+      <li>If you don’t know what you did, you can’t do it again</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p>template: left-aligned</p>
+
+<h1 id="system-administration-best-practices">System Administration Best Practices</h1>
+
+<ul>
+  <li>Take security seriously</li>
+  <li><strong>Update Galaxy when security updates are released</strong></li>
+  <li>Follow OS security best practices</li>
+  <li>Privilege separate code/job/data ownership</li>
+  <li>Write protect Galaxy and data if you can</li>
+  <li>Read-only cluster mounts</li>
+</ul>
+
+<p>Back up everything (except that which is managed by configuration management)</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Galaxy is scalable from personal computers to huge HPC and cloud-instances.</li>
+
+<li>Amount of expected users, types of common tasks, and storage capabilities have a big impact on the deployment.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/faaf91a768f673eb43ceea5b4c81ed2725553132">faaf91a768f673eb43ceea5b4c81ed2725553132</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

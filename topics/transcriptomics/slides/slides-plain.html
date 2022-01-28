@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to Transcriptomics</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Introduction to Transcriptomics" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/slides/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/slides/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/slides/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/slides/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/slides/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/slides/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/slides/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/slides/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/transcriptomics/slides/slides-plain.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/transcriptomics/slides/slides-plain.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-11-01/topics/transcriptomics/slides/slides-plain.html" title="Version 2021-11-01">2021-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/slides/slides.html">View markdown source on GitHub</a>
+	<h1>Introduction to Transcriptomics</h1>
+		<h2>Contributors</h2>
+		
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+ 
+<a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge contributor-erxleben"><img src="https://avatars.githubusercontent.com/erxleben?s=27" alt="Avatar">Anika Erxleben</a>
+
+ 
+<a href="/training-material/hall-of-fame/mwolfien/" class="contributor-badge contributor-mwolfien"><img src="https://avatars.githubusercontent.com/mwolfien?s=27" alt="Avatar">Markus Wolfien</a>
+
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 20, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="what-is-rna-sequencing">What is RNA sequencing?</h1>
+
+<hr />
+
+<h3 id="rna">RNA</h3>
+
+<p><img src="../images/Gene_structure_eukaryote_2_annotated.png" alt="The structure of a eukaryotic protein-coding gene. " loading="lazy" /></p>
+
+<ul>
+  <li>Transcribed form of the DNA</li>
+  <li>Active state of the DNA</li>
+</ul>
+
+<p>.footnote[<a href="https://en.wikipedia.org/wiki/File:Gene_structure_eukaryote_2_annotated.svg">Credit: Thomas Shafee</a>]</p>
+
+<hr />
+
+<h2 id="rna-sequencing">RNA sequencing</h2>
+
+<p><img src="../images/Summary_of_RNA-Seq.png" alt="Summary of RNA-Seq principle. In vivo transcription, pre-mRNA, intron splicing all rpoduce a mature mRNA. In vitro this is fragmented into RNA fragments, reverse transcribed into double stranded cDNA and then sequenced." loading="lazy" /></p>
+
+<ul>
+  <li>RNA quantification at single base resolution</li>
+  <li>Cost efficient analysis of the whole transcriptome in a high-throughput manner</li>
+</ul>
+
+<p>.footnote[<a href="https://commons.wikimedia.org/wiki/File:Summary_of_RNA-Seq.svg">Credit: Thomas Shafee (adapted)</a>]</p>
+
+<hr />
+
+<h3 id="where-does-my-data-come-from">Where does my data come from?</h3>
+
+<p><img src="../images/RNA_seq_zang2016.png" alt="select a cell population and extract total RNA is shown at the top. Small RNA are size selected by PAGE or kit, an adapter ligated, and converted to cDNA. Or poly(a) selects ribosome minus, and those mRNA are fragmented, and converted to cDNA. In both cases the cDNA becomes a library for sequencing." loading="lazy" /></p>
+
+<p>.footnote[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4138050/"><em>Zang and Mortazavi, Nature, 2012</em></a>]</p>
+
+<hr />
+
+<h3 id="principle-of-rna-sequencing">Principle of RNA sequencing</h3>
+
+<p><img src="../images/korf_2013.jpg" alt="Cartoon showing a magazine stand labelled transcriptome, and a person saying &quot;I'll take all of them&quot;. These are run through a shredder, before hundreds of people attempt to re-assemble, and the person hands the professor a poorly assembled magazine." loading="lazy" /></p>
+
+<p>.footnote[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4461013/"><em>Korf, Nat Met, 2013</em></a>]</p>
+
+<hr />
+
+<h3 id="challenges-of-rna-sequencing">Challenges of RNA sequencing</h3>
+
+<ul>
+  <li>Different origin for the sample RNA and the reference genome</li>
+  <li>Presence of incompletely processed RNAs or transcriptional background noise</li>
+  <li>Sequencing biases (<em>e.g.</em> PCR library preparation)</li>
+</ul>
+
+<hr />
+
+<h3 id="benefits-of-rna-sequencing">Benefits of RNA sequencing</h3>
+
+<p><img src="../images/wordcloud.png" alt="A word cloud highlighting words like benefits, novel, sensitivity. . " loading="lazy" /></p>
+
+<hr />
+
+<h3 id="2-main-research-applications-for-rna-seq">2 main research applications for RNA-Seq</h3>
+
+<ul>
+  <li>
+    <p>Transcript discovery</p>
+
+    <blockquote>
+      <p><em>Which RNA molecules are in my sample?</em></p>
+    </blockquote>
+
+    <blockquote>
+      <p>Novel isoforms and alternative splicing, Non-coding RNAs, Single nucleotide variations, Fusion genes</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>RNA quantification</p>
+
+    <blockquote>
+      <p><em>What is the concentration of RNAs?</em></p>
+    </blockquote>
+
+    <blockquote>
+      <p>Absolute gene expression (within sample), Differential expression (between biological samples)</p>
+    </blockquote>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="how-to-analyze-rna-seq-data-for-rna-quantification">How to analyze RNA seq data for RNA quantification?</h2>
+
+<hr />
+
+<h3 id="rna-quantification">RNA quantification</h3>
+
+<p><img src="../images/pepke_2009.jpg" alt="Select RNA fraction of interest (polyA, ribo-minus, and others), these are fragmented and reverse transcribed before sequencing and mapping onto the genome and quantification." loading="lazy" /></p>
+
+<p>.footnote[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4077321/"><em>Pepke et al, Nat Met, 2009</em></a>]</p>
+
+<hr />
+
+<h3 id="overview-of-the-data-processing">Overview of the Data Processing</h3>
+
+<p><img src="../images/rna_seq_workflow.png" alt="Control and treatment files goes through QC, annotation, and rad counting to produce sets of count tables. Then differential expression analysis is computed." loading="lazy" /></p>
+
+<ul>
+  <li>No available standardized workflow</li>
+  <li>Multiple possible best practices for every dataset</li>
+</ul>
+
+<hr />
+
+<h3 id="data-pre-processing">Data Pre-processing</h3>
+
+<ol>
+  <li>Adapter clipping to trim the sequencing adapters</li>
+  <li>Quality trimming to remove wrongly called and low quality bases</li>
+</ol>
+
+<p>.footnote[See <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html">NGS Quality control</a>]</p>
+
+<hr />
+
+<h3 id="annotation-of-rna-seq-reads">Annotation of RNA-Seq reads</h3>
+
+<p>Simple mapping on a reference genome? More challenging</p>
+
+<p><img src="../images/RNA-Seq-alignment.png" alt="A cartoon of a pre-mRNA, intro and exons. These map to an mRNA and short reads are shown piled up against the mRNA. The short read is splity by intron when aligning to a reference genome." loading="lazy" /></p>
+
+<p>.footnote[<a href="https://en.wikipedia.org/wiki/File:RNA-Seq-alignment.png">Credit: Rgocs</a>]</p>
+
+<hr />
+
+<h3 id="annotation-of-rna-seq-reads-1">Annotation of RNA-Seq reads</h3>
+
+<p>3 main strategies for annotations</p>
+
+<ul>
+  <li>Transcriptome mapping</li>
+  <li>Genome mapping</li>
+  <li><em>De novo</em> transcriptome assembly and annotation</li>
+</ul>
+
+<hr />
+
+<h3 id="transcriptome-mapping">Transcriptome mapping</h3>
+
+<p><img src="../images/transcriptome_alignment.png" alt="Cartoon of multiple exons collapsed, and paired end reads being shown as easy to align." loading="lazy" /></p>
+
+<p><em>See <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html">NGS Mapping</a></em></p>
+
+<ul>
+  <li>Need reliable gene models</li>
+  <li>No detection of novel genes</li>
+</ul>
+
+<p>.footnote[Figures by Ernest Turro, EMBO Practical Course on Analysis of HTS Data, 2012]</p>
+
+<hr />
+
+<h3 id="genome-mapping">Genome mapping</h3>
+
+<p>Splice-aware read alignment</p>
+
+<p><img src="../images/genome_alignment.png" alt="The same cartoon again, but now it is shown split up by introns, and one of the paired end reads is split across three exons, so it is hard to align." loading="lazy" /></p>
+
+<p>Detection of novel genes and isoforms</p>
+
+<p>.footnote[Figures by Ernest Turro, EMBO Practical Course on Analysis of HTS Data, 2012]</p>
+
+<hr />
+
+<h3 id="transcriptome-and-genome-mapping">Transcriptome and Genome mapping</h3>
+
+<p>Needed</p>
+
+<ul>
+  <li>Reference genome/transcriptome in FASTA</li>
+  <li>Annotations of known genes, … in GTF</li>
+</ul>
+
+<p>Where to find?</p>
+
+<ul>
+  <li>Joint projects to produce and maintain annotations on selected organisms: EMBL-EBI, UCSC, RefSeq, Ensembl, …</li>
+</ul>
+
+<hr />
+
+<h3 id="de-novo-transcriptome-assembly"><em>De novo</em> transcriptome assembly</h3>
+
+<p>No need for a reference genome …</p>
+
+<ol>
+  <li>Assembly into transcripts</li>
+  <li>Map reads back</li>
+</ol>
+
+<hr />
+
+<h3 id="quantification">Quantification</h3>
+
+<p><em>What is the expression level of the genomic features?</em></p>
+
+<ul>
+  <li>Counting the number of reads per features: Easy!!</li>
+  <li>Challenges
+    <ul>
+      <li>How to handle multi-mapped reads (<em>i.e.</em> reads with multiple alignments)?</li>
+      <li>How to distinguish between different isoforms?
+        <ul>
+          <li>At gene level?</li>
+          <li>At transcript level?</li>
+          <li>At exon level?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="differential-expression-analysis">Differential Expression Analysis</h3>
+
+<p>.image-75[<img src="../images/RNA_seq_DEscheme.png" alt="Three conditions are created and multiple transcriptomics sequenced into reads and mapped and compared." loading="lazy" />]</p>
+
+<p>Account for variability of expression across biological replicates<br />with the help of counts</p>
+
+<hr />
+
+<h3 id="differential-expression-analysis-normalization">Differential Expression Analysis: Normalization</h3>
+
+<p><em>Make the expression levels comparable across</em></p>
+
+<ul>
+  <li>By Features: genes, isoforms</li>
+  <li>By Samples</li>
+  <li>Methods
+    <ul>
+      <li><a href="https://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html"><em>FPKM/RPKM</em></a> (Cufflinks/Cuffdiff)</li>
+      <li><a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25"><em>TMM</em></a> (edgeR)</li>
+      <li><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8"><em>DESeq2</em></a> (DESeq2)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.footnote[<em>“Only the DESeq and TMM normalization methods are robust to the presence of different library sizes and widely different library compositions…”</em> - Dillies et al., Brief Bioinf, 2013]</p>
+
+<hr />
+
+<h3 id="impact-of-sequencing-depth-and-number-of-replicates">Impact of sequencing depth and number of replicates</h3>
+
+<p>.image-75[<img src="../images/RNA_seq_numreplicates.png" alt="Image of a table from a paper. The recommendation is at least three biological replicates to accurately detect changes. 3 replicates will give you an 87% chance of detecting a 2-fold change, but only a 17% chance of detecting a 1.25 fold change." loading="lazy" />]</p>
+
+<p>.footnote[<a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8"><em>Conesa et al, Genome Biol, 2016</em></a>]</p>
+
+<p><strong>Recommendation: At least 3 biological replicates</strong></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Number of replicates has greater effect on DE detection accuracy than sequencing depth (more replicates = increased statistical power)</li>
+  <li>DE detection of lowly expressed genes is very sensitive to number of reads and replication</li>
+  <li>DE detection of highly expressed genes possible already at low sequencing depth</li>
+</ul>
+
+<hr />
+
+<h3 id="visualization">Visualization</h3>
+
+<ul>
+  <li>
+    <p>Integrative Genomics Viewer (<a href="https://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&amp;%2520ijkey=qTgjFwbRBAzRZWC"><em>IGV</em></a>) or Trackster</p>
+
+    <p>Visualization of the aligned BAM files</p>
+  </li>
+  <li>
+    <p><a href="https://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034"><em>Sashimi plots</em></a></p>
+
+    <p>Quantitative visualization of read coverage along exons and splice junctions</p>
+  </li>
+  <li>
+    <p><a href="http://compbio.mit.edu/cummeRbund/manual_2_0.html"><em>CummeRbund</em></a></p>
+
+    <p>Visualization package for Cufflinks high-throughput sequencing data</p>
+  </li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/faaf91a768f673eb43ceea5b4c81ed2725553132">faaf91a768f673eb43ceea5b4c81ed2725553132</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
