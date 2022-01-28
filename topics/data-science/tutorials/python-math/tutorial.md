@@ -231,12 +231,15 @@ That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let
 > > ### {% icon solution %} Solution
 > > ```
 > > x = math.pow(2, 8)
+> > print(x)
 > > ```
 > {: .solution}
 {: .question}
 
 ```python
 # Test solutions here!
+x =
+print(x)
 ```
 
 
