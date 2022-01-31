@@ -88,7 +88,11 @@ A first step of this tutorial will show you how you can simply apply spatial coo
 
 ## Sub-step with **Homoscedasticity and normality**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Here we will check homogeneity of variances (Levene test) for every species and represent it through multiple boxplots and the normal distribution (Kolmogorov-Smirnov test) represented by a distribution histogram and a Q-Q plot.
+
+If the levene test is significant (P-value in column Pr < 0.5 and at least one * at the end of the 4th line), variances aren't homogeneous, the hypothesis of homoscedasticity is rejected.
+
+If the K-S test is significant (p-value < 0.5), your numerical variable isn't normally distributed, the hypothesis of normality is rejected.
 >
 > 1. {% tool [Homoscedasticity and normality](toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: `output` (Input dataset)
