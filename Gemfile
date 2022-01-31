@@ -1,14 +1,16 @@
 source "https://rubygems.org"
 gem "nokogiri", ">= 1.10.4"
 gem 'addressable'
-gem 'jekyll', '< 4'
+gem 'jekyll'
 gem 'jekyll-feed'
-gem 'jekyll-environment-variables'
-gem 'jekyll-github-metadata'
-gem 'jekyll-scholar', '< 6'
 gem 'jekyll-redirect-from'
-gem 'csl-styles'
+gem 'jekyll-last-modified-at'
 gem 'awesome_bot'
 gem 'html-proofer'
 gem 'pkg-config'
 gem 'kwalify'
+
+# Citations
+gem 'bibtex-ruby'
+gem 'citeproc-ruby'
+gem 'csl-styles'

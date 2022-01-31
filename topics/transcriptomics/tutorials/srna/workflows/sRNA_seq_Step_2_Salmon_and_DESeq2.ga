@@ -1,667 +1,670 @@
 {
-    "a_galaxy_workflow": "true", 
-    "annotation": "This workflow completes the second part of the sRNA-seq tutorial from transcript quantification through differential abundance testing.", 
-    "format-version": "0.1", 
-    "name": "sRNA-seq Step 2: Salmon and DESeq2", 
-    "steps": {
-        "0": {
-            "annotation": "", 
-            "content_id": null, 
-            "id": 0, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "Input Dataset Collection - Control RNAi sRNA reads"
-                }
-            ], 
-            "label": "Dataset collection - Control", 
-            "name": "Input dataset collection", 
-            "outputs": [], 
-            "position": {
-                "left": 217, 
-                "top": 436
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection - Control RNAi sRNA reads\"}", 
-            "tool_version": null, 
-            "type": "data_collection_input", 
-            "uuid": "91427be9-059a-4e6c-89e9-b4cfea01639b", 
-            "workflow_outputs": []
-        }, 
-        "1": {
-            "annotation": "", 
-            "content_id": null, 
-            "id": 1, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "Input Dataset - Reference Transcriptome"
-                }
-            ], 
-            "label": "Dataset - Ref Txome", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 221.5, 
-                "top": 524
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"Input Dataset - Reference Transcriptome\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "52018b9a-9b80-445d-8a0b-6ce9d3b3b47c", 
-            "workflow_outputs": []
-        }, 
-        "2": {
-            "annotation": "", 
-            "content_id": null, 
-            "id": 2, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "Input Dataset Collection - Case RNAi sRNA reads"
-                }
-            ], 
-            "label": "Dataset collection - Case", 
-            "name": "Input dataset collection", 
-            "outputs": [], 
-            "position": {
-                "left": 223, 
-                "top": 612
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection - Case RNAi sRNA reads\"}", 
-            "tool_version": null, 
-            "type": "data_collection_input", 
-            "uuid": "c26c73ec-cd58-4674-95be-90ca097afc20", 
-            "workflow_outputs": []
-        }, 
-        "3": {
-            "annotation": "Tab-delimited", 
-            "content_id": null, 
-            "id": 3, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "Tab-delimited", 
-                    "name": "Tx2Gene reference"
-                }
-            ], 
-            "label": null, 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 1104, 
-                "top": 512
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"Tx2Gene reference\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "dcb51b30-6cea-43c4-8399-b310f04fe8d9", 
-            "workflow_outputs": []
-        }, 
-        "4": {
-            "annotation": "Salmon quantification on control datasets calculating SF/sense hits", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "id": 4, 
-            "input_connections": {
-                "refTranscriptSource|ownFile": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "single_or_paired|input_singles": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "refTranscriptSource"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "geneMap"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "single_or_paired"
-                }
-            ], 
-            "label": null, 
-            "name": "Salmon", 
-            "outputs": [
-                {
-                    "name": "output_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_gene_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_sam", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 491, 
-                "top": 202
-            }, 
-            "post_job_actions": {
-                "TagDatasetActionoutput_quant": {
-                    "action_arguments": {
-                        "tags": "SF"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "output_quant"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "tool_shed_repository": {
-                "changeset_revision": "53e9709776a0", 
-                "name": "salmon", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SF\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}", 
-            "tool_version": "0.8.2", 
-            "type": "tool", 
-            "uuid": "516935fd-da65-4824-8a8a-e1b0dd010b1b", 
-            "workflow_outputs": []
-        }, 
-        "5": {
-            "annotation": "Salmon quantification on control datasets calculating SR/antisense hits", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "id": 5, 
-            "input_connections": {
-                "refTranscriptSource|ownFile": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "single_or_paired|input_singles": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "refTranscriptSource"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "geneMap"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "single_or_paired"
-                }
-            ], 
-            "label": null, 
-            "name": "Salmon", 
-            "outputs": [
-                {
-                    "name": "output_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_gene_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_sam", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 494, 
-                "top": 594
-            }, 
-            "post_job_actions": {
-                "TagDatasetActionoutput_quant": {
-                    "action_arguments": {
-                        "tags": "SR"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "output_quant"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "tool_shed_repository": {
-                "changeset_revision": "53e9709776a0", 
-                "name": "salmon", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SR\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}", 
-            "tool_version": "0.8.2", 
-            "type": "tool", 
-            "uuid": "ee5c2ecc-5d0c-4b5b-86fe-179f3fd20542", 
-            "workflow_outputs": []
-        }, 
-        "6": {
-            "annotation": "Salmon quantification on case datasets calculating SF/sense hits", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "id": 6, 
-            "input_connections": {
-                "refTranscriptSource|ownFile": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "single_or_paired|input_singles": {
-                    "id": 2, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "refTranscriptSource"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "geneMap"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "single_or_paired"
-                }
-            ], 
-            "label": null, 
-            "name": "Salmon", 
-            "outputs": [
-                {
-                    "name": "output_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_gene_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_sam", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 794, 
-                "top": 200
-            }, 
-            "post_job_actions": {
-                "TagDatasetActionoutput_quant": {
-                    "action_arguments": {
-                        "tags": "SF"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "output_quant"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "tool_shed_repository": {
-                "changeset_revision": "53e9709776a0", 
-                "name": "salmon", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SF\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}", 
-            "tool_version": "0.8.2", 
-            "type": "tool", 
-            "uuid": "4a6dcd95-fd68-43fd-b913-28ad92a0dc4e", 
-            "workflow_outputs": []
-        }, 
-        "7": {
-            "annotation": "Salmon quantification on case datasets calculating SR/antisense hits", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "id": 7, 
-            "input_connections": {
-                "refTranscriptSource|ownFile": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "single_or_paired|input_singles": {
-                    "id": 2, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "refTranscriptSource"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "geneMap"
-                }, 
-                {
-                    "description": "runtime parameter for tool Salmon", 
-                    "name": "single_or_paired"
-                }
-            ], 
-            "label": null, 
-            "name": "Salmon", 
-            "outputs": [
-                {
-                    "name": "output_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_gene_quant", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_sam", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 780, 
-                "top": 594
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2", 
-            "tool_shed_repository": {
-                "changeset_revision": "53e9709776a0", 
-                "name": "salmon", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SR\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}", 
-            "tool_version": "0.8.2", 
-            "type": "tool", 
-            "uuid": "842ae573-2f98-4a40-bd05-a66a86918422", 
-            "workflow_outputs": []
-        }, 
-        "8": {
-            "annotation": "Calculating differential abundance of SF/sense hits", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39", 
-            "id": 8, 
-            "input_connections": {
-                "rep_factorName_0|rep_factorLevel_0|countsFile": {
-                    "id": 6, 
-                    "output_name": "output_quant"
-                }, 
-                "rep_factorName_0|rep_factorLevel_1|countsFile": {
-                    "id": 4, 
-                    "output_name": "output_quant"
-                }, 
-                "tximport|mapping_format|tabular_file": {
-                    "id": 3, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "DESeq2", 
-            "outputs": [
-                {
-                    "name": "split_output", 
-                    "type": "input"
-                }, 
-                {
-                    "name": "deseq_out", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "plots", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "counts_out", 
-                    "type": "tabular"
-                }
-            ], 
-            "position": {
-                "left": 1102, 
-                "top": 201
-            }, 
-            "post_job_actions": {
-                "TagDatasetActioncounts_out": {
-                    "action_arguments": {
-                        "tags": "SF"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "counts_out"
-                }, 
-                "TagDatasetActiondeseq_out": {
-                    "action_arguments": {
-                        "tags": "SF"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "deseq_out"
-                }, 
-                "TagDatasetActionplots": {
-                    "action_arguments": {
-                        "tags": "SF"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "plots"
-                }, 
-                "TagDatasetActionsplit_output": {
-                    "action_arguments": {
-                        "tags": "SF"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "split_output"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39", 
-            "tool_shed_repository": {
-                "changeset_revision": "6f91b8ce6e07", 
-                "name": "deseq2", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"fit_type\": \"\\\"1\\\"\", \"__page__\": 0, \"tximport\": \"{\\\"mapping_format\\\": {\\\"tabular_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1, \\\"mapping_format_selector\\\": \\\"tabular\\\"}, \\\"tximport_selector\\\": \\\"tximport\\\", \\\"__current_case__\\\": 0}\", \"outlier_replace_off\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"auto_mean_filter_off\": \"\\\"false\\\"\", \"rep_factorName\": \"[{\\\"__index__\\\": 0, \\\"factorName\\\": \\\"RNAi\\\", \\\"rep_factorLevel\\\": [{\\\"__index__\\\": 0, \\\"factorLevel\\\": \\\"Symplekin\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"factorLevel\\\": \\\"Blank\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]}]\", \"normCounts\": \"\\\"true\\\"\", \"outlier_filter_off\": \"\\\"false\\\"\", \"many_contrasts\": \"\\\"false\\\"\", \"pdf\": \"\\\"true\\\"\"}", 
-            "tool_version": "2.11.39", 
-            "type": "tool", 
-            "uuid": "f576a1e3-d292-4113-bc73-125f32668c2b", 
-            "workflow_outputs": []
-        }, 
-        "9": {
-            "annotation": "Calculating differential abundance of SR/antisense hits", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39", 
-            "id": 9, 
-            "input_connections": {
-                "rep_factorName_0|rep_factorLevel_0|countsFile": {
-                    "id": 7, 
-                    "output_name": "output_quant"
-                }, 
-                "rep_factorName_0|rep_factorLevel_1|countsFile": {
-                    "id": 5, 
-                    "output_name": "output_quant"
-                }, 
-                "tximport|mapping_format|tabular_file": {
-                    "id": 3, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "DESeq2", 
-            "outputs": [
-                {
-                    "name": "split_output", 
-                    "type": "input"
-                }, 
-                {
-                    "name": "deseq_out", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "plots", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "counts_out", 
-                    "type": "tabular"
-                }
-            ], 
-            "position": {
-                "left": 1102, 
-                "top": 592
-            }, 
-            "post_job_actions": {
-                "TagDatasetActioncounts_out": {
-                    "action_arguments": {
-                        "tags": "SR"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "counts_out"
-                }, 
-                "TagDatasetActiondeseq_out": {
-                    "action_arguments": {
-                        "tags": "SR"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "deseq_out"
-                }, 
-                "TagDatasetActionplots": {
-                    "action_arguments": {
-                        "tags": "SR"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "plots"
-                }, 
-                "TagDatasetActionsplit_output": {
-                    "action_arguments": {
-                        "tags": "SR"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "split_output"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39", 
-            "tool_shed_repository": {
-                "changeset_revision": "6f91b8ce6e07", 
-                "name": "deseq2", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"fit_type\": \"\\\"1\\\"\", \"__page__\": 0, \"tximport\": \"{\\\"mapping_format\\\": {\\\"tabular_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1, \\\"mapping_format_selector\\\": \\\"tabular\\\"}, \\\"tximport_selector\\\": \\\"tximport\\\", \\\"__current_case__\\\": 0}\", \"outlier_replace_off\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"auto_mean_filter_off\": \"\\\"false\\\"\", \"rep_factorName\": \"[{\\\"__index__\\\": 0, \\\"factorName\\\": \\\"RNAi\\\", \\\"rep_factorLevel\\\": [{\\\"__index__\\\": 0, \\\"factorLevel\\\": \\\"Symplekin\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"factorLevel\\\": \\\"Blank\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]}]\", \"normCounts\": \"\\\"true\\\"\", \"outlier_filter_off\": \"\\\"false\\\"\", \"many_contrasts\": \"\\\"false\\\"\", \"pdf\": \"\\\"true\\\"\"}", 
-            "tool_version": "2.11.39", 
-            "type": "tool", 
-            "uuid": "c38087c7-232e-4ffd-aa1c-ec054b78e08c", 
-            "workflow_outputs": []
-        }, 
-        "10": {
-            "annotation": "", 
-            "content_id": "Filter1", 
-            "id": 10, 
-            "input_connections": {
-                "input": {
-                    "id": 8, 
-                    "output_name": "deseq_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Filter", 
-                    "name": "input"
-                }
-            ], 
-            "label": null, 
-            "name": "Filter", 
-            "outputs": [
-                {
-                    "name": "out_file1", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1394, 
-                "top": 201
-            }, 
-            "post_job_actions": {
-                "RenameDatasetActionout_file1": {
-                    "action_arguments": {
-                        "newname": "Differentially abundant sRNAs (SF/sense)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "out_file1"
-                }, 
-                "TagDatasetActionout_file1": {
-                    "action_arguments": {
-                        "tags": "SF"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "out_file1"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "Filter1", 
-            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"0\\\"\", \"cond\": \"\\\"c7<0.05\\\"\", \"__page__\": 0}", 
-            "tool_version": "1.1.0", 
-            "type": "tool", 
-            "uuid": "4175662d-3962-453b-a0c8-d27a5ca39ab0", 
-            "workflow_outputs": []
-        }, 
-        "11": {
-            "annotation": "", 
-            "content_id": "Filter1", 
-            "id": 11, 
-            "input_connections": {
-                "input": {
-                    "id": 9, 
-                    "output_name": "deseq_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Filter", 
-                    "name": "input"
-                }
-            ], 
-            "label": null, 
-            "name": "Filter", 
-            "outputs": [
-                {
-                    "name": "out_file1", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1394, 
-                "top": 594
-            }, 
-            "post_job_actions": {
-                "RenameDatasetActionout_file1": {
-                    "action_arguments": {
-                        "newname": "Differentially abundant sRNAs (SR/antisense)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "out_file1"
-                }, 
-                "TagDatasetActionout_file1": {
-                    "action_arguments": {
-                        "tags": "SR"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "out_file1"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "Filter1", 
-            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"0\\\"\", \"cond\": \"\\\"c7<0.05\\\"\", \"__page__\": 0}", 
-            "tool_version": "1.1.0", 
-            "type": "tool", 
-            "uuid": "cfb839fd-3e47-45bc-a653-25084172d2f0", 
-            "workflow_outputs": []
+  "a_galaxy_workflow": "true",
+  "annotation": "This workflow completes the second part of the sRNA-seq tutorial from transcript quantification through differential abundance testing.",
+  "format-version": "0.1",
+  "name": "sRNA Seq Step 2: Salmon And DESeq2",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Input Dataset Collection - Control RNAi sRNA reads"
         }
-    }, 
-    "uuid": "6c564868-0734-4e25-9478-b91a49852ff9"
+      ],
+      "label": "Dataset collection - Control",
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 217,
+        "top": 436
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection - Control RNAi sRNA reads\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "91427be9-059a-4e6c-89e9-b4cfea01639b",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Input Dataset - Reference Transcriptome"
+        }
+      ],
+      "label": "Dataset - Ref Txome",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 221.5,
+        "top": 524
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Input Dataset - Reference Transcriptome\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "52018b9a-9b80-445d-8a0b-6ce9d3b3b47c",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Input Dataset Collection - Case RNAi sRNA reads"
+        }
+      ],
+      "label": "Dataset collection - Case",
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 223,
+        "top": 612
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection - Case RNAi sRNA reads\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "c26c73ec-cd58-4674-95be-90ca097afc20",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "Tab-delimited",
+      "content_id": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "Tab-delimited",
+          "name": "Tx2Gene reference"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 1104,
+        "top": 512
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Tx2Gene reference\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "dcb51b30-6cea-43c4-8399-b310f04fe8d9",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "Salmon quantification on control datasets calculating SF/sense hits",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "id": 4,
+      "input_connections": {
+        "refTranscriptSource|ownFile": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "single_or_paired|input_singles": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "refTranscriptSource"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "geneMap"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "single_or_paired"
+        }
+      ],
+      "label": null,
+      "name": "Salmon",
+      "outputs": [
+        {
+          "name": "output_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_gene_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_sam",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 491,
+        "top": 202
+      },
+      "post_job_actions": {
+        "TagDatasetActionoutput_quant": {
+          "action_arguments": {
+            "tags": "SF"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output_quant"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "tool_shed_repository": {
+        "changeset_revision": "53e9709776a0",
+        "name": "salmon",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SF\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}",
+      "tool_version": "0.8.2",
+      "type": "tool",
+      "uuid": "516935fd-da65-4824-8a8a-e1b0dd010b1b",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "Salmon quantification on control datasets calculating SR/antisense hits",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "id": 5,
+      "input_connections": {
+        "refTranscriptSource|ownFile": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "single_or_paired|input_singles": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "refTranscriptSource"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "geneMap"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "single_or_paired"
+        }
+      ],
+      "label": null,
+      "name": "Salmon",
+      "outputs": [
+        {
+          "name": "output_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_gene_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_sam",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 494,
+        "top": 594
+      },
+      "post_job_actions": {
+        "TagDatasetActionoutput_quant": {
+          "action_arguments": {
+            "tags": "SR"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output_quant"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "tool_shed_repository": {
+        "changeset_revision": "53e9709776a0",
+        "name": "salmon",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SR\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}",
+      "tool_version": "0.8.2",
+      "type": "tool",
+      "uuid": "ee5c2ecc-5d0c-4b5b-86fe-179f3fd20542",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "Salmon quantification on case datasets calculating SF/sense hits",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "id": 6,
+      "input_connections": {
+        "refTranscriptSource|ownFile": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "single_or_paired|input_singles": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "refTranscriptSource"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "geneMap"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "single_or_paired"
+        }
+      ],
+      "label": null,
+      "name": "Salmon",
+      "outputs": [
+        {
+          "name": "output_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_gene_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_sam",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 794,
+        "top": 200
+      },
+      "post_job_actions": {
+        "TagDatasetActionoutput_quant": {
+          "action_arguments": {
+            "tags": "SF"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output_quant"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "tool_shed_repository": {
+        "changeset_revision": "53e9709776a0",
+        "name": "salmon",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SF\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}",
+      "tool_version": "0.8.2",
+      "type": "tool",
+      "uuid": "4a6dcd95-fd68-43fd-b913-28ad92a0dc4e",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "Salmon quantification on case datasets calculating SR/antisense hits",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "id": 7,
+      "input_connections": {
+        "refTranscriptSource|ownFile": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "single_or_paired|input_singles": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "refTranscriptSource"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "geneMap"
+        },
+        {
+          "description": "runtime parameter for tool Salmon",
+          "name": "single_or_paired"
+        }
+      ],
+      "label": null,
+      "name": "Salmon",
+      "outputs": [
+        {
+          "name": "output_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_gene_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "output_sam",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 780,
+        "top": 594
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+      "tool_shed_repository": {
+        "changeset_revision": "53e9709776a0",
+        "name": "salmon",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"maxReadOcc\\\": \\\"100\\\", \\\"numBiasSamples\\\": \\\"2000000\\\", \\\"perTranscriptPrior\\\": \\\"false\\\", \\\"incompatPrior\\\": \\\"0.0\\\", \\\"splitSpanningSeeds\\\": \\\"false\\\", \\\"writeMappings\\\": \\\"true\\\", \\\"numPreAuxModelSamples\\\": \\\"1000000\\\", \\\"biasSpeedSamp\\\": \\\"1\\\", \\\"minLen\\\": \\\"19\\\", \\\"splitWidth\\\": \\\"0\\\", \\\"noEffectiveLengthCorrection\\\": \\\"true\\\", \\\"numBootstraps\\\": \\\"0\\\", \\\"noBiasLengthThreshold\\\": \\\"false\\\", \\\"fldMean\\\": \\\"200\\\", \\\"initUniform\\\": \\\"false\\\", \\\"consistentHits\\\": \\\"false\\\", \\\"writeUnmappedNames\\\": \\\"false\\\", \\\"numGibbsSamples\\\": \\\"0\\\", \\\"vbPrior\\\": \\\"0.001\\\", \\\"useVBOpt\\\": \\\"true\\\", \\\"maxOcc\\\": \\\"200\\\", \\\"coverage\\\": \\\"0.7\\\", \\\"gcSizeSamp\\\": \\\"1\\\", \\\"extraSensitive\\\": \\\"false\\\", \\\"noFragLengthDist\\\": \\\"true\\\", \\\"forgettingFactor\\\": \\\"0.65\\\", \\\"strictIntersect\\\": \\\"false\\\", \\\"numAuxModelSamples\\\": \\\"5000000\\\", \\\"sensitive\\\": \\\"false\\\", \\\"fldMax\\\": \\\"1000\\\", \\\"fldSD\\\": \\\"80\\\", \\\"dumpEq\\\": \\\"false\\\"}\", \"refTranscriptSource\": \"{\\\"kmerLen\\\": \\\"19\\\", \\\"TranscriptSource\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"geneMap\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"perfectHash\": \"\\\"false\\\"\", \"quasi_orphans\": \"{\\\"type\\\": \\\"quasi\\\", \\\"__current_case__\\\": 0}\", \"sasamp\": \"\\\"1\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"single_or_paired_opts\\\": \\\"single\\\", \\\"strandedness\\\": \\\"SR\\\", \\\"__current_case__\\\": 0}\", \"seqBias\": \"\\\"false\\\"\", \"gcBias\": \"\\\"false\\\"\"}",
+      "tool_version": "0.8.2",
+      "type": "tool",
+      "uuid": "842ae573-2f98-4a40-bd05-a66a86918422",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "Calculating differential abundance of SF/sense hits",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39",
+      "id": 8,
+      "input_connections": {
+        "rep_factorName_0|rep_factorLevel_0|countsFile": {
+          "id": 6,
+          "output_name": "output_quant"
+        },
+        "rep_factorName_0|rep_factorLevel_1|countsFile": {
+          "id": 4,
+          "output_name": "output_quant"
+        },
+        "tximport|mapping_format|tabular_file": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "DESeq2",
+      "outputs": [
+        {
+          "name": "split_output",
+          "type": "input"
+        },
+        {
+          "name": "deseq_out",
+          "type": "tabular"
+        },
+        {
+          "name": "plots",
+          "type": "pdf"
+        },
+        {
+          "name": "counts_out",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1102,
+        "top": 201
+      },
+      "post_job_actions": {
+        "TagDatasetActioncounts_out": {
+          "action_arguments": {
+            "tags": "SF"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "counts_out"
+        },
+        "TagDatasetActiondeseq_out": {
+          "action_arguments": {
+            "tags": "SF"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "deseq_out"
+        },
+        "TagDatasetActionplots": {
+          "action_arguments": {
+            "tags": "SF"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "plots"
+        },
+        "TagDatasetActionsplit_output": {
+          "action_arguments": {
+            "tags": "SF"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "split_output"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39",
+      "tool_shed_repository": {
+        "changeset_revision": "6f91b8ce6e07",
+        "name": "deseq2",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"fit_type\": \"\\\"1\\\"\", \"__page__\": 0, \"tximport\": \"{\\\"mapping_format\\\": {\\\"tabular_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1, \\\"mapping_format_selector\\\": \\\"tabular\\\"}, \\\"tximport_selector\\\": \\\"tximport\\\", \\\"__current_case__\\\": 0}\", \"outlier_replace_off\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"auto_mean_filter_off\": \"\\\"false\\\"\", \"rep_factorName\": \"[{\\\"__index__\\\": 0, \\\"factorName\\\": \\\"RNAi\\\", \\\"rep_factorLevel\\\": [{\\\"__index__\\\": 0, \\\"factorLevel\\\": \\\"Symplekin\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"factorLevel\\\": \\\"Blank\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]}]\", \"normCounts\": \"\\\"true\\\"\", \"outlier_filter_off\": \"\\\"false\\\"\", \"many_contrasts\": \"\\\"false\\\"\", \"pdf\": \"\\\"true\\\"\"}",
+      "tool_version": "2.11.39",
+      "type": "tool",
+      "uuid": "f576a1e3-d292-4113-bc73-125f32668c2b",
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "Calculating differential abundance of SR/antisense hits",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39",
+      "id": 9,
+      "input_connections": {
+        "rep_factorName_0|rep_factorLevel_0|countsFile": {
+          "id": 7,
+          "output_name": "output_quant"
+        },
+        "rep_factorName_0|rep_factorLevel_1|countsFile": {
+          "id": 5,
+          "output_name": "output_quant"
+        },
+        "tximport|mapping_format|tabular_file": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "DESeq2",
+      "outputs": [
+        {
+          "name": "split_output",
+          "type": "input"
+        },
+        {
+          "name": "deseq_out",
+          "type": "tabular"
+        },
+        {
+          "name": "plots",
+          "type": "pdf"
+        },
+        {
+          "name": "counts_out",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1102,
+        "top": 592
+      },
+      "post_job_actions": {
+        "TagDatasetActioncounts_out": {
+          "action_arguments": {
+            "tags": "SR"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "counts_out"
+        },
+        "TagDatasetActiondeseq_out": {
+          "action_arguments": {
+            "tags": "SR"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "deseq_out"
+        },
+        "TagDatasetActionplots": {
+          "action_arguments": {
+            "tags": "SR"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "plots"
+        },
+        "TagDatasetActionsplit_output": {
+          "action_arguments": {
+            "tags": "SR"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "split_output"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39",
+      "tool_shed_repository": {
+        "changeset_revision": "6f91b8ce6e07",
+        "name": "deseq2",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"fit_type\": \"\\\"1\\\"\", \"__page__\": 0, \"tximport\": \"{\\\"mapping_format\\\": {\\\"tabular_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1, \\\"mapping_format_selector\\\": \\\"tabular\\\"}, \\\"tximport_selector\\\": \\\"tximport\\\", \\\"__current_case__\\\": 0}\", \"outlier_replace_off\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"auto_mean_filter_off\": \"\\\"false\\\"\", \"rep_factorName\": \"[{\\\"__index__\\\": 0, \\\"factorName\\\": \\\"RNAi\\\", \\\"rep_factorLevel\\\": [{\\\"__index__\\\": 0, \\\"factorLevel\\\": \\\"Symplekin\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"factorLevel\\\": \\\"Blank\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]}]\", \"normCounts\": \"\\\"true\\\"\", \"outlier_filter_off\": \"\\\"false\\\"\", \"many_contrasts\": \"\\\"false\\\"\", \"pdf\": \"\\\"true\\\"\"}",
+      "tool_version": "2.11.39",
+      "type": "tool",
+      "uuid": "c38087c7-232e-4ffd-aa1c-ec054b78e08c",
+      "workflow_outputs": []
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "id": 10,
+      "input_connections": {
+        "input": {
+          "id": 8,
+          "output_name": "deseq_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1394,
+        "top": 201
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file1": {
+          "action_arguments": {
+            "newname": "Differentially abundant sRNAs (SF/sense)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file1"
+        },
+        "TagDatasetActionout_file1": {
+          "action_arguments": {
+            "tags": "SF"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "Filter1",
+      "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"0\\\"\", \"cond\": \"\\\"c7<0.05\\\"\", \"__page__\": 0}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "4175662d-3962-453b-a0c8-d27a5ca39ab0",
+      "workflow_outputs": []
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "id": 11,
+      "input_connections": {
+        "input": {
+          "id": 9,
+          "output_name": "deseq_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1394,
+        "top": 594
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file1": {
+          "action_arguments": {
+            "newname": "Differentially abundant sRNAs (SR/antisense)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file1"
+        },
+        "TagDatasetActionout_file1": {
+          "action_arguments": {
+            "tags": "SR"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "Filter1",
+      "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"0\\\"\", \"cond\": \"\\\"c7<0.05\\\"\", \"__page__\": 0}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "cfb839fd-3e47-45bc-a653-25084172d2f0",
+      "workflow_outputs": []
+    }
+  },
+  "uuid": "6c564868-0734-4e25-9478-b91a49852ff9",
+  "tags": [
+    "transcriptomics"
+  ]
 }

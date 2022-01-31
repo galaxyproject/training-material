@@ -12,11 +12,12 @@ contributors:
  - bebatut
  - shiltemann
  - gmauro
- - erasche
+ - hexylena
 key_points:
  - It is possible to couple an external data resource with a Galaxy server
  - The external data resource is accessed through his native interface
  - Data flows from the external data resource to the Galaxy server without the need of "downloading" the data
+subtopic: advanced
 ---
 
 # Data Source Integration

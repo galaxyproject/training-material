@@ -1,0 +1,56 @@
+@startuml
+
+!include plantuml_options.txt
+participant "*client*"
+participant "ToolsController"
+participant "app.toolbox"
+participant tool
+participant "execute.py"
+participant "tool.tool_action"
+participant "app.job_manager"
+
+== Render Tool Form ==
+
+"*client*" -> "ToolsController": build()
+activate "ToolsController"
+"ToolsController" -> "app.toolbox": get_tool(tool_id)
+activate "app.toolbox"
+"app.toolbox" --> "ToolsController": tool
+deactivate "app.toolbox"
+"ToolsController" -> tool: to_json()
+activate tool
+tool --> "ToolsController"
+deactivate tool
+"ToolsController" --> "*client*"
+deactivate "ToolsController"
+
+== Submit Tool Form ==
+
+"*client*" -> "ToolsController": create()
+"ToolsController" -> "app.toolbox": get_tool(tool_id)
+activate "app.toolbox"
+"app.toolbox" --> "ToolsController": tool
+deactivate "app.toolbox"
+"ToolsController" -> tool: handle_input(trans, incoming, history)
+activate tool
+tool -> "execute.py": execute()
+activate "execute.py"
+loop over mapped parameter combinations
+"execute.py" -> tool: handle_single_execution()
+activate tool
+tool -> "tool.tool_action": execute()
+activate "tool.tool_action"
+"tool.tool_action" -> "app.job_manager": enqueue(job)
+"tool.tool_action" --> tool
+deactivate "tool.tool_action"
+tool --> "execute.py": job
+deactivate tool
+end
+"execute.py" --> tool: jobs
+deactivate "execute.py"
+tool --> "ToolsController"
+deactivate tool
+"ToolsController" --> "*client*"
+deactivate "ToolsController"
+
+@enduml

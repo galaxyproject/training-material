@@ -3,8 +3,7 @@ layout: tutorial_slides
 logo: "GTN"
 
 title: "Tool Dependencies and Conda"
-hands_on: "external"
-hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
+subtopic: dependencies
 questions:
   - "How can I connect tools to applications and libraries?"
   - "What are the advantages of declaring dependencies for my tool?"
@@ -87,7 +86,7 @@ The `--requirement seqtk@1.2` gets translated into the following Galaxy tool XML
 
 ## Dependency Resolution
 
-![](../../images/galaxy_instance.png)
+![schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications & libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed](../../images/galaxy_instance.png)
 
 ???
 
@@ -101,7 +100,7 @@ The `--requirement seqtk@1.2` gets translated into the following Galaxy tool XML
 
 class: enlarge120
 
-![](../../../../shared/images/conda_logo.png)
+![Conda logo](../../../../shared/images/conda_logo.png)
 
 Package, dependency and environment management
 
@@ -109,7 +108,7 @@ Package, dependency and environment management
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Conda Terminology
+###.image-25[![Conda logo](../../../../shared/images/conda_logo.png)] <br/> Conda Terminology
 
 Conda **recipes** build **packages** that are published to **channels**.
 
@@ -117,7 +116,7 @@ Conda **recipes** build **packages** that are published to **channels**.
 
 class: enlarge120
 
-### .image-25[![](../../../../shared/images/conda_logo.png)] <br /> Conda Key Features for Galaxy
+### .image-25[![Conda logo](../../../../shared/images/conda_logo.png)] <br /> Conda Key Features for Galaxy
 
 - No compilation at install time - *binaries* with their dependencies, libraries...
 
@@ -144,31 +143,27 @@ Compared with the Tool Shed dependency management (`tool_dependencies.xml`), Bio
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Conda Distributions
+###.image-25[![Conda logo](../../../../shared/images/conda_logo.png)] <br/> Conda Distributions
 
 ```
 
 
 ```
-![](../../images/miniconda_vs_anaconda.png)
+![Schematic showing conda as a small circle, miniconda encompasses it and adds python and base packages. Anaconda encompasses all of it, adding 150 high quality packages.](../../images/miniconda_vs_anaconda.png)
 
 ---
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
+###.image-25[![conda logo](../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
 
 - Packages through channels within Continuum.
 
 - Conda channels searched by Galaxy for packages
-    - iuc
+    - iuc (legacy)
     - conda-forge
     - bioconda
     - defaults
-
-<br/>
-<br/>
-<br/>
 
 .footnote[If you are interested in Natural Language Processing or Cheminformatics you may be asking if these channels can still work for your tools. Despite the name [Bioconda](https://bioconda.github.io/) - it is really more about community and a set of best practices than about bioinformatics purity - many diverse packages have been integrated.]
 
@@ -176,7 +171,7 @@ class: enlarge120
 
 class: left, enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Install and Configure
+###.image-25[![conda logo](../../../../shared/images/conda_logo.png)] <br/> Install and Configure
 
 ```bash
 $ planemo conda_init
@@ -193,24 +188,24 @@ This has already been done on [Planemo machine](https://github.com/galaxyproject
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Quickstart
+###.image-25[![conda logo](../../../../shared/images/conda_logo.png)] <br/> Quickstart
 #### Using Conda outside Planemo
-
-- Install a package
-
-```bash
-$ conda install pyyaml
-```
 
 - Install some packages within an isolated environment
 
 ```bash
 $ conda create -n yaml pyyaml
 $ conda env list
-yaml        *  ~/miniconda3/envs/yaml
-root             ~/miniconda3
-$ source activate yaml
+base        *  ~/miniconda3
+yaml           ~/miniconda3/envs/yaml
+$ conda activate yaml
 (yaml) $
+```
+
+- Install a package in the current environment
+
+```bash
+$ conda install pyyaml
 ```
 
 ---
@@ -225,13 +220,13 @@ Galaxy now automatically installs Conda when first launched and will use [Biocon
 
 ### Installing Tools with Conda
 
-![](../../images/tool_install.png)
+![Screnshot of tool installation menu](../../images/tool_install.png)
 
 ---
 
 ### Managing Tool Dependencies
 
-![](../../images/dependency_manage.png)
+![Screenshot of the galaxy page for managing tool dependencies](../../images/dependency_manage.png)
 
 ---
 
@@ -382,11 +377,12 @@ The following line indicates the seqtk package was found:
 [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
 ```
 ]
+
 ---
 
 ### {% icon hands_on %} Hands-on
 
-![](../../images/exercise.png)
+![Cartoon of people jumping.](../../images/exercise.png)
 
 ---
 
@@ -458,16 +454,13 @@ $ $HOME/miniconda3/bin/conda search -c iuc -c conda-forge -c bioconda seqtk
 
 ### Using Anaconda Search - https://anaconda.org
 
-![](../../images/anaconda_landing.png)
-
-
-???
+![screensho of the anaconda homepage](../../images/anaconda_landing.png)
 
 ---
 
 ### Using Anaconda Search - https://anaconda.org
 
-![](../../images/anaconda_result.png)
+![Screenshot of an anaconda search for the term seqtk](../../images/anaconda_result.png)
 
 ???
 
@@ -478,7 +471,7 @@ only one that will be used by Galaxy by default.
 
 ### {% icon hands_on %} Hands-on
 
-![](../../images/exercise.png)
+![Cartoon of people jumping.](../../images/exercise.png)
 
 ---
 
@@ -511,60 +504,61 @@ pear.xml              test-data
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe
+## Writing a Conda recipe
 
-If searching best practice channels fails, you may need to build a Conda recipe.
+- If searching best practice channels fails, you may need to build a Conda recipe.
 
-.footnote[[Documentation about how to write conda recipes from scratch](https://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
+- A Conda recipe is defined by a directory, the two most important files in this directory are:
+  - `meta.yaml`: contains all the metadata of the recipe
+  - `build.sh`: the (optional) Unix script that installs the files
 
----
-
-class: left
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - The Files
-
-A Conda recipe is defined by a directory, the two most important files in this directory are:
-
-- `meta.yaml`: contains all the metadata of the recipe
-- `build.sh`: the Unix script that installs the files
+.footnote[[conda-build user guide](https://conda.io/projects/conda-build/en/latest/user-guide/index.html) <br/> [Bioconda guidelines](https://bioconda.github.io/contributor/index.html)]
 
 ---
 
 class: left
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - `meta.yaml`
+## `meta.yaml`
 
 `meta.yaml` contains basic metadata about the recipe.
 
+{% raw %}
 ```yaml
+{% set version = "0.7.17" %}
+{% set sha256 = "980b9591b61c60042c4a39b9e31ccaad8d17ff179d44d347997825da3fdf47fd" %}
+
 package:
   name: bwa
-  version: "0.7.15"
-about:
-  home: http://bio-bwa.sourceforge.net
-  license: MIT
-  summary: The BWA read mapper.
-build:
-  number: 0
-  skip: True # [osx]
+  version: {{ version }}
 source:
-  url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
-  md5: 54fdee953c5c256d36885a1c5c6b118c
+  url: https://github.com/lh3/bwa/archive/v{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+  patches:
+    - Makefile.patch
+build:
+  number: 7
+about:
+  home: https://github.com/lh3/bwa
+  license: GPL3
+  license_file: COPYING
+  summary: The BWA read mapper.
 ```
+{% endraw %}
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - `requirements`
+## `meta.yaml` > `requirements`
 
-```yaml
 {% raw %}
+```yaml
 requirements:
   build:
     - {{ compiler('c') }}
   host:
     - zlib
   run:
-    - bowtie2
+    - zlib
+    - perl
 {% endraw %}
 ```
 <small>
@@ -575,22 +569,23 @@ requirements:
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Preprocessing Selectors
+## Preprocessing Selectors
 
+- Common selectors include `linux`, `osx`, `py2k`, `py3k`.
 - Evaluated as Python expressions - feel free to use `and`, `or`, etc.
-- Other common selectors include `py2k`, `py3k`.
 
+{% raw %}
 ```yaml
 requirements:
   build:
-    - gcc   # [not osx]
-    - llvm  # [osx]
-    - zlib
+    - bz2file  # [py < 33]
+    - typing  # [py27 or py34]
+{% endraw %}
 ```
 
 ```yaml
 build:
-  skip: True  # [not py27]
+  skip: True  # [osx]
 ```
 
 .footer[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#preprocessing-selectors ]]
@@ -599,13 +594,9 @@ build:
 
 class: left
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Tests
-
-<br/>
-<br/>
+## Tests
 
 `meta.yaml` should contain simple tests. These are commands executed at the end of `conda build` and expected to return `0` on success.
-
 
 ```yaml
 test:
@@ -631,13 +622,13 @@ Please note that the Conda tests run inside the runtime environment and not in t
 
 ---
 
-From the [Bioconda Guidelines](https://bioconda.github.io/guidelines.html):
+From the [Bioconda Guidelines](https://bioconda.github.io/contributor/guidelines.html):
 
 > An adequate test must be included in the recipe. An "adequate" test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on CircleCI. We especially want to avoid including any kind of test data in the repository.
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - `build.sh`
+## `build.sh`
 
 ```bash
 #!/bin/bash
@@ -661,7 +652,7 @@ cp *.py $PREFIX/bin
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Skeletons
+## Skeletons
 
 ```bash
 $ conda skeleton pypi <packagename>
@@ -678,11 +669,11 @@ $ conda skeleton cpan <packagename>`
 
 These generate pre-filled recipes <small>(not guaranteed to work out of the box)</small> for specific programming environments.
 
-.footnote[[Building conda packages with conda skeleton](https://conda.pydata.org/docs/build_tutorials/pkgs.html)]
+.footnote[[Building conda packages with conda skeleton](https://docs.conda.io/projects/conda-build/en/latest/user-guide/tutorials/build-pkgs-skeleton.html)]
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Building
+## Building
 
 Once the recipe is ready to go, the `conda build` command can be used to build it.
 
@@ -702,7 +693,7 @@ $ $HOME/miniconda3/bin/conda build .
 
 ---
 
-.image-75[![](../../../../shared/images/bioconda_logo.png)]
+.image-75[![bioconda logo](../../../../shared/images/bioconda_logo.png)]
 
 
 - A channel dedicated to bioinformatics (and other informatics) packages
@@ -713,7 +704,7 @@ $ $HOME/miniconda3/bin/conda build .
 
 ---
 
-###.image-25[![](../../../../shared/images/bioconda_logo.png)] contributing 1/2
+###.image-25[![bioconda logo](../../../../shared/images/bioconda_logo.png)] contributing 1/2
 
 - Fork [Bioconda](https://github.com/bioconda/bioconda-recipes/fork).
 - Clone your fork:
@@ -734,7 +725,7 @@ $ $HOME/miniconda3/bin/conda build .
 
 ---
 
-###.image-25[![](../../../../shared/images/bioconda_logo.png)] contributing 2/2
+###.image-25[![bioconda logo](../../../../shared/images/bioconda_logo.png)] contributing 2/2
 
 - Commit and push to GitHub
 
@@ -757,7 +748,7 @@ $ $HOME/miniconda3/bin/conda build .
 - Enjoy your new Conda package at https://anaconda.org/bioconda
 
 
-See [Contributing with GitHub](../github-contribution/slides.html)
+See [Contributing with GitHub]({% link topics/contributing/tutorials/github-command-line-contribution/slides.html %}).
 
 ---
 
@@ -774,7 +765,7 @@ cache.
 
 ### {% icon hands_on %} Hands-on
 
-![](../../images/exercise.png)
+![Cartoon of people jumping.](../../images/exercise.png)
 
 ---
 
@@ -827,9 +818,8 @@ class: left
 
 ## Jinja Templating
 
-```yaml
-
 {% raw %}
+```yaml
 {% set name = "seqtk" %}
 {% set version = "1.15.1" %}
 
@@ -839,9 +829,8 @@ package:
 
 source:
     url: http://coolsoftware.com/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
-
-{% endraw %}
 ```
+{% endraw %}
 
 https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#templating-with-jinja
 
@@ -901,8 +890,8 @@ $PYTHON setup.py install
 
 ## Python - pysam's `meta.yaml`
 
-.reduce50[```yaml
-{% raw %}
+.reduce50[{% raw %}
+```yaml
 {% set version = "0.15.2" %}
 {% set samtools_version = "1.9" %}
 {% set bcftools_version = "1.9" %}
@@ -942,8 +931,7 @@ requirements:
 test:
   imports:
     - pysam
-{% endraw %}
-```]
+```{% endraw %}]
 
 ---
 
@@ -998,14 +986,13 @@ class: reduce70
 
 ## Java - PeptideShaker's `meta.yaml`
 
+{% raw %}
 ```yaml
 ...
 
-{% raw %}
 source:
     url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
     md5: 14a48413e28a25614f5fda2b381d7197
-{% endraw %}
 
 requirements:
   build:
@@ -1018,6 +1005,7 @@ test:
       - peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI
       - peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI -Xms512m -Xmx1g
 ```
+{% endraw %}
 
 ---
 
@@ -1097,7 +1085,7 @@ class: left
 
 ## CircleCI Continuous Building
 
-.image-70[![](../../images/circleci-logo.png)]
+.image-70[![circle ci logo](../../images/circleci-logo.png)]
 
 - Lint recipes.
 - Build and run tests.

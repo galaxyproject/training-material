@@ -94,8 +94,8 @@ To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` whi
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
@@ -104,14 +104,14 @@ To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` whi
 >    https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 4. Rename the files `wt_H3K4me3_read1` and `wt_H3K4me3_read2`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Inspect the first file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
@@ -128,7 +128,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. Run **FastQC** {% icon tool %} with the following parameters
 >    - {% icon param-files %} *"Short read data from your current history"*: `wt_H3K4me3_read1` and `wt_H3K4me3_read2` (Input datasets selected with **Multiple datasets**)
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 2. Inspect the generated HTML files
 >

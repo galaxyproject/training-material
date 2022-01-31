@@ -2,7 +2,7 @@
 layout: introduction_slides
 logo: "GTN"
 
-title: "Galaxy from an administrator point of view"
+title: "Galaxy from an administrator's point of view"
 type: "introduction"
 zenodo_link: ""
 questions:
@@ -15,12 +15,12 @@ objectives:
 time_estimation: "20m"
 key_points:
   - Galaxy is scalable from personal computers to huge HPC and cloud-instances.
-  - Amount of expected users and storage capabilities does have a big impact on the deployment.
+  - Amount of expected users, types of common tasks, and storage capabilities have a big impact on the deployment.
 contributors:
   - valentinmarcon
   - natefoo
   - bgruening
-  - erasche
+  - hexylena
 subtopic: core
 
 #- [Deployment and Platform options]({{ site.baseurl }}/topics/admin/tutorials/deployment-platforms-options/slides.html#1)
@@ -28,17 +28,17 @@ subtopic: core
 #- [Galaxy Database schema]({{ site.baseurl }}/topics/admin/tutorials/database-schema/tutorial.html)
 ---
 
-![](../images/use-resource-banner.png)
+![Picture with 125+ platforms for using galaxy written and a number of screenshots of those galaxies.](../images/use-resource-banner.png)
 
 ---
 
 # Where can Galaxy run?
 
 * Cloud (SaaS)
-  - [usegalaxy.org](https://usegalaxy.org)
-  - [Public Galaxy Servers](https://wiki.galaxyproject.org/PublicGalaxyServers)
-  - [Amazon EC2](https://wiki.galaxyproject.org/CloudMan)
-  - Semi-private cloud (e.g.: [Genomics Virtual Lab](https://www.genome.edu.au/), [Jetstream](http://jetstream-cloud.org/))
+  - A usegalaxy.* site [Main](https://usegalaxy.org) [Europe](https://usegalaxy.eu) [Australia](https://usegalaxy.org.au/)
+  - [Public Galaxy Servers](https://galaxyproject.org/use)
+  - [Amazon EC2 or MS Azure](https://launch.usegalaxy.org/)
+  - Semi-private cloud (e.g.: [NeCTAR](https://nectar.org.au/), [Jetstream](http://jetstream-cloud.org/))
 * Private cloud (build your own Galaxy SaaS)
 * Cloud (IaaS)
   - Any cloud
@@ -54,15 +54,24 @@ subtopic: core
 
 [Resource Directory](https://galaxyproject.org/use/)
 
-![](../images/options-to-choose.png)
+Supported                                         | Main | Local | Cloud | Appliance
+---------                                         | ---- | ----- | ----- | ---------
+Your data sets are moderately sized               | yes  | yes   | yes   | yes
+Your computation requirements are moderate        | yes  | yes   | yes   | yes
+You want to share your Galaxy objects with others | yes  | yes   | yes   | yes
+All needed Tools are installed on Main            | yes  | ?     | yes   | yes
+Your data sets are very large                     | no   | ?     | yes   | yes
+Your computation requirements are very large      | no   | ?     | yes   | yes
+You have absolute data security requirements      | no   | yes   | yes   | yes
+No network transfer of data                       | no   | yes   | no    | yes
 
 ---
 
 ## Reasons to Install Your Own Galaxy
 
-- You want to run a local [production Galaxy](https://galaxyproject.org/admin/config/performance/production-server/)
+- You want to run a local [production Galaxy](https://docs.galaxyproject.org/en/latest/admin/production.html)
 - You want to develop [Galaxy tools](https://galaxyproject.org/admin/tools/add-tool-tutorial)
-- You to [Develop Galaxy](https://galaxyproject.org/develop/) itself
+- You want to [Develop Galaxy](https://galaxyproject.org/develop/) itself
 - [Install](https://galaxyproject.org/admin/tools/add-tool-tutorial) and use tools unavailable on [public Galaxies](https://galaxyproject.org/public-galaxy-servers)
 - Use sensitive data (e.g. clinical)
 - Process large datasets that are too big for public Galaxies
@@ -74,13 +83,11 @@ subtopic: core
 # Software Requirements
 
 Required:
-  - Galaxy is written in Python and depends on **Python 2.7**
-  - All major distros in wide circulation have 2.7, *except* RHEL<sup>[1]</sup> 6
-    - See: Software Collections for [RHEL](https://access.redhat.com/solutions/472793), [CentOS](https://wiki.centos.org/AdditionalResources/Repositories/SCL), [Scientific Linux](http://linux.web.cern.ch/linux/scl/)
+  - Galaxy is written in Python and depends on **Python 3.5** or newer
 
-Optional (but not really):
-  - [PostgreSQL](https://galaxyproject.github.io/dagobah-training/2018-oslo/03-production-basics/databases.html)
-  - [Reverse proxy server](https://galaxyproject.github.io/dagobah-training/2018-oslo/03-production-basics/webservers.html) (NGINX, Apache)
+Minimal [production](https://docs.galaxyproject.org/en/master/admin/production.html) requirements:
+  - [PostgreSQL](../tutorials/database/slides.html)
+  - Reverse proxy server (NGINX, Apache)
 
 ---
 
@@ -93,10 +100,16 @@ This depends:
 
 If possible, run the Galaxy server **separate** from Galaxy jobs
 
-**Storage** will be the bigger concern
+**Storage** will usually be the biggest concern
+
+???
+
+- Depends on your available infrastructure
+- If you are storage limited, can be addressed by policy of deleting old/unused histories
+- If you are compute limited, can be addressed with queue limits
 
 ---
-# Hardware Estimates
+# Server Hardware Requirements
 
 Based on concurrent user count and assuming separate compute for jobs:
 
@@ -107,22 +120,18 @@ Users     | Resource estimate
 20 - 40   | 8 cores, 8 GB, 200 TB
 40+       | multiple hosts, 16 GB/host, 500 TB, dedicated DB host
 
-Storage is the big variable since it, like compute, is **analysis** and **policy** dependent
+Storage is more difficult to estimate since it is, like compute, **analysis** and **policy** dependent
 
 ---
-
 template: left-aligned
 
-# On Storage...
-
-The Philosophy of Galaxy:
+# Galaxy Storage Philosophy
 
 - Foster transparency and reproducibility
 - Data is always created, *never overwritten*
-- Data is never deleted unless *explicitly instructed*
+- Copying history or library datasets associate them with the original file on disk without an actual copy
+- By default, data is never really deleted unless *explicitly instructed*
 - Even deleted data can be undeleted unless *forcibly purged*
-
-Additionally, tools can produce large amounts of transient data while running.
 
 ---
 
@@ -130,15 +139,20 @@ template: left-aligned
 
 # Storage Requirements
 
-An "average" NGS analysis (by Anton): **66 GB**
+An "average" 2018 NGS analysis (by Anton Nekrutenko): **66 GB**
 
 10 users, 10 histories: **> 6 TB**
 
 Solutions:
 
 - Quotas
-- Clean up deleted data (aggressively)
-- Forced removal based on age available
+- Set job limits in `job_conf.xml`
+- Clean up deleted data (with a cron job)
+- Forced removal based on age
+- Users can configure their workflows to delete intermediate tool outputs
+- Data libraries for common data
+- Public servers: require email verification (and watch for duplicates)
+- Plug in more/heterogeneous storage using Object Store configuration
 
 ---
 
@@ -156,48 +170,40 @@ usegalaxy.org allocates from **8 GB/core** to **16 GB/core**
 
 Connecting Galaxy to clusters/HPC is covered in the advanced section.
 
-
 ---
 
-# How is Galaxy deployed?
-
-Current:
-
-- Ansible / `git clone https://github.com/galaxyproject/galaxy.git`
-- *Framework dependencies* provided as Python "wheels", fetched at first startup with `pip`
-- *Tool dependencies* provided as Conda packages or legacy Tool Shed packages
-
-Future:
-
-- RPM, Debian packages
-- Galaxy wheel in PyPI
-- Watch: [Pull Request #921](https://github.com/galaxyproject/galaxy/pull/921)
-
----
-# Making Plans
+# Making plans
 
 **Before** deploying your first Galaxy server:
 
-- Get PostgreSQL (you do not want to switch later)
 - Figure out where Galaxy will be stored
   - Make sure it will be accessible to any eventual compute
 - Figure out where data will be stored
   - Make sure it will be accessible to any eventual compute
 
 ---
+
+# Galaxy deployment options
+
+- As developer: `git clone https://github.com/galaxyproject/galaxy.git`
+- Ready-to-use locally: [Docker](https://github.com/bgruening/docker-galaxy-stable/)
+- Production server: configuration management (e.g. Ansible)
+
+In future:
+
+- Alternative to git clone: Galaxy wheel in PyPI
+
+---
+
 # Deployment Best Practices
 
-**Use configuration management**
-- [Ansible](http://docs.ansible.com) ([tutorial](https://galaxyproject.github.io/dagobah-training/2018-oslo/14-ansible/ansible-introduction.html))
-- [Chef](https://www.chef.io/)
-- [Puppet](https://puppet.com)
-- [SaltStack](https://saltstack.com)
-- [CFEngine](https://cfengine.com)
+- **Use configuration management**
+  - [Ansible](http://docs.ansible.com) for which Galaxy Project maintains roles ([tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html))
+  - Other systems are possible (Chef, Puppet, SaltStack, CFEngine) but do not have project-maintained roles.
 
-**Use configuration management** but if you don't, *record every change you make somehow.*
-- Large, complex deployments grow organically
-- If you don't know what you did you can't do it again
-- "My context switching penalty is high and my process isolation is not what it used to be." - Elon Musk
+- Whether you use configuration management or not, *record every change you make on a version control system* (e.g. git):
+  - Large, complex deployments grow organically
+  - If you don't know what you did, you can't do it again
 
 ---
 
@@ -205,15 +211,11 @@ template: left-aligned
 
 # System Administration Best Practices
 
-Take security seriously
-- OS security best practices (not covered yet)
+- Take security seriously
 - **Update Galaxy when security updates are released**
-  - We put a lot of effort into these!
-
-Privilege separate if you can
-- Separate code and job/data ownership
-
-Write protect Galaxy and data if you can
+- Follow OS security best practices
+- Privilege separate code/job/data ownership
+- Write protect Galaxy and data if you can
 - Read-only cluster mounts
 
 Back up everything (except that which is managed by configuration management)

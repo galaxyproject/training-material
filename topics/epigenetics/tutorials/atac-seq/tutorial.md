@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: ATAC-Seq data analysis
-zenodo_link: "https://zenodo.org/record/3270536"
+zenodo_link: https://zenodo.org/record/3862793
 questions:
 - Which DNA regions are accessible in the human lymphoblastoid cell line GM12878?
 - How to analyse and visualise ATAC-Seq data?
@@ -35,7 +35,7 @@ In this tutorial we will use data from the study of {% cite Buenrostro2013 %}, t
 
 ### When working with real data
 {:.no_toc}
-When you use your own data we suggest you to use [this workflow](https://usegalaxy.eu/u/heylf/w/atac-seq-gtm-with-control) which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this workflow, removing all steps with the controls. Controls for the ATAC-seq procedure are not commonly performed, as discussed [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html), but could be ATAC-Seq of purified DNA.
+When you use your own data we suggest you to use [this workflow](https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control) which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this workflow, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html), but could be ATAC-Seq of purified DNA.
 
 > ### Agenda
 >
@@ -47,7 +47,7 @@ When you use your own data we suggest you to use [this workflow](https://usegala
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 # Preprocessing
 
@@ -60,47 +60,49 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/3270536) and [ENCODE](https://www.encodeproject.org/) or from the shared data library
+> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3862792) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/3270536/files/SRR891268_R1.fastq.gz
->    https://zenodo.org/record/3270536/files/SRR891268_R2.fastq.gz
->    https://www.encodeproject.org/files/ENCFF933NTR/@@download/ENCFF933NTR.bed.gz
+>    https://zenodo.org/record/3862793/files/ENCFF933NTR.bed.gz
+>    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R1.fastq.gz
+>    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Add a tag called `#SRR891268_R1` to the R1 file and a tag called `#SRR891268_R2` to the R2 file.
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 4. Check that the datatype of the 2 FASTQ files is `fastqsanger.gz` and the BED file is `bed`. If they are not then change the datatype as described below.
+> 4. Check that the datatype of the 2 FASTQ files is `fastqsanger.gz` and the peak file (ENCFF933NTR.bed.gz) is `encodepeak`. If they are not then change the datatype as described below.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
 > ### {% icon comment %} FASTQ format
-> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
 {: .comment}
 >
-> ### {% icon comment %} BED format
-> If you are not familiar with BED format, see the [BED Format](https://genome.ucsc.edu/FAQ/FAQformat.html)
+> ### {% icon comment %} BED / encode narrowPeak format
+> If you are not familiar with BED format or encode narrowPeak format, see the [BED Format](https://genome.ucsc.edu/FAQ/FAQformat.html)
 {: .comment}
 
 We will visualise regions later in the analysis and obtain the gene information now. We will get information for chromosome 22 genes (names of transcripts and genomic positions) using the UCSC tool.
 
 > ### {% icon hands_on %} Hands-on: Obtain Annotation for hg38 genes
 >
-> 1. **UCSC Main** {% icon tool %} with the following parameters:
+> 1. {% tool [UCSC Main table browser](ucsc_table_direct1) %} with the following parameters:
 >    - *"clade"*: `Mammal`
 >    - *"genome"*: `Human`
 >    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >    - *"group"*: `Genes and Gene Prediction`
->    - *"track"*: `All GENCODE V31`
+>    - *"track"*: `All GENCODE V37`
 >    - *"table"*: `Basic`
 >    - *"region"*: `position` `chr22`
 >    - *"output format"*: `all fields from selected table`
@@ -108,25 +110,61 @@ We will visualise regions later in the analysis and obtain the gene information 
 > 2. Click **get output**
 > 3. Click **Send query to Galaxy**
 >
-> This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
-> 4. **Cut columns from a table** {% icon tool %} with the following parameters:
->    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
->    - {% icon param-text %} *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV31 (chr22:1-50,818,468)`
-> 5. Rename the dataset as `chr22 genes`
+>    This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
 >
->    {% include snippets/rename_dataset.md %}
+> 4. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV37 (chr22:1-50,818,468)`
 >
-> 6. Change its datatype to BED
+> 5. Check the contents of your file, is this as you expect it to be?
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    > ### {% icon question %} Question: Expected output
+>    >
+>    > Our goal here was to convert the data to BED format.
+>    >
+>    > 1. Which columns do you expect in your file? (Tip: read about [BED format](https://genome.ucsc.edu/FAQ/FAQformat.html#format1))
+>    > 2. Does your file look like a valid BED format?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. We expect at least 3 columns, `chromosome - start - end`, and possibly more optional columns
+>    > > 2. Your file should look something like this:
+>    > >    ```
+>    > >    chr22	10736170	10736283	U2	0	-
+>    > >    chr22	11066417	11068174	CU104787.1	0	+
+>    > >    chr22	11249808	11249959	5_8S_rRNA	0	-
+>    > >    chr22	15273854	15273961	U6	0	+
+>    > >    [..]
+>    > >    ```
+>    > >
+>    > > - **Troubleshooting:** Is your second column the `Strand` column?
+>    > >    - Make sure you used the correct **Cut** {% icon tool %} (the one that matches the tool name mentioned in the previous step *exactly*)
+>    > >    - There is another tool with `(cut)` behind the title, we do NOT want to use this tool in this step.
+>    > >
+>    > > - **Tip:** Always check your output files to make sure they match your expectations!
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+>
+> 6. **Rename** {% icon galaxy-pencil %} the dataset as `chr22 genes`
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 7. **Change** {% icon galaxy-pencil %} its datatype to BED
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
+>
+> 8. Click on the {% icon galaxy-eye %} (eye) icon of the file. It should have now column names and they should match the content.
 >
 {: .hands_on}
 
 >
 > ### {% icon comment %} Gene file
 > The chr22 genes BED we produced only contains the start, the end, the name, and the strand of each transcript. It does not contain exon information.
-> To be able to have the exon information, you could use a GTF file which can be downloaded from the [gencode website](ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_31/gencode.v31.annotation.gtf.gz) but this file would include the information for the whole genome and would slow the analysis.
+> To be able to have the exon information, you could use a GTF file which can be downloaded from the [gencode website](ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_37/gencode.v37.annotation.gtf.gz) but this file would include the information for the whole genome and would slow the analysis.
 {: .comment}
 
 ## Quality Control
@@ -135,32 +173,38 @@ The first step is to check the quality of the reads and the presence of the Next
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **FastQC** {% icon tool %} with the default parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1` and `SRR891268_R2`.
 > 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. How many reads are in the FASTQ?
->    > 2. Which sections have a warning?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. There are 285247 reads.
->    > > 2. The 3 steps below have warnings:
->    > >
->    > > > 1) **Per base sequence content**
->    > > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
->    > >
->    > > > 2) **Sequence Duplication Levels**
->    > > > > The read library quite often has PCR duplicates that are introduced
->    > > > > simply by the PCR itself. We will remove these duplicates later on.
->    > >
->    > > > 3) **Overrepresented sequences**
->    > > > > Nextera adapter sequences are observable in the **Adapter Content** section.
->    > > 
->    > {: .solution}
->    >
+> > ### {% icon question %} Questions
+> >
+> > 1. How many reads are in the FASTQ?
+> > 2. Which sections have a warning?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. There are 285247 reads.
+> > > 2. The 3 steps below have warnings:
+> > >
+> > >    1. **Per base sequence content**
+> > >
+> > >       It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
+> > >
+> > >    2. **Sequence Duplication Levels**
+> > >
+> > >       The read library quite often has PCR duplicates that are introduced
+> > >       simply by the PCR itself. We will remove these duplicates later on.
+> > >
+> > >    3. **Overrepresented sequences**
+> > >
+> > >       One sequence is over represented: 
+> > >       you have 306 reads which are exactly the sequence of the Nextera adapter.
+> > >       They correspond to adapters amplified head-to-head.
+> > >       306 is really low (only 0.1% of reads).
+> > >
+> > {: .solution}
+> >
 >    {: .question}
 {: .hands_on}
 
@@ -182,7 +226,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Cutadapt** {% icon tool %} with the following parameters:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
 >        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1`
 >        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2`
@@ -190,18 +234,18 @@ The forward and reverse adapters are slightly different. We will also trim low q
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
->                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
+>                        - *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
+>                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
 >        - In *"Read 2 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
->                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
+>                        - *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
+>                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
 >    - In *"Filter Options"*:
->        - {% icon param-text %} *"Minimum length"*: `20`
+>        - *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*:
->        - {% icon param-text %} *"Quality cutoff"*: `20`
+>        - *"Quality cutoff"*: `20`
 >    - In *"Output Options"*:
 >        - *"Report"*: `Yes`
 >
@@ -230,22 +274,23 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > ### {% icon hands_on %} Hands-on: Check Adapter Removal with FastQC
 >
-> 1. **FastQC** {% icon tool %} with the default parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >       - *"Short read data from your current history"*: select the output of **Cutadapt** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
 > ### {% icon comment %} FastQC Results
-> If we run FastQC again we should see under **Adapter Content** that the Nextera adapters are no longer present.
+> Now, you should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Nextera adapters are no longer present.
 > ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
+> However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
 {: .comment}
 
 # Mapping
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. 
+Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose. The hg38 version of the human genome contains [alternate loci](https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE). This means that some region of the genome are present both in the canonical chromosome and on its alternate loci. The reads that map to these regions would map twice. To be able to filter reads falling into repetitive regions but keep reads falling into regions present in alternate loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).
 
 > ### {% icon comment %} Dovetailing
 > We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. For example, if the first mate in the read pair is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`, where both contain 2 bases of adapter sequence, they will not be trimmed by Cutadapt and will map this way:
@@ -255,13 +300,13 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
   CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT
   ----------------------Mate 2--------------------->
 ```
-This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
+> This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
 {: .comment}
 
 
 > ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
-> 1. **Bowtie2** {% icon tool %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
 >        - {% icon param-file %} *"FASTQ/A file #1"*: select the output of **Cutadapt** {% icon tool %} *"Read 1 Output"*
 >        - {% icon param-file %} *"FASTQ/A file #2"*: select the output of **Cutadapt** {% icon tool %} *"Read 2 Output"*
@@ -269,9 +314,11 @@ This is what we call dovetailing and we want to consider this pair as a valid co
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
->        - *"Select reference genome"*: `Human Dec. 2013 (GRCh38/hg38 (hg38)`
+>        - *"Select reference genome"*: `Human (Homo sapiens): hg38 Canonical`
+>    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1: Default setting only`
 >        - *"Do you want to use presets?"*: `Very sensitive end-to-end (--very-sensitive)`
+>    - *"Do you want to tweak SAM/BAM Options?"*: `No`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the mapping stats.
@@ -288,7 +335,7 @@ This is what we call dovetailing and we want to consider this pair as a valid co
 >
 > > ### {% icon solution %} Solution
 > >
-> > 54.07+43.63=97.7%
+> > 54.8+42.87=97.67%
 > >
 > {: .solution}
 >
@@ -311,12 +358,12 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 
 > ### {% icon hands_on %} Hands-on: Filtering of uninformative reads
 >
-> 1. **Filter** BAM datasets on a variety of attributes {% icon tool %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
->        - *"1: Condition"*
+>        - {% icon param-repeat %} *"Insert Condition"*
 >            - In *"Filter"*:
->                - *"1: Filter"*
+>                - {% icon param-repeat %} *"Insert Filter"*
 >                    - *"Select BAM property to filter on"*: `mapQuality`
 >                        - *"Filter on read mapping quality (phred scale)"*: `>=30`
 >                - {% icon param-repeat %} *"Insert Filter"*
@@ -339,7 +386,7 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The original BAM file is 28 MB, the filtered one is 14.8 MB. Approximately half of the alignments were removed.
+> > 1. The original BAM file is 28.1 MB, the filtered one is 15.2 MB. Approximately half of the alignments were removed.
 > >
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
@@ -347,17 +394,18 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 >
 {: .question}
 
-High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-seq samples have been reported to be 80% mitochondrial reads and so wet-lab methods have been developed to deal with this issue {% cite Corces2017 %} and {% cite Litzenburger2017 %}. It can be a useful QC to assess the number of mitochondrial reads.
+High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-Seq samples have been reported to be 80% mitochondrial reads and so wet-lab methods have been developed to deal with this issue {% cite Corces2017 %} and {% cite Litzenburger2017 %}. It can be a useful QC to assess the number of mitochondrial reads.
+However, it does not predict the quality of the rest of the data. It is just that sequencing reads have been wasted.
 
 > ### {% icon tip %} Tip: Getting the number of mitochondrial reads
 >
-> To get the number of reads that mapped to the mitochondrial genome (chrM) you can run **Samtools idxstats** {% icon tool %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
+> To get the number of reads that mapped to the mitochondrial genome (chrM) you can run {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3) %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
 > The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
-> The first 2 lines of the result would be (after sorting):
+> The first 2 lines of the result would be (after using {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %}):
 >
 > ![Samtools idxstats result](../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png "Samtools idxstats result")
 >
-> There are 221 000 reads which map to chrM and 170 000 which map to chr22.
+> There are 220 000 reads which map to chrM and 165 000 which map to chr22.
 {: .tip}
 
 ## Filter Duplicate Reads
@@ -366,7 +414,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
-> 1. **MarkDuplicates** {% icon tool %} with the following parameters:
+> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
@@ -384,13 +432,17 @@ Because of the PCR amplification, there might be read duplicates (different read
 {: .comment}
 
 > ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
-> You can copy/paste the 2 lines with header and data into an Excel sheet.
-> Replace `Unknown Library` by `Unknown_Library` in the second line.
-> Then do Text to Columns (it is space delimited data). You should check the box for Treat consecutive delimiters as one.
-> Finally you copy and paste special your table to transpose it.
-> Now you should have:
 >
-> ![Metrics of MarkDuplicates in Excel](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates in Excel")
+> 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
+>    - *"that*: `Matching`
+>    - *"the pattern*: `(Library|LIBRARY)`
+> 2. Check that the datatype is tabular. If not, change it.
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
+>    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
+>
+> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates")
 >
 {: .tip}
 
@@ -401,31 +453,33 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 133284
-> > 2. 3549
+> > 1. 135813
+> > 2. 3584
 > >
 > {: .solution}
 >
 {: .question}
 
+Once again, if you have a high number of replicates it does not mean that your data are not good, it just means that you sequenced too much compared to the diversity of the library you generated. Consequently, libraries with a high portion of duplicates should not be resequenced as this would not increase the amount of data.
+
 ## Check Insert Sizes
 
-We will check the insert sizes with **Picard CollectInsertSizeMetrics**. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.
+We will check the insert sizes with **Paired-end histogram** of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.
 
 > ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
-> 1. **CollectInsertSizeMetrics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
->    - *"Load reference genome from"*: `Local cache`
->        - *"Using reference genome"*: `Human Dec. 2013 (GRCh38/hg38) (hg38)`
+> 1. {% tool [Paired-end histogram](toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1) %} with the following parameters:
+>    - {% icon param-file %} *"BAM file"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
+>    - *"Lower bp limit (optional)"*: `0`
+>    - *"Upper bp limit (optional)"*: `1000`
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the upper one of the 2 outputs (the pdf file).
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the lower one of the 2 outputs (the png file).
 {: .hands_on}
 
 > ### {% icon comment %} CollectInsertSizeMetrics Results
 > This is what you get from CollectInsertSizeMetrics:
 > ![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
-{: .comment} 
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -453,90 +507,125 @@ Here are examples of Fragment size distributions of ATAC-Seq which were very noi
 A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome "peak".
 ![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
 
-> ### {% icon comment %} Comment on FR and RF
->
-> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role.
-{: .comment}
 
 # Peak calling
 
 ## Call Peaks
 
-We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. We will use [Genrich](https://github.com/jsh58/Genrich). It is very important at this point that we center the reads on the 5' extremity (read start site) as this is where Tn5 cut. You want your peaks around the nucleosomes and not directly on the nucleosome:
+We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published and the more reads you have, the less peaks you get (see the issue [here](https://github.com/jsh58/Genrich/issues/33)). That's why we will not use Genrich in this tutorial.
+
+At this step, two approaches exists:
+
+- The first one is to select only paired whose fragment length is below 100bp corresponding to nucleosome-free regions and to use a peak calling like you would do for a ChIP-seq, joining signal between mates. The disadvantages of this approach is that you can only use it if you have paired-end data and you will miss small open regions where only one Tn5 bound.
+- The second one chosen here is to use all reads to be more exhaustive. In this approach, it is very important to re-center the signal of each reads on the 5' extremity (read start site) as this is where Tn5 cuts. Indeed, you want your peaks around the nucleosomes and not directly on the nucleosome:
 ![Scheme of ATAC-Seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-Seq reads relative to nucleosomes")
 
 > ### {% icon comment %} Comment on Tn5 insertion
 >
-> When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp {% cite Kia2017 %}:
+> When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp ({% cite Kia2017 %}):
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
-> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected.
+> This means in order to have the read start site reflecting the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don't take it into account but if you are interested in the footprint, this is important.
 {: .comment}
 
-If we only assess the coverage of the start sites of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 100bp (50 bp in each direction) to assess coverage.
+If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.
 
-> ### {% icon hands_on %} Hands-on: Identifying enriched genomic regions
+### Using MACS2
+
+We convert the BAM file to BED format because when we set the extension size in MACS2, it will only consider one read of the pair while here we would like to use the information from both.
+
+> ### {% icon hands_on %} Hands-on: Convert the BAM to BED
 >
-> 1. **Genrich** {% icon tool %} with the following parameters:
->    - *"Are you pooling Treatment Files?"*: `No`
->    - {% icon param-file %} *"Treatment File(s)"*: Select the output of  **MarkDuplicates** {% icon tool %}
->    - *"Do you have a Control File?"*: `No`
->    - *"Filter Options"*:
->        - *"Remove PCR duplicates"*: `Yes`
->    - *"ATAC Options"*:
->        - *"Use ATAC-seq mode."*: `Yes`
->        - *"Expand cut sites."*: `100`
->    - *"Output Options"*:
->        - *"Bedgraph-ish Pileups"*: `Yes`
+> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0) %} with the following parameters:
+>    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %}
 >
 {: .hands_on}
 
+We call peaks with MACS2. In order to get the coverage centered on the 5' extended 100bp each side we will use `--shift -100` and `--extend 200`:
+![MACS2 options to get 100bp each side](../../images/atac-seq/macs2Options.jpg "MACS2 options to get 100bp each side")
 
+
+> ### {% icon hands_on %} Hands-on: Call peaks with MACS2
+>
+> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6) %} with the following parameters:
+>    - *"Are you pooling Treatment Files?"*: `No`
+>        - {% icon param-file %} Select the output of **bedtools BAM to BED** converter {% icon tool %}
+>    - *"Do you have a Control File?"*: `No`
+>    - *"Format of Input Files"*: `Single-end BED`
+>    - *"Effective genome size"*: `H. sapiens (2.7e9)`
+>    - *"Build Model"*: `Do not build the shifting model (--nomodel)`
+>        - *"Set extension size"*: `200`
+>        - *"Set shift size"*: `-100`. It needs to be - half the extension size to be centered on the 5'.
+>    - *"Additional Outputs"*:
+>        - Check `Peaks as tabular file (compatible with MultiQC)`
+>        - Check `Peak summits`
+>        - Check `Scores in bedGraph files`
+>    - In *"Advanced Options"*:
+>        - *"Composite broad regions"*: `No broad regions`
+>            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
+>        - *"How many duplicate tags at the exact same location are allowed?"*: `all`
+>
+>    > ### {% icon comment %} Why keeping all duplicates is important
+>    >
+>    > We previously removed duplicates using **MarkDuplicates** {% icon tool %} using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.
+>    {: .comment}
+>
+{: .hands_on}
 
 # Visualisation of Coverage
 
 ## Prepare the Datasets
 
-Thanks to **Genrich** we now have a coverage file which represents the coverage of the read start sites extended 50 bp to each side.
-The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it. The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
+### Extract CTCF peaks on chr22 in intergenic regions
+As our training dataset is focused on chromosome 22 we will only use the CTCF peaks from chr22. We expect to have ATAC-seq coverage at TSS but only good ATAC-seq have coverage on intergenic CTCF. Indeed, the CTCF protein is able to position nucleosomes and creates a region depleted of nucleosome of around 120bp {% cite fu_insulator_2008 %}. This is smaller than the 200bp nucleosome-free region around TSS and also probably not present in all cells. Thus it is more difficult to get enrichment. In order to get the list of intergenic CTCF peaks of chr22, we will first select the peaks on chr22 and then exclude the one which overlap with genes.
 
-### Convert BedGraph-ish pileup to bigWig
+> ### {% icon hands_on %} Hands-on: Select CTCF peaks from chr22 in intergenic regions:
+>
+> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: Select the first dataset: `ENCFF933NTR.bed.gz`
+>    - *"With following condition"*: `c1=='chr22'`
+>
+> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
+>    - {% icon param-file %} *"File A to intersect with B"*: Select the output of **Filter** data on any column using simple expressions {% icon tool %}
+>    - *"Combined or separate output files"*: `One output file per 'input B' file`
+>        - {% icon param-file %} *"File B to intersect with A"*:  Select the dataset `chr22 genes`
+>    - *"What should be written to the output file?"*: `Write the original entry in A for each overlap (-wa)`
+>    - *"Required overlap"*: `Default: 1bp`
+>    - *"Report only those alignments that **do not** overlap with file(s) B"*: `Yes`
+>
+> 3. Rename the datasets `intergenic CTCF peaks chr22`.
+{: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Convert bedgraph-ish pileup to bigWig.
+
+### Convert bedgraph from **MACS2** to bigwig
+The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
+
+> ### {% icon tip %} Tip: Speed-up the bedgraph to bigwig conversion
 >
-> 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: Select the output of **Genrich** {% icon tool %} *"Bedgraph Pileups"*.
->    - *"AWK Program"*: `NR>=3 {print $1,$2,$3,$4}`
+> In this tutorial we focus on chr22, thus we could restrict our bedgraph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.
 >
->    > ### {% icon comment %} Comment: From BedGraph-ish pileup to bedgraph
->    >
->    > The awk program will read each line of the output of **Genrich** {% icon tool %}, when the number of the line is greater or equal to 3 (NR>=3), it will write the first 4 columns (print $1,$2,$3,$4) into a new file.
->    {: .comment}
+> To do so, we will use {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
+> - {% icon param-file %} *"Filter"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
+> - *"With following condition"*: `c1=='chr22'`
 >
-> 2. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Convert"*: Select the output of **Text reformatting with awk** {% icon tool %} *"Bedgraph"*.
+> This will decrease by half the size of the file.
+> In the next step, choose the output of **Filter** instead of the output of **MACS2**.
+>
+{: .tip}
+
+> ### {% icon hands_on %} Hands-on: Convert bedgraphs to bigWig.
+>
+> 1. {% tool [Wig/BedGraph-to-bigWig](wig_to_bigWig) %} with the following parameters:
+>    - {% icon param-file %} *"Convert"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
 >    - *"Converter settings to use"*: `Default`
 >
+> 2. Rename the datasets `MACS2 bigwig`.
 {: .hands_on}
 
-### Sort CTCF Peaks
-In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like **IGV** or **UCSC browser**, or use **pyGenomeTracks** to make publishable figures. We will use **pyGenomeTracks**. The **pyGenomeTracks** tool needs all BED files sorted, thus we sort the CTCF peaks.
 
-> ### {% icon hands_on %} Hands-on: Sort the BED files
->
-> 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort the following BED/bedGraph/GFF/VCF file"*: `ENCFF933NTR.bed.gz`
->
-{: .hands_on}
+## Create heatmap of coverage at TSS with deepTools
 
-### Convert the Genrich peaks to BED
-At the moment, **pyGenomeTracks** does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** from encodepeak to bed.
-
-{% include snippets/change_datatype.md datatype="datatypes" %}
-
-## Create heatmap of genes
-
-You might also be interested in specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
+You might be interested in checking the coverage on specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS) and another one centered on intergenic CTCF peaks. First, on the TSS:
 
 ### Generate computeMatrix
 
@@ -544,29 +633,28 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 
 > ### {% icon hands_on %} Hands-on: Generate the matrix
 >
-> 1. **computeMatrix** {% icon tool %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
 >    - In *"Select regions"*:
->        - 1. *"Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
+>        - {% icon param-repeat %} *"Insert Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
 >    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
+>        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
 >    - *"computeMatrix has two main output options"*: `reference-point`
 >    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `yes`
->        - *"Convert missing values to 0?"*: `yes`
->        - *"Labels for the samples (each bigwig)"*: `ATAC-Seq`
+>        - *"Convert missing values to 0?"*: `Yes`
 >
 {: .hands_on}
 
 
 ### Plot with **plotHeatmap**
 
-We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS.
+We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS. There will be one heatmap per bigwig.
 
 > ### {% icon hands_on %} Hands-on: Generate the heatmap
 >
-> 1. **plotHeatmap** {% icon tool %} with the following parameters:
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `no`
@@ -579,73 +667,110 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 
 > ### {% icon question %} Questions
 >
-> 1. What is the mean value in genes?
-> 2. Is the coverage symmetric?
+> 1. Is the coverage symmetric?
+> 2. What is the mean value in genes?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Around 2.5.
-> > 2. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
+> > 1. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
+> > 2. Around 5.5.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Visualise Regions with **pyGenomeTracks**
+Now we will repeat the procedure for CTCF peaks of chr22 in intergenic regions:
+
+> ### {% icon hands_on %} Hands-on: Generate the matrix
+>
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
+>    - In *"Select regions"*:
+>        - {% icon param-repeat %} *"Insert Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `intergenic CTCF peaks chr22`
+>    - *"Sample order matters"*: `No`
+>        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
+>    - *"Would you like custom sample labels?"*: `No, use sample names in the history`
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>        - *"The reference point for the plotting"*: `center of region`
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `yes`
+>        - *"Convert missing values to 0?"*: `Yes`
+>
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*:  Select the output of **computeMatrix** {% icon tool %}.
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `yes`
+>        - In *"Colormap to use for each sample"*:
+>            - {% icon param-repeat %} *"Insert Colormap to use for each sample"*
+>                - *"Color map to use for the heatmap"*: `Blues` # Or what you want
+>        - *"The x-axis label"*: `distance from peak center (bp)`
+>        - *"The y-axis label for the top panel"*: `CTCF peaks`
+>        - *"Reference point label"*: `peak center`
+>        - *"Labels for the regions plotted in the heatmap"*: `CTCF_peaks`
+>        - *"Did you compute the matrix with more than one groups of regions?"*: `Yes, I used multiple groups of regions`
+>
+{: .hands_on}
+
+> ### {% icon comment %} plotHeatmap Results
+> This is what you get from plotHeatmap, this is much more symetric:
+> ![plotHeatmap output on CTCF](../../images/atac-seq/plotHeatmapOutput_CTCF.png "plotHeatmap output on CTCF")
+{: .comment}
+
+
+## Visualise Regions with pyGenomeTracks
+
+In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like **IGV** or **UCSC browser**, or use **pyGenomeTracks** to make publishable figures. We will use **pyGenomeTracks**.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **pyGenomeTracks** {% icon tool %} with the following parameters:
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6) %} with the following parameters:
 >    - *"Region of the genome to limit the operation"*: `chr22:37,193,000-37,252,000`
 >    - In *"Include tracks in your plot"*:
->        - *"1. Include tracks in your plot"*
->            - *"Choose style of the track"*: `Bigwig track `
->                - *"Plot title"*: `Coverage from Genrich (extended +/-50bp)`
->                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bigwig track`
+>                - *"Plot title"*: `Coverage from MACS2 (extended +/-100bp)`
+>                - {% icon param-file %} *"Track file(s) bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
 >                - *"Color of track"*: Select the color of your choice
+>                - *"Minimum value"*: `0`
 >                - *"height"*: `5`
 >                - *"Show visualization of data range"*: `Yes`
->                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->                - *"Plot title"*: `Peaks from Genrich (extended +/-50bp)`
->                - {% icon param-file %} *"Track file bed format"*: Select the output of **Genrich** {% icon tool %} (the one you converted from encodepeak to bed).
+>            - *"Choose style of the track"*: `NarrowPeak track`
+>                - *"Plot title"*: `Peaks from MACS2 (extended +/-100bp)`
+>                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the output of **MACS2** {% icon tool %} (narrow Peaks).
 >                - *"Color of track"*: Select the color of your choice
->                - *"height"*: `3`
->                - *"Plot labels"*: `No`
->                - *"Include spacer at the end of the track"*: `0.5`
+>                - *"display to use"*: `box: Draw a box`
+>                - *"Plot labels (name, p-val, q-val)"*: `No`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file bed format"*: `chr22 genes`
+>                - {% icon param-file %} *"Track file(s) bed or gtf format"*: `chr22 genes`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"height"*: `5`
->                - *"Include spacer at the end of the track"*: `0.5`
+>                - *"Plot labels"*: `yes`
+>                    - *"Put all labels inside the plotted region"*: `Yes`
+>                    - *"Allow to put labels in the right margin"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `Gene track / Bed track`
+>            - *"Choose style of the track"*: `NarrowPeak track`
 >                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of ENCFF933NTR.bed.gz`
+>                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the first dataset: `ENCFF933NTR.bed.gz`
 >                - *"Color of track"*: Select the color of your choice
->                - *"Plot labels"*: `No`
->                - *"Include spacer at the end of the track"*: `0.5`
->    - *"Configure x-axis"*: `Yes`
->        - *"Where to place the x-axis"*: `Bottom`
+>                - *"display to use"*: `box: Draw a box`
+>                - *"Plot labels (name, p-val, q-val)"*: `No`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `X-axis`
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the output.
 >
 {: .hands_on}
-
 
 > ### {% icon comment %} pyGenomeTracks Results
 > You should get similar to results to this from pyGenomeTracks:
 > ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
 {: .comment}
 
-Unfortunately, Genrich does not work very well with our small training dataset (every covered region is called a peak). This is because most of the data is on chr22 whereas the background model was built on the whole genome. When the pipeline described here was run on 20 million of pairs from the original dataset, this is the output of pyGenomeTracks:
-![pyGenomeTracks output for 20 million of pairs on the whole genome](../../images/atac-seq/pyGenomeTracksOutput_20M.png "pyGenomeTracks output for 20 million of pairs on the whole genome")
-
-
 > ### {% icon question %} Questions
-> In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich. 
+> In the ATAC-Seq sample in this selected region we see four peaks detected by MACS2.
 >
 > 1. How many TSS are accessible in the sample in the displayed region?
 > 2. How many CTCF binding loci are accessible?
@@ -663,7 +788,7 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 >
 {: .question}
 
-As CTCF binds so ubiquitously and by itself can displace the nucleosome creating accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
+As CTCF creates accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
 
 
 # Conclusion
@@ -673,7 +798,6 @@ is a method to investigate the chromatin accessibility and the genome is treated
 a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting and
 inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if **FastQC**, shows a warning in these areas. We mapped the reads
 with **Bowtie2**, filtered our reads for properly paired, good quality and reads that do not
-map to the mitochondrial genome. We found open chromatin regions with **Genrich**, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of **computeMatrix** and **plotHeatmap**. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of **pyGenomeTracks**. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
-
+map to the mitochondrial genome. We found open chromatin regions with **MACS2**, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of **computeMatrix** and **plotHeatmap**. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of **pyGenomeTracks**. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")

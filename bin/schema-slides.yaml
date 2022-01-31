@@ -7,6 +7,7 @@ mapping:
         enum:
             - base_slides
             - tutorial_slides
+            - rdmbites_slides
     title:
         type: str
         required: true
@@ -31,6 +32,9 @@ mapping:
     edam_ontology:
         type: str
         required: false
+    video:
+        type: bool
+        required: false
     contributors:
         type: seq
         required: true
@@ -47,6 +51,9 @@ mapping:
         required: false
     subtopic:
         type: str
+        required: false
+    priority:
+        type: int
         required: false
     zenodo_link:
         type: str
@@ -70,6 +77,37 @@ mapping:
             - Introductory
             - Intermediate
             - Advanced
+    translations:
+        type: seq
+        required: false
+        sequence:
+            - type: str
+              required: true
+    lang:
+        type: str
+        required: false
+        enum:  # These are the only supported values currently
+            - es
+            - en
+    voice:
+        type: map
+        required: false
+        mapping:
+            id:
+                type: str
+                required: true
+            lang:
+                type: str
+                required: true
+            neural:
+                type: bool
+                required: true
+            endOfSentencePause:
+                type: float
+                required: false
+            endOfSlidePause:
+                type: float
+                required: false
     time_estimation:
         type: str
         required: false
@@ -135,3 +173,6 @@ mapping:
                   link:
                       type: str
                       required: false
+    enable:
+        type: bool
+        required: false

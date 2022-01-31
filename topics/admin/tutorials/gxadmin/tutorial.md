@@ -15,7 +15,7 @@ key_points:
   - gxadmin is a tool to run common database queries useful for Galaxy admins
   - new queries are welcome and easy to contribute
 contributors:
-  - erasche
+  - hexylena
 subtopic: features
 tags:
   - monitoring
@@ -28,7 +28,7 @@ We will just briefly cover the features available in `gxadmin`, there are lots o
 
 It started life as a small shell script that Helena wrote because she couldn't remember what [Gravity](https://github.com/galaxyproject/gravity) was called or where it could be found. Some of the functions needed for things like swapping zerglings are still included in gxadmin but are highly specific to UseGalaxy.eu and not generally useful.
 
-Since then it became the home for "all of the SQL queries we [galaxy admins] run regularly." @erasche and @natefoo often shared SQL queries with each other in private chats, but this wasn't helpful to the admin community at large, so they decided to put them all in `gxadmin` and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that's missing or broken, or have a new query you want to run, just [let us know](https://github.com/usegalaxy-eu/gxadmin/issues/new).
+Since then it became the home for "all of the SQL queries we [galaxy admins] run regularly." @hexylena and @natefoo often shared SQL queries with each other in private chats, but this wasn't helpful to the admin community at large, so they decided to put them all in `gxadmin` and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that's missing or broken, or have a new query you want to run, just [let us know](https://github.com/usegalaxy-eu/gxadmin/issues/new).
 
 > ### Agenda
 >
@@ -37,29 +37,98 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 {: .agenda}
 
-## Installation with Ansible
+## Installing gxadmin
+
+It's simple to install gxadmin. Here's how you do it, if you haven't done it already.
 
 > ### {% icon hands_on %} Hands-on: Installing gxadmin with Ansible
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
->    ```yml
->    - src: https://github.com/usegalaxy-eu/ansible-gxadmin
->      name: usegalaxy-eu.gxadmin
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -26,3 +26,5 @@
+>       version: 0.1.0
+>     - src: galaxyproject.pulsar
+>       version: 1.0.8
+>    +- src: galaxyproject.gxadmin
+>    +  version: 0.0.8
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add requirement"}
 >
-> 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
+> 2. Install the role with:
 >
-> 3. Add the role to your playbook, it should run as root
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 3. Add the role to your playbook:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -32,3 +32,4 @@
+>         - usegalaxy_eu.rabbitmq
+>         - galaxyproject.nginx
+>         - galaxyproject.cvmfs
+>    +    - galaxyproject.gxadmin
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add the gxadmin role"}
 >
 > 4. Run the playbook
 >
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 {: .hands_on}
+
+With that, `gxadmin` should be installed! Now, test it out:
+
+> ### {% icon hands_on %} Hands-on: Test out gxadmin
+>
+> 1. Run `gxadmin` as the galaxy user and list recently registered users:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > sudo -u galaxy gxadmin query latest-users
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} Output
+>    > ```bash
+>    >  id |          create_time          | disk_usage | username |       email        | groups | active
+>    > ----+-------------------------------+------------+----------+--------------------+--------+--------
+>    >   1 | 2021-06-09 12:25:59.299651+00 | 218 kB     | admin    | admin@example.org  |        | f
+>    > (1 rows)
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+{: .hands_on}
+
+> ```bash
+> 1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 ## Configuration
 
 If `psql` runs without any additional arguments, and permits you to access your galaxy database then you do not need to do any more configuration for gxadmin.
-Otherwise, you may need to set some of the [PostgreSQL environment variables](https://github.com/usegalaxy-eu/gxadmin#query-setup)
+Otherwise, you may need to set some of the [PostgreSQL environment variables](https://github.com/usegalaxy-eu/gxadmin#postgres)
 
 ## Overview
 
@@ -70,7 +139,7 @@ Category      | Keyword             | Purpose
 Configuration | `config`            | Commands relating to galaxy's configuration files like XML validation.
 Filters       | `filter`            | Transforming streams of text.
 Galaxy Admin  | `galaxy`            | Miscellaneous galaxy related commands like a cleanup wrapper.
-uWSGI         | `uwsgi`             | If you're using [SystemD for Galaxy](https://github.com/usegalaxy-eu/ansible-galaxy-systemd/) and a handler/zergling setup, then this lets you manage your handlers and zerglings.
+uWSGI         | `uwsgi`             | If you're using [systemd for Galaxy](https://github.com/usegalaxy-eu/ansible-galaxy-systemd/) and a handler/zergling setup, then this lets you manage your handlers and zerglings.
 DB Queries    | `{csv,tsv,i,}query` | Queries against the database which return tabular output.
 Report        | `report`            | Queries which return more complex and structured markdown reports.
 Mutations     | `mutate`            | These are like queries, except they mutate the database. All other queries are read-only.
@@ -97,7 +166,7 @@ hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted 
 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
 
-**@bgruening's favourite**: `gxamdin query latest-users` let's us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven't registered for [training infrastructure as a service](https://galaxyproject.eu/tiaas) which helps us coordinate infrastructure for them so they don't have bad experiences.
+**@bgruening's favourite**: `gxadmin query latest-users` let's us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven't registered for [training infrastructure as a service](https://galaxyproject.eu/tiaas) which helps us coordinate infrastructure for them so they don't have bad experiences.
 
 id    |        create_time         | disk_usage | username | email | groups | active
 ----- | -------------------------- | ---------- | -------- | ----- | ------ | -------
@@ -107,7 +176,7 @@ id    |        create_time         | disk_usage | username | email | groups | ac
 3934  | 2019-01-27 10:06:40.973938 | 0 bytes    | xxxx     | xxxx  |        | f
 3933  | 2019-01-27 10:01:22.562782 |            | xxxx     | xxxx  |        | f
 
-**@erasche's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
+**@hexylena's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
 
 ```text
 # Galaxy Job 5132146
@@ -226,6 +295,20 @@ gxadmin iquery queue-overview --short-tool-id
 gxadmin iquery workflow-invocation-status
 ```
 
+
+> ### {% icon tip %} Which queries support iquery?
+> This data is not currently exposed, so, just try the queries. But it's easy to add influx support when missing! [Here is an example](https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L54), we set the variables in a function:
+>
+> ```
+> fields="count=1"
+> tags="tool_id=0"
+> ```
+>
+> This means: column 0 is a tag named tool_id, and column 1 is a field (real value) named count.
+> [Here is an example](https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L1987) that has multiple fields that are stored.
+>
+{: .tip}
+
 # Implementing a Query
 
 Queries are really easy to implement! All you have to do is add your SQL, with a small bash function to wrap it. `gxadmin` supports 'local' functions, which you can add locally without contributing back. We strongly encourage you to contribute your functions back to `gxadmin` though, you'll never know who wants to know the same thing about their db.
@@ -243,7 +326,7 @@ Queries are really easy to implement! All you have to do is add your SQL, with a
 > 3. Add the following to the file and save it.
 >
 >    ```bash
->    local_hello() { ## hello: Says hi
+>    local_hello() { ## : Says hi
 >    	echo "hi!"
 >    }
 >    ```
@@ -297,7 +380,7 @@ Every function is improved by documentation! Let's add that now:
 > 2. Update your function to add the `handle_help` call:
 >
 >    ```bash
->    local_hello() { ## hello: Says hi
+>    local_hello() { ## : Says hi
 >    	handle_help "$@" <<-EOF
 >    		Greets you
 >    	EOF
@@ -338,7 +421,7 @@ Every function is improved by documentation! Let's add that now:
 
 ## Adding a query
 
-The bulk of gxadmin is not fnuctions calling shell commands though, it's mostly SQL queries. So let's find the N most recent jobs
+The bulk of gxadmin is not functions calling shell commands though, it's mostly SQL queries. So let's find the N most recent jobs
 
 > ### {% icon hands_on %} Hands-on: Adding a query
 >
@@ -347,7 +430,7 @@ The bulk of gxadmin is not fnuctions calling shell commands though, it's mostly 
 > 2. Add a new function:
 >
 >    ```bash
->    local_query-latest() { ## query-latest [jobs|10]: Queries latest N jobs (default to 10)
+>    local_query-latest() { ## [jobs|10]: Queries latest N jobs (default to 10)
 >    	handle_help "$@" <<-EOF
 >    		Find information about the latest jobs on your server.
 >    	EOF

@@ -11,8 +11,11 @@ objectives:
     - "Model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM"
 requirements:
 time_estimation: "1h"
+tags:
+    - interactive-tools
 key_points:
-    - ""
+    - "Use 'classical' Galaxy tools in combination with Interactive tools"
+    - "Identify general steps of a species distribution modeling aproach"
 contributors:
     - emichn
     - yvanlebras
@@ -35,6 +38,7 @@ The goal of this tutorial is to model a theoretical ecological niche and predict
 >
 {: .agenda}
 
+
 # Step 1: Import data from public databank
 
 In this study the datasets are all imported from the [GBIF](https://www.gbif.org/) databanks. It is also possible to import from [bison](https://www.gbif.org/), [iNaturalist](https://www.inaturalist.org/) and others.
@@ -43,11 +47,11 @@ In this study the datasets are all imported from the [GBIF](https://www.gbif.org
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. **Get species occurrences data** {% icon tool %} with the following parameters
->    - *"Scientific name"*: `Chrysemys picta`
+>    - *"Scientific name"*: `chrysemys picta`
 >    - *"Data source"*: `gbif`
 >    - *"Number of records to return"*: `10000`
 >
@@ -58,7 +62,7 @@ We have now a tabular file with about 10,001 lines and many columns.
 
 > ### {% icon question %} Questions
 > 1. What do the lines in the files represent?
-> 2. What are the columns 1, 2, 3 and 50 of the generated file?
+> 2. What are the columns 1, 2, 3 and 54 of the generated file?
 >
 > > ### {% icon solution %} Solution
 > > 1. Each line represent an observation of Chrysemys picta, with its location, and some other metadata
@@ -70,7 +74,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. **Cut columns** {% icon tool %} with the following parameters
->    - *"Cut columns"*: `c1,c2,c3,c50`
+>    - *"Cut columns"*: `c1,c2,c3,c54`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Get species occurrences data**
 >
@@ -86,7 +90,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    > How many occurrences have been conserved?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 71.18% of the occurrences (7,118) are conserved
+>    > > 63.06% of the occurrences (6,306) are conserved
 >    > {: .solution }
 >    {: .question}
 >
@@ -94,23 +98,23 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    - {% icon param-file %} *"tabular file"*: output of **Filter**
 >    - *"output csv Separator"*: `,`
 >    - *"Header in file"*: `Yes`
+> 5. Due to an issue related to the actual tabular to csv converter application to GBIF format, each `"` sign is triplicated on the resulting file. You need to replace `"""` by `"` using for example the **Replace** {% icon tool %} parts of text tool.
 {: .hands_on}
 
 # Step 2: Development and evaluation of SDM using Wallace
 
 [Wallace](https://wallaceecomod.github.io/) is a R Shiny app integrated into Galaxy. It provides an interactive environment for the rapid and effective development and evaluation of SDM, including data download, cleaning, partitioning, modeling, visualisation and predictions.
 
-## Obtain occurrence data
+## Transmit occurrence data from Galaxy to Wallace
 
 With this you can either upload file you've loaded earlier from Galaxy data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Launch Wallace
-> 1. Click on **Visualization** (top panel) and then **Interactive Environments**
-> 2. Select
->    - *"GIE"*: `interactiveShiny`
->    - *"Image"*: `valentinchdock/wallace-galaxy-ie`
->    - *"Datasets"*: output of **Tabular to CSV**
-> 3. In Wallace
+> 1. Verify your current history is the history containing previous filtered occurences data.
+> 2. Open {% tool [Wallace](interactive_tool_wallace) %} in Galaxy or click here to [open the tool](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace) and click on execute
+> 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool named `Wallace visualisation`
+> 4. In Wallace
+>    0. Due to an issue related to last wallace Docker update, a manual fix is proposed waiting for a better solution. You first have to go to the **5 Partition Occs**, selecting *"Spatial Partition"* then for *"Options available"* selecting `Checkerboard 2 (k=4)` then click on the **Partition** button. This will fix the issue so now you have the *"Aggregation Factor"* displayed. Sorry for the inconvenience.
 >    1. Go to **1 Occ Data**
 >    2. In **Obtain Occurrence Data**
 >       - *"Modules Available"*: `Galaxy History User`
@@ -237,7 +241,7 @@ For both of these techniques the number of occurrences into each bin may vary.
 > ### {% icon hands_on %} Hands-on: Partition Occurrence Data
 > 1. Go to **5 Partition Occs**
 > 2. In **Partition Occurrence Data**
->    - *"Modules Available"*: `Non-spatial Partition`
+>    - *"Modules Available"*: `Spatial Partition`
 >    - *"Options Available:"*: `Checkerboard 2 (k=4)`
 >    - *"Aggregation Factor"*: `6`
 > 4. Click on **Partition**
@@ -306,7 +310,7 @@ Wallace can use the trained model to predict possible species distributions in a
 > 1. Go to **8 Project**
 > 2. In **Project Model**
 >    - *"Modules Available"*: `Project to New Extent`
-> > 3. In the middle panel,
+> 3. In the middle panel,
 >    1. Click on the polygon icon on the map
 >    2. Draw a polygon around a part of Canada
 > 2. In **Project Model**

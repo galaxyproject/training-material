@@ -30,6 +30,9 @@ mapping:
     edam_ontology:
         type: str
         required: false
+    gitter:
+        type: str
+        required: false
     contributors:
         type: seq
         required: true
@@ -38,6 +41,9 @@ mapping:
               required: true
     subtopic:
         type: str
+        required: false
+    priority:
+        type: int
         required: false
     zenodo_link:
         type: str
@@ -48,6 +54,20 @@ mapping:
         sequence:
             - type: str
               required: true
+    translations:
+        type: seq
+        required: false
+        sequence:
+            - type: str
+              required: true
+    abbreviations:
+        type: map
+        mapping:
+            "=":
+                type: str
+    galaxy_version:
+        type: float
+        required: false
     level:
         type: str
         enum:
@@ -63,6 +83,37 @@ mapping:
         sequence:
             - type: str
         required: false
+    notebook:
+        type: map
+        required: false
+        mapping:
+            language:
+                type: str
+                required: true
+                enum:
+                    - python
+                    - bash
+                    - r
+                    - sql
+    lang:
+        type: str
+        required: false
+        enum:  # These are the only supported values currently
+            - es
+            - en
+    voice:
+        type: map
+        required: false
+        mapping:
+            id:
+                type: str
+                required: true
+            lang:
+                type: str
+                required: true
+            neural:
+                type: bool
+                required: true
     follow_up_training:
         type: seq
         required: false
@@ -119,3 +170,10 @@ mapping:
                   link:
                       type: str
                       required: false
+    # This permits overriding the default CC-BY icon we add everywhere.
+    license:
+        type: str
+        required: false
+    enable:
+        type: bool
+        required: false

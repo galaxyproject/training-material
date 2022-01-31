@@ -1,56 +1,31 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'find'
 require 'pathname'
 require 'kwalify'
-fn = ARGV[0]
 
-metadata_schema = YAML.load_file('bin/schema-topic.yaml')
-tutorial_schema = YAML.load_file('bin/schema-tutorial.yaml')
-slides_schema = YAML.load_file('bin/schema-slides.yaml')
+# Schemas
+TOPIC_SCHEMA = YAML.load_file('bin/schema-topic.yaml')
+TUTORIAL_SCHEMA = YAML.load_file('bin/schema-tutorial.yaml')
+SLIDES_SCHEMA = YAML.load_file('bin/schema-slides.yaml')
 requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
 requirement_internal_schema = YAML.load_file('bin/schema-requirement-internal.yaml')
 
-# Any error messages
-errs = []
-
-data = YAML.load_file(fn)
-
 # Contributors
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+
 # Update the existing schemas to have enums with values. Then we get validation *for free*!
-tutorial_schema['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
-slides_schema['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
-metadata_schema['mapping']['maintainers']['sequence'][0]['enum'] = CONTRIBUTORS.keys
-
-# If it's disabled, exit early
-if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
-  puts "#{fn} skipped (disabled)"
-  exit 0
-end
-
-if not fn.include?('metadata.yaml') then
-  # Load topic metadata
-  topic = fn.split('/')[1]
-  topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
-
-  # Load subtopic titles
-  if data.key?('subtopic') then
-    subtopic_ids = []
-    topic_metadata['subtopics'].each{ |x|
-      subtopic_ids.push(x['id'])
-    }
-
-    tutorial_schema['mapping']['subtopic']['enum'] = subtopic_ids
-    slides_schema['mapping']['subtopic']['enum'] = subtopic_ids
-  end
-end
+TUTORIAL_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+SLIDES_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+TOPIC_SCHEMA['mapping']['maintainers']['sequence'][0]['enum'] = CONTRIBUTORS.keys
 
 # Build validators now that we've filled out the subtopic enum
-$metadata_validator = Kwalify::Validator.new(metadata_schema)
-$tutorial_validator = Kwalify::Validator.new(tutorial_schema)
-$slides_validator = Kwalify::Validator.new(slides_schema)
+$topic_validator = Kwalify::Validator.new(TOPIC_SCHEMA)
+$tutorial_validator = Kwalify::Validator.new(TUTORIAL_SCHEMA)
+$slides_validator = Kwalify::Validator.new(SLIDES_SCHEMA)
 $requirement_external_validator = Kwalify::Validator.new(requirement_external_schema)
 $requirement_internal_validator = Kwalify::Validator.new(requirement_internal_schema)
+
 
 
 def validate_document(document, validator)
@@ -115,36 +90,92 @@ def validate_requirements(requirements)
   return errs
 end
 
-# Generic error handling:
-## Check requirements
-if data.key?('requirements') then
-  errs.push(*validate_requirements(data['requirements']))
+def lint_file(fn)
+  # Any error messages
+  errs = []
+
+  begin
+    data = YAML.load_file(fn)
+  rescue
+    puts "Skipping #{fn}"
+    return nil
+  end
+
+  # Check this is something we actually want to process
+  if ! data.is_a?(Hash) then
+    puts "Skipping #{fn}"
+    return nil
+  end
+
+  if not fn.include?('metadata.yaml') then
+    # Load topic metadata
+    topic = fn.split('/')[2]
+    topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+
+    # Load subtopic titles
+    if data.key?('subtopic') then
+      subtopic_ids = []
+      topic_metadata['subtopics'].each{ |x|
+        subtopic_ids.push(x['id'])
+      }
+
+      TUTORIAL_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
+      SLIDES_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
+    end
+  end
+
+  # Generic error handling:
+  ## Check requirements
+  if data.key?('requirements') then
+    errs.push(*validate_requirements(data['requirements']))
+  end
+
+  ## Check follow ups
+  if data.key?('follow_up_training') then
+    errs.push(*validate_requirements(data['follow_up_training']))
+  end
+
+  # Custom error handling:
+  if fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/ then
+    errs.push(*validate_document(data, $tutorial_validator))
+  elsif fn.include?('metadata.yaml') then
+    errs.push(*validate_document(data, $topic_validator))
+  elsif fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/ then
+    errs.push(*validate_document(data, $slides_validator))
+  else
+    #errs.push("No validation available for this type of file")
+  end
+
+
+  # If we had no errors, validated successfully
+  if errs.length == 0 then
+    #puts "\e[38;5;40m#{fn} validated succesfully\e[m"
+  else
+    # Otherwise, print errors and exit non-zero
+    puts "\e[48;5;09m#{fn} has errors\e[m"
+    errs.each {|x| puts "  #{x}" }
+  end
+  return errs
 end
 
-## Check follow ups
-if data.key?('follow_up_training') then
-  errs.push(*validate_requirements(data['follow_up_training']))
+
+ec = 0
+Find.find('./topics') do |path|
+  if FileTest.directory?(path)
+    if File.basename(path).start_with?('.')
+      Find.prune       # Don't look any further into this directory.
+    else
+      next
+    end
+  else
+    last_component = path.split('/')[-1]
+    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/  || last_component =~ /metadata.ya?ml/ then
+      errs = lint_file(path)
+      if !errs.nil? && errs.length > 0 then
+        ec = 1
+      end
+    end
+  end
 end
 
-# Custom error handling:
-if fn.include?('tutorial.md') then
-  errs.push(*validate_document(data, $tutorial_validator))
-elsif fn.include?('metadata.yaml') then
-  errs.push(*validate_document(data, $metadata_validator))
-elsif fn.include?('slides.html') then
-  errs.push(*validate_document(data, $slides_validator))
-else
-  errs.push("No validation available for this type of file")
-end
-
-
-# If we had no errors, validated successfully
-if errs.length == 0 then
-  puts "\e[38;5;40m#{fn} validated succesfully\e[m"
-  exit 0
-else
-  # Otherwise, print errors and exit non-zero
-  puts "\e[48;5;09m#{fn} has errors\e[m"
-  errs.each {|x| puts "  #{x}" }
-  exit 1
-end
+exit ec

@@ -40,7 +40,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located [here]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
+In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located [here]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
 
 > ### Agenda
 >
@@ -55,7 +55,7 @@ In this tutorial, we'll cover the basics of molecular modelling by setting up a 
 
 To start we'll look at the PDB and find the entry for a fungal enzyme that cleaves cellulose. The enzyme is 7CEL, a hydrolase as seen in [the figure.](#figure-1)
 
-![Snapshot of 7CEL pdb with octaose ligand]({{ site.baseurl }}{% link topics/computational-chemistry/images/enzyme.jpg %} "7CEL Cellulase with a short chain cellulose (octaose) ligand")
+![Snapshot of 7CEL pdb with octaose ligand]({% link topics/computational-chemistry/images/enzyme.jpg %} "7CEL Cellulase with a short chain cellulose (octaose) ligand")
 
 In this section we'll access the PDB, download the correct structure, import it and view in Galaxy.
 
@@ -97,33 +97,34 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >
 > 1. Create a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from the Zenodo link provided.
->    >    ```
->    > https://zenodo.org/record/2600690
->    >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    ```
+>    https://zenodo.org/record/2600690
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets.
 > 4. Check that the datatype is correct. The file should have the PDB datatype.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
 # Modelling with CHARMM-GUI
-It is convenient to set up the molecular system outside Galaxy using a tool such as CHARMM-GUI. Alternative methods are possible - see the [GROMACS tutorial]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.md %}) for an example. {% cite jo17 %}
+It is convenient to set up the molecular system outside Galaxy using a tool such as CHARMM-GUI. Alternative methods are possible - see the [GROMACS tutorial]({% link topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.md %}) for an example. {% cite jo17 %}
 
 > ### {% icon tip %} Tip: Viewing figures
 > * Some of the figures are screenshots and it may be difficult to make out details
-> * Right-click on the image and choose 'Open image in new tab' to view 
+> * Right-click on the image and choose 'Open image in new tab' to view
 > * Zoom in and out as needed to see the content
 {: .tip}
 
-![CHARMM-GUI interface]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui.png %} "The CHARMM-GUI interface")
+![CHARMM-GUI interface]({% link topics/computational-chemistry/images/charmmgui.png %} "The CHARMM-GUI interface")
 
 Go to the correct section depending on which MD engine you will be using.
 
@@ -133,29 +134,29 @@ Go to the correct section depending on which MD engine you will be using.
 [Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/pdbreader) and use the Input Generator, specifically the PDB Reader tool and upload the Cellulase PDB file. Press 'Next Step: Select Model/Chain' in the bottom right corner.
 
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
-> 
+>
 > 1. Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.2600690).
 > 2. Upload the PDB and choose CHARMM format.
-> ![Snapshot of CHARMM-GUI PDB reader section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-reader.png %} "The CHARMM-GUI PDB Reader tool")
+> ![Snapshot of CHARMM-GUI PDB reader section]({% link topics/computational-chemistry/images/charmmgui-reader.png %} "The CHARMM-GUI PDB Reader tool")
 {: .hands_on}
 
 ### Select both protein and ligand models
 
 > ### {% icon hands_on %} Hands-on: Generate PDB file
 > Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press 'Next Step: Generate PDB' in the bottom right corner.
-> ![Snapshot of CHARMM-GUI model section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI model section]({% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
 {: .hands_on}
 
 ### Manipulate the system
 > ### {% icon hands_on %} Hands-on: Make necessary modifications
 > Rename the hetero chain to BGLC and add ten disulfide bonds to the protein, as shown in the figure. Then press 'Next Step: Manipulate PDB' in the bottom right corner.
-> ![Snapshot of CHARMM-GUI renaming section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI renaming section]({% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
 {: .hands_on}
 
 ### Download the output
 > ### {% icon hands_on %} Hands-on: Download CHARMM output
 > The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
-> ![Snapshot of CHARMM-GUI CHARMM output section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-charmmoutput.png %} "CHARMM output from CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI CHARMM output section]({% link topics/computational-chemistry/images/charmmgui-charmmoutput.png %} "CHARMM output from CHARMM-GUI")
 {: .hands_on}
 
 > ### {% icon tip %} What is a .tgz file?
@@ -176,52 +177,50 @@ Go to the correct section depending on which MD engine you will be using.
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
 > Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.2600690).
 [Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
-> ![Snapshot of CHARMM-GUI Quick MD Simulator tool ]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-mdsimulator.png %} "The CHARMM-GUI Quick MD Simulator tool")
+> ![Snapshot of CHARMM-GUI Quick MD Simulator tool ]({% link topics/computational-chemistry/images/charmmgui-mdsimulator.png %} "The CHARMM-GUI Quick MD Simulator tool")
 {: .hands_on}
 
 ### Select both protein and ligand models
 > ### {% icon hands_on %} Hands-on: Generate PDB file
 > Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press 'Next Step: Generate PDB' in the bottom right corner.
-> ![Snapshot of CHARMM-GUI model section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI model section]({% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
 {: .hands_on}
 
 ### Manipulate the system
 > ### {% icon hands_on %} Hands-on: Make necessary modifications
 > Rename the hetero chain to BGLC and add disulfide bonds.
-> ![Snapshot of CHARMM-GUI renaming section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI renaming section]({% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
 {: .hands_on}
 
 ### Set up the waterbox and add ions
 > ### {% icon hands_on %} Hands-on: Solvate the protein
 > Set up a waterbox. Use a size of 10 angstroms and choose a cubic box ('rectangular' option).
-> ![Snapshot of CHARMM-GUI waterbox section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-waterbox.png %} "Setting up a waterbox in CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI waterbox section]({% link topics/computational-chemistry/images/charmmgui-waterbox.png %} "Setting up a waterbox in CHARMM-GUI")
 {: .hands_on}
 
-> > ### {% icon question %} Question
+> ### {% icon question %} Question
+>
+> Why is 10 angstrom a fair choice for the buffer?  Why choose 0.15M NaCl?
+>
+> > ### {% icon solution %} Solution
+> > Under periodic boundary conditions, we need to ensure the protein can never interact with its periodic image, otherwise artefacts are introduced. Allowing 10 angstroms between the protein and the box edge ensures the two images will always be at minimum 20 angstroms apart, which is sufficient.
 > >
-> > Why is 10 angstrom a fair choice for the buffer?  Why choose 0.15M NaCl?
-> >
-> > > ### {% icon solution %} Solution
-> > > Under periodic boundary conditions, we need to ensure the protein can never interact with its periodic image, otherwise artefacts are introduced. Allowing 10 angstroms between the protein and the box edge ensures the two images will always be at minimum 20 angstroms apart, which is sufficient.
-> > >
-> > > Some of the residues on the protein surface are charged and counter-ions need to be present nearby to neutralise them. Failure to explicitly model salt ions may destabilise the protein.
-> > {: .solution}
-> {: .question}
+> > Some of the residues on the protein surface are charged and counter-ions need to be present nearby to neutralise them. Failure to explicitly model salt ions may destabilise the protein.
+> {: .solution}
+{: .question}
 
-
-{: .details}
 
 ### Generate the FFT automatically
 
 > ### {% icon hands_on %} Hands-on: Generate the FFT
 > Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try [Wikipedia](https://en.wikipedia.org/wiki/Ewald_summation) and [Ewald summation techniques in perspective: a survey](https://doi.org/10.1016/0010-4655(96)00016-1).
-> ![Snapshot of CHARMM-GUI FFT section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-fft.png %} "Setting up a FFT in CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI FFT section]({% link topics/computational-chemistry/images/charmmgui-fft.png %} "Setting up a FFT in CHARMM-GUI")
 {: .hands_on}
 
 ### Download the output
 > ### {% icon hands_on %} Hands-on: Solvate the protein
 > The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
-> ![Snapshot of CHARMM-GUI NAMD output section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-namdoutput.png %} "NAMD output from CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI NAMD output section]({% link topics/computational-chemistry/images/charmmgui-namdoutput.png %} "NAMD output from CHARMM-GUI")
 {: .hands_on}
 
 > ### {% icon tip %} What is a .tgz file?
@@ -241,10 +240,10 @@ Upload the following files to your BRIDGE instance and ensure the correct dataty
 - step2.1_waterbox.prm -> waterbox prm input (txt format)
 {: .hands_on}
 
-You are now ready to run the NAMD workflow, which is discussed in another [tutorial]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}).
+You are now ready to run the NAMD workflow, which is discussed in another [tutorial]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}).
 
 
 # Conclusion
 {:.no_toc}
 
-{% icon trophy %} Well done! You have started modelling a cellulase protein and uploaded it into Galaxy. The next step is running molecular dynamics simulations ([tutorial]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}))
+{% icon trophy %} Well done! You have started modelling a cellulase protein and uploaded it into Galaxy. The next step is running molecular dynamics simulations ([tutorial]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}))

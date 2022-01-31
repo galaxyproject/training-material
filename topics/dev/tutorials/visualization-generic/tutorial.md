@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Visualizations: generic plugins"
+title: "Generic plugins"
 questions:
   - "How can visualization plugins benefit science?"
 objectives:
@@ -17,6 +17,7 @@ key_points:
   - "Interactivity is what makes visualizations different from static tools"
   - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
   - "Performance is more important than for static Galaxy tools"
+subtopic: viz
 contributors:
   - shiltemann
   - yhoogstrate
@@ -426,7 +427,7 @@ chromosome.
 
 ![Example visualization](../../images/vis_plugins_example.png)
 
-The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
+The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 

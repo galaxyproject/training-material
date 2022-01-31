@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Secretome Prediction"
 zenodo_link: "https://zenodo.org/record/519260"
+level: Intermediate
 questions:
   - "How to predict cellular protein localization based upon GO-terms?"
   - "How to combine multiple localization predictions?"
@@ -17,6 +18,9 @@ key_points:
 contributors:
   - stortebecker
   - bgruening
+
+subtopic: post-process
+tags: [human]
 ---
 
 # Secretome Prediction using GO annotations and localization prediction
@@ -41,18 +45,18 @@ The figure below gives an overview of the Galaxy workflow:
 The workflow needs three input files:
 
   1. A tabular file, the first column containing uniprot accession numbers of the proteins of interest. [Test data](https://doi.org/10.5281/zenodo.519260)
-  
+
 		> ### {% icon comment %} Comment: Test data
 		> The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. The dataset was originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/27526672).
 		{: .comment}
-  
+
   2. The complete uniprot GO database for the organism of interest, available [via FTP](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/). To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: 'ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz'
-  
+
 		> ### {% icon comment %} Comment: Uniprot Gene Ontology Association (GOA) files
 		> - Information about different GOA file types can be found [here](https://www.ebi.ac.uk/GOA/downloads).
 		> - Information about the structure of the files can be found [here](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README).
-	  {: .comment}  
-  
+	  {: .comment}
+
   3. The complete GO Open Biomedical Ontology (OBO), i.e. "GO term tree", accessible at http://purl.obolibrary.org/obo/go/go.obo
 
 > ### {% icon comment %} Comment: Customizing the Workflow

@@ -1,9 +1,13 @@
 require 'json'
 
-
 module Jekyll
   module JsonldFilter
     def to_jsonld(material, topic, site)
+      langCodeMap = {
+        'en': "English",
+        'es': "Español",
+      }
+
       gtn = {
         "@type": "Organization",
         "email": "#{site['email']}",
@@ -18,7 +22,7 @@ module Jekyll
         "@type": "CreativeWork",
         "name": "#{topic['title']}",
         "description": "#{topic['summary']}",
-        "url": "#{site['url']}#{site['baseurl']}/topics/#{topic['name']}/"
+        "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{topic['name']}/"
       }
 
       # aggregate everything
@@ -69,9 +73,9 @@ module Jekyll
         #"correction":,
         #"creator":,
         #"dateCreated":,
-        #"dateModified":,
+        "dateModified": Time.at(material['last_modified_at'].to_s.to_i),
         #"datePublished":,
-        "discussionUrl": "#{site["gitter_url"]}",
+        "discussionUrl": site["gitter_url"],
         #"editor":,
         #"educationalAlignment":,
         #"educationalUse":,
@@ -83,20 +87,15 @@ module Jekyll
         #"genre":,
         #"hasPart" described below
         "headline": "#{material['title']}",
-        "inLanguage": {
-            "@type": "Language",
-            "name": "English",
-            "alternateName": "en"
-        },
         #"interactionStatistic":,
         "interactivityType": "mixed",
         "isAccessibleForFree": true,
         #"isBasedOn":,
-        #"isFamilyFriendly":,
+        "isFamilyFriendly": true,
         #"isPartOf" described below
         #"keywords": described below
         #"learningResourceType" described below
-        "license": "#{site['github_repository']}/blob/#{site['github_repository_branch']}/LICENSE.md",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
         #"locationCreated":,
         #"mainEntity":,
         #"material":,
@@ -149,40 +148,16 @@ module Jekyll
       #info depending if tutorial, hands-on or slide level
       parts = []
       mentions = []
-      description = [material['title']]
-      if material['type'] == 'tutorial' then
-        data['courseCode'] = "#{material['topic_name']} / #{material['tutorial_name']}"
-        data['isPartOf'] = topic_desc
-        data['learningResourceType'] = "tutorial"
-        data['name'] = "#{material['title']}"
-        #hands-on
-        if material.key?('hands_on') then
-          hands_on_path = {
-            "@type": "Course",
-            "url": "#{site['url']}#{site['baseurl']}/topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html",
-            "name": "Hands-on for '#{material['title']}' tutorial",
-            "learningResourceType": "hands-on tutorial",
-            "interactivityType": "expositive"
-          }
-          parts.push(hands_on_path)
-        end
-        #slides
-        if material.key?('slides') then
-          slide_part = {
-            "@type": "Course",
-            "url": "#{site['url']}#{site['baseurl']}/topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/slides.html",
-            "name": "Slides for '#{material['title']}' tutorial",
-            "learningResourceType": "slides",
-            "interactivityType": "expositive"
-          }
-          parts.push(slide_part)
-        end
-      elsif material['type'] == 'introduction' then
+      description = []
+
+      data['isPartOf'] = topic_desc
+
+      if material['type'] == 'introduction' then
         data['courseCode'] = "#{material['topic_name']} / introduction / #{material['name']}"
-        data['isPartOf'] = topic_desc
         data['learningResourceType'] = "slides"
         data['name'] = "Introduction to '#{topic['title']}'"
-        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
+        data['url'] = "https://training.galaxyproject.org/#{site['baseurl']}#{material['url']}"
+        description.push("Slides for #{topic['title']}")
       elsif material['name'] == 'tutorial.md' or material['name'] == 'slides.html' then
         if material['name'] == 'tutorial.md' then
           data['courseCode'] = "#{material['topic_name']} / #{material['tutorial_name']} / hands-on"
@@ -193,21 +168,14 @@ module Jekyll
           data['learningResourceType'] = "slides"
           data['name'] = "Slides for '#{material['title']}' tutorial"
         end
-        data['isPartOf'] = {
-          "@type": "Course",
-          "name": "#{material['title']}",
-          "description": "#{material['title']}",
-          "learningResourceType": "tutorial",
-          "interactivityType": "expositive",
-          "provider": gtn
-        }
-        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
+        data['url'] = "https://training.galaxyproject.org/#{site['baseurl']}#{material['url']}"
+
         # Time required
         if material.key?('time_estimation') and not material['time_estimation'].nil? then
           data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
         end
-        # Description with questions, objectives and keypoints
 
+        # Description with questions, objectives and keypoints
         if material.key?('questions') and not material['questions'].nil? and material['questions'].length > 0 then
           questions = material['questions'].join("\n - ")
           description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
@@ -236,6 +204,20 @@ module Jekyll
       end
       data['description'] = description.join('\n')
 
+      if material.key?("lang") then
+        data['inLanguage'] = {
+          "@type": "Language",
+          "name": langCodeMap[material['lang']],
+          "alternateName": material['lang']
+        }
+      else
+        data['inLanguage'] = {
+          "@type": "Language",
+          "name": "English",
+          "alternateName": "en"
+        }
+      end
+
       # Course requirements (material + topic)
       reqs = []
       if topic.key?('requirements') then
@@ -257,7 +239,7 @@ module Jekyll
                       if page['name'] == 'slides.html' then
                         coursePrerequisites.push({
                           "@type": "Course",
-                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
+                          "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
                           "name": "#{page['title']}",
                           "description": "Slides for '#{page['title']}' tutorial",
                           "learningResourceType": "slides",
@@ -277,7 +259,7 @@ module Jekyll
                       if page['name'] == 'tutorial.md' then
                         coursePrerequisites.push({
                           "@type": "Course",
-                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
+                          "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
                           "name": "#{page['title']}",
                           "description": "Hands-on for '#{page['title']}' tutorial",
                           "learningResourceType": "hands-on tutorial",
@@ -292,7 +274,7 @@ module Jekyll
             else
               coursePrerequisites.push({
                 "@type": "CreativeWork",
-                "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
+                "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/",
                 "name": "#{site['data'][req['topic_name']]['title']}",
                 "description": "#{site['data'][req['topic_name']]['title']}",
                 "provider": gtn
@@ -311,38 +293,14 @@ module Jekyll
         data['coursePrerequisites'] = coursePrerequisites
       end
 
-      #Interactive tour
-      if material.key?('galaxy_tour') then
-        parts.push(material['galaxy_tour'].map{ |x|
-          {
-            "@type": "CreativeWork",
-            "url": "#{site['github_repository']}/blob/#{site['github_repository_branch']}/topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tours/#{x}",
-            "name": "Galaxy Interactive Tour for '#{material['title']}' tutorial",
-            "learningResourceType": "interactive-tour",
-            "interactivityType": "active"
-          }
-        })
-      end
       data['hasPart'] = parts
-
-      #Workflows
-      if material.key?('workflows') then
-        mentions.push(material['contributors'].map{ |x|
-          {
-            "@type": "Thing",
-            "url": "#{site['github_repository']}/blob/#{site['github_repository_branch']}/topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/workflows/#{x}",
-            "name": "Workflow for #{material['title']} tutorial"
-          }
-        })
-      end
-      data['mentions'] = mentions
 
       # Add contributors/authors
       if material.key?('contributors') then
         contributors = material['contributors'].map{ |x|
           {
             "@type": "Person",
-            "name": "#{site['data']['contributors'][x]['name']}" #expand to use real names
+            "name": "#{site['data']['contributors'].fetch(x, {"name": x})['name']}" #expand to use real names
           }
         }
         data['author'] = contributors

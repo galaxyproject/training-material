@@ -1,0 +1,20 @@
+- doc: Test for maxquant_label_free.ga
+  job:
+    Fasta file:
+      class: File
+      path: todo_test_data_path.ext
+    sample1:
+      class: File
+      path: todo_test_data_path.ext
+    sample2:
+      class: File
+      path: todo_test_data_path.ext
+  outputs:
+    column_maker_out1:
+      asserts:
+        has_text:
+          text: "kappa"
+    histogram_out:
+      asserts:
+        has_text:
+          text: "PDF"

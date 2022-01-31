@@ -16,7 +16,7 @@ key_points:
   - Terraform lets you develop and implement infrastructure-as-code within your organisation
   - It can drastically simplify management of large numbers of VMs
 contributors:
-  - erasche
+  - hexylena
 tags:
   - terraform
   - deploying
@@ -330,7 +330,7 @@ We should now have a keypair in our cloud!
 We now have:
 
 - Terraform installed
-- The OpenStack plugin intialized
+- The OpenStack plugin initialized
 - A keypair in OpenStack
 
 > ### {% icon comment %} Doing this training outside of a training event
@@ -1117,7 +1117,7 @@ If you have variables this can produce a more complex dependency graph:
 
 ![A more complex graph showing variables](../../images/graph2.png "A more complex graph showing variables")
 
-Once you develop complex infrastructure, these graphics become less useful. For reference, you can find [UseGalaxy.eu's infrastructure graph](https://raw.githubusercontent.com/usegalaxy-eu/infrastructure/master/graph.png) in our repository (you will need to zoom in a lot.)
+Once you develop complex infrastructure, these graphics become less useful.
 
 # Tearing Everything Down
 

@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Peptide and Protein ID using OpenMS tools"
 zenodo_link: "https://zenodo.org/record/546301"
+level: Advanced
 questions:
   - "How to convert LC-MS/MS raw files?"
   - "How to identify peptides?"
@@ -30,6 +31,8 @@ follow_up_training:
 contributors:
   - stortebecker
   - bgruening
+subtopic: id-quant
+tags: [DDA]
 ---
 
 # Introduction
@@ -85,7 +88,7 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Load one of the example datasets into your history from Zenodo
 >
@@ -94,16 +97,16 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >    https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the dataset to something meaningful
 >
-> 4. Run **msconvert** {% icon tool %} on the training `raw` file to convert to the `mzML` format
+> 4. Run {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} on the training `raw` file to convert to the `mzML` format
 >    - {% icon param-file %} *"Input unrefined MS data"*: imported `raw` file
 >    - *"Do you agree to the vendor licenses"*: set to `Yes`
 >    - *"Output Type"*: set to `mzML`
 >
-> 5. Run **PeakPickerHiRes** {% icon tool %} on the resulting file
+> 5. Run {% tool [PeakPickerHiRes](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peakpickerhires/PeakPickerHiRes/2.3.0) %} on the resulting file
 >    - {% icon param-file %} *"input profile data file": output of **msconvert** or `mzML` file
 >    - In *"param_algorithm_ms_levels"*
 >      - {% icon param-repeat %} Click on *"Insert param_algorithm_ms_levels"*
@@ -131,7 +134,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 
 > ### {% icon hands_on %} Hands-On: Peptide Identification
 >
-> 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({{ site.baseurl }}{% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view
+> 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view
 >
 >   > ### {% icon comment %} You did not run the Database Handling first?
 >   > You can upload the ready-made database from Zenodo
@@ -141,26 +144,19 @@ Different peptide search engines have been developed to fulfill the matching pro
 >   > ```
 >   {: .comment}
 >
-> 2. Run the tool **XTandemAdapter** {% icon tool %} with:
+> 2. Run {% tool [XTandemAdapter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0) %} with:
 >   - {% icon param-file %} *"Input file containing MS2 spectra"*: MS2-centroided mzML file
 >   - {% icon param-file %} *"FASTA file"*: FASTA protein database
 >   - *"Fragment mass error"*: `10`
 >   - *"Fragment monoisotopic mass error units"*: `ppm`
->    - In *"param_fixed_modifications"*
->      - {% icon param-repeat %} Click on *"Insert param_fixed_modifications"*
->      - In *"1: param_fixed_modifications"*
->         - *"Fixed modifications"*: `Carbamidomethyl (C)`
->    - In *"param_variable_modifications"*
->      - {% icon param-repeat %} Click on *"Insert param_variable_modifications"*
->      - In *"1: param_variable_modifications"*
->         - *"Variable modifications"*: `Oxidation (M)`
+>   - *"Optional Outputs"* select `out (Output file containing search results)`
 >
-> 3. Run the tool **FileInfo** {% icon tool %}
+> 3. Run {% tool [FileInfo](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0) %}
 >    - {% icon param-file %} *"input file"*: **XTandem** output
 {: .hands_on}
 
 > ### {% icon comment %} Settings for labelled data
-> Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also [Peptide and Protein Quantification via Stable Isotope Labelling]({{ site.baseurl }}{% link topics/proteomics/tutorials/protein-quant-sil/tutorial.md %}).
+> Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also [Peptide and Protein Quantification via Stable Isotope Labelling]({% link topics/proteomics/tutorials/protein-quant-sil/tutorial.md %}).
 {: .comment}
 
 > ### {% icon comment %} Comment: Advanced Search Engine Parameters
@@ -177,33 +173,33 @@ In proteomics, this decision is typically done by calculating false discovery ra
 The calculation is based on a simple assumption: for every decoy peptide identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.
 
-We will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool **PeptideIndexer** {% icon tool %}. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. We will then filter PSMs for 1 % FDR and set the score back to PEP.
+To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool **PeptideIndexer** {% icon tool %}. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. Then we calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm Fido, which is used by OpenMS. We will then filter PSMs for 1 % FDR with **FalseDiscoveryRate** {% icon tool %}. and set the score back to PEP with **IDScoreSwitcher** {% icon tool %}.
 
 > ### {% icon hands_on %} Hands-On: Peptide FDR filtering
 >
-> 1. Run **IDPosteriorErrorProbability** {% icon tool %} with
->    - {% icon param-file %} *"input file"*: **XTandemAdapter** output
->    - *"If set scores will be calculated as '1 - ErrorProbabilities' and can be interpreted as probabilities for correct identifications"*: `Yes`
->
-> 1. Run **PeptideIndexer** {% icon tool %} with
->    - {% icon param-file %} *"Input idXML file containing the identifications"*: output of **IDPosteriorErrorProbability**
+> 1. Run {% tool [PeptideIndexer](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0) %} with
+>    - {% icon param-file %} *"Input idXML file containing the identifications"*: output of **XTandemAdapter**
 >    - {% icon param-file %} *"Input sequence database in FASTA format"*: FASTA protein database
 >    - *"If set, the protein sequences are stored as well"*: `Yes`
 >    - *"If set, the protein description is stored as well"*: `Yes`
->    - *"Specificity of the enzyme"*: `none`
+>    - In the *"enzyme"* section set *"Specificity of the enzyme"*: `none`
 >
-> 3. Run **FalseDiscoveryRate** {% icon tool %} with
->    - {% icon param-file %} *"Identifications from searching a target-decoy database"*: output of **PeptideIndexer**
+> 2. Run {% tool [IDPosteriorErrorProbability](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy) %} with
+>    - {% icon param-file %} *"input file"*: **PeptideIndexer** output
+>    - *"If set scores will be calculated as '1 - ErrorProbabilities' and can be interpreted as probabilities for correct identifications"*: `Yes`
+>
+> 3. Run {% tool [FalseDiscoveryRate](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0) %} with
+>    - {% icon param-file %} *"Identifications from searching a target-decoy database"*: output of **IDPosteriorErrorProbability**
 >    - *"Perform FDR calculation on protein level"*: `false`
->    - *"Filter PSMs based on q-value"*: `0.01`
->    - *"If 'true' decoy peptides will be written to output file, too"*: `Yes`
+>    - In the *"FDR control"* section select *"Filter PSMs based on q-value"*: `0.01`
+>    - In the "Parameter section for the FDR calculation algorithm"* section select *"If 'true' decoy peptides will be written to output file, too"*: `Yes`
 >
-> 4. Run **IDScoreSwitcher** {% icon tool %} with
+> 4. Run {% tool [IDScoreSwitcher](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0) %} with
 >    - {% icon param-file %} *"Input file"*: output of **FalseDiscoveryRate**
 >    - *"Name of the meta value to use as the new score"*: `Posterior Probability_score`
 >    - *"Orientation of the new score"*: `higher_better`
 >
-> 5. Run **FileInfo** {% icon tool %} to get basic information about the identified peptides
+> 5. Run {% tool [FileInfo](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0) %} to get basic information about the identified peptides
 >    - {% icon param-file %} *"input file"*: **IDScoreSwitcher** output
 >
 {: .hands_on}
@@ -213,32 +209,30 @@ We will calculate peptide posterior error probabilities (PEPs), because they are
 > 2. How many peptides with oxidized methionine were identified?
 >
 > > ### {% icon solution %} Solution
-> > 1. You should have identified 3366 non-redundant peptide hits.
-> > 2. 798 peptides contain an oxidized methionine.
+> > 1. You should have identified 3378 non-redundant peptide hits.
+> > 2. 804 peptides contain an oxidized methionine.
+> > Numbers may slightly vary depending on the versions of the tools and the used FASTA file.
 > {: .solution }
 {: .question}
 
 
 # Protein Inference
 In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein.
-The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches.
+The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR.
 
 > ### {% icon hands_on %} Hands-On: Protein inference
 >
-> 1. Run **FidoAdapter** {% icon tool %}
+> 1. Run {% tool [FidoAdapter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0) %}
 >    - {% icon param-file %} *"Input: identification results"*: output of **IDScoreSwitcher**
 >    - *"Post-process Fido output with greedy resolution of shared peptides based on the protein probabilities"*: `Yes`
 >
-> 2. Run **FalseDiscoveryRate** {% icon tool %}
+> 2. Run {% tool [FalseDiscoveryRate](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0) %}
 >    - {% icon param-file %} *"Identifications from searching a target-decoy database"*: output of **FidoAdapter**
 >    - *"Perform FDR calculation on PSM level"*: `false`
+>    - In the *"FDR control"* section select *"Filter proteins based on q-value"*: `0.01`
 >
-> 3. Run **IDFilter** {% icon tool %}
+> 3. Run {% tool [FileInfo](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0) %} to get basic information about the identified proteins
 >    - {% icon param-file %} *"input file"*: output of **FalseDiscoveryRate**
->    - *"The score which should be reached by a protein hit to be kept"*: `0.01`
->
-> 4. Run **FileInfo** {% icon tool %} to get basic information about the identified proteins
->    - {% icon param-file %} *"input file"*: output of **IDFilter**
 {: .hands_on}
 
 > ### {% icon comment %} Comment: "Greedy" Group Resolution
@@ -249,7 +243,8 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 > How many proteins were finally identified?
 >
 > > ### {% icon solution %} Solution
-> > You should have identified 1255 proteins.
+> > You should have identified 1252 proteins.
+> > Numbers may slightly vary depending on the versions of the tools and the used FASTA file.
 > {: .solution }
 {: .question}
 
@@ -262,15 +257,15 @@ It also enables you to check for contaminations in your samples.
 
 > ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
-> 1. Run **TextExporter** {% icon tool %} to convert the idXML output to a human-readable tabular file.
->    - {% icon param-file %} *"Input file"*: **IDFilter** output
+> 1. Run {% tool [TextExporter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0) %} to convert the idXML output to a human-readable tabular file.
+>    - {% icon param-file %} *"Input file"*: **FalseDiscoveryRate** output
 >
-> 2. Run **Select lines that match an expression** {% icon tool %}
+> 2. Run {% tool [Select lines that match an expression](Grep1) %}
 >    - {% icon param-file %} *"Select lines from"*: **TextExporter**
 >    - *"that"*: `Matching`
 >    - *"the pattern"*: `CONTAMINANT`
 >
-> 2. Run **Select lines that match an expression** {% icon tool %} to remove all non human proteins (e.g. bovine)
+> 2. Run {% tool [Select lines that match an expression](Grep1) %} to remove all non human proteins (e.g. bovine)
 >    - {% icon param-file %} *"Select lines from"*: **TextExporter**
 >    - *"that"*: `Matching`
 >    - *"the pattern"*: `HUMAN`
@@ -368,9 +363,9 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found [here]({{ site.baseurl }}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
+A premade workflow for this tutorial can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
 
-A premade workflow using the search engines XTandem and MSGF+ can be found [here]({{ site.baseurl }}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
+A premade workflow using the search engines XTandem and MSGF+ can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
 
 # Further Reading
 

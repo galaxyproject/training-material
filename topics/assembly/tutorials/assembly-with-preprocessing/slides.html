@@ -1,0 +1,323 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+class: enlarge120
+
+title: "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads"
+zenodo_link: "https://zenodo.org/record/3732359"
+tags:
+  - covid19
+questions:
+  - "How can a genome of interest be assembled against a background of contaminating reads from other genomes?"
+  - "How can sequencing data used to obtain an assembled genome?"
+objectives:
+  - "Know basic characteristics of SARS-CoV-2"
+  - "Understand Nanopore and Illumina technologies"
+  - "Detect and remove human reads from SARS-CoV-2 sequencing reads"
+  - "Know main _de novo_ genome assembly algorithms"
+  - "Perform a hybrid _de novo_ genome assembly "
+time_estimation: "4h"
+key_points:
+  - "Certain types of NGS samples can be heavily contaminated with sequences from other genomes."
+  - "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes."
+  - "The different characteristics of Illumina and Nanopore sequencing technologies require processing by different tools."
+  - "Hybrid genome assembly allows to obtain high quality genome sequences."
+contributors:
+  - gallardoalba
+
+
+---
+.enlarge120[
+
+# **SARS-CoV-2**
+
+]
+
+
+The severe acute respiratory syndrome coronavirus, known as SARS-CoV-2, is a betacoronavirus which belongs to the subfamily Coronavidinae, family Coronavidae.
+
+* Genome characteristics:
+
+  * Positive-sense single-stranded RNA (+ssRNA) virus of 30 kb.
+  * Encode 9860 aminoacids.
+  * Includes 14 functional ORFs.
+  * Codify 4 structural proteins and 23 non-structural proteins.
+
+---
+
+# **SARS-CoV-2 genome structure**
+
+![Structure of the SARS CoV 2 genome, a 5' utr, a polyprotein pp1ab/pp1b, and several structural and accessory proteins before the 3' utr. The pp1ab polyprotein is shown exapnded into a series of non-structural proteins labelled nsp1 to nsp16.](../../images/SARS-CoV-2_Genome.png)
+
+- NSP1-NSP16 encodes the replicase-transcriptase complex
+- It includes four structural proteins: Spike (S), Envelope (E), Membrane (M) and Nucleocapsid (N).
+
+---
+
+# **SARS-CoV-2 structure**
+
+![A graphic of the virus as a sphere with spikes (S1 and S2) coming out from the membrane, envelope proteins embedded within the membrane, and then a nucelocapsid inside. The 3d protein structures are shown in two styles of the spike proteins with the receptor binding domain highlighted. ](../../images/structure_SARS-CoV_2.png)
+
+---
+
+.enlarge200[
+
+# **Hybrid assembly**
+
+]
+
+.reduce70[
+Hybrid assembly consists in using a combination of long and short reads to produce genome sequence.
+
+Long reads are used to resolve ambiguities that exist in genomes previously assembled using the short reads. In addition, low rate-error short reads are used to correct errors that exist in the error-prone long reads.
+]
+
+![Cartoon of hybrid assembly. Step 1 shows short reads from Illumina and long reads from Nanopore. In step 2 these are assembled separately and there are ambiguities in sequence assembly. In step 3, hybrid assembly shows the assembly done with both sets of data and it helps resolve ambiguities with higher coverage.](../../images/hybrid_assembly.png)
+
+
+---
+
+.enlarge200[
+
+# **Data sources**
+
+]
+
+.pull-left[
+
+**Illumina reads**
+
+- Second generation sequencing
+- Short size: 200 bp
+- Low error rate (~1%)
+
+![A picture of an illumina sequencer. It is a large white and grey box with a computer screen](../../images/illumina_sequencing.png)
+
+]
+
+.pull-right[
+
+**Oxford Nanopore reads**
+
+- Third generation sequencing
+- Long size:  >40,000 bp
+- High error rate (~10%)
+
+![A picture of someone holding a nanopore device, approximately the size of an oversize usb stick with a chip visible.](../../images/nanopore_sequencing.png)
+
+]
+
+
+---
+
+
+.enlarge120[
+
+# **Data sources: Illumina sequencing**
+
+]
+
+![Cartoon of illumina sequence, DNA is fragmented and adapters added. This binds to nanowells with oligonucleotides. Then the DNA bends and attaches to another binder. A primer attaches to the adapter and polymerase adds flourescently tagged dNTPs. Imaging happens while these are added. Then it is split, the DNA strand is denaturalised and now it there are two strands, bound to different adapters in the well. This process is repeated many times.](../../images/illumina_sequencing_cluster.png)
+
+
+---
+
+
+.enlarge200[
+
+# **Data sources: Nanopore sequencing**
+
+]
+
+![Single nucleic acid molecules pass through a nanopore and changes in electrical field are measured. The magnitude of the current density depends on which nucleotide occupies the nanopore. This produces a graph which is then rad into individual bases.](../../images/nanopore_sequencing_process.png)
+
+---
+
+
+.enlarge200[
+
+# **Quality control**
+
+]
+
+Quality control, read trimming and filtering are essential preprocessing steps required to garantee accurate results from RNA-seq datasets. Due to their very different nature, Illumina and Nanopore reads should be processed by using different tools.
+
+![Schematic of a workflow, RNA-seq dataset is input which consists of illumina and nanopore reads. Those go through quality assessment with fastp and nanoplot, trimming, and filtering, before producing processed reads.](../../images/rna-seq_processing.png)
+
+.reduce70[
+
+
+]
+
+---
+
+
+
+.enlarge200[
+
+# **Subtraction of reads mapping to the human reference genome**
+
+]
+
+Since the SARS-CoV-2 samples were obtained from human tissues, it is necessary to retain only the reads that don't map to the human genome, i.e those of potential viral origin.
+
+
+---
+
+
+.enlarge200[
+
+# **Subtraction of reads mapping to the human reference genome**
+
+]
+
+.image-75[![A set of reads and a human genome are put together, mapping done with bowtie2 or minimap2 to identify reads which map to the human genome. (Then these are removed.)](../../images/mapping_human_genome.png)]
+
+.reduce70[
+
+As with quality control, differential characteristics of Illumina and Nanopore reads require different tools for mapping the reads to the human genome:
+
+- __Bowtie2__:  It is optimized for the read lengths and error modes yielded by typical Illumina sequencers.
+
+- __Minimap2__: It is particularly efficient for mapping Nanopore long reads.
+
+]
+
+---
+
+
+.enlarge200[
+
+# **Genome assembly**
+
+]
+
+Now everything is ready to perform genome assembly!
+
+![A picture of a jigsaw puzzle with a DNA image, and several missing pieces scattered around.](../../images/jigsaw_genome.png)
+
+Genome assembly is a complex computational process whose objetive is to reconstruct a genome from the reads obtained by sequencing technologies.
+
+---
+
+
+
+.enlarge200[
+
+# **_De novo_ genome assembly**
+
+]
+
+
+_De novo_ assembly is a method for constructing genomes from a large number of  DNA fragments, with no a priori knowledge of the correct sequence or order of those fragments.
+
+Two common types of _de novo_ assemblers are greedy algorithm assemblers and graph method assemblers.
+
+
+---
+
+
+
+.enlarge200[
+
+# **_De novo_ genome assembly algorithms**
+
+]
+
+
+.pull-left[
+
+__Greedy algorithm assemblers__
+
+It finds overlaps between reads, then builds a consensus sequence from the aligned overlapping reads.
+
+
+</br>
+.reduce70[
+
+- Relative efficiency
+- Do not work well for large read sets because only takes into account local information
+- Do not perform well with repeat regions
+
+]
+
+.image-75[![Rainbow coloured reads are aligned locally to make small high quality overlaps. These are then built up into a larger consensus with the entire rainbow.](../../images/greedy_algoritm.png)]
+
+]
+
+
+.pull-right[
+
+__Graph method assemblers__
+
+Basically it represent reads as a set of nodes, and overlaps between these reads as directed edges which connect these nodes to form a complete graph.
+
+
+.reduce70[
+
+- Computationally more expensive
+- Aim for global optima
+- Perform well on large read sets, specially when they contain repeat regions.
+]
+
+.image-75[![A graph with many nodes connected by lines in a large tangle.](../../images/graph_example.png)]
+
+]
+
+---
+
+
+
+.enlarge200[
+
+# **Graph methods assemblers: de Brujin graphs**
+]
+
+.reduce70[
+De Bruijn graphs is the graph model used by most genome assemblers.
+
+During the assembly process reads are broken into smaller fragments of a specified size, the k-mers, whichs are then used as nodes in the graph assembly. Nodes that overlap are then connected by an edge, which represents the reads. An ideal genome assembly corresponds to the path that visits every node exactly once.
+
+]
+
+.image-75[![Reads are provided to the algorithm, they are in the colours of the rainbow. Next overlaps are identified and the rainbow resolves itself. A subset of that is highlighted and points to reads connected by overlaps with many arrows going between the bluegreen fragments that are highlighted. This goes to the hamiltonian path identified with a re-run arrow between, indicating some mount of backtracking needed to find the best path. Finally the hamiltonian produces a consensus sequence with the correct final ordering.](../../images/olc_pic.png)]
+
+
+---
+
+.enlarge200[
+
+# **Graph methods assemblers: de Brujin graphs**
+
+]
+
+The [de Brujin graph assembly tutorial](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#1) provides a detailed explanation about this topic.
+
+
+
+---
+
+.enlarge200[
+
+# **Assembly genome with Unicycler**
+
+]
+
+.image-50[![unicycler logo](../../images/unicycler_logo.png)]
+
+Unicycler is a software tool designed specifically for hybrid assembly of small genomes.
+
+
+
+
+---
+
+.enlarge200[
+
+# **Assembly genome with Unicycler**
+
+]
+
+It employs a multi-step process that utilizes a set of software tools.
+
+![schematic of the unicycler pipeline, illumina short reads are assembled with spades into an assembly graph in one branch. Another branch brings nanopore reads through miniasm and racon to assemble and polish into long read contigs. Bridge application and contig merging combin the assembly graph and long reads, and this is sent to bowtie2 and pilon for polishing, producing the final assembly.](../../images/unicycler_pipeline.png)

@@ -1,0 +1,166 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+redirect_from:
+- /topics/admin/tutorials/heterogeneous-compute/slides
+
+title: "Running Jobs on Remote Resources with Pulsar"
+questions:
+  - How does pulsar work?
+  - How can I deploy it?
+objectives:
+  - Have an understanding of what Pulsar is and how it works
+  - Install and configure a Pulsar server on a remote linux machine
+  - Be able to get Galaxy to send jobs to a remote Pulsar server
+time_estimation: "60m"
+key_points:
+  - Pulsar allows you to easily add geographically distributed compute resources into your Galaxy instance
+  - It also works well in situations where the compute resources cannot share storage pools.
+contributors:
+  - natefoo
+  - slugger70
+  - mvdbeek
+  - hexylena
+subtopic: features
+tags:
+  - jobs
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - ansible
+      - ansible-galaxy
+  - title: "A server/VM on which to deploy Pulsar"
+    type: "none"
+---
+
+# What are heterogenous compute resources?
+
+Differences in:
+- Operating system or version
+- Users/groups
+- Data accessibility
+- Administrative control
+- Physical Location (i.e. Cities)
+
+Galaxy expects:
+- One OS, version (dependencies)
+- Shared filesystem w/ fixed paths
+
+---
+# Example - Australia
+
+![australia_locations.png](../../images/australia_locations.png)
+
+---
+# Partial solution - CLI job runner
+
+SSH to remote, submit jobs with CLI `sbatch`, `qsub`, etc.
+
+Still depends on shared FS
+
+---
+# Pulsar
+
+![pulsar_logo.png](../../images/pulsar_logo.png)
+
+Galaxy's remote job management system
+
+* Can run jobs on any(?) OS including Windows
+
+* Multiple modes of operation for every environment
+
+---
+# Pulsar - Architecture
+
+* Pulsar server runs on remote resource (e.g. cluster head node)
+
+* Galaxy Pulsar job runner is Pulsar client
+
+* Communication is via HTTP or AMQP, language is JSON
+
+* File transport is dependent on communication method
+
+---
+# Pulsar - Architecture
+
+![pulsar_schematic.png](../../images/pulsar_schematic.png)
+
+---
+# Pulsar Transports - RESTful
+
+Pulsar server listens over HTTP(S)
+
+Pulsar client (Galaxy) initiates connections to Pulsar server
+
+Good for:
+- Environments where firewall, open ports are not concerns
+- No external dependencies (AMQP server)
+
+---
+# Pulsar Transports - AMQP
+
+Pulsar server and client connect to AMQP server
+
+Good for:
+- Firewalled/NATted remote compute
+- Networks w/ bad connectivity
+
+---
+# Pulsar Transports - Embedded
+
+Galaxy runs Pulsar server internally
+
+Good for:
+- Manipulating paths
+- Copying input datasets from non-shared filesystem
+
+---
+# Pulsar - Job file staging
+
+Pulsar can be configured to *push* or *pull* when using RESTful:
+- Push
+  - Galaxy sends job inputs, metadata to Pulsar over HTTP
+  - Upon completion signal from Pulsar, Galaxy pulls from Pulsar over HTTP
+- Pull
+  - Upon setup signal, Pulsar pulls job inputs, metadata from Galaxy over HTTP
+  - Upon completion, Pulsar pushes to Galaxy over HTTP
+
+Pulsar can use libcurl for more robust transfers with resume capability
+
+AMQP is pull-only because Pulsar does not run HTTP server
+
+---
+# Pulsar - Dependency management
+
+Pulsar does not provide Tool Shed tool dependency management. But:
+- It has a similar dependency resolver config to Galaxy
+- It can auto-install **conda** dependencies
+- It can use containers too!
+
+---
+# Pulsar - Job management
+
+Pulsar "managers" provide job running interfaces:
+- `queued_python`: Run locally on the Pulsar server
+- `queued_drmaa`: Run on a cluster with DRMAA
+- `queued_cli`: Run on a cluster with local `qsub`, `sbatch`, etc.
+- `queued_condor`: Run on HTCondor
+
+---
+# Pulsar Australia
+
+![pulsar_australia.png](../../images/pulsar_australia.png)
+
+---
+
+# Resources
+
+* Pulsar Read-the-docs
+    * [https://pulsar.readthedocs.io/en/latest/index.html](https://pulsar.readthedocs.io/en/latest/index.html)
+* Pulsar on galaxyproject.org
+    * [https://galaxyproject.org/admin/config/pulsar/](https://galaxyproject.org/admin/config/pulsar/)
+* Pulsar Github
+    * [https://github.com/galaxyproject/pulsar](https://github.com/galaxyproject/pulsar)
+* Pulsar Ansible
+    * [https://github.com/galaxyproject/ansible-pulsar](https://github.com/galaxyproject/ansible-pulsar)

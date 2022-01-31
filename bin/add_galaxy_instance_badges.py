@@ -13,9 +13,12 @@ DRY_RUN = False
 def discover_trainings(topics_dir):
     """Auto-discover all topic metadata files."""
     for training_dir in glob.glob(os.path.join(topics_dir, '*')):
+        metadata_file = os.path.join(training_dir, 'metadata.yaml')
+        if not os.path.exists(metadata_file):
+            continue
 
-        with open(os.path.join(training_dir, 'metadata.yaml'), 'r') as handle:
-            training_data = yaml.load(handle)
+        with open(metadata_file, 'r') as handle:
+            training_data = yaml.safe_load(handle)
 
         training = {
             'title': training_data['title'],
@@ -24,7 +27,7 @@ def discover_trainings(topics_dir):
 
         for material in glob.glob(os.path.join(training_dir, 'tutorials', '*', 'tutorial.md')) + glob.glob(os.path.join(training_dir, 'tutorials', '*', 'slides.html')):
             with open(material, 'r') as handle:
-                material_data = yaml.load_all(handle)
+                material_data = yaml.safe_load_all(handle)
                 material_data = next(material_data)
 
             name = material.split('/')[-2]
@@ -62,7 +65,10 @@ def realise_badge(badge, badge_cache_dir):
             '--quiet', '-O', os.path.join(badge_cache_dir, badge)
         ]
         if not DRY_RUN:
-            subprocess.check_call(cmd)
+            try:
+                subprocess.check_call(cmd)
+            except subprocess.CalledProcessError:
+                print('unable to retrieve badges, please try again later')
             time.sleep(1)
         else:
             print(' '.join(cmd))
@@ -86,7 +92,8 @@ def badge_it(label, value, color, CACHE_DIR, identifier_parts, output_dir):
 
     # Copy the badge to a per-instance named .svg file.
     up = ['..'] * (len(identifier_parts) - 1)
-    symlink_source = os.path.join(*up, real_badge_path[len('badges/'):])
+    total = up + [real_badge_path[len('badges/'):]]
+    symlink_source = os.path.join(*total)
     if not DRY_RUN:
         # Remove it if it exists, since this is easier than testing for
         # equality.
@@ -126,7 +133,7 @@ if __name__ == '__main__':
 
     # Load the validated list of instances which support trainings
     with open(args.instances, 'r') as handle:
-        data = yaml.load(handle)
+        data = yaml.safe_load(handle)
 
     # Collect a list of instances seen
     instances = []

@@ -26,7 +26,7 @@ In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/
 
 ![The abstract of the paper on Population Genomics](../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
-We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({{site.baseurl}}{% link topics/ecology/tutorials/de-novo-rad-seq/tutorial.md %}), enhancing discoverability of new loci of interest but also of false positive one).
+We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({% link topics/ecology/tutorials/de-novo-rad-seq/tutorial.md %}), enhancing discoverability of new loci of interest but also of false positive one).
 
 
 > ### Agenda
@@ -50,7 +50,8 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics with reference genome" for example...
->    {% include snippets/create_new_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **EBI SRA** {% icon tool %} import files from SRA:
 >    - Search for `SRR034310`
@@ -66,21 +67,22 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 >    https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
 >    ```
->    {% include snippets/import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Make sure the fastq.gz files you imported are of datatype `fastqsanger.gz`
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
 >
 >    Next, we need to tell Galaxy about the reference genome associated with this.
 >
 > 5. We will define a custom reference build** for this tutorial:
 >
->    {% include snippets/add_custom_build.md name="Stickleback" dbkey="stickleback" fasta="Reference_genome_11_chromosomes.fasta" %}
+>    {% snippet faqs/galaxy/analysis_add_custom_build.md name="Stickleback" dbkey="stickleback" fasta="Reference_genome_11_chromosomes.fasta" %}
 >
 > 6. Next, we set the `dbkey` of our imported fastq files to our custom build key
 >
->    {% include snippets/change_dbkey.md dbkey="stickleback" %}
+>    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="stickleback" %}
 >
 > 7. **Rename datasets** according to the sample names
 >
@@ -270,7 +272,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >    sample_GGCC	2
 >    ```
 >
->    {% include snippets/create_new_file.md %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md %}
 >
 > 2. **Stacks: Reference map** {% icon tool %}:
 >    - *"Select your usage"*: `Population`

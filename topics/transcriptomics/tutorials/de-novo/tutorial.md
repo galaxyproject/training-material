@@ -2,6 +2,9 @@
 layout: tutorial_hands_on
 
 title: "De novo transcriptome reconstruction with RNA-Seq"
+subtopic: introduction
+priority: 3
+
 zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
 questions:
   - "What genes are differentially expressed between G1E cells and megakaryocytes?"
@@ -46,8 +49,9 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >
 > 1. Create a new history for this RNA-seq exercise
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Open the data upload manager (Get Data -> Upload file)
 > 3. Copy and paste the links for the reads and annotation file
@@ -61,21 +65,21 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >
 > 10. Import the data from [Zenodo](https://zenodo.org/record/583140) [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
 >
->    ```
->    https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
->    https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
->    https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
->    https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
->    https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
->    ```
+>     ```
+>     https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>     https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
+>     https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
+>     https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
+>     https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
+>     ```
 >
->    You will need to fetch the link to the annotation file yourself ;)
+>     You will need to fetch the link to the annotation file yourself ;)
 >
->    {% include snippets/import_via_link.md %}
+>     {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
@@ -101,8 +105,8 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 > 2. **Trimmomatic** {% icon tool %}: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads with the following settings:
 >
 >    - *"Single-end or paired-end reads?"*: `Paired-end (two separate input files)`
->       - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: `G1E forward read (R1)`
->       - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: `G1E reverse read (R1)`
+>       - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: `G1E_rep1 forward read`
+>       - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: `G1E_rep1 reverse read`
 >    - *"Perform initial ILLUMINACLIP step?"*: `No`
 >
 > 3. **FastQC** {% icon tool %}: Re-run `FastQC` on trimmed reads and inspect the differences.
@@ -118,6 +122,9 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > {: .solution }
 >    {: .question}
 > ![Before and after trimming comparison](../../images/BeforeAndAfterTrimming.png)
+>
+> 4. **Trimmomatic** {% icon tool %}: Run `Trimmomatic` on the remaining forward/reverse read pairs with the same parameters.
+>
 {: .hands_on}
 
 Now that we have trimmed our reads and are fortunate that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
@@ -162,8 +169,8 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    - *"Source for the reference genome"*: `Use a built-in genome`
 >       - {% icon param-file %} *"Select a reference genome"*: `Mouse (Mus Musculus): mm10`
 >    - *"Single-end or paired-end reads?"*: `Paired-end`
->       - {% icon param-file %} *"FASTA/Q file #1"*: trimmed G1E forward read (R1)
->       - {% icon param-file %} *"FASTA/Q file #2"*: trimmed G1E reverse read (R1)
+>       - {% icon param-file %} *"FASTA/Q file #1"*: Trimmomatic on G1E_rep1 forward read (R1 paired)
+>       - {% icon param-file %} *"FASTA/Q file #2"*: Trimmomatic on G1E_rep1 reverse read (R2 paired)
 >       - *"Specify strand information"*: `Forward(FR)`
 >    - *"Advanced options"*
 >       - *"Spliced alignment options"*
@@ -195,13 +202,14 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 > ### {% icon hands_on %} Hands-on: Transcriptome assembly
 >
 > 1. **Stringtie-merge** {% icon tool %}: Run `Stringtie-merge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
->    - {% icon param-file %} *"input_gtf"*: `all four `Stringtie` assemblies`
->    - {% icon param-file %} *"guide_gff"*: `RefSeq GTF mm10`
+>    - {% icon param-file %} *"Transcripts"*: `all four `Stringtie` assemblies`
+>    - {% icon param-file %} *"Reference annotation to include in the merging"*: `RefSeq_reference_GTF`
 >
 > 2. **GFFCompare** {% icon tool %}: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
 >    - {% icon param-file %} *"GTF inputs for comparison"*: `output of Stringtie-merge`
 >    - *"Use Reference Annotation"*: `Yes`
->       - {% icon param-file %} *"Reference Annotation"*: `RefSeq GTF mm10`
+>       - *"Choose the source for the reference annotation"*: `History`
+>           - {% icon param-file %} *"Reference Annotation"*: `RefSeq_reference_GTF`
 >    - *"Use Sequence Data"*: `Yes`
 >       - *"Choose the source for the reference list"*: `Locally cached`
 >           - *"Using reference genome"*: 'Mouse (Mus Musculus): mm10'
@@ -246,6 +254,8 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - *"Specify strand information"*: `Stranded (Forward)`
 >    - {% icon param-file %} *"Gene annotation file"*: `in your history`
 >       - *"Gene annotation file"*: `the annotated transcripts GTF file output by GFFCompare`
+>    - *"Options for paired-end reads"*
+>       - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) wil be counted instead of reads`
 >    - *"Advanced options"*
 >       - *"GFF gene identifier"*: `transcript_id`
 >
