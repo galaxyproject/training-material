@@ -84,21 +84,7 @@ A first step of this tutorial will show you how you can simply apply spatial coo
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Descriptive statistical testing
 
 ## Sub-step with **Homoscedasticity and normality**
 
