@@ -5,7 +5,7 @@ title: Biodiversity data exploration
 zenodo_link: https://zenodo.org/record/5930763/files/Reel_life_survey_fish_sample.tabular?download=1
 questions:
 - How to explore biodiversity data?
-- How to look at Homoscedasticity, normality or colinearity of presences-absence or abundance data?
+- How to look at Homoscedasticity, normality or collinearity of presences-absence or abundance data?
 - How to compare beta diversity taking into account space, time and species components?
 objectives:
 - Explore Biodiversity data with taxonomic, temporal and geographical informations
@@ -49,7 +49,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+> 2. Import the files from [Zenodo](https://zenodo.org/record/5930763/files/Reel_life_survey_fish_sample.tabular?download=1)
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -66,24 +66,9 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Want to spatially anoymize your data 
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+A first step of this tutorial will show you how you can simply apply spatial coordinates anonymization if you want to share data without spatial context.
 
 
 ## Sub-step with **Spatial coordinates anonymization**
@@ -95,14 +80,7 @@ A big step can have several subsections or sub steps:
 >    - *"Select column containing latitudes in decimal degrees"*: `c9`
 >    - *"Select column containing longitudes in decimal degrees"*: `c10`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
