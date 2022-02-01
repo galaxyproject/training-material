@@ -60,7 +60,7 @@ Not everyone has the same background and that's ok!
 ## What does Galaxy look like?
 
 > ### {% icon hands_on %} Hands-on: Log in or register
-> 1. Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)
+> 1. Open your favorite browser (Chrome/Chromium, Safari, or Firefox, but not Internet Explorer/Edge!)
 > 2. Browse to a [Galaxy instance](https://galaxyproject.org/use/) of your choice
 > 3. Choose *Login or Register* from the navigation bar at the top of the page
 > 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
@@ -70,7 +70,7 @@ Not everyone has the same background and that's ok!
 >   > ### {% icon comment %} Different Galaxy servers
 >   > The particular Galaxy server that you are using may look slightly different than the one shown in this training.
 >   > Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look and feel to some extent.
->   > The basic functionaity will be rather similar across instances, so don't worry!
+>   > The basic functionality will be rather similar across instances, so don't worry!
 >   {: .comment}
 >
 {: .hands_on}
@@ -82,7 +82,7 @@ The Galaxy interface consists of three main parts:
 2. Your analysis history is recorded on the right
 3. The central panel will let you run analyses and view outputs
 
-![Galaxy ecosystem]({% link shared/images/galaxy_interface.png %})
+![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center]({% link shared/images/galaxy_interface.png %})
 
 
 # Create a history
@@ -92,7 +92,7 @@ Galaxy allows you to create analysis histories. A **history** can be thought of 
 Think of a workflow as a cooking recipe with a list of ingredients (datasets) and a set of instructions
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
-a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterwards.
+a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterward.
 That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.
 
 The finalized pipelines can be generalized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
@@ -149,8 +149,8 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 # Pre-processing
 
-Often, one or more data pre-processing step(s) may be required to proceed with an analysis.
-In our case, the tools we will use require tab-separated input data, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:
+Often, one or more data pre-processing step(s) may be required to proceed with the analysis.
+In our case, the tools we will use require tab-separated input data and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:
 
 - Format conversion
 - Header removal
@@ -285,6 +285,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 Now we have our answer! There are 3 different Iris species in our file.
 
 Like we mentioned before, there are often multiple ways to reach your answer in Galaxy. For example, we could have done this with just a single tool, **Group** {% icon tool %} as well.
+(This tool also can be searched for by the term "grouping" )
 
 
 > ### {% icon hands_on %} Exercise: Grouping dataset
@@ -376,7 +377,7 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon comment %} petal and sepal
 > The image below shows you what the terms sepal and petal mean.
-> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
+> ![Iris flower image showing Petal and Sepal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
 {: .comment}
 
 ## Generate summary and descriptive statistics with
@@ -519,37 +520,38 @@ check whether we can spot any immediate patterns.
 
 ## Convert your analysis history into a workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
+When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
 
 Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history.
->    - If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button.
->    - This will make the creation of a workflow easier.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
-> 2. Go to the **History Options menu**  {% icon galaxy-gear %} menu
->    - Select the **Extract Workflow** option.
+>    This will make the creation of the workflow easier.
 >
->      ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
->    - The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_foreveryone_workflow_create.png)
 >
-> 3. **Rename** the workflow to something descriptive
->    - For example: `Exploring Iris dataset with statistics and scatterplots`.
->    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+> 3. Replace the **Workflow name** to something more descriptive, for example: `Exploring Iris dataset with statistics and scatterplots`.
 >
-> 4. Click on the **Create Workflow** button near the top.
->    - You will get a message that the workflow was created. But where did it go?
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
-> 5. Click on **Workflow** in the top menu of Galaxy.
+> 5. Click on the **Create Workflow** button near the top.
+>
+>    You will get a message that the workflow was created. But where did it go?
+>
+>    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
+>
+> 6. Click on **Workflow** in the top menu of Galaxy.
 >    - Here you have a list of all your workflows.
 >    - Your newly created workflow should be listed at the top:
 >
->    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
 >    ![`Your workflows` list](../../images/101_foreveryone_workflow_list.png)
 {: .hands_on}
 

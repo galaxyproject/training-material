@@ -29,9 +29,12 @@ tags:
 - single-cell
 - 10x
 - paper-replication
+- interactive-tools
+- español
 contributors:
 - nomadscientist
-
+translations:
+  - es
 ---
 
 
@@ -580,7 +583,7 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindTSNE** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunTSNE** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `Yes`
 {: .hands_on}
 

@@ -489,10 +489,6 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 
 Now that we have identifiers of datasets we want we need to download the actual sequencing data. You can also watch [this video](#from-ncbi-short-read-archive).
 
-The remaining portion of this tutorial can also be viewed as a video:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9mIL0tIfZ_o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Download sequencing data
 
 > ### {% icon hands_on %} Hands-on: Get data from SRA

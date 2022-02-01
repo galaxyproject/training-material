@@ -86,7 +86,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    @@ -36,3 +36,5 @@
 >       version: 0.12.0
 >     - src: usegalaxy_eu.tiaas2
->       version: 0.0.6
+>       version: 0.0.8
 >    +- src: galaxyproject.proftpd
 >    +  version: 0.3.1
 >    {% endraw %}
@@ -108,7 +108,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -159,9 +159,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -162,9 +162,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
 >       - rabbitmq
@@ -132,7 +132,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -93,6 +93,9 @@ galaxy_config:
+>    @@ -98,6 +98,9 @@ galaxy_config:
 >         allow_user_impersonation: true
 >         # Tool security
 >         outputs_to_working_directory: true
@@ -154,7 +154,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -228,6 +228,27 @@ rabbitmq_users:
+>    @@ -231,6 +231,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     

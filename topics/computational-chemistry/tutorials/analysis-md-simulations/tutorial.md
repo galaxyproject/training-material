@@ -90,7 +90,7 @@ RMSD, or root-mean-square deviation, is a standard measure of structural distanc
 
 > ### {% icon hands_on %} Hands-on: Calculate RMSD
 >
-> **RMSD Analysis** {% icon tool %} with the following parameters:
+> {% tool [RMSD Analysis](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"dcd trajectory input"*: Trajectory file
 >    - {% icon param-file %} *"pdb input"*: Structure file
 >    - *"Select domains"*: `Calpha` (calculate RMSD only for the C-alpha domain of the protein)
@@ -118,7 +118,7 @@ The root-mean-square fluctuation (RMSF) measures the average deviation of a part
 
 > ### {% icon hands_on %} Hands-on: Calculate RMSF
 >
-> 1. **RMSF Analysis** {% icon tool %} with the following parameters:
+> 1. {% tool [RMSF Analysis](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"dcd trajectory input"*: Trajectory file
 >    - {% icon param-file %} *"pdb input"*: Structure file
 >    - *"Select domains"*: `Calpha` (calculate RMSF only for the C-alpha domain of the protein)
@@ -151,14 +151,13 @@ In summary:
 
 
 > ### {% icon hands_on %} Hands-on: Calculate PCA
->
-> 1. **PCA** {% icon tool %} with the following parameters:
+> 1. {% tool [PCA](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"dcd trajectory input"*: Trajectory file
 >    - {% icon param-file %} *"pdb input"*: Structure file
 >    - *"Use singular value decomposition (SVD) instead of default eigenvalue decomposition ?"*: `No`
 >    - *"Select domains"*: `Calpha`
 >
-> 1. **PCA visualization** {% icon tool %} with the following parameters:
+> 1. {% tool [PCA visualization](toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"dcd trajectory input"*: Trajectory file
 >    - {% icon param-file %} *"pdb input"*: Structure file
 >    - *"Use singular value decomposition (SVD) instead of default eigenvalue decomposition ?"*: `No`

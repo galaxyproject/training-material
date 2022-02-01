@@ -457,11 +457,11 @@ The counts for the samples are output as tabular files. Take a look at one. The 
 
 ## Create count matrix
 
-The counts files are currently in the format of one file per sample. However, it is often convenient to have a count matrix. A count matrix is a single table containing the counts for all samples, with the genes in rows and the samples in columns. The counts files are all within a collection so we can use the Galaxy **Column Join on Collection** tool to easily create a count matrix from the single counts files.
+The counts files are currently in the format of one file per sample. However, it is often convenient to have a count matrix. A count matrix is a single table containing the counts for all samples, with the genes in rows and the samples in columns. The counts files are all within a collection so we can use the Galaxy **Column Join on multiple datasets** tool to easily create a count matrix from the single counts files.
 
-> ### {% icon hands_on %} Hands-on: Create count matrix with **Column Join on Collection**
+> ### {% icon hands_on %} Hands-on: Create count matrix with **Column Join on multiple datasets**
 >
-> **Column Join on Collection** {% icon tool %} with the following parameters:
+> 1. {% tool [Column Join on multiple datasets](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
 >    - {% icon param-collection %} *"Tabular files"*: `Counts` (output of **featureCounts** {% icon tool %})
 >    - {% icon param-text %} *"Identifier column"*: `1`
 >    - {% icon param-text %} *"Number of header lines in each input file"*: `1`

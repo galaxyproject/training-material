@@ -258,7 +258,7 @@ container, virtual machines, Google compute images
 
 Language server implementation for Galaxy tools. Visual Studio Code extension for tool development.
 
-Test execution, code completion, best practices, documentaiton tooltips, etc..
+Test execution, code completion, best practices, documentation tooltips, etc..
 
 ---
 
@@ -374,7 +374,7 @@ for more context.
 
 ## Putting it all together
 
-![](../../images/galaxy_main_scheme.png)
+![Large graphic showing different domains and where different portions of the Galaxy community can be found from Biology, Dev, Packaging, Deployment, Documentation, Training, and Support.](../../images/galaxy_main_scheme.png)
 
 ???
 
@@ -756,9 +756,9 @@ template: left-aligned
 
 ### ASGI - Application
 
-Spirtual successor to
+Spiritual successor to
 [WSGI](https://www.python.org/dev/peps/pep-0333/). An ASGI application
-is a async callable that takes in a `scope` (`dict` describing the
+is an async callable that takes in a `scope` (`dict` describing the
 connection), `send` (an async callable to respond to events via),
 and `receive` (an async callable to receive messages).
 
@@ -769,7 +769,7 @@ async def application(scope, receive, send):
     await send({"type": "http.response.body", ...})
 ```
 
-Checkout [ASGI documentaiton](https://asgi.readthedocs.io/) for more details.
+Checkout [ASGI documentation](https://asgi.readthedocs.io/) for more details.
 
 ---
 
@@ -777,8 +777,8 @@ template: left-aligned
 
 ### ASGI & Starlette Low-level Example
 
-We will talk about a lot about Galaxy and FastAPI - but much of its
-plubming is just aliases for starlette ASGI handling.
+We will talk a lot about Galaxy and FastAPI - but much of its
+plumbing is just aliases for starlette ASGI handling.
 
 ```python
 from starlette.responses import PlainTextResponse
@@ -907,7 +907,7 @@ def build_middleware_stack(self) -> ASGIApp:
     return app
 ```
 
-Start with the router and surrond it with each layer of configured middleware.
+Start with the router and surround it with each layer of configured middleware.
 
 ---
 
@@ -1013,7 +1013,7 @@ https://www.starlette.io/routing/
 class: enlarge200
 
 In order to understand how the routing classes are setup within Galaxy,
-lets step back and and look really quickly at how Galaxy's FastAPI
+lets step back and look really quickly at how Galaxy's FastAPI
 application (ASGI endpoint) is constructed.
 
 ---
@@ -1139,7 +1139,7 @@ wsgi_handler = WSGIMiddleware(gx_webapp)
 app.mount('/', wsgi_handler)
 ```
 
-This effectively provies a fallback to our legacy WSGI application.
+This effectively provides a fallback to our legacy WSGI application.
 
 ---
 
@@ -1603,8 +1603,8 @@ class DatasetCollectionManager:
 ```]
 
 - We're no longer depending on `app`.
-- The type signature very clearly delinates what dependencies are required.
-- Unit testing can inject percise dependencies supplying only the behavior needed.
+- The type signature very clearly delineates what dependencies are required.
+- Unit testing can inject precise dependencies supplying only the behavior needed.
 
 ---
 
@@ -1631,7 +1631,7 @@ class: enlarge150
 
 ### What is Type-based Dependency Injection?
 
-A dependency injection **container** keeps tracks of singleons or recipes for how to construct each type. By
+A dependency injection **container** keeps tracks of singletons or recipes for how to construct each type. By
 default when it goes to construct an object, it can just ask the container for each dependency based on the
 type signature of the class being constructed.
 
@@ -1811,7 +1811,7 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
 
 ### Tips for Designing New Galaxy Backend Components
 
-- Consume only the related components you need to - avoid `app` when possible.
+- Consume only the related components you need to avoid `app` when possible.
 - Annotate inputs to the component with Python types.
 - Use interface types to shield consumers from implementation details.
 - Rely on Galaxy's dependency injection to construct the component and provide it to consumers.
@@ -1828,7 +1828,7 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
 
 ---
 
-The are many of ways to describe and visualize the Galaxy server architecture,
+There are many ways to describe and visualize the Galaxy server architecture,
 one is to imagine the Galaxy database as the ultimate source for Galaxy "stuff"
 and the API controllers as the ultimate sink.
 
@@ -1869,7 +1869,7 @@ in a manager instead of in the model.
 ### Galaxy Models
 
 - Database interactions powered by SQLAlchemy - https://www.sqlalchemy.org/.
-- Galaxy doesn't think in terms "rows" but "objects".
+- Galaxy doesn't think in terms of "rows" but "objects".
 - Classes for Galaxy model objects in `lib/galaxy/model/__init__.py`.
 - Classes mapped to tables in `lib/galaxy/model/mapping.py`
   - Describes table definitions and relationships.
@@ -2015,7 +2015,7 @@ Adding new visualizations to a Galaxy instance
 - Additional static data if needed (CSS, JS, …)
 
 
-.footnote[[Learn more about it with our visualization tutorial.](topics/dev/tutorials/visualization/slides.html)]
+.footnote[[Learn more about it with our visualization tutorial.]({% link topics/dev/tutorials/visualization-generic/slides.html %})]
 
 ---
 
@@ -2078,7 +2078,7 @@ process
 
 Build a UI that accesses that process through a proxy
 
-.footnote[[Learn more about it with our IE tutorial.](topics/dev/tutorials/interactive-environments/slides.html)]
+.footnote[[Learn more about it with our IE tutorial.]({% link topics/dev/tutorials/interactive-environments/slides.html %})]
 
 ---
 
@@ -2367,7 +2367,7 @@ The client is built from JavaScript source files. We use ES6 JavaScript.
 
 A tutorial to help learn JavaScript generally might be https://www.w3schools.com/js/.
 
-For someone familiar with JavaScript but that wants a primer on the new language features in ES6, 
+For someone familiar with JavaScript but that wants a primer on the new language features in ES6,
 https://www.w3schools.com/js/js_es6.asp may be more appropriate.
 
 ---
@@ -2427,37 +2427,37 @@ Webhooks is a system in Galaxy which can be used to write small JS and/or Python
 In short: A plugin infrastructure for the Galaxy UI
 
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
 ### Webhook masthead example
 
-![](../../images/webhook_masthead.png)
+![A person shaped icon in the Galaxy masthead is being hovered over and the popup reads "Show Username", presumably a custom webhook from a tutorial.](../../images/webhook_masthead.png)
 
 At the header menu: Enabling the overlay search, link to communities ...
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
 ### Webhook tool/workflow example
-<br><br>
-![](../../images/webhook_tool.png)
+
+![Screenshot of Galaxy with the job completion screen shown and a PhD comic image shown below.](../../images/webhook_tool.png)
 
 Shown after tool or workflow execution. Comics, citations, support ...
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
 ### Webhook history-menu example
 
-![](../../images/webhook_history.png)
+![A section of the history menu is labelled Webhooks and shows a custom menu entry.](../../images/webhook_history.png)
 
 Adds an entry to the history menu - no functionality as of now
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
@@ -3115,5 +3115,3 @@ class: enlarge150
 We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in "Galaxy".
 
 The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
-
----

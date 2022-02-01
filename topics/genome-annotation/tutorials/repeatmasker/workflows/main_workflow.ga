@@ -1,0 +1,141 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Masking repeats in a genome using RepeatMasker",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-0914-2470",
+            "name": "Anthony Bretaudeau"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "RepeatMasker",
+    "steps": {
+        "0": {
+            "annotation": "The raw (not masked) genome sequence in fasta format",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "The raw (not masked) genome sequence in fasta format",
+                    "name": "Raw genome sequence"
+                }
+            ],
+            "label": "Raw genome sequence",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 457.1999969482422,
+                "height": 82.19999694824219,
+                "left": 686,
+                "right": 886,
+                "top": 375,
+                "width": 200,
+                "x": 686,
+                "y": 375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c26e06b1-39a6-43f4-a83f-7daeba257011",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "13d1856f-3db4-4b96-94c3-89fa2fecc684"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_fasta": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool RepeatMasker",
+                    "name": "input_fasta"
+                }
+            ],
+            "label": null,
+            "name": "RepeatMasker",
+            "outputs": [
+                {
+                    "name": "output_masked_genome",
+                    "type": "fasta"
+                },
+                {
+                    "name": "output_log",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_table",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_repeat_catalog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 725.6000061035156,
+                "height": 347.6000061035156,
+                "left": 1046,
+                "right": 1246,
+                "top": 378,
+                "width": 200,
+                "x": 1046,
+                "y": 378
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3f987772e283",
+                "name": "repeat_masker",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"is_only\": \"false\", \"is_clip\": \"false\", \"no_is\": \"false\", \"rodspec\": \"false\", \"primspec\": \"false\", \"nolow\": \"false\", \"noint\": \"false\", \"norna\": \"false\", \"alu\": \"false\", \"div\": \"false\", \"search_speed\": \"\", \"frag\": \"40000\", \"gc\": null, \"gccalc\": \"false\", \"nocut\": \"false\", \"xout\": \"false\", \"keep_alignments\": \"false\", \"invert_alignments\": \"false\", \"poly\": \"false\"}, \"excln\": \"true\", \"gff\": \"false\", \"input_fasta\": {\"__class__\": \"RuntimeValue\"}, \"repeat_source\": {\"source_type\": \"dfam\", \"__current_case__\": 0, \"species_source\": {\"species_from_list\": \"yes\", \"__current_case__\": 0, \"species_list\": \"human\"}}, \"xsmall\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.1.2-p1+galaxy1",
+            "type": "tool",
+            "uuid": "f7ef7c85-b782-468b-94a2-076efc91920c",
+            "workflow_outputs": [
+                {
+                    "label": "RepeatMasker repeat catalogue on input dataset(s)",
+                    "output_name": "output_repeat_catalog",
+                    "uuid": "9644ecb2-211f-4310-8ad4-b60a117a93a0"
+                },
+                {
+                    "label": "RepeatMasker repeat statistics on input dataset(s)",
+                    "output_name": "output_table",
+                    "uuid": "8469690e-02ce-439f-941c-1de9dc482950"
+                },
+                {
+                    "label": "RepeatMasker output log on input dataset(s)",
+                    "output_name": "output_log",
+                    "uuid": "e80e5a1d-8239-4b92-97bb-87b16dab3975"
+                },
+                {
+                    "label": "RepeatMasker masked sequence on input dataset(s)",
+                    "output_name": "output_masked_genome",
+                    "uuid": "70f5248f-c30e-4c54-bb03-91211a0b9d12"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "genome-annotation"
+    ],
+    "uuid": "99ce36ab-e48c-49de-ac5e-f550a8c90915",
+    "version": 3
+}

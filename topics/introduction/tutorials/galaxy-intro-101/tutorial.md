@@ -34,7 +34,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
+This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
@@ -47,7 +47,7 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 >
 {: .agenda}
 
-# Pretreatments
+# Setting the stage: Exons and SNPs
 
 We start with the question: In human chromosome 22, which exon has the highest number of single nucleotide polymorphisms (SNPs)?
 
@@ -58,23 +58,32 @@ We start with the question: In human chromosome 22, which exon has the highest n
 > - **Chromosomes** can be thought of as a very long piece of DNA (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.
 > - **Features** are regions of the chromosome that are interesting for one reason or another. Some examples of features include genes, terminators, transcription start sites, and repeat regions.
 > - **Genes** are one kind of interesting feature, a region that will be [transcribed](https://en.wikipedia.org/wiki/Transcription_(biology)) into RNA before being [translated](https://en.wikipedia.org/wiki/Translation_(biology)) into proteins.
-> - **Exons** are part of the [eukaryotic](https://en.wikipedia.org/wiki/Eukaryote) gene [model](https://en.wikipedia.org/wiki/Gene#Structure_and_function). A gene is a complex structure with numerous segments that are removed before the the gene is transcribed into an RNA. The exons are the coding regions, the regions that will appear in the final protein product.
+> - **Exons** are fundamental components of [eukaryotic](https://en.wikipedia.org/wiki/Eukaryote) [genes](https://en.wikipedia.org/wiki/Gene#Structure_and_function). A typical eukaryotic gene contains numerous *exons* separated by *introns*. An entire gene containing both exons and introns is *transcribed* into a pre-messenger RNA or pre-mRNA. During maturation introns are excised from the pre-mRNA in a process called *[splicing](https://www.nature.com/scitable/topicpage/rna-splicing-introns-exons-and-spliceosome-12375/)*.  A mature messenger RNA, or simply mRNA, is then *translated* into protein during the process of *translation*.
+>
 >
 >   ![Eukaryotic gene model](../../images/DNA_exons_introns.png "An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)")
 >
-> - **SNP** stands for [single-nucleotide polymorphism](https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism) and is pronounced like the English word "snip". SNPs are single nucleotide differences between a sequenced individual compared to some reference sequence; where one individual might have an A, another could have a C in that position. Databases of SNPs have been created for many organisms and they include any single nucleotide deviation from the reference sequence which appears in some percentage of the population (e.g. >1%). These are often especially interesting to geneticists as the causes of certain inheritable diseases.
+> **SNP** is an abbreviation for [single-nucleotide polymorphism](https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism). It is pronounced as "snip". SNPs are single nucleotide differences between a sequenced individual compared to some reference sequence; where one individual might have an A, another could have a C in that position. Databases of SNPs have been created for many organisms and they include any single nucleotide deviation from the reference sequence which appears in some percentage of the population (e.g. >1%). These are often especially interesting to geneticists as the causes of certain inheritable diseases.
 {: .comment}
 
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
-But even with your data in hand, you stll have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
+But even with your data in hand, you still have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
-Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts:
+Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
 
-1. The available tools are listed on the left
-2. Your analysis history is recorded on the right
-3. The central panel will let you run analyses and view outputs
+{% snippet faqs/galaxy/creating_account.md %}
 
-![Galaxy interface](../../images/galaxy_interface.png)
+The Galaxy interface consists of three main parts:
+
+1. The available **Tools** are listed on the left
+2. The **Central Panel** will let you run analyses and view outputs
+3. Your analysis **History** is recorded on the right
+
+
+> ![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
+{: .comment}
+
+When you start Galaxy for very first time, your history will be empty. Let's add some data to it.
 
 > ### {% icon hands_on %} Hands-on: Create history
 >
@@ -95,7 +104,7 @@ First we need to get some data into our history. You can upload files from your 
 > ### {% icon hands_on %} Hands-on: Upload SNPs and Exons
 > 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload Data**
 >
->    ![upload button](../../images/upload-data.png)
+>    ![upload data button](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
@@ -110,7 +119,7 @@ First we need to get some data into our history. You can upload files from your 
 >
 > 3. Click **Start**, and then **Close**
 >
-> 4. When they're ready, **rename** {% icon galaxy-pencil %} the datasets to `Exons` and `SNPs`, respectively.
+> 4. When they are ready, **rename** {% icon galaxy-pencil %} the datasets to `Exons` and `SNPs`, respectively.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
@@ -120,7 +129,7 @@ For this tutorial, we made the input datasets available on Zenodo for you. Howev
 Below we describe how you can do this, but it is not necessary for this tutorial. Note that since the data in UCSC is updated frequently, you might get slightly different results in the rest of this tutorial if you use these files.
 
 > ### {% icon comment %} Comments
-> In order to get the datasets from the UCSC server, you need to have an account in the [useGalaxy.org](https://usegalaxy.org/) instance.
+> In order to get the datasets from the UCSC server, you need to have an account in an instance.
 {: .comment}
 
 
@@ -132,7 +141,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >
 > > 1. **UCSC Main** {% icon tool %} table browser:
 > >
-> >     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+> >     In the tool menu, navigate to `Get Data -> UCSC Main table browser`
 > >
 > >     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
 > >
@@ -145,7 +154,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >     - *"genome"*: `Human`
 > >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 > >     - *"group"*: `Genes and Gene Predictions`
-> >     - *"track"*: `GENCODE v32`
+> >     - *"track"*: `GENCODE v36` (or a more recent version)
 > >     - *"table"*: `knownGene`
 > >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
 > >     - *"output format"* should be changed to `BED - browser extensible data`
@@ -189,7 +198,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 >
 > > ### {% icon hands_on %} Hands-on: Obtaining SNPs from UCSC
-> > Again open the `UCSC Main - table browser` tool and set the following parameters
+> > Again open the `UCSC Main table browser` tool and set the following parameters
 > >
 > > 1. **UCSC Main** {% icon tool %} table browser:
 > >    - *"group"* should be changed to `Variation`
@@ -198,7 +207,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >
 > >    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
 > >
-> >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 153, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+> >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 151, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 > >
 > > 2. Click on the **get output** button to find a form similar to this:
 > >
@@ -228,15 +237,21 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
 >
-> 1. {% tool [Join](toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0) %}   the intervals of two datasets side-by-side:
+> To find intersection we will be using `intersect intervals` tool from [BEDTools](https://bedtools.readthedocs.io/en/latest/content/overview.html) package.
 >
->    Enter the word `join` in the search bar of the tool panel, and select the
->    tool named `Join - the intervals of two datasets side-by-side`
+> 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} the intervals of two datasets side-by-side:
 >
->    - *"Join"*: Select `Exons`
->    - *"With"*: Select `SNPs`
->    - *"with min overlap"*: `1`
->    - *"Return"*: `Only records that are joined (INNER JOIN)`, which means that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
+>    Enter the word `intersect` in the search bar of the tool panel, and select the
+>    tool named `bedtools Intersect intervals`
+>
+>    - *"File A to intersect with B"*: Select `Exons`
+>    - *"Combined or separate output files"*: Select `One output file per 'input B' file"`
+>    - *"File B to intersect with A"*: `SNPs`
+>    - *"What should be written to the output file?"*: `Write the original entry in B for each overlap...`, which means that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
+>
+>  The interface of the tool should look like this:
+>
+>    ![Bedtool intersect interval interface](../../images/101_bed_intersect_interface.png)
 >
 >    > ### {% icon tip %} How do I use this tool?
 >    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
@@ -249,11 +264,11 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
->    Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!
+>    Here column 4 contains exon IDs (e.g., `ENST00000252835.5_cds_0_0_chr22_15528159_f`) and column 10 lists SNP IDs (e.g., `rs9617249`) Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!
 >
 > > ### {% icon comment %} If things didn't work...
 > >
-> > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
+> > Did the Intersect tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 > >
 > >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
 > >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
@@ -281,20 +296,24 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 
 ## Count the number of SNPs per exon
 
-Since each line in our file represents a single overlap between SNP and exon, we can find the total number of SNPs in an exon, simply by counting the number of lines that have the same exon ID. So let's do this for all the exons in our file:
+Since each line in our file represents a single overlap between SNP and exon, we can find the total number of SNPs in an exon, simply by counting the number of lines that have the same exon ID. However, to be more "proper" we will instead count the number of unique SNP IDs per exon. So let's do this for all the exons in our file:
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
-> 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns:
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} data by a column and perform aggregate operation on other columns:
 >
->    - *"Select data"*: select the output dataset from **Join** {% icon tool %}
->    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
->    - *"Insert Operation"*:
->      - 1: Operation
->        - *"Type"*: `Count`
->        - *"On column"*: `Column: 4`
+>    - *"Input tabular dataset"*: select the output dataset from **bedtools intersect intervals** {% icon tool %}
+>    - *"Group by fields"*: `Column: 4` (the column with the exon IDs)
 >
-> 2. Click **Execute** to perform the grouping. Your new output dataset will look something like this:
+>    ![Datamash tool interface](../../images/101_datamash_1.png)
+>
+>    - Scroll tool interface down to *"Operation to perform on each group"*
+>      - *"Type"*: `Count Unique values`
+>      - *"On column"*: `Column: 10` (this column contains SNPs ids like `rs2236639`. This we will count occurrences of unique SNP ids for each exon)
+>
+>    ![Operation to perform on each group](../../images/101_datamash_2.png)
+>
+> 2. Click **Execute**. Your new output dataset will look something like this:
 >
 >    ![Contents of the `Group` output dataset](../../images/101_14.png)
 >
@@ -306,7 +325,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > How many exons are there in total in your file?
 >
 > > ### {% icon solution %} Solution
-> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4.242 lines, which is equal to the number of exons.
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,242 lines, which is equal to the number of exons overlapped by at least one SNP.
 > >
 > {: .solution }
 {: .question}
@@ -317,14 +336,12 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
-> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order:
+> 1. {% tool [Sort](sort1) %} data in ascending or descending order:
 >
->    - *"Sort Query"*: Output from **Group** {% icon tool %}
->    - *"Column Selections"*:
->      - 1: Column Selections
->        - *"on column"*: `Column: 2`
->        - *"in"*: `Descending order`
->        - *"Flavor"*: `Fast numeric sort (-n)`
+>    - *"Sort Dataset"*: Output from **Group** {% icon tool %}
+>    - *"on column"*: `Column: 2`
+>    - *"with flavor"*: `Numerical sort`
+>    - *"everything in"*: `Descending order`
 >
 > 2. Click **Execute**
 >
@@ -351,7 +368,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. {% tool [Select first](Show beginning1) %} lines from a dataset:
+> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %} lines from a dataset:
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
@@ -428,31 +445,35 @@ You can always return to your analysis view by clicking on Home icon {% icon gal
 
 ## Convert your analysis history into a workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
+When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
 
 Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
 >
-> 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
+>    This will make the creation of the workflow easier.
 >
->    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+>
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of features`.
+> 3. Replace the **Workflow name** to something more descriptive, for example `Find exons with the highest number of features`.
 >
-> While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
+>    While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
 >
->    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
-> 4. Click on the **Create Workflow** button near the top.
+> 5. Click on the **Create Workflow** button near the top.
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 5. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
+> 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
 >
 >    ![`Your workflows` list](../../images/101_26.png)
 {: .hands_on}
@@ -518,7 +539,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the {% icon galaxy-columns %} history overview. Here you can just drag and drop datasets from one history to another.
 >
->    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
+>    ![Drag and drop of `Exons` dataset in the history overview](../../images/copying_data.gif)
 >
 > 3. Click the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top to return to the main analysis window
 >
