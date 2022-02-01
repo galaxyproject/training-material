@@ -815,7 +815,7 @@ In the case of our `Tabulator` application, the run script is simply the R scrip
 - [AskOmics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml): configuration with Python and Bash scripts, followed by `start_all.sh` to run the application.
 
 ## Templated config files
-Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the applcation by templating a run script or configuration file to be read by the application. In this application for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
+Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the application by templating a run script or configuration file to be read by the application. In this application for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
 
 ## Reserved environment variables
 
