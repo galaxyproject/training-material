@@ -4,6 +4,7 @@ title: "Bulk RNA Deconvolution with MuSiC"
 subtopic: single-cell
 priority: 10
 zenodo_link: https://zenodo.org/record/5719228
+enable: false
 tags:
   - single-cell
   - mouse
@@ -17,7 +18,7 @@ objectives:
 - Construct Bulk and scRNA Expression Set Objects
 - Inspect these objects for various properties
 - Measure the abundance of certain cell type cluster markers compared to others
-time_estimation: '2H'
+time_estimation: '2h'
 key_points:
 - Deconvolution tools show individual cell type proportions in bulk RNA-seq data
 - Bulk RNA-seq can be complimented by scRNA-seq data
