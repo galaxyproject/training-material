@@ -42,7 +42,7 @@ It is always a good idea to have a look at the intermediate results or to evalua
 - obistat to get some basic statistics (count, mean, standard deviation) on the attributes (key=value combinations) in the header of each sequence record (see The extended OBITools fasta format in the fasta format description)
 - any Galaxy tools corresponding to classical unix command such as less, awk, sort, wc to check your files.
 
-# Data
+# Manage input data
 The data needed to run the tutorial are the following:
 
 - fastq files resulting of a GA IIx (Illumina) paired-end (2 x 108 bp) sequencing assay of DNA extracted and amplified from four wolf faeces:
@@ -74,9 +74,9 @@ The data needed to run the tutorial are the following:
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 
-## Sub-step with **Unzip**
+## **Unzip** the downloaded archive
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Unzip the downladed .zip archive and prepare unzipped files to be used by OBITools Galaxy tools
 >
 > 1. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2) %} with the following parameters:
 >    - *"Extract single file"*: `All files`
@@ -86,13 +86,13 @@ The data needed to run the tutorial are the following:
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
-> 2. Add to each datafile a tag corresponding or modify names if needed
+> 2. Add to each datafile a tag and/or modify names (*optional*)
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 3. Unhide all dataset from the resulting data collection so you can use these files independently.
 >
-> 4. Modify format from txt to tabular for xxxx file
+> 4. Modify datatype from txt to tabular for the `wolf_diet_ngsfilter` dataset
 {: .hands_on}
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
@@ -114,7 +114,7 @@ The data needed to run the tutorial are the following:
 
 
 
-# Title of the section usually corresponding to a big step in the analysis
+# Use OBITools
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
@@ -134,23 +134,24 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
+## Sub-step with **illuminapairedend**
 
-
-## Sub-step with **obigrep**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Recover consensus sequences from overlapping forward and reverse reads.
+> 
+> When using the result of a paired-end sequencing assay with supposedly overlapping forward and reverse reads, the first step is to recover the assembled sequence.
 >
-> 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
->    - *"Choose the sequence record selection option"*: `predicat`
->        - *"Python boolean expression to be evaluated for each sequence record."*: `mode!=joined`
+> The forward and reverse reads of the same fragment are at the same line position in the two fastq files obtained after sequencing. Based on these two files, the assembly of the forward and reverse reads is done with the illuminapairedend utility that aligns the two reads and returns the reconstructed sequence.
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> 1. {% tool [illuminapairedend](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_illuminapairedend/1.2.13) %} with the following parameters:
+>    - *"Read from file"*: `wolf_F` for the 3p file
+>    - *"Read from file"*: `wolfRF` for the 5p file
+>    - *"minimum score for keeping aligment"*: `40.0`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Sequence records corresponding to the same read pair must be in the same order in the two files !
+>    > 
+>    > If the alignment score is below the defined score, here 40, the forward and reverse reads are not aligned but concatenated, and the value of the mode attribute in the sequence header is set to joined instead of alignment
 >    {: .comment}
 >
 {: .hands_on}
@@ -166,6 +167,39 @@ A big step can have several subsections or sub steps:
 > >
 > > 1. Answer for question1
 > > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Sub-step with **obigrep**
+
+> ### {% icon hands_on %} Hands-on: Remove unaligned sequence records
+> We here use the value of the mode attribute in the sequence header to discard sequences not "joined" (see explanation about this mode on the previous step)
+>
+> 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
+>    - *"Choose the sequence record selection option"*: `predicat`
+>        - *"Python boolean expression to be evaluated for each sequence record."*: `mode!=joined`
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Questions
+>
+> 1. How do you verify the operation is successfull?
+> 2. How many sequences are kept?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. you can search in the input file content the presence of `mode=joined` and same on the output file (just clicking the eye to visualize the content of each file and typing CTRL+C for example to search `mode=joined` in the file, or using a regex Galaxy tool for example). You can also at least look at the size of the output file, if smaller than input file, this is a first good indication.
+> > 2. You can use a Galaxy tool like `Line/Word/Character count of a dataset` to count the number of lines of each dataset (input and output of obigrep) and divided by 4 (as in a FastQ file, each sequence is represented by a block of 4 lines). 45 276 sequences for input file. 44 717 for output file. Thus  559 sequences.
 > >
 > {: .solution}
 >
