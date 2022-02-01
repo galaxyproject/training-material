@@ -93,13 +93,7 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 > ### {% icon hands_on %} Hands-on: Create history
 >
 > 1. Make sure you start from an empty analysis history.
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
 > 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Xarray with Pangeo notebook** as the name of your new history.
->
->    {% snippet faqs/galaxy/histories_rename.md %}
->
 {: .hands_on}
 
 
@@ -118,14 +112,8 @@ Data can be retrieved directly from [Copernicus Atmosphere Monitoring Service](h
 >    https://zenodo.org/record/5805953/files/CAMS-PM2_5-20211222.netcdf
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
 > 3. Rename the dataset to **CAMS-PM2_5-20211222.netcdf**
 > 4. Check that the datatype is **netcdf**
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
