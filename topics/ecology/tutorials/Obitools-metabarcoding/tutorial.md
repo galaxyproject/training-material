@@ -116,22 +116,11 @@ The data needed to run the tutorial are the following:
 
 # Use OBITools
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+OBITools is a set of programs specifically designed for analyzing NGS data in a DNA metabarcoding context, taking into account taxonomic information. It is distributed as an open source software available on the following website: http://metabarcoding.org/obitools.
 
-![Alternative text](../../images/image_name "Legend of the image")
+Citation: Boyer F., Mercier C., Bonin A., Taberlet P., Coissac E. (2014) OBITools: a Unix-inspired software package for DNA metabarcoding. Molecular Ecology Resources, submitted.
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+The OBITools commands consider a sequence record as an entity composed of five distinct elements. Two of them are mandatory, the identifier (id) and the DNA or protein sequence itself. The id is a single word composed of characters, digits, and other symbols like dots or underscores excluding spaces. Formally, the ids should be unique within a dataset and should identify each sequence record unambiguously, but only a few OBITools actually rely on this property. The sequence is an ordered set of characters corresponding to nucleotides or amino-acids according to the International Union of Pure and Applied Chemistry (IUPAC) nomenclature (Cornish-Bowden 1985). The three other elements composing a sequence record are optional. They consist in a sequence definition, a quality vector, and a set of attributes. The sequence definition is a free text describing the sequence briefly. The quality vector associates a quality score to each nucleotide or amino-acid. Usually this quality score is the result of the base-calling process by the sequencer. The last element is a set of attributes qualifying the sequence, each attribute being described by a key=value pair. The set of attributes is the central concept of the OBITools system. When an OBITools command is run on the sequence records included in a dataset, the result of the computation often consist in the addition of new attributes completing the annotation of each sequence record. This strategy of sequence annotation allows the OBITools to return their results as a new sequence record file that can be used as the input of another OBITools program, ultimately creating complex pipelines.
 
 
 ## Sub-step with **illuminapairedend**
@@ -156,21 +145,6 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ## Sub-step with **obigrep**
@@ -185,7 +159,24 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The obigrep command is in some way analog to the standard Unix grep command. It selects a subset of sequence records from a sequence file.
+>    > 
+>    > A sequence record is a complex object composed of an identifier, a set of attributes (key=value), a definition, and the sequence itself.
+>    > 
+>    > Instead of working text line by text line as the standard Unix tool, selection is done sequence record by sequence record. A large set of options allows refining selection on any of the sequence record elements.
+>    > 
+>    > Moreover obigrep allows specifying simultaneously several conditions (that take the value TRUE or FALSE) and only the sequence records that fulfill all the conditions (all conditions are TRUE) are selected.
+>    > 
+>    > Sequence record selection options : 
+>    > * sequence : Regular expression pattern to be tested against the sequence itself. ex: GAATTC
+>    > * definition : Regular expression pattern to be tested against the definition of the sequence record. ex: [Cc]hloroplast
+>    > * identifier : Regular expression pattern to be tested against the identifier of the sequence record. ex: ^GH
+>    > * idlist : points to a text file containing the list of sequence record identifiers to be selected.
+>    > * attribute : Regular expression pattern matched against the attributes of the sequence record. the value of this attribute is of the form : key:regular_pattern. ex:'family_name:Asteraceae'
+>    > * hasattribute : Selects sequence records having an attribute whose key = KEY.
+>    > * predicat : Python boolean expression to be evaluated for each sequence record. The attribute keys defined for each sequence record can be used in the expression as variable names. An extra variable named ‘sequence’ refers to the sequence record itself. ex: mode!="joined"
+>    > * lmax : Keeps sequence records whose sequence length is equal or shorter than lmax. ex : 100
+>    > * lmin : Selects sequence records whose sequence length is equal or longer than lmin. ex : 100
 >    {: .comment}
 >
 {: .hands_on}
@@ -207,18 +198,22 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **NGSfilter**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Assigns sequence records to the corresponding experiment/sample based on DNA tags and primers
 >
 > 1. {% tool [NGSfilter](toolshed.g2.bx.psu.edu/repos/iuc/obi_ngsfilter/obi_ngsfilter/1.2.13) %} with the following parameters:
+>    - *"Parameter file"*: `wolf_diet_ngsfilter`
+>    - *"Read from file"*: `obigrep output`
+>    - *"Number of errors allowed for matching primers"*: `2`
 >    - *"Output data type"*: `fastq`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > A DNA metabarcoding experiment can be considered as a set a PCR products mixed together and sequenced using a next generation sequencer ({i.e.} a solexa or a 454). To distinguish between this different PCR products, pairs of small DNA sequences (call tags, see the oligoTag command and its associated paper for more informations on the design of such tags) unique for each PCR products are concatenated to the PCR primers. As they are amplified during the PCR, these tags should be recognizable, together with their respective primers, at the beginning and the end of the reads. The first step in data analysis is thus to demultiplex the large resulting sequence file by identifying these DNA tags and the primers.
+
+Usually the results of sequencing are stored in one or more files formatted according to the fasta or fastq format. ngsfilter take as input such sequence file and an extra file describing the DNA tags and primers sequences used for each sample.
+
+The results consist of sequences trimmed of the primers and tags and annotated with the corresponding sample (and possibly some extra informations). Sequences for which the tags and primers have not been well identified, and which are thus unassigned to any sample, are tagged as erroneous sequences by ngsfilter. Such erroneous sequences are not reported by the program unless specified by the appropriate option.
 >    {: .comment}
 >
 {: .hands_on}
@@ -241,7 +236,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **obiuniq**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Groups together sequence records
 >
 > 1. {% tool [obiuniq](toolshed.g2.bx.psu.edu/repos/iuc/obi_uniq/obi_uniq/1.2.13) %} with the following parameters:
 >    - *"Attribute to merge"*: `sample`
@@ -275,7 +270,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **FastQC**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Check quality of your data before and after analysis
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >
@@ -308,7 +303,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **obiannotate**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Adds/Edits sequence record annotations
 >
 > 1. {% tool [obiannotate](toolshed.g2.bx.psu.edu/repos/iuc/obi_annotate/obi_annotate/1.2.13) %} with the following parameters:
 >    - In *"Keep only attribute with key"*:
@@ -321,7 +316,8 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > obiannotate is the command that allows adding/modifying/removing annotation attributes attached to sequence records.
+>    > Once such attributes are added, they can be used by the other OBITools commands for filtering purposes or for statistics computing.
 >    {: .comment}
 >
 {: .hands_on}
@@ -344,7 +340,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **obistat**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Computes basic statistics for attribute values
 >
 > 1. {% tool [obistat](toolshed.g2.bx.psu.edu/repos/iuc/obi_stat/obi_stat/1.2.13) %} with the following parameters:
 >    - In *"Category attribute"*:
@@ -359,7 +355,14 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > stats computes basic statistics for attribute values of sequence records. The sequence records can be categorized or not using one or several -c options. By default, only the number of sequence records and the total count are computed for each category. Additional statistics can be computed for attribute values in each category, like:
+>    > * minimum value (-m option)
+>    > * maximum value (-M option)
+>    > * mean value (-a option)
+>    > * variance (-v option)
+>    > * standard deviation (-s option)
+>    > 
+>    > The result is a contingency table with the different categories in rows, and the computed statistics in columns.
 >    {: .comment}
 >
 {: .hands_on}
@@ -382,7 +385,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **obigrep**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filters sequence file on count criteria
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Choose the sequence record selection option"*: `predicat`
@@ -417,7 +420,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **obigrep**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filters sequence file on sequence length criteria
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Choose the sequence record selection option"*: `lmin`
@@ -452,7 +455,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **obiclean**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Tags a set of sequences for PCR/sequencing errors identification
 >
 > 1. {% tool [obiclean](toolshed.g2.bx.psu.edu/repos/iuc/obi_clean/obi_clean/1.2.13) %} with the following parameters:
 >    - *"Threshold ratio between counts (rare/abundant counts) of two sequence records so that the less abundant one is a variant of the more abundant (default: 1, i.e. all less abundant sequences are variants)"*: `0.05`
@@ -487,7 +490,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **NCBI BLAST+ blastn**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Search nucleotide database with nucleotide query sequence(s) from OBITools treatments
 >
 > 1. {% tool [NCBI BLAST+ blastn](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy0) %} with the following parameters:
 >    - *"Subject database/sequences"*: `FASTA file from your history (see warning note below)`
@@ -524,7 +527,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Filter**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter Blast results
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - *"With following condition"*: `c3>99.99`
