@@ -58,7 +58,8 @@ tags:
   - jupyter-notebook
 contributors:
 - annefou
-
+notebook:
+  language: python
 ---
 
 
