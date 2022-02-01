@@ -867,3 +867,6 @@ Having issues with your Interactive Tool? Here are a few ideas for how to troubl
 - Try running the container with Docker directly on your development machine. If the application doesn't work independantly it certainly won't work inside Galaxy!
 - If you need to debug the Docker container itself, it can be useful to write output/logging to a [mounted volume](https://docs.docker.com/storage/volumes/) that can be inspected after the tool has run.
 - You can also open a `bash` terminal inside the container to check the container state while the application is running: `docker exec -it mycontainer /bin/bash`
+
+# Conclusion
+{:.no_toc} 
