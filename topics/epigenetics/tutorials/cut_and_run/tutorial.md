@@ -1,23 +1,19 @@
 ---
 layout: tutorial_hands_on
 
-title: ATAC-Seq data analysis
+title: CUT & RUN data analysis
 zenodo_link: https://zenodo.org/record/3862793
 questions:
-- Which DNA regions are accessible in the human lymphoblastoid cell line GM12878?
-- How to analyse and visualise ATAC-Seq data?
+ [comment]: <> - Which DNA regions are accessible in the human lymphoblastoid cell line GM12878?
+- How to analyse and visualise CUT & RUN data?
 objectives:
-- Apply appropriate analysis and quality control steps for ATAC-Seq
-- Generate a heatmap of transcription start site accessibility
-- Visualise peaks for specific regions
+- Apply appropriate analysis and quality control steps for CUT & RUN
 time_estimation: 3h
 key_points:
-- ATAC-Seq can be used to identify accessible gene promoters and enhancers
+ [comment]: <> - CUT & RUN can be used to identify binding regions for
 - Several filters are applied to the reads, such as removing those mapped to mitochondria
-- Fragment distribution can help determine whether an ATAC-Seq experiment has worked well
+- Fragment distribution can help determine whether an CUT & RUN experiment has worked well
 contributors:
-- lldelisle
-- mblue9
 - heylf
 
 ---
@@ -25,17 +21,18 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of DNA. When the DNA is being actively transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. **A**ssay for **T**ransposase-**A**ccessible **C**hromatin using **seq**uencing ([ATAC-Seq](https://en.wikipedia.org/wiki/ATAC-seq)) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the DNA region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the RNA polymerase. An enhancer is a DNA region that can be located up to 1 Mb downstream or upstream of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene's expression. ATAC-Seq has become popular for identifying accessible regions of the genome as it's easier, faster and requires less cells than alternative techniques, such as FAIRE-Seq and DNase-Seq.
 
-![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
+In many organism transcription factors (TF) play an important tole in the regulation of the gene expression. In human we have up to 2,800 proteins and more than 1,600 are TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer. Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
 
-With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts DNA sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end reads are recommended for ATAC-Seq for the reasons described [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html).
+![ATAC-Seq](../../images/cut_and_run/cut_and_run.png {% cite Skene2017 %})
 
-In this tutorial we will use data from the study of {% cite Buenrostro2013 %}, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million reads in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a DNA-binding protein implicated in 3D structure: [CTCF](https://en.wikipedia.org/wiki/CTCF). CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).
+**C**leavage **U**nder **T**argets and **R**elease **U**sing **N**uclease (CUT&RUN){% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the protein of interest (POI). The big difference, CUT&RUN couples the antibody with a protein A-micrococcal nuclease (pA-MNase), which you can see in **Figure 1**. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) is an endo-exonuclease that cleaves and shortens the bound DNA of the selected POI *in-situ*. CUT&RUN allows to fragment the DNA in intact cells and thus allows to study protein-DNA interactions in a more natural state. The added pA-MNase thus creates shorted fragments that lead to a higher resolution for the mapping in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) fixate and make the nuceli or cells permeable, (2) add selective antibody of the POI, (3) add and activate pA-MNas, (4) release DNA complex and collect the DNA from the supernatant. Afterwards, the DNA can be PCR amplified and prepared for sequencing.
+
+In this tutorial we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we are **not** completely follow. It is important to note at this point that a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from an CUT&RUN experiment for the aforementioned TF GATA1 in human. We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment.
 
 ### When working with real data
 {:.no_toc}
-When you use your own data we suggest you to use [this workflow](https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control) which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this workflow, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html), but could be ATAC-Seq of purified DNA.
+The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your own data we suggest to use [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong) which includes additional steps for your data analysis. Both worklfows do not support a peak calling with controls as CUT&RUN has a low background. It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to take them into consideration. 
 
 > ### Agenda
 >
@@ -198,7 +195,7 @@ The first step is to check the quality of the reads and the presence of the Next
 > > >
 > > >    3. **Overrepresented sequences**
 > > >
-> > >       One sequence is over represented: 
+> > >       One sequence is over represented:
 > > >       you have 306 reads which are exactly the sequence of the Nextera adapter.
 > > >       They correspond to adapters amplified head-to-head.
 > > >       306 is really low (only 0.1% of reads).
