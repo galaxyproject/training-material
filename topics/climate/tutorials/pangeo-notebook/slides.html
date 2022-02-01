@@ -21,9 +21,9 @@ objectives:
 time_estimation: "15m"
 key_points:
   - Pangeo is an inclusive community promoting open, reproducible and scalable science.
-  - The Pangeo software ecosystem involves open source tools such as X-array, iris, dask, jupyter, and many other packages. 
+  - The Pangeo software ecosystem involves open source tools such as Xarray, iris, dask, jupyter, and many other packages. 
   - Pangeo is an inclusive community promoting open, reproducible and scalable science.
-  - The Pangeo software ecosystem involves open source tools such as X-array, iris, dask, jupyter, and many other packages. 
+  - The Pangeo software ecosystem involves open source tools such as Xarray, iris, dask, jupyter, and many other packages. 
   - On the cloud, Analysis Ready, Cloud Optimized ata format (ARCO) is preferable.
   - Pangeo-forge eases the extractionm transformation and loading of Earth Science datasets
   - SpatioTemporal Asset Catalogs helps to provide a unified interface for searching and extracting spatio temporal datasets
@@ -73,7 +73,7 @@ Co-founder of Pangeo; Introduction to DASK by the Dask community and STAC e.g. S
 Pangeo is first and foremost a community promoting open, reproducible, and scalable science.
 This community provides documentation, develops and maintains Open Source software, and deploys computing infrastructure to make scientific research and programming easier.
 
-Pangeo is funded through many different projects in USA, Europe and Australia but the main funders are NSF, EarthCube, NASA and Gordon and Betty Moore foundation.
+Pangeo is funded through many different projects in USA, Europe and Australia but the main funders are NSF, EarthCube, NASA and the Gordon and Betty Moore foundation.
 
 
 ---
@@ -130,14 +130,14 @@ with many functions for analysing and visualising Earth Science data.
 
 ## Xarray 
 
-*Xarray is an open source project and Python package that makes working with labelled multi-dimensional arrays simple, efficient, and fun!*
+*Xarray is an open source project and Python package that makes working with labeled multi-dimensional arrays simple, efficient, and fun!*
 
 <img src="../../images/dataset-diagram-logo.png" alt="Xarray logo" width="400"/>
 
 
 ???
 
-X array is an open source project and Python package that makes working with labelled multi-dimensional arrays simple, efficient, and fun!
+X-array is an open source project and Python package that makes working with labeled multi-dimensional arrays simple, efficient, and fun!
 
 ---
 
@@ -146,16 +146,16 @@ X array is an open source project and Python package that makes working with lab
 
 .left[Xarray expands on NumPy arrays and pandas. Xarray has two core data structures:]
 
-.left[- `DataArray` is our implementation of a labeled, N-dimensional array. It is an N-D generalization of a `pandas.Series`.]
+.left[- `DataArray` is our implementation of a labeled, N-dimensional array. It is a generalization of a `pandas.Series`.]
 .left[- `Dataset` is a multi-dimensional, in-memory array database. It is a dict-like container of `DataArray` objects aligned along any number of shared dimensions, and serves a similar purpose in xarray to the `pandas.DataFrame`.]
 
 .left[*Source*: [Xarray documentation](https://xarray.pydata.org/en/stable/getting-started-guide/why-xarray.html)]
 
 
 ???
-Xarray expands on NumPy arrays and pandas. Xarray has two core data structures: DataArray is the X array implementation of a labeled, N-dimensional array. It is an N-D generalization of a pandas Series.
+X-array expands on NumPy arrays and pandas. X-array has two core data structures: DataArray is the X-array implementation of a labeled, N-dimensional array. It is an N-D generalization of a pandas Series.
 Dataset is a multi-dimensional, in-memory array database. It is a dict-like container of DataArray objects aligned along any number of shared dimensions, and serves a similar purpose in 
-X array to the pandas DataFrame.
+X-array to the pandas DataFrame.
 
 ---
 
@@ -170,12 +170,12 @@ X array to the pandas DataFrame.
 
 ???
 
-On this figure, we have represented an X array Dataset. Each X array Dataset contains dimensions: here we have 3 dimensions e.g. latitude, longitude and time.
+On this figure, we have represented an X-array Dataset. Each X-array Dataset contains dimensions: here we have 3 dimensions e.g. latitude, longitude and time.
 These are also the coordinates of the datasets and then we have variables. In our example, each of the variables have 3 dimensions.
-The idea behind X array is to provide functions to ease the manipulation of complex and multi-dimensional datasets we have in Earth 
-Science. However, X array is a very generic Python package and is not only used for Earth Sciences. Any data where it is useful to
-represent on a coordinate reference system is very much suitable for X array.
-X array is widely used and probably the most common package from the Pangeo software ecosystem.
+The idea behind X-array is to provide functions to facilitate the handling of complex and multi-dimensional datasets we have in Earth 
+Science. However, X-array is a very generic Python package and it is not only used for Earth Sciences. 
+Any data that can be represented on a coordinate reference system is very much suitable for X-array.
+X-array is widely used and probably the most common package from the Pangeo software ecosystem.
 
 ---
 
@@ -187,7 +187,7 @@ X array is widely used and probably the most common package from the Pangeo soft
 - Data model based on the [CF conventions](http://cfconventions.org/);
 - Unit conversion;
 - visualization interface based on [matplotlib](https://matplotlib.org/) and [cartopy](https://scitools.org.uk/cartopy/docs/latest/);
-- efficient from single-machine through to multi-core clusters and HPC. 
+- efficient from single-machine through to multi-core clusters and High Performance Computers. 
 ]
 
 .pull-right[
@@ -205,7 +205,7 @@ X array is widely used and probably the most common package from the Pangeo soft
 Iris is a powerful, format-agnostic, community-driven Python package for analysing and visualising Earth science data.
 Its data model is based on the NetCDF Climate and Forecast Metadata Conventions. Iris contains a lot of very useful functionalities
 such as unit conversion. It offers a powerful visualization interface based on matplot lib and cartopy. Finally Iris is efficient everywhere, 
-from a single machine through to multi-core clusters and HPC.
+from a single machine through to multi-core clusters and High Performance Computers.
 
 ---
 
@@ -237,7 +237,7 @@ from a single machine through to multi-core clusters and HPC.
 ???
 Dask is a flexible library for parallel computing in Python. It is widely used for getting the necessary performance when manipulating
 large and complex Earth Science datasets. Dask is powerful, scalable and flexible. It is the leading platform today for analytics.
-It scales natively to clusters and cloud and bridges prototyping to production. 
+It scales natively to clusters, cloud and bridges prototyping up to production. 
 The strength of Dask is that is accelerates the existing Python ecosystem e.g. Numpy, Pandas and Scikit-learn with few effort from end-users.
 
 ---
@@ -271,7 +271,7 @@ x + x.T - x.mean(axis=0)
 ???
 
 How does dask accelerate Numpy? Well, it is simple as you can see on this example. Instead of importing numpy, you need to 
-import dask array. Then the rest of your code is unchanged. Dask chunks your big datasets into "Numpy" array and this is how we can
+import dask array. Then the rest of your code is unchanged. Dask chunks your big datasets into "Numpy" arrays and this is how we can
 easily parallelize and scale.
 
 ---
@@ -305,7 +305,7 @@ df.groupby("x").y.mean()
 
 ???
 
-To accelerate Pandas, dask has the same approach than with X array. Your Pandas dataframe is "divided" in chunks.
+To accelerate Pandas, dask follows the same approach than with X-array. Your Pandas dataframe is "divided" in chunks.
 Instead of importing pandas, you import dask.dataframe. And again, the rest of your code remains unchanged.
 
 ---
@@ -337,8 +337,8 @@ lr.fit(data, labels)
 ]
 
 ???
-As you can guess, it is not different for Scikit-Learn. Dask accelerate Scikit-Learn using the same approach. To scale your
-code, we can use dask_ml rather than scikit_learn. 
+As you can guess, it is not different for Scikit-Learn. Dask accelerate Scikit-Learn in a similar way. To scale your
+code, you can use dask_ml rather than scikit_learn. 
 
 ---
 
@@ -367,12 +367,12 @@ code, we can use dask_ml rather than scikit_learn.
 
 You may have heard about the Jupyter ecosystem and wonder why it is presented here as part of the Pangeo ecosystem.
 
-Jupyter has an important role for the Pangeo community. 
+Jupyter plays an important role for the Pangeo community. 
 
 Jupyter is free, follows open standards, and has web services for interactive computing across all programming languages.
 The Jupyter notebook is probably still the most know interface. It is a  simple, streamlined web application for creating 
 and sharing computational documents; 
-JupyterLab is the next generation of Jupyter notebook interface that is flexible and easier to customize and extend
+JupyterLab is the next generation of Jupyter notebook interface that is flexible and easier to customize and extend. 
 Finally JupyterHub is the multi-user version of the notebook (for both Jupyter Notebooks and JupyterLab).
 
 ---
@@ -411,16 +411,16 @@ All Pangeo Tools in Galaxy (interactive notebook or asynchronous tools) include 
 ???
 
 When analyzing data at scale, the data format used is key. For years, the main data format was netCDF e.g. Network Common Data Form
-but with the use of cloud computing and interest of Open Science, different formats are of often more suitable.
-Formats for analyzing data from the cloud are refered as: Analysis Ready, cloud optimized data format or in short ARCO.
-What do we mean by analysis ready? When you analyse data, you are not interested by the data files themselves but by the datasets you need to use.
-We think in datasets and not data files. This abstraction makes it easier to analyse your data because there is no need for tedious homogenizing, organizing or cleaning your files.
+but with the use of cloud computing and interest of Open Science, different formats are often more suitable.
+Formats for analyzing data from the cloud are refered to as "Analysis Ready, Cloud Optimized" data formats or in short ARCO.
+What do we mean by analysis ready? When you analyse data, you are not interested in the data files themselves but in the datasets you need to use.
+We think in terms of "datasets" rather than "data files". This abstraction makes it easier to analyse your data because there is no need for tedious homogenizing, organizing or cleaning your files.
 All your datasets are curated and cataloged. End-users access datasets through well curated catalogs. The location of the data files and
 organization may change, it is transparent to end-users.
 
 What is cloud optimized? It is compatible with Object storage e.g. can be accessed via HTTP protocol. It supports lazy access and intelligent
 subsetting e.g. there is no need to load all your datasets in memory. Only what is needed and when it is needed will be accessed.
-It integrates with high-level analysis libraries and distributed frameworks
+It integrates with high-level analysis libraries and distributed frameworks.
 
 ---
 
@@ -430,7 +430,7 @@ It integrates with high-level analysis libraries and distributed frameworks
 
 
 ???
-The example we show here is not very different from the X array we showed earlier. The difference
+The example we show here is not very different from the X-array we presented earlier. The difference
 is that instead of having one big dataset, it is chunked appropriately for analysis and has rich metadata.
 
 ---
@@ -442,8 +442,8 @@ is that instead of having one big dataset, it is chunked appropriately for analy
 [https://pangeo-forge.org](https://pangeo-forge.org)
 
 Pangeo Forge is an open source platform for data **Extraction**, **Transformation**, and **Loading** (ETL).
-The goal of *Pangeo Forge* is to make it easy to extract data from traditional data repositories and deposit in cloud
-object storage in analysis-ready, cloud optimized (ARCO) format.
+The goal of *Pangeo Forge* is to make it easy to extract data from traditional data repositories and deposit this data in cloud
+object storage in an analysis-ready, cloud optimized (ARCO) format.
 
 Pangeo Forge is inspired directly by Conda Forge, a community-led collection of recipes for building conda packages.
 
@@ -458,7 +458,7 @@ It is under active development and the Pangeo community hopes it will play a rol
 
 ---
 
-## How does it work?
+## How does Pangeo Forge work?
 
 .image-40[
 ![pangeo forge explained](https://pangeo-forge.org/img/pangeo-forge-diagram.b8332f39.png)
@@ -471,9 +471,9 @@ It is under active development and the Pangeo community hopes it will play a rol
 ???
 This may look complicated on this figure but like for conda forge most of the process is automated.
 
-The goal is to "transform" existing datasets from their native format to ARCO format. They can then be used by anyone from anywhere.
+The goal of Pangeo Forge is to "convert" existing datasets from their native format into ARCO format. They can then be used by anyone from anywhere.
 
-Let's imagine you have a bunch of data from NOAA in a tradictional data repository. Instead of manually convert them to ARCO format, 
+Let's imagine you have a bunch of data from NOAA in a tradictional data repository. Instead of manually converting them to ARCO format, 
 you create a recipe, actually you often reuse an existing one that will automatically transform the original datasets in ARCO format and publish it to an s3 compatible object storage such as Amazon.
 
 The next step is then to tell the community where and how to access to your transformed dataset.
@@ -506,9 +506,9 @@ Just searching the relevant data for your project could be a tough work...
 
 ???
 
-why do we need spatio temporal asset catalogs?
+Why do we need spatio temporal asset catalogs?
 Each provider has its own catalog and interface. So just searching the relevant data for your project could be a tough work.
-We have lots of data providers and each with bespoke interface.
+We have lots of data providers and each with a bespoke interface.
 ---
 
 ## Why STAC?
@@ -629,10 +629,10 @@ How to use STAC? Depdending on your needs, you will be using STAC to store your 
 
 ???
 
-Here we show an example using sat-search utility. You can use intake-stac and achieve similar results.
+Here we present an example using the sat-search utility. You can use intake-stac and achieve similar results.
 In this example, we search data over the main region (France) between the 1st January 2019 and the 4th June 2019 using STAC catalogs.
 
-The result shows we have data available for 108 dates and for Landsat-8, sentinel 2A, etc.
+The result shows that data is available for 108 dates and for Landsat-8, sentinel 2A, etc.
 
 ---
 
@@ -653,14 +653,14 @@ With STAC, you can search datasets but you can also easily apply your own proces
     
 *A lot of project are now build around <span style="color:green">STAC</span>*.
 
-- All the STAC Catalog available are at [https://stacindex.org/catalogs](https://stacindex.org/catalogs)
-- Lots of tutorial can be found at [https://stacindex.org/learn](https://stacindex.org/learn)
+- All the STAC Catalogs available are at [https://stacindex.org/catalogs](https://stacindex.org/catalogs)
+- Lots of tutorials can be found at [https://stacindex.org/learn](https://stacindex.org/learn)
 - All packages that rely or work extremely well with STAC are at [https://stacindex.org/ecosystem](https://stacindex.org/ecosystem)
 - [Intake-stac](https://intake-stac.readthedocs.io/en/latest/) is the most popular Python package for discovering, exploring, and loading spatio-temporal datasets.
 
 ???
 
-The STAC ecosystem is growing and A lot of project are now build around STAC. All the STAC Catalog available are online at https://stacindex.org/catalogs.
+The STAC ecosystem is growing and a lot of projects are now built around STAC. All the STAC Catalog available are online at https://stacindex.org/catalogs.
 Lots of tutorial can be found at https://stacindex.org/learn. All packages that rely or work extremely well with STAC are at 
 listed at https://stacindex.org/ecosystem.
 
@@ -679,7 +679,7 @@ Join and contribute to STAC: [https://github.com/radiantearth/stac-spec](https:/
 
 ???
 
-There is already a lot of contributors and it would be hard to name all of them. And STAC welcomes new contributors so the list will likely
+There is already a lot of contributors and it would be hard to name all of them. Since STAC welcomes new contributors, the list will likely
 grow very quickly!
 ---
 
@@ -691,9 +691,9 @@ grow very quickly!
 
 ???
 
-So how does STAC and Pangeo forge relate to each other?
+So how do STAC and Pangeo forge relate to each other?
 Pangeo-forge supports the creation of analysis-ready cloud optimized (ARCO) data in cloud object storage from "classical" data repositories;
-STAC is used to create catalog and goes beyond the Pangeo ecosystem;
+STAC is used to create catalogs and goes beyond the Pangeo ecosystem;
 Work is ongoing to figure out the best way to expose Pangeo-Forge-generated data assets via STAC catalogs.
 
 ---
@@ -713,7 +713,7 @@ Everyone is welcome to the [Pangeo Weekly Community Meeting](https://pangeo.io/m
 
 ???
 The pangeo project is completely open to involvement from anyone with interest.
-There are many ways to get involved. Science users can read the Guide for Scientists, browse the Pangeo Gallery watch Pangeo Showcase Webinar Series, read about the Packages, or try it yourself on Galaxy!
+There are many ways to get involved. Science users can read the Guide for Scientists, browse the Pangeo Gallery watch Pangeo Showcase Webinar Series, read about the Packages, or try it themselves on Galaxy!
 Developers and system administrators can learn about the Technical Architecture or read the Deployment Setup Guides.
 For more information, consult the Frequently Asked Questions on the pangeo website.
 
