@@ -40,11 +40,11 @@ contributors:
 
 *Our mission is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.*
 
-In this tutorial, you will learn how to manipulate [netCDF](https://en.wikipedia.org/wiki/NetCDF) data file using [Xarray](https://xarray.pydata.org/en/stable/) Galaxy Tools. 
+In this tutorial, you will learn how to manipulate [netCDF](https://en.wikipedia.org/wiki/NetCDF) data files using [Xarray](https://xarray.pydata.org/en/stable/) Galaxy Tools. 
 
 
 > ### {% icon comment %} Xarray and Earth Science
-> Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following [CF-Convention](https://cfconventions.org/). However, some Galaxy Tools also work for non Earth Science datasets and if needed current Xarray Galaxy Tools could be extended to accomodate new usage.
+> Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following the [CF-Convention](https://cfconventions.org/). However, some Galaxy Tools also work for non Earth Science datasets and if needed current Xarray Galaxy Tools could be extended to accomodate new usage.
 {: .comment}
 
 In this tutorial, we will be using data from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/)
@@ -307,7 +307,7 @@ In `info file` output file, we can identify 4 different sections:
 >                - *"Choose the start value for slice"*: `0 days 00:00:00`
 >                - *"Choose the end value for slice"*: `1 days 00:00:00`
 > 2. Rename the output dataset to `CAMS-PM2_5-20211222_fc0-23h.netcdf`
-> 3.  Add a tag corresponding to `0-23h`
+> 3.  Add a tag corresponding to `0-23h` (do not forget to add `#` in front of the tag)
 > 4. {% tool [NetCDF xarray Coordinate Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc0-23h.netcdf`
 > 5. Check the generated outputs and in particular `time`. We see that the tabular file `time` only contains **24** lines with times from `0 days 00:00:00` to `0 days 23:00:00`
@@ -353,7 +353,7 @@ In `info file` output file, we can identify 4 different sections:
 > > 5. {% tool [NetCDF xarray Coordinate Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0) %} with the following parameters:
 > >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > > 6.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
-> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-18h_Italy.netcdf`
+> >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > >   - *"Choose the variable to plot"*: `pm2p5_conc`
 > >   - *"Name of latitude coordinate"*: `latitude`
@@ -366,18 +366,19 @@ In `info file` output file, we can identify 4 different sections:
 > >   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
 > >   - *"Add coastline with alpha value [0-1] (optional)"*: `0.5`
 > >   - *"Specify which colormap to use for plotting (optional)"*: `roma_r` 
+> >   - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 > > 8. {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
 > >   - {% icon param-files %} *"Images"*: `Map plots`
 > >   - {% icon param-text %} *"# of images wide"*: `4`
 > > 
 > > ![CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021](../../images/PM2_5_galaxy_20211222_Italy-10-17UTC.png)
 > >
-> > From the plot there is no obvious trend over this entire region of Italy. Howver, we clearly see that PM2.5 is always higher over Naples and tend to increase during the day (on that particular date).
+> > From the plot there is no obvious trend over this entire region of Italy. Howver, we clearly see that PM2.5 is always higher over Naples and tend to spread in the South-East direction by the end of the day (on that particular date).
 > {: .solution }
 {: .question }
 
-> ### {% icon comment %}  `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`
-> Why did we slice latitudes with `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`?
+> ### {% icon comment %}  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`
+> Why did we slice latitudes with `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`?
 > - because when using slice, you need to specify values using the same order than in the coordinates. Latitudes are specified in 
 > decreasing order for CAMS.
 >
@@ -388,7 +389,7 @@ In `info file` output file, we can identify 4 different sections:
 - Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this we use `where`.
 - For instance, we may want to only keep PM2.5 if values are greater than a chosen threshold.
 
-> ### {% icon hands_on %} Hands-on: Plot where PM2.5 is greater than 30 μm.m-3
+> ### {% icon hands_on %} Hands-on: Plot where PM2.5 is greater than 30 μm.m<sup>-3</sup>
 > 1.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
 >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
@@ -404,16 +405,19 @@ In `info file` output file, we can identify 4 different sections:
 >   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
 >   - *"Add coastline with alpha value [0-1] (optional)"*: `0.5`
 >   - *"Specify which colormap to use for plotting (optional)"*: `roma_r`
+>   - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >    ![CAMS PM2.5 Italy 10:00  December 22, 2021](../../images/PM2_5_galaxy_20211222_Italy-10UTC-30.png)
-> Now we clearly see that values of PM2.5 >  30 μm.m-3 are only found over Naples on December 22, 10:00 UTC.
+> Now we clearly see that values of PM2.5 >  30 μm.m<sup>-3</sup> are only found over Naples on December 22, 10:00 UTC.
 >
 {: .hands_on}
 
 
 
-> ### {% icon question %} PM2.5 over Italy over 30 μm.m-3
+> ### {% icon question %} PM2.5 over Italy over 30 μm.m<sup>-3</sup>
 >
->Using the same geographical region over Italy, can you tell us if the forecasted PM2.5 will exceed 30 μm.m-3 between 10:00 UTC and 17:00 UTC on december 22, 2021? 
+> Using the same geographical region over Italy, can you tell us if the forecasted PM2.5 will exceed
+> 30 μm.m<sup>-3</sup> 
+> between 10:00 UTC and 17:00 UTC on december 22, 2021? 
 >
 > > ### {% icon solution %} Solution
 > > 1.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
@@ -426,18 +430,19 @@ In `info file` output file, we can identify 4 different sections:
 > >         - {% icon param-file %} *"Tabular of time values"*: `time` 
 > >         - *"Choose the times to plot"*: **Tick Select all** 
 > >   - *"Shift longitudes [0,360] --> [-180,180]"*: `No`
-> >   - *"Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)"*: `0,35`
+> >   - *"Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)"*: `0,35`
 > >   - *"Do not plot values below this threshold (optional)"*: `30`
 > >   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
 > >   - *"Add coastline with alpha value [0-1] (optional)"*: `0.5`
 > >   - *"Specify which colormap to use for plotting (optional)"*: `roma_r`
+> >   - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 > >   
 > > 7. {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
-> >   - {% icon param-files %} *"Images"*: `Map plots`
+> >   - {% icon param-files %} *"Images"*: Browse the dataset and manually select all images (png files) 
 > >   - {% icon param-text %} *"# of images wide"*: `4`
 > > 
-> > ![CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021 with PM2.5 > 30 μm.m-3](../../images/PM2_5_galaxy_20211222_Italy-10-17UTC_30.png)
-> > Using thresholds, we can clearly identify areas if any where we have "high" values of PM2.5. On that particular day, PM2.5 is not very high but there are a few pixels where we have values greater than 30 μm.m-3.
+> > ![CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021 with PM2.5 > 30 μm.m<sup>-3</sup>](../../images/PM2_5_galaxy_20211222_Italy-10-17UTC_30.png)
+> > Using thresholds, we can clearly identify areas if anywhere there are "high" values of PM2.5. On that particular day there are a few pixels where PM2.5 values exceed 30 μm.m<sup>-3</sup>.
 > {: .solution }
 {: .question }
 
@@ -500,7 +505,7 @@ In `info file` output file, we can identify 4 different sections:
 > >   - *"Column to plot on x-axis"*: `1`
 > >   - *"Column to plot on y-axis"*: `6`
 > >   - *"Label for x axis"*: `Forecast time (hour) from December, 22 2021`
-> >   - *"Label for y axis"*: `Particule Matter < 2.5 um-3`
+> >   - *"Label for y axis"*: `Particule Matter < 2.5 μm.m-3`
 > >   - In *"Advanced Options"*:
 > >       - *"Type of plot"*: `Lines only `
 > >       - *"Data point options"*: `User defined point options`
