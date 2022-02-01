@@ -58,7 +58,7 @@ The data needed to run the tutorial are the following:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1) 
+> 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1) 
 >
 >    ```
 >    https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1
@@ -68,16 +68,51 @@ The data needed to run the tutorial are the following:
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 3. Rename the dataset, here a zip archive, if needed
+> 4. Check that the datatype is `zip`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+
+## Sub-step with **Unzip**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2) %} with the following parameters:
+>    - *"Extract single file"*: `All files`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 2. Add to each datafile a tag corresponding or modify names if needed
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
+> 3. Unhide all dataset from the resulting data collection so you can use these files independently.
+>
+> 4. Modify format from txt to tabular for xxxx file
 {: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
 
 # Title of the section usually corresponding to a big step in the analysis
 
@@ -99,39 +134,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **Unzip**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2) %} with the following parameters:
->    - *"Extract single file"*: `All files`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **obigrep**
 
