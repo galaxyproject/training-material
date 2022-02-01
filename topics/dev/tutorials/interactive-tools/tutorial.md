@@ -786,7 +786,7 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 
 # Additional components
 
-The GxIT that we wrapped in this tutorial was a simple example, and should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
+The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
 
 ## Self-destruct script
 Web server applications will tend to keep running after the user has terminated the tool in Galaxy, which can result in "zombie" containers hanging around and clogging up the Galaxy server. It is therefore good practice to implement a script that will end the server process when the connection to Galaxy has been terminated. The following script will watch Galaxy's binding to the container port and kill the container when the connection terminates (e.g. the user has ended the job). Just change `RUN_COMMAND_NAME` to the run command for your application.
