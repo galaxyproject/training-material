@@ -23,7 +23,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The data used in this tutorial correspond to the [official OBITools tutorial](https://pythonhosted.org/OBITools/wolves.html) and show how to analyse four wolf scats, using the protocol published in Shehzad et al. (2012) for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifiying the 12S-V5 region (Riaz et al. 2011), together with a wolf blocking oligonucleotide.
+The data used in this tutorial correspond to those described in the [official OBITools tutorial](https://pythonhosted.org/OBITools/wolves.html) and show how to analyse four wolf scats, using the protocol published in Shehzad et al. (2012) for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifiying the 12S-V5 region (Riaz et al. 2011), together with a wolf blocking oligonucleotide.
 
 > ### Agenda
 >
@@ -34,7 +34,13 @@ The data used in this tutorial correspond to the [official OBITools tutorial](ht
 >
 {: .agenda}
 
-# OBITools overview
+# Tutorial based on the official OBITools one
+Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wolves.html), you will learn here how to analyze DNA metabarcoding data produced on Illumina sequencers using:
+ * the OBITools on Galaxy
+ * some classical Galaxy tools
+
+The data used in this tutorial correspond to the analysis of four wolf scats, using the protocol published in Shehzad et al. (2012) for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifiying the 12S-V5 region (Riaz et al. 2011), together with a wolf blocking oligonucleotide.
+
 It is always a good idea to have a look at the intermediate results or to evaluate the best parameter for each step. Some commands are designed for that purpose, for example you can use :
 
 - obicount to count the number of sequence records in a file
@@ -76,14 +82,14 @@ The data needed to run the tutorial are the following:
 
 ## **Unzip** the downloaded archive
 
-> ### {% icon hands_on %} Hands-on: Unzip the downladed .zip archive and prepare unzipped files to be used by OBITools Galaxy tools
+> ### {% icon hands_on %} Hands-on: Unzip the downladed .zip archive and prepare unzipped files to be used by OBITools
 >
 > 1. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2) %} with the following parameters:
 >    - *"Extract single file"*: `All files`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > To work properly, this unzip Galaxy tool is waiting "simple" archive as input, this means without sub directory.
 >    {: .comment}
 >
 > 2. Add to each datafile a tag and/or modify names (*optional*)
@@ -95,17 +101,14 @@ The data needed to run the tutorial are the following:
 > 4. Modify datatype from txt to tabular for the `wolf_diet_ngsfilter` dataset
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we need to unhide manually datasets from the data collection?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Data collection is a functionality often used to deal with multiple datasets on the same format who can be analysed in batch mode. Here, the data collection is populated with heterogenous datafiles, coming from an archive. We thus need to treat separately each dataset of the collection, and to do so, we need to unhide corresponding datasets from the history, as datasets insides collections ar "just" like "symbolic link" to "classical" history datasets hidden by default.
 > >
 > {: .solution}
 >
@@ -118,7 +121,7 @@ The data needed to run the tutorial are the following:
 
 OBITools is a set of programs specifically designed for analyzing NGS data in a DNA metabarcoding context, taking into account taxonomic information. It is distributed as an open source software available on the following website: http://metabarcoding.org/obitools.
 
-Citation: Boyer F., Mercier C., Bonin A., Taberlet P., Coissac E. (2014) OBITools: a Unix-inspired software package for DNA metabarcoding. Molecular Ecology Resources, submitted.
+Citation: Boyer F., Mercier C., Bonin A., Taberlet P., Coissac E. (2016) OBITools: [a Unix-inspired software package for DNA metabarcoding](https://pubmed.ncbi.nlm.nih.gov/25959493/). Molecular Ecology Resources.
 
 The OBITools commands consider a sequence record as an entity composed of five distinct elements. Two of them are mandatory, the identifier (id) and the DNA or protein sequence itself. The id is a single word composed of characters, digits, and other symbols like dots or underscores excluding spaces. Formally, the ids should be unique within a dataset and should identify each sequence record unambiguously, but only a few OBITools actually rely on this property. The sequence is an ordered set of characters corresponding to nucleotides or amino-acids according to the International Union of Pure and Applied Chemistry (IUPAC) nomenclature (Cornish-Bowden 1985). The three other elements composing a sequence record are optional. They consist in a sequence definition, a quality vector, and a set of attributes. The sequence definition is a free text describing the sequence briefly. The quality vector associates a quality score to each nucleotide or amino-acid. Usually this quality score is the result of the base-calling process by the sequencer. The last element is a set of attributes qualifying the sequence, each attribute being described by a key=value pair. The set of attributes is the central concept of the OBITools system. When an OBITools command is run on the sequence records included in a dataset, the result of the computation often consist in the addition of new attributes completing the annotation of each sequence record. This strategy of sequence annotation allows the OBITools to return their results as a new sequence record file that can be used as the input of another OBITools program, ultimately creating complex pipelines.
 
@@ -185,12 +188,12 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > ### {% icon question %} Questions
 >
 > 1. How do you verify the operation is successfull?
-> 2. How many sequences are kept?
+> 2. How many sequences are kept? Discarded?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. you can search in the input file content the presence of `mode=joined` and same on the output file (just clicking the eye to visualize the content of each file and typing CTRL+C for example to search `mode=joined` in the file, or using a regex Galaxy tool for example). You can also at least look at the size of the output file, if smaller than input file, this is a first good indication.
-> > 2. You can use a Galaxy tool like `Line/Word/Character count of a dataset` to count the number of lines of each dataset (input and output of obigrep) and divided by 4 (as in a FastQ file, each sequence is represented by a block of 4 lines). 45 276 sequences for input file. 44 717 for output file. Thus  559 sequences.
+> > 2. You can use a Galaxy tool like `Line/Word/Character count of a dataset` to count the number of lines of each dataset (input and output of obigrep) and divided by 4 (as in a FastQ file, each sequence is represented by a block of 4 lines). 45 276 sequences for input file. 44 717 for output file. Thus 559 sequences discarded.
 > >
 > {: .solution}
 >
@@ -209,11 +212,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A DNA metabarcoding experiment can be considered as a set a PCR products mixed together and sequenced using a next generation sequencer ({i.e.} a solexa or a 454). To distinguish between this different PCR products, pairs of small DNA sequences (call tags, see the oligoTag command and its associated paper for more informations on the design of such tags) unique for each PCR products are concatenated to the PCR primers. As they are amplified during the PCR, these tags should be recognizable, together with their respective primers, at the beginning and the end of the reads. The first step in data analysis is thus to demultiplex the large resulting sequence file by identifying these DNA tags and the primers.
-
-Usually the results of sequencing are stored in one or more files formatted according to the fasta or fastq format. ngsfilter take as input such sequence file and an extra file describing the DNA tags and primers sequences used for each sample.
-
-The results consist of sequences trimmed of the primers and tags and annotated with the corresponding sample (and possibly some extra informations). Sequences for which the tags and primers have not been well identified, and which are thus unassigned to any sample, are tagged as erroneous sequences by ngsfilter. Such erroneous sequences are not reported by the program unless specified by the appropriate option.
+>    > Each sequence record is assigned to its corresponding sample and marker using the data provided in a text file (here wolf_diet_ngsfilter.txt). This text file contains one line per sample, with the name of the experiment (several experiments can be included in the same file), the name of the tags (for example: aattaac if the same tag has been used on each extremity of the PCR products, or aattaac:gaagtag if the tags were different), the sequence of the forward primer, the sequence of the reverse primer, the letter T or F for sample identification using the forward primer and tag only or using both primers and both tags, respectively.
 >    {: .comment}
 >
 {: .hands_on}
@@ -222,13 +221,11 @@ The results consist of sequences trimmed of the primers and tags and annotated w
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many sequences are not assigned?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 1391
 > >
 > {: .solution}
 >
@@ -239,11 +236,12 @@ The results consist of sequences trimmed of the primers and tags and annotated w
 > ### {% icon hands_on %} Hands-on: Groups together sequence records
 >
 > 1. {% tool [obiuniq](toolshed.g2.bx.psu.edu/repos/iuc/obi_uniq/obi_uniq/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `Trimmed and annotated file by NGSfilter`
+>    
 >    - *"Attribute to merge"*: `sample`
+>    
+>    - *"Use specific option"*: `merge`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
