@@ -217,8 +217,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
 > 1. How many sequences are not assigned?
@@ -245,22 +243,23 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The same DNA molecule can be sequenced several times. In order to reduce both file size and computations time, and to get easier interpretable results, it is convenient to work with unique sequences instead of reads. To dereplicate such reads into unique sequences, we use the obiuniq command.
+>    > Definition: Dereplicate reads into unique sequences
+>    > * compare all the reads in a data set to each other
+>    > * group strictly identical reads together
+>    > * output the sequence for each group and its count in the original dataset (in this way, all duplicated reads are removed)
+>    > *Definition adapted from Seguritan and Rohwer (2001)*
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many sequences you had and how many you finally obtain?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. From 43 326 to 3 962
 > >
 > {: .solution}
 >
@@ -271,29 +270,26 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > ### {% icon hands_on %} Hands-on: Check quality of your data before and after analysis
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>    - *"Raw read data from your current history"*: `wolf-F`, `wolf-R` and `obigrep output file`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > To select more than one input dataset and execute the tool in parallel on multiple files, you have to select the `Multiple datasets` mode.
+>    > 
+>    > The run of obiuniq has added two key=values entries in the header of the fasta sequence:
+>    > * merged_sample={'29a_F260619': 1}: this sequence have been found once in a single sample called 29a_F260619
+>    > * count=1 : the total count for this sequence is 1
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Do you know why Per base sequence quality is ok with obigrep output file and not original F and R files?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Raw F and R files have classical decrease of sequencing quality with the length of sequences. On obigrep output dataset, Forward and Reverse sequences are merged so nucleotides with low sequencing quality from the end of forward reads are replaced by the high sequencing quality from the start of reverse corresponding reads.
 > >
 > {: .solution}
 >
@@ -307,34 +303,18 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    - In *"Keep only attribute with key"*:
 >        - *"key"*: `count`
 >        - *"if you want to specify a second key"*: `merged_sample`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+
 >
 >    > ### {% icon comment %} Comment
 >    >
 >    > obiannotate is the command that allows adding/modifying/removing annotation attributes attached to sequence records.
 >    > Once such attributes are added, they can be used by the other OBITools commands for filtering purposes or for statistics computing.
+>    > 
+>    > Here, the goal is to keep only `count` and `merged_sample` key=value attributes!
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **obistat**
 
