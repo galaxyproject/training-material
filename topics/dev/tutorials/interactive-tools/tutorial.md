@@ -786,7 +786,7 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 
 # Additional components
 
-The GxIT that we wrapped in this tutorial was a simple example, and should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
+The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
 
 ## Self-destruct script
 Web server applications will tend to keep running after the user has terminated the tool in Galaxy, which can result in "zombie" containers hanging around and clogging up the Galaxy server. It is therefore good practice to implement a script that will end the server process when the connection to Galaxy has been terminated. The following script will watch Galaxy's binding to the container port and kill the container when the connection terminates (e.g. the user has ended the job). Just change `RUN_COMMAND_NAME` to the run command for your application.
@@ -815,7 +815,7 @@ In the case of our `Tabulator` application, the run script is simply the R scrip
 - [AskOmics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml): configuration with Python and Bash scripts, followed by `start_all.sh` to run the application.
 
 ## Templated config files
-Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the applcation by templating a run script or configuration file to be read by the application. In this application for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
+Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the application by templating a run script or configuration file to be read by the application. In this application for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
 
 ## Reserved environment variables
 
@@ -867,3 +867,6 @@ Having issues with your Interactive Tool? Here are a few ideas for how to troubl
 - Try running the container with Docker directly on your development machine. If the application doesn't work independantly it certainly won't work inside Galaxy!
 - If you need to debug the Docker container itself, it can be useful to write output/logging to a [mounted volume](https://docs.docker.com/storage/volumes/) that can be inspected after the tool has run.
 - You can also open a `bash` terminal inside the container to check the container state while the application is running: `docker exec -it mycontainer /bin/bash`
+
+# Conclusion
+{:.no_toc} 
