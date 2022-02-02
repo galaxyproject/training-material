@@ -276,9 +276,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    >
 >    > To select more than one input dataset and execute the tool in parallel on multiple files, you have to select the `Multiple datasets` mode.
 >    > 
->    > The run of obiuniq has added two key=values entries in the header of the fasta sequence:
->    > * merged_sample={'29a_F260619': 1}: this sequence have been found once in a single sample called 29a_F260619
->    > * count=1 : the total count for this sequence is 1
 >    {: .comment}
 >
 {: .hands_on}
@@ -310,7 +307,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    > obiannotate is the command that allows adding/modifying/removing annotation attributes attached to sequence records.
 >    > Once such attributes are added, they can be used by the other OBITools commands for filtering purposes or for statistics computing.
 >    > 
->    > Here, the goal is to keep only `count` and `merged_sample` key=value attributes!
+>    > Here, the goal is to keep only `count` and `merged_sample` key=value attributes! 
 >    {: .comment}
 >
 {: .hands_on}
@@ -349,13 +346,11 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can you use this result to say how many sequences occuring only once? You would need to use Galaxy tools like `Sort data in ascending or descending order` and ` Select first lines from a dataset` to answer the question
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 3131 sequences are occuring once.
 > >
 > {: .solution}
 >
@@ -363,69 +358,32 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 ## Sub-step with **obigrep**
 
-> ### {% icon hands_on %} Hands-on: Filters sequence file on count criteria
+> ### {% icon hands_on %} Hands-on: Keep only the sequences having a count greater or equal to 10 and a length shorter than 80 bp
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Choose the sequence record selection option"*: `predicat`
 >        - *"Python boolean expression to be evaluated for each sequence record."*: `count>=10`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **obigrep**
-
-> ### {% icon hands_on %} Hands-on: Filters sequence file on sequence length criteria
->
-> 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
+> 2. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Choose the sequence record selection option"*: `lmin`
 >        - *"lmin"*: `80`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Based on the previous observation, we set the cut-off for keeping sequences for further analysis to a count of 10
+>    > Based on previous knowledge we also remove sequences with a length shorter than 80 bp (option -l) as we know that the amplified 12S-V5 barcode for vertebrates must have a length around 100bp
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many sequences are kept following the "count" filter?
+> 2. How many sequences are kept following the "length" filter?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 178
+> > 2. 175
 > >
 > {: .solution}
 >
@@ -433,38 +391,21 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 ## Sub-step with **obiclean**
 
-> ### {% icon hands_on %} Hands-on: Tags a set of sequences for PCR/sequencing errors identification
+> ### {% icon hands_on %} Hands-on: Clean the sequences for PCR/sequencing errors (sequence variants)
 >
 > 1. {% tool [obiclean](toolshed.g2.bx.psu.edu/repos/iuc/obi_clean/obi_clean/1.2.13) %} with the following parameters:
->    - *"Threshold ratio between counts (rare/abundant counts) of two sequence records so that the less abundant one is a variant of the more abundant (default: 1, i.e. all less abundant sequences are variants)"*: `0.05`
+>    - *"Input sequences file"*: `obigrep output file`
+>    - *"Maximum numbers of differences between two variant sequences (default: 1)"*: `1`
+>    -  *"Threshold ratio between counts (rare/abundant counts) of two sequence records so that the less abundant one is a variant of the more abundant (default: 1, i.e. all less abundant sequences are variants)"*: `0.05`
 >    - *"Do you want to select only sequences with the head status in a least one sample?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > As a final denoising step, using the obiclean program, we keep the head sequences that are sequences with no variants with a count greater than 5% of their own count
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **NCBI BLAST+ blastn**
 
@@ -474,7 +415,35 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    - *"Subject database/sequences"*: `FASTA file from your history (see warning note below)`
 >    - *"Set expectation value cutoff"*: `0.0001`
 >    - *"Output format"*: `Tabular (extended 25 columns)`
->    - *"Advanced Options"*: `Hide Advanced Options`
+>    - *"Advanced Options"*: `Show Advanced Options`
+>    - *"Maximum hits to consider/show": `1`
+>
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Sub-step with **Filter sequences by ID**
+
+> ### {% icon hands_on %} Hands-on: Filter Blast results
+>
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - *"Sequence file to be filtered"*: `db_v05_r117`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -502,6 +471,10 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > {: .solution}
 >
 {: .question}
+
+
+
+
 
 ## Sub-step with **Filter**
 
