@@ -426,7 +426,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 > ### {% icon hands_on %} Hands-on: Filter Blast results
 >
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
+> 1. {% tool [obitab](toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13) %} with the following parameters:
 >    - *"Sequence file to be filtered"*: `db_v05_r117`
 >    - *"Filter using the ID list from"*: `tabular file`
 >    - *"Tabular file containing sequence identifiers"*: `megablast obiclean`
@@ -436,75 +436,50 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This tool allows you to re-associate all the reference sequences information, notably the `species_name` one so you can see which species are potentially seen on the sample.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 
 
-
-## Sub-step with **Filter**
+## Sub-step with **Obitab**
 
 > ### {% icon hands_on %} Hands-on: Filter Blast results
 >
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - *"With following condition"*: `c3>99.99`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> 1. {% tool [obitab](toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `db_v05_r117 with matched ID`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This tool allows you to convert a fasta file into a tabular one so it is easier to read sequences definitions.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many species are identified? You can use `Cut columns from a table` and `unique occurences of each record` to isolate the `species name` column of obitab results.
+> 2. Can you deduce the diet of each sample? You can use tools like `obitab` and `Join two Datasets side by side on a specified field` to join megablast results to obigrep one and `db_v05_r117 with matched ID`
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 1O 
+> > 2. If we remove human sequences ;), some squirrel (sample:26a_F040644), deer (sample:15a_F730814 + sample:29a_F260619), stag (sample:29a_F260619 + sample:13a_F730603), marmot (sample:26a_F040644), doe (sample:29a_F260619), Grimm's duiker (sample:29a_F260619).
 > >
 > {: .solution}
 >
 {: .question}
-
 
 ## Re-arrange
 
 To create the template, each step of the workflow had its own subsection.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+You analyzed raw metabarcoding data to identify diet of wolves.
