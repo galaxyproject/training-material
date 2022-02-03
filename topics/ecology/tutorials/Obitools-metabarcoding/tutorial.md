@@ -421,22 +421,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 
 ## Sub-step with **Filter sequences by ID**
 
@@ -444,10 +428,11 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - *"Sequence file to be filtered"*: `db_v05_r117`
+>    - *"Filter using the ID list from"*: `tabular file`
+>    - *"Tabular file containing sequence identifiers"*: `megablast obiclean`
+>    - *"Column(s) containing sequence identifiers"*: `Column 2`
+>    - *"Output positive matches, negative matches, or both?"*: `just positive match`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
