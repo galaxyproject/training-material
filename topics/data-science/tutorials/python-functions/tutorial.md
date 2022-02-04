@@ -301,28 +301,31 @@ display(c=77)
 > ### {% icon question %} Exercise: Signing a message
 > Let's test out a default argument. Imagine you are printing out a message, and at the bottom it should have a signature.
 >
-> You can accomplish this with three print statements. Print the message, print nothing `print()` and then print a signature variable.
->
 > Inputs:
-> - message
-> - signature (default it to your name)
+> - `message`: a variable that is always provided to the function, it has no default.
+> - `signature`: a variable that can be *optionally* provided, it should have a default like your name.
+>
+> You can accomplish this with *three print statements*:
+> 1. Print the message
+> 2. Print nothing (i.e. `print()`)
+> 3. Print a signature variable.
 >
 > > ### {% icon solution %} Solution
 > > ```
-> > def signedSaying(message, name="Your name"):
+> > def myFunction(message, signature="Your name"):
 > >     print(message)
 > >     print()
-> >     print(name)
+> >     print(signature)
 > > ```
 > {: .solution}
 {: .question}
 
 ```python
 # Test things out here!
-def signedSaying # Fix this function!
+def myFunction # Fix this function!
 
 
 # Here are some test cases, for you to check if your function works!
-message('This is a message')
-message('This is a message', signature='Jane Doe')
+myFunction('This is a message')
+myFunction('This is a message', signature='Jane Doe')
 ```
