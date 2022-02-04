@@ -23,9 +23,9 @@
         
         
         
-        <meta name="description" content="Image analysis using Galaxy" />
+        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
         <meta property="og:title" content="Galaxy Training: Nucleoli Segmentation <br> & <br> Feature Extraction <br>..." />
-        <meta property="og:description" content="Image analysis using Galaxy" />
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
@@ -100,10 +100,6 @@
 
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
-        </a>
-        
-        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -294,7 +290,7 @@
 </ul>
 
 <p>.image-55[
-  <img src="../../images/tutorial-CP/img_dna_channel.png" alt="image of four cells, one is dividing, and red arrows point to the 5 nucleii. " loading="lazy" />
+  <img src="../../images/tutorial-CP/img_dna_channel.png" alt="image of four cells, one is dividing, and red arrows point to the 5 nucleii" />
 ]</p>
 
 <p><span>Speaker Notes</span>
@@ -308,7 +304,7 @@ In the DNA channel, the nucleoli is shown as the absence of DNA (red arrows).
 </ul>
 
 <p>.image-65[
-  <img src="../../images/tutorial-CP/IDR_interface.jpg" alt="screenshot of a complex tool interface showing an array of images (1) and then two selected images below it (2) and a configuration panel on the right (3). " loading="lazy" />
+  <img src="../../images/tutorial-CP/IDR_interface.jpg" alt="screenshot of a complex tool interface showing an array of images (1) and then two selected images below it (2) and a configuration panel on the right (3)" />
 ]</p>
 
 <p><span>Speaker Notes</span>
@@ -329,7 +325,7 @@ You can also bring your images by uploading the DNA channel of your images to yo
   </li>
 </ul>
 
-<figure id="figure-1"><img src="../../images/tutorial-CP/wf.jpg" alt="screenshot of a galaxy workflow with four sections highlighted by boxes reading nuclei, nucleoli, background, and feature extraction." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> High-level view of the workflow</figcaption></figure>
+<p><img src="../../images/tutorial-CP/wf.jpg" alt="screenshot of a galaxy workflow with four sections highlighted by boxes reading nuclei, nucleoli, background, and feature extraction." title="High-level view of the workflow" /></p>
 
 <p><span>Speaker Notes</span></p>
 <ul>
@@ -342,7 +338,7 @@ You can also bring your images by uploading the DNA channel of your images to yo
 
 <h3 id="1-segment-nuclei">1) Segment nuclei</h3>
 
-<p><img src="../../images/tutorial-CP/subwf_nuclei.jpg" alt="Inset to the first portion of the above overview image showing nuclei with 5 steps, starting modules, segment complete nuclei, segmentation mask complete nuclei, label nuclei, and save labelled nuclei." loading="lazy" /></p>
+<p><img src="../../images/tutorial-CP/subwf_nuclei.jpg" alt="Inset to the first portion of the above overview image showing nuclei with 5 steps, starting modules, segment complete nuclei, segmentation mask complete nuclei, label nuclei, and save labelled nuclei." /></p>
 
 <p><span>Speaker Notes</span>
 Every CellProfiler pipeline needs to start by processing the metadata with the tool “Starting modules”.</p>
@@ -355,7 +351,7 @@ Every CellProfiler pipeline needs to start by processing the metadata with the t
 
 <h3 id="segmentation-and-labelling-of-the-nuclei">Segmentation and labelling of the nuclei</h3>
 
-<figure id="figure-2"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="a photo of cells in black and white, several cells have red numbers written atop them." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Identified nuclei with labels</figcaption></figure>
+<p><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="a photo of cells in black and white, several cells have red numbers written atop them." title="Identified nuclei with labels" /></p>
 
 <p><span>Speaker Notes</span>
 Resulting image after the first logical step of the workflow in which the nuclei were segmented and labelled.
@@ -363,7 +359,7 @@ Resulting image after the first logical step of the workflow in which the nuclei
 
 <h3 id="2-segment-nucleoli">2) Segment nucleoli</h3>
 
-<p><img src="../../images/tutorial-CP/subwf_nucleoli.jpg" alt="Inset of the nucleoli portion of the workflow with the following steps: detect dark holes in nuclei, segment nucleoli that fall inside nuclei, segment nucleoli, convert the segmented nucleoli into an image, combine masks (nuclei+nucleoli), and finally save combined segmentation masks." loading="lazy" /></p>
+<p><img src="../../images/tutorial-CP/subwf_nucleoli.jpg" alt="Inset of the nucleoli portion of the workflow with the following steps: detect dark holes in nuclei, segment nucleoli that fall inside nuclei, segment nucleoli, convert the segmented nucleoli into an image, combine masks (nuclei+nucleoli), and finally save combined segmentation masks." /></p>
 
 <p><span>Speaker Notes</span>
 To identify the nucleoli the first step is to enhance the dark holes so that they can be segmented.
@@ -374,7 +370,7 @@ It will be useful for visual exploration that the masks of the nuclei and nucleo
 
 <h3 id="combined-mask-nuclei--nucleoli">Combined mask: nuclei + nucleoli</h3>
 
-<figure id="figure-3"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="image of the cells again, but now cells are blue and nuclei/nucleoli are red." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.</figcaption></figure>
+<p><img src="../../images/tutorial-CP/img_combined_masks.png" alt="image of the cells again, but now cells are blue and nuclei/nucleoli are red." title="Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta." /></p>
 
 <p><span>Speaker Notes</span>
 The combination of both masks gives an image with the nuclei in blue and the nucleoli in magenta.
@@ -382,7 +378,7 @@ The combination of both masks gives an image with the nuclei in blue and the nuc
 
 <h3 id="background-extraction">Background extraction</h3>
 
-<p><img src="../../images/tutorial-CP/subwf_background.jpg" alt="third inset workflow, background extraction, with steps segment all nuclei, segmentation mask nucleoli including cells touching borders, and extract background." loading="lazy" /></p>
+<p><img src="../../images/tutorial-CP/subwf_background.jpg" alt="third inset workflow, background extraction, with steps segment all nuclei, segmentation mask nucleoli including cells touching borders, and extract background." /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -394,7 +390,7 @@ We have partially detected the foreground in the nuclei segmentation in previous
 
 <h3 id="feature-extraction">Feature extraction</h3>
 
-<p><img src="../../images/tutorial-CP/subwf_feature_extraction.jpg" alt="The final inset, feature extraction with very small steps." loading="lazy" /></p>
+<p><img src="../../images/tutorial-CP/subwf_feature_extraction.jpg" alt="The final inset, feature extraction with very small steps." /></p>
 
 <ul>
   <li><strong>Important:</strong> Relate nucleoli and parent nucleus</li>

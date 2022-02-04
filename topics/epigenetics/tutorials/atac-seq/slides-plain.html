@@ -23,9 +23,9 @@
         
         
         
-        <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher..." />
+        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
         <meta property="og:title" content="Galaxy Training: Introduction to ATAC-Seq data analysis" />
-        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher..." />
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
@@ -100,10 +100,6 @@
 
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
-        </a>
-        
-        <a class="dropdown-item" href="/training-material/topics/epigenetics/faqs/" title="Check our FAQs for the Epigenetics topic">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -267,7 +263,7 @@
 
 	<h3 id="where-does-my-data-come-from">Where does my data come from?</h3>
 
-<p><img src="../../images/atac-seq/atac.jpg" alt="Low resolution image from a paper with two subfigures a and b. In A closed and open chromatin exists, then tn5 transposase attaches to open chromatin regions. these fragments are amplifiable and become amplified and sequenced. In subfigure B open chromatin is shown as two strands in black, with a common end in grey on both strands' both ends. Adapter 1 and 2 are attached to 5' ends. this is extended at 72° for 5 minutes, PCR'd using barcoded primers, and then the final product is created for sequencing which has open chromatin regions, surrounded by a common end, and then the adapters with a barcode on adapter 2." loading="lazy" /></p>
+<p><img src="../../images/atac-seq/atac.jpg" alt="Low resolution image from a paper with two subfigures a and b. In A closed and open chromatin exists, then tn5 transposase attaches to open chromatin regions. these fragments are amplifiable and become amplified and sequenced. In subfigure B open chromatin is shown as two strands in black, with a common end in grey on both strands' both ends. Adapter 1 and 2 are attached to 5' ends. this is extended at 72° for 5 minutes, PCR'd using barcoded primers, and then the final product is created for sequencing which has open chromatin regions, surrounded by a common end, and then the adapters with a barcode on adapter 2." /></p>
 
 <p><small>
 <a href="https://doi.org/10.1002/0471142727.mb2129s109"><em>Buenrostro et al. 2013 Nat Methods</em></a>
@@ -329,7 +325,7 @@
 <h3 id="check-the-insert-size">Check the Insert Size</h3>
 
 <p>.image-50[
-  <img src="../../images/atac-seq/Screenshot_sizeDistribution.png" alt="A bar chart mapping frequency to insert size in base pairs. The graph data starts at insert size 20, there is a large sharp peak around 50 to 2000 frequency, and this rapidly decreases to ~200 frequency. There are additional small and broad peaks at insert size 200, 400, and 600 but the graph steadily decreases." loading="lazy" />
+  <img src="../../images/atac-seq/Screenshot_sizeDistribution.png" alt="A bar chart mapping frequency to insert size in base pairs. The graph data starts at insert size 20, there is a large sharp peak around 50 to 2000 frequency, and this rapidly decreases to ~200 frequency. There are additional small and broad peaks at insert size 200, 400, and 600 but the graph steadily decreases." />
 ]</p>
 
 <ul>
@@ -350,7 +346,7 @@
 
 <h2 id="do-not-worry-about-a-nucleotide-bias">Do not worry about a nucleotide bias</h2>
 
-<p><img src="../../images/atac-seq/per_base_sequence_content.png" alt="Fastqc plot showing sequence content as percent of the four bases, A C T G as a function of their position in the read. Below position 17, the lines are extremely jagged showing widely varying distribution of nucleotides that changes base by base. After position 17 in the read this stabilises to ~22% CG/~28% AT." loading="lazy" /></p>
+<p><img src="../../images/atac-seq/per_base_sequence_content.png" alt="Fastqc plot showing sequence content as percent of the four bases, A C T G as a function of their position in the read. Below position 17, the lines are extremely jagged showing widely varying distribution of nucleotides that changes base by base. After position 17 in the read this stabilises to ~22% CG/~28% AT." /></p>
 
 <ul>
   <li>Your experiment might have a nucelotide bias because of the transposase treatment (<a href="https://doi.org/10.1186/1759-8753-3-3">Brian Green et. al. 2012</a>)</li>
@@ -388,7 +384,7 @@
 <h2 id="peak-calling">Peak Calling</h2>
 
 <p>.image-50[
-  <img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Cartoon of nucleosomes shown as large spheres with dna sequence wrapped aroud them and connecting them like lights on a string. Tn5 is binding to the DNA connecting the nucleosomes, and transcription factor is bound to the Tn5 molecules. Reads are shown as arrows pointing towards each other, below the Tn5 molecules." loading="lazy" />
+  <img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Cartoon of nucleosomes shown as large spheres with dna sequence wrapped aroud them and connecting them like lights on a string. Tn5 is binding to the DNA connecting the nucleosomes, and transcription factor is bound to the Tn5 molecules. Reads are shown as arrows pointing towards each other, below the Tn5 molecules." />
 ]</p>
 
 <ul>
@@ -412,7 +408,7 @@
 
 <h2 id="overview">Overview</h2>
 
-<p><img src="../../images/atac-seq/ATACWF.svg" alt="Schematic of the ATAC-Seq workflow. dataset R1 and R2 are run through FastQC which points to a cloud labelled &quot;QC Measures&quot;. The two datasets also go through cutadapt to produce trimmed r1 and r2. This goes to bowtie2 which produces alignments, and another cloud labelled QC measures. The alignments output goes to bamtools filter to produce filtered alignments, which then goes to mark duplicates to produce a filtered without duplicate alignments file. This is sent to MACS2 which produces coverage and peaks outputs. Those, in combination with annotations for the genome are sent to deepTools for heatmaps summarizing multiple regions, and pyGenomeTracks for tracks displaying a specific region." loading="lazy" /></p>
+<p><img src="../../images/atac-seq/ATACWF.svg" alt="Schematic of the ATAC-Seq workflow. dataset R1 and R2 are run through FastQC which points to a cloud labelled &quot;QC Measures&quot;. The two datasets also go through cutadapt to produce trimmed r1 and r2. This goes to bowtie2 which produces alignments, and another cloud labelled QC measures. The alignments output goes to bamtools filter to produce filtered alignments, which then goes to mark duplicates to produce a filtered without duplicate alignments file. This is sent to MACS2 which produces coverage and peaks outputs. Those, in combination with annotations for the genome are sent to deepTools for heatmaps summarizing multiple regions, and pyGenomeTracks for tracks displaying a specific region." /></p>
 
 <ul>
   <li>This is an overview of ATAC-Seq data analysis.</li>
