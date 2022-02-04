@@ -177,9 +177,6 @@ If the K-S test is significant (p-value < 0.5), your numerical variable isn't no
 >        - *"Select column containing taxon "*: `c16`
 >    - *"Select column containing abundances "*: `c18`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -187,6 +184,8 @@ If the K-S test is significant (p-value < 0.5), your numerical variable isn't no
 >    {: .comment}
 >
 {: .hands_on}
+
+![Presence-absence-example](../../images/BiodivExplo/Presence-absence_and_abundance_mappy.png)
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
