@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:39 +0000",
+  "dateModified": "1970-01-01 00:33:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mapping and molecular identification of phenotype-causing mutations",
   "interactivityType": "mixed",
@@ -805,7 +805,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 7, 2019 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 5, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1328,33 +1328,38 @@ with predicted functional effects.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-variant-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Variant Annotation</h3>
 
-  <p>To annotate our variants we are going to use <strong>SnpEff</strong> with the
-<code class="language-plaintext highlighter-rouge">athalianaTair10</code> genome database as the source of functional genomic
+  <p>To annotate our variants we are going to use <strong>SnpEff</strong> with its
+<code class="language-plaintext highlighter-rouge">Arabidopsis_thaliana</code> genome database as the source of functional genomic
 annotations, then generate a human-friendly variant report with the
 <strong>MiModD Report Variants</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
   <ol>
     <li>
-      <p>Use <strong>SnpEff Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="notranslate">Galaxy</span> tool version 4.1.0) to
-download genome database <code class="language-plaintext highlighter-rouge">athalianaTair10</code>.</p>
+      <p>Use <strong>SnpEff Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to download genome database
+<code class="language-plaintext highlighter-rouge">Arabidopsis_thaliana</code>.</p>
 
       <blockquote class="comment">
         <h3 id="comment-snpeff-versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> SnpEff versions</h3>
-        <p>SnpEff genome databases can only be used with the specific version of
-SnpEff they were built for. Make sure you are using version <code class="language-plaintext highlighter-rouge">4.1.0</code> of
-<strong>SnpEff Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in this and of <strong>SnpEff Variant
-effect and annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the next step.
-If your <span class="notranslate">Galaxy</span> server offers newer versions of these tools by default,
-you may be able to request version <code class="language-plaintext highlighter-rouge">4.1.0</code> explicitly using the
-<strong>Versions</strong> button at the top right of the tool interface.</p>
+        <p>SnpEff genome databases can only be used with the specific <code class="language-plaintext highlighter-rouge">major.minor</code>
+version of SnpEff they were built for.
+Make sure you are using matching versions (e.g., <code class="language-plaintext highlighter-rouge">4.3</code> - differences
+past the second digit are fine and denote subversions with compatible
+database schemes) of <strong>SnpEff Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in this and of
+<strong>SnpEff Variant effect and annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the next
+step.</p>
+
+        <p>Please also note that before SnpEff version 4.3 the TAIR10 version of
+the <em>A. thaliana</em> genome database was named <code class="language-plaintext highlighter-rouge">athalianaTair10</code>.
+If your <span class="notranslate">Galaxy</span> server offers only older versions of the SnpEff tools,
+you will have to use that name instead of <code class="language-plaintext highlighter-rouge">Arabidopsis_thaliana</code>.</p>
       </blockquote>
     </li>
     <li>In the <strong>SnpEff Variant effect and annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> interface,
 set:
       <ul>
         <li><strong>Sequence changes (SNPs, MNPs, InDels)</strong> to your filtered VCF dataset</li>
-        <li><strong>Genome source</strong> to <code class="language-plaintext highlighter-rouge">Reference genome from your history</code></li>
-        <li><strong>SnpEff4.1 Genome Data</strong> to your just downloaded genome dataset</li>
+        <li><strong>Genome source</strong> to <code class="language-plaintext highlighter-rouge">Downloaded snpEff database in your history</code></li>
+        <li><strong>SnpEff4.3 Genome Data</strong> to your just downloaded genome dataset</li>
         <li>
           <p>under <strong>Annotation options</strong> check <code class="language-plaintext highlighter-rouge">Use 'EFF' field compatible with
 older versions (instead of 'ANN')</code></p>
@@ -1418,7 +1423,7 @@ at 18,808,927 affects a splice donor site and, thus, is likely to
 interfere with correct splicing of the transcript AT2G45660.1.</li>
         <li>From the linked gene pages at <em>TAIR</em> you can learn that the
 gene AT2G45550 encodes a cytochrome P450, while AT2G45660 encodes a
-protein called AGL20, which is known to control flowering. Thus, there
+protein called AGL20/SOC1, which is known to control flowering. Thus, there
 is a direct connection between the late-flowering phenotype of the
 mutant line studied here and the known role of the gene affected by
 chr2:18,808,927 C→T.</li>
@@ -1510,7 +1515,7 @@ samples.</p>
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Wolfgang Maier, 2019 <b>Mapping and molecular identification of phenotype-causing mutations (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Wolfgang Maier, 2021 <b>Mapping and molecular identification of phenotype-causing mutations (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1527,9 +1532,9 @@ samples.</p>
 <code id="citation-code">@misc{variant-analysis-mapping-by-sequencing,
 author = "Wolfgang Maier",
 title = "Mapping and molecular identification of phenotype-causing mutations (Galaxy Training Materials)",
-year = "2019",
-month = "03",
-day = "07"
+year = "2021",
+month = "11",
+day = "05"
 url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
