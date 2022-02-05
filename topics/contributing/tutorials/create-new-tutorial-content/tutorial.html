@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Creating content in Markdown",
   "interactivityType": "mixed",
@@ -502,7 +502,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 11, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -557,7 +557,9 @@
     </ol>
   </li>
   <li><a href="#citations" id="markdown-toc-citations">Citations</a></li>
-  <li><a href="#automatic-jupyter-notebooks" id="markdown-toc-automatic-jupyter-notebooks">Automatic Jupyter Notebooks</a>    <ol>
+  <li><a href="#automatic-jupyter-notebooks--rmarkdown" id="markdown-toc-automatic-jupyter-notebooks--rmarkdown">Automatic Jupyter Notebooks &amp; RMarkdown</a>    <ol>
+      <li><a href="#currently-supported-languages" id="markdown-toc-currently-supported-languages">Currently Supported Languages</a></li>
+      <li><a href="#restrictions" id="markdown-toc-restrictions">Restrictions</a></li>
       <li><a href="#enabling-the-system" id="markdown-toc-enabling-the-system">Enabling the system</a></li>
     </ol>
   </li>
@@ -2106,7 +2108,7 @@ and the corresponding website {% cite <span class="notranslate">galaxy</span>-tr
 
 <p>Rendered:</p>
 
-<p>For more information please look at this great article <span class="citation"><a href="#batut2018community">Batut <i>et al.</i> 2018</a></span>, and the corresponding website <span class="citation"><a href="#galaxy-training-materials">“<b><span class="notranslate">Galaxy</span> Training materials website</b>”</a></span></p>
+<p>For more information please look at this great article <span class="citation"><a href="#bebatut2018community">Batut <i>et al.</i> 2018</a></span>, and the corresponding website <span class="citation"><a href="#galaxy-training-materials">“<b><span class="notranslate">Galaxy</span> Training materials website</b>”</a></span></p>
 
 <p>A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or <a href="#bibliography">jump there directly</a>)</p>
 
@@ -2115,28 +2117,67 @@ and the corresponding website {% cite <span class="notranslate">galaxy</span>-tr
   <p>If you have a DOI for a paper, you can easily obtain the bibtex citation using <a href="https://www.doi2bib.org/">doi2bib.org</a>.</p>
 </blockquote>
 
-<h1 id="automatic-jupyter-notebooks">Automatic Jupyter Notebooks</h1>
+<h1 id="automatic-jupyter-notebooks--rmarkdown">Automatic Jupyter Notebooks &amp; RMarkdown</h1>
 
-<p>If your tutorial is primarily focused on teaching students how to write code (Bash, Python, SQL, etc) you can take advantage of the GTN’s ability to automatically export Jupyter Notebooks from the tutorial content. In this system, you pick a single language for your tutorial, and then all code blocks tagged with that language become runnable. E.g.</p>
+<p>If your tutorial is primarily focused on teaching students how to write code (Bash, Python, SQL, etc) you can take advantage of the GTN’s ability to automatically export notebooks from the tutorial content! In this system, you pick a <em>single</em> language for your tutorial, and then all code blocks tagged with that language become runnable. E.g.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is some explanation
 
-```bash
-some code that students should execute
+```python
+some_code += f"that students {should execute}"
 ```
 </code></pre></div></div>
+
+<h2 id="currently-supported-languages">Currently Supported Languages</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Jupyter</th>
+      <th>RMarkdown</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bash</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>SQL</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>R</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Every cell that you wish to be executable, needs to be annotated with the language like above. Then if a compatible notebook can be produced, it will be.</p>
+
+<h2 id="restrictions">Restrictions</h2>
 
 <p>To use this system, you need to take care of a few things:</p>
 
 <ul>
   <li>Do <strong>not</strong> use hands-on boxes for segments that should be executed (code needs to be left aligned!)</li>
-  <li>Do not use snippets</li>
-  <li>Do not use the built in citation system</li>
-  <li>Do not use a terminal or prompt character</li>
+  <li>Do <strong>not</strong> use snippets</li>
+  <li>Do not use a terminal or prompt character (that would be included in the execution.)</li>
   <li>Avoid including output when you can, it doesn’t render nicely especially when the cells will become runnable.</li>
 </ul>
 
-<p>And be aware that the output will look a little bit different than the GTN, e.g. solution boxes cannot be hidden by default.</p>
+<p>And be aware that the output will look a little bit different than the GTN, e.g. solution boxes cannot be hidden by default, so in Jupyter notebook we format the text with a colour of <code class="language-plaintext highlighter-rouge">white</code> so it does not appear in the notebook and requires selection to view the answer.</p>
+
+<p><em>However there are things that are possible!</em> You can still use question/solution boxes, or otherwise nested boxes. Just not <code class="language-plaintext highlighter-rouge">includes</code> or <code class="language-plaintext highlighter-rouge">snippets</code></p>
 
 <h2 id="enabling-the-system">Enabling the system</h2>
 
@@ -2145,6 +2186,8 @@ some code that students should execute
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>notebook:
   language: python
 </code></pre></div></div>
+
+<p>Supported values are python, sql, r, and bash. The notebook will be generated automatically as part of the site build process.</p>
 
 <h1 id="spanish-translation-project">Spanish Translation Project</h1>
 
@@ -2220,7 +2263,7 @@ some code that students should execute
                 
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="galaxy-training-materials"><b>Galaxy Training materials website</b>. Accessed 2019-04-08. <a href="https://training.galaxyproject.org">https://training.galaxyproject.org</a></li>
-<li id="batut2018community">Batut, B., S. Hiltemann, A. Bagnacani, D. Baker, V. Bhardwaj <i>et al.</i>, 2018 <b>Community-driven data analysis training for biology</b>. Cell systems 6: 752–758. <a href="https://doi.org/10.1016/j.cels.2018.05.012">10.1016/j.cels.2018.05.012</a></li></ol>
+<li id="bebatut2018community">Batut, B., S. Hiltemann, A. Bagnacani, D. Baker, V. Bhardwaj <i>et al.</i>, 2018 <b>Community-driven data analysis training for biology</b>. Cell systems 6: 752–758. <a href="https://doi.org/10.1016/j.cels.2018.05.012">10.1016/j.cels.2018.05.012</a></li></ol>
                 
 
                 
@@ -2275,7 +2318,7 @@ some code that students should execute
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Bérénice Batut, Björn Grüning, Saskia Hiltemann, Helena Rasche, 2021 <b>Creating content in Markdown (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Bérénice Batut, Björn Grüning, Saskia Hiltemann, Helena Rasche, 2022 <b>Creating content in Markdown (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -2292,9 +2335,9 @@ some code that students should execute
 <code id="citation-code">@misc{contributing-create-new-tutorial-content,
 author = "Bérénice Batut and Björn Grüning and Saskia Hiltemann and Helena Rasche",
 title = "Creating content in Markdown (Galaxy Training Materials)",
-year = "2021",
-month = "10",
-day = "11"
+year = "2022",
+month = "01",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
