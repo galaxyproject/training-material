@@ -48,6 +48,14 @@ It is always a good idea to have a look at the intermediate results or to evalua
 - obistat to get some basic statistics (count, mean, standard deviation) on the attributes (key=value combinations) in the header of each sequence record (see The extended OBITools fasta format in the fasta format description)
 - any Galaxy tools corresponding to classical unix command such as less, awk, sort, wc to check your files.
 
+The OBITools programs imitate Unix standard programs because they usually act as filters, reading their data from text files or the stdin and writing their results to the stdout. The main difference with classical Unix programs is that text files are not analyzed line per line but sequence record per sequence record (see below for a detailed description of a sequence record). Compared to packages for similar purposes like mothur (Schloss et al. 2009) or QIIME (Caporaso et al. 2010), the OBITools mainly rely on filtering and sorting algorithms. This allows users to set up versatile data analysis pipelines
+
+![OBITools pipeline](../../images/Obitools/fig-Pipeline.png)
+
+Most of the OBITools commands read sequence records from a file or from the stdin, make some computations on the sequence records and output annotated sequence records. As inputs, the OBITools are able to automatically recognize the most common sequence file formats (i.e. fasta, fastq, EMBL, and GenBank). They are also able to read ecoPCR (Ficetola et al. 2010) result files and ecoPCR/ecoPrimers formatted sequence databases (Riaz et al. 2011) as ordinary sequence files. File format outputs are more limited. By default, sequences without and with quality information are written in fasta and Sanger fastq formats, respectively. However, dedicated options allow enforcing the output format, and the OBITools are also able to write sequences in the ecoPCR/ecoPrimers database format, to produce reference databases for these programs. In the fasta or fastq format, the attributes are written in the header line just after the id, following a key=value; format
+
+![OBITools attributes records](../../images/Obitools/fig-Record.png)
+
 # Manage input data
 The data needed to run the tutorial are the following:
 
