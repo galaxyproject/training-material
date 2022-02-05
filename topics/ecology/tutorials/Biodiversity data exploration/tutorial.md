@@ -128,7 +128,7 @@ If the K-S test is significant (p-value < 0.5), your numerical variable isn't no
 {: .question}
 
 
-![Absence correlation_example](../../images/BiodivExplo/Absence-correlation_plot.png)
+
 ![Boxplot dispersion_example](../../images/BiodivExplo/Boxplot_and_dispersion_plot.png)
 ![Homoscedasticity and normality_example](../../images/BiodivExplo/Homoscedasticity_and_normality_Homogeneity_of_%20Amblygobius%20phalaena.png)
 
@@ -295,6 +295,8 @@ If the K-S test is significant (p-value < 0.5), your numerical variable isn't no
 ![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Mean_LCBD_through_time.png) 
 ![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_SCBD_Species_Radar_plot.png) 
 
+Final absence correlation plot:
+![Absence correlation_example](../../images/BiodivExplo/Absence-correlation_plot.png)
 
 ## Re-arrange
 
