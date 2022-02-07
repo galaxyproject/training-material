@@ -301,10 +301,9 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1) %} with the following parameters:
+> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
->    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY`  (see why below)
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
 >    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
 >
@@ -312,9 +311,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > ### {% icon comment %} Comments
 >
-> Due to bugs in InterProScan, `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY` don't work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.
->
-> To speed up the processing by InterProScan during this tutorial, you can also disable `Pfam` and `PANTHER` applications. When analysing real data, it is adviced to keep them enabled.
+> To speed up the processing by InterProScan during this tutorial, you can disable `Pfam` and `PANTHER` applications. When analysing real data, it is adviced to keep them enabled.
 >
 > When some applications are disabled, you will of course miss the corresponding results in the output of **InterProScan**.
 {: .comment}
