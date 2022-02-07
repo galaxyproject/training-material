@@ -73,7 +73,7 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 
 > ### {% icon comment %} Remark
 >
-> This tutorial uses data on a regular latitude, longitude grid. More complex and irregular grids are not discussed in this tutorial. In addition,
+> This tutorial uses data on a regular latitude-longitude grid. More complex and irregular grids are not discussed in this tutorial. In addition,
 > this tutorial is not meant to cover all the different possibilities offered by Xarrays but shows functionalities we find useful for day to day
 > analysis.
 >
@@ -134,6 +134,12 @@ Data can be retrieved directly from [Copernicus Atmosphere Monitoring Service](h
 
 ## Import Python packages
 
+Some packages may need to be installed first. For example `cmcrameri` is missing, so we need to do:
+
+```python
+pip install cmcrameri
+```
+then import all the necessary packages in your Jupyter Notebook.
 
 ```python
 import numpy as np
@@ -143,13 +149,14 @@ import matplotlib.pyplot as plt
 import cmcrameri.cm as cmc
 import pandas as pd
 ```
+In case some packages cannot be imported you need to install them first. For example if cmcrameri is missing, open a terminal and type pip install cmcrameri, then re-execute the cell in your Jupyter Notebook.
 
 ## Open and read metadata
 
 The netCDF dataset can now be opened with Xarray:
 
 ```python
-dset = xr.open_dataset("CAMS-PM2_5-20211222.netcdf")
+dset = xr.open_dataset("data/CAMS-PM2_5-20211222.netcdf")
 ```
 
 Once opened, we can get metadata using `print` statement.
@@ -253,7 +260,7 @@ as coordinates (if they have some), all the attributes such as the name, the phy
 
 ## Select / Subset from coordinates
 
-We often want to select elements from the coordinates for instance to subset a geographical area or select specific times or time range.
+We often want to select elements from the coordinates for instance to subset a geographical area or select specific times or a specific time range.
 
 There are two different ways to select:
 - by index
@@ -265,12 +272,12 @@ There are two different ways to select:
 print(dset.isel(time=0))
 ```
 
-You should see that the coordinate `time` "disappeared" from the `Dimensions` and now the variable `pm2p5_conc` is a 3D field with level, latitude and longitude.
+You should see that the coordinate `time` "disappeared" from the `Dimensions` and now the variable `pm2p5_conc` is a 3D field with longitude, latitude and level.
 
 ### Select elements from coordinates by value
 
 When selecting elements by the value of the coordinate, we need to use the same datatype. For instance, to select and element from
-`time`, we need to use `timedelta64`. The code below will give the same result than `isel(time=0)`.
+`time`, we need to use `timedelta64`. The code below will give the same result as `isel(time=0)`.
 
 ```python
 print(dset.sel(time=np.timedelta64(0)))
@@ -283,7 +290,7 @@ The output will be very similar to what we did previously when selecting from co
 > How to select the forecast for December, 24th 2021 at 12:00 UTC?
 >
 > > ### {% icon solution %} Solution
-> > Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index.`
+> > Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index.
 > >
 > > > ### {% icon code-in %} Input: Python
 > > > ```python
@@ -319,7 +326,7 @@ The output will be very similar to what we did previously when selecting from co
 ## Plotting
 
 - To plot a map, you need to select a variable with data on geographical coordinates (latitude, longitude).
-- In addition coordinates need to be sorted (preferably in increasing order). This is not the case for "longitude" because they are expressed as 0 to 360. Let's shift them to -180 to 180.
+- In addition coordinates need to be sorted, and preferably in increasing order. This is not the case for the coordinate "longitude" which is given between 360 and 0. Let's shift the longitudes by 180 degrees so that they come in the range of -180 to 180.
 
 ### Shift longitudes
 
@@ -402,13 +409,13 @@ list_times = np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta
 print(pd.to_datetime(list_times).strftime("%d %b %H:%S UTC"))
 ```
 
-2. We use the same plotting method than earlier but we pass additional parameters:
+2. We use the same plotting method as earlier, but we pass additional parameters:
         - `vmin = 0`and `vmax = 35` to set the minimum and maximum values when plotting (this is useful to highlight features in your plot);
         - `subplot_kws={"projection": proj_plot}` to project data on a non-default projection. See [cartopy projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for more information about projections;
         - `col='time'` because we will plot several `time`;
         -  `col_wrap=4` to have a maximum of 4 plots per row. If we have more times to plot, then the next figures will be on another row;
         - `robust=True` and `aspect=dset.dims["longitude"] / dset.dims["latitude"]` are additional parameters to make each subplot with a "sensible" figsize;
-        - `cmap=cmc.roma_r` to select a non-default and color-blind driendly colormap (see [scientific colormaps](https://www.fabiocrameri.ch/colourmaps/)).
+        - `cmap=cmc.roma_r` to select a non-default and color-blind friendly colormap (see [scientific colormaps](https://www.fabiocrameri.ch/colourmaps/)).
 
 
 ```python
@@ -482,7 +489,7 @@ In the second part of our plot, we customize each subplot (this is why we loop f
 
 > ### {% icon comment %}  `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`
 > Why did we slice latitudes with `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`?
-> - because when using slice, you need to specify values using the same order than in the coordinates. Latitudes are specified in 
+> - because when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
 > decreasing order for CAMS.
 >
 {: .comment}
@@ -500,8 +507,8 @@ print(dset.where(dset['pm2p5_conc'] > 25))
 ```
 
 > ### {% icon comment %} What happened?
-> You may not see any changes but if you look carefuly to `pm2p5_conc` values, you will see that many `nan`. In fact, we now have 
-> `nan` values Whenever the criteria within the `where` statement is not met e.g. when PM2.5 <= 25
+> You may not see any changes but if you look carefuly at `pm2p5_conc` values, you will see many `nan`. In fact, we now have 
+> `nan` values whenever the criteria within the `where` statement is not met e.g. when PM2.5 <= 25
 >
 {: .comment}
 
