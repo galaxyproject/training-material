@@ -391,7 +391,34 @@ So list slicing together is either `list[low:high]` or `list[low:high:stride]`, 
 
 ## Sorting
 
-https://arstechnica.com/information-technology/2019/10/chemists-discover-cross-platform-python-scripts-not-so-cross-platform/
+Lists occasionally need to be sorted. For example, you have a list of students you might want to alphabetise, and here you can use the function `sorted` to help you.
+
+```python
+students = [
+    'Koos Christabella',
+    'Zackary Habiba',
+    'Jumana Rostam',
+    'Sorina Gaia',
+    'Kalyani Bessarion',
+    'Enéas Nirmala',
+    '王奕辰',
+    '刘依诺',
+]
+students = sorted(students)
+print(students)
+```
+
+> ### {% icon tip %} Tip: Sorting names is hard!
+> Some people have 1 name, some have 4 or more! Some cultures have surnames first, some not. Sorting names is a complex situation, so be sure you consider your data before sorting and assuming it's correct. Test with multiple values to make sure your code works!
+{: .tip}
+
+> ### {% icon tip %} Tip: Results can be dependent on analysis order!
+> Some analyses (especially simultaions) can be dependent on data input order or data sorting. This was recently seen in {% cite Bhandari_Neupane_2019 %} where the data files used were sorted one way on Windows, and another on Linux, resulting in different results for the same code and the same datasets! Yikes!
+>
+> If you know your analyses are dependent on file ordering, then you can use `sorted()` to make sure the data is provided in a uniform way every time.
+>
+> If you're not sure if your results will be dependent, you can try sorting anyway. Or better yet, randomising the list of inputs to make sure your code behaves properly in any scenario.
+{: .tip}
 
 ## Type Conversion
 
