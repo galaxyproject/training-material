@@ -389,7 +389,11 @@ print(values[::3]) # every third value in the list.
 
 So list slicing together is either `list[low:high]` or `list[low:high:stride]`, where low and high are optional if you just want to go to the end of the list.
 
-# Type Conversion
+## Sorting
+
+https://arstechnica.com/information-technology/2019/10/chemists-discover-cross-platform-python-scripts-not-so-cross-platform/
+
+## Type Conversion
 
 Just list with converting `"1.5"` to an float with the `float()` function, or `3.1` to a string with `str()`, we can do the same with lists using the `list()` function, and sets with `set()`:
 
@@ -797,17 +801,21 @@ Set (`set`) | `{1, 2, 3}` | Use this to make a list of data unique | If you want
 
 > ### {% icon question %} Question: Which Datatype
 >
+> 1. Chromosome Length
 > 1. Name
 > 2. Weight
-> 3. Gender
+> 3. Sex
 > 4. Hair Colour
+> 5. Money/Currency
 >
 > > ### {% icon solution %} Solution
 > >
+> > 1. Here you need to use an integer, a fractional or float value would not make sense. You cannot have half an A/C/T/G.
 > > 1. Here a string would be a good choice. (And probably just a single `name` string, rather than a `first` and `last` name, as not all humans have two names! And some have more than two.)
-> > 2. A float is good type for storing weight. You could use an integer as well, but you would be losing the decimal places. In some applications that is ok, in others, you require the precision.
-> > 3. This is a case where you should consider carefully the application, but `bool` is usally the wrong answer. Are you recording patient data? Is their expressed gender the correct variable or did you need sex? Chromosomal sex is also more complicated and cannot be stored with a true/false value, as people with [Kleinfelters](https://en.wikipedia.org/wiki/Klinefelter_syndrome) exist. A string can be an ok choice here, depending on the application.
+> > 2. An integer is good type for storing weight, if you are using a small unit (e.g. grams). Otherwise you might consider a float, but you'd need to be careful to format it properly (e.g. `{value:0.2f}`) when printing it out. It depends on the application.
+> > 3. This is a case where you should consider carefully the application, but `bool` is usally the *wrong answer*. Are you recording patient data? Is their expressed gender the correct variable or did you need sex? {% cite Miyagi_2021 %} goes into detail on this multifaceted issue in a medical research context. For example chromosomal sex is also more complicated and cannot be stored with a true/false value, as people with [Kleinfelters](https://en.wikipedia.org/wiki/Klinefelter_syndrome) exist. A string can be an ok choice here.
 > > 4. There is a limited vocabulary humans use to describe hair colour, so a string can be used, or a data type we haven't discussed! An `enum` is an `enumeration`, and when you have a limited set of values that are possible, you can use a `enum` to double check that whatever value is being used (or read from a file, or entered by a user) matches one of the "approved" values.
+> > 5. A float is a good guess, but with floats come weird rounding issues. Often times people choose to use an integer storing the value in cents (or fractional cents, to whatever the desired precision is).
 > >
 > {: .solution}
 {: .question}
