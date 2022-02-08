@@ -56,7 +56,7 @@ jobs:
         run: |
           find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_*ES.html' | \
              xargs ./bin/filter-resource-metadata video | \
-             xargs ruby ./bin/ari-extract-script.rb
+             xargs bundle exec ruby ./bin/ari-extract-script.rb
 
       - name: Check software versions
         run: |
