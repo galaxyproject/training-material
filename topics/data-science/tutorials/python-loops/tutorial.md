@@ -97,7 +97,7 @@ for number in [2, 3, 5]:
 - the loop body, where we double a number and the print out a message. The loop body is what gets executed for every iteration of the loop.
 
 > > ### {% icon code-in %} The loop
-> > ```
+> > ```python
 > > for number in [2, 3, 5]:
 > >     doubled = number * 2
 > >     print(f"{number} doubled is {doubled}")
