@@ -23,7 +23,7 @@ module GTNNotebooks
   }
   COLORS_EXTRA = {
     'agenda' => 'display: none',
-    'solution' => 'color: white',
+    'solution' => 'color: white !important',
   }
 
   ICONS = {
@@ -85,10 +85,12 @@ module GTNNotebooks
       }
       # Strip the trailing newline in the last cell.
       if res['source'].length > 0
-        if res['source'][-1].strip == ''
-          res['source'][-1] = res['source'][-1].strip
-        end
+        res['source'][-1] = res['source'][-1].rstrip
       end
+
+      # Remove any remaining language tagged code blocks, e.g. in
+      # tip/solution/etc boxes. These do not render well.
+      res['source'] = res['source'].map{|x| x.gsub(/```#{language}/, '```')}
 
       if data[1]
         res = res.update({
@@ -379,8 +381,6 @@ module GTNNotebooks
     # can't setup a style block, so we really need to render the markdown
     # to html.
     notebook = self.renderMarkdownCells(site, notebook, data, url, dir)
-    #require 'pp'
-    #pp notebook
 
     # Here we add a close to the notebook
     notebook['cells'] = notebook['cells'] + [{
@@ -486,6 +486,7 @@ module GTNNotebooks
         # Strip out the highlighting as it is bad on some platforms.
         cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: white">')
         cell['source'].gsub!(/<div class="highlight">/, '<div>')
+        cell['source'].gsub!(/<code>/, '<code style="color: inherit">')
 
         # add a 'hint' to the solution boxes which have blanked out text.
         cell['source'].gsub!(/(<h3 id="-icon-solution--solution">)/, '<div style="color: #555; font-size: 95%;">Hint: Select the text with your mouse to see the answer</div>\1')
