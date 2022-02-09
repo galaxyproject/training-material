@@ -54,22 +54,22 @@ module GTNNotebooks
           raise "[GTN/Notebook] Error! we're already in a block"
         end
         # End the previous block
-        out.append([val, inside_block])
+        out.push([val, inside_block])
         val = []
 
         inside_block = true
       elsif inside_block && line == '```'
         # End of code block
-        out.append([val, inside_block])
+        out.push([val, inside_block])
         val = []
         inside_block = false
       else
-        val.append(line)
+        val.push(line)
       end
     }
     # final flush
     if ! val.nil?
-      out.append([val, inside_block])
+      out.push([val, inside_block])
     end
 
     notebook = {
@@ -123,12 +123,12 @@ module GTNNotebooks
         val = [line]
       else
         if line[0] == first_char
-          val.append(line)
+          val.push(line)
         elsif line[0..1] == '{:' && first_char == '>'
-          val.append(line)
+          val.push(line)
         else
           # flush
-          out.append(val)
+          out.push(val)
           if line.size > 0
             first_char = line[0]
           else
@@ -139,7 +139,7 @@ module GTNNotebooks
       end
     }
     # final flush
-    out.append(val)
+    out.push(val)
 
     out.select!{|v|
       !(v[0][0] == '>' && v[-1][0..1] == '{:' && v[-1].match(/.agenda/))
