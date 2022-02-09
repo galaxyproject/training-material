@@ -141,7 +141,7 @@ Integers and floating-point numbers can be mixed in arithmetic. Python 3 (which 
 
 ```python
 print(f'half is {1 / 2.0}')
-print(f''three squared is' {3.0 ** 2}')
+print(f'three squared is {3.0 ** 2}')
 ```
 
 
