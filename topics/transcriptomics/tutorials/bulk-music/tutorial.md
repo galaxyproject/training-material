@@ -359,6 +359,7 @@ Here we will use one of the factors from the bulk RNA-seq phenotypes related to 
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Estimate Proportions`
+>        - *"Methods to use"*: `MuSiC` and `NNLS`
 >        - *"Cell Types Label from scRNA dataset"*: `cellType`
 >        - *"Samples Identifier from scRNA dataset"*: `sampleID`
 >        - *"Comma list of cell types to use from scRNA dataset"*: `alpha,beta,delta,gamma,acinar,ductal`
