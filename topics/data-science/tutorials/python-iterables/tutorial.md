@@ -709,6 +709,7 @@ print(populations)
 And similarly, removing items is the same as it was for lists:
 
 ```python
+print(x)
 del x[0] # Removes the first item
 print(x)
 ```
