@@ -168,14 +168,17 @@ patient1 = "z2910"
 
 > ### {% icon question %} Question: Correct the errors
 >
+> This code is completely missing indentation, it needs to be fixed. Can you make some guesses at how indented each line should be?
 > ```
 > data = [1, 3, 5, 9]
+> acc = 0
 > for i in data:
 > if i < 4:
-> print(i)
+> acc = acc + i * 2
 > else:
-> print(i * 2)
-> print(len(data))
+> acc = acc + i
+> print(f'The value at {i} is {acc}')
+> print(f'The answer is {acc}')
 > ```
 >
 > > ### {% icon solution %} Solution
@@ -183,62 +186,72 @@ patient1 = "z2910"
 > >
 > > ```python
 > > data = [1, 3, 5, 9]
+> > acc = 0
+> > # There is a : character at the end of this line, so you KNOW the next line
+> > # must be indented.
 > > for i in data:
+> >     # Same here, another :
 > >     if i < 4:
-> >         print(i)
+> >         acc = acc + i * 2
+> >     # And again! Another :
 > >     else:
-> >         print(i * 2)
-> > # But what about this line:
-> > print(len(data))
+> >         acc = acc + i
+> > # But what about these lines?
+> > print(f'The value at {i} is {acc}')
+> > print(f'The answer is {acc}')
 > > ```
 > >
-> > Here this code is actually ambiguous, we don't know how indented `print(len(data))` should be. This very synthetic example lacks context, but there are three places it could be, with three different effects.
-> > The first option, no indentation, prints out the list length at the end.
+> > Here this code is actually ambiguous, we don't know how indented the two prints should be. This very synthetic example lacks good context, but there are three places it could be, with three different effects.
+> >
+> > There are two bits of knowledge we can use, however:
+> > - the first print uses `i`, so it must be within the loop
+> > - the second print cannot be indented more than the first print (Why? It would require a block like `for ... :` or `if .. :` to indent further.)
+> >
+> > The first option, no indentation, prints out the value once per loop, that seems good
 > >
 > > ```python
 > > [...]
 > >     else:
-> >         print(i * 2)
-> > print(len(data))
+> >         acc = acc + i
+> >     print(f'The value at {i} is {acc}')
 > > ```
 > >
-> > The second, prints out the length once per loop iteration.
+> > The second, prints out the value only during the else case, not otherwise.
+> >
+> > ```python
+> >     else:
+> >         acc = acc + i
+> >         print(f'The value at {i} is {acc}')
+> > ```
+> >
+> > So that's probably wrong, and we should take the first option. That leaves two options for the final print, no indentation, or at the same level as our first print statement. We can guess that we probably want to print out the final result of the loop, and that it should not be indented.
 > >
 > > ```python
 > > data = [1, 3, 5, 9]
+> > acc = 0
 > > for i in data:
 > >     if i < 4:
-> >         print(i)
+> >         acc = acc + i * 2
 > >     else:
-> >         print(i * 2)
-> >     print(len(data))
-> > ```
-> >
-> > First the `if` and `else` case resolve themselves, and then `len(data)` is printed every single loop iteration.
-> > The last case only prints out the length if `i >= 4`.
-> >
-> > ```python
-> > data = [1, 3, 5, 9]
-> > for i in data:
-> >     if i < 4:
-> >         print(i)
-> >     else:
-> >         print(i * 2)
-> >         print(len(data))
+> >         acc = acc + i
+> >     print(f'The value at {i} is {acc}')
+> > print(f'The answer is {acc}')
 > > ```
 > >
 > {: .solution}
 {: .question}
 
 ```python
-# Check your answers here!
+# This code accidentally lost it's indentation! Can you fix it?
 data = [1, 3, 5, 9]
+acc = 0
 for i in data:
 if i < 4:
-print(i)
+acc = acc + i * 2
 else:
-print(i * 2)
-print(len(data))
+acc = acc + i
+print(f'The value at {i} is {acc}')
+print(f'The answer is {acc}')
 ```
 
 ## Variable Naming
