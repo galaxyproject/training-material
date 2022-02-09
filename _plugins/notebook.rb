@@ -85,7 +85,9 @@ module GTNNotebooks
       }
       # Strip the trailing newline in the last cell.
       if res['source'].length > 0
-        res['source'][-1] = res['source'][-1].strip
+        if res['source'][-1].strip == ''
+          res['source'][-1] = res['source'][-1].strip
+        end
       end
 
       if data[1]
