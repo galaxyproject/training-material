@@ -283,38 +283,6 @@ print(terrible_sequence)
 data = "0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0"
 ```
 
-<!--
-# Tuples
-
-Tuples are like lists, except after you create them, they're immutable. You can create a tuple with `(1, 2, 3, ...)` instead of `[1, 2, 3]`
-
-```python
-t = (1, 2, 3)
-print(type(t))
-# You can access indicies just like lists
-print(t[0])
-# But you can't modify them
-# t.push(1) # This will fail. They're immutable!
-```
-
-# Sets
-
-Sets are similar to lists, except:
-
-- They're unique
-- You cannot access individual indices within the set or slice them (next section)
-
-You won't need sets very often, but once you get comfortable with python there will be times you might want to use them. And often you'll see code like:
-
-```python
-data = ['a', 'a', 'b', 'c', 'c', 'c']
-unique_data = list(set(data))
-print(unique_data)
-```
-
-in order to get the unique values in the list. Here we convert it to a set (unique), before converting it back to a list, so it behaves like we except. Sets are created with `{1, 2, 3, ...}` instead of `[1, 2, 3, ...]`
--->
-
 # Slicing & Dicing
 
 All of the data types we've talked about today can be sliced, and this will be a key part of using lists.
@@ -826,8 +794,7 @@ Float (`float`) | 123.49, 3.14159, -3.33334 | If you need more precision or part
 Strings (`str`) | 'patient_12312', 'Jane Doe', '火锅' | To store free text, identifiers, sequence IDs, etc. | If it's truly a numeric value you can do calculations with, like adding or subtracting or doing statistics.
 List / Array (`list`) | `['A', 1, 3.4, ['Nested']]` | If you need to store a list of items, like sequences from a file. Especially if you're reading in a table of data from a file. | If you want to retrieve individual values, and there are clear identifiers it might be better as a dict.
 Dictionary / Associative Array / map (`dict`) | `{"weight": 3.4, "age": 12, "name": "Fluffy"}` | When you have identifiers for your data, and want to look them up by that value. E.g. looking up sequences by an identifier, or data about students based on their name. Counting values. | If you just have a list of items without identifiers, it makes more sense to just use a list.
-Tuple (`tuple`) | `(1, 2, 3)` | Probably not necessary, but if you want an immutable list | If you want to ever modify your list.
-Set (`set`) | `{1, 2, 3}` | Use this to make a list of data unique | If you want to retain a specific order of your list (e.g. the order you read the data in) a set is inappropriate.
+
 
 ## Exercises
 
