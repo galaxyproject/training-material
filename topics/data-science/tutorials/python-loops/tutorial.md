@@ -557,7 +557,7 @@ print(message)
 > {: .solution}
 {: .question}
 
-```
+```python
 # Fix me!
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 print(f'My favorite season is {seasons[4]}')
