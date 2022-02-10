@@ -112,7 +112,6 @@ Interactive Tool!
 > However, as we will see in the next section, testing and deploying a GxIT is not so simple.
 {: .comment}
 
----
 
 # The development process
 
@@ -788,26 +787,6 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 
 The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
 
-## Self-destruct script
-Web server applications will tend to keep running after the user has terminated the tool in Galaxy, which can result in "zombie" containers hanging around and clogging up the Galaxy server. It is therefore good practice to implement a script that will end the server process when the connection to Galaxy has been terminated. The following script will watch Galaxy's binding to the container port and kill the container when the connection terminates (e.g. the user has ended the job). Just change `RUN_COMMAND_NAME` to the run command for your application.
-
-```sh
-RUN_COMMAND_NAME='my_run_script.sh'
-while true; do
-    sleep 60
-    if [ `netstat -t | grep -v CLOSE_WAIT | grep ':8888' | wc -l` -lt 1 ]; then
-        pkill $RUN_COMMAND_NAME
-    fi
-done
-```
-
-This script can then be built into the docker image and called in the tool XML `<command>` before the main application call. Alternatively, it can be called within a `run.sh` script inside the container itself (see below).
-
-```sh
-/scripts/monitor_traffic.sh &
-bash my_run_script.sh
-```
-
 ## Run script
 In the case of our `Tabulator` application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML. However, some web apps might require more elaborate commands to be run. In this situation there are a number of solutions demonstrated in the `<command>` section of [existing GxITs](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive):
 - [Guacamole Desktop](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_guacamole_desktop.xml): application startup with `startup.sh`
@@ -856,6 +835,10 @@ We have demonstrated how to pass an input file to the Docker container. But what
 >
 {: .tip}
 
+## Self-destruct script
+Web server applications will tend to keep running after the user has terminated the tool in Galaxy.
+With Galaxy's legacy "Interactive Environments", this used to result in "zombie" containers hanging around and clogging up the Galaxy server. You may notice a `terminate.sh` script in some older GxITs as a workaround to this problem, but the new GxIT architecture handles containers much better. This is no longer required.
+
 ---
 
 # Troubleshooting
@@ -869,4 +852,4 @@ Having issues with your Interactive Tool? Here are a few ideas for how to troubl
 - You can also open a `bash` terminal inside the container to check the container state while the application is running: `docker exec -it mycontainer /bin/bash`
 
 # Conclusion
-{:.no_toc} 
+{:.no_toc}
