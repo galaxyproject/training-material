@@ -326,3 +326,13 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 >
 > There is no one right answer.
 {: .tip}
+
+> ### {% icon tip %} Tools not showing up? Refresh the toolbox!
+> Sometimes the toolbox will fail to reload. You can correct for this by manually triggering the toolbox reload with a query:
+>
+> ```console
+> curl -X PUT https://<your-galaxy>/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
+> ```
+>
+> This will request the toolbox to reload and you can check after if it's discovered your newly installed tools.
+{: .tip}
