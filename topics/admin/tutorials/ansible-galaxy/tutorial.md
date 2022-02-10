@@ -816,6 +816,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Configure miniconda and galaxy"}
 >
+>    > ### {% icon tip %} Tip: Following this training outside of a GAT course?
+>    > Consider updating the Galaxy Commit ID to the latest version of Galaxy available, this will probably give better results (given that dependencies are always updating) than using a potentially outdated version.
+>    {: .tip}
+>
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
 >    So the structure looks like:
