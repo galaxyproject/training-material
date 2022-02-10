@@ -132,7 +132,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -76,4 +76,10 @@ server {
+>    @@ -92,4 +92,10 @@ server {
 >             uwsgi_param UWSGI_SCHEME $scheme;
 >             include uwsgi_params;
 >         }

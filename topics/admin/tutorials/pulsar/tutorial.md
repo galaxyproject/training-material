@@ -139,7 +139,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -22,3 +22,7 @@
+>    @@ -24,3 +24,7 @@
 >       version: 0.0.2
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
@@ -264,11 +264,10 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -160,3 +162,31 @@ slurm_config:
->       SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
+>    @@ -161,6 +163,34 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
->    +
+>     
 >    +# RabbitMQ
 >    +rabbitmq_version: 3.8.16-1
 >    +rabbitmq_plugins: rabbitmq_management
@@ -296,6 +295,10 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +  - user: galaxy_au
 >    +    password: "{{ vault_rabbitmq_password_vhost }}"
 >    +    vhost: /pulsar/galaxy_au
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure RabbitMQ"}

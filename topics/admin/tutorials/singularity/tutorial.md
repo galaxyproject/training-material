@@ -66,14 +66,14 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -12,3 +12,7 @@
->       version: 0.3.0
->     - src: usegalaxy_eu.certbot
+>    @@ -14,3 +14,7 @@
 >       version: 0.1.5
 >    +- src: cyverse-ansible.singularity
 >    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >    +- src: gantsign.golang
 >    +  version: 2.6.3
+>     - name: galaxyproject.tusd
+>       version: 0.0.1
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add golang and singulary ansible roles"}
@@ -93,16 +93,19 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -122,3 +122,9 @@ nginx_conf_http:
->     nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -123,6 +123,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
->    +
+>     
 >    +# Golang
 >    +golang_gopath: '/opt/workspace-go'
 >    +# Singularity target version
 >    +singularity_version: "3.7.4"
 >    +singularity_go_path: "{{ golang_install_dir }}"
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure golang and singularity"}

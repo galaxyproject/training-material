@@ -72,7 +72,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -18,3 +18,7 @@
+>    @@ -20,3 +20,7 @@
 >       version: 2.6.3
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.13
@@ -120,11 +120,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -137,3 +137,13 @@ golang_gopath: '/opt/workspace-go'
->     # Singularity target version
+>    @@ -138,6 +138,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
->    +
+>     
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:
@@ -134,6 +133,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
 >    +  SelectType: select/cons_res
 >    +  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add slurm configuration"}
