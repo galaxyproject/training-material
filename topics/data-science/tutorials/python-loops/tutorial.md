@@ -561,4 +561,25 @@ print(message)
 # Fix me!
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 print(f'My favorite season is {seasons[4]}')
-```
+
+> ### {% icon tip %} Tip: Controlling your loop!
+>
+> There are multiple ways to efficiently control your loop if you need it.
+> these are the inbuilt python functions: continue & break
+>
+> when python encounters *continue* in your loop it will stop working and goes to the next iteration of the loop.
+> ```
+>for letter in 'Galaxy':
+>  if letter == 'l':
+>    continue
+>  print(f'The letters are: {letter}')
+>```
+> with *break* python stops the loop and continues with the next part of the code like nothing happened 
+> ```
+>for letter in 'Galaxy':
+>  if letter == 'l':
+>    break
+>  print(f'The letters are: {letter}')
+> print('Done')
+> ```
+{: .tip}
