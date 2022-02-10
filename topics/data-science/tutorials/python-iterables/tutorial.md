@@ -159,6 +159,15 @@ print(weekdays[-2])
 print(weekdays[-4])
 ```
 
+If you wanted to find the last value in a list, you could also use `len(elements)` and then subtract back to find the index you want
+
+```python
+elements[len(elements)-1]
+```
+
+This is essentially how negative indexes work, except you don't have to use `len(elements)`, that's done for you automatically.
+
+
 ## Removing Items.
 
 You can use `del` to remove items from a list entirely. We use `del list_name[index]` to remove an element from a list (in the example, 9 is not a prime number) and thus shorten it. `del` is not a function or a method, but a statement in the language.
@@ -182,7 +191,7 @@ Lists may contain values of different types. A single list may contain numbers, 
 goals = [1, 'Create lists.', 2, 'Extract items from lists.', 3, 'Modify lists.']
 ```
 
-# Strings are like Lists
+## Strings are like Lists
 
 Text is often called a "string" in the programming world. Strings of text like `name = "Helena"` or `patient_id = "19237zud830"` are very similar conceptually to lists. Except instead of being a list of numbers, they're a lists of characters.
 
@@ -195,8 +204,6 @@ element = 'carbon'
 print(f'zeroth character: {element[0]}')
 print(f'third character: {element[3]}')
 ```
-
-## Strings are immutable.
 
 Strings, however, cannot be modified, you can't change a single letter in a string. Things that cannot be modified after creation are called *immutable* or sometimes *frozen*, compared to things which can be modified which are called *mutable*.
 Python considers the string to be a single value with parts, not a collection of values.
@@ -276,6 +283,7 @@ print(terrible_sequence)
 data = "0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0"
 ```
 
+<!--
 # Tuples
 
 Tuples are like lists, except after you create them, they're immutable. You can create a tuple with `(1, 2, 3, ...)` instead of `[1, 2, 3]`
@@ -305,6 +313,7 @@ print(unique_data)
 ```
 
 in order to get the unique values in the list. Here we convert it to a set (unique), before converting it back to a list, so it behaves like we except. Sets are created with `{1, 2, 3, ...}` instead of `[1, 2, 3, ...]`
+-->
 
 # Slicing & Dicing
 
@@ -332,34 +341,29 @@ print(elements[6:8])
 print(elements[6:5])
 ```
 
-## The end of the list
-
-But how do you access the end of the list? There are a couple options.
-
-```python
-elements[len(elements)-5:]
-```
-
-That is a really cumbersome way to access lists, so Python makes your life easier. If you need to access somewhere off of the end of the list, say, the last two items, you can just use negative values!
-
-```python
-elements[-5:]
-```
-
-Notice that we also haven't filled out the end value. If you don't supply an end value, Python will default to going to the end of the list. Likewise, if you don't provide a start value, Python will use `0` as the start by default, until whatever end value you subscribe.
+If you don't supply an end value, Python will default to going to the end of the list. Likewise, if you don't provide a start value, Python will use `0` as the start by default, until whatever end value you provide.
 
 
 > ### {% icon question %} Question: Valid and Invalid Slices
 > Which of these do you think will be valid? Which are invalid? Predict what they will return:
 > ```
+> # 1
 > elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F']
+> # 2
 > elements[0:3]
+> # 3
 > elements[:3]
+> # 4
 > elements[-3:3]
+> # 5
 > elements[-8:-3]
+> # 6
 > elements[:]
+> # 7
 > elements[0:20]
+> # 8
 > elements['H':'Li']
+> # 9
 > elements[1.5:]
 > ```
 >

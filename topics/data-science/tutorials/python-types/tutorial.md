@@ -48,7 +48,7 @@ Python is a typed language, data has a type, and different types of data cannot 
 >
 {: .agenda}
 
-## Every value has a type.
+## Types
 
 Every value in a program has a specific type.
 
@@ -58,11 +58,11 @@ Integer               | `int`       | represents positive or negative whole numb
 Floating point number | `float`     | represents real numbers like 3.14159 or -2.5.
 Character string      | `str`       | text, written with either `'` or `"` quotes (they must match)
 
-## Use the built-in function `type` to find the type of a value.
+### Checking the Type
 
 Use the built-in function `type` to find out what type a value has. This works on values as well as variables. But remember: the *value* has the type --- the *variable* is just a label.
 
-Check the type of values with the type function:
+Check the type of values with the [`type()`](https://docs.python.org/3.8/library/functions.html#type) function:
 
 ```python
 print(type(52))
@@ -76,7 +76,7 @@ fitness = 'average'
 print(type(fitness))
 ```
 
-## Types control what operations (or methods) can be performed on a given value.
+### Methods
 
 A value's type determines what the program can do to it. Some operations may work
 
@@ -90,50 +90,50 @@ And some operations may not work:
 print('hello' - 'h')
 ```
 
-## You can use the "+" and "*" operators on strings.
-
-"Adding" character strings concatenates them.
+For instance, you can use the `+` and `*` operators on strings.
 
 ```python
 full_name = 'Ahmed' + ' ' + 'Walsh'
 print(full_name)
-```
-
-Multiplying a character string by an integer _N_ creates a new string that consists of that character string repeated  _N_ times, since multiplication is repeated addition.
-
-```python
 separator = '=' * 10
 print(separator)
 ```
 
-## Strings have a length (but numbers don't).
+Some methods only accept specific types, or only work on specific types.
 
-The built-in function `len` counts the number of characters in a string.
+The built-in function `len` returns the length of your data. Which of the following would you expect to work? `len(string)`? `len(int)`?
 
 ```python
 print(len(full_name))
-```
-
-But numbers don't have a length (not even zero).
-
-```python
 print(len(52))
 ```
 
-## Must convert numbers to strings or vice versa when operating on them.
+### Matching Types
 
-Cannot add numbers and strings.
+Not all types support all operations, adding an integer to a string doesn't make much sense:
 
 ```python
 print(1 + '2')
 ```
 
-You're not allowed because it's ambiguous: should `1 + '2'` be `3` or `'12'`? Some types can be converted to other types by using the type name as a function.
+This does not work because it's ambiguous: should `1 + '2'` be `3` (a number) or `'12'` (a string)? Some types can be converted to other types by using the type name as a function.
 
 ```python
 print(1 + int('2'))
 print(str(1) + '2')
 ```
+
+### Operation Support
+
+Here is a quick chart showing which operations are allowed for each pair:
+
+Left\Right | `int`  | `float` | `str`
+---------- | ---    | -----   | ---
+`int`      | `+-*/` | `+-*/`  | `*`
+`float`    | `+-*/` | `+-*/`  | ``
+`str`      | `*`    | ``      | `+`
+
+As you can see you can do `3 * "test"` and `"test" * 3`, but it doesn't work with floats.
 
 ## Can mix integers and floats freely in operations.
 
@@ -163,7 +163,7 @@ where it came from. Every computation happens line-by-line.
 
 > ### {% icon question %} Question: Fractions
 >
-> What type of value is 3.4?
+> What type of value is 3.14159?
 > How can you find out?
 >
 > > ### {% icon solution %} Solution
@@ -172,7 +172,7 @@ where it came from. Every computation happens line-by-line.
 > > It is possible to find out by using the built-in function `type()`.
 > >
 > > ```
-> > print(type(3.4))
+> > print(type(3.14159))
 > > <class 'float'>
 > > ```
 > {: .solution}
@@ -185,7 +185,7 @@ where it came from. Every computation happens line-by-line.
 
 > ### {% icon question %} Question: Automatic Type Conversion
 >
-> What type of value is 3.25 + 4?
+> What type of value is the result of (3.25 + 4)?
 >
 > > ### {% icon solution %} Solution
 > >
