@@ -814,8 +814,7 @@ We have demonstrated how to pass an input file to the Docker container. But what
 {: .tip}
 
 ## Self-destruct script
-Web server applications will tend to keep running after the user has terminated the tool in Galaxy.
-With Galaxy's legacy "Interactive Environments", this used to result in "zombie" containers hanging around and clogging up the Galaxy server. You may notice a `terminate.sh` script in some older GxITs as a workaround to this problem, but the new GxIT architecture handles containers much better. This is no longer required.
+Unlike regular tools, web applications will run indefinitely until terminated. With Galaxy's legacy "Interactive Environments", this used to result in "zombie" containers hanging around and clogging up the Galaxy server. You may notice a `terminate.sh` script in some older GxITs as a workaround to this problem, but the new GxIT architecture handles container termination for you. This script is no longer required or reccommended.
 
 ---
 
