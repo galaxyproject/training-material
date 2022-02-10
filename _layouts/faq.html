@@ -2,10 +2,23 @@
 layout: page
 ---
 
-<section class="tutorial">
-{{ page.description }}
-<hr>
+{% assign contributors = site.data['contributors'] %}
 
-{{content | regex_replace: '<hr.*—<\/p>', '' }}
+<section class="tutorial">
+  {% if page.contributors %}
+    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include
+        _includes/contributor-list.html
+        contributors=page.contributors badge=true newcontributors=true %}</div>
+  {% endif %}
+
+    {{ page.description }}
+    <hr>
+
+    {{content | regex_replace: '<hr.*—<\/p>', '' }}
+
+    {% if page.cited %}
+    <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+    {% bibliography --cited %}
+    {% endif %}
 
 </section>

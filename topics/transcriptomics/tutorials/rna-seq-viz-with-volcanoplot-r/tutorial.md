@@ -12,6 +12,8 @@ time_estimation: "1H"
 key_points:
   - "R can be used to customise Volcano Plot output"
   - "The RStudio interactive tool can be used to run R inside Galaxy"
+tags:
+  - interactive-tools
 contributors:
   - mblue9
 requirements:
@@ -22,7 +24,7 @@ requirements:
           - rstudio
     -
         type: "internal"
-        topic_name: introduction
+        topic_name: data-science
         tutorials:
           - r-basics
           - r-advanced

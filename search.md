@@ -13,53 +13,8 @@ title: Search Tutorials
 
 <!-- Configuration -->
 <script>
-var tutorials = { {% for topic in site.data %}
-    {% if topic[1].type == 'use' or topic[1].type == 'admin-dev' or topic[1].type == 'basics' %}
-      {% assign topic_material = site.pages | topic_filter:topic[0] %}
-      {% assign topic_title = topic[1].title %}
-      {% for tutorial in topic_material %}
 
-       {% capture result_entry %}
-        <div class='col-sm-6'>
-        <div class='card'>
-        <div class='card-body'>
-          <h5 class='card-title'>{{ tutorial.title | escape }}</h5>
-          <h6 class='card-subtitle text-muted'>{{ topic_title}}</h6>
-          <p class='card-text'> {{tutorial.description}}</p>
-          {% if tutorial.tags %}
-            <p>
-            {% for tag in tutorial.tags %}
-              <form method="GET" action="{{site.baseurl}}/search" style="display:inline"><input type="hidden" name="query" value="{{tag}}"><button class='label label-default tutorial_tag' id='{{ tag }}' style='{{ tag | colour_tag }}' title='Click to show all tutorials with this tag'>{{ tag  }}</button></form>
-            {% endfor %}
-            </p>
-          {% endif %}
-          <p>{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}</p>
-          <a class='btn btn-primary' href='{{ site.baseurl }}{{ tutorial.url }}'>View Tutorial</a>
-          </div>
-          </div>
-          </div>
-          {% endcapture %}
-      "{{ tutorial.url }}": {
-        "topic"    : "{{ topic_title }}",
-        "title"    : "{{ tutorial.title | escape }}",
-        "description": "{{ tutorial.description }}",
-        "question" : "{{ tutoral.questions | join: ', '}}",
-        "objectives"  : "{{ tutorial.objectives | join: ', ' }}",
-        "tags"     : "{{ tutorial.tags | join: ', ' }}",
-        "level"     : "{{ tutorial.level }}",
-        "time_estimation": "{{ tutorial.time_estimation }}",
-        "url"      : "{{ site.baseurl }}{{ tutorial.url }}",
-        "level"     : "{{ tutorial.level}}",
-        "contributors": "{{ tutorial.contributors | join: ', '}}",
-        "entry"      : "{{ result_entry | strip_newlines | replace: '"',"'" }}"
-      }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-    {% unless forloop.last %},{% endunless %}
-    {% endif %}
-  {% endfor %}
-};
-
-
+var tutorials = {% dump_search_view testing %};
 
 function search(idx, q){
 	if(q.length > 2){
@@ -103,7 +58,19 @@ function search(idx, q){
 			return tutorials['/' + x.replaceAll(".md", ".html")];
 		}).filter(x => x !== undefined);
 
-		$("#results-container").html(results_final.map(x => x.entry));
+        $("#results-container").html(results_final.map(x => `
+        <div class='col-sm-6'>
+        <div class='card'>
+        <div class='card-body'>
+          <h5 class='card-title'>${x.title}</h5>
+          <h6 class='card-subtitle text-muted'>${x.topic}</h6>
+          <p>${x.tags.join(' ')}</p>
+          <p>${x.contributors}</p>
+          <a class='btn btn-primary' href='${x.url}'>View Tutorial</a>
+          </div>
+          </div>
+          </div>
+                    `));
 	}
 }
 

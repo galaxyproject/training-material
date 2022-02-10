@@ -6,7 +6,7 @@ layout: base
 	<a href="{{ site.github_repository }}/blob/main/{{ page.url | replace: 'slides-plain','slides' }}">View markdown source on GitHub</a>
 	<h1>{{ page.title }}</h1>
 		<h2>Contributors</h2>
-		{% include _includes/contributor-author-list-comma.html contributors=page.contributors %}
+		{% include _includes/contributor-list.html contributors=page.contributors sep=" " badge=true %}
 
 		{% if page.questions %}
 		<h2>Questions</h2>
@@ -70,7 +70,7 @@ This material is the result of a collaborative work. Thanks to the <a href="http
 
 {% if tutorial.contributors %}
 <div class="contributors-line">
-{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
+{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}
 </div>
 {% endif %}
 

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+{% assign topic = site.data[page.topic_name] %}
+{% assign topic_material = site | topic_filter:page.topic_name %}
+{% assign title = topic.title %}
+
+{% assign tutorial = page %}
+{% assign title = tutorial.title %}
+{% assign contributors = site.data['contributors'] %}
+
+{% assign locale = site.data.lang[page.lang] %}
+
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title | strip_html }}</title>
+    {% if jekyll.environment == 'production' %}
+        {% include _includes/analytics.html %}
+    {% endif %}
+    <link rel="stylesheet" href="{{ "/assets/css/slides.css" | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ "/assets/css/slides-rdmbites.css" | prepend: site.baseurl }}">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+
+    {% assign topic = site.data[page.topic_name] %}
+    {% assign og_title = topic.title %}
+    {% if page.title %}
+        {% assign og_title = page.title %}
+    {% endif %}
+    {% assign og_desc = topic.summary %}
+    <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
+    <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
+    <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
+    <meta property="og:image" content="{{ "/assets/images/elixir-uk.png" | prepend: site.baseurl }}" />
+    <script type="application/ld+json">
+      {% include _includes/material.jsonld material=page topic=topic site=site %}
+    </script>
+    <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
+  </head>
+  <body class="rdmbites">
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+{% if page.type == "introduction" %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+{% else %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+{% endif %}
+<a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+{% if page.logo == "GTN" %}
+<img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" class="slide-logo"/>
+{% else %}
+  {% if page.logo contains "://" %}
+<img src="{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="slide-logo"/>
+  {% else %}
+<img src="{{ site.baseurl }}/{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="slide-logo"/>
+  {% endif %}
+{% endif %}
+</span></div>
+
+<div class="my-footer"><span>
+</span></div>
+
+---
+
+
+![Logos of all involved projects]({{ site.baseurl }}/assets/images/rdm-cover.png)
+
+## {{ title }}
+
+<div class="footnote" style="bottom: 3em;">{{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+
+???
+{{locale['presenter-notes-explanation'] | default: "Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting."
+}}
+
+{% if topic.requirements or page.requirements %}
+
+---
+
+## {{locale['requirements'] | default: "Requirements"}}
+
+{{ locale['before-diving-in'] | default: "Before diving into this slide deck, we recommend you to have a look at"}}:
+
+{% include _includes/display_extra_training_slides.md extra_trainings=topic.requirements %}
+{% include _includes/display_extra_training_slides.md extra_trainings=page.requirements %}
+
+{% endif %}
+
+---
+
+{{ content | xml_escape }}
+
+---
+
+.reduce90[
+ELIXIR-UK brings you this RDMbite, funded by the UKRI and using infrastructure written by the Galaxy Training Network
+]
+
+![Logos of supporting projects]({{ site.baseurl }}/assets/images/rdm-close.png)
+
+{% if tutorial.contributors %}
+<div class="contributors-line">
+{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}
+</div>
+{% endif %}
+
+.reduce90[
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+{{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.
+]
+
+{% if page.layout == "base_slides" %}
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
+{% endif %}
+    </textarea>
+	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

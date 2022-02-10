@@ -73,28 +73,29 @@ The annotation file, group comparison file and FASTA file for this training is d
 > 4. Steps 4 to 7 can be skipped to save time and storage capacity by not running MaxQuant. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD006914).
 >
 >    ```
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment105_metast_cSCC1.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment106_metast_cSCC2.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment107_metast_cSCC3.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment109_metast_cSCC4.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment116_metast_cSCC5.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment117_metast_cSCC6.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment118_metast_cSCC7.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment119_metast_cSCC8.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment120_metast_cSCC9.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment121_metast_cSCC10.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment122_metast_cSCC11.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment123_metast_cSCC12.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment124_metast_cSCC13.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment110_RDEB_cSCC1.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment111_RDEB_cSCC2.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment112_RDEB_cSCC3.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment113_RDEB_cSCC4.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment114_RDEB_cSCC5.raw
->    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDEB_cSCC6.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment105_metast_cSCC1.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment106_metast_cSCC2.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment107_metast_cSCC3.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment109_metast_cSCC4.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment116_metast_cSCC5.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment117_metast_cSCC6.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment118_metast_cSCC7.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment119_metast_cSCC8.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment120_metast_cSCC9.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment121_metast_cSCC10.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment122_metast_cSCC11.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment123_metast_cSCC12.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment124_metast_cSCC13.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment110_RDEB_cSCC1.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment111_RDEB_cSCC2.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment112_RDEB_cSCC3.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment113_RDEB_cSCC4.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment114_RDEB_cSCC5.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment115_RDEB_cSCC6.raw
 >
 >    ```
 > 5. Rename the raw datasets into 'metast_cSCC1.raw', 'metast_cSCC2.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
+> 
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 6. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
@@ -111,7 +112,7 @@ The annotation file, group comparison file and FASTA file for this training is d
 
 The run time of **MaxQuant** {% icon tool %} depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the [PTXQC functionality](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780) that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.
 
-> ### {% icon hands_on %} Hands-on: MaxQuant analysis
+> ### {% icon hands_on %} Hands-on: Optional: MaxQuant analysis
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3) %} with the following parameters:
 >    - In *"Input Options"*:
@@ -120,24 +121,24 @@ The run time of **MaxQuant** {% icon tool %} depends on the number and size of t
 >    - *"minimum unique peptides"*: `1`
 >    - *"Match between runs"*: `yes`
 >    - In *"Parameter Group"*:
->        - {% icon param-repeat %} *"Insert Parameter Group"*
->            - {% icon param-collection %} *"Infiles"*: `raw_files`
+>        - {% icon param-collection %} *"Infiles"*: `raw_files`
 >    - *"Generate PTXQC (proteomics quality control pipeline) report?"*: `Yes`
 >    - In *"Output Options"*:
 >        - *"Select the desired outputs."*: `Protein Groups` `Evidence`
 >
->    > ### {% icon tip %} Tip: Continue with results from Zenodo
->    >
->    > Because the MaxQuant run takes really long, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial
->    > 1. Import the files from [Zenodo](https://zenodo.org/record/4896554)
->    >
->    >  ```
->    > https://zenodo.org/record/4896554/files/MaxQuant_Evidence.tabular
->    > https://zenodo.org/record/4896554/files/MaxQuant_proteingroups.tabular
->    > https://zenodo.org/record/4896554/files/PTXQC_report.pdf
->    > ```
->    {: .tip}
+{: .hands_on}
+
+Because the MaxQuant run takes really long, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial. 
+
+> ### {% icon hands_on %} Hands-on: Load MaxQuant results from Zenodo
 >
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4896554)
+>
+>    ```
+>    https://zenodo.org/record/4896554/files/MaxQuant_Evidence.tabular
+>    https://zenodo.org/record/4896554/files/MaxQuant_proteingroups.tabular
+>    https://zenodo.org/record/4896554/files/PTXQC_report.pdf
+>    ```
 {: .hands_on}
 
 
@@ -184,7 +185,7 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 >            - *"in column"*: `c54`
 >            - *"Find pattern"*: `+`
 >    - Once finished, rename the file into `evidence input for MSstats`
-> 5. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.0) %}  with the following parameters:
+> 5. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0.0) %}  with the following parameters:
 >    - *"input source"*: `MaxQuant`
 >        - {% icon param-file %} *"evidence.txt - feature-level data"*: `evidence input for MSstats` (output of **Replace** {% icon tool %})
 >        - {% icon param-file %} *"proteinGroups.txt - protein-level data"*: `protein groups input for MSstats` (output of **Replace** {% icon tool %})
@@ -192,20 +193,21 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 >        - *"Select Protein ID in evidence.txt"*: `Leading razor protein column`
 >        - In *"MaxQtoMSstatsFormat Options"*:
 >            - *"Remove the proteins which have only 1 peptide and charge"*: `Yes`
->    - *"Select outputs"*: `MSstats log` `MSstats ProcessedData` `RunlevelData` `Group Quantification Matrix Table` `Sample Quantification Matrix Table`
->    - In *"DataProcess Plot Options"*:
->	 - *"Select visualization outputs"*: `QCPlot`
->        - *"Select protein IDs to draw plots"*: `Option for QC plot: "allonly" will generate one QC plot with all proteins`
->    	 - In *"Advanced visualization parameters"*:
->	    - *"Angle of labels represented each condition at the top of graph"*: `0`
+>    - In *"dataProcess Options"*:
+>        - *"Select outputs"*: `MSstats log` `MSstats FeatureLevelData` `ProteinLevelData` `Group Quantification Matrix Table` `Sample Quantification Matrix Table`
+>        - In *"dataProcess Plot Options"*:
+>            - *"Select visualization outputs"*: `QCPlot`
+>            - *"Select protein IDs to draw plots"*: `Option for QC plot: "allonly" will generate one QC plot with all proteins`
+>    	     - In *"Advanced visualization parameters"*:
+>                - *"Angle of labels represented each condition at the top of graph"*: `0`
 >    - *"Compare Groups"*: `Yes`
->        - {% icon param-file %} *"Comparison Matrix"*: `comparison matrix`
+>        - {% icon param-file %} *"Comparison Matrix"*: `comparison_matrix`
 >        - *"Select outputs"*: `MSstats ComparisonResult`
->    - In *"Comparison Visualization Options"*:
->        - *"Select visualization outputs"*: `MSstats VolcanoPlot`
->    	 - In *"Advanced visualization parameters"*:
->	    - *"Involve fold change cutoff or not for volcano plot or heatmap."*: `1.5`
->	    - *"Display protein names in Volcano Plot."*: `No`
+>        - In *"Comparison Visualization Options"*:
+>            - *"Select visualization outputs"*: `MSstats VolcanoPlot`
+>    	     - In *"Advanced visualization parameters"*:
+>                - *"Involve fold change cutoff or not for volcano plot or heatmap"*: `1.5`
+>                - *"Display protein names in Volcano Plot"*: `No`
 >
 {: .hands_on}
 
@@ -218,7 +220,7 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 > > ### {% icon solution %} Solution
 > >
 > > 1. 28 (2622 lines in protein group file minus 2594 lines after select)
-> > 2. 2289 (MSstats log)
+> > 2. 1764 (MSstats log)
 > >
 > {: .solution}
 >
@@ -272,24 +274,24 @@ Any two groups can be compared to find differentially abundant proteins between 
 # Follow up on MSstats results
 
 We obtain several output files from MSstats. MSstats log file contains the MSstats report with warnings and information about the analysis steps.
-The MSstats QCPlot visualizes the log transformed intensities for all proteins and runs of the processed data.
+The MSstats QCPlot visualizes the log transformed intensities for all proteins and runs.
 The volcano plot plots the statistical result as transformed p-values vs. the log2 fold change. A fold change of 1.5 means that a protein is 50% more abundand in one condition than the other. The log2 fold change is 0.58.
 
 ![qc plot](../../images/maxquant-msstats-lfq/qc_plot.png "QC plot of all proteins")
 
 ![volcano plot](../../images/maxquant-msstats-lfq/volcano_plot.png "Volcano plot showing p-values and log2 fold changes for all proteins. Dashed line indicates p-value of 0.05 and log2 fold change of ± 0.58")
 
-The processed data file contains the transformed, normalized and imputed intensities for each peptide in each run. Run level data summarizes intensities per run and protein.
+The FeatureLevelData file contains the transformed, normalized and imputed intensities for each peptide in each run. ProteinLevelData data summarizes intensities per run and protein.
 We’ll count and visualize the number of features per run and calculate the distribution of proteins per sample.
 
 > ### {% icon hands_on %} Hands-on: Follow up on MSstats results
 >
 > 1. {% tool [Summary Statistics](Summary_Statistics1) %} with the following parameters:
->    - {% icon param-file %} *"Summary statistics on"*: `RunLevel data` (output of **MSstats** {% icon tool %})
->    - *"Column or expression"*: `c4`
+>    - {% icon param-file %} *"Summary statistics on"*: `ProteinLevelData` (output of **MSstats** {% icon tool %})
+>    - *"Column or expression"*: `c8`
 > 2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `RunLevel data` (output of **MSstats** {% icon tool %})
->    - *"Group by fields"*: `8`
+>    - {% icon param-file %} *"Input tabular dataset"*: `ProteinLevelData` (output of **MSstats** {% icon tool %})
+>    - *"Group by fields"*: `4`
 >    - *"Input file has a header line"*: `Yes`
 >    - *"Print header line"*: `Yes`
 >    - *"Sort input"*: `Yes`
@@ -315,7 +317,7 @@ We’ll count and visualize the number of features per run and calculate the dis
 > >
 > > 1. RDEB cSCC4 
 > > ![Number of proteins per sample](../../images/maxquant-msstats-lfq/features_sample.png "Number of proteins per sample (run)")
-> > 2. Around 5 features per protein (mean in summary statistics). 
+> > 2. Around 6 features per protein (mean in summary statistics). 
 > >
 > {: .solution}
 >
@@ -366,10 +368,12 @@ In order to make its IDs compatible with the ones from the comparison result at 
 > ### {% icon question %} Questions
 >
 > 1. Why do we filter for the adjusted p-value?
+> 2. How many proteins have a p-value below 0.05?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Adjusted p-values control for the multiplicity of testing. Since we fit a separate model, and conduct a separate comparison for each protein, the number of tests equals the number of comparisons. A 0.05 cutoff of an adjusted p-value controls the False Discovery Rate in the collection of tests over all the proteins at 5%. Since they account for the multiplicity, adjusted p-values are more conservative (i.e. it is more difficult to detect a change).
+> > 2. 148 in total (first filtering step); 133 are upregulated in metastasized cSCC (metastasized filtered) and 13 are upregulated in RDEB cSCC (rdeb filtered).
 > >
 > {: .solution}
 >
@@ -377,7 +381,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 
 # Finding differentially abundant proteins
 
-For each condition we select only the significant proteins, which are proteins with a p-value above 0 and below 0.05. Thus we will discard proteins that are missing in one condition and therefore have a p-value of 0. We'll keep only the column with the Uniprot ID and extract the average protein intensities per sample from the sample quantification matrix file and vizualize them at heatmap. We do the exact same steps for both conditions, therefore each time you start a tool you can use the multiple input file to start the step for the metastasized and rdeb files at the same time. 
+For each condition we select only the significant proteins, which are proteins with a p-value above 0 and below 0.05. Proteins with a p-value of 0 are missing in one condition and are therfore discarded in the next steps. We'll keep only the column with the Uniprot ID and extract the average protein intensities per sample from the sample quantification matrix file and vizualize them at heatmap. We do the exact same steps for both conditions, therefore, each time you start a tool (except for the replace step) you can use the multiple input file to start the step for the metastasized and rdeb files at the same time. 
 
 > ### {% icon hands_on %} Hands-on: filter differentially abundant proteins
 >
@@ -436,7 +440,7 @@ For each condition we select only the significant proteins, which are proteins w
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 95: 84 are upregulated in metastasized cSCC and 11 are upregulated in RDEB cSCC (number of lines minus 1)
+> > 1. 85 are upregulated in metastasized cSCC and 12 are upregulated in RDEB cSCC (number of lines minus 1 in the first filtering step per condition).
 > >
 > {: .solution}
 >

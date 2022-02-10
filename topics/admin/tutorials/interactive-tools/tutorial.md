@@ -24,6 +24,7 @@ contributors:
   - abretaud
 tags:
   - ansible
+  - interactive-tools
 requirements:
   - type: "internal"
     topic_name: admin

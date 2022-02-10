@@ -5,7 +5,7 @@ layout: base
 {% assign topic = site.data[page.topic_name] %}
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
-{% assign topic_material = site.pages | topic_filter:page.topic_name %}
+{% assign topic_material = site | topic_filter:page.topic_name %}
 {% assign language = site.other_languages %}
 
 
@@ -26,6 +26,7 @@ layout: base
 <section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
     <h1>{{ topic.title }}</h1>
     <p>{{ topic.summary }}</p>
+    <i>You can view the tutorial materials in different languages by clicking the dropdown icon next to the slides ({% icon slides %}) and tutorial ({% icon tutorial %}) buttons below. </i>
 
     {% if topic.requirements %}
     <h2 id="requirements">Requirements</h2>
@@ -89,7 +90,7 @@ nil %}
     <h2 id="maintainers">Maintainers</h2>
     <p>This material is maintained by:</p>
     {% assign maintainers = topic.maintainers | sorted %}
-    {% include _includes/contributor-badge-list.html contributors=maintainers %}
+    {% include _includes/contributor-list.html contributors=maintainers badge=true %}
 
     <p>
         <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
@@ -107,7 +108,7 @@ nil %}
         {% endfor %}
     {% endfor %}
     {% assign contributors_list_sorted = contributors_list | sorted %}
-    {% include _includes/contributor-badge-list.html contributors=contributors_list_sorted %}
+    {% include _includes/contributor-list.html contributors=contributors_list_sorted badge=true %}
 
     {% if topic.references %}
     <h2 id="references">References</h2>

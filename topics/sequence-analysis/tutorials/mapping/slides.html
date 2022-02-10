@@ -22,7 +22,9 @@ key_points:
 contributors:
   - joachimwolff
   - shiltemann
-
+  - EngyNasr
+  - gallardoalba
+  - erasmusplus
 ---
 
 # Example NGS pipeline
@@ -682,7 +684,7 @@ A64;##=#B9=AAAAAAAAAA9#:AB95%^
 ]
 
 .pull-right[
-<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:8em;"></i>
 .red[
 ```
 @PAIR-1 reverse
@@ -691,7 +693,7 @@ AAGTTACCCTTAACAACTTAAGGGTTTTCA
 fffddf`feedB`IABa)^%YBBBRTT\^d
 ```
 ]
-<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:8em;"></i>
 .orange[
 ```
 @PAIR-2 reverse
@@ -699,7 +701,7 @@ AGCAGAAGTCGATGATAATACGCGTCGTTT
 +
 IIIIIII^^IIId`?III%IIIGII>IIII
 ```
-]<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+]<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:8em;"></i>
 .blue[
 ```
 @PAIR-3 reverse
@@ -732,7 +734,7 @@ class: top
 - ***Always trim and filter together!***
 
 .pull-left[
-<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:8em;"></i>
 .red[
 ```
 @PAIR-1 forward
@@ -742,7 +744,7 @@ GGGTGATGGCCGCTGCCGATGGCGTCAAAT
 ```
 ]
 .left[<i class="fa fa-cut" style="width:15%;position:absolute;font-size:5em;"></i>]
-<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:8em;"></i>
 .orange[
 ```
 @PAIR-2 forward
@@ -751,7 +753,7 @@ GATTTGGGGTTCAAAGCAGTATCGATCAA
 !''3((((^^d+))%%%++)(%%%%).1)
 ```
 ]
-<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:8em;"></i>
 .blue[
 ```
 @PAIR-3 forward
@@ -816,7 +818,7 @@ class: top
 - ***Always trim and filter together!***
 
 .pull-left[
-<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:8em;"></i>
 .red[
 ```
 @PAIR-1 forward
@@ -825,7 +827,7 @@ GGGTGATGGCCGCTGCCGATGGCGTCAAAT
 ))%255CCF>>>>>>CCCCCCC65`IIII%
 ```
 ]
-<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:8em;"></i>
 .blue[
 ```
 @PAIR-3 forward
@@ -834,7 +836,7 @@ TCGCACTCAACGCCCTGCATATGACAAGAC
 A64;##=#B9=AAAAAAAAAA9#:AB95%^
 ```
 ]
-<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:6.4em;"></i>
+<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:8em;"></i>
 .green[
 ```
 @PAIR-4 forward
@@ -877,41 +879,6 @@ AATCCATTTGTTCAACTCACAGTTTACCGT
 
 ???
 By cutting the yellow read only from the forward reads file, but leaving the other side of pair in the other file, an incorrect pairing is now assumed by downstream tools
-
-
----
-class: top
-
-## Tools, tools, tools
-
-60+ different mappers, many comparison papers
-
-
-.left-column70[![Timeline of mapping tools](../../images/mapping/ngs_read_mappers_timeline.jpeg)]
-
-.right-column30[
-- Bowtie2
-- HISAT
-- MAQ
-- BWA
-- Eland
-- SOAP
-- STAR
-- BISMARCK
-- Novoalign
-- TopHat2
-- BLASR
-- ..
-]
-
-
-.footnote[Feature comparison:  [10.1093/bioinformatics/bts605](https://doi.org/10.1093/bioinformatics/bts605) ]
-
-???
-
-Many different tools available
-
-Different strengths and weaknesses, comparison table in link
 
 ---
 
@@ -976,6 +943,39 @@ provides the best results.”* - Hatem et al BMC Bioinformatics 2013, 14:184
 Know the data you are working with and pick the right mapper and parameters for the job!
 
 Not an easy task..
+
+---
+class: top
+
+## Mapping tools
+
+![Timeline of mapping tools](../../images/mapping/ngs_read_mappers_timeline.jpeg)
+
+
+.footnote[60+ different mappers, many comparison papers. Figure from [10.1093/bioinformatics/bts605](https://doi.org/10.1093/bioinformatics/bts605) ]
+
+???
+
+Many different tools available
+
+Different strengths and weaknesses, comparison table in link
+
+---
+class: top
+
+# Mapping tools
+
+
+**Mapping tool**   |   **Uses**   | **Characteristics**
+--- | --- | ---
+HISAT2 | DNA/RNA | Short reads. Based on [GCSA](https://www.nature.com/articles/s41587-019-0201-4. [Reference](https://www.nature.com/articles/s41587-019-0201-4). [Reference](https://www.nature.com/articles/s41587-019-0201-4).
+RNASTAR | RNA | Short reads. Extremely fast. High sensitive and accuracy. Based on [MMPs](https://pubs.acs.org/doi/10.1021/ci900450m). [Reference](https://pubmed.ncbi.nlm.nih.gov/23104886/).
+BWA-MEM2 | DNA | Short reads. Twice as faster as BWA-MEM. Memory efficient. Based on [Burrows-Wheeler](https://academic.oup.com/bioinformatics/article/25/14/1754/225615). [Reference](https://arxiv.org/abs/1907.12931).
+Minimap2 | DNA/RNA | Long reads (PacBio and ONT).  Extremely fast. Based on [DALINGNER](https://link.springer.com/chapter/10.1007/978-3-662-44753-6_5) and [MHAP](https://www.nature.com/articles/nbt.3238). [Reference](https://www.nature.com/articles/nbt.3238).
+Bismark | DNA/RNA | Short reads. Bisulfite treated sequencing. Based on [GCSA](https://www.nature.com/articles/s41587-019-0201-4). [Reference](https://pubmed.ncbi.nlm.nih.gov/21493656/).
+BBMap | DNA/RNA | Short and long reads (PacBio and ONT). Memory demanding. [Reference](https://bib.irb.hr/datoteka/773708.Josip_Maric_diplomski.pdf).
+Whisper 2 | DNA | Short reads. Indel sensitive. Variant-calling oriented. [Reference](https://academic.oup.com/bioinformatics/article/35/12/2043/5165374).
+S-conLSH | DNA | Long reads (ONT). High sensitivity and accuracy. [Reference](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03918-3).
 
 ---
 
@@ -1060,3 +1060,4 @@ class: top
 
 ???
 In the mapping hands-on tutorial you will use JBrowse and IGV
+

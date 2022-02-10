@@ -1,5 +1,9 @@
 name: Lint Broken Links
 
+concurrency:
+  group: ci-${{ github.head_ref }}
+  cancel-in-progress: true
+
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on:
   pull_request:
@@ -16,26 +20,42 @@ on:
 
 jobs:
   build-site:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - uses: actions/setup-ruby@v1
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "2.5"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - uses: actions/cache@v2
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          path: |
+            vendor/bundle
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material
+          npm install
+          bundle pristine ffi
+      # END Dependencies
+
+      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
       - run: |
           bundle exec htmlproofer \
             --assume-extension \

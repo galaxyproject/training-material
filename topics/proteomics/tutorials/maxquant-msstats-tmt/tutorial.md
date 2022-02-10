@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: false
+enable: true
 
 title: MaxQuant and MSstats for the analysis of TMT data
 zenodo_link: 'https://zenodo.org/record/5195800'
@@ -11,7 +11,7 @@ objectives:
 - Learn how to use MaxQuant and MSstats for the analysis of TMT labelled shotgun (DDA) data
 - Learn how to create an experimental design template for fractionated data in MaxQuant
 - Learn how to create an annotation file for MSstatsTMT
-time_estimation: 1H
+time_estimation: 3H
 key_points:
 - MaxQuant in combination with MSstatsTMT enables quantitative analysis of TMT data.
 contributors:
@@ -63,34 +63,23 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145).
->
+> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) as a 'Collection'.
 >    ```
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA380.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA381.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA382.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA383.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA384.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA385.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA386.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA387.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA388.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA389.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA390.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA391.raw
 >    ```
-> 5. Rename the raw datasets into 'MFA380.raw', 'MFA381.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
->
->    {% snippet faqs/galaxy/datasets_rename.md %}
->
-> 6. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
->
-> 7. Generate a collection for all raw files and name it 'raw_files', hide the individual raw files
->
->    {% snippet faqs/galaxy/collections_build_list.md %}
->
+>    
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List" collection_name="raw_files" format="thermo.raw" %}
 {: .hands_on}
 
 
@@ -107,6 +96,7 @@ We start the MaxQuant run with TMT parameters for MS2 based reporter quantitatio
 >    - In *"Search Options"*:
 >        - {% icon param-file %} *"Specify an experimental design template"*: `experimental design template` 
 >    - In *"Parameter Group"*:
+>        - {% icon param-collection %} *"Infiles"*: `MFA380.raw` `MFA381.raw` `MFA382.raw` `MFA383.raw` `MFA384.raw` `MFA385.raw` `MFA386.raw` `MFA387.raw` `MFA388.raw` `MFA389.raw` `MFA390.raw` `MFA391.raw`
 >        - *"Quantitation Methods"*: `reporter ion MS2`
 >            - *"isobaric labeling"*: `TMT11plex`
 >            - *"Filter by PIF"*: `Yes`
@@ -163,23 +153,24 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
 >        - {% icon param-file %} *"proteinGroups.txt"*: `proteinGroups` (output of **MaxQuant** {% icon tool %})
 >        - {% icon param-file %} *"annotation.txt"*: `annotation file`
 >    - In *"Plot Output Options"*:
->        - *"Select protein IDs to draw plots"*: `generate all plots for each protein`
+>        - *"Select protein IDs to draw plots"*: `Option for QC plot: "allonly" will generate one QC plot with all proteins`
 >    - *"Compare Groups"*: `Yes`
 >        - In *"Comparison Plot Options"*:
 >            - *"Display protein names in Volcano Plot."*: `No`
->    - *"Select Outputs"*: `QC Plot`
+>    - *"Select Outputs"*: `MSstatsTMT summarization log` `Protein Abundance` `QC Plot`
 {: .hands_on}
 
+> ### {% icon tip %} Tip: Waiting for MSstatsTMT result
+> This training consists of a real proteomics experiments. Therefore, calculation times take longer than in usual Galaxy tutorials. You may want to come back later to the training or use the time to prepare your own data for the analysis with MaxQuant and MSstatsTMT with the tips provided in this training (yellow boxes).
+{: .tip}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many differentially regulated proteins were detected in the MSstatsTMT group comparison? 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 7139 (numbers might slightly vary with different MSstatsTMT versions); number of lines minus header line in the MSstatsTMT group comparison output
 > >
 > {: .solution}
 >
@@ -262,7 +253,7 @@ For more information on MSstats parameters and ideas on how to follow up with yo
 # Follow up on MSstatsTMT results
 
 We obtain several output files from MSstatsTMT. MSstats log file contains the MSstats report with warnings and information about the analysis steps. 
-The QC report allows to visualize protein abundance of conditions for all proteins (first page) or for each individual protein (following pages). 
+The QC report allows to visualize protein abundance of conditions for all proteins (first page) or if enabled for each individual protein (following pages). 
 
 ![QC report](../../images/maxquant-msstats-tmt/QC_plot.png "QC report for all samples, each boxplot summarizes the protein abundances of one sample")
 

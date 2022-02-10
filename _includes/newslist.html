@@ -3,15 +3,15 @@
 <div class="newstable">
 <div class="list-group">
  {% assign newsitems = site.categories['news'] | sort: date | reverse %}
- {% for post in newsitems limit: 6 %}
+ {% for post in newsitems limit: 5 %}
  <a class="list-group-item" href="{% if post.external %}{{post.link}}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">
    <p class="list-group-item-text">{% if post.start %}{{post.start | date: data_format }}{% if post.end %} - {{post.end | date: date_format}}{% endif %}{% else %}{{ post.date | date: date_format }}{% endif %}</p>
-   <h5 class="list-group-item-heading">
+   <div class="list-group-item-heading">
    {% if post.tags contains 'event' %}{% icon event aria=false %}{% endif %}
    {% if post.tags contains 'new tutorial' %}{% icon curriculum aria=false %}{% endif %}
    {% if post.tags contains 'new feature' %}{% icon announcement aria=false %}{% endif %}
    {% if post.tags contains 'cofest' %}{% icon cofest aria=false %}{% endif%}
-   {{ post.title | escape }} </h5>
+   {{ post.title | escape }} </div>
  </a>
  {% endfor %}
 </div>

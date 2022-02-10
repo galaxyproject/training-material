@@ -19,7 +19,7 @@
 
         {% if page.layout == 'topic' and site.data['feedback'].topic contains page.topic_name %}
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
-                {% icon galaxy-barchart %} Topic feedback 
+                {% icon galaxy-barchart %} Topic feedback
             </a>
         {% elsif page.layout == 'tutorial_hands_on' and site.data['feedback'].tutorial contains page.tutorial_name %}
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
@@ -30,32 +30,6 @@
                 {% icon galaxy-barchart %} GTN feedback
             </a>
         {% endif %}
-
-        <div class="dropdown-item">
-            <div>
-                {% icon language %} Translate this page
-            </div>
-
-            <div id="lang-selector">
-                {% if page.translations %}
-                  <strong>Curated Translations</strong>
-                  {% for lang in page.translations %}
-                  <a class="btn btn-info" href="{{ site.baseurl }}{{ page.dir }}tutorial{%unless lang == 'en'%}_{{lang | upcase }}{%endunless%}.html">
-                {{site.other_languages[lang]}}
-                  </a>
-                  {% endfor %}
-                {% endif %}
-                <strong>Automatic Translations</strong>
-{% for lang in site.other_languages %}{% unless lang[0]=='en' %}
-<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{lang[0]}}&u=https%3A%2F%2Ftraining.galaxyproject.org{{page.url}}&edit-text=&act=url">
-                {{lang[1]}}
-                </a>
-                {% endunless %}{% endfor %}
-                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
-                And more!
-                </a>
-            </div>
-        </div>
 
         <div class="dropdown-item">
             <div>

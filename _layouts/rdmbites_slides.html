@@ -1,0 +1,57 @@
+---
+layout: base_slides_rdmbites
+---
+
+{% assign topic = site.data[page.topic_name] %}
+{% assign topic_material = site | topic_filter:page.topic_name %}
+{% for tuto in topic_material %}
+    {% if tuto.name == page.tutorial_name %}
+        {% assign tutorial = tuto %}
+        {% assign title = tutorial.title %}
+    {% endif %}
+{% endfor %}
+{% assign locale = site.data.lang[page.lang] %}
+
+{% if page.questions %}
+### {% icon question %} {{ locale['questions'] | default: "Questions" }}
+
+{% for question in page.questions %}
+- {{ question }}
+{% endfor %}
+
+---
+{% endif %}
+
+{% if page.objectives %}
+### {% icon objectives %} {{ locale['objectives'] | default: "Objectives" }}
+
+{% for objective in page.objectives %}
+- {{ objective }}
+{% endfor %}
+
+---
+{% endif %}
+
+{{ content }}
+
+
+{% if page.key_points %}
+---
+### {% icon keypoints %} {{ locale['key-points'] | default: "Key points" }}
+
+{% for key_point in page.key_points %}
+- {{ key_point }}
+{% endfor %}
+{% endif %}
+
+
+{% if page.follow_up_training %}
+---
+### {% icon curriculum %} Do you want to extend your knowledge?
+
+
+Follow one of our recommended follow-up trainings:
+
+{% include _includes/display_extra_training_slides.md extra_trainings=page.follow_up_training %}
+
+{% endif %}

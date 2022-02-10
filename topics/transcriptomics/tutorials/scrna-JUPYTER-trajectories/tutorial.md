@@ -30,6 +30,7 @@ tags:
 - single-cell
 - 10x
 - paper-replication
+- interactive-tools
 contributors:
 - nomadscientist
 - mtekman

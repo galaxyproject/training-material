@@ -235,8 +235,8 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >
 >    Notice we have two URLs, two collection names, and two datatype extensions for each accession ID we started with. Like in the example where we split the columns, here we will split these up to describe multiple collections.
 > 7. From **Rules** menu, select  `Split Columns`
->    - *"Odd Number Column(s)"*: `C`, `D`, and `E` (the fasta columns)
->    - *"Even Number Column(s)"*: `F`, `G`, and `H` (the gff3 columns)
+>    - *"Odd Row Column(s)"*: `C`, `D`, and `E` (the fasta columns)
+>    - *"Even Row Column(s)"*: `F`, `G`, and `H` (the gff3 columns)
 >
 >    This will take the row consisting of the columns `ABCDEFGH` and build two rows, one with `ABCDEF` and the other with `ABFGH`
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_7_split_columns.png)
@@ -396,12 +396,12 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >       {: .solution}
 >
 >    For the analysis we wish to do, we want to group these files based on the type indicated in column `L` (LibraryName) shown below.
->    The source data though adds numbers to the library type to to generate the `LibraryName`, we need to strip those out to use the type
+>    The source data though adds numbers to the library type to generate the `LibraryName`, so we need to strip those out to use the type
 >    as an identifier for grouping the datasets. To do this, use the regex column adder rule again.
 >
 > 3. From **Column** menu, select `Using a Regular Expression`
 >     - *"From Column"*: `L`
->     - Select `Create column from regular expression groups`
+>     - Select `Create columns matching expression groups`
 >     - *"Regular Expression"*: `([^\d]+)\d+`.
 >     - *"Number of Groups"*: `1`
 >
@@ -484,7 +484,7 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    sublists below that. We can do this with the `Apply Rules` collection operation tool, which will
 >    likely be under the `Collection Operations` tool menu in your Galaxy interface.
 >
-> 4. Open the **Apply Rule to Collection** tool
+> 4. Open the **Apply Rules** tool
 >
 >    The very simple interface should look something like this:
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_5_apply_rules_landing.png)
@@ -492,7 +492,7 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    This interface simply lets one pick a collection to operate on and then launch the rule builder
 >    window to work to describe and preview manipulating the metadata of that collection.
 >
-> 5. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 5. **Apply Rules** {% icon tool %} with the following parameters:
 >    - *"Input Collection"*: the collection we just uploaded
 >    - Click the `Edit` button
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_6_apply_rules_init_flat.png)
@@ -532,10 +532,10 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_8_nested.png)
 >
 >    Placing the "single" and "paired" sublists inside the "treated" and "untreated" lists was a bit arbitrary and depending on the
->    workflow these may need to be inverted at different parts of an analysis. The **Apply Rules** tool can be used to invert these levels
+>    workflow these may need to be inverted at different parts of an analysis. The `Apply Rules` tool can be used to invert these levels
 >    if that is needed.
 >
-> 8. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 8. **Apply Rules** {% icon tool %} with the following parameters:
 >    - *"Input Collection"*: the new nested list we created in the previous step
 >    - Click "Edit".
 >
@@ -556,13 +556,13 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_11_inverted.png)
 >
->    In addition to structural re-organizations of a collection, the Apply Rules tool can be used to
+>    In addition to structural re-organizations of a collection, the `Apply Rules` tool can be used to
 >    filter elements out of the collection.
 >
-> 10. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 10. **Apply Rules** {% icon tool %} with the following parameters:
 >     - *"Input Collection"*: the original flat list created
 >     - Click `Edit`
->     - From **Filter** menu, select `From a regular expression`
+>     - From **Filter** menu, select `Using a Regular Expression`
 >       - *"From Column"*: `A`
 >       - *"Regular Expression"*: `.*_single_.*`
 >     - From **Rules** menu, select `Add / Modify Column Definitions`
@@ -574,15 +574,15 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >
 >     ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_13_filtered.png)
 >
->     Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the Apply Rules tool. Use the same regular expression as last time to filter the result but also add a column for "treated" and "untreated" list identifiers.
+>     Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the `Apply Rules` tool. Use the same regular expression as last time to filter the result but also add a column for "treated" and "untreated" list identifiers.
 >
-> 11. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 11. **Apply Rules** {% icon tool %} with the following parameters:
 >     - From **Filter** menu, select `Using a Regular Expression`
 >       - *"From Column"*: `A`
 >       - *"Regular Expression"*: `.*_single_.*`
 >     - From **Column** menu, select `Using a Regular Expression`
 >       - *"From Column"*: `A`
->       - Select `Create column from regular expression groups`
+>       - Select `Create columns matching expression groups`
 >       - *"Regular Expression"*:  `(.*)_single_.*`
 >       - *"Number of Groups"*: `1`
 >     - From **Rules** menu, select  `Add / Modify Column Definitions`

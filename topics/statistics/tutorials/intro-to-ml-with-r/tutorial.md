@@ -12,13 +12,9 @@ requirements:
         - rstudio
   -
     type: "internal"
-    topic_name: introduction
+    topic_name: data-science
     tutorials:
         - r-basics
-  -
-    type: "internal"
-    topic_name: introduction
-    tutorials:
         - r-advanced
 
 follow_up_training:
@@ -41,10 +37,13 @@ objectives:
 - Interpret and visualize the results obtained from ML analyses on omics datasets
 - Apply the ML techniques to analyse their own datasets
 time_estimation: 3H
+tags:
+- interactive-tools
 key_points:
 - To be added
 contributors:
   - fpsom
+  - erasmusplus
 ---
 
 # Introduction to Machine Learning and Data mining

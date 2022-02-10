@@ -431,28 +431,33 @@ with predicted functional effects.
 
 > ### {% icon hands_on %} Hands-on: Variant Annotation
 >
-> To annotate our variants we are going to use **SnpEff** with the
-> `athalianaTair10` genome database as the source of functional genomic
+> To annotate our variants we are going to use **SnpEff** with its
+> `Arabidopsis_thaliana` genome database as the source of functional genomic
 > annotations, then generate a human-friendly variant report with the
 > **MiModD Report Variants** {% icon tool %} tool.
 >
-> 1. Use **SnpEff Download** {% icon tool %} (Galaxy tool version 4.1.0) to
->    download genome database `athalianaTair10`.
+> 1. Use **SnpEff Download** {% icon tool %} to download genome database
+>    `Arabidopsis_thaliana`.
 >
 >    > ### {% icon comment %} SnpEff versions
->    > SnpEff genome databases can only be used with the specific version of
->    > SnpEff they were built for. Make sure you are using version `4.1.0` of
->    > **SnpEff Download** {% icon tool %} in this and of **SnpEff Variant
->    > effect and annotation** {% icon tool %} in the next step.
->    > If your Galaxy server offers newer versions of these tools by default,
->    > you may be able to request version `4.1.0` explicitly using the
->    > **Versions** button at the top right of the tool interface.
+>    > SnpEff genome databases can only be used with the specific `major.minor`
+>    > version of SnpEff they were built for.
+>    > Make sure you are using matching versions (e.g., `4.3` - differences
+>    > past the second digit are fine and denote subversions with compatible
+>    > database schemes) of **SnpEff Download** {% icon tool %} in this and of
+>    > **SnpEff Variant effect and annotation** {% icon tool %} in the next
+>    > step.
+>    > 
+>    > Please also note that before SnpEff version 4.3 the TAIR10 version of
+>    > the *A. thaliana* genome database was named `athalianaTair10`.
+>    > If your Galaxy server offers only older versions of the SnpEff tools,
+>    > you will have to use that name instead of `Arabidopsis_thaliana`.
 >    {: .comment}
 > 2. In the **SnpEff Variant effect and annotation** {% icon tool %} interface,
 >    set:
 >    - **Sequence changes (SNPs, MNPs, InDels)** to your filtered VCF dataset
->    - **Genome source** to `Reference genome from your history`
->    - **SnpEff4.1 Genome Data** to your just downloaded genome dataset
+>    - **Genome source** to `Downloaded snpEff database in your history`
+>    - **SnpEff4.3 Genome Data** to your just downloaded genome dataset
 >    - under **Annotation options** check `Use 'EFF' field compatible with
 >      older versions (instead of 'ANN')`
 >
@@ -500,7 +505,7 @@ with predicted functional effects.
 > > >    interfere with correct splicing of the transcript AT2G45660.1.
 > > > 2. From the linked gene pages at *TAIR* you can learn that the
 > > >    gene AT2G45550 encodes a cytochrome P450, while AT2G45660 encodes a
-> > >    protein called AGL20, which is known to control flowering. Thus, there
+> > >    protein called AGL20/SOC1, which is known to control flowering. Thus, there
 > > >    is a direct connection between the late-flowering phenotype of the
 > > >    mutant line studied here and the known role of the gene affected by
 > > >    chr2:18,808,927 C→T.

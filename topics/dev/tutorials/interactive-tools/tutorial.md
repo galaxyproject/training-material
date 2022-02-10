@@ -277,6 +277,9 @@ ENV PORT=$PORT
 RUN mkdir -p $(dirname "${LOG_PATH}")
 EXPOSE $PORT
 COPY ./gxit /gxit
+
+# This is the command that will be run when the Docker container is launched.
+# In this case it will launch the R Shiny app within the container.
 CMD R -e "shiny::runApp('/gxit', host='0.0.0.0', port=${PORT})" 2>&1 > "${LOG_PATH}"
 ```
 

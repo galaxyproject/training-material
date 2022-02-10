@@ -25,6 +25,7 @@ ALLOWED_SHORT_IDS = [
     'wig_to_bigWig',
     'ChangeCase',
     'param_value_from_file',
+    'Convert characters1'
 ]
 
 RE_TOOL = '{% tool ([^[%}]*)\s*%}'
