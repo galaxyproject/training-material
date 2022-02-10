@@ -5,12 +5,14 @@ title: "Performant Uploads with TUS"
 zenodo_link: ""
 questions:
 objectives:
-  - Setup TUSd and configure Galaxy to use it to process uploads
+  - Setup TUSd
+  - Configure Galaxy to use it to process uploads
 time_estimation: "30M"
 key_points:
+  - Use TUS to make uploads more efficient, especially for large uploads over unstable connections.
 contributors:
-  - hexylena
   - mvdbeek
+  - hexylena
   - lldelisle
 subtopic: features
 requirements:

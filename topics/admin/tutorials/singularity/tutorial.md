@@ -68,12 +68,12 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    +++ b/requirements.yml
 >    @@ -14,3 +14,7 @@
 >       version: 0.1.5
+>     - name: galaxyproject.tusd
+>       version: 0.0.1
 >    +- src: cyverse-ansible.singularity
 >    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >    +- src: gantsign.golang
 >    +  version: 2.6.3
->     - name: galaxyproject.tusd
->       version: 0.0.1
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add golang and singulary ansible roles"}
