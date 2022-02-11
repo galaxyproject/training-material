@@ -32,7 +32,7 @@ In this tutorial we will use data from the study of {% cite Zhu2019 %}. The arti
 
 ### When working with real data
 {:.no_toc}
-The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your own data we suggest to use [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong) which includes additional steps for your data analysis. Both worklfows do not support a peak calling with controls as CUT&RUN has a low background. It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to take them into consideration. 
+The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your own data we suggest to use [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong) which includes additional steps for your data analysis. Both worklfows do not support a peak calling with controls as CUT&RUN has a low background. It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to take them into consideration.    
 
 > ### Agenda
 >
@@ -42,7 +42,6 @@ The workflow for this training material can be found [here](https://usegalaxy.eu
 > {:toc}
 >
 {: .agenda}
-
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
@@ -90,83 +89,9 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 > If you are not familiar with BED format or encode narrowPeak format, see the [BED Format](https://genome.ucsc.edu/FAQ/FAQformat.html)
 {: .comment}
 
-We will visualise regions later in the analysis and obtain the gene information now. We will get information for chromosome 22 genes (names of transcripts and genomic positions) using the UCSC tool.
-
-> ### {% icon hands_on %} Hands-on: Obtain Annotation for hg38 genes
->
-> 1. {% tool [UCSC Main table browser](ucsc_table_direct1) %} with the following parameters:
->    - *"clade"*: `Mammal`
->    - *"genome"*: `Human`
->    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
->    - *"group"*: `Genes and Gene Prediction`
->    - *"track"*: `All GENCODE V37`
->    - *"table"*: `Basic`
->    - *"region"*: `position` `chr22`
->    - *"output format"*: `all fields from selected table`
->    - *"Send output to"*: `Galaxy`
-> 2. Click **get output**
-> 3. Click **Send query to Galaxy**
->
->    This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
->
-> 4. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV37 (chr22:1-50,818,468)`
->
-> 5. Check the contents of your file, is this as you expect it to be?
->
->    > ### {% icon question %} Question: Expected output
->    >
->    > Our goal here was to convert the data to BED format.
->    >
->    > 1. Which columns do you expect in your file? (Tip: read about [BED format](https://genome.ucsc.edu/FAQ/FAQformat.html#format1))
->    > 2. Does your file look like a valid BED format?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. We expect at least 3 columns, `chromosome - start - end`, and possibly more optional columns
->    > > 2. Your file should look something like this:
->    > >    ```
->    > >    chr22	10736170	10736283	U2	0	-
->    > >    chr22	11066417	11068174	CU104787.1	0	+
->    > >    chr22	11249808	11249959	5_8S_rRNA	0	-
->    > >    chr22	15273854	15273961	U6	0	+
->    > >    [..]
->    > >    ```
->    > >
->    > > - **Troubleshooting:** Is your second column the `Strand` column?
->    > >    - Make sure you used the correct **Cut** {% icon tool %} (the one that matches the tool name mentioned in the previous step *exactly*)
->    > >    - There is another tool with `(cut)` behind the title, we do NOT want to use this tool in this step.
->    > >
->    > > - **Tip:** Always check your output files to make sure they match your expectations!
->    > >
->    > {: .solution}
->    >
->    {: .question}
->
->
-> 6. **Rename** {% icon galaxy-pencil %} the dataset as `chr22 genes`
->
->    {% snippet faqs/galaxy/datasets_rename.md %}
->
-> 7. **Change** {% icon galaxy-pencil %} its datatype to BED
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
->
-> 8. Click on the {% icon galaxy-eye %} (eye) icon of the file. It should have now column names and they should match the content.
->
-{: .hands_on}
-
->
-> ### {% icon comment %} Gene file
-> The chr22 genes BED we produced only contains the start, the end, the name, and the strand of each transcript. It does not contain exon information.
-> To be able to have the exon information, you could use a GTF file which can be downloaded from the [gencode website](ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_37/gencode.v37.annotation.gtf.gz) but this file would include the information for the whole genome and would slow the analysis.
-{: .comment}
-
 ## Quality Control
 
-The first step is to check the quality of the reads and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get DNA fragments of about 40 bp if two adjacent Tn5 transposases cut the DNA {% cite Adey2010 %}. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can assess the reads with **FastQC**.
+We first have to check if our data contains adapter sequences that we have to remove. A typical CUT&RUN experiment has a read length of 30-80 nt. We can check the raw data quality with **FastQC**.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -181,24 +106,21 @@ The first step is to check the quality of the reads and the presence of the Next
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > 1. There are 285247 reads.
+> > > 1. There are 300,000 reads.
 > > > 2. The 3 steps below have warnings:
 > > >
 > > >    1. **Per base sequence content**
 > > >
-> > >       It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
+> > >       CUT&RUN has some base biases at the start of every read.
 > > >
 > > >    2. **Sequence Duplication Levels**
 > > >
 > > >       The read library quite often has PCR duplicates that are introduced
 > > >       simply by the PCR itself. We will remove these duplicates later on.
 > > >
-> > >    3. **Overrepresented sequences**
+> > >    3. **Adapter Content**
 > > >
-> > >       One sequence is over represented:
-> > >       you have 306 reads which are exactly the sequence of the Nextera adapter.
-> > >       They correspond to adapters amplified head-to-head.
-> > >       306 is really low (only 0.1% of reads).
+> > >       Our data contains adapter that we still have to remove.
 > > >
 > > {: .solution}
 > >
@@ -210,47 +132,28 @@ The first step is to check the quality of the reads and the presence of the Next
 > ![FastQC screenshot of the Adapter Content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the Adapter Content section")
 {: .comment}
 
-The FastQC web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
+The FastQC report pointed out that we have in our data some standard Illumina adapter sequences, which we will remove with Trim Galore!.
 
 ## Trimming Reads
 
-To trim the adapters we provide the Nextera adapter sequences to **Cutadapt**. These adapters are shown in the image below.
-
-![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg.png "Nextera library with the sequence of adapters")
-
-The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the reads (quality less than 20). We will only keep reads that are at least 20 bases long. We remove short reads (< 20bp) as they are not useful, they will either be thrown out by the mapping or may interfere with our results at the end.
-
+**Trim Galore!** is a handy tool that can automatically detect and trim standard Illumina adapters.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters:
->    - *"Single-end or Paired-end reads?"*: `Paired-end`
->        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1`
->        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2`
->        - In *"Read 1 Options"*:
->            - In *"3' (End) Adapters"*:
->                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
->                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
->                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
->        - In *"Read 2 Options"*:
->            - In *"3' (End) Adapters"*:
->                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
->                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
->                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
->    - In *"Filter Options"*:
->        - *"Minimum length"*: `20`
->    - In *"Read Modification Options"*:
->        - *"Quality cutoff"*: `20`
->    - In *"Output Options"*:
->        - *"Report"*: `Yes`
+> 1. {% tool [Trim Galore!]( https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/cd7e644cae1d) %} with the following parameters:
+>    - *"Is this library paired- or single-end?"*: `Paired-end`
+>        - {% icon param-file %} *"Reads in FASTQ format"*: select `SRR891268_R1`
+>        - {% icon param-file %} *"Reads in FASTQ format (second)"*: select `SRR891268_R2`
+>    - In *"Adapter sequence to be trimmed"*: `Illumina universal`
+>    - In *"Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)"*: `30`
+>    - In *"Discard reads that became shorter than length N"*: `15`
+>    - In *"Generate a report file"*:   `Yes`
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
-> ### {% icon comment %} Cutadapt Results
-> You should get similar output to this from Cutadapt:
+> ### {% icon comment %} Trim Galore Results
+> You should get similar output to this from Trim Galore:
 > ![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
 {: .comment}
 
@@ -272,7 +175,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 > ### {% icon hands_on %} Hands-on: Check Adapter Removal with FastQC
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->       - *"Short read data from your current history"*: select the output of **Cutadapt** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
+>       - *"Short read data from your current history"*: select the output of **Trim Galore!** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
@@ -283,6 +186,58 @@ The forward and reverse adapters are slightly different. We will also trim low q
 > However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
 {: .comment}
 
+It can happen that a read library contains double adapter ligations, which means that the read as two adapter sequences. Thus, we have to do a second adapter trimming.
+
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Trim Galore!]( https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/cd7e644cae1d) %} with the following parameters:
+>    - *"Is this library paired- or single-end?"*: `Paired-end`
+>        - {% icon param-file %} *"Reads in FASTQ format"*: select `Trim Galore! R1`
+>        - {% icon param-file %} *"Reads in FASTQ format (second)"*: select `Trim Galore! R2`
+>    - In *"Adapter sequence to be trimmed"*: `Illumina universal`
+>    - In *"Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)"*: `30`
+>    - In *"Discard reads that became shorter than length N"*: `15`
+>    - In *"Generate a report file"*:   `Yes`
+>
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+{: .hands_on}
+
+> ### {% icon comment %} Trim Galore Results
+> You should get similar output to this from Trim Galore:
+> ![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
+{: .comment}
+
+
+> ### {% icon question %} Questions
+>
+> 1. What percentage of reads contain adapters?
+> 2. What percentage of reads are still longer than 20bp after the trimming?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. ~14%
+> > 2. ~99%
+> >
+> {: .solution}
+>
+{: .question}
+
+> ### {% icon hands_on %} Hands-on: Check Adapter Removal with FastQC
+>
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
+>       - *"Short read data from your current history"*: select the output of **Trim Galore!** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
+>
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+{: .hands_on}
+
+> ### {% icon comment %} FastQC Results
+> Now, you should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Nextera adapters are no longer present.
+> ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
+> However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
+{: .comment}
+
+
 # Mapping
 
 ## Mapping Reads to Reference Genome
@@ -290,13 +245,19 @@ The forward and reverse adapters are slightly different. We will also trim low q
 Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose. The hg38 version of the human genome contains [alternate loci](https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE). This means that some region of the genome are present both in the canonical chromosome and on its alternate loci. The reads that map to these regions would map twice. To be able to filter reads falling into repetitive regions but keep reads falling into regions present in alternate loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).
 
 > ### {% icon comment %} Dovetailing
-> We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. For example, if the first mate in the read pair is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`, where both contain 2 bases of adapter sequence, they will not be trimmed by Cutadapt and will map this way:
+> We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. This occurs especially for CUT&RUN because the read length is quite short. Bowtie thus discards reads such as:
 > ```
-<--------------------Mate 1-----------------------
-AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
-  CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT
-  ----------------------Mate 2--------------------->
+---------------------Mate 1--------------------------------->
+<---------------------Mate 2----------------------
 ```
+
+or
+
+> ```
+---------------------Mate 1--------------------------------->
+<---------------------Mate 2---------------------------------
+```
+
 > This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
 {: .comment}
 
@@ -305,8 +266,8 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 >
 > 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
->        - {% icon param-file %} *"FASTQ/A file #1"*: select the output of **Cutadapt** {% icon tool %} *"Read 1 Output"*
->        - {% icon param-file %} *"FASTQ/A file #2"*: select the output of **Cutadapt** {% icon tool %} *"Read 2 Output"*
+>        - {% icon param-file %} *"FASTQ/A file #1"*: select the output of **Trim Galore!** {% icon tool %} *"Read 1 Output"*
+>        - {% icon param-file %} *"FASTQ/A file #2"*: select the output of **Trim Galore!** {% icon tool %} *"Read 2 Output"*
 >        - *"Do you want to set paired-end options?"*: `Yes`
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`
@@ -350,7 +311,7 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 
 ## Filter Uninformative Reads
 
-We apply some filters to the reads after the mapping. ATAC-Seq datasets can have a lot of reads that map to the mitchondrial genome because it is nucleosome-free and thus very accessible to Tn5 insertion. The mitchondrial genome is uninteresting for ATAC-Seq so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.
+We apply some filters to the reads after the mapping. CUT & RUN datasets can have a lot of reads that map to the mitchondrial genome because it is nucleosome-free and thus very accessible to the pA-MNase. CUT & RUN inserts adapter more easily in open chromatin regions due to the pA-MNase activity. The mitchondrial genome is uninteresting for CUT&RUN so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.
 
 
 > ### {% icon hands_on %} Hands-on: Filtering of uninformative reads
@@ -391,23 +352,9 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 >
 {: .question}
 
-High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-Seq samples have been reported to be 80% mitochondrial reads and so wet-lab methods have been developed to deal with this issue {% cite Corces2017 %} and {% cite Litzenburger2017 %}. It can be a useful QC to assess the number of mitochondrial reads.
-However, it does not predict the quality of the rest of the data. It is just that sequencing reads have been wasted.
-
-> ### {% icon tip %} Tip: Getting the number of mitochondrial reads
->
-> To get the number of reads that mapped to the mitochondrial genome (chrM) you can run {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3) %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
-> The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
-> The first 2 lines of the result would be (after using {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %}):
->
-> ![Samtools idxstats result](../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png "Samtools idxstats result")
->
-> There are 220 000 reads which map to chrM and 165 000 which map to chr22.
-{: .tip}
-
 ## Filter Duplicate Reads
 
-Because of the PCR amplification, there might be read duplicates (different reads mapping to exactly the same genomic region) from overamplification of some regions. As the Tn5 insertion is random within an accessible region, we do not expect to see fragments with the same coordinates. We consider such fragments to be PCR duplicates. We will remove them with **Picard MarkDuplicates**.
+Because of the PCR amplification, there might be read duplicates (different reads mapping to exactly the same genomic region) from overamplification of some regions. We will remove them with **Picard MarkDuplicates**.
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
@@ -461,7 +408,7 @@ Once again, if you have a high number of replicates it does not mean that your d
 
 ## Check Insert Sizes
 
-We will check the insert sizes with **Paired-end histogram** of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.
+We will check the insert sizes with **Paired-end histogram** of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the CUT and RUN experiment.
 
 > ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
@@ -480,50 +427,29 @@ We will check the insert sizes with **Paired-end histogram** of insert size freq
 
 > ### {% icon question %} Questions
 >
-> Could you guess what the peaks at approximately 50bp, 200bp, 400bp and 600bp correspond to?
+> Could you guess what the peaks at approximately 30bp correspond to?
 >
 > > ### {% icon solution %} Solution
 > >
-> > The first peak (50bp) corresponds to where the Tn5 transposase inserted into nucleosome-free regions. The second peak (a bit less than 200bp) corresponds to where Tn5 inserted around a single nucleosome. The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosomes and the fourth one (around 600bp) is where Tn5 inserted around three adjacent nucleosomes.
+> > The first peak (30bp) corresponds to where the cleavage around our ROI. Nevertheless, the cutting of our pA-MNase-antibody-protein complex is not perfect. The arms can actually cut further away from the protein. Little bumps int the distribution are an indication for another protein(complex), such as, a nucelosome that is located between the two cleavage sites.
 > >
 > {: .solution}
 >
 {: .question}
 
-This fragment size distribution is a good indication if your experiment worked or not.
-In absence of chromatin (without nucleosome), this is the profile you would get:
-
-![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA")
-
-Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:
-
-![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq")
-
-![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another very noisy ATAC-Seq")
-
-A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome "peak".
-![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
-
+This fragment size distribution is a good indication if your experiment worked or not. The CUT & RUN yield can graduately increase over the digestion time {% cite Skene2017 %}, which of course depends on the enzyme used for the cleavage of the DNA.
 
 # Peak calling
 
 ## Call Peaks
 
-We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published and the more reads you have, the less peaks you get (see the issue [here](https://github.com/jsh58/Genrich/issues/33)). That's why we will not use Genrich in this tutorial.
+We have now finished the data preprocessing. Next, in order to find regions corresponding to potential binding sites, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. [MACS2](https://github.com/taoliu/MACS) is widely used for CUT & RUN.
 
 At this step, two approaches exists:
 
-- The first one is to select only paired whose fragment length is below 100bp corresponding to nucleosome-free regions and to use a peak calling like you would do for a ChIP-seq, joining signal between mates. The disadvantages of this approach is that you can only use it if you have paired-end data and you will miss small open regions where only one Tn5 bound.
-- The second one chosen here is to use all reads to be more exhaustive. In this approach, it is very important to re-center the signal of each reads on the 5' extremity (read start site) as this is where Tn5 cuts. Indeed, you want your peaks around the nucleosomes and not directly on the nucleosome:
-![Scheme of ATAC-Seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-Seq reads relative to nucleosomes")
+Like in ATAC-Seq, we have to take a few things into account. The pA-MNase does not need to bind the protein it can create fragments unpsecifically a few bases downtream and upstream away from the true binding site. This is to the *"long"* arms of the proteins. A big jump can happen if a nucelosome is between the protein binding site and the cutting site.
 
-> ### {% icon comment %} Comment on Tn5 insertion
->
-> When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp ({% cite Kia2017 %}):
-> ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
->
-> This means in order to have the read start site reflecting the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don't take it into account but if you are interested in the footprint, this is important.
-{: .comment}
+It is very important to re-center the signal since the pA-MNase cuts in different distances. Since some read pairs are not symmetric (i.e., the first mate might be further away from the binding site than the second mate) we will turn off the shifting mode of MACS2 and apply a direct shift.
 
 If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.
 
@@ -569,12 +495,12 @@ We call peaks with MACS2. In order to get the coverage centered on the 5' extend
 >
 {: .hands_on}
 
-# Visualisation of Coverage
+# Identifying Binding Motifs
 
 ## Prepare the Datasets
 
-### Extract CTCF peaks on chr22 in intergenic regions
-As our training dataset is focused on chromosome 22 we will only use the CTCF peaks from chr22. We expect to have ATAC-seq coverage at TSS but only good ATAC-seq have coverage on intergenic CTCF. Indeed, the CTCF protein is able to position nucleosomes and creates a region depleted of nucleosome of around 120bp {% cite fu_insulator_2008 %}. This is smaller than the 200bp nucleosome-free region around TSS and also probably not present in all cells. Thus it is more difficult to get enrichment. In order to get the list of intergenic CTCF peaks of chr22, we will first select the peaks on chr22 and then exclude the one which overlap with genes.
+### Extract Robust and Positive Peaks
+MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set will contain false positives because of technical and biological noise. We can remove some noise with a positive control, that is why we have downloaded a peak set from a ChIP experiment of GATA1. 
 
 > ### {% icon hands_on %} Hands-on: Select CTCF peaks from chr22 in intergenic regions:
 >
