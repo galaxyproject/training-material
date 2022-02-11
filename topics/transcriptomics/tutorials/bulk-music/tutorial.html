@@ -1,0 +1,2146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Bulk RNA Deconvolution with MuSiC</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Bulk RNA Deconvolution with MuSiC" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/bulk-music/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/bulk-music/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/bulk-music/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/bulk-music/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/bulk-music/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/bulk-music/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/bulk-music/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/bulk-music/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/transcriptomics/tutorials/bulk-music/tutorial.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/transcriptomics/tutorials/bulk-music/tutorial.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/transcriptomics/tutorials/bulk-music/tutorial.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/galaxy-single-cell'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Bulk RNA Deconvolution with MuSiC",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+  },
+  "courseCode": "transcriptomics / bulk-music / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Bulk RNA Deconvolution with MuSiC' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/bulk-music/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "single-cell, mouse, human, deconvolution, bulk",
+  "description": "The questions this  addresses are:\n - How do we infer cell type proportions from bulk RNA-seq data?\n - How are these cell types grouped together?\n\n\\nThe objectives are:\n - Construct Bulk and scRNA Expression Set Objects\n - Inspect these objects for various properties\n - Measure the abundance of certain cell type cluster markers compared to others\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/scrna-intro/slides.html",
+      "name": "An introduction to scRNA-seq data analysis",
+      "description": "Slides for 'An introduction to scRNA-seq data analysis' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Mehmet Tekman"
+    },
+    {
+      "@type": "Person",
+      "name": "Wendi Bacon"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Mehmet Tekman"
+    },
+    {
+      "@type": "Person",
+      "name": "Wendi Bacon"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>Bulk RNA Deconvolution with MuSiC</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a>
+
+
+<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=27" alt="Avatar">Wendi Bacon</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do we infer cell type proportions from bulk RNA-seq data?</p>
+</li>
+        
+        <li><p>How are these cell types grouped together?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Construct Bulk and scRNA Expression Set Objects</p>
+</li>
+        
+        <li><p>Inspect these objects for various properties</p>
+</li>
+        
+        <li><p>Measure the abundance of certain cell type cluster markers compared to others</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> An introduction to scRNA-seq data analysis:
+                            
+                                <a href="/training-material/topics/transcriptomics/tutorials/scrna-intro/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/5719228">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/bulk-music/workflows/" title="Workflows" alt="Bulk RNA Deconvolution with MuSiC workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+        <a class="dropdown-item" href="http://aspendb.uga.edu:8085/" title="AGEseq @ AspenDB">
+            AGEseq @ AspenDB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://motherbox.chemeng.ntua.gr/anastasia_dev/" title="ANASTASIA">
+            ANASTASIA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://apostl.moffitt.org/" title="APOSTL">
+            APOSTL
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8083/" title="ARGA">
+            ARGA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://smile.hku.hk/SARGs" title="ARGs-OAP">
+            ARGs-OAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://bf2i-galaxy.insa-lyon.fr:8080/" title="BF2I-MAP">
+            BF2I-MAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ugent.be/" title="BioBix">
+            BioBix
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://143.169.238.104/galaxy/" title="Biomina">
+            Biomina
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://pistacho.ac.uma.es/galaxy-bitlab" title="BitLAB">
+            BitLAB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://iris.angers.inra.fr/galaxypub-cfbp" title="CIRM-CFBP">
+            CIRM-CFBP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://clipseq.usegalaxy.eu/" title="CLIP-Explorer">
+            CLIP-Explorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cpt.tamu.edu/galaxy-public/" title="Center for Phage Technology (CPT)">
+            Center for Phage Technology (CPT)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://vm-chemflow-francegrille.eu/" title="ChemFlow">
+            ChemFlow
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cheminformatics.usegalaxy.eu/" title="ChemicalToolbox">
+            ChemicalToolbox
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://hyperbrowser.uio.no/coloc-stats" title="Coloc-stats">
+            Coloc-stats
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://corgat.cloud.ba.infn.it/galaxy" title="CorGAT">
+            CorGAT
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://coralsnp.science.psu.edu/galaxy/" title="CoralSNP">
+            CoralSNP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://cropgalaxy.excellenceinbreeding.org/" title="CropGalaxy">
+            CropGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://dintor.eurac.edu/" title="Dintor">
+            Dintor
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.freebioinfo.org/" title="FreeBioinfo">
+            FreeBioinfo
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://igg.cloud.ba.infn.it/galaxy" title="GASLINI">
+            GASLINI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gio.sbcs.qmul.ac.uk/" title="Galaxy Integrated Omics (GIO)">
+            Galaxy Integrated Omics (GIO)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.mesocentre.uca.fr" title="Galaxy@AuBi">
+            Galaxy@AuBi
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.pasteur.fr/" title="Galaxy@Pasteur">
+            Galaxy@Pasteur
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://hyperbrowser.uio.no/hb/" title="Genomic Hyperbrowser">
+            Genomic Hyperbrowser
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gigagalaxy.net/" title="GigaGalaxy">
+            GigaGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://huttenhower.sph.harvard.edu/galaxy/" title="Huttenhower Lab">
+            Huttenhower Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.hyphy.org/" title="HyPhy HIV NGS Tools">
+            HyPhy HIV NGS Tools
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8081/" title="IDENAP">
+            IDENAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy-web.ipk-gatersleben.de" title="IPK Galaxy Blast Suite">
+            IPK Galaxy Blast Suite
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://www.immportgalaxy.org/" title="ImmPort Galaxy">
+            ImmPort Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.interactomix.com/" title="InteractoMIX">
+            InteractoMIX
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.lappsgrid.org/" title="LAPPS Grid">
+            LAPPS Grid
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ul.edu.lb/" title="Lebanese University Galaxy">
+            Lebanese University Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
+            Machine Learning Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://neo.engr.uconn.edu/" title="Mandoiu Lab">
+            Mandoiu Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://metabolomics.usegalaxy.eu/" title="Metabolomics">
+            Metabolomics
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
+            Metagenomics
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/" title="MiModD NacreousMap">
+            MiModD NacreousMap
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.migale.inra.fr/" title="Migale">
+            Migale
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.inf.ethz.ch" title="Oqtans">
+            Oqtans
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://palfinder.ls.manchester.ac.uk/" title="Palfinder">
+            Palfinder
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://pepsimili.e-nios.com:8080/" title="PepSimili">
+            PepSimili
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.bio.di.uminho.pt/" title="PhagePromotor">
+            PhagePromotor
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
+            Plant Anaylsis Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://protologger.de/" title="Protologger">
+            Protologger
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.bio.ku.dk/" title="Vinther Lab">
+            Vinther Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://viralvariant.anses.fr/" title="Viral Variant Visualizer (VVV)">
+            Viral Variant Visualizer (VVV)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://virology.usegalaxy.eu/" title="Virology">
+            Virology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://covid19.usegalaxy.fr/" title="covid19.UseGalaxy.fr">
+            covid19.UseGalaxy.fr
+        </a>
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 9, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
+
+<p>Bulk <span class="notranslate">RNA</span>-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain more precise estimates of the proportions of cell types within the bulk sample.</p>
+
+<p>To do this, we can use <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data as a reference for estimating the cell type proportions within the bulk data.</p>
+
+<p>In this tutorial, we will use bulk and <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq assays, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk <span class="notranslate">RNA</span>-seq.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#bulk-rna-seq-cell-type-deconvolution" id="markdown-toc-bulk-rna-seq-cell-type-deconvolution">Bulk <span class="notranslate">RNA</span>-seq Cell Type Deconvolution</a></li>
+  <li><a href="#cell-proportion-estimation" id="markdown-toc-cell-proportion-estimation">Cell Proportion Estimation</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+      <li><a href="#building-the-expression-set-objects" id="markdown-toc-building-the-expression-set-objects">Building the <span class="notranslate">Expression</span> Set objects</a></li>
+      <li><a href="#estimating-cell-type-proportions" id="markdown-toc-estimating-cell-type-proportions">Estimating Cell Type proportions</a></li>
+    </ol>
+  </li>
+  <li><a href="#estimation-of-cell-type-proportions-with-pre-grouping-of-cell-types" id="markdown-toc-estimation-of-cell-type-proportions-with-pre-grouping-of-cell-types">Estimation of cell type proportions with pre-grouping of cell types</a>    <ol>
+      <li><a href="#get-data-1" id="markdown-toc-get-data-1">Get data</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h2 id="bulk-rna-seq-cell-type-deconvolution">Bulk <span class="notranslate">RNA</span>-seq Cell Type Deconvolution</h2>
+
+<p>The heterogeneity that exists in the cellular composition of bulk <span class="notranslate">RNA</span>-seq can add bias to the results from differential <span class="notranslate">expression</span> analysis. In order to circumvent this limitation, <span class="notranslate">RNA</span>-seq deconvolution aims to infer cell type abundances by modelling the gene <span class="notranslate">expression</span>s levels as ‘weighted sums’ of cell type specific <span class="notranslate">expression</span> profiles.</p>
+
+<blockquote class="details">
+  <h3 id="details-more-details-on-sums"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on ‘Sums’</h3>
+
+  <p><strong>So!</strong> You fancy some maths do you? Good! This is important, as you’ll see variations of that phrase if you ever look at any papers in the field!
+If we think about the total <span class="notranslate">expression</span> of a given gene you might get from bulk <span class="notranslate">RNA</span>-seq, you could also think about it as the sum of the <span class="notranslate">expression</span> of each cell, for example,</p>
+
+  <p><em>Total = cell<sub>a</sub> <span class="notranslate">expression</span> + cell<sub>b</sub> <span class="notranslate">expression</span> … (and so forth)</em></p>
+
+  <p>This is a <em>‘sum’</em>, because we’re adding up all the cells. If we now think about how we expect similar <span class="notranslate">expression</span> from similar cell types, we could change this to the following:</p>
+
+  <p><em>Total = cell_type<sub>a</sub> <span class="notranslate">expression</span> + cell_type<sub>b</sub> <span class="notranslate">expression</span></em>  … (and so forth)</p>
+
+  <p><strong>BUT WAIT!</strong> That’s not strictly true, because the cell types are not all in equal proportion (if only!). So we have to take into account another variable, the proportion a given cell type takes up in a sample. So we now have:</p>
+
+  <p><em>Total = Proportion<sub>a</sub> x cell_type<sub>a</sub> <span class="notranslate">expression</span> + Proportion<sub>b</sub> x cell_type<sub>b</sub> <span class="notranslate">expression</span></em></p>
+
+  <p>So now, we are <em>‘weighting’</em> the sums of <span class="notranslate">expression</span> based off of the cell proportion. And if you’re a mathematician, you might instead put this as</p>
+
+  <p><strong>T = C x P</strong>
+or some fancier formulas…(read more <a href="https://academic.oup.com/bioinformatics/article/34/11/1969/4813737">in-depth here</a> if you like!)</p>
+
+  <p>The point is, if we have an idea of what the average <span class="notranslate">expression</span> should be for each gene (what we can get from <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data, <em>C</em>), and we have the total <span class="notranslate">expression</span> (from the bulk <span class="notranslate">RNA</span>-seq, <em>C</em>), then we can infer the cell proportions (<em>P</em>).</p>
+
+</blockquote>
+
+<p>Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the <a href="https://xuranw.github.io/MuSiC/articles/MuSiC.html">MuSiC</a> tool suite <span class="citation"><a href="#wang2019bulk">Wang <i>et al.</i> 2019</a></span> to estimate the proportion of individual cell types in our bulk <span class="notranslate">RNA</span>-seq datasets.</p>
+
+<h3 id="music">MusiC</h3>
+
+<p>MuSiC uses cell-type specific gene <span class="notranslate">expression</span> from <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span> seq data to characterize cell type compositions (proportions) from bulk <span class="notranslate">RNA</span>-seq data in complex tissues. By appropriate weighting of genes showing cross-subject (sample to sample) and cross-cell (cells of the same cell type within a sample) consistency, MuSiC enables the transfer of cell type-specific gene <span class="notranslate">expression</span> information from one dataset to another.</p>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>What is a weighted sum? <em>Hint</em>: What kinds of genes would be best for distinguishing cell types, and what kinds of genes would make it difficult?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>So you know what the <em>Sum</em> is from above - the total <span class="notranslate">expression</span> of a given gene in a bulk <span class="notranslate">RNA</span>-seq sample depends on the proportion of cell types and the average <span class="notranslate">expression</span> level of each of those cell types (<strong>T = C x P</strong>). However, <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data is highly variable. Cell-type specific <span class="notranslate">expression</span> if genes with lower variation from sample to sample (i.e. person to person or organism to organism) and cell to cell (i.e. within a sample) will be the most useful for distinguishing cells, while genes that vary heavily (i.e. high in cell type<sub>a</sub> in one sample, but low in cell type<sub>a</sub> in another sample, will be the least useful in accurately distinguishing cells. Therefore, to use the mean <span class="notranslate">expression</span> level in a cell_type, MusiC weights the sums, favouring more consistently expressed genes in cell types.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>Solid tissues often contain closely related cell types that are difficult to distinguish from one another, a phenomenon known as <em>“collinearity”</em>. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, MuSic first groups similar cell types into the same cluster and estimate cluster proportions, then recursively repeats this procedure within each cluster.</p>
+
+<figure id="figure-1"><img src="../../images/bulk-music/figure_method.jpg" alt="muse1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Overview of MuSiC Suite</figcaption></figure>
+
+<h1 id="cell-proportion-estimation">Cell Proportion Estimation</h1>
+
+<p>Here we will extract cell proportions from a bulk data of human pancreas data from <span class="citation"><a href="#fadista2014global">Fadista <i>et al.</i> 2014</a></span> concerning 56 638 genes across 89 samples, using a <span class="notranslate">single cell</span> human pancreas dataset from <span class="citation"><a href="#segerstolpe2016single">Segerstolpe <i>et al.</i> 2016</a></span> containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subjects and 4 with Type-II diabetes (T2D). If the deconvolution is good, and the datasets are compatible with sufficient enough overlap, we should be able to identify the same cell types from the bulk data.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial <em>“Deconvolution: Cell Type inference of Human Pancreas Data”</em></li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/5719228">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">transcriptomics</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Bulk <span class="notranslate">RNA</span> Deconvolution with MuSiC</code>):</p>
+
+      <ul>
+        <li>
+          <p>Human pancreas bulk <span class="notranslate">RNA</span> datasets (tag: <code class="language-plaintext highlighter-rouge">#bulk</code>)</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5719228/files/GSE50244bulkeset.<span class="notranslate">expression</span>.tabular
+https://zenodo.org/record/5719228/files/GSE50244bulkeset.phenotype.tabular
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <p>Human pancreas <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span> datasets (tag: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code>)</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5719228/files/EMTABesethealthy.<span class="notranslate">expression</span>.tabular
+https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+    <li>
+      <p>Rename the datasets</p>
+    </li>
+    <li>
+      <p>Check that the datatype</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Add to each <code class="language-plaintext highlighter-rouge"><span class="notranslate">expression</span></code> file a tag corresponding to <code class="language-plaintext highlighter-rouge">#bulk</code> and <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>  <li>Click on the dataset</li>  <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>  <li>    <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>    <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>  </li>  <li>Check that the tag is appearing below the dataset name</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="exploring-the-datasets">Exploring the Datasets</h3>
+
+<p>We are told before we download the data, that:</p>
+<ul>
+  <li>The bulk human pancreas dataset is 89 samples across 56 638 genes</li>
+  <li>The <span class="notranslate">single cell</span> human pancreas datasets is 2209 cells across 24 453 genes.</li>
+</ul>
+
+<p>But what does this actually look like in the data?</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-inspecting-datasets"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Inspecting Datasets</h3>
+
+  <p>Note that at any time you can visually inspect the input datasets yourself by either:</p>
+  <ul>
+    <li>Expanding the dataset in the history panel clicking on the name of the dataset</li>
+    <li>Or clicking on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> icon to load them into the main window.</li>
+  </ul>
+</blockquote>
+
+<p>Let’s start exploring the datasets.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-exploring-the-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Exploring the Datasets</h3>
+
+  <ol>
+    <li>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> <span class="notranslate">expression</span> file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What do the rows and columns correspond to?</li>
+          <li>What do the values at each position mean?</li>
+          <li>Has the data been normalised?</li>
+          <li>Why are there so many zeroes?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <figure id="figure-2"><img src="../../images/bulk-music/peek_tabular_scrna_expr.png" alt="expr_tab. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Peeking at the tabular sc<span class="notranslate">RNA</span> <span class="notranslate">expression</span> dataset</figcaption></figure>
+
+          <ol>
+            <li>Rows correspond to gene names, and columns to cell identifiers</li>
+            <li>These are the number of <span class="notranslate">reads</span> or counts for each gene for each cell</li>
+            <li>The data has not been normalised since the counts are integer and not decimal</li>
+            <li><span class="notranslate">Single-cell</span> datasets can be very sparse for a variety of reasons relating to dropouts and biological factors. For more information, please see the <a href="../../tutorials/scrna-intro/slides.html">introduction <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq slides#41</a>.</li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">#bulk</code> <span class="notranslate">expression</span> file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What do the rows and columns correspond to?</li>
+          <li>In which field is there likely to be overlap with the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> dataset?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <figure id="figure-3"><img src="../../images/bulk-music/peek_tabular_bulk_expr.png" alt="bulk_tab. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Peeking at the tabular bulk <span class="notranslate">RNA</span>-seq <span class="notranslate">expression</span> dataset</figcaption></figure>
+
+          <ol>
+            <li>As before with the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> dataset, rows correspond to gene names and columns to sample identifiers.</li>
+            <li>The sample identifiers and the cell identifiers are completely different, but the gene names appear to be using the same symbols as the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> dataset, so the gene field is the common factor here.</li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> phenotype file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>Does the phenotypes file describe genes or cells?</li>
+          <li>What does the <code class="language-plaintext highlighter-rouge">SubjectName</code> field describe?</li>
+          <li>What does the <code class="language-plaintext highlighter-rouge">cellType</code> field describe?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <figure id="figure-4"><img src="../../images/bulk-music/peek_tabular_scrna_pheno.png" alt="peek_tabular_scrna_pheno.png. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Peeking at the tabular sc<span class="notranslate">RNA</span> phenotype dataset</figcaption></figure>
+
+          <ol>
+            <li>The first column is the index column, which uses the cell identifiers in the header of the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> <span class="notranslate">expression</span> file, so the phenotypes file describes the cells.</li>
+            <li><code class="language-plaintext highlighter-rouge">SubjectName</code> tells us whether the cell (on that row) is labelled as Type-II diabetes or not, “Non T2D” or “T2D” respectively.</li>
+            <li><code class="language-plaintext highlighter-rouge">cellType</code> tells us which cell type the cell was assigned to. This could be the results of prior-clustering and then labelling, or the cells could be labelled before analysis.</li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">#bulk</code> phenotype file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>Does the phenotypes file describe genes or samples?</li>
+          <li>Is the <code class="language-plaintext highlighter-rouge">SubjectName</code> field related to the <code class="language-plaintext highlighter-rouge">SubjectName</code> field in the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> phenotypes file?</li>
+          <li>What other factors are in the phenotypes file?</li>
+          <li>Is the <code class="language-plaintext highlighter-rouge">tissue</code> field related to the <code class="language-plaintext highlighter-rouge">cellType</code> field in the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> phenotypes file?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <figure id="figure-5"><img src="../../images/bulk-music/peek_tabular_bulk_pheno.png" alt="peek_tabular_bulk_pheno.png. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Peeking at the tabular bulk <span class="notranslate">RNA</span>-seq phenotype dataset</figcaption></figure>
+
+          <ol>
+            <li>The first column is the index column, which uses the sample identifiers in the header of the <code class="language-plaintext highlighter-rouge">#bulk</code> <span class="notranslate">expression</span> file, so the phenotypes file describes the samples.</li>
+            <li>The <code class="language-plaintext highlighter-rouge">SubjectName</code> column uses a completely different set of identifiers from the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> phenotypes file so they should be assumed to be unrelated.</li>
+            <li>We see <code class="language-plaintext highlighter-rouge">age</code>, <code class="language-plaintext highlighter-rouge">bmi</code>, <code class="language-plaintext highlighter-rouge">hba1c</code>, <code class="language-plaintext highlighter-rouge">gender</code>, <code class="language-plaintext highlighter-rouge">tissue</code>. HbA1c appears to be a gene of interest related to a known phenotype.</li>
+            <li><strong>This is the question we wish to answer in the deconvolution</strong>. Visually, there appears to be no overlap, but the “pancreatic islets” tissue likely consists of several cell types that show <span class="notranslate">expression</span>s profiles with some affinity  to the <span class="notranslate">single cell</span> types described in the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> phenotypes file.</li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The bulk <span class="notranslate">RNA</span>-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions are related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important tests for T2D is the HbA1c (hemoglobin A1c) test. When the HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions relationship with HbA1c level in this deconvolution analysis.</p>
+
+<h2 id="building-the-expression-set-objects">Building the <span class="notranslate">Expression</span> Set objects</h2>
+
+<p>For now we need to construct our <span class="notranslate">Expression</span> set objects that will be consumed by MuSiC.</p>
+
+<blockquote class="details">
+  <h3 id="details-details-expression-set"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: <span class="notranslate">Expression</span> Set</h3>
+
+  <figure id="figure-6"><img src="../../images/bulk-music/expressionset.png" alt="expression_set. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Image from Stefano Monti</figcaption></figure>
+
+  <p><em><span class="notranslate">Expression</span> Set</em> objects are a container for high-throughput assays and experimental metadata. The <em><span class="notranslate">Expression</span>Set</em> class is derived from <em>eSet</em>, and requires a matrix named <em>exprs</em>.</p>
+
+  <p>The <em><span class="notranslate">Expression</span>Set</em> class is designed to combine several different sources of information into a single convenient structure. An <em><span class="notranslate">Expression</span>Set</em> can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions.</p>
+
+  <p>The data in an <em><span class="notranslate">Expression</span>Set</em> is complicated, consisting of:</p>
+  <ul>
+    <li><span class="notranslate">expression</span> data (<em>exprs</em>, or assayData; assayData is used to hint at the methods used to access different data components, as we will see below);</li>
+    <li>metadata describing samples in the experiment (phenoData, <em>pData</em>)</li>
+    <li>information related to the protocol used for processing each sample and usually extracted from manufacturer files (protocolData);</li>
+    <li>annotations and metadata about the features on the chip or technology used for the experiment (featureData, annotation, <em>fData</em>);</li>
+    <li>and a flexible structure to describe the experiment (experimentData).</li>
+  </ul>
+
+  <p>The <span class="notranslate">Expression</span>Set class coordinates all of this data, so that you do not usually have to worry about the details.</p>
+
+  <p>For more information please <a href="http://www.bioconductor.org/packages/release/bioc/vignettes/Biobase/inst/doc/ExpressionSetIntroduction.pdf">read the specification</a> as well as the <a href="https://montilab.github.io/BS831/articles/docs/ExpressionSet.html">image source</a>.</p>
+
+</blockquote>
+
+<p>Here we shall build two <span class="notranslate">Expression</span>Set objects corresponding to the bulk and <span class="notranslate">single-cell</span> datatypes.</p>
+
+<h3 id="construct-expression-set-object"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-build-the-expression-set-inputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Build the <span class="notranslate">Expression</span> Set inputs</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assay Data”</em>: <code class="language-plaintext highlighter-rouge">GSE50244bulkeset.<span class="notranslate">expression</span>.tabular</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Data”</em>: <code class="language-plaintext highlighter-rouge">GSE50244bulkeset.phenotype.tabular</code> (Input dataset)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>An <span class="notranslate">Expression</span>Set object has many data slots, the principle of which are the experiment data (<em>exprs</em>), the phenotype data (<em>pData</em>), as well metadata pertaining to experiment information and additional annotations (<em>fData</em>).</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assay Data”</em>: <code class="language-plaintext highlighter-rouge">EMTABesethealthy.<span class="notranslate">expression</span>.tabular</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Data”</em>: <code class="language-plaintext highlighter-rouge">EMTABesethealthy.phenotype.tabular</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h4 id="inspect-expression-set-object"><strong>Inspect <span class="notranslate">Expression</span> Set Object</strong></h4>
+
+<p>We will now inspect these objects we just created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-inspect-and-describe-the-scrna-expressionset-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect and Describe the sc<span class="notranslate">RNA</span> <span class="notranslate">Expression</span>Set Object</h3>
+
+  <ol>
+    <li>Obtain General Info about the data set
+      <ul>
+        <li><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> Click on the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> <em>General Info</em> dataset in the history view (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>Obtain Feature Information about the data set
+      <ul>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3"><strong>Inspect <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+          <blockquote class="warning">
+            <h3 id="warning-danger-this-tool-has-needs"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Danger: This tool has needs!</h3>
+            <p>You will need to click the dataset from your history and drag it into the input of this tool. Some browsers don’t allow this!</p>
+          </blockquote>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ESet Dataset”</em>: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Inspect”</em>: <code class="language-plaintext highlighter-rouge">Feature Data Table</code>
+              <blockquote class="comment">
+                <h3 id="comment-comment-features-or-genes"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Features or Genes?</h3>
+
+                <p>“Features” are synonymous with “Genes” in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.</p>
+
+              </blockquote>
+              <p>By inspecting the <code class="language-plaintext highlighter-rouge">Feature Data Table</code>, you should see a list of gene names.</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Obtain the dimensions of the data set
+      <ul>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3"><strong>Inspect <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ESet Dataset”</em>: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Inspect”</em>: <code class="language-plaintext highlighter-rouge">Dimension</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many samples are in the dataset, and how many genes?</li>
+    <li>Does this agree with the original input tabular <span class="notranslate">expression</span> data set?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>1097 samples and 25 453 genes</li>
+      <li>Yes!</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="estimating-cell-type-proportions">Estimating Cell Type proportions</h2>
+
+<!-- Maybe this goes in a comment? -->
+<p>Instead of selecting marker genes, MuSiC gives weights to each gene. The weighting scheme is based on cross-subject variation, by up-weighing genes with low variation and down-weighing genes with high variation in a cell type. Here we demonstrate this step-by-step with the human pancreas datasets.</p>
+
+<p>The deconvolution of 89 subjects from <span class="citation"><a href="#fadista2014global">Fadista <i>et al.</i> 2014</a></span> is performed with the bulk data GSE50244 <span class="notranslate">expression</span> set and <span class="notranslate">single cell</span> reference EMTAB. The estimation was constrained on 6 major cell types: alpha, beta, delta, gamma, acinar and ductal, which make up over 90% of the whole islet.</p>
+
+<h3 id="cell-type-estimation-with-music">Cell Type estimation with <strong>MuSiC</strong></h3>
+
+<p>The deconvolution process can be performed by simply inputting the bulk <span class="notranslate">RNA</span>-seq and sc<span class="notranslate">RNA</span>-seq datasets, and hitting execute, but in this section we will be tracing the effect of a disease phenotype across both datasets.</p>
+
+<p>Here we will use one of the factors from the bulk <span class="notranslate">RNA</span>-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the <code class="language-plaintext highlighter-rouge">hba1c</code> factor described in bulk phenotype data, compared against the <code class="language-plaintext highlighter-rouge">T2D</code> factor in the <span class="notranslate">single cell</span> phenotype data, and displaying both in the subset of <code class="language-plaintext highlighter-rouge">beta</code> cells from the sc<span class="notranslate">RNA</span>-seq data.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3"><strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+      <ul>
+        <li>*MuSiC sometimes does not show up from the tool search box. You may need to look for it under the <strong><span class="notranslate">Single Cell</span></strong> heading</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">#bulk</code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Purpose”</em>: <code class="language-plaintext highlighter-rouge">Estimate Proportions</code>
+          <ul>
+            <li><em>“Methods to use”</em>: <code class="language-plaintext highlighter-rouge">MuSiC</code> and <code class="language-plaintext highlighter-rouge">NNLS</code></li>
+            <li><em>“Cell Types Label from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">cellType</code></li>
+            <li><em>“Samples Identifier from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">sampleID</code></li>
+            <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha,beta,delta,gamma,acinar,ductal</code></li>
+            <li><em>“Phenotype factors”</em>: <code class="language-plaintext highlighter-rouge">(leave blank)</code></li>
+            <li><em>“Excluded phenotype factors”</em>: <code class="language-plaintext highlighter-rouge">sampleID,SubjectName</code></li>
+            <li>Under <em>“Show proportions of a disease factor?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“sc<span class="notranslate">RNA</span> Phenotype Cell Target”</em>: <code class="language-plaintext highlighter-rouge">beta</code></li>
+                <li><em>“Bulk Phenotype Target”</em>: <code class="language-plaintext highlighter-rouge">hba1c</code> (<strong>Factor from Bulk Phenotype</strong>)</li>
+                <li><em>“Bulk Phenotype Target Threshold”</em>: <code class="language-plaintext highlighter-rouge">6.5</code></li>
+                <li><em>“sc<span class="notranslate">RNA</span> Sample Disease Group”</em>: <code class="language-plaintext highlighter-rouge">T2D</code> (<strong>Factor from sc<span class="notranslate">RNA</span> Phenotype</strong>)</li>
+                <li><em>“sc<span class="notranslate">RNA</span> Sample Disease Group (Scale)”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>It’s important to set a phenotype target threshold, otherwise no cells will be matched for the phenotype target. In this case, when the HbA1c level is greater than 6.5%, the patient is diagnosed as T2D.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The estimated proportions are normalized such that the proportions of cell types within each sample sum to 1. MuSic compares itself against a previous method of deconvolution known as Non-negative Least-Squares (NNLS), which MuSic supercededs via its Weighted Non-negative Least-Squares (W-NNLS) methodology.</p>
+
+<figure id="figure-7"><img src="../../images/bulk-music/jitter_plot.png" alt="jitter_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Jitter plot of Estimated Proportions</figcaption></figure>
+
+<p>In the above image you can see (a) the estimated proportion of cells for each of the 6 declared types, as calculated by MuSiC and the NNLS methods, respectively. In the (b) section, this information is better represented as a box plot to show you the distribution of cell type proportions.</p>
+
+<figure id="figure-8"><img src="../../images/bulk-music/ctprop_plot.png" alt="ctprop. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> (top) Cell type proportions by disease factor, and (bottom) hba1c factor <span class="notranslate">expression</span> against beta cell type proportion</figcaption></figure>
+
+<p>As stated previously, it is well known that the beta cell proportions are related to T2D disease status. As T2D progresses, the number of beta cells decreases. In the above image we can see in (a) that we have the same information as previous, but we also distinguish between cells that show a high affinity to T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with Hba1c <span class="notranslate">expression</span>, where we see that there is a significant negative correlation between HbA1c levels, beta cell proportions, and gender (after adjusted Age and BMI). This is unsurprising, as gender is related to Hba1c levels.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>We can extract the coefficients of this fitting by looking at the <code class="language-plaintext highlighter-rouge">Log of Music Fitting Data</code> in the <code class="language-plaintext highlighter-rouge">Summaries and Logs</code> output collection:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+ (Intercept)  0.797148   0.194757   4.093  0.00011 ***
+ age          0.002639   0.001772   1.489  0.14087    
+ bmi         -0.013620   0.007276  -1.872  0.06529 .  
+ hba1c       -0.061396   0.025403  -2.417  0.01819 *  
+ genderMale   0.079874   0.039274   2.034  0.04566 *  
+ 
+</code></pre></div>  </div>
+
+</blockquote>
+
+<h3 id="proportions-of-cell-type-to-each-bulk-rna-sample">Proportions of Cell Type to each Bulk <span class="notranslate">RNA</span> sample</h3>
+
+<p>One question we might wish to ask is that what affinity did each of the 6 <span class="notranslate">single cell</span> types have to each of the 89 subjects in the bulk data?</p>
+
+<p>For this we can look at the raw data <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> <code class="language-plaintext highlighter-rouge">MuSiC Estimated Proportions of Cell Types</code> in the <code class="language-plaintext highlighter-rouge">Proportion Matrices</code>, to get a glimpse of cell type compositions on a bulk <span class="notranslate">RNA</span> sample level.</p>
+
+<p>Both the MuSiC and the NNLS calculations of this data is best represented in the below heatmap, with <span class="notranslate">RNA</span> samples as rows and cell types as columns:</p>
+
+<figure id="figure-9"><img src="../../images/bulk-music/subject_heatmap.png" alt="subject_heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Heatmap of cell type proportions at the <span class="notranslate">RNA</span> sample level.</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Which cell types are under-represented in the NNLS method?</li>
+    <li>Which cell types do not appear to be present in both?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Here it is evident that the previous NNLS method over-represents the Alpha cell type compared to the MuSiC method which gives more weight to the Beta and Ductal cell types, which were under-represented in the NNLS method.</li>
+      <li>The Delta and Gamma cell types appear empty in both.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="estimation-of-cell-type-proportions-with-pre-grouping-of-cell-types">Estimation of cell type proportions with pre-grouping of cell types</h1>
+
+<p>In the previous section we estimated cell types under the assumption that that the gene <span class="notranslate">expression</span> between cell types was largely independent.</p>
+
+<p>However, solid tissues often contain closely related cell types, and correlation of gene <span class="notranslate">expression</span> between these cell types leads to collinearity, which makes it difficult to resolve their relative proportions in bulk data.</p>
+
+<p>To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types.</p>
+
+<p>Briefly, similar cell types are grouped into the same cluster and their cluster proportions are estimated, then this procedure is recursively repeated within each cluster. At each recursion stage, only genes that have low within-cluster variance are used, as they are used as consistent genes across cell types. This is critical as the mean <span class="notranslate">expression</span> estimates of genes with high variance are affected by the pervasive bias in cell capture of sc<span class="notranslate">RNA</span>-seq experiments, and thus cannot serve as reliable reference.</p>
+
+<p>In this section we will use mouse kidney <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq data from <span class="citation"><a href="#park2018single">Park <i>et al.</i> 2018</a></span> described by 16 273 genes over a trimmed subset of 10 000 cells, giving 16 unique cell type (2 of which are novel) across 7 subjects. The bulk <span class="notranslate">RNA</span>-seq dataset is from <span class="citation"><a href="#beckerman2017transgenic">Beckerman <i>et al.</i> 2017</a></span> and contains mouse kidney tissue described by 19 033 genes over 10 samples.</p>
+
+<h2 id="get-data-1">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial <em>“Deconvolution: Dendrogram of Mouse Data”</em></li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/5719228">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">transcriptomics</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Bulk <span class="notranslate">RNA</span> Deconvolution with MuSiC</code>):</p>
+
+      <ul>
+        <li>
+          <p>Mouse kidney bulk <span class="notranslate">RNA</span> datasets (tag: <code class="language-plaintext highlighter-rouge">#bulk</code>)</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5719228/files/Mousebulkeset.<span class="notranslate">expression</span>.tabular
+https://zenodo.org/record/5719228/files/Mousebulkeset.phenotype.tabular
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <p>Mouse kidney <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span> datasets (tag: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code>)</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5719228/files/Mousesubeset.<span class="notranslate">expression</span>.tabular
+https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+    <li>
+      <p>Rename the datasets</p>
+    </li>
+    <li>
+      <p>Check that the datatype</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Add to each <code class="language-plaintext highlighter-rouge"><span class="notranslate">expression</span></code> file a tag corresponding to <code class="language-plaintext highlighter-rouge">#bulk</code> and <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>  <li>Click on the dataset</li>  <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>  <li>    <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>    <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>  </li>  <li>Check that the tag is appearing below the dataset name</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-exploring-the-datasets"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Exploring the Datasets</h3>
+
+  <p>As before, you may choose to explore the bulk and sc<span class="notranslate">rna</span> datasets and try to determine their factors from the phenotypes as well as any overlapping fields that will be used to guide the deconvolution.</p>
+
+</blockquote>
+
+<p>You will need to again create <span class="notranslate">Expression</span>Set objects, as before.</p>
+
+<h3 id="construct-expression-set-object-1"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-build-the-expression-set-inputs-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Build the <span class="notranslate">Expression</span> Set inputs</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assay Data”</em>: <code class="language-plaintext highlighter-rouge">Mousebulkeset.<span class="notranslate">expression</span>.tabular</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Data”</em>: <code class="language-plaintext highlighter-rouge">Mousebulkeset.phenotype.tabular</code> (Input dataset)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>An <span class="notranslate">Expression</span>Set object has many data slots, the principle of which are the experiment data (<em>exprs</em>), the phenotype data (<em>pData</em>), as well metadata pertaining to experiment information and additional annotations (<em>fData</em>).</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assay Data”</em>: <code class="language-plaintext highlighter-rouge">Mousesubeset.<span class="notranslate">expression</span>.tabular</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Data”</em>: <code class="language-plaintext highlighter-rouge">Mousesubeset.phenotype.tabular</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="colinearity-dendrogram-with-music-to-determine-cell-type-similarities">Colinearity Dendrogram with <strong>MuSiC</strong> to determine cell type similarities</h3>
+
+<p>Determining cell type similarities reqzures first producing a design matrix as well as a cross-subject mean of relative abundance, using a tree-blased clustering method of the cell types we wish to cluster.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3"><strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">#bulk</code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Purpose”</em>: <code class="language-plaintext highlighter-rouge">Compute Dendrogram</code>
+          <ul>
+            <li><em>“Cell Types Label from sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">cellType</code></li>
+            <li><em>“Cluster Types Label from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">clusterType</code></li>
+            <li><em>“Samples Identifier from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">sampleID</code></li>
+            <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>:<br />
+ <code class="language-plaintext highlighter-rouge">Endo,Podo,PT,LOH,DCT,CD-PC,CD-IC,Fib,Macro,Neutro,B lymph,T lymph,NK</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-10"><img src="../../images/bulk-music/dendrogram.png" alt="dendrogram. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Dendrogram of Design Matrix and Cross-Subject Mean of Relative Abundance</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What do you notice about the cells clustering?</li>
+    <li>How many clusters can you see with a height threshold above 650 in the “Cluster log(Design Matrix)”?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The immune cells are clustered together and the kidney specific cells are clustered together. Notice that DCT and PT are within the same high-level grouping.</li>
+      <li>
+        <p>The cut-off of 650. Here we cut 13 cell types into 4 groups:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C1: Neutro
+C2: Podo
+C3: Endo, CD-PC, CD-IC, LOH, DCT, PT
+C4: Fib, Macro, NK, B lymph, T lymph
+</code></pre></div>        </div>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h3 id="heatmap-of-cell-type-similarities-using-music">Heatmap of Cell Type Similarities using <strong>MuSiC</strong></h3>
+
+<p>We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C3 groups.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-upload-marker-genes-and-generate-heatmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload marker genes and generate heatmap</h3>
+  <ol>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/5719228">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">transcriptomics</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Bulk <span class="notranslate">RNA</span> Deconvolution with MuSiC</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5719228/files/epith.markers
+https://zenodo.org/record/5719228/files/immune.markers
+</code></pre></div>      </div>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3"><strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:</p>
+      <ul>
+        <li><strong>Note</strong>
+          <blockquote class="warning">
+            <h3 id="warning-shortcut"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Shortcut!</h3>
+
+            <p>Here we need to re-use all the inputs from the previous <strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step, plus add a few extra. To speed this up, you can simply click on the re-run icon <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> under any of its outputs.</p>
+          </blockquote>
+        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">#bulk</code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Purpose”</em>: <code class="language-plaintext highlighter-rouge">Compute Dendrogram</code>
+          <ul>
+            <li><em>“Cell Types Label from sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">cellType</code></li>
+            <li><em>“Cluster Types Label from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">clusterType</code></li>
+            <li><em>“Samples Identifier from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">sampleID</code></li>
+            <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>:<br />
+ <code class="language-plaintext highlighter-rouge">Endo,Podo,PT,LOH,DCT,CD-PC,CD-IC,Fib,Macro,Neutro,B lymph,T lymph,NK</code></li>
+            <li>In <em>“Cluster Groups”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Cluster Groups”</em>
+                  <ul>
+                    <li><em>“Cluster ID”</em>: <code class="language-plaintext highlighter-rouge">C1</code></li>
+                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Neutro</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Cluster Groups”</em>
+                  <ul>
+                    <li><em>“Cluster ID”</em>: <code class="language-plaintext highlighter-rouge">C2</code></li>
+                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Podo</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Cluster Groups”</em>
+                  <ul>
+                    <li><em>“Cluster ID”</em>: <code class="language-plaintext highlighter-rouge">C3</code></li>
+                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>:<br />
+ <code class="language-plaintext highlighter-rouge">Endo,CD-PC,LOH,CD-IC,DCT,PT</code></li>
+                    <li><em>“Marker Gene Group Name”</em>:<code class="language-plaintext highlighter-rouge">Epithelial</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“List of Gene Markers”</em>: <code class="language-plaintext highlighter-rouge">epith.markers</code> (Input dataset)</li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Cluster Groups”</em>
+                  <ul>
+                    <li><em>“Cluster ID”</em>: <code class="language-plaintext highlighter-rouge">C4</code></li>
+                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <br />
+ <code class="language-plaintext highlighter-rouge">Macro,Fib,B lymph,NK,T lymph</code></li>
+                    <li><em>“Marker Gene Group Name”</em>:<code class="language-plaintext highlighter-rouge">Immune</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“List of Gene Markers”</em>: <code class="language-plaintext highlighter-rouge">immune.markers</code> (Input dataset)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>The C1 (Neutrophil) and C2 (Podocyte) clusters do not use marker genes for the dendrogram clustering in this dataset.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-11"><img src="../../images/bulk-music/dendro_jitboxheat.png" alt="dendro_jitboxheat. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Jitter and Boxplots of all cell types followed by a heatmap of each <span class="notranslate">RNA</span> sample against cell type. Note that the y-axis for each of the plots above are not constant across cell types.</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Most of the <span class="notranslate">expression</span> in the above plot appears to be derived from one cell type.</p>
+
+  <ol>
+    <li>Which cell type dominates the plot?</li>
+    <li>What does this tell you about the bulk <span class="notranslate">RNA</span>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The PT cells appear to dominate.</li>
+      <li>Most of the <span class="notranslate">expression</span> in the bulk <span class="notranslate">RNA</span> dataset is derived solely from the PT cells, and could be a monogenic cell line.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we constructed <span class="notranslate">Expression</span>Set objects, inspected, and annotated them, and then finally processing them with the MuSiC <span class="notranslate">RNA</span>-Deconvolution analysis suite.</p>
+
+<p>Below is an overview of the <span class="notranslate">workflow</span> that was used throughout this tutorial.</p>
+
+<figure id="figure-12"><img src="../../images/bulk-music/workflow1.png" alt="workflow1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> <span class="notranslate">Workflow</span> for estimating cell types</figcaption></figure>
+
+<p>Note how two <span class="notranslate">Expression</span>Set objects are constructed: one from bulk <span class="notranslate">RNA</span>-seq tabular assay data, and the other from <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq tabular assay data. A blind analysis of cell proportion estimation is performed, along side a guided analysis using pre-grouped cell types.</p>
+
+<figure id="figure-13"><img src="../../images/bulk-music/workflow_dendro.png" alt="workflow_dendro.png. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> <span class="notranslate">Workflow</span> for generating a dendrogram and clustering cells upon it</figcaption></figure>
+
+<p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Deconvolution tools show individual cell type proportions in bulk RNA-seq data</p>
+</li>
+                        
+                        <li><p>Bulk RNA-seq can be complimented by scRNA-seq data</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="fadista2014global">Fadista, J., P. Vikman, E. O. Laakso, I. G. Mollet, J. L. Esguerra <i>et al.</i>, 2014 <b>Global genomic and transcriptomic analysis of human pancreatic islets reveals novel genes influencing glucose metabolism</b>. Proceedings of the National Academy of Sciences 111: 13924–13929.</li>
+<li id="segerstolpe2016single">Segerstolpe, Å., A. Palasantza, P. Eliasson, E.-M. Andersson, A.-C. Andréasson <i>et al.</i>, 2016 <b>Single-cell transcriptome profiling of human pancreatic islets in health and type 2 diabetes</b>. Cell metabolism 24: 593–607.</li>
+<li id="beckerman2017transgenic">Beckerman, P., J. Bi-Karchin, A. S. D. Park, C. Qiu, P. D. Dummer <i>et al.</i>, 2017 <b>Transgenic expression of human APOL1 risk variants in podocytes induces kidney disease in mice</b>. Nature medicine 23: 429–438.</li>
+<li id="park2018single">Park, J., R. Shrestha, C. Qiu, A. Kondo, S. Huang <i>et al.</i>, 2018 <b>Single-cell transcriptomics of the mouse kidney reveals potential cellular targets of kidney disease</b>. Science 360: 758–763.</li>
+<li id="wang2019bulk">Wang, X., J. Park, K. Susztak, N. R. Zhang, and M. Li, 2019 <b>Bulk tissue cell type deconvolution with multi-subject single-cell expression reference</b>. Nature communications 10: 1–9.</li>
+<li id="tekman2020single">Tekman, M., B. Batut, A. Ostrovsky, C. Antoniewski, D. Clements <i>et al.</i>, 2020 <b>A single-cell RNA-sequencing training and analysis suite using the Galaxy framework</b>. GigaScience 9: giaa102.</li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Bulk RNA Deconvolution with MuSiC (Transcriptomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Mehmet Tekman, Wendi Bacon, 2022 <b>Bulk RNA Deconvolution with MuSiC (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/bulk-music/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/bulk-music/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{transcriptomics-bulk-music,
+author = "Mehmet Tekman and Wendi Bacon",
+title = "Bulk RNA Deconvolution with MuSiC (Galaxy Training Materials)",
+year = "2022",
+month = "02",
+day = "09"
+url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/bulk-music/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
