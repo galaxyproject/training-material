@@ -372,7 +372,8 @@ where it came from. Every computation happens line-by-line.
 >
 > > ### {% icon solution %} Solution
 > >
-> > Answer: 1 and 4
+> > Answer: 1 and 4 give exactly 2.0.
+> > Answer 5 gives the value `2` which may be considered equivalent, but is not returning a float specifically.
 > {: .solution}
 {: .question}
 
