@@ -8,7 +8,7 @@ questions:
 - What is a pharmacophore model?
 - How can I perform protein target prediction with individual tools (multiple steps) or the Zauberkugel workflow (single step)?
 objectives:
-- Create an SMI file of a bioactive ligand.
+- Create an SMILES file of a bioactive ligand.
 - Screen the query ligand against a pharmacophore library.
 - Analyze the results of the protein target prediction.
 time_estimation: 2H
@@ -24,11 +24,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich ({% cite Ehrlich1909 %}). According to the [International Union of Pure and Applied Chemistry (IUPAC)](https://iupac.org/), a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” ({% cite Wermuth1998 %}). Starting from the cocrystal structure of a non-covalent protein--ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction in a single model of the key molecular features of the bioactive ligand at the protein--ligand contact interface ({% cite Moumbock2019 %}). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed in a forward manner using several ligands to search for novel putative hits of a given target, or in a reverse manner when a ligand is screened against multiple pharmacophore models in search of putative protein targets ({% cite Steindl2006 %}).
+Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich ({% cite Ehrlich1909 %}). According to the [International Union of Pure and Applied Chemistry (IUPAC)](https://iupac.org/), a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” ({% cite Wermuth1998 %}). Starting from the cocrystal structure of a non-covalent protein--ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction of the key molecular features of the bioactive ligand at the protein--ligand contact interface into a single model ({% cite Moumbock2019 %}). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed either in a forward manner, using several ligands to search for novel putative hits of a given target, or in a reverse manner, by screening a single ligand against multiple pharmacophore models in search of putative protein targets ({% cite Steindl2006 %}).
 
 ![PDB ID: 4FR4]({% link topics/computational-chemistry/images/4FR4-STU.png %} "Crystal structure of the human serine/threonine-protein kinase in complex with staurosporine (PDB ID: 4FR4). Image generated using Maestro (Schrödinger LLC, NY).")
 
-Bioactive compounds oftentimes bind to several target proteins, thereby exhibiting polypharmacology. Experimentally determining these interactions is however laborious, and structure-based virtual screening of bioactive compounds could expedite drug discovery by prioritizing hits for experimental validation. The recently reported ePharmaLib ({% cite Moumbock2021 %}) dataset is a library of 15,148 e-pharmacophores modeled from solved structures of pharmaceutically relevant protein--ligand complexes of the screening Protein Data Bank (sc-PDB, {% cite Desaphy2014 %}). ePharmaLib can be used for target fishing of phenotypic hits, side effect predictions, drug repurposing, and scaffold hopping.
+Bioactive compounds often bind to several target proteins, thereby exhibiting polypharmacology. However, experimentally determining these interactions is laborious, and structure-based virtual screening of bioactive compounds could expedite drug discovery by prioritizing hits for experimental validation. The recently reported ePharmaLib ({% cite Moumbock2021 %}) dataset is a library of 15,148 e-pharmacophores modeled from solved structures of pharmaceutically relevant protein--ligand complexes of the screening Protein Data Bank (sc-PDB, {% cite Desaphy2014 %}). ePharmaLib can be used for target fishing of phenotypic hits, side effect predictions, drug repurposing, and scaffold hopping.
 
 ![STU]({% link topics/computational-chemistry/images/STU.png %} "Overlay of staurosporine onto its key pharmacophoric features (PDB ID: 4FR4). Image generated using Maestro (Schrödinger LLC, NY).")
 
@@ -51,7 +51,7 @@ In this tutorial, you will perform pharmacophore-based target prediction of a bi
 
 # Create a history
 
-Galaxy allows you to create analysis histories.
+As a first step, we create a new history for the analysis.
 
 > ### {% icon hands_on %} Hands-on 1: Create history
 >
@@ -59,7 +59,7 @@ Galaxy allows you to create analysis histories.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Rename it as `Staurosporine target prediction`.
+> 2. Rename it to `Staurosporine target prediction`.
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
@@ -76,13 +76,9 @@ Firstly, we will retrieve the concatenated ePharmaLib subset representing human 
 
 > ### {% icon hands_on %} Hands-on 2: Upload ePharmaLib
 >
-> 1. Download the dataset from [Zenodo](https://zenodo.org) and upload it to your Galaxy history:
+> 1. Upload the dataset from the [Zenodo](https://zenodo.org) link provided to your Galaxy history.
 >
->    ```
->    https://zenodo.org/record/5898113/files/ePharmaLib_PHARAO_human.phar
->    ```
->
->    {% snippet faqs/galaxy/datasets_upload.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md link="https://zenodo.org/record/5898113/files/ePharmaLib_PHARAO_human.phar" %}
 >
 >    > ### {% icon comment %} ePharmaLib versions
 >    >
@@ -102,36 +98,32 @@ Firstly, we will retrieve the concatenated ePharmaLib subset representing human 
 
 In this step, we will manually create an SMI file containing the SMILES of staurosporine.
 
->    > ### {% icon details %} What are SMILES and the SMI file format?
->    >
->    > The simplified molecular-input line-entry system (SMILES) is a string notation for describing the 2D chemical structure of a compound. It only states atoms in a compound and the connectivity between them. As an example, the SMILES string of acetone is `CC(=O)C`. SMILES strings can be imported by most molecule editors for conversion back into two-dimensional drawings or three-dimensional models of the compounds, and vice versa. For more information on how the notation works, please consult the [OpenSMILES specification](http://opensmiles.org/opensmiles.html) or the description provided by [Wikipedia](https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system). 
->    {: .details}
+> ### {% icon details %} What are SMILES and the SMI file format?
+>
+> The simplified molecular-input line-entry system (SMILES) is a string notation for describing the 2D chemical structure of a compound. It only states the atoms present in a compound and the connectivity between them. As an example, the SMILES string of acetone is `CC(=O)C`. SMILES strings can be imported by most molecule editors and converted into either two-dimensional structural drawings or three-dimensional models of the compounds, and vice versa. For more information on how the notation works, please consult the [OpenSMILES specification](http://opensmiles.org/opensmiles.html) or the description provided by [Wikipedia](https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system). 
+>
+{: .details}
 
 > ### {% icon hands_on %} Hands-on 3: Create an SMI file
 >
-> 1. Create a new text file with your favorite text editor, e.g. [NotePad](https://www.microsoft.com/en-us/p/windows-notepad/9msmlrh6lzf3#activetab=pivot:overviewtab) on Microsoft Windows, [gedit](https://wiki.gnome.org/Apps/Gedit) on Linux distributions, and [TextEdit](https://support.apple.com/guide/textedit/welcome/mac) on macOS. Paste the isomeric SMILES string of staurosporine, then seperate it with a tab from the name of the ligand `staurosporine` (as shown below). Finally, save the file as `staurosporine.smi`.
+>
+> 1. Create a new file using the Galaxy upload manager, with the following contents. Make sure to select the datatype (with **Type**) as `smi`. This step is essential, as Galaxy does not automatically detect the datatype for SMI files.
 >
 >    ```
 >    C[C@@]12[C@@H]([C@@H](C[C@@H](O1)N3C4=CC=CC=C4C5=C6C(=C7C8=CC=CC=C8N2C7=C53)CNC6=O)NC)OC	staurosporine
->    ``` 
+>    ```
 >
-> ### {% icon tip %} Tip: SMILES generation
+>    {% snippet faqs/galaxy/datasets_create_new_file.md format="smi" %}
 >
+> > ### {% icon tip %} Tip: SMILES generation
+> >
 > > A SMILES string can automatically be generated from a ligand name or 2D structure with a desktop molecule editor such [ChemDraw®](https://perkinelmerinformatics.com/products/research/chemdraw/) and [Marvin®](https://chemaxon.com/products/marvin), or with web-based molecule editors such as [PubChem Sketcher](https://pubchem.ncbi.nlm.nih.gov//edit3/index.html) and [ChemDraw® JS](https://chemdrawdirect.perkinelmer.cloud/js/sample/index.html). Moreover, the pre-computed SMILES strings of a large number of bioactive compounds can be retrieved from chemical databases such as [PubChem](https://pubchem.ncbi.nlm.nih.gov/). e.g.
->
->    ```
->    https://pubchem.ncbi.nlm.nih.gov/compound/44259#section=Isomeric-SMILES&fullscreen=true
->    ```
->
-{: .tip}
->
-> 2. Upload the SMI file to your Galaxy history.
->
->    {% snippet faqs/galaxy/datasets_upload.md %}
->
-> 3. Change the datatype from `txt`to `smi`. This step is essential, as Galaxy does not automatically detect the datatype for SMI files.
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="smi" %}
+> >
+> >    ```
+> >    https://pubchem.ncbi.nlm.nih.gov/compound/44259#section=Isomeric-SMILES&fullscreen=true
+> >    ```
+> >
+> {: .tip}
 >
 {: .hands_on}
 
@@ -141,7 +133,7 @@ In this step, we will manually create an SMI file containing the SMILES of staur
 >
 > > ### {% icon solution %} Solution
 > >
-> > Staurosporine is a chiral molecule possessing four chiral centers. The SMILES notation allows the specification of configuration at tetrahedral centers and double bond geometry. These are structural features that cannot be specified by connectivity alone, and therefore SMILES which encode this information are termed isomeric SMILES. A notable feature of these rules is that they allow rigorous partial specification of chirality.
+> > Staurosporine is a chiral molecule possessing four chiral centers. The SMILES notation allows the specification of configuration at tetrahedral centers and double bond geometry, by marking atoms with `@` or `@@`. These are structural features that cannot be specified by connectivity alone, and therefore SMILES which encode this information are termed isomeric SMILES. A notable feature of these rules is that they allow rigorous partial specification of chirality.
 > >
 > {: .solution}
 >
@@ -150,11 +142,11 @@ In this step, we will manually create an SMI file containing the SMILES of staur
 
 # Pre-processing
 
-Prior to pharmacophore alignment, the predominant ionization state(s) of the query ligand as well as its 3D conformers should be generated. Also, the pharmacophore dataset will be splitted into a collection of individual pharmacophore files.
+Prior to pharmacophore alignment, the predominant ionization state(s) of the query ligand as well as its 3D conformers should be generated. Also, the pharmacophore dataset will be split into a collection of individual pharmacophore files.
  
-## Ligand Ionization State Generation
+## Ligand hydration
 
-More often than not, the bioactive form of a compound is its predominant form at physiologic pH (7.4). In this step, we predict the most probable ionnization state(s) of the query ligand at pH 7.4 with the cheiminformatics toolkit Openbabel ({% cite OBoyle2011 %}).
+More often than not, the bioactive form of a compound is its predominant form at physiological pH (7.4). In this step, we predict the most probable ionization state(s) of the query ligand at pH 7.4 with the cheminformatics toolkit OpenBabel ({% cite OBoyle2011 %}).
 
 > ### {% icon hands_on %} Hands-on 4: Add hydrogen atoms
 >
@@ -166,7 +158,7 @@ More often than not, the bioactive form of a compound is its predominant form at
 
 > ### {% icon question %} Question
 >
-> Nitrogen-containing functional groups are known to be basic. Which of them present in staurosporine do you (not) expect to be protonated at pH 7.4? And why?
+> Nitrogen-containing functional groups are known to be basic. Which of them present in staurosporine do you expect to be protonated at pH 7.4, and which not? And why?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -178,7 +170,7 @@ More often than not, the bioactive form of a compound is its predominant form at
 
 ## Splitting ePharmaLib into individual pharmacophores
 
-The ePharmaLib subset representing human protein targets (*ePharmaLib_PHARAO_human.phar*) is a concatenated file containing 5,010 individual pharmacophore files. From a computing standpoint, it is preferable to split the dataset into individual files (with the Unix command-line utility `split`) in order to simultaneously perform several pharmacophore alignments in batch mode.
+The ePharmaLib subset representing human protein targets (*ePharmaLib_PHARAO_human.phar*) is a concatenated file containing 5,010 individual pharmacophore files. In order to speed up our analysis, it is preferable to split the dataset into individual files in order to perform several pharmacophore alignments in parallel, using Galaxy's collection functionality.
 
 > ### {% icon hands_on %} Hands-on 5: Splitting ePharmaLib
 >
@@ -201,7 +193,7 @@ The ePharmaLib subset representing human protein targets (*ePharmaLib_PHARAO_hum
 
 ## Ligand conformational flexibility
 
-In order to avoid combinatorial explosion, the Align-it ({% cite Taminau2008 %}) tool performs rigid alignment rather than flexible alignment. Conformational flexibility of the ligand is accounted for by introducing a precomputing step, whereby a set of energy-minimized conformers of the query ligand are generated with the RDConf ({% cite rdconf %}) Python script which utilizes the RDKit ({% cite landrum2013rdkit %}) toolkit. 
+In order to avoid combinatorial explosion, the Align-it ({% cite Taminau2008 %}) tool performs rigid alignment rather than flexible alignment. Conformational flexibility of the ligand is accounted for by introducing a preliminary step, in which a set of energy-minimized conformers for the query ligand are generated with the RDConf ({% cite rdconf %}) tool (using the RDKit ({% cite landrum2013rdkit %}) toolkit). 
 
 > ### {% icon hands_on %} Hands-on 6: Low-energy ligand conformer search
 >
@@ -211,14 +203,14 @@ In order to avoid combinatorial explosion, the Align-it ({% cite Taminau2008 %})
 >
 >    > ### {% icon comment %} RDConf
 >    >
->    > It is recommended to use default settings except for the number of conformers which should be change to *100*. As a rule of thumb, a threshold of 100 conformers appropriately represent the conformational flexibility of a compound with less than 10 rotatable bonds. The output SDF (structure data file) format encodes three-dimensional atomic coordinates of each conformer, separated by lines containing four dollar signs (*$$$$*).
+>    > It is recommended to use the default settings, except for the number of conformers which should be changed to 100. As a rule of thumb, a threshold of 100 conformers appropriately represents the conformational flexibility of a compound with less than 10 rotatable bonds. The output SDF (structure data file) format encodes three-dimensional atomic coordinates of each conformer, separated by lines containing four dollar signs (*$$$$*).
 >    {: .comment}
 >
 {: .hands_on}
 
 # Pharmacophore alignment
 
-In this step, the ligand conformer dataset (SDF format) is converted on-the-fly to a pharmacophore dataset (PHAR format) and simultaneously aligned to the individual pharmacophores of the ePharmaLib dataset in a batch mode with Align-it ({% cite Taminau2008 %}). The pharmacophoric alignments and thus the predicted targets are ranked in terms of a scoring metric; `Tversky index` = [0,1]. The higher the Tversky index, the higher the likelihood of the predicted protein--ligand interaction. A cut-off of 0.5 is applied to prioritize the most promising targets.
+In this step, the ligand conformer dataset (SDF format) is converted on-the-fly to a pharmacophore dataset (PHAR format) and simultaneously aligned to the individual pharmacophores of the ePharmaLib dataset in a batch mode with Align-it ({% cite Taminau2008 %}). The pharmacophoric alignments and thus the predicted targets are ranked in terms of a scoring metric: `Tversky index` = [0,1]. The higher the Tversky index, the higher the likelihood of the predicted protein--ligand interaction. A cut-off of 0.5 is applied to prioritize the most promising targets.
 
 > ### {% icon hands_on %} Hands-on 7: Pharmacophore alignment
 >
@@ -236,16 +228,16 @@ In this step, the ligand conformer dataset (SDF format) is converted on-the-fly 
 This step takes about 45 minutes to an hour to complete.
 
 > ### {% icon tip %} Tip: Problems using the Align-it tool?
-> Due to the large number of files contained in the splitted ePharmaLib dataset collection, users occasionally encounter technical issues with this particular Align-it job. Sometimes the job takes too long to successfully complete (more than the estimated 1 hour duration) depending on the available Galaxy computing resources. And in other cases the job completes with errors; if this happens, delete the wrong outputs and rerun the job.
+> Due to the large number of files contained in the ePharmaLib dataset collection, users occasionally encounter technical issues with this particular Align-it job. Sometimes the job takes too long to successfully complete (more than the estimated 1 hour duration) depending on the available Galaxy computing resources. And in other cases the job completes with errors; if this happens, delete the errored outputs and rerun the job.
 {: .tip}
 
 # Post-processing
 
-The above pharmacophore alignment produces three types of outputs: the aligned pharmacophores (PHAR format), aligned structures (SMI format), and alignment scores (TABULAR format). Of these results, only the alignment scores are of primary interest and will be post-processed prior to analysis.
+The above pharmacophore alignment produces three types of outputs: the aligned pharmacophores (PHAR format), aligned structures (SMI format), and alignment scores (tabular format). Of these results, only the alignment scores are of interest and will be post-processed prior to analysis.
 
 ## Concatenating the pharmacophore alignment scores
 
-The alignment score of the best ranked ligand conformer aligned against each ePharmaLib pharmacophore is stored in individual files. In total, this job generates 5,010 output files which should be concatenated in a single file with the Unix command-line utility `cat`, for a better overview of the predictions.
+The alignment score of the best ranked ligand conformer aligned against each ePharmaLib pharmacophore is stored in individual files. In total, this job generates 5,010 output files which should be concatenated in a single file, for a better overview of the predictions.
 
 > ### {% icon hands_on %} Hands-on 8: Concatenating the scores
 >
@@ -256,7 +248,7 @@ The alignment score of the best ranked ligand conformer aligned against each ePh
 
 ## Ranking the predicted protein targets
 
-The resulting single alignment score file needs to be re-sorted according to the alignment metric, the Tversky index, i.e. the 10th column. This first task is performed with the Unix command-line utility `sort`. The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*. Given that staurosporine (hetID: *STU*) appears in several PDB cocrystal structures (43 times in the sc-PDB dataset from which ePharmaLIb was built), we shall evaluate the predictions results by identifying the predicted proteins whereby the cocrystallized ligand is `STU`. This second task is performed with the Unix command-line utility `awk`.
+The resulting single alignment score file needs to be re-sorted according to the alignment metric, the Tversky index, i.e. the 10th column. The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*. Given that staurosporine (hetID: *STU*) appears in several PDB cocrystal structures (43 times in the sc-PDB dataset from which ePharmaLib was built), we shall evaluate the predictions results by identifying the predicted proteins whereby the cocrystallized ligand is `STU`.
 
 > ### {% icon hands_on %} Hands-on 9: Sort Dataset
 >
@@ -269,7 +261,7 @@ The resulting single alignment score file needs to be re-sorted according to the
 >
 >    > ### {% icon comment %} Further investigation (optional)
 >    >
->    > The second task performed in the above *Hands-on 9* is optional and should only be performed if query ligand possess a *PDB hetID*, i.e. is present as a cocrystallized structure in PDB structures.
+>    > The second task performed in the above *Hands-on 9* is optional and should only be performed if the query ligand possess a *PDB hetID*, i.e. is present as a cocrystallized structure in PDB structures.
 >    {: .comment}
 >
 {: .hands_on}
@@ -296,16 +288,17 @@ The resulting single alignment score file needs to be re-sorted according to the
 
 For pharmacophore-based protein target prediction, you can choose to use Galaxy tools separately and in succession as described above, or alternatively use the Zauberkugel workflow as described below (Figure 3).
 
-![Snapshot of zauberkugel workflow]({% link topics/computational-chemistry/images/zauberkugel.png %} "Zauberkugel --- protein target prediction of a bioactive ligand with Align-it and ePharmaLib")
+![Snapshot of Zauberkugel workflow]({% link topics/computational-chemistry/images/zauberkugel.png %} "Zauberkugel --- protein target prediction of a bioactive ligand with Align-it and ePharmaLib")
 
 > ### {% icon hands_on %} Upload the Zauberkugel workflow
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
 >
 >    ```
 >    https://github.com/galaxyproject/training-material/blob/main/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga
 >    ```
->    {% snippet faqs/galaxy/workflows_import.md %}
 >
->    The Zauberkugel workflow necessitates only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format).
+>    The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format).
 >
 {: .hands_on}
 
