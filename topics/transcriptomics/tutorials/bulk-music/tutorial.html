@@ -1049,6 +1049,12 @@
         
     
         
+        <a class="dropdown-item" href="https://galaxy.bio.di.uminho.pt/" title="PhagePromotor">
+            PhagePromotor
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -1140,7 +1146,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 9, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 11, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1162,11 +1168,9 @@
 
 <!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
-<p>Bulk <span class="notranslate">RNA</span>-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain more precise estimates of the proportions of cell types within the bulk sample.</p>
+<p>Bulk <span class="notranslate">RNA</span>-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain estimates of the proportions of cell types within the bulk sample. To do this, we can use <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data as a reference for estimating the cell type proportions within the bulk data.</p>
 
-<p>To do this, we can use <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data as a reference for estimating the cell type proportions within the bulk data.</p>
-
-<p>In this tutorial, we will use bulk and <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq assays, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk <span class="notranslate">RNA</span>-seq.</p>
+<p>In this tutorial, we will use bulk and <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq data, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk <span class="notranslate">RNA</span>-seq.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -1196,7 +1200,7 @@
 <blockquote class="details">
   <h3 id="details-more-details-on-sums"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on ‘Sums’</h3>
 
-  <p><strong>So!</strong> You fancy some maths do you? Good! This is important, as you’ll see variations of that phrase if you ever look at any papers in the field!
+  <p><strong>So…</strong> You fancy some maths do you? Good! This is important, as you’ll see variations of the phrase ‘weighted sums’ if you ever look at any papers in the field! Let’s think about just the ‘sums’ here.
 If we think about the total <span class="notranslate">expression</span> of a given gene you might get from bulk <span class="notranslate">RNA</span>-seq, you could also think about it as the sum of the <span class="notranslate">expression</span> of each cell, for example,</p>
 
   <p><em>Total = cell<sub>a</sub> <span class="notranslate">expression</span> + cell<sub>b</sub> <span class="notranslate">expression</span> … (and so forth)</em></p>
@@ -1209,7 +1213,7 @@ If we think about the total <span class="notranslate">expression</span> of a giv
 
   <p><em>Total = Proportion<sub>a</sub> x cell_type<sub>a</sub> <span class="notranslate">expression</span> + Proportion<sub>b</sub> x cell_type<sub>b</sub> <span class="notranslate">expression</span></em></p>
 
-  <p>So now, we are <em>‘weighting’</em> the sums of <span class="notranslate">expression</span> based off of the cell proportion. And if you’re a mathematician, you might instead put this as</p>
+  <p>So now, we are using the sums of <span class="notranslate">expression</span> based off of the cell proportion. And if you’re a mathematician, you might instead put this as</p>
 
   <p><strong>T = C x P</strong>
 or some fancier formulas…(read more <a href="https://academic.oup.com/bioinformatics/article/34/11/1969/4813737">in-depth here</a> if you like!)</p>
@@ -1235,13 +1239,13 @@ or some fancier formulas…(read more <a href="https://academic.oup.com/bioinfor
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>So you know what the <em>Sum</em> is from above - the total <span class="notranslate">expression</span> of a given gene in a bulk <span class="notranslate">RNA</span>-seq sample depends on the proportion of cell types and the average <span class="notranslate">expression</span> level of each of those cell types (<strong>T = C x P</strong>). However, <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data is highly variable. Cell-type specific <span class="notranslate">expression</span> if genes with lower variation from sample to sample (i.e. person to person or organism to organism) and cell to cell (i.e. within a sample) will be the most useful for distinguishing cells, while genes that vary heavily (i.e. high in cell type<sub>a</sub> in one sample, but low in cell type<sub>a</sub> in another sample, will be the least useful in accurately distinguishing cells. Therefore, to use the mean <span class="notranslate">expression</span> level in a cell_type, MusiC weights the sums, favouring more consistently expressed genes in cell types.</li>
+      <li>So you know what the <em>Sum</em> is from above - the total <span class="notranslate">expression</span> of a given gene in a bulk <span class="notranslate">RNA</span>-seq sample depends on the proportion of cell types and the average <span class="notranslate">expression</span> level of each of those cell types (<strong>T = C x P</strong>). However, <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data is highly variable. Cell-type specific <span class="notranslate">expression</span> in genes with lower variation from sample to sample (i.e. person to person or organism to organism) and cell to cell (i.e. within a sample) will be the most useful for distinguishing cells, while genes that vary heavily (i.e. high in cell type<sub>a</sub> in one sample, but low in cell type<sub>a</sub> in another sample) will be the least useful in accurately distinguishing cells. Therefore, to accurately use the mean <span class="notranslate">expression</span> level in a cell_type, MusiC weights the sums, favouring more consistently expressed genes in cell types.</li>
     </ol>
 
   </blockquote>
 </blockquote>
 
-<p>Solid tissues often contain closely related cell types that are difficult to distinguish from one another, a phenomenon known as <em>“collinearity”</em>. To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, MuSic first groups similar cell types into the same cluster and estimate cluster proportions, then recursively repeats this procedure within each cluster.</p>
+<p>Solid tissues often contain closely related cell types that are difficult to distinguish from one another, a phenomenon known as <em>“collinearity”</em>. To deal with collinearity, MuSiC can also employ a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, MuSic first groups similar cell types into the same cluster and estimates cluster proportions, then recursively repeats this procedure within each cluster.</p>
 
 <figure id="figure-1"><img src="../../images/bulk-music/figure_method.jpg" alt="muse1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Overview of MuSiC Suite</figcaption></figure>
 
@@ -1287,7 +1291,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       <p>Rename the datasets</p>
     </li>
     <li>
-      <p>Check that the datatype</p>
+      <p>Check the datatype</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
@@ -1400,7 +1404,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
           <ol>
             <li>The first column is the index column, which uses the cell identifiers in the header of the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> <span class="notranslate">expression</span> file, so the phenotypes file describes the cells.</li>
             <li><code class="language-plaintext highlighter-rouge">SubjectName</code> tells us whether the cell (on that row) is labelled as Type-II diabetes or not, “Non T2D” or “T2D” respectively.</li>
-            <li><code class="language-plaintext highlighter-rouge">cellType</code> tells us which cell type the cell was assigned to. This could be the results of prior-clustering and then labelling, or the cells could be labelled before analysis.</li>
+            <li><code class="language-plaintext highlighter-rouge">cellType</code> tells us which cell type the cell was assigned to. This could be the result of prior-clustering and then labelling, or the cells could be labelled before analysis.</li>
           </ol>
 
         </blockquote>
@@ -1516,7 +1520,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3"><strong>Inspect <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
           <blockquote class="warning">
             <h3 id="warning-danger-this-tool-has-needs"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Danger: This tool has needs!</h3>
-            <p>You will need to click the dataset from your history and drag it into the input of this tool. Some browsers don’t allow this!</p>
+            <p>You may need to click the dataset from your history and drag it into the input of this tool. Some browsers don’t allow this.</p>
           </blockquote>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ESet Dataset”</em>: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1576,9 +1580,29 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 
 <h3 id="cell-type-estimation-with-music">Cell Type estimation with <strong>MuSiC</strong></h3>
 
-<p>The deconvolution process can be performed by simply inputting the bulk <span class="notranslate">RNA</span>-seq and sc<span class="notranslate">RNA</span>-seq datasets, and hitting execute, but in this section we will be tracing the effect of a disease phenotype across both datasets.</p>
+<p>The deconvolution process can be performed by simply inputting the bulk <span class="notranslate">RNA</span>-seq &amp; sc<span class="notranslate">RNA</span>-seq datasets and then hitting execute. However, in this section we will be tracing the effect of a disease phenotype across both datasets.</p>
 
-<p>Here we will use one of the factors from the bulk <span class="notranslate">RNA</span>-seq phenotypes related to the the Type-II Diabetes (T2D) disease status, namely the <code class="language-plaintext highlighter-rouge">hba1c</code> factor described in bulk phenotype data, compared against the <code class="language-plaintext highlighter-rouge">T2D</code> factor in the <span class="notranslate">single cell</span> phenotype data, and displaying both in the subset of <code class="language-plaintext highlighter-rouge">beta</code> cells from the sc<span class="notranslate">RNA</span>-seq data.</p>
+<p>Here we will use one of the factors from the bulk <span class="notranslate">RNA</span>-seq phenotypes related to the the T2D disease status. Any bulk <span class="notranslate">RNA</span>-seq sample coming from a patient with the <code class="language-plaintext highlighter-rouge">HbA1c</code> factor above 6.5% would be clinically classified as having T2D, so we want to compare these datasets with non-diseased samples. As diabetes affects Beta cells, we’re particularly interested in these cells proportions - mostly to prove that the deconvolution has worked well!</p>
+
+<p>It’s also important that input sc<span class="notranslate">RNA</span>-seq datasets (ideally) have some representation of cell populations from diseased patients.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Why should the sc<span class="notranslate">RNA</span>-seq dataset contain diseased cells and healthy cells?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>For instance, there might be a weird extra cell type that appears in the disease phenotype. Or perhaps there is a missing cell type in the disease phenotype. Without both healthy &amp; diseased datasets, the cells in the bulk datasets might not be fully identifiable. Saying that, such datasets are not always available - something to keep in mind when interpreting the results!</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1602,7 +1626,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
                 <li><em>“sc<span class="notranslate">RNA</span> Phenotype Cell Target”</em>: <code class="language-plaintext highlighter-rouge">beta</code></li>
                 <li><em>“Bulk Phenotype Target”</em>: <code class="language-plaintext highlighter-rouge">hba1c</code> (<strong>Factor from Bulk Phenotype</strong>)</li>
                 <li><em>“Bulk Phenotype Target Threshold”</em>: <code class="language-plaintext highlighter-rouge">6.5</code></li>
-                <li><em>“sc<span class="notranslate">RNA</span> Sample Disease Group”</em>: <code class="language-plaintext highlighter-rouge">T2D</code> (<strong>Factor from sc<span class="notranslate">RNA</span> Phenotype</strong>)</li>
+                <li><em>“sc<span class="notranslate">RNA</span> Sample Disease Group”</em>: <code class="language-plaintext highlighter-rouge">T2D</code> (<strong>Ideally a Factor from sc<span class="notranslate">RNA</span> Phenotype</strong>)</li>
                 <li><em>“sc<span class="notranslate">RNA</span> Sample Disease Group (Scale)”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
               </ul>
             </li>
@@ -1620,15 +1644,15 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 
 </blockquote>
 
-<p>The estimated proportions are normalized such that the proportions of cell types within each sample sum to 1. MuSic compares itself against a previous method of deconvolution known as Non-negative Least-Squares (NNLS), which MuSic supercededs via its Weighted Non-negative Least-Squares (W-NNLS) methodology.</p>
+<p>The estimated proportions are normalized such that the proportions of cell types within each sample sum to 1. MuSic compares itself against a previous method of deconvolution known as Non-negative Least-Squares (NNLS), which MuSic supercededs via its Weighted Non-negative Least-Squares (W-NNLS) methodology. You can remove this if you wish from within the tool parameters when running.</p>
 
 <figure id="figure-7"><img src="../../images/bulk-music/jitter_plot.png" alt="jitter_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Jitter plot of Estimated Proportions</figcaption></figure>
 
 <p>In the above image you can see (a) the estimated proportion of cells for each of the 6 declared types, as calculated by MuSiC and the NNLS methods, respectively. In the (b) section, this information is better represented as a box plot to show you the distribution of cell type proportions.</p>
 
-<figure id="figure-8"><img src="../../images/bulk-music/ctprop_plot.png" alt="ctprop. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> (top) Cell type proportions by disease factor, and (bottom) hba1c factor <span class="notranslate">expression</span> against beta cell type proportion</figcaption></figure>
+<figure id="figure-8"><img src="../../images/bulk-music/ctprop_plot.png" alt="ctprop. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> (top) Cell type proportions by disease factor, and (bottom) HbA1c factor <span class="notranslate">expression</span> against beta cell type proportion</figcaption></figure>
 
-<p>As stated previously, it is well known that the beta cell proportions are related to T2D disease status. As T2D progresses, the number of beta cells decreases. In the above image we can see in (a) that we have the same information as previous, but we also distinguish between cells that show a high affinity to T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with Hba1c <span class="notranslate">expression</span>, where we see that there is a significant negative correlation between HbA1c levels, beta cell proportions, and gender (after adjusted Age and BMI). This is unsurprising, as gender is related to Hba1c levels.</p>
+<p>As stated previously, it is well known that the beta cell proportions are related to T2D disease status. As T2D progresses, the number of beta cells decreases. In the above image we can see in (a) that we have the same information as previous, but we also distinguish between cells that from patients with T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with HbA1c <span class="notranslate">expression</span>, where we see that there is a significant negative correlation between HbA1c level and beta cell proportions.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1645,20 +1669,20 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
  
 </code></pre></div>  </div>
 
+  <p>In addition to HbA1c levels, gender has also correlated with beta cell proportions. This is unsurprising, as more men have diabetes than women and sex is known to impact HbA1c levels.</p>
+
 </blockquote>
 
 <h3 id="proportions-of-cell-type-to-each-bulk-rna-sample">Proportions of Cell Type to each Bulk <span class="notranslate">RNA</span> sample</h3>
 
-<p>One question we might wish to ask is that what affinity did each of the 6 <span class="notranslate">single cell</span> types have to each of the 89 subjects in the bulk data?</p>
-
-<p>For this we can look at the raw data <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> <code class="language-plaintext highlighter-rouge">MuSiC Estimated Proportions of Cell Types</code> in the <code class="language-plaintext highlighter-rouge">Proportion Matrices</code>, to get a glimpse of cell type compositions on a bulk <span class="notranslate">RNA</span> sample level.</p>
+<p>One question we might wish to ask is: what affinity did each of the 6 <span class="notranslate">single cell</span> types have to each of the 89 subjects in the bulk data? For this we can look at the raw data <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> <code class="language-plaintext highlighter-rouge">MuSiC Estimated Proportions of Cell Types</code> in the <code class="language-plaintext highlighter-rouge">Proportion Matrices</code>, to get a glimpse of cell type compositions on a bulk <span class="notranslate">RNA</span> sample level.</p>
 
 <p>Both the MuSiC and the NNLS calculations of this data is best represented in the below heatmap, with <span class="notranslate">RNA</span> samples as rows and cell types as columns:</p>
 
 <figure id="figure-9"><img src="../../images/bulk-music/subject_heatmap.png" alt="subject_heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Heatmap of cell type proportions at the <span class="notranslate">RNA</span> sample level.</figcaption></figure>
 
 <blockquote class="question">
-  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Which cell types are under-represented in the NNLS method?</li>
@@ -1666,7 +1690,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Here it is evident that the previous NNLS method over-represents the Alpha cell type compared to the MuSiC method which gives more weight to the Beta and Ductal cell types, which were under-represented in the NNLS method.</li>
@@ -1679,15 +1703,13 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 
 <h1 id="estimation-of-cell-type-proportions-with-pre-grouping-of-cell-types">Estimation of cell type proportions with pre-grouping of cell types</h1>
 
-<p>In the previous section we estimated cell types under the assumption that that the gene <span class="notranslate">expression</span> between cell types was largely independent.</p>
+<p>In the previous section we estimated cell types under the assumption that that the gene <span class="notranslate">expression</span> between cell types was largely independent. However, solid tissues often contain closely related cell types. This correlation of gene <span class="notranslate">expression</span> between these cell types is termed ‘collinearity’, which makes it difficult to resolve their relative proportions in bulk data.</p>
 
-<p>However, solid tissues often contain closely related cell types, and correlation of gene <span class="notranslate">expression</span> between these cell types leads to collinearity, which makes it difficult to resolve their relative proportions in bulk data.</p>
+<p>To deal with collinearity, MuSiC can also employ a tree-guided procedure that recursively zooms in on closely related cell types.</p>
 
-<p>To deal with collinearity, MuSiC employs a tree-guided procedure that recursively zooms in on closely related cell types.</p>
+<p>Briefly, similar cell types are grouped into the same cluster and their cluster proportions are estimated, then this procedure is recursively repeated within each cluster. At each recursion stage, only genes that have low within-cluster variance are used, as they should be consistent within a cell type. This is critical as the mean <span class="notranslate">expression</span> estimates of genes with high variance are affected by the pervasive bias in cell capture of sc<span class="notranslate">RNA</span>-seq experiments, and thus cannot serve as reliable reference.</p>
 
-<p>Briefly, similar cell types are grouped into the same cluster and their cluster proportions are estimated, then this procedure is recursively repeated within each cluster. At each recursion stage, only genes that have low within-cluster variance are used, as they are used as consistent genes across cell types. This is critical as the mean <span class="notranslate">expression</span> estimates of genes with high variance are affected by the pervasive bias in cell capture of sc<span class="notranslate">RNA</span>-seq experiments, and thus cannot serve as reliable reference.</p>
-
-<p>In this section we will use mouse kidney <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq data from <span class="citation"><a href="#park2018single">Park <i>et al.</i> 2018</a></span> described by 16 273 genes over a trimmed subset of 10 000 cells, giving 16 unique cell type (2 of which are novel) across 7 subjects. The bulk <span class="notranslate">RNA</span>-seq dataset is from <span class="citation"><a href="#beckerman2017transgenic">Beckerman <i>et al.</i> 2017</a></span> and contains mouse kidney tissue described by 19 033 genes over 10 samples.</p>
+<p>To perform this analysis, we will use mouse kidney <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq data from <span class="citation"><a href="#park2018single">Park <i>et al.</i> 2018</a></span> described by 16 273 genes over a trimmed subset of 10 000 cells, giving 16 unique cell type (2 of which are novel) across 7 subjects. The bulk <span class="notranslate">RNA</span>-seq dataset is from <span class="citation"><a href="#beckerman2017transgenic">Beckerman <i>et al.</i> 2017</a></span> and contains mouse kidney tissue described by 19 033 genes over 10 samples.</p>
 
 <h2 id="get-data-1">Get data</h2>
 
@@ -1781,7 +1803,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
 
 <h3 id="colinearity-dendrogram-with-music-to-determine-cell-type-similarities">Colinearity Dendrogram with <strong>MuSiC</strong> to determine cell type similarities</h3>
 
-<p>Determining cell type similarities reqzures first producing a design matrix as well as a cross-subject mean of relative abundance, using a tree-blased clustering method of the cell types we wish to cluster.</p>
+<p>Determining cell type similarities requires first producing a design matrix as well as a cross-subject mean of relative abundance, using a tree-based clustering method of the cell types we wish to cluster.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1809,7 +1831,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
 <figure id="figure-10"><img src="../../images/bulk-music/dendrogram.png" alt="dendrogram. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Dendrogram of Design Matrix and Cross-Subject Mean of Relative Abundance</figcaption></figure>
 
 <blockquote class="question">
-  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What do you notice about the cells clustering?</li>
@@ -1817,7 +1839,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>The immune cells are clustered together and the kidney specific cells are clustered together. Notice that DCT and PT are within the same high-level grouping.</li>
@@ -1927,7 +1949,7 @@ https://zenodo.org/record/5719228/files/immune.markers
 <figure id="figure-11"><img src="../../images/bulk-music/dendro_jitboxheat.png" alt="dendro_jitboxheat. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Jitter and Boxplots of all cell types followed by a heatmap of each <span class="notranslate">RNA</span> sample against cell type. Note that the y-axis for each of the plots above are not constant across cell types.</figcaption></figure>
 
 <blockquote class="question">
-  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Most of the <span class="notranslate">expression</span> in the above plot appears to be derived from one cell type.</p>
 
@@ -1937,7 +1959,7 @@ https://zenodo.org/record/5719228/files/immune.markers
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>The PT cells appear to dominate.</li>
@@ -1950,17 +1972,17 @@ https://zenodo.org/record/5719228/files/immune.markers
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we constructed <span class="notranslate">Expression</span>Set objects, inspected, and annotated them, and then finally processing them with the MuSiC <span class="notranslate">RNA</span>-Deconvolution analysis suite.</p>
+<p>In this tutorial we constructed <span class="notranslate">Expression</span>Set objects, inspected and annotated them, and then finally processed them with the MuSiC <span class="notranslate">RNA</span>-Deconvolution analysis suite.</p>
 
 <p>Below is an overview of the <span class="notranslate">workflow</span> that was used throughout this tutorial.</p>
 
 <figure id="figure-12"><img src="../../images/bulk-music/workflow1.png" alt="workflow1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> <span class="notranslate">Workflow</span> for estimating cell types</figcaption></figure>
 
-<p>Note how two <span class="notranslate">Expression</span>Set objects are constructed: one from bulk <span class="notranslate">RNA</span>-seq tabular assay data, and the other from <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq tabular assay data. A blind analysis of cell proportion estimation is performed, along side a guided analysis using pre-grouped cell types.</p>
+<p>Note how two <span class="notranslate">Expression</span>Set objects are constructed: one from bulk <span class="notranslate">RNA</span>-seq tabular assay data, and the other from <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq tabular assay data. A blind analysis of cell proportion estimation is performed first. Then in the second half of the tutorial, we performed a guided analysis using pre-grouped cell types.</p>
 
 <figure id="figure-13"><img src="../../images/bulk-music/workflow_dendro.png" alt="workflow_dendro.png. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> <span class="notranslate">Workflow</span> for generating a dendrogram and clustering cells upon it</figcaption></figure>
 
-<p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
+<p>This tutorial is part of the <a href="https://singlecell.usegalaxy.eu">https://singlecell.use<span class="notranslate">galaxy</span>.eu</a> portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
 
                 
@@ -2057,7 +2079,7 @@ author = "Mehmet Tekman and Wendi Bacon",
 title = "Bulk RNA Deconvolution with MuSiC (Galaxy Training Materials)",
 year = "2022",
 month = "02",
-day = "09"
+day = "11"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/bulk-music/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
