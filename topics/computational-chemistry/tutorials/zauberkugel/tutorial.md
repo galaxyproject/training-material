@@ -36,7 +36,7 @@ In this tutorial, you will perform pharmacophore-based target prediction of a bi
 
 > ### {% icon details %} Pharmacology of staurosporine
 >
->  Staurosporine (PDB hetID: [STU](https://www.rcsb.org/ligand/STU)) is an indolocarbazole secondary metabolite isolated from several bacteria of the genus Streptomyces. It displays highly potent and broad inhibition of human protein kinases, and serves as the precursor of numerous marketed kinase inhibitors, notably imatinib --- the first FDA-approved small-molecule kinase inhibitor ({% cite mura2018 %}).
+>  Staurosporine (PDB hetID: [STU](https://www.rcsb.org/ligand/STU)) is an indolocarbazole secondary metabolite isolated from several bacteria of the genus Streptomyces. It displays highly potent and broad inhibition of human protein kinases, and serves as the precursor of numerous marketed kinase inhibitors, notably imatinib -- the first FDA-approved small-molecule kinase inhibitor ({% cite mura2018 %}).
 {: .details}
 
 > ### Agenda
@@ -248,7 +248,7 @@ The alignment score of the best ranked ligand conformer aligned against each ePh
 
 ## Ranking the predicted protein targets
 
-The resulting single alignment score file needs to be re-sorted according to the alignment metric, the Tversky index, i.e. the 10th column. The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*. Given that staurosporine (hetID: *STU*) appears in several PDB cocrystal structures (43 times in the sc-PDB dataset from which ePharmaLib was built), we shall evaluate the predictions results by identifying the predicted proteins whereby the cocrystallized ligand is `STU`.
+The resulting single alignment score file needs to be re-sorted according to the alignment metric, the Tversky index, i.e. the 10th column. The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*. Given that staurosporine (hetID: *STU*) appears in several PDB cocrystal structures (43 times in the sc-PDB dataset from which ePharmaLib was built), we shall evaluate the predictions results by identifying the predicted proteins for which the cocrystallized ligand is `STU`.
 
 > ### {% icon hands_on %} Hands-on 9: Sort Dataset
 >
@@ -272,11 +272,11 @@ The resulting single alignment score file needs to be re-sorted according to the
 > 1. For predicted targets in the top 10 whose cocrystallized ligands are other than *STU*, are these ligands structurally similar to *STU*?
 > Output of task 2:
 > 2. Out of the 43 STU-containing targets of the sc-PDB ({% cite Desaphy2014 %}), how many were retrieved by the current target prediction experiment?
-> 3. Why a perfect pharmacophore alignment (`Tversky index =  1`) was not achieved for protein targets where the cocrystallized ligand is staurosporine (*STU*)?
+> 3. Why was a perfect pharmacophore alignment (`Tversky index =  1`) not achieved for protein targets where the cocrystallized ligand is staurosporine (*STU*)?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. With the exception of *TIY* (purpurogallin), the other cocrystallized ligands for the top 10 targets, namely: *ITQ* , *UCM*, and *UCN* are *STU*-derived compounds, wherein the indolocarbazole scaffold was preserved.
+> > 1. With the exception of *TIY* (purpurogallin), the other cocrystallized ligands for the top 10 targets, namely *ITQ* , *UCM*, and *UCN*, are *STU*-derived compounds, in which the indolocarbazole scaffold was preserved.
 > > 2. Thirty nine (39).
 > > 3. A perfect pharmacophore alignment because a computational conformer generator can hardly reproduce with 100% accuracy a crystallographic (native) ligand pose.
 > >
@@ -288,7 +288,7 @@ The resulting single alignment score file needs to be re-sorted according to the
 
 For pharmacophore-based protein target prediction, you can choose to use Galaxy tools separately and in succession as described above, or alternatively use the Zauberkugel workflow as described below (Figure 3).
 
-![Snapshot of Zauberkugel workflow]({% link topics/computational-chemistry/images/zauberkugel.png %} "Zauberkugel --- protein target prediction of a bioactive ligand with Align-it and ePharmaLib")
+![Snapshot of Zauberkugel workflow]({% link topics/computational-chemistry/images/zauberkugel.png %} "Zauberkugel -- protein target prediction of a bioactive ligand with Align-it and ePharmaLib")
 
 > ### {% icon hands_on %} Upload the Zauberkugel workflow
 >
