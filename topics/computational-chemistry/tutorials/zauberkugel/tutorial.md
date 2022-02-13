@@ -317,7 +317,7 @@ For pharmacophore-based protein target prediction, you can choose to use Galaxy 
 >    https://github.com/galaxyproject/training-material/blob/main/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga
 >    ```
 >
->    The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format).
+>    The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format). The output of the prediction of human targets of staurosporine performed with the ePharmaLib human target subset (https://zenodo.org/record/6055897) and this workflow, is available as a [Galaxy history](https://usegalaxy.eu/u/aurelien_moumbock/h/zauberkugel).
 >
 {: .hands_on}
 
