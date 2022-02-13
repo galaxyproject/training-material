@@ -162,6 +162,7 @@ More often than not, the bioactive form of a compound is its predominant form at
 >    - *"Add hydrogens to polar atoms only (i.e. not to carbon atoms)"*: `Yes`
 >
 > 2. Rename the ouput to `staurosporine_hydrated`.
+> 
 >    {% snippet faqs/galaxy/collections_rename.md name = "staurosporine_hydrated" %}
 >
 {: .hands_on}
