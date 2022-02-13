@@ -162,7 +162,7 @@ More often than not, the bioactive form of a compound is its predominant form at
 >    - *"Add hydrogens to polar atoms only (i.e. not to carbon atoms)"*: `Yes`
 >
 > 2. Rename the ouput to `staurosporine_hydrated`.
-> 
+>
 >    {% snippet faqs/galaxy/collections_rename.md name = "staurosporine_hydrated" %}
 >
 {: .hands_on}
@@ -196,6 +196,7 @@ The ePharmaLib subset representing *P. falciparum* protein targets (*ePharmaLib_
 >        - *"Method to allocate records to new files"*: `Maintain record order`
 >
 > 2. Rename the ouput to `ePharmaLib_PLAF_splitted`.
+>
 >    {% snippet faqs/galaxy/collections_rename.md name = "ePharmaLib_PLAF_splitted" %}
 >
 {: .hands_on}
@@ -211,6 +212,7 @@ To reduce the calculation time, the Align-it ({% cite Taminau2008 %}) tool perfo
 >    - *"Maximum number of conformers to generate per molecule"*: `100`
 >
 > 2. Rename the ouput to `staurosporine_3D_conformers`.
+>
 >    {% snippet faqs/galaxy/collections_rename.md name = "staurosporine_3D_conformers" %}
 >
 >    > ### {% icon comment %} RDConf
@@ -264,6 +266,7 @@ The alignment score of the best ranked ligand conformer aligned against each ePh
 >    - {% icon param-file %} *"Datasets to concatenate"*: `scores` (from Hands-on 7)
 >
 > 2. Rename the ouput to `concatenated_scores`.
+>
 >    {% snippet faqs/galaxy/collections_rename.md name = "concatenated_scores" %}
 >
 {: .hands_on}
@@ -279,6 +282,7 @@ The resulting single alignment score file needs to be re-sorted according to the
 >    - *"on column"*: `c10`
 >
 > 2. Rename the ouput to `final_target_prediction_scores`.
+>
 >    {% snippet faqs/galaxy/collections_rename.md name = "final_target_prediction_scores" %}
 >
 > 3. You can view the contents of the collection `final_target_prediction_scores` by pressing the **eye icon** (View data).
