@@ -17,7 +17,7 @@ key_points:
 - Pharmacophore-based target prediction is an efficient and cost-effective method.
 contributors:
 - aurelienmoumbock
--simonbray
+- simonbray
 
 ---
 
