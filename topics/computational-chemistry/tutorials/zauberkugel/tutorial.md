@@ -273,7 +273,23 @@ The alignment score of the best ranked ligand conformer aligned against each ePh
 
 ## Ranking the predicted protein targets
 
-The resulting single alignment score file needs to be re-sorted according to the alignment metric, the Tversky index, i.e. the 10th column. The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*.
+The resulting `concatenated_scores` needs to be re-sorted according to the alignment metric, the Tversky index, i.e. the 10th column. The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*. The contents of the `concatenated_scores` are as follows:
+
+	------    ---------------------------------------------------------------------
+	column    Content
+	------    ---------------------------------------------------------------------
+	     1    Id of the reference structure
+	     2    Maximum volume of the reference structure
+	     3    Id of the database structure
+	     4    Maximum volume of the database structure
+	     5    Maximum volume overlap of the two structures
+	     6    Overlap between pharmacophore and exclusion spheres in the reference
+	     7    Corrected volume overlap between database pharmacophore and reference
+	     8    Number of pharmacophore points in the processed pharmacophore
+	     9    TANIMOTO score
+	    10    TVERSKY_REF score
+	    11    TVERSKY_DB score
+	------    --------------------------------------------------------------------- 
 
 > ### {% icon hands_on %} Hands-on 9: Sort Dataset
 >
