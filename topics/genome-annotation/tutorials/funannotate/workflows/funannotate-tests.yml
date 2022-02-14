@@ -1,0 +1,39 @@
+- doc: Test outline for Funannotate-(imported-from-uploaded-file)
+  job:
+    Alternate annotation gbk:
+      class: File
+      filetype: genbank
+      location: https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gbk
+    Alternate annotation gff3:
+      class: File
+      filetype: gff3
+      location: https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gff3
+    Genome assembly:
+      class: File
+      filetype: fasta
+      location: https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/genome_masked.fasta
+    NCBI submission template:
+      class: File
+      filetype: txt
+      location: test-data/NCBI_submission_template.txt
+    Protein evidence sequences:
+      class: File
+      filetype: fasta
+      location: https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/SwissProt_subset.fasta
+    RNASeq reads forward:
+      class: File
+      filetype: fastqsanger.gz
+      location: https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R1.fq.gz
+    RNASeq reads reverse:
+      class: File
+      filetype: fastqsanger.gz
+      location: https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R2.fq.gz
+  outputs:
+    'Busco summary':
+      file: 'test-data/busco_sum.txt'
+    'Final annotation (GFF3)':
+      asserts:
+        has_text:
+          text: 'note=EggNog:ENOG503Q21Z;'
+        has_text:
+          text: 'InterPro:IPR001128'
