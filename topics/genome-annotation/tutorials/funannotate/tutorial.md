@@ -260,7 +260,7 @@ Before moving on, have a quick look at the `tbl2asn error summary report` output
 >
 > > ### {% icon solution %} Solution
 > >
-> > On a total of 2449, you should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.
+> > On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.
 > >
 > > That's a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
 > >
