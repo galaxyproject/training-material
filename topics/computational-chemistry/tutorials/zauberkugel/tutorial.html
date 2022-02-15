@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Protein target prediction of a bioactive ligand with Align-it and ePharmaLib</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:title" content="Galaxy Training: Protein target prediction of a bioactive ligand with Alig..." />
+        <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/computational-chemistry" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Computational chemistry
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/computational-chemistry/faqs/" title="Check our FAQs for the Computational chemistry topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/computational-chemistry/tutorials/zauberkugel/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxycomputationalchemistry/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Protein target prediction of a bioactive ligand with Align-it and ePharmaLib",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Computational chemistry",
+    "description": "Modelling, simulation and analysis of biomolecular systems",
+    "url": "https://training.galaxyproject.org//training-material/topics/computational-chemistry/"
+  },
+  "courseCode": "computational-chemistry / zauberkugel / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Protein target prediction of a bioactive ligand with Align-it and ePharmaLib' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - What is a pharmacophore model?\n - How can I perform protein target prediction with a multi-step workflow or the one-step Zauberkugel workflow?\n\n\\nThe objectives are:\n - Create an SMILES file of a bioactive ligand.\n - Screen the query ligand against a pharmacophore library.\n - Analyze the results of the protein target prediction.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Aurélien F. A. Moumbock"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Aurélien F. A. Moumbock"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Computational chemistry",
+      "description": "Modelling, simulation and analysis of biomolecular systems",
+      "url": "https://training.galaxyproject.org//training-material/topics/computational-chemistry/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-computational-chemistry">
+    <h1 data-toc-skip>Protein target prediction of a bioactive ligand with Align-it and ePharmaLib</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/aurelienmoumbock/" class="contributor-badge contributor-aurelienmoumbock"><img src="https://avatars.githubusercontent.com/aurelienmoumbock?s=27" alt="Avatar">Aurélien F. A. Moumbock</a>
+
+
+<a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=27" alt="Avatar">Simon Bray</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is a pharmacophore model?</p>
+</li>
+        
+        <li><p>How can I perform protein target prediction with a multi-step workflow or the one-step Zauberkugel workflow?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Create an SMILES file of a bioactive ligand.</p>
+</li>
+        
+        <li><p>Screen the query ligand against a pharmacophore library.</p>
+</li>
+        
+        <li><p>Analyze the results of the protein target prediction.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/" title="Workflows" alt="Protein target prediction of a bioactive ligand with Align-it and ePharmaLib workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/computational-chemistry/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://cheminformatics.usegalaxy.eu/" title="ChemicalToolbox">
+            ChemicalToolbox
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 15, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich (<span class="citation"><a href="#Ehrlich1909">Ehrlich 1909</a></span>). According to the <a href="https://iupac.org/">Inte<span class="notranslate">rna</span>tional Union of Pure and Applied Chemistry (IUPAC)</a>, a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” (<span class="citation"><a href="#Wermuth1998">Wermuth <i>et al.</i> 1998</a></span>). Starting from the cocrystal structure of a non-covalent protein–ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction of the key molecular features of the bioactive ligand at the protein–ligand contact interface into a single model (<span class="citation"><a href="#Moumbock2019">Moumbock <i>et al.</i> 2019</a></span>). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed either in a forward manner, using several ligands to search for novel putative hits of a given target, or in a reverse manner, by screening a single ligand against multiple pharmacophore models in search of putative protein targets (<span class="citation"><a href="#Steindl2006">Steindl <i>et al.</i> 2006</a></span>).</p>
+
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/4MVF-STU.png" alt="PDB ID: 4MVF. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Crystal Structure of *Plasmodium falciparum* calcium-dependent protein kinase 2 (CDPK2) complexed with staurosporine (STU) with PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
+
+<p>Bioactive compounds often bind to several target proteins, thereby exhibiting polypharmacology. However, experimentally determining these interactions is laborious, and structure-based virtual screening of bioactive compounds could expedite drug discovery by prioritizing hits for experimental validation. The recently reported ePharmaLib (<span class="citation"><a href="#Moumbock2021">Moumbock <i>et al.</i> 2021</a></span>) dataset is a library of 15,148 e-pharmacophores modeled from solved structures of pharmaceutically relevant protein–ligand complexes of the screening Protein Data Bank (sc-PDB, <span class="citation"><a href="#Desaphy2014">Desaphy <i>et al.</i> 2014</a></span>). ePharmaLib can be used for target fishing of phenotypic hits, side effect predictions, drug repurposing, and scaffold hopping.</p>
+
+<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/STU.png" alt="STU. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Depiction of the 2D structure of staurosporine (left) and 3D structure (right) with key pharmacophoric features extracted from the STU–CDPK2 complex (PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf)). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
+
+<p>In this tutorial, you will perform pharmacophore-based target prediction of a bioactive ligand known as staurosporine (Figure 2) with the ePharmaLib subset representing <em>Plasmodium falciparum</em> protein targets (138 pharmacophore models) and the open-source pharmacophore alignment program <a href="https://anaconda.org/bioconda/align_it">Align-it</a>, formerly known as PHARAO (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>).</p>
+
+<blockquote class="details">
+  <h3 id="details-pharmacology-of-staurosporine"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Pharmacology of staurosporine</h3>
+
+  <p>Staurosporine (PDB hetID: <a href="https://www.rcsb.org/ligand/STU">STU</a>) is an indolocarbazole secondary metabolite isolated from several bacteria of the genus Streptomyces. It displays diverse biological activities such as anticancer and antiparasitic activities (<span class="citation"><a href="#Nakano2009">Nakano and Ōmura 2009</a></span>).</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#create-a-history" id="markdown-toc-create-a-history">Create a history</a></li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a>    <ol>
+      <li><a href="#fetching-the-epharmalib-dataset" id="markdown-toc-fetching-the-epharmalib-dataset">Fetching the ePharmaLib dataset</a></li>
+      <li><a href="#creating-a-query-ligand-structure-file" id="markdown-toc-creating-a-query-ligand-structure-file">Creating a query ligand structure file</a></li>
+    </ol>
+  </li>
+  <li><a href="#pre-processing" id="markdown-toc-pre-processing">Pre-processing</a>    <ol>
+      <li><a href="#ligand-hydration" id="markdown-toc-ligand-hydration">Ligand hydration</a></li>
+      <li><a href="#splitting-epharmalib-into-individual-pharmacophores" id="markdown-toc-splitting-epharmalib-into-individual-pharmacophores">Splitting ePharmaLib into individual pharmacophores</a></li>
+      <li><a href="#ligand-conformational-flexibility" id="markdown-toc-ligand-conformational-flexibility">Ligand conformational flexibility</a></li>
+    </ol>
+  </li>
+  <li><a href="#pharmacophore-alignment" id="markdown-toc-pharmacophore-alignment">Pharmacophore alignment</a></li>
+  <li><a href="#post-processing" id="markdown-toc-post-processing">Post-processing</a>    <ol>
+      <li><a href="#concatenating-the-pharmacophore-alignment-scores" id="markdown-toc-concatenating-the-pharmacophore-alignment-scores">Concatenating the pharmacophore alignment scores</a></li>
+      <li><a href="#ranking-the-predicted-protein-targets" id="markdown-toc-ranking-the-predicted-protein-targets">Ranking the predicted protein targets</a></li>
+    </ol>
+  </li>
+  <li><a href="#one-step-zauberkugel-workflow-vs-multi-step-workflow" id="markdown-toc-one-step-zauberkugel-workflow-vs-multi-step-workflow">One-step Zauberkugel <span class="notranslate">workflow</span> vs. multi-step <span class="notranslate">workflow</span></a></li>
+  <li><a href="#further-analysis" id="markdown-toc-further-analysis">Further analysis</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="create-a-history">Create a history</h1>
+
+<p>As a first step, we create a new history for the analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-1-create-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 1: Create history</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+    </li>
+    <li>
+      <p>Rename it to <code class="language-plaintext highlighter-rouge">Staurosporine target prediction</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>  <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>  <li>Type the new name: <code class="language-plaintext highlighter-rouge">Staurosporine target prediction</code></li>  <li>Press <kbd>Enter</kbd></li></ol></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="get-data">Get data</h1>
+
+<p>For this exercise, we need two datasets: the ePharmaLib pharmacophore library (PHAR format) and a query ligand structure file (SMI format).</p>
+
+<h2 id="fetching-the-epharmalib-dataset">Fetching the ePharmaLib dataset</h2>
+
+<p>Firstly, we will retrieve the concatenated ePharmaLib subset representing <em>P. falciparum</em> protein targets.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-2-upload-epharmalib"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 2: Upload ePharmaLib</h3>
+
+  <ol>
+    <li>
+      <p>Upload the dataset from the <a href="https://zenodo.org">Zenodo</a> link provided to your <span class="notranslate">Galaxy</span> history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>    <p><code class="language-plaintext highlighter-rouge">hhttps://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar</code></p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-epharmalib-versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> ePharmaLib versions</h3>
+
+        <p>Two versions of the ePharmaLib (PHAR &amp; PHYPO formats) have been created for use with the pharmacophore alignment programs <a href="https://anaconda.org/bioconda/align_it">Align-it</a> and <a href="https://www.schrodinger.com/products/phase">Phase</a>, respectively. Both versions can be broken down into small datasets. e.g. for human targets. They are freely available at <a href="https://zenodo.org">Zenodo</a> under the link:
+	<code class="language-plaintext highlighter-rouge">
+	https://zenodo.org/record/6055897
+</code></p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Change the datatype from <code class="language-plaintext highlighter-rouge">tabular</code>to <code class="language-plaintext highlighter-rouge">phar</code>. This step is essential, as <span class="notranslate">Galaxy</span> does not automatically detect the datatype for PHAR files.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">phar</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li>
+      <p>You can view the contents of the downloaded PHAR file by pressing the <strong>eye icon</strong> (View data) for this dataset.</p>
+
+      <blockquote class="details">
+        <h3 id="details-what-is-a-phar-file"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What is a PHAR file?</h3>
+
+        <p>A PHAR file is essentially a series of lines containing the three-dimensional coordinates of pharmacophoric features and excluded spheres. The first column specifies a feature type (e.g. HACC is a hydrogen bond acceptor). Subsequent columns specify the position of the feature center in a three-dimensional space. Individual pharmacophores are separated by lines containing four dollar signs (<code class="language-plaintext highlighter-rouge">$$$$</code>). The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code <em>PDBID-hetID-UniprotEntryName</em>.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="creating-a-query-ligand-structure-file">Creating a query ligand structure file</h2>
+
+<p>In this step, we will manually create an SMI file containing the SMILES of staurosporine.</p>
+
+<blockquote class="details">
+  <h3 id="details-what-are-smiles-and-the-smi-file-format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What are SMILES and the SMI file format?</h3>
+
+  <p>The simplified molecular-input line-entry system (SMILES) is a string notation for describing the 2D chemical structure of a compound. It only states the atoms present in a compound and the connectivity between them. As an example, the SMILES string of acetone is <code class="language-plaintext highlighter-rouge">CC(=O)C</code>. SMILES strings can be imported by most molecule editors and converted into either two-dimensional structural drawings or three-dimensional models of the compounds, and vice versa. For more information on how the notation works, please consult the <a href="http://opensmiles.org/opensmiles.html">OpenSMILES specification</a> or the description provided by <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">Wikipedia</a>.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-3-create-an-smi-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 3: Create an SMI file</h3>
+
+  <ol>
+    <li>
+      <p>Create a new file using the <span class="notranslate">Galaxy</span> upload manager, with the following contents. Make sure to select the datatype (with <strong>Type</strong>) as <code class="language-plaintext highlighter-rouge">smi</code>. This step is essential, as <span class="notranslate">Galaxy</span> does not automatically detect the datatype for SMI files.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C[C@@]12[C@@H]([C@@H](C[C@@H](O1)N3C4=CC=CC=C4C5=C6C(=C7C8=CC=CC=C8N2C7=C53)CNC6=O)NC)OC	staurosporine
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file</h3>  <ul>  <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the file contents into the text field</p>  </li>  <li>    <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">smi</code></p>  </li>  <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-smiles-generation"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: SMILES generation</h3>
+
+    <p>A SMILES string can automatically be generated from a ligand name or 2D structure with a desktop molecule editor such <a href="https://perkinelmerinformatics.com/products/research/chemdraw/">ChemDraw®</a> and <a href="https://chemaxon.com/products/marvin">Marvin®</a>, or with web-based molecule editors such as <a href="https://pubchem.ncbi.nlm.nih.gov//edit3/index.html">PubChem Sketcher</a> and <a href="https://chemdrawdirect.perkinelmer.cloud/js/sample/index.html">ChemDraw® JS</a>. Moreover, the pre-computed SMILES strings of a large number of bioactive compounds can be retrieved from chemical databases such as <a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a>. e.g.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://pubchem.ncbi.nlm.nih.gov/compound/44259#section=Isomeric-SMILES&amp;fullscreen=true
+</code></pre></div>    </div>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Why do we specifically use a so-called isomeric SMILES string?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Staurosporine is a chiral molecule possessing four chiral centers. The SMILES notation allows the specification of configuration at tetrahedral centers and double bond geometry, by marking atoms with <code class="language-plaintext highlighter-rouge">@</code> or <code class="language-plaintext highlighter-rouge">@@</code>. These are structural features that cannot be specified by connectivity alone, and therefore SMILES which encode this information are termed isomeric SMILES. A notable feature of these rules is that they allow rigorous partial specification of chirality.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="pre-processing">Pre-processing</h1>
+
+<p>Prior to pharmacophore alignment, the predominant ionization state(s) of the query ligand as well as its 3D conformers should be generated. Also, the pharmacophore dataset will be split into a collection of individual pharmacophore files.</p>
+
+<h2 id="ligand-hydration">Ligand hydration</h2>
+
+<p>More often than not, the bioactive form of a compound is its predominant form at physiological pH (7.4). In this step, we predict the most probable ionization state(s) of the query ligand at pH 7.4 with the cheminformatics toolkit OpenBabel (<span class="citation"><a href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a></span>).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-4-add-hydrogen-atoms"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 4: Add hydrogen atoms</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1"><strong>Add hydrogen atoms</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: <code class="language-plaintext highlighter-rouge">staurosporine.smi</code> (from Hands-on 3)</li>
+        <li><em>“Add hydrogens to polar atoms only (i.e. not to carbon atoms)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output to <code class="language-plaintext highlighter-rouge">staurosporine_hydrated</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">staurosporine_hydrated</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Nitrogen-containing functional groups are known to be basic. Which of them present in staurosporine (Figure 2) do you expect to be protonated at pH 7.4, and which not? And why?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Only the secondary N-methylamino group will be protonated because indoles, much like aromatic amides, are typically not basic.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="splitting-epharmalib-into-individual-pharmacophores">Splitting ePharmaLib into individual pharmacophores</h2>
+
+<p>The ePharmaLib subset representing <em>P. falciparum</em> protein targets (<em>ePharmaLib_PHARAO_plasmodium.phar</em>) is a concatenated file containing 148 individual pharmacophore files. To speed up our analysis, it is preferable to split the dataset into individual files in order to perform several pharmacophore alignments in parallel, using <span class="notranslate">Galaxy</span>’s collection functionality.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-5-splitting-epharmalib"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 5: Splitting ePharmaLib</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0"><strong>Split file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Select the file type to split”</em>: <code class="language-plaintext highlighter-rouge">Generic</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to split”</em>: <code class="language-plaintext highlighter-rouge">ePharmaLib_PHARAO_plasmodium.phar</code> (from Hands-on 2)</li>
+            <li><em>“Method to split files”</em>: <code class="language-plaintext highlighter-rouge">Specify record separator as regular <span class="notranslate">expression</span></code>
+              <ul>
+                <li><em>“Regex to match record separator”</em>: <code class="language-plaintext highlighter-rouge">\$\$\$\$</code></li>
+                <li><em>“Split records before or after the separator?”</em>: <code class="language-plaintext highlighter-rouge">After</code></li>
+              </ul>
+            </li>
+            <li><em>“Specify number of output files or number of records per file?”</em>: <code class="language-plaintext highlighter-rouge">Number of records per file ('chunk mode')</code></li>
+            <li><em>“Base name for new files in collection”</em>: <code class="language-plaintext highlighter-rouge">epharmalib</code></li>
+            <li><em>“Method to allocate records to new files”</em>: <code class="language-plaintext highlighter-rouge">Maintain record order</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output to <code class="language-plaintext highlighter-rouge">ePharmaLib_PLAF_split</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">ePharmaLib_PLAF_split</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="ligand-conformational-flexibility">Ligand conformational flexibility</h2>
+
+<p>To reduce the calculation time, the Align-it (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>) tool performs rigid alignment rather than flexible alignment. Conformational flexibility of the ligand is accounted for by introducing a preliminary step, in which a set of energy-minimized conformers for the query ligand are generated with the RDConf (<span class="citation"><a href="#rdconf">Koes</a></span>) tool (using the RDKit (<span class="citation"><a href="#landrum2013rdkit">Landrum and others 2013</a></span>) toolkit).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-6-low-energy-ligand-conformer-search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 6: Low-energy ligand conformer search</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0"><strong>RDConf: Low-energy ligand conformer search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">staurosporine_hydrated</code> (from Hands-on 4)</li>
+        <li><em>“Maximum number of conformers to generate per molecule”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output to <code class="language-plaintext highlighter-rouge">staurosporine_3D_conformers</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">staurosporine_3D_conformers</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-rdconf"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> RDConf</h3>
+
+        <p>It is recommended to use the default settings, except for the number of conformers which should be changed to 100. As a rule of thumb, a threshold of 100 conformers appropriately represents the conformational flexibility of a compound with less than 10 rotatable bonds. The output SDF (structure data file) format encodes three-dimensional atomic coordinates of each conformer, separated by lines containing four dollar signs (<code class="language-plaintext highlighter-rouge">$$$$</code>).</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Have a look at the contents of the created collection <code class="language-plaintext highlighter-rouge">staurosporine_3D_conformers</code>. Why were less than 100 conformers were generated for staurosporine?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Staurosporine is a fused 8-ring system with only two rotatable bonds, due to its planar aromatic 5-ring indolocarbozole scaffold which confers a high structural rigidity upon the compound, i.e. it exists in relatively few energetically distinct 3D conformations.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="pharmacophore-alignment">Pharmacophore alignment</h1>
+
+<p>In this step, the ligand conformer dataset (SDF format) is converted on-the-fly to a pharmacophore dataset (PHAR format) and simultaneously aligned to the individual pharmacophores of the ePharmaLib dataset in a batch mode with Align-it (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>). The pharmacophoric alignments and thus the predicted targets are ranked in terms of a scoring metric: <code class="language-plaintext highlighter-rouge">Tversky index</code> = [0,1]. The higher the Tversky index, the higher the likelihood of the predicted protein–ligand interaction.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-7-pharmacophore-alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 7: Pharmacophore alignment</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0"><strong>Pharmacophore alignment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Defines the database of molecules that will be used to screen”</em>: <code class="language-plaintext highlighter-rouge">staurosporine_3D_conformers</code> (from Hands-on 7)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference molecule”</em>: <code class="language-plaintext highlighter-rouge">ePharmaLib_PLAF_split</code> (from Hands-on 5)</li>
+        <li><em>“No normal information is included during the alignment”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Disable the use of hybrid pharmacophore points”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Only structures with a score larger than this cutoff will be written to the files”</em>: <code class="language-plaintext highlighter-rouge">0.0</code></li>
+        <li><em>“Maximum number of best scoring structures to write to the files”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“This option defines the used scoring scheme”</em>: <code class="language-plaintext highlighter-rouge">TVERSKY_REF</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="post-processing">Post-processing</h1>
+
+<p>The above pharmacophore alignment produces three types of outputs: the aligned pharmacophores (PHAR format), aligned structures (SMI format), and alignment scores (tabular format). Of these results, only the alignment scores are of interest and will be post-processed prior to analysis.</p>
+
+<h2 id="concatenating-the-pharmacophore-alignment-scores">Concatenating the pharmacophore alignment scores</h2>
+
+<p>The alignment score of the best ranked ligand conformer aligned against each ePharmaLib pharmacophore is stored in an individual file. In total, this job generates a collection of 138 output files which should be concatenated in a single file, for a better overview of the predictions.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-8-concatenating-the-scores"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 8: Concatenating the scores</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">scores</code> (from Hands-on 7)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output to <code class="language-plaintext highlighter-rouge">concatenated_scores</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">concatenated_scores</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="ranking-the-predicted-protein-targets">Ranking the predicted protein targets</h2>
+
+<p>The resulting <code class="language-plaintext highlighter-rouge">concatenated_scores</code> needs to be re-sorted according to the alignment metric, the Tversky index, i.e. the 10th column. The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code <em>PDBID-hetID-UniprotEntryName</em>. The contents of the <code class="language-plaintext highlighter-rouge">concatenated_scores</code> are as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>------    ---------------------------------------------------------------------
+column    Content
+------    ---------------------------------------------------------------------
+     1    Id of the reference structure
+     2    Maximum volume of the reference structure
+     3    Id of the database structure
+     4    Maximum volume of the database structure
+     5    Maximum volume overlap of the two structures
+     6    Overlap between pharmacophore and exclusion spheres in the reference
+     7    Corrected volume overlap between database pharmacophore and reference
+     8    Number of pharmacophore points in the processed pharmacophore
+     9    TANIMOTO score
+    10    TVERSKY_REF score
+    11    TVERSKY_DB score
+------    --------------------------------------------------------------------- 
+</code></pre></div></div>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-9-sort-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on 9: Sort Dataset</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">concatenated_scores</code> (from Hands-on 8)</li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">c10</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output to <code class="language-plaintext highlighter-rouge">final_target_prediction_scores</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">final_target_prediction_scores</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li>You can view the contents of the collection <code class="language-plaintext highlighter-rouge">final_target_prediction_scores</code> by pressing the <strong>eye icon</strong> (View data).</li>
+  </ol>
+
+  <p>The top-ranked protein of our target prediction experiment is <em>4mvf-STU-CDPK2_PLAFK</em> (Figures 1 &amp; 2) with a Tversky index = 0.73. The general observation that can be made from this ranking of protein hits is the high self-retrieval rate of known targets, which demonstrates the high prediction accuracy of the method. The higher the Tversky index, the higher the likelihood of the predicted protein–ligand interaction; with a value of 0.5 corresponding to a 50% likelihood.</p>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Why was a perfect pharmacophore alignment (Tversky index =  1) not achieved for the top-ranked protein target for which the cocrystallized ligand is staurosporine (<em>STU</em>)?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>A perfect pharmacophore alignment because a computational conformer generator (here RDConf in Hands-on 6) is unlikely to be able to reproduce a crystallographic (native) ligand pose with 100% accuracy.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="one-step-zauberkugel-workflow-vs-multi-step-workflow">One-step Zauberkugel <span class="notranslate">workflow</span> vs. multi-step <span class="notranslate">workflow</span></h1>
+
+<p>For pharmacophore-based protein target prediction, you can choose to use <span class="notranslate">Galaxy</span> tools separately and in succession as described above, or alte<span class="notranslate">rna</span>tively use the one-step Zauberkugel <span class="notranslate">workflow</span> as described below (Figure 3).</p>
+
+<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/zauberkugel.png" alt="Snapshot of Zauberkugel workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-upload-the-zauberkugel-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Upload the Zauberkugel <span class="notranslate">workflow</span></h3>
+
+  <p><!--SNIPPET-->&lt;blockquote class="tip"&gt;  &lt;h3 data-toc-skip id="-tip-importing-a-<span class="notranslate">workflow</span>"&gt;<i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span>&lt;/h3&gt;  &lt;ul&gt;  &lt;li&gt;Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.&lt;/li&gt;  &lt;li&gt;Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen&lt;/li&gt;  &lt;li&gt;Provide your <span class="notranslate">workflow</span>    &lt;ul&gt;      &lt;li&gt;Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em>&lt;/li&gt;      &lt;li&gt;Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em>&lt;/li&gt;    &lt;/ul&gt;  &lt;/li&gt;  &lt;li&gt;Click the <strong>Import <span class="notranslate">workflow</span></strong> button&lt;/li&gt;&lt;/ul&gt;&lt;/blockquote&gt;</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://github.com/<span class="notranslate">galaxy</span>project/training-material/blob/main/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_<span class="notranslate">workflow</span>.ga
+</code></pre></div>  </div>
+
+  <p>The Zauberkugel <span class="notranslate">workflow</span> requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format). The output of the prediction of human targets of staurosporine performed with the ePharmaLib human target subset (https://zenodo.org/record/6055897) and this <span class="notranslate">workflow</span>, is available as a <a href="https://usegalaxy.eu/u/aurelien_moumbock/h/zauberkugel"><span class="notranslate">Galaxy</span> history</a>.</p>
+
+</blockquote>
+
+<h1 id="further-analysis">Further analysis</h1>
+
+<p>To obtain a docking pose of a protein–ligand interaction predicted from pharmacophore-based protein target prediction, follow the <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html">Protein–ligand docking</a> <span class="notranslate">Galaxy</span> training.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>A pharmacophore is an abstract description of the molecular features of a bioactive ligand.</p>
+</li>
+                        
+                        <li><p>Pharmacophore-based target prediction is an efficient and cost-effective method.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/computational-chemistry/faqs/">FAQ page for the Computational chemistry topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/computational-chemistry#references">here</a>.</p>
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Ehrlich1909">Ehrlich, P., 1909 <b>Über den jetzigen Stand der Chemotherapie</b>. Berichte der deutschen chemischen Gesellschaft 42: 17–47. <a href="https://doi.org/10.1002/cber.19090420105">10.1002/cber.19090420105</a></li>
+<li id="Wermuth1998">Wermuth, C. G., C. R. Ganellin, P. Lindberg, and L. A. Mitscher, 1998 <b>Glossary of terms used in medicinal chemistry (IUPAC Recommendations 1998)</b>. Pure and Applied Chemistry 70: 1129–1143. <a href="https://doi.org/10.1351/pac199870051129">10.1351/pac199870051129</a></li>
+<li id="Steindl2006">Steindl, T. M., D. Schuster, C. Laggner, and T. Langer, 2006 <b>Parallel Screening:\hspace0.167em A Novel Concept in Pharmacophore Modeling and Virtual Screening</b>. Journal of Chemical Information and Modeling 46: 2146–2157. <a href="https://doi.org/10.1021/ci6002043">10.1021/ci6002043</a></li>
+<li id="Taminau2008">Taminau, J., G. Thijs, and H. D. Winter, 2008 <b>Pharao: Pharmacophore alignment and optimization</b>. Journal of Molecular Graphics and Modelling 27: 161–169. <a href="https://doi.org/10.1016/j.jmgm.2008.04.003">10.1016/j.jmgm.2008.04.003</a></li>
+<li id="Nakano2009">Nakano, H., and S. Ōmura, 2009 <b>Chemical biology of natural indolocarbazole products: 30 years since the discovery of staurosporine</b>. The Journal of Antibiotics 62: 17–26. <a href="https://doi.org/10.1038/ja.2008.4">10.1038/ja.2008.4</a></li>
+<li id="OBoyle2011">O’Boyle, N. M., M. Banck, C. A. James, C. Morley, T. Vandermeersch <i>et al.</i>, 2011 <b>Open Babel: An open chemical toolbox</b>. Journal of Cheminformatics 3: <a href="https://doi.org/10.1186/1758-2946-3-33">10.1186/1758-2946-3-33</a></li>
+<li id="landrum2013rdkit">Landrum, G., and others, 2013 <b>RDKit: A software suite for cheminformatics, computational chemistry, and predictive modeling</b>.</li>
+<li id="Desaphy2014">Desaphy, J., G. Bret, D. Rognan, and E. Kellenberger, 2014 <b>sc-PDB: a 3D-database of ligandable binding sites—10 years on</b>. Nucleic Acids Research 43: D399–D404. <a href="https://doi.org/10.1093/nar/gku928">10.1093/nar/gku928</a></li>
+<li id="Moumbock2019">Moumbock, A. F. A., J. Li, P. Mishra, M. Gao, and S. Günther, 2019 <b>Current computational methods for predicting protein interactions of natural products</b>. Computational and Structural Biotechnology Journal 17: 1367–1376. <a href="https://doi.org/10.1016/j.csbj.2019.08.008">10.1016/j.csbj.2019.08.008</a></li>
+<li id="Moumbock2021">Moumbock, A. F. A., J. Li, H. T. T. Tran, R. Hinkelmann, E. Lamy <i>et al.</i>, 2021 <b>ePharmaLib: A Versatile Library of e-Pharmacophores to Address Small-Molecule (Poly-)Pharmacology</b>. Journal of Chemical Information and Modeling 61: 3659–3666. <a href="https://doi.org/10.1021/acs.jcim.1c00135">10.1021/acs.jcim.1c00135</a></li>
+<li id="rdconf">Koes, D. <b>RDConf: Low-energy ligand conformer search</b>. <a href="https://github.com/dkoes/rdkit-scripts">https://github.com/dkoes/rdkit-scripts</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Protein target prediction of a bioactive ligand with Align-it and ePharmaLib (Computational chemistry)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Aurélien F. A. Moumbock, Simon Bray, 2022 <b>Protein target prediction of a bioactive ligand with Align-it and ePharmaLib (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html">https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{computational-chemistry-zauberkugel,
+author = "Aurélien F. A. Moumbock and Simon Bray",
+title = "Protein target prediction of a bioactive ligand with Align-it and ePharmaLib (Galaxy Training Materials)",
+year = "2022",
+month = "02",
+day = "15"
+url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
