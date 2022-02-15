@@ -14,9 +14,14 @@ objectives:
 requirements:
   -
     type: internal
+    topic_name: galaxy-interface
+    tutorials:
+      - jupyterlab
+  -
+    type: internal
     topic_name: statistics
     tutorials:
-      - JupyterLab in Galaxy
+      - intro_deep_learning
 time_estimation: 2H
 contributors:
 - anuprulez
@@ -24,9 +29,12 @@ contributors:
 ---
 
 # Introduction
+
+## Jupyterlab
+
+## COVID CT scan segmentation
+
 {:.no_toc}
-
-
 
 > ### Agenda
 >
@@ -37,8 +45,35 @@ contributors:
 >
 {: .agenda}
 
+
+## Custom Jupyterlab features
+
+### AI programs on GPU(s)
+
+### Git version control
+
+### Elyra AI - workflow of notebooks
+
+### Shareable AI models using ONNX
+
+### Acessible Galaxy tools via Bioblend
+
+
 ## Get data
 
+## Dataset description
+
+### Open Jupyterlab editor
+
+### Pull code
+
+### Attach dataset
+
+### Train model
+
+### Fetch model and make inference
+
+### Show plots and predicted images
 
 # Conclusion
 {:.no_toc}
