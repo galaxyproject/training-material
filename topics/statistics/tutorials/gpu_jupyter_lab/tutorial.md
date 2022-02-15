@@ -29,14 +29,15 @@ contributors:
 ---
 
 # Introduction
+Jupyterlab [https://jupyterlab.readthedocs.io/en/stable/] is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of mostly used languages in such environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust Jupyterlab notebook application has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, Scikit-learn, Tensorflow, ONNX for modern data science. It has been developed as an interactive Galaxy tool that runs on an isolated docker container [https://github.com/anuprulez/ml-jupyter-notebook]. The docker container has been built using "jupyter/tensorflow-notebook:tensorflow-2.6.0" as the base container. Moreover, With the use of Bioblend [https://bioblend.readthedocs.io/], a Galaxy tool [https://github.com/bgruening/galaxytools/pull/1157] can be executed to make use of Galaxy remote job processing for long-running deep learning training and the finished datasets (such a trained models, tabular files, ...) are saved in a Galaxy history. 
 
-### Jupyterlab
 
-### Image segmentation and COVID CT scan
+## Image segmentation and COVID CT scan
+
 
 https://www.sciencedirect.com/science/article/pii/S2666990021000069
 
-### uNet neural network
+### Unet neural network
 
 {:.no_toc}
 
