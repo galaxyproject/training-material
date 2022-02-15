@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: COVID CT scan images segmentation prediction using uNet neural network in GPU-powered Jupyterlab
-zenodo_link: 
+zenodo_link: https://zenodo.org/record/6091361#.Ygu4gIzMI5k
 questions:
 - How to use Jupyterlab and it several features?
 - How to use it for creating input datasets and writing artificial intelligence (AI) algorithms?
@@ -22,7 +22,7 @@ requirements:
     topic_name: statistics
     tutorials:
       - intro_deep_learning
-time_estimation: 2H
+time_estimation: 1H
 contributors:
 - anuprulez
 
@@ -30,9 +30,13 @@ contributors:
 
 # Introduction
 
-## Jupyterlab
+### Jupyterlab
 
-## COVID CT scan segmentation
+### Image segmentation and COVID CT scan
+
+https://www.sciencedirect.com/science/article/pii/S2666990021000069
+
+### uNet neural network
 
 {:.no_toc}
 
@@ -46,22 +50,26 @@ contributors:
 {: .agenda}
 
 
-## Custom Jupyterlab features
+## Custom Jupyterlab features features programs Git version control Galaxy 
 
 ### AI programs on GPU(s)
 
 ### Git version control
 
-### Elyra AI - workflow of notebooks
-
 ### Shareable AI models using ONNX
 
-### Acessible Galaxy tools via Bioblend
+### Accessible Galaxy tools via Bioblend
+
+### Miscellaneous - Elyra AI - workflow of notebooks, GPU utilization dashboards,
 
 
 ## Get data
 
 ## Dataset description
+
+## Neural network architecture description
+
+## Segmentation prediction using uNet in Jupyterlab
 
 ### Open Jupyterlab editor
 
@@ -69,11 +77,11 @@ contributors:
 
 ### Attach dataset
 
-### Train model
+### Train model in the notebook
 
-### Fetch model and make inference
+### Train model remotely and make inference
 
-### Show plots and predicted images
+### Predict masks using trained model
 
 # Conclusion
 {:.no_toc}
