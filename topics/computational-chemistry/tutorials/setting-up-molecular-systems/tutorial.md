@@ -102,7 +102,7 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 > 2. Import the files from the Zenodo link provided.
 >
 >    ```
->    https://zenodo.org/record/2600690
+>    https://zenodo.org/record/2600690/files/7cel_modeled.pdb?download=1
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

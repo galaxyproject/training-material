@@ -970,7 +970,7 @@ If you would like to cite any articles, books or websites in your tutorial, you 
 
 {% raw %}
 ```
-@article{batut2018community,
+@article{bebatut2018community,
   title={Community-driven data analysis training for biology},
   author={Batut, B{\'e}r{\'e}nice and Hiltemann, Saskia and Bagnacani, Andrea and Baker, Dannon and Bhardwaj, Vivek and Blank, Clemens and Bretaudeau, Anthony and Brillet-Gu{\'e}guen, Loraine and {\v{C}}ech, Martin and Chilton, John and others},
   journal={Cell systems},
