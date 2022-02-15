@@ -97,7 +97,7 @@ Firstly, we will retrieve the concatenated ePharmaLib subset representing *P. fa
 >
 >    > ### {% icon details %} What is a PHAR file?
 >    >
->    > A PHAR file is essentially a series of lines containing the three-dimensional coordinates of pharmacophoric features and excluded spheres. The first column specifies a feature type (e.g. HACC is a hydrogen bond acceptor). Subsequent columns specify the position of the feature center in a three-dimensional space. Individual pharmacophores are separated by lines containing four dollar signs (*$$$$*). The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*.
+>    > A PHAR file is essentially a series of lines containing the three-dimensional coordinates of pharmacophoric features and excluded spheres. The first column specifies a feature type (e.g. HACC is a hydrogen bond acceptor). Subsequent columns specify the position of the feature center in a three-dimensional space. Individual pharmacophores are separated by lines containing four dollar signs (`$$$$`). The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code *PDBID-hetID-UniprotEntryName*.
 >    {: .details}
 {: .hands_on}
 
@@ -163,7 +163,7 @@ More often than not, the bioactive form of a compound is its predominant form at
 >
 > 2. Rename the ouput to `staurosporine_hydrated`.
 >
->    {% snippet faqs/galaxy/collections_rename.md name = "staurosporine_hydrated" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name = "staurosporine_hydrated" %}
 >
 {: .hands_on}
 
@@ -195,9 +195,9 @@ The ePharmaLib subset representing *P. falciparum* protein targets (*ePharmaLib_
 >        - *"Base name for new files in collection"*: `epharmalib`
 >        - *"Method to allocate records to new files"*: `Maintain record order`
 >
-> 2. Rename the ouput to `ePharmaLib_PLAF_splitted`.
+> 2. Rename the ouput to `ePharmaLib_PLAF_split`.
 >
->    {% snippet faqs/galaxy/collections_rename.md name = "ePharmaLib_PLAF_splitted" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name = "ePharmaLib_PLAF_split" %}
 >
 {: .hands_on}
 
@@ -213,22 +213,22 @@ To reduce the calculation time, the Align-it ({% cite Taminau2008 %}) tool perfo
 >
 > 2. Rename the ouput to `staurosporine_3D_conformers`.
 >
->    {% snippet faqs/galaxy/collections_rename.md name = "staurosporine_3D_conformers" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name = "staurosporine_3D_conformers" %}
 >
 >    > ### {% icon comment %} RDConf
 >    >
->    > It is recommended to use the default settings, except for the number of conformers which should be changed to 100. As a rule of thumb, a threshold of 100 conformers appropriately represents the conformational flexibility of a compound with less than 10 rotatable bonds. The output SDF (structure data file) format encodes three-dimensional atomic coordinates of each conformer, separated by lines containing four dollar signs (*$$$$*).
+>    > It is recommended to use the default settings, except for the number of conformers which should be changed to 100. As a rule of thumb, a threshold of 100 conformers appropriately represents the conformational flexibility of a compound with less than 10 rotatable bonds. The output SDF (structure data file) format encodes three-dimensional atomic coordinates of each conformer, separated by lines containing four dollar signs (`$$$$`).
 >    {: .comment}
 >
 {: .hands_on}
 
 > ### {% icon question %} Question
 >
-> Visualize the contents of the created collection `staurosporine_3D_conformers`. Why less than 100 conformers were generated for staurosporine?
+> Have a look at the contents of the created collection `staurosporine_3D_conformers`. Why were less than 100 conformers were generated for staurosporine?
 >
 > > ### {% icon solution %} Solution
 > >
-> > Staurosporine is a fused 8-ring system with only two rotatable bonds, due to its planar aromatic 5-ring indolocarbozole scaffold which confers the compound a high structural rigidity, i.e. it exists in relatively few energetically distinct 3D conformations.
+> > Staurosporine is a fused 8-ring system with only two rotatable bonds, due to its planar aromatic 5-ring indolocarbozole scaffold which confers a high structural rigidity upon the compound, i.e. it exists in relatively few energetically distinct 3D conformations.
 > >
 > {: .solution}
 >
@@ -243,7 +243,7 @@ In this step, the ligand conformer dataset (SDF format) is converted on-the-fly 
 >
 > 1. {% tool [Pharmacophore alignment](toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Defines the database of molecules that will be used to screen"*: `staurosporine_3D_conformers` (from Hands-on 7)
->    - {% icon param-file %} *"Reference molecule"*: `ePharmaLib_PLAF_splitted` (from Hands-on 5)
+>    - {% icon param-file %} *"Reference molecule"*: `ePharmaLib_PLAF_split` (from Hands-on 5)
 >    - *"No normal information is included during the alignment"*: `Yes`
 >    - *"Disable the use of hybrid pharmacophore points"*: `Yes`
 >    - *"Only structures with a score larger than this cutoff will be written to the files"*: `0.0`
@@ -267,7 +267,7 @@ The alignment score of the best ranked ligand conformer aligned against each ePh
 >
 > 2. Rename the ouput to `concatenated_scores`.
 >
->    {% snippet faqs/galaxy/collections_rename.md name = "concatenated_scores" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name = "concatenated_scores" %}
 >
 {: .hands_on}
 
@@ -299,7 +299,7 @@ The resulting `concatenated_scores` needs to be re-sorted according to the align
 >
 > 2. Rename the ouput to `final_target_prediction_scores`.
 >
->    {% snippet faqs/galaxy/collections_rename.md name = "final_target_prediction_scores" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name = "final_target_prediction_scores" %}
 >
 > 3. You can view the contents of the collection `final_target_prediction_scores` by pressing the **eye icon** (View data).
 >
@@ -313,7 +313,7 @@ The resulting `concatenated_scores` needs to be re-sorted according to the align
 >
 > > ### {% icon solution %} Solution
 > >
-> > A perfect pharmacophore alignment because a computational conformer generator (here RDConf in Hands-on 6) can hardly reproduce with 100% accuracy a crystallographic (native) ligand pose.
+> > A perfect pharmacophore alignment because a computational conformer generator (here RDConf in Hands-on 6) is unlikely to be able to reproduce a crystallographic (native) ligand pose with 100% accuracy.
 > >
 > {: .solution}
 >
