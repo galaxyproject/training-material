@@ -161,7 +161,7 @@ More often than not, the bioactive form of a compound is its predominant form at
 >    - {% icon param-file %} *"Molecular input file"*: `staurosporine.smi` (from Hands-on 3)
 >    - *"Add hydrogens to polar atoms only (i.e. not to carbon atoms)"*: `Yes`
 >
-> 2. Rename the ouput to `staurosporine_hydrated`.
+> 2. Rename the output to `staurosporine_hydrated`.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name = "staurosporine_hydrated" %}
 >
@@ -173,7 +173,7 @@ More often than not, the bioactive form of a compound is its predominant form at
 >
 > > ### {% icon solution %} Solution
 > >
-> > Only the secondary N-methylamino group will be protonated because indoles much like aromatic amides are typically not basic.
+> > Only the secondary N-methylamino group will be protonated because indoles, much like aromatic amides, are typically not basic.
 > >
 > {: .solution}
 >
@@ -195,7 +195,7 @@ The ePharmaLib subset representing *P. falciparum* protein targets (*ePharmaLib_
 >        - *"Base name for new files in collection"*: `epharmalib`
 >        - *"Method to allocate records to new files"*: `Maintain record order`
 >
-> 2. Rename the ouput to `ePharmaLib_PLAF_split`.
+> 2. Rename the output to `ePharmaLib_PLAF_split`.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name = "ePharmaLib_PLAF_split" %}
 >
@@ -211,7 +211,7 @@ To reduce the calculation time, the Align-it ({% cite Taminau2008 %}) tool perfo
 >    - {% icon param-file %} *"Input file"*: `staurosporine_hydrated` (from Hands-on 4)
 >    - *"Maximum number of conformers to generate per molecule"*: `100`
 >
-> 2. Rename the ouput to `staurosporine_3D_conformers`.
+> 2. Rename the output to `staurosporine_3D_conformers`.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name = "staurosporine_3D_conformers" %}
 >
@@ -265,7 +265,7 @@ The alignment score of the best ranked ligand conformer aligned against each ePh
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `scores` (from Hands-on 7)
 >
-> 2. Rename the ouput to `concatenated_scores`.
+> 2. Rename the output to `concatenated_scores`.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name = "concatenated_scores" %}
 >
@@ -297,7 +297,7 @@ The resulting `concatenated_scores` needs to be re-sorted according to the align
 >    - {% icon param-file %} *"Sort Dataset"*: `concatenated_scores` (from Hands-on 8)
 >    - *"on column"*: `c10`
 >
-> 2. Rename the ouput to `final_target_prediction_scores`.
+> 2. Rename the output to `final_target_prediction_scores`.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name = "final_target_prediction_scores" %}
 >
