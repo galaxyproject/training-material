@@ -56,7 +56,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 >
 > 1. Create a new history for this tutorial and give it a name (example: "RLS for biodiversity data exploration tutorial")
 >    for you to find it again later if needed.
-> 2. Import the files from [Zenodo](https://zenodo.org/record/5930763/files/Reel_life_survey_fish_sample.tabular?download=1)
+> 2. Import the files from [Zenodo](https://zenodo.org/record/6107457/files/IMOS-National_Reef_Monitoring_Network_Sub-Facility-Global_reef_fish_abundance_and_biomass.csv?download=1)
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
