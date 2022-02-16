@@ -48,10 +48,11 @@ module GTNNotebooks
     inside_block = false
     val = []
     data = content.split("\n")
-    data.each{|line|
+    data.each.with_index{|line, i|
       if line == "```#{language}"
         if inside_block
-          raise "[GTN/Notebook] Error! we're already in a block"
+          puts data[i-2..i+2]
+          raise "[GTN/Notebook] L#{i} Error! we're already in a block:"
         end
         # End the previous block
         out.push([val, inside_block])
