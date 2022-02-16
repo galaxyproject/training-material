@@ -54,6 +54,44 @@ notebook:
 >
 {: .agenda}
 
+## Comparators
+
+In Python we have the following comparators to do compare two values
+
+- `>`: greater than
+- `<`: less than
+- `==`: equal to
+- `!=`: does not equal
+- `>=`: greater than or equal to
+- `<=`: less than or equal to
+
+They're all "binary" comparators, we can only compare two values at a time.
+
+```python
+print(37 < 38)
+print(38 < 38)
+print(39 < 38)
+```
+
+These print out `True` or `False`, these are the two possible values of the [*boolean*](https://en.wikipedia.org/wiki/Boolean_algebra) datatype in Python.
+
+We can use `<=` to check if it's less than or equal to:
+
+```python
+print(19 <= 20)
+print(20 <= 20)
+print(21 <= 20)
+```
+
+And we can use `==` for comparing numbers in Python
+
+```
+print(11 == 11)
+print(11 != 11)
+print(22 != 33)
+```
+
+And now that we can compare numbers, we can start doing useful things with them!
 
 ## Conditionals
 
@@ -89,7 +127,6 @@ if num > 100:
 print('...after conditional')
 ```
 
-
 > ### {% icon question %} Question: If behaviour
 >
 > Try changing the `num` value and see what happens for different values.
@@ -108,8 +145,33 @@ print('...after conditional')
 > {: .solution}
 {: .question}
 
-We can also chain several tests together using `elif`,
-which is short for "else if".
+## Multiple Branches
+
+But what if you want more branches? What if you need to handle more cases? `elif` to the rescue!
+
+We can chain several tests together using `elif`, which is short for "else if".
+
+```
+if todays_temperature > 30:
+    print("Wear shorts! Remember your sunscreen")
+elif todays_temperature > 20:
+    print("It's nice weather finally! Gasp!")
+elif todays_temperature < 10:
+    print("Time to bundle up!")
+else:
+    print("Dress normally")
+```
+
+> ### {% icon tip %} Tip: If/Elif/Elif/Elif/Else:
+> if/elif/else cases follow these rules:
+>
+> - must start with an `if`
+> - can have 0 or more `elif` conditions
+> - can have 0 or 1 `else` condition (if no else condition is supplied, it's equivalent to `else: <nothing>`)
+{: .tip}
+
+Each of these three sections is a **branch**, the code pauses, and chooses to go down one of the branches based on the conditions.
+
 The following Python code uses `elif` to print the sign of a number.
 
 ```python
@@ -123,22 +185,10 @@ else:
     print(f'{num} is negative')
 ```
 
-
-Note that to test for equality we use a double equals sign `==`
+**NB**: To test for equality we use a double equals sign `==`
 rather than a single equals sign `=` which is used to assign values.
 
-> ### {% icon tip %} Tip: Comparing in Python
->
-> Along with the `>` and `==` operators we have already used for comparing values in our
-> conditionals, there are a few more options to know about:
->
-> - `>`: greater than
-> - `<`: less than
-> - `==`: equal to
-> - `!=`: does not equal
-> - `>=`: greater than or equal to
-> - `<=`: less than or equal to
-{: .tip}
+## Combining Tests
 
 We can also combine tests using `and` and `or`.
 `and` is only true if both parts are true:
@@ -185,19 +235,31 @@ if (a < 0) or (b > 0):
 {: .tip}
 
 `True` and `False` booleans are not the only values in Python that are true and false.
-In fact, *any* value can be used in an `if` or `elif`.
-After reading and running the code below,
-explain what the rule is for which values are considered true and which are considered false.
+In fact, *any* value can be used in an `if` or `elif`. This is commonly used to
+check, for instance, if a string is empty or if some data is provided:
 
 ```python
 if '':
     print('empty string is true')
 if 'word':
     print('word is true')
+```
+
+You can also use it to check if a list is empty or full:
+
+```python
 if []:
     print('empty list is true')
 if [1, 2, 3]:
     print('non-empty list is true')
+# The last statement is equivalent to:
+if len([1, 2, 3]) > 0:
+    print('non-empty list is true')
+```
+
+Or you can check if a number is zero, or non-zero:
+
+```python
 if 0:
     print('zero is true')
 if 1:
@@ -211,6 +273,7 @@ The Boolean operator `not` can do this explicitly.
 After reading and running the code below,
 write some `if` statements that use `not` to test the rule
 that you formulated in the previous question.
+`not` is a `unary` (not `binary`) operator: it only takes a single value
 
 ```python
 if not '':
@@ -221,7 +284,69 @@ if not not True:
     print('not not True is true')
 ```
 
+## Ranges
 
+Python makes it super easy to check if a number is within a range.
+
+```python
+# quality_score = calculate_score(my_fastq_file)
+
+if quality_score > 40:
+    print("Your data is a bit sus")
+elif 20 < quality_score <= 40:
+    print("Hey that looks ok")
+elif 4 < quality_score <= 20:
+    print("Oh you did nanopore sequencing")
+else:
+    print("It shouldn't be *that* bad. Try again.")
+```
+
+There are two important points here:
+
+- `20 < x < 40` is equivalent to `20 < x and x < 40`, checking both sides of the condition, to make sure it's greater than one value and smaller than another
+- Note that we checked in the second case `20 < x` and then in the third we had to check `x <= 20`. If we had not had a `<=` on one side, what would have happened to 20? It would have gone straight to else!
+
+
+## Exercises
+
+> ### {% icon question %} Question:
+> `if`s, `elif`s and `else`s get evaluated in blocks. Look at the following code and list the lines that are part of a single block.
+>
+> ```
+> 1.  if x:
+> 2.      # ..
+> 3.  if y:
+> 4.      # ..
+> 5.  elif z:
+> 6.      # ..
+> 7.  if q:
+> 8.      # ..
+> 9.  else:
+> 10.     # ..
+> 11. elif t:
+> 12.     # ..
+> 13. else e:
+> 14.     # ..
+> ```
+>
+> > ### {% icon solution %} Solution
+> > "Blocks" of if/elif/elses
+> > - must start with an `if`
+> > - can have 0 or more `elif` conditions
+> > - can have 0 or 1 `else` condition (if no else condition is supplied, it's equivalent to `else: <nothing>`)
+> >
+> > The above blocks are parsed together, you could not insert a `print` anywhere within the blocks, but between the blocks it would work.
+> >
+> > - 1-2, Just an `if` by itself. There's no elif, or else, so that's the end of that block
+> > - 3-6, `if` and `elif` get evaluated, there is no `else`, so that's the end of that block
+> > - 7-10, `if` and `else` is fine
+> > - 11-14, error! This is missing an `if` case, it will fail with a syntaxerror.
+> {: .solution}
+{: .question}
+
+```python
+# Test code here.
+```
 
 > ### {% icon question %} Question: How Many Paths?
 >
@@ -294,3 +419,58 @@ if not not True:
 > > have string representations which can be printed.
 > {: .solution}
 {: .question}
+
+```python
+# Test code here.
+```
+
+> ### {% icon question %} Question: Pitfalls
+>
+> A *integer* number between 0 and 100 will be provided to this function. Answer these two questions:
+>
+> - Will it always print something? If not, which value(s) fail?
+> - Can you find any numbers the programmer explicitly wanted to handle, that aren't handled as expected?
+>
+> ```
+> num = 42 # Randomly chosen so the code will execute, try changing it around.
+>
+> if num > 90:
+>     print("great score")
+> elif num < 32:
+>     print("Very cold")
+> elif num >= 86:
+>     print("Almost")
+> elif num == 86:
+>     print("It's exactly this value!")
+> elif 32 < num < 58:
+>     print("Getting warmer")
+> elif 57 < num <= 86:
+>     print("Everything else goes here")
+> ```
+>
+> > ### {% icon solution %} Solution
+> > 1. No, it won't. 32 is the only value there that doesn't print anything. You can either do `x < 57` and later `57 <= x` to test the bigger and smaller values, or you can make use `x < 57` and `56 < x`, which have the same results, but **only with integers**. If your code accepted a float, e.g. `56.5`, both of those tests would be true. So `x < 57` and later `57 <= x` is the preferred way to write that.
+> > 2. `86` is the most obvious solution to this, the programmer added a check specifically to see if the value was 86, but instead it's caught by the previous case.
+> {: .solution}
+{: .question}
+
+```python
+num = 42 # Randomly chosen so the code will execute, try changing it around.
+
+if num > 90:
+    print("great score")
+elif num < 32:
+    print("Very cold")
+elif num >= 86:
+    print("Almost")
+elif num == 86:
+    print("It's exactly this value!")
+elif 32 < num < 58:
+    print("Getting warmer")
+elif 57 < num <= 86:
+    print("Everything else goes here")
+```
+
+> ### {% icon tip %} Tip: Why a synthetic example like this?
+> Complicated if/elif/else cases are common in code, you need to be able to spot these sort of issues. For example there are large if/else cases in the [Galaxy codebase](https://github.com/galaxyproject/galaxy/blob/9143dd7ca46d150ebfb26febbe187979f682da51/tools/stats/grouping.py#L153-L176), sometimes nested even, and being ale to predict their behaviour is really important to being able to work with the code. [Missing else cases](https://github.com/galaxyproject/galaxy/blob/9143dd7ca46d150ebfb26febbe187979f682da51/tools/stats/grouping.py#L185-L195) are sometimes important, sometimes a bug, sometimes just the code hasn't been implemented yet, which is why we always write good code comments!
+{: .tip}
