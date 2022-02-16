@@ -28,6 +28,17 @@ contributors:
 
 ---
 
+{:.no_toc}
+
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 # Introduction
 Jupyterlab [https://jupyterlab.readthedocs.io/en/stable/] is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of mostly used languages in such environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust Jupyterlab notebook application has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, Scikit-learn, Tensorflow, ONNX for modern data science. It has been developed as an interactive Galaxy tool that runs on an isolated docker container [https://github.com/anuprulez/ml-jupyter-notebook]. The docker container has been built using "jupyter/tensorflow-notebook:tensorflow-2.6.0" as the base container. Moreover, With the use of Bioblend [https://bioblend.readthedocs.io/], a Galaxy tool [https://github.com/bgruening/galaxytools/pull/1157] can be executed to make use of Galaxy remote job processing for long-running deep learning training and the finished datasets (such a trained models, tabular files, ...) are saved in a Galaxy history. 
 
@@ -39,23 +50,20 @@ In an image classification task, a label is assigned to each image. For example,
 
 
 ## COVID CT scan
-Segmenting lung CT scans to locate infected regions has been actively proposed to augment the RT-PCR testing for initial screening of COVID infection in humans. Deep learning has been used to predict these regions with high accuracy in works such as "Inf-net: Automatic COVID-19 lung infection segmentation from CT images" [https://ieeexplore.ieee.org/document/9098956], "JCS: An explainable COVID-19 diagnosis system by joint classification and segmentation" [https://arxiv.org/abs/2004.07054] and so on. In the image shown below, the differences between the CT scans of a normal person and suffering from COVID can be seen. The regions marked by white patches are infected by COVID [https://www.sciencedirect.com/science/article/pii/S2666990021000069]. 
+Segmenting lung CT scans to locate infected regions has been actively proposed to augment the RT-PCR testing for initial screening of COVID infection in humans. Deep learning has been used to predict these regions with high accuracy in works such as "Inf-net: Automatic COVID-19 lung infection segmentation from CT images" [https://ieeexplore.ieee.org/document/9098956], "JCS: An explainable COVID-19 diagnosis system by joint classification and segmentation" [https://arxiv.org/abs/2004.07054] and so on. In the image shown below, the differences between the CT scans of a normal person and suffering from COVID can be seen. The regions marked by white patches are infected by COVID [https://www.sciencedirect.com/science/article/pii/S2666990021000069].
 
 ![Normal and Covid CT scans](../../images/normal_covid_ct_scans.jpg "(Left) Lungs CT scan for normal person and (right) lungs CT scan for person having COVID-19.")
 
+
+## CT scans and masks
+
+![Masks](../../images/covid_ct_scan_masks.png "Pictures show CT scans and its masks of infected region (drawn with red color in images of the middle row).")
+
 ### Unet neural network
+Unet neural network (Unet) is widely used for segmentation tasks in images. The name "Unet" resembles the shape of its architecture as "U" (see image below). It has two parts - encoder and decoder. The left half of the "U" shape is the encoder that learns the feature representation (downsampling) at lower level. The right half is the decoder that maps the low resolution feature representation on the higher resolution (upsampling) pixel space. For further reading, please refer to: [https://arxiv.org/pdf/1505.04597.pdf]
 
 
-{:.no_toc}
-
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
+![Unet architecture](../../images/Unet.jpg "Architecture of Unet neural network for image segmentation")
 
 
 ## Custom Jupyterlab features features programs Git version control Galaxy 
