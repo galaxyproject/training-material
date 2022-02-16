@@ -26,13 +26,13 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Advances in sequencing technologies over the last few decades have revolutionised the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as Next Generation Sequencing or NGS) allowed to produce highly accurate but short (up to 800bp), whose extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called third-generation sequencing (TGS) technologies, usually known as single-molecule real-time (SMRT) sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced High-Fidelity (HiFi) sequencing, which produces reads 10-25 kpb in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
+Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as Next Generation Sequencing or NGS) allowed to produce highly accurate but short (up to 800bp) reads, whose extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called third-generation sequencing (TGS) technologies, usually known as single-molecule real-time (SMRT) sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced High-Fidelity (HiFi) sequencing, which produces reads 10-25 kpb in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
 
-Deciphering the structural organisation of complex vertebrate genomes is currently one of the largest challenges in genomics ({% cite Frenkel2012 %}). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repetitive content and heterozygosity.
+Deciphering the structural organization of complex vertebrate genomes is currently one of the largest challenges in genomics ({% cite Frenkel2012 %}). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repetitive content and heterozygosity.
 
 Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR) that occur at a single locus ({% cite Trresen2019 %}). Repetitive elements are an important component of eukaryotic genomes, constituting over a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tandem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). TE content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as TE content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, TR usually lead to local genome assembly collapse, especially when their length is close to that of the reads ({% cite Trresen2019 %}).
 
-Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertexes representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
+Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
 The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline.
 
@@ -53,14 +53,14 @@ This training is an adaptation of the VGP assembly pipeline 2.0 (fig. 1).
 
 ![Figure 1: VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0. The pipeline starts with assembly of the HiFi reads into contigs, yielding the primary and alternate assemblies. Then, duplicated and erroneously assigned contigs will be removed by using purge_dups. Finally, Bionano optical maps and HiC data are used to generate a scaffolded primary assembly.")
 
-With the aim of making it easier to understand, the training has been organised into four main sections: genome profile analysis, HiFi phased assembly with hifiasm, post-assembly processing and hybrid scaffolding.    
+With the aim of making it easier to understand, the training has been organized into four main sections: genome profile analysis, HiFi phased assembly with hifiasm, post-assembly processing and hybrid scaffolding.    
     
 # Get data
 
-In order to reduce computation time, we will assemble samples from the yeast _Saccharomyces cerevisiae_ S288C, a widely used laboratory strain isolated in the 1950s by Robert Mortimer. Using _S. cerevisae_, one of the most intensively studied eukaryotic model organisms, has the additional advantage of allowing us to evaluate the final result of our assembly with great precision. For this tutorial, we generated a set of synthetic HiFi reads corresponding to theoretical diploid genome.
+In order to reduce computation time, we will assemble samples from the yeast _Saccharomyces cerevisiae_ S288C, a widely used laboratory strain isolated in the 1950s by Robert Mortimer. Using _S. cerevisae_, one of the most intensively studied eukaryotic model organisms, has the additional advantage of allowing us to evaluate the final result of our assembly with great precision. For this tutorial, we generated a set of synthetic HiFi reads corresponding to a theoretical diploid genome.
 
 > ### {% icon details %} Generation of synthetic reads
-> The syntetic HiFi reads were generated by using the [S288C assembly](https://www.ncbi.nlm.nih.gov/genome/15?genome_assembly_id=22535) as reference genome. With this objetive we used [HIsim](https://github.com/thegenemyers/HI.SIM), a HiFi shotgun simulator. The commands used are detailed below:
+> The synthetic HiFi reads were generated by using the [S288C assembly](https://www.ncbi.nlm.nih.gov/genome/15?genome_assembly_id=22535) as reference genome. With this objective we used [HIsim](https://github.com/thegenemyers/HI.SIM), a HiFi shotgun simulator. The commands used are detailed below:
 >
 > ```bash
 > ./FastK -T8 -Nsynthetic -k40 -t4 ./hifi_reads.fastq.gz
@@ -170,7 +170,7 @@ Before starting a *de novo* genome assembly project, it is useful to collect met
 
 > ### {% icon comment %} K-mer size, sequencing coverage and genome size
 >
->*K*-mers are unique substrings of length k contained within a DNA sequence. For example, the DNA sequence *TCGATCACA* can be decomposed into six unique *k*-mers that have five bases long: *TCGAT*, *CGATC*, *GATCA*, *ATCAC* and *TCACA*. A sequence of length L will have  L-k+1 *k*-mers. On the other hand, the number of possible *k*-mers can be calculated as  n<sup>k</sup>, where n is number of possible monomers and k is the k-mer size.
+>*K*-mers are unique substrings of length k contained within a DNA sequence. For example, the DNA sequence *TCGATCACA* can be decomposed into six unique *k*-mers that have five bases long: *TCGAT*, *CGATC*, *GATCA*, *ATCAC* and *TCACA*. A sequence of length L will have  L-k+1 *k*-mers. On the other hand, the number of possible *k*-mers can be calculated as  n<sup>k</sup>, where n is the number of possible monomers and k is the k-mer size.
 >
 >
 >---------| -------------|-----------------------
@@ -206,7 +206,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 > 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
->        - *"Count operations"*: `Count: count the ocurrences of canonical k-mers`
+>        - *"Count operations"*: `Count: count the occurrences of canonical k-mers`
 >        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
 >        - *"k-mer size selector"*: `Set a k-mer size`
 >            - "*k-mer size*": `21`
@@ -383,7 +383,7 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 
 # HiFi phased assembly with hifiasm
 
-Once we have done genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
+Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
 
 ## Genome assembly with **hifiasm**
 
@@ -482,7 +482,7 @@ Let's have a look at the HTML report generated by QUAST.
 
 ![Figure 5: QUAST initial plot](../../images/vgp_assembly/QUAST_initial.png "QUAST HTML report. Statistics of the primary and alternate assembly (a). Cumulative length plot (b).")
 
-According with the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose accumulative length is around 23.5Mbp. On the other hand, the second alternate assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 5a, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.
+According to the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose cumulative length is around 23.5Mbp. On the other hand, the second alternate assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 5a, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.
 
 > ### {% icon question %} Questions
 >
@@ -494,18 +494,18 @@ According with the report, both assemblies are quite similar; the primary assemb
 > >
 > > 1. The longest contig in the primary assembly is 1.532.843 bp, and 1.532.843 bp in the alternate assembly.
 > > 2. The N50 of the primary assembly is 922.430 bp.
-> > 3. According the report, 100% of reads mapped to both the primary assembly and the alternate assembly.
+> > 3. According to the report, 100% of reads mapped to both the primary assembly and the alternate assembly.
 > >
 > {: .solution}
 >
 {: .question}
 
-Next, we will use BUSCO, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies in the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+Next, we will use BUSCO, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > ### {% icon hands_on %} Hands-on: assessing assembly completeness with BUSCO
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Sequences to analyse"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
+>    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
@@ -530,11 +530,11 @@ As we can see in the report, the results are simplified into four categories: *c
 > ### {% icon question %} Questions
 >
 > 1. How many complete BUSCO genes have been identified in the primary assembly?
-> 2. How many BUSCOs gene are absent?
+> 2. How many BUSCOs genes are absent?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. According the report, our assembly contains the complete sequence of 2080 complete BUSCO genes (97.3%).
+> > 1. According to the report, our assembly contains the complete sequence of 2080 complete BUSCO genes (97.3%).
 > > 2. 19 BUSCO genes are missing.
 > >
 > {: .solution}
@@ -555,11 +555,11 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 {: .hands_on}
 
 
-By default, Merqury generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the compy number (CN) spectum plot, known as the *spectra-cn* plot (fig. 7).
+By default, Merqury generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the compy number (CN) spectrum plot, known as the *spectra-cn* plot (fig. 7).
 
 ![Figure 7: Merqury plot](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot corresponding to the primary assembly. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="80%"}
 
-As suggested previously by the report generated by QUAST (fig. 5), the assemblies contain a large proportion of duplicated reads. The read area represents one-copy *k*-mers in the genome, while blue area represents two-copy *k*-mers, originating from haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.
+As suggested previously by the report generated by QUAST (fig. 5), the assemblies contain a large proportion of duplicated reads. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers, originating from haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.
 
 # Post-assembly processing
 
@@ -601,7 +601,7 @@ Now, we will map the reads against the primary assembly by using Minimap2 ({% ci
 
 Finally, we will use the `Reads mapped to contigs` pairwise mapping format (PAF) file for calculating some statistics required in a later stage. In this step, purge_dups initially produces a read-depth histogram from base-level coverages. This information is used for estimating the coverage cutoffs, taking into account that collapsed haplotype contigs will lead to reads from both alleles mapping to those contigs, whereas if the alleles have assembled as separate contigs, then the reads will be split over the two contigs, resulting in half the read-depth ({% cite Roach2018 %}). 
 
-> ### {% icon hands_on %} Hands-on: Read-depth analsys
+> ### {% icon hands_on %} Hands-on: Read-depth analisys
 > 1. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
 >    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
 >        - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
@@ -621,7 +621,7 @@ Purge_dups generates three outputs:
 
 
     
-### Generation of all versus all self-alignmnet
+### Generation of all versus all self-alignment
 
 Now, we will segment the draft assembly into contigs by cutting at blocks of *N*s, and use minimap2 to generate an all by all self-alignment.
 
@@ -653,7 +653,7 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 >
 > In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according the following criteria:
 > - If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is discarded.
-> - If more than 80% bases are in the diploid depth interval, it is labelled as a primary contig, otherwise it is considered further as a possible haplotig.
+> - If more than 80% bases are in the diploid depth interval, it is labeled as a primary contig, otherwise it is considered further as a possible haplotig.
 >
 > Contigs that were flagged for further analysis according to read-depth are then evaluated to attempt to identify synteny with its allelic companion contig. In this step, purge_dups uses the information contained in the self alignments:
 > - If the alignment score is larger than the cutoff *s* (default 70), the contig is marked for reassignment as haplotig. Contigs marked for reassignment with a maximum match score greater than the cutoff *m* (default 200) are further flagged as repetitive regions.
@@ -794,19 +794,19 @@ In the figure 9 we can see the cumulative length plot corresponding to the prima
 
 ![Figure 9: QUAST plot post-processing](../../images/vgp_assembly/QUAST_cummulative.png "QUAST cumulative plot after runnig purge_dups.")
 
-As can be appreciate, both the number of contigs and the total length have been reduced significantly after running purge_dups. It indicates that purge_dups has been able to improve genome assemblies by removing overlaps and haplotigs caused by sequence divergence in heterozygous regions. 
+As can be appreciated, both the number of contigs and the total length have been reduced significantly after running purge_dups. It indicates that purge_dups has been able to improve genome assemblies by removing overlaps and haplotigs caused by sequence divergence in heterozygous regions. 
     
 > ### {% icon question %} Questions
 >
 > 1. How many contigs includes the primary assembly after being processed with purge_dups? What about before purge_dups?
-> 2. How many contigs includes the alternate assembly after being processed with purge_dups?
+> 2. How many contigs include the alternate assembly after being processed with purge_dups?
 > 3. Which percentage of reads mapped to the primary assembly?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. The primary assembly includes 17 contigs after being processed. The initial assembly included 33 contigs.
 > > 2. The alternate includes 17 contigs after being processed.
-> > 3. According the report, 100% of reads mapped to the primary assembly.
+> > 3. According to the report, 100% of reads mapped to the primary assembly.
 > >
 > {: .solution}
 >
@@ -817,7 +817,7 @@ Now, let's evaluate the assembly with BUSCO.
 > ### {% icon hands_on %} Hands-on: assessing assembly completeness with BUSCO
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Sequences to analyse"*: `Primary contigs purged` and `Alternate contigs purged`
+>    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs purged` and `Alternate contigs purged`
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
@@ -835,7 +835,7 @@ Now, let's evaluate the assembly with BUSCO.
 >
 > > ### {% icon solution %} Solution
 > >
-> > According the report, the primary assembly contains 2021 complete BUSCO genes.
+> > According to the report, the primary assembly contains 2021 complete BUSCO genes.
 > >
 > {: .solution}
 >
@@ -843,11 +843,11 @@ Now, let's evaluate the assembly with BUSCO.
 
 # Hybrid scaffolding
 
-At this point, we have obtained the primary and alternate assemblies, each of which consists in a collection of contigs (contiguous sequences assembled from overlapping reads). Next, the contigs will be assembled into scaffolds, i.e., sequences of contigs interspaced with gaps. For this purpose, we will carry out a hybrid scaffolding by taking advantage of two additional technologies: Bionoano optical maps and Hi-C data. 
+At this point, we have obtained the primary and alternate assemblies, each of which consists in a collection of contigs (contiguous sequences assembled from overlapping reads). Next, the contigs will be assembled into scaffolds, i.e., sequences of contigs interspaced with gaps. For this purpose, we will carry out a hybrid scaffolding by taking advantage of two additional technologies: Bionano optical maps and Hi-C data. 
 
 ## Hybrid scaffolding using Bionano data
 
-In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantage of optical maps is that can easily span genomic regions that are difficult to resolve using DNA sequencing technologies ({% cite Savara2021 %}, {% cite Yuan2020 %}).
+In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantages of optical maps is that can easily span genomic regions that are difficult to resolve using DNA sequencing technologies ({% cite Savara2021 %}, {% cite Yuan2020 %}).
 
 > ### {% icon comment %} Background on Bionano optical maps
 >
@@ -925,13 +925,13 @@ Now, let's evaluate the effect of Bionano in our assembly.
 
 > ### {% icon comment %} Note on Bionano results
 >
-> In that case, Bionano hasn't improve the genome assembly at all; the reason is that we are assembling a very simple genome, so at this point the assembly is almost perfect. Nevertheless, it is important to know how optimal maps can contribute to improve the scaffolding of our genomes, since in most cases this will be necessary.
+> In that case, Bionano hasn't improved the genome assembly at all; the reason is that we are assembling a very simple genome, so at this point the assembly is almost perfect. Nevertheless, it is important to know how optimal maps can contribute to improving the scaffolding of our genomes, since in most cases this will be necessary.
 >
 {: .comment}
 
 ## Hybrid scaffolding based on Hi-C mapping data
 
-Hi-C is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing us to provide an insight into the three-dimensional organisation of a genome  ({% cite Dixon2012 %}, {% cite LiebermanAiden2009 %}). In this final stage, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.
+Hi-C is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing us to provide an insight into the three-dimensional organization of a genome  ({% cite Dixon2012 %}, {% cite LiebermanAiden2009 %}). In this final stage, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.
 
 > ### {% icon comment %} Background about Hi-C data
 >
@@ -939,7 +939,7 @@ Hi-C is a sequencing-based molecular assay designed to identify regions of frequ
 >
 > ![Figure 11: Hi-C protocol](../../images/vgp_assembly/hi-c_protocol.png "Hi-C protocol. Adapted from Rao et al. 2014")
 >
-> Next, the blunt ends of spatially proximal digested end are ligated. Each DNA fragment is then sequenced from each end of this artificial junction, generating read pairs. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome ({% cite Giani2020 %}). Hi-C data are in the form of two-dimensional matrices (contact maps) whose entries quantify the intensity of the physical interaction between genome regions.
+> Next, the blunt ends of the spatially proximal digested end are ligated. Each DNA fragment is then sequenced from each end of this artificial junction, generating read pairs. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome ({% cite Giani2020 %}). Hi-C data are in the form of two-dimensional matrices (contact maps) whose entries quantify the intensity of the physical interaction between genome regions.
 >
 {: .comment}
 
@@ -1018,13 +1018,13 @@ Let's have a look at the Hi-C contact maps generated by Pretext Snapshot.
 
 ![Figure 13: Pretext optical map](../../images/vgp_assembly/hic_map_pretext.png "Hi-C map generated by Pretext. Primary assembly full contact map generated in this training (a) Hi-C map representative of a typical missasembly (b).")
 
-In the contact generared from the Bionano-scaffolded assembly can be identified 17 scaffolds, representing each of the haploid chromosomes of our genome (fig. 13.a). The fact that all the contact signals are found around the diagonal suggest that the contigs were scaffolded in the right order. However, during the assembly of complex genomes, it is common to find in the contact maps indicators of errors during the scaffolding process, as shown in the figure 13b. In that case, a conting belonging to the third chromosome has been misplaced as part of the second chromosome.
+In the contact generated from the Bionano-scaffolded assembly can be identified 17 scaffolds, representing each of the haploid chromosomes of our genome (fig. 13.a). The fact that all the contact signals are found around the diagonal suggest that the contigs were scaffolded in the right order. However, during the assembly of complex genomes, it is common to find in the contact maps indicators of errors during the scaffolding process, as shown in the figure 13b. In that case, a contig belonging to the third chromosome has been misplaced as part of the second chromosome.
 
-Once whe have evaluated the quality of the scaffolfolded genome assembly, the next step consist in integrating the information containted in the HiC reads into our assembly, so that any errors identified can be resolved. For this purpose we will use SALSA2 ({% cite Ghurye2019 %}).  
+Once we have evaluated the quality of the scaffolded genome assembly, the next step consists in integrating the information contained in the HiC reads into our assembly, so that any errors identified can be resolved. For this purpose we will use SALSA2 ({% cite Ghurye2019 %}).  
      
 ### SALSA2 scaffolding
 
-SALSA2 is an open source software that makes use of Hi-C to linearly orient and order assembled contigs along entire chromosomes ({% cite Ghurye2019 %}). One of the advantages of SALSA2 with respect to most existing Hi-C scaffolding tools is that it doesn't require to provide the estimated number of chromosomes.
+SALSA2 is an open source software that makes use of Hi-C to linearly orient and order assembled contigs along entire chromosomes ({% cite Ghurye2019 %}). One of the advantages of SALSA2 with respect to most existing Hi-C scaffolding tools is that it doesn't require the estimated number of chromosomes.
 
 > ### {% icon comment %} SALSA2 algorithm overview
 >
@@ -1079,7 +1079,7 @@ Now we can launch SALSA2 in order to generate the hybrid scaffolding based on th
 
 ### Evaluate SALSA2 scaffolding with QUAST
 
-In order to analyse how the information provided by the HiC read has contributed to the improvement of our assembly, we are going to run QUAST again.
+In order to analyze how the information provided by the HiC read has contributed to the improvement of our assembly, we are going to run QUAST again.
 
 > ### {% icon hands_on %} Hands-on: Evaluation with QUAST
 >
@@ -1095,7 +1095,7 @@ In order to analyse how the information provided by the HiC read has contributed
 > 2. Rename the HTML report as `QUAST final report`
 {: .hands_on}
 
-We will analyse the results generated by QUAST to assess the extent to which SALSA2 has improved our genome assembly.
+We will analyze the results generated by QUAST to assess the extent to which SALSA2 has improved our genome assembly.
 
 > ### {% icon question %} Questions
 >
@@ -1106,8 +1106,8 @@ We will analyse the results generated by QUAST to assess the extent to which SAL
 > > ### {% icon solution %} Solution
 > >
 > > 1. The largest contig has 1.532.843 bp.
-> > 2. The final assembly includes 17 scaffolds.
-> > 3. The N50 value is 922.430.
+> > 2. The final assembly includes 16 scaffolds.
+> > 3. The N50 value is 923.452 bp.
 > >
 > {: .solution}
 >
@@ -1166,23 +1166,22 @@ Finally, we should repeat the procedure described previously for generating the 
 >
 {: .hands_on}
 
-In order to evalute the Hi-C hybrid scaffolding, we are going to compare the contact maps before and after running SALSA2 (fig. 15). 
+In order to evaluate the Hi-C hybrid scaffolding, we are going to compare the contact maps before and after running SALSA2 (fig. 15). 
   
-![Figure 15: Pretext final contact map](../../images/vgp_assembly/hi-c_pretext_final.png "Hi-C map generated by Pretext after the hybrid scaffolding based on Hi-C data. The red circles indicate the largest differences between the ontact map generated after (a) and before (b) Hi-C hybrid scaffolding.")
+![Figure 15: Pretext final contact map](../../images/vgp_assembly/hi-c_pretext_final.png "Hi-C map generated by Pretext after the hybrid scaffolding based on Hi-C data. The red circles indicate the  differences between the contact map generated after (a) and before (b) Hi-C hybrid scaffolding.")
 
-Among the most notable differences that can be identified between the contact map as a result of hybrid scaffolding, it can be highlighted the region under the circle in the upper left corner, where an inversion can be identified.
-
+Among the most notable differences that can be identified between the contact maps, it can be highlighted the region under the circle in the upper left corner, where an inversion can be identified.
         
 # Conclusion
 
-To sum up, it is worthwhile to compare the final assembly with the [_S. cerevisiae_ S288C reference genome](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt), which is the one that was used for generating the HiFi reads used along this training.
+To sum up, it is worthwhile to compare the final assembly with the [_S. cerevisiae_ S288C reference genome](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt).
 
 ![Table 1: Final stats](../../images/vgp_assembly/stats_conclusion.png "Comparison between the final assembly generating in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).")
 
-With respect the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.16a,b).It is striking that the reference genome consists of 17 sequences, while in our case the number of chromosomes is 16. This is because the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bps. The remaining statistics exhibit very similar values (fig. 16b).
+With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.16a,b). It is conspicuous that the reference genome consists of 17 sequences, while in our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 16b).
 
 ![Figure 16: Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison bwetween contact maps generated by using the final assembly (a) and the reference genome (b).")
 
-If we compare the contact map of our assembled genome (fig. 17a) with the reference assembly (fig. 17b), we can see that the two are essentially identical. This means that we have achieved a almost perfect assembly at the chromosome level.
+If we compare the contact map of our assembled genome (fig. 17a) with the reference assembly (fig. 17b), we can see that the two are essentially identical. This means that we have achieved an almost perfect assembly at the chromosome level.
         
 {:.no_toc}
