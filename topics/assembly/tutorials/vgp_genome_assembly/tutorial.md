@@ -112,9 +112,9 @@ The first step is to get the datasets from Zenodo. The VGP assembly pipeline use
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
->   dataset_01    https://zenodo.org/record/5985413/files/HiFi_synthetic_01.FASTA.gz?download=1  fasta.gz    HiFi  HiFi_collection
->   dataset_02    https://zenodo.org/record/5985413/files/HiFi_synthetic_02.FASTA.gz?download=1  fasta.gz    HiFi  HiFi_collection
->   dataset_03    https://zenodo.org/record/5985413/files/HiFi_synthetic_03.FASTA.gz?download=1  fasta.gz    HiFi  HiFi_collection
+>   dataset_01    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta?download=1  fasta    HiFi  HiFi_collection
+>   dataset_02    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta?download=1  fasta    HiFi  HiFi_collection
+>   dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta?download=1  fasta    HiFi  HiFi_collection
 >       ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
