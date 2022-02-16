@@ -14,7 +14,7 @@ time_estimation: "1H"
 key_points:
     - "Contributions come in many forms, reviewing is one of them, we appreciate your input!"
     - "Everybody is invited to help with reviewing tutorials"
-    - "Travis CI is used for some automated testing, leaving you able to focus on the content of the tutorial"
+    - "GitHub is used for some automated testing, leaving you able to focus on the content of the tutorial"
     - "If you would like to review on a regular basis, consider volunteering to become a topic maintainer, we always need more help!"
 contributors:
   - shiltemann
@@ -191,7 +191,7 @@ Below is a list of common things to look for when reviewing, this list is just a
 
 
 **Framework**
-- Do travis test pass? (see next section)
+- Do the tests pass? (see next section)
 - Does the layout fit with the [best practices guidelines](TODO)?
 - Is all the input data on Zenodo?
   - Do the Zenodo links match in the metadata, hands_on boxes, and data-library yaml file?
@@ -204,38 +204,15 @@ Below is a list of common things to look for when reviewing, this list is just a
 - Are all the images in the PR actually used in the tutorial?
 
 
-# Automated Testing with Travis
-For every pull request, some automatic tests are run using [Travis](TODO) continuous integration framework to assist in the reviewing process. Travis can test many of the technical aspects of a contribution, leaving you free to focus on evaluation of the scientific content and pedagogic value of the tutorial.
+# Automated Testing with GitHub
+For every pull request, some automatic tests are run using GitHub Actions continuous integration framework to assist in the reviewing process. GHA can test many of the technical aspects of a contribution, leaving you free to focus on evaluation of the scientific content and pedagogic value of the tutorial.
 
-## Travis
-To make reviewing a bit easier, Travis automatically runs some basic tests on the training materials in a PR. These test will tell you if there are problems with the tutorial such as incorrect URLs, missing images, or other problems building the website.
-
-To get a quick view of the status of these tests, scroll to the bottom of the PR page, you will see a box with the status of the checks (running, failed, success). If the tests have failed, you can check the Travis output log to see why it failed.
-
-
-### Check Travis Output
-To make
-
-### What does Travis check for?
-
-Travis makes sure that:
+## What does GitHub check for?
 
 - The website builds successfully
 - All internal links (those referring to other pages within the GTN) are valid
-- External links are valid
-  - Travis doesnt fail on this, but you can check the job status in Travis
-- There are no broken boxes
+- There are no broken boxes (but it still misses things)
 - All contributors listed on tutorial are in the `CONTRIBUTING.yaml` file
 - All `yaml` files have a valid structure
 - Snippets are correctly formatted
 - Citations used in the tutorial are present in the bibliography (`.bib`) file
-
-
-
-
-
-
-
-
-
-
