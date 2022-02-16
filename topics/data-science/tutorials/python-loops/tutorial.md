@@ -92,7 +92,7 @@ for number in [2, 3, 5]:
     print(f"{number} doubled is {doubled}")
 ```
 
-- `number` - this is the loop variable. It's a new variable, that's assigned to the values from the collection.
+- `number` - this is the loop variable. It's a new variable, that's assigned to the values from the collection. It does not need to be defined before the loop.
 - the collection, `[2, 3, 5]` is a `list` of numbers which we can tell from the square brackets used: `[`, `]`
 - the loop body, where we double a number and the print out a message. The loop body is what gets executed for every iteration of the loop.
 
@@ -121,10 +121,27 @@ for number in [2, 3, 5]:
 
 Writing loops saves us time and makes sure our code is accurate, that we don't accidentally introduce a typo somewhere in the loop body.
 
+## Things You Can Loop Over
+
+You can loop over characters in a string
+
+```python
+dna_string = 'ACTGGTCATCG'
+for base in dna_string:
+    print(base)
+```
+
+You can loop over lists:
+
+```python
+cast = ['Elphaba', 'Glinda', 'Fiyero', 'Nessarose']
+for character in cast:
+    print(character)
+```
 
 ## Indentation
 
-The first line of the `for` loop must end with a colon, and the body must be indented.
+The first line of the `for` loop must end with a colon, and the body must be indented with *four spaces*. Many editors do this automatically for you and even convert <kbd>Tab</kbd>s into 4 spaces.
 
 > ### {% icon tip %} Tip: Blocks in Python
 >
@@ -166,94 +183,6 @@ patient1 = "z2910"
   patient2 = "y9583"
 ```
 
-> ### {% icon question %} Question: Correct the errors
->
-> This code is completely missing indentation, it needs to be fixed. Can you make some guesses at how indented each line should be?
-> ```
-> data = [1, 3, 5, 9]
-> acc = 0
-> for i in data:
-> if i < 4:
-> acc = acc + i * 2
-> else:
-> acc = acc + i
-> print(f'The value at {i} is {acc}')
-> print(f'The answer is {acc}')
-> ```
->
-> > ### {% icon solution %} Solution
-> >
-> >
-> > ```python
-> > data = [1, 3, 5, 9]
-> > acc = 0
-> > # There is a : character at the end of this line, so you KNOW the next line
-> > # must be indented.
-> > for i in data:
-> >     # Same here, another :
-> >     if i < 4:
-> >         acc = acc + i * 2
-> >     # And again! Another :
-> >     else:
-> >         acc = acc + i
-> > # But what about these lines?
-> > print(f'The value at {i} is {acc}')
-> > print(f'The answer is {acc}')
-> > ```
-> >
-> > Here this code is actually ambiguous, we don't know how indented the two prints should be. This very synthetic example lacks good context, but there are three places it could be, with three different effects.
-> >
-> > There are two bits of knowledge we can use, however:
-> > - the first print uses `i`, so it must be within the loop
-> > - the second print cannot be indented more than the first print (Why? It would require a block like `for ... :` or `if .. :` to indent further.)
-> >
-> > The first option, no indentation, prints out the value once per loop, that seems good
-> >
-> > ```python
-> > [...]
-> >     else:
-> >         acc = acc + i
-> >     print(f'The value at {i} is {acc}')
-> > ```
-> >
-> > The second, prints out the value only during the else case, not otherwise.
-> >
-> > ```python
-> >     else:
-> >         acc = acc + i
-> >         print(f'The value at {i} is {acc}')
-> > ```
-> >
-> > So that's probably wrong, and we should take the first option. That leaves two options for the final print, no indentation, or at the same level as our first print statement. We can guess that we probably want to print out the final result of the loop, and that it should not be indented.
-> >
-> > ```python
-> > data = [1, 3, 5, 9]
-> > acc = 0
-> > for i in data:
-> >     if i < 4:
-> >         acc = acc + i * 2
-> >     else:
-> >         acc = acc + i
-> >     print(f'The value at {i} is {acc}')
-> > print(f'The answer is {acc}')
-> > ```
-> >
-> {: .solution}
-{: .question}
-
-```python
-# This code accidentally lost it's indentation! Can you fix it?
-data = [1, 3, 5, 9]
-acc = 0
-for i in data:
-if i < 4:
-acc = acc + i * 2
-else:
-acc = acc + i
-print(f'The value at {i} is {acc}')
-print(f'The answer is {acc}')
-```
-
 ## Variable Naming
 
 Loop variables can be called anything, `i`, `j`, and `k` are very commong defaults due to their long history of use in other programing languages.
@@ -280,24 +209,26 @@ for nucleotide in dna_sequence:
 You can use `range` to iterate over a sequence of numbers. This is a built in function (check `help(range)`!) so it's always available even if you don't `import` anything. The range produced is non-inclusive: `range(N)` is the numbers `0` to `N-1`, so the result will be exactly the length you requested.
 
 ```python
-for number in range(3):
+for number in range(10):
     print(number)
 ```
 
-However in python `range` is a special type of iterable: none of the numbers are created until we need them.
-
-```python
-print(range(5))
-print(range(-3, 8)[0:4])
-```
-
-The easiest way to see what numbers are actually in there is to convert it to a `list`:
-
-```python
-print(list(range(5)))
-print(list(range(-3, 8)))
-print(list(range(0, 10, 2)))
-```
+> ### {% icon tip %} Tip: Iterables can be weird
+> In python `range` is a special type of iterable: none of the numbers are created until we need them.
+>
+> ```python
+> print(range(5))
+> print(range(-3, 8)[0:4])
+> ```
+>
+> The easiest way to see what numbers are actually in there is to convert it to a `list`:
+>
+> ```python
+> print(list(range(5)))
+> print(list(range(-3, 8)))
+> print(list(range(0, 10, 2)))
+> ```
+{: .tip}
 
 ## Accumulation
 
@@ -318,6 +249,28 @@ print(f'Currently {number}, our total is {total}')
 ```
 
 You can add it before you update `total`, after it, or both! Compare the outputs to understand what's happening on each line.
+
+> ### {% icon tip %} Tip: Controlling your loop!
+>
+> There are multiple ways to efficiently control your loop if you need it.
+> these are the inbuilt python functions: continue & break
+>
+> when python encounters *continue* in your loop it will stop working and goes to the next iteration of the loop.
+> ```
+> for letter in 'Galaxy':
+>     if letter == 'l':
+>         continue
+>     print(f'The letters are: {letter}')
+>```
+> with *break* python stops the loop and continues with the next part of the code like nothing happened
+> ```
+> for letter in 'Galaxy':
+>     if letter == 'l':
+>         break
+>     print(f'The letters are: {letter}')
+> print('Done')
+> ```
+{: .tip}
 
 > ### {% icon question %} Question: Tracing Execution
 >
@@ -486,7 +439,8 @@ print(result)
 # Test your code here!
 ```
 
-> ## Identifying Variable Name Errors
+
+> ### {% icon question %} Question: Identifying Variable Name Errors
 >
 > 1. Read the code below and try to identify what the errors are
 >    **without** running it.
@@ -561,25 +515,162 @@ print(message)
 # Fix me!
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 print(f'My favorite season is {seasons[4]}')
+```
 
-> ### {% icon tip %} Tip: Controlling your loop!
+> ### {% icon question %} Question: Correct the errors
 >
-> There are multiple ways to efficiently control your loop if you need it.
-> these are the inbuilt python functions: continue & break
+> This code is completely missing indentation, it needs to be fixed. Can you make some guesses at how indented each line should be?
+> ```
+> data = [1, 3, 5, 9]
+> acc = 0
+> for i in data:
+> if i < 4:
+> acc = acc + i * 2
+> else:
+> acc = acc + i
+> print(f'The value at {i} is {acc}')
+> print(f'The answer is {acc}')
+> ```
 >
-> when python encounters *continue* in your loop it will stop working and goes to the next iteration of the loop.
+> > ### {% icon solution %} Solution
+> >
+> >
+> > ```python
+> > data = [1, 3, 5, 9]
+> > acc = 0
+> > # There is a : character at the end of this line, so you KNOW the next line
+> > # must be indented.
+> > for i in data:
+> >     # Same here, another :
+> >     if i < 4:
+> >         acc = acc + i * 2
+> >     # And again! Another :
+> >     else:
+> >         acc = acc + i
+> > # But what about these lines?
+> > print(f'The value at {i} is {acc}')
+> > print(f'The answer is {acc}')
+> > ```
+> >
+> > Here this code is actually ambiguous, we don't know how indented the two prints should be. This very synthetic example lacks good context, but there are three places it could be, with three different effects.
+> >
+> > There are two bits of knowledge we can use, however:
+> > - the first print uses `i`, so it must be within the loop
+> > - the second print cannot be indented more than the first print (Why? It would require a block like `for ... :` or `if .. :` to indent further.)
+> >
+> > The first option, no indentation, prints out the value once per loop, that seems good
+> >
+> > ```python
+> > [...]
+> >     else:
+> >         acc = acc + i
+> >     print(f'The value at {i} is {acc}')
+> > ```
+> >
+> > The second, prints out the value only during the else case, not otherwise.
+> >
+> > ```python
+> >     else:
+> >         acc = acc + i
+> >         print(f'The value at {i} is {acc}')
+> > ```
+> >
+> > So that's probably wrong, and we should take the first option. That leaves two options for the final print, no indentation, or at the same level as our first print statement. We can guess that we probably want to print out the final result of the loop, and that it should not be indented.
+> >
+> > ```python
+> > data = [1, 3, 5, 9]
+> > acc = 0
+> > for i in data:
+> >     if i < 4:
+> >         acc = acc + i * 2
+> >     else:
+> >         acc = acc + i
+> >     print(f'The value at {i} is {acc}')
+> > print(f'The answer is {acc}')
+> > ```
+> >
+> {: .solution}
+{: .question}
+
+```python
+# This code accidentally lost it's indentation! Can you fix it?
+data = [1, 3, 5, 9]
+acc = 0
+for i in data:
+if i < 4:
+acc = acc + i * 2
+else:
+acc = acc + i
+print(f'The value at {i} is {acc}')
+print(f'The answer is {acc}')
+```
+
+> ### {% icon question %} Question: Trimming a FASTQ string
+> Given a FASTQ string, and a list with quality scores, use `break` to print out just the good bit of DNA and it's quality score.
+>
 > ```
->for letter in 'Galaxy':
->  if letter == 'l':
->    continue
->  print(f'The letters are: {letter}')
->```
-> with *break* python stops the loop and continues with the next part of the code like nothing happened 
+> # We've got a Read
+> read = """
+> @SEQ_ID
+> GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
+> +
+> 55CCF>>>>>>CCCCCCC65!''*((((***+))%%%++)(%%%%).1***-+*''))**
+> """.strip().split('\n')
+>
+> def quality_to_percent(q):
+>     return 100 * (1 - (10 ** (q / -10)))
+>
+> sequence = read[1]
+> quality_scores = [ord(x) - 33 for x in read[3]]
+>
+> for i in ... # TODO
 > ```
->for letter in 'Galaxy':
->  if letter == 'l':
->    break
->  print(f'The letters are: {letter}')
-> print('Done')
-> ```
-{: .tip}
+>
+> > ### {% icon solution %} Hint: Looping over two variables
+> > There are two ways to do this, one you might be able to guess, and one that might be new:
+> > 1. Loop over a `range()` using `len(sequence)`. Since `len(sequence) == len(quality_scores)`, when we access the Nth position of either, they match up.
+> > 2. `zip(sequence, quality_scores)` will loop over both of these lists together. It produces a new list that looks like `[['G', 20], ['A', 20], ['T', 34]]`.
+> {: .solution}
+>
+> > ### {% icon solution %} Solution
+> > The naïve solution is quite easy and readable:
+> > ```
+> > for i in range(len(sequence)):
+> >     if quality_scores[i] < 15:
+> >         break
+> >     print(f'Base {i} = {sequence[i]} with {quality_to_percent(quality_scores[i])}% accuracy')
+> > ```
+> > But we can make this a bit prettier using the `zip()` function:
+> > ```
+> > for base, score in zip(sequence, quality_scores):
+> >     if score < 15:
+> >         break
+> >     print(f'Base = {base} with {quality_to_percent(score)}% accuracy')
+> > ```
+> > But note that we don't have the position in the list anymore, so we remove it from the print statement.
+> {: .solution}
+{: .question}
+
+```python
+# We've got a Read
+read = """
+@SEQ_ID
+GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
++
+55CCF>>>>>>CCCCCCC65!''*((((***+))%%%++)(%%%%).1***-+*''))**
+""".strip().split('\n')
+
+def quality_to_percent(q):
+    return 100 * (1 - (10 ** (q / -10)))
+
+# Extract the sequence
+sequence = read[1]
+# And the quality scores, and map those to the correct values.
+quality_scores = [ord(x) - 33 for x in read[3]]
+
+# Write something here
+# That loops over BOTH the sequence and Quality Scores.
+# And prints them out
+# If the quality scores are `<15`, then break and quit printing.
+for i in ...
+```
