@@ -3,6 +3,11 @@ layout: tutorial_hands_on
 
 title: VGP assembly pipeline
 zenodo_link: 'https://zenodo.org/record/5887339'
+level: Intermediate
+tags:
+ - pacbio
+ - eukaryote
+ - VGP
 questions:
 - "what combination of tools can produce the highest quality assembly of vertebrate genomes?"
 - "How can we evaluate how good it is?"
@@ -20,6 +25,7 @@ contributors:
 - annasyme
 - abueg
 - pickettbd
+- gf777
 ---
 
 
