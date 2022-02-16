@@ -56,25 +56,21 @@ Segmenting lung CT scans to locate infected regions has been actively proposed t
 
 
 ## CT scans and masks
+The picture below shows CT scans of infected lungs (top row) and borders around the infected regions have been drawn with red color (middle row). In the last row respective masks, from the CT scans, have been taken out denoting the infected regions. These masks are the "segmented" regions from the corresponding CT scans. While creating the dataset for training the deep learning model (Unet), the CT scans are the data points and its "known" respective masks of infected regions become their labels [https://www.sciencedirect.com/science/article/pii/S2666990021000069]. 
 
-![Masks](../../images/covid_ct_scan_masks.png "Pictures show CT scans and its masks of infected region (drawn with red color in images of the middle row).")
+![Masks](../../images/covid_ct_scan_masks.png "Picture shows CT scans and its masks of infected region (drawn with red color in images of the middle row).")
 
 ### Unet neural network
 Unet neural network (Unet) is widely used for segmentation tasks in images. The name "Unet" resembles the shape of its architecture as "U" (see image below). It has two parts - encoder and decoder. The left half of the "U" shape is the encoder that learns the feature representation (downsampling) at lower level. The right half is the decoder that maps the low resolution feature representation on the higher resolution (upsampling) pixel space. For further reading, please refer to: [https://arxiv.org/pdf/1505.04597.pdf]
 
-
 ![Unet architecture](../../images/Unet.jpg "Architecture of Unet neural network for image segmentation")
 
+In this tutorial, we will use the dataset of CTs scans and their respective masks to train a Unet model. The model learns to map the infected regions in the CT scans to their masks. For prediction, the trained model is given CT scans and it predicts infected regions. For this experiment, we will use Jupyterlab for pulling the notebooks that contain training and prediction scripts. The data (images and also the trained model) required for this notebook can be downloaded from [https://zenodo.org/record/6091361#.Ygu4gIzMI5k]. The model can either be trained in the Jupyterlab or can be sent to Galaxy's cluster for remote processing. After remote processing, the generated datasets such as trained model become available in a new Galaxy history.
 
-## Custom Jupyterlab features features programs Git version control Galaxy 
 
-### AI programs on GPU(s)
+## Custom Jupyterlab features
+Jupyterlab notebook has been augmented with several useful features that makes it ready-to-use for quick prototying of AI projects. Feature such as **available online** makes it really convenient to share it with other researchers and users. GPUs have accelerated AI research, especially deep leanring. Therefore, the backend of the Jupyterlab is powered by GPU to make long running AI training programs finish faster by parallelizing matrix multiplications. Galaxy tool for remote job processing also runs on GPU. Jupyterlab is also integrated with **Git version control** that makes it easy to pull, push and maintain codebase directly into the notebook. Repositories from Github can be easily clone, updated and maintained. In addition, a standard model format **Open Neural Network Exchange(ONNX)**, has been added to transform scikit-learn and tensorflow models to "onnx" files. These files can then be conveniently shared and used for inference. Galaxy also supports "onnx" file format to make it easier to create, save and share such models. Using Bioblend, the notebook can be connected to Galaxy and different histories and tools can be accessed. Using this features, Galaxy tools can be executed with the correct input datasets such as the Galaxy tool for processing long running training. Many notebooks can be created serving different purposes. These notebooks can be knit together to form one pipeline where each notebook transforms data taking a form of data from its previous notebook and pass on the transformed data to its next nextbook. This feature 
 
-### Git version control
-
-### Shareable AI models using ONNX
-
-### Accessible Galaxy tools via Bioblend
 
 ### Miscellaneous - Elyra AI - workflow of notebooks, GPU utilization dashboards,
 
