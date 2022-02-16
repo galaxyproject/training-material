@@ -273,6 +273,12 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 > ```
 {: .tip}
 
+```python
+# Test break and continue here
+```
+
+## Exercises
+
 > ### {% icon question %} Question: Tracing Execution
 >
 > Create a table showing the numbers of the lines that are executed when this program runs,
@@ -440,55 +446,33 @@ print(result)
 # Test your code here!
 ```
 
-
-> ### {% icon question %} Question: Identifying Variable Name Errors
+> ### {% icon question %} Question: A classic programmer test: Fizz Buzz
+> [FizzBuzz](https://en.wikipedia.org/wiki/Fizz_buzz) is a classic "test" question that is used in some job interviews to remove candidates who really do not understand programming. Your task is this:
 >
-> 1. Read the code below and try to identify what the errors are
->    **without** running it.
-> 2. Run the code and read the error message.
->    What type of `NameError` do you think this is?
->    Is it a string with no quotes, a misspelled variable, or a
->    variable that should have been defined but was not?
-> 3. Fix the error.
-> 4. Repeat steps 2 and 3, until you have fixed all the errors.
+> Write a for loop that loops over the numbers 1 to 50.
 >
-> ```
-> for number in range(10):
->     # use a if the number is a multiple of 3, otherwise use b
->     if Number % 3 == 0:
->         message = message + a
->     else:
->         message = message + "b"
-> print(message)
-> ```
+> - If the number is divisible by 3, write Fizz instead of the number
+> - If the number is divisible by 5, write Buzz instead of the number
+> - If the number is divisible by 3 and 5 both, write FizzBuzz instead of the number
+> - Otherwise, write the number itself.
 >
 > > ### {% icon solution %} Solution
-> > - Python variable names are case sensitive: `number` and `Number` refer to different variables.
-> > - The variable `message` needs to be initialized as an empty string.
-> > - We want to add the string `"a"` to `message`, not the undefined variable `a`.
-> >
-> > ```
-> > message = ""
-> > for number in range(10):
-> >     # use a if the number is a multiple of 3, otherwise use b
-> >     if number % 3 == 0:
-> >         message = message + "a"
+> > ```python
+> > for i in range(1, 50):
+> >     if i % 3 == 0 and i % 5 == 0:
+> >         print("FizzBuzz")
+> >     elif i % 3 == 0:
+> >         print("Fizz")
+> >     elif i % 5 == 0:
+> >         print("Buzz")
 > >     else:
-> >         message = message + "b"
-> > print(message)
+> >         print(i)
 > > ```
 > {: .solution}
 {: .question}
 
 ```python
-# Fix me!
-for number in range(10):
-    # use a if the number is a multiple of 3, otherwise use b
-    if Number % 3 == 0:
-        message = message + a
-    else:
-        message = message + "b"
-print(message)
+# Do a FizzBuzz
 ```
 
 > ### {% icon question %} Question: Identifying Item Errors

@@ -289,7 +289,7 @@ if not not True:
 Python makes it super easy to check if a number is within a range.
 
 ```python
-# quality_score = calculate_score(my_fastq_file)
+quality_score = 32 # Try out different values!
 
 if quality_score > 40:
     print("Your data is a bit sus")
@@ -433,7 +433,6 @@ There are two important points here:
 >
 > ```
 > num = 42 # Randomly chosen so the code will execute, try changing it around.
->
 > if num > 90:
 >     print("great score")
 > elif num < 32:
@@ -456,7 +455,6 @@ There are two important points here:
 
 ```python
 num = 42 # Randomly chosen so the code will execute, try changing it around.
-
 if num > 90:
     print("great score")
 elif num < 32:
