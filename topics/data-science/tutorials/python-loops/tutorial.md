@@ -172,6 +172,7 @@ The first line of the `for` loop must end with a colon, and the body must be ind
 The indentation is in fact, quite necessary. Notice how this fails:
 
 ```python
+#Fix me!
 for number in [2, 3, 5]:
 print(number)
 ```
@@ -239,7 +240,7 @@ In programming you'll often want to accumulate some values: counting things (or 
 total = 0
 for number in range(1, 11):
     total = total + (number)
-print(total)
+print(f" final: {{ total }}")
 ```
 
 But how did we get that result? We can add some "debugging" lines to the above code to figure out how we got to that result. Try adding the following line in the above loop
