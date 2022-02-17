@@ -260,7 +260,13 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    {: .comment}
 >
 {: .hands_on}
-
+>
+>    > ### {% icon tip %} Tip: Verifying FastQ format and converting it
+>    >
+>    > * You can use {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} to look at the format of the sequencing encoding score then {% tool [FASTQ GROOMER](toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5) %} to specify the guessed sequencing encoding score and create a fastqsanger file.
+>    >
+>    {: .tip}
+>
 > ### {% icon question %} Questions
 >
 > 1. How many sequences you had and how many you finally obtain?
