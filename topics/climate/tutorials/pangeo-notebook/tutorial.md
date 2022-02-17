@@ -454,8 +454,7 @@ In the second part of our plot, we are going to customize each subplot (this is 
 
 ## How to use the **where** method 
 
-- Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this we use `where`.
-- For instance, we may want to only keep PM2.5 if values are greater than 25 μm.m-3 (or any threshold you would like to choose)
+Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this purpose,  we use the `where` method. For instance, we may want to only keep PM2.5 if values are greater than 25 μm.m-3 (or any threshold you would like to choose).
 
 ### Mask values that do not meet a criteria with `Where`
 
