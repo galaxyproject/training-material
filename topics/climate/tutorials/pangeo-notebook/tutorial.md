@@ -473,6 +473,10 @@ Let's plot one time to better see what happened:
 ### Plotting with mask
  
 ```python
+######################
+# Plotting with mask #
+######################
+
 fig = plt.figure(1, figsize=[15,10])
  
 # We're using cartopy to project our data.
