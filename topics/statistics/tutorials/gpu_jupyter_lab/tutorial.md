@@ -40,7 +40,18 @@ contributors:
 {: .agenda}
 
 # Introduction
-Jupyterlab [https://jupyterlab.readthedocs.io/en/stable/] is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of mostly used languages in such environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust Jupyterlab notebook application has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, Scikit-learn, Tensorflow, ONNX for modern data science. It has been developed as an interactive Galaxy tool that runs on an isolated docker container [https://github.com/anuprulez/ml-jupyter-notebook]. The docker container has been built using "jupyter/tensorflow-notebook:tensorflow-2.6.0" as the base container. Moreover, With the use of Bioblend [https://bioblend.readthedocs.io/], a Galaxy tool [https://github.com/bgruening/galaxytools/pull/1157] can be executed to make use of Galaxy remote job processing for long-running deep learning training and the finished datasets (such a trained models, tabular files, ...) are saved in a Galaxy history. 
+Jupyterlab [https://jupyterlab.readthedocs.io/en/stable/] is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of mostly used languages in such environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust Jupyterlab notebook application has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, Scikit-learn, Tensorflow, ONNX for modern data science. It has been developed as an interactive Galaxy tool that runs on an isolated docker container [https://github.com/anuprulez/ml-jupyter-notebook]. The docker container has been built using "jupyter/tensorflow-notebook:tensorflow-2.6.0" as the base container. Moreover, With the use of Bioblend [https://bioblend.readthedocs.io/], a Galaxy tool [https://github.com/bgruening/galaxytools/pull/1157] can be executed to make use of Galaxy remote job processing for long-running deep learning training and the finished datasets (such a trained models, tabular files, ...) are saved in a Galaxy history.
+
+## Custom Jupyterlab features
+Jupyterlab notebook has been augmented with several useful features that makes it ready-to-use for quick prototying of AI projects. Feature such as **available online** makes it really convenient to share it with other researchers and users. GPUs have accelerated AI research, especially deep leanring. Therefore, the backend of the Jupyterlab is powered by GPU to make long running AI training programs finish faster by parallelizing matrix multiplications. Galaxy tool for remote job processing also runs on GPU. Jupyterlab is also integrated with **Git version control** that makes it easy to pull, push and maintain codebase directly into the notebook. Repositories from Github can be easily clone, updated and maintained. In addition, a standard model format **Open Neural Network Exchange(ONNX)**, has been added to transform scikit-learn and tensorflow models to "onnx" files. These files can then be conveniently shared and used for inference. Galaxy also supports "onnx" file format to make it easier to create, save and share such models. Using Bioblend, the notebook can be connected to Galaxy and different histories and tools can be accessed. Using this features, Galaxy tools can be executed with the correct input datasets such as the Galaxy tool for processing long running training. Many notebooks can be created serving different purposes. These notebooks can be knit together to form one pipeline where each notebook transforms data taking a different form of data from its previous notebook and pass on the transformed data to its next nextbook.  
+An example workflow created using Elyra AI [https://elyra.readthedocs.io/en/stable/] can be found at [<<open notebook>>/elyra/METABRIC_ML.pipeline]. These pipelines can also be executed remotely on different cluster using its "runtimes" features that pull different docker containers. An example pipeline can be seen in the picture below.
+
+![Elyra AI pipeline](../../images/elyra_ai_pipeline.png "An example ML pipeline created using Elyra AI").
+
+There are many other features such as GPU utilization dashboards for monitoring the GPU usage and system memory utilization, voila for rendering output cells of a notebook in a separate tab hiding all code cells, interactive bqplots, and many more. There are several packages suited for performing ML tasks such as Open-CV and Scikit-Image for image processing, NiBabel package for processing images files.
+
+## Security features
+Security benefits of executing code in isolated environments such as docker containers 
 
 
 ## Image segmentation
@@ -67,17 +78,6 @@ Unet neural network (Unet) is widely used for segmentation tasks in images. The 
 
 In this tutorial, we will use the dataset of CTs scans and their respective masks to train a Unet model. The model learns to map the infected regions in the CT scans to their masks. For prediction, the trained model is given CT scans and it predicts infected regions. For this experiment, we will use Jupyterlab for pulling the notebooks that contain training and prediction scripts. The data (images and also the trained model) required for this notebook can be downloaded from [https://zenodo.org/record/6091361#.Ygu4gIzMI5k]. The model can either be trained in the Jupyterlab or can be sent to Galaxy's cluster for remote processing. After remote processing, the generated datasets such as trained model become available in a new Galaxy history.
 
-## Custom Jupyterlab features
-Jupyterlab notebook has been augmented with several useful features that makes it ready-to-use for quick prototying of AI projects. Feature such as **available online** makes it really convenient to share it with other researchers and users. GPUs have accelerated AI research, especially deep leanring. Therefore, the backend of the Jupyterlab is powered by GPU to make long running AI training programs finish faster by parallelizing matrix multiplications. Galaxy tool for remote job processing also runs on GPU. Jupyterlab is also integrated with **Git version control** that makes it easy to pull, push and maintain codebase directly into the notebook. Repositories from Github can be easily clone, updated and maintained. In addition, a standard model format **Open Neural Network Exchange(ONNX)**, has been added to transform scikit-learn and tensorflow models to "onnx" files. These files can then be conveniently shared and used for inference. Galaxy also supports "onnx" file format to make it easier to create, save and share such models. Using Bioblend, the notebook can be connected to Galaxy and different histories and tools can be accessed. Using this features, Galaxy tools can be executed with the correct input datasets such as the Galaxy tool for processing long running training. Many notebooks can be created serving different purposes. These notebooks can be knit together to form one pipeline where each notebook transforms data taking a different form of data from its previous notebook and pass on the transformed data to its next nextbook.  
-An example workflow created using Elyra AI [https://elyra.readthedocs.io/en/stable/] can be found at [<<open notebook>>/elyra/METABRIC_ML.pipeline]. These pipelines can also be executed remotely on different cluster using its "runtimes" features that pull different docker containers. An example pipeline can be seen in the picture below.
-
-![Elyra AI pipeline](../../images/elyra_ai_pipeline.png "An example ML pipeline created using Elyra AI").
-
-There are many other features such as GPU utilization dashboards for monitoring the GPU usage and system memory utilization, voila for rendering output cells of a notebook in a separate tab hiding all code cells, interactive bqplots, and many more. There are several packages suited for performing ML tasks such as Open-CV and Scikit-Image for image processing, NiBabel package for processing images files.
-
-## Security features
-Security benefits of executing code in isolated environments such as docker containers
-
 # Image segmentation using Jupyterlab
 In this tutorial, we will a few features of Jupyterlab in Galaxy to create and train a deep learning model and predict segmented regions using the trained model from COVID CT scans.
 
@@ -94,7 +94,7 @@ Now, we should wait for a few minutes until Galaxy creates the required compute 
 
 
 ## Run image segmentation analysis
-> ### {% icon hands_on %} Hands-on: Pull code
+> ### {% icon hands_on %} Hands-on: 1. Pull code
 > Several features of Jupyterlab editor running in Galaxy can be found out by opening the "home_page.ipynb" notebook. Folder "notebooks" contain several notebooks showing the running usecases of different packages and features. To use Git version control for pulling any codebase from GitHub, following steps should be performed
 > 1. Create a new folder named "covid_ct_segmentation"
 > 2. Inside this folder, clone a code repository by clicking on "Git" icon as shown in the picture below
@@ -107,7 +107,7 @@ Now, we should wait for a few minutes until Galaxy creates the required compute 
 
 Now, we have all the notebooks available for performing image segmentation.
 
-> ### {% icon hands_on %} Hands-on: Run notebooks
+> ### {% icon hands_on %} Hands-on: 2. Run notebooks
 >
 > 1. Download and save datasets in the notebook using **"fetch_datasets.ipynb"** notebook. It will also create all the necessary folders. It downloads two datasets, one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. These sub-datasets are stored in different variables after reading the original "h5" file once. For training we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used for prediction. We use "h5" format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on. To coverge all these different forms of datasets, we use "h5" format. In an analysis, any type of dataset that can be used with AI algorithms can also be saved as "h5" file. For image segmentation tasks, we also saved all the input datasets/matrices to the deep learning model as sub-datasets in one "h5" file that can be easily created, stored and downloaded.
 >  
