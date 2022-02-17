@@ -1,3 +1,0 @@
----
-layout: training_philosophies
----

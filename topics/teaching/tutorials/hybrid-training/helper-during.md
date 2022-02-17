@@ -1,0 +1,3 @@
+- Indicate to instructor if they should speed up or slow down, or if there is a technical issue and need, using the instructor - helper chat
+- Help answer procedural questions like "where is this button that I should click"
+- Direct technical/biological questions to the participant chat
