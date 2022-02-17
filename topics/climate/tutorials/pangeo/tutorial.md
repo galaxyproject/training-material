@@ -212,7 +212,7 @@ In `info file` output file, we can identify 4 different sections:
 
 > ### {% icon question %} Understanding PM2.5 forecast coordinates
 >
->  1. What is the units of the `time` coordinate?
+>  1. What is the unit of the `time` coordinate?
 >  2. What is the frequency of PM2.5 forecasts? 
 >  3. What is the range of values for latitudes and longitudes?
 >
