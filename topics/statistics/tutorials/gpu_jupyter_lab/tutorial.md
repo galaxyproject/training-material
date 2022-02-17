@@ -42,7 +42,7 @@ contributors:
 # Introduction
 Jupyterlab [https://jupyterlab.readthedocs.io/en/stable/] is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of mostly used languages in such environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust Jupyterlab notebook application has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, Scikit-learn, Tensorflow, ONNX for modern data science. It has been developed as an interactive Galaxy tool that runs on an isolated docker container [https://github.com/anuprulez/ml-jupyter-notebook]. The docker container has been built using "jupyter/tensorflow-notebook:tensorflow-2.6.0" as the base container. Moreover, With the use of Bioblend [https://bioblend.readthedocs.io/], a Galaxy tool [https://github.com/bgruening/galaxytools/pull/1157] can be executed to make use of Galaxy remote job processing for long-running deep learning training and the finished datasets (such a trained models, tabular files, ...) are saved in a Galaxy history.
 
-## Custom Jupyterlab features
+## Jupyterlab features
 Jupyterlab notebook has been augmented with several useful features that makes it ready-to-use for quick prototying of AI projects. Feature such as **available online** makes it really convenient to share it with other researchers and users. GPUs have accelerated AI research, especially deep leanring. Therefore, the backend of the Jupyterlab is powered by GPU to make long running AI training programs finish faster by parallelizing matrix multiplications. Galaxy tool for remote job processing also runs on GPU. Jupyterlab is also integrated with **Git version control** that makes it easy to pull, push and maintain codebase directly into the notebook. Repositories from Github can be easily clone, updated and maintained. In addition, a standard model format **Open Neural Network Exchange(ONNX)**, has been added to transform scikit-learn and tensorflow models to "onnx" files. These files can then be conveniently shared and used for inference. Galaxy also supports "onnx" file format to make it easier to create, save and share such models. Using Bioblend, the notebook can be connected to Galaxy and different histories and tools can be accessed. Using this features, Galaxy tools can be executed with the correct input datasets such as the Galaxy tool for processing long running training. Many notebooks can be created serving different purposes. These notebooks can be knit together to form one pipeline where each notebook transforms data taking a different form of data from its previous notebook and pass on the transformed data to its next nextbook.  
 An example workflow created using Elyra AI [https://elyra.readthedocs.io/en/stable/] can be found at [<<open notebook>>/elyra/METABRIC_ML.pipeline]. These pipelines can also be executed remotely on different cluster using its "runtimes" features that pull different docker containers. An example pipeline can be seen in the picture below.
 
@@ -50,7 +50,7 @@ An example workflow created using Elyra AI [https://elyra.readthedocs.io/en/stab
 
 There are many other features such as GPU utilization dashboards for monitoring the GPU usage and system memory utilization, voila for rendering output cells of a notebook in a separate tab hiding all code cells, interactive bqplots, and many more. There are several packages suited for performing ML tasks such as Open-CV and Scikit-Image for image processing, NiBabel package for processing images files.
 
-## Security features
+## Security
 Security benefits of executing code in isolated environments such as docker containers 
 
 
@@ -94,7 +94,7 @@ Now, we should wait for a few minutes until Galaxy creates the required compute 
 
 
 ## Run image segmentation analysis
-> ### {% icon hands_on %} Hands-on: 1. Pull code
+> ### {% icon hands_on %} Hands-on: Pull code
 > Several features of Jupyterlab editor running in Galaxy can be found out by opening the "home_page.ipynb" notebook. Folder "notebooks" contain several notebooks showing the running usecases of different packages and features. To use Git version control for pulling any codebase from GitHub, following steps should be performed
 > 1. Create a new folder named "covid_ct_segmentation"
 > 2. Inside this folder, clone a code repository by clicking on "Git" icon as shown in the picture below
@@ -105,9 +105,9 @@ Now, we should wait for a few minutes until Galaxy creates the required compute 
 >
 {: .hands_on}
 
-Now, we have all the notebooks available for performing image segmentation.
+Now, we have all the notebooks available for performing image segmentation. The entire analysis can be completed in two ways - one by running all the notebooks in the Jupyterlab itself and another by sending the notebook for training to a remote Galaxy cluster invoking another Galaxy tool from the notebook. First, let's look at how we can run this analysis in the notebook itself.
 
-> ### {% icon hands_on %} Hands-on: 2. Run notebooks
+> ### {% icon hands_on %} Hands-on: Run notebooks in Jupyterlab
 >
 > 1. Download and save datasets in the notebook using **"fetch_datasets.ipynb"** notebook. It will also create all the necessary folders. It downloads two datasets, one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. These sub-datasets are stored in different variables after reading the original "h5" file once. For training we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used for prediction. We use "h5" format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on. To coverge all these different forms of datasets, we use "h5" format. In an analysis, any type of dataset that can be used with AI algorithms can also be saved as "h5" file. For image segmentation tasks, we also saved all the input datasets/matrices to the deep learning model as sub-datasets in one "h5" file that can be easily created, stored and downloaded.
 >  
@@ -119,6 +119,21 @@ Now, we have all the notebooks available for performing image segmentation.
 > The above picture shows origin lungs CT scans in the first column. The second column shows the corresponding true infected regions in white. The third and fourth columns show the infected regions predicted with different loss methods, one is the binary cross-entropy loss and another is the combination of binary cross-entropy loss and total variation loss. Binary cross-entropy calculates loss between two corresponding pixels of true and predicted images. It measure how close two corresponding pixels are. But, total variation loss measures the amount of noise in predicted images as noisy regions usually show large variations in their neighbourhood. The noise in the predicted images gets minimized and the connectivity of predicted masks improves as well when minimizing this loss.   
 >
 {: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: 2. Run notebooks in Jupyterlab as well in remote Galaxy cluster
+>
+> 1. Download and save datasets in the notebook using **"fetch_datasets.ipynb"** notebook in the same way as before
+>  
+> 2. Execute **"create_model_and_train_remote.ipynb"** notebook in a remote cluster using another Galaxy tool by running **"run_remote_training.ipynb"** notebook
+> 
+> 3. Predict unseen masks using the trained model in **"predict_masks.ipynb"** notebook. This will read test datasets and trained model and make prediction and print prediction as an image. To predict masks of unseen CT scans, we use "predict_masks.ipynb" notebook. First, it reads test datasets from the combined "h5" file and then, loads the "Onnx" model. Using this model, it predicts masks of unseen CT scans and then plots the ground truth masks and predicted masks in one image (see below).
+> ![True and predicted masks of CTs scans](../../images/true_pred_masks.png "True and predicted masks of CT scans")
+>
+> The above picture shows origin lungs CT scans in the first column. The second column shows the corresponding true infected regions in white. The third and fourth columns show the infected regions predicted with different loss methods, one is the binary cross-entropy loss and another is the combination of binary cross-entropy loss and total variation loss. Binary cross-entropy calculates loss between two corresponding pixels of true and predicted images. It measure how close two corresponding pixels are. But, total variation loss measures the amount of noise in predicted images as noisy regions usually show large variations in their neighbourhood. The noise in the predicted images gets minimized and the connectivity of predicted masks improves as well when minimizing this loss.   
+>
+{: .hands_on}
+
 
 
 # Conclusion
