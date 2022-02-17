@@ -397,7 +397,7 @@ for ax,i in zip(p.axes.flat,  (np.datetime64('2021-12-22') + dset.time.sel(time=
 # Save your figure
 plt.savefig("CAMS-PM2_5-fc-multi.png")
 ```
-In the second part of our plot, we customize each subplot (this is why we loop for each of them and get their axes) by adding:
+In the second part of our plot, we are going to customize each subplot (this is why we loop for each of them and get their axes) by adding:
          -  `coastlines`: we pass a parameter `10m` to get coastlines with a high resolution (non-default);
          - `set_title` to set a title for each subplot.
     
