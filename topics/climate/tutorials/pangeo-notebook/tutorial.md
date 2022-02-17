@@ -355,8 +355,7 @@ And you should get the following plot:
 
 ### Multi-plots
 
-- Here we would like to plot several times on the same figure in different sub-plots
-- We will not plots all the times (too many) but the first 24 forecasted values.
+Now, we will plot several times on the same figure in different sub-plots; we will not plot all the times (too many) but the first 24 forecasted values.
 
 1. Make a list of times and convert to pandas datetime to make it easier to format times when plotting
  
