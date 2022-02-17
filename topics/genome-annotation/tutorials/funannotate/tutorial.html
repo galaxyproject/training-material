@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Genome annotation with Funannotate",
   "interactivityType": "mixed",
@@ -764,6 +764,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -809,7 +811,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -900,12 +902,12 @@
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">genome-annotation</code>
  -&gt; <code class="language-plaintext highlighter-rouge">Genome annotation with Funannotate</code>):</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/genome_masked.fasta
-https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/<span class="notranslate">rna</span>seq_R1.fq.gz
-https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/<span class="notranslate">rna</span>seq_R2.fq.gz
-https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/SwissProt_subset.fasta
-https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alte<span class="notranslate">rna</span>te_annotation.gbk
-https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alte<span class="notranslate">rna</span>te_annotation.gff3
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/genome_masked.fasta
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/<span class="notranslate">rna</span>seq_R1.fq.gz
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/<span class="notranslate">rna</span>seq_R2.fq.gz
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/SwissProt_subset.fasta
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span class="notranslate">rna</span>te_annotation.gbk
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span class="notranslate">rna</span>te_annotation.gff3
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1071,7 +1073,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
   <ul>
     <li>For <em>“Select protein evidences”</em> we select <code class="language-plaintext highlighter-rouge">Custom protein sequences</code> to reduce the computing time, but for real data analysis, you should select the default value: <code class="language-plaintext highlighter-rouge">Use UniProtKb/SwissProt (from selected Funannotate database)</code>.</li>
-    <li>It is possible to enable the <em>“Is it a fungus species?”</em> option in Funannotate: it launched an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the <span class="notranslate">RNA</span>Seq data available. For this tutorial we leave this option to <code class="language-plaintext highlighter-rouge">No</code>. You can test it with real data, but be sure to compare the result with and without this option.</li>
+    <li>It is possible to enable the <em>“Is it a fungus species?”</em> option in Funannotate: it launches an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the <span class="notranslate">RNA</span>Seq data available. For this tutorial we leave this option to <code class="language-plaintext highlighter-rouge">No</code>. You can test it with real data, but be sure to compare the result with and without this option.</li>
     <li>For real data analysis you can consider enabling the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em>. If you have enough data, you might get better results as there will be an additional training step for augustus (at the cost of a longer runtime).</li>
   </ul>
 </blockquote>
@@ -1140,7 +1142,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <blockquote class="solution">
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>On a total of 2449, you should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.</p>
+    <p>On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.</p>
 
     <p>That’s a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.</p>
 
@@ -1161,7 +1163,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <h3 id="hands_on-hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1"><strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/eggnog_mapper/eggnog_mapper/2.0.1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.6+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.6+galaxy1"><strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/eggnog_mapper/eggnog_mapper/2.1.6+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fasta sequences to annotate”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Version of eggNOG Database”</em>: select the latest version available</li>
@@ -1192,11 +1194,10 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <h3 id="hands_on-hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1"><strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy1"><strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein FASTA File”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“InterProScan database”</em>: select the latest version available</li>
-        <li><em>“Applications to run”</em>: unselect <code class="language-plaintext highlighter-rouge">PROSITE Profiles</code>, <code class="language-plaintext highlighter-rouge">PROSITE Pattern</code> and <code class="language-plaintext highlighter-rouge">SUPERFAMILY</code>  (see why below)</li>
         <li><em>“Use applications with restricted license, only for non-commercial use?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (set it to <code class="language-plaintext highlighter-rouge">No</code> if you run InterProScan for commercial use)</li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Tab-separated values format (TSV)</code> and <code class="language-plaintext highlighter-rouge">XML</code></li>
       </ul>
@@ -1208,9 +1209,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 <blockquote class="comment">
   <h3 id="comment-comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
 
-  <p>Due to bugs in InterProScan, <code class="language-plaintext highlighter-rouge">PROSITE Profiles</code>, <code class="language-plaintext highlighter-rouge">PROSITE Pattern</code> and <code class="language-plaintext highlighter-rouge">SUPERFAMILY</code> don’t work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.</p>
-
-  <p>To speed up the processing by InterProScan during this tutorial, you can also disable <code class="language-plaintext highlighter-rouge">Pfam</code> and <code class="language-plaintext highlighter-rouge">PANTHER</code> applications. When analysing real data, it is adviced to keep them enabled.</p>
+  <p>To speed up the processing by InterProScan during this tutorial, you can disable <code class="language-plaintext highlighter-rouge">Pfam</code> and <code class="language-plaintext highlighter-rouge">PANTHER</code> applications. When analysing real data, it is adviced to keep them enabled.</p>
 
   <p>When some applications are disabled, you will of course miss the corresponding results in the output of <strong>InterProScan</strong>.</p>
 </blockquote>
@@ -1562,7 +1561,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Anthony Bretaudeau, Alexandre Cormier, Laura Leroi, Erwan Corre, Stéphanie Robin, Erasmus+ Programme, 2021 <b>Genome annotation with Funannotate (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Anthony Bretaudeau, Alexandre Cormier, Laura Leroi, Erwan Corre, Stéphanie Robin, Erasmus+ Programme, 2022 <b>Genome annotation with Funannotate (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1579,8 +1578,8 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 <code id="citation-code">@misc{genome-annotation-funannotate,
 author = "Anthony Bretaudeau and Alexandre Cormier and Laura Leroi and Erwan Corre and Stéphanie Robin and Erasmus+ Programme",
 title = "Genome annotation with Funannotate (Galaxy Training Materials)",
-year = "2021",
-month = "12",
+year = "2022",
+month = "02",
 day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html}",
 note = "[Online; accessed TODAY]"
