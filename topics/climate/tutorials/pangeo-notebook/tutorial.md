@@ -280,8 +280,9 @@ The output will be very similar to what we did previously when selecting from co
 
 ## Plotting
 
-- To plot a map, you need to select a variable with data on geographical coordinates (latitude, longitude).
-- In addition coordinates need to be sorted, and preferably in increasing order. This is not the case for the coordinate "longitude" which is given between 360 and 0. Let's shift the longitudes by 180 degrees so that they come in the range of -180 to 180.
+To plot a map, you need to select a variable with data on geographical coordinates (latitude, longitude). In addition, coordinates need to be sorted, and preferably in increasing order. This is not the case for the coordinate "longitude" which is given between 360 and 0. 
+
+Let's shift the longitudes by 180 degrees so that they come in the range of -180 to 180.
 
 ### Shift longitudes
 
