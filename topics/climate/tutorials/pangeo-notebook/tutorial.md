@@ -203,21 +203,16 @@ print(dset.time)
 > ### {% icon comment %} Different ways to access Data variables
 >
 > To access a variable or coordinate, we can use "." or specify its name as a string between squared brackets "[" "]". For example:
-
-
-```python
-print(dset['pm2p5_conc'])
-```
-
-or 
-
-```python
-print(dset.pm2p5_conc)
-```
-
-When we print a variable or coordinate, we don't get all the individual values but a `DataArray` that contains a lot of very useful metadata such 
-as coordinates (if they have some), all the attributes such as the name, the physical units, etc.
-
+>
+> ```python
+> print(dset['pm2p5_conc'])
+> # or alternatively
+> print(dset.pm2p5_conc)
+> ```
+> 
+> When we print a variable or coordinate, we don't get all the individual values but a `DataArray` that contains a lot of very useful metadata such as coordinates (if they have some), all the attributes such as the name, the physical units, etc.
+>
+{: .comment}
 ## Select / Subset from coordinates
 
 We often want to select elements from the coordinates for instance to subset a geographical area or select specific times or a specific time range.
