@@ -171,7 +171,7 @@ foundations for effective curriculum development, drawing heavily on the
 curriculum- and course- development guidelines developed by
 {% cite tractenberg2020guidelines %}. Notable here is the fact that different
 types of curriculum have been defined: i.e., **intended**, **implemented**,
-**attained** and **hidden curricula** .Recognising the existence of different
+**attained** and **hidden curricula**. Recognising the existence of different
 curriculum types (or, perhaps, different curricular outcomes) is important
 because, while the intended curriculum is the starting point, it may not be the
 curriculum actually attained: i.e., what you aimed to teach and what students
@@ -214,7 +214,12 @@ and courses.
 >
 > 1. Take the topic you choose
 > 2. Define teaching objectives (describe your goals and intentions as
->    instructor)
+>    instructor):
+>    - stakeholders
+>    - potential professions
+>    - desired performance an/or competences of course completers
+>    - duration
+
 >
 {: .hands_on}
 
@@ -400,7 +405,7 @@ below.
 > - **support assessment that generates actionable evidence**: here, actionable
 >   means supportive of a decision, or taking some action by a learner or
 >   instructor.
->
+> <!-- NILOA five principles for articulating LOs>
 {: .comment}
 
 > ### {% icon hands_on %} Learning outcomes
@@ -639,6 +644,15 @@ will, or the LOs themselves should be revised, to prevent misalignment of
 instructional inputs and learning outcomes. Overall, the role of _LOs here is to
 help focus on relevant content, and avoid material that's either
 non-essential/too broad or too narrow_.
+
+<!-- . If content is, or seems, fixed, it can be difficult to make the
+shift from content- to LO-driven decisions. In this case, Messick and Bloom’s can be used to make
+adjustments so that what it means to learn that content or what it looks like to have learned that
+content can be made concrete and observable. If such fixed content does not lead to observable
+behaviors that are, or support the achievement of, LOs, then additional content should be
+considered that will; otherwise, it may be necessary to discuss the feasibility of modifying the
+content or revising the LOs with those who are able to make changes, to avoid misalignment of
+intended and actual curricula -->
 
 > ### {% icon question %} Evaluate content
 >
@@ -1029,6 +1043,8 @@ LOs_.
 >   evaluation with the Kirkpatrick-Katzell strategy?
 {: .question}
 
+<!-- Challenges and options in implementing Nicholl's curriculum-development model-->
+
 <!-- ELIXIR TtT -->
 
 # Session, course, curriculum design
@@ -1232,3 +1248,28 @@ the simple set of recommendations summarised:
 > - [https://www.clinton.edu/curriculumcommittee/listofmeasurableverbs.cxml](https://www.clinton.edu/curriculumcommittee/listofmeasurableverbs.cxml)
 > - Adopt collaborative platforms to support training activities
 {: tip}
+
+<!--
+Considerations for training and self-directed learning
+Designing instruction is challenging, requiring thought, attention and time; this is just as true for
+short-form and self-instruction as it is for curricula and programs of study (Diamond, 2008). Self-
+directed learners need to make informed decisions about which training sessions will be most likely
+to help them achieve their own learning goals; they therefore need to develop a sense of whether
+  14
+particular learning opportunities or LEs can actually support the stated LOs (e.g., in order to be
+able to choose between several different offerings of a ‘data science’ course that appear
+superficially similar). Similarly, trainers need to focus on, and make informed choices about, the
+LEs that best align with the objective of achieving specific LOs in the time available.
+Assessment presents greater challenges for training and self-directed learning. Trainers can use
+short- and longer-term evaluations to determine, say, interest in, or consistency in implementing,
+the training material; but formative assessment is generally the most relevant assessment tool for
+this context. Self-directed learners may be unlikely to create formative assessments, but they may
+formulate LOs for themselves and then try to determine whether they have met them, or whether
+they need to augment their learning with supplemental reading or exercises/activities. Job
+descriptions and published descriptors (the European Qualifications Framework (European
+Communities, 2008), etc.) can be leveraged by self-directed learners and trainers; these concretely
+describe specific KSAs that can be used as targets, against which to compare the LOs or LEs they
+are considering.
+
+
+-->
