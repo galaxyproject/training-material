@@ -286,32 +286,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .question}
 
-## Sub-step with **FastQC**
-
-> ### {% icon hands_on %} Hands-on: Check quality of your data before and after analysis
->
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - *"Raw read data from your current history"*: `wolf-F`, `wolf-R` and `obigrep output file`
->
->    > ### {% icon comment %} Comment
->    >
->    > To select more than one input dataset and execute the tool in parallel on multiple files, you have to select the `Multiple datasets` mode.
->    > 
->    {: .comment}
->
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. Do you know why Per base sequence quality is ok with obigrep output file and not original F and R files?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Raw F and R files have classical decrease of sequencing quality with the length of sequences. On obigrep output dataset, Forward and Reverse sequences are merged so nucleotides with low sequencing quality from the end of forward reads are replaced by the high sequencing quality from the start of reverse corresponding reads.
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **obiannotate**
 
