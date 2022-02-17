@@ -373,7 +373,7 @@ In `info file` output file, we can identify 4 different sections:
 > > 
 > > ![CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021](../../images/PM2_5_galaxy_20211222_Italy-10-17UTC.png)
 > >
-> > From the plot there is no obvious trend over this entire region of Italy. Howver, we clearly see that PM2.5 is always higher over Naples and tend to spread in the South-East direction by the end of the day (on that particular date).
+> > From the plot there is no obvious trend over this entire region of Italy. However, we clearly see that PM2.5 is always higher over Naples and tends to spread in the South-East direction by the end of the day (on that particular date).
 > {: .solution }
 {: .question }
 
