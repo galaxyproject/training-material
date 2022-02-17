@@ -92,34 +92,32 @@ In this tutorial, we will a few features of Jupyterlab in Galaxy to create and t
 
 Now, we should wait for a few minutes until Galaxy creates the required compute environment for opening a new Jupyterlab. The progress can be checked by clicking on the "User>Active Interactive tools". On "Active Interactive Tools" page, there is a list of all open interactive tools. We should find our interactive tool by "GPU enabled Interactive Jupyter Notebook for Machine Learning" name. When the job info starts showing "running", then the name of the interactive tool gets associated with a link to the running Jupyterlab. On clicking this link, we can open the running Jupyterlab.
 
-## Pull code
-Several features of Jupyterlab editor running in Galaxy can be found out by opening the "home_page.ipynb" notebook. Folder "notebooks" contain several notebooks showing the running usecases of different packages and features. To use Git version control for pulling any codebase from GitHub, following steps should be performed:
 
+## Run image segmentation analysis
+> ### {% icon hands_on %} Hands-on: Pull code
+> Several features of Jupyterlab editor running in Galaxy can be found out by opening the "home_page.ipynb" notebook. Folder "notebooks" contain several notebooks showing the running usecases of different packages and features. To use Git version control for pulling any codebase from GitHub, following steps should be performed
 > 1. Create a new folder named "covid_ct_segmentation"
 > 2. Inside this folder, clone a code repository by clicking on "Git" icon as shown in the picture below
 > 3. In the popup that asks the repository path, enter "https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation" and click on "clone"
 > 4. The repository "anuprulez/gpu_jupyterlab_ct_image_segmentation" gets immediately cloned
 > 5. A few notebooks can be found inside "gpu_jupyterlab_ct_image_segmentation"
+>    ![Clone repository](../../images/git_clone.png "Clone a code repository using Git").
+>
+{: .hands_on}
 
-![Clone repository](../../images/git_clone.png "Clone a code repository using Git").
+Now, we have all the notebooks available for performing image segmentation.
 
-Now, we have all the notebooks available for performing image segmentation. 
-
-> 1. Download and save datasets in the notebook using "fetch_datasets.ipynb" notebook. It will also create all the necessary folders.
-> 2. Create and train a deep learning Unet model using "create_model_and_train.ipynb" notebook. This will read the input "h5" datasets containing all images and train the model after creating deep learning model architecture.
-> 3. Predict unseen masks using the trained model in "predict_masks.ipynb" notebook. This will read test datasets and trained model and make prediction and print prediction as an image.
-
-## Run image segmentation
-
-> 1. Download datasets and their description
-The datasets needed for this task can be downloaded using the first notebook (fetch_datasets.ipynb). It downloads two datasets, one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. These sub-datasets are stored in different variables after reading the original "h5" file once. For training we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used for prediction. We use "h5" format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on. To coverge all these different forms of datasets, we use "h5" format. In an analysis, any type of dataset that can be used with AI algorithms can also be saved as "h5" file. For image segmentation tasks, we also saved all the input datasets/matrices to the deep learning model as sub-datasets in one "h5" file that can be easily created, stored and downloaded.
+> ### {% icon hands_on %} Hands-on: Run notebooks
+>
+> 1. Download and save datasets in the notebook using "fetch_datasets.ipynb" notebook. It will also create all the necessary folders. The datasets needed for this task can be downloaded using the first notebook (fetch_datasets.ipynb). It downloads two datasets, one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. These sub-datasets are stored in different variables after reading the original "h5" file once. For training we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used for prediction. We use "h5" format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on. To coverge all these different forms of datasets, we use "h5" format. In an analysis, any type of dataset that can be used with AI algorithms can also be saved as "h5" file. For image segmentation tasks, we also saved all the input datasets/matrices to the deep learning model as sub-datasets in one "h5" file that can be easily created, stored and downloaded.
 In short, to download all datasets, please execute "fetch_datasets.ipynb" notebook.
-
-> 2. Create and train a deep learning Unet model
-To create a deep learning model and its training, we use "create_model_and_train.ipynb" notebook. This notebook first creates a deep learning architecture based on Unet including custom loss functions such as total variation and binary cross-entropy losses. After creating the deep learning architecture, all training datasets such as training data, training labels, validation data, validation labels are loaded from the combined "h5" file. In the next step, all the datasets and deep learning architecture are compiled together and training starts for 10 epochs (10 iteration over entire training dataset). The training is really fast as it runs of GPU and finishes in a few minutes created a trained model. In the last step, the trained model containing several files are converted to one "Onnx" file. 
-
-> 3. Predict unseen masks using the trained model
-
+>  
+> 2. Create and train a deep learning Unet model using "create_model_and_train.ipynb" notebook. This will read the input "h5" datasets containing all images and train the model after creating deep learning model architecture. To create a deep learning model and its training, we use "create_model_and_train.ipynb" notebook. This notebook first creates a deep learning architecture based on Unet including custom loss functions such as total variation and binary cross-entropy losses. After creating the deep learning architecture, all training datasets such as training data, training labels, validation data, validation labels are loaded from the combined "h5" file. In the next step, all the datasets and deep learning architecture are compiled together and training starts for 10 epochs (10 iteration over entire training dataset). The training is really fast as it runs of GPU and finishes in a few minutes created a trained model. In the last step, the trained model containing several files are converted to one "Onnx" file.
+> 
+> 3. Predict unseen masks using the trained model in "predict_masks.ipynb" notebook. This will read test datasets and trained model and make prediction and print prediction as an image. To predict masks of unseen CT scans, we use "predict_masks.ipynb" notebook. First, it reads test datasets from the combined "h5" file and then, loads the "Onnx" model. Using this model, it predicts masks of unseen CT scans and then plots the ground truth masks and predicted masks in one image (see below).
+> ![True and predicted masks of CTs scans](../../images/true_pred_masks.png "True and predicted masks of CT scans").
+>
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}
