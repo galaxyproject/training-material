@@ -619,9 +619,9 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 
 
 ## Resample
-- We often want to resample (on time dimension) our data:
-    - if your resampling frequency is lower than your original data, you would need to apply an operation on the data you group together, such as mean, min, max;
-    - if your resampling frequency is higher than your original data, you would need to indicate how to fill the gaps, for instance interpolate and indicate which interpolation method to apply or select nearest values, etc.
+We often want to resample (on time dimension) our data:
+    - If your resampling frequency is lower than your original data, you would need to apply an operation on the data you group together, such as mean, min, max;
+    - If your resampling frequency is higher than your original data, you would need to indicate how to fill the gaps, for instance, interpolate and indicate which interpolation method to apply or select nearest values, etc.
 
 ### 1 day Resampling
  
