@@ -400,7 +400,7 @@ In `info file` output file, we can identify 4 different sections:
 >   - {% icon param-file %} *"Tabular of time values"*: `time` 
 >   - *"Choose the times to plot"*: `0 days 10:00:00` 
 >   - *"Shift longitudes [0,360] --> [-180,180]"*: `No`
->   - *"Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)"*: `0,35`
+>   - *"Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)"*: `0,35`
 >   - *"Do not plot values below this threshold (optional)"*: `30`
 >   - *"Add country borders with alpha value [0-1] (optional)"*: `0.2`
 >   - *"Add coastline with alpha value [0-1] (optional)"*: `0.5`
