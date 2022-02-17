@@ -364,7 +364,7 @@ list_times = np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta
 print(pd.to_datetime(list_times).strftime("%d %b %H:%S UTC"))
 ```
 
-2. We use the same plotting method as earlier, but we pass additional parameters:
+Secondly, we need to use the same plotting method as earlier, but we pass additional parameters:
         - `vmin = 0`and `vmax = 35` to set the minimum and maximum values when plotting (this is useful to highlight features in your plot);
         - `subplot_kws={"projection": proj_plot}` to project data on a non-default projection. See [cartopy projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for more information about projections;
         - `col='time'` because we will plot several `time`;
