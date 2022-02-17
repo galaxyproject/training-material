@@ -311,7 +311,7 @@ dset.sel(time=(np.timedelta64(2,'D')+ np.timedelta64(12,'h'))).pm2p5_conc.plot()
 ```
 We will get a figure like the one below:
 
-[CAMS PM2.5 December, 24th 2021 at 12:00 UTC](../../images/PM2_5_default.png)
+![CAMS PM2.5 December, 24th 2021 at 12:00 UTC](../../images/PM2_5_default.png)
 
 
 > ### {% icon comment %} What about `level`
