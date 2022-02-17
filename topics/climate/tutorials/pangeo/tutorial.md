@@ -44,7 +44,7 @@ In this tutorial, you will learn how to manipulate [netCDF](https://en.wikipedia
 
 
 > ### {% icon comment %} Xarray and Earth Science
-> Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following the [CF-Convention](https://cfconventions.org/). However, some Galaxy Tools also work for non Earth Science datasets and if needed current Xarray Galaxy Tools could be extended to accomodate new usage.
+> Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following the [CF-Convention](https://cfconventions.org/). However, some Galaxy Tools also work for non Earth Science datasets, and if needed current Xarray Galaxy Tools could be extended to accommodate new usage.
 {: .comment}
 
 In this tutorial, we will be using data from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/)
