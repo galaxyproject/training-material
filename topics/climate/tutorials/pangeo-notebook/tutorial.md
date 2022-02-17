@@ -533,7 +533,7 @@ plt.savefig("CAMS-PM2_5-fc-multi-Italy-25.png")
 We often want to compute the mean of all our datasets, or along a dimension (for instance time). If you do not pass any argument to the operation then it is done over all dimensions.
 
 ### Details on the **mean** method
-When we do not specify any paramters, we get a single value
+When we do not specify any parameters, we get a single value.
 
 ```python
 print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
