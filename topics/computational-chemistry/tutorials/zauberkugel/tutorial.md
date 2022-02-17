@@ -323,20 +323,20 @@ The resulting `concatenated_scores` needs to be re-sorted according to the align
 
 For pharmacophore-based protein target prediction, you can choose to use Galaxy tools separately and in succession as described above, or alternatively use the one-step Zauberkugel workflow as described below (Figure 3).
 
-![Snapshot of Zauberkugel workflow]({% link topics/computational-chemistry/images/zauberkugel.png %} "Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib")
-
 > ### {% icon hands_on %} Upload the Zauberkugel workflow
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+> Upload the Zauberkugel workflow from the following URL:
 >
->    ```
->    https://github.com/galaxyproject/training-material/blob/main/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga
->    ```
+> ```
+> https://github.com/galaxyproject/training-material/blob/main/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga
+> ```
 >
->    The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format). The output of the prediction of human targets of staurosporine performed with the ePharmaLib human target subset (https://zenodo.org/record/6055897) and this workflow, is available as a [Galaxy history](https://usegalaxy.eu/u/aurelien_moumbock/h/zauberkugel).
+> {% snippet faqs/galaxy/workflows_import.md %}
 >
+> The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format). The output of the prediction of human targets of staurosporine performed with the ePharmaLib human target subset (<https://zenodo.org/record/6055897>) and this workflow is available as a [Galaxy history](https://usegalaxy.eu/u/aurelien_moumbock/h/zauberkugel).
 {: .hands_on}
 
+![Snapshot of Zauberkugel workflow]({% link topics/computational-chemistry/images/zauberkugel.png %} "Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib")
 
 # Further analysis
 
