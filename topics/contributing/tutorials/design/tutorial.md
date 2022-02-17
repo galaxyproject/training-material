@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: Design and plan session, course, materials
+title: "1: Design and plan session, course, materials"
+subtopic: pedagogy
 time_estimation: 60m
 enable: false
 questions:
@@ -22,19 +23,19 @@ objectives:
     progression towards learning outcomes
   - Summarise the benefits of course evaluation
 key_points:
-  - Course development is a multi-step, iterative process;
-  - The first step is to identify intended (SMART) LOs;
+  - Course development is a multi-step, iterative process
+  - The first step is to identify intended (SMART) LOs
   - Identification  of  key  content  only  becomes  relevant  after  LOs  &
-    suitable LEs have been identified;
-  - Bloom’s taxonomy can facilitate the articulation of measurable LOs, &
-    support the development of cognitive complexity through them;
-  - Messick’s questions help to align KSAs, instruction & assessment;
+    suitable LEs have been identified
+  - Bloom's taxonomy can facilitate the articulation of measurable LOs, &
+    support the development of cognitive complexity through them
+  - Messick's questions help to align KSAs, instruction & assessment
   - For  successful  outcomes,  learners  &  the  course  must  be  evaluated
-    (it isn’t sufficient simply to note ‘completers’ or learner satisfaction);
+    (it isn't sufficient simply to note 'completers' or learner satisfaction)
   - A successful course guides learners from entry-level performance to the
-    minimum performance level for achieving its target LOs;
-  - In a course designed to support learners & LOs, the instruction that’s
-    delivered & learning that’s intended are more likely to align, thereby
+    minimum performance level for achieving its target LOs
+  - In a course designed to support learners & LOs, the instruction that's
+    delivered & learning that's intended are more likely to align, thereby
     providing the optimal circumstances for learner success.
 requirements:
 contributors:
@@ -59,7 +60,7 @@ especially so for those who're relatively new to teaching and training.
 >
 > **Training**: instruction delivered via short courses designed to expand or
 > build knowledge & practical skills in a given field, often conducted in the
-> workplace or training centre to ‘up-skill’ members of a workforce
+> workplace or training centre to 'up-skill' members of a workforce
 >
 > **Teaching**: usually, instruction delivered over long time-scales via a
 > series of courses (in schools, colleges, universities, etc.) designed to
@@ -133,7 +134,7 @@ to inform the design of effective courses.
 >
 {: .comment}
 
-> ### {% icon hands_on %} Select a topic for a 3 minute training (1 min - Silent reflection)
+> ### {% icon hands_on %} Select a topic for a 3 minute training - *{% icon time %} 1 min - Silent reflection*
 >
 > - Choose a topic for a 3 minutes training, examples:
 >   - how to make an origami bird
@@ -192,13 +193,13 @@ and courses.
 >
 > **Attained curriculum**: what learners actually acquire & can demonstrate
 > having followed the implemented curriculum (from
-> [UNESCO IBE Glossary of Curriculum-Related Terminology](www.ibe.unesco.org/en/glossary-curriculum-terminology/a/attained-curriculum))
+> [UNESCO IBE Glossary of Curriculum-Related Terminology](http://www.ibe.unesco.org/en/glossary-curriculum-terminology/a/attained-curriculum))
 >
 > **Hidden curriculum**: unintended curricular effects: unofficial norms,
 > behaviours & values that are transferred (not necessarily consciously) by the
 > school culture or ethos; this recognises that schooling happens in broad
 > social & cultural environments that influence learning (from
-> [The glossary of Education Reform](www.edglossary.org/hidden-curriculum))
+> [The glossary of Education Reform](http://www.edglossary.org/hidden-curriculum))
 >
 > **Implemented curriculum**: or taught curriculum, how the intended curriculum
 > is delivered in practice: i.e., the teaching & learning activities, & the
@@ -210,7 +211,7 @@ and courses.
 >
 {: .comment}
 
-> ### {% icon hands_on %} Define audience and teaching goal (10 min)
+> ### {% icon hands_on %} Define audience and teaching goal- *{% icon time %} 10 min*
 >
 > 1. Take the topic you choose
 > 2. Define teaching objectives (describe your goals and intentions as
@@ -219,7 +220,6 @@ and courses.
 >    - potential professions
 >    - desired performance an/or competences of course completers
 >    - duration
-
 >
 {: .hands_on}
 
@@ -408,7 +408,7 @@ below.
 > <!-- NILOA five principles for articulating LOs>
 {: .comment}
 
-> ### {% icon hands_on %} Learning outcomes
+> ### {% icon hands_on %} Learning outcomes - *{% icon time %} 2 min - Silent working*
 >
 > 1. Take the topic you selected at the beginning
 > 2. Try to jot a few LOs down
@@ -683,9 +683,9 @@ Concept maps: rough and visual scheme on how the different concepts are linked
 
 Concept maps can be used by trainers to help building content
 
-Example 1: The n
+Example 1: The nucleus
 
-![example of concept map](../..7images/design/nucleus_concept_map.jpg "Example of concept map to explain the nucleus")
+![](images/nucleus_concept_map.jpg "Example of concept map to explain the nucleus")
 
 - Number of nodes: 9
 - Number of edges: 6
@@ -709,7 +709,7 @@ Example 2: the FAIR principles
   - Re-usable
 - Question: What are FAIR principles?
 
-![alt_text](../../images/design/fair_concept_map.png "image_tooltip")
+![](images/fair_concept_map.png "Example of concept map to explain the FAIR principles")
 
 Why concept maps?
 
@@ -747,7 +747,7 @@ concepts
 
 (can play a role in the number of nodes/edges in the map)
 
-> ### {% icon hands_on %} Draw a concept map (15 min - Silent working)
+> ### {% icon hands_on %} Draw a concept map - *{% icon time %} 15 min - Silent working*
 >
 > - Draw a concept map of your topic of interest
 > - Start with a question
@@ -762,7 +762,7 @@ When using concept maps to identify the number of items you are going to teach
 
 Ask if difficulties, questions, thoughts to create the maps
 
-> ### {% icon hands_on %} Give / receive feedback on concept maps (10 min - Group of 2 people)
+> ### {% icon hands_on %} Give / receive feedback on concept maps - *{% icon time %} 10 min - Group of 2 persons*
 >
 > - Pair with someone
 > - Check the concept name of your partner (see slide number above)
@@ -779,7 +779,7 @@ Ask if difficulties, questions, thoughts to create the maps
 - **Content reduction**: one of the biggest challenges in designing training
   courses is the reduction of content to the training format. key points!
 
-> ### {% icon hands_on %} Delivery planning (10 min - Silent working)
+> ### {% icon hands_on %} Delivery planning - *{% icon time %} 10 min - Silent working*
 >
 > - Think if you want to make your training interactive
 > - Think whether you need or want to use a visual support (images)
@@ -789,7 +789,7 @@ Ask if difficulties, questions, thoughts to create the maps
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Producing the content and the training material (15 min)
+> ### {% icon hands_on %} Producing the content and the training material - *{% icon time %} 15 min*
 >
 > It's now time to prepare the content of your mini-training.
 >
@@ -826,7 +826,7 @@ Ask if difficulties, questions, thoughts to create the maps
 * If you are offended by anything said during discussion, acknowledge it
   immediately.
 
-> ### {% icon hands_on %} Give / receive feedback on mini-training delivery (15 min - Groups of 2 peoples)
+> ### {% icon hands_on %} Give / receive feedback on mini-training delivery - *{% icon time %} 15 min - Groups of 2 persons*
 >
 > - Deliver each one your 3 minute session to others with 1 person noting down
 >   feedback in real-time
@@ -910,7 +910,7 @@ complex or time-consuming (just informative about learning at a given point).
 >   then display and discuss the answers with them.
 >
 > These, and many other simple assessments, may be found in
-> [Briggs’ online list of 21 ways to check for student understanding](www.opencolleges.edu.au/informed/features/21-ways-to-check-for-student-understanding/#ixzz30n5SFAYV).
+> [Briggs' online list of 21 ways to check for student understanding](http://www.opencolleges.edu.au/informed/features/21-ways-to-check-for-student-understanding/).
 >
 {: .details}
 
@@ -1053,7 +1053,7 @@ LOs_.
 
 Instruction design in 5 steps
 
-![](../../images/design/instruction_design.png "5 phases of instructional design described by Nicholls et al in _Developing teaching and learning in higher education_. London, UK: Routledge. Pp 51-75")
+![](images/instruction_design.png "5 phases of instructional design described by Nicholls et al in _Developing teaching and learning in higher education_. London, UK: Routledge. Pp 51-75")
 
 ### From learning outcomes to a lesson/session/course outline
 
@@ -1176,7 +1176,7 @@ Training materials repositories and resources
 
 <!-- -->
 
-> ### {% icon hands_on %} Apply (5 min)
+> ### {% icon hands_on %} Apply - *{% icon time %} 5 min*
 >
 > - Articulate a goal of good teaching practice that you are ready to apply for
 >   your next training
