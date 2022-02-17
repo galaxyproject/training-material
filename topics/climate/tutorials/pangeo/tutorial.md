@@ -107,7 +107,7 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 # Understanding our dataset
 
 
-> ### {% icon details %} More information about CAMS PM2.5 forecast datasetss
+> ### {% icon details %} More information about CAMS PM2.5 forecast datasets
 >
 > Our CAMS PM2.5 forecast dataset is in [netCDF](https://en.wikipedia.org/wiki/NetCDF) format. You could find the same dataset in different formats such as [GRIdded Binary or General Regularly-distributed Information in Binary form (GRIB)](https://en.wikipedia.org/wiki/GRIB) or [geoTIFF](https://en.wikipedia.org/wiki/GeoTIFF). The same Xarray Tools can be used with these other data formats. More information about this particular data set can be found on the [CAMS European air quality forecast webpage](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-europe-air-quality-forecasts?tab=overview).
 {: .details}
