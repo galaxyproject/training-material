@@ -379,7 +379,7 @@ In `info file` output file, we can identify 4 different sections:
 
 > ### {% icon comment %}  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`
 > Why did we slice latitudes with `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`?
-> - because when using slice, you need to specify values using the same order than in the coordinates. Latitudes are specified in 
+> - because when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
 > decreasing order for CAMS.
 >
 {: .comment}
