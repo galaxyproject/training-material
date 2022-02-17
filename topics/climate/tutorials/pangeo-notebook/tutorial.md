@@ -357,7 +357,7 @@ And you should get the following plot:
 
 Now, we will plot several times on the same figure in different sub-plots; we will not plot all the times (too many) but the first 24 forecasted values.
 
-1. Make a list of times and convert to pandas datetime to make it easier to format times when plotting
+Firstly, we need to create a list of times and convert it to `pandas datetime` in order to make it easier to format times when plotting:
  
 ```python
 list_times = np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))
