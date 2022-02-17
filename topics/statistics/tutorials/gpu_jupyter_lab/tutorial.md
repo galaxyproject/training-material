@@ -67,13 +67,30 @@ Unet neural network (Unet) is widely used for segmentation tasks in images. The 
 
 In this tutorial, we will use the dataset of CTs scans and their respective masks to train a Unet model. The model learns to map the infected regions in the CT scans to their masks. For prediction, the trained model is given CT scans and it predicts infected regions. For this experiment, we will use Jupyterlab for pulling the notebooks that contain training and prediction scripts. The data (images and also the trained model) required for this notebook can be downloaded from [https://zenodo.org/record/6091361#.Ygu4gIzMI5k]. The model can either be trained in the Jupyterlab or can be sent to Galaxy's cluster for remote processing. After remote processing, the generated datasets such as trained model become available in a new Galaxy history.
 
-
 ## Custom Jupyterlab features
-Jupyterlab notebook has been augmented with several useful features that makes it ready-to-use for quick prototying of AI projects. Feature such as **available online** makes it really convenient to share it with other researchers and users. GPUs have accelerated AI research, especially deep leanring. Therefore, the backend of the Jupyterlab is powered by GPU to make long running AI training programs finish faster by parallelizing matrix multiplications. Galaxy tool for remote job processing also runs on GPU. Jupyterlab is also integrated with **Git version control** that makes it easy to pull, push and maintain codebase directly into the notebook. Repositories from Github can be easily clone, updated and maintained. In addition, a standard model format **Open Neural Network Exchange(ONNX)**, has been added to transform scikit-learn and tensorflow models to "onnx" files. These files can then be conveniently shared and used for inference. Galaxy also supports "onnx" file format to make it easier to create, save and share such models. Using Bioblend, the notebook can be connected to Galaxy and different histories and tools can be accessed. Using this features, Galaxy tools can be executed with the correct input datasets such as the Galaxy tool for processing long running training. Many notebooks can be created serving different purposes. These notebooks can be knit together to form one pipeline where each notebook transforms data taking a form of data from its previous notebook and pass on the transformed data to its next nextbook. This feature 
+Jupyterlab notebook has been augmented with several useful features that makes it ready-to-use for quick prototying of AI projects. Feature such as **available online** makes it really convenient to share it with other researchers and users. GPUs have accelerated AI research, especially deep leanring. Therefore, the backend of the Jupyterlab is powered by GPU to make long running AI training programs finish faster by parallelizing matrix multiplications. Galaxy tool for remote job processing also runs on GPU. Jupyterlab is also integrated with **Git version control** that makes it easy to pull, push and maintain codebase directly into the notebook. Repositories from Github can be easily clone, updated and maintained. In addition, a standard model format **Open Neural Network Exchange(ONNX)**, has been added to transform scikit-learn and tensorflow models to "onnx" files. These files can then be conveniently shared and used for inference. Galaxy also supports "onnx" file format to make it easier to create, save and share such models. Using Bioblend, the notebook can be connected to Galaxy and different histories and tools can be accessed. Using this features, Galaxy tools can be executed with the correct input datasets such as the Galaxy tool for processing long running training. Many notebooks can be created serving different purposes. These notebooks can be knit together to form one pipeline where each notebook transforms data taking a different form of data from its previous notebook and pass on the transformed data to its next nextbook.  
+An example workflow created using Elyra AI [https://elyra.readthedocs.io/en/stable/] can be found at [<<open notebook>>/elyra/METABRIC_ML.pipeline]. These pipelines can also be executed remotely on different cluster using its "runtimes" features that pull different docker containers. An example pipeline can be seen in the picture below.
 
+![Elyra AI pipeline](../../images/elyra_ai_pipeline.png "An example ML pipeline created using Elyra AI").
 
-### Miscellaneous - Elyra AI - workflow of notebooks, GPU utilization dashboards,
+There are many other features such as GPU utilization dashboards for monitoring the GPU usage and system memory utilization, voila for rendering output cells of a notebook in a separate tab hiding all code cells, interactive bqplots, and many more. There are several packages suited for performing ML tasks such as Open-CV and Scikit-Image for image processing, NiBabel package for processing images files.
 
+## Security features
+Security benefits of executing code in isolated environments such as docker containers
+
+# Image segmentation using Jupyterlab
+In this tutorial, we will a few features of Jupyterlab in Galaxy to create and train a deep learning model and predict segmented regions using the trained model from COVID CT scans.
+
+## Open Jupyterlab editor
+
+> ### {% icon hands_on %} Hands-on: GPU enabled Interactive Jupyter Notebook for Machine Learning
+>
+> - {% tool [Create a deep learning model architecture](interactive_tool_ml_jupyter_notebook) %}
+>    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
+>    - Click *"Execute"*
+{: .hands_on}
+
+Now, we should wait for a few minutes until Galaxy creates the required compute environment for opening a new Jupyterlab. 
 
 ## Get data
 
@@ -83,7 +100,7 @@ Jupyterlab notebook has been augmented with several useful features that makes i
 
 ## Segmentation prediction using uNet in Jupyterlab
 
-### Open Jupyterlab editor
+
 
 ### Pull code
 
