@@ -365,12 +365,13 @@ print(pd.to_datetime(list_times).strftime("%d %b %H:%S UTC"))
 ```
 
 Secondly, we need to use the same plotting method as earlier, but we pass additional parameters:
-        - `vmin = 0`and `vmax = 35` to set the minimum and maximum values when plotting (this is useful to highlight features in your plot);
-        - `subplot_kws={"projection": proj_plot}` to project data on a non-default projection. See [cartopy projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for more information about projections;
-        - `col='time'` because we will plot several `time`;
-        -  `col_wrap=4` to have a maximum of 4 plots per row. If we have more times to plot, then the next figures will be on another row;
-        - `robust=True` and `aspect=dset.dims["longitude"] / dset.dims["latitude"]` are additional parameters to make each subplot with a "sensible" figsize;
-        - `cmap=cmc.roma_r` to select a non-default and color-blind friendly colormap (see [scientific colormaps](https://www.fabiocrameri.ch/colourmaps/)).
+        
+- `vmin = 0`and `vmax = 35` to set the minimum and maximum values when plotting (this is useful to highlight features in your plot)
+- `subplot_kws={"projection": proj_plot}` to project data on a non-default projection. See [cartopy projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for more information about projections.
+- `col='time'` because we will plot several `time`;
+-  `col_wrap=4` to have a maximum of 4 plots per row. If we have more times to plot, then the next figures will be on another row.
+- `robust=True` and `aspect=dset.dims["longitude"] / dset.dims["latitude"]` are additional parameters to make each subplot with a "sensible" figsize.
+- `cmap=cmc.roma_r` to select a non-default and color-blind friendly colormap (see [scientific colormaps](https://www.fabiocrameri.ch/colourmaps/)).
 
 
 ```python
