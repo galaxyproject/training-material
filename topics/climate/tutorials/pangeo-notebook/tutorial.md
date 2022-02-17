@@ -530,8 +530,7 @@ plt.savefig("CAMS-PM2_5-fc-multi-Italy-25.png")
 
 
 ## Reduction operations
-- We often want to compute the mean of all our dataset, or along a dimension (for instance time).
-- If you do not pass any argument to the operation then it is done over all dimension.
+We often want to compute the mean of all our datasets, or along a dimension (for instance time). If you do not pass any argument to the operation then it is done over all dimensions.
 
 ### Mean
 When we do not specify any paramters, we get a single value
