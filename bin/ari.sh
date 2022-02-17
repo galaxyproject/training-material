@@ -34,8 +34,10 @@ output=$3  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.m
 slidesbase=$(basename "$source" .html)
 if [[ "$slidesbase" == *"_ES" ]]; then
 	lang=es
+	language=esp
 else
 	lang=en
+	language=eng
 fi
 
 subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".${lang}.vtt
@@ -47,69 +49,51 @@ meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors 
 meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
 REVISION="$(git log -1 --format=%H)"
 
+# This is digusting, but the safest way to get a fresh ffmpeg.
+FFMPEG_PATH=$(echo "const ffmpeg = require('ffmpeg-static');console.log(ffmpeg.split('/').slice(0, -1).join('/'));" | node -)
+echo "Located FFMPEG at $FFMPEG_PATH"
+export PATH="$FFMPEG_PATH:$PATH"
+which ffmpeg
+
 # We'll cache audio locally.
 ffmpeglog=warning
 
 # Setup output files
 script="${build_dir}/script.json"
-images="${build_dir}/images.txt"
-sounds="${build_dir}/sounds.txt"
 
 # Generate our script
+echo "  Building Script, Subtitles"
 echo ruby bin/ari-extract-script.rb "$source"
 ruby bin/ari-extract-script.rb "$source" > "$script"
 voice=$(cat "$script" | jq .voice.id)
 
 # Now explode that into individual lines, synthesize, and re-assemble them into
-# our images.txt/sounds.txt scripts
-ruby bin/ari-prep-script.rb "${script}" "${build_dir}" "${engine}"
-
+# our editly.json5 script
+# This will read the environment variable EDITLY_FAST=true and set fast in the script, if requested.
+ruby bin/ari-prep-script.rb "${build_dir}" "${engine}"
 
 # Generate images for use.
 echo "  Extracting slides"
 convert "${slides}" -resize 1920x1080 "${build_dir}/slides.%03d.png"
 
-# Generate a pause of 1 seconds, used after slides.
-sox -n -r 44100 -c 2 "${build_dir}/silence-unfixed.mp3" trim 0 1
-ffmpeg -loglevel $ffmpeglog -i "${build_dir}/silence-unfixed.mp3"  "${build_dir}/silence.mp3"
-
-# Build components
-echo "  Building Subtitles"
-python3 bin/ari-subs.py "${build_dir}" --format srt > "${build_dir}/tmp.srt"
-python3 bin/ari-subs.py "${build_dir}" --format webvtt > "${build_dir}/out.vtt"
-echo "  Building Audio"
-
-
-# Concatenate (literally) the files. This is how the concat filter (not
-# demuxer!!!) works in ffmpeg. It makes NO sense. but it gets the right output time.
-# If you use the concat demuxer, you get something that's off by ~3 seconds
-# over 250 seconds. It's not clear what generates this discrepancy but it's
-# solved by first concatenating them all, then transcoding once within the same
-# format (still wrong time) then transcoding again to the new format (finally
-# correct.)
-for f in $(cat "${build_dir}/sounds.txt" | grep '^file' | cut -f2 -d' ' | sed "s/'//g"); do
-	cat "${build_dir}/$f" >> "${build_dir}/ugly.mp3"
-done
-# This conversion step fixes the headers (still the wrong timestamps)
-ffmpeg -loglevel fatal -i "${build_dir}/ugly.mp3" "${build_dir}/ugly2.mp3"
-
-# Finally it's right.
-ffmpeg -loglevel fatal -i "${build_dir}/ugly2.mp3" "${build_dir}/tmp.m4a"
-echo "  Building Video"
-ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264 "${build_dir}/tmp.mp4"
+echo "  Building Video | $(npm bin)/editly --json ${build_dir}/editly.json5"
+$FFMPEG_PATH/ffmpeg -version
+$(npm bin)/editly --json "${build_dir}/editly.json5"
 
 # Mux it together
 echo "  Muxing"
-ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" -i "${build_dir}/tmp.srt" \
+ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/out.srt" \
 	-movflags +faststart \
 	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$REVISION/$USER/$engine/$voice" \
 	-metadata network="Galaxy Training Network"\
 	-metadata artist="$meta_authors, AWS Polly $voice" \
 	-metadata title="$meta_title" \
 	-c:v copy -c:a copy -c:s mov_text \
-	-map 0:v:0 -map 1:a:0 -map 2 \
-	-metadata:s:s:0 language=English -disposition:s:s:0 forced \
-	-b:a 192k "${build_dir}/out.mp4"
+	-map 0 -map 1 \
+	-metadata:s:a:0 language=$language \
+	-metadata:s:v:0 language=$language \
+	-metadata:s:s:0 language=$language \
+	-disposition:s:s:0 forced "${build_dir}/out.mp4"
 
 # Check if output dir needs to be created
 mkdir -p "$(dirname "$output")"

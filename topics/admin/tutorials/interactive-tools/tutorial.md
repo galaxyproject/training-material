@@ -242,7 +242,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    {% raw %}
 >    ```yaml
 >    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
->    gie_proxy_git_version: master
+>    gie_proxy_git_version: main
 >    gie_proxy_setup_nodejs: nodeenv
 >    gie_proxy_virtualenv_command: "{{ pip_virtualenv_command }}"
 >    gie_proxy_nodejs_version: "10.13.0"

@@ -13,7 +13,7 @@ on:
 
 jobs:
   lint-frontmatter:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -38,20 +38,18 @@ jobs:
         with:
           path: |
             vendor/bundle
-            ~/.cache/pip
             ~/.npm
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py--node-
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          pip install -r requirements.txt
           npm install
+          bundle pristine ffi
       # END Dependencies
 
       - name: Check Citations

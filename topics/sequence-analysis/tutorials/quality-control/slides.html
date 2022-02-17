@@ -10,9 +10,9 @@ questions:
   - How to improve the quality of a sequence dataset?
 objectives:
   - Manipulate FASTQ files
-  - Control quality from a FASTQ file
-  - Use FastQC tool
-  - Understand FastQC output
+  - Control quality from a FASTQ file for short and long reads
+  - Use FastQC/NanoPlot/PycoQC
+  - Understand output
   - Use tools for quality correction
 requirements:
 time_estimation: "1h"
@@ -22,6 +22,13 @@ key_points:
   - Re-run FastQC to check the impact of the quality control
 contributors:
   - bebatut
+  - abretaud
+  - alexcorm
+  - lleroi
+  - r1corre
+  - stephanierobin
+  - erasmusplus
+
 ---
 
 # Why Quality Control?
@@ -36,6 +43,7 @@ Potential audience poll ideas:
 Comments:
 
 - Process of removing low quality sequences that might corrupt downstream analyses
+- Some assemblers like Spades have an auto-correction process and ask for raw data
 
 ---
 
@@ -159,7 +167,7 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ### Quality score encoding
 
-![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/quality_score_encoding.png)
+![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/fastq-quality-encoding.png)
 
 ???
 
@@ -171,7 +179,27 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ---
 
+## PacBio HiFi *vs* CLR
+
+![Comparison between PacBio HiFi and CLR sequencing methods](../../images/quality-control/pacbio_hifi_vs_clr.png)
+
+- **HiFi (CCS)**: 99%+ accurate read achieved by multiple passes of the polymerase over a **single molecule**
+- **CLR**: 90% accurate read from **multiples molecules**
+
+???
+
+- HiFi read is the result of a consensus of subreads from the same molecule (i.e. multiple pass over the same molecule). It's imply to have shorter sequences to allow multiple pass on a single molecule by the polymerase.
+- CLR read come from a single pass from a single molecule. It's allow to have longer reads but with a lower read quality. Warning: Absence of encoded quality since Sequel I into fastq files with CLR.
+
+---
+
 ## Identifying Potential Quality Issues
+
+---
+
+## FastQC
+
+A versatile tool for short and long reads quality control
 
 ---
 
@@ -208,7 +236,6 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ---
 
-
 ### Per-base Quality
 
 ![Fastqc quality score plot, most results are in the green region up until 30. The whiskers extend to the yellow region from the start, and after base 30 get progressively worse, goign to the worst possible score by the end. The boxes cover the yellow region by base 40.](../../images/per_base_sequence_quality_bad.png)
@@ -217,17 +244,48 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ---
 
-### Per-base Quality
+### Per-base Quality - Nanopore
 
-![A graph in between the previous two, mostly green, but gts to yellow  by base 30 and red by base 33.](../../images/per_base_sequence_quality_medium.png)
+![A graph for Nanopore reads (R9.4) basecalled with guppy. Almost all bases are in the red region below 20.](../../images/per_base_sequence_quality_nanopore.png)
 
-<i class="fa fa-thumbs-up"></i> <i class="fa fa-thumbs-down"></i> Intermediate quality score
+{% icon congratulations %} Good quality score
+
+???
+
+- Nanopore reads have an higher error rate, around 5% while it's ~0.5% for Illumina
+- Q10 -> Q14 with recent versions of Guppy
+- Q20+ with new sequencing kit by the end of 2021 (new chemistry)
+
+---
+
+### Per-base Quality - PacBio HiFi
+
+![A graph for PacBio HiFi reads. All reads are in the green region and quality score are encoded up to 92.](../../images/per_base_sequence_quality_pacbio_hifi_good.png)
+
+{% icon congratulations %} Good quality score
+
+???
+
+- PacBio encodes quality with a higher range than Illumina to increase precision in base quality assessment
+---
+
+### Per-base Quality - PacBio CLR
+
+![A graph for PacBio CLR reads. It's empty as quality is set to 0 for all bases!](../../images/per_base_sequence_quality_pacbio_clr.png)
+
+Quality information is "absent" for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. "!")!
 
 ---
 
 ### Per-sequence Quality
 
 ![A per-sequence quality showing quality score distribution histogram with average quality per read plotted. Most reads pile up around quality 30, but another peak appears at 17. very few reads have quality less than 10.](../../images/per_sequence_quality.png)
+
+???
+
+- For Illumina, the pic should be near 30
+- For Nanopore, the pic is generally between 10 and 12. It depends on pore (R9 vs R10) and basecaller version and models (fast, hac, sup).
+- For PacBio HiFi, the pic should be near 90.
 
 ---
 
@@ -295,6 +353,16 @@ This module will raise a warning if all sequences are not the same length. This 
 
 ---
 
+### Sequence length distribution - PacBio / Nanopore
+
+![A graph with a main peak around 15,000bp for PacBio HiFi run.](../../images/sequence_length_distribution_long-reads.png)
+
+???
+
+For long reads, the distribution is much more important and depends on the fragment size selection, primers, DNA weight and quality, etc
+
+---
+
 ### Duplicated sequences
 
 ![Two line graphs, deduplicated sequences in red, and total sequences in blue. They start off near 100 and go rapidly to zero by sequence duplication level 2 and 3.](../../images/sequence_duplication_levels.png)
@@ -334,6 +402,188 @@ Over-represented K-mers will appear as sharp spikes at a single point in the seq
 
 ---
 
+## NanoPlot
+
+A quality control tool for long reads (Nanopore/PacBio)
+
+---
+
+### NanoPlot report
+
+![Header of a NanoPlot html report ](../../images/nanoplot_report.png)
+
+Qscores (Qx): it is the average per-base error probability, expressed on the log (Phred) scale
+
+???
+
+- Analyses your fastq/bam files
+- Reports on different aspects of the reads
+
+- Modules include:
+  - Summary Statistics
+    - Mean / Median / N50 reads length
+    - Mean / Median / N50 reads quality
+    - Number of reads
+    - Total of bases generated
+  - Plots (depends on parameters)
+    - Histogram of read lengths
+    - Yield by length
+    - Read lengths vs Average read quality
+
+---
+
+### Read length *vs* Read quality score (Qscores)
+
+![Distribution for HiFi reads with a default filter >= Q20 ](../../images/LengthvsQualityScatterPlot_dot.png)
+
+Each dot represents a read. In the case of PacBio HiFi, the minimum Qscore is fixed to 20 which explains the absence of any dot under this score.
+
+???
+
+This plot give a 2D visualisation of quality score for reads according to reads length. It allows to detect bias quickly and easily.
+
+---
+
+### Histogram of read length
+
+![Distribution around 15 / 20kb in HiFi mode ](../../images/HistogramReadlength.png)
+
+???
+
+It's a similar representation as FastQC sequence length distribution.
+The length distribution can then be used as quality measure, as you would expect a normal distribution for the best result.
+Also, at least for PacBio HiFi, the pic should be centered near 15kb.
+
+---
+
+### Run yield by Length
+
+![Yield for HiFi run ](../../images/Yield_By_Length.png)
+
+This plot shows the total number of bases read in the run, as a function of the length of the read that contained them. The Y-axis is scaled based on the quantity of data in the fastq/a that was analyzed (20Gbp in this example).
+
+???
+
+- Very long reads represent only a small part of the total bases pairs generated.
+- In case of HiFi reads, the contribution of long reads starts to decrease after 10kb and 50% of the data correspond to the N50.
+- Used to evaluate the contribution of each size fraction
+
+---
+
+## PycoQC
+
+An interactive quality control tool for basecalled Nanopore data
+
+???
+
+- Analyse your run after basecalling
+- Has many modules
+- Dynamics plot
+- They report on different aspects of the sequence
+
+- Modules include:
+  - Basic Statistics
+  - Basecalled reads length
+  - Basecalled reads PHRED quality
+  - Basecalled reads length vs reads PHRED quality
+  - Output reads over experiment time
+  - Read length over experiment time
+  - Read quality over experiment time
+  - Channel activity over time
+  - Number of reads per barcode (optional)
+
+---
+
+### General and basecalled summary
+
+![General summary about a Nanopore run from PycoQC. It includes general information about the run itself (duration, channels, run ids and barcode in case of barcoded runs).](../../images/general_run_summary-pycoqc.png)
+![General summary about the reads.](../../images/basecall_summary-pycoqc.png)
+
+???
+
+The 2 tables give general information about the run itself like the duration of the run, the number of active channels (pores), run ids and number of barcodes if necessary.
+It also provides information about the reads themself, like the total reads, bases, N50, median and median PHRED score.
+Reads with a Qscore >= 7 (default with Guppy) are marked as "Pass"
+
+---
+
+### Basecalled reads length
+
+![A graph with a read length distribution between 200bp and 150kbp.](../../images/basecalled_reads_length-pycoqc.png)
+
+---
+
+### Basecalled reads PHRED quality (Qscores)
+
+![A graph of PHRED quality (Qscore) with a distribution centered around 10.](../../images/basecalled_reads_PHRED_quality-pycoqc.png)
+
+Reminder: Qscores is the average per-base error probability, expressed on the log (Phred) scale
+
+---
+
+### Basecalled reads length *vs* reads PHRED quality (Qscores)
+
+![Standard distribution for Nanopore reads.](../../images/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png)
+
+???
+
+As for NanoPlot, this representation give a 2D visualisation of quality score for reads according to reads length.
+It allows to detect bias quickly and easily.
+
+---
+
+### Output over experiment time
+
+![Sequenced reads over time for a single run.](../../images/output_over_experiment_time-pycoqc.png)
+
+???
+
+This representation gives information about sequenced reads over the time.
+- Each pic indicates a new loading of the flow cell (3 + the first load).
+- The contribution in total reads for each "refuel".
+- The production of reads is decreasing over time:
+  - Most of material (DNA/RNA) is sequenced
+  - Saturation of pores
+  - Material degradation
+  - ...
+- In this example, the contribution of refuling is very low and it can be considered as a bad run.
+
+Unlike all other technologies, with Nanopore you can refuel the flow cell with biological material without needing to make another run.
+
+---
+
+### Read length over experiment time
+
+![Read length during an experiment.](../../images/read_length_over_experiment_time-pycoqc.png)
+
+???
+
+The read length over experiment time should be stable.
+It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.
+
+---
+
+### Read quality over experiment time
+
+![Read quality over the time.](../../images/read_quality_over_experiment_time-pycoqc.png)
+
+???
+
+The read quality should be stable over the time.
+
+---
+
+### Channel activity over time
+
+![View of the activity of each pore from the flow cell over the time.](../../images/channel_activity_over_time-pycoqc.png)
+
+???
+
+It gives an overview of available pores, pore usage during the experiment and shows if the loading of the flow cell is good (almost all pores are used).
+In this case, the run can be considered bad as the number of used pores is decreasing over the time.
+
+---
+
 ## Improving the quality of sequences
 
 - Filtering of sequences
@@ -346,3 +596,7 @@ Over-represented K-mers will appear as sharp spikes at a single point in the seq
     - from low quality score parts
     - tails
     - ...
+
+???
+
+- Trimming is not always recommended (e.g. see Spades documentation)

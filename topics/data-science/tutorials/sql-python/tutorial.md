@@ -28,6 +28,7 @@ key_points:
 contributors:
 - carpentries
 - hexylena
+- avans-atgm
 
 subtopic: sql
 
@@ -37,7 +38,6 @@ notebook:
 tags:
 - SQL
 - Python
-- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment

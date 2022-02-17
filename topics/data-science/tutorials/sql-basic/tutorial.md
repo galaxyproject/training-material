@@ -56,6 +56,7 @@ contributors:
 - hexylena
 - dirowa
 - bazante1
+- avans-atgm
 
 subtopic: sql
 
@@ -67,7 +68,6 @@ abbreviations:
 
 tags:
 - SQL
-- jupyter-notebook
 ---
 
 > ### {% icon comment %} Comment

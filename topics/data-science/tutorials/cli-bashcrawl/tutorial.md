@@ -29,9 +29,9 @@ notebook:
 subtopic: bash
 contributors:
 - hexylena
+- erasmusplus
 tags:
 - game
-- jupyter-notebook
 - bash
 ---
 
