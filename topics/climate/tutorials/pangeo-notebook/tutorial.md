@@ -50,8 +50,10 @@ objectives:
 - Learn to cite and contribute to Pangeo
 time_estimation: 1H
 key_points:
-- Pangeo and Xarray
-- Read, select, mask and plot netCDF data using Xarray
+- Pangeo ecosystem enables big data analysis in geosciences
+- Xarray is an important Python package for big data analysis in geosciences 
+- Xarray can be used to read, select, mask and plot netCDF data
+- Xarray can also be used to perform global operations such as mean, max, min or resampling data
 tags:
   - pangeo
   - interactive-tools
@@ -94,12 +96,13 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 
 ## Import Python packages
 
-Some packages may need to be installed first. For example `cmcrameri` is missing, so we need to do:
+Some packages may need to be installed first. For example `cmcrameri` is missing, so we need to install it by entering the following command in a new cell of your Jupyter Notebook:
 
 ```python
 pip install cmcrameri
 ```
-then import all the necessary packages in your Jupyter Notebook.
+
+Then we need to import all the necessary packages in our Jupyter Notebook.
 
 ```python
 import numpy as np
@@ -109,7 +112,8 @@ import matplotlib.pyplot as plt
 import cmcrameri.cm as cmc
 import pandas as pd
 ```
-In case some packages cannot be imported you need to install them first. For example if cmcrameri is missing, open a terminal and type pip install cmcrameri, then re-execute the cell in your Jupyter Notebook.
+
+In case some packages cannot be imported you need to install them first. For example if cmcrameri is missing and you get an error, type and run `pip install cmcrameri` in a new notebook cell, then re-execute the cell in your Jupyter Notebook.
 
 ## Open and read metadata
 
@@ -321,7 +325,7 @@ We will get a figure like the one below:
 
 ### Customize your plot
 
-There are many ways to customize your plots and here we only give you what we think is important for creating publication ready figures:
+There are many ways to customize your plots and we will only detail what we think is important for creating publication ready figures:
 - Define the size of the figure
 - Choose to project data on a different projection.
 - Add coastline
@@ -410,7 +414,10 @@ In the second part of our plot, we are going to customize each subplot (this is 
 > Using a Multi-plot between Rome and Naples, can you tell us if the forecasted PM2.5 will increase or decrease during the first 24 hours?
 >
 > > ### {% icon solution %} Solution
-> > We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N. PM2.5 will increase and reach values close to 35 μm.m-3
+> > We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N. PM2.5 will increase and reach values close to 35 μm.m-3.
+> > We will use `slice` to select the area and we slice latitudes with `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`.
+> > The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
+> > decreasing order for CAMS.
 > >
 > > > ### {% icon code-in %} Input: Python
 > > > ```python
@@ -440,16 +447,9 @@ In the second part of our plot, we are going to customize each subplot (this is 
 > > {: .code-in}
 > > 
 > >  ![PM2.5 over Italy](../../images/CAMS-PM2_5-fc-multi-Italy.png)
+> > 
 > {: .solution }
 {: .question }
-
-
-> ### {% icon comment %}  `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`
-> Why did we slice latitudes with `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`?
-> - because when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
-> decreasing order for CAMS.
->
-{: .comment}
 
 
 ## How to use the **where** method 
@@ -463,15 +463,13 @@ print(dset.where(dset['pm2p5_conc'] > 25))
 ```
 
 > ### {% icon comment %} What happened?
-> You may not see any changes but if you look carefuly at `pm2p5_conc` values, you will see many `nan`. In fact, we now have 
-> `nan` values whenever the criteria within the `where` statement is not met e.g. when PM2.5 <= 25
+> Each element of the dataset where the criteria within the `where` statement is not met, e.g. when PM2.5 <= 25, will be set to `nan`. 
+> You may not see any changes when printing the dataset but if you look carefuly at `pm2p5_conc` values, you will see many `nan`.
 >
 {: .comment}
 
 Let's plot one time to better see what happened:
 
-### Plotting with mask
- 
 ```python
 ######################
 # Plotting with mask #
@@ -579,10 +577,6 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 > {: .solution }
 {: .question }
 
-
-
-
-
 > ### {% icon question %} Find when the maximum PM2.5 is forecasted
 >
 > When is the maximum PM2.5 value forecasted?
@@ -619,12 +613,11 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 
 
 ## Details on the **resample** method
-We often want to resample (on time dimension) our data:
-    - If your resampling frequency is lower than your original data, you would need to apply an operation on the data you group together, such as mean, min, max;
-    - If your resampling frequency is higher than your original data, you would need to indicate how to fill the gaps, for instance, interpolate and indicate which interpolation method to apply or select nearest values, etc.
 
 ### 1 day Resampling
  
+ The resampling frequency is lower than our original data, so we would need to apply a global operation on the data we group together such as mean, min, max:
+
 ```python
 print(dset.resample(time='1D').mean())
 ```
@@ -646,12 +639,11 @@ print(dset.resample(time='1D').mean())
 
 ### 30 minute resampling
  
+When the resampling frequency is higher than the original data, we need to indicate how to fill the gaps, for instance, interpolate and indicate which interpolation method to apply or select nearest values, etc.:
 
 ```python
 print(dset.resample(time='30min').interpolate('linear'))
 ```
-
-
 
 > ### {% icon comment %} Be careful when sub-sampling!
 > Increasing the frequency of your data e.g. artificially creating data may not be scientifically relevant. Please use it carefully! Interpolating is not always scientifically relevant and sometimes you may prefer to choose a different method, like taking the nearest value for instance:
