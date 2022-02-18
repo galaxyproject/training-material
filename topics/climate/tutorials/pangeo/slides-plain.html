@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Pangeo ecosystem 101 for everyone</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:title" content="Galaxy Training: Pangeo ecosystem 101 for everyone" />
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/pangeo/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/pangeo/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/climate/tutorials/pangeo/slides-plain.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/climate/tutorials/pangeo/slides-plain.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/climate/tutorials/pangeo/slides-plain.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/climate/tutorials/pangeo/slides.html">View markdown source on GitHub</a>
+	<h1>Pangeo ecosystem 101 for everyone</h1>
+		<h2>Contributors</h2>
+		
+<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="https://avatars.githubusercontent.com/annefou?s=27" alt="Avatar">Anne Fouilloux</a>
+
+ 
+<a href="/training-material/hall-of-fame/rabernat/" class="contributor-badge contributor-rabernat"><img src="https://avatars.githubusercontent.com/rabernat?s=27" alt="Avatar">Ryan Abernathey</a>
+
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What are Pangeo and its ecosystem?</p>
+</li>
+		
+		<li><p>Why Pangeo?</p>
+</li>
+		
+		<li><p>What is the Pangeo Software Ecosystem?</p>
+</li>
+		
+		<li><p>How can I use Pangeo in Galaxy?</p>
+</li>
+		
+		<li><p>How to cite and support Pangeo?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand Pangeo, its community and software ecosystem</p>
+</li>
+		
+		<li><p>Learn how to use Pangeo within Galaxy.</p>
+</li>
+		
+		<li><p>Learn to cite and support Pangeo.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 1, 2022 </div>
+
+	<hr />
+
+
+	<h2 id="pangeo-in-a-nutshell">Pangeo in a nutshell</h2>
+
+<p><strong>A Community platform for Big Data geoscience</strong></p>
+
+<ul>
+  <li>Open Community</li>
+  <li>Open Source Software</li>
+  <li>Open Source Infrastructure</li>
+</ul>
+
+<p><strong>Funders</strong></p>
+
+<div class="centre"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/NSF.svg" alt="NSF Logo" width="120" />
+  <img src="https://static.wixstatic.com/media/a8b87d_92e16cb7795f467b8c105af31fded270~mv2.png" alt="EarthCube Logo" width="300" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" alt="NASA Logo" width="120" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Moore_Foundation_Logo.jpg/1920px-Moore_Foundation_Logo.jpg" alt="MOORE Logo By Gordon and Betty Moore Foundation - Own work, Public Domain" width="250" />
+</div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Pangeo is first and foremost a community promoting open, reproducible, and scalable science.
+This community provides documentation, develops and maintains Open Source software, and deploys computing infrastructure to make scientific research and programming easier.</p>
+
+<p>Pangeo is funded through many different projects in USA, Europe and Australia but the main funders are NSF, EarthCube, NASA and the Gordon and Betty Moore foundation.</p>
+
+<hr />
+
+<h2 id="motivations">Motivations</h2>
+
+<p>There are several building crises facing the geoscience community:</p>
+
+<p>.left[- <em>Big Data</em>: datasets are growing too rapidly and legacy software tools for scientific analysis can’t handle them. This is a major obstacle to scientific progress.]
+.left[- <em>Technology Gap</em>: a growing gap between the technological sophistication of industry solutions (high) and scientific software (low).]
+.left[- <em>Reproducibility</em>: a fragmentation of software tools and environments renders most geoscience research effectively unreproducible and prone to failure.]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The Pangeo Project has been motivated by several building crises faced by the geoscience community: Big data, Technology gap and Reproducibility crisis.
+Indeed, datasets are are growing too rapidly and legacy software tools for scientific analysis can’t handle them. This is a major obstacle to scientific progress.
+Another obstacle concerns the growing gap between the technological sophistication of industry solutions (high) and scientific software (low).
+Finally, the fragmentation of software tools and environments renders most geoscience research effectively unreproducible and prone to failure.</p>
+
+<hr />
+
+<h2 id="goals">Goals</h2>
+
+<p>Pangeo aims to address these challenges through a unified, collaborative effort.</p>
+
+<p><em>The mission of Pangeo is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere 
+and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future 
+challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.</em></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Pangeo aims to address these challenges through a unified, collaborative effort.</p>
+
+<p>The mission of Pangeo is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere 
+and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future 
+challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.</p>
+
+<hr />
+
+<h2 id="the-pangeo-approach">The Pangeo Approach</h2>
+
+<p><img src="../../images/pangeo-dev-process.png" alt="Pangeo approach" /></p>
+
+<p><em>Source</em>: <a href="https://medium.com/pangeo/pangeo-2-0-2bedf099582d">Pangeo 2.0</a> by Ryan Abernathey, December 22, 2020.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>To address the issues mentioned earlier, an agile development methodology needs to be adopted. Challenges related to scientific use cases
+as well as Open-Source software libraries, HPC and cloud infrastructure need for answering these scientific questions cannot be
+tackled separately. For example, scientific users are most often identifying bugs/bottlenecks and when “immediately” reported, developers can define
+priorities for future releases and provide relevant inputs to HPC and cloud infrastructure providers on the current trend in the community.</p>
+
+<hr />
+
+<h2 id="the-pangeo-software-ecosystem">The Pangeo Software ecosystem</h2>
+
+<p><img src="../../images/pangeo-ecosystem-2020.png" alt="Pangeo approach" /></p>
+
+<p><em>Source</em>: <a href="https://speakerdeck.com/rabernat/pangeo-tutorial-ocean-sciences-2020?slide=28">Pangeo Tutorial - Ocean Sciences 2020</a> by Ryan Abernathey, February 17, 2020.</p>
+
+<p><span>Speaker Notes</span>
+The Pangeo software ecosystem involves open source tools such as X-array, iris, dask, jupyter, and many other packages.
+There is no single software package called Pangeo; rather, the Pangeo project serves as a coordination point between scientists, software, and computing infrastructure.
+On this figure, the python packages are “layered” based on their dependencies. At the “bottom”, we have the Python programming language itself;
+on the second layer, we can find NumPy or Jupyter Notebooks that are very common Python packages and that you may know already.
+X-array makes an intensive use of Numpy for its underlying data structures. Iris has what we call a “high-level” user interface
+with many functions for analysing and visualising Earth Science data.</p>
+
+<hr />
+
+<h2 id="pangeo-galaxy-tools">Pangeo Galaxy Tools</h2>
+
+<p><strong>A growing number of tools available to non Python programmers</strong></p>
+
+<p>.left[Xarray Galaxy tools:</p>
+
+<ul>
+  <li>Manipulate netCDF with Zarr e.g. Cloud Optimized Data available soon;</li>
+  <li>Visualize geographical (<a href="https://cfconventions.org/">CF-Convention</a>) netCDF on a map;</li>
+  <li>“Convert” to tabular data to increase interoperability with other Galaxy Tools;</li>
+  <li><strong>Graphical User Interface</strong>: learn about the concepts without being hindered by Python programming.]</li>
+</ul>
+
+<p><em>Our objective is to bridge the gap between disciplines and add tools on demand to help cross-disciplinary research</em></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>If you are not familiar with Python or any other programming languages, you may wonder whether there are “Pangeo tools” with a graphical user interface.
+We have indeed wrapped a number of tools using Python packages from the Pangeo software stack. For instance, Galaxy tools using X-array are available in Galaxy.
+Even if you are a Python programmer but for instance not very familiar with Earth Science data, learning X-array concepts from Galaxy 
+Tools can be useful.
+The main objective is to bridge the gap between disciplines and add tools on demand to help cross-disciplinary research.</p>
+
+<hr />
+<h2 id="how-to-cite-and-support-pangeo">How to cite and support Pangeo</h2>
+
+<ul>
+  <li>Cite Pangeo when using Xarray Galaxy Tools:
+    <ul>
+      <li><span class="citation"><a href="#Abernathey2017">Abernathey <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Abernathey2021">Abernathey <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Gentemann2021">Gentemann <i>et al.</i> 2021</a></span> and <span class="citation"><a href="#Sambasivan2021">Sambasivan <i>et al.</i> 2021</a></span></li>
+    </ul>
+  </li>
+  <li>Report issues, wishes and thank the Pangeo Community whenever you use tools from the Pangeo software stack!</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Like any Open Source community, it is important to acknowledge the community effort to provide open and easy to use Python packages and the associated Galaxy Tools.
+We encourage you to cite <span class="citation"><a href="#Abernathey2017">Abernathey <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Abernathey2021">Abernathey <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Gentemann2021">Gentemann <i>et al.</i> 2021</a></span> and <span class="citation"><a href="#Sambasivan2021">Sambasivan <i>et al.</i> 2021</a></span> in your pangeo-dev-process when using Xarray Galaxy Tools.
+As mentioned earlier, user feedback is important for improving open source tools and packages. Report issues, wishes and thank the Pangeo Community whenever you use tools from the Pangeo software stack!</p>
+
+<hr />
+
+<h2 id="learn-more">Learn more</h2>
+
+<ul>
+  <li>Web: <a href="https://pangeo.io/">https://pangeo.io</a></li>
+  <li>Discourse: <a href="https://discourse.pangeo.io/">https://discourse.pangeo.io/</a></li>
+  <li>Github: <a href="https://github.com/pangeo-data">https://github.com/pangeo-data</a></li>
+  <li>Twitter: <a href="https://twitter.com/pangeo_data">@pangeo_data</a></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>If you want to learn more about Pangeo, visit the Pangeo website https://pangeo.io, or github reposity https://github.com/pangeo-data.
+Get help on discourse at https://discourse.pangeo.io/ and follow Pangeo on Twitter @pangeo_data.</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Pangeo is an inclusive community promoting open, reproducible and scalable science.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+
+<h2 id="bibliography">References</h2>
+<ol class="bibliography"><li id="Abernathey2017">Abernathey, R., kevin paul, joe hamman, matthew rocklin, chiara lepore <i>et al.</i>, 2017 <b>Pangeo NSF Earthcube Proposal</b>. <a href="https://doi.org/10.6084/m9.figshare.5361094.v1">10.6084/m9.figshare.5361094.v1</a> <a href="https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094">https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094</a></li>
+<li id="Abernathey2021">Abernathey, R. P., T. Augspurger, A. Banihirwe, C. C. Blackmon-Luca, T. J. Crone <i>et al.</i>, 2021 <b>Cloud-Native Repositories for Big Scientific Data</b>. Computing in Science &amp; Engineering 23: 26–35. <a href="https://doi.org/10.1109/mcse.2021.3059437">10.1109/mcse.2021.3059437</a></li>
+<li id="Gentemann2021">Gentemann, C. L., C. Holdgraf, R. Abernathey, D. Crichton, J. Colliander <i>et al.</i>, 2021 <b>Science Storms the Cloud</b>. <a href="https://doi.org/10.1002/essoar.10506344.2">10.1002/essoar.10506344.2</a></li>
+<li id="Sambasivan2021">Sambasivan, N., S. Kapania, H. Highfill, D. Akrong, P. Paritosh <i>et al.</i>, 2021 <b>“Everyone wants to do the model work,  not the data work”: Data Cascades in High-Stakes AI</b>, <span style="font-style: normal">in</span> <i>Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</i>, <i>ACM</i>. <a href="https://doi.org/10.1145/3411764.3445518">10.1145/3411764.3445518</a></li></ol>
+
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/72087e50d05bf3c6e8e3b024f39f269f945c1470">72087e50d05bf3c6e8e3b024f39f269f945c1470</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

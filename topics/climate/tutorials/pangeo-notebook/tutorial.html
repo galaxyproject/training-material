@@ -1,0 +1,2029 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Pangeo Notebook in Galaxy - Introduction to Xarray</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Pangeo Notebook in Galaxy - Introduction to Xarray" />
+        <meta property="og:description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Climate
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Climate topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/pangeo-notebook/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/pangeo-notebook/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/climate/tutorials/pangeo-notebook/tutorial.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/climate/tutorials/pangeo-notebook/tutorial.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/climate/tutorials/pangeo-notebook/tutorial.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Pangeo Notebook in Galaxy - Introduction to Xarray",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+  },
+  "courseCode": "climate / pangeo-notebook / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Pangeo Notebook in Galaxy - Introduction to Xarray' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/pangeo-notebook/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "pangeo, interactive-tools, jupyter-notebook, jupyter-notebook",
+  "description": "The questions this  addresses are:\n - What is Pangeo notebook?\n - How to start Pangeo Notebook in Galaxy?\n - What are the main software components of the Pangeo ecosystem?\n - What is Xarray?\n - How to manipulate Xarrays?\n - How to print metadata information?\n - How to make a selection?\n - How to visualize?\n - How to filter?\n - How to make reduction operations (mean, max, min)?\n - How to resample my data?\n - Where to go next?\n\n\\nThe objectives are:\n - Learn to get metadata information using Xarray Galaxy Tools\n - Learn to select data\n - Learn to visualize data\n - Learn to filter, make reduction operations (mean, max, min)\n - Learn to resample my data\n - Learn to cite and contribute to Pangeo\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/python-basics/tutorial.html",
+      "name": "Introduction to Python",
+      "description": "Hands-on for 'Introduction to Python' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/python-plotting/tutorial.html",
+      "name": "Plotting in Python",
+      "description": "Hands-on for 'Plotting in Python' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html",
+      "name": "Advanced Python",
+      "description": "Hands-on for 'Advanced Python' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "https://datacarpentry.org/geospatial-workshop/",
+      "name": "Data Carpentry Geospatial Workshop"
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-climate">
+    <h1 data-toc-skip>Pangeo Notebook in Galaxy - Introduction to Xarray</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="https://avatars.githubusercontent.com/annefou?s=27" alt="Avatar">Anne Fouilloux</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is Pangeo notebook?</p>
+</li>
+        
+        <li><p>How to start Pangeo Notebook in Galaxy?</p>
+</li>
+        
+        <li><p>What are the main software components of the Pangeo ecosystem?</p>
+</li>
+        
+        <li><p>What is Xarray?</p>
+</li>
+        
+        <li><p>How to manipulate Xarrays?</p>
+</li>
+        
+        <li><p>How to print metadata information?</p>
+</li>
+        
+        <li><p>How to make a selection?</p>
+</li>
+        
+        <li><p>How to visualize?</p>
+</li>
+        
+        <li><p>How to filter?</p>
+</li>
+        
+        <li><p>How to make reduction operations (mean, max, min)?</p>
+</li>
+        
+        <li><p>How to resample my data?</p>
+</li>
+        
+        <li><p>Where to go next?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn to get metadata information using Xarray Galaxy Tools</p>
+</li>
+        
+        <li><p>Learn to select data</p>
+</li>
+        
+        <li><p>Learn to visualize data</p>
+</li>
+        
+        <li><p>Learn to filter, make reduction operations (mean, max, min)</p>
+</li>
+        
+        <li><p>Learn to resample my data</p>
+</li>
+        
+        <li><p>Learn to cite and contribute to Pangeo</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Introduction to Python:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Plotting in Python:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/python-plotting/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Advanced Python:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        <a href="https://datacarpentry.org/geospatial-workshop/">Data Carpentry Geospatial Workshop</a>
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/climate/tutorials/pangeo-notebook/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.5805953">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/climate/tutorials/pangeo-notebook/workflows/" title="Workflows" alt="Pangeo Notebook in Galaxy - Introduction to Xarray workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/climate/tutorials/pangeo-notebook/climate-pangeo-notebook.ipynb" title="Jupyter Notebook" alt="Pangeo Notebook in Galaxy - Introduction to Xarray Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/climate/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+        <a class="dropdown-item" href="http://aspendb.uga.edu:8085/" title="AGEseq @ AspenDB">
+            AGEseq @ AspenDB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://motherbox.chemeng.ntua.gr/anastasia_dev/" title="ANASTASIA">
+            ANASTASIA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://apostl.moffitt.org/" title="APOSTL">
+            APOSTL
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8083/" title="ARGA">
+            ARGA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ugent.be/" title="BioBix">
+            BioBix
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://143.169.238.104/galaxy/" title="Biomina">
+            Biomina
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://pistacho.ac.uma.es/galaxy-bitlab" title="BitLAB">
+            BitLAB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://iris.angers.inra.fr/galaxypub-cfbp" title="CIRM-CFBP">
+            CIRM-CFBP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://clipseq.usegalaxy.eu/" title="CLIP-Explorer">
+            CLIP-Explorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cpt.tamu.edu/galaxy-public/" title="Center for Phage Technology (CPT)">
+            Center for Phage Technology (CPT)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://vm-chemflow-francegrille.eu/" title="ChemFlow">
+            ChemFlow
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cheminformatics.usegalaxy.eu/" title="ChemicalToolbox">
+            ChemicalToolbox
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://hyperbrowser.uio.no/coloc-stats" title="Coloc-stats">
+            Coloc-stats
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://corgat.cloud.ba.infn.it/galaxy" title="CorGAT">
+            CorGAT
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://coralsnp.science.psu.edu/galaxy/" title="CoralSNP">
+            CoralSNP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://cropgalaxy.excellenceinbreeding.org/" title="CropGalaxy">
+            CropGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://dintor.eurac.edu/" title="Dintor">
+            Dintor
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.freebioinfo.org/" title="FreeBioinfo">
+            FreeBioinfo
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://igg.cloud.ba.infn.it/galaxy" title="GASLINI">
+            GASLINI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gio.sbcs.qmul.ac.uk/" title="Galaxy Integrated Omics (GIO)">
+            Galaxy Integrated Omics (GIO)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.mesocentre.uca.fr" title="Galaxy@AuBi">
+            Galaxy@AuBi
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.pasteur.fr/" title="Galaxy@Pasteur">
+            Galaxy@Pasteur
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://hyperbrowser.uio.no/hb/" title="Genomic Hyperbrowser">
+            Genomic Hyperbrowser
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gigagalaxy.net/" title="GigaGalaxy">
+            GigaGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://huttenhower.sph.harvard.edu/galaxy/" title="Huttenhower Lab">
+            Huttenhower Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.hyphy.org/" title="HyPhy HIV NGS Tools">
+            HyPhy HIV NGS Tools
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8081/" title="IDENAP">
+            IDENAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy-web.ipk-gatersleben.de" title="IPK Galaxy Blast Suite">
+            IPK Galaxy Blast Suite
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://www.immportgalaxy.org/" title="ImmPort Galaxy">
+            ImmPort Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.interactomix.com/" title="InteractoMIX">
+            InteractoMIX
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.lappsgrid.org/" title="LAPPS Grid">
+            LAPPS Grid
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ul.edu.lb/" title="Lebanese University Galaxy">
+            Lebanese University Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
+            Machine Learning Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://neo.engr.uconn.edu/" title="Mandoiu Lab">
+            Mandoiu Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.informatik.uni-halle.de" title="Martin Luther U. Halle-Wittenberg">
+            Martin Luther U. Halle-Wittenberg
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://metabolomics.usegalaxy.eu/" title="Metabolomics">
+            Metabolomics
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
+            Metagenomics
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/" title="MiModD NacreousMap">
+            MiModD NacreousMap
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.inf.ethz.ch" title="Oqtans">
+            Oqtans
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://palfinder.ls.manchester.ac.uk/" title="Palfinder">
+            Palfinder
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://pepsimili.e-nios.com:8080/" title="PepSimili">
+            PepSimili
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.bio.di.uminho.pt/" title="PhagePromotor">
+            PhagePromotor
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
+            Plant Anaylsis Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://protologger.de/" title="Protologger">
+            Protologger
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.bio.ku.dk/" title="Vinther Lab">
+            Vinther Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://viralvariant.anses.fr/" title="Viral Variant Visualizer (VVV)">
+            Viral Variant Visualizer (VVV)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://virology.usegalaxy.eu/" title="Virology">
+            Virology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://covid19.usegalaxy.fr/" title="covid19.UseGalaxy.fr">
+            covid19.UseGalaxy.fr
+        </a>
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 18, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                     
+                    
+                        
+                        <!--SNIPPET--><blockquote class="comment">  <h3 data-toc-skip id="comment-this-is-best-viewed-in-pangeo-jupyter-lab"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> This is best viewed in Pangeo Jupyter Lab</h3>  <ol>    <li>      <p>Create a history</p>      <blockquote class="hands_on">        <h3 data-toc-skip id="hands_on-hands-on-create-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create history</h3>        <ol>          <li>Make sure you start from an empty analysis history.</li>          <li><strong>Rename your history</strong> to be meaningful and easy to find. For instance, you can choose <strong>Xarray with Pangeo notebook</strong> as the name of your new history.</li>        </ol>      </blockquote>    </li>    <li>      <p>Upload CAMS PM2.5 data</p>      <p>Data can be retrieved directly from <a href="https://ads.atmosphere.copernicus.eu/">Copernicus Atmosphere Monitoring Service</a> but to make it easier, you can download the tutorial data from <a href="https://zenodo.org/record/5805953/files/CAMS-PM2_5-20211222.netcdf">Zenodo</a>.</p>      <blockquote class="hands_on">        <h3 data-toc-skip id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>        <ol>          <li>Create a new history for this tutorial</li>          <li>            <p>Import the files from <a href="https://doi.org/10.5281/zenodo.5805953">Zenodo</a> or fromthe shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">Climate</code> -&gt; <code class="language-plaintext highlighter-rouge">Pangeo Notebook in Galaxy - Introduction to Xarray</code>):</p>            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5805953/files/CAMS-PM2_5-20211222.netcdf</code></pre></div>            </div>          </li>          <li>Rename the dataset to <strong>CAMS-PM2_5-20211222.netcdf</strong></li>          <li>Check that the datatype is <strong>netcdf</strong></li>        </ol>      </blockquote>    </li>    <li>      <p>Starting Galaxy Pangeo JupyterLab</p>      <blockquote class="hands_on">        <h3 data-toc-skip id="hands_on-hands-on-launch-pangeo-notebook-jupyterlab-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch Pangeo notebook JupyterLab in Galaxy</h3>        <p>Currently Pangeo notebook in Galaxy is available on <a href="https://usegalaxy.eu">useGalaxy.eu</a> only. Make sure you login to Galaxy and search for Pangeo notebook and not the default JupyterLab in Galaxy to make sure you ahve all the Pangeo Software stack available. The default JupyterLab in Galaxy would not be sufficient for executing all the tasks in this tutorial.</p>        <ol>          <li>Open the <span class="tool" data-tool="interactive_tool_pangeo_notebook" title="Tested with interactive_tool_pangeo_notebook"><strong>Pangeo Notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_pangeo_notebook</span></span>  by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_pangeo_notebook" target="_blank">here</a></li>          <li><em>Include data into the environment</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>          <li>Click on <strong>Execute</strong>: the tool will start running and will stay running</li>          <li>Click on the <strong>User</strong> menu at the top and go to <strong>Active Interactive Tools</strong> and locate the Pangeo JupyterLab instance you started.</li>          <li>Click on your Pangeo JupyterLab instance</li>        </ol>      </blockquote>    </li>    <li>      <p>Once the notebook has started, open a Terminal in Jupyter <strong>File → New → Terminal</strong></p>    </li>    <li>      <p>Run the following command:</p>      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/climate-pangeo-notebook.ipynb</code></pre></div>      </div>    </li>    <li>      <p>Switch to the Notebook that appears in the list of files on the left</p>    </li>  </ol></blockquote>
+                    
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>In this tutorial, we will learn about <a href="https://xarray.pydata.org/">Xarray</a>, one of the most used Python library from the <a href="https://pangeo.io/">Pangeo</a> ecosystem.</p>
+
+<p>We will be using data from <a href="https://ads.atmosphere.copernicus.eu/">Copernicus Atmosphere Monitoring Service</a>
+and more precisely PM2.5 (<a href="https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter">Particle Matter &lt; 2.5 μm</a>) 4 days forecast from December, 22 2021. Parallel data analysis with Pangeo is not covered in this tutorial.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-remark"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Remark</h3>
+
+  <p>This tutorial uses data on a regular latitude-longitude grid. More complex and irregular grids are not discussed in this tutorial. In addition,
+this tutorial is not meant to cover all the different possibilities offered by Xarrays but shows functionalities we find useful for day to day
+analysis.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#analysis" id="markdown-toc-analysis">Analysis</a>    <ol>
+      <li><a href="#import-python-packages" id="markdown-toc-import-python-packages">Import Python packages</a></li>
+      <li><a href="#open-and-read-metadata" id="markdown-toc-open-and-read-metadata">Open and read metadata</a></li>
+      <li><a href="#select--subset-from-coordinates" id="markdown-toc-select--subset-from-coordinates">Select / Subset from coordinates</a></li>
+      <li><a href="#plotting" id="markdown-toc-plotting">Plotting</a></li>
+      <li><a href="#how-to-use-the-where-method" id="markdown-toc-how-to-use-the-where-method">How to use the <strong>where</strong> method</a></li>
+      <li><a href="#reduction-operations" id="markdown-toc-reduction-operations">Reduction operations</a></li>
+      <li><a href="#details-on-the-resample-method" id="markdown-toc-details-on-the-resample-method">Details on the <strong>resample</strong> method</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="analysis">Analysis</h1>
+
+<h2 id="import-python-packages">Import Python packages</h2>
+
+<p>Some packages may need to be installed first. For example <code class="language-plaintext highlighter-rouge">cmcrameri</code> is missing, so we need to install it by entering the following command in a new cell of your Jupyter Notebook:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">cmcrameri</span>
+</code></pre></div></div>
+
+<p>Then we need to import all the necessary packages in our Jupyter Notebook.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="n">xr</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="n">ccrs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">cmcrameri.cm</span> <span class="k">as</span> <span class="n">cmc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+
+<h2 id="open-and-read-metadata">Open and read metadata</h2>
+
+<p>The netCDF dataset can now be opened with Xarray:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span> <span class="o">=</span> <span class="n">xr</span><span class="p">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s">"data/CAMS-PM2_5-20211222.netcdf"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Once opened, we can get metadata using <code class="language-plaintext highlighter-rouge">print</code> statement.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Below is what you should get if everything goes fine.</p>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;xarray.Dataset&gt;
+ Dimensions:     (longitude: 700, latitude: 400, level: 1, time: 97)
+ Coordinates:
+   * longitude   (longitude) float32 -24.95 -24.85 -24.75 ... 44.75 44.85 44.95
+   * latitude    (latitude) float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
+   * level       (level) float32 0.0
+   * time        (time) timedelta64[ns] 00:00:00 01:00:00 ... 4 days 00:00:00
+Data variables:
+  pm2p5_conc  (time, level, latitude, longitude) float32 0.4202 ... 7.501
+Attributes:
+  title:        PM25 Air Pollutant FORECAST at the Surface
+  institution:  Data produced by Meteo France
+  source:       Data from ENSEMBLE model
+  history:      Model ENSEMBLE FORECAST
+  FORECAST:     Europe, 20211222+[0H_96H]
+  summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
+  project:      MACC-RAQ (http://macc-raq.gmes-atmosphere.eu)
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-command-not-found"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Command not found</h3>
+  <p>If you get an error with the previous command, first check the location of the input file <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code>:
+it needs to be in the same directory as your Jupyter Notebook.</p>
+</blockquote>
+
+<p>We can identify 4 different sections:</p>
+<ol>
+  <li><strong>Dimensions</strong>: name of dimensions and corresponding number of elements;</li>
+  <li><strong>Coordinates</strong>: contains coordinate arrays (longitude, latitude, level and time) with their values.</li>
+  <li><strong>Data variables</strong>: contains all the variables available in the dataset. Here, we only have one variable. For each variable, we get information on its shape and values.</li>
+  <li><strong>Attributes</strong>: at this level, we get all the attributes of the dataset.</li>
+</ol>
+
+<p>We can also get metadata information for each coordinate and data variables using “.” followed by the coordinate or data variable name.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-questions-cam-pm25-dataset"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions CAM PM2.5 Dataset</h3>
+
+  <p>What is the name of the variable for Particle matter &lt; 2.5 μm and its physical units?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>To get metadata information from <code class="language-plaintext highlighter-rouge">pm2p5_conc</code> Data variable, we use its variable name and print it. Printing it will only print metadata, not the values.
+        <ul>
+          <li>Variable name: <code class="language-plaintext highlighter-rouge">mass_concentration_of_pm2p5_ambient_aerosol_in_air</code></li>
+          <li>Units: <code class="language-plaintext highlighter-rouge">µg/m3</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-input-python"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Python</h3>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">pm2p5_conc</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   &lt;xarray.DataArray <span class="s1">'pm2p5_conc'</span> <span class="o">(</span><span class="nb">time</span>: 97, level: 1, latitude: 400, longitude: 700<span class="o">)&gt;</span>
+   <span class="o">[</span>27160000 values with <span class="nv">dtype</span><span class="o">=</span>float32]
+   Coordinates:
+     <span class="k">*</span> longitude  <span class="o">(</span>longitude<span class="o">)</span> float32 335.0 335.1 335.2 335.4 ... 44.75 44.85 44.95
+     <span class="k">*</span> latitude   <span class="o">(</span>latitude<span class="o">)</span> float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
+     <span class="k">*</span> level      <span class="o">(</span>level<span class="o">)</span> float32 0.0
+     <span class="k">*</span> <span class="nb">time</span>       <span class="o">(</span><span class="nb">time</span><span class="o">)</span> timedelta64[ns] 00:00:00 01:00:00 ... 4 days 00:00:00
+   Attributes:
+       species:        PM2.5 Aerosol
+       units:          µg/m3
+       value:          hourly values
+       standard_name:  mass_concentration_of_pm2p5_ambient_aerosol_in_air
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-different-ways-to-access-data-variables"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Different ways to access Data variables</h3>
+
+  <p>To access a variable or coordinate, we can use “.” or specify its name as a string between squared brackets “[” “]”. For example:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">])</span>
+<span class="c1"># or alte<span class="notranslate">rna</span>tively
+</span><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">pm2p5_conc</span><span class="p">)</span>
+</code></pre></div>  </div>
+
+  <p>When we print a variable or coordinate, we do not get all the individual values but a <code class="language-plaintext highlighter-rouge">DataArray</code> that contains a lot of very useful metadata such as coordinates (if they have some), all the attributes such as the name, the physical units, etc.</p>
+
+</blockquote>
+<h2 id="select--subset-from-coordinates">Select / Subset from coordinates</h2>
+
+<p>We often want to select elements from the coordinates for instance to subset a geographical area or select specific times or a specific time range.</p>
+
+<p>There are two different ways to make a selection:</p>
+<ul>
+  <li>by index</li>
+  <li>by value</li>
+</ul>
+
+<h3 id="select-elements-from-coordinate-by-index">Select elements from coordinate by index</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>You should see that the coordinate <code class="language-plaintext highlighter-rouge">time</code> “disappeared” from the <code class="language-plaintext highlighter-rouge">Dimensions</code> and now the variable <code class="language-plaintext highlighter-rouge">pm2p5_conc</code> is a 3D field with longitude, latitude and level.</p>
+
+<h3 id="select-elements-from-coordinates-by-value">Select elements from coordinates by value</h3>
+
+<p>When selecting elements by the value of the coordinate, we need to use the same datatype. For instance, to select an element from
+<code class="language-plaintext highlighter-rouge">time</code>, we need to use <code class="language-plaintext highlighter-rouge">timedelta64</code>. The code below will give the same result as <code class="language-plaintext highlighter-rouge">isel(time=0)</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>The output will be very similar to what we did previously when selecting from coordinates by index.</p>
+
+<blockquote class="question">
+  <h3 id="question-select-a-single-time-for-pm25"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Select a single time for PM2.5</h3>
+
+  <p>How to select the forecast for December, 24th 2021 at 12:00 UTC?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index.</p>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-input-python-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Python</h3>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">))))</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
+Dimensions:     <span class="o">(</span>longitude: 700, latitude: 400, level: 1<span class="o">)</span>
+Coordinates:
+  <span class="k">*</span> longitude   <span class="o">(</span>longitude<span class="o">)</span> float32 <span class="nt">-24</span>.95 <span class="nt">-24</span>.85 <span class="nt">-24</span>.75 ... 44.75 44.85 44.95
+  <span class="k">*</span> latitude    <span class="o">(</span>latitude<span class="o">)</span> float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
+  <span class="k">*</span> level       <span class="o">(</span>level<span class="o">)</span> float32 0.0
+    <span class="nb">time        </span>timedelta64[ns] 2 days 12:00:00
+Data variables:
+    pm2p5_conc  <span class="o">(</span>level, latitude, longitude<span class="o">)</span> float32 0.4499 0.4421 ... 10.71
+Attributes:
+    title:        PM25 Air Pollutant FORECAST at the Surface
+    institution:  Data produced by Meteo France
+    <span class="nb">source</span>:       Data from ENSEMBLE model
+    <span class="nb">history</span>:      Model ENSEMBLE FORECAST
+    FORECAST:     Europe, 20211222+[0H_96H]
+    summary:      ENSEMBLE model hourly FORECAST of PM25 concentration at the...
+    project:      MACC-RAQ <span class="o">(</span>http://macc-raq.gmes-atmosphere.eu<span class="o">)</span>
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="plotting">Plotting</h2>
+
+<p>To plot a map, you need to select a variable with data on geographical coordinates (latitude, longitude). In addition, coordinates need to be sorted, and preferably in increasing order. This is not the case for the coordinate “longitude” which is given between 360 and 0.</p>
+
+<p>Let’s shift the longitudes by 180 degrees so that they come in the range of -180 to 180.</p>
+
+<h3 id="shift-longitudes">Shift longitudes</h3>
+
+<p>We print the longitudes before and after shifting them so we can see what is happening.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">longitude</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The longitude values are between <code class="language-plaintext highlighter-rouge">335.05</code> and <code class="language-plaintext highlighter-rouge">44.95</code> degrees.</p>
+
+<p>Let’s now shift the longitudes to get values between <code class="language-plaintext highlighter-rouge">-180</code>, <code class="language-plaintext highlighter-rouge">180</code> degrees.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="n">coords</span><span class="p">[</span><span class="s">'longitude'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'longitude'</span><span class="p">]</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span> <span class="o">-</span> <span class="mi">180</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">longitude</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Indeed, the longitudes have been shifted and now the values are between <code class="language-plaintext highlighter-rouge">-24.95</code> and <code class="language-plaintext highlighter-rouge">44.95</code>.</p>
+
+<h3 id="visualize-on-a-map-pm25-for-december-24th-2021-at-1200-utc">Visualize on a map PM2.5 for December, 24th 2021 at 12:00 UTC</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">))).</span><span class="n">pm2p5_conc</span><span class="p">.</span><span class="n">plot</span><span class="p">()</span>
+</code></pre></div></div>
+<p>We will get a figure like the one below:</p>
+
+<p><img src="../../images/PM2_5_default.png" alt="CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " loading="lazy" /></p>
+
+<blockquote class="comment">
+  <h3 id="comment-what-about-level"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> What about <code class="language-plaintext highlighter-rouge">level</code></h3>
+  <p>Note that in the previous plot, we did not need to select <code class="language-plaintext highlighter-rouge">level</code> because there is one value only. However, if we had more than one level, we would need to add a selection on the level before plotting</p>
+
+</blockquote>
+
+<h3 id="customize-your-plot">Customize your plot</h3>
+
+<p>There are many ways to customize your plots and we will only detail what we think is important for creating publication ready figures:</p>
+<ul>
+  <li>Define the size of the figure</li>
+  <li>Choose to project data on a different projection.</li>
+  <li>Add coastline</li>
+  <li>Set the min and max values for plotting</li>
+  <li>Add a title, change colorbar title</li>
+  <li>Save figure into png</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+ 
+<span class="c1"># We're using cartopy to project our data.
+# (see documentation on cartopy)
+</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">())</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s">'10m'</span><span class="p">)</span>
+  
+<span class="c1"># We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+</span><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">)))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
+                                                                                    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                                                                                    <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
+                                                                                    <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
+<span class="c1"># One way to customize your title
+</span><span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts</span><span class="se">\n</span><span class="s"> 24th December 2021 at 12:00 UTC"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-20211224.png"</span><span class="p">)</span>
+</code></pre></div></div>
+<blockquote>
+</blockquote>
+
+<p>And you should get the following plot:</p>
+
+<p><img src="../../images/CAMS-PM2_5-fc-20211224.png" alt="Customized plot for CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " loading="lazy" /></p>
+
+<h3 id="multi-plots">Multi-plots</h3>
+
+<p>Now, we will plot several times on the same figure in different sub-plots; we will not plot all the times (too many) but the first 24 forecasted values.</p>
+
+<p>Firstly, we need to create a list of times and convert it to <code class="language-plaintext highlighter-rouge">pandas datetime</code> in order to make it easier to format times when plotting:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list_times</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">list_times</span><span class="p">).</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Secondly, we need to use the same plotting method as earlier, but we pass additional parameters:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vmin = 0</code>and <code class="language-plaintext highlighter-rouge">vmax = 35</code> to set the minimum and maximum values when plotting (this is useful to highlight features in your plot)</li>
+  <li><code class="language-plaintext highlighter-rouge">subplot_kws={"projection": proj_plot}</code> to project data on a non-default projection. See <a href="https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html">cartopy projection</a> for more information about projections.</li>
+  <li><code class="language-plaintext highlighter-rouge">col='time'</code> because we will plot several <code class="language-plaintext highlighter-rouge">time</code>;</li>
+  <li><code class="language-plaintext highlighter-rouge">col_wrap=4</code> to have a maximum of 4 plots per row. If we have more times to plot, then the next figures will be on another row.</li>
+  <li><code class="language-plaintext highlighter-rouge">robust=True</code> and <code class="language-plaintext highlighter-rouge">aspect=dset.dims["longitude"] / dset.dims["latitude"]</code> are additional parameters to make each subplot with a “sensible” figsize.</li>
+  <li><code class="language-plaintext highlighter-rouge">cmap=cmc.roma_r</code> to select a non-default and color-blind friendly colormap (see <a href="https://www.fabiocrameri.ch/colourmaps/">scientific colormaps</a>).</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+  
+<span class="c1"># We're using cartopy to project our data.
+# (see documentation on cartopy)
+</span><span class="n">proj_plot</span> <span class="o">=</span> <span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">()</span>
+  
+<span class="c1"># We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                                                                                       <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
+                                                                                       <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                                                                       <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                                                       <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                                                                      <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+</span>                                                                                       <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
+<span class="c1"># We have to set the map's options on our axes
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+      <span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
+      <span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">"CAMS PM2.5 "</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># Save your figure
+</span><span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi.png"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>In the second part of our plot, we are going to customize each subplot (this is why we loop for each of them and get their axes) by adding:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">coastlines</code>: we pass a parameter <code class="language-plaintext highlighter-rouge">10m</code> to get coastlines with a high resolution (non-default);</li>
+  <li><code class="language-plaintext highlighter-rouge">set_title</code> to set a title for each subplot.</li>
+</ul>
+
+<p><img src="../../images/CAMS-PM2_5-fc-multi.png" alt="Customized multi-plot. " loading="lazy" /></p>
+
+<blockquote class="question">
+  <h3 id="question-pm25-over-italy"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> PM2.5 over Italy</h3>
+
+  <p>Using a Multi-plot between Rome and Naples, can you tell us if the forecasted PM2.5 will increase or decrease during the first 24 hours?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N. PM2.5 will increase and reach values close to 35 μm.m-3.
+We will use <code class="language-plaintext highlighter-rouge">slice</code> to select the area and we slice latitudes with <code class="language-plaintext highlighter-rouge">latitude=slice(47.3, 36.5)</code> and not <code class="language-plaintext highlighter-rouge">latitude=slice(36.5, 47.3)</code>.
+The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
+decreasing order for CAMS.</p>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-input-python-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Python</h3>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># We're using cartopy to project our data.
+# (see documentation on cartopy)
+</span><span class="n">proj_plot</span> <span class="o">=</span> <span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">()</span>
+
+<span class="c1"># We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">))).</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span>
+                                                                          <span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                                                                                     <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
+                                                                                     <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                                                                     <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                                                     <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                                                                     <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+</span>                                                                                     <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
+<span class="c1"># We have to set the map's options on all axes
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">"CAMS PM2.5 "</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># Save your figure
+</span><span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi-Italy.png"</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <p><img src="../../images/CAMS-PM2_5-fc-multi-Italy.png" alt="PM2.5 over Italy. " loading="lazy" /></p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="how-to-use-the-where-method">How to use the <strong>where</strong> method</h2>
+
+<p>Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this purpose,  we use the <code class="language-plaintext highlighter-rouge">where</code> method. For instance, we may want to only keep PM2.5 if values are greater than 25 μm.m-3 (or any threshold you would like to choose).</p>
+
+<h3 id="mask-values-that-do-not-meet-a-criteria-with-where">Mask values that do not meet a criteria with <code class="language-plaintext highlighter-rouge">Where</code></h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">))</span>
+</code></pre></div></div>
+
+<blockquote class="comment">
+  <h3 id="comment-what-happened"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> What happened?</h3>
+  <p>Each element of the dataset where the criteria within the <code class="language-plaintext highlighter-rouge">where</code> statement is not met, e.g. when PM2.5 &lt;= 25, will be set to <code class="language-plaintext highlighter-rouge">nan</code>. 
+You may not see any changes when printing the dataset but if you look carefuly at <code class="language-plaintext highlighter-rouge">pm2p5_conc</code> values, you will see many <code class="language-plaintext highlighter-rouge">nan</code>.</p>
+
+</blockquote>
+
+<p>Let’s plot one time to better see what happened:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">######################
+# Plotting with mask #
+######################
+</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+ 
+<span class="c1"># We're using cartopy to project our data.
+# (see documentation on cartopy)
+</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">())</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s">'10m'</span><span class="p">)</span>
+  
+<span class="c1"># We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+</span><span class="n">dset</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                                                                     <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                                                                     <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
+                                                                     <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
+<span class="c1"># One way to customize your title
+</span><span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts</span><span class="se">\n</span><span class="s"> 24th December 2021 at 12:00 UTC</span><span class="se">\n</span><span class="s"> only values &gt; 25"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-20211224-25.png"</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="../../images/CAMS-PM2_5-fc-20211224-25.png" alt="PM2.5 over Italy with threshold at 25. " loading="lazy" /></p>
+
+<p>We can then make the same multi-plot as earlier (over Italy) but with a <code class="language-plaintext highlighter-rouge">where</code> statement to mask values lower than 25 μm.m-3:</p>
+
+<h3 id="multi-plot-over-italy-using-a-mask">Multi-plot over Italy using a mask</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+ 
+<span class="c1"># We're using cartopy to project our data.
+# (see documentation on cartopy)
+</span><span class="n">proj_plot</span> <span class="o">=</span> <span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">()</span>
+  
+<span class="c1"># We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">))).</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span>
+                                                                           <span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                                                                                      <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
+                                                                                     <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                                                                     <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                                                     <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                                                                     <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+</span>                                                                                     <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
+<span class="c1"># We have to set the map's options on all four axes
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+     <span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
+     <span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">"PM2.5 &gt; 25 μm.m-3"</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># Save your figure
+</span><span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi-Italy-25.png"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../../images/CAMS-PM2_5-fc-multi-Italy-25.png" alt="Multi-plot of PM2.5 over Italy with threshold at 25. " loading="lazy" /></p>
+
+<h2 id="reduction-operations">Reduction operations</h2>
+<p>We often want to compute the mean of all our datasets, or along a dimension (for instance time). If you do not pass any argument to the operation then it is done over all dimensions.</p>
+
+<h3 id="details-on-the-mean-method">Details on the <strong>mean</strong> method</h3>
+<p>When we do not specify any parameters, we get a single value.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div></div>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
+Dimensions:     <span class="o">()</span>
+ Data variables:
+    pm2p5_conc  float32 9.118
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-maximum-pm25-over-italy"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Maximum PM2.5 over Italy</h3>
+
+  <p>What is the maximum forecasted PM2.5 value over the Rome-Naples region?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We  select the same sub-area: 11. East to 15.0 East and 40. N to 43. N and compute the maximum with <code class="language-plaintext highlighter-rouge">max</code>. The maximum PM2.5 value is <strong>59.13694382</strong> μm.m-3 (that is rounded to <strong>59.14</strong>).</p>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-input-python-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Python</h3>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="nb">max</span><span class="p">()</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <h3 id="code-out-output-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xarray.Dataset
+Dimensions:
+Coordinates: <span class="o">(</span>0<span class="o">)</span>
+Data variables:
+pm2p5_conc
+<span class="o">()</span>
+float64
+59.14
+array<span class="o">(</span>59.13694382<span class="o">)</span>
+Attributes: <span class="o">(</span>0<span class="o">)</span>
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-find-when-the-maximum-pm25-is-forecasted"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Find when the maximum PM2.5 is forecasted</h3>
+
+  <p>When is the maximum PM2.5 value forecasted?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N and average over the entire selected area and search where the maximum PM2.5 value of 59.13694382 μm.m-3 is found. The maximum PM2.5 value occurs on 2021-12-22 at 20:00 UTC.</p>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-input-python-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Python</h3>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset_tmean</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="nb">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s">'latitude'</span><span class="p">,</span> <span class="s">'longitude'</span><span class="p">))</span>
+<span class="n">dset_tmean_max</span> <span class="o">=</span> <span class="n">dset_tmean</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">dset_tmean</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">==</span> <span class="mf">59.13694382</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dset_tmean_max</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <h3 id="code-out-output-5"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
+Dimensions:     <span class="o">(</span><span class="nb">time</span>: 1, level: 1<span class="o">)</span>
+Coordinates:
+  <span class="k">*</span> level       <span class="o">(</span>level<span class="o">)</span> float32 0.0
+  <span class="k">*</span> <span class="nb">time</span>        <span class="o">(</span><span class="nb">time</span><span class="o">)</span> timedelta64[ns] 20:00:00
+Data variables:
+    pm2p5_conc  <span class="o">(</span><span class="nb">time</span>, level<span class="o">)</span> float32 59.14
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-pixel-size-when-averaging"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Pixel size when averaging</h3>
+  <p>We average over a relatively small area so we do not make a weighted average. Use weighted averages when averaging over the entire globe or over a large area where the pixel sizes may vary (depending on the latitude).</p>
+
+</blockquote>
+
+<h2 id="details-on-the-resample-method">Details on the <strong>resample</strong> method</h2>
+
+<h3 id="1-day-resampling">1 day Resampling</h3>
+
+<p>The resampling frequency is lower than our original data, so we would need to apply a global operation on the data we group together such as mean, min, max:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'1D'</span><span class="p">).</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div></div>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-6"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
+Dimensions:     <span class="o">(</span><span class="nb">time</span>: 5, longitude: 700, latitude: 400, level: 1<span class="o">)</span>
+Coordinates:
+  <span class="k">*</span> <span class="nb">time</span>        <span class="o">(</span><span class="nb">time</span><span class="o">)</span> timedelta64[ns] 0 days 1 days 2 days 3 days 4 days
+  <span class="k">*</span> longitude   <span class="o">(</span>longitude<span class="o">)</span> float32 <span class="nt">-24</span>.95 <span class="nt">-24</span>.85 <span class="nt">-24</span>.75 ... 44.75 44.85 44.95
+  <span class="k">*</span> latitude    <span class="o">(</span>latitude<span class="o">)</span> float32 69.95 69.85 69.75 69.65 ... 30.25 30.15 30.05
+  <span class="k">*</span> level       <span class="o">(</span>level<span class="o">)</span> float32 0.0
+Data variables:
+    pm2p5_conc  <span class="o">(</span><span class="nb">time</span>, level, latitude, longitude<span class="o">)</span> float32 0.4298 ... 7.501
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="30-minute-resampling">30 minute resampling</h3>
+
+<p>When the resampling frequency is higher than the original data, we need to indicate how to fill the gaps, for instance, interpolate and indicate which interpolation method to apply or select nearest values, etc.:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'30min'</span><span class="p">).</span><span class="n">interpolate</span><span class="p">(</span><span class="s">'linear'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<blockquote class="comment">
+  <h3 id="comment-be-careful-when-sub-sampling"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Be careful when sub-sampling!</h3>
+  <p>Increasing the frequency of your data e.g. artificially creating data may not be scientifically relevant. Please use it carefully! Interpolating is not always scientifically relevant and sometimes you may prefer to choose a different method, like taking the nearest value for instance:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-python-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Python</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">dset</span><span class="p">.</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'30min'</span><span class="p">).</span><span class="n">nearest</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-pm25-over-italy-in-the-next-4-days"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> PM2.5 over Italy in the next 4 days</h3>
+
+  <p>Using a Multi-plot between Rome and Naples, and making averages per day, can you tell us if forecasted PM2.5 will increase or decrease?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>PM2.5 over Italy is overall decreasing over the next 4 forecasted days.</p>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-input-python-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Python</h3>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># We're using cartopy to project our data.
+# (see documentation on cartopy)
+</span><span class="n">proj_plot</span> <span class="o">=</span> <span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">()</span>
+
+<span class="n">sub_dset</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'1D'</span><span class="p">).</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># We need to project our data to the new projection and for this we use `transform`.
+# we set the original data projection in transform (here PlateCarree)
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">sub_dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span> 
+                                <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
+                                <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+</span>                                <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
+<span class="c1"># We have to set the map's options on all axes
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">"CAMS PM2.5 "</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># Save your figure
+</span><span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi-Italy-mean-per-day.png"</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote>
+      <p><img src="../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png" alt="Daily mean for PM2.5 over Italy. " loading="lazy" /></p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-grouby-versus-resample"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> <code class="language-plaintext highlighter-rouge">Grouby</code> versus <code class="language-plaintext highlighter-rouge">resample</code></h3>
+
+  <p>Use <code class="language-plaintext highlighter-rouge">groupby</code> instead of <code class="language-plaintext highlighter-rouge">resample</code> when you wish to group over a dimension that is not <code class="language-plaintext highlighter-rouge">time</code>. <code class="language-plaintext highlighter-rouge">groupby</code> is very similar to resample but can be applied to any coordinates and not only to time.</p>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! <a href="https://pangeo.io/">Pangeo</a> is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo <span class="citation"><a href="#Abernathey2017">Abe<span class="notranslate">rna</span>they <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Abernathey2021">Abe<span class="notranslate">rna</span>they <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Gentemann2021">Gentemann <i>et al.</i> 2021</a></span> and <span class="citation"><a href="#Sambasivan2021">Sambasivan <i>et al.</i> 2021</a></span>!</p>
+
+<p>Have a look at the <a href="https://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/">Pangeo Tutorial Gallery</a> to pick up your next Pangeo training material!</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Pangeo ecosystem enables big data analysis in geosciences</p>
+</li>
+                        
+                        <li><p>Xarray is an important Python package for big data analysis in geosciences</p>
+</li>
+                        
+                        <li><p>Xarray can be used to read, select, mask and plot netCDF data</p>
+</li>
+                        
+                        <li><p>Xarray can also be used to perform global operations such as mean, max, min or resampling data</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/climate/faqs/">FAQ page for the Climate topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Abernathey2017">Abernathey, R., kevin paul, joe hamman, matthew rocklin, chiara lepore <i>et al.</i>, 2017 <b>Pangeo NSF Earthcube Proposal</b>. <a href="https://doi.org/10.6084/m9.figshare.5361094.v1">10.6084/m9.figshare.5361094.v1</a> <a href="https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094">https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094</a></li>
+<li id="Abernathey2021">Abernathey, R. P., T. Augspurger, A. Banihirwe, C. C. Blackmon-Luca, T. J. Crone <i>et al.</i>, 2021 <b>Cloud-Native Repositories for Big Scientific Data</b>. Computing in Science &amp; Engineering 23: 26–35. <a href="https://doi.org/10.1109/mcse.2021.3059437">10.1109/mcse.2021.3059437</a></li>
+<li id="Gentemann2021">Gentemann, C. L., C. Holdgraf, R. Abernathey, D. Crichton, J. Colliander <i>et al.</i>, 2021 <b>Science Storms the Cloud</b>. <a href="https://doi.org/10.1002/essoar.10506344.2">10.1002/essoar.10506344.2</a></li>
+<li id="Sambasivan2021">Sambasivan, N., S. Kapania, H. Highfill, D. Akrong, P. Paritosh <i>et al.</i>, 2021 <b>“Everyone wants to do the model work,  not the data work”: Data Cascades in High-Stakes AI</b>, <span style="font-style: normal">in</span> <i>Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</i>, <i>ACM</i>. <a href="https://doi.org/10.1145/3411764.3445518">10.1145/3411764.3445518</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Pangeo Notebook in Galaxy - Introduction to Xarray (Climate)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anne Fouilloux, 2022 <b>Pangeo Notebook in Galaxy - Introduction to Xarray (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{climate-pangeo-notebook,
+author = "Anne Fouilloux",
+title = "Pangeo Notebook in Galaxy - Introduction to Xarray (Galaxy Training Materials)",
+year = "2022",
+month = "02",
+day = "18"
+url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        <a href="http://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/index.html">Pangeo Tutorial Gallery</a>
+    
+    </li>
+
+    <li>
+    
+        <a href="http://gallery.pangeo.io/index.html">Pangeo Gallery</a>
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>The Pangeo ecosystem</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:title" content="Galaxy Training: The Pangeo ecosystem" />
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/pangeo-notebook/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/pangeo-notebook/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/pangeo-notebook/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/climate/tutorials/pangeo-notebook/slides-plain.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/climate/tutorials/pangeo-notebook/slides-plain.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-12-01/topics/climate/tutorials/pangeo-notebook/slides-plain.html" title="Version 2021-12-01">2021-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/climate/tutorials/pangeo-notebook/slides.html">View markdown source on GitHub</a>
+	<h1>The Pangeo ecosystem</h1>
+		<h2>Contributors</h2>
+		
+<a href="/training-material/hall-of-fame/BasileGoussard/" class="contributor-badge contributor-BasileGoussard"><img src="https://avatars.githubusercontent.com/BasileGoussard?s=27" alt="Avatar">Basile Goussard</a>
+
+ 
+<a href="/training-material/hall-of-fame/rabernat/" class="contributor-badge contributor-rabernat"><img src="https://avatars.githubusercontent.com/rabernat?s=27" alt="Avatar">Ryan Abernathey</a>
+
+ 
+<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="https://avatars.githubusercontent.com/annefou?s=27" alt="Avatar">Anne Fouilloux</a>
+
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is Pangeo?</p>
+</li>
+		
+		<li><p>What is the Pangeo Software Ecosystem?</p>
+</li>
+		
+		<li><p>What is ARCO (Analysis Ready, Cloud Optimized) Data?</p>
+</li>
+		
+		<li><p>What is Pangeo forge?</p>
+</li>
+		
+		<li><p>What is STAC?</p>
+</li>
+		
+		<li><p>Why and how to use STAC?</p>
+</li>
+		
+		<li><p>How do Pangeo forge and STAC relate to each other?</p>
+</li>
+		
+		<li><p>How can I use and/or contribute to Pangeo?</p>
+</li>
+		
+		<li><p>Where to go to learn more about Pangeo?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand Pangeo, its community, software ecosystem, infrastructure and cloud optimized data ecosystem.</p>
+</li>
+		
+		<li><p>Understand SpatioTemporal Asset Catalog (STAC) and how it relates to Pangeo.</p>
+</li>
+		
+		<li><p>Understand how to use and contribute to Pangeo.</p>
+</li>
+		
+		<li><p>Learn about Pangeo in Galaxy.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 7, 2022 </div>
+
+	<hr />
+
+
+	<h2 id="about-this-presentation">About this presentation</h2>
+
+<p>.left[ This presentation is a summary of: ]</p>
+
+<ul>
+  <li><a href="https://speakerdeck.com/rabernat/unlocking-the-potential-of-cloud-native-science-with-pangeo">Unlocking the Potential of Cloud Native Science with Pangeo</a> by Ryan Abernathey (Co-founder of Pangeo);</li>
+  <li><a href="https://docs.google.com/presentation/d/e/2PACX-1vSTH2kAR0DCR0nw8pFBe5kuYbOk3inZ9cQfZbzOIRjyzQoVaOoMfI2JONGBz-qsvG_P6g050ddHxSXT/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g646705d04f_0_0">Introduction to DASK</a> by the Dask Community;</li>
+  <li><a href="https://doi.org/10.5281/zenodo.5896445">STAC for Earth Observation</a> by Basile Goussard (<a href="https://www.netcarbon.fr/">netCarbon</a>).</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This presentation is a summary of three presentations: Unlocking the Potential of Cloud Native Science with Pangeo by Ryan Abernathey, 
+Co-founder of Pangeo; Introduction to DASK by the Dask community and STAC e.g. SpatioTemporal Asset Catalogs, for Earth Observation by Basile Goussard from netCarbon.</p>
+
+<hr />
+
+<h2 id="pangeo-in-a-nutshell">Pangeo in a nutshell</h2>
+
+<p><strong>A Community platform for Big Data geoscience</strong></p>
+
+<ul>
+  <li>Open Community</li>
+  <li>Open Source Software</li>
+  <li>Open Source Infrastructure</li>
+</ul>
+
+<p><strong>Funders</strong></p>
+
+<div class="centre"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/NSF.svg" alt="NSF Logo" width="120" />
+  <img src="https://static.wixstatic.com/media/a8b87d_92e16cb7795f467b8c105af31fded270~mv2.png" alt="EarthCube Logo" width="300" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" alt="NASA Logo" width="120" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Moore_Foundation_Logo.jpg/1920px-Moore_Foundation_Logo.jpg" alt="MOORE Logo By Gordon and Betty Moore Foundation - Own work, Public Domain" width="250" />
+</div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Pangeo is first and foremost a community promoting open, reproducible, and scalable science.
+This community provides documentation, develops and maintains Open Source software, and deploys computing infrastructure to make scientific research and programming easier.</p>
+
+<p>Pangeo is funded through many different projects in USA, Europe and Australia but the main funders are NSF, EarthCube, NASA and the Gordon and Betty Moore foundation.</p>
+
+<hr />
+
+<h2 id="motivations">Motivations</h2>
+
+<p>.left[ There are several building crises facing the geoscience community: ]</p>
+
+<p>.left[- <em>Big Data</em>: datasets are growing too rapidly and legacy software tools for scientific analysis can’t handle them. This is a major obstacle to scientific progress.]
+.left[- <em>Technology Gap</em>: a growing gap between the technological sophistication of industry solutions (high) and scientific software (low).]
+.left[- <em>Reproducibility</em>: a fragmentation of software tools and environments renders most geoscience research effectively unreproducible and prone to failure.]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The Pangeo Project has been motivated by several building crises faced by the geoscience community: Big data, Technology gap and Reproducibility crisis.
+Indeed, datasets are are growing too rapidly and legacy software tools for scientific analysis can’t handle them. This is a major obstacle to scientific progress.
+Another obstacle concerns the growing gap between the technological sophistication of industry solutions (high) and scientific software (low).
+Finally, the fragmentation of software tools and environments renders most geoscience research effectively unreproducible and prone to failure.</p>
+
+<hr />
+
+<h2 id="goals">Goals</h2>
+
+<p>Pangeo aims to address these challenges through a unified, collaborative effort.</p>
+
+<p><em>The mission of Pangeo is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere 
+and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future 
+challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.</em></p>
+
+<p><span>Speaker Notes</span>
+Pangeo aims to address these challenges through a unified, collaborative effort.</p>
+
+<p>The mission of Pangeo is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere 
+and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future 
+challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.</p>
+
+<hr />
+
+<h2 id="the-pangeo-software-ecosystem">The Pangeo Software Ecosystem</h2>
+
+<p><img src="../../images/pangeo-ecosystem-2020.png" alt="Pangeo approach" /></p>
+
+<p><em>Source</em>: <a href="https://speakerdeck.com/rabernat/pangeo-tutorial-ocean-sciences-2020?slide=28">Pangeo Tutorial - Ocean Sciences 2020</a> by Ryan Abernathey, February 17, 2020.</p>
+
+<p><span>Speaker Notes</span>
+The Pangeo software ecosystem involves open source tools such as X-array, iris, dask, jupyter, and many other packages.
+There is no single software package called Pangeo; rather, the Pangeo project serves as a coordination point between scientists, software, and computing infrastructure.
+On this figure, the python packages are “layered” based on their dependencies. At the “bottom” is the Python programming language itself;
+on the second layer, we can find NumPy or Jupyter Notebooks that are very common Python packages and that you may know already.
+X-array makes an intensive use of Numpy for its underlying data structures. Iris has what we call a “high-level” user interface
+with many functions for analysing and visualising Earth Science data.</p>
+
+<hr />
+
+<h2 id="xarray">Xarray</h2>
+
+<p><em>Xarray is an open source project and Python package that makes working with labeled multi-dimensional arrays simple, efficient, and fun!</em></p>
+
+<p><img src="../../images/dataset-diagram-logo.png" alt="Xarray logo" width="400" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>X-array is an open source project and Python package that makes working with labeled multi-dimensional arrays simple, efficient, and fun!</p>
+
+<hr />
+
+<h2 id="what-is-xarray">What is Xarray?</h2>
+
+<p>.left[Xarray expands on NumPy arrays and pandas. Xarray has two core data structures:]</p>
+
+<p>.left[- <code class="language-plaintext highlighter-rouge">DataArray</code> is our implementation of a labeled, N-dimensional array. It is a generalization of a <code class="language-plaintext highlighter-rouge">pandas.Series</code>.]
+.left[- <code class="language-plaintext highlighter-rouge">Dataset</code> is a multi-dimensional, in-memory array database. It is a dict-like container of <code class="language-plaintext highlighter-rouge">DataArray</code> objects aligned along any number of shared dimensions, and serves a similar purpose in xarray to the <code class="language-plaintext highlighter-rouge">pandas.DataFrame</code>.]</p>
+
+<p>.left[<em>Source</em>: <a href="https://xarray.pydata.org/en/stable/getting-started-guide/why-xarray.html">Xarray documentation</a>]</p>
+
+<p><span>Speaker Notes</span>
+X-array expands on NumPy arrays and pandas. X-array has two core data structures: DataArray is the X-array implementation of a labeled, N-dimensional array. It is an N-D generalization of a pandas Series.
+Dataset is a multi-dimensional, in-memory array database. It is a dict-like container of DataArray objects aligned along any number of shared dimensions, and serves a similar purpose in 
+X-array to the pandas DataFrame.</p>
+
+<hr />
+
+<h2 id="example">Example</h2>
+
+<p><img src="../../images/xarray-concept.png" alt="Xarray concept" width="500" /></p>
+
+<p><img src="../../images/xarray-dataset.png" alt="Xarray dataset" width="500" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>On this figure, we have represented an X-array Dataset. Each X-array Dataset contains dimensions: here we have 3 dimensions e.g. latitude, longitude and time.
+These are also the coordinates of the datasets and then we have variables. In our example, each of the variables have 3 dimensions.
+The idea behind X-array is to provide functions to facilitate the handling of complex and multi-dimensional datasets we have in Earth 
+Science. However, X-array is a very generic Python package and it is not only used for Earth Sciences. 
+Any data that can be represented on a coordinate reference system is very much suitable for X-array.
+X-array is widely used and probably the most common package from the Pangeo software ecosystem.</p>
+
+<hr />
+
+<h2 id="iris">iris</h2>
+
+<p><em>A powerful, format-agnostic, community-driven Python package for analysing and visualising Earth science data.</em></p>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Data model based on the <a href="http://cfconventions.org/">CF conventions</a>;</li>
+  <li>Unit conversion;</li>
+  <li>visualization interface based on <a href="https://matplotlib.org/">matplotlib</a> and <a href="https://scitools.org.uk/cartopy/docs/latest/">cartopy</a>;</li>
+  <li>efficient from single-machine through to multi-core clusters and High Performance Computers. 
+]</li>
+</ul>
+
+<p>.pull-right[</p>
+
+<p>.image-40[
+<img src="https://scitools-iris.readthedocs.io/en/latest/_static/iris-logo-title.png" alt="IRIS logo" /> 
+]</p>
+
+<p>]</p>
+
+<p>.left[<em>Source:</em> <a href="https://scitools-iris.readthedocs.io/en/latest/#">Scitools Iris documentation</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Iris is a powerful, format-agnostic, community-driven Python package for analysing and visualising Earth science data.
+Its data model is based on the NetCDF Climate and Forecast Metadata Conventions. Iris contains a lot of very useful functionalities
+such as unit conversion. It offers a powerful visualization interface based on matplot lib and cartopy. Finally Iris is efficient everywhere, 
+from a single machine through to multi-core clusters and High Performance Computers.</p>
+
+<hr />
+
+<h2 id="dask">Dask</h2>
+
+<p>.pull-left[</p>
+
+<p><em>Enabling performance at scale for the tools you love</em></p>
+
+<ul>
+  <li><strong>Powerful</strong>: Leading platform today for analytics</li>
+  <li><strong>Scalable</strong>: Natively scales to clusters and cloud</li>
+  <li><strong>Flexible</strong>: Bridges prototyping to production</li>
+</ul>
+
+<p><strong>Dask accelerates the existing Python ecosystem (Numpy, Pandas, Scikit-learn)</strong>
+]</p>
+
+<p>.pull-right[</p>
+
+<p>.image-40[
+<img src="https://docs.dask.org/en/stable/_images/dask_stacked.svg" alt="DASK logo" /> 
+]</p>
+
+<p>]</p>
+
+<p>.left[<em>Source</em>: <a href="https://docs.dask.org/en/stable/">Dask documentation</a>]</p>
+
+<p><span>Speaker Notes</span>
+Dask is a flexible library for parallel computing in Python. It is widely used for getting the necessary performance when handling 
+large and complex Earth Science datasets. Dask is powerful, scalable and flexible. It is the leading platform today for analytics.
+It scales natively to clusters, cloud and bridges prototyping up to production. 
+The strength of Dask is that is accelerates the existing Python ecosystem e.g. Numpy, Pandas and Scikit-learn with few effort from end-users.</p>
+
+<hr />
+
+<h2 id="how-does-dask-accelerate-numpy">How does Dask accelerate Numpy?</h2>
+
+<p>.image-40[
+<img src="https://examples.dask.org/_images/dask-array-black-text.svg" alt="Dask and Numpy" /> 
+]</p>
+
+<p>.pull-left[</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">x</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">dask.array</span> <span class="k">as</span> <span class="n">da</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">x</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>How does dask accelerate Numpy? Well, it is simple as you can see on this example. Instead of importing numpy, you need to 
+import dask array. Then the rest of your code is unchanged. Dask chunks your big datasets into “Numpy” arrays and this is how we can
+easily parallelize and scale.</p>
+
+<hr />
+
+<h2 id="how-does-dask-accelerate-pandas">How does Dask accelerate Pandas?</h2>
+
+<p>.image-25[
+<img src="https://examples.dask.org/_images/dask-dataframe.svg" alt="Dask and Pandas" /> 
+]</p>
+
+<p>.pull-left[</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"file.csv"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"x"</span><span class="p">).</span><span class="n">y</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">dask.dataframe</span> <span class="k">as</span> <span class="n">dd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">dd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"s3://*.csv"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"x"</span><span class="p">).</span><span class="n">y</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>To accelerate Pandas, dask follows the same approach than with X-array. Your Pandas dataframe is “divided” in chunks.
+Instead of importing pandas, you import dask.dataframe. And again, the rest of your code remains unchanged.</p>
+
+<hr />
+
+<h2 id="how-does-dask-accelerate-scikit-learn">How does Dask accelerate Scikit-Learn?</h2>
+
+<p>.image-40[
+<img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_classifier_comparison_001.png" alt="Dask and Scikit-Learn" /> 
+]</p>
+
+<p>.pull-left[</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scikit_learn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dask_ml.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span>
+As you can guess, it is not different for Scikit-Learn. Dask accelerate Scikit-Learn in a similar way. To scale your
+code, you can use dask_ml rather than scikit_learn.</p>
+
+<hr />
+
+<h2 id="jupyter">jupyter</h2>
+
+<p>.pull-left[</p>
+
+<p><em>Free software, open standards, and web services for interactive computing across all programming languages</em></p>
+
+<ul>
+  <li><strong>Jupyter notebook</strong>: a  simple, streamlined web application for creating and sharing computational documents;</li>
+  <li><strong>JupyterLab</strong>: Next generation of Jupyter notebook interface that is flexible and easier to customize and extend;</li>
+  <li><strong>JupyterHub</strong>: A multi-user version of the notebook
+]</li>
+</ul>
+
+<p>.pull-right[</p>
+
+<p>.image-40[
+<img src="https://jupyter.org/assets/homepage/main-logo.svg" alt="Jupyter logo" />
+]
+]</p>
+
+<p>.left[<em>Source</em>: <a href="https://jupyter.org/">Jupyter documentation</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>You may have heard about the Jupyter ecosystem and wonder why it is presented here as part of the Pangeo ecosystem.</p>
+
+<p>Jupyter plays an important role for the Pangeo community.</p>
+
+<p>Jupyter is free, follows open standards, and has web services for interactive computing across all programming languages.
+The Jupyter notebook is probably still the most popular interface. It is a  simple, streamlined web application for creating 
+and sharing computational documents; 
+JupyterLab is the next generation of Jupyter notebook interface that is flexible and easier to customize and extend. 
+Finally JupyterHub is the multi-user version of the notebook (for both Jupyter Notebooks and JupyterLab).</p>
+
+<hr />
+
+<h2 id="jupyter-and-galaxy">Jupyter and Galaxy</h2>
+
+<ul>
+  <li>Galaxy Interactive Tools</li>
+  <li>Several JupyterLab computing environments available such as Galaxy Pangeo, Galaxy Climate Notebooks</li>
+  <li>All are Galaxy Tools that includes metadata and can be added as a step in your Galaxy Workflows</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Pangeo JupyterLab is available in Galaxy as a Galaxy interactive tool. It corresponds to the Pangeo notebook.
+Many packages from the Pangeo software stack are also available in the Galaxy Climate Notebook which is another Galaxy Interactive Tool.
+The main difference is that the latter is used for Earth System Modelling so it contains packages for running popular Earth System Models.</p>
+
+<p>There is a growing number of Galaxy Tools that make use of packages from the Pangeo software stack and that can be easily integrated in Galaxy workflows.
+Another advantage is that no Python programming skills are required for these Galaxy Tools which is of course not the case for using
+Pangeo Notebooks.
+All Pangeo Tools in Galaxy (interactive notebook or asynchronous tools) include metadata and can be added as a step in your Galaxy Workflows.</p>
+
+<hr />
+
+<h2 id="analysis-ready-cloud-optimized-data-arco">Analysis Ready, Cloud Optimized Data (ARCO)</h2>
+
+<ul>
+  <li>What is “Analysis Ready”?
+    <ul>
+      <li>Think in “Datasets” not “data files”</li>
+      <li>No need for tedious homogenizing / cleaning setup_guides</li>
+      <li>Curated and cataloged</li>
+    </ul>
+  </li>
+  <li>What is “Cloud Optimized”?
+    <ul>
+      <li>Compatible with object storage e.g. access via HTTP</li>
+      <li>Supports lazy access and intelligent subsetting</li>
+      <li>Integrates with high-level analysis libraries and distributed frameworks</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>When analyzing data at scale, the data format used is key. For years, the main data format was netCDF e.g. Network Common Data Form
+but with the use of cloud computing and interest in Open Science, different formats are often more suitable.
+Formats for analyzing data from the cloud are refered to as “Analysis Ready, Cloud Optimized” data formats or in short ARCO.
+What do we mean by analysis ready? When you analyse data, you are not interested in the data files themselves but in the datasets you need to use.
+We think in terms of “datasets” rather than “data files”. This abstraction makes it easier to analyse your data because there is no need for tedious homogenizing, organizing or cleaning your files.
+All your datasets are curated and cataloged. End-users access datasets through well curated catalogs. The location of the data files and
+organization may change, it is transparent to end-users.</p>
+
+<p>What is cloud optimized? It is compatible with Object storage e.g. can be accessed via HTTP protocol. It supports lazy access and intelligent
+subsetting e.g. there is no need to load all your datasets in memory. Only what is needed and when it is needed will be accessed.
+It integrates with high-level analysis libraries and distributed frameworks.</p>
+
+<hr />
+
+<h2 id="example-of-arco-data">Example of ARCO Data</h2>
+
+<p><img src="../../images/arco_data.png" alt="Arco data" /></p>
+
+<p><span>Speaker Notes</span>
+The example we show here is not very different from the X-array we presented earlier. The difference
+is that instead of having one big dataset, it is chunked appropriately for analysis and has rich metadata.</p>
+
+<hr />
+
+<h2 id="pangeo-forge">Pangeo Forge</h2>
+
+<p><img src="https://pangeo-forge.readthedocs.io/en/latest/_static/pangeo-forge-logo-blue.png" alt="Pangeo Forge Logo" width="400" /></p>
+
+<p><a href="https://pangeo-forge.org">https://pangeo-forge.org</a></p>
+
+<p>Pangeo Forge is an open source platform for data <strong>Extraction</strong>, <strong>Transformation</strong>, and <strong>Loading</strong> (ETL).
+The goal of <em>Pangeo Forge</em> is to make it easy to extract data from traditional repositories and deposit this data in cloud
+object storage in an analysis-ready, cloud optimized (ARCO) format.</p>
+
+<p>Pangeo Forge is inspired directly by Conda Forge, a community-led collection of recipes for building conda packages.</p>
+
+<p><span>Speaker Notes</span>
+Pangeo Forge is an open source platform for data Extraction, Transformation, and Loading e.g. ETL.
+The goal of Pangeo Forge is to make it easy to extract data from traditional repositories and 
+deposit this data in cloud object storage in analysis-ready, cloud optimized (ARCO) format.</p>
+
+<p>Pangeo Forge is inspired directly by Conda Forge, a community-led collection of recipes for building conda packages.</p>
+
+<p>It is under active development and the Pangeo community hopes it will play a role in democratizing the publication of datasets in ARCO format.</p>
+
+<hr />
+
+<h2 id="how-does-pangeo-forge-work">How does Pangeo Forge work?</h2>
+
+<p>.image-40[
+<img src="https://pangeo-forge.org/img/pangeo-forge-diagram.b8332f39.png" alt="pangeo forge explained" />
+]</p>
+
+<p>.image-40[
+<img src="../../images/pangeo-forge-detail.png" alt="pangeo forge recipe" />
+]</p>
+
+<p><span>Speaker Notes</span>
+This may look complicated on this figure but like for conda forge most of the process is automated.</p>
+
+<p>The goal of Pangeo Forge is to “convert” existing datasets from their native format into ARCO format. They can then be used by anyone from anywhere.</p>
+
+<p>Let’s imagine you have a bunch of data from NOAA in a tradictional data repository. Instead of manually converting them to ARCO format, 
+you create a recipe, actually you often reuse an existing one that will automatically transform the original datasets in ARCO format and publish it to an s3 compatible object storage such as Amazon.</p>
+
+<p>The next step is then to tell the community where and how to access to your transformed dataset.
+This is done by creating a catalog.
+—</p>
+
+<h2 id="stac">STAC</h2>
+
+<p>.center[STAC stands for <strong>SpatioTemporal Asset Catalog</strong>.]</p>
+
+<p><span>Speaker Notes</span>
+STAC stands for SpatioTemporal Asset Catalog.</p>
+
+<hr />
+
+<h2 id="why-stac">Why STAC?</h2>
+
+<p><em>Each provider has its <span style="color:green">catalog and interface</span></em>.</p>
+
+<p>.pull-left[</p>
+
+<p>Just searching the relevant data for your project could be a tough work…</p>
+
+<ul>
+  <li><strong>Lot of data providers …</strong></li>
+  <li><strong>Each interface is unique …</strong></li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[ <img src="../../images/why_STAC.png" alt="Why STAC" /> ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Why do we need spatio temporal asset catalogs?
+Each provider has its own catalog and interface. So just searching the relevant data for your project could be a tough work.
+We have lots of data providers and each with a bespoke interface.
+—</p>
+
+<h2 id="why-stac-1">Why STAC?</h2>
+
+<p><em>Each provider has its own <span style="color:green">Application Programming Interface (API)</span></em>.</p>
+
+<p>.pull-left[</p>
+
+<p>If you are a programmer that’s exactly the same…</p>
+
+<p>You should design a new data connector each time…</p>
+
+<ul>
+  <li><strong>Lot of data providers …</strong></li>
+  <li><strong>Each API is unique …</strong></li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[ <img src="../../images/why_STAC-API.png" alt="Why STAC" /> ]</p>
+
+<p><span>Speaker Notes</span>
+Each provider has its own Application Programming Interface (API). Every time you want to access a new catalog, you need to change your
+program. It is becoming quickly difficult for programmers who need to design a new data connector each time.</p>
+
+<hr />
+
+<h2 id="why-stac-2">Why STAC?</h2>
+
+<p><em>Let’s work <span style="color:green">together</span></em>.</p>
+
+<p>.pull-left[</p>
+
+<p>The main purpose of STAC is:</p>
+
+<ul>
+  <li><strong>Build a common language to catalog geospatial data</strong></li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[ <img src="../../images/STAC-logo.png" alt="STAC" /> ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<h2 id="why-not-trying-to-work-together-this-is-the-main-purpose-of-stac-build-a-common-language-to-catalog-geospatial-data">Why not trying to work together? This is the main purpose of STAC: build a common language to catalog geospatial data.</h2>
+
+<h2 id="why-stac-3">Why STAC?</h2>
+
+<p><em>Let’s work <span style="color:green">together</span></em>.</p>
+
+<p>.pull-left[</p>
+
+<p>It’s extremely simple, STAC catalogs are composed of three layers :</p>
+
+<ul>
+  <li><strong>Catalogs</strong>
+    <ul>
+      <li><strong>Collections</strong>
+        <ul>
+          <li><strong>Items</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p><strong>It’s already used for Sentinel 2 in AWS</strong></p>
+
+<p>.image-90[
+<img src="../../images/sentinel2_AWS.png" alt="Sentinel 2" /> 
+]</p>
+
+<p><strong>It’s already used for Landsat 8 in MICROSOFT</strong></p>
+
+<p>.image-90[
+<img src="../../images/landsat8_microsoft.png" alt="Landsat 8" /> 
+]</p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>STAC catalogs are extremely simple. They are composed of three layers: catalogs, collections and items. STAC is already very popular
+for Earth Observation satellite imagery. For instance it is used for Sentinel 2 in AWS and Landsat 8 in Microsoft. 
+—</p>
+
+<h2 id="how-to-use-stac">How to use STAC</h2>
+
+<p><em>Depending on <span style="color:green">your needs</span></em>.</p>
+
+<p>.pull-left[
+<strong>Storing your data</strong></p>
+
+<p>.image-40[
+   <img src="../../images/storing_data.png" alt="Storing data" /> 
+  ]
+]</p>
+
+<p>.pull-right[</p>
+
+<p><strong>Searching data</strong></p>
+
+<p>.image-40[
+   <img src="../../images/searching_data.png" alt="Searching data" /> 
+  ]</p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>How to use STAC? Depdending on your needs, you will be using STAC to store your data or to search for existing data.</p>
+
+<hr />
+
+<h2 id="searching-data">Searching data</h2>
+
+<p><em>Let’s search data over the main region (France) between the 1st January 2019 and the 4th June 2019</em>.</p>
+
+<p>.image-100[
+   <img src="../../images/search_maine_data.png" alt="Search data over main and specific dates" /> 
+  ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Here we present an example using the sat-search utility. You can use intake-stac and achieve similar results.
+In this example, we search data over the main region (France) between the 1st January 2019 and the 4th June 2019 using STAC catalogs.</p>
+
+<p>The result shows that data is available for 108 dates and for Landsat-8, sentinel 2A, etc.</p>
+
+<hr />
+
+<h2 id="searching-and-processing">Searching and processing</h2>
+
+<p>.image-100[
+     <img src="../../images/search_process.png" alt="Search and process" /> 
+    ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>With STAC, you can search datasets but you can also easily apply your own processing using STAC API.</p>
+
+<hr />
+
+<h2 id="stac-ecosystem">STAC ecosystem</h2>
+
+<p><em>A lot of project are now build around <span style="color:green">STAC</span></em>.</p>
+
+<ul>
+  <li>All the STAC Catalogs available are at <a href="https://stacindex.org/catalogs">https://stacindex.org/catalogs</a></li>
+  <li>Lots of tutorials can be found at <a href="https://stacindex.org/learn">https://stacindex.org/learn</a></li>
+  <li>All packages that rely or work extremely well with STAC are at <a href="https://stacindex.org/ecosystem">https://stacindex.org/ecosystem</a></li>
+  <li><a href="https://intake-stac.readthedocs.io/en/latest/">Intake-stac</a> is the most popular Python package for discovering, exploring, and loading spatio-temporal datasets.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The STAC ecosystem is growing and a lot of projects are now built around STAC. All the STAC Catalog available are online at https://stacindex.org/catalogs.
+Lots of tutorial can be found at https://stacindex.org/learn. All packages that rely or work extremely well with STAC are at 
+listed at https://stacindex.org/ecosystem.</p>
+
+<p>If you are a Python programmer, you will probably make use of intake-stac: this is currently the most popular Python package for 
+discovering, exploring, and loading spatio-temporal datasets.</p>
+
+<hr />
+
+<h2 id="a-lot-of-contributors">A lot of contributors!</h2>
+
+<p>Join and contribute to STAC: <a href="https://github.com/radiantearth/stac-spec">https://github.com/radiantearth/stac-spec</a></p>
+
+<p>.image-100[
+     <img src="../../images/STAC_contributors.png" alt="STAC contributors" /> 
+    ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>There is already a lot of contributors and it would be hard to name all of them. Since STAC welcomes new contributors, the list will likely
+grow very quickly!
+—</p>
+
+<h2 id="stac-and-pangeo-forge">STAC and Pangeo Forge</h2>
+
+<ul>
+  <li>Pangeo-forge supports the creation of analysis-ready cloud optimized (ARCO) data in cloud object storage from “classical” data repositories;</li>
+  <li>STAC is used to create catalog and goes beyond the Pangeo ecosystem;</li>
+  <li>Work is ongoing to figure out the best way to expose Pangeo-Forge-generated data assets via STAC catalogs.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>So how do STAC and Pangeo-forge relate to each other?
+Pangeo-forge supports the creation of analysis-ready cloud optimized (ARCO) data in cloud object storage from “classical” data repositories;
+STAC is used to create catalogs and goes beyond the Pangeo ecosystem;
+Work is ongoing to figure out the best way to expose Pangeo-Forge-generated data assets via STAC catalogs.</p>
+
+<hr />
+
+<h2 id="using-andor-contributing-to-pangeo">Using and/or contributing to Pangeo</h2>
+
+<p>.left[The Pangeo project is completely open to involvement from anyone with interest.</p>
+
+<p>There are many ways to get involved:]</p>
+
+<ul>
+  <li><em>Science users</em>: read the <a href="https://pangeo.io/quickstart.html#quickstart">Guide for Scientists</a>, browse the <a href="https://pangeo.io/gallery.html#use-cases">Pangeo Gallery</a>, watch <a href="https://pangeo.io/pangeo-showcase.html">Pangeo Showcase Webinar Series</a>, read about the <a href="https://pangeo.io/packages.html#packages">Packages</a>, or try it yourself on Galaxy!</li>
+  <li><em>Developers / system administrators</em>: learn about the <a href="https://pangeo.io/architecture.html#architecture">Technical Architecture</a> or read the <a href="https://pangeo.io/setup_guides/index.html#setup-guides">Deployment Setup Guides</a>.</li>
+</ul>
+
+<p>For more information, consult the <a href="https://pangeo.io/faq.html#faq">Frequently Asked Questions</a>.</p>
+
+<p>Everyone is welcome to the <a href="https://pangeo.io/meeting-notes.html#meeting-notes">Pangeo Weekly Community Meeting</a>.</p>
+
+<p><span>Speaker Notes</span>
+The pangeo project is completely open to involvement from anyone with interest.
+There are many ways to get involved. Science users can read the Guide for Scientists, browse the Pangeo Gallery watch Pangeo Showcase Webinar Series, read about the Packages, or try it themselves on Galaxy!
+Developers and system administrators can learn about the Technical Architecture or read the Deployment Setup Guides.
+For more information, consult the Frequently Asked Questions on the pangeo website.</p>
+
+<p>Everyone is welcome to the Pangeo Weekly Community Meetings: they are organized in different time zones for increasing accessibility.</p>
+
+<hr />
+
+<h2 id="learn-more">Learn more</h2>
+
+<ul>
+  <li>Web: <a href="https://pangeo.io/">https://pangeo.io</a></li>
+  <li>Discourse: <a href="https://discourse.pangeo.io/">https://discourse.pangeo.io/</a></li>
+  <li>Github: <a href="https://github.com/pangeo-data">https://github.com/pangeo-data</a></li>
+  <li>Twitter: <a href="https://twitter.com/pangeo_data">@pangeo_data</a></li>
+</ul>
+
+<p><span>Speaker Notes</span>
+If you want to learn more about Pangeo, visit the Pangeo website https://pangeo.io, or github reposity https://github.com/pangeo-data.
+Get help on discourse at https://discourse.pangeo.io/ and follow Pangeo on Twitter @pangeo_data.</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Pangeo is an inclusive community promoting open, reproducible and scalable science.</li>
+
+<li>The Pangeo software ecosystem involves open source tools such as Xarray, iris, dask, jupyter, and many other packages.</li>
+
+<li>Pangeo is an inclusive community promoting open, reproducible and scalable science.</li>
+
+<li>The Pangeo software ecosystem involves open source tools such as Xarray, iris, dask, jupyter, and many other packages.</li>
+
+<li>On the cloud, Analysis Ready, Cloud Optimized ata format (ARCO) is preferable.</li>
+
+<li>Pangeo-forge eases the extractionm transformation and loading of Earth Science datasets</li>
+
+<li>SpatioTemporal Asset Catalogs helps to provide a unified interface for searching and extracting spatio temporal datasets</li>
+
+<li>STAC and pangeo-forge aim at complementing each other</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/72087e50d05bf3c6e8e3b024f39f269f945c1470">72087e50d05bf3c6e8e3b024f39f269f945c1470</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
