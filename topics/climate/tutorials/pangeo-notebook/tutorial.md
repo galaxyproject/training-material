@@ -585,7 +585,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 
 > ### {% icon question %} Find when the maximum PM2.5 is forecasted
 >
-> When is forecasted the maximum PM2.5 value?
+> When is the maximum PM2.5 value forecasted?
 >
 > > ### {% icon solution %} Solution
 > > We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N and average over the entire selected area and search where the maximum PM2.5 value of 59.13694382 μm.m-3 is found. The maximum PM2.5 value occurs on 2021-12-22 at 20:00 UTC.
