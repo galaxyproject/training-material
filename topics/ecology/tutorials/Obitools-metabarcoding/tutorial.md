@@ -407,12 +407,19 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > ### {% icon hands_on %} Hands-on: Search nucleotide database with nucleotide query sequence(s) from OBITools treatments
 >
 > 1. {% tool [NCBI BLAST+ blastn](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy0) %} with the following parameters:
->    - *"Subject database/sequences"*: `FASTA file from your history (see warning note below)`
+>    - *"Nucleotide query sequence(s)"*: `obiclean output file`
+>    - *"Subject database/sequences"*: `FASTA file from your history`
+>    - *"Nucleotide FASTA subject file to use instead of a database"*: `db_v05_r117`
 >    - *"Set expectation value cutoff"*: `0.0001`
 >    - *"Output format"*: `Tabular (extended 25 columns)`
 >    - *"Advanced Options"*: `Show Advanced Options`
 >    - *"Maximum hits to consider/show": `1`
 >
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Here we directly use the `db_v05_r117` fasta file proposed on the [original obitools tutorial](https://pythonhosted.org/OBITools/wolves.html#step-by-step-analysis). One can mention you can create such a fasta file using same obitools workflow describe before (using obigrep/obiuniq/obigrep/obiannotate) on downloaded EMBL datrabases and taxonomy treated by obitools ecoPCR tool. 
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -421,10 +428,10 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 > ### {% icon hands_on %} Hands-on: Filter Blast results
 >
-> 1. {% tool [obitab](toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13) %} with the following parameters:
+> 1. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
 >    - *"Sequence file to be filtered"*: `db_v05_r117`
 >    - *"Filter using the ID list from"*: `tabular file`
->    - *"Tabular file containing sequence identifiers"*: `megablast obiclean`
+>    - *"Tabular file containing sequence identifiers"*: `megablast on obiclean output`
 >    - *"Column(s) containing sequence identifiers"*: `Column 2`
 >    - *"Output positive matches, negative matches, or both?"*: `just positive match`
 >
@@ -432,6 +439,19 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    > ### {% icon comment %} Comment
 >    >
 >    > This tool allows you to re-associate all the reference sequences information, notably the `species_name` one so you can see which species are potentially seen on the sample.
+>    {: .comment}
+>    
+> 2. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
+>    - *"Sequence file to be filtered"*: `obiclean output data`
+>    - *"Filter using the ID list from"*: `tabular file`
+>    - *"Tabular file containing sequence identifiers"*: `megablast on obiclean output`
+>    - *"Column(s) containing sequence identifiers"*: `Column 1`
+>    - *"Output positive matches, negative matches, or both?"*: `just positive match`
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > This tool allows you to re-associate all the query sequences information, notably the `merged_sample` and `obiclean_count` attributes so we can better evaluate quality of the results.
 >    {: .comment}
 >
 {: .hands_on}
@@ -442,10 +462,18 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 ## Sub-step with **Obitab**
 
-> ### {% icon hands_on %} Hands-on: Filter Blast results
+> ### {% icon hands_on %} Hands-on: Convert fasta filtered files in tabular ones
 >
 > 1. {% tool [obitab](toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `db_v05_r117 with matched ID`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > This tool allows you to convert a fasta file into a tabular one so it is easier to read sequences definitions.
+>    {: .comment}
+>
+> 2. {% tool [obitab](toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `obiclean on data 61 with matched ID`
 >
 >    > ### {% icon comment %} Comment
 >    >
