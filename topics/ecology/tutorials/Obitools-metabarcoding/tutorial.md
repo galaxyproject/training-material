@@ -158,7 +158,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 ## Remove unaligned sequence records with **obigrep**
 
 > ### {% icon hands_on %} Hands-on: Remove unaligned sequence records
-> We here use the value of the mode attribute in the sequence header to discard sequences inicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
+> We here use the value of the mode attribute in the sequence header to discard sequences indicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Choose the sequence record selection option"*: `predicat`
