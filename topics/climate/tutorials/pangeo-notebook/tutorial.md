@@ -217,7 +217,7 @@ print(dset.time)
 
 We often want to select elements from the coordinates for instance to subset a geographical area or select specific times or a specific time range.
 
-There are two different ways to select:
+There are two different ways to make a selection:
 - by index
 - by value
 
