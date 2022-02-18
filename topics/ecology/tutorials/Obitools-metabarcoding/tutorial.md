@@ -199,7 +199,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 > ### {% icon question %} Questions
 >
-> 1. How do you verify the operation is successfull?
+> 1. How do you verify the operation is successful?
 > 2. How many sequences are kept? Discarded?
 >
 > > ### {% icon solution %} Solution
