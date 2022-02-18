@@ -124,7 +124,7 @@ The data needed to run the tutorial are the following:
 
 # Use OBITools
 
-OBITools is a set of programs specifically designed for analyzing NGS data in a DNA metabarcoding context, taking into account taxonomic information. It is distributed as an open source software available on the following website: http://metabarcoding.org/obitools.
+OBITools is a set of programs specifically designed for analyzing NGS data in a DNA metabarcoding context, taking into account taxonomic information. It is distributed as an open source software available on the following website: [http://metabarcoding.org/obitools](http://metabarcoding.org/obitools).
 
 Citation: Boyer F., Mercier C., Bonin A., Taberlet P., Coissac E. (2016) OBITools: [a Unix-inspired software package for DNA metabarcoding](https://pubmed.ncbi.nlm.nih.gov/25959493/). Molecular Ecology Resources.
 
