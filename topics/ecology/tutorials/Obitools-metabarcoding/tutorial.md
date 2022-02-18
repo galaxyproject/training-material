@@ -27,7 +27,7 @@ Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wol
  * the OBITools on Galaxy
  * some classical Galaxy tools
 
-The data used in this tutorial correspond to the analysis of four wolf scats, using the protocol published in Shehzad et al. (2012) for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifiying the 12S-V5 region (Riaz et al. 2011), together with a wolf blocking oligonucleotide.
+The data used in this tutorial correspond to the analysis of four wolf scats, using the protocol published in {% cite Shehzad2012 %} for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifying the 12S-V5 region ({% cite Riaz2011}), together with a wolf blocking oligonucleotide.
 
 It is always a good idea to have a look at the intermediate results or to evaluate the best parameter for each step. Some commands are designed for that purpose, for example you can use :
 
