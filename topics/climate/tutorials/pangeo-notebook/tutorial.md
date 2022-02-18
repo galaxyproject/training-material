@@ -654,7 +654,7 @@ print(dset.resample(time='30min').interpolate('linear'))
 
 
 > ### {% icon comment %} Be careful when sub-sampling!
-> Increasing the frequency of your data e.g. artificialy creating data may not be scientifically relevant. Please use carefuly! Interpolating is not always scientifically relevant and sometimes you may prefer to choose a different method, for instance to take the nearest value:
+> Increasing the frequency of your data e.g. artificially creating data may not be scientifically relevant. Please use it carefully! Interpolating is not always scientifically relevant and sometimes you may prefer to choose a different method, like taking the nearest value for instance:
 > 
 >    > ### {% icon code-in %} Input: Python
 >    >  ```python
