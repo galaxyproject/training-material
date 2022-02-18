@@ -231,7 +231,7 @@ You should see that the coordinate `time` "disappeared" from the `Dimensions` an
 
 ### Select elements from coordinates by value
 
-When selecting elements by the value of the coordinate, we need to use the same datatype. For instance, to select and element from
+When selecting elements by the value of the coordinate, we need to use the same datatype. For instance, to select an element from
 `time`, we need to use `timedelta64`. The code below will give the same result as `isel(time=0)`.
 
 ```python
