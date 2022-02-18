@@ -210,7 +210,7 @@ print(dset.time)
 > print(dset.pm2p5_conc)
 > ```
 > 
-> When we print a variable or coordinate, we don't get all the individual values but a `DataArray` that contains a lot of very useful metadata such as coordinates (if they have some), all the attributes such as the name, the physical units, etc.
+> When we print a variable or coordinate, we do not get all the individual values but a `DataArray` that contains a lot of very useful metadata such as coordinates (if they have some), all the attributes such as the name, the physical units, etc.
 >
 {: .comment}
 ## Select / Subset from coordinates
