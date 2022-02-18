@@ -134,7 +134,7 @@ Citation: Boyer F., Mercier C., Bonin A., Taberlet P., Coissac E. (2016) OBITool
 The OBITools commands consider a sequence record as an entity composed of five distinct elements. Two of them are mandatory, the identifier (id) and the DNA or protein sequence itself. The id is a single word composed of characters, digits, and other symbols like dots or underscores excluding spaces. Formally, the ids should be unique within a dataset and should identify each sequence record unambiguously, but only a few OBITools actually rely on this property. The sequence is an ordered set of characters corresponding to nucleotides or amino-acids according to the International Union of Pure and Applied Chemistry (IUPAC) nomenclature (Cornish-Bowden 1985). The three other elements composing a sequence record are optional. They consist in a sequence definition, a quality vector, and a set of attributes. The sequence definition is a free text describing the sequence briefly. The quality vector associates a quality score to each nucleotide or amino-acid. Usually this quality score is the result of the base-calling process by the sequencer. The last element is a set of attributes qualifying the sequence, each attribute being described by a key=value pair. The set of attributes is the central concept of the OBITools system. When an OBITools command is run on the sequence records included in a dataset, the result of the computation often consist in the addition of new attributes completing the annotation of each sequence record. This strategy of sequence annotation allows the OBITools to return their results as a new sequence record file that can be used as the input of another OBITools program, ultimately creating complex pipelines.
 
 
-## Sub-step with **illuminapairedend**
+## Micro assembly of paired-end sequences with **illuminapairedend**
 
 > ### {% icon hands_on %} Hands-on: Recover consensus sequences from overlapping forward and reverse reads.
 > 
@@ -158,7 +158,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 
 
-## Sub-step with **obigrep**
+## Remove unaligned sequence records with **obigrep**
 
 > ### {% icon hands_on %} Hands-on: Remove unaligned sequence records
 > We here use the value of the mode attribute in the sequence header to discard sequences inicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
@@ -213,7 +213,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .question}
 
-## Sub-step with **NGSfilter**
+## Assign each sequence record to the corresponding sample/marker combination with **NGSfilter**
 
 > ### {% icon hands_on %} Hands-on: Assigns sequence records to the corresponding experiment/sample based on DNA tags and primers
 >
@@ -250,7 +250,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .question}
 
-## Sub-step with **obiuniq**
+## Dereplicate reads into uniq sequences with **obiuniq**
 
 > ### {% icon hands_on %} Hands-on: Groups together sequence records
 >
@@ -287,7 +287,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 {: .question}
 
 
-## Sub-step with **obiannotate**
+## Limit number of informations with **obiannotate**
 
 > ### {% icon hands_on %} Hands-on: Adds/Edits sequence record annotations
 >
@@ -308,7 +308,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 {: .hands_on}
 
 
-## Sub-step with **obistat**
+## Computes basic statistics for attribute values with **obistat**
 
 > ### {% icon hands_on %} Hands-on: Computes basic statistics for attribute values
 >
@@ -334,7 +334,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -348,7 +347,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .question}
 
-## Sub-step with **obigrep**
+## Filtering sequances by count and length with **obigrep**
 
 > ### {% icon hands_on %} Hands-on: Keep only the sequences having a count greater or equal to 10 and a length shorter than 80 bp
 >
@@ -381,7 +380,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .question}
 
-## Sub-step with **obiclean**
+## Clean the sequences for PCR/sequencing errors (sequence variants) with **obiclean**
 
 > ### {% icon hands_on %} Hands-on: Clean the sequences for PCR/sequencing errors (sequence variants)
 >
@@ -399,7 +398,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 {: .hands_on}
 
 
-## Sub-step with **NCBI BLAST+ blastn**
+## Taxonomic assignment of sequences with **NCBI BLAST+ blastn**
 
 > ### {% icon hands_on %} Hands-on: Search nucleotide database with nucleotide query sequence(s) from OBITools treatments
 >
@@ -421,7 +420,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 {: .hands_on}
 
 
-## Sub-step with **Filter sequences by ID**
+## Filter database and query sequences by ID to re associate informations with **Filter sequences by ID**
 
 > ### {% icon hands_on %} Hands-on: Filter Blast results
 >
@@ -457,7 +456,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 
 
-## Sub-step with **Obitab**
+## From FASTA to tabular with **Obitab**
 
 > ### {% icon hands_on %} Hands-on: Convert fasta filtered files in tabular ones
 >
@@ -475,7 +474,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .hands_on}
 
-## Sub-step with **create a final synthesis as a tabular file**
+## create a final synthesis as a tabular file
 
 > ### {% icon hands_on %} Hands-on: Join blast and obitab files then cut relevant column and apply filters
 >
