@@ -113,7 +113,7 @@ The data needed to run the tutorial are the following:
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Data collection is a functionality often used to deal with multiple datasets on the same format who can be analysed in batch mode. Here, the data collection is populated with heterogenous datafiles, coming from an archive. We thus need to treat separately each dataset of the collection, and to do so, we need to unhide corresponding datasets from the history, as datasets insides collections ar "just" like "symbolic link" to "classical" history datasets hidden by default.
+> > 1. Data collection is a functionality often used to deal with multiple datasets on the same format who can be analysed in batch mode. Here, the data collection is populated with heterogenous datafiles, coming from an archive. We thus need to treat separately each dataset of the collection, and to do so, we need to unhide corresponding datasets from the history, as datasets inside collections are just like "symbolic link" to "classical" history datasets hidden by default.
 > >
 > {: .solution}
 >
