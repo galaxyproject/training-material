@@ -113,8 +113,6 @@ import cmcrameri.cm as cmc
 import pandas as pd
 ```
 
-In case some packages cannot be imported you need to install them first. For example if cmcrameri is missing and you get an error, type and run `pip install cmcrameri` in a new notebook cell, then re-execute the cell in your Jupyter Notebook.
-
 ## Open and read metadata
 
 The netCDF dataset can now be opened with Xarray:
