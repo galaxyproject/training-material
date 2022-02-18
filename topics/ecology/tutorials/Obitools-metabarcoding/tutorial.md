@@ -23,18 +23,6 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The data used in this tutorial correspond to those described in the [official OBITools tutorial](https://pythonhosted.org/OBITools/wolves.html) and show how to analyse four wolf scats, using the protocol published in Shehzad et al. (2012) for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifiying the 12S-V5 region (Riaz et al. 2011), together with a wolf blocking oligonucleotide.
-
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# Tutorial based on the official OBITools one
 Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wolves.html), you will learn here how to analyze DNA metabarcoding data produced on Illumina sequencers using:
  * the OBITools on Galaxy
  * some classical Galaxy tools
@@ -55,6 +43,15 @@ The OBITools programs imitate Unix standard programs because they usually act as
 Most of the OBITools commands read sequence records from a file or from the stdin, make some computations on the sequence records and output annotated sequence records. As inputs, the OBITools are able to automatically recognize the most common sequence file formats (i.e. fasta, fastq, EMBL, and GenBank). They are also able to read ecoPCR (Ficetola et al. 2010) result files and ecoPCR/ecoPrimers formatted sequence databases (Riaz et al. 2011) as ordinary sequence files. File format outputs are more limited. By default, sequences without and with quality information are written in fasta and Sanger fastq formats, respectively. However, dedicated options allow enforcing the output format, and the OBITools are also able to write sequences in the ecoPCR/ecoPrimers database format, to produce reference databases for these programs. In the fasta or fastq format, the attributes are written in the header line just after the id, following a key=value; format
 
 ![OBITools attributes records](../../images/Obitools/fig-Record.png)
+
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Manage input data
 The data needed to run the tutorial are the following:
