@@ -319,9 +319,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >                - *"Attribute used to categorize the sequence records"*: `count`
 >    - *"Use a specific option"*: `no`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -475,11 +472,51 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > 2. {% tool [obitab](toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `obiclean on data 61 with matched ID`
 >
+>
+{: .hands_on}
+
+## Sub-step with **create a final synthesis as a tabular file**
+
+> ### {% icon hands_on %} Hands-on: Join blast and obitab files then cut relevant column and apply filters
+>
+> 1. {% tool [Join two datasets side by side on a specified field](join1) %} with the following parameters:
+>    - *"Join"*: `obitab on obiclean output file`
+>    - *"using column"*: `Column 1`
+>    - *"with"*: `megablast output file`
+>    - *"using column"*: `Column 1`
+>    - *"Fill empty columns"*: `Yes`
+>    - *"Fill Columns by"*: `Single fill value`
+>    - *"Fill value"*: `NA`
+>    
+> 2. {% tool [Join two datasets side by side on a specified field](join1) %} with the following parameters:
+>    - *"Join"*: last `Join two Datasets output file`
+>    - *"using column"*: `Column 26`
+>    - *"with"*: `obitab on db_v05_r117 with matched ID output file`
+>    - *"using column"*: `Column 1`
+>    - *"Fill empty columns"*: `Yes`
+>    - *"Fill Columns by"*: `Single fill value`
+>    - *"Fill value"*: `NA`
+>        
+>
+> 3. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c1,c3,c4,c5,c6,c7,c50,c54,c59,c51`
+>    - *"From"*: last `Join two Datasets output file`
+>
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool allows you to convert a fasta file into a tabular one so it is easier to read sequences definitions.
+>    > To have something easier to read and understand, we create a tabular file containing only columns with important informations (c1: query sequences names / c3-7: query counts / c50: reference sequences names / c54: family / c59: genus / c51: reference annotations).
 >    {: .comment}
+>        
 >
+> 4. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
+>    - *"Filter"*: `Cut output file`
+>    - *"With following condition"*: `c3>1000 or c4>1000 or c5>1000 or c6>1000`
+>    - *"Number of header lines to skip"*: `1`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > To keep only data with significative counts.
+>    {: .comment}
 {: .hands_on}
 
 
@@ -497,12 +534,8 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 {: .question}
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
 
 # Conclusion
 {:.no_toc}
 
-You analyzed raw metabarcoding data to identify diet of wolves.
+You just did a ecological analysis, finding diet from wolves faeces ! So now you know how to preprocess metabarcoding data on Galaxy, producing quantitative informations with quality checks and filtering results to interpret it and to have a synthesis table you can share broadly!
