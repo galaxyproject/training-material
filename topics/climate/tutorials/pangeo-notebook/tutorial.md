@@ -151,7 +151,7 @@ Below is what you should get if everything goes fine.
 
 > ### {% icon tip %} Command not found
 > If you get an error with the previous command, first check the location of the input file `CAMS-PM2_5-20211222.netcdf`:
-> it needs to be in the smae directory than your Jupyter Notebook.
+> it needs to be in the same directory as your Jupyter Notebook.
 {: .tip }
 
 We can identify 4 different sections:
