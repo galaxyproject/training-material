@@ -161,6 +161,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > We here use the value of the mode attribute in the sequence header to discard sequences indicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `ilumimnapairedend fastq groomer output file`
 >    - *"Choose the sequence record selection option"*: `predicat`
 >        - *"Python boolean expression to be evaluated for each sequence record."*: `mode!="joined"`
 >
@@ -253,9 +254,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >
 > 1. {% tool [obiuniq](toolshed.g2.bx.psu.edu/repos/iuc/obi_uniq/obi_uniq/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `Trimmed and annotated file by NGSfilter`
->    
 >    - *"Attribute to merge"*: `sample`
->    
 >    - *"Use specific option"*: `merge`
 >
 >
@@ -289,6 +288,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > ### {% icon hands_on %} Hands-on: Adds/Edits sequence record annotations
 >
 > 1. {% tool [obiannotate](toolshed.g2.bx.psu.edu/repos/iuc/obi_annotate/obi_annotate/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `obiuniq output file`
 >    - In *"Keep only attribute with key"*:
 >        - *"key"*: `count`
 >        - *"if you want to specify a second key"*: `merged_sample`
@@ -310,6 +310,7 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > ### {% icon hands_on %} Hands-on: Computes basic statistics for attribute values
 >
 > 1. {% tool [obistat](toolshed.g2.bx.psu.edu/repos/iuc/obi_stat/obi_stat/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `obiannotate output file`
 >    - In *"Category attribute"*:
 >        - {% icon param-repeat %} *"Insert Category attribute"*
 >            - *"How would you specify the category attribute key?"*: `simply by a key of an attribute`
@@ -349,10 +350,12 @@ The OBITools commands consider a sequence record as an entity composed of five d
 > ### {% icon hands_on %} Hands-on: Keep only the sequences having a count greater or equal to 10 and a length shorter than 80 bp
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `obiannotate output file`
 >    - *"Choose the sequence record selection option"*: `predicat`
 >        - *"Python boolean expression to be evaluated for each sequence record."*: `count>=10`
 >
 > 2. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `obigrep output file`
 >    - *"Choose the sequence record selection option"*: `lmin`
 >        - *"lmin"*: `80`
 >
