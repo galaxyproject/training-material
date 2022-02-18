@@ -613,7 +613,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 {: .question }
 
 > ### {% icon comment %} Pixel size when averaging
-> We average over a relatively small so we do not make a weighted average. Use weighted averages when averaging over the entire globe or over a large area where the pixel sizes may vary (depending on the latitude).
+> We average over a relatively small area so we do not make a weighted average. Use weighted averages when averaging over the entire globe or over a large area where the pixel sizes may vary (depending on the latitude).
 >
 {: .comment}
 
