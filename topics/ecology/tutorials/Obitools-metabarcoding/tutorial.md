@@ -56,7 +56,7 @@ Most of the OBITools commands read sequence records from a file or from the stdi
 # Manage input data
 The data needed to run the tutorial are the following:
 
-- fastq files resulting of a GA IIx (Illumina) paired-end (2 x 108 bp) sequencing assay of DNA extracted and amplified from four wolf faeces:
+- FASTQ files resulting from a GA IIx (Illumina) paired-end (2 x 108 bp) sequencing assay of DNA extracted and amplified from four wolf faeces:
     - wolf_F.fastq
     - wolf_R.fastq
 - the file describing the primers and tags used for all samples sequenced:
