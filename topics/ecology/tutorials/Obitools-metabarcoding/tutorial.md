@@ -497,15 +497,15 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    - *"Fill value"*: `NA`
 >        
 >
-> 3. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1,c3,c4,c5,c6,c7,c50,c54,c59,c51`
->    - *"From"*: last `Join two Datasets output file`
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > To have something easier to read and understand, we create a tabular file containing only columns with important informations (c1: query sequences names / c3-7: query counts / c50: reference sequences names / c54: family / c59: genus / c51: reference annotations).
 >    {: .comment}
->        
+>
+>
+> 3. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c1,c3,c4,c5,c6,c7,c50,c54,c59,c51`
+>    - *"From"*: last `Join two Datasets output file`       
 >
 > 4. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
 >    - *"Filter"*: `Cut output file`
