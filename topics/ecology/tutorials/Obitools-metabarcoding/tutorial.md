@@ -36,7 +36,7 @@ It is always a good idea to have a look at the intermediate results or to evalua
 - obistat to get some basic statistics (count, mean, standard deviation) on the attributes (key=value combinations) in the header of each sequence record (see The [extended OBITools fasta format in the fasta format description](https://pythonhosted.org/OBITools/fasta.html))
 - any Galaxy tools corresponding to classical unix command such as less, awk, sort, wc to check your files.
 
-The OBITools programs imitate Unix standard programs because they usually act as filters. The main difference with classical Unix programs is that text files are not analyzed line per line but sequence record per sequence record (see below for a detailed description of a sequence record). Compared to packages for similar purposes like mothur (Schloss et al. 2009) or QIIME (Caporaso et al. 2010), the OBITools mainly rely on filtering and sorting algorithms. This allows users to set up versatile data analysis pipelines
+The OBITools programs imitate Unix standard programs because they usually act as filters. The main difference with classical Unix programs is that text files are not analyzed line per line but sequence record per sequence record (see below for a detailed description of a sequence record). Compared to packages for similar purposes like mothur ({% cite Schloss2009 %}) or QIIME ({% cite Caporaso2010 %}), the OBITools mainly rely on filtering and sorting algorithms. This allows users to set up versatile data analysis pipelines
 
 ![OBITools pipeline](../../images/Obitools/fig-Pipeline.png)
 
