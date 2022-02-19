@@ -20,7 +20,7 @@ module Jekyll
 
         puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
         last_modified = begin page.last_modified.to_s rescue Time.new.to_s end
-        notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified, notebook_language, site)
+        notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified, notebook_language, site, dir)
 
         topic_id = dir.split('/')[-3]
         tutorial_id = dir.split('/')[-1]
