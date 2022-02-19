@@ -384,16 +384,16 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 > ### {% icon hands_on %} Hands-on: Clean the sequences for PCR/sequencing errors (sequence variants)
 >
+> As a final denoising step, using the obiclean program, we keep the head sequences that are sequences with no variants with a count greater than 5% of their own count
+>
+>
 > 1. {% tool [obiclean](toolshed.g2.bx.psu.edu/repos/iuc/obi_clean/obi_clean/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `obigrep output file`
 >    - *"Maximum numbers of differences between two variant sequences (default: 1)"*: `1`
 >    -  *"Threshold ratio between counts (rare/abundant counts) of two sequence records so that the less abundant one is a variant of the more abundant (default: 1, i.e. all less abundant sequences are variants)"*: `0.05`
 >    - *"Do you want to select only sequences with the head status in a least one sample?"*: `Yes`
 >
->    > ### {% icon comment %} Comment
->    >
->    > As a final denoising step, using the obiclean program, we keep the head sequences that are sequences with no variants with a count greater than 5% of their own count
->    {: .comment}
+
 >
 {: .hands_on}
 
