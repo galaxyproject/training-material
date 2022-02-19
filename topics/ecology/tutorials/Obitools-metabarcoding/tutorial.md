@@ -27,7 +27,7 @@ Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wol
  * the OBITools on Galaxy
  * some classical Galaxy tools
 
-The data used in this tutorial correspond to the analysis of four wolf scats, using the protocol published in {% cite Shehzad2012 %} for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifying the 12S-V5 region ({% cite Riaz2011}), together with a wolf blocking oligonucleotide.
+The data used in this tutorial correspond to the analysis of four wolf scats, using the protocol published in {% cite Shehzad2012 %} for assessing carnivore diet. After extracting DNA from the faeces, the DNA amplifications were carried out using the primers TTAGATACCCCACTATGC and TAGAACAGGCTCCTCTAG amplifying the 12S-V5 region ({% cite Riaz2011 %}), together with a wolf blocking oligonucleotide.
 
 It is always a good idea to have a look at the intermediate results or to evaluate the best parameter for each step. Some commands are designed for that purpose, for example you can use :
 
@@ -40,7 +40,7 @@ The OBITools programs imitate Unix standard programs because they usually act as
 
 ![OBITools pipeline](../../images/Obitools/fig-Pipeline.png)
 
-Most of the OBITools commands read sequence records from a file or from the stdin, make some computations on the sequence records and output annotated sequence records. As inputs, the OBITools are able to automatically recognize the most common sequence file formats (i.e. FASTA, FASTQ, EMBL, and GenBank). They are also able to read ecoPCR ({% cite Ficetola2010}) result files and ecoPCR/ecoPrimers formatted sequence databases ({% cite Riaz2011}) as ordinary sequence files. File format outputs are more limited. By default, sequences without and with quality information are written in FASTA and FASTQ formats, respectively. However, dedicated options allow enforcing the output format, and the OBITools are also able to write sequences in the ecoPCR/ecoPrimers database format, to produce reference databases for these programs. In FASTA or FASTQ format, the attributes are written in the header line just after the id, following a key=value; format.
+Most of the OBITools commands read sequence records from a file or from the stdin, make some computations on the sequence records and output annotated sequence records. As inputs, the OBITools are able to automatically recognize the most common sequence file formats (i.e. FASTA, FASTQ, EMBL, and GenBank). They are also able to read ecoPCR ({% cite Ficetola2010 %}) result files and ecoPCR/ecoPrimers formatted sequence databases ({% cite Riaz2011 %}) as ordinary sequence files. File format outputs are more limited. By default, sequences without and with quality information are written in FASTA and FASTQ formats, respectively. However, dedicated options allow enforcing the output format, and the OBITools are also able to write sequences in the ecoPCR/ecoPrimers database format, to produce reference databases for these programs. In FASTA or FASTQ format, the attributes are written in the header line just after the id, following a key=value; format.
 
 ![OBITools attributes records](../../images/Obitools/fig-Record.png)
 
