@@ -402,6 +402,8 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 > ### {% icon hands_on %} Hands-on: Search nucleotide database with nucleotide query sequence(s) from OBITools treatments
 >
+> Once denoising has been done, the next step in diet analysis is to assign the barcodes to the corresponding species in order to get the complete list of species associated to each sample. Taxonomic assignment of sequences requires a reference database compiling all possible species to be identified in the sample. Assignment is then done based on sequence comparison between sample sequences and reference sequences. We here propose to use BLAST+ blastn. 
+>
 > 1. {% tool [NCBI BLAST+ blastn](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy0) %} with the following parameters:
 >    - *"Nucleotide query sequence(s)"*: `obiclean output file`
 >    - *"Subject database/sequences"*: `FASTA file from your history`
