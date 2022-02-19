@@ -89,12 +89,12 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/genome_masked.fasta
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/SwissProt_subset.fasta
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alternate_annotation.gbk
->    https://zenodo.org/api/files/baa26ebe-665a-4f9f-aaa4-61902fa51377/alternate_annotation.gff3
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/genome_masked.fasta
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R1.fq.gz
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R2.fq.gz
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/SwissProt_subset.fasta
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gbk
+>    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gff3
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -211,7 +211,7 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 > ### {% icon comment %} Comments on parameters
 >
 > - For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analysis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
-> - It is possible to enable the *"Is it a fungus species?"* option in Funannotate: it launched an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the RNASeq data available. For this tutorial we leave this option to `No`. You can test it with real data, but be sure to compare the result with and without this option.
+> - It is possible to enable the *"Is it a fungus species?"* option in Funannotate: it launches an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the RNASeq data available. For this tutorial we leave this option to `No`. You can test it with real data, but be sure to compare the result with and without this option.
 > - For real data analysis you can consider enabling the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"*. If you have enough data, you might get better results as there will be an additional training step for augustus (at the cost of a longer runtime).
 {: .comment}
 
@@ -260,7 +260,7 @@ Before moving on, have a quick look at the `tbl2asn error summary report` output
 >
 > > ### {% icon solution %} Solution
 > >
-> > On a total of 2449, you should find ~2292 BUSCO genes identifed as complete in the annotation, with 2261 being in single copy, and 31 being duplicated.
+> > On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.
 > >
 > > That's a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
 > >
@@ -279,7 +279,7 @@ The aim of the previous step is to predict the position of the genes on the geno
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.0.1+galaxy1) %} with the following parameters:
+> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Fasta sequences to annotate"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Version of eggNOG Database"*: select the latest version available
 >    - In *"Output Options"*:
@@ -301,10 +301,9 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.52-86.0+galaxy1) %} with the following parameters:
+> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
->    - *"Applications to run"*: unselect `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY`  (see why below)
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
 >    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
 >
@@ -312,9 +311,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > ### {% icon comment %} Comments
 >
-> Due to bugs in InterProScan, `PROSITE Profiles`, `PROSITE Pattern` and `SUPERFAMILY` don't work with the current version of InterProScan. We disable it for this tutorial, and hopefully it should be possible to use them in future versions of InterProScan.
->
-> To speed up the processing by InterProScan during this tutorial, you can also disable `Pfam` and `PANTHER` applications. When analysing real data, it is adviced to keep them enabled.
+> To speed up the processing by InterProScan during this tutorial, you can disable `Pfam` and `PANTHER` applications. When analysing real data, it is adviced to keep them enabled.
 >
 > When some applications are disabled, you will of course miss the corresponding results in the output of **InterProScan**.
 {: .comment}

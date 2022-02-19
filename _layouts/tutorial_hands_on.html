@@ -175,7 +175,10 @@ footer: no
             <div class="col-sm-10">
                  {% if page.notebook %}
                      {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
-                    {% if page.notebook.language ==  "r" %}
+                    {% if page.notebook.snippet %}
+                        {% assign pagesnippet = page.notebook.snippet %}
+                        {% snippet pagesnippet %}
+                    {% elsif page.notebook.language ==  "r" %}
                         <blockquote class="comment">
                             <h3>{% icon comment aria=false %} {{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</h3>
                             <p>

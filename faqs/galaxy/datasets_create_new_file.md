@@ -9,11 +9,11 @@ layout: faq
 * Open the Galaxy Upload Manager
 * Select **Paste/Fetch Data**
 * Paste the file contents into the text field
-{%- if include.format -%}
+{% if include.format %}
 * Change **Type** from "Auto-detect" to `{{ include.format }}`
 {% endif %}
-{%- if include.genome -%}
+{% if include.genome %}
 * Change **Genome** to `{{ include.genome }}`
 {% endif %}
-{%- if include.convertspaces -%} * From the Settings menu ({% icon galaxy-gear %}) select **Convert spaces to tabs** {% endif %}
+{% if include.convertspaces %} * From the Settings menu ({% icon galaxy-gear %}) select **Convert spaces to tabs** {% endif %}
 * Press **Start** and **Close** the window

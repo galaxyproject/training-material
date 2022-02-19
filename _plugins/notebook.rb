@@ -2,6 +2,7 @@ require 'digest'
 require 'json'
 require 'fileutils'
 require 'yaml'
+require 'base64'
 
 
 module GTNNotebooks
@@ -50,7 +51,7 @@ module GTNNotebooks
     data.each{|line|
       if line == "```#{language}"
         if inside_block
-          raise "Error! we're already in a block"
+          raise "[GTN/Notebook] Error! we're already in a block"
         end
         # End the previous block
         out.append([val, inside_block])
@@ -351,7 +352,7 @@ module GTNNotebooks
     rmddata.to_yaml(:line_width => rmddata['author'].size + 10) + "---\n" + final_content.join("\n")
   end
 
-  def self.render_jupyter_notebook(data, content, url, last_modified, notebook_language, site)
+  def self.render_jupyter_notebook(data, content, url, last_modified, notebook_language, site, dir)
     # Here we read use internal methods to convert the tutorial to a Hash
     # representing the notebook
     notebook = self.convert_notebook_markdown(content, notebook_language)
@@ -375,7 +376,7 @@ module GTNNotebooks
     # custom CSS which only seems to work when inline on a cell, i.e. we
     # can't setup a style block, so we really need to render the markdown
     # to html.
-    notebook = self.renderMarkdownCells(site, notebook, data, url)
+    notebook = self.renderMarkdownCells(site, notebook, data, url, dir)
     #require 'pp'
     #pp notebook
 
@@ -394,9 +395,8 @@ module GTNNotebooks
     JSON.pretty_generate(notebook)
   end
 
-  def self.renderMarkdownCells(site, notebook, metadata, page_url)
+  def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
     seen_abbreviations = Hash.new
-
     notebook['cells'].map{|cell|
       if cell.fetch('cell_type') == 'markdown'
 
@@ -452,10 +452,33 @@ module GTNNotebooks
         # fab, but in a notebook this doesn't make sense as it will live
         # outside of the GTN. We need real URLs.
         #
-        # But we'll only do this if it's in "deploy" mode, in order to have
-        # the images also work locally.
-        if site.config['url'] == "https://training.galaxyproject.org"
-          cell['source'].gsub!(/<img src=\"\.\./, '<img src="' + site.config['url'] + site.config['baseurl'] + page_url.split('/')[0..-2].join('/') + '/..')
+        # So either we'll embed the images directly via base64 encoding (cool,
+        # love it) or we'll link to the production images and folks can live
+        # without their images for a bit until it's merged.
+
+        if cell['source'].match(/<img src="\.\./)
+          cell['source'].gsub!(/<img src="(\.\.[^"]*)/) { |img|
+            path = img[10..-1]
+            image_path = File.join(dir, path)
+
+            if img[-3..-1].downcase == 'png'
+              #puts "[GTN/Notebook/Images] Embedding png: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/png;base64,#{data}")
+            elsif img[-3..-1].downcase == 'jpg' or img[-4..-1].downcase == 'jpeg'
+              #puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/jpeg;base64,#{data}")
+            elsif img[-3..-1].downcase == 'svg'
+              #puts "[GTN/Notebook/Images] Embedding svg: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/svg+xml;base64,#{data}")
+            else
+              #puts "[GTN/Notebook/Images] Fallback for #{img}"
+              # Falling back to non-embedded images
+              '<img src="https://training.galaxyproject.org/training-material/' + page_url.split('/')[0..-2].join('/') + '/..'
+            end
+          }
         end
 
         # Strip out the highlighting as it is bad on some platforms.
