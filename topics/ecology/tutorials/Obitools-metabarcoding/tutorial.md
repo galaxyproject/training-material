@@ -426,6 +426,13 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 > ### {% icon hands_on %} Hands-on: Filter Blast results
 >
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > This tool allows you to re-associate all the reference sequences information, notably the `species_name` one so you can see which species are potentially seen on the sample.
+>    > We will also use it to re-associate all the query sequences information, notably the `merged_sample` and `obiclean_count` attributes so we can better evaluate quality of the results.
+>    >    {: .comment}
+>
 > 1. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
 >    - *"Sequence file to be filtered"*: `db_v05_r117`
 >    - *"Filter using the ID list from"*: `tabular file`
@@ -433,11 +440,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    - *"Column(s) containing sequence identifiers"*: `Column 2`
 >    - *"Output positive matches, negative matches, or both?"*: `just positive match`
 >
->
->    > ### {% icon comment %} Comment
->    >
->    > This tool allows you to re-associate all the reference sequences information, notably the `species_name` one so you can see which species are potentially seen on the sample.
->    {: .comment}
 >    
 > 2. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
 >    - *"Sequence file to be filtered"*: `obiclean output data`
@@ -447,10 +449,6 @@ The OBITools commands consider a sequence record as an entity composed of five d
 >    - *"Output positive matches, negative matches, or both?"*: `just positive match`
 >
 >
->    > ### {% icon comment %} Comment
->    >
->    > This tool allows you to re-associate all the query sequences information, notably the `merged_sample` and `obiclean_count` attributes so we can better evaluate quality of the results.
->    {: .comment}
 >
 {: .hands_on}
 
