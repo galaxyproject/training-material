@@ -48,7 +48,7 @@ Here we'll give a quick tutorial on how to read and write files within Python.
 
 For this tutorial, we assume you're working in a notebook (Jupyter, CoCalc, etc) so we'll run a quick "setup" step to download some CSV data:
 
-```
+```python
 import urllib.request
 # Download a copy of Hamlet.
 urllib.request.urlretrieve("https://gutenberg.org/cache/epub/1524/pg1524.txt", "hamlet.txt")
@@ -148,7 +148,7 @@ Here we've initialised the `lines` variable with the contents of the text, and s
 
 ```python
 def is_speaker(word):
-    return word == word.upper() and word[-1] == '.':
+    return word == word.upper() and word[-1] == '.'
 ```
 
 We can use that function later to check if a line starts with a speaker
@@ -411,13 +411,12 @@ That should be easier to work with, now we only have one country's data. Let's d
 > >
 > > ```python
 > > vaccines = []
-> >
 > > for row in subset:
 > >     vaccines.append(row[12])
-> >
-> > # We can use the `set` function to convert the list to a set, and show only the unique values.
 > > print(set(vaccines))
 > > ```
+> >
+> > We can use the `set` function to convert the list to a set, and show only the unique values.
 > {: .solution}
 {: .question}
 
@@ -427,7 +426,10 @@ That should be easier to work with, now we only have one country's data. Let's d
 
 > ### {% icon question %} Question: How many of each vaccine were given?
 >
-> How many of each were given? *Tip*: use the accumulator pattern
+> How many of each were given?
+>
+> *Tip*: use the accumulator pattern.
+> *Tip*: Columns 5, 7, and 8 have doses being given out to patients.
 >
 > > ### {% icon solution %} Solution
 > > ```python
@@ -436,9 +438,7 @@ That should be easier to work with, now we only have one country's data. Let's d
 > >     brand = row[12]
 > >     if brand not in doses:
 > >         doses[brand] = 0
-> >
-> >     doses[brand] = doses[brand] + 1
-> >
+> >     doses[brand] = doses[brand] + int(row[5]) + int(row[7]) + int(row[8])
 > > print(doses)
 > > ```
 > {: .solution}
@@ -450,7 +450,10 @@ That should be easier to work with, now we only have one country's data. Let's d
 
 > ### {% icon question %} Question: How many of each vaccine were exported? received?
 >
-> How many of each were exported? received? *Tip*: you only need to loop once.
+> How many of each were exported? received?
+>
+> *Tip*: you only need to loop once.
+> *Tip*: you will need to handle an edge case here. Try and find it out!
 >
 > > ### {% icon solution %} Solution
 > > ```python
@@ -458,14 +461,14 @@ That should be easier to work with, now we only have one country's data. Let's d
 > > received = {}
 > > for row in subset:
 > >     brand = row[12]
-> >     if brand not in doses:
+> >     if brand not in export:
 > >         export[brand] = 0
-> >     if brand not in doses:
+> >     if brand not in received:
 > >         received[brand] = 0
-> >
-> >     export[brand] = export[brand] + 1
-> >     received[brand] = received[brand] + 1
-> >
+> >     if row[4]:
+> >         export[brand] = export[brand] + int(row[4])
+> >     if row[3]:
+> >         received[brand] = received[brand] + int(row[3])
 > > print(export)
 > > print(received)
 > > ```
@@ -483,8 +486,8 @@ That should be easier to work with, now we only have one country's data. Let's d
 > > ### {% icon solution %} Solution
 > > ```python
 > > for row in subset:
-> >     if row[5] > 0:
-> >         print(row[0])
+> >     if row[5] and int(row[5]) > 0:
+> >         print(f"On {row[0]}, {row[5]} doses of {row[12]} were given")
 > >         break
 > > ```
 > {: .solution}
@@ -494,29 +497,25 @@ That should be easier to work with, now we only have one country's data. Let's d
 # Try things out here!
 ```
 
-
 > ### {% icon question %} Question: Transform the data for plotting
 >
 > Let's say you want to plot the fraction of the population that has been vaccinated by the various points in time.
 >
 > - Subset the data further for TargetGroup (column 11) set to 'ALL'
-> - Create an accumulator, to count how many doses have been given (FirstDose + SecondDose + DoseAdditional1) at each week
+> - Create an accumulator, to count how many doses have been given their FirstDose at each week
 > - Use column 13 (population) to calculate the fraction of the population that has been given one of those doses at each week
 >
 > The output should be a list of percentages ranging from [0.0 to 1.0].
 >
 > > ### {% icon solution %} Solution
 > > ```python
-total_doses = 0
-percent_vaccinated_per_week = []
-
-for row in subset:
-    if row[11] != 'ALL':
-        continue
-
-    total_doses = total_doses + row[5] + row[7] + row[8]
-    percent_vaccinated_per_week.append(total_doses / row[13])
-
+> > total_doses = 0
+> > percent_vaccinated_per_week = []
+> > for row in subset:
+> >     if row[11] != 'ALL':
+> >         continue
+> >     total_doses = total_doses + int(row[5])
+> >     percent_vaccinated_per_week.append(total_doses / int(row[13]))
 > > ```
 > {: .solution}
 {: .question}
@@ -533,8 +532,7 @@ percent_vaccinated_per_week = []
 # You may need to `pip install matplotlib`
 %matplotlib inline
 import matplotlib.pyplot as plt
-week_count = list(range(percent_vaccinated_per_week))
-plt.plot(week_count, percent_vaccinated_per_week)
+plt.plot(percent_vaccinated_per_week)
 plt.xlabel('Week')
 plt.ylabel('Percent Vaccinated')
 ```
@@ -559,5 +557,8 @@ plt.ylabel('Percent Vaccinated')
 > {: .solution}
 {: .question}
 
+```python
+# Try things out here!
+```
 
 Congratulations on getting this far! Hopefully you feel more comfortable working with files.
