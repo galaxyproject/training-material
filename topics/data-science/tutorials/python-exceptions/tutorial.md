@@ -25,7 +25,7 @@ enable: false
 subtopic: python-modular
 contributors:
   - hexylena
-
+- dirowa
 priority: 1
 notebook:
   language: python
@@ -65,7 +65,7 @@ mean([1, 2, 3])
 mean([])
 ```
 
-This raises a `ZeroDivisionError` but we can make this a more friendly error message by raising our own exception.
+This raises a `ZeroDivisionError`  but we can make this a more friendly error message by raising our own exception.
 
 ```python
 def mean(numbers):
