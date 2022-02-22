@@ -144,7 +144,8 @@ except:
 finally:
     # So we should cleanup this temporary file we created, so it doesn't cause
     # problems or distract the user from the results file.
-    os.unlink('gene_query.fa')
+    # This function will delete a file from your computer:
+    os.remove('gene_query.fa')
 ```
 
 ## Fallback
