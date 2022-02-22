@@ -32,6 +32,7 @@ contributors:
   - carpentries
   - hexylena
   - dirowa
+  - bazante1
 
 priority: 1
 notebook:

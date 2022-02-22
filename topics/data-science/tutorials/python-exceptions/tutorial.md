@@ -25,7 +25,8 @@ enable: false
 subtopic: python-modular
 contributors:
   - hexylena
-- dirowa
+  - dirowa
+  - bazante1
 priority: 1
 notebook:
   language: python

@@ -27,6 +27,7 @@ subtopic: python-modular
 contributors:
   - hexylena
   - dirowa
+  - bazante1
 
 priority: 1
 notebook:
