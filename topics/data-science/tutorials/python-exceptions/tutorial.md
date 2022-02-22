@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Python - Try & Except
+title: 'Python - Try & Except'
 level: Introductory
 requirements: []
 follow_up_training: []
@@ -16,10 +16,10 @@ objectives:
 
 time_estimation:  20M
 key_points:
-- `raise` lets your raise your own `Exception`s
+- raise lets your raise your own `Exception`s
 - This is mostly used by library authors (which you might become!)
 - Use `try`/`except` to catch expected errors and work around them (if possible)
-- `finally` lets you cleanup your temporary files, if you created some.
+- finally lets you cleanup your temporary files, if you created some.
 
 enable: false
 subtopic: python-modular
@@ -104,13 +104,13 @@ Or for another example, accessing a user supplied file. Oftentimes users will ca
 user_supplied_file = 'does-not-exist.txt'
 try:
     open(user_supplied_file, 'r')
-except FileNotFoundException:
+except FileNotFoundError:
     print(f"The path you supplied ({user_supplied_file}) doesn't exist, please double check it!")
 except PermissionError:
     print(f"You supplied a valid file, but it is unreadable. Try changing it's permissions with `chmod +r {user_supplied_file}`")
 ```
 
-Failing to open a file raises a `FileNotFoundException` which indicates the file isn't available, and `PermissionError` indicates that a file is unreadable. However in practice, sometimes you'll see something like this:
+Failing to open a file raises a `FileNotFoundError` which indicates the file isn't available, and `PermissionError` indicates that a file is unreadable. However in practice, sometimes you'll see something like this:
 
 ```
 # Bad!
