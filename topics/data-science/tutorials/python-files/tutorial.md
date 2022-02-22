@@ -18,8 +18,9 @@ objectives:
 
 time_estimation:  1H30M
 key_points:
-- File reading requires a mode: read, write, and append
-- Use the CSV module to parse CSV files: do NOT attempt to do it yourself, it will encounter edge cases that the CSV module handles for you
+- "File reading requires a mode: read, write, and append"
+- Use the CSV module to parse CSV files.
+- do NOT attempt to do it yourself, it will encounter edge cases that the CSV module handles for you
 - Use a `with` block to open a file.
 
 enable: false
