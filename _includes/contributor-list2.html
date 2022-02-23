@@ -1,0 +1,43 @@
+<dl>
+	{% if include.contributors.authorship %}
+		<dt>Author(s)</dt>
+		<dd>
+			{% for id in include.contributors.authorship %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+			{%- if include.newcontributors -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='newcontributors' %}{% endif %}{% endif %}
+		</dd>
+	{% endif %}
+	{% if include.contributors.editing %}
+		<dt>Editor(s)</dt>
+		<dd>
+			{% for id in include.contributors.editing %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</dd>
+	{% endif %}
+
+	{% if include.contributors.testing %}
+		<dt>Tester(s)</dt>
+		<dd>
+			{% for id in include.contributors.testing %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</dd>
+	{% endif %}
+
+	{% if include.contributors.ux %}
+		<dt>UX/Designer(s)</dt>
+		<dd>
+			{% for id in include.contributors.ux %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</dd>
+	{% endif %}
+
+	{% if include.contributors.infrastructure %}
+		<dt>Infrastructure</dt>
+		<dd>
+			{% for id in include.contributors.infrastructure %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</dd>
+	{% endif %}
+
+	{% if include.contributors.funding %}
+		<dt>Funder(s)</dt>
+		<dd>
+			{% for id in include.contributors.funding %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</dd>
+	{% endif %}
+</dl>

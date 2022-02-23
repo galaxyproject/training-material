@@ -21,8 +21,14 @@ layout: page
 {% endif %}
 
 <div class="newsitem">
-{% if page.contributors %}
-<div class="contributors-line">By: {% include _includes/contributor-list.html contributors=page.contributors badge=true %}</div>
+{% if page.contributors or page.contributions %}
+<div class="contributors-line">
+    {% if page.contributors %}
+    {{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true newcontributors=true %}
+    {% else %}
+        {% include _includes/contributor-list2.html contributors=page.contributions badge=true newcontributors=true %}
+    {% endif %}
+</div>
 {% endif %}
 
 {% for tag in page.tags %}

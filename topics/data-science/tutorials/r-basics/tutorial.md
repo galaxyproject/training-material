@@ -33,11 +33,14 @@ tags:
   - R
 subtopic: r
 priority: 1
-contributors:
+contributions:
+  authorship:
   - carpentries
+  editing:
   - bebatut
   - fpsom
   - tobyhodges
+  funding:
   - erasmusplus
 ---
 
