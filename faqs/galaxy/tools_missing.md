@@ -8,7 +8,7 @@ contributors: shiltemann
 
 If you can't find a tool you need for a tutorial on Galaxy, please:
 
-1. **Check that you are using the right Galaxy server**
+1. **Check that you are using a compatible Galaxy server**
   - Navigate to the overview box at the top of the tutorial
   - Find the **"Supporting Materials"** section
   - Check **"Available on these Galaxies"**
