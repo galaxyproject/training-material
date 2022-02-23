@@ -4,6 +4,14 @@ require './_plugins/jekyll-topic-filter.rb'
 module Jekyll
   class APIGenerator < Generator
 
+    def get_contributors(data)
+      if data.has_key?('contributors')
+        return data['contributors']
+      elsif data.has_key?('contributions')
+        return data['contributions'].keys.map{|k| data['contributions'][k]}.flatten()
+      end
+    end
+
     def generate(site)
 
       # Full Bibliography
@@ -38,7 +46,7 @@ module Jekyll
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map{|x|
           q = x.dup
-          q['contributors'] = q['contributors'].dup.map{|c| mapContributor(site, c)}
+          q['contributors'] = get_contributors(q).dup.map{|c| mapContributor(site, c)}
 
           q['urls'] = Hash.new
 
@@ -92,7 +100,7 @@ module Jekyll
 
         page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{page.url[7..-6]}.json")
         p = page.data.dup
-        p['contributors'] = p['contributors'].dup.map{|c| mapContributor(site, c)}
+        p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
         page5.content = JSON.pretty_generate(p)
         page5.data["layout"] = nil
         site.pages << page5
