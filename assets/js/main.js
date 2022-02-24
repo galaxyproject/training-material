@@ -17,7 +17,7 @@ $(".question,.hands_on,.comment").each(function() {
     h3.append("<span role='button' class='fold-unfold fa fa-minus-square'></span>");
 });
 
-$("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQ page</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
+$("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
 
 (function (window, document) {
     function onDocumentReady(fn) {
