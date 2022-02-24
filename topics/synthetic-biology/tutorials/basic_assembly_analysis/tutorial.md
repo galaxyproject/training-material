@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Designing plasmids encoding predicted pathways by using the BASIC assembly method
-zenodo_link: https://zenodo.org/record/6123887#.YhTCPhvjJH4
+zenodo_link: https://zenodo.org/record/6123887
 questions:
 - How to design plasmids encoding predicted pathways using BASIC assembly method ?
 - How to generate scripts enabling the automatic build of plasmids ?
