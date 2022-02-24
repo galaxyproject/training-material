@@ -16,7 +16,7 @@ Common questions about the Galaxy platform, or about the GTN itself, can be foun
 
 {% include _includes/button.html link="/faqs/galaxy" colour="yellow" label="Galaxy FAQs" buttonsize="large" %}
 
-{% include _includes/button.html link="/faqs/gtn" colour="pink" label="GTN FAQs" buttonsize="large" %}
+{% include _includes/button.html link="/faqs/gtn" colour="purple" label="GTN FAQs" buttonsize="large" %}
 
 </div>
 
@@ -40,7 +40,7 @@ Each topic in the GTN also has a dedicated FAQ page:
 ### Galaxy for Scientists
 
 <div markdown="0">
-{% assign buttoncolours = "red,orange,yellow,green,lightgreen,blue,lightblue,purple,pink" | split: "," %}
+{% assign buttoncolours = "red,orange,yellow,green,blue,purple,pink" | split: "," %}
 
 {% assign buttonnum = 0 %}
 {% for topic in sorted_topics %}
