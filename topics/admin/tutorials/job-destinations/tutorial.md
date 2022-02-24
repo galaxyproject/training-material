@@ -23,7 +23,7 @@ contributors:
   - hexylena
 tags:
   - jobs
-subtopic: features
+subtopic: jobs
 requirements:
   - type: "internal"
     topic_name: admin

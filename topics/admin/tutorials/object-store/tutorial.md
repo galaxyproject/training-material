@@ -15,7 +15,7 @@ contributors:
   - natefoo
   - hexylena
   - gmauro
-subtopic: features
+subtopic: data
 tags:
   - storage
 requirements:

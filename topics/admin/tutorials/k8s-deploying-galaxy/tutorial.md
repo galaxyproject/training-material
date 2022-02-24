@@ -21,6 +21,7 @@ contributors:
   - ic4f
 tags:
   - kubernetes
+subtopic: cloud
 follow_up_training:
   - type: "internal"
     topic_name: admin

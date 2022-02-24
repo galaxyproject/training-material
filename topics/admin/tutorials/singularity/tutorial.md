@@ -13,7 +13,7 @@ contributors:
   - mvdbeek
   - bernt-matthias
   - hexylena
-subtopic: features
+subtopic: jobs
 tags:
   - jobs
 requirements:

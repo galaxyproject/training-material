@@ -15,7 +15,7 @@ objectives:
 time_estimation: "2h"
 tags:
   - monitoring
-subtopic: features
+subtopic: monitoring
 key_points:
   - Telegraf provides an easy solution to monitor servers
   - Galaxy can send metrics to Telegraf

@@ -26,6 +26,7 @@ contributors:
   - ic4f
 tags:
   - kubernetes
+subtopic: cloud
 requirements:
   - type: "internal"
     topic_name: admin

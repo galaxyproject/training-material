@@ -17,7 +17,7 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
-subtopic: features
+subtopic: data
 tags:
   - storage
 requirements:

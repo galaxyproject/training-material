@@ -16,7 +16,7 @@ contributors:
   - bgruening
   - slugger70
   - hexylena
-subtopic: features
+subtopic: monitoring
 tags:
   - monitoring
 requirements:
