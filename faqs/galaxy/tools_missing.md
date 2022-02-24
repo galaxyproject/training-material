@@ -1,5 +1,5 @@
 ---
-title: A Tool is Missing
+title: If a Tool is Missing
 area: tools
 box_type: tip
 layout: faq
