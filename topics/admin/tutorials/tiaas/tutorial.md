@@ -17,8 +17,10 @@ contributors:
   - shiltemann
 subtopic: features
 tags:
+  - ansible
   - training
   - jobs
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin

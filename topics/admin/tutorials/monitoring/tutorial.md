@@ -14,7 +14,9 @@ objectives:
   - Create several charts
 time_estimation: "2h"
 tags:
+  - ansible
   - monitoring
+  - git-gat
 subtopic: monitoring
 key_points:
   - Telegraf provides an easy solution to monitor servers

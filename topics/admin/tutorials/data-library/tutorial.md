@@ -19,7 +19,9 @@ contributors:
   - shiltemann
 subtopic: data
 tags:
+  - ansible
   - storage
+  - git-gat
 requirements:
  - type: "internal"
    topic_name: admin

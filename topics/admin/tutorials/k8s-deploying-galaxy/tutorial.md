@@ -27,6 +27,7 @@ follow_up_training:
     topic_name: admin
     tutorials:
       - k8s-managing-galaxy
+priority: 2
 ---
 
 # Galaxy Helm Chart

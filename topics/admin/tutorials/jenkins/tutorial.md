@@ -13,6 +13,7 @@ objectives:
   - Secure Jenkins
 time_estimation: "1h"
 tags:
+  - ansible
   - automation
 subtopic: features
 key_points:

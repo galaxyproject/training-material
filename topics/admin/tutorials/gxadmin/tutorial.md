@@ -19,6 +19,8 @@ contributors:
 subtopic: monitoring
 tags:
   - monitoring
+  - ansible
+  - git-gat
 ---
 
 # Overview

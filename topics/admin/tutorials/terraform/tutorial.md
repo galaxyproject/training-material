@@ -22,6 +22,7 @@ tags:
   - terraform
   - deploying
   - cloud
+priority: 3
 ---
 
 # Overview

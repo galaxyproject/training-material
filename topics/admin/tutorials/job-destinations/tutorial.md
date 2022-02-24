@@ -22,7 +22,9 @@ contributors:
   - bgruening
   - hexylena
 tags:
+  - ansible
   - jobs
+  - git-gat
 subtopic: jobs
 requirements:
   - type: "internal"

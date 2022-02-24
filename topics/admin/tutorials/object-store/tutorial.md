@@ -17,6 +17,7 @@ contributors:
   - gmauro
 subtopic: data
 tags:
+  - ansible
   - storage
 requirements:
  - type: "internal"

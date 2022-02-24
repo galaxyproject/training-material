@@ -25,6 +25,8 @@ contributors:
   - hexylena
 tags:
   - jobs
+  - ansible
+  - git-gat
 subtopic: jobs
 requirements:
   - type: "internal"

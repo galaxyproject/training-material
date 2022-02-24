@@ -18,7 +18,9 @@ contributors:
   - hexylena
 subtopic: monitoring
 tags:
+  - ansible
   - monitoring
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin

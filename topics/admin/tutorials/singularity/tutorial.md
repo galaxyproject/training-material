@@ -16,6 +16,8 @@ contributors:
 subtopic: jobs
 tags:
   - jobs
+  - ansible
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin
