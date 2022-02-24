@@ -40,9 +40,17 @@ layout: faqs
 {{q.description}}
 {% snippet {{q.path}} %}
 
-
-
 {% endfor %}
+
+
+<!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
+{% if page.dir contains 'faqs' and page.dir contains 'tutorial' %}
+ <h2 id="general"> <a href="#general"> General FAQs </a></h2>
+ <hr/>
+ <h3 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+  {% snippet /faqs/galaxy/tools_missing.md %}
+{% endif %}
+
 
 {% if page.cited %}
 <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
