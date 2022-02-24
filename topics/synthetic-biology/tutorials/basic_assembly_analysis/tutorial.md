@@ -10,7 +10,7 @@ objectives:
 - Annotate the SBML pathway using Selenzy tool.
 - Design plasmids encoding predicted pathways using rpbasicdesign tool.
 - Generate dnabot scripts enabling the automatic build of plasmids.
-time_estimation: 15 min
+time_estimation: 15M
 key_points:
 - Annotation of SBML pathway using Selenzyme
 - Generating Constructs using rpbasicdesign
