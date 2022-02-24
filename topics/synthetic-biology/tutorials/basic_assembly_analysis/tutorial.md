@@ -16,10 +16,10 @@ key_points:
 - Generating Constructs using rpbasicdesign
 - Generating python scripts using dnabot
 contributors:
-- Kenza BAZI KABBAJ
-- Thomas DUIGOU
-- Joan HERISSON
-- Guillaume GRICOURT
+- kenza12
+- tduigou
+- breakthewall
+- guillaume-gricourt
 
 ---
 
