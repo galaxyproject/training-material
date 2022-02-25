@@ -296,7 +296,6 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    - In *"Keep only attribute with key"*:
 >        - *"key"*: `count`
 >        - *"if you want to specify a second key"*: `merged_sample`
-
 >
 >    > ### {% icon comment %} Comment
 >    >
