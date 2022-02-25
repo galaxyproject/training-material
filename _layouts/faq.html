@@ -25,14 +25,15 @@ layout: base
 
   <h1>{{page.title}}</h1>
 
-  {% if page.contributors %}
-    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include
+    {% if page.contributors %}
+    <div class="contributors-line" style="font-size:1rem;">{{ locale['authors'] | default: "Authors" }}: {% include
         _includes/contributor-list.html
         contributors=page.contributors badge=true newcontributors=true %}</div>
-  {% endif %}
+    <hr>
+    {% endif %}
 
     {{ page.description }}
-    <hr>
+
 
     {{content | regex_replace: '<hr.*—<\/p>', '' }}
 
