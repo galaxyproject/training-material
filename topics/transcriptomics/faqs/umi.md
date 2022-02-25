@@ -1,6 +1,6 @@
 ---
 title: Are UMIs not actually unique?
-area: extract tool
+area: Single-Cell RNA
 box_type: tip
 layout: faq
 ---
