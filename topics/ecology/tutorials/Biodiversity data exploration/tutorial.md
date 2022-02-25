@@ -70,11 +70,11 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 >        - {% icon param-file %} *"from"*: reef_life_molluscs data file
 >
 >    Then, verify if your new file hasn't got hashtags in the first lines and modify the datatype of the new file from txt to csv.
->    {% include snippets/change_datatype.md datatype="csv" %}
+>    {% include faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
-> 4. Convert datatype CSV to tabular 
+> 4. Convert datatype CSV to tabular
 >
->    {% include snippets/convert_datatype.md conversion="Convert CSV to tabular" %}
+>    {% include faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to tabular" %}
 >
 {: .hands_on}
 
@@ -155,7 +155,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 >    - {% icon param-select %} *"Variables links exploration"*: `Autocorrelation of one selected numerical variable`
 >        - {% icon param-select %} *"Select columns containing numerical values"*: `c6`
 >
->     You must get two outputs, one text file containing the Autocorrelation function values and one PNG file in the data collection showing the autocorrelation for a variable. 
+>     You must get two outputs, one text file containing the Autocorrelation function values and one PNG file in the data collection showing the autocorrelation for a variable.
 >     If the bars of the histogram are strictly confined between the dashed lines (representing 95% confidence interval without white noise), there is auto-correlation.
 >
 >    Here, we don't see there is autocorrelation.
@@ -177,7 +177,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 >
 {: .hands_on}
 
-![Variable_exploration_example](../../images/BiodivExplo/Variables_exploration_collinarity_of_Amblygobius%20phalaena.png)  
+![Variable_exploration_example](../../images/BiodivExplo/Variables_exploration_collinarity_of_Amblygobius%20phalaena.png)
 
 ## Visualize abundance repartition through space
 
@@ -193,13 +193,13 @@ In the next steps, you may use either of the two files with or without anonymiza
 >        - {% icon param-select %} *"Select column containing taxon "*: `c5`
 >    - {% icon param-select %} *"Select column containing abundances "*: `c6`
 >
->    You must get two outputs, one with the map of the abundance through space with the coordinates and one text file to inform you about the geographical extent of your map. 
+>    You must get two outputs, one with the map of the abundance through space with the coordinates and one text file to inform you about the geographical extent of your map.
 >
 {: .hands_on}
 
 ![Presence-absence-example](../../images/BiodivExplo/Presence-absence_and_abundance_mappy.png)
 
-## Visualize the number of locations where each taxons are present 
+## Visualize the number of locations where each taxons are present
 
 > ### {% icon hands_on %} Hands-on: Presence count of taxons (barplot)
 >
@@ -211,7 +211,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 >        - {% icon param-select %} *"Select column containing taxon"*: `c5`
 >    - {% icon param-select %} *"Select column containing abundances "*: `c6`
 >
->    You must get two outputs, one with 120 PNG files (one for each site) representing the number of locations where each taxons are present and one text file to inform you about the used locations. 
+>    You must get two outputs, one with 120 PNG files (one for each site) representing the number of locations where each taxons are present and one text file to inform you about the used locations.
 >
 {: .hands_on}
 
@@ -228,7 +228,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 >        - {% icon param-select %} *"Select column containing species"*: `c5`
 >    - {% icon param-select %} *"Select column containing abundances "*: `c6`
 >
->    You must get two outputs, one data collection with one PNG files representing the rarefaction curves of each species in one graph and one tabular file with log informations. 
+>    You must get two outputs, one data collection with one PNG files representing the rarefaction curves of each species in one graph and one tabular file with log informations.
 >
 {: .hands_on}
 
@@ -272,10 +272,10 @@ In the next steps, you may use either of the two files with or without anonymiza
 {: .hands_on}
 
 
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Beta_diversity_through_space.png) 
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_LCBD_sites_time.png) 
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Mean_LCBD_through_time.png) 
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_SCBD_Species_Radar_plot.png) 
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Beta_diversity_through_space.png)
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_LCBD_sites_time.png)
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Mean_LCBD_through_time.png)
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_SCBD_Species_Radar_plot.png)
 
 Final absence correlation plot:
 ![Absence correlation_example](../../images/BiodivExplo/Absence-correlation_plot.png)
@@ -284,4 +284,4 @@ Final absence correlation plot:
 {:.no_toc}
 
 Here, you just explored your biodiversity dataframe properly and you know a lot more about your data. You can now peacefully make your statiscal analyses as most of the red flags you can get have been revealed by this toolsuite ! Enjoy !
- 
+
