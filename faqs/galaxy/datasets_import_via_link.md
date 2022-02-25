@@ -3,7 +3,7 @@ title: Importing via links
 area: data upload
 box_type: tip
 layout: faq
-contributors: [bebatut,hexylena,mtekman,lecorguille,shitemann,nomadscientist,nekrut,mblue9]
+contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,nekrut,mblue9]
 ---
 
 * Copy the link location
