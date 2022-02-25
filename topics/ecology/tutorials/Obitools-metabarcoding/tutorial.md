@@ -350,7 +350,9 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 ## Filtering sequances by count and length with **obigrep**
 
-> ### {% icon hands_on %} Hands-on: Keep only the sequences having a count greater or equal to 10 and a length shorter than 80 bp
+In this step, we are going to use *obigrep* in order to keep only the sequences having a count greater or equal to 10 and a length shorter than 80 bp.
+
+> ### {% icon hands_on %} Hands-on: filter sequences with **obigrep**
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `obiannotate output file`
