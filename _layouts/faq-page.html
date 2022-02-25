@@ -28,7 +28,7 @@ layout: faqs
 
 <!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
 {% if page.dir contains 'faqs' and page.dir contains 'tutorial' %}
- <h3 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+ <h4 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h4>
   {% snippet /faqs/galaxy/tools_missing.md %}
 {% endif %}
 
@@ -36,12 +36,12 @@ layout: faqs
 {% for q in topic_faqs_sorted %}
 {% unless q.area == area_prev %}
 {% unless forloop.first %} <br><br> {% endunless %}
-<h2 id="{{q.area}}"> <a href="#{{q.area}}"> {{ q.area | capitalize}} </a></h2>
+<h3 id="{{q.area}}"> <a href="#{{q.area}}"> {{ q.area | capitalize}} </a></h3>
 <hr/>
 {% assign area_prev = q.area %}
 {% endunless %}
 
-<h3 class="faq-area"> {{q.title}} <a href="{{site.baseurl}}{{q.url}}"><i class="fas fa-external-link-alt"></i></a> </h3>
+<h4 class="faq-area"> {{q.title}} <a href="{{site.baseurl}}{{q.url}}"><i class="fas fa-external-link-alt"></i></a> </h4>
 {{q.description}}
 {% snippet {{q.path}} %}
 
