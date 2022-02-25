@@ -14,7 +14,8 @@ key_points:
 contributors:
 - colineroyaux
 - onorvez
-- obitools_team
+- ecoissac
+- fboyer
 - yvanlebras
 
 ---
