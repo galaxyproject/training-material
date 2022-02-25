@@ -3,7 +3,7 @@ title: If a Tool is Missing
 area: tools
 box_type: tip
 layout: faq
-contributors: shiltemann
+contributors: [shiltemann]
 ---
 
 If you can't find a tool you need for a tutorial on Galaxy, please:

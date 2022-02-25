@@ -3,6 +3,7 @@ title: Knitting RMarkdown documents in RStudio
 area: interactive tools
 box_type: hands_on
 layout: faq
+contributors: [hexylena]
 ---
 
 One of the other nice features of RMarkdown documents is making lovely presentation-quality worthy documents. You can take, for example, a tutorial and produce a nice report like output as HTML, PDF, or `.doc` document that can easily be shared with colleagues or students.

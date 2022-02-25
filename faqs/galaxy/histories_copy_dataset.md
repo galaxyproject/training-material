@@ -4,6 +4,7 @@ description: Sometimes you may want to use a dataset in multiple histories. You 
 area: histories
 box_type: tip
 layout: faq
+contributors: [lecorguille,shiltemann,hexylena]
 ---
 
 1. Click on the {% icon galaxy-gear %} icon (**History options**) on the top of the history panel

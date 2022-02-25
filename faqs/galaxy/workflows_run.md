@@ -3,6 +3,7 @@ title: Running a workflow
 area: workflows
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena]
 ---
 
 - Click on *Workflow* on the top menu bar of Galaxy. You will see a list of all your workflows.

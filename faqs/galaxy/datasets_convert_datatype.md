@@ -4,6 +4,7 @@ description: Some datasets can be transformed into a different format. Galaxy ha
 area: datasets
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena]
 ---
 
 * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes

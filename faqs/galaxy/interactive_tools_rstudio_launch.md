@@ -3,6 +3,7 @@ title: Launch RStudio
 area: interactive tools
 box_type: hands_on
 layout: faq
+contributors: [bebatut,shiltemann,hexylena,yvanlebras,natefoo]
 ---
 
 

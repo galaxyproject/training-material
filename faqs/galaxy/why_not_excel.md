@@ -4,6 +4,7 @@ description: Excel is a fantastic tool and a great place to build simple analysi
 area: features
 box_type: tip
 layout: faq
+contributors: [hexylena]
 ---
 
 You could just as easily use Excel to answer the same question, and if the goal is to learn how to use a tool, then either tool would be great! But what if you are working on a question where your analysis matters? Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?

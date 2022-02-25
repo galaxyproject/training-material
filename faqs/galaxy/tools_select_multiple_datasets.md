@@ -3,6 +3,7 @@ title: Select multiple datasets
 area: tools
 box_type: tip
 layout: faq
+contributors: [bebatut,wm75,hexylena,shiltemann]
 ---
 
 1. Click on {% icon param-files %} **Multiple datasets**

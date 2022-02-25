@@ -3,6 +3,7 @@ title: "Illumina MiSeq sequencing"
 area: sequencing
 box_type: comment
 layout: faq
+contributors: [shiltemann]
 ---
 
 

@@ -3,6 +3,7 @@ title:  Getting your API key
 area: user preferences
 box_type: tip
 layout: faq
+contributors: [hexylena,shiltemann,bebatut]
 ---
 
 {% if include.dev %}

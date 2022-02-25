@@ -4,6 +4,7 @@ area: analysis
 description: When you get a red dataset in your history, it means something went wrong. But how can you find out what it was? And how can you report errors?
 box_type: tip
 layout: faq
+contributors: shiltemann
 ---
 
 When someting goes wrong in Galaxy, there are a number of things you can do to find out what it was. Error messages can help you figure out whether it was a problem with one of the settings of the tool, or with the input data, or maybe there is a bug in the tool itself and the problem should be reported. Below are the steps you can follow to troubleshoot your Galaxy errors.

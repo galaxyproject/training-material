@@ -3,6 +3,7 @@ title: Importing a workflow using the search
 area: workflows
 box_type: tip
 layout: faq
+contributors: [bebatut]
 ---
 
 - Click on *Workflow* on the top menu bar of Galaxy. You will see a list of all your workflows.

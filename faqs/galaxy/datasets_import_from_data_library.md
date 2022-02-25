@@ -3,6 +3,7 @@ title: Importing data from a data library
 area: data upload
 box_type: tip
 layout: faq
+contributors: [bebatut,shiltemann,nsoranzo,hexylena,wm75]
 ---
 
 

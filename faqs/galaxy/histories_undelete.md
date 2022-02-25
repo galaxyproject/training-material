@@ -4,6 +4,7 @@ description: undelete your deleted histories
 area: histories
 box_type: tip
 layout: faq
+contributors: [gatwirival]
 ---
 * Click on **User** then select **Histories**
 * Click on **Advanced search** on the top left side below  **Saved Histories**

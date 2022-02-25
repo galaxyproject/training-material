@@ -4,6 +4,7 @@ description: Galaxy allows you to create new files from the upload menu. You can
 area: datasets
 box_type: tip
 layout: faq
+contributors: [bebatut,shiltemann,wm75,hexylena,simonbray]
 ---
 
 * Open the Galaxy Upload Manager

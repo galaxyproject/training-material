@@ -3,6 +3,7 @@ title: Selecting a datast collection as input
 area: tools
 box_type: tip
 layout: faq
+contributors: [bebatut,shiltemann,hexylena]
 ---
 
 
