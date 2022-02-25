@@ -2,6 +2,7 @@
 title: What are the tutorials for?
 area: introduction
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

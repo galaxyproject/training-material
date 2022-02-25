@@ -2,6 +2,7 @@
 title:  How can I create new content without dealing with git?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [shiltemann]
 ---
 

@@ -2,6 +2,7 @@
 title: Which isobaric labeled quantification methods does MaxQuant in Galaxy support?
 area: analysis
 layout: faq
+box_type: tip
 contributors: [foellmelanie]
 ---
 

@@ -2,6 +2,7 @@
 title: Where do I start?
 area: learners
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

@@ -2,6 +2,7 @@
 title: What is Galaxy?
 area: introduction
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

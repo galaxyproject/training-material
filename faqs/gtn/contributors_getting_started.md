@@ -2,6 +2,7 @@
 title: How can I get started with contributing?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

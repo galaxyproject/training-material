@@ -2,6 +2,7 @@
 title: How can I test an Interactive Tour?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [shiltemann]
 ---
 

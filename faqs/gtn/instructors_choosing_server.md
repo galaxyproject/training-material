@@ -2,6 +2,7 @@
 title: What Galaxy instance should I use for my training?
 area: instructors
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

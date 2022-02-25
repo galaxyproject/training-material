@@ -2,6 +2,7 @@
 title: How can I report mistakes or errors?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [shiltemann]
 ---
 

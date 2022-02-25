@@ -2,6 +2,7 @@
 title: Where can I run the hands-on tutorials?
 area: learners
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

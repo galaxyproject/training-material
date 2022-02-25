@@ -2,6 +2,7 @@
 title: What can I do to help the project?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [shiltemann]
 ---
 

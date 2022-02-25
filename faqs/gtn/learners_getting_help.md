@@ -2,6 +2,7 @@
 title: How can I get help?
 area: learners
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

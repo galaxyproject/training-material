@@ -2,6 +2,7 @@
 title: How is the content licensed?
 area: introduction
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

@@ -2,6 +2,7 @@
 title: How does the GTN ensure our training materials are FAIR?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [hexylena]
 ---
 

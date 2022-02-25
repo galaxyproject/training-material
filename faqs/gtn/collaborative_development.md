@@ -2,6 +2,7 @@
 title: How does the GTN implement the "Ten simple rules for collaborative lesson development"
 area: contributors
 layout: faq
+box_type: tip
 contributors: [hexylena]
 ---
 

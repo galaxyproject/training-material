@@ -2,6 +2,7 @@
 title: Sustainability of the training-material and metadata
 area: other
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

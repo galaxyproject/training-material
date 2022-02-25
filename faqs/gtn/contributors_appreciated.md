@@ -2,6 +2,7 @@
 title: Thanks!
 area: contributors
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

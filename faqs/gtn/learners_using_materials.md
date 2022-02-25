@@ -2,6 +2,7 @@
 title: How do I use this material?
 area: learners
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

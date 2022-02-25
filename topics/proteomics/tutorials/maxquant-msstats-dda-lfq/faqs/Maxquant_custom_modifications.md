@@ -2,6 +2,7 @@
 title: How can I include custom modifications into MaxQuant in Galaxy?
 area: analysis
 layout: faq
+box_type: tip
 contributors: [foellmelanie]
 ---
 

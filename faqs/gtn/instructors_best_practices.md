@@ -2,6 +2,7 @@
 title: What are the best practices for teaching with Galaxy?
 area: instructors
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

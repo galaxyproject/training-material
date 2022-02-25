@@ -2,6 +2,7 @@
 title: How can I cite the GTN?
 area: introduction
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

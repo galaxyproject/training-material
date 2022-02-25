@@ -2,6 +2,7 @@
 title: Are there any upcoming events focused on Galaxy Training?
 area: other
 layout: faq
+box_type: tip
 contributors: [shiltemann]
 ---
 

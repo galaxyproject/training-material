@@ -2,6 +2,7 @@
 title: How can I advertise the training materials on my posters?
 area: introduction
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 

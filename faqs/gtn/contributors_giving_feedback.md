@@ -2,6 +2,7 @@
 title: How can I give feedback?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [shiltemann]
 ---
 

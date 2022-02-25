@@ -2,6 +2,7 @@
 title: How can I contribute in "advanced" mode?
 area: contributors
 layout: faq
+box_type: tip
 contributors: [shiltemann,hexylena]
 ---
 

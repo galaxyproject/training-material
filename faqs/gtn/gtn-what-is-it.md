@@ -2,6 +2,7 @@
 title: What is this website?
 area: introduction
 layout: faq
+box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 
