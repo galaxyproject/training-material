@@ -256,11 +256,6 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 > ### {% icon hands_on %} Hands-on: Groups together sequence records
 >
-> 1. {% tool [obiuniq](toolshed.g2.bx.psu.edu/repos/iuc/obi_uniq/obi_uniq/1.2.13) %} with the following parameters:
->    - *"Input sequences file"*: `Trimmed and annotated file by NGSfilter`
->    - *"Attribute to merge"*: `sample`
->    - *"Use specific option"*: `merge`
->
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -271,6 +266,11 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    > * output the sequence for each group and its count in the original dataset (in this way, all duplicated reads are removed)
 >    > *Definition adapted from Seguritan and Rohwer (2001)*
 >    {: .comment}
+>
+> 1. {% tool [obiuniq](toolshed.g2.bx.psu.edu/repos/iuc/obi_uniq/obi_uniq/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `Trimmed and annotated file by NGSfilter`
+>    - *"Attribute to merge"*: `sample`
+>    - *"Use specific option"*: `merge`
 >
 {: .hands_on}
 
@@ -291,12 +291,6 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 > ### {% icon hands_on %} Hands-on: Adds/Edits sequence record annotations
 >
-> 1. {% tool [obiannotate](toolshed.g2.bx.psu.edu/repos/iuc/obi_annotate/obi_annotate/1.2.13) %} with the following parameters:
->    - *"Input sequences file"*: `obiuniq output file`
->    - In *"Keep only attribute with key"*:
->        - *"key"*: `count`
->        - *"if you want to specify a second key"*: `merged_sample`
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > obiannotate is the command that allows adding/modifying/removing annotation attributes attached to sequence records.
@@ -304,6 +298,12 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    > 
 >    > Here, the goal is to keep only `count` and `merged_sample` key=value attributes! 
 >    {: .comment}
+>
+> 1. {% tool [obiannotate](toolshed.g2.bx.psu.edu/repos/iuc/obi_annotate/obi_annotate/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `obiuniq output file`
+>    - In *"Keep only attribute with key"*:
+>        - *"key"*: `count`
+>        - *"if you want to specify a second key"*: `merged_sample`
 >
 {: .hands_on}
 
