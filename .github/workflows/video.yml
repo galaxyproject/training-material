@@ -55,7 +55,7 @@ jobs:
       - name: Install rendering stuff
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libfontconfig ghostscript
+          sudo apt-get install -y xvfb libfontconfig ghostscript ffmpeg
 
       - name: Change ImageMagick policy to allow pdf->png conversion.
         run: |
@@ -82,7 +82,7 @@ jobs:
       # The actual compilation process deposits everything in the ./videos/ folder.
       - name: Build Videos
         run: |
-          xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" bash bin/ari-make.sh
+          xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" bundle exec bash bin/ari-make.sh
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_POLLY_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_POLLY_SECRET_ACCESS_KEY }}
