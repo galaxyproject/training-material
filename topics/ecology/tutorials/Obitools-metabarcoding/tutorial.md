@@ -135,11 +135,11 @@ The OBITools commands consider a sequence record as an entity composed of five d
 
 ## Micro assembly of paired-end sequences with **illuminapairedend**
 
+When using the result of a paired-end sequencing assay with supposedly overlapping forward and reverse reads, the first step is to recover the assembled sequence.
+
+The forward and reverse reads of the same fragment are at the same line position in the two FASTQ files obtained after sequencing. Based on these two files, the assembly of the forward and reverse reads is done with the **illuminapairedend** utility that aligns the two reads and returns the reconstructed sequence.
+
 > ### {% icon hands_on %} Hands-on: Recover consensus sequences from overlapping forward and reverse reads.
-> 
-> When using the result of a paired-end sequencing assay with supposedly overlapping forward and reverse reads, the first step is to recover the assembled sequence.
->
-> The forward and reverse reads of the same fragment are at the same line position in the two fastq files obtained after sequencing. Based on these two files, the assembly of the forward and reverse reads is done with the illuminapairedend utility that aligns the two reads and returns the reconstructed sequence.
 >
 > 1. {% tool [illuminapairedend](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_illuminapairedend/1.2.13) %} with the following parameters:
 >    - *"Read from file"*: `wolf_F` for the 3p file
