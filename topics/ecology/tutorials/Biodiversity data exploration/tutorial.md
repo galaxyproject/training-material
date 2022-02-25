@@ -65,7 +65,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 > 3. Rename the datasets "reef_life_molluscs" for example and preview your dataset
 >
 >    You can see that the dataset hasn't been detected to be a CSV dataframe, it is because RLS data directly puts the
->    metadata of the dataframe in the first lines before the dataframe so you'll have to remove these lines using the {% tool [Remove beginning](https://toolshed.g2.bx.psu.edu/repos/devteam/remove_beginning) %} with the following parameters:
+>    metadata of the dataframe in the first lines before the dataframe so you'll have to remove these lines using the {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >        - {% icon param-text %} *"Remove first"*: `72`
 >        - {% icon param-file %} *"from"*: reef_life_molluscs data file
 >
