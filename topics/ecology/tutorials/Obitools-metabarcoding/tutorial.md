@@ -219,6 +219,12 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 > ### {% icon hands_on %} Hands-on: Assigns sequence records to the corresponding experiment/sample based on DNA tags and primers
 >
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Each sequence record is assigned to its corresponding sample and marker using the data provided in a text file (here wolf_diet_ngsfilter.txt). This text file contains one line per sample, with the name of the experiment (several experiments can be included in the same file), the name of the tags (for example: aattaac if the same tag has been used on each extremity of the PCR products, or aattaac:gaagtag if the tags were different), the sequence of the forward primer, the sequence of the reverse primer, the letter T or F for sample identification using the forward primer and tag only or using both primers and both tags, respectively.
+>    {: .comment}
+>
 > 1. {% tool [NGSfilter](toolshed.g2.bx.psu.edu/repos/iuc/obi_ngsfilter/obi_ngsfilter/1.2.13) %} with the following parameters:
 >    - *"Parameter file"*: `wolf_diet_ngsfilter`
 >    - *"Read from file"*: `obigrep output`
@@ -231,12 +237,6 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    > * If you are sure the format is compatible with a tabular datatype, as this is the case here ;), you can manually change it, clicking on the eye of the "wolf_diet_ngsfilter.txt" dataset, then selecting the "Datatypes" section then affecting manually tabular and saving the operation
 >    >
 >    {: .tip}
->
->
->    > ### {% icon comment %} Comment
->    >
->    > Each sequence record is assigned to its corresponding sample and marker using the data provided in a text file (here wolf_diet_ngsfilter.txt). This text file contains one line per sample, with the name of the experiment (several experiments can be included in the same file), the name of the tags (for example: aattaac if the same tag has been used on each extremity of the PCR products, or aattaac:gaagtag if the tags were different), the sequence of the forward primer, the sequence of the reverse primer, the letter T or F for sample identification using the forward primer and tag only or using both primers and both tags, respectively.
->    {: .comment}
 >
 {: .hands_on}
 
