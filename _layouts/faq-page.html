@@ -26,6 +26,11 @@ layout: faqs
 {% endif %}
 
 
+<!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
+{% if page.dir contains 'faqs' and page.dir contains 'tutorial' %}
+ <h3 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+  {% snippet /faqs/galaxy/tools_missing.md %}
+{% endif %}
 
 {% assign area_prev = '' %}
 {% for q in topic_faqs_sorted %}
@@ -43,16 +48,11 @@ layout: faqs
 {% endfor %}
 
 
-<!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
-{% if page.dir contains 'faqs' and page.dir contains 'tutorial' %}
- <h2 id="general"> <a href="#general"> General FAQs </a></h2>
- <hr/>
- <h3 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h3>
-  {% snippet /faqs/galaxy/tools_missing.md %}
-{% endif %}
+
 
 
 {% if page.cited %}
 <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
 {% bibliography --cited %}
 {% endif %}
+
