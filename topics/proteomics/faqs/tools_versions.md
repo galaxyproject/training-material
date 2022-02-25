@@ -1,6 +1,5 @@
 ---
 title: Which version of SearchGUI and PeptideShaker shall I use for this tutorial?
-area: metaproteomics
 box_type: tip
 layout: faq
 contributors: [millen2223]

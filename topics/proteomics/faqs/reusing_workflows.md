@@ -1,6 +1,5 @@
 ---
 title: Can I use these workflows on datasets generated from our laboratory?
-area: metaproteomics
 box_type: tip
 layout: faq
 contributors: [millen2223]

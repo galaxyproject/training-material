@@ -1,6 +1,5 @@
 ---
 title: Which search algorithms are recommended for searching the metaproteomics data?
-area: metaproteomics
 box_type: tip
 layout: faq
 contributors: [millen2223]

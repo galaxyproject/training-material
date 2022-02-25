@@ -1,6 +1,5 @@
 ---
 title: What other methods are available to study the functional state of the microbiome within Galaxy?
-area: metaproteomics
 box_type: tip
 layout: faq
 contributors: [millen2223]

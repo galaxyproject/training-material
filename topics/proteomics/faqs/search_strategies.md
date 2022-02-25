@@ -1,6 +1,5 @@
 ---
 title: I have a really large search database, what search strategies do you recommend for searching my mass spectrometry dataset?
-area: metaproteomics
 box_type: tip
 layout: faq
 contributors: [millen2223]

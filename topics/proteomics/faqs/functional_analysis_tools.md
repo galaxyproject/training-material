@@ -1,6 +1,5 @@
 ---
 title: Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?
-area: metaproteomics
 box_type: tip
 layout: faq
 contributors: [millen2223]
