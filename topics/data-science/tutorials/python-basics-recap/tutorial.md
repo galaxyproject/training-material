@@ -234,8 +234,9 @@ In python you must `open()` a file handle, using one of the three modes (read, w
 
 ```python
 with open('out.txt', 'w') as handle:
-    handle.write("Hello!\n")
+    handle.write("Здравствуйте ")
     handle.write("世界!\n")
+    handle.write("Welcome!\n")
 
 # Can no longer handle.write(), once we've exited the with block, the file is automatically closed for us.
 ```
@@ -247,12 +248,15 @@ There are several basic parts
 - `as` is a keyword
 - `handle` is the name of a file handle, something that represents the file which we can write to, or read from.
 
+Additionally if you need a newline in your file, you *must* write it yourself with a `\n`.
+
 The above code is equivalent to this, but it is not recommended, it's a bit harder to read, and it is very very common to forget to close files which is not ideal.
 
 ```
 handle = open('out.txt', 'w')
-handle.write("Hello!\n")
+handle.write("Здравствуйте ")
 handle.write("世界!\n")
+handle.write("Welcome!\n")
 handle.close()
 
 # Can no longer write.
