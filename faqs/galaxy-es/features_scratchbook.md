@@ -3,6 +3,7 @@ title: Uso del cuaderno de apuntes para ver varios conjuntos de datos
 area: features
 box_type: tip
 layout: faq
+contributors: [nomadscientist]
 ---
 
 Si deseas ver dos o más conjuntos de datos al mismo tiempo, puedes usar la función **Scratchbook** en Galaxy:
