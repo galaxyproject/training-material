@@ -23,7 +23,7 @@ module GTNNotebooks
   }
   COLORS_EXTRA = {
     'agenda' => 'display: none',
-    'solution' => 'color: white !important',
+    'solution' => 'color: transparent !important',
   }
 
   ICONS = {
@@ -485,7 +485,7 @@ module GTNNotebooks
         end
 
         # Strip out the highlighting as it is bad on some platforms.
-        cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: white">')
+        cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: transparent">')
         cell['source'].gsub!(/<div class="highlight">/, '<div>')
         cell['source'].gsub!(/<code>/, '<code style="color: inherit">')
 
