@@ -27,7 +27,7 @@ When someting goes wrong in Galaxy, there are a number of things you can do to f
 4. **Submit a bug report!** If you are still unsure what the problem is.
    - Click on the bug icon {% icon galaxy-bug %}
    - Write down any information you think might help solve the problem
-     - See [this FAQ]({% link faqs/gtn/issues_galaxy.md %}) on how to write good bug reports
+     - See [this FAQ]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}) on how to write good bug reports
    - Click **{% icon galaxy-bug %} Report** button
    - In the meantime, you can ask for help in the [Galaxy Gitter Channel](https://gitter.im/galaxyproject/Lobby) or the [GTN Gitter Channel](https://gitter.im/Galaxy-Training-Network/Lobby), or you can browse the [Galaxy Help Forum](https://help.galaxyproject.org/) to see if others have encountered the same problem before.
 

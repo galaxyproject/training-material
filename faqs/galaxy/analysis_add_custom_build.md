@@ -4,8 +4,7 @@ description: Galaxy may have several reference genomes built-in, but you can als
 area: analysis
 box_type: tip
 layout: faq
-contributors: shiltemann
-
+contributors: [shiltemann]
 ---
 
 - In the top menu bar, go to the *User*, and select *Custom Builds*
