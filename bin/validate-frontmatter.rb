@@ -8,6 +8,7 @@ require 'kwalify'
 TOPIC_SCHEMA = YAML.load_file('bin/schema-topic.yaml')
 TUTORIAL_SCHEMA = YAML.load_file('bin/schema-tutorial.yaml')
 SLIDES_SCHEMA = YAML.load_file('bin/schema-slides.yaml')
+FAQ_SCHEMA = YAML.load_file('bin/schema-faq.yaml')
 requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
 requirement_internal_schema = YAML.load_file('bin/schema-requirement-internal.yaml')
 
@@ -18,11 +19,13 @@ CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
 TUTORIAL_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
 SLIDES_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
 TOPIC_SCHEMA['mapping']['maintainers']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+FAQ_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
 
 # Build validators now that we've filled out the subtopic enum
 $topic_validator = Kwalify::Validator.new(TOPIC_SCHEMA)
 $tutorial_validator = Kwalify::Validator.new(TUTORIAL_SCHEMA)
 $slides_validator = Kwalify::Validator.new(SLIDES_SCHEMA)
+$faq_validator = Kwalify::Validator.new(FAQ_SCHEMA)
 $requirement_external_validator = Kwalify::Validator.new(requirement_external_schema)
 $requirement_internal_validator = Kwalify::Validator.new(requirement_internal_schema)
 
@@ -87,6 +90,25 @@ def validate_requirements(requirements)
     end
   end
 
+  return errs
+end
+
+def lint_faq_file(fn)
+  errs = []
+
+  begin
+    data = YAML.load_file(fn)
+  rescue
+    puts "Skipping #{fn}"
+    return nil
+  end
+
+  # Check this is something we actually want to process
+  if ! data.is_a?(Hash) then
+    puts "Skipping #{fn}"
+    return nil
+  end
+  errs.push(*validate_document(data, $faq_validator))
   return errs
 end
 
@@ -169,13 +191,39 @@ Find.find('./topics') do |path|
     end
   else
     last_component = path.split('/')[-1]
-    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/  || last_component =~ /metadata.ya?ml/ then
+    if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/  || last_component =~ /metadata.ya?ml/  then
       errs = lint_file(path)
       if !errs.nil? && errs.length > 0 then
         ec = 1
+        puts path
+        puts errs
       end
     end
   end
 end
+
+
+Dir.glob("**/faqs/**/*.md") do |path|
+  if FileTest.directory?(path)
+    if File.basename(path).start_with?('.')
+      Find.prune       # Don't look any further into this directory.
+    else
+      next
+    end
+  else
+    last_component = path.split('/')[-1]
+    if last_component =~ /.*.md/ then
+      unless last_component =~ /index.md$/ || last_component =~ /README.md/  then
+        errs = lint_faq_file(path)
+        if !errs.nil? && errs.length > 0 then
+          ec = 1
+          puts path
+          puts errs
+        end
+      end
+    end
+  end
+end
+
 
 exit ec
