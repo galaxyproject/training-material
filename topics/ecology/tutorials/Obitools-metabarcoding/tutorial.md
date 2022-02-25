@@ -184,18 +184,7 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    > 
 >    > Instead of working text line by text line as the standard Unix tool, selection is done sequence record by sequence record. A large set of options allows refining selection on any of the sequence record elements.
 >    > 
->    > Moreover obigrep allows specifying simultaneously several conditions (that take the value TRUE or FALSE) and only the sequence records that fulfill all the conditions (all conditions are TRUE) are selected.
->    > 
->    > Sequence record selection options : 
->    > * sequence : Regular expression pattern to be tested against the sequence itself. ex: GAATTC
->    > * definition : Regular expression pattern to be tested against the definition of the sequence record. ex: [Cc]hloroplast
->    > * identifier : Regular expression pattern to be tested against the identifier of the sequence record. ex: ^GH
->    > * idlist : points to a text file containing the list of sequence record identifiers to be selected.
->    > * attribute : Regular expression pattern matched against the attributes of the sequence record. the value of this attribute is of the form : key:regular_pattern. ex:'family_name:Asteraceae'
->    > * hasattribute : Selects sequence records having an attribute whose key = KEY.
->    > * predicat : Python boolean expression to be evaluated for each sequence record. The attribute keys defined for each sequence record can be used in the expression as variable names. An extra variable named ‘sequence’ refers to the sequence record itself. ex: mode!="joined"
->    > * lmax : Keeps sequence records whose sequence length is equal or shorter than lmax. ex : 100
->    > * lmin : Selects sequence records whose sequence length is equal or longer than lmin. ex : 100
+>    > Moreover obigrep allows specifying simultaneously several conditions (that take the value TRUE or FALSE) and only the sequence records that fulfill all the conditions (all conditions are TRUE) are selected. You can refer to [https://pythonhosted.org/OBITools/scripts/obigrep.html](https://pythonhosted.org/OBITools/scripts/obigrep.html) for more details
 >    {: .comment}
 >
 {: .hands_on}
