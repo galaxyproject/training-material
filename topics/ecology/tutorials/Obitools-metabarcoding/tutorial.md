@@ -160,7 +160,7 @@ The forward and reverse reads of the same fragment are at the same line position
 ## Remove unaligned sequence records with **obigrep**
 
 
-In this step we are going to use the value of the mode attribute in the sequence header to discard sequences indicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
+In this step we are going to use the value of the mode attribute in the sequence header of the illuminapairedend output file to discard sequences indicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
 
 > ### {% icon hands_on %} Hands-on: Remove unaligned sequence records
 >
