@@ -2,6 +2,7 @@
 title: Thanks!
 area: contributors
 layout: faq
+contributors: [bebatut,shiltemann]
 ---
 
 First off, thanks for your interest in contributing to the Galaxy training materials!

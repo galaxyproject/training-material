@@ -2,6 +2,7 @@
 title: Where do I start?
 area: learners
 layout: faq
+contributors: [bebatut,shiltemann]
 ---
 
 If you are new to Galaxy then start with one of the introductory topics.  These introduce you to concepts that are useful in Galaxy, no matter what domain you are doing analysis in.

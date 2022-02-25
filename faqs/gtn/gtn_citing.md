@@ -2,6 +2,7 @@
 title: How can I cite the GTN?
 area: introduction
 layout: faq
+contributors: [bebatut,shiltemann]
 ---
 
 We wrote an [article](https://doi.org/10.1016/j.cels.2018.05.012) about our efforts.

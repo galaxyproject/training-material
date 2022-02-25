@@ -2,6 +2,7 @@
 title: How does the GTN ensure our training materials are FAIR?
 area: contributors
 layout: faq
+contributors: [hexylena]
 ---
 
 This infrastructure has been developed in accordance with the FAIR (Findable, Accessible, Interoperable, Reusable) principles for training materials {% cite Garcia2020 %}. Following these principles enables trainers and trainees to find, reuse, adapt, and improve the available tutorials.
