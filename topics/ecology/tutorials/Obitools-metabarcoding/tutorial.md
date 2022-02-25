@@ -159,8 +159,10 @@ The forward and reverse reads of the same fragment are at the same line position
 
 ## Remove unaligned sequence records with **obigrep**
 
+
+In this step we are going to use the value of the mode attribute in the sequence header to discard sequences indicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
+
 > ### {% icon hands_on %} Hands-on: Remove unaligned sequence records
-> We here use the value of the mode attribute in the sequence header to discard sequences indicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `ilumimnapairedend fastq groomer output file`
