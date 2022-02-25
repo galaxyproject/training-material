@@ -61,7 +61,8 @@ The data needed to run the tutorial are the following:
     - wolf_F.fastq
     - wolf_R.fastq
 - the file describing the primers and tags used for all samples sequenced:
-    - wolf_diet_ngsfilter.txt The tags correspond to short and specific sequences added on the 5’ end of each primer to distinguish the different samples
+    - wolf_diet_ngsfilter.txt 
+- the tags correspond to short and specific sequences added on the 5’ end of each primer to distinguish the different samples
 - the file containing the reference database in a fasta format:
     -db_v05_r117.fasta This reference database has been extracted from the release 117 of EMBL using ecoPCR
 
