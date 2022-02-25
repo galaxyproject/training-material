@@ -312,14 +312,6 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 > ### {% icon hands_on %} Hands-on: Computes basic statistics for attribute values
 >
-> 1. {% tool [obistat](toolshed.g2.bx.psu.edu/repos/iuc/obi_stat/obi_stat/1.2.13) %} with the following parameters:
->    - *"Input sequences file"*: `obiannotate output file`
->    - In *"Category attribute"*:
->        - {% icon param-repeat %} *"Insert Category attribute"*
->            - *"How would you specify the category attribute key?"*: `simply by a key of an attribute`
->                - *"Attribute used to categorize the sequence records"*: `count`
->    - *"Use a specific option"*: `no`
->
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -332,6 +324,14 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    > 
 >    > The result is a contingency table with the different categories in rows, and the computed statistics in columns.
 >    {: .comment}
+>
+> 1. {% tool [obistat](toolshed.g2.bx.psu.edu/repos/iuc/obi_stat/obi_stat/1.2.13) %} with the following parameters:
+>    - *"Input sequences file"*: `obiannotate output file`
+>    - In *"Category attribute"*:
+>        - {% icon param-repeat %} *"Insert Category attribute"*
+>            - *"How would you specify the category attribute key?"*: `simply by a key of an attribute`
+>                - *"Attribute used to categorize the sequence records"*: `count`
+>    - *"Use a specific option"*: `no`
 >
 {: .hands_on}
 
