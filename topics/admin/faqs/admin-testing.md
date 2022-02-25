@@ -3,6 +3,7 @@ title: Operating system compatibility
 area: ansible
 box_type: tip
 layout: faq
+contributors: [hexylena]
 ---
 
 

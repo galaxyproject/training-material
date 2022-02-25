@@ -3,6 +3,7 @@ title: Got lost along the way?
 area: utilities
 box_type: comment
 layout: faq
+contributors: [hexylena]
 ---
 
 {% assign prevStep = include.step | plus: -1 %}
