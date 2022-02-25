@@ -2,6 +2,7 @@
 title: Which icons are available to use in my tutorial?
 box_type: tip
 layout: faq
+contributors: [shiltemann]
 ---
 
 

@@ -3,6 +3,7 @@ title: How can I create a tutorial skeleton from a Galaxy workflow?
 area: markdown
 box_type: tip
 layout: faq
+contributors: [shiltemann]
 ---
 
 There are two ways to do this:
