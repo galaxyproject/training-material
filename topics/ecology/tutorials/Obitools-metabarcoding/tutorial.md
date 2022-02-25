@@ -73,7 +73,7 @@ The data needed to run the tutorial are the following:
 > 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1) 
 >
 >    ```
->    https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1
+>    https://zenodo.org/record/5932108/files/wolf_tutorial.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
