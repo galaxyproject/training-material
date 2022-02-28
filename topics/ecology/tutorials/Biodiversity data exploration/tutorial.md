@@ -77,7 +77,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 >
 {: .hands_on}
 
-## Prepare the data
+## Customize you dataset
 
 In order to clean unnecessary informations from the table we will now cut a few columns and change the format of time information.
 
