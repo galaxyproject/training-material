@@ -215,6 +215,9 @@ In order to clean unnecessary informations from the table we will now cut a few 
 {: .hands_on}
 
 
+![Variable_exploration_rarefaction curves](../../images/BiodivExplo/Presence-absence_and_abundance_rarefaction.png)
+
+
 ## Visualize the dispersion of a numeric variable and the correlation between species absence
 
 > ### {% icon hands_on %} Hands-on: Boxplot of dispersion and correlation of absence
