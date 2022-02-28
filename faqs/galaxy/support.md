@@ -15,5 +15,5 @@ If you need support for using Galaxy, running your analysis or completing a tuto
 
 - **Galaxy Help Forum**: You can also have a look at the [Galaxy Help Forum](https://help.galaxyproject.org). Your question may already have been answered here before. If not, you can post your question here.
 
-- **Contact Server Admins:** If you think there is a problem with the Galaxy server, or you would like to make a request, [contact the Galaxy server administrators]({{site.baseurl}}/faqs/galaxy/support_admins.html).
+- **Contact Server Admins:** If you think there is a problem with the Galaxy server, or you would like to make a request, [contact the Galaxy server administrators]({% link faqs/galaxy/support_admins.md %}).
 
