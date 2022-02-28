@@ -133,7 +133,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 >    - {% icon param-select %} *"Select column containing species"*: `c5`
 >    - {% icon param-select %} *"Select column containing numerical values (like abundances)"*: `c6`
 >
->    You must get three outputs the Levene Test for homoscedasticity, the Kolmogrov-Smirnov test for normality and 15 PNG files in a data collection representing the homogeneity of variances for each species at each time point of the study.
+>    You must get three outputs: the Levene Test for homoscedasticity dataset, the Kolmogrov-Smirnov test for normality  and 9 PNG files in a data collection representing the homogeneity of variances for each species at each time point of the study.
 >    If the levene test is significant (P-value in column Pr < 0.5 and at least one * at the end of the 4th line), variances aren't homogeneous, the hypothesis of homoscedasticity is rejected.
 >    If the K-S test is significant (p-value < 0.5), your numerical variable isn't normally distributed, the hypothesis of normality is rejected.
 >    The two tests must be significant so variances aren't homogenous and data isn't normally distributed.
