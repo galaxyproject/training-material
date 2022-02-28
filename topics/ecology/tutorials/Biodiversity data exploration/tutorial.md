@@ -101,25 +101,6 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >
 {: .hands_on}
 
-# Want to spatially anoymize your data?
-
-A first step of this tutorial will show you how you can simply apply spatial coordinates anonymization if you want to share data without spatial context.
-
-
-## Spatial coordinates anonymization
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Spatial coordinates anonymization](toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0) %} with the following parameters:
->    - {% icon param-file %} *"Input table"*: Column Regex Find and Replace data file
->    - {% icon param-select %} *"First line is a header line"*: `Yes`
->    - {% icon param-select %} *"Select column containing latitudes in decimal degrees"*: `c2`
->    - {% icon param-select %} *"Select column containing longitudes in decimal degrees"*: `c3`
->
-{: .hands_on}
-
-In the next steps, you may use either of the two files with or without anonymization of the localities. To designate these two file whatever the one you choose, we call them the "formatted biodiversity data file" in the following steps.
-
 # Data checking
 
 ## Homoscedasticity and normality analysis
@@ -284,4 +265,23 @@ Final absence correlation plot:
 {:.no_toc}
 
 Here, you just explored your biodiversity dataframe properly and you know a lot more about your data. You can now peacefully make your statiscal analyses as most of the red flags you can get have been revealed by this toolsuite ! Enjoy !
+
+# Want to spatially anoymize your data?
+
+A first step of this tutorial will show you how you can simply apply spatial coordinates anonymization if you want to share data without spatial context, particularly of interest if you want to share endangered species oriented data.
+
+# Bonus!
+## Spatial coordinates anonymization
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Spatial coordinates anonymization](toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input table"*: Column Regex Find and Replace data file
+>    - {% icon param-select %} *"First line is a header line"*: `Yes`
+>    - {% icon param-select %} *"Select column containing latitudes in decimal degrees"*: `c2`
+>    - {% icon param-select %} *"Select column containing longitudes in decimal degrees"*: `c3`
+>
+{: .hands_on}
+
+In the next steps, you may use either of the two files with or without anonymization of the localities. To designate these two file whatever the one you choose, we call them the "formatted biodiversity data file" in the following steps.
 
