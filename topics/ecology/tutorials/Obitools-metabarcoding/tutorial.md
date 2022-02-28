@@ -61,7 +61,7 @@ The data needed to run the tutorial are the following:
     - wolf_F.fastq
     - wolf_R.fastq
 - the file describing the primers and tags used for all samples sequenced:
-    - wolf_diet_ngsfilter.txt 
+    - wolf_diet_ngsfilter.txt
 - the tags correspond to short and specific sequences added on the 5’ end of each primer to distinguish the different samples
 - the file containing the reference database in a fasta format:
     -db_v05_r117.fasta This reference database has been extracted from the release 117 of EMBL using ecoPCR
@@ -71,7 +71,7 @@ The data needed to run the tutorial are the following:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1) 
+> 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1)
 >
 >    ```
 >    https://zenodo.org/record/5932108/files/wolf_tutorial.zip
@@ -130,7 +130,7 @@ OBITools is a set of programs specifically designed for analyzing NGS data in a 
 
 Citation: Boyer F., Mercier C., Bonin A., Taberlet P., Coissac E. (2016) OBITools: [a Unix-inspired software package for DNA metabarcoding](https://pubmed.ncbi.nlm.nih.gov/25959493/). Molecular Ecology Resources.
 
-The OBITools commands consider a sequence record as an entity composed of five distinct elements. Two of them are mandatory, the identifier (id) and the DNA or protein sequence itself. The id is a single word composed of characters, digits, and other symbols like dots or underscores excluding spaces. Formally, the ids should be unique within a dataset and should identify each sequence record unambiguously, but only a few OBITools actually rely on this property. The three other elements composing a sequence record are optional. They consist in a sequence definition, a quality vector, and a set of attributes. The last element is a set of attributes qualifying the sequence, each attribute being described by a key=value pair. The set of attributes is the central concept of the OBITools system. When an OBITools command is run on the sequence records included in a dataset, the result of the computation often consist in the addition of new attributes completing the annotation of each sequence record. This strategy of sequence annotation allows the OBITools to return their results as a new sequence record file that can be used as the input of another OBITools program, ultimately creating complex pipelines (source: [(https://pythonhosted.org/OBITools/welcome.html)]((https://pythonhosted.org/OBITools/welcome.html))).
+The OBITools commands consider a sequence record as an entity composed of five distinct elements. Two of them are mandatory, the identifier (id) and the DNA or protein sequence itself. The id is a single word composed of characters, digits, and other symbols like dots or underscores excluding spaces. Formally, the ids should be unique within a dataset and should identify each sequence record unambiguously, but only a few OBITools actually rely on this property. The three other elements composing a sequence record are optional. They consist in a sequence definition, a quality vector, and a set of attributes. The last element is a set of attributes qualifying the sequence, each attribute being described by a key=value pair. The set of attributes is the central concept of the OBITools system. When an OBITools command is run on the sequence records included in a dataset, the result of the computation often consist in the addition of new attributes completing the annotation of each sequence record. This strategy of sequence annotation allows the OBITools to return their results as a new sequence record file that can be used as the input of another OBITools program, ultimately creating complex pipelines (source: [OBITools Welcome](https://pythonhosted.org/OBITools/welcome.html)).
 
 
 ## Micro assembly of paired-end sequences with **illuminapairedend**
@@ -149,7 +149,7 @@ The forward and reverse reads of the same fragment are at the same line position
 >    > ### {% icon comment %} Comment
 >    >
 >    > Sequence records corresponding to the same read pair must be in the same order in the two files !
->    > 
+>    >
 >    > If the alignment score is below the defined score, here 40, the forward and reverse reads are not aligned but concatenated, and the value of the mode attribute in the sequence header is set to joined instead of alignment
 >    {: .comment}
 >
@@ -179,11 +179,11 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    > ### {% icon comment %} Comment
 >    >
 >    > The obigrep command is in some way analog to the standard Unix grep command. It selects a subset of sequence records from a sequence file.
->    > 
+>    >
 >    > A sequence record is a complex object composed of an identifier, a set of attributes (key=value), a definition, and the sequence itself.
->    > 
+>    >
 >    > Instead of working text line by text line as the standard Unix tool, selection is done sequence record by sequence record. A large set of options allows refining selection on any of the sequence record elements.
->    > 
+>    >
 >    > Moreover obigrep allows specifying simultaneously several conditions (that take the value TRUE or FALSE) and only the sequence records that fulfill all the conditions (all conditions are TRUE) are selected. You can refer to [https://pythonhosted.org/OBITools/scripts/obigrep.html](https://pythonhosted.org/OBITools/scripts/obigrep.html) for more details
 >    {: .comment}
 >
@@ -284,8 +284,8 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    >
 >    > obiannotate is the command that allows adding/modifying/removing annotation attributes attached to sequence records.
 >    > Once such attributes are added, they can be used by the other OBITools commands for filtering purposes or for statistics computing.
->    > 
->    > Here, the goal is to keep only `count` and `merged_sample` key=value attributes! 
+>    >
+>    > Here, the goal is to keep only `count` and `merged_sample` key=value attributes!
 >    {: .comment}
 >
 > 1. {% tool [obiannotate](toolshed.g2.bx.psu.edu/repos/iuc/obi_annotate/obi_annotate/1.2.13) %} with the following parameters:
@@ -310,7 +310,7 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    > * mean value (-a option)
 >    > * variance (-v option)
 >    > * standard deviation (-s option)
->    > 
+>    >
 >    > The result is a contingency table with the different categories in rows, and the computed statistics in columns.
 >    {: .comment}
 >
@@ -396,7 +396,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 > ### {% icon hands_on %} Hands-on: Search nucleotide database with nucleotide query sequence(s) from OBITools treatments
 >
-> Once denoising has been done, the next step in diet analysis is to assign the barcodes to the corresponding species in order to get the complete list of species associated to each sample. Taxonomic assignment of sequences requires a reference database compiling all possible species to be identified in the sample. Assignment is then done based on sequence comparison between sample sequences and reference sequences. We here propose to use BLAST+ blastn. 
+> Once denoising has been done, the next step in diet analysis is to assign the barcodes to the corresponding species in order to get the complete list of species associated to each sample. Taxonomic assignment of sequences requires a reference database compiling all possible species to be identified in the sample. Assignment is then done based on sequence comparison between sample sequences and reference sequences. We here propose to use BLAST+ blastn.
 >
 > 1. {% tool [NCBI BLAST+ blastn](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy0) %} with the following parameters:
 >    - *"Nucleotide query sequence(s)"*: `obiclean output file`
@@ -410,7 +410,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Here we directly use the `db_v05_r117` fasta file proposed on the [original obitools tutorial](https://pythonhosted.org/OBITools/wolves.html#step-by-step-analysis). One can mention you can create such a fasta file using same obitools workflow describe before (using obigrep/obiuniq/obigrep/obiannotate) on downloaded EMBL datrabases and taxonomy treated by obitools ecoPCR tool. 
+>    > Here we directly use the `db_v05_r117` fasta file proposed on the [original obitools tutorial](https://pythonhosted.org/OBITools/wolves.html#step-by-step-analysis). One can mention you can create such a fasta file using same obitools workflow describe before (using obigrep/obiuniq/obigrep/obiannotate) on downloaded EMBL datrabases and taxonomy treated by obitools ecoPCR tool.
 >    {: .comment}
 >
 {: .hands_on}
@@ -434,7 +434,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    - *"Column(s) containing sequence identifiers"*: `Column 2`
 >    - *"Output positive matches, negative matches, or both?"*: `just positive match`
 >
->    
+>
 > 2. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
 >    - *"Sequence file to be filtered"*: `obiclean output data`
 >    - *"Filter using the ID list from"*: `tabular file`
@@ -480,7 +480,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    - *"Fill empty columns"*: `Yes`
 >    - *"Fill Columns by"*: `Single fill value`
 >    - *"Fill value"*: `NA`
->    
+>
 > 2. {% tool [Join two datasets side by side on a specified field](join1) %} with the following parameters:
 >    - *"Join"*: last `Join two Datasets output file`
 >    - *"using column"*: `Column 26`
@@ -489,7 +489,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    - *"Fill empty columns"*: `Yes`
 >    - *"Fill Columns by"*: `Single fill value`
 >    - *"Fill value"*: `NA`
->        
+>
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -499,7 +499,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >
 > 3. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c3,c4,c5,c6,c7,c50,c54,c59,c51`
->    - *"From"*: last `Join two Datasets output file`       
+>    - *"From"*: last `Join two Datasets output file`
 >
 > 4. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
 >    - *"Filter"*: `Cut output file`
@@ -520,7 +520,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 1O 
+> > 1. 1O
 > > 2. If we remove human sequences ;), some squirrel (sample:26a_F040644), deer (sample:15a_F730814 + sample:29a_F260619), stag (sample:29a_F260619 + sample:13a_F730603), marmot (sample:26a_F040644), doe (sample:29a_F260619), Grimm's duiker (sample:29a_F260619).
 > >
 > {: .solution}
