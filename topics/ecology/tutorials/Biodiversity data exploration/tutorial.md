@@ -141,7 +141,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 {: .hands_on}
 
 ![Boxplot dispersion_example](../../images/BiodivExplo/Boxplot_and_dispersion_plot.png)
-![Homoscedasticity and normality_example](../../images/BiodivExplo/Homoscedasticity_and_normality_Homogeneity_of_%20Amblygobius%20phalaena.png)
+![Homoscedasticity and normality_example on Sepioteuthis australis](../../images/BiodivExplo/Homoscedasticity_and_normality_Homogeneity_of_%20Sepioteuthis%20australis.png)
 
 
 ## Check Autocorrelation in your data
