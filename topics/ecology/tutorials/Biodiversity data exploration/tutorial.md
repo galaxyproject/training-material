@@ -69,8 +69,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 >        - {% icon param-text %} *"Remove first"*: `72`
 >        - {% icon param-file %} *"from"*: reef_life_molluscs data file
 >
->    Then, verify if your new file hasn't got hashtags in the first lines and modify the datatype of the new file from txt to csv.
->    {% include faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
+>    Then, verify if your new file hasn't got hashtags in the first lines and then ask Galaxy to autodetect datatype (click on the pencil, then "Datatypes" then click on "Auto-detect" button). Galaxy will normally detect it as csv.
 >
 > 4. Convert datatype CSV to tabular
 >
