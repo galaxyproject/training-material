@@ -127,7 +127,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 > ### {% icon hands_on %} Hands-on: Here we will check homogeneity of variances (Levene test) for every species and represent it through multiple boxplots and the normal distribution (Kolmogorov-Smirnov test) represented by a distribution histogram and a Q-Q plot.
 >
 > 1. {% tool [Homoscedasticity and normality](toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0) %} with the following parameters:
->    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
+>    - {% icon param-file %} *"Input table"*: Column Regex Find and Replace data file
 >    - {% icon param-select %} *"First line is a header line"*: `Yes`
 >    - {% icon param-select %} *"Select column containing temporal data (year, date, ...)"*: `c4`
 >    - {% icon param-select %} *"Select column containing species"*: `c5`
@@ -149,7 +149,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 > ### {% icon hands_on %} Hands-on: Autocorrelation
 >
 > 1. {% tool [Variables exploration](toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0) %} with the following parameters:
->    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
+>    - {% icon param-file %} *"Input table"*: Column Regex Find and Replace data file
 >    - {% icon param-select %} *"First line is a header line"*: `Yes`
 >    - {% icon param-select %} *"Variables links exploration"*: `Autocorrelation of one selected numerical variable`
 >        - {% icon param-select %} *"Select columns containing numerical values"*: `c6`
