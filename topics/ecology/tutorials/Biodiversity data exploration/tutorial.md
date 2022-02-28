@@ -237,7 +237,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 ![Boxplot dispersion_example](../../images/BiodivExplo/Boxplot_and_dispersion_plot.png)
 ![Absence correlation_example](../../images/BiodivExplo/Absence-correlation_plot.png)
 
-# Bea diversity
+# Beta diversity
 ## Local and Species Contribution to Beta Diversity (SCBD and LCBD)
 
 > ### {% icon hands_on %} Hands-on: Task description
