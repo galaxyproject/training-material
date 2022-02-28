@@ -84,7 +84,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 > ### {% icon hands_on %} Hands-on: Clean your data
 >
-> 1. Use {% tool [Cut columns from a table (cut)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
+> 1. Use {% tool [Advanced cut columns from a table (cut)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
 >    with following parameters :
 >    - {% icon param-files %} *"File to cut"*: Convert CSV to tabular data file
 >    - {% icon param-select %} *"Operation"*: `Keep`
