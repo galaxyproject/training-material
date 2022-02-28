@@ -148,23 +148,9 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 1. SSH into your machine
 >
-> 2. Check the active status of proftpd by `systemctl status proftpd`.
+> 2. Check the active status of tusd by `systemctl status tusd`.
 >
-> 3. Check the port has been correctly attributed by `sudo lsof -i -P -n`.
->
->    > ### {% icon question %} Question
->    >
->    > What do you see?
->    >
->    > > ### {% icon solution %} Solution
->    > > You should see all the ports used by the server. What interests us is the line with proftpd.
->    > > You should see TCP *:21 (LISTEN).
->    > >
->    > {: .solution }
->    >
->    {: .question}
->
-> 4. Check the directory `/data/uploads/` has been created and is empty.
+> 3. Check the directory `/data/uploads/` has been created and is empty.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
