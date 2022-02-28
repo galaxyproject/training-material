@@ -46,7 +46,7 @@ We'll be using Reef Life Survey (RLS) data extracted from the Australian Ocean D
 >
 {: .agenda}
 
-# Downloading and pre-processing biodiversity data
+# Data preparation
 
 First step is to download biodiversity data on your Galaxy history. Here we will use a "classical" (containing taxonomic, spatial and temporal informations) biodiversity dataset from the well known ["Reef life survey" initiative](https://reeflifesurvey.com/).
 
