@@ -143,8 +143,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 ![Boxplot dispersion_example](../../images/BiodivExplo/Boxplot_and_dispersion_plot.png)
 ![Homoscedasticity and normality_example on Sepioteuthis australis](../../images/BiodivExplo/Homoscedasticity_and_normality_of_%20Sepioteuthis%20australis.png)
 
-# Variable exploration
-## Check Autocorrelation in your data
+## Autocorrelation in your data
 
 > ### {% icon hands_on %} Hands-on: Autocorrelation
 >
@@ -180,7 +179,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 
 ![Variable_exploration_collinarity example](../../images/BiodivExplo/Variables_exploration_collinarity_of_Sepioteuthis%20australis.png)
 
-
+# Data exploration
 ## Visualize abundance repartition through space
 
 > ### {% icon hands_on %} Hands-on: Abundance map in the environment
@@ -252,7 +251,6 @@ In the next steps, you may use either of the two files with or without anonymiza
 {: .hands_on}
 
 
-# Beta Diversity
 ## Local and Species Contribution to Beta Diversity (SCBD and LCBD)
 
 > ### {% icon hands_on %} Hands-on: Task description
