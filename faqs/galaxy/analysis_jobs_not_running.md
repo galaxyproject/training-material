@@ -13,7 +13,7 @@ contributors: [shiltemann]
 
 3. **Be patient**. Galaxy is a free service, when a lot of people are using it, you may have to wait longer than usual (especially for 'big' jobs, e.g. alignments).
 
-4. **Contact Support**. If you really think something is wrong with the server. [You can ask for support]({{site.baseurl}}/faqs/galaxy/support.html)
+4. **Contact Support**. If you really think something is wrong with the server, you can [ask for support]({{site.baseurl}}/faqs/galaxy/support.html)
 
 
 
