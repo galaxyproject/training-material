@@ -86,6 +86,7 @@ The data needed to run the tutorial are the following:
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
+{: .hands_on}
 
 ## **Unzip** the downloaded archive
 
@@ -126,9 +127,7 @@ The data needed to run the tutorial are the following:
 
 # Use OBITools
 
-OBITools is a set of programs specifically designed for analyzing NGS data in a DNA metabarcoding context, taking into account taxonomic information. It is distributed as an open source software available on the following website: [http://metabarcoding.org/obitools](http://metabarcoding.org/obitools).
-
-Citation: Boyer F., Mercier C., Bonin A., Taberlet P., Coissac E. (2016) OBITools: [a Unix-inspired software package for DNA metabarcoding](https://pubmed.ncbi.nlm.nih.gov/25959493/). Molecular Ecology Resources.
+OBITools ({% cite Boyer2015 %}) is a set of programs specifically designed for analyzing NGS data in a DNA metabarcoding context, taking into account taxonomic information. It is distributed as an open source software available on the following website: [http://metabarcoding.org/obitools](http://metabarcoding.org/obitools).
 
 The OBITools commands consider a sequence record as an entity composed of five distinct elements. Two of them are mandatory, the identifier (id) and the DNA or protein sequence itself. The id is a single word composed of characters, digits, and other symbols like dots or underscores excluding spaces. Formally, the ids should be unique within a dataset and should identify each sequence record unambiguously, but only a few OBITools actually rely on this property. The three other elements composing a sequence record are optional. They consist in a sequence definition, a quality vector, and a set of attributes. The last element is a set of attributes qualifying the sequence, each attribute being described by a key=value pair. The set of attributes is the central concept of the OBITools system. When an OBITools command is run on the sequence records included in a dataset, the result of the computation often consist in the addition of new attributes completing the annotation of each sequence record. This strategy of sequence annotation allows the OBITools to return their results as a new sequence record file that can be used as the input of another OBITools program, ultimately creating complex pipelines (source: [OBITools Welcome](https://pythonhosted.org/OBITools/welcome.html)).
 
@@ -387,7 +386,6 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    -  *"Threshold ratio between counts (rare/abundant counts) of two sequence records so that the less abundant one is a variant of the more abundant (default: 1, i.e. all less abundant sequences are variants)"*: `0.05`
 >    - *"Do you want to select only sequences with the head status in a least one sample?"*: `Yes`
 >
-
 >
 {: .hands_on}
 
@@ -420,12 +418,11 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 > ### {% icon hands_on %} Hands-on: Filter Blast results
 >
->
->    > ### {% icon comment %} Comment
->    >
->    > This tool allows you to re-associate all the reference sequences information, notably the `species_name` one so you can see which species are potentially seen on the sample.
->    > We will also use it to re-associate all the query sequences information, notably the `merged_sample` and `obiclean_count` attributes so we can better evaluate quality of the results.
->    >    {: .comment}
+> > ### {% icon comment %} Comment
+> >
+> > This tool allows you to re-associate all the reference sequences information, notably the `species_name` one so you can see which species are potentially seen on the sample.
+> > We will also use it to re-associate all the query sequences information, notably the `merged_sample` and `obiclean_count` attributes so we can better evaluate quality of the results.
+> {: .comment}
 >
 > 1. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
 >    - *"Sequence file to be filtered"*: `db_v05_r117`
