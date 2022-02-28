@@ -121,7 +121,6 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >
 {: .hands_on}
 
-![Boxplot dispersion_example](../../images/BiodivExplo/Boxplot_and_dispersion_plot.png)
 ![Homoscedasticity and normality_example on Sepioteuthis australis](../../images/BiodivExplo/Homoscedasticity_and_normality_of_%20Sepioteuthis%20australis.png)
 
 ## Autocorrelation in your data
@@ -235,6 +234,9 @@ In order to clean unnecessary informations from the table we will now cut a few 
 {: .hands_on}
 
 
+![Boxplot dispersion_example](../../images/BiodivExplo/Boxplot_and_dispersion_plot.png)
+![Absence correlation_example](../../images/BiodivExplo/Absence-correlation_plot.png)
+
 ## Local and Species Contribution to Beta Diversity (SCBD and LCBD)
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -261,8 +263,6 @@ In order to clean unnecessary informations from the table we will now cut a few 
 ![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Mean_LCBD_through_time.png)
 ![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_SCBD_Species_Radar_plot.png)
 
-Final absence correlation plot:
-![Absence correlation_example](../../images/BiodivExplo/Absence-correlation_plot.png)
 
 # Conclusion
 {:.no_toc}
