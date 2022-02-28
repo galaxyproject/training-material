@@ -218,12 +218,32 @@
 
 
 
-<section class="tutorial faqs">
+<section class="faqs">
+
+   <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+
+     <li class="breadcrumb-item "><a href="/training-material/faqs">All FAQs</a></li>
+     
+     <li class="breadcrumb-item "><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+     
+     
+     
+     
+     <li class="breadcrumb-item active">Topic FAQs</li>
+     
+
+     
+     </ol>
+    </nav>
+
     <h1 data-toc-skip>Frequently Asked Questions</h1>
-<div class="contributors-line">Authors: 
-    </div>
+    
+<!--<div class="contributors-line">Authors: 
+    </div>-->
     <div class="container">
         <div class="row">
+
             <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-2">
                 <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
@@ -238,111 +258,64 @@
 
 
 
+<!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
 
 
 
 
 
-<h2 id="De novo transcriptome reconstruction with RNA-Seq"> <a href="#De novo transcriptome reconstruction with RNA-Seq"> De novo transcriptome reconstruction with <span class="notranslate">rna</span>-seq </a></h2>
+
+<h3 id="Single-Cell RNA"> <a href="#Single-Cell RNA"> <span class="notranslate">Single-cell</span> <span class="notranslate">rna</span> </a></h3>
 <hr/>
 
 
 
-<h3 class="faq-area"> I’m using the same training data, tools, and parameters as the tutorial, but I get a different number of transcripts with a significant change in gene <span class="notranslate">expression</span> between the G1E and megakaryocyte cellular states. Why? <a href="/training-material/topics/transcriptomics/faqs/transcript.html"><i class="fas fa-external-link-alt"></i></a> </h3>
-
-<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-im-using-the-same-training-data-tools-and-parameters-as-the-tutorial-but-i-get-a-different-number-of-transcripts-with-a-significant-change-in-gene-expression-between-the-g1e-and-megakaryocyte-cellular-states-why"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: I’m using the same training data, tools, and parameters as the tutorial, but I get a different number of transcripts with a significant change in gene <span class="notranslate">expression</span> between the G1E and megakaryocyte cellular states. Why?</h3>  <p>This is okay! Many aspects of the tutorial can potentially affect the exact results you obtain. For example, the reference genome version used and versions of tools. It’s less important to get the exact results shown in the tutorial, and more important to understand the concepts so you can apply them to your own data.</p></blockquote>
-
-
-
-
-
- <br><br> 
-<h2 id="extract tool"> <a href="#extract tool"> Extract tool </a></h2>
-<hr/>
-
-
-
-<h3 class="faq-area"> Are UMIs not actually unique? <a href="/training-material/topics/transcriptomics/faqs/umi.html"><i class="fas fa-external-link-alt"></i></a> </h3>
-
-<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-are-umis-not-actually-unique"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Are UMIs not actually unique?</h3>  <p>Not strictly, but unique enough. The distribution of UMIs should ideally be uniform so that the chance of any two same UMIs capturing the same transcript (via different amplicons) is small. As barcodes have increased in size, the number of UMIs has also increased allowing for UMIs to reach more or less the same numbers of transcripts.</p></blockquote>
-
-
-
-
-
- <br><br> 
-<h2 id="gene"> <a href="#gene"> Gene </a></h2>
-<hr/>
-
-
-
-<h3 class="faq-area"> Why do we do dimension reduction and then clustering? Why not just cluster on the actual data? <a href="/training-material/topics/transcriptomics/faqs/dimension_reduction.html"><i class="fas fa-external-link-alt"></i></a> </h3>
-
-<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-do-we-do-dimension-reduction-and-then-clustering-why-not-just-cluster-on-the-actual-data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?</h3>  <p>The actual data has tens of thousands of genes, and so tens of thousands of variables to consider. Even after selecting for the most variable genes and the most high quality genes, we can still be left with &gt; 1000 genes. Performing clustering on a dataset with 1000s of variables is possible, but computationally expensive. It is therefore better to perform dimension reduction to reduce the number of variables to a latent representation of these variables. These latent variables are ideally more than 10 but less than 50 to capture the variability in the data to perform clustering upon.</p></blockquote>
-
-
-
-
-
-
-<h3 class="faq-area"> What exactly is a ‘Gene profile’? <a href="/training-material/topics/transcriptomics/faqs/gene_profile.html"><i class="fas fa-external-link-alt"></i></a> </h3>
-
-<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-what-exactly-is-a-gene-profile"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What exactly is a ‘Gene profile’?</h3>  <p>Think of it like a fingerprint that some cells exhibit and others don’t. It’s a small collection of genes which are up or down regulated in relation to one another. Their differences are not absolute, but relative. So if CellA has 100 counts of Gene1 and 50 counts of Gene2, this creates a relation of 2:1 between Gene1 and Gene2. If CellB has a 20 counts of Gene1 and 10 counts of Gene2, then they share the same relation. If CellA and CellB share other relations with other genes than this might be enough to say that they share a Gene profile, and will therefore likely cluster together as they describe the same cell type.</p></blockquote>
-
-
-
-
-
-
-<h3 class="faq-area"> Why do we only consider highly variable genes? <a href="/training-material/topics/transcriptomics/faqs/variable_genes.html"><i class="fas fa-external-link-alt"></i></a> </h3>
-
-<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-do-we-only-consider-highly-variable-genes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why do we only consider highly variable genes?</h3>  <p>The non-variable genes are likely housekeeping genes, which are expressed everywhere and are not so useful for distinguishing one cell type from another. However background genes are important to the analysis and are used to generate a background baseline model for measuring the variability of the other genes.</p></blockquote>
-
-
-
-
-
- <br><br> 
-<h2 id="scRNA"> <a href="#scRNA"> Sc<span class="notranslate">rna</span> </a></h2>
-<hr/>
-
-
-
-<h3 class="faq-area"> Why is amplification more of an issue in sc<span class="notranslate">RNA</span>-seq than <span class="notranslate">RNA</span>-seq? <a href="/training-material/topics/transcriptomics/faqs/amplification.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+<h4 class="faq-area"> Why is amplification more of an issue in sc<span class="notranslate">RNA</span>-seq than <span class="notranslate">RNA</span>-seq? <a href="/training-material/topics/transcriptomics/faqs/amplification.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-is-amplification-more-of-an-issue-in-scrna-seq-than-rna-seq"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why is amplification more of an issue in sc<span class="notranslate">RNA</span>-seq than <span class="notranslate">RNA</span>-seq?</h3>  <p>Due to the extremely small amount of starting material, the initial amplification is likely to be uneven due to the first cycle of amplified products being overrepresented in the second cycle of amplification leading to further bias. In Bulk <span class="notranslate">RNA</span>-seq, the larger selection of <span class="notranslate">RNA</span> molecules to amplify, evens out the odds that any one transcript will be amplified more than others.</p></blockquote>
 
 
 
 
-
-
-<h3 class="faq-area"> Can <span class="notranslate">RNA</span>-seq techniques be applied to sc<span class="notranslate">RNA</span>-seq? <a href="/training-material/topics/transcriptomics/faqs/techniques.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+<h4 class="faq-area"> Can <span class="notranslate">RNA</span>-seq techniques be applied to sc<span class="notranslate">RNA</span>-seq? <a href="/training-material/topics/transcriptomics/faqs/techniques.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-can-rna-seq-techniques-be-applied-to-scrna-seq"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Can <span class="notranslate">RNA</span>-seq techniques be applied to sc<span class="notranslate">RNA</span>-seq?</h3>  <p>The short answer is ‘no, but yes’. At the beginning this was impossible due to the over-prevalence of dropout events (“zeroes”) in the data complicating the normalisation techniques, but this is not so much of a problem any more with newer methods.</p></blockquote>
 
 
 
 
+<h4 class="faq-area"> Are UMIs not actually unique? <a href="/training-material/topics/transcriptomics/faqs/umi.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-are-umis-not-actually-unique"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Are UMIs not actually unique?</h3>  <p>Not strictly, but unique enough. The distribution of UMIs should ideally be uniform so that the chance of any two same UMIs capturing the same transcript (via different amplicons) is small. As barcodes have increased in size, the number of UMIs has also increased allowing for UMIs to reach more or less the same numbers of transcripts.</p></blockquote>
+
+
 
  <br><br> 
-<h2 id="transcriptome analysis of Arabidopsis thaliana"> <a href="#transcriptome analysis of Arabidopsis thaliana"> Transcriptome analysis of arabidopsis thaliana </a></h2>
+<h3 id="gene"> <a href="#gene"> Gene </a></h3>
 <hr/>
 
 
 
-<h3 class="faq-area"> Could I use a different p-adj value for filtering differentially expressed genes? <a href="/training-material/topics/transcriptomics/faqs/p_adj.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+<h4 class="faq-area"> Why do we do dimension reduction and then clustering? Why not just cluster on the actual data? <a href="/training-material/topics/transcriptomics/faqs/dimension_reduction.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-could-i-use-a-different-p-adj-value-for-filtering-differentially-expressed-genes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Could I use a different p-adj value for filtering differentially expressed genes?</h3>  <p>Yes, you can modify this value, to perform a more rigorous analysis, or extend the range of genes selected. A higher p-value will significantly increase the number of genes selected, at the expense of including possible false positives.</p></blockquote>
-
-
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-do-we-do-dimension-reduction-and-then-clustering-why-not-just-cluster-on-the-actual-data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?</h3>  <p>The actual data has tens of thousands of genes, and so tens of thousands of variables to consider. Even after selecting for the most variable genes and the most high quality genes, we can still be left with &gt; 1000 genes. Performing clustering on a dataset with 1000s of variables is possible, but computationally expensive. It is therefore better to perform dimension reduction to reduce the number of variables to a latent representation of these variables. These latent variables are ideally more than 10 but less than 50 to capture the variability in the data to perform clustering upon.</p></blockquote>
 
 
 
 
-<h3 class="faq-area"> Could I use a different tool for performing the quantification step? <a href="/training-material/topics/transcriptomics/faqs/quantification.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+<h4 class="faq-area"> What exactly is a ‘Gene profile’? <a href="/training-material/topics/transcriptomics/faqs/gene_profile.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-could-i-use-a-different-tool-for-performing-the-quantification-step"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Could I use a different tool for performing the quantification step?</h3>  <p>There are some alte<span class="notranslate">rna</span>tives to Salmon for reference transcriptome-based <span class="notranslate">RNA</span> quantification. Kallisto and Sailfish use a similar approach, known as pseudoalignment.</p></blockquote>
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-what-exactly-is-a-gene-profile"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What exactly is a ‘Gene profile’?</h3>  <p>Think of it like a fingerprint that some cells exhibit and others don’t. It’s a small collection of genes which are up or down regulated in relation to one another. Their differences are not absolute, but relative. So if CellA has 100 counts of Gene1 and 50 counts of Gene2, this creates a relation of 2:1 between Gene1 and Gene2. If CellB has a 20 counts of Gene1 and 10 counts of Gene2, then they share the same relation. If CellA and CellB share other relations with other genes than this might be enough to say that they share a Gene profile, and will therefore likely cluster together as they describe the same cell type.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Why do we only consider highly variable genes? <a href="/training-material/topics/transcriptomics/faqs/variable_genes.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-why-do-we-only-consider-highly-variable-genes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why do we only consider highly variable genes?</h3>  <p>The non-variable genes are likely housekeeping genes, which are expressed everywhere and are not so useful for distinguishing one cell type from another. However background genes are important to the analysis and are used to generate a background baseline model for measuring the variability of the other genes.</p></blockquote>
+
+
+
 
 
 
@@ -367,7 +340,7 @@
         <p>
 The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
 </p>
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/1a73c26fe5da540be197ed0f1aba68d6e4a831ae">1a73c26fe5da540be197ed0f1aba68d6e4a831ae</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/6ef7d72a8595b99fbca7e9af1d9fe09331467be7">6ef7d72a8595b99fbca7e9af1d9fe09331467be7</a></p>
     </div>
 </footer>
 
