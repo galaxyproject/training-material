@@ -114,10 +114,10 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >    - {% icon param-select %} *"Select column containing species"*: `c5`
 >    - {% icon param-select %} *"Select column containing numerical values (like abundances)"*: `c6`
 >
->    You must get three outputs: the Levene Test for homoscedasticity dataset, the Kolmogrov-Smirnov test for normality  and 9 PNG files in a data collection representing the homogeneity of variances for each species at each time point of the study.
+>    You have to get three outputs: the Levene Test for homoscedasticity dataset, the Kolmogrov-Smirnov test for normality  and 9 PNG files in a data collection representing the homogeneity of variances for each species at each time point of the study.
 >    If the levene test is significant (P-value in column Pr < 0.5 and at least one * at the end of the 4th line), variances aren't homogeneous, the hypothesis of homoscedasticity is rejected.
 >    If the K-S test is significant (p-value < 0.5), your numerical variable isn't normally distributed, the hypothesis of normality is rejected.
->    The two tests must be significant so variances aren't homogenous and data isn't normally distributed.
+>    The two tests have to be significant so variances aren't homogenous and data isn't normally distributed.
 >
 {: .hands_on}
 
@@ -134,7 +134,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >    - {% icon param-select %} *"Variables links exploration"*: `Autocorrelation of one selected numerical variable`
 >        - {% icon param-select %} *"Select columns containing numerical values"*: `c6`
 >
->     You must get two outputs, one text file containing the Autocorrelation function values and one PNG file in the data collection showing the autocorrelation for a variable.
+>     You have to get two outputs, one text file containing the Autocorrelation function values and one PNG file in the data collection showing the autocorrelation for a variable.
 >     If the bars of the histogram are strictly confined between the dashed lines (representing 95% confidence interval without white noise), there is auto-correlation.
 >
 >    Here, we don't see there is autocorrelation.
@@ -154,7 +154,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >        - {% icon param-select %} *"Select column containing species"*: `c5`
 >        - {% icon param-select %} *"Select columns containing numerical values"*: `c['4', '6']`
 >
->    You must get two outputs, one describing species we couldn't evaluate and one PNG file with one plot containing multiple correlation plots and the correlation values between each variables.
+>    You have to get two outputs, one describing species we couldn't evaluate and one PNG file with one plot containing multiple correlation plots and the correlation values between each variables.
 >
 {: .hands_on}
 
@@ -175,7 +175,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >        - {% icon param-select %} *"Select column containing taxon "*: `c5`
 >    - {% icon param-select %} *"Select column containing abundances "*: `c6`
 >
->    You must get two outputs, one with the map of the abundance through space with the coordinates and one text file to inform you about the geographical extent of your map.
+>    You have to get two outputs, one with the map of the abundance through space with the coordinates and one text file to inform you about the geographical extent of your map.
 >
 {: .hands_on}
 
@@ -193,7 +193,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >        - {% icon param-select %} *"Select column containing taxon"*: `c5`
 >    - {% icon param-select %} *"Select column containing abundances "*: `c6`
 >
->    You must get two outputs, one with 120 PNG files (one for each site) representing the number of locations where each taxons are present and one text file to inform you about the used locations.
+>    You have to get two outputs, one with 120 PNG files (one for each site) representing the number of locations where each taxons are present and one text file to inform you about the used locations.
 >
 {: .hands_on}
 
@@ -210,7 +210,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >        - {% icon param-select %} *"Select column containing species"*: `c5`
 >    - {% icon param-select %} *"Select column containing abundances "*: `c6`
 >
->    You must get two outputs, one data collection with one PNG files representing the rarefaction curves of each species in one graph and one tabular file with log informations.
+>    You have to get two outputs, one data collection with one PNG files representing the rarefaction curves of each species in one graph and one tabular file with log informations.
 >
 {: .hands_on}
 
@@ -227,7 +227,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >    - {% icon param-select %} *"Select column containing locations "*: `c1`
 >    - {% icon param-select %} *"Select column containing temporal data (year, date, ...) "*: `c4`
 >
->    You must get two outputs, one PNG file with the boxplot and dispersion plot of the abundance and one plot representing wether the absence of several species is correlated. In the second plot if you see there is a cross on the round representation the two related species haven't got their absences correlated, the other are correlated and seem to be co-absent.
+>    You have to get two outputs, one PNG file with the boxplot and dispersion plot of the abundance and one plot representing wether the absence of several species is correlated. In the second plot if you see there is a cross on the round representation the two related species haven't got their absences correlated, the other are correlated and seem to be co-absent.
 >
 {: .hands_on}
 
@@ -247,7 +247,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 >        - {% icon param-select %} *"Select column containing latitudes in decimal degrees"*: `c2`
 >        - {% icon param-select %} *"Select column containing longitudes in decimal degrees"*: `c3`
 >
->    You must get three outputs. Two text file containing a table with information on the beta diversity and one text file with the list of species that has a SCBD larger than the mean SCBD. One data collection with PNG files showing multiple plots according to one type of variable in order to vizualize the beta diversity.
+>    You have to get three outputs. Two text file containing a table with information on the beta diversity and one text file with the list of species that has a SCBD larger than the mean SCBD. One data collection with PNG files showing multiple plots according to one type of variable in order to vizualize the beta diversity.
 >
 >
 {: .hands_on}
