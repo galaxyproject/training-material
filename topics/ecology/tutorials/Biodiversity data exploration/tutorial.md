@@ -270,11 +270,13 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 Here, you just explored your biodiversity dataframe properly and you know a lot more about your data. You can now peacefully make your statiscal analyses as most of the red flags you can get have been revealed by this toolsuite ! Enjoy !
 
+# Bonus!
+
 # Want to spatially anoymize your data?
 
-A first step of this tutorial will show you how you can simply apply spatial coordinates anonymization if you want to share data without spatial context, particularly of interest if you want to share endangered species oriented data.
+A step of this tutorial could be to show you how you can simply apply spatial coordinates anonymization if you want to share data without spatial context, particularly of interest if you want to share endangered species oriented data.
 
-# Bonus!
+
 ## Spatial coordinates anonymization
 
 > ### {% icon hands_on %} Hands-on: Task description
