@@ -161,6 +161,8 @@ In the next steps, you may use either of the two files with or without anonymiza
 >
 {: .hands_on}
 
+![Variable_exploration_autocorrelation example](../../images/BiodivExplo/Variables_exploration_autocorrelation.png)
+
 ## Check collinearity in your data
 
 > ### {% icon hands_on %} Hands-on: Collinearity between numerical variables
@@ -176,7 +178,7 @@ In the next steps, you may use either of the two files with or without anonymiza
 >
 {: .hands_on}
 
-![Variable_exploration_example](../../images/BiodivExplo/Variables_exploration_collinarity_of_Amblygobius%20phalaena.png)
+![Variable_exploration_collinarity example](../../images/BiodivExplo/Variables_exploration_collinarity_of_Sepioteuthis%20australis.png)
 
 ## Visualize abundance repartition through space
 
