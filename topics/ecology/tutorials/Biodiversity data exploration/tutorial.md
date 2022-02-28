@@ -120,7 +120,7 @@ A first step of this tutorial will show you how you can simply apply spatial coo
 
 In the next steps, you may use either of the two files with or without anonymization of the localities. To designate these two file whatever the one you choose, we call them the "formatted biodiversity data file" in the following steps.
 
-# Descriptive statistical testing
+# Data checking
 
 ## Homoscedasticity and normality analysis
 
