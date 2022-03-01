@@ -3,6 +3,7 @@ title: How to read a Diff
 area: diffs
 box_type: tip
 layout: faq
+contributors: [hexylena]
 ---
 
 If you haven't worked with diffs before, this can be something quite new or different.
