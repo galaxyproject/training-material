@@ -301,10 +301,19 @@ Some of the most common reasons to do this are when you're processing user input
 
 Write a program that computes the sum of an alternating series where each element of the series is an expression of the form
 
-$$4\cdot\sum_{k=1}^{1000000} \dfrac{(-1)^{k+1}}{2 * k-1}$$
+$$4\cdot\sum_{k=1}^{N} \dfrac{(-1)^{k+1}}{2 * k-1}$$
+
+Use that expression and calculate the sum for various values of N like `10`, `1000`, `1000000`
 
 ```python
 # Write your approximation here!
+def calculate_sum(N):
+    # for values in the range [1, N] (inclusive!)
+        # calculate the expression (the bit after the Sigma)
+    # sum up all of those numbers!
+    return value
+
+print(calculate_sum(10))
 ```
 
 ## Monte Carlo Simulation
@@ -335,19 +344,31 @@ Using the `random.random()` to generate x and y coordinates, write a function th
 import math
 
 # Just a suggestion: write a function to calculate the distance to origin.
+#
 def distance(x, y):
-    return ...
+    # ...
+    return
+
+def generate_random_point():
+    # ....
+    return [x, y]
 
 def approximate(N=1000):
-    return ...
+    # For every point in the range [0, N]
+    #   check if it's distance is great than 1
+
+    # Find the ratio of how many are distance<=1
+    # and return 4 times that ratio.
+    return 4 * x
+
+# Try it with a couple N values like 1, 100, 100000,
+n = 10000
+# Since we're using a random number function, the result is different every
+# time we run the simulation.
+print(approximate(n))
+print(approximate(n))
+print(approximate(n))
 ```
-
-## File Parsing.
-
-parse a fasta file
-objectives: file, loop, flow control
-- find the longest sequence
-- output it's ID
 
 ## Sixpack
 
@@ -372,8 +393,8 @@ What sixpack does is:
 ```
 orfs = []
 
-for sequence in (forward, reverse_complement(forward)):
-    for frame in (sequence, sequence[1:], sequence[2:]):
+for sequence in [forward, reverse_complement(forward)]:
+    for frame in [sequence, sequence[1:], sequence[2:]]:
         # Remembering
         for potential start_codon:
             # accumulate until it sees a stop codon
@@ -402,4 +423,13 @@ It's a good exercise to rewrite `sixpack` in a very simplified version without m
 # Some recommendations:
 def reverse_complement(sequence):
     return ...
+
+orfs = []
+
+for sequence in [forward, reverse_complement(forward)]:
+    for frame in [sequence, sequence[1:], sequence[2:]]:
+        # Remembering
+        for potential start_codon:
+            # accumulate until it sees a stop codon
+            # and append it to the orfs array once it does.
 ```
