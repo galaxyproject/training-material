@@ -81,11 +81,7 @@ class: center, middle, inverse
 
 # {{ title }}
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true newcontributors=true %}
-</div>
-{% endif %}
+{% include _includes/contributor-list2-slides.html page=page %}
 
 <div class="footnote" style="bottom: {% if page.video%}5.5em;{% else %}4 em;{% endif %}">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
 {% if page.video %}
@@ -129,11 +125,7 @@ Useful when presenting."
 
 {{ locale['collaborative-effort'] | default: "This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!" }}
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}
-</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page %}
 
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
