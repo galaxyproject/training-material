@@ -1,5 +1,5 @@
 ---
-title: Additional resources to learn more about protiomic data analysis
+title: Additional resources to learn more about proteomic data analysis
 box_type: tip
 layout: faq
 contributors: [foellmelanie]
