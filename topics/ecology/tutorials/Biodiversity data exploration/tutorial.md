@@ -274,8 +274,7 @@ Here, you just explored your biodiversity dataframe properly and you know a lot 
 
 A step of this tutorial could be to show you how you can simply apply spatial coordinates anonymization if you want to share data without spatial context, particularly of interest if you want to share endangered species oriented data.
 
-
-## Spatial coordinates anonymization
+## Bonus! Spatial coordinates anonymization
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
