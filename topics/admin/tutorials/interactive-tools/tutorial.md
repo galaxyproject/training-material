@@ -33,6 +33,7 @@ requirements:
       - ansible-galaxy
       - connect-to-compute-cluster
       - job-destinations
+subtopic: features
 ---
 
 > ### {% icon warning %} Evolving Topic

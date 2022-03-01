@@ -14,8 +14,10 @@ objectives:
   - Create several charts
 time_estimation: "2h"
 tags:
+  - ansible
   - monitoring
-subtopic: features
+  - git-gat
+subtopic: monitoring
 key_points:
   - Telegraf provides an easy solution to monitor servers
   - Galaxy can send metrics to Telegraf

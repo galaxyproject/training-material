@@ -16,9 +16,11 @@ key_points:
   - new queries are welcome and easy to contribute
 contributors:
   - hexylena
-subtopic: features
+subtopic: monitoring
 tags:
   - monitoring
+  - ansible
+  - git-gat
 ---
 
 # Overview

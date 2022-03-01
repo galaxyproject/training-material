@@ -13,9 +13,11 @@ contributors:
   - mvdbeek
   - bernt-matthias
   - hexylena
-subtopic: features
+subtopic: jobs
 tags:
   - jobs
+  - ansible
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin

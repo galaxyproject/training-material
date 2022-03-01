@@ -16,9 +16,11 @@ contributors:
   - bgruening
   - slugger70
   - hexylena
-subtopic: features
+subtopic: monitoring
 tags:
+  - ansible
   - monitoring
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin

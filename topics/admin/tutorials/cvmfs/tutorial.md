@@ -25,6 +25,10 @@ voice:
   id: Olivia
   lang: en-AU
   neural: true
+subtopic: data
+tags:
+  - ansible
+  - git-gat
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He

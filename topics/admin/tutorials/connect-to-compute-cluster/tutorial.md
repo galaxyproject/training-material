@@ -25,7 +25,9 @@ contributors:
   - hexylena
 tags:
   - jobs
-subtopic: features
+  - ansible
+  - git-gat
+subtopic: jobs
 requirements:
   - type: "internal"
     topic_name: admin

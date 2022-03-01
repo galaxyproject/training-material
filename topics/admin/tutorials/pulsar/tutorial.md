@@ -22,9 +22,11 @@ contributors:
   - mvdbeek
   - hexylena
   - gmauro
-subtopic: features
+subtopic: jobs
 tags:
+  - ansible
   - jobs
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin

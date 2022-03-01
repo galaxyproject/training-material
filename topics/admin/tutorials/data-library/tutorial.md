@@ -17,9 +17,11 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
-subtopic: features
+subtopic: data
 tags:
+  - ansible
   - storage
+  - git-gat
 requirements:
  - type: "internal"
    topic_name: admin

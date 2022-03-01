@@ -25,6 +25,9 @@ requirements:
 abbreviations:
   FTP: File Transfer Protocol
   NAT: Network Address Translation
+tags:
+  - data
+  - git-gat
 ---
 
 # Overview

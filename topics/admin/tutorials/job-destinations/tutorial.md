@@ -22,8 +22,10 @@ contributors:
   - bgruening
   - hexylena
 tags:
+  - ansible
   - jobs
-subtopic: features
+  - git-gat
+subtopic: jobs
 requirements:
   - type: "internal"
     topic_name: admin
