@@ -55,6 +55,10 @@ layout: page
     <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
     {% bibliography --cited %}
     {% endif %}
+
+    {% if page.contributions %}
+    {% include _includes/funding-statement.md contributions=page.contributions %}
+    {% endif %}
   </div>
 
   <div class="col-md-4">

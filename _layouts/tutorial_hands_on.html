@@ -267,26 +267,8 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
                 <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                {% if page.contributions.funding %}
-                <h1 id="funding">{{locale['references']| default: "Funding" }}</h1>
-                <p>These individuals or organisations provided funding support for the development of this resource</p>
-
-                <div class="row">
-                {% for id in page.contributions.funding %}
-                    {% assign name = contributors[id].name | default: id -%}
-                    <div class="col-md-3 col-xs-12">
-                        {% if contributors[id].avatar %}
-                        <img class="funder-avatar" src="{{ contributors[id].avatar }}" alt="">
-                        <a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="btn btn-secondary">See Funder Profile</a>
-                        {% else %}
-                        <img class="funder-avatar" src="https://avatars.githubusercontent.com/{{ id }}" alt="">
-                        {% endif %}
-                    </div>
-                    <div class="col-md-9 col-xs-12">
-                        {{ contributors[id].funding_statement | markdownify }}
-                    </div>
-                {% endfor %}
-                </div>
+                {% if page.contributions %}
+                {% include _includes/funding-statement.md contributions=page.contributions %}
                 {% endif %}
 
                 {% if topic.references %}
