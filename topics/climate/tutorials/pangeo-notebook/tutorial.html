@@ -1173,7 +1173,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1477,15 +1477,15 @@ Attributes:
 </ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
- 
+
 <span class="c1"># We're using cartopy to project our data.
 # (see documentation on cartopy)
 </span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">())</span>
 <span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s">'10m'</span><span class="p">)</span>
-  
+
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">)))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
+</span><span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">)))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
                                                                                     <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
                                                                                     <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
                                                                                     <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
@@ -1522,11 +1522,11 @@ Attributes:
 </ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-  
+
 <span class="c1"># We're using cartopy to project our data.
 # (see documentation on cartopy)
 </span><span class="n">proj_plot</span> <span class="o">=</span> <span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">()</span>
-  
+
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
 </span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
@@ -1561,7 +1561,7 @@ Attributes:
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N. PM2.5 will increase and reach values close to 35 μm.m-3.
 We will use <code class="language-plaintext highlighter-rouge">slice</code> to select the area and we slice latitudes with <code class="language-plaintext highlighter-rouge">latitude=slice(47.3, 36.5)</code> and not <code class="language-plaintext highlighter-rouge">latitude=slice(36.5, 47.3)</code>.
-The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
+The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in
 decreasing order for CAMS.</p>
 
     <blockquote class="code-in">
@@ -1607,7 +1607,7 @@ decreasing order for CAMS.</p>
 
 <blockquote class="comment">
   <h3 id="comment-what-happened"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> What happened?</h3>
-  <p>Each element of the dataset where the criteria within the <code class="language-plaintext highlighter-rouge">where</code> statement is not met, e.g. when PM2.5 &lt;= 25, will be set to <code class="language-plaintext highlighter-rouge">nan</code>. 
+  <p>Each element of the dataset where the criteria within the <code class="language-plaintext highlighter-rouge">where</code> statement is not met, e.g. when PM2.5 &lt;= 25, will be set to <code class="language-plaintext highlighter-rouge">nan</code>.
 You may not see any changes when printing the dataset but if you look carefuly at <code class="language-plaintext highlighter-rouge">pm2p5_conc</code> values, you will see many <code class="language-plaintext highlighter-rouge">nan</code>.</p>
 
 </blockquote>
@@ -1619,12 +1619,12 @@ You may not see any changes when printing the dataset but if you look carefuly a
 ######################
 </span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
- 
+
 <span class="c1"># We're using cartopy to project our data.
 # (see documentation on cartopy)
 </span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">())</span>
 <span class="n">ax</span><span class="p">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s">'10m'</span><span class="p">)</span>
-  
+
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
 </span><span class="n">dset</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
@@ -1642,11 +1642,11 @@ You may not see any changes when printing the dataset but if you look carefuly a
 <h3 id="multi-plot-over-italy-using-a-mask">Multi-plot over Italy using a mask</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
- 
+
 <span class="c1"># We're using cartopy to project our data.
 # (see documentation on cartopy)
 </span><span class="n">proj_plot</span> <span class="o">=</span> <span class="n">ccrs</span><span class="p">.</span><span class="n">Mercator</span><span class="p">()</span>
-  
+
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
 </span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">))).</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span>
@@ -1816,7 +1816,7 @@ Data variables:
 <span class="n">sub_dset</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'1D'</span><span class="p">).</span><span class="n">mean</span><span class="p">()</span>
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">p</span> <span class="o">=</span> <span class="n">sub_dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span> 
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">sub_dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
                                 <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
                                 <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
                                 <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -1847,7 +1847,7 @@ Data variables:
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! <a href="https://pangeo.io/">Pangeo</a> is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo <span class="citation"><a href="#Abernathey2017">Abe<span class="notranslate">rna</span>they <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Abernathey2021">Abe<span class="notranslate">rna</span>they <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Gentemann2021">Gentemann <i>et al.</i> 2021</a></span> and <span class="citation"><a href="#Sambasivan2021">Sambasivan <i>et al.</i> 2021</a></span>!</p>
+<p>Well done! <a href="https://pangeo.io/">Pangeo</a> is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo <span class="citation"><a href="#Abernathey2017">Abe<span class="notranslate">rna</span>they <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Abernathey2021">Abe<span class="notranslate">rna</span>they <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Gentemann2021">Gentemann <i>et al.</i> 2021</a></span> and <span class="citation"><a href="#Sambasivan2021">Sambasivan <i>et al.</i> 2021</a></span>!</p>
 
 <p>Have a look at the <a href="https://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/">Pangeo Tutorial Gallery</a> to pick up your next Pangeo training material!</p>
 
@@ -1947,7 +1947,7 @@ author = "Anne Fouilloux",
 title = "Pangeo Notebook in Galaxy - Introduction to Xarray (Galaxy Training Materials)",
 year = "2022",
 month = "02",
-day = "18"
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
