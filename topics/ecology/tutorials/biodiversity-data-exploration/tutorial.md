@@ -259,10 +259,10 @@ In order to clean unnecessary informations from the table we will now cut a few 
 {: .hands_on}
 
 
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Beta_diversity_through_space.png)
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_LCBD_sites_time.png)
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_Mean_LCBD_through_time.png)
-![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_(LCBD)_SCBD_Species_Radar_plot.png)
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Beta_diversity_through_space.png)
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_LCBD_sites_time.png)
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Mean_LCBD_through_time.png)
+![Variable_exploration_example](../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_SCBD_Species_Radar_plot.png)
 
 
 # Conclusion
