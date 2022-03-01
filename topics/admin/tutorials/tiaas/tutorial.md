@@ -63,7 +63,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -34,3 +34,5 @@
+>    @@ -36,3 +36,5 @@
 >       version: 0.14.2
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
@@ -88,11 +88,10 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -214,3 +214,12 @@ telegraf_plugins_extra:
->           - timeout = "10s"
+>    @@ -215,6 +215,15 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
->    +
+>     
 >    +# TIaaS setup
 >    +tiaas_dir: /opt/tiaas
 >    +tiaas_user: tiaas
@@ -101,6 +100,10 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
 >    +tiaas_listen_url: "127.0.0.1:6000"
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure tiaas"}
@@ -182,7 +185,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -61,4 +61,19 @@ server {
+>    @@ -77,4 +77,19 @@ server {
 >             proxy_pass http://127.0.0.1:3000/;
 >         }
 >     

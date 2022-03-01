@@ -107,7 +107,7 @@ module TopicFilter
       slide_translations = []
       if slides_page_keys.length == 1 then
         page = interesting[slides_page_keys[0]]
-        slide_has_video = page.data.has_key?('video') and page['video']
+        slide_has_video = page.data.fetch('video', false)
         slide_translations = page.data.fetch('translations', [])
       end
 

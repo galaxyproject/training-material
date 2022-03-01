@@ -3,6 +3,7 @@ title:  Importación por medio de enlaces
 area: data upload
 box_type: tip
 layout: faq
+contributors: [nomadscientist]
 ---
 
 * Copia los enlaces

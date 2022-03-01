@@ -4,6 +4,7 @@ area: analysis
 description: To get access to all features of a Galaxy instance, you need to create an account.
 box_type: tip
 layout: faq
+contributors: [nekrut]
 ---
 
 To create an account:
