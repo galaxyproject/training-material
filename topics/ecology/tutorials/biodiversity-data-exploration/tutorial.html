@@ -1,0 +1,1284 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Biodiversity data exploration</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Biodiversity data exploration" />
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/ecology/faqs/" title="Check our FAQs for the Ecology topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-03-01/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html" title="Version 2022-03-01">2022-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Biodiversity data exploration",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/ecology/"
+  },
+  "courseCode": "ecology / biodiversity-data-exploration / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Biodiversity data exploration' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - How to explore biodiversity data?\n - How to look at Homoscedasticity, normality or collinearity of presences-absence or abundance data?\n - How to compare beta diversity taking into account space, time and species components?\n\n\\nThe objectives are:\n - Explore Biodiversity data with taxonomic, temporal and geographical informations\n - Have an idea about quality content of the data regarding statistical tests like normality or homoscedasticity and coverage like temporal or geographical coverage\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Olivier Norvez"
+    },
+    {
+      "@type": "Person",
+      "name": "Marie"
+    },
+    {
+      "@type": "Person",
+      "name": "Coline Royaux"
+    },
+    {
+      "@type": "Person",
+      "name": "Yvan Le Bras"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Olivier Norvez"
+    },
+    {
+      "@type": "Person",
+      "name": "Marie"
+    },
+    {
+      "@type": "Person",
+      "name": "Coline Royaux"
+    },
+    {
+      "@type": "Person",
+      "name": "Yvan Le Bras"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-ecology">
+    <h1 data-toc-skip>Biodiversity data exploration</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/onorvez/" class="contributor-badge contributor-onorvez"><img src="https://avatars.githubusercontent.com/onorvez?s=27" alt="Avatar">Olivier Norvez</a>
+
+
+<a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=27" alt="Avatar">Marie</a>
+
+
+<a href="/training-material/hall-of-fame/colineroyaux/" class="contributor-badge contributor-colineroyaux"><img src="https://avatars.githubusercontent.com/colineroyaux?s=27" alt="Avatar">Coline Royaux</a>
+
+
+<a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="https://avatars.githubusercontent.com/yvanlebras?s=27" alt="Avatar">Yvan Le Bras</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to explore biodiversity data?</p>
+</li>
+        
+        <li><p>How to look at Homoscedasticity, normality or collinearity of presences-absence or abundance data?</p>
+</li>
+        
+        <li><p>How to compare beta diversity taking into account space, time and species components?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Explore Biodiversity data with taxonomic, temporal and geographical informations</p>
+</li>
+        
+        <li><p>Have an idea about quality content of the data regarding statistical tests like normality or homoscedasticity and coverage like temporal or geographical coverage</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6107457/files/IMOS-National_Reef_Monitoring_Network_Sub-Facility-Global_reef_fish_abundance_and_biomass.csv?download=1">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/ecology/tutorials/biodiversity-data-exploration/workflows/" title="Workflows" alt="Biodiversity data exploration workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 1, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This tutorial will guide you on the exploration of biodiversity data having taxonomic, spatial and temporal informations.</p>
+
+<p>We’ll be using Reef Life Survey (RLS) data extracted from the Australian Ocean Data Network (AODN) portal. We’ll use a subset done directly on the AODN data portal (https://portal.aodn.org.au/) on this dataset “IMOS - National Reef Monitoring Network Sub-Facility - Global reef fish abundance and biomass”. We decided to use data only on the Mollusca phylum from the east coast of Australia between 2008 and 2021. We’ll explore this dataset in the view of making statistical analyses so we will check the homoscedasticity and normality of the variables, see if some variables are correlated, how the data is distributed through space and time, etc … And finally, we’ll explore Beta diversity through the computation of the SCBD and LCBD (Species and Local Contribution to Beta Diversity).</p>
+
+<blockquote class="details">
+  <h3 id="details-definitions-of-scbd-and-lcbd"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Definitions of SCBD and LCBD</h3>
+
+  <p>Species Contribution to Beta Diversity: degree of variation for individual species across the study area.</p>
+
+  <p>Local Contribution to Beta Diversity: comparative indicators of the ecological uniqueness of the sites.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-preparation" id="markdown-toc-data-preparation">Data preparation</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+      <li><a href="#customize-your-dataset" id="markdown-toc-customize-your-dataset">Customize your dataset</a></li>
+    </ol>
+  </li>
+  <li><a href="#data-checking" id="markdown-toc-data-checking">Data checking</a>    <ol>
+      <li><a href="#homoscedasticity-and-normality-analysis" id="markdown-toc-homoscedasticity-and-normality-analysis">Homoscedasticity and normality analysis</a></li>
+      <li><a href="#autocorrelation-in-your-data" id="markdown-toc-autocorrelation-in-your-data">Autocorrelation in your data</a></li>
+      <li><a href="#check-collinearity-in-your-data" id="markdown-toc-check-collinearity-in-your-data">Check collinearity in your data</a></li>
+    </ol>
+  </li>
+  <li><a href="#data-exploration" id="markdown-toc-data-exploration">Data exploration</a>    <ol>
+      <li><a href="#visualize-abundance-repartition-through-space" id="markdown-toc-visualize-abundance-repartition-through-space">Visualize abundance repartition through space</a></li>
+      <li><a href="#visualize-the-number-of-locations-where-each-taxons-are-present" id="markdown-toc-visualize-the-number-of-locations-where-each-taxons-are-present">Visualize the number of locations where each taxons are present</a></li>
+      <li><a href="#visualize-the-rarefaction-curves-of-your-species" id="markdown-toc-visualize-the-rarefaction-curves-of-your-species">Visualize the rarefaction curves of your species</a></li>
+      <li><a href="#visualize-the-dispersion-of-a-numeric-variable-and-the-correlation-between-species-absence" id="markdown-toc-visualize-the-dispersion-of-a-numeric-variable-and-the-correlation-between-species-absence">Visualize the dispersion of a numeric variable and the correlation between species absence</a></li>
+    </ol>
+  </li>
+  <li><a href="#beta-diversity" id="markdown-toc-beta-diversity">Beta diversity</a>    <ol>
+      <li><a href="#local-and-species-contribution-to-beta-diversity-scbd-and-lcbd" id="markdown-toc-local-and-species-contribution-to-beta-diversity-scbd-and-lcbd">Local and Species Contribution to Beta Diversity (SCBD and LCBD)</a></li>
+    </ol>
+  </li>
+  <li><a href="#bonus-want-to-spatially-anoymize-your-data" id="markdown-toc-bonus-want-to-spatially-anoymize-your-data">Bonus: Want to spatially anoymize your data?</a>    <ol>
+      <li><a href="#bonus-spatial-coordinates-anonymization" id="markdown-toc-bonus-spatial-coordinates-anonymization">Bonus! Spatial coordinates anonymization</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-preparation">Data preparation</h1>
+
+<p>First step is to download biodiversity data on your <span class="notranslate">Galaxy</span> history. Here we will use a “classical” (containing taxonomic, spatial and temporal informations) biodiversity dataset from the well known <a href="https://reeflifesurvey.com/">“Reef life survey” initiative</a>.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote>
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial and give it a name (example: “RLS for biodiversity data exploration tutorial”)
+for you to find it again later if needed.</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/6107457/files/IMOS-National_Reef_Monitoring_Network_Sub-Facility-Global_reef_fish_abundance_and_biomass.csv?download=1">Zenodo</a></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+    </li>
+    <li>
+      <p>Rename the datasets “reef_life_molluscs” for example and preview your dataset</p>
+
+      <p>You can see that the dataset hasn’t been detected to be a CSV dataframe, it is because RLS data directly puts the
+metadata of the dataframe in the first lines before the dataframe so you’ll have to remove these lines using the <span class="tool" data-tool="Remove beginning1" title="Tested with Remove beginning1"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove beginning1</span></span>  with the following parameters:
+    - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">72</code>
+    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: reef_life_molluscs data file</p>
+
+      <p>Then, verify if your new file hasn’t got hashtags in the first lines and then ask <span class="notranslate">Galaxy</span> to autodetect datatype (click on the pencil, then “Datatypes” then click on “Auto-detect” button). <span class="notranslate">Galaxy</span> will normally detect it as csv.</p>
+    </li>
+    <li>Convert datatype CSV to tabular</li>
+  </ol>
+
+  <hr />
+  <p>title: Converting the file format
+description: Some datasets can be transformed into a different format. <span class="notranslate">Galaxy</span> has some built-in file conversion options depending on the type of data you have.
+area: datasets
+box_type: tip
+layout: faq
+contributors: [shiltemann,hexylena]
+—</p>
+</blockquote>
+
+<ul>
+  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+  <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>Convert</strong> tab on the top</li>
+  <li>Select <code class="language-plaintext highlighter-rouge">Convert CSV to tabular</code></li>
+  <li>Click the <strong>Convert datatype</strong> button</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+
+</blockquote>
+
+<h2 id="customize-your-dataset">Customize your dataset</h2>
+
+<p>In order to clean unnecessary informations from the table we will now cut a few columns and change the format of time information.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-clean-your-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Clean your data</h3>
+
+  <ol>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Advanced cut columns from a table (cut)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span> 
+with following parameters :
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“File to cut”</em>: Convert CSV to tabular data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 8</code> <code class="language-plaintext highlighter-rouge">Column: 10</code> <code class="language-plaintext highlighter-rouge">Column: 11</code> <code class="language-plaintext highlighter-rouge">Column: 12</code> <code class="language-plaintext highlighter-rouge">Column: 25</code> <code class="language-plaintext highlighter-rouge">Column: 28</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regexColumn1/1.0.0</span></span>  with following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: Advanced Cut data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">([0-9]{4})-[0-9]{2}-[0-9]{2}</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="data-checking">Data checking</h1>
+
+<h2 id="homoscedasticity-and-normality-analysis">Homoscedasticity and normality analysis</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-here-we-will-check-homogeneity-of-variances-levene-test-for-every-species-and-represent-it-through-multiple-boxplots-and-the-normal-distribution-kolmogorov-smirnov-test-represented-by-a-distribution-histogram-and-a-q-q-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Here we will check homogeneity of variances (Levene test) for every species and represent it through multiple boxplots and the normal distribution (Kolmogorov-Smirnov test) represented by a distribution histogram and a Q-Q plot.</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0"><strong>Homoscedasticity and normality</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: Column Regex Find and Replace data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing temporal data (year, date, …)”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing species”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing numerical values (like abundances)”</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+      </ul>
+
+      <p>You have to get three outputs: the Levene Test for homoscedasticity dataset, the Kolmogrov-Smirnov test for normality  and 9 PNG files in a data collection representing the homogeneity of variances for each species at each time point of the study.
+If the levene test is significant (P-value in column Pr &lt; 0.5 and at least one * at the end of the 4th line), variances aren’t homogeneous, the hypothesis of homoscedasticity is rejected.
+If the K-S test is significant (p-value &lt; 0.5), your numerical variable isn’t normally distributed, the hypothesis of normality is rejected.
+The two tests have to be significant so variances aren’t homogenous and data isn’t normally distributed.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/BiodivExplo/Homoscedasticity_and_normality_of_%20Sepioteuthis%20australis.png" alt="Homoscedasticity and normality_example on Sepioteuthis australis. " loading="lazy" /></p>
+
+<h2 id="autocorrelation-in-your-data">Autocorrelation in your data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-autocorrelation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Autocorrelation</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0"><strong>Variables exploration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: Column Regex Find and Replace data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variables links exploration”</em>: <code class="language-plaintext highlighter-rouge">Autocorrelation of one selected numerical variable</code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select columns containing numerical values”</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>You have to get two outputs, one text file containing the Autocorrelation function values and one PNG file in the data collection showing the autocorrelation for a variable.
+ If the bars of the histogram are strictly confined between the dashed lines (representing 95% confidence interval without white noise), there is auto-correlation.</p>
+
+      <p>Here, we don’t see there is autocorrelation.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/BiodivExplo/Variables_exploration_autocorrelation.png" alt="Variable_exploration_autocorrelation example. " loading="lazy" /></p>
+
+<h2 id="check-collinearity-in-your-data">Check collinearity in your data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-collinearity-between-numerical-variables"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Collinearity between numerical variables</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0"><strong>Variables exploration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variables links exploration”</em>: <code class="language-plaintext highlighter-rouge">Collinearity between selected numerical variables for each species</code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing species”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select columns containing numerical values”</em>: <code class="language-plaintext highlighter-rouge">c['4', '6']</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>You have to get two outputs, one describing species we couldn’t evaluate and one PNG file with one plot containing multiple correlation plots and the correlation values between each variables.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/BiodivExplo/Variables_exploration_collinarity_of_Sepioteuthis%20australis.png" alt="Variable_exploration_collinarity example. " loading="lazy" /></p>
+
+<h1 id="data-exploration">Data exploration</h1>
+<h2 id="visualize-abundance-repartition-through-space">Visualize abundance repartition through space</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-abundance-map-in-the-environment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Abundance map in the environment</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0"><strong>Presence-absence and abundance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variables presence, absence and abundance”</em>: <code class="language-plaintext highlighter-rouge">Abundance map in the environment </code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing latitudes “</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing longitudes”</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“What do you study in this analysis ?”</em>: <code class="language-plaintext highlighter-rouge">Molluscs of Australian east coast</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing taxon “</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+          </ul>
+        </li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing abundances “</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+      </ul>
+
+      <p>You have to get two outputs, one with the map of the abundance through space with the coordinates and one text file to inform you about the geographical extent of your map.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/BiodivExplo/Presence-absence_and_abundance_mappy.png" alt="Presence-absence-example. " loading="lazy" /></p>
+
+<h2 id="visualize-the-number-of-locations-where-each-taxons-are-present">Visualize the number of locations where each taxons are present</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-presence-count-of-taxons-barplot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Presence count of taxons (barplot)</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0"><strong>Presence-absence and abundance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variables presence, absence and abundance”</em>: <code class="language-plaintext highlighter-rouge">Presence count of taxons (barplot)</code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing your separation variable”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing taxon”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+          </ul>
+        </li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing abundances “</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+      </ul>
+
+      <p>You have to get two outputs, one with 120 PNG files (one for each site) representing the number of locations where each taxons are present and one text file to inform you about the used locations.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="visualize-the-rarefaction-curves-of-your-species">Visualize the rarefaction curves of your species</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-rarefaction-curve-of-species"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rarefaction curve of species</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0"><strong>Presence-absence and abundance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variables presence, absence and abundance”</em>: <code class="language-plaintext highlighter-rouge">Rarefaction curve of species</code>
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Size of subsamples”</em>: <code class="language-plaintext highlighter-rouge">200</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing species”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+          </ul>
+        </li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing abundances “</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+      </ul>
+
+      <p>You have to get two outputs, one data collection with one PNG files representing the rarefaction curves of each species in one graph and one tabular file with log informations.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/BiodivExplo/Presence-absence_and_abundance_rarefaction.png" alt="Variable_exploration_rarefaction curves. " loading="lazy" /></p>
+
+<h2 id="visualize-the-dispersion-of-a-numeric-variable-and-the-correlation-between-species-absence">Visualize the dispersion of a numeric variable and the correlation between species absence</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-boxplot-of-dispersion-and-correlation-of-absence"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Boxplot of dispersion and correlation of absence</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0"><strong>Statistics on presence-absence</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a column containing numerical values (such as the abundance) “</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the column of the x-axis : most commonly species”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing locations “</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing temporal data (year, date, …) “</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+      </ul>
+
+      <p>You have to get two outputs, one PNG file with the boxplot and dispersion plot of the abundance and one plot representing wether the absence of several species is correlated. In the second plot if you see there is a cross on the round representation the two related species haven’t got their absences correlated, the other are correlated and seem to be co-absent.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/BiodivExplo/Boxplot_and_dispersion_plot.png" alt="Boxplot dispersion_example. " loading="lazy" />
+<img src="../../images/BiodivExplo/Absence-correlation_plot.png" alt="Absence correlation_example. " loading="lazy" /></p>
+
+<h1 id="beta-diversity">Beta diversity</h1>
+<h2 id="local-and-species-contribution-to-beta-diversity-scbd-and-lcbd">Local and Species Contribution to Beta Diversity (SCBD and LCBD)</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0"><strong>Local Contributions to Beta Diversity (LCBD)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column with abundances”</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column with locations”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing taxon”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing dates”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Other LCBD : spatialized representation or xy plot.”</em>: <code class="language-plaintext highlighter-rouge">Spatialized representation</code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing latitudes in decimal degrees”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing longitudes in decimal degrees”</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>You have to get three outputs. Two text file containing a table with information on the beta diversity and one text file with the list of species that has a SCBD larger than the mean SCBD. One data collection with PNG files showing multiple plots according to one type of variable in order to vizualize the beta diversity.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Beta_diversity_through_space.png" alt="Variable_exploration_example. " loading="lazy" />
+<img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_LCBD_sites_time.png" alt="Variable_exploration_example. " loading="lazy" />
+<img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Mean_LCBD_through_time.png" alt="Variable_exploration_example. " loading="lazy" />
+<img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_SCBD_Species_Radar_plot.png" alt="Variable_exploration_example. " loading="lazy" /></p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Here, you just explored your biodiversity dataframe properly and you know a lot more about your data. You can now peacefully make your statiscal analyses as most of the red flags you can get have been revealed by this toolsuite ! Enjoy !</p>
+
+<h1 id="bonus-want-to-spatially-anoymize-your-data">Bonus: Want to spatially anoymize your data?</h1>
+
+<p>A step of this tutorial could be to show you how you can simply apply spatial coordinates anonymization if you want to share data without spatial context, particularly of interest if you want to share endangered species oriented data.</p>
+
+<h2 id="bonus-spatial-coordinates-anonymization">Bonus! Spatial coordinates anonymization</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0"><strong>Spatial coordinates anonymization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: Column Regex Find and Replace data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing latitudes in decimal degrees”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select column containing longitudes in decimal degrees”</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Explore your data before diving into deep analysis</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Biodiversity data exploration (Ecology)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Olivier Norvez, Marie, Coline Royaux, Yvan Le Bras, 2022 <b>Biodiversity data exploration (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{ecology-biodiversity-data-exploration,
+author = "Olivier Norvez and Marie and Coline Royaux and Yvan Le Bras",
+title = "Biodiversity data exploration (Galaxy Training Materials)",
+year = "2022",
+month = "03",
+day = "01"
+url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
