@@ -8,9 +8,9 @@
 	{% assign name = site.data.contributors[id].name | default: id -%}
 	<div class="col-md-3 col-xs-12">
 		{% if site.data.contributors[id].avatar %}
-		<img class="funder-avatar" src="{{ site.data.contributors[id].avatar }}" alt="">
+		<img class="funder-avatar" src="{{ site.data.contributors[id].avatar }}" alt="Logo">
 		{% else %}
-		<img class="funder-avatar" src="https://avatars.githubusercontent.com/{{ id }}" alt="">
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/{{ id }}" alt="Logo">
 		{% endif %}
 		<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="btn btn-secondary">See Funder Profile</a>
 	</div>
