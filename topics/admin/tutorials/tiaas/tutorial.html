@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Training Infrastructure as a Service (TIaaS)",
   "interactivityType": "mixed",
@@ -630,6 +630,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -723,6 +725,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -746,6 +750,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -906,7 +912,11 @@
                     
                         
                     
+                        
+                    
                 
+                    
+                        
                     
                         
                     
@@ -1090,7 +1100,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 6, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 10, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1142,7 +1152,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Add tiaas2 requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
-</span><span class="p">@@ -34,3 +34,5 @@</span>
+</span><span class="p">@@ -36,3 +36,5 @@</span>
    version: 0.14.2
  - src: dj-wasabi.telegraf
    version: 0.12.0
@@ -1164,12 +1174,11 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -214,3 +214,12 @@</span> telegraf_plugins_extra:
-       - timeout = "10s"
+</span><span class="p">@@ -215,6 +215,15 @@</span> telegraf_plugins_extra:
        - data_format = "influx"
        - interval = "15s"
-<span class="gi">+
-+# TIaaS setup
+    
+<span class="gi">+# TIaaS setup
 +tiaas_dir: /opt/tiaas
 +tiaas_user: tiaas
 +tiaas_group: tiaas
@@ -1177,7 +1186,11 @@ resources, thus reducing queue times on the day of the training.</p>
 +tiaas_admin_user: admin
 +tiaas_admin_pass: changeme
 +tiaas_listen_url: "127.0.0.1:6000"
-</span>   
++
+</span> # TUS
+ <span class="notranslate">galaxy</span>_tusd_port: 1080
+ tusd_instances:
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1254,7 +1267,7 @@ to perform this process every night at midnight. You can control when this runs 
 
       <div data-commit="Add nginx routes for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -61,4 +61,19 @@</span> server {
+</span><span class="p">@@ -77,4 +77,19 @@</span> server {
          proxy_pass http://127.0.0.1:3000/;
      }
     
@@ -1616,7 +1629,7 @@ to perform this process every night at midnight. You can control when this runs 
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Helena Rasche, Saskia Hiltemann, 2021 <b>Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Helena Rasche, Saskia Hiltemann, 2022 <b>Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1633,9 +1646,9 @@ to perform this process every night at midnight. You can control when this runs 
 <code id="citation-code">@misc{admin-tiaas,
 author = "Helena Rasche and Saskia Hiltemann",
 title = "Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)",
-year = "2021",
-month = "08",
-day = "06"
+year = "2022",
+month = "02",
+day = "10"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

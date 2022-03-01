@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Telegraf and Grafana",
   "interactivityType": "mixed",
@@ -589,6 +589,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -636,6 +638,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -735,6 +739,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -876,7 +882,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 10, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -955,7 +961,7 @@
 
       <div data-commit="Add requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
-</span><span class="p">@@ -28,3 +28,5 @@</span>
+</span><span class="p">@@ -30,3 +30,5 @@</span>
    version: 1.0.8
  - src: <span class="notranslate">galaxy</span>project.gxadmin
    version: 0.0.8
@@ -1076,7 +1082,7 @@
 
       <div data-commit="Add grafana requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
-</span><span class="p">@@ -30,3 +30,5 @@</span>
+</span><span class="p">@@ -32,3 +32,5 @@</span>
    version: 0.0.8
  - src: use<span class="notranslate">galaxy</span>_eu.influxdb
    version: v6.0.7
@@ -1147,7 +1153,7 @@
 
       <div data-commit="Setup nginx location for grafana" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -56,4 +56,9 @@</span> server {
+</span><span class="p">@@ -72,4 +72,9 @@</span> server {
      location /training-material/ {
          proxy_pass https://training.<span class="notranslate">galaxy</span>project.org/training-material/;
      }
@@ -1272,7 +1278,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add Telegraf requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
-</span><span class="p">@@ -32,3 +32,5 @@</span>
+</span><span class="p">@@ -34,3 +34,5 @@</span>
    version: v6.0.7
  - src: cloudalchemy.grafana
    version: 0.14.2
@@ -1351,12 +1357,11 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -190,3 +190,12 @@</span> rabbitmq_users:
-   - user: <span class="notranslate">galaxy</span>_au
+</span><span class="p">@@ -191,6 +191,15 @@</span> rabbitmq_users:
      password: "{{ vault_rabbitmq_password_vhost }}"
      vhost: /pulsar/<span class="notranslate">galaxy</span>_au
-<span class="gi">+
-+# Telegraf
+    
+<span class="gi">+# Telegraf
 +telegraf_plugins_extra:
 +  listen_<span class="notranslate">galaxy</span>_routes:
 +    plugin: "statsd"
@@ -1364,7 +1369,11 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 +      - service_address = ":8125"
 +      - metric_separator = "."
 +      - allowed_pending_messages = 10000
-</span>   
++
+</span> # TUS
+ <span class="notranslate">galaxy</span>_tusd_port: 1080
+ tusd_instances:
+   
 </code></pre></div>      </div>
 
       <p>We have configured the <code class="language-plaintext highlighter-rouge">statsd</code> plugin for telegraf, as we will use it to receive <span class="notranslate">Galaxy</span> timing data. <a href="https://github.com/statsd/statsd">StatsD</a> was an earlier time series database and had an associated line protocol with a different format. Telegraf supports data sent in this format, allowing us to reuse the long-present <span class="notranslate">Galaxy</span> support for this with our newer Telegraf/InfluxDB setup. Telegraf parses the data and converts it into a format that InfluxDB can understand.</p>
@@ -1729,7 +1738,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -207,3 +207,10 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -207,6 +207,13 @@</span> telegraf_plugins_extra:
        - service_address = ":8125"
        - metric_separator = "."
        - allowed_pending_messages = 10000
@@ -1740,7 +1749,10 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 +      - timeout = "10s"
 +      - data_format = "influx"
 +      - interval = "15s"
-</span>   
+</span>    
+ # TUS
+ <span class="notranslate">galaxy</span>_tusd_port: 1080
+   
 </code></pre></div>      </div>
 
       <p>This one is slightly more complex in the configuration. The command block does several things:</p>
@@ -1943,7 +1955,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Helena Rasche, 2021 <b>Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Helena Rasche, 2022 <b>Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1960,9 +1972,9 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 <code id="citation-code">@misc{admin-monitoring,
 author = "Helena Rasche",
 title = "Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)",
-year = "2021",
-month = "07",
-day = "09"
+year = "2022",
+month = "02",
+day = "10"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Running Jobs on Remote Resources with Pulsar",
   "interactivityType": "mixed",
@@ -670,6 +670,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -763,6 +765,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -786,6 +790,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -946,7 +952,11 @@
                     
                         
                     
+                        
+                    
                 
+                    
+                        
                     
                         
                     
@@ -1146,7 +1156,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 2, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 10, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1306,7 +1316,7 @@
 
       <div data-commit="Add requirements" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
-</span><span class="p">@@ -22,3 +22,7 @@</span>
+</span><span class="p">@@ -24,3 +24,7 @@</span>
    version: 0.0.2
  - src: <span class="notranslate">galaxy</span>project.slurm
    version: 0.1.3
@@ -1432,12 +1442,11 @@
 </span> certbot_domains:
   - "{{ inventory_hostname }}"
  certbot_agree_tos: --agree-tos
-<span class="p">@@ -160,3 +162,31 @@</span> slurm_config:
-   SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
+<span class="p">@@ -161,6 +163,34 @@</span> slurm_config:
    SelectType: select/cons_res
    SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
-<span class="gi">+
-+# RabbitMQ
+    
+<span class="gi">+# RabbitMQ
 +rabbitmq_version: 3.8.16-1
 +rabbitmq_plugins: rabbitmq_management
 +
@@ -1464,7 +1473,11 @@
 +  - user: <span class="notranslate">galaxy</span>_au
 +    password: "{{ vault_rabbitmq_password_vhost }}"
 +    vhost: /pulsar/<span class="notranslate">galaxy</span>_au
-</span>   
++
+</span> # TUS
+ <span class="notranslate">galaxy</span>_tusd_port: 1080
+ tusd_instances:
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -2167,7 +2180,7 @@ The aim of these parameters is to control the retrying of staging actions in the
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Nate Coraor, Simon Gladman, Marius van den Beek, Helena Rasche, Gianmauro Cuccuru, 2021 <b>Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Nate Coraor, Simon Gladman, Marius van den Beek, Helena Rasche, Gianmauro Cuccuru, 2022 <b>Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -2184,9 +2197,9 @@ The aim of these parameters is to control the retrying of staging actions in the
 <code id="citation-code">@misc{admin-pulsar,
 author = "Nate Coraor and Simon Gladman and Marius van den Beek and Helena Rasche and Gianmauro Cuccuru",
 title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
-year = "2021",
-month = "07",
-day = "02"
+year = "2022",
+month = "02",
+day = "10"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
