@@ -33,11 +33,4 @@
 			{% for id in include.contributors.infrastructure %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
 		</dd>
 	{% endif %}
-
-	{% if include.contributors.funding %}
-		<dt><abbr title="These individuals or organisations provided funding support for the development of this resource">Funder(s)</abbr></dt>
-		<dd>
-			{% for id in include.contributors.funding %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
-		</dd>
-	{% endif %}
 </dl>

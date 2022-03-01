@@ -867,8 +867,3 @@ Lists are quite useful in R. You may come across lists in the way that some bioi
 >    [1] 8762685
 >    ```
 {: .hands_on}
-
-# Conclusion
-{:.no_toc}
-
-This tutorial
