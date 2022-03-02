@@ -1,7 +1,7 @@
 ---
 title: How do I know what protocol my data was sequenced with?
 layout: faq
-box_type: tip
+box_type: question
 contributors: [nomadscientist,mtekman]
 ---
 
