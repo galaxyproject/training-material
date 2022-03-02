@@ -29,6 +29,12 @@ When someting goes wrong in Galaxy, there are a number of things you can do to f
    - Write down any information you think might help solve the problem
      - See [this FAQ]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}) on how to write good bug reports
    - Click **{% icon galaxy-bug %} Report** button
-   - In the meantime, you can ask for help in the [Galaxy Gitter Channel](https://gitter.im/galaxyproject/Lobby) or the [GTN Gitter Channel](https://gitter.im/Galaxy-Training-Network/Lobby), or you can browse the [Galaxy Help Forum](https://help.galaxyproject.org/) to see if others have encountered the same problem before.
+
+5. **Ask for help!**
+   - Where?
+     - In the [GTN Gitter Channel](https://gitter.im/Galaxy-Training-Network/Lobby)
+     - In the [Galaxy Gitter Channel](https://gitter.im/galaxyproject/Lobby)
+     - Browse the [Galaxy Help Forum](https://help.galaxyproject.org/) to see if others have encountered the same problem before (or post your question).
+   - When asking for help, it is useful to [share a link to your history]({% link faqs/galaxy/histories_sharing.md %})
 
 
