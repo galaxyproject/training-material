@@ -229,7 +229,7 @@ Curriculum design benefits from being systematic: structured approaches help to
 orchestrate and clarify what will be taught, _why it will be taught_ and how;
 they also afford opportunities to evaluate what does and doesn't work, and hence
 what needs to change, ultimately leading to improvements in learning outcomes
-{% cite fink2013creating, diamond2008designing, nilson2016teaching %}. Several
+{% cite fink2013creating %}, {% cite diamond2008designing %}, {% cite nilson2016teaching %}. Several
 different frameworks have been devised to facilitate the design process, but
 each is motivated by the same underlying philosophy: to help formulate
 programmes that promote _meaningful and enduring learning_. If we're to
@@ -288,7 +288,7 @@ the cognitive levels are made explicit.
 The cognitive aspects embodied in LOs are important. Teaching should promote
 more complex behaviours than just recall or recognition (unless remembering is
 the intended LO), and push learners to achieve greater cognitive complexity
-{% cite nilson2016teaching, ambrose2010learning, weinstein2018understanding, roediger2006power, jensen2014teaching %}.
+{% cite nilson2016teaching %}, {% cite ambrose2010learning %}, {% cite weinstein2018understanding %}, {% cite roediger2006power %}, {% cite jensen2014teaching %}.
 This can be done by embedding development in learning activities and materials,
 and ensuring that LOs reflect the lowest to the highest levels of cognitive
 complexity realistically achievable on completing those activities or having
@@ -627,7 +627,7 @@ the core of a course has been identified, additional _auxiliary_ materials can
 also be selected, and offered, say, as ‘further reading’. Using LOs to drive
 content selection in this way thereby both provides focus (avoiding the
 temptation to squeeze as much as possible into a course to ensure coverage
-{% cite mckeachie2013mckeachie, lujan2006too %}), and increases the likelihood
+{% cite mckeachie2013mckeachie %}, {% cite lujan2006too %}), and increases the likelihood
 of accomplishing those LOs.
 
 > ### {% icon comment %} Definitions of key terms
@@ -917,7 +917,7 @@ complex or time-consuming (just informative about learning at a given point).
 If formative assessments are used frequently, and lead to specific decisions by
 learners and instructors, then instruction (or learner preparation) can be
 modified to better develop the target LOs
-{% cite dylan2008integrating, trumbull2013understanding %}. Such assessments can
+{% cite dylan2008integrating %}, {% cite trumbull2013understanding %}. Such assessments can
 be designed to anticipate, and identify which learners are experiencing, common
 misunderstandings, and gauge their readiness to move ahead; they can also help
 learners to identify their own strengths and weaknesses by encouraging
@@ -973,7 +973,7 @@ feedback surveys. It’s tempting to use completion rates or learner satisfactio
 as proxies for success; however, although simple to collate, these outcomes
 aren’t informative about learners’ growth or course effectiveness. Satisfaction
 surveys often use pre- and post-course questionnaires
-{% cite jordan_kari_2018_1325464, gurwitz2020framework %} to collect demographic
+{% cite jordan_kari_2018_1325464 %}, {% cite gurwitz2020framework %} to collect demographic
 details, and solicit learners’ self-evaluations and reactions to a course.
 Reviewing learners’ perceptions can help to identify whether the conditions for
 learning were present, but alone will not shed light on whether the intended LOs
@@ -1000,7 +1000,7 @@ were achieved, and whether learners’ on-the-job practices changed.
 > Evaluation methods provide systematic frameworks for analysing the
 > effectiveness of training courses. The first approach was introduced by
 > Raymond Katzell in 1956 and later popularised by Kirkpatrick
-> {% cite kirkpatrick1979techniques, kirkpatrick2006evaluating %}. The
+> {% cite kirkpatrick1979techniques %}, {% cite kirkpatrick2006evaluating %}. The
 > Kirkpatrick-Katzell method proposes a four-level strategy:
 >
 > - _Level 1: Reaction_ – what do learners feel about the training?
@@ -1194,7 +1194,7 @@ to profit most from the course. Identifying the target audience and learner
 prerequisites helps to define criteria for selecting participants, should a
 limit be needed to maximise course effectiveness.
 
-Once such ‘situational analysis’ has been completed, the starting point, and
+Once such 'situational analysis' has been completed, the starting point, and
 pivotal reference for all subsequent stages of the course-design process, is to
 articulate SMART LOs. As part of this process, Bloom’s taxonomy is useful for
 defining LOs that are measurable, and whose cognitive complexity increases along
