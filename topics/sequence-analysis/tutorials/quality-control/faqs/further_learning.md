@@ -1,6 +1,6 @@
 ---
 title: Where can I read more about Quality Control of data?
-box_type: questions
+box_type: question
 layout: faq
 contributors: [shiltemann]
 ---
