@@ -1,5 +1,5 @@
 ---
-title: When I get a warning for base per sequence content, what should I do??
+title: When I get a warning for base per sequence content, what should I do?
 box_type: tip
 layout: faq
 contributors: [heylf]
