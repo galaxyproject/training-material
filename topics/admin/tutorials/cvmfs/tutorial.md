@@ -14,7 +14,6 @@ key_points:
 contributors:
   - slugger70
   - hexylena
-subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
