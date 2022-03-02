@@ -1,8 +1,8 @@
 ---
 title: Do I need to create collections to run MaxQuant analysis or can I use single sample inputs?
-area: analysis
+area: inputs
 layout: faq
-box_type: tip
+box_type: question
 contributors: [foellmelanie]
 ---
 
