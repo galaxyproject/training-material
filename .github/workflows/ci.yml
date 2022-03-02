@@ -33,7 +33,7 @@ jobs:
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.5"
+          ruby-version: "2.7"
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
@@ -66,3 +66,7 @@ jobs:
             --allow-hash-href \
             --disable-external \
             ./_site
+
+      - run: |
+          # If this fails, ask @hexylena to look at your notebook
+          find _site | grep ipynb | xargs -n 1 bundle exec ruby bin/check-valid-json.rb

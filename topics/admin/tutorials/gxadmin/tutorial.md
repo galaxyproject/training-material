@@ -16,9 +16,11 @@ key_points:
   - new queries are welcome and easy to contribute
 contributors:
   - hexylena
-subtopic: features
+subtopic: monitoring
 tags:
   - monitoring
+  - ansible
+  - git-gat
 ---
 
 # Overview
@@ -49,7 +51,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -26,3 +26,5 @@
+>    @@ -28,3 +28,5 @@
 >       version: 0.1.0
 >     - src: galaxyproject.pulsar
 >       version: 1.0.8

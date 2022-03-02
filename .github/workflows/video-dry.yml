@@ -29,7 +29,7 @@ jobs:
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.5"
+          ruby-version: "2.7"
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
@@ -56,7 +56,7 @@ jobs:
         run: |
           find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_*ES.html' | \
              xargs ./bin/filter-resource-metadata video | \
-             xargs ruby ./bin/ari-extract-script.rb
+             xargs bundle exec ruby ./bin/ari-extract-script.rb
 
       - name: Check software versions
         run: |

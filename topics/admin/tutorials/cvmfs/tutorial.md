@@ -25,6 +25,10 @@ voice:
   id: Olivia
   lang: en-AU
   neural: true
+subtopic: data
+tags:
+  - ansible
+  - git-gat
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He
@@ -176,7 +180,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,5 @@
+>    @@ -18,3 +18,5 @@
 >       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >     - src: gantsign.golang
 >       version: 2.6.3

@@ -3,6 +3,7 @@ title: Renaming workflow outputs
 area: workflows
 box_type: tip
 layout: faq
+contributors: [shiltemann,wm75,hexylena]
 ---
 
 1. Open the workflow editor

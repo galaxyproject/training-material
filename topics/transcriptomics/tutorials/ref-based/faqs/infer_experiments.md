@@ -3,6 +3,7 @@ title: Infer experiment, is it ever used in practice? I mean, most often you are
 area: estimation of strandedness
 box_type: tip
 layout: faq
+contributors: [rahmot]
 ---
 
 This can happen in cases where you get the data from someone else, and they don't know.
