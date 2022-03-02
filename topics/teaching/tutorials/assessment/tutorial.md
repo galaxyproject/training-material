@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: "2: Assessment and feedback in training and teachings"
 subtopic: pedagogy
 enable: false
-time_estimation: 3.5h
+time_estimation: 3h30m
 questions:
   - What are the main strategies for active learning?
   -
