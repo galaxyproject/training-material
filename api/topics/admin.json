@@ -11,12 +11,68 @@
       "description": "These are the core, foundational topics for the majority of administration in Galaxy."
     },
     {
+      "id": "jobs",
+      "title": "Jobs & Scheduling",
+      "description": "Learn how to use DRMAA and other resources to schedule your jobs on clusters"
+    },
+    {
+      "id": "data",
+      "title": "Data Management & Reference Data",
+      "description": "Manage data like a pro: tips on scaling to 1PB and more."
+    },
+    {
       "id": "features",
       "title": "Further Learning",
       "description": "These topics will let you further expand your knowledge. They all build upon what you learned in the core topics, and many expect that you have a setup identical to the one started in the core trainings."
+    },
+    {
+      "id": "cloud",
+      "title": "Running Galaxy on the Cloud",
+      "description": "If acronyms like EKS, EC2, GCP, ECS, K8S mean anything to you, then you've found where your home! Run Galaxy on someone else's computer with Cloud based tutorials"
+    },
+    {
+      "id": "maintenance",
+      "title": "Maintaining a Production Galaxy",
+      "description": "Deployed Galaxy? Now what? All of the knowledge you need to maintain it long term."
+    },
+    {
+      "id": "monitoring",
+      "title": "Monitoring",
+      "description": "Monitor Galaxy like UseGalaxy.eu, learn the ins and outs of monitoring"
+    },
+    {
+      "id": "deprecated",
+      "title": "Deprecated Tutorials",
+      "description": "Please do not run these. They are outdated and for historical, archival purposes only."
     }
   ],
   "maintainers": [
+    {
+      "name": "Helena Rasche",
+      "email": "helena.rasche@gmail.com",
+      "orcid": "0000-0001-9760-8992",
+      "maintainer_contact": "gitter",
+      "gitter": "hexylena",
+      "joined": "2017-09",
+      "id": "hexylena",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+    },
+    {
+      "name": "Nate Coraor",
+      "gitter": "natefoo",
+      "twitter": "natefoo",
+      "email": "nate@bx.psu.edu",
+      "joined": "2017-12",
+      "id": "natefoo",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/natefoo.json"
+    },
+    {
+      "name": "Simon Gladman",
+      "email": "simon.gladman@unimelb.edu.au",
+      "joined": "2017-09",
+      "id": "slugger70",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+    },
     {
       "name": "Björn Grüning",
       "email": "bjoern.gruening@gmail.com",
@@ -34,23 +90,6 @@
       "joined": "2017-09",
       "id": "martenson",
       "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json"
-    },
-    {
-      "name": "Helena Rasche",
-      "email": "helena.rasche@gmail.com",
-      "orcid": "0000-0001-9760-8992",
-      "maintainer_contact": "gitter",
-      "gitter": "hexylena",
-      "joined": "2017-09",
-      "id": "hexylena",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
-    },
-    {
-      "name": "Simon Gladman",
-      "email": "simon.gladman@unimelb.edu.au",
-      "joined": "2017-09",
-      "id": "slugger70",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
     }
   ],
   "gitter": "galaxyproject/admins",
@@ -227,7 +266,10 @@
         }
       ],
       "subtopic": "core",
-      "last_modified_at": "2021-07-09T16:20:06+00:00",
+      "tags": [
+        "ansible"
+      ],
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/ansible/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "ansible",
@@ -267,8 +309,10 @@
       ],
       "time_estimation": "1h",
       "tags": [
+        "ansible",
         "automation"
       ],
+      "subtopic": "features",
       "key_points": [
         "Automate all the things!",
         "Especially regular tasks you might forget to do",
@@ -296,7 +340,7 @@
           ]
         }
       ],
-      "last_modified_at": "2021-05-04T07:40:37+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/jenkins/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "jenkins",
@@ -377,9 +421,11 @@
         }
       ],
       "tags": [
-        "jobs"
+        "jobs",
+        "ansible",
+        "git-gat"
       ],
-      "subtopic": "features",
+      "subtopic": "jobs",
       "requirements": [
         {
           "type": "internal",
@@ -399,7 +445,7 @@
           ]
         }
       ],
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "connect-to-compute-cluster",
@@ -515,9 +561,11 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
         }
       ],
-      "subtopic": "features",
+      "subtopic": "data",
       "tags": [
-        "storage"
+        "ansible",
+        "storage",
+        "git-gat"
       ],
       "requirements": [
         {
@@ -530,7 +578,7 @@
           ]
         }
       ],
-      "last_modified_at": "2021-07-09T16:20:06+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/data-library/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "data-library",
@@ -585,12 +633,14 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
+      "subtopic": "cloud",
       "tags": [
         "terraform",
         "deploying",
         "cloud"
       ],
-      "last_modified_at": "2021-11-13T12:40:45+00:00",
+      "priority": 3,
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/terraform/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "terraform",
@@ -656,8 +706,9 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/gmauro.json"
         }
       ],
-      "subtopic": "features",
+      "subtopic": "data",
       "tags": [
+        "ansible",
         "storage"
       ],
       "requirements": [
@@ -670,7 +721,7 @@
           ]
         }
       ],
-      "last_modified_at": "2021-07-06T14:27:19+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/object-store/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "object-store",
@@ -859,7 +910,11 @@
         "FTP": "File Transfer Protocol",
         "NAT": "Network Address Translation"
       },
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "tags": [
+        "data",
+        "git-gat"
+      ],
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/ftp/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "ftp",
@@ -1152,6 +1207,7 @@
       "tags": [
         "kubernetes"
       ],
+      "subtopic": "cloud",
       "follow_up_training": [
         {
           "type": "internal",
@@ -1161,7 +1217,8 @@
           ]
         }
       ],
-      "last_modified_at": "2019-07-06T09:55:58+00:00",
+      "priority": 2,
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "k8s-deploying-galaxy",
@@ -1252,7 +1309,9 @@
         }
       ],
       "tags": [
-        "deploying"
+        "ansible",
+        "deploying",
+        "git-gat"
       ],
       "subtopic": "core",
       "requirements": [
@@ -1268,7 +1327,7 @@
           "title": "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
         }
       ],
-      "last_modified_at": "2022-02-10T08:43:08+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/ansible-galaxy/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "ansible-galaxy",
@@ -1366,7 +1425,8 @@
           ]
         }
       ],
-      "last_modified_at": "2022-02-14T15:33:54+00:00",
+      "subtopic": "features",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/interactive-tools/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "interactive-tools",
@@ -1433,7 +1493,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "last_modified_at": "2021-04-06T11:50:17+00:00",
+      "subtopic": "monitoring",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/general-monitoring/slides.html",
       "topic_name": "admin",
       "tutorial_name": "general-monitoring",
@@ -1487,11 +1548,13 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "subtopic": "features",
+      "subtopic": "monitoring",
       "tags": [
-        "monitoring"
+        "monitoring",
+        "ansible",
+        "git-gat"
       ],
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/gxadmin/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "gxadmin",
@@ -1569,9 +1632,11 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "subtopic": "features",
+      "subtopic": "monitoring",
       "tags": [
-        "monitoring"
+        "ansible",
+        "monitoring",
+        "git-gat"
       ],
       "requirements": [
         {
@@ -1583,7 +1648,7 @@
           ]
         }
       ],
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/reports/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "reports",
@@ -1624,9 +1689,11 @@
       ],
       "time_estimation": "2h",
       "tags": [
-        "monitoring"
+        "ansible",
+        "monitoring",
+        "git-gat"
       ],
-      "subtopic": "features",
+      "subtopic": "monitoring",
       "key_points": [
         "Telegraf provides an easy solution to monitor servers",
         "Galaxy can send metrics to Telegraf",
@@ -1657,7 +1724,7 @@
           ]
         }
       ],
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/monitoring/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "monitoring",
@@ -1694,7 +1761,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
         }
       ],
-      "last_modified_at": "2021-07-26T14:25:22+00:00",
+      "subtopic": "cloud",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/cloudbursting/slides.html",
       "topic_name": "admin",
       "tutorial_name": "cloudbursting",
@@ -1766,9 +1834,10 @@
       ],
       "subtopic": "features",
       "tags": [
-        "tools"
+        "tools",
+        "git-gat"
       ],
-      "last_modified_at": "2022-02-28T09:48:48+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/tool-management/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "tool-management",
@@ -1814,7 +1883,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/natefoo.json"
         }
       ],
-      "last_modified_at": "2021-04-06T11:50:17+00:00",
+      "subtopic": "maintenance",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/troubleshooting/slides.html",
       "topic_name": "admin",
       "tutorial_name": "troubleshooting",
@@ -1875,7 +1945,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json"
         }
       ],
-      "last_modified_at": "2021-04-06T11:50:17+00:00",
+      "subtopic": "maintenance",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/production/slides.html",
       "topic_name": "admin",
       "tutorial_name": "production",
@@ -1953,6 +2024,7 @@
       "tags": [
         "kubernetes"
       ],
+      "subtopic": "cloud",
       "requirements": [
         {
           "type": "internal",
@@ -1962,7 +2034,8 @@
           ]
         }
       ],
-      "last_modified_at": "2019-07-06T09:55:58+00:00",
+      "priority": 1,
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/k8s-managing-galaxy/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "k8s-managing-galaxy",
@@ -2040,9 +2113,11 @@
         }
       ],
       "tags": [
-        "jobs"
+        "ansible",
+        "jobs",
+        "git-gat"
       ],
-      "subtopic": "features",
+      "subtopic": "jobs",
       "requirements": [
         {
           "type": "internal",
@@ -2054,7 +2129,7 @@
           ]
         }
       ],
-      "last_modified_at": "2021-07-06T14:23:26+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/job-destinations/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "job-destinations",
@@ -2184,7 +2259,6 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "subtopic": "features",
       "requirements": [
         {
           "type": "internal",
@@ -2200,7 +2274,12 @@
         "lang": "en-AU",
         "neural": true
       },
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "subtopic": "data",
+      "tags": [
+        "ansible",
+        "git-gat"
+      ],
+      "last_modified_at": "2022-03-02T09:29:35+00:00",
       "url": "/topics/admin/tutorials/cvmfs/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "cvmfs",
@@ -2255,7 +2334,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "last_modified_at": "2021-05-04T07:38:45+00:00",
+      "subtopic": "data",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/cvmfs-manual/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "cvmfs-manual",
@@ -2300,7 +2380,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
         }
       ],
-      "last_modified_at": "2021-04-06T11:50:17+00:00",
+      "subtopic": "data",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/reference-genomes/slides.html",
       "topic_name": "admin",
       "tutorial_name": "reference-genomes",
@@ -2385,9 +2466,11 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/gmauro.json"
         }
       ],
-      "subtopic": "features",
+      "subtopic": "jobs",
       "tags": [
-        "jobs"
+        "ansible",
+        "jobs",
+        "git-gat"
       ],
       "requirements": [
         {
@@ -2406,7 +2489,7 @@
           "type": "none"
         }
       ],
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/pulsar/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "pulsar",
@@ -2489,7 +2572,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "last_modified_at": "2021-04-06T11:50:17+00:00",
+      "subtopic": "maintenance",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/maintenance/slides.html",
       "topic_name": "admin",
       "tutorial_name": "maintenance",
@@ -2639,8 +2723,10 @@
       ],
       "subtopic": "features",
       "tags": [
+        "ansible",
         "training",
-        "jobs"
+        "jobs",
+        "git-gat"
       ],
       "requirements": [
         {
@@ -2655,7 +2741,7 @@
           ]
         }
       ],
-      "last_modified_at": "2022-02-10T12:37:34+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/tiaas/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "tiaas",
@@ -2708,7 +2794,7 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
         }
       ],
-      "subtopic": "features",
+      "subtopic": "maintenance",
       "tags": [
         "ansible"
       ],
@@ -2722,7 +2808,7 @@
           ]
         }
       ],
-      "last_modified_at": "2021-06-08T09:15:14+00:00",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/upgrading/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "upgrading",
@@ -2786,9 +2872,11 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "subtopic": "features",
+      "subtopic": "jobs",
       "tags": [
-        "jobs"
+        "jobs",
+        "ansible",
+        "git-gat"
       ],
       "requirements": [
         {
@@ -2800,7 +2888,7 @@
           ]
         }
       ],
-      "last_modified_at": "2022-02-10T12:37:37+00:00",
+      "last_modified_at": "2022-03-01T12:21:58+00:00",
       "url": "/topics/admin/tutorials/singularity/tutorial.html",
       "topic_name": "admin",
       "tutorial_name": "singularity",
@@ -2874,7 +2962,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "last_modified_at": "2021-04-06T11:50:17+00:00",
+      "subtopic": "maintenance",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/users-groups-quotas/slides.html",
       "topic_name": "admin",
       "tutorial_name": "users-groups-quotas",
@@ -2919,7 +3008,8 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
         }
       ],
-      "last_modified_at": "2021-04-06T11:50:17+00:00",
+      "subtopic": "deprecated",
+      "last_modified_at": "2022-03-01T12:21:57+00:00",
       "url": "/topics/admin/tutorials/uwsgi/slides.html",
       "topic_name": "admin",
       "tutorial_name": "uwsgi",
