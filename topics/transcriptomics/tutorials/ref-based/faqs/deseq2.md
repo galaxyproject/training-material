@@ -3,6 +3,7 @@ title:  Regarding DESeq2, in the tutorial you used the normalised count table. S
 area: DESeq2
 box_type: tip
 layout: faq
+contributors: [rahmot]
 ---
 
 this depends on what you would like to do with the table. The DESeq2 wrapper in Galaxy can output all of these, and there is a nice discussion in the [DESeq2 vignette](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#count-data-transformations) about this topic.

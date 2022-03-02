@@ -15,8 +15,9 @@ contributors:
   - natefoo
   - hexylena
   - gmauro
-subtopic: features
+subtopic: data
 tags:
+  - ansible
   - storage
 requirements:
  - type: "internal"

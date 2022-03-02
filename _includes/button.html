@@ -1,0 +1,14 @@
+<!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+{% assign buttonsize = include.buttonsize | default: "medium" %}
+{% assign buttoncolour = include.colour | default: "yellow" %}
+
+<a href="{% if include.link contains 'https' %}{{include.link}}{% else %}{{include.link | prepend: site.baseurl }}{% endif %}" class="btn {% unless include.square==false%}btn-square-{{buttonsize}}{% endunless %} btn-{{buttoncolour}}"><div>{{include.label}}</div></a>

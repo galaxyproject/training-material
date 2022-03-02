@@ -3,6 +3,7 @@ title: Opening the workflow editor
 area: workflows
 box_type: tip
 layout: faq
+contributors: [pvanheus,shiltemann,annefou,nsoranzo,hexylena]
 ---
 
 1. Click on the name of the imported workflow

@@ -20,6 +20,8 @@ contributors:
   - hexylena
   - shiltemann
 subtopic: core
+tags:
+  - ansible
 
 ---
 

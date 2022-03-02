@@ -1,657 +1,756 @@
 {
-  "a_galaxy_workflow": "true",
-  "annotation": "RNA-seq genes to pathways",
-  "format-version": "0.1",
-  "name": "RNA Seq Genes To Pathways",
-  "steps": {
-    "0": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 0,
-      "input_connections": {},
-      "inputs": [
-        {
-          "description": "",
-          "name": "seqdata"
+    "a_galaxy_workflow": "true",
+    "annotation": "RNA-seq genes to pathways",
+    "format-version": "0.1",
+    "name": "RNA Seq Genes To Pathways (imported from uploaded file)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "seqdata"
+                }
+            ],
+            "label": "seqdata",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 376.9375,
+                "height": 61.78125,
+                "left": 164.984375,
+                "right": 364.984375,
+                "top": 315.15625,
+                "width": 200,
+                "x": 164.984375,
+                "y": 315.15625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "530892fe-96db-4ac9-86da-57adf9dc569d",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "factordata"
+                }
+            ],
+            "label": "factordata",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 466.96875,
+                "height": 61.78125,
+                "left": 164.984375,
+                "right": 364.984375,
+                "top": 405.1875,
+                "width": 200,
+                "x": 164.984375,
+                "y": 405.1875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a7dfbd15-e384-4bbb-a30f-a8ff03b07784",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "DE table"
+                }
+            ],
+            "label": "DE table",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 556.984375,
+                "height": 61.78125,
+                "left": 164.984375,
+                "right": 364.984375,
+                "top": 495.203125,
+                "width": 200,
+                "x": 164.984375,
+                "y": 495.203125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "e3e247b3-de91-4ae4-af20-41fe85400e05",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "mouse_hallmark_sets"
+                }
+            ],
+            "label": "mouse_hallmark_sets",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 667.421875,
+                "height": 82.171875,
+                "left": 164.984375,
+                "right": 364.984375,
+                "top": 585.25,
+                "width": 200,
+                "x": 164.984375,
+                "y": 585.25
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "651a815a-cadf-4bdf-8d6e-d08379ed4684",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "limma_filtered_counts"
+                }
+            ],
+            "label": "limma_filtered_counts",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 796.453125,
+                "height": 82.171875,
+                "left": 164.984375,
+                "right": 364.984375,
+                "top": 714.28125,
+                "width": 200,
+                "x": 164.984375,
+                "y": 714.28125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9347a180-d878-4afe-95cb-9b6cfd383448",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 408.328125,
+                "height": 93.171875,
+                "left": 477.015625,
+                "right": 677.015625,
+                "top": 315.15625,
+                "width": 200,
+                "x": 477.015625,
+                "y": 315.15625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
+            "tool_shed_repository": {
+                "changeset_revision": "02026300aa45",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": \"false\", \"cond\": \"bool(c8<0.01) and bool(abs(c4)>0.58)\", \"header_lines_conditional\": {\"header_lines_select\": \"no\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"round\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.6",
+            "type": "tool",
+            "uuid": "20efeeff-6096-48d2-9f1f-e3e776112b13",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "52fae575-f107-4657-aec1-1f2b3d71ac95"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 534.359375,
+                "height": 93.171875,
+                "left": 477.015625,
+                "right": 677.015625,
+                "top": 441.1875,
+                "width": 200,
+                "x": 477.015625,
+                "y": 441.1875
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"chromInfo\": \"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\", \"columnList\": \"c1,c6\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input|__identifier__\": \"limma-voom_luminalpregnant-luminallactate\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "a301610d-4e49-4dd6-b603-482674c9ec7f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "b9d13636-4ef9-45a6-9563-b91005fa9d57"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 680.765625,
+                "height": 113.5625,
+                "left": 477.015625,
+                "right": 677.015625,
+                "top": 567.203125,
+                "width": 200,
+                "x": 477.015625,
+                "y": 567.203125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"2,3\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "74f84dac-988e-436e-80cf-e45720a1ca6d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "8cf43669-dd17-42be-bd0d-f1a8ca299db6"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 800.8125,
+                "height": 113.5625,
+                "left": 477.015625,
+                "right": 677.015625,
+                "top": 687.25,
+                "width": 200,
+                "x": 477.015625,
+                "y": 687.25
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"1,2\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "e5c8206a-72d0-4faa-a19e-8d7ac0190316",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "3ce059c1-68f7-49c1-a1fd-fd7d6e1c0bc8"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "join1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input1": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Join two Datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 459.109375,
+                "height": 143.953125,
+                "left": 734.046875,
+                "right": 934.046875,
+                "top": 315.15625,
+                "width": 200,
+                "x": 734.046875,
+                "y": 315.15625
+            },
+            "post_job_actions": {},
+            "tool_id": "join1",
+            "tool_state": "{\"chromInfo\": \"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\", \"field1\": \"1\", \"field2\": \"1\", \"fill_empty_columns\": {\"fill_empty_columns_switch\": \"no_fill\", \"__current_case__\": 0}, \"header\": \"\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input1|__identifier__\": \"limma-voom_luminalpregnant-luminallactate\", \"input2\": {\"__class__\": \"ConnectedValue\"}, \"partial\": \"\", \"unmatched\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.3",
+            "type": "tool",
+            "uuid": "2f81fad6-b41c-4c4b-b803-51a5ccd1c047",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "49d52f1a-b5ce-4cde-a141-eb684154f8ad"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 562.359375,
+                "height": 93.171875,
+                "left": 734.046875,
+                "right": 934.046875,
+                "top": 469.1875,
+                "width": 200,
+                "x": 734.046875,
+                "y": 469.1875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\", \"header\": \"1\", \"ignore_case\": \"false\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"infile|__identifier__\": \"limma-voom_luminalpregnant-luminallactate\", \"sortkeys\": [{\"__index__\": 0, \"column\": \"2\", \"order\": \"r\", \"style\": \"n\"}], \"unique\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "ce9e6449-48c9-4857-b20a-e82f0a554685",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "304a128c-3da0-4a25-bd5b-52da23d9f850"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/egsea/egsea/1.20.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "genes": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "input|counts": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "input|fact|finfo": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "EGSEA",
+            "outputs": [
+                {
+                    "name": "outTables",
+                    "type": "input"
+                },
+                {
+                    "name": "outReport",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "bottom": 820.34375,
+                "height": 225.125,
+                "left": 734.046875,
+                "right": 934.046875,
+                "top": 595.21875,
+                "width": 200,
+                "x": 734.046875,
+                "y": 595.21875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/egsea/egsea/1.20.0",
+            "tool_shed_repository": {
+                "changeset_revision": "fba1660fb717",
+                "name": "egsea",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"display_top\": \"5\", \"min_size\": \"2\", \"fdr_cutoff\": \"0.05\", \"combine_method\": \"wilkinson\", \"sort_method\": \"med.rank\", \"rscriptOpt\": \"false\", \"rdaOpt\": \"false\"}, \"base_methods\": [\"camera\", \"safe\", \"gage\", \"zscore\", \"gsva\", \"globaltest\", \"ora\", \"ssgsea\", \"padog\", \"plage\", \"fry\"], \"chromInfo\": \"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\", \"genes\": {\"__class__\": \"ConnectedValue\"}, \"gsdb\": {\"gsdb_gsets\": null}, \"input\": {\"format\": \"matrix\", \"__current_case__\": 1, \"counts\": {\"__class__\": \"ConnectedValue\"}, \"fact\": {\"ffile\": \"yes\", \"__current_case__\": 0, \"finfo\": {\"__class__\": \"ConnectedValue\"}}}, \"keggdb\": {\"keggdb_gsets\": [\"keggmet\", \"keggsig\"], \"kegg_updated\": \"false\"}, \"msigdb\": {\"msigdb_gsets\": [\"h\"]}, \"non_commercial_use\": \"true\", \"rep_contrast\": [{\"__index__\": 0, \"contrast\": \"basalpregnant-basallactate\"}, {\"__index__\": 1, \"contrast\": \"luminalpregnant-luminallactate\"}], \"species\": \"mouse\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.20.0",
+            "type": "tool",
+            "uuid": "e9df8569-f438-4144-9f3a-ebb569ec2047",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outTables",
+                    "uuid": "778284eb-56d6-4079-badb-951d5714c8f8"
+                },
+                {
+                    "label": null,
+                    "output_name": "outReport",
+                    "uuid": "86db0251-4d15-45b7-b471-2af7def64d39"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cut",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 408.328125,
+                "height": 93.171875,
+                "left": 1003.09375,
+                "right": 1203.09375,
+                "top": 315.15625,
+                "width": 200,
+                "x": 1003.09375,
+                "y": 315.15625
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c1,c10\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "af9206ae-98cc-4432-a81e-ee39bb2c2a8a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "fd382af4-5a99-4264-af9a-f8fdc6c134b7"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cut",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 534.359375,
+                "height": 93.171875,
+                "left": 1003.09375,
+                "right": 1203.09375,
+                "top": 441.1875,
+                "width": 200,
+                "x": 1003.09375,
+                "y": 441.1875
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c1,c12\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "4a72bc30-2d4e-4480-875b-507b2a7274b4",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "655e9412-ca8c-4b0f-9dcc-fa8da9126e90"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fgsea/fgsea/1.8.0+galaxy1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "rnk_file": {
+                    "id": 10,
+                    "output_name": "outfile"
+                },
+                "sets_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "fgsea",
+            "outputs": [
+                {
+                    "name": "out_tab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "out_pdf",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 782.328125,
+                "height": 215.125,
+                "left": 1003.09375,
+                "right": 1203.09375,
+                "top": 567.203125,
+                "width": 200,
+                "x": 1003.09375,
+                "y": 567.203125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fgsea/fgsea/1.8.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "17eb1e0d711f",
+                "name": "fgsea",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\", \"header\": \"true\", \"max_size\": \"500\", \"min_size\": \"15\", \"n_perm\": \"1000\", \"plot_opt\": \"true\", \"rda_opt\": \"false\", \"rnk_file\": {\"__class__\": \"ConnectedValue\"}, \"rnk_file|__identifier__\": \"limma-voom_luminalpregnant-luminallactate\", \"sets_file\": {\"__class__\": \"ConnectedValue\"}, \"top_num\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.8.0+galaxy1",
+            "type": "tool",
+            "uuid": "8e1c5077-edf1-4dcf-9a07-3b521c49a76f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_pdf",
+                    "uuid": "d8219c05-bd0a-43e5-8f5c-f4bb77a22863"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_tab",
+                    "uuid": "8b684bd0-a210-42e8-8c32-16a143e20086"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "dge_file": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                },
+                "length_file": {
+                    "id": 13,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "goseq",
+            "outputs": [
+                {
+                    "name": "wallenius_tab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "top_plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 611.84375,
+                "height": 296.6875,
+                "left": 1258.109375,
+                "right": 1458.109375,
+                "top": 315.15625,
+                "width": 200,
+                "x": 1258.109375,
+                "y": 315.15625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ef2ad746b589",
+                "name": "goseq",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"p_adj_method\": \"BH\", \"use_genes_without_cat\": \"false\"}, \"categorySource\": {\"catSource\": \"getgo\", \"__current_case__\": 0, \"genome\": \"mm10\", \"gene_id\": \"knownGene\", \"fetchcats\": [\"GO:BP\"]}, \"chromInfo\": \"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\", \"dge_file\": {\"__class__\": \"ConnectedValue\"}, \"dge_file|__identifier__\": \"limma-voom_luminalpregnant-luminallactate\", \"length_file\": {\"__class__\": \"ConnectedValue\"}, \"length_file|__identifier__\": \"limma-voom_luminalpregnant-luminallactate\", \"methods\": {\"wallenius\": \"true\", \"hypergeometric\": \"false\", \"repcnt\": \"0\"}, \"out\": {\"topgo_plot\": \"true\", \"make_plots\": \"false\", \"cat_genes\": \"false\", \"rdata_out\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.44.0+galaxy0",
+            "type": "tool",
+            "uuid": "cddd834a-87f6-470a-b4cd-3c7af7f75e50",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "top_plot",
+                    "uuid": "6aacfcb1-f009-4fc9-8607-b3725488fb1d"
+                },
+                {
+                    "label": null,
+                    "output_name": "wallenius_tab",
+                    "uuid": "a473f119-2db7-451f-8ad5-3700df2ae19b"
+                }
+            ]
         }
-      ],
-      "label": "seqdata",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 199.9921875,
-        "top": 199.9921875
-      },
-      "tool_id": null,
-      "tool_state": "{\"name\": \"seqdata\"}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "530892fe-96db-4ac9-86da-57adf9dc569d",
-      "workflow_outputs": []
     },
-    "1": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 1,
-      "input_connections": {},
-      "inputs": [],
-      "label": "factordata",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 199.9921875,
-        "top": 290.015625
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "a7dfbd15-e384-4bbb-a30f-a8ff03b07784",
-      "workflow_outputs": []
-    },
-    "10": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-      "errors": null,
-      "id": 10,
-      "input_connections": {
-        "infile": {
-          "id": 6,
-          "output_name": "out_file1"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Sort",
-          "name": "infile"
-        }
-      ],
-      "label": null,
-      "name": "Sort",
-      "outputs": [
-        {
-          "name": "outfile",
-          "type": "input"
-        }
-      ],
-      "position": {
-        "left": 769.0546875,
-        "top": 354.0234375
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-      "tool_shed_repository": {
-        "changeset_revision": "74a8bef53a00",
-        "name": "text_processing",
-        "owner": "bgruening",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"sortkeys\": \"[{\\\"__index__\\\": 0, \\\"column\\\": \\\"2\\\", \\\"order\\\": \\\"r\\\", \\\"style\\\": \\\"n\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"infile|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"1\\\"\", \"unique\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
-      "tool_version": "1.1.1",
-      "type": "tool",
-      "uuid": "ce9e6449-48c9-4857-b20a-e82f0a554685",
-      "workflow_outputs": []
-    },
-    "11": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/egsea/egsea/1.6.0.1",
-      "errors": null,
-      "id": 11,
-      "input_connections": {
-        "genes": {
-          "id": 8,
-          "output_name": "output"
-        },
-        "input|counts": {
-          "id": 7,
-          "output_name": "output"
-        },
-        "input|fact|finfo": {
-          "id": 1,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool EGSEA",
-          "name": "genes"
-        },
-        {
-          "description": "runtime parameter for tool EGSEA",
-          "name": "input"
-        }
-      ],
-      "label": null,
-      "name": "EGSEA",
-      "outputs": [
-        {
-          "name": "outTables",
-          "type": "input"
-        },
-        {
-          "name": "outReport",
-          "type": "html"
-        },
-        {
-          "name": "outRscript",
-          "type": "txt"
-        },
-        {
-          "name": "outRdata",
-          "type": "rdata"
-        }
-      ],
-      "position": {
-        "left": 769.0546875,
-        "top": 480.046875
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/egsea/egsea/1.6.0.1",
-      "tool_shed_repository": {
-        "changeset_revision": "73281fbdf6c1",
-        "name": "egsea",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"msigdb\": \"{\\\"msigdb_gsets\\\": [\\\"h\\\"]}\", \"__page__\": null, \"gsdb\": \"{\\\"gsdb_gsets\\\": null}\", \"keggdb\": \"{\\\"kegg_updated\\\": \\\"false\\\", \\\"keggdb_gsets\\\": [\\\"keggmet\\\", \\\"keggsig\\\"]}\", \"__rerun_remap_job_id__\": null, \"genes\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"base_methods\": \"[\\\"camera\\\", \\\"safe\\\", \\\"gage\\\", \\\"zscore\\\", \\\"gsva\\\", \\\"globaltest\\\", \\\"ora\\\", \\\"ssgsea\\\", \\\"padog\\\", \\\"plage\\\", \\\"fry\\\"]\", \"non_commercial_use\": \"\\\"true\\\"\", \"rep_contrast\": \"[{\\\"__index__\\\": 0, \\\"contrast\\\": \\\"basalpregnant-basallactate\\\"}, {\\\"__index__\\\": 1, \\\"contrast\\\": \\\"luminalpregnant-luminallactate\\\"}]\", \"input\": \"{\\\"__current_case__\\\": 1, \\\"counts\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"fact\\\": {\\\"__current_case__\\\": 0, \\\"ffile\\\": \\\"yes\\\", \\\"finfo\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, \\\"format\\\": \\\"matrix\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"species\": \"\\\"mouse\\\"\", \"advanced\": \"{\\\"combine_method\\\": \\\"wilkinson\\\", \\\"display_top\\\": \\\"5\\\", \\\"fdr_cutoff\\\": \\\"0.05\\\", \\\"min_size\\\": \\\"2\\\", \\\"rdaOpt\\\": \\\"false\\\", \\\"rscriptOpt\\\": \\\"false\\\", \\\"sort_method\\\": \\\"med.rank\\\"}\"}",
-      "tool_version": "1.6.0.1",
-      "type": "tool",
-      "uuid": "e9df8569-f438-4144-9f3a-ebb569ec2047",
-      "workflow_outputs": []
-    },
-    "12": {
-      "annotation": "",
-      "content_id": "Cut1",
-      "errors": null,
-      "id": 12,
-      "input_connections": {
-        "input": {
-          "id": 9,
-          "output_name": "out_file1"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cut",
-          "name": "input"
-        }
-      ],
-      "label": null,
-      "name": "Cut",
-      "outputs": [
-        {
-          "name": "out_file1",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 1038.09375,
-        "top": 199.9921875
-      },
-      "post_job_actions": {},
-      "tool_id": "Cut1",
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"columnList\": \"\\\"c1,c9\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"input|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\"}",
-      "tool_version": "1.0.2",
-      "type": "tool",
-      "uuid": "af9206ae-98cc-4432-a81e-ee39bb2c2a8a",
-      "workflow_outputs": []
-    },
-    "13": {
-      "annotation": "",
-      "content_id": "Cut1",
-      "errors": null,
-      "id": 13,
-      "input_connections": {
-        "input": {
-          "id": 9,
-          "output_name": "out_file1"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cut",
-          "name": "input"
-        }
-      ],
-      "label": null,
-      "name": "Cut",
-      "outputs": [
-        {
-          "name": "out_file1",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 1038.09375,
-        "top": 326.015625
-      },
-      "post_job_actions": {},
-      "tool_id": "Cut1",
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"columnList\": \"\\\"c1,c11\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"input|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\"}",
-      "tool_version": "1.0.2",
-      "type": "tool",
-      "uuid": "4a72bc30-2d4e-4480-875b-507b2a7274b4",
-      "workflow_outputs": []
-    },
-    "14": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fgsea/fgsea/1.6.0",
-      "errors": null,
-      "id": 14,
-      "input_connections": {
-        "rnk_file": {
-          "id": 10,
-          "output_name": "outfile"
-        },
-        "sets_file": {
-          "id": 3,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool fgsea",
-          "name": "rnk_file"
-        },
-        {
-          "description": "runtime parameter for tool fgsea",
-          "name": "sets_file"
-        }
-      ],
-      "label": null,
-      "name": "fgsea",
-      "outputs": [
-        {
-          "name": "out_tab",
-          "type": "tabular"
-        },
-        {
-          "name": "out_pdf",
-          "type": "pdf"
-        },
-        {
-          "name": "out_rdata",
-          "type": "rdata"
-        }
-      ],
-      "position": {
-        "left": 1038.09375,
-        "top": 452.0390625
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fgsea/fgsea/1.6.0",
-      "tool_shed_repository": {
-        "changeset_revision": "9bb7943b5263",
-        "name": "fgsea",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"rnk_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"rda_opt\": \"\\\"false\\\"\", \"rnk_file|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\", \"min_size\": \"\\\"15\\\"\", \"header\": \"\\\"true\\\"\", \"top_num\": \"\\\"10\\\"\", \"n_perm\": \"\\\"1000\\\"\", \"plot_opt\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"__rerun_remap_job_id__\": null, \"max_size\": \"\\\"500\\\"\", \"sets_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
-      "tool_version": "1.6.0",
-      "type": "tool",
-      "uuid": "8e1c5077-edf1-4dcf-9a07-3b521c49a76f",
-      "workflow_outputs": []
-    },
-    "15": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.30.1",
-      "errors": null,
-      "id": 15,
-      "input_connections": {
-        "dge_file": {
-          "id": 12,
-          "output_name": "out_file1"
-        },
-        "length_file": {
-          "id": 13,
-          "output_name": "out_file1"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool goseq",
-          "name": "length_file"
-        },
-        {
-          "description": "runtime parameter for tool goseq",
-          "name": "dge_file"
-        }
-      ],
-      "label": null,
-      "name": "goseq",
-      "outputs": [
-        {
-          "name": "wallenius_tab",
-          "type": "tabular"
-        },
-        {
-          "name": "sampling_tab",
-          "type": "tabular"
-        },
-        {
-          "name": "nobias_tab",
-          "type": "tabular"
-        },
-        {
-          "name": "length_bias_plot",
-          "type": "pdf"
-        },
-        {
-          "name": "sample_vs_wallenius_plot",
-          "type": "pdf"
-        },
-        {
-          "name": "rdata",
-          "type": "rdata"
-        },
-        {
-          "name": "top_plot",
-          "type": "pdf"
-        }
-      ],
-      "position": {
-        "left": 1293.1171875,
-        "top": 199.9921875
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.30.1",
-      "tool_shed_repository": {
-        "changeset_revision": "ae39895af5fe",
-        "name": "goseq",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"adv\": \"{\\\"p_adj_method\\\": \\\"BH\\\", \\\"use_genes_without_cat\\\": \\\"false\\\"}\", \"categorySource\": \"{\\\"__current_case__\\\": 0, \\\"catSource\\\": \\\"getgo\\\", \\\"fetchcats\\\": [\\\"GO:BP\\\"], \\\"gene_id\\\": \\\"knownGene\\\", \\\"genome\\\": \\\"mm10\\\"}\", \"methods\": \"{\\\"hypergeometric\\\": \\\"false\\\", \\\"repcnt\\\": \\\"0\\\", \\\"wallenius\\\": \\\"true\\\"}\", \"dge_file|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\", \"__page__\": null, \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"__rerun_remap_job_id__\": null, \"length_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"length_file|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\", \"dge_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"out\": \"{\\\"make_plots\\\": \\\"false\\\", \\\"rdata_out\\\": \\\"false\\\", \\\"topgo_plot\\\": \\\"true\\\"}\"}",
-      "tool_version": "1.30.1",
-      "type": "tool",
-      "uuid": "cddd834a-87f6-470a-b4cd-3c7af7f75e50",
-      "workflow_outputs": []
-    },
-    "2": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 2,
-      "input_connections": {},
-      "inputs": [],
-      "label": "DE table",
-      "name": "Input dataset collection",
-      "outputs": [],
-      "position": {
-        "left": 199.9921875,
-        "top": 380.0390625
-      },
-      "tool_id": null,
-      "tool_state": "{\"collection_type\": \"list\"}",
-      "tool_version": null,
-      "type": "data_collection_input",
-      "uuid": "e3e247b3-de91-4ae4-af20-41fe85400e05",
-      "workflow_outputs": []
-    },
-    "3": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 3,
-      "input_connections": {},
-      "inputs": [
-        {
-          "description": "",
-          "name": "mouse_hallmark_sets"
-        }
-      ],
-      "label": "mouse_hallmark_sets",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 199.9921875,
-        "top": 470.0859375
-      },
-      "tool_id": null,
-      "tool_state": "{\"name\": \"mouse_hallmark_sets\"}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "651a815a-cadf-4bdf-8d6e-d08379ed4684",
-      "workflow_outputs": []
-    },
-    "4": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 4,
-      "input_connections": {},
-      "inputs": [],
-      "label": "limma_filtered_counts",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 199.9921875,
-        "top": 599.109375
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "9347a180-d878-4afe-95cb-9b6cfd383448",
-      "workflow_outputs": []
-    },
-    "5": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.1.0",
-      "errors": null,
-      "id": 5,
-      "input_connections": {
-        "input": {
-          "id": 2,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Compute",
-          "name": "input"
-        }
-      ],
-      "label": null,
-      "name": "Compute",
-      "outputs": [
-        {
-          "name": "out_file1",
-          "type": "input"
-        }
-      ],
-      "position": {
-        "left": 512.015625,
-        "top": 199.9921875
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.1.0",
-      "tool_shed_repository": {
-        "changeset_revision": "626658afe4cb",
-        "name": "column_maker",
-        "owner": "devteam",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"round\": \"\\\"no\\\"\", \"cond\": \"\\\"bool(c8<0.01) and bool(abs(c4)>0.58)\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"input|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\"}",
-      "tool_version": "1.1.0",
-      "type": "tool",
-      "uuid": "20efeeff-6096-48d2-9f1f-e3e776112b13",
-      "workflow_outputs": []
-    },
-    "6": {
-      "annotation": "",
-      "content_id": "Cut1",
-      "errors": null,
-      "id": 6,
-      "input_connections": {
-        "input": {
-          "id": 2,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cut",
-          "name": "input"
-        }
-      ],
-      "label": null,
-      "name": "Cut",
-      "outputs": [
-        {
-          "name": "out_file1",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 512.015625,
-        "top": 326.015625
-      },
-      "post_job_actions": {},
-      "tool_id": "Cut1",
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"columnList\": \"\\\"c1,c6\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"input|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\"}",
-      "tool_version": "1.0.2",
-      "type": "tool",
-      "uuid": "a301610d-4e49-4dd6-b603-482674c9ec7f",
-      "workflow_outputs": []
-    },
-    "7": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-      "errors": null,
-      "id": 7,
-      "input_connections": {
-        "input": {
-          "id": 4,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cut",
-          "name": "input"
-        }
-      ],
-      "label": null,
-      "name": "Cut",
-      "outputs": [
-        {
-          "name": "output",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 512.015625,
-        "top": 452.0390625
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-      "tool_shed_repository": {
-        "changeset_revision": "74a8bef53a00",
-        "name": "text_processing",
-        "owner": "bgruening",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cut_type_options\": \"{\\\"__current_case__\\\": 0, \\\"cut_element\\\": \\\"-f\\\", \\\"list\\\": \\\"2,3\\\"}\", \"delimiter\": \"\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"complement\": \"\\\"--complement\\\"\"}",
-      "tool_version": "1.1.0",
-      "type": "tool",
-      "uuid": "74f84dac-988e-436e-80cf-e45720a1ca6d",
-      "workflow_outputs": []
-    },
-    "8": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-      "errors": null,
-      "id": 8,
-      "input_connections": {
-        "input": {
-          "id": 4,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cut",
-          "name": "input"
-        }
-      ],
-      "label": null,
-      "name": "Cut",
-      "outputs": [
-        {
-          "name": "output",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 512.015625,
-        "top": 572.0859375
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-      "tool_shed_repository": {
-        "changeset_revision": "74a8bef53a00",
-        "name": "text_processing",
-        "owner": "bgruening",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cut_type_options\": \"{\\\"__current_case__\\\": 0, \\\"cut_element\\\": \\\"-f\\\", \\\"list\\\": \\\"1,2\\\"}\", \"delimiter\": \"\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"complement\": \"\\\"\\\"\"}",
-      "tool_version": "1.1.0",
-      "type": "tool",
-      "uuid": "e5c8206a-72d0-4faa-a19e-8d7ac0190316",
-      "workflow_outputs": []
-    },
-    "9": {
-      "annotation": "",
-      "content_id": "join1",
-      "errors": null,
-      "id": 9,
-      "input_connections": {
-        "input1": {
-          "id": 5,
-          "output_name": "out_file1"
-        },
-        "input2": {
-          "id": 0,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Join two Datasets",
-          "name": "input2"
-        },
-        {
-          "description": "runtime parameter for tool Join two Datasets",
-          "name": "input1"
-        }
-      ],
-      "label": null,
-      "name": "Join two Datasets",
-      "outputs": [
-        {
-          "name": "out_file1",
-          "type": "input"
-        }
-      ],
-      "position": {
-        "left": 769.0546875,
-        "top": 199.9921875
-      },
-      "post_job_actions": {},
-      "tool_id": "join1",
-      "tool_state": "{\"input2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"field1\": \"\\\"1\\\"\", \"partial\": \"\\\"\\\"\", \"field2\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"__rerun_remap_job_id__\": null, \"fill_empty_columns\": \"{\\\"__current_case__\\\": 0, \\\"fill_empty_columns_switch\\\": \\\"no_fill\\\"}\", \"unmatched\": \"\\\"\\\"\", \"header\": \"\\\"\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1|__identifier__\": \"\\\"limma-voom_luminalpregnant-luminallactate\\\"\"}",
-      "tool_version": "2.1.1",
-      "type": "tool",
-      "uuid": "2f81fad6-b41c-4c4b-b803-51a5ccd1c047",
-      "workflow_outputs": []
-    }
-  },
-  "tags": [
-    "transcriptomics"
-  ],
-  "uuid": "0a8ac077-a1ef-4b4d-b760-654972683023",
-  "version": 3
+    "tags": [
+        "transcriptomics"
+    ],
+    "uuid": "43067417-9c85-4aa0-b2e8-2fbec982eb11",
+    "version": 5
 }

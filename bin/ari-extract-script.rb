@@ -2,6 +2,10 @@
 require 'yaml'
 require 'shellwords'
 require 'json'
+require 'find'
+require 'bibtex'
+require 'citeproc/ruby'
+require 'csl/styles'
 
 fn = ARGV[0]
 metadata = YAML.load_file(fn)
@@ -38,6 +42,29 @@ APPROVED_VOICES = {
     { "id" => "Lupe"     , "lang" => "es-US" , "neural" => true }
   ]
 }
+
+# This is copied directly from the plugins, TODO: make into a module.
+global_bib = BibTeX::Bibliography.new
+bib_paths = [Find.find('./topics'), Find.find('./faqs')].lazy.flat_map(&:lazy)
+bib_paths.each{|path|
+  if FileTest.directory?(path)
+    if File.basename(path).start_with?('.')
+      Find.prune       # Don't look any further into this directory.
+    else
+      next
+    end
+  else
+    if path =~ /bib$/ then
+      for x in BibTeX.open(path)
+        x = x.convert_latex
+        global_bib << x
+      end
+    end
+  end
+}
+cp = CiteProc::Processor.new format: 'text', locale: 'en'
+cp.import global_bib.to_citeproc
+
 
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
@@ -147,6 +174,17 @@ blocks = blocks.map{ |block|
       line += '.'
     end
 
+    line
+  }
+  script_lines = script_lines.map { |line|
+    line.gsub!(/{%\s*cite ([^}]*)\s*%}/){ |match|
+      # Strip off the {% %} first, whitespace, and then remove cite at the
+      # start and restrip again.
+      value = match[2..-3].strip[4..-1].strip
+      # Render the citation, the :text format includes ( ) on both sides which
+      # we strip off.
+      cp.render(:citation, id: value)[1..-2]
+    }
     line
   }
   script_lines
