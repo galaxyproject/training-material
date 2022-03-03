@@ -157,7 +157,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
 ## Trim adapters
 
-We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) and its linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`.
+We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}). To trim, we'll use the 5' adapter sequence. We don't need to trim the 3' adapter as MAGeCK will only use the first 20bp from each read. It determines the number of bases to use automatically from the length of the sequences in the library file, in our case 20bp, or we can specify the sgRNA length.
 
 
 > ### {% icon details %} Adapter trimming
@@ -166,10 +166,7 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >
 > ![Adapters MAGeCK can trim](../../images/crispr-screen/adapter_sequences_mageck.png "Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is higlighted in blue with the adapter sequences directly adjacent on the right and left. MAGeCK count uses the first 20 bases of each read to map so the sequence after the guide is less important to trim exactly.")
 >
-> For this dataset, as the adapters are not at the same position in each read, we need to trim the adapters before running MAGeCK count. To trim, we could run Cutadapt twice, first trimming the 5' adapter sequence, then trimming the 3' adapter. Alternatively, we can run Cutadapt just once using the linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`, as discussed [here](https://github.com/marcelm/cutadapt/issues/261#issue-261019127).
->
-> Using a 5' linked adapter with Cutadapt requires both adapters to be present in the read, which is what we expect here, in order to trim.
-> As we know the guide sequence is 20bp, we will only keep sequences that are 20bp after trimming.
+> For this dataset, as the adapters are not at the same position in each read, we need to trim the adapters before running MAGeCK count.
 {: .details}
 
 
@@ -182,52 +179,38 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >            - In *"5' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 5' (Front) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 5' adapter sequence"*: `TTGTGGAAAGGACGAAACACCG...GTTTTAGAGCTAGAAATAGCAAG`
->    - In *"Filter Options"*:
->        - *"Minimum length (R1)"*: `20`
->        - *"Maximum length (R1)"*: `20`
+>                        - *"Enter custom 5' adapter sequence"*: `TTGTGGAAAGGACGAAACACCG`
 >    - *"Outputs selector"*: 
 >        - *"Report"*: tick
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the Cutadapt reports:
->     - In *"Results"*
->       - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
->         - {% icon param-collection %} *"Output of Cutadapt"*: `Report` files (output of **Cutadapt**)
->
-> 3. Add a tag (`#cutadapt-report`) to the MultiQC webpage to differentiate this report from the previous (FastQC) one
->
-> 4. Inspect the MultiQC report
+> 2. Inspect the Cutadapt report
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > For sample T8-APR-246:
 >    >
->    > 1. What % of reads were filtered after trimming for being too short (< 20bp)?
->    > 2. What % of reads were filtered for being too long (> 20bp)?
->    > 3. What % of reads remain after trimming and filtering?
+>    > 1. What % of reads contained adapter?
+>    > 2. What % of reads remain after trimming?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. 3.6%
->    > > 2. 6.0%
->    > > 3. 90.5%
+>    > > 1. 99.6%
+>    > > 2. 100%
 >    > >
->    > >
->    > > ![](../../images/crispr-screen/cutadapt_filtered_reads_plot.png)
 >    > {: .solution}
 >    >
 >    {: .question}
 >
->    > ### {% icon details %} Dip in trimmed sequences plots
->    >
->    > In the 5' trimmed sequences plot, we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) ([see sequencing protocol](https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf)). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. There are a few reads trimmed which may have arisen from errors acquired during sequencing or sample generation.
->    > The 3' trimmed sequence shows a similar dip at 28bp as that is the read length that corresponds to the nonexistent 5bp stagger: 75bp (read length) - (5bp (stagger) + 22bp (adapter) + 20bp (sgRNA)) = 28bp.
->    >
->    > ![](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
->    >
->    {: .details}
->
 {: .hands_on}
+
+
+> ### {% icon details %} Trimmed sequences
+>
+> If you want to take a closer look at what has been trimmed, you can use MultiQC to summarise the Cutadapt output. MultiQC will produce a 5' trimmed sequences plot, where you can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) ([see sequencing protocol](https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf)). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. There are a few reads trimmed which may have arisen from errors acquired during sequencing or sample generation.
+>
+> ![](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
+>
+{: .details}
 
 
 > ### {% icon hands_on %} Exercise: Quality control of the polished datasets
@@ -235,11 +218,11 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >
 >    > ### {% icon question %} Questions
 >    >
->    > How did read trimming affect the quality reports?
+>    > How did read trimming affect the Adapter Content plot?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > In the Adapter Content section we now don't have any adapters detected. We can see in the Per Base Sequence Quality plot (and Sequence Length plot) that all sequences are 20bp.
+>    > > In the Adapter Content section we now don't have any 5' adapter detected. The first 20bp of the reads, what MAGeCK will use for our dataset, has no adapter detected.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -673,9 +656,8 @@ Similar to what we did with the MAGeCK test output, we can create a volcano plot
 > 1. Create a volcano plot to visualise the result for APR vs T0. Use the gene summary file columns `Gene` `APR|beta` `APR|wald-p-value`  `APR|wald-fdr`
 >    - {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5) %} to create a volcano plot
 >        - {% icon param-file %} *"Specify an input file"*: the MAGeCK mle Gene Summary file
->        - {% icon param-file %} *"File has header?"*: `Yes`
 >        - {% icon param-select %} *"FDR (adjusted P value)"*: `Column 14`
->        - {% icon param-select %} *"P value (raw)"*: `Column 12`
+>        - {% icon param-select %} *"P value (raw)"*: `Column 13`
 >        - {% icon param-select %} *"Log Fold Change"*: `Column 9`
 >        - {% icon param-select %} *"Labels"*: `Column 1`
 >        - {% icon param-select %} *"Points to label"*: `Significant`
