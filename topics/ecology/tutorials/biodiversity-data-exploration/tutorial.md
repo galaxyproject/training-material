@@ -73,7 +73,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 >
 > 4. Convert datatype CSV to tabular
 >
->    {% include faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to tabular" %}
 >
 {: .hands_on}
 
