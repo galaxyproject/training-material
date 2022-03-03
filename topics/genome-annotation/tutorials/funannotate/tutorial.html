@@ -690,26 +690,6 @@
         
     
         
-        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
-            Galaxy Africa
-        </a>
-        
-    
-        
-        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
-            Galaxy India
-        </a>
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
@@ -758,34 +738,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
-            Street Science
-        </a>
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
-            UseGalaxy.eu
-        </a>
-        
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
             UseGalaxy.fr
         </a>
@@ -807,8 +759,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -817,7 +767,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 17, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 3, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -860,17 +810,17 @@
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
   <li><a href="#preparing-the-genome-sequence" id="markdown-toc-preparing-the-genome-sequence">Preparing the genome sequence</a></li>
   <li><a href="#preparing-rnaseq-data" id="markdown-toc-preparing-rnaseq-data">Preparing <span class="notranslate">RNA</span>Seq data</a></li>
-  <li><a href="#strutural-annotation" id="markdown-toc-strutural-annotation">Strutural annotation</a>    <ol>
-      <li><a href="#evaluation-with-busco" id="markdown-toc-evaluation-with-busco">Evaluation with <strong>Busco</strong></a></li>
-    </ol>
-  </li>
+  <li><a href="#strutural-annotation" id="markdown-toc-strutural-annotation">Strutural annotation</a></li>
   <li><a href="#functional-annotation" id="markdown-toc-functional-annotation">Functional annotation</a>    <ol>
       <li><a href="#eggnog-mapper" id="markdown-toc-eggnog-mapper"><strong>EggNOG Mapper</strong></a></li>
       <li><a href="#interproscan" id="markdown-toc-interproscan"><strong>InterProScan</strong></a></li>
     </ol>
   </li>
   <li><a href="#submission-to-ncbi" id="markdown-toc-submission-to-ncbi">Submission to NCBI</a></li>
-  <li><a href="#integrating-structural-and-functional-annotation" id="markdown-toc-integrating-structural-and-functional-annotation">Integrating structural and functional annotation</a></li>
+  <li><a href="#integrating-structural-and-functional-annotation" id="markdown-toc-integrating-structural-and-functional-annotation">Integrating structural and functional annotation</a>    <ol>
+      <li><a href="#evaluation-with-busco" id="markdown-toc-evaluation-with-busco">Evaluation with <strong>Busco</strong></a></li>
+    </ol>
+  </li>
   <li><a href="#visualisation-with-a-genome-browser" id="markdown-toc-visualisation-with-a-genome-browser">Visualisation with a genome browser</a></li>
   <li><a href="#comparing-annotations" id="markdown-toc-comparing-annotations">Comparing annotations</a>    <ol>
       <li><a href="#comparing-with-aegean-parseval" id="markdown-toc-comparing-with-aegean-parseval">Comparing with <strong>AEGeAn ParsEval</strong></a></li>
@@ -1112,51 +1062,6 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <p>Before moving on, have a quick look at the <code class="language-plaintext highlighter-rouge">tbl2asn error summary report</code> output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identified potential problems in the <code class="language-plaintext highlighter-rouge">tbl2asn genome validation report</code> dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to manually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.</p>
 
-<h2 id="evaluation-with-busco">Evaluation with <strong>Busco</strong></h2>
-
-<p><a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the annotation.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">annotated gene sets (protein)</code></li>
-        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
-          <ul>
-            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Mucorales</code></li>
-          </ul>
-        </li>
-        <li>In <em>“Advanced Options”</em>:
-          <ul>
-            <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">shortsummary text</code> and <code class="language-plaintext highlighter-rouge">summary image</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="question">
-  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-  <p>How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?</p>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <p>On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.</p>
-
-    <p>That’s a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.</p>
-
-    <p>To improve the result you can consider using more <span class="notranslate">RNA</span>Seq data, and using the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em> option.</p>
-  </blockquote>
-
-</blockquote>
-
 <h1 id="functional-annotation">Functional annotation</h1>
 
 <p>The aim of the previous step is to predict the position of the genes on the genome (structural annotation). Now we want to assign names and functions to the predicted genes. We can do this automatically using specialised tools: <strong>EggNOG Mapper</strong> and <strong>InterProScan</strong>.</p>
@@ -1166,7 +1071,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 <p><strong>EggNOG Mapper</strong> compares each protein sequence of the annotation to a huge set of ortholog groups from the <a href="http://eggnog5.embl.de">EggNOG database</a>. In this database, each ortholog group is associated with functional annotation like <a href="http://www.geneontology.org/">Gene Ontology (GO)</a> terms or <a href="https://www.genome.jp/kegg/pathway.html">KEGG pathways</a>. When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.6+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.6+galaxy1"><strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/eggnog_mapper/eggnog_mapper/2.1.6+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1197,7 +1102,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 <p><strong>InterProScan</strong> itself runs multiple applications to search for the signatures in the protein sequences. It is possible to select exactly which ones we want to use when launching the analysis (by default all will be run).</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy2"><strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1271,7 +1176,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 <p>Now we have a structural annotation, and the results of both <strong>EggNOG Mapper</strong> and <strong>InterProScan</strong>. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural <em>and</em> the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2"><strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1305,6 +1210,51 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 </ul>
 
 <p>If you display the GFF3 output, you will notice that the functional information, including gene names, is now stored in this file.</p>
+
+<h2 id="evaluation-with-busco">Evaluation with <strong>Busco</strong></h2>
+
+<p>We now have a complete annotation, including functional annotation, but it’s time to evaluate the quality of this annotation. <a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the annotation.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">annotated gene sets (protein)</code></li>
+        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
+          <ul>
+            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Mucorales</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">shortsummary text</code> and <code class="language-plaintext highlighter-rouge">summary image</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.</p>
+
+    <p>That’s a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.</p>
+
+    <p>To improve the result you can consider using more <span class="notranslate">RNA</span>Seq data, and using the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em> option.</p>
+  </blockquote>
+
+</blockquote>
 
 <h1 id="visualisation-with-a-genome-browser">Visualisation with a genome browser</h1>
 
@@ -1585,8 +1535,8 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 author = "Anthony Bretaudeau and Alexandre Cormier and Laura Leroi and Erwan Corre and Stéphanie Robin and Erasmus+ Programme",
 title = "Genome annotation with Funannotate (Galaxy Training Materials)",
 year = "2022",
-month = "02",
-day = "17"
+month = "03",
+day = "03"
 url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
