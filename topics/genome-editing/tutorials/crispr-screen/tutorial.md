@@ -1,18 +1,15 @@
 ---
 layout: tutorial_hands_on
-enable: false
 
 title: CRISPR screen analysis
 zenodo_link: https://zenodo.org/record/5750854
 questions:
 - What are the steps to process CRISPR screen data?
-- How to identify differentially enriched guides across multiple experimental conditions?
+- How to identify essential genes across experimental conditions?
 objectives:
-- Check quality of raw reads
-- Trim sequencing adapters
-- Count guide sequences in samples
-- Evaluate the quality of count results
-- Test for differential enrichment of guides across conditions
+- Apply appropriate analysis and quality control steps for CRISPR screen data
+- Identify differentially enriched genes across conditions
+- Generate volcano plot to visualise results
 time_estimation: 2H
 key_points:
 - CRISPR screen data can be analysed using MAGeCK and standard read quality tools
@@ -39,9 +36,9 @@ requirements:
 # Introduction
 {:.no_toc}
 
-The **C**lustered **R**egularly **I**nterspaced **S**hort **P**alindromic **R**epeats (CRISPR) system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). The ease of generating gRNAs makes CRISPR one of the most scalable genome editing technologies and has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity.
+The **C**lustered **R**egularly **I**nterspaced **S**hort **P**alindromic **R**epeats (CRISPR) system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.
 
-Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it results in small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
+The ease of generating gRNAs makes CRISPR one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
 
 ![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
@@ -224,6 +221,8 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >    > >
 >    > > In the Adapter Content section we now don't have any 5' adapter detected. The first 20bp of the reads, what MAGeCK will use for our dataset, has no adapter detected.
 >    > >
+>    > > ![](../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png){:width="50%"}
+>    > >
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
@@ -341,8 +340,7 @@ The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 CRISPR positive or negative selection screens can be performed. With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sgRNAs increase and dominate, indicating loss of those genes helps cells survive that treatment. With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose sgRNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment. Regardless of the type of screen performed (positive or negative), MAGeCK can identify both positively and negatively selected genes in the screen ({% cite Li2014 %}). The dataset we are using in this tutorial is from a negative selection screen.
 
-![Positive and negative selection](../../images/crispr-screen/pos_neg_screen.png)
- Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)
+![Positive and negative selection](../../images/crispr-screen/pos_neg_screen.png "Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)")
 
 
 ## Two conditions
@@ -685,4 +683,4 @@ CRISPR Screen reads can be assessed for quality using standard sequencing tools 
 # Acknowledgements
 {:.no_toc}
 
-Thanks to Mehmet Tekman for suggesting the awk tool and Jennifer Devlin for comments on the tutorial.
+Thanks to Mehmet Tekman for suggesting the awk tool. Thanks also to Jennifer Devlin, Lydia Lim and Sylvia Mahara for comments and feedback on the tutorial.
