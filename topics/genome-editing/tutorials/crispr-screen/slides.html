@@ -24,10 +24,9 @@ contributors:
 
 ### What is CRISPR?
 
-
-.image-100[![](../../images/crispr-screen/what_is_crispr.png)]
-
 .center[Overview of CRISPR knockout method]
+
+.image-100[![CRISPR method](../../images/crispr-screen/what_is_crispr.png)]
 
 
 ???
@@ -45,26 +44,34 @@ contributors:
 
 ### What is a CRISPR screen?
 
-.image-100[![](../../images/crispr-screen/what_is_a_crispr_screen.png)]
+.center[CRISPR screens help us to identify the functions of genes]
+
+.image-100[![CRISPR screen](../../images/crispr-screen/what_is_a_crispr_screen.png)]
+
+.pull-right[Source: [Peter.Grant.ubc](https://en.wikipedia.org/w/index.php?curid=63278077)]
 
 ???
 
 - The ease of generating guide RNAs makes CRISPR one of the most scalable genome editing technologies.
 - It can be used for genome-wide screens, enabling systematic targeting of 1000s of genes, with one gene targeted per cell.
-- With these screens we can identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity.
+- With these screens we can identify the functions of genes, such as those essential for cell survival, drug resistance or sensitivity.
 - Pooled or arrayed screens can be performed. In this tutorial we analyse data from a pooled screen.
 
 ---
 
-- How is an sgRNA library created?
+### How is an sgRNA library created?
 
-.image-50[![](../../images/crispr-screen/how_sgRNA_library_created.png)]
+.pull-right[
+
+.image-60[![sgRNA library](../../images/crispr-screen/how_sgRNA_library_created.png)]
+
+]
 
 .pull-left[
 
-* Various sgRNA libraries available e.g Brunello, Gecko, Yusa and others
+* Various sgRNA libraries available e.g Brunello, Gecko, Yusa and [others](https://www.addgene.org/crispr/libraries/)
 
-* In this tutorial we use Brunello library (77,441 sgRNAs: ~4 per human gene + 1000 non-targeting controls)
+* In this tutorial we use Brunello (77,441 sgRNAs: ~4 per human gene + 1000 non-targeting controls)
 
 * Cas9 expressing cells are transfected with sgRNA library
 
@@ -74,28 +81,28 @@ contributors:
 
 ### What is the difference between a negative and positive screen?
 
-.image-100[![](../../images/crispr-screen/pos_neg_screen.png)]
+.image-100[![Neg and pos screens](../../images/crispr-screen/pos_neg_screen.png)]
 
-.right[Source: https://www.addgene.org/guides/pooled-libraries/]
+.pull-right[Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)]
 
 ???
 
-- CRISPR positive or negative selection screens can be performed.
-- With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sgRNAs increase and dominate, indicating loss of those genes helps cells survive that treatment.
-- With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose guide RNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment.
+- CRISPR positive or negative screens can be performed.
+- With a positive screen, most cells die after the treatment and we are interested in identifying genes whose sgRNAs increase and dominate, indicating knocking out those genes helps cells survive that treatment.
+- With a negative screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose guide RNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive that treatment.
 - In this tutorial we analyse data from a negative screen.
 
 
 ---
 
-## A workflow for CRISPR screen analysis
+### A workflow for CRISPR screen analysis
 
-![](../../images/crispr-screen/crispr_workflow.png)
+![CRISPR workflow](../../images/crispr-screen/crispr_workflow.png)
 
 
 ???
 
 - This is an overview of the workflow used in the tutorial.
-- We prepare the reads checking quality and trimming adapters.
-- We use MAGeCK to analyse, followed by visualising results using volcano plots and identifying pathways.
+- We first prepare the reads checking quality and trimming adapters.
+- We then use the MAGeCK toolkit to analyse, followed by visualising results using volcano plots and identifying pathways.
 
