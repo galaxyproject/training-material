@@ -102,11 +102,12 @@ An alignment of SNPs looks something like this. Each row is a different strain, 
 >
 {: .hands_on}
 
-
 # Estimate a phylogeny
 There are numerous methods to infer phylogenetic trees, but the most frequently used with large-scale molecular data are based on maximum likelihood and Bayesian inference. The details of how these methods construct trees from an alignment are beyond the scope of this introductory course. To be able to read trees, it is not necessary to know the statistical and computational details of how the trees are estimated. The books listed in the [Resources](#Resources) section provide in-depth introductions into the different principles of phylogenetic inference, in particular Baum & Smith 2013 and Yang 2014.
 
-In this tutorial, we will use the maximum likelihood method [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) to estimate a phylogenetic tree for the 20 strains. Treating RAxML as a black box and estimating trees with default settings, as we are doing here, can be problematic. To get a flavour of the issues involved, you may take a look at [this recent paper](https://doi.org/10.1093/molbev/msaa314), which exposes such problems in the context of phylogenetic inference with SARS-CoV2 data.
+In this tutorial, we will use the maximum likelihood method [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) to estimate a phylogenetic tree for the 20 strains.
+
+An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic inference. While RAxML will deliver a single tree, not all aspects of this tree are equally well supported by the data. This uncertainty can be quantified through **bootstrapping**, a procedure where are large number of trees are estimated from random samples of the original data. If a certain split in the original tree is present in all the bootstrapped trees, then we can be confident about this split. Published phylogenies should always include a measure of uncertainty, while for this tutorial you will have to believe me that we are looking at a solid phylogeny...
 
 ## Hands-on
 > ### {% icon hands_on %} Hands-on: Estimate a phylogeny for 20 MTBC strains
@@ -127,7 +128,7 @@ Phylogenetic trees are great tools because they are at the same time quantitativ
 We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy, as explained [here](https://shiltemann.github.io/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html). This is not required to finish this tutorial, but if you have used R before, it might be worthwile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
 
 ## Plot the RAxML output
-The RAxML output includes the "Best-scoring ML tree" in the output list on the right of your Galaxy window. The code below imports this tree into a Galaxy instance of RStudio and plots the tree.
+The RAxML output includes the "Best-scoring ML tree" in your Galaxy history. The code below imports this tree into a Galaxy instance of RStudio and plots the tree.
 
 ```{r}
 # Load R package for phylogenetics
@@ -160,7 +161,7 @@ plot(tree)
 
 
 ## Root the tree
-To make the phylogeny better interpretable, will now root it and add some additional information. First, we root the tree and afterwards exclude the canettii strain, such that patterns within the MTBC become more clear. This already looks better, the tree topology stands out more clearly now, and we can identify groups of closely related strains.
+To make the phylogeny better interpretable, will now root it and add some additional information. First, we root the tree and then exclude the canettii strain, such that patterns within the MTBC become more clear. This already looks better, the tree topology stands out more clearly now, and we can identify groups of closely related strains.
 
 ```{r}
 # Root the tree
@@ -239,7 +240,7 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 >
 > Looking at the different lineages present in the tree, does our phylogeny make sense? Or asked differently: does our phylogeny show the same branching patterns between lineages as the established phylogeny in Fig. 1A?
 >
-> > ### {% icon solution %} Solutions
+> > ### {% icon solution %} Solution
 > >
 > > There is indeed a problem with our phylogeny: one L2 and one L5 strain do not cluster with the other strains of these lineages. Instead, they appear near the root of the tree, with very short (ERR5987300) to non-existent (ERR1203059) branches. Other parts of the tree are consistent with Fig. 1A, suggesting that we can focus our first round of trouble shooting on these two strains.
 > >
@@ -249,19 +250,44 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 
 > ### {% icon question %} Question 2
 >
-> An important part of bioinformatics consists in trying to find out whether a surprizing observation has biological significance - or reflects a mistake somewhere in the numerous steps leading to the result. Have we just discovered two new lineages of MTB, or did we commit a stupid mistake? To find out, take a look a the TB-profiler and the VCF files for the two strange strains, and compare them with "normal" strains. Do you notice something? Have we just assigned the wrong lineages when plotting the tree?
+> An important part of bioinformatics consists in trying to find out whether a surprizing observation has biological significance - or reflects a mistake somewhere in the numerous steps leading to the result. Have we just discovered two new lineages of MTB, or did we commit a stupid mistake? To find out, take a look a the TB-profiler and the VCF files for the two strange strains, and compare them with "normal" strains. Do you notice something?
 >
 > > ### {% icon solution %} Solution
 > >
-> > The VCF files hold the key to explain our puzzling observation: ERR1203059.vcf contains not a single SNP, ERR5987300.vcf only 81 SNPs. By contrast, the other strains have between 750 and 1250 SNPs.
+> > The VCF files hold the key to explain our puzzling observation: ERR1203059.vcf contains not a single SNP, ERR5987300.vcf only 81 SNPs. By contrast, the other strains have between 750 and 1250 SNPs. What happened here?
+> >
+> {: .solution}
+>
+{: .question}
+
+> ### {% icon question %} Question 3
+>
+> Recall the clusters identified in the previous tutorial, reproduced below. How do these clusters show up in the phylogenetic tree? What additional information does the tree contain?
+>
+| Sample       | Cluster_id | DR profile | Clustering  |
+|--------------|------------|------------|-------------|
+| ERR5987352   | 10         | Pre-MDR    | Clustered   |
+| ERR6362484   | 10         | Pre-MDR    | Clustered   |
+| ERR6362138   | 12         | MDR        | Clustered   |
+| ERR6362156   | 12         | Pre-XDR    | Clustered   |
+| ERR6362253   | 12         | MDR        | Clustered   |
+>
+> > ### {% icon solution %} Solutions
+> >
+> > Clusters 10 and 12 appear as clades of closely related strains in the phylogeny: cluster 12 being part of lineage 2, cluster 10 of lineage 4. +++
 > >
 > {: .solution}
 >
 {: .question}
 
 
-## Map DR profiles onto the tree
-Create a tree showing the different DR profiles of the samples
+## Map a trait onto the tree
+
+Phylogenies are particularly useful when combined with additional information. For our 19 MTB strains, for example, we might know such things as the country of origin, the sampling date, or various phenotypes determined in the lab, for example the virulence of the strains in an animal model. By mapping this additional information onto the phylogeny, we can gain insights into how, where and when these traits evolved.
+
+For our 20 samples, a trait you previously identifed is the DR profile. Let us map this trait onto the tree and see if we can learn something from the observed patterns.
+
+
 ```{r}
 
 # Same as above, but with DR profiles instead of lineages
@@ -309,28 +335,18 @@ plot(tree_dr,cex = 0.8, tip.color = pal_dr, root.edge = TRUE)
 <img src="./images/tree_rooted_dr.svg" alt="drawing" width="600"/>
 
 
-
 ### Question
 > ### {% icon question %} Question
 >
-> Recall the clusters identified in the previous tutorial, reproduced below. How do these clusters show up in the phylogenetic tree? What additional information does the tree contain?
->
-| Sample       | Cluster_id | DR profile | Clustering  |
-|--------------|------------|------------|-------------|
-| ERR5987352   | 10         | Pre-MDR    | Clustered   |
-| ERR6362484   | 10         | Pre-MDR    | Clustered   |
-| ERR6362138   | 12         | MDR        | Clustered   |
-| ERR6362156   | 12         | Pre-XDR    | Clustered   |
-| ERR6362253   | 12         | MDR        | Clustered   |
+> In the previous tutorial on clustering, you have come across the hypothesis that unclustered cases of DR represent *de novo* evolution of DR, while clustered cases of DR represent instances of DR transmission. Looking at lineage 2 in the phylogeny above, does this hypothesis hold? How many times would MDR have evolved independently in lineage 2? Is there an alternative explanation for the prevalence of MDR in lineage 2?
 >
 > > ### {% icon solution %} Solutions
 > >
-> > Clusters 10 and 12 appear as clades of closely related strains in the phylogeny: cluster 12 being part of lineage 2, cluster 10 of lineage 4. Zoom in on lineage 2 -> not overinterprete patterns, as there is probably quite some uncertainty involved at such short time scales. This uncertainty could be quantified through bootstrapping,
+> > MDR would have evolved three times according to the clustering perspective mentioned above. The phylogeny suggest a simpler alternative: MDR could have been already present in the common ancestor of the six strains in our sample; it could have evolved only once, along the long branch leading from the split from lineage 3 to the most recent common ancestor of the six samples. This picture, however, might completely change with a more extensive sampling of lineage 2. Six samples are hardly sufficient to make claims about the prevalence and evolution of MDR in lineage 2.
 > >
 > {: .solution}
 >
 {: .question}
-
 
 
 # Resources
