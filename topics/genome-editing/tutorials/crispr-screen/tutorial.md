@@ -38,7 +38,7 @@ requirements:
 
 The **C**lustered **R**egularly **I**nterspaced **S**hort **P**alindromic **R**epeats (CRISPR) system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.
 
-The ease of generating gRNAs makes CRISPR one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
+The ease of generating gRNAs makes CRISPR one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Bock2022 %}, {% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
 
 ![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
@@ -109,7 +109,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 >
 > 1. Import the adapters file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/adapters_list.tsv
+>    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/adapter_list.tsv
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -186,28 +186,28 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >    >
 >    > For sample T8-APR-246:
 >    >
->    > 1. What % of reads contained adapter?
->    > 2. What % of reads remain after trimming?
+>    > What % of reads contained adapter?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. 99.6%
->    > > 2. 100%
+>    > > 99.6%
 >    > >
 >    > {: .solution}
->    >
->    {: .question}
+>
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the Cutadapt reports:
+>     - In *"Results"*
+>       - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
+>         - {% icon param-collection %} *"Output of Cutadapt"*: `Report` files (output of **Cutadapt**)
+>
+> 4. Add a tag (`#cutadapt-report`) to the MultiQC webpage to differentiate this report from the previous (FastQC) one
+>
+> 5. Inspect the MultiQC report
 >
 {: .hands_on}
 
+MultiQC produces a 5' trimmed sequences plot where we can check the results are as expected. Here we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) ([see sequencing protocol](https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf)). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. The trimmed sequence lengths are what we expect for this dataset and the plot looks similar for all our samples which is good.
 
-> ### {% icon details %} Trimmed sequences
->
-> If you want to take a closer look at what has been trimmed, you can use MultiQC to summarise the Cutadapt output. MultiQC will produce a 5' trimmed sequences plot, where you can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) ([see sequencing protocol](https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf)). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. There are a few reads trimmed which may have arisen from errors acquired during sequencing or sample generation.
->
-> ![](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
->
-{: .details}
+![](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
 
 
 > ### {% icon hands_on %} Exercise: Quality control of the polished datasets
@@ -231,7 +231,7 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 
 For the rest of the CRISPR screen analysis, counting and testing, we'll use the tool called **M**odel-based **A**nalysis of **Ge**nome-wide **C**RISPR-Cas9 **K**nockout (MAGeCK) ({% cite Li2014 %}, {% cite Li2015 %}).
 
-To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the [Brunello library](https://www.addgene.org/pooled-library/broadgpp-human-knockout-brunello/) ({% cite Doench2016 %}) which contains 77,441 sgRNAs, an average of 4 sgRNAs per gene, and 1000 non-targeting control sgRNAs. The library file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
+To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the [Brunello library](https://www.addgene.org/pooled-library/broadgpp-human-knockout-brunello/) ({% cite Doench2016 %}) which contains 77,441 sgRNAs, an average of 4 sgRNAs per gene, and 1000 non-targeting control sgRNAs. **The library file must be tab-separated and contain no spaces within the gene or target names**. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
 
 > ### {% icon hands_on %} Hands-on: Count guides per gene
 > 1. Import the sgRNA library file
@@ -491,7 +491,7 @@ In addition to the visualisations automatically generated by MAGeCK in the PDF, 
 
 
 > ### {% icon hands_on %} Hands-on: Create volcano plot
-> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
+> 1. {% tool [Text reformatting with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `MAGeCK test Gene Summary`
 >    - *"AWK Program"*: Copy and paste the text in the grey box below into this field
 >
@@ -567,13 +567,7 @@ We can perform pathway analysis on the results to identify pathways that are cha
 >    - {% icon param-text %} *"Cut columns"*: `c1,c3` (the gene symbols and neg score)
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the MAGeCK Gene Summary file
-> 3. **Sort data in ascending or descending order** {% icon tool %} with
->    - {% icon param-file %} *"Sort Dataset"*: the output of **Cut** {% icon tool %}
->    - {% icon param-select %} *"on column"*: `Column: 2`
->    - {% icon param-select %} *"with flavor"*: `General numeric sort`
->    - {% icon param-select %} *"everything in"*: `Descending order`
->    - {% icon param-text %} *"Number of header lines"*: `1`
-> 4. **fgsea** {% icon tool %} with
+> 3. **fgsea** {% icon tool %} with
 >    - {% icon param-file %} *"Ranked Genes"*: the output of **Sort** {% icon tool %}
 >    - {% icon param-check %} *"File has header?"*: `Yes`
 >    - {% icon param-file %} *"Gene Sets"*: `h.all.v7.4.symbols.gmt` (this should be `tabular` format, if not, see how to change it in the Tip below)
@@ -629,7 +623,7 @@ Examples of more complicated design matrices, for e.g. time series experiments, 
 >    ```
 >
 > 2. {% tool [MAGeCKs mle](toolshed.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1) %} with the following parameters:
->    - {% icon param-file %} *"Counts file"*: the `kenji_mageck_counts.tsv` file
+>    - {% icon param-file %} *"Counts file"*: the `kenji_mageck_sgrna_counts.tsv` file
 >    - *"Design matrix or sample labels"*: `Design matrix`
 >        - {% icon param-file %} *"Design matrix file"*: the `mageck_mle_design_matrix` file
 >
