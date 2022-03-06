@@ -568,7 +568,7 @@ We can perform pathway analysis on the results to identify pathways that are cha
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the MAGeCK Gene Summary file
 > 3. **fgsea** {% icon tool %} with
->    - {% icon param-file %} *"Ranked Genes"*: the output of **Sort** {% icon tool %}
+>    - {% icon param-file %} *"Ranked Genes"*: the output of **Cut** {% icon tool %}
 >    - {% icon param-check %} *"File has header?"*: `Yes`
 >    - {% icon param-file %} *"Gene Sets"*: `h.all.v7.4.symbols.gmt` (this should be `tabular` format, if not, see how to change it in the Tip below)
 >    - {% icon param-text %} *"Minimum Size of Gene Set"*: `15`
