@@ -881,6 +881,9 @@ Run some tools in Galaxy, try to generate a large number of jobs. It is relative
 
 You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}dashboard.json).
 
+{% snippet topics/admin/faqs/missed-something.md step=11 %}
+
 # Conclusion
 
 Monitoring with Telegraf, InfluxDB, and Grafana can provide an easy solution to monitor your infrastructure. The UseGalaxy.\* servers use this stack and it has proven to be effective in production situations, with large Galaxy servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by UseGalaxy.\*, and then to extend them to your own needs.
+

@@ -587,7 +587,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=4 %}
+{% snippet topics/admin/faqs/missed-something.md step=5 %}
 
 # Common Production Questions
 

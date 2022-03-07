@@ -165,3 +165,5 @@ Congratulations, you've set up TUS for Galaxy.
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/missed-something.md step=2 %}
