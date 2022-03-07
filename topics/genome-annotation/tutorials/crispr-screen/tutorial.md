@@ -1,18 +1,15 @@
 ---
 layout: tutorial_hands_on
-enable: false
 
 title: CRISPR screen analysis
 zenodo_link: https://zenodo.org/record/5750854
 questions:
 - What are the steps to process CRISPR screen data?
-- How to identify differentially enriched guides across multiple experimental conditions?
+- How to identify essential genes across experimental conditions?
 objectives:
-- Check quality of raw reads
-- Trim sequencing adapters
-- Count guide sequences in samples
-- Evaluate the quality of count results
-- Test for differential enrichment of guides across conditions
+- Apply appropriate analysis and quality control steps for CRISPR screen data
+- Identify differentially enriched genes across conditions
+- Generate volcano plot to visualise results
 time_estimation: 2H
 key_points:
 - CRISPR screen data can be analysed using MAGeCK and standard read quality tools
@@ -20,6 +17,9 @@ contributors:
 - mblue9
 - kenjifujihara
 - twishigulati
+tags:
+- annotating
+- CRISPR
 requirements:
   -
     type: "internal"
@@ -32,16 +32,18 @@ requirements:
     tutorials:
       - collections
       - upload-rules
-
+abbreviations:
+  CRISPR: Clustered Regularly Interspaced Short Palindromic Repeats
+  MAGeCK: Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout
 ---
 
 
 # Introduction
 {:.no_toc}
 
-The **C**lustered **R**egularly **I**nterspaced **S**hort **P**alindromic **R**epeats (CRISPR) system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). The ease of generating gRNAs makes CRISPR one of the most scalable genome editing technologies and has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity.
+The {CRISPR} system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.
 
-Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it results in small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
+The ease of generating gRNAs makes {CRISPR} one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Bock2022 %}, {% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
 
 ![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
@@ -59,7 +61,7 @@ Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting D
 
 ## Data upload
 
-Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}. There are 3 samples from the human esophageal cancer cell line (OACM5.1): a baseline sample taken at time zero (T0-Control), a sample treated with drug for 8 days (T8-APR-246) and a control sample treated with vehicle for 8 days (T8-Vehicle). We will use FASTQ files containing 1% of reads from the original samples to demonstrate the read processing steps.
+Here we will demonstrate analysing {CRISPR} screen using data from {% cite Fujihara2020 %}. There are 3 samples from the human esophageal cancer cell line (OACM5.1): a baseline sample taken at time zero (T0-Control), a sample treated with drug for 8 days (T8-APR-246) and a control sample treated with vehicle for 8 days (T8-Vehicle). The aim is to identify genes whose knockout increases the cancer cells sensitivity to the drug. We will use FASTQ files containing 1% of reads from the original samples to demonstrate the read processing steps.
 
 > ### {% icon hands_on %} Hands-on: Retrieve CRISPR screen fastq datasets
 >
@@ -76,7 +78,7 @@ Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihar
 >      T8-APR-246 https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-APR-246.fastq.gz
 >      T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-Vehicle.fastq.gz
 >      ```
->  
+>
 >    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -88,11 +90,11 @@ Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihar
 >
 >       - Click `Add Definition` button and select `URL`: column `B`
 >
->    - Click `Apply` 
+>    - Click `Apply`
 >    - In the Name: box type `fastqs` and press <kbd>Upload</kbd>
->      
+>
 >    ![Rule-based Editor](../../images/crispr-screen/crispr_rule_editor.png)
->    
+>
 {: .hands_on}
 
 ## Raw reads QC
@@ -112,7 +114,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 >
 > 1. Import the adapters file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/adapters_list.tsv
+>    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/adapter_list.tsv
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -157,19 +159,16 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
 ## Trim adapters
 
-We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) and its linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`.
+We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}). To trim, we'll use the 5' adapter sequence. We don't need to trim the 3' adapter as {MAGeCK} will only use the first 20bp from each read. It determines the number of bases to use automatically from the length of the sequences in the library file, in our case 20bp, or we can specify the sgRNA length.
 
 
 > ### {% icon details %} Adapter trimming
-> 
+>
 > In this dataset the adapters start at different positions in the reads, as was shown above. MAGeCK count can trim adapters around the guide sequences. However, the adapters need to start at the same position in each read, requiring the same trimming length, as described on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/). An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn't be able to trim the 5' adapter properly and you would only get ~60% reads mapping instead of >80%.
 >
 > ![Adapters MAGeCK can trim](../../images/crispr-screen/adapter_sequences_mageck.png "Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is higlighted in blue with the adapter sequences directly adjacent on the right and left. MAGeCK count uses the first 20 bases of each read to map so the sequence after the guide is less important to trim exactly.")
 >
-> For this dataset, as the adapters are not at the same position in each read, we need to trim the adapters before running MAGeCK count. To trim, we could run Cutadapt twice, first trimming the 5' adapter sequence, then trimming the 3' adapter. Alternatively, we can run Cutadapt just once using the linked adapter format `MY_5PRIME_ADAPTER...MY_3PRIME_ADAPTER`, as discussed [here](https://github.com/marcelm/cutadapt/issues/261#issue-261019127).
->
-> Using a 5' linked adapter with Cutadapt requires both adapters to be present in the read, which is what we expect here, in order to trim.
-> As we know the guide sequence is 20bp, we will only keep sequences that are 20bp after trimming.
+> For this dataset, as the adapters are not at the same position in each read, we need to trim the adapters before running MAGeCK count.
 {: .details}
 
 
@@ -177,57 +176,44 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy0) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->        - {% icon param-collection %} *"FASTQ/A file #1"*: all fastq.gz files 
+>        - {% icon param-collection %} *"FASTQ/A file #1"*: all fastq.gz files
 >        - In *"Read 1 Options"*:
 >            - In *"5' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 5' (Front) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 5' adapter sequence"*: `TTGTGGAAAGGACGAAACACCG...GTTTTAGAGCTAGAAATAGCAAG`
->    - In *"Filter Options"*:
->        - *"Minimum length (R1)"*: `20`
->        - *"Maximum length (R1)"*: `20`
->    - *"Outputs selector"*: 
+>                        - *"Enter custom 5' adapter sequence"*: `TTGTGGAAAGGACGAAACACCG`
+>    - *"Outputs selector"*:
 >        - *"Report"*: tick
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the Cutadapt reports:
->     - In *"Results"*
->       - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
->         - {% icon param-collection %} *"Output of Cutadapt"*: `Report` files (output of **Cutadapt**)
->
-> 3. Add a tag (`#cutadapt-report`) to the MultiQC webpage to differentiate this report from the previous (FastQC) one
->
-> 4. Inspect the MultiQC report
+> 2. Inspect the Cutadapt report
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > For sample T8-APR-246:
 >    >
->    > 1. What % of reads were filtered after trimming for being too short (< 20bp)?
->    > 2. What % of reads were filtered for being too long (> 20bp)?
->    > 3. What % of reads remain after trimming and filtering?
+>    > What % of reads contained adapter?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. 3.6%
->    > > 2. 6.0%
->    > > 3. 90.5%
+>    > > 99.6%
 >    > >
->    > >
->    > > ![](../../images/crispr-screen/cutadapt_filtered_reads_plot.png)
 >    > {: .solution}
->    >
 >    {: .question}
 >
->    > ### {% icon details %} Dip in trimmed sequences plots
->    >
->    > In the 5' trimmed sequences plot, we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) ([see sequencing protocol](https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf)). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. There are a few reads trimmed which may have arisen from errors acquired during sequencing or sample generation.
->    > The 3' trimmed sequence shows a similar dip at 28bp as that is the read length that corresponds to the nonexistent 5bp stagger: 75bp (read length) - (5bp (stagger) + 22bp (adapter) + 20bp (sgRNA)) = 28bp.
->    >
->    > ![](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
->    >
->    {: .details}
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the Cutadapt reports:
+>     - In *"Results"*
+>       - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
+>         - {% icon param-collection %} *"Output of Cutadapt"*: `Report` files (output of **Cutadapt**)
+>
+> 4. Add a tag (`#cutadapt-report`) to the MultiQC webpage to differentiate this report from the previous (FastQC) one
+>
+> 5. Inspect the MultiQC report
 >
 {: .hands_on}
+
+MultiQC produces a 5' trimmed sequences plot where we can check the results are as expected. Here we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) ([see sequencing protocol](https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf)). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. The trimmed sequence lengths are what we expect for this dataset and the plot looks similar for all our samples which is good.
+
+![Plot showing lengths of sequences trimmed from 5' end of reads](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
 
 
 > ### {% icon hands_on %} Exercise: Quality control of the polished datasets
@@ -235,11 +221,13 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >
 >    > ### {% icon question %} Questions
 >    >
->    > How did read trimming affect the quality reports?
+>    > How did read trimming affect the Adapter Content plot?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > In the Adapter Content section we now don't have any adapters detected. We can see in the Per Base Sequence Quality plot (and Sequence Length plot) that all sequences are 20bp.
+>    > > In the Adapter Content section we now don't have any 5' adapter detected. The first 20bp of the reads, what MAGeCK will use for our dataset, has no adapter detected.
+>    > >
+>    > > ![Plot of trimmed sequences showing no adapter detected in first 20 bases](../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png){:width="50%"}
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -247,9 +235,9 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 
 # Counting
 
-For the rest of the CRISPR screen analysis, counting and testing, we'll use the tool called **M**odel-based **A**nalysis of **Ge**nome-wide **C**RISPR-Cas9 **K**nockout (MAGeCK) ({% cite Li2014 %}, {% cite Li2015 %}).
+For the rest of the {CRISPR} screen analysis, counting and testing, we'll use the tool called {MAGeCK} ({% cite Li2014 %}, {% cite Li2015 %}).
 
-To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the [Brunello library](https://www.addgene.org/pooled-library/broadgpp-human-knockout-brunello/) ({% cite Doench2016 %}) which contains 77,441 sgRNAs, an average of 4 sgRNAs per gene, and 1000 non-targeting control sgRNAs. The library file must be tab-separated and contain no spaces within the target names. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
+To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the [Brunello library](https://www.addgene.org/pooled-library/broadgpp-human-knockout-brunello/) ({% cite Doench2016 %}) which contains 77,441 sgRNAs, an average of 4 sgRNAs per gene, and 1000 non-targeting control sgRNAs. **The library file must be tab-separated and contain no spaces within the gene or target names**. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
 
 > ### {% icon hands_on %} Hands-on: Count guides per gene
 > 1. Import the sgRNA library file
@@ -313,7 +301,7 @@ GiniIndex | The Gini Index of the read count distribution. A smaller value indic
 > > ### {% icon solution %} Solution
 > >
 > > 1. The number of reads is ok. For example, for T0 control sample we have 17,272,052 reads mapped to guides. We have 77,441 guides so we have ~220 reads per guide (17,272,052/77,441). A minimum of 100 reads per guide, preferably 300, is recommended.
-> > 2. Yes, in the summary we have >85% mapped for all 3 samples. MAGeCK count does not allow any base mismatches between the reads and the library file, as described [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-1-allow-mismatches-for-read-mapping) so we expect not all reads will map. Note that we filtered out (6-10%) reads with Cutadapt so we should include those in our unmapped % if we want an accurate count.
+> > 2. Yes, in the summary we have >85% mapped for all 3 samples. {MAGeCK} count does not allow any base mismatches between the reads and the library file, as described [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-1-allow-mismatches-for-read-mapping) so we expect not all reads will map. Note that we filtered out (6-10%) reads with Cutadapt so we should include those in our unmapped % if we want an accurate count.
 > > 3. T0-Control has 0.71% (546/77441 * 100) sgRNAs that have no reads mapped, which is good. The T8 samples are just slightly high at 2.3% (1752/77441 * 100) and 2.8% (2170/77441 * 100).
 > > 4. The Gini Index is 0.09 for T0-Control (initial state) which is good. The T8 samples are higher at 0.13 and 0.14 but good for a negative selection experiment.
 > >
@@ -335,16 +323,16 @@ MAGeCK count can also generate a PDF with plots that can help assess quality.
 > > > ### {% icon solution %} Solution
 > > >
 > > > In the boxplots, we can see we have largely similiar distributions of counts for the 3 samples. The greater length of the box and between whiskers in the T8 samples compared to the control tells us we have a bit more variability of counts in those samples, more guides with low and high counts in T8 compared to the T0.
-> > > ![](../../images/crispr-screen/mageck_count_boxplots.png)
+> > > ![MAGeCK count boxplots](../../images/crispr-screen/mageck_count_boxplots.png)
 > > >
 > > > The Distribution of read counts plot shows us how many guides we have for each count (the frequency sums to the total no. of guides 77,441). Similar to the boxplots, the wider distribution for T8 compared to T0 shows us that those samples have more guides with low and high counts. The peak for T0 appears lower just because it has more points (bins) in the plot.
-> > > ![](../../images/crispr-screen/mageck_count_histogram.png)
+> > > ![MAGeCK count histograms](../../images/crispr-screen/mageck_count_histogram.png)
 > > >
 > > > The PCA plot shows us the samples from the different conditions separate well. The T8 samples are a bit more similar to each other, to each other on PC1 axis than to T0. If we had more samples we could use this plot to check for clustering of replicates, batch effect or outliers.
-> > > ![](../../images/crispr-screen/mageck_count_pca.png)
+> > > ![MAGeCK count PCA plot](../../images/crispr-screen/mageck_count_pca.png)
 > > >
 > > > The hierarchical clustering plot also shows us that the T8 samples are a bit more similar to each other than to T0.
-> > > ![](../../images/crispr-screen/mageck_count_clustering.png)
+> > > ![MAGeCK count hierarchical clustering plot](../../images/crispr-screen/mageck_count_clustering.png)
 > > {: .solution}
 > >
 > {: .question}
@@ -356,17 +344,16 @@ The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 # Testing
 
-CRISPR positive or negative selection screens can be performed. With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sgRNAs increase and dominate, indicating loss of those genes helps cells survive that treatment. With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose sgRNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment. Regardless of the type of screen performed (positive or negative), MAGeCK can identify both positively and negatively selected genes in the screen ({% cite Li2014 %}). The dataset we are using in this tutorial is from a negative selection screen.
+Now that we've generated our guide counts, we'll use MAGeCK test to identify essential genes. Essential means positively or negatively selected sgRNAs and genes. CRISPR positive or negative selection screens can be performed. With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sgRNAs increase and dominate, indicating loss of those genes helps cells survive that treatment. This can help identify genes essential for drug resistance. With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose sgRNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment. This can help identify genes essential for drug sensitivity. Regardless of the type of screen performed (positive or negative), MAGeCK can identify both positively and negatively selected genes in the screen ({% cite Li2014 %}). The dataset we are using in this tutorial is from a negative selection screen where the aim is to identify genes whose knockout increases the cancer cells sensitivity to the drug.
 
-![Positive and negative selection](../../images/crispr-screen/pos_neg_screen.png)
- Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)
+![Positive and negative selection screens](../../images/crispr-screen/pos_neg_screen.png "Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)")
 
 
 ## Two conditions
 
 If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8-Vehicle) we can use MAGeCK test. MAGeCK test uses a robust ranking aggregation (RRA) algorithm ({% cite Li2014 %}).
 
-![MAGeCK RRA](../../images/crispr-screen/mageck_rra_algorithm.png "Overview of the MAGeCK algorithm. Raw read counts corresponding to single-guided RNAs (sgRNAs) from different experiments are first normalized using median normalization and mean-variance modeling is used to capture the relationship of mean and variance in replicates. The statistical significance of each sgRNA is calculated using the learned mean-variance model. Essential genes (both positively and negatively selected) are then identified by looking for genes whose sgRNAs are ranked consistently higher (by significance) using robust rank aggregation (RRA) (from {% cite Li2014 %})")
+![Diagram of MAGeCK RRA algorithm](../../images/crispr-screen/mageck_rra_algorithm.png "Overview of the MAGeCK algorithm. Raw read counts corresponding to single-guided RNAs (sgRNAs) from different experiments are first normalized using median normalization and mean-variance modeling is used to capture the relationship of mean and variance in replicates. The statistical significance of each sgRNA is calculated using the learned mean-variance model. Essential genes (both positively and negatively selected) are then identified by looking for genes whose sgRNAs are ranked consistently higher (by significance) using robust rank aggregation (RRA) (from {% cite Li2014 %})")
 
 
 > ### {% icon hands_on %} Hands-on: Test for enrichment
@@ -409,7 +396,7 @@ For technical replicates, we could combine the fastqs for each sample/biological
 > Instead of median or total, we could choose to normalize using control guide sgRNAs. However, we would need to know that they're not changing due to the experiment or introducing bias ({% cite Chen2018 %}).
 {: .details}
 
-MAGeCK test outputs:
+{MAGeCK} test outputs:
 
 * a Gene Summary file
 * a sgRNA Summary file
@@ -485,7 +472,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
 
 The PDF also shows plots with the sgRNA counts for the top 10 genes. These values are the normalized counts for each sgRNA from the sgRNA summary file. With these plots we can see if the counts of all the sgRNAs for these top genes are changing similarly.
 
-![ESD counts](../../images/crispr-screen/esd_plot.png){:width="50%"}
+![Plot showing guide counts for ESD gene](../../images/crispr-screen/esd_plot.png){:width="50%"}
 
 > ### {% icon question %} Questions
 >
@@ -497,7 +484,7 @@ The PDF also shows plots with the sgRNA counts for the top 10 genes. These value
 > > 1. No. We can see in this case that, while one sgRNA is a lot lower in the APR treated sample compared to the vehicle, one increases a little, and the other two sgRNAs don't change much. So we might conclude that this gene is not strongly negatively selected.
 > > 2. None. One reason for this is likely the large number of genes being tested (>20,000). You could try to increase sensitivity with the procedures described [here](https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do).
 > >
-> > ![MAGeCK test pvalues](../../images/crispr-screen/fli1_plot.png){:width="50%"}
+> > ![Plot showing guide counts for FLI1 gene](../../images/crispr-screen/fli1_plot.png){:width="50%"}
 > >
 > {: .solution}
 >
@@ -510,7 +497,7 @@ In addition to the visualisations automatically generated by MAGeCK in the PDF, 
 
 
 > ### {% icon hands_on %} Hands-on: Create volcano plot
-> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
+> 1. {% tool [Text reformatting with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `MAGeCK test Gene Summary`
 >    - *"AWK Program"*: Copy and paste the text in the grey box below into this field
 >
@@ -559,7 +546,7 @@ In addition to the visualisations automatically generated by MAGeCK in the PDF, 
 >    > >
 >    > > ATP5E as it is the gene nearest the top of the plot.
 >    > >
->    > > ![Volcano plot](../../images/crispr-screen/volcanoplot.png){:width="50%"}
+>    > > ![Volcano plot for APR compared to vehicle](../../images/crispr-screen/volcanoplot.png){:width="50%"}
 >    > >
 >    > {: .solution}
 >    >
@@ -586,14 +573,8 @@ We can perform pathway analysis on the results to identify pathways that are cha
 >    - {% icon param-text %} *"Cut columns"*: `c1,c3` (the gene symbols and neg score)
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the MAGeCK Gene Summary file
-> 3. **Sort data in ascending or descending order** {% icon tool %} with
->    - {% icon param-file %} *"Sort Dataset"*: the output of **Cut** {% icon tool %}
->    - {% icon param-select %} *"on column"*: `Column: 2`
->    - {% icon param-select %} *"with flavor"*: `General numeric sort`
->    - {% icon param-select %} *"everything in"*: `Descending order`
->    - {% icon param-text %} *"Number of header lines"*: `1`
-> 4. **fgsea** {% icon tool %} with
->    - {% icon param-file %} *"Ranked Genes"*: the output of **Sort** {% icon tool %}
+> 3. **fgsea** {% icon tool %} with
+>    - {% icon param-file %} *"Ranked Genes"*: the output of **Cut** {% icon tool %}
 >    - {% icon param-check %} *"File has header?"*: `Yes`
 >    - {% icon param-file %} *"Gene Sets"*: `h.all.v7.4.symbols.gmt` (this should be `tabular` format, if not, see how to change it in the Tip below)
 >    - {% icon param-text %} *"Minimum Size of Gene Set"*: `15`
@@ -648,7 +629,7 @@ Examples of more complicated design matrices, for e.g. time series experiments, 
 >    ```
 >
 > 2. {% tool [MAGeCKs mle](toolshed.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1) %} with the following parameters:
->    - {% icon param-file %} *"Counts file"*: the `kenji_mageck_counts.tsv` file
+>    - {% icon param-file %} *"Counts file"*: the `kenji_mageck_sgrna_counts.tsv` file
 >    - *"Design matrix or sample labels"*: `Design matrix`
 >        - {% icon param-file %} *"Design matrix file"*: the `mageck_mle_design_matrix` file
 >
@@ -673,15 +654,14 @@ Similar to what we did with the MAGeCK test output, we can create a volcano plot
 > 1. Create a volcano plot to visualise the result for APR vs T0. Use the gene summary file columns `Gene` `APR|beta` `APR|wald-p-value`  `APR|wald-fdr`
 >    - {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5) %} to create a volcano plot
 >        - {% icon param-file %} *"Specify an input file"*: the MAGeCK mle Gene Summary file
->        - {% icon param-file %} *"File has header?"*: `Yes`
 >        - {% icon param-select %} *"FDR (adjusted P value)"*: `Column 14`
->        - {% icon param-select %} *"P value (raw)"*: `Column 12`
+>        - {% icon param-select %} *"P value (raw)"*: `Column 13`
 >        - {% icon param-select %} *"Log Fold Change"*: `Column 9`
 >        - {% icon param-select %} *"Labels"*: `Column 1`
 >        - {% icon param-select %} *"Points to label"*: `Significant`
 >        - {% icon param-text %} *"Only label top most significant"*: `10`
 >
->   ![Volcano plot mle](../../images/crispr-screen/mageck_mle_apr_volcano.png){:width="50%"}
+>   ![Volcano plot for APR compared to timepoint zero](../../images/crispr-screen/mageck_mle_apr_volcano.png){:width="50%"}
 >
 >    Similarly, you could create a plot for the vehicle vs T0 using the gene summary file columns `Gene` `Vehicle|beta` `Vehicle|wald-p-value`  `Vehicle|wald-fdr`
 >
@@ -698,9 +678,9 @@ Similar to what we did with the MAGeCK test output, we can create a volcano plot
 # Conclusion
 {:.no_toc}
 
-CRISPR Screen reads can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using MAGeCK. Downstream analysis can include visualisations, such as volcano plot, and pathway analysis with tools like fgsea.
+{CRISPR} Screen reads can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using {MAGeCK}. Downstream analysis can include visualisations, such as volcano plot, and pathway analysis with tools like fgsea.
 
 # Acknowledgements
 {:.no_toc}
 
-Thanks to Mehmet Tekman for suggesting the awk tool and Jennifer Devlin for comments on the tutorial.
+Thanks to Mehmet Tekman for suggesting the awk tool. Thanks also to Jennifer Devlin, Lydia Lim and Sylvia Mahara for comments and feedback on the tutorial.
