@@ -765,8 +765,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -822,7 +820,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 16, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 7, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1032,10 +1030,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
         </li>
         <li>In <em>“Adapter Options”</em>:
           <ul>
-            <li><em>“Match times”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
             <li><em>“Maximum error rate”</em>: <code class="language-plaintext highlighter-rouge">0.1</code></li>
             <li><em>“Minimum overlap length”</em>: <code class="language-plaintext highlighter-rouge">35</code></li>
-            <li><em>“Look for adapters in the reverse complement”</em>: <code class="language-plaintext highlighter-rouge">True</code></li>
+            <li><em>“Look for adapters in the reverse complement”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
         <li>In <em>“Filter Options”</em>:
@@ -1044,9 +1041,22 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
           </ul>
         </li>
       </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-select-collection-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select collection dataset</h3>
+
+        <ol>
+          <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>
+          <li>Select the collection you want to use from the list</li>
+        </ol>
+
+      </blockquote>
     </li>
-    <li>Rename the output file as <code class="language-plaintext highlighter-rouge">HiFi_collection (trim)</code>. To rename an output file, click on the result, and then click again on the title to change it. After closing, you may need to refresh the history to see the name change.</li>
+    <li>Rename the output file as <code class="language-plaintext highlighter-rouge">HiFi_collection (trim)</code>.</li>
   </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
 
 </blockquote>
 
@@ -1057,7 +1067,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <blockquote class="comment">
   <h3 id="comment-k-mer-size-sequencing-coverage-and-genome-size"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> K-mer size, sequencing coverage and genome size</h3>
 
-  <p><em>K</em>-mers are unique substrings of length k contained within a <span class="notranslate">DNA</span> sequence. For example, the <span class="notranslate">DNA</span> sequence <em>TCGATCACA</em> can be decomposed into six unique <em>k</em>-mers that have five bases long: <em>TCGAT</em>, <em>CGATC</em>, <em>GATCA</em>, <em>ATCAC</em> and <em>TCACA</em>. A sequence of length L will have  L-k+1 <em>k</em>-mers. On the other hand, the number of possible <em>k</em>-mers can be calculated as  n<sup>k</sup>, where n is the number of possible monomers and k is the k-mer size.</p>
+  <p><em>K</em>-mers are unique substrings of length k contained within a <span class="notranslate">DNA</span> sequence. For example, the <span class="notranslate">DNA</span> sequence <em>TCGATCACA</em> can be decomposed into five unique <em>k</em>-mers that have five bases long: <em>TCGAT</em>, <em>CGATC</em>, <em>GATCA</em>, <em>ATCAC</em> and <em>TCACA</em>. A sequence of length L will have  L-k+1 <em>k</em>-mers. On the other hand, the number of possible <em>k</em>-mers can be calculated as  n<sup>k</sup>, where n is the number of possible monomers and k is the k-mer size.</p>
 
   <table>
     <thead>
@@ -1189,7 +1199,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <li>In “<em>Output options</em>”: mark <code class="language-plaintext highlighter-rouge">Summary of the analysis</code></li>
     <li>In “<em>Advanced options</em>”:
       <ul>
-        <li><em>“Create testing.tsv file with model parameters”</em>: <code class="language-plaintext highlighter-rouge">true</code></li>
+        <li><em>“Create testing.tsv file with model parameters”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ul>
@@ -1213,7 +1223,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>Now, let’s analyze the <em>k</em>-mer profiles, fitted models and estimated parameters (fig. 3).</p>
 
-<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 21-mer profile. The first peak located at coverage 21x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.637%. The plot also includes informatin about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 21-mer profile. The first peak located at coverage 21x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.637%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
 
 <p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to <em>Saccharomyces</em> genome size. Additionally, it revealed that the variation across the genomic sequences is 0.69%.</p>
 
@@ -1282,7 +1292,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<p>Now let’s parse the <code class="language-plaintext highlighter-rouge">upper bound for the read depth estimation</code> parameter.</p>
+<p>Now let’s parse the <code class="language-plaintext highlighter-rouge">upper bound for the read depth estimation</code> parameter. This parameter will be used later by purge_dups as high read depth cutoff to identify <em>junk contigs</em>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-get-maximum-read-depth"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get maximum read depth</h3>
@@ -1342,7 +1352,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<p>Finally, let’s parse the <code class="language-plaintext highlighter-rouge">transition between haploid and diploid coverage depths</code> parameter.</p>
+<p>Finally, let’s parse the <code class="language-plaintext highlighter-rouge">transition between haploid and diploid coverage depths</code> parameter. This will be used as threshold to discriminate between haploid and diploid depths.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-get-transition-parameter"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get transition parameter</h3>
@@ -1437,6 +1447,14 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input GFA file”</em>: select <code class="language-plaintext highlighter-rouge">Primary contigs graph</code> and the <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contigs graph</code> datasets</li>
       </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-select-multiple-datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+        <ol>
+          <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+          <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+        </ol>
+      </blockquote>
     </li>
     <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">Primary contigs FASTA</code> and <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contigs FASTA</code></li>
   </ol>
@@ -1518,7 +1536,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <figure id="figure-5"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="Figure 5: QUAST initial plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> QUAST HTML report. Statistics of the primary and alte<span class="notranslate">rna</span>te assembly (a). Cumulative length plot (b).</figcaption></figure>
 
-<p>According to the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose cumulative length is around 23.5Mbp. On the other hand, the second alte<span class="notranslate">rna</span>te assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 5a, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.</p>
+<p>According to the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose cumulative length is around 23.5Mbp. On the other hand, the second alte<span class="notranslate">rna</span>te assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 5b, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1626,11 +1644,11 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<p>By default, Merqury generates three collections as output: stats, plots and QV stats. The “stats” collection contains the completeness statistics, while the “QV stats” collection contains the quality value statistics. Let’s have a look at the compy number (CN) spectrum plot, known as the <em>spectra-cn</em> plot (fig. 7).</p>
+<p>By default, Merqury generates three collections as output: stats, plots and QV stats. The “stats” collection contains the completeness statistics, while the “QV stats” collection contains the quality value statistics. Let’s have a look at the primary assembly copy number (CN) spectrum plot, known as the <em>spectra-cn</em> plot (fig. 7).</p>
 
 <figure id="figure-7"><img src="../../images/vgp_assembly/merqury_cn_plot.png" alt="Figure 7: Merqury plot. " width="80%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Merqury CN plot corresponding to the primary assembly. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve.</figcaption></figure>
 
-<p>As suggested previously by the report generated by QUAST (fig. 5), the assemblies contain a large proportion of duplicated <span class="notranslate">reads</span>. The red area represents one-copy <em>k</em>-mers in the genome, while the blue area represents two-copy <em>k</em>-mers, originating from haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.</p>
+<p>As suggested previously by the report generated by QUAST (fig. 5), the assemblies contain a large proportion of duplicated <span class="notranslate">reads</span>. The red area represents one-copy <em>k</em>-mers in the genome, while the blue area represents two-copy <em>k</em>-mers, originating from haplotype-specific duplications. The fact that the primary haplotype shows a diploid genetic endowment can be explained as a result of the high divergence between the artificially generated haplotypes. In addition, from that figure, we can state that the sequencing coverage is around 50x.</p>
 
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
 
@@ -1809,6 +1827,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
         </li>
       </ul>
     </li>
+    <li>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">purge_dups <span class="notranslate">BED</span></code></p>
+    </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2"><strong>purge_dups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
       <ul>
         <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Obtain sequences after purging (get_seqs)</code>
@@ -1819,7 +1840,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
         </li>
       </ul>
     </li>
-    <li>Rename the output <code class="language-plaintext highlighter-rouge">get_seq purged sequences</code> as <code class="language-plaintext highlighter-rouge">Primary contigs purged</code> and the <code class="language-plaintext highlighter-rouge">get_seq haplotype</code> file as <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te haplotype contigs</code>.</li>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">get_seq purged sequences</code> as <code class="language-plaintext highlighter-rouge">Primary contigs purged</code> and the <code class="language-plaintext highlighter-rouge">get_seq haplotype</code> file as <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te haplotype contigs</code></li>
   </ol>
 
 </blockquote>
@@ -1967,7 +1988,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h2 id="second-round-of-assembly-evaluation">Second round of assembly evaluation</h2>
 
-<p>Once we have run purge_dups, we can evaluate the assembly again, and compare the results before and after purging. In this case, we will only evaluate the primary assembly.</p>
+<p>Once we have run purge_dups, we can evaluate the assembly again, and compare the results before and after purging.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assembly-evaluation-with-quast-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assembly evaluation with QUAST</h3>
@@ -2091,7 +2112,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h2 id="hybrid-scaffolding-using-bionano-data">Hybrid scaffolding using Bionano data</h2>
 
-<p>In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantages of optical maps is that can easily span genomic regions that are difficult to resolve using <span class="notranslate">DNA</span> sequencing technologies (<span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Yuan2020">Yuan <i>et al.</i> 2020</a></span>).</p>
+<p>In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantages of optical maps is that they can easily span genomic regions that are difficult to resolve using <span class="notranslate">DNA</span> sequencing technologies (<span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Yuan2020">Yuan <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="comment">
   <h3 id="comment-background-on-bionano-optical-maps"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background on Bionano optical maps</h3>
@@ -2191,7 +2212,6 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   <ol>
     <li>How many scaffolds are in the primary assembly after the hybrid scaffolding?</li>
     <li>What is the size of the largest scaffold?</li>
-    <li>What is the value of the statistical N50?</li>
   </ol>
 
   <blockquote class="solution">
@@ -2200,7 +2220,6 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <ol>
       <li>The number of contigs is 17.</li>
       <li>The largest contig is 1.532.843 bp long.</li>
-      <li>N50 has increased from 923.452 bp.</li>
     </ol>
 
   </blockquote>
@@ -2266,7 +2285,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
         </li>
         <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">Hi-C_dataset_F</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">Hi-C_dataset_R</code></li>
           </ul>
         </li>
         <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
@@ -2333,7 +2352,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <figure id="figure-13"><img src="../../images/vgp_assembly/hic_map_pretext.png" alt="Figure 13: Pretext optical map. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Hi-C map generated by Pretext. Primary assembly full contact map generated in this training (a) Hi-C map representative of a typical missasembly (b).</figcaption></figure>
 
-<p>In the contact generated from the Bionano-scaffolded assembly can be identified 17 scaffolds, representing each of the haploid chromosomes of our genome (fig. 13.a). The fact that all the contact signals are found around the diagonal suggest that the contigs were scaffolded in the right order. However, during the assembly of complex genomes, it is common to find in the contact maps indicators of errors during the scaffolding process, as shown in the figure 13b. In that case, a contig belonging to the third chromosome has been misplaced as part of the second chromosome.</p>
+<p>In the contact generated from the Bionano-scaffolded assembly can be identified 17 scaffolds, representing each of the haploid chromosomes of our genome (fig. 13.a). The fact that all the contact signals are found around the diagonal suggest that the contigs were scaffolded in the right order. However, during the assembly of complex genomes, it is common to find in the contact maps indicators of errors during the scaffolding process, as shown in the figure 13b. In that case, a contig belonging to the second chromosome has been misplaced as part of the fourth chromosome. We can also note that the final portion of the second chromosome should be placed at the beginning, as the off-diagonal contact signal suggests.</p>
 
 <p>Once we have evaluated the quality of the scaffolded genome assembly, the next step consists in integrating the information contained in the HiC <span class="notranslate">reads</span> into our assembly, so that any errors identified can be resolved. For this purpose we will use SALSA2 (<span class="citation"><a href="#Ghurye2019">Ghurye <i>et al.</i> 2019</a></span>).</p>
 
@@ -2562,7 +2581,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.16a,b). It is conspicuous that the reference genome consists of 17 sequences, while in our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial <span class="notranslate">DNA</span>, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 16b).</p>
 
-<figure id="figure-17"><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Figure 16: Comparison reference genome. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Comparison bwetween contact maps generated by using the final assembly (a) and the reference genome (b).</figcaption></figure>
+<figure id="figure-17"><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Figure 16: Comparison reference genome. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Comparison between contact maps generated by using the final assembly (a) and the reference genome (b).</figcaption></figure>
 
 <p>If we compare the contact map of our assembled genome (fig. 17a) with the reference assembly (fig. 17b), we can see that the two are essentially identical. This means that we have achieved an almost perfect assembly at the chromosome level.</p>
 
@@ -2680,8 +2699,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo and Anna Syme and Linelle Abueg and Brandon Pickett and Giulio Formenti",
 title = "VGP assembly pipeline (Galaxy Training Materials)",
 year = "2022",
-month = "02",
-day = "16"
+month = "03",
+day = "07"
 url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
