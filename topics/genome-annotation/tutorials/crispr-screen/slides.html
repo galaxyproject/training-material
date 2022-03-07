@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Introduction to CRISPR screen analysis</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+    <meta property="og:title" content="Galaxy Training: Introduction to CRISPR screen analysis" />
+    <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to CRISPR screen analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+  },
+  "courseCode": "genome-annotation / crispr-screen / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Introduction to CRISPR screen analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/tutorials/crispr-screen/slides.html",
+  "timeRequired": "PT5M",
+  "description": "The questions this  addresses are:\n - What is CRISPR?\n - What is a CRISPR screen?\n - How is a sgRNA library created?\n - What is the difference between a negative and positive screen?\n - How to analyse CRISPR screen data?\n\n\\nThe objectives are:\n - Describe what CRISPR screen data is\n - Outline how CRISPR screen data is generated and analysed\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Sylvia Mahara"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Sylvia Mahara"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/genome-annotation" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/crispr-screen/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Introduction to CRISPR screen analysis
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-mblue9"><img src="https://avatars.githubusercontent.com/mblue9?s=27" alt="Avatar">Maria Doyle</a>
+
+
+<a href="/training-material/hall-of-fame/sylviamahara/" class="contributor-badge contributor-sylviamahara"><img src="https://avatars.githubusercontent.com/sylviamahara?s=27" alt="Avatar">Sylvia Mahara</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+
+</div>
+
+
+<div class="footnote" style="bottom: 5.5em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Mar 7, 2022</div>
+
+<div class="footnote" style="bottom: 4em;"><a href="/training-material/videos/watch.html?v=/genome-annotation/tutorials/crispr-screen/slides"><i class="far fa-play-circle" aria-hidden="true"></i><span class="visually-hidden">video-slides</span> View video slides for this lecture</a></div>
+
+<div class="footnote" style="bottom: 2.5em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a></div>
+<div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is CRISPR?
+
+- What is a CRISPR screen?
+
+- How is a sgRNA library created?
+
+- What is the difference between a negative and positive screen?
+
+- How to analyse CRISPR screen data?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Describe what CRISPR screen data is
+
+- Outline how CRISPR screen data is generated and analysed
+
+
+---
+
+
+### What is CRISPR?
+
+.center[Overview of CRISPR knockout method]
+
+.image-100[![CRISPR method](../../images/crispr-screen/what_is_crispr.png)]
+
+
+???
+
+- CRISPR stands for Clustered Regularly Interspaced Short Palindromic Repeats.
+- It's a bacterial immune system that has been modified for genome editing.
+- It consists of 2 components - a guide RNA and a non-specific CRISPR-associated endonuclease called Cas9.
+- The guide RNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding and ~20 nucleotide spacer sequence that binds to the genomic target.
+- Cas9 induces a double-stranded break within the target DNA.
+- This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the targeted gene.
+- With CRISPR knockout methods, ideally the end result is a loss-of-function mutation within the targeted gene.
+- There are also CRISPR inhibition and activation methods but in this tutorial we focus on knockout.
+
+---
+
+### What is a CRISPR screen?
+
+.center[CRISPR screens help us to identify the functions of genes]
+
+.image-100[![CRISPR screen](../../images/crispr-screen/what_is_a_crispr_screen.png)]
+
+.pull-right[Source: [Peter.Grant.ubc](https://en.wikipedia.org/w/index.php?curid=63278077)]
+
+???
+
+- The ease of generating guide RNAs makes CRISPR one of the most scalable genome editing technologies.
+- It can be used for genome-wide screens, enabling systematic targeting of 1000s of genes, with one gene targeted per cell.
+- With these screens we can identify the functions of genes, such as those essential for cell survival, drug resistance or sensitivity.
+- Pooled or arrayed screens can be performed. In this tutorial we analyse data from a pooled screen.
+
+---
+
+### How is an sgRNA library created?
+
+.pull-right[
+
+.image-60[![sgRNA library](../../images/crispr-screen/how_sgRNA_library_created.png)]
+
+]
+
+.pull-left[
+
+* Various sgRNA libraries available e.g Brunello, Gecko, Yusa and [others](https://www.addgene.org/crispr/libraries/)
+
+* In this tutorial we use Brunello (77,441 sgRNAs: ~4 per human gene + 1000 non-targeting controls)
+
+* Cas9 expressing cells are transfected with sgRNA library
+
+]
+
+---
+
+### What is the difference between a negative and positive screen?
+
+.image-100[![Neg and pos screens](../../images/crispr-screen/pos_neg_screen.png)]
+
+.pull-right[Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)]
+
+???
+
+- CRISPR positive or negative screens can be performed.
+- With a positive screen, most cells die after the treatment and we are interested in identifying genes whose sgRNAs increase and dominate, indicating knocking out those genes helps cells survive that treatment.
+- With a negative screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose guide RNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive that treatment.
+- In this tutorial we analyse data from a negative screen.
+
+
+---
+
+### A workflow for CRISPR screen analysis
+
+![CRISPR workflow](../../images/crispr-screen/crispr_workflow.png)
+
+
+???
+
+- This is an overview of the workflow used in the tutorial.
+- We first prepare the reads checking quality and trimming adapters.
+- We then use the MAGeCK toolkit to analyse, followed by visualising results using volcano plots and identifying pathways.
+
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+
+<div class="contributors-line">
+
+<a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-mblue9"><img src="https://avatars.githubusercontent.com/mblue9?s=27" alt="Avatar">Maria Doyle</a>
+
+
+<a href="/training-material/hall-of-fame/sylviamahara/" class="contributor-badge contributor-sylviamahara"><img src="https://avatars.githubusercontent.com/sylviamahara?s=27" alt="Avatar">Sylvia Mahara</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

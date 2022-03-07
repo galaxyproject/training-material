@@ -1,0 +1,2101 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>CRISPR screen analysis</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:title" content="Galaxy Training: CRISPR screen analysis" />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/crispr-screen/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/crispr-screen/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/crispr-screen/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/crispr-screen/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-03-01/topics/genome-annotation/tutorials/crispr-screen/tutorial.html" title="Version 2022-03-01">2022-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/genome-annotation/tutorials/crispr-screen/tutorial.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-01-01/topics/genome-annotation/tutorials/crispr-screen/tutorial.html" title="Version 2022-01-01">2022-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxy-genome-annotation/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "CRISPR screen analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+  },
+  "courseCode": "genome-annotation / crispr-screen / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'CRISPR screen analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/tutorials/crispr-screen/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "annotating, CRISPR",
+  "description": "The questions this  addresses are:\n - What are the steps to process CRISPR screen data?\n - How to identify essential genes across experimental conditions?\n\n\\nThe objectives are:\n - Apply appropriate analysis and quality control steps for CRISPR screen data\n - Identify differentially enriched genes across conditions\n - Generate volcano plot to visualise results\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "name": "Using dataset collections",
+      "description": "Hands-on for 'Using dataset collections' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html",
+      "name": "Rule Based Uploader",
+      "description": "Hands-on for 'Rule Based Uploader' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Kenji Fujihara"
+    },
+    {
+      "@type": "Person",
+      "name": "Twishi Gulati"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Kenji Fujihara"
+    },
+    {
+      "@type": "Person",
+      "name": "Twishi Gulati"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>CRISPR screen analysis</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-mblue9"><img src="https://avatars.githubusercontent.com/mblue9?s=27" alt="Avatar">Maria Doyle</a>
+
+
+<a href="/training-material/hall-of-fame/kenjifujihara/" class="contributor-badge contributor-kenjifujihara"><img src="https://avatars.githubusercontent.com/kenjifujihara?s=27" alt="Avatar">Kenji Fujihara</a>
+
+
+<a href="/training-material/hall-of-fame/twishigulati/" class="contributor-badge contributor-twishigulati"><img src="https://avatars.githubusercontent.com/twishigulati?s=27" alt="Avatar">Twishi Gulati</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the steps to process CRISPR screen data?</p>
+</li>
+        
+        <li><p>How to identify essential genes across experimental conditions?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Apply appropriate analysis and quality control steps for CRISPR screen data</p>
+</li>
+        
+        <li><p>Identify differentially enriched genes across conditions</p>
+</li>
+        
+        <li><p>Generate volcano plot to visualise results</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Using dataset collections:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Rule Based Uploader:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/genome-annotation/tutorials/crispr-screen/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/5750854">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/crispr-screen/workflows/" title="Workflows" alt="CRISPR screen analysis workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                 <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/crispr-screen/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+  </li>
+
+
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 7, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The Clustered Regularly Interspaced Short Palindromic Repeats (CRISPR) system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Dou<span class="notranslate">dna</span> in 2020 (<span class="citation"><a href="#Uyhazi2021">Uyhazi and Bennett 2021</a></span>). CRISPR consists of two components: a guide <span class="notranslate">RNA</span> (g<span class="notranslate">RNA</span>) and a non-specific CRISPR-associated endonuclease (Cas9). The g<span class="notranslate">RNA</span> is a short synthetic <span class="notranslate">RNA</span> composed of a scaffold sequence necessary for Cas9-binding (tr<span class="notranslate">RNA</span>) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (cr<span class="notranslate">RNA</span>). Cas9 induces double-stranded breaks (DSB) within the target <span class="notranslate">DNA</span>. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.</p>
+
+<p>The ease of generating g<span class="notranslate">RNA</span>s makes <abbr title="Clustered Regularly Interspaced Short Palindromic Repeats">CRISPR</abbr> one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen (<span class="citation"><a href="#Cluse2018">Cluse <i>et al.</i> 2018</a></span>) and they are being increasingly used to obtain biological insight (<span class="citation"><a href="#Bock2022">Bock <i>et al.</i> 2022</a></span>, <span class="citation"><a href="#Przybyla2021">Przybyla and Gilbert 2021</a></span>). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.</p>
+
+<figure id="figure-1"><img src="../../images/crispr-screen/crispr_screen.jpg" alt="Illustration of CRISPR Screen Method. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> CRISPR knockout and activation methods (from <span class="citation"><a href="#Joung2016">Joung <i>et al.</i> 2016</a></span>)</figcaption></figure>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preparing-the-reads" id="markdown-toc-preparing-the-reads">Preparing the <span class="notranslate">reads</span></a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+      <li><a href="#raw-reads-qc" id="markdown-toc-raw-reads-qc">Raw <span class="notranslate">reads</span> QC</a></li>
+      <li><a href="#trim-adapters" id="markdown-toc-trim-adapters">Trim adapters</a></li>
+    </ol>
+  </li>
+  <li><a href="#counting" id="markdown-toc-counting">Counting</a></li>
+  <li><a href="#testing" id="markdown-toc-testing">Testing</a>    <ol>
+      <li><a href="#two-conditions" id="markdown-toc-two-conditions">Two conditions</a></li>
+      <li><a href="#optional-multiple-conditions" id="markdown-toc-optional-multiple-conditions">(Optional) Multiple conditions</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="preparing-the-reads">Preparing the <span class="notranslate">reads</span></h1>
+
+<h2 id="data-upload">Data upload</h2>
+
+<p>Here we will demonstrate analysing <abbr title="Clustered Regularly Interspaced Short Palindromic Repeats">CRISPR</abbr> screen using data from <span class="citation"><a href="#Fujihara2020">Fujihara <i>et al.</i> 2020</a></span>. There are 3 samples from the human esophageal cancer cell line (OACM5.1): a baseline sample taken at time zero (T0-Control), a sample treated with drug for 8 days (T8-APR-246) and a control sample treated with vehicle for 8 days (T8-Vehicle). The aim is to identify genes whose knockout increases the cancer cells sensitivity to the drug. We will use FASTQ files containing 1% of <span class="notranslate">reads</span> from the original samples to demonstrate the read processing steps.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-retrieve-crispr-screen-fastq-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieve CRISPR screen fastq datasets</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li>Click on <strong>Rule-based</strong> tab</li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li>
+          <p>Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T0-Control https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T0-Control.fastq.gz
+T8-APR-246 https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-APR-246.fastq.gz
+T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-Vehicle.fastq.gz
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <p><img src="../../images/crispr-screen/crispr_rule_uploader.png" alt="Rule-based Uploader. " loading="lazy" /></p>
+
+      <ul>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>
+              <p>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>: column <code class="language-plaintext highlighter-rouge">A</code></p>
+
+              <blockquote class="tip">
+                <h3 id="tip-cant-find-list-identifier"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Can’t find <em>List Identifier</em>?</h3>
+                <p>Then you’ve chosen to upload as a ‘dataset’ and not a ‘collection’. Close the upload menu, and restart the process, making sure you check <em>Upload data as</em>: <strong>Collection(s)</strong></p>
+              </blockquote>
+            </li>
+            <li>
+              <p>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></p>
+            </li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
+        <li>In the Name: box type <code class="language-plaintext highlighter-rouge">fastqs</code> and press <kbd>Upload</kbd></li>
+      </ul>
+
+      <p><img src="../../images/crispr-screen/crispr_rule_editor.png" alt="Rule-based Editor. " loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="raw-reads-qc">Raw <span class="notranslate">reads</span> QC</h2>
+
+<p>First we’ll check the quality of the raw read sequences with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and aggregate the reports from the multiple samples with <a href="https://multiqc.info/">MultiQC</a> (<span class="citation"><a href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a></span>). We will check if the base quality is good and for presence of adapters. For more details on quality control and what the other FastQC plots mean see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>.
+With CRISPR screens we expect adapter sequence to be present, surrounding the guide. The adapters for the Brunello library vector used with this dataset (<a href="https://www.addgene.org/52963/">lentiGuide-Puro</a>) are shown below. We’ll get FASTQC to check for their presence by providing an adapters file with their sequences.</p>
+
+<figure id="figure-2"><img src="../../images/crispr-screen/adapter_sequences_dataset.png" alt="Adapter sequences dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> <span class="notranslate">Reads</span> from the T8-APR-246 sample with one of the guide sequences highlighted in blue (controlguide1 from Brunello library file). The adapter sequences are in red, directly adjacent to the guide on the right and left. The bases in purple at the start of the <span class="notranslate">reads</span> are stagger regions of different length (0-8bp), required to maintain diversity across the flowcell during sequencing of CRISPR screens.</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-adapters-file"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Adapters file</h3>
+
+  <p>The adapters file (<code class="language-plaintext highlighter-rouge">adapter_list.tsv</code>) we use here with FASTQC was created by adding the two CRISPR adapter sequences (5’ and 3’ of the guide) to the bottom of the adapters file used by FASTQC <a href="https://github.com/s-andrews/FastQC/blob/master/Configuration/adapter_list.txt">here</a>. The first 12 bases of the CRISPR adapters were used, as that length is currently recommended in the FASTQC adapters file.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
+
+  <ol>
+    <li>Import the adapters file from <a href="https://zenodo.org/record/5750854">Zenodo</a> or the Shared Data library (if available):
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/adapter_list.tsv
+</code></pre></div>      </div>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: fastqs (click “Dataset collection” button on left-side of this input field)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span><em>“Adapter list”</em>: <code class="language-plaintext highlighter-rouge">adapter_list.tsv</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters to aggregate the FastQC reports:
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
+            <li>In <em>“FastQC output”</em>
+              <ul>
+                <li><em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code></li>
+                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code> files (output of <strong>FastQC</strong>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Add a tag (<code class="language-plaintext highlighter-rouge">#fastqc-untrimmed</code>) to the MultiQC webpage to make it easy to differentiate this dataset in the History from other MultiQC reports we will generate.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>  <li>Click on the dataset</li>  <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>  <li>    <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>    <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>  </li>  <li>Check that the tag is appearing below the dataset name</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Inspect the webpage output from MultiQC</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What is the read length?</li>
+          <li>What do you think of the base quality of the sequences?</li>
+          <li>Are adapters detected?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>The read length is 75 bp.</li>
+            <li>
+              <p>The base quality is good for the 3 files, as can be seen in the plot below.</p>
+
+              <p><img src="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" alt="Sequence quality. " loading="lazy" /></p>
+            </li>
+            <li>
+              <p>Yes. In the Adapter Content plot (below) we can see the two CRISPR adapters have been detected. The adapter 5 prime of the sg<span class="notranslate">RNA</span> starts appearing at the beginning of the <span class="notranslate">reads</span> and has been detected in nearly 100% of <span class="notranslate">reads</span>. The adapter 3 prime of the sg<span class="notranslate">RNA</span> appears after base 40. There’s also a little Illumina Universal adapter detected towards the ends of some <span class="notranslate">reads</span> which indicate the presence of short fragments, possibly adapter dimers.</p>
+
+              <p><img src="../../images/crispr-screen/fastqc_adapter_content_plot.png" alt="Adapter content. " loading="lazy" /></p>
+            </li>
+          </ol>
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="trim-adapters">Trim adapters</h2>
+
+<p>We’ll trim the adapters from these sequences using <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>). To trim, we’ll use the 5’ adapter sequence. We don’t need to trim the 3’ adapter as Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout (MAGeCK) will only use the first 20bp from each read. It determines the number of bases to use automatically from the length of the sequences in the library file, in our case 20bp, or we can specify the sg<span class="notranslate">RNA</span> length.</p>
+
+<blockquote class="details">
+  <h3 id="details-adapter-trimming"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Adapter trimming</h3>
+
+  <p>In this dataset the adapters start at different positions in the <span class="notranslate">reads</span>, as was shown above. MAGeCK count can trim adapters around the guide sequences. However, the adapters need to start at the same position in each read, requiring the same trimming length, as described on the MAGeCK website <a href="https://sourceforge.net/p/mageck/wiki/advanced_tutorial/">here</a>. An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn’t be able to trim the 5’ adapter properly and you would only get ~60% <span class="notranslate">reads</span> <span class="notranslate">mapping</span> instead of &gt;80%.</p>
+
+  <figure id="figure-3"><img src="../../images/crispr-screen/adapter_sequences_mageck.png" alt="Adapters MAGeCK can trim. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is higlighted in blue with the adapter sequences directly adjacent on the right and left. MAGeCK count uses the first 20 bases of each read to map so the sequence after the guide is less important to trim exactly.</figcaption></figure>
+
+  <p>For this dataset, as the adapters are not at the same position in each read, we need to trim the adapters before running MAGeCK count.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-trim-adapters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Trim adapters</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy0"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file #1”</em>: all fastq.gz files</li>
+            <li>In <em>“Read 1 Options”</em>:
+              <ul>
+                <li>In <em>“5’ (End) Adapters”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 5’ (Front) Adapters”</em>
+                      <ul>
+                        <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom sequence</code>
+                          <ul>
+                            <li><em>“Enter custom 5’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">TTGTGGAAAGGACGAAACACCG</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Outputs selector”</em>:
+          <ul>
+            <li><em>“Report”</em>: tick</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the Cutadapt report</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>For sample T8-APR-246:</p>
+
+        <p>What % of <span class="notranslate">reads</span> contained adapter?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>99.6%</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters to aggregate the Cutadapt reports:
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Cutadapt/Trim Galore!</code>
+              <ul>
+                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of Cutadapt”</em>: <code class="language-plaintext highlighter-rouge">Report</code> files (output of <strong>Cutadapt</strong>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Add a tag (<code class="language-plaintext highlighter-rouge">#cutadapt-report</code>) to the MultiQC webpage to differentiate this report from the previous (FastQC) one</p>
+    </li>
+    <li>Inspect the MultiQC report</li>
+  </ol>
+
+</blockquote>
+
+<p>MultiQC produces a 5’ trimmed sequences plot where we can check the results are as expected. Here we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) (<a href="https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf">see sequencing protocol</a>). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. The trimmed sequence lengths are what we expect for this dataset and the plot looks similar for all our samples which is good.</p>
+
+<p><img src="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" alt="Plot showing lengths of sequences trimmed from 5' end of reads. " width="70%" loading="lazy" /></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Exercise: Quality control of the polished datasets</h3>
+  <p>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+<span class="notranslate">galaxy</span>0</span></span>  and <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+<span class="notranslate">galaxy</span>0</span></span>  like before, but using the the trimmed datasets produced by Cutadapt as input.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>How did read trimming affect the Adapter Content plot?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <p>In the Adapter Content section we now don’t have any 5’ adapter detected. The first 20bp of the <span class="notranslate">reads</span>, what MAGeCK will use for our dataset, has no adapter detected.</p>
+
+      <p><img src="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" alt="Plot of trimmed sequences showing no adapter detected in first 20 bases. " width="50%" loading="lazy" /></p>
+
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h1 id="counting">Counting</h1>
+
+<p>For the rest of the <abbr title="Clustered Regularly Interspaced Short Palindromic Repeats">CRISPR</abbr> screen analysis, counting and testing, we’ll use the tool called <abbr title="Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout">MAGeCK</abbr> (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span>).</p>
+
+<p>To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the <a href="https://www.addgene.org/pooled-library/broadgpp-human-knockout-brunello/">Brunello library</a> (<span class="citation"><a href="#Doench2016">Doench <i>et al.</i> 2016</a></span>) which contains 77,441 sg<span class="notranslate">RNA</span>s, an average of 4 sg<span class="notranslate">RNA</span>s per gene, and 1000 non-targeting control sg<span class="notranslate">RNA</span>s. <strong>The library file must be tab-separated and contain no spaces within the gene or target names</strong>. If necessary, there are tools in <span class="notranslate">Galaxy</span> that can format the file removing spaces and converting commas to tabs.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-count-guides-per-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count guides per gene</h3>
+  <ol>
+    <li>Import the sg<span class="notranslate">RNA</span> library file
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/brunello.tsv
+</code></pre></div>      </div>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4"><strong>MAGeCK count</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4</span></span>  with the following parameters:
+      <ul>
+        <li><em>“<span class="notranslate">Reads</span> Files or Count Table?”</em>: <code class="language-plaintext highlighter-rouge">Separate <span class="notranslate">Reads</span> files</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sample <span class="notranslate">reads</span>”</em>: the <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (outputs of <strong>Cutadapt</strong>)</li>
+          </ul>
+        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sg<span class="notranslate">RNA</span> library file”</em>: the <code class="language-plaintext highlighter-rouge">brunello.tsv</code> file</li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Output Count Summary file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Output plots”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>We have been using 1% of <span class="notranslate">reads</span> from the samples. Import the MAGeCK count files (sg<span class="notranslate">RNA</span> counts, counts summary and plots pdf) for the full dataset so you can see what results for a real dataset looks like.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_sg<span class="notranslate">rna</span>_counts.tsv
+https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_count_summary.tsv
+https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_count_report.pdf
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>MAGeCK count outputs:</p>
+
+<ul>
+  <li>a sg<span class="notranslate">RNA</span> Counts file</li>
+  <li>a Count Summary file</li>
+  <li>a PDF report</li>
+</ul>
+
+<p><strong>Count Summary file</strong></p>
+
+<p>The contents of the count summary file is explained on the MAGeCK website <a href="https://sourceforge.net/p/mageck/wiki/output/#count_summary_txt">here</a>, also shown below. The columns are as follows. To help you evaluate the quality of the data, recommended values from the MAGeCK authors are shown in bold.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td>The fastq (or the count table) file used.</td>
+    </tr>
+    <tr>
+      <td>Label</td>
+      <td>The label of that fastq file assigned.</td>
+    </tr>
+    <tr>
+      <td><span class="notranslate">Reads</span></td>
+      <td>Total number <span class="notranslate">reads</span> in the fastq file. <strong>(Recommended: 100~300 times the number of sg<span class="notranslate">RNA</span>s)</strong></td>
+    </tr>
+    <tr>
+      <td>Mapped</td>
+      <td>Total number of <span class="notranslate">reads</span> that can be mapped to library</td>
+    </tr>
+    <tr>
+      <td>Percentage</td>
+      <td>Mapped percentage, calculated as Mapped/<span class="notranslate">Reads</span> <strong>(Recommended: at least 60%)</strong></td>
+    </tr>
+    <tr>
+      <td>Totalsg<span class="notranslate">RNA</span>s</td>
+      <td>Total number of sg<span class="notranslate">RNA</span>s in the library</td>
+    </tr>
+    <tr>
+      <td>Zerocounts</td>
+      <td>Total number of missing sg<span class="notranslate">RNA</span>s (sg<span class="notranslate">RNA</span>s that have 0 counts) <strong>(Recommended: no more than 1%)</strong></td>
+    </tr>
+    <tr>
+      <td>GiniIndex</td>
+      <td>The Gini Index of the read count distribution. A smaller value indicates more eveness of the count distribution. <strong>(Recommended: around 0.1 for plasmid or initial state samples, and around 0.2-0.3 for negative selection samples)</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="details">
+  <h3 id="details-gini-index"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Gini index</h3>
+
+  <p>Gini index is a measure of inequality from economics. It is used in CRISPR analysis to assess if sg<span class="notranslate">RNA</span>s are present in equal amounts. In positive selection experiments, where only some sg<span class="notranslate">RNA</span>s dominate, the index can be high. However, as discussed in <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span>, in plasmid library, in early time points, or negative selection experiments, we expect fairly even
+distribution of the remaining sg<span class="notranslate">RNA</span>s that haven’t been negatively selected. A high Gini index in these types of sample can indicate CRISPR oligonucleotide synthesis unevenness, low viral transfection efficiency, and overselection, respectively.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Is the data quality good for the 3 samples? Use the count summary file for the full dataset, and the recommended values in the table above, to answer these questions.</p>
+
+  <ol>
+    <li>Have we sequenced enough <span class="notranslate">reads</span>?</li>
+    <li>Is the mapped percentage good?</li>
+    <li>Is the sg<span class="notranslate">RNA</span> zero count value good?</li>
+    <li>Is the Gini Index good?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The number of <span class="notranslate">reads</span> is ok. For example, for T0 control sample we have 17,272,052 <span class="notranslate">reads</span> mapped to guides. We have 77,441 guides so we have ~220 <span class="notranslate">reads</span> per guide (17,272,052/77,441). A minimum of 100 <span class="notranslate">reads</span> per guide, preferably 300, is recommended.</li>
+      <li>Yes, in the summary we have &gt;85% mapped for all 3 samples. <abbr title="Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout">MAGeCK</abbr> count does not allow any base mismatches between the <span class="notranslate">reads</span> and the library file, as described <a href="https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-1-allow-mismatches-for-read-mapping">here</a> so we expect not all <span class="notranslate">reads</span> will map. Note that we filtered out (6-10%) <span class="notranslate">reads</span> with Cutadapt so we should include those in our unmapped % if we want an accurate count.</li>
+      <li>T0-Control has 0.71% (546/77441 * 100) sg<span class="notranslate">RNA</span>s that have no <span class="notranslate">reads</span> mapped, which is good. The T8 samples are just slightly high at 2.3% (1752/77441 * 100) and 2.8% (2170/77441 * 100).</li>
+      <li>The Gini Index is 0.09 for T0-Control (initial state) which is good. The T8 samples are higher at 0.13 and 0.14 but good for a negative selection experiment.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>MAGeCK count can also generate a PDF with plots that can help assess quality.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-assess-mageck-count-plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assess mageck count plots</h3>
+
+  <p>Inspect the PDF we imported above.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>What can you determine about the samples from the plots?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <p>In the boxplots, we can see we have largely similiar distributions of counts for the 3 samples. The greater length of the box and between whiskers in the T8 samples compared to the control tells us we have a bit more variability of counts in those samples, more guides with low and high counts in T8 compared to the T0.
+<img src="../../images/crispr-screen/mageck_count_boxplots.png" alt="MAGeCK count boxplots. " loading="lazy" /></p>
+
+      <p>The Distribution of read counts plot shows us how many guides we have for each count (the frequency sums to the total no. of guides 77,441). Similar to the boxplots, the wider distribution for T8 compared to T0 shows us that those samples have more guides with low and high counts. The peak for T0 appears lower just because it has more points (bins) in the plot.
+<img src="../../images/crispr-screen/mageck_count_histogram.png" alt="MAGeCK count histograms. " loading="lazy" /></p>
+
+      <p>The PCA plot shows us the samples from the different conditions separate well. The T8 samples are a bit more similar to each other, to each other on PC1 axis than to T0. If we had more samples we could use this plot to check for clustering of replicates, batch effect or outliers.
+<img src="../../images/crispr-screen/mageck_count_pca.png" alt="MAGeCK count PCA plot. " loading="lazy" /></p>
+
+      <p>The hierarchical clustering plot also shows us that the T8 samples are a bit more similar to each other than to T0.
+<img src="../../images/crispr-screen/mageck_count_clustering.png" alt="MAGeCK count hierarchical clustering plot. " loading="lazy" /></p>
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The paper by <span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span> has more information on MAGeCK quality control.</p>
+
+<h1 id="testing">Testing</h1>
+
+<p>Now that we’ve generated our guide counts, we’ll use MAGeCK test to identify essential genes. Essential means positively or negatively selected sg<span class="notranslate">RNA</span>s and genes. CRISPR positive or negative selection screens can be performed. With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sg<span class="notranslate">RNA</span>s increase and dominate, indicating loss of those genes helps cells survive that treatment. This can help identify genes essential for drug resistance. With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose sg<span class="notranslate">RNA</span>s decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment. This can help identify genes essential for drug sensitivity. Regardless of the type of screen performed (positive or negative), MAGeCK can identify both positively and negatively selected genes in the screen (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>). The dataset we are using in this tutorial is from a negative selection screen where the aim is to identify genes whose knockout increases the cancer cells sensitivity to the drug.</p>
+
+<figure id="figure-4"><img src="../../images/crispr-screen/pos_neg_screen.png" alt="Positive and negative selection screens. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)</figcaption></figure>
+
+<h2 id="two-conditions">Two conditions</h2>
+
+<p>If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8-Vehicle) we can use MAGeCK test. MAGeCK test uses a robust ranking aggregation (RRA) algorithm (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>).</p>
+
+<figure id="figure-5"><img src="../../images/crispr-screen/mageck_rra_algorithm.png" alt="Diagram of MAGeCK RRA algorithm. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Overview of the MAGeCK algorithm. Raw read counts corresponding to single-guided <span class="notranslate">RNA</span>s (sg<span class="notranslate">RNA</span>s) from different experiments are first normalized using median normalization and mean-variance modeling is used to capture the relationship of mean and variance in replicates. The statistical significance of each sg<span class="notranslate">RNA</span> is calculated using the learned mean-variance model. Essential genes (both positively and negatively selected) are then identified by looking for genes whose sg<span class="notranslate">RNA</span>s are ranked consistently higher (by significance) using robust rank aggregation (RRA) (from <span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>)</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-test-for-enrichment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test for enrichment</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1"><strong>MAGeCKs test</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Counts file”</em>: <code class="language-plaintext highlighter-rouge">kenji_mageck_sg<span class="notranslate">RNA</span>_counts.tsv</code>(the counts file for the full dataset that we imported)</li>
+        <li><em>“Specify Treated samples or Control”</em>: <code class="language-plaintext highlighter-rouge">Treated samples</code>
+          <ul>
+            <li><em>“Treated Sample Labels (or Indexes)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+          </ul>
+        </li>
+        <li><em>“Control Sample Labels (or Indexes)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Output normalized counts file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Output plots”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="details">
+    <h3 id="details-mageck-test-sample-names"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> MAGeCK test sample names</h3>
+
+    <p>For MAGeCK test we could specify the samples using their names, which must match the names used in the columns of the counts file, but the hyphens we have in our sample names aren’t allowed. We could change the hyphens in the counts file or we can specify the samples by their positions in the counts file, with the first sample column being 0. We do that here.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-replicates"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Replicates</h3>
+
+  <p>If we have biological and/or technical replicates we can handle them in a similar way to that described on the <a href="https://sourceforge.net/p/mageck/wiki/QA/#how-to-deal-with-biological-replicates-and-technical-replicates">MAGeCK website</a>.
+For biological replicates, we input them in MAGeCK test Treated Sample Labels/Control Sample Labels fields separated by a comma.
+For technical replicates, we could combine the fastqs for each sample/biological replicate, for example with the <strong>Concatenate datasets</strong> tool, before running MAGeCK count.</p>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-normalization"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Normalization</h3>
+
+  <p>We are using MAGeCK’s default normalization method “median” which is more robust to outliers.
+Figure M1 from <span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span> shows a comparison of median (“median”) versus total (“total”) normalization for two CRISPR screen datasets.
+The distribution of the read counts of significant sg<span class="notranslate">RNA</span>s (FDR=1%) was compared with the mean read count distribution of all sg<span class="notranslate">RNA</span>s (“all”, black). The distribution of the significant sg<span class="notranslate">RNA</span>s should be similar to the distribution of all sg<span class="notranslate">RNA</span>s if the normalization method is unbiased. The difference is small for the leukemia dataset. However, in the melanoma dataset, where a few sg<span class="notranslate">RNA</span>s have very large read counts, the difference is larger, as “total” normalization will prefer sg<span class="notranslate">RNA</span>s with higher read-counts. In contrast, the distribution after “median” normalization is closer to the distribution of all sg<span class="notranslate">RNA</span>s.</p>
+
+  <p><img src="../../images/crispr-screen/median_vs_total.png" alt="Median versus Total normalization. " loading="lazy" /></p>
+
+  <p>If many genes have zero counts, such as after treatment in a positive selection screen, the median may be zero and we may get a message in the MAGeCK log that we have to use total normalization.</p>
+
+  <p>Instead of median or total, we could choose to normalize using control guide sg<span class="notranslate">RNA</span>s. However, we would need to know that they’re not changing due to the experiment or introducing bias (<span class="citation"><a href="#Chen2018">Chen <i>et al.</i> 2018</a></span>).</p>
+</blockquote>
+
+<p><abbr title="Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout">MAGeCK</abbr> test outputs:</p>
+
+<ul>
+  <li>a Gene Summary file</li>
+  <li>a sg<span class="notranslate">RNA</span> Summary file</li>
+  <li>a PDF report</li>
+</ul>
+
+<p><strong>Gene Summary file</strong></p>
+
+<p>The Gene Summary file contains the columns described below and a row for each gene targeted by sg<span class="notranslate">RNA</span>s. We have &gt;20,000 genes in the file for this dataset.
+We get values for both negative and positive selection. The dataset here is from a negative selection screen so we are most interested in the negative values.
+Genes are ranked by the p.neg field (by default). If you need a ranking by the p.pos, you can use the <strong>Sort</strong> data in ascending or descending order tool in <span class="notranslate">Galaxy</span>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column name</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Gene ID</td>
+    </tr>
+    <tr>
+      <td>num</td>
+      <td>The number of targeting sg<span class="notranslate">RNA</span>s for each gene</td>
+    </tr>
+    <tr>
+      <td>neg|score</td>
+      <td>The RRA lo value of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>neg|p-value</td>
+      <td>The raw p-value (using permutation) of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>neg|fdr</td>
+      <td>The false discovery rate of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>neg|rank</td>
+      <td>The ranking of this gene in negative selection</td>
+    </tr>
+    <tr>
+      <td>neg|goodsg<span class="notranslate">rna</span></td>
+      <td>The number of “good” sg<span class="notranslate">RNA</span>s, i.e., sg<span class="notranslate">RNA</span>s whose ranking is below the alpha cutoff (determined by the –gene-test-fdr-threshold option), in negative selection.</td>
+    </tr>
+    <tr>
+      <td>neg|lfc</td>
+      <td>The log2 fold change of this gene in negative selection. The way to calculate gene lfc is controlled by the –gene-lfc-method option</td>
+    </tr>
+    <tr>
+      <td>pos|score</td>
+      <td>The RRA lo value of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>pos|p-value</td>
+      <td>The raw p-value (using permutation) of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>pos|fdr</td>
+      <td>The false discovery rate of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>pos|rank</td>
+      <td>The ranking of this gene in positive selection</td>
+    </tr>
+    <tr>
+      <td>pos|goodsg<span class="notranslate">rna</span></td>
+      <td>The number of “good” sg<span class="notranslate">RNA</span>s, i.e., sg<span class="notranslate">RNA</span>s whose ranking is below the alpha cutoff (determined by the –gene-test-fdr-threshold option), in positive selection.</td>
+    </tr>
+    <tr>
+      <td>pos|lfc</td>
+      <td>The log fold change of this gene in positive selection</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>sg<span class="notranslate">RNA</span> summary file</strong></p>
+
+<p>The sg<span class="notranslate">RNA</span> Summary file contains the columns described below. We can use the sg<span class="notranslate">RNA</span> file to check how the individual guides for genes of interest performed.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sg<span class="notranslate">rna</span></td>
+      <td>sg<span class="notranslate">RNA</span> ID</td>
+    </tr>
+    <tr>
+      <td>Gene</td>
+      <td>The targeting gene</td>
+    </tr>
+    <tr>
+      <td>control_count</td>
+      <td>Normalized read counts in control samples</td>
+    </tr>
+    <tr>
+      <td>treatment_count</td>
+      <td>Normalized read counts in treatment samples</td>
+    </tr>
+    <tr>
+      <td>control_mean</td>
+      <td>Median read counts in control samples</td>
+    </tr>
+    <tr>
+      <td>treat_mean</td>
+      <td>Median read counts in treatment samples</td>
+    </tr>
+    <tr>
+      <td>LFC</td>
+      <td>The log2 fold change of sg<span class="notranslate">RNA</span></td>
+    </tr>
+    <tr>
+      <td>control_var</td>
+      <td>The raw variance in control samples</td>
+    </tr>
+    <tr>
+      <td>adj_var</td>
+      <td>The adjusted variance in control samples</td>
+    </tr>
+    <tr>
+      <td>score</td>
+      <td>The score of this sg<span class="notranslate">RNA</span></td>
+    </tr>
+    <tr>
+      <td>p.low</td>
+      <td>p-value (lower tail)</td>
+    </tr>
+    <tr>
+      <td>p.high</td>
+      <td>p-value (higher tail)</td>
+    </tr>
+    <tr>
+      <td>p.twosided</td>
+      <td>p-value (two sided)</td>
+    </tr>
+    <tr>
+      <td>FDR</td>
+      <td>false discovery rate</td>
+    </tr>
+    <tr>
+      <td>high_in_treatment</td>
+      <td>Whether the abundance is higher in treatment samples</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>PDF report</strong></p>
+
+<p>The PDF shows plots of the top 10 negatively and positively selected genes.
+We can see the top genes ranked by RRA scores or p value. These values come from the gene summary file.</p>
+
+<p><img src="../../images/crispr-screen/mageck_test_rra_scores.png" alt="MAGeCK test RRA scores. " loading="lazy" /></p>
+
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What are the top 3 negatively selected genes by P value?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>ESD, MTHFD1L and SHMT2, the same as by RRA score. RRA score is like p-value. Those genes are part of the glutathione pathway which was found to be altered in the published paper for this dataset.</p>
+
+    <p><img src="../../images/crispr-screen/mageck_test_pvalues.png" alt="MAGeCK test pvalues. " loading="lazy" /></p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The PDF also shows plots with the sg<span class="notranslate">RNA</span> counts for the top 10 genes. These values are the normalized counts for each sg<span class="notranslate">RNA</span> from the sg<span class="notranslate">RNA</span> summary file. With these plots we can see if the counts of all the sg<span class="notranslate">RNA</span>s for these top genes are changing similarly.</p>
+
+<p><img src="../../images/crispr-screen/esd_plot.png" alt="Plot showing guide counts for ESD gene. " width="50%" loading="lazy" /></p>
+
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Are all the sg<span class="notranslate">RNA</span>s for FLI1 (the 4th top neg gene) changing similarly?</li>
+    <li>In the gene summary table, how many of the negatively selected genes have FDR &lt; 0.05?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>No. We can see in this case that, while one sg<span class="notranslate">RNA</span> is a lot lower in the APR treated sample compared to the vehicle, one increases a little, and the other two sg<span class="notranslate">RNA</span>s don’t change much. So we might conclude that this gene is not strongly negatively selected.</li>
+      <li>None. One reason for this is likely the large number of genes being tested (&gt;20,000). You could try to increase sensitivity with the procedures described <a href="https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do">here</a>.</li>
+    </ol>
+
+    <p><img src="../../images/crispr-screen/fli1_plot.png" alt="Plot showing guide counts for FLI1 gene. " width="50%" loading="lazy" /></p>
+
+  </blockquote>
+
+</blockquote>
+
+<h3 id="visualisation">Visualisation</h3>
+
+<p>In addition to the visualisations automatically generated by MAGeCK in the PDF, we can create a volcano plot to further visualise the output. With a volcano plot we plot the magnitude of change for drug treatment versus vehicle control (lfc) versus significance (p-value). As we have two columns for lfc and p-value, one for negative selection and one for positive, we first combine these into one column for each using the <strong>awk</strong> tool. If the <code class="language-plaintext highlighter-rouge">neg|p-value</code> is smaller than the <code class="language-plaintext highlighter-rouge">pos|p-value</code> the gene is negatively selected. If the <code class="language-plaintext highlighter-rouge">neg|p-value</code> is larger than the <code class="language-plaintext highlighter-rouge">pos|p-value</code> the gene is positively selected. Then we create the plot using the <strong>Volcano plot</strong> tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create volcano plot</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2"><strong>Text reformatting with awk</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">MAGeCK test Gene Summary</code></li>
+        <li><em>“AWK Program”</em>: Copy and paste the text in the grey box below into this field</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Print new header for first line
+NR == 1 { print "gene", "pval", "fdr", "lfc" }
+
+# Only process lines after first
+NR &gt; 1 {
+    # check if neg pval (column 4) is less than pos pval (column 10)
+    if ($4 &lt; $10){
+       # if it is, print negative selection values
+        print $1, $4, $5, $8
+    } else {
+       # if it's not, print positive selection values
+        print $1, $10, $11, $14
+    }
+}
+</code></pre></div>      </div>
+    </li>
+    <li>Inspect the file output. It should look like below.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gene    pval        fdr       lfc
+ESD     1.9454e-05  0.324257  -1.9283
+MTHFD1L 3.226e-05   0.324257  -0.89778
+SHMT2   7.6093e-05  0.454208  -1.1328
+FLI1    9.0376e-05  0.454208  -0.08872
+</code></pre></div>      </div>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5</span></span>  to create a volcano plot
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: the Text reformatting output file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File has header?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“FDR (adjusted P value)”</em>: <code class="language-plaintext highlighter-rouge">Column 3</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“P value (raw)”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Log Fold Change”</em>: <code class="language-plaintext highlighter-rouge">Column 4</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labels”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Significant</code>
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the plot in the PDF output.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What is the most significant gene?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>ATP5E as it is the gene nearest the top of the plot.</p>
+
+          <p><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot for APR compared to vehicle. " width="50%" loading="lazy" /></p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+  <p>For more details on using the volcano plot tool, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">tutorial here</a>. For how to customise the volcano plot tool output using R, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html">tutorial here</a>.</p>
+
+</blockquote>
+
+<h3 id="pathway-analysis">Pathway analysis</h3>
+
+<p>We can perform pathway analysis on the results to identify pathways that are changing with the treatment. MAGeCK has a pathway analysis module, however, we will use the tool <strong>fgsea</strong> as it outputs some visualisations and the genes enriched in the pathway. For fgsea we need a ranked list of genes and a pathways file in GMT format. We can get the ranked list from our mageck results, we’ll use the RRA score column for negative results. For the pathways, we’ll use the Hallmark pathways from MSigDB, which can be a good starting point for pathway exploration as discussed <a href="http://www.gsea-msigdb.org/gsea/msigdb/collection_details.jsp">here</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-perform-gene-set-enrichment-with-fgsea"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform gene set enrichment with fgsea</h3>
+
+  <ol>
+    <li>Import the Hallmark pathways file <a href="https://zenodo.org/record/5750854">Zenodo</a> or the Shared Data library (if available). Set the Type to tabular:
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/h.all.v7.4.symbols.gmt
+</code></pre></div>      </div>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select  your desired datatype</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+    <li><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c3</code> (the gene symbols and neg score)</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the MAGeCK Gene Summary file</li>
+      </ul>
+    </li>
+    <li><strong>fgsea</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ranked Genes”</em>: the output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“File has header?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Sets”</em>: <code class="language-plaintext highlighter-rouge">h.all.v7.4.symbols.gmt</code> (this should be <code class="language-plaintext highlighter-rouge">tabular</code> format, if not, see how to change it in the Tip below)</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Size of Gene Set”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output plots”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What is the top ranked pathway?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>Oxidative phosphorylation.
+You can see some explanation of fgsea output in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html"><span class="notranslate">RNA</span>-seq genes to pathways” tutorial</a>.</p>
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="optional-multiple-conditions">(Optional) Multiple conditions</h2>
+
+<p><em>It takes about 30 mins to run mageck mle on the samples below so this part of the tutorial is optional, you can try it if time allows or in your own time.</em></p>
+
+<p>If we have more than two conditions to compare, or a complex experimental design, we can use MAGeCK mle. MAGeCK mle uses a maximum likelihood estimation (MLE) algorithm (<span class="citation"><a href="#Li2015">Li <i>et al.</i> 2015</a></span>). It outputs a single value (beta score) per gene instead of a score for both negative and positive selection. A negative beta score indicates negative selection and a positive indicates positive selection. MAGeCK mle can also be used for comparing 2 conditions instead of MAGeCK test (RRA) but it is slower.</p>
+
+<p>To demonstrate using MAGeCK mle, we will compare the drug treatment (T8-APR-246) to T0 and the vehicle (T8-Vehicle) to T0.
+We’ll use a design matrix file as described <a href="https://sourceforge.net/p/mageck/wiki/input/#design-matrix-file">here</a>.
+The rules of the design matrix are:</p>
+
+<ul>
+  <li>The design matrix file must include a header line of condition labels</li>
+  <li>The first column is the sample labels that must match labels in read count file</li>
+  <li>The second column must be a “baseline” column that sets all values to “1”</li>
+  <li>The value in the design matrix is either “0” or “1”</li>
+  <li>You must have at least one sample of “initial state” (e.g., day 0 or plasmid) that has only one “1” in the corresponding row. That only “1” must be in the baseline column</li>
+  <li>The initial state (baseline) sample must be the 1st sample listed, under the header row, for mageck mle</li>
+</ul>
+
+<p>The file for our samples looks like below. We have 3 conditions: baseline (T0), Vehicle and APR. The 1st row indicates that T0 is our baseline sample, the 2nd row indicates that we want to compare Vehicle to T0, and the 3rd row indicates that we want to compare APR to T0.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Samples     baseline  Vehicle APR
+T0-Control  1         0       0
+T8-Vehicle  1         1       0
+T8-APR-246  1         0       1
+</code></pre></div></div>
+
+<p>Examples of more complicated design matrices, for e.g. time series experiments, can be seen on the <a href="https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-4-make-full-use-of-mageck-mle-for-more-complicated-experimental-design-eg-paired-samples-time-series">MAGeCK website</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-test-for-enrichment-with-mle"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test for enrichment with MLE</h3>
+  <ol>
+    <li>Import the design matrix file from <a href="https://zenodo.org/record/5750854">Zenodo</a> or the Shared Data library (if available):
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_mle_design_matrix.tsv
+</code></pre></div>      </div>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1"><strong>MAGeCKs mle</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Counts file”</em>: the <code class="language-plaintext highlighter-rouge">kenji_mageck_sg<span class="notranslate">rna</span>_counts.tsv</code> file</li>
+        <li><em>“Design matrix or sample labels”</em>: <code class="language-plaintext highlighter-rouge">Design matrix</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Design matrix file”</em>: the <code class="language-plaintext highlighter-rouge">mageck_mle_design_matrix</code> file</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>MAGeCK mle Gene Summary output is described <a href="https://sourceforge.net/p/mageck/wiki/output/#gene_summary_txt-in-mle-subcommand">here</a> and below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Gene</td>
+      <td>Gene ID</td>
+    </tr>
+    <tr>
+      <td>sg<span class="notranslate">RNA</span></td>
+      <td>The number of targeting sg<span class="notranslate">RNA</span>s for each gene</td>
+    </tr>
+    <tr>
+      <td>Condition_name|beta</td>
+      <td>The beta score of this gene in condition (e.g. Vehicle or APR). The conditions are specified in the design matrix input to mle.</td>
+    </tr>
+    <tr>
+      <td>Condition_name|p-value</td>
+      <td>The raw p-value (using permutation) of this gene</td>
+    </tr>
+    <tr>
+      <td>Condition_name|fdr</td>
+      <td>The false discovery rate of this gene</td>
+    </tr>
+    <tr>
+      <td>Condition_name|z</td>
+      <td>The z-score associated with Wald test</td>
+    </tr>
+    <tr>
+      <td>Condition_name|wald-p-value</td>
+      <td>The p value using Wald test</td>
+    </tr>
+    <tr>
+      <td>Condition_name|wald-fdr</td>
+      <td>The false discovery rate of the Wald test</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Similar to what we did with the MAGeCK test output, we can create a volcano plot to visualise the results, showing the magnitude of change (beta score) and significance (p-value).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualize-mle-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize MLE results</h3>
+  <ol>
+    <li>Create a volcano plot to visualise the result for APR vs T0. Use the gene summary file columns <code class="language-plaintext highlighter-rouge">Gene</code> <code class="language-plaintext highlighter-rouge">APR|beta</code> <code class="language-plaintext highlighter-rouge">APR|wald-p-value</code>  <code class="language-plaintext highlighter-rouge">APR|wald-fdr</code>
+      <ul>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5</span></span>  to create a volcano plot
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: the MAGeCK mle Gene Summary file</li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“FDR (adjusted P value)”</em>: <code class="language-plaintext highlighter-rouge">Column 14</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“P value (raw)”</em>: <code class="language-plaintext highlighter-rouge">Column 13</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Log Fold Change”</em>: <code class="language-plaintext highlighter-rouge">Column 9</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labels”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Significant</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <p><img src="../../images/crispr-screen/mageck_mle_apr_volcano.png" alt="Volcano plot for APR compared to timepoint zero. " width="50%" loading="lazy" /></p>
+
+  <p>Similarly, you could create a plot for the vehicle vs T0 using the gene summary file columns <code class="language-plaintext highlighter-rouge">Gene</code> <code class="language-plaintext highlighter-rouge">Vehicle|beta</code> <code class="language-plaintext highlighter-rouge">Vehicle|wald-p-value</code>  <code class="language-plaintext highlighter-rouge">Vehicle|wald-fdr</code></p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-getting-help"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Getting help</h3>
+
+  <p>For questions about using <span class="notranslate">Galaxy</span>, you can ask in the <a href="https://help.galaxyproject.org/"><span class="notranslate">Galaxy</span> help forum</a>. For questions about MAGeCK, you can ask in the <a href="https://groups.google.com/g/mageck">MAGeCK Google group</a>.</p>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><abbr title="Clustered Regularly Interspaced Short Palindromic Repeats">CRISPR</abbr> Screen <span class="notranslate">reads</span> can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using <abbr title="Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout">MAGeCK</abbr>. <span class="notranslate">Downstream</span> analysis can include visualisations, such as volcano plot, and pathway analysis with tools like fgsea.</p>
+
+<h1 class="no_toc" id="acknowledgements">Acknowledgements</h1>
+
+<p>Thanks to Mehmet Tekman for suggesting the awk tool. Thanks also to Jennifer Devlin, Lydia Lim and Sylvia Mahara for comments and feedback on the tutorial.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>CRISPR screen data can be analysed using MAGeCK and standard read quality tools</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17: 10–12. <a href="http://journal.embnet.org/index.php/embnetjournal/article/view/200">http://journal.embnet.org/index.php/embnetjournal/article/view/200</a></li>
+<li id="Li2014">Li, W., H. Xu, T. Xiao, L. Cong, M. I. Love <i>et al.</i>, 2014 <b>MAGeCK enables robust identification of essential genes from genome-scale CRISPR/Cas9 knockout screens</b>. 15: <a href="https://doi.org/10.1186/s13059-014-0554-4">10.1186/s13059-014-0554-4</a></li>
+<li id="Li2015">Li, W., J. Köster, H. Xu, C.-H. Chen, T. Xiao <i>et al.</i>, 2015 <b>Quality control,  modeling,  and visualization of CRISPR screens with MAGeCK-VISPR</b>. 16: <a href="https://doi.org/10.1186/s13059-015-0843-6">10.1186/s13059-015-0843-6</a></li>
+<li id="Doench2016">Doench, J. G., N. Fusi, M. Sullender, M. Hegde, E. W. Vaimberg <i>et al.</i>, 2016 <b>Optimized sgRNA design to maximize activity and minimize off-target effects of CRISPR-Cas9</b>. Nature Biotechnology 34: 184–191. <a href="https://doi.org/10.1038/nbt.3437">10.1038/nbt.3437</a></li>
+<li id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048. <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a></li>
+<li id="Joung2016">Joung, J., S. Konermann, J. S. Gootenberg, O. O. Abudayyeh, R. J. Platt <i>et al.</i>, 2016 <b>Protocol: Genome-scale CRISPR-Cas9 Knockout and Transcriptional Activation Screening</b>. <a href="https://doi.org/10.1101/059626">10.1101/059626</a></li>
+<li id="Chen2018">Chen, C.-H., T. Xiao, H. Xu, P. Jiang, C. A. Meyer <i>et al.</i>, 2018 <b>Improved design and analysis of CRISPR knockout screens</b> (J. Wren, Ed.). Bioinformatics 34: 4095–4101. <a href="https://doi.org/10.1093/bioinformatics/bty450">10.1093/bioinformatics/bty450</a></li>
+<li id="Cluse2018">Cluse, L. A., I. Nikolic, D. Knight, P. B. Madhamshettiwar, J. Luu <i>et al.</i>, 2018 <b>A Comprehensive Protocol Resource for Performing Pooled shRNA and CRISPR Screens</b>, pp. 201–227 <span style="font-style: normal">in</span> <i>Methods in Molecular Biology</i>, <i>Springer New York</i>. <a href="https://doi.org/10.1007/978-1-4939-7568-6_17">10.1007/978-1-4939-7568-6_17</a></li>
+<li id="Fujihara2020">Fujihara, K. M., B. Zhang, T. D. Jackson, B. Nijiagel, C.-S. Ang <i>et al.</i>, 2020 <b>Genome-wide CRISPR screens reveal APR-246 (Eprenetapopt) triggers ferroptosis and inhibits iron-sulfur cluster biogenesis</b>. <a href="https://doi.org/10.1101/2020.11.29.398867">10.1101/2020.11.29.398867</a></li>
+<li id="Przybyla2021">Przybyla, L., and L. A. Gilbert, 2021 <b>A new era in functional genomics screens</b>. Nature Reviews Genetics. <a href="https://doi.org/10.1038/s41576-021-00409-w">10.1038/s41576-021-00409-w</a></li>
+<li id="Uyhazi2021">Uyhazi, K. E., and J. Bennett, 2021 <b>A CRISPR view of the 2020 Nobel Prize in Chemistry</b>. Journal of Clinical Investigation 131: <a href="https://doi.org/10.1172/jci145214">10.1172/jci145214</a></li>
+<li id="Bock2022">Bock, C., P. Datlinger, F. Chardon, M. A. Coelho, M. B. Dong <i>et al.</i>, 2022 <b>High-content CRISPR screening</b>. Nature Reviews Methods Primers 2: <a href="https://doi.org/10.1038/s43586-021-00093-4">10.1038/s43586-021-00093-4</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>CRISPR</dt>
+                    <dd>Clustered Regularly Interspaced Short Palindromic Repeats</dd>
+                    
+                    <dt>MAGeCK</dt>
+                    <dd>Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=CRISPR screen analysis (Genome Annotation)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Maria Doyle, Kenji Fujihara, Twishi Gulati, 2022 <b>CRISPR screen analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/crispr-screen/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/crispr-screen/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{genome-annotation-crispr-screen,
+author = "Maria Doyle and Kenji Fujihara and Twishi Gulati",
+title = "CRISPR screen analysis (Galaxy Training Materials)",
+year = "2022",
+month = "03",
+day = "07"
+url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/crispr-screen/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
