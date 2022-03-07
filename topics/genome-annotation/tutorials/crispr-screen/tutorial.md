@@ -17,6 +17,9 @@ contributors:
 - mblue9
 - kenjifujihara
 - twishigulati
+tags:
+- annotating
+- CRISPR
 requirements:
   -
     type: "internal"
