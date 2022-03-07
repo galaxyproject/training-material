@@ -29,16 +29,18 @@ requirements:
     tutorials:
       - collections
       - upload-rules
-
+abbreviations:
+  CRISPR: Clustered Regularly Interspaced Short Palindromic Repeats
+  MAGeCK: Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout
 ---
 
 
 # Introduction
 {:.no_toc}
 
-The **C**lustered **R**egularly **I**nterspaced **S**hort **P**alindromic **R**epeats (CRISPR) system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.
+The {CRISPR} system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.
 
-The ease of generating gRNAs makes CRISPR one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Bock2022 %}, {% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
+The ease of generating gRNAs makes {CRISPR} one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Bock2022 %}, {% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
 
 ![Illustration of CRISPR Screen Method](../../images/crispr-screen/crispr_screen.jpg "CRISPR knockout and activation methods (from {% cite Joung2016 %})")
 
@@ -56,7 +58,7 @@ The ease of generating gRNAs makes CRISPR one of the most scalable genome editin
 
 ## Data upload
 
-Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihara2020 %}. There are 3 samples from the human esophageal cancer cell line (OACM5.1): a baseline sample taken at time zero (T0-Control), a sample treated with drug for 8 days (T8-APR-246) and a control sample treated with vehicle for 8 days (T8-Vehicle). We will use FASTQ files containing 1% of reads from the original samples to demonstrate the read processing steps.
+Here we will demonstrate analysing {CRISPR} screen using data from {% cite Fujihara2020 %}. There are 3 samples from the human esophageal cancer cell line (OACM5.1): a baseline sample taken at time zero (T0-Control), a sample treated with drug for 8 days (T8-APR-246) and a control sample treated with vehicle for 8 days (T8-Vehicle). We will use FASTQ files containing 1% of reads from the original samples to demonstrate the read processing steps.
 
 > ### {% icon hands_on %} Hands-on: Retrieve CRISPR screen fastq datasets
 >
@@ -73,7 +75,7 @@ Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihar
 >      T8-APR-246 https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-APR-246.fastq.gz
 >      T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-Vehicle.fastq.gz
 >      ```
->  
+>
 >    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -85,11 +87,11 @@ Here we will demonstrate analysing CRISPR screen using data from {% cite Fujihar
 >
 >       - Click `Add Definition` button and select `URL`: column `B`
 >
->    - Click `Apply` 
+>    - Click `Apply`
 >    - In the Name: box type `fastqs` and press <kbd>Upload</kbd>
->      
+>
 >    ![Rule-based Editor](../../images/crispr-screen/crispr_rule_editor.png)
->    
+>
 {: .hands_on}
 
 ## Raw reads QC
@@ -154,11 +156,11 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
 ## Trim adapters
 
-We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}). To trim, we'll use the 5' adapter sequence. We don't need to trim the 3' adapter as MAGeCK will only use the first 20bp from each read. It determines the number of bases to use automatically from the length of the sequences in the library file, in our case 20bp, or we can specify the sgRNA length.
+We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}). To trim, we'll use the 5' adapter sequence. We don't need to trim the 3' adapter as {MAGeCK} will only use the first 20bp from each read. It determines the number of bases to use automatically from the length of the sequences in the library file, in our case 20bp, or we can specify the sgRNA length.
 
 
 > ### {% icon details %} Adapter trimming
-> 
+>
 > In this dataset the adapters start at different positions in the reads, as was shown above. MAGeCK count can trim adapters around the guide sequences. However, the adapters need to start at the same position in each read, requiring the same trimming length, as described on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/). An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn't be able to trim the 5' adapter properly and you would only get ~60% reads mapping instead of >80%.
 >
 > ![Adapters MAGeCK can trim](../../images/crispr-screen/adapter_sequences_mageck.png "Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is higlighted in blue with the adapter sequences directly adjacent on the right and left. MAGeCK count uses the first 20 bases of each read to map so the sequence after the guide is less important to trim exactly.")
@@ -171,13 +173,13 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy0) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->        - {% icon param-collection %} *"FASTQ/A file #1"*: all fastq.gz files 
+>        - {% icon param-collection %} *"FASTQ/A file #1"*: all fastq.gz files
 >        - In *"Read 1 Options"*:
 >            - In *"5' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 5' (Front) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
 >                        - *"Enter custom 5' adapter sequence"*: `TTGTGGAAAGGACGAAACACCG`
->    - *"Outputs selector"*: 
+>    - *"Outputs selector"*:
 >        - *"Report"*: tick
 >
 > 2. Inspect the Cutadapt report
@@ -193,6 +195,7 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >    > > 99.6%
 >    > >
 >    > {: .solution}
+>    {: .question}
 >
 > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the Cutadapt reports:
 >     - In *"Results"*
@@ -229,7 +232,7 @@ MultiQC produces a 5' trimmed sequences plot where we can check the results are 
 
 # Counting
 
-For the rest of the CRISPR screen analysis, counting and testing, we'll use the tool called **M**odel-based **A**nalysis of **Ge**nome-wide **C**RISPR-Cas9 **K**nockout (MAGeCK) ({% cite Li2014 %}, {% cite Li2015 %}).
+For the rest of the {CRISPR} screen analysis, counting and testing, we'll use the tool called {MAGeCK} ({% cite Li2014 %}, {% cite Li2015 %}).
 
 To count how many guides we have for each gene, we need a library file that tells us which guide sequence belongs to which gene. The guides used here are from the [Brunello library](https://www.addgene.org/pooled-library/broadgpp-human-knockout-brunello/) ({% cite Doench2016 %}) which contains 77,441 sgRNAs, an average of 4 sgRNAs per gene, and 1000 non-targeting control sgRNAs. **The library file must be tab-separated and contain no spaces within the gene or target names**. If necessary, there are tools in Galaxy that can format the file removing spaces and converting commas to tabs.
 
@@ -295,7 +298,7 @@ GiniIndex | The Gini Index of the read count distribution. A smaller value indic
 > > ### {% icon solution %} Solution
 > >
 > > 1. The number of reads is ok. For example, for T0 control sample we have 17,272,052 reads mapped to guides. We have 77,441 guides so we have ~220 reads per guide (17,272,052/77,441). A minimum of 100 reads per guide, preferably 300, is recommended.
-> > 2. Yes, in the summary we have >85% mapped for all 3 samples. MAGeCK count does not allow any base mismatches between the reads and the library file, as described [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-1-allow-mismatches-for-read-mapping) so we expect not all reads will map. Note that we filtered out (6-10%) reads with Cutadapt so we should include those in our unmapped % if we want an accurate count.
+> > 2. Yes, in the summary we have >85% mapped for all 3 samples. {MAGeCK} count does not allow any base mismatches between the reads and the library file, as described [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-1-allow-mismatches-for-read-mapping) so we expect not all reads will map. Note that we filtered out (6-10%) reads with Cutadapt so we should include those in our unmapped % if we want an accurate count.
 > > 3. T0-Control has 0.71% (546/77441 * 100) sgRNAs that have no reads mapped, which is good. The T8 samples are just slightly high at 2.3% (1752/77441 * 100) and 2.8% (2170/77441 * 100).
 > > 4. The Gini Index is 0.09 for T0-Control (initial state) which is good. The T8 samples are higher at 0.13 and 0.14 but good for a negative selection experiment.
 > >
@@ -390,7 +393,7 @@ For technical replicates, we could combine the fastqs for each sample/biological
 > Instead of median or total, we could choose to normalize using control guide sgRNAs. However, we would need to know that they're not changing due to the experiment or introducing bias ({% cite Chen2018 %}).
 {: .details}
 
-MAGeCK test outputs:
+{MAGeCK} test outputs:
 
 * a Gene Summary file
 * a sgRNA Summary file
@@ -672,7 +675,7 @@ Similar to what we did with the MAGeCK test output, we can create a volcano plot
 # Conclusion
 {:.no_toc}
 
-CRISPR Screen reads can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using MAGeCK. Downstream analysis can include visualisations, such as volcano plot, and pathway analysis with tools like fgsea.
+{CRISPR} Screen reads can be assessed for quality using standard sequencing tools such as FASTQC, MultiQC and trimmed of adapters using Cutadapt. The detection of enriched guides can be performed using {MAGeCK}. Downstream analysis can include visualisations, such as volcano plot, and pathway analysis with tools like fgsea.
 
 # Acknowledgements
 {:.no_toc}
