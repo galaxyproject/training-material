@@ -210,7 +210,7 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 
 MultiQC produces a 5' trimmed sequences plot where we can check the results are as expected. Here we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) ([see sequencing protocol](https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf)). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. The trimmed sequence lengths are what we expect for this dataset and the plot looks similar for all our samples which is good.
 
-![](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
+![Plot showing lengths of sequences trimmed from 5' end of reads](../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png){:width="70%"}
 
 
 > ### {% icon hands_on %} Exercise: Quality control of the polished datasets
@@ -224,7 +224,7 @@ MultiQC produces a 5' trimmed sequences plot where we can check the results are 
 >    > >
 >    > > In the Adapter Content section we now don't have any 5' adapter detected. The first 20bp of the reads, what MAGeCK will use for our dataset, has no adapter detected.
 >    > >
->    > > ![](../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png){:width="50%"}
+>    > > ![Plot of trimmed sequences showing no adapter detected in first 20 bases](../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png){:width="50%"}
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -320,16 +320,16 @@ MAGeCK count can also generate a PDF with plots that can help assess quality.
 > > > ### {% icon solution %} Solution
 > > >
 > > > In the boxplots, we can see we have largely similiar distributions of counts for the 3 samples. The greater length of the box and between whiskers in the T8 samples compared to the control tells us we have a bit more variability of counts in those samples, more guides with low and high counts in T8 compared to the T0.
-> > > ![](../../images/crispr-screen/mageck_count_boxplots.png)
+> > > ![MAGeCK count boxplots](../../images/crispr-screen/mageck_count_boxplots.png)
 > > >
 > > > The Distribution of read counts plot shows us how many guides we have for each count (the frequency sums to the total no. of guides 77,441). Similar to the boxplots, the wider distribution for T8 compared to T0 shows us that those samples have more guides with low and high counts. The peak for T0 appears lower just because it has more points (bins) in the plot.
-> > > ![](../../images/crispr-screen/mageck_count_histogram.png)
+> > > ![MAGeCK count histograms](../../images/crispr-screen/mageck_count_histogram.png)
 > > >
 > > > The PCA plot shows us the samples from the different conditions separate well. The T8 samples are a bit more similar to each other, to each other on PC1 axis than to T0. If we had more samples we could use this plot to check for clustering of replicates, batch effect or outliers.
-> > > ![](../../images/crispr-screen/mageck_count_pca.png)
+> > > ![MAGeCK count PCA plot](../../images/crispr-screen/mageck_count_pca.png)
 > > >
 > > > The hierarchical clustering plot also shows us that the T8 samples are a bit more similar to each other than to T0.
-> > > ![](../../images/crispr-screen/mageck_count_clustering.png)
+> > > ![MAGeCK count hierarchical clustering plot](../../images/crispr-screen/mageck_count_clustering.png)
 > > {: .solution}
 > >
 > {: .question}
@@ -343,14 +343,14 @@ The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 CRISPR positive or negative selection screens can be performed. With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sgRNAs increase and dominate, indicating loss of those genes helps cells survive that treatment. With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose sgRNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment. Regardless of the type of screen performed (positive or negative), MAGeCK can identify both positively and negatively selected genes in the screen ({% cite Li2014 %}). The dataset we are using in this tutorial is from a negative selection screen.
 
-![Positive and negative selection](../../images/crispr-screen/pos_neg_screen.png "Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)")
+![Positive and negative selection screens](../../images/crispr-screen/pos_neg_screen.png "Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)")
 
 
 ## Two conditions
 
 If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8-Vehicle) we can use MAGeCK test. MAGeCK test uses a robust ranking aggregation (RRA) algorithm ({% cite Li2014 %}).
 
-![MAGeCK RRA](../../images/crispr-screen/mageck_rra_algorithm.png "Overview of the MAGeCK algorithm. Raw read counts corresponding to single-guided RNAs (sgRNAs) from different experiments are first normalized using median normalization and mean-variance modeling is used to capture the relationship of mean and variance in replicates. The statistical significance of each sgRNA is calculated using the learned mean-variance model. Essential genes (both positively and negatively selected) are then identified by looking for genes whose sgRNAs are ranked consistently higher (by significance) using robust rank aggregation (RRA) (from {% cite Li2014 %})")
+![Diagram of MAGeCK RRA algorithm](../../images/crispr-screen/mageck_rra_algorithm.png "Overview of the MAGeCK algorithm. Raw read counts corresponding to single-guided RNAs (sgRNAs) from different experiments are first normalized using median normalization and mean-variance modeling is used to capture the relationship of mean and variance in replicates. The statistical significance of each sgRNA is calculated using the learned mean-variance model. Essential genes (both positively and negatively selected) are then identified by looking for genes whose sgRNAs are ranked consistently higher (by significance) using robust rank aggregation (RRA) (from {% cite Li2014 %})")
 
 
 > ### {% icon hands_on %} Hands-on: Test for enrichment
@@ -469,7 +469,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
 
 The PDF also shows plots with the sgRNA counts for the top 10 genes. These values are the normalized counts for each sgRNA from the sgRNA summary file. With these plots we can see if the counts of all the sgRNAs for these top genes are changing similarly.
 
-![ESD counts](../../images/crispr-screen/esd_plot.png){:width="50%"}
+![Plot showing guide counts for ESD gene](../../images/crispr-screen/esd_plot.png){:width="50%"}
 
 > ### {% icon question %} Questions
 >
@@ -481,7 +481,7 @@ The PDF also shows plots with the sgRNA counts for the top 10 genes. These value
 > > 1. No. We can see in this case that, while one sgRNA is a lot lower in the APR treated sample compared to the vehicle, one increases a little, and the other two sgRNAs don't change much. So we might conclude that this gene is not strongly negatively selected.
 > > 2. None. One reason for this is likely the large number of genes being tested (>20,000). You could try to increase sensitivity with the procedures described [here](https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do).
 > >
-> > ![MAGeCK test pvalues](../../images/crispr-screen/fli1_plot.png){:width="50%"}
+> > ![Plot showing guide counts for FLI1 gene](../../images/crispr-screen/fli1_plot.png){:width="50%"}
 > >
 > {: .solution}
 >
@@ -543,7 +543,7 @@ In addition to the visualisations automatically generated by MAGeCK in the PDF, 
 >    > >
 >    > > ATP5E as it is the gene nearest the top of the plot.
 >    > >
->    > > ![Volcano plot](../../images/crispr-screen/volcanoplot.png){:width="50%"}
+>    > > ![Volcano plot for APR compared to vehicle](../../images/crispr-screen/volcanoplot.png){:width="50%"}
 >    > >
 >    > {: .solution}
 >    >
@@ -658,7 +658,7 @@ Similar to what we did with the MAGeCK test output, we can create a volcano plot
 >        - {% icon param-select %} *"Points to label"*: `Significant`
 >        - {% icon param-text %} *"Only label top most significant"*: `10`
 >
->   ![Volcano plot mle](../../images/crispr-screen/mageck_mle_apr_volcano.png){:width="50%"}
+>   ![Volcano plot for APR compared to timepoint zero](../../images/crispr-screen/mageck_mle_apr_volcano.png){:width="50%"}
 >
 >    Similarly, you could create a plot for the vehicle vs T0 using the gene summary file columns `Gene` `Vehicle|beta` `Vehicle|wald-p-value`  `Vehicle|wald-fdr`
 >
