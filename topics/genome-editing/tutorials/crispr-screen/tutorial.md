@@ -195,6 +195,7 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 >    > > 99.6%
 >    > >
 >    > {: .solution}
+>    {: .question}
 >
 > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the Cutadapt reports:
 >     - In *"Results"*
