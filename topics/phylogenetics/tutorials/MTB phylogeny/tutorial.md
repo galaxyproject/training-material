@@ -150,8 +150,6 @@ The RAxML output includes the "Best-scoring ML tree" in your Galaxy history. The
 library(ape)
 
 # Load the tree from Galaxy: in the first line below, enter the id of your "Best-scoring ML tree" in the Galaxy history
-data_id =  
-treefile <- gx_get(data_id)
 tree <- read.tree(treefile)
 
 # Plot the tree
