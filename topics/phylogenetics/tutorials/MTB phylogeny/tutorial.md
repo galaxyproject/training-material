@@ -124,7 +124,23 @@ An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic
 # Visualize and manipulate the tree
 Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually "see" biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples. Here, to obtain an overview of the different strains present in the country (given the limitations of the sampling), our goal is to create a rooted tree in which colors indicate different MTB lineages.
 
-We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy, as explained [here]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}). This is not required to finish this tutorial, but if you have used R before, it might be worthwile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
+We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy. This is not required to finish this tutorial, but if you have used R before, it might be worthwile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
+
+> ### {% icon hands_on %} Hands-on: Starting RStudio
+>
+> 1. Note the history IDs of the "Best-scoring ML tree"
+>
+> 2. {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy provides some special functions such as `gx_get` to import and export files from your history.
+>
+>    {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+>
+> 3. Copy the files we need into our workspace so we can see them in the Files pane.
+>
+>    ```R
+>    treefile <- gx_get(1)  # Use the correct ID for your differentially expressed results dataset.
+>    ```
+>
+{: .hands_on}
 
 ## Plot the RAxML output
 The RAxML output includes the "Best-scoring ML tree" in your Galaxy history. The code below imports this tree into a Galaxy instance of RStudio and plots the tree.
