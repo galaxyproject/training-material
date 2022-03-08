@@ -26,6 +26,7 @@ contributors:
 - abueg
 - pickettbd
 - gf777
+- msozzoni
 ---
 
 
