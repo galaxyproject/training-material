@@ -270,6 +270,8 @@
 
 <p>.image-100[<img src="../../images/crispr-screen/what_is_crispr.png" alt="CRISPR method" />]</p>
 
+<p>.pull-right[Adapted from <a href="https://www.addgene.org/guides/crispr/">Addgene</a>]</p>
+
 <p><span>Speaker Notes</span></p>
 
 <ul>
@@ -304,7 +306,7 @@
 
 <hr />
 
-<h3 id="how-is-an-sgrna-library-created">How is an sgRNA library created?</h3>
+<h3 id="how-are-the-cells-for-the-screen-set-up">How are the cells for the screen set up?</h3>
 
 <p>.pull-right[</p>
 
@@ -322,11 +324,19 @@
     <p>In this tutorial we use Brunello (77,441 sgRNAs: ~4 per human gene + 1000 non-targeting controls)</p>
   </li>
   <li>
-    <p>Cas9 expressing cells are transfected with sgRNA library</p>
+    <p>Cas9 expressing cells are transduced with sgRNA library</p>
   </li>
 </ul>
 
 <p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Various sgRNA libraries are available and can be purchased.</li>
+  <li>In this tutorial we use Brunello, which is a human genome-wide CRISPR knockout library in a lentiGuide vector.</li>
+  <li>Cells expressing the Cas9 enzyme are transduced with the sgRNAs at a low Multiplicity of Infection (MOI), aiming for ~500-fold starting representation of each guide, and puromycin is used to remove cells without guides.</li>
+</ul>
 
 <hr />
 
@@ -340,12 +350,13 @@
 
 <ul>
   <li>CRISPR positive or negative screens can be performed.</li>
-  <li>With a positive screen, most cells die after the treatment and we are interested in identifying genes whose sgRNAs increase and dominate, indicating knocking out those genes helps cells survive that treatment.</li>
-  <li>With a negative screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose guide RNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive that treatment.</li>
+  <li>With a positive screen, most cells die after the treatment and we are interested in identifying genes whose guide RNAs increase (are enriched), indicating knocking out those genes may lead to treatment resistance.</li>
+  <li>With a negative screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose guide RNAs decrease (drop out) compared to a control e.g. vehicle, indicating knocking out those genes may lead to treatment sensitivity.</li>
   <li>In this tutorial we analyse data from a negative screen.</li>
+  <li>
+    <h2 id="cells-from-the-timepoints-of-interest-are-collected-genomic-dna-is-extracted-and-the-sgrna-region-is-amplified-by-pcr-followed-by-sequencing">Cells from the timepoints of interest are collected, genomic DNA is extracted, and the sgRNA region is amplified by PCR, followed by sequencing.</h2>
+  </li>
 </ul>
-
-<hr />
 
 <h3 id="a-workflow-for-crispr-screen-analysis">A workflow for CRISPR screen analysis</h3>
 
@@ -355,7 +366,7 @@
 
 <ul>
   <li>This is an overview of the workflow used in the tutorial.</li>
-  <li>We first prepare the reads checking quality and trimming adapters.</li>
+  <li>We first prepare the sequencing reads, checking quality and trimming adapters.</li>
   <li>We then use the MAGeCK toolkit to analyse, followed by visualising results using volcano plots and identifying pathways.</li>
 </ul>
 
@@ -397,7 +408,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         <p>
 The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
 </p>
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/8b2d42c7ffb31868900e59965aad7fc36ae56633">8b2d42c7ffb31868900e59965aad7fc36ae56633</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9f1f4b9150bf2a9bbfe6f574c5af0d97d229a2b8">9f1f4b9150bf2a9bbfe6f574c5af0d97d229a2b8</a></p>
     </div>
 </footer>
 
