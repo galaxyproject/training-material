@@ -43,18 +43,17 @@ The key difference between the rooted and the unrooted tree is that only the roo
 
 The best way to root a tree is by including an **outgroup**: a species or lineage which we know *a priori* to lay outside the phylogeny we're interested in. *M. canetti* usually serves this purpose for studying the MTBC, but you can also root, for example, a phylogeny of lineage 2 by including a lineage 4 strain.
 
-<img src="./images/mtbc_1strainPerLineage.nwk.COMB.svg" alt="drawing" width="800"/>
+<img src="./images/mtbc_1strainPerLineage.nwk.COMB.svg" width="800"/>
 <figcaption align = "left">Fig.1 - Rooted (A) and unrooted (B) phylogeny of the MTBC. Some basic tree vocabulary is shown in red.</figcaption>
 
 
 ## Branch lengths
-Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny was estimated from DNA or protein sequences, branch length usually reflects the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events. Molecular dating is not covered in this tutorial, but if you should be interested in this topic, here is a [recent study](https://doi.org/10.1371/journal.ppat.1008067) showing the promises and problems of molecular dating with MTB.
+Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny was estimated from DNA or protein sequences, branch length usually reflects the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events (see {% cite Menardo2019 %} for a recent critical discussion of molecular dating with MTB).
 
-As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Below is a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 [(Eldholm et al. 2016)](https://doi.org/10.1073/pnas.1611283113). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.
+As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Below is a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 ({% cite Eldholm2016 %}). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.
 
-<img src="./images/eldholm2016_tree.png" alt="drawing" width="200"/>
+<img src="./images/eldholm2016_tree.png" width="200"/>
 <figcaption align = "left">Fig.2 - Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016.</figcaption>
-<br/><br/>
 
 > ### {% icon comment %} Phylogenetics with *Mycobacterium tuberculosis*
 >
@@ -66,7 +65,8 @@ As branch lengths reflect evolutionary distances, they can also be used to ident
 >
 > c) A large proportion of DNA polymorphisms in the MTBC are **singletons**, that is, variants present only in a single strain. This adds to the problem of low diversity, since singletons are not informative about tree topology.
 >
-> d) In this workshop, and indeed in many studies of the MTBC, SNPs are called not against H37Rv, but against a reconstructed ancestral genome. This means that the number of SNPs identified does not reflect the evolutionary distance from some random strain like H37Rv, but from the most recent common ancestor of the MTBC. Below we will see that this has implications for the interpretation of a tree.
+> d) In this workshop, and indeed in many studies of the MTBC, SNPs are called not against H37Rv, but against a reconstructed ancestral genome. This means that the number of SNPs identified does not reflect the evolutionary distance from some random strain like H37Rv, but from the most recent common ancestor of the MTBC. Take a look at Figure 3 in {% cite Goig2018 %} to see how this affects the number of SNPs identified in a genome.
+Below we will see that this has implications for the interpretation of a tree.
 >
 {: .comment}
 
@@ -74,12 +74,11 @@ As branch lengths reflect evolutionary distances, they can also be used to ident
 # The alignment
 Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous tutorials on SNP calling and transmission clusters, reflecting the diversity of 19 MTBC strains and 1 strain of **M. canettii**. The latter is included to have an outgroup, allowing us to root the phylogeny.
 
-Recall that the alignment here was generated using SNPs called from reference-aligned short reads. A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous [Galaxy tutorials](https://training.galaxyproject.org/training-material/topics/assembly) on this topic), b) annotate genes, c) extract genes present in all strains (the "core" genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. [Zhou et al. 2021](https://doi.org/10.1093/bioinformatics/btab234)).
+Recall that the alignment here was generated using SNPs called from reference-aligned short reads. A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous [Galaxy tutorials](https://training.galaxyproject.org/training-material/topics/assembly) on this topic), b) annotate genes, c) extract genes present in all strains (the "core" genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. {% cite Zhou2021 %}).
 
 An alignment of SNPs looks something like this. Each row is a different strain, each column a position in the reference genome. Because this alignment is based on SNPs, it contains only variable positions. Inspecting the alignment is always a good idea, because also in phylogenetics the principle of 'garbage in, garbage out' applies.
 
-<img src="./images/MEGA_alignment.png" alt="drawing" width="500"/>
-<br/><br/>
+<img src="./images/MEGA_alignment.png" width="500"/>
 
 ## Get the data
 > ### {% icon hands_on %} Hands-on: Obtain your data
@@ -125,12 +124,12 @@ An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic
 # Visualize and manipulate the tree
 Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually "see" biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples. Here, to obtain an overview of the different strains present in the country (given the limitations of the sampling), our goal is to create a rooted tree in which colors indicate different MTB lineages.
 
-We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy, as explained [here](https://shiltemann.github.io/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html). This is not required to finish this tutorial, but if you have used R before, it might be worthwile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
+We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy, as explained [here]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}). This is not required to finish this tutorial, but if you have used R before, it might be worthwile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
 
 ## Plot the RAxML output
 The RAxML output includes the "Best-scoring ML tree" in your Galaxy history. The code below imports this tree into a Galaxy instance of RStudio and plots the tree.
 
-```{r}
+```r
 # Load R package for phylogenetics
 library(ape)
 
@@ -143,7 +142,7 @@ tree <- read.tree(treefile)
 plot(tree)
 
 ```
-<img src="./images/tree_unrooted.svg" alt="drawing" width="600"/>
+<img src="./images/tree_unrooted.svg" width="600"/>
 
 
 ### Question
@@ -163,7 +162,7 @@ plot(tree)
 ## Root the tree
 To make the phylogeny better interpretable, will now root it and add some additional information. First, we root the tree and then exclude the canettii strain, such that patterns within the MTBC become more clear. This already looks better, the tree topology stands out more clearly now, and we can identify groups of closely related strains.
 
-```{r}
+```r
 # Root the tree
 tree_rooted <- root(tree, "ERR313115.fastq.vcf")
 
@@ -173,13 +172,13 @@ tree_rooted$root.edge <- 0.005
 plot(tree_rooted, root.edge = T, cex=0.6)
 ```
 
-<img src="./images/tree_rooted.svg" alt="drawing" width="600"/>
+<img src="./images/tree_rooted.svg" width="600"/>
 
 
 ## Show the different lineages present in the sample
 A first piece of information we now want to add to the phylogeny is to which lineage the strains belong. This will allow us to assess whether our tree is consistent with the known phylogeny of the MTBC, shown in Figure 1A, and to visualize which lineages are present in our samples. The information to which lineage a strain belongs can be found in the output of TB-profiler.
 
-```{r}
+```r
 
 # Assign lineages to samples, as identified by TB-profiler
 
@@ -232,7 +231,7 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 
 ```
 
-<img src="./images/tree_rooted_lineages.svg" alt="drawing" width="600"/>
+<img src="./images/tree_rooted_lineages.svg" width="600"/>
 
 
 ### Questions
@@ -264,13 +263,13 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 >
 > Recall the clusters identified in the previous tutorial, reproduced below. How do these clusters show up in the phylogenetic tree? What additional information does the tree contain?
 >
-| Sample       | Cluster_id | DR profile | Clustering  |
-|--------------|------------|------------|-------------|
-| ERR5987352   | 10         | Pre-MDR    | Clustered   |
-| ERR6362484   | 10         | Pre-MDR    | Clustered   |
-| ERR6362138   | 12         | MDR        | Clustered   |
-| ERR6362156   | 12         | Pre-XDR    | Clustered   |
-| ERR6362253   | 12         | MDR        | Clustered   |
+> | Sample       | Cluster_id | DR profile | Clustering  |
+> |--------------|------------|------------|-------------|
+> | ERR5987352   | 10         | Pre-MDR    | Clustered   |
+> | ERR6362484   | 10         | Pre-MDR    | Clustered   |
+> | ERR6362138   | 12         | MDR        | Clustered   |
+> | ERR6362156   | 12         | Pre-XDR    | Clustered   |
+> | ERR6362253   | 12         | MDR        | Clustered   |
 >
 > > ### {% icon solution %} Solutions
 > >
@@ -288,7 +287,7 @@ Phylogenies are particularly useful when combined with additional information. F
 For our 20 samples, a trait you previously identifed is the DR profile. Let us map this trait onto the tree and see if we can learn something from the observed patterns.
 
 
-```{r}
+```r
 
 # Same as above, but with DR profiles instead of lineages
 
@@ -332,7 +331,7 @@ plot(tree_rooted,cex = 0.7, root.edge = T)
 plot(tree_dr,cex = 0.8, tip.color = pal_dr, root.edge = TRUE)
 
 ```
-<img src="./images/tree_rooted_dr.svg" alt="drawing" width="600"/>
+<img src="./images/tree_rooted_dr.svg" width="600"/>
 
 
 ### Question
