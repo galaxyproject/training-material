@@ -12,9 +12,9 @@ objectives:
 - Be able to read and interrogate a phylogeny encountered in the literature
 time_estimation: 1H
 contributors:
-- Christoph Stritt
-- Daniela Brites
-- Galo A. Goig
+- cstritt
+- dbrites
+- GaloGS
 
 ---
 
