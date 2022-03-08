@@ -348,7 +348,6 @@ plot(tree_dr,cex = 0.8, tip.color = pal_dr, root.edge = TRUE)
 <img src="./images/tree_rooted_dr.svg" width="600"/>
 
 
-### Question
 > ### {% icon question %} Question
 >
 > In the previous tutorial on clustering, you have come across the hypothesis that unclustered cases of DR represent *de novo* evolution of DR, while clustered cases of DR represent instances of DR transmission. Looking at lineage 2 in the phylogeny above, does this hypothesis hold? How many times would MDR have evolved independently in lineage 2? Is there an alternative explanation for the prevalence of MDR in lineage 2?
