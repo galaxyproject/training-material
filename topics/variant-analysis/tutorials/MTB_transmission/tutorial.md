@@ -17,9 +17,9 @@ key_points:
 - Clustering does not provide information about particular transmission events nor their directionality (who infected whom).
 - Clustering is very much influenced by sampling. Lower sampling proportions and shorter sampling timeframes lead to lower clustering rates that shoud not be confounded with lack of transmission.
 contributors:
-- Galo A. Goig
-- Daniela Brites
-- Christoph Stritt
+- GaloGS
+- dbrites
+- cstritt
 ---
 
 
@@ -42,7 +42,7 @@ you can [have a look at the following material](https://galaxyproject.org/tutori
 all samples to be analyzed are merged into a "dataset collection", and then you analyze that "collection"
 as you would analyze a single sample, with the difference that all steps will be performed for each
 sample individually. Do not worry if you do not fully understand this right now, we will be creating
-a dataset collection at the beginning of this tutorial and we will analyze it.   
+a dataset collection at the beginning of this tutorial and we will analyze it.
 
 To save you some time, (and server load) we have run the pipeline that you used in the previous tutorial for
 the 20 samples that we have been asked to analyze. Thus, we now have 20 VCF files that describe the
@@ -535,7 +535,7 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 > > to misidentification of index cases. **Remember:** we cannot rule out the possibility
 > > that patients within the cluster were infected by an index case that was not sampled.
 > >
-> >  Read [Xu et al., 2019](https://doi.org/10.1371/journal.pmed.1002961) for more information on this topic.  
+> >  Read [Xu et al., 2019](https://doi.org/10.1371/journal.pmed.1002961) for more information on this topic.
 > {: .solution}
 {: .question}
 
@@ -827,7 +827,7 @@ knowledge in the TB field will also help us to conduct our investigation!
 >
 > 1.  There is one strain with a DR profile "other", because it is only resistant to pyrazinamide. This
 > strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
-> most likely evolved *de-novo* in this patient. But we are wrong. Do you know why?  
+> most likely evolved *de-novo* in this patient. But we are wrong. Do you know why?
 >
 > > ### {% icon solution %} Solution
 > > 1. The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
