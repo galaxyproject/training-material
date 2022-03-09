@@ -18,8 +18,10 @@ contributors:
 - kenjifujihara
 - twishigulati
 tags:
-- annotating
+- genome editing
 - CRISPR
+- essential genes
+- cell line
 requirements:
   -
     type: "internal"
@@ -346,7 +348,7 @@ The paper by {% cite Li2015 %} has more information on MAGeCK quality control.
 
 Now that we've generated our guide counts, we'll use MAGeCK test to identify essential genes. Essential means positively or negatively selected sgRNAs and genes. CRISPR positive or negative selection screens can be performed. With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sgRNAs increase and dominate, indicating loss of those genes helps cells survive that treatment. This can help identify genes essential for drug resistance. With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose sgRNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment. This can help identify genes essential for drug sensitivity. Regardless of the type of screen performed (positive or negative), MAGeCK can identify both positively and negatively selected genes in the screen ({% cite Li2014 %}). The dataset we are using in this tutorial is from a negative selection screen where the aim is to identify genes whose knockout increases the cancer cells sensitivity to the drug.
 
-![Positive and negative selection screens](../../images/crispr-screen/pos_neg_screen.png "Source: Adapted from Addgene")
+![Positive and negative selection screens](../../images/crispr-screen/pos_neg_screen.png "Adapted from Addgene")
 
 
 ## Two conditions
