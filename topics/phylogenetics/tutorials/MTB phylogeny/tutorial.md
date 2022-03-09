@@ -43,8 +43,7 @@ The key difference between the rooted and the unrooted tree is that only the roo
 
 The best way to root a tree is by including an **outgroup**: a species or lineage which we know *a priori* to lay outside the phylogeny we're interested in. *M. canetti* usually serves this purpose for studying the MTBC, but you can also root, for example, a phylogeny of lineage 2 by including a lineage 4 strain.
 
-<img src="./images/mtbc_1strainPerLineage.nwk.COMB.svg" width="800"/>
-<figcaption align = "left">Fig.1 - Rooted (A) and unrooted (B) phylogeny of the MTBC. Some basic tree vocabulary is shown in red.</figcaption>
+![Phylogeny](./images/mtbc_1strainPerLineage.nwk.COMB.svg "Rooted [A] and unrooted [B] phylogeny of the MTBC. Some basic tree vocabulary is shown in red."){:width="800"}
 
 
 ## Branch lengths
@@ -52,8 +51,8 @@ Besides relatedness and direction, a third important piece of information contai
 
 As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Below is a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 ({% cite Eldholm2016 %}). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.
 
-<img src="./images/eldholm2016_tree.png" width="200"/>
-<figcaption align = "left">Fig.2 - Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016.</figcaption>
+![Phylogeny](./images/eldholm2016_tree.png "Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016."){:width="200"}
+
 
 > ### {% icon comment %} Phylogenetics with *Mycobacterium tuberculosis*
 >
@@ -78,7 +77,7 @@ Recall that the alignment here was generated using SNPs called from reference-al
 
 An alignment of SNPs looks something like this. Each row is a different strain, each column a position in the reference genome. Because this alignment is based on SNPs, it contains only variable positions. Inspecting the alignment is always a good idea, because also in phylogenetics the principle of 'garbage in, garbage out' applies.
 
-<img src="./images/MEGA_alignment.png" width="500"/>
+![Alignment](./images/MEGA_alignment.png){:width="500"}
 
 ## Get the data
 > ### {% icon hands_on %} Hands-on: Obtain your data
@@ -156,7 +155,7 @@ tree <- read.tree(treefile)
 plot(tree)
 
 ```
-<img src="./images/tree_unrooted.svg" width="600"/>
+![Unrooted tree](./images/tree_unrooted.svg){:width="600"}
 
 
 ### Question
@@ -186,8 +185,7 @@ tree_rooted$root.edge <- 0.005
 plot(tree_rooted, root.edge = T, cex=0.6)
 ```
 
-<img src="./images/tree_rooted.svg" width="600"/>
-
+![Rooted tree](./images/tree_rooted.svg){:width="600"}
 
 ## Show the different lineages present in the sample
 A first piece of information we now want to add to the phylogeny is to which lineage the strains belong. This will allow us to assess whether our tree is consistent with the known phylogeny of the MTBC, shown in Figure 1A, and to visualize which lineages are present in our samples. The information to which lineage a strain belongs can be found in the output of TB-profiler.
@@ -245,8 +243,7 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 
 ```
 
-<img src="./images/tree_rooted_lineages.svg" width="600"/>
-
+![Colored lineages](./images/tree_rooted_lineages.svg){:width="600"}
 
 ### Questions
 > ### {% icon question %} Question 1
@@ -345,8 +342,8 @@ plot(tree_rooted,cex = 0.7, root.edge = T)
 plot(tree_dr,cex = 0.8, tip.color = pal_dr, root.edge = TRUE)
 
 ```
-<img src="./images/tree_rooted_dr.svg" width="600"/>
 
+![Colored DR profiles](./images/tree_rooted_dr.svg){:width="600"}
 
 > ### {% icon question %} Question
 >
