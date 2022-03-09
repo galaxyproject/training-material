@@ -144,7 +144,17 @@ module TopicFilter
       end
 
       # Similar as above.
-      page_obj['workflows'] = resources.include?('workflows')
+      if resources.include?('workflows')
+        workflow_files = Dir.glob("#{folder}/workflows/*.ga").map{ |a| a.split('/')[-1] }
+        page_obj['workflows'] = workflow_files.map{|wf|
+          x = {
+            "workflow" => wf,
+            "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
+          }
+          x
+        }
+      end
+
       page_obj['tours'] = resources.include?('tours')
       page_obj['video'] = slide_has_video
       page_obj['translations'] = Hash.new
