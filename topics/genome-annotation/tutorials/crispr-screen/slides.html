@@ -7,7 +7,7 @@ title: "Introduction to CRISPR screen analysis"
 questions:
   - What is CRISPR?
   - What is a CRISPR screen?
-  - How is a sgRNA library created?
+  - How is a guide RNA library created?
   - What is the difference between a negative and positive screen?
   - How to analyse CRISPR screen data?
 objectives:
@@ -18,7 +18,10 @@ time_estimation: "5m"
 contributors:
   - mblue9
   - sylviamahara
-
+voice:
+  id: Olivia
+  lang: en-AU
+  neural: true
 ---
 
 
@@ -45,16 +48,14 @@ contributors:
 
 ### What is a CRISPR screen?
 
-.center[CRISPR screens help us to identify the functions of genes]
+.center[CRISPR screens enable high-throughput functional interrogation of a genome]
 
 .image-100[![CRISPR screen](../../images/crispr-screen/what_is_a_crispr_screen.png)]
-
-.pull-right[Source: [Peter.Grant.ubc](https://en.wikipedia.org/w/index.php?curid=63278077)]
 
 ???
 
 - The ease of generating guide RNAs makes CRISPR one of the most scalable genome editing technologies.
-- It can be used for genome-wide screens, enabling systematic targeting of 1000s of genes, with one gene targeted per cell.
+- It can be used for genome-wide screens, enabling systematic targeting of tens of thousands of genes, with one gene targeted per cell.
 - With these screens we can identify the functions of genes, such as those essential for cell survival, drug resistance or sensitivity.
 - Pooled or arrayed screens can be performed. In this tutorial we analyse data from a pooled screen.
 
@@ -76,13 +77,15 @@ contributors:
 
 * Cas9 expressing cells are transduced with sgRNA library
 
+* Whole genome screen should be carried out with min x300 guide representation
+
 ]
 
 ???
 
-- Various sgRNA libraries are available and can be purchased.
+- Various guide RNA libraries are available and can be purchased.
 - In this tutorial we use Brunello, which is a human genome-wide CRISPR knockout library in a lentiGuide vector.
-- Cells expressing the Cas9 enzyme are transduced with the sgRNAs at a low Multiplicity of Infection (MOI), aiming for ~500-fold starting representation of each guide, and puromycin is used to remove cells without guides.
+- Cells expressing the Cas9 enzyme are transduced with the guide RNAs at a low Multiplicity of Infection (MOI), aiming for a minimum starting representation of 300 for each guide, and puromycin is used to remove cells without guides.
 
 ---
 
@@ -90,15 +93,15 @@ contributors:
 
 .image-100[![Neg and pos screens](../../images/crispr-screen/pos_neg_screen.png)]
 
-.pull-right[Source: [Addgene](https://www.addgene.org/guides/pooled-libraries/)]
+.pull-right[Adapted from [Addgene](https://www.addgene.org/guides/pooled-libraries/)]
 
 ???
 
 - CRISPR positive or negative screens can be performed.
-- With a positive screen, most cells die after the treatment and we are interested in identifying genes whose guide RNAs increase (are enriched), indicating knocking out those genes may lead to treatment resistance.
-- With a negative screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose guide RNAs decrease (drop out) compared to a control e.g. vehicle, indicating knocking out those genes may lead to treatment sensitivity.
+- With a positive screen, few cells survive the treatment and we are interested in identifying genes whose guide RNAs increase (are enriched), indicating knockout of those genes leads to resistance.
+- With a negative screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose guide RNAs decrease (are depleted) compared to a control e.g. vehicle, indicating knockout of those genes increases sensitivity to the treatment.
 - In this tutorial we analyse data from a negative screen.
-- Cells from the timepoints of interest are collected, genomic DNA is extracted, and the sgRNA region is amplified by PCR, followed by sequencing.
+- Cells from the timepoints of interest are collected, genomic DNA is extracted, and the guide RNA region is amplified by PCR, followed by sequencing.
 ---
 
 ### A workflow for CRISPR screen analysis
