@@ -409,7 +409,7 @@ matrix. For example, imagine that in our story says *198: SNP distance matrix on
 
 Then the history ID is *198*, and the block of code should be:
 
-```
+```r
 library(cluster)
 
 # Get the SNP distance matrix object from Galaxy
