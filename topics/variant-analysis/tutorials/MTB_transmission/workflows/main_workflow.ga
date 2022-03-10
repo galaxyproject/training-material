@@ -1,7 +1,6 @@
 {
     "a_galaxy_workflow": "true",
-    "annotation": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
-    "tags": ["variant-analysis"],
+    "annotation": "Given a set of VCF files and the reference genome used to do the mapping and SNP calling, create a multifasta file containing the genomes of all samples and calculate the matrix of pairwise SNP distances",
     "format-version": "0.1",
     "name": "From VCFs to SNP distance matrix",
     "steps": {
@@ -21,20 +20,20 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "bottom": 528.7500152587891,
-                "height": 96.05000305175781,
-                "left": 173.60000610351562,
-                "right": 413.6000061035156,
-                "top": 432.70001220703125,
-                "width": 240,
-                "x": 173.60000610351562,
-                "y": 432.70001220703125
+                "bottom": 602.3000183105469,
+                "height": 89.10000610351562,
+                "left": 562.0999755859375,
+                "right": 782.0999755859375,
+                "top": 513.2000122070312,
+                "width": 220,
+                "x": 562.0999755859375,
+                "y": 513.2000122070312
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "8727dab8-04c7-429e-b66e-dbd731a67f62",
+            "uuid": "a3701b5d-9f74-46b4-ae97-51c432933230",
             "workflow_outputs": []
         },
         "1": {
@@ -53,24 +52,24 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "bottom": 716.2333526611328,
-                "height": 120.53334045410156,
-                "left": 489.6000061035156,
-                "right": 729.6000061035156,
-                "top": 595.7000122070312,
-                "width": 240,
-                "x": 489.6000061035156,
-                "y": 595.7000122070312
+                "bottom": 789.7333526611328,
+                "height": 111.53334045410156,
+                "left": 865.0999755859375,
+                "right": 1085.0999755859375,
+                "top": 678.2000122070312,
+                "width": 220,
+                "x": 865.0999755859375,
+                "y": 678.2000122070312
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "6716b7b9-1d64-4a61-9f58-bcb81588808e",
+            "uuid": "899dca08-73f5-4ac1-9d19-313414c90a1e",
             "workflow_outputs": []
         },
         "2": {
-            "annotation": "",
+            "annotation": "We will ensure at this step that variants to build the MSA are fixed variants and that we low-confidence filter repetitive regions of the MTB genome",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0",
             "errors": null,
             "id": 2,
@@ -90,14 +89,14 @@
                 }
             ],
             "position": {
-                "bottom": 563.2333526611328,
-                "height": 131.53334045410156,
-                "left": 490.6000061035156,
-                "right": 730.6000061035156,
-                "top": 431.70001220703125,
-                "width": 240,
-                "x": 490.6000061035156,
-                "y": 431.70001220703125
+                "bottom": 636.7333526611328,
+                "height": 122.53334045410156,
+                "left": 866.0999755859375,
+                "right": 1086.0999755859375,
+                "top": 514.2000122070312,
+                "width": 220,
+                "x": 866.0999755859375,
+                "y": 514.2000122070312
             },
             "post_job_actions": {
                 "RenameDatasetActionoutput1": {
@@ -118,18 +117,18 @@
             "tool_state": "{\"filter_options\": {\"show_filter_options\": \"yes\", \"__current_case__\": 0, \"region_filter\": [\"pe_ppe\", \"uvp\"], \"indel_window_size\": \"5\", \"min_percentage_alt\": \"90.0\", \"min_depth\": \"30\"}, \"filters\": [\"region_filter\", \"close_to_indel_filter\", \"min_percentage_alt_filter\", \"snv_only_filter\"], \"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.3+galaxy0",
             "type": "tool",
-            "uuid": "bca4a21f-1c73-439f-a65c-c665ec9b7ed2",
+            "uuid": "b6ef7486-0dc1-4f0c-ad2d-038f648670b8",
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "output1",
-                    "uuid": "e878535b-90d3-47e9-b281-3a92e83f78e0"
+                    "uuid": "87f8ad83-d43e-4e44-8bed-33415b7add79"
                 }
             ]
         },
         "3": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10+galaxy1",
+            "annotation": "The complete genome of each of the samples is generated by inserting the SNPs defined in the respective VCF in the reference genome that was used for mapping and SNP calling",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2",
             "errors": null,
             "id": 3,
             "input_connections": {
@@ -145,6 +144,14 @@
             "inputs": [
                 {
                     "description": "runtime parameter for tool bcftools consensus",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "reference_source"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
                     "name": "sec_default"
                 }
             ],
@@ -157,14 +164,14 @@
                 }
             ],
             "position": {
-                "bottom": 666.683349609375,
-                "height": 224.98333740234375,
-                "left": 768.5999755859375,
-                "right": 1008.5999755859375,
-                "top": 441.70001220703125,
-                "width": 240,
-                "x": 768.5999755859375,
-                "y": 441.70001220703125
+                "bottom": 734.0333557128906,
+                "height": 209.83334350585938,
+                "left": 1144.0999755859375,
+                "right": 1364.0999755859375,
+                "top": 524.2000122070312,
+                "width": 220,
+                "x": 1144.0999755859375,
+                "y": 524.2000122070312
             },
             "post_job_actions": {
                 "RenameDatasetActionoutput_file": {
@@ -175,187 +182,42 @@
                     "output_name": "output_file"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2",
             "tool_shed_repository": {
-                "changeset_revision": "92182c270ce4",
+                "changeset_revision": "a87ae767b01d",
                 "name": "bcftools_consensus",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"chain\": \"false\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"fasta_ref\": {\"__class__\": \"ConnectedValue\"}}, \"rename\": \"false\", \"sec_default\": {\"mask\": {\"__class__\": \"RuntimeValue\"}, \"iupac_codes\": \"false\", \"sample\": \"\", \"select_haplotype\": null}, \"sec_restrict\": {\"include\": \"\", \"exclude\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.10+galaxy1",
+            "tool_state": "{\"chain\": \"false\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"fasta_ref\": {\"__class__\": \"RuntimeValue\"}}, \"rename\": \"true\", \"sec_default\": {\"mask\": {\"__class__\": \"RuntimeValue\"}, \"iupac_codes\": \"false\", \"sample\": \"\", \"select_haplotype\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9+galaxy2",
             "type": "tool",
-            "uuid": "6da5cff1-67f5-419c-befa-fcd085cb6403",
+            "uuid": "967af052-882a-427c-825e-e88f59ac50b3",
             "workflow_outputs": [
                 {
                     "label": "#{input_file}",
                     "output_name": "output_file",
-                    "uuid": "278b7a82-a7ef-48d4-9d26-0bf237eb4081"
+                    "uuid": "ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a"
                 }
             ]
         },
         "4": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_formatter/cshl_fasta_formatter/1.0.1",
+            "annotation": "All genomes are concatenated in a single multifasta file. Because all o them have the same length, this may be seen as a multiple sequence alignment.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
             "errors": null,
             "id": 4,
             "input_connections": {
-                "input": {
+                "inputs": {
                     "id": 3,
                     "output_name": "output_file"
                 }
             },
-            "inputs": [],
-            "label": "Reformat the output fasta to a single line",
-            "name": "FASTA Width",
-            "outputs": [
+            "inputs": [
                 {
-                    "name": "output",
-                    "type": "fasta"
+                    "description": "runtime parameter for tool Concatenate datasets",
+                    "name": "inputs"
                 }
             ],
-            "position": {
-                "bottom": 870.2333526611328,
-                "height": 131.53334045410156,
-                "left": 996.5,
-                "right": 1236.5,
-                "top": 738.7000122070312,
-                "width": 240,
-                "x": 996.5,
-                "y": 738.7000122070312
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_formatter/cshl_fasta_formatter/1.0.1",
-            "tool_shed_repository": {
-                "changeset_revision": "859422bcb689",
-                "name": "fasta_formatter",
-                "owner": "devteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"width\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.0.1",
-            "type": "tool",
-            "uuid": "30f5218e-0acd-4430-8076-3276ed90caa7",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "93864e9b-b5fe-4a9c-bfc2-e1fe2f23e6fb"
-                }
-            ]
-        },
-        "5": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0",
-            "errors": null,
-            "id": 5,
-            "input_connections": {
-                "input": {
-                    "id": 4,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": "Add a column with the name of the sample",
-            "name": "Add input name as column",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tabular"
-                }
-            ],
-            "position": {
-                "bottom": 891.7166748046875,
-                "height": 156.01666259765625,
-                "left": 1268.5,
-                "right": 1508.5,
-                "top": 735.7000122070312,
-                "width": 240,
-                "x": 1268.5,
-                "y": 735.7000122070312
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0",
-            "tool_shed_repository": {
-                "changeset_revision": "3284b72eef56",
-                "name": "add_input_name_as_column",
-                "owner": "mvdbeek",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"header\": {\"contains_header\": \"no\", \"__current_case__\": 1}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"prepend\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.2.0",
-            "type": "tool",
-            "uuid": "41317d4c-efaa-4a00-8372-d179c5a400de",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "257f20d7-113d-4bb7-8f33-2994c76b2e3e"
-                }
-            ]
-        },
-        "6": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
-            "errors": null,
-            "id": 6,
-            "input_connections": {
-                "infile": {
-                    "id": 5,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": "Substitute MTB_anc by the sample name",
-            "name": "Text reformatting",
-            "outputs": [
-                {
-                    "name": "outfile",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "bottom": 889.7166748046875,
-                "height": 156.01666259765625,
-                "left": 1527.5,
-                "right": 1767.5,
-                "top": 733.7000122070312,
-                "width": 240,
-                "x": 1527.5,
-                "y": 733.7000122070312
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
-            "tool_shed_repository": {
-                "changeset_revision": "ddf54b12c295",
-                "name": "text_processing",
-                "owner": "bgruening",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"code\": \"$1 == \\\">MTB_anc\\\" { print \\\">\\\"$2 } $1 != \\\">MTB_anc\\\"  { print $1 }\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.2",
-            "type": "tool",
-            "uuid": "2ab986e9-efc6-4569-8950-9121d89dab71",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "outfile",
-                    "uuid": "65f0b2aa-9ff9-4eb3-b840-8e468c1d20fa"
-                }
-            ]
-        },
-        "7": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
-            "errors": null,
-            "id": 7,
-            "input_connections": {
-                "inputs": {
-                    "id": 6,
-                    "output_name": "outfile"
-                }
-            },
-            "inputs": [],
             "label": "Concatenate genomes to build a MSA",
             "name": "Concatenate datasets",
             "outputs": [
@@ -365,14 +227,14 @@
                 }
             ],
             "position": {
-                "bottom": 547.2333526611328,
-                "height": 131.53334045410156,
-                "left": 1734.5999755859375,
-                "right": 1974.5999755859375,
-                "top": 415.70001220703125,
-                "width": 240,
-                "x": 1734.5999755859375,
-                "y": 415.70001220703125
+                "bottom": 647.7333526611328,
+                "height": 122.53334045410156,
+                "left": 1519.0999755859375,
+                "right": 1739.0999755859375,
+                "top": 525.2000122070312,
+                "width": 220,
+                "x": 1519.0999755859375,
+                "y": 525.2000122070312
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
@@ -382,30 +244,35 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"inputs\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"inputs\": {\"__class__\": \"RuntimeValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.1",
             "type": "tool",
-            "uuid": "1800fa04-7ef5-4e68-a6ff-96e27f362768",
+            "uuid": "e0b536e1-c56c-41ed-9600-905d0cf58e97",
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "out_file1",
-                    "uuid": "7d437881-f47b-49f3-8e0d-1e1bdc4825ac"
+                    "uuid": "c1fe096c-2693-4128-8139-4285bcd394ad"
                 }
             ]
         },
-        "8": {
-            "annotation": "",
+        "5": {
+            "annotation": "Discard invariant positions from the MSA to simplify the file so only contains positions with at least one SNP in at least one strain.",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0",
             "errors": null,
-            "id": 8,
+            "id": 5,
             "input_connections": {
                 "input_fasta": {
-                    "id": 7,
+                    "id": 4,
                     "output_name": "out_file1"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Finds SNP sites",
+                    "name": "input_fasta"
+                }
+            ],
             "label": "Keep only variable positions",
             "name": "Finds SNP sites",
             "outputs": [
@@ -415,14 +282,14 @@
                 }
             ],
             "position": {
-                "bottom": 568.7166748046875,
-                "height": 156.01666259765625,
-                "left": 1999.5999755859375,
-                "right": 2239.5999755859375,
-                "top": 412.70001220703125,
-                "width": 240,
-                "x": 1999.5999755859375,
-                "y": 412.70001220703125
+                "bottom": 647.1666870117188,
+                "height": 144.9666748046875,
+                "left": 1843.0999755859375,
+                "right": 2063.0999755859375,
+                "top": 502.20001220703125,
+                "width": 220,
+                "x": 1843.0999755859375,
+                "y": 502.20001220703125
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0",
@@ -432,30 +299,35 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"input_fasta\": {\"__class__\": \"ConnectedValue\"}, \"out_type\": {\"ot_select\": \"alignment\", \"__current_case__\": 0, \"formats\": [\"-m\"], \"b\": \"false\", \"c\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_fasta\": {\"__class__\": \"RuntimeValue\"}, \"out_type\": {\"ot_select\": \"alignment\", \"__current_case__\": 0, \"formats\": [\"-m\"], \"b\": \"false\", \"c\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.5.1+galaxy0",
             "type": "tool",
-            "uuid": "7ebc1c82-145c-4eaf-92ef-7d0aa15586b8",
+            "uuid": "3718c889-5f1c-4cc7-977c-eaa564753c9b",
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "output_fasta",
-                    "uuid": "cfb3e7d0-adf6-4180-bc33-14b947ec3e5f"
+                    "uuid": "2931ef4f-28d7-4701-bee0-292177bf0841"
                 }
             ]
         },
-        "9": {
-            "annotation": "",
+        "6": {
+            "annotation": "From the MSA. Calculate pairwise SNP distances between samples. ",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0",
             "errors": null,
-            "id": 9,
+            "id": 6,
             "input_connections": {
                 "input": {
-                    "id": 8,
+                    "id": 5,
                     "output_name": "output_fasta"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SNP distance matrix",
+                    "name": "input"
+                }
+            ],
             "label": "Calculate SNP distances",
             "name": "SNP distance matrix",
             "outputs": [
@@ -465,14 +337,14 @@
                 }
             ],
             "position": {
-                "bottom": 597.2000122070312,
-                "height": 180.5,
-                "left": 2268.60009765625,
-                "right": 2508.60009765625,
-                "top": 416.70001220703125,
-                "width": 240,
-                "x": 2268.60009765625,
-                "y": 416.70001220703125
+                "bottom": 662.6000213623047,
+                "height": 167.40000915527344,
+                "left": 2173.10009765625,
+                "right": 2393.10009765625,
+                "top": 495.20001220703125,
+                "width": 220,
+                "x": 2173.10009765625,
+                "y": 495.20001220703125
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0",
@@ -482,129 +354,20 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"a\": \"false\", \"b\": \"false\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"k\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"a\": \"false\", \"b\": \"false\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"k\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.6.3+galaxy0",
             "type": "tool",
-            "uuid": "843d5f8e-add2-4a0f-bc74-b5ce4e89e409",
+            "uuid": "e5f85c1b-43cc-417e-8e02-79ecc511b4ec",
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "output",
-                    "uuid": "128e4132-ca95-432c-bd56-4d4382b6916d"
-                }
-            ]
-        },
-        "10": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/reshape2_melt/melt/1.4.2",
-            "errors": null,
-            "id": 10,
-            "input_connections": {
-                "input": {
-                    "id": 9,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool melt",
-                    "name": "input"
-                }
-            ],
-            "label": "Convert distance matrix into tabular",
-            "name": "melt",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tabular"
-                }
-            ],
-            "position": {
-                "bottom": 620.2666473388672,
-                "height": 204.9833221435547,
-                "left": 2563.10009765625,
-                "right": 2803.10009765625,
-                "top": 415.2833251953125,
-                "width": 240,
-                "x": 2563.10009765625,
-                "y": 415.2833251953125
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/reshape2_melt/melt/1.4.2",
-            "tool_shed_repository": {
-                "changeset_revision": "317ed0ee8bf2",
-                "name": "reshape2_melt",
-                "owner": "iuc",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.4.2",
-            "type": "tool",
-            "uuid": "08c66a0f-89dd-4f66-8a72-9775cd2debae",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "53e1af40-5fb5-4470-a1bd-02f46c324dcd"
-                }
-            ]
-        },
-        "11": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
-            "errors": null,
-            "id": 11,
-            "input_connections": {
-                "infile": {
-                    "id": 10,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Text reformatting",
-                    "name": "infile"
-                }
-            ],
-            "label": "Filter pairwise distances with maximum of 10 SNPs",
-            "name": "Text reformatting",
-            "outputs": [
-                {
-                    "name": "outfile",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "bottom": 577.2999877929688,
-                "height": 156.01666259765625,
-                "left": 2843.10009765625,
-                "right": 3083.10009765625,
-                "top": 421.2833251953125,
-                "width": 240,
-                "x": 2843.10009765625,
-                "y": 421.2833251953125
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
-            "tool_shed_repository": {
-                "changeset_revision": "ddf54b12c295",
-                "name": "text_processing",
-                "owner": "bgruening",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"code\": \"$1 != $2 && $3 <= 10\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.2",
-            "type": "tool",
-            "uuid": "cce708f9-8f9a-4a03-b3fe-37d69d6a3b19",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "outfile",
-                    "uuid": "cd46c9bf-376f-4bbb-a9b4-9080e1fcadd6"
+                    "uuid": "2dff3ea9-ce2d-48eb-b9eb-90b3b6034ae6"
                 }
             ]
         }
     },
-    "uuid": "0c6b0a12-40b9-4141-b0ae-3a54c65d485a",
-    "version": 10
+    "tags": [],
+    "uuid": "69bd4977-643c-4024-bf24-7632d691f8cf",
+    "version": 4
 }
