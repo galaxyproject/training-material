@@ -13,9 +13,11 @@ contributors:
   - mvdbeek
   - bernt-matthias
   - hexylena
-subtopic: features
+subtopic: jobs
 tags:
   - jobs
+  - ansible
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin
@@ -412,4 +414,4 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 
 -->
 
-{% snippet topics/admin/faqs/missed-something.md step=2 %}
+{% snippet topics/admin/faqs/missed-something.md step=3 %}

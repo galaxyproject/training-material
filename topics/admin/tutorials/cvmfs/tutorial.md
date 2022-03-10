@@ -14,7 +14,6 @@ key_points:
 contributors:
   - slugger70
   - hexylena
-subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
@@ -25,6 +24,10 @@ voice:
   id: Olivia
   lang: en-AU
   neural: true
+subtopic: data
+tags:
+  - ansible
+  - git-gat
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He
@@ -584,7 +587,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=4 %}
+{% snippet topics/admin/faqs/missed-something.md step=5 %}
 
 # Common Production Questions
 

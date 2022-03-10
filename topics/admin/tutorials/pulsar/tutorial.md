@@ -22,9 +22,11 @@ contributors:
   - mvdbeek
   - hexylena
   - gmauro
-subtopic: features
+subtopic: jobs
 tags:
+  - ansible
   - jobs
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin
@@ -785,7 +787,7 @@ You'll notice that the Pulsar server has received the job (all the way in Austra
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
-{% snippet topics/admin/faqs/missed-something.md step=8 %}
+{% snippet topics/admin/faqs/missed-something.md step=9 %}
 
 # Retries of the staging actions
 

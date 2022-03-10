@@ -21,6 +21,7 @@ contributors:
 subtopic: features
 tags:
   - tools
+  - git-gat
 ---
 
 # Overview

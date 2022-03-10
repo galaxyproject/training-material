@@ -22,21 +22,19 @@ layout: faqs
     {% endif %}
   {% endfor %}
 {% else %}
-  {% assign topic_faqs_sorted = topic_faqs | sort: "area" %}
+  {% assign topic_faqs_sorted = topic_faqs | sort: "area", "first" %}
 {% endif %}
 
-
-<!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
-{% if page.dir contains 'faqs' and page.dir contains 'tutorial' %}
- <h4 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h4>
-  {% snippet /faqs/galaxy/tools_missing.md %}
-{% endif %}
 
 {% assign area_prev = '' %}
 {% for q in topic_faqs_sorted %}
 {% unless q.area == area_prev %}
-{% unless forloop.first %} <br><br> {% endunless %}
+{% unless forloop.first %} <br> {% endunless %}
+{% if q.area == nil %}
+<h3 id="tutorial-faqs"> <a href="#tutorial-faqs"> Tutorial Questions </a></h3>
+{% else %}
 <h3 id="{{q.area}}"> <a href="#{{q.area}}"> {{ q.area | capitalize}} </a></h3>
+{% endif %}
 <hr/>
 {% assign area_prev = q.area %}
 {% endunless %}
@@ -47,6 +45,19 @@ layout: faqs
 
 {% endfor %}
 
+{% unless page.url contains 'faqs/galaxy/' or page.url contains 'faqs/gtn/' %}
+<br>
+<h3 id="general-faqs"> <a href="#general-faqs"> General Questions </a></h3>
+<hr>
+<!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
+{% if page.dir contains 'faqs' and page.dir contains 'tutorial' %}
+ <h4 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+  {% snippet /faqs/galaxy/tools_missing.md %}
+ <h4 class="faq-area"> Running into an error? <a href="{{site.baseurl}}/faqs/galaxy/analysis_troubleshooting.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+  {% snippet /faqs/galaxy/analysis_troubleshooting.md %}
+{% endif %}
+
+{% endunless %}
 
 
 

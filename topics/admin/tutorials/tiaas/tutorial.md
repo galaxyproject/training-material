@@ -17,8 +17,10 @@ contributors:
   - shiltemann
 subtopic: features
 tags:
+  - ansible
   - training
   - jobs
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin
@@ -425,3 +427,5 @@ Congratulations! you have now set up TIaaS on your Galaxy server.
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/missed-something.md step=12 %}

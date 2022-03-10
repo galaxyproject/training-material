@@ -25,6 +25,9 @@ requirements:
 abbreviations:
   FTP: File Transfer Protocol
   NAT: Network Address Translation
+tags:
+  - data
+  - git-gat
 ---
 
 # Overview
@@ -391,3 +394,5 @@ It's working!
 {: .hands_on}
 
 Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.
+
+{% snippet topics/admin/faqs/missed-something.md step=14 %}

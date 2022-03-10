@@ -19,7 +19,9 @@ contributors:
   - shiltemann
   - nsoranzo
 tags:
+  - ansible
   - deploying
+  - git-gat
 subtopic: core
 requirements:
   - type: "internal"

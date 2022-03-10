@@ -16,9 +16,11 @@ contributors:
   - bgruening
   - slugger70
   - hexylena
-subtopic: features
+subtopic: monitoring
 tags:
+  - ansible
   - monitoring
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin
@@ -168,3 +170,5 @@ The reports application is included with the Galaxy codebase and this tutorial a
 > ### {% icon comment %} Insecure!
 > But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/external-auth/tutorial.md %}) tutorial for information on securing Reports.
 {: .comment}
+
+{% snippet topics/admin/faqs/missed-something.md step=13 %}

@@ -22,8 +22,10 @@ contributors:
   - bgruening
   - hexylena
 tags:
+  - ansible
   - jobs
-subtopic: features
+  - git-gat
+subtopic: jobs
 requirements:
   - type: "internal"
     topic_name: admin
@@ -708,7 +710,7 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 > ```
 {: .code-out}
 
-{% snippet topics/admin/faqs/missed-something.md step=7 %}
+{% snippet topics/admin/faqs/missed-something.md step=8 %}
 
 ## Further Reading
 

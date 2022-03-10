@@ -1,0 +1,1 @@
+../../../../../faqs/galaxy/datatypes_fastq_varieties.md
