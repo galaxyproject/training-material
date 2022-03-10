@@ -176,9 +176,10 @@ Go to the correct section depending on which MD engine you will be using.
 
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
 > Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.2600690).
-[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
-> ![Snapshot of CHARMM-GUI Quick MD Simulator tool ]({% link topics/computational-chemistry/images/charmmgui-mdsimulator.png %} "The CHARMM-GUI Quick MD Simulator tool")
+[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Solution Builder tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
+> ![Snapshot of CHARMM-GUI Solution Builder tool ]({% link topics/computational-chemistry/images/charmmgui-mdsimulator-solution-builder.png %} "The CHARMM-GUI Solution Builder tool")
 {: .hands_on}
+
 
 ### Select both protein and ligand models
 > ### {% icon hands_on %} Hands-on: Generate PDB file
@@ -186,16 +187,18 @@ Go to the correct section depending on which MD engine you will be using.
 > ![Snapshot of CHARMM-GUI model section]({% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
 {: .hands_on}
 
+
 ### Manipulate the system
 > ### {% icon hands_on %} Hands-on: Make necessary modifications
-> Rename the hetero chain to BGLC and add disulfide bonds.
+> Rename the hetero chain to BGLC and add disulfide bonds.Press 'Next Step: Generate PDB' in the bottom right corner.
 > ![Snapshot of CHARMM-GUI renaming section]({% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
 {: .hands_on}
+
 
 ### Set up the waterbox and add ions
 > ### {% icon hands_on %} Hands-on: Solvate the protein
 > Set up a waterbox. Use a size of 10 angstroms and choose a cubic box ('rectangular' option).
-> ![Snapshot of CHARMM-GUI waterbox section]({% link topics/computational-chemistry/images/charmmgui-waterbox.png %} "Setting up a waterbox in CHARMM-GUI")
+> ![Snapshot of CHARMM-GUI waterbox section]({% link topics/computational-chemistry/images/charmm-gui-waterbox-from-solution-builder.png %} "Setting up a waterbox in CHARMM-GUI")
 {: .hands_on}
 
 > ### {% icon question %} Question
@@ -234,7 +237,7 @@ Go to the correct section depending on which MD engine you will be using.
 ### Upload to Galaxy
 > ### {% icon hands_on %} Hands-on: Upload files to Galaxy
 Upload the following files to your Galaxy instance and ensure the correct datatype is selected:
- - step3_pbcsetup.xplor.ext.psf -> xplor psf input (psf format)
+ - step3_pbcsetup.psf -> xplor psf input (psf format)
  - step3_pbcsetup.pdb -> pdb input (pdb format)
  - Checkfft.str -> PME grid specs (txt format)
 - step2.1_waterbox.prm -> waterbox prm input (txt format)
