@@ -6,7 +6,7 @@ tags:
   - prokaryotes
   - phylogenetics
   - evolution
-level: Beginner
+level: Introductory
 objectives:
 - Understand the basic concepts behind phylogenetic trees
 - Be able to read and interrogate a phylogeny encountered in the literature
