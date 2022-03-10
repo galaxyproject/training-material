@@ -111,7 +111,7 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 > 3. Rename the datasets.
 > 4. Check that the datatype is correct. The file should have the PDB datatype.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="pdb" %}
 >
 {: .hands_on}
 
@@ -149,7 +149,7 @@ Go to the correct section depending on which MD engine you will be using.
 
 ### Manipulate the system
 > ### {% icon hands_on %} Hands-on: Make necessary modifications
-> Rename the hetero chain to BGLC and add ten disulfide bonds to the protein, as shown in the figure. Then press 'Next Step: Manipulate PDB' in the bottom right corner.
+> Rename the hetero chain to BGLC and add ten disulfide bonds to the protein, as shown in the figure. Then press 'Next Step: Generate PDB' in the bottom right corner.
 > ![Snapshot of CHARMM-GUI renaming section]({% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
 {: .hands_on}
 
@@ -167,7 +167,7 @@ Go to the correct section depending on which MD engine you will be using.
 
 ### Upload to Galaxy
 > ### {% icon hands_on %} Hands-on: Upload files to Galaxy
-> Upload the step1_pdbreader.psf and step1_pdbreader.crd files to your BRIDGE instance and run the system setup tool.
+> Upload the step1_pdbreader.psf and step1_pdbreader.crd files to your Galaxy instance and run the system setup tool.
 {: .hands_on}
 
 ## NAMD
@@ -233,7 +233,7 @@ Go to the correct section depending on which MD engine you will be using.
 
 ### Upload to Galaxy
 > ### {% icon hands_on %} Hands-on: Upload files to Galaxy
-Upload the following files to your BRIDGE instance and ensure the correct datatype is selected:
+Upload the following files to your Galaxy instance and ensure the correct datatype is selected:
  - step3_pbcsetup.xplor.ext.psf -> xplor psf input (psf format)
  - step3_pbcsetup.pdb -> pdb input (pdb format)
  - Checkfft.str -> PME grid specs (txt format)
