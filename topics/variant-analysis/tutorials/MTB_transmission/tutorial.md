@@ -432,7 +432,7 @@ clusterIDs <- unique(subset(clusters, duplicated(clusters$cluster_id))$cluster_i
 clusters <- subset(clusters, cluster_id %in% clusterIDs)
 # Add proper Sample name column
 clusters <- cbind(Sample = rownames(clusters), clusters)
-write.table(clusters, file = "Transmission_clusters.tsv", sep="\t", quote = F, row.names = F))
+write.table(clusters, file = "Transmission_clusters.tsv", sep="\t", quote = F, row.names = F)
 ```
 
 This code has written the results to a file called *Transmission_clusters.tsv*. You can
