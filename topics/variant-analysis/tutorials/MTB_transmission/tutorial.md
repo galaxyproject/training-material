@@ -151,7 +151,9 @@ complicated. That is the reason why we tipically use alignments that only contai
 Thus, the first step in this tutorial will be to filter the VCFs so we are sure that
 they only contain **fixed SNPs**. As it was introduced in day 2 webinar [Mapping and Variant calling](https://youtu.be/38GUBKwWXv8), we will consider fixed
 those variants at a frequency equal or greater than 90%. We will be using here the tool
-**TB Variant Filter**
+**TB Variant Filter**.
+
+*Note: TB variant Filter refers to SNPs as SNVs. These two short forms are interchangeable, meaning **S**ingle **N**ucleotide **P**olymorphism and **S**ingle **N**ucleotide **V**ariant, respectively.*
 
 > ### {% icon hands_on %} Hands-on: Filter VCF files for epidemiological investigation
 >
@@ -165,7 +167,7 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 
 > ### {% icon question %} Questions
 >
-> 1.**`TB Variant Filter`** reads the VCF and output only SNVs that have, at leat, 90% frequency.
+> 1.**`TB Variant Filter`** reads the VCF and output only SNPs that have, at least, 90% frequency.
 > How can this sofware extract such information from the VCF files?
 >
 > > ### {% icon solution %} Solution
