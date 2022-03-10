@@ -6,7 +6,7 @@ tags:
   - prokaryotes
   - phylogenetics
   - evolution
-level: Beginner
+level: Introductory
 questions:
 - What information can I get from a phylogenetic tree?
 - How do I estimate a phylogeny?
