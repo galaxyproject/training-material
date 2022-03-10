@@ -94,7 +94,7 @@ To allow your user to upload via TUS, you will need to:
 >    +tusd_instances:
 >    +  - name: main
 >    +    user: "{{ galaxy_user.name }}"
->    +    group: "{{ __galaxy_user_group }}"
+>    +    group: "galaxy"
 >    +    args:
 >    +      - "-host=localhost"
 >    +      - "-port={{ galaxy_tusd_port }}"
