@@ -721,7 +721,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 7, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 10, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -798,7 +798,16 @@
 
       <div data-commit="Configure TUS in your group variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -122,3 +122,16 @@</span> nginx_conf_http:
+</span><span class="p">@@ -60,6 +60,8 @@</span> <span class="notranslate">galaxy</span>_config:
+     allow_user_impersonation: true
+     # Tool security
+     outputs_to_working_directory: true
+<span class="gi">+    # TUS
++    tus_upload_store: /data/tus
+</span>   uwsgi:
+     socket: 127.0.0.1:5000
+     buffer-size: 16384
+<span class="p">@@ -122,3 +124,16 @@</span> nginx_conf_http:
  nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -808,11 +817,11 @@
 +tusd_instances:
 +  - name: main
 +    user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
-+    group: "{{ <span class="notranslate">galaxy</span>_user.group }}"
++    group: "<span class="notranslate">galaxy</span>"
 +    args:
 +      - "-host=localhost"
 +      - "-port={{ <span class="notranslate">galaxy</span>_tusd_port }}"
-+      - "-upload-dir=/data/tus/"
++      - "-upload-dir={{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.tus_upload_store }}"
 +      - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
 +      - "-hooks-http-forward-headers=X-Api-Key,Cookie"
 </span>   
@@ -850,6 +859,19 @@
 </code></pre></div>      </div>
     </li>
     <li>
+      <p>Add to the end of your <span class="notranslate">Galaxy</span> playbook</p>
+
+      <div data-commit="Add the role to the playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -19,3 +19,4 @@</span>
+       become: true
+       become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
+     - <span class="notranslate">galaxy</span>project.nginx
+<span class="gi">+    - <span class="notranslate">galaxy</span>project.tusd
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
@@ -874,16 +896,22 @@
       <p>SSH into your machine</p>
     </li>
     <li>
-      <p>Check the active status of tusd by <code class="language-plaintext highlighter-rouge">systemctl status tusd</code>.</p>
+      <p>Check the active status of tusd by <code class="language-plaintext highlighter-rouge">systemctl status tusd-main</code>.</p>
     </li>
     <li>
-      <p>Check the directory <code class="language-plaintext highlighter-rouge">/data/uploads/</code> has been created and is empty.</p>
+      <p>Upload a file! (Or paste text, even a small file will go via TUS)</p>
+    </li>
+    <li>
+      <p>Check the directory <code class="language-plaintext highlighter-rouge">/data/uploads/</code> has been created and it’s contents</p>
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo tree /data/uploads/
 </code></pre></div>        </div>
       </blockquote>
+    </li>
+    <li>
+      <p>You’ll see files in that directory, a file that’s been uploaded and an ‘info’ file which contains metadata about the upload.</p>
     </li>
   </ol>
 
@@ -978,7 +1006,7 @@ author = "Marius van den Beek and Helena Rasche and Lucille Delisle",
 title = "Performant Uploads with TUS (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "07"
+day = "10"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/tus/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

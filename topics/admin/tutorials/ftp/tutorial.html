@@ -714,7 +714,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 7, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 10, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -824,7 +824,7 @@
 
       <div data-commit="Add proftpd in certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -162,9 +162,11 @@</span> certbot_well_known_root: /srv/nginx/_well-known_root
+</span><span class="p">@@ -164,9 +164,11 @@</span> certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - nginx
    - rabbitmq
@@ -846,10 +846,10 @@
 
       <div data-commit="Add ftp vars in galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -98,6 +98,9 @@</span> <span class="notranslate">galaxy</span>_config:
-     allow_user_impersonation: true
-     # Tool security
+</span><span class="p">@@ -100,6 +100,9 @@</span> <span class="notranslate">galaxy</span>_config:
      outputs_to_working_directory: true
+     # TUS
+     tus_upload_store: /data/tus
 <span class="gi">+    # FTP
 +    ftp_upload_dir: /data/uploads
 +    ftp_upload_site: "{{ inventory_hostname }}"
@@ -869,7 +869,7 @@
 
       <div data-commit="Add proftpd variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -231,6 +231,27 @@</span> rabbitmq_users:
+</span><span class="p">@@ -233,6 +233,27 @@</span> rabbitmq_users:
      password: "{{ vault_rabbitmq_password_vhost }}"
      vhost: /pulsar/<span class="notranslate">galaxy</span>_au
     
@@ -977,9 +977,9 @@ To relax the requirement that the SSL session from the control connection be reu
      - use<span class="notranslate">galaxy</span>_eu.rabbitmq
      - <span class="notranslate">galaxy</span>project.nginx
 <span class="gi">+    - <span class="notranslate">galaxy</span>project.proftpd
-</span>     - <span class="notranslate">galaxy</span>project.cvmfs
+</span>     - <span class="notranslate">galaxy</span>project.tusd
+     - <span class="notranslate">galaxy</span>project.cvmfs
      - <span class="notranslate">galaxy</span>project.gxadmin
-     - dj-wasabi.telegraf
    
 </code></pre></div>      </div>
     </li>
@@ -1299,7 +1299,7 @@ author = "Lucille Delisle",
 title = "Enable upload via FTP (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "07"
+day = "10"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

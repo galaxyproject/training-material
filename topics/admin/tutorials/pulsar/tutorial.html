@@ -1156,7 +1156,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 7, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 10, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1431,7 +1431,7 @@
 
       <div data-commit="Configure RabbitMQ" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -126,8 +126,10 @@</span> certbot_environment: staging
+</span><span class="p">@@ -128,8 +128,10 @@</span> certbot_environment: staging
  certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - nginx
@@ -1442,7 +1442,7 @@
 </span> certbot_domains:
   - "{{ inventory_hostname }}"
  certbot_agree_tos: --agree-tos
-<span class="p">@@ -161,6 +163,34 @@</span> slurm_config:
+<span class="p">@@ -163,6 +165,34 @@</span> slurm_config:
    SelectType: select/cons_res
    SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
     
@@ -1485,12 +1485,13 @@
 
       <div data-commit="Add role" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -29,5 +29,6 @@</span>
+</span><span class="p">@@ -29,6 +29,7 @@</span>
      - role: uchida.miniconda
        become: true
        become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
 <span class="gi">+    - use<span class="notranslate">galaxy</span>_eu.rabbitmq
 </span>     - <span class="notranslate">galaxy</span>project.nginx
+     - <span class="notranslate">galaxy</span>project.tusd
      - <span class="notranslate">galaxy</span>project.cvmfs
    
 </code></pre></div>      </div>
@@ -2199,7 +2200,7 @@ author = "Nate Coraor and Simon Gladman and Marius van den Beek and Helena Rasch
 title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "07"
+day = "10"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
