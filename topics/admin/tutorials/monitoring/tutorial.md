@@ -436,8 +436,8 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -33,3 +33,4 @@
->         - galaxyproject.nginx
+>    @@ -34,3 +34,4 @@
+>         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
 >    +    - dj-wasabi.telegraf
@@ -496,7 +496,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -191,6 +191,15 @@ rabbitmq_users:
+>    @@ -193,6 +193,15 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -789,7 +789,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -207,6 +207,13 @@ telegraf_plugins_extra:
+>    @@ -209,6 +209,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

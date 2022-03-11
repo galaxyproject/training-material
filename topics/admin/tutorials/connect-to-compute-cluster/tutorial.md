@@ -122,7 +122,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -138,6 +138,16 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -140,6 +140,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
 >     
@@ -364,7 +364,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -101,6 +101,7 @@ galaxy_config_templates:
+>    @@ -103,6 +103,7 @@ galaxy_config_templates:
 >     
 >     # systemd
 >     galaxy_manage_systemd: yes
