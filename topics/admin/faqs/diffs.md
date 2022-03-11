@@ -10,6 +10,7 @@ If you haven't worked with diffs before, this can be something quite new or diff
 
 If we have two files, let's say a grocery list, in two files. We'll call them 'a' and 'b'.
 
+
 > > ### {% icon code-in %} Old
 > > ```
 > > $ cat old
@@ -108,7 +109,7 @@ And additions likewise are very easy, just add a new line, between the other lin
 
 Completely new files look a bit different, there the "old" file is `/dev/null`, the empty file in a Linux machine.
 
-```
+```diff
 $ diff -U2 /dev/null old
 --- /dev/null	2022-02-15 11:47:16.100000270 +0100
 +++ old	2022-02-16 14:06:19.697132568 +0100
@@ -123,7 +124,7 @@ $ diff -U2 /dev/null old
 
 And removed files are similar, except with the the new file being /dev/null
 
-```
+```diff
 --- old	2022-02-16 14:06:19.697132568 +0100
 +++ /dev/null	2022-02-15 11:47:16.100000270 +0100
 @@ -1,6 +0,0 @@
