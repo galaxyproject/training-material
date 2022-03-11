@@ -109,7 +109,13 @@
       "tutorial_name": "gcms",
       "hands_on": true,
       "slides": false,
-      "workflows": false,
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0"
+      ],
       "tours": false,
       "video": false,
       "translations": {
@@ -177,7 +183,22 @@
       "tutorial_name": "msi-analyte-distribution",
       "hands_on": true,
       "slides": false,
-      "workflows": true,
+      "workflows": [
+        {
+          "workflow": "wf_MSI_distribution.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "Filter1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.2",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3"
+      ],
       "tours": false,
       "video": false,
       "translations": {
@@ -246,7 +267,26 @@
       "tutorial_name": "msi-finding-nglycans",
       "hands_on": true,
       "slides": false,
-      "workflows": true,
+      "workflows": [
+        {
+          "workflow": "msi-finding-diff-analytes.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "Filter1",
+        "Grep1",
+        "Summary_Statistics1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_peak_detection/maldi_quant_peak_detection/1.18.0.4",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3"
+      ],
       "tours": false,
       "video": false,
       "translations": {
@@ -321,7 +361,27 @@
       "tutorial_name": "lcms",
       "hands_on": true,
       "slides": false,
-      "workflows": true,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8",
+        "toolshed.g2.bx.psu.edu/repos/ethevenot/univariate/Univariate/2.2.4",
+        "toolshed.g2.bx.psu.edu/repos/fgiacomoni/hmdb_ms_search/wsdl_hmdb/2018-10-01",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.4",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.8.2.1",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.4.4.0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.4.4.0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.4.4.0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.4.4.0",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.4.4.1",
+        "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.4.4.1",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/batchcorrection/Batch_correction/2.1.2",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2017.04"
+      ],
       "tours": false,
       "video": false,
       "translations": {
@@ -380,7 +440,14 @@
       "tutorial_name": "lcms-dataprocessing",
       "hands_on": true,
       "slides": false,
-      "workflows": false,
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10",
+        "toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8",
+        "toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/normalization/normalization/1.0.7",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/batchcorrection/Batch_correction/3.0.0",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8"
+      ],
       "tours": false,
       "video": false,
       "translations": {
@@ -453,7 +520,9 @@
       "tutorial_name": "lcms-preprocessing",
       "hands_on": true,
       "slides": true,
-      "workflows": false,
+      "tools": [
+
+      ],
       "tours": false,
       "video": false,
       "translations": {
