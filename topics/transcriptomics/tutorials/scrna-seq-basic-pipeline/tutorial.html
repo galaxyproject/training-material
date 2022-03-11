@@ -841,8 +841,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
@@ -930,7 +928,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 1, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 11, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1737,6 +1735,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
         <li><em>“Flavor of computing normalised dispersion”</em>: <code class="language-plaintext highlighter-rouge">Seurat</code></li>
       </ul>
     </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> plot output <code class="language-plaintext highlighter-rouge">Use_me_FVG</code></li>
   </ol>
 </blockquote>
 
@@ -1748,10 +1747,11 @@ Any bioinformatician will tell you that the best way to get clean data is in the
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0"><strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (output of <strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Use_me_FVG</code> (output of <strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Truncate to this value after scaling”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
       </ul>
     </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> plot output <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code></li>
   </ol>
 </blockquote>
 
@@ -1769,13 +1769,18 @@ Any bioinformatician will tell you that the best way to get clean data is in the
   <p>Where did the <code class="language-plaintext highlighter-rouge">2262</code> come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the <strong>Scanpy FindVariableGenes</strong> tool and select the parameter to <em>Remove genes not marked as highly variable</em>. Then you can Inspect your resulting object and you’ll see only 2262 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 2262 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 2262 or 2000 (if you set a limit on it) highly variable genes.</p>
 </blockquote>
 
+<blockquote class="warning">
+  <h3 id="warning-danger-check-your-anndata-object"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Danger: Check your AnnData object!</h3>
+  <p>Your AnnData object should have far more than 2262 genes in it (if you followed our settings and tool versions, you’d have a matrix 7874 x 14832 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 2262 or 2000 output from your testing in the section above labelled ‘2262’.</p>
+</blockquote>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-calculate-principal-components"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate Principal Components</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1"><strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (output of <strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> (output of <strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Number of PCs to produce”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
       </ul>
     </li>
@@ -2416,7 +2421,7 @@ author = "Wendi Bacon",
 title = "Filter, Plot and Explore Single-cell RNA-seq Data (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "01"
+day = "11"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
