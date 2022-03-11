@@ -885,6 +885,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -930,7 +932,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 4, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 11, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1194,6 +1196,35 @@ https://zenodo.org/record/4697906/files/y_test.tsv
 <p>In this section, we define a CNN and train it using MNIST dataset training data. The goal is to learn a model such that given an image
 of a digit we can predict whether the digit (0 to 9). We then evaluate the trained CNN on the test dataset and plot the confusion matrix.</p>
 
+<p>In order to train the CNN, we must have the One-Hot Encoding (OHE) representation of the training
+labels. This is needed to calculate the categorical cross entropy loss function. OHE encodes labels
+as a <strong>one-hot</strong> numeric array, where only one element is 1 and the rest are 0’s. For example, if
+we had 3 fruits (apple, orange, banana) and their labels were 1, 2, and 3, the OHE
+represntation of apple would be (1,0,0), the OHE representation of orange would be (0,1,0), and the
+OHE representation of banana would be (0,0,1). For apple with label 1, the first element of array
+is 1 (and the rest are 0’s); For Orange with label 2, the second element of the array is 1 (and the
+rest are 0’s); And for Banana with label 3, the third element of the array is 1 (and the rest are 0’s).
+We have 10 digits in our dataset and we would just have an array of size 10, where only one
+element is 1, corresponding to the digit, and the rest are 0’s.</p>
+
+<h3 id="create-one-hot-encoding-ohe-representation-of-training-labels"><strong>Create One-Hot Encoding (OHE) representation of training labels</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-one-hot-encoding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: One-Hot Encoding</h3>
+
+  <ul>
+    <li><span class="tool" data-tool="https://usegalaxy.org/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3" title="Tested with https://usegalaxy.org/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3"><strong>To categorical</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: https://use<span class="notranslate">galaxy</span>.org/root?tool_id=<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3</span></span>
+      <ul>
+        <li><em>“Input file”</em> : Select <code class="language-plaintext highlighter-rouge">y_train</code></li>
+        <li><em>“Does the dataset contain header?”</em> : Select <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Total number of classes”</em>: Select <code class="language-plaintext highlighter-rouge">10</code></li>
+        <li>Click <em>“Execute”</em></li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
 <h3 id="create-a-deep-learning-model-architecture"><strong>Create a deep learning model architecture</strong></h3>
 
 <blockquote class="notranslate hands_on">
@@ -1338,7 +1369,7 @@ The model builder can be downloaded as a zip file.</p>
           <ul>
             <li><em>“Training samples dataset”</em>: Select <code class="language-plaintext highlighter-rouge">X_train</code> dataset</li>
             <li><em>“Choose how to select data by column:”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
-            <li><em>“Dataset containing class labels or target values”</em>: Select <code class="language-plaintext highlighter-rouge">y_train</code> dataset</li>
+            <li><em>“Dataset containing class labels or target values”</em>: Select the OHE representation of <code class="language-plaintext highlighter-rouge">y_train</code> dataset</li>
             <li><em>“Choose how to select data by column:”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
           </ul>
         </li>
@@ -1524,8 +1555,8 @@ operator and its parameters. We then used <span class="notranslate">Galaxy</span
 author = "Kaivan Kamali",
 title = "Deep Learning (Part 3) - Convolutional neural networks (CNN) (Galaxy Training Materials)",
 year = "2022",
-month = "01",
-day = "04"
+month = "03",
+day = "11"
 url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
