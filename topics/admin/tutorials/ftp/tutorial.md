@@ -111,7 +111,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -162,9 +162,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -164,9 +164,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
 >       - rabbitmq
@@ -135,10 +135,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,9 @@ galaxy_config:
->         allow_user_impersonation: true
->         # Tool security
+>    @@ -100,6 +100,9 @@ galaxy_config:
 >         outputs_to_working_directory: true
+>         # TUS
+>         tus_upload_store: /data/tus
 >    +    # FTP
 >    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
@@ -157,7 +157,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -231,6 +231,27 @@ rabbitmq_users:
+>    @@ -233,6 +233,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -222,9 +222,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >         - usegalaxy_eu.rabbitmq
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
+>         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
->         - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}

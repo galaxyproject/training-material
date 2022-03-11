@@ -299,10 +299,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -21,3 +21,4 @@
->           become: true
+>    @@ -22,3 +22,4 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx
+>         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```

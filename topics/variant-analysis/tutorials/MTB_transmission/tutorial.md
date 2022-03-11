@@ -22,7 +22,9 @@ contributors:
 - cstritt
 ---
 
-
+# Pre-requisites
+This tutorial belongs to *Day 3: Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission* of the workshop [Mycobacterium tuberculosis NGS made easy: data analysis step-by-step](https://gallantries.github.io/video-library/events/mtb-ngs/program.html). It assumes you went through the materials
+of *Day 2*, and you have watched the respective webinars and completed the tutorial on [MTB variant analysis](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html).
 
 # Introduction
 {:.no_toc}
@@ -45,16 +47,17 @@ sample individually. Do not worry if you do not fully understand this right now,
 a dataset collection at the beginning of this tutorial and we will analyze it.
 
 To save you some time, (and server load) we have run the pipeline that you used in the previous tutorial for
-the 20 samples that we have been asked to analyze. Thus, we now have 20 VCF files that describe the
+the 20 samples that we want to analyze. Thus, we now have 20 VCF files that describe the
 mutations found for each of the samples. **These 20 VCFs files will be the starting point of this tutorial.**
  If you want to perform the mapping and variant calling for
 all of the samples, feel free to do it. You can find the respective [FASTQ files here](https://zenodo.org/record/5911437), and
 the [Galaxy workflow that was used to analyze the samples here](https://usegalaxy.eu/u/galo_a_goig/w/from-fastqs-to-vcfs-and-bams).
-However this is completely optional, and we would suggest to do it after you have finished all the
+However this is completely optional, and we suggest you to do it after you have finished all the
 tutorials of this workshop.
 
 Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
-this lesson (links) and therefore you understand 1) How genotypic drug susceptibility is determined
+this lesson ([Drug resistance prediction](https://youtu.be/Ddwt-_gQR2M), [Phylogenetic mutations](https://youtu.be/1ps_o5rpnmw), [The concept of clustering](https://youtu.be/l4cPUECJ7VU) and
+  [Genetic distance thresholds](https://youtu.be/kKNgmpy1N94)) and therefore you understand 1) How genotypic drug susceptibility is determined
 based on WGS analysis 2) The concept of clustering.
 
 > ### Agenda
@@ -143,16 +146,18 @@ samples.
 
 ### Filter VCF files for epidemiological/phylogenetic investigation
 Interpreting **mixed calls** or **indels** in phylogenetic/epidemiological applications can be very
-complicated. That is the reason why we tipically use alignments that only contain **fixed SNPs**. (REFS?)
+complicated. That is the reason why we tipically use alignments that only contain **fixed SNPs**.
 
 Thus, the first step in this tutorial will be to filter the VCFs so we are sure that
-they only contain **fixed SNPs**. As it was introduced in *part X of lesson Y ofthe workshop (@Daniela)*, we will consider fixed
+they only contain **fixed SNPs**. As it was introduced in day 2 webinar [Mapping and Variant calling](https://youtu.be/38GUBKwWXv8), we will consider fixed
 those variants at a frequency equal or greater than 90%. We will be using here the tool
-**TB Variant Filter**
+**TB Variant Filter**.
+
+*Note: TB variant Filter refers to SNPs as SNVs. These two short forms are interchangeable, meaning **S**ingle **N**ucleotide **P**olymorphism and **S**ingle **N**ucleotide **V**ariant, respectively.*
 
 > ### {% icon hands_on %} Hands-on: Filter VCF files for epidemiological investigation
 >
-> 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0) %} with the following parameters:
+> 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"VCF file to be filter"*: `MTB VCFs` (Select Dataset Collection instead of Single Dataset)
 >    - *"Filters to apply"*: `Only accept SNVs`, `Filter variants by percentage alt allele`
 >    - *"Show options for the filters"*: `Yes`
@@ -162,7 +167,7 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 
 > ### {% icon question %} Questions
 >
-> 1.**`TB Variant Filter`** reads the VCF and output only SNVs that have, at leat, 90% frequency.
+> 1.**`TB Variant Filter`** reads the VCF and output only SNPs that have, at least, 90% frequency.
 > How can this sofware extract such information from the VCF files?
 >
 > > ### {% icon solution %} Solution
@@ -186,12 +191,15 @@ one would put the same nucleotide than in the reference if that position is not 
 SNP described in the VCF otherwise. This is exactly what `bcftools consensus` will do for us,
 given the reference genome and the VCF of the strain we want to reconstruct the genome for.
 
+https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2
+
 > ### {% icon hands_on %} Hands-on: Reconstruct the complete genome of each sample
 >
-> 1. {% tool [bcftools consensus](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10+galaxy1) %} with the following parameters:
+> 1. {% tool [bcftools consensus](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"VCF/BCF Data"*: `MTB VCFs filtered` (output of **TB Variant Filter** {% icon tool %})
 >    - *"Choose the source for the reference genome"*: `Use a genome from the history` (The reference genome that was used for SNP-calling)
 >        - {% icon param-file %} *"Reference genome"*: `(MTB_ancestor_reference.fasta)`
+>        - {% icon param-file %} *"Set output FASTA ID from name of VCF"*: `Yes`
 >
 {: .hands_on}
 
@@ -227,11 +235,10 @@ Multiple sequence alignment is a process in which multiple DNA, RNA or protein s
 to find regions of similarity that are supposed to reflect the consequences of different evolutionary
 processes (Figure 1). MSAs are used to test hypotheses about this evoluitionary processes and infer phylogenetic
 relationships, and for these reasons we build MSA for sequences for which we already assume some sort
-of evolutionary relationship. More on MSAs here (link here to a webpage or Christoph's tutorial.).
-**Galo: maybe this is too much, or too complex explanation or not necessary here**
+of evolutionary relationship. You will learn more on MSAs and phylogenetic inference in the next
+tutorial.
 
-We can build MSAs of a particular gene, a particular sequence or the complete genome. Building MSAs
-of several complete genomes can be a complicated process and computationally demanding. To perform
+Building MSAs of several complete genomes can be a complicated process and computationally demanding. To perform
 such task there are many software packages available like `Muscle`, `MAFFT` or `Clustal` just to mention some.
 Which one are we going to use in this tutorial? Well, we are going to use a trick. We are going to
 just stack one genome on top of each other within a text file. (More on why we can do this below).
@@ -248,130 +255,22 @@ ATGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGC...
 TTCGTTCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACG...
 ```
 
-
-But given the output of **bcftools consensus**, what we have **for each** sample looks like this:
-```
->MTB_anc
-TTGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGC...
-```
-
-That is to say, because we had no option to specify the name of the sample, all our samples are now
-identified in the fasta header as `">MTB_anc"` (the name of the reference genome that was used as
-  template by `bcftools`), so we now have no way of distinguish them!
-
-Performing text transformations is very common when doing
-bioinformatics. Sometimes the output of one software/step is not completely compatible with the
-downstream analysis, so we have to transform it to make it compatible. In this case, we have
-to find a way of renaming the genomes, so they contain the name of the respective sample as in the example box
- above. There is no "correct" way of doing this, and many possible strategies/tools could be used. We
- could do it by hand, for example.
- Because we are using Galaxy, we will use tools available in Galaxy to perform such task.
-
-In Galaxy, because we are
-analzying a collection of 20 samples instead of one sample at a time (meaning that renaming manually
-each sample is not an option, and never should be!) we can do the renaming in two steps:
-
-First we will use **Add input name as column**. This will add a colum with the name of the input
-file that we will be able to use as identifier of the sample. For example, after using it, for the
-sample ERR6362078, the file will look like this:
-
-```
->MTB_anc  ERR6362078.vcf
-TTGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGCGGTCGTCTCCGAACTT  ERR6362078.vcf
-AACGGCGACCCTAAGGTTGACGACGGACCCAGCAGTGATGCTAATCTCAGCGCTCCGCTG  ERR6362078.vcf
-ACCCCTCAGCAAAGGGCTTGGCTCAATCTCGTCCAGCCATTGACCATCGTCGAGGGGTTT  ERR6362078.vcf
-GCTCTGTTATCCGTGCCGAGCAGCTTTGTCCAAAACGAAATCGAGCGCCATCTGCGGGCC  ERR6362078.vcf
-CCGATTACCGACGCTCTCAGCCGCCGACTCGGACATCAGATCCAACTCGGGGTCCGCATC  ERR6362078.vcf
-```
-
-Now we want to remove "MTB_anc" from the fasta header, so instead of ">MTB_anc", it reads ">ERR6362078.vcf".
-We  also want to remove "ERR6362078.vcf" from the rest of the lines, as they should only contain the genome
-sequence, so it loos like:
-
-```
->ERR6362078.vcf
-TTGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGCGGTCGTCTCCGAACTT
-AACGGCGACCCTAAGGTTGACGACGGACCCAGCAGTGATGCTAATCTCAGCGCTCCGCTG...
-```
-
-We can easily do this using **Text reformatting with AWK**. AWK is a programming language integrated in the linux
-terminal that is very useful and powerful to manipulate text. **Don't worry about this now**. You are
-not supposed to know **awk** language at this stage. However if your aim is to become a fully dedicated
-bioinformatician, you will need to learn the basics of the linux terminal, and some of its tools like
-`AWK`, `sed` or `grep`. You can find plenty of information and tutorial like
-[this one.](https://riptutorial.com/awk) in the internet.
-
-### **Add input name as column**
-
-> ### {% icon hands_on %} Hands-on: Add file name as a column
->
-> 1. {% tool [Add input name as column](toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0) %} with the following parameters:
->    - {% icon param-file %} *"to Dataset Collection"*: `Consensus fasta` (output of **bcftools consensus** {% icon tool %})
->    - *"input contains a header line?"*: `No`
->
->    > ### {% icon comment %} Comment
->    >
->    > We need to specify that input does **not** contain a header so the name is also added to the
->    > first line (the fasta header). Otherwise this tool will only add the name starting from the second line.
->    {: .comment}
->
-{: .hands_on}
-
-### **Text reformatting with AWK**
-
-> ### {% icon hands_on %} Hands-on: Reformat text to generate a correct fasta file
->
-> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Dataset collection` (output of **Add input name as column** {% icon tool %})
->    - *"AWK Program"*: copy-paste the following text: `$1 == ">MTB_anc" { print ">"$2 } $1 != ">MTB_anc"  { print $1 }`
->
-{: .hands_on}
-
-
-> ### {% icon question %} Questions
->
-> 1. As a game in which you have to decipher a rebus puzzle: can you decipher what the AWK command used above means?
->
-> > ### {% icon solution %} Solution
-> >
-> > AWK reads files line by line, and performs a set of actions given a set of conditions that we
-> > programmed. In our case, for each line:
-> >
-> > * `$1 == >MTB_anc { print >$2 }` This part reads: **if** the first field of the line ($1) is **equal to** ">MTB_anc", then print ">" followed by the second field ($2) of the line (ERR6362078).
-> > * `$1 != >MTB_anc  { print $1 }` This part reads: **if** the first field of the line ($1) is **NOT equal to**
-> > ">MTB_anc", then print (only) the first field ($1) of the line (the sequence).
-> {: .solution}
->
-{: .question}
-
-### Build a multiple-sequence alignment from complete genomes with "**Concatenate datasets**"
-We have now the genome of each sample with a proper identifier in the fasta header. As we already
-mentioned, we are going to build a MSA by stacking one genome on top of each other in a single text
-file. **A multifasta file**.
-
-```
->Sample 1
-TTGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGC...
->Sample 2
-ATGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGC...
->Sample 3
-TTCGTTCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACG...
-```
-
 This could be done manually, by copy-pasting all genomes in a single text file.
 However we can do the same with a specific command that *concatenates* files.
+
+### Build a multiple-sequence alignment from complete genomes with "**Concatenate datasets**"
 
 > ### {% icon hands_on %} Hands-on: Concatenate genomes to build a MSA
 >
 > 1. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Datasets to concatenate"*: `Dataset collection` (output of **Text reformatting** with awk {% icon tool %})
+>    - {% icon param-file %} *"Datasets to concatenate"*: `Dataset collection` (output of **bcftools consensus** {% icon tool %})
 > 2. The output of **concatenate datasets** may be of type tabular. Make sure Galaxy sees this file as
 > a fasta file by editing its attributes. Click in the pencil icon, select "Datatypes" and then select fasta.
 >
 {: .hands_on}
 
-Now we have a multifasta file, where each position of each genome corresponds to the same position
-of the rest of genomes in the file. This can be seen and used as a multiple-sequence alignment of
+Now we have a multifasta file, where **each position of each genome corresponds to the same position
+of the rest of genomes in the file**. This can be seen and used as a multiple-sequence alignment of
 all of our genomes! However, it is important that you understand the following question...
 
 > ### {% icon question %} Question
@@ -400,7 +299,7 @@ analysis. Although we could already use this MSA for such analysis, it is common
 the invariant sites from the alignment. Think that our file now contains 20 genomes of 4.4 Mb each.
 MTB genomes have a very low genetic diversity, meaning that in reality, there are only some hundreds or
 thousands of SNPs *in total*, because the genomes are >99% identical between them. Identical positions
-in a MSA provide no information **(link here about invariant positions?)**, so we can remove those and
+in a MSA provide no information, so we can remove those and
 generate a **SNP alignment** that only contain variant positions with phylogenetic information. By
 doing this, we will generate a much smaller file, that will be easier to handle by downstream applications.
 
@@ -454,8 +353,8 @@ easy. We will use **SNP distance matrix**, that will generate a matrix with pair
 
 ## Determine transmission clusters based on a SNP threshold
 Now that we have a distance matrix that describes the SNP distance between each pair of samples, we
-could already describe the transmission clusters based on a **SNP threshold**, as explained in the
-respective webinar(link). If two samples are at a distance below that threshold, we will say that they
+could already describe the transmission clusters based on a **SNP threshold**, as [explained in the
+respective webinar](https://youtu.be/kKNgmpy1N94) . If two samples are at a distance below that threshold, we will say that they
 belong to the same transmission cluster, because they are close enough genetically speaking. Again,
 we could do this manually, but we are doing bioinformatics, and we want to be able to do the same
 analysis regardless of whether we are analyzing two or two million samples. Also, **note that two samples
@@ -469,7 +368,7 @@ linking them in between as exemplified in the picture below.
 > ### {% icon question %} Very Important Question
 >
 > 1. In the image above exemplifying a transmission cluster, the distance between samples A and E is
-> 17 SNPs. Being the other pairwise distances in the figure same,
+> 17 SNPs. Being the other pairwise distances in the figure the same,
 > would it be possible that the distance between A and E is different?
 >
 > > ### {% icon solution %} Solution
@@ -487,14 +386,68 @@ linking them in between as exemplified in the picture below.
 {: .question}
 
 
-
-
 ## Determine transmission clusters using Rscript
-Currently there is not tool in Galaxy to perform the exact task that we need, but we can use the
-statistics package `R` and the library `cluster` to perform such task. Again, don't worry about this,
-programming in `R` is beyong the scope of this workshop. We have prepared a simple `R` script that
-identifies transmission clusters based on the matrix of SNP distances. This script is available
-within the Galaxy workflow we are following, so feel free to use it for your own analysis!
+Currently there is not tool in Galaxy to perform the exact task that we need (although we plan to
+include it!).  So far, we can use `R` and the library `cluster` within Galaxy to perform such task.
+Again, don't worry about this, programming in `R` is beyong the scope of this workshop, but if you
+have some `R` or other programming language knowledge, or if you plan to learn in the future, you could
+also reuse this code for your own analyses.
+
+First you will need to open Rstudio within Galaxy. To do this look for Rstudio in the tool panel,
+click on it and click on `execute`. Rstudio will appear in your story as a job that is being continously
+executed. This is the normal behaviour because, indeed, Rstudio is now being executed and will only
+stop once we have finish using it.
+
+To access your Rstudio instance within Galaxy, go to *User>Active Interactive Tools* in the top center
+panel. Now click on the link `Rstudio` that appears below *Name*. The status below *Job Info* should be `running`.
+
+Wait for Rstudio to open, and copy-paste the following code in the Console of Rstudio (left panel):
+
+**IMPORTANT**: Note the third line of the next block of code, where it reads:
+`distance <- gx_get(Galaxy history ID)`
+In this part is where we are importing the SNP distance matrix generated in Galaxy into
+R. You need to take note of the history ID of the step that generated the SNP distance
+matrix. For example, imagine that in our story says *198: SNP distance matrix on data 197*.
+
+Then the history ID is *198*, and the block of code should be:
+
+```r
+library(cluster)
+
+# Get the SNP distance matrix object from Galaxy
+distance <- gx_get(198)
+# Read the SNP distance matrix
+distance <- read.table(distance, header=T, sep="\t", row.names = 1)  
+distance <- as.dist(distance)
+
+# Perform clustering based on SNP distances and a SNP threshold of 10 (h=10)
+clusters <- agnes(distance, diss = TRUE, method = "average")
+clusters <- as.data.frame(cutree(as.hclust(clusters), h = 10))
+colnames(clusters) <- "cluster_id"
+
+## Discard groups of only one patient by picking clusters with more than one entry
+# Get cluster_ids that are "duplicated" (meaning they have more than one patient)
+clusterIDs <- unique(subset(clusters, duplicated(clusters$cluster_id))$cluster_id)
+# Get samples within these "duplicated" clusters
+clusters <- subset(clusters, cluster_id %in% clusterIDs)
+# Add proper Sample name column
+clusters <- cbind(Sample = rownames(clusters), clusters)
+write.table(clusters, file = "Transmission_clusters.tsv", sep="\t", quote = F, row.names = F)
+```
+
+This code has written the results to a file called *Transmission_clusters.tsv*. You can
+check the results and/or download the file by clicking in the right bottom panel, under *Files*.
+
+The output of the R script is a table containing, for samples that were found within a cluster,
+their respective names and the cluster id (an arbitrary number) they belong to:
+
+| Sample                  | cluster_id |
+|-------------------------|------------|
+| ERR6362484.vcf    | 10         |
+| ERR6362138.vcf | 12         |
+| ERR6362156.vcf | 12         |
+| ERR6362253.vcf | 12         |
+| ERR5987352.vcf    | 10         |
 
 > ### {% icon question %} Questions
 >
@@ -508,23 +461,11 @@ within the Galaxy workflow we are following, so feel free to use it for your own
 > {: .solution}
 {: .question}
 
-The output of the R script is a table containing, for samples that were found within a cluster,
-their respective names and the cluster id (an arbitrary number) they belong to:
-
-| Sample                  | cluster_id |
-|-------------------------|------------|
-| ERR6362484.vcf    | 10         |
-| ERR6362138.vcf | 12         |
-| ERR6362156.vcf | 12         |
-| ERR6362253.vcf | 12         |
-| ERR5987352.vcf    | 10         |
-
-
 > ### {% icon question %} Question
 >
 > 1. Let's assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
 > belong to the same transmission cluster. Sample ERR6362484 was isolated on January 2021, while sample
->  ERR5987352 was isolated on June 2021. Would you be able to determine who was the infector and who the infectee?
+>  ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?
 >
 > > ### {% icon solution %} Solution
 > > 1. **NO**
@@ -541,7 +482,7 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 
 # Using clustering to investigate the emergence of drug resistance
 
- Although we have stressed the fact that **clustering cannot be used to delinate
+ Although we have stressed the fact that **clustering cannot be used to delineate
 transmission events**, clustering is very useful to investigate outbreaks and determine which cases are
 involved in the same transmission chain. We can leverage this information to investigate the relationship
 between tuberculosis transmission and particular biological or clinical traits.
@@ -636,7 +577,7 @@ for example in a spreadsheet. However this is not feasible when analyzing hundre
 
 We are here to learn bioinformatics, so let's generate this table using Linux commands.
 
-The process will consist on three steps (of which you already know two of them):
+The process will consist on three steps:
 * 1) Select the line containing the drug resistance profile with **grep**:
 
 ```
@@ -686,8 +627,9 @@ as output the complete line, for example `Drug-resistance: MDR`
 
 
 #### 2. Prepend the sample name
-We have already used this command before. This time we will *prepend* the column with the sample name
-so it appears as the first column. This is arbitrary and just a matter of personal taste:
+We will add the name of the input file, to know to which sample the DR line refers to.
+We will *prepend* the column with the sample name so it appears as the first column.
+ This is arbitrary and just a matter of personal taste:
 
 #### *Add input name as column*
 
@@ -745,10 +687,9 @@ for these two *patterns* and to replace them with "*nothing*"
 
 # Put everything together
 Now that we have performed a clustering analysis and know which DR mutations carry each strain,
-let's try answer a series of questions about how DR may be emergind and spreading in our study
+let's try answer a series of questions about how DR may be emerging and spreading in our study
 population.
-You will see that we will be supporting our findings in the results of our analysis, but general
-knowledge in the TB field will also help us to conduct our investigation!
+We will be supporting our findings in the results of our analysis, and the concepts introduced in the webinars.
 
 | Sample       | Cluster_id | DR profile | Clustering  |
 |--------------|------------|------------|-------------|
@@ -816,9 +757,6 @@ knowledge in the TB field will also help us to conduct our investigation!
 > > *gyrA* that confers resistance to fluorioquinolones. This is compatible with an scenario in which
 > > fluoroquinolone resistance evolved independently within this patient after being infected with
 > > the MDR strain.
-> > 2. Remember, although it is reasonable to think that fluorioquinolone resistance evolved in this
-> > patient, we cannot rule out that actually it evolved in another patient who we did not sample and
-> > was the transmitter of the fluoroquinolone-resistant strain.
 > {: .solution}
 {: .question}
 
@@ -827,13 +765,12 @@ knowledge in the TB field will also help us to conduct our investigation!
 >
 > 1.  There is one strain with a DR profile "other", because it is only resistant to pyrazinamide. This
 > strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
-> most likely evolved *de-novo* in this patient. But we are wrong. Do you know why?
+> most likely evolved *de-novo* in this patient due to antibiotic treatment. But we are wrong. Do you know why?
 >
 > > ### {% icon solution %} Solution
 > > 1. The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
 > > within our population. However, if we have a look at the TB-profiler report, we observe that this
-> > is a *M. bovis* strain, wich are known to be intrinsically resistant to PZA (all carry the same
-> > mutation conferring resistance to PZA).
+> > is a *M. bovis* strain, which are known to be intrinsically resistant to PZA.
 > {: .solution}
 {: .question}
 
@@ -850,7 +787,7 @@ knowledge in the TB field will also help us to conduct our investigation!
 > > distance measured in SNPs. We want to cluster samples that are genetically so similar that we
 > > can consider them as the same genotype, that is to say, as the same strain. Two different
 > > sublineages, by definition, do not belong to the same genotype and will have a distance in SNPs
-> > between well beyond any SNP threshold we could use.
+> > between them well beyond any SNP threshold we could use.
 > {: .solution}
 {: .question}
 
@@ -865,5 +802,11 @@ also learned, however, that interpreting clustering results requires careful con
 limitations of the methodology. Clustering analysis is better complemented with phylogenetic analysis,
 which may help overcome some of these limitations.
 
-In the following tutorial [this will be a link] you will perform a phylogenetic analysis of these
-same 20 strains.
+In the following tutorial you will perform a phylogenetic analysis of these same 20 strains.
+
+# Bonus
+
+You might have noticed that one of the strains analyzed presents thousands of differences (SNPs) to
+the reference genome, standing out from the rest of strains. This strain is a *M. canettii* strain,
+that was actually not part of the outbreak investigated. However we decided to include it here. Why? Let's find out
+in the next tutorial. 
