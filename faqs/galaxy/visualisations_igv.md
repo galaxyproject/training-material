@@ -14,6 +14,6 @@ You can send data from your Galaxy history to IGV for viewing as follows:
    - In IGV, go to `View > Preferences > Advanced`
    - Check the box `Enable Port`
 
-3. In Galaxy, expand the dataset you would like to view in IGV
+4. In Galaxy, expand the dataset you would like to view in IGV
    - Make sure you have set a reference genome/database correctly (dbkey) ([instructions]({% link faqs/galaxy/datasets_change_dbkey.md %}))
    - Under `display in IGV`, click on `local`
