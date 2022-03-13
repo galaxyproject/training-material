@@ -275,6 +275,8 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```
 >    {: data-commit="Add requirements"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 >    > ### {% icon details %} What do each of these roles do?
 >    > We'll cover it in more detail as we use each of the roles but briefly:
 >    >
