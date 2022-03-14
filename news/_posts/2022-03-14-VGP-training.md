@@ -2,7 +2,7 @@
 title: "New Tutorial: VGP assembly pipeline"
 tags: [new tutorial, assembly, pacbio]
 contributors: [gallardoalba, delphine-l, astrovsky01]
-cover: "topics/transcriptomics/images/vgp_assembly/VGP_Pipeline.png"
+cover: "topics/assembly/images/vgp_assembly/VGP_Pipeline.png"
 coveralt: "Assembly of vertebrate genomes"
 
 layout: news
