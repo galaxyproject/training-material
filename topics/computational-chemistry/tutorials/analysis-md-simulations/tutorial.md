@@ -31,6 +31,7 @@ contributors:
   - chrisbarnettster
   - tsenapathi
   - simonbray
+  - nagoue
 
 ---
 
