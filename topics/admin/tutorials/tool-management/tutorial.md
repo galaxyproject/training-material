@@ -95,7 +95,7 @@ Ephemeris can take care of this process. Let's practice this on a real workflow.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > wget {% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
+>    > wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
