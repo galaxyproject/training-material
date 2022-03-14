@@ -176,11 +176,11 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 3. Upload a file! (Or paste text, even a small file will go via TUS)
 >
-> 4. Check the directory `/data/uploads/` has been created and it's contents
+> 4. Check the directory `/data/tus/` has been created and it's contents
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
->    > sudo tree /data/uploads/
+>    > sudo tree /data/tus/
 >    > ```
 >    {: .code-in}
 >
