@@ -1,5 +1,5 @@
 ---
-title: "New Tutorials: VGP assembly pipeline"
+title: "New Tutorial: VGP assembly pipeline"
 tags: [new tutorial, assembly, pacbio]
 contributors: [gallardoalba, delphine-l, astrovsky01]
 cover: "topics/transcriptomics/images/vgp_assembly/VGP_Pipeline.png"
