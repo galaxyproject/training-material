@@ -19,6 +19,8 @@ module Jekyll
     end
 
     def render(context)
+      puts "[GTN/Search]"
+
       site = context.registers[:site]
       topics = site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('type')}
         .select{|k, v| ['use', 'admin-dev', 'basics'].include? v['type'] }
@@ -28,22 +30,32 @@ module Jekyll
         tutorials = site.data['cache_topic_filter'][k]
         tutorials.each{|tutorial|
           results[tutorial['url']] = {
+            "type" => 'Tutorial',
             "topic" => topic['title'],
             "title" => tutorial['title'],
-            "description" => tutorial['description'],
-            "question" => getlist(tutorial, 'questions'),
-            "objectives" => getlist(tutorial, 'objectives'),
-            "tags" => getlist(tutorial, 'tags').map{|tag|
-              %Q(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
-            },
             "contributors" => getlist(tutorial, 'contributors').map{|c|
               site.data['contributors'].fetch(c, {}).fetch('name', c)
             }.join(', '),
-            "level" => tutorial['level'],
-            "time_estimation" => tutorial['time_estimation'],
+            "tags" => getlist(tutorial, 'tags').map{|tag|
+              %Q(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
+            },
             "url" => site.baseurl + tutorial['url'],
           }
         }
+      }
+
+      faqs = site.pages.select{|p| p.data['layout'] == 'faq'}
+      faqs.each{|resource|
+          results[resource['url']] = {
+            "type" => 'FAQ',
+            "topic" => 'FAQ',
+            "title" => resource['title'],
+            "contributors" => getlist(resource.data, 'contributors').map{|c|
+              site.data['contributors'].fetch(c, {}).fetch('name', c)
+            }.join(', '),
+            "tags" => [],
+            "url" => site.baseurl + resource['url'],
+          }
       }
 
       JSON.pretty_generate(results)
