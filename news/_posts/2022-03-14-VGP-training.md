@@ -10,7 +10,7 @@ layout: news
 
 We are proud to announce that, as result of the collaboration with the Vertebrate Genomes Project (VGP), a new training describing the VGP assembly pipeline (fig. 1) is now available in the Galaxy Training Network. The Vertebrate Genomes Project aims to generate high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species.
 
-![VGP pipeline]({{site.baseurl}}/topics/assebly/images/vgp_assembly/VGP_Pipeline.png)
+![VGP pipeline]({{site.baseurl}}/topics/assembly/images/vgp_assembly/VGP_Pipeline.png)
 
 *Figure 1. VPG Pipeline 2.0. The pipeline starts with assembly of the HiFi reads into contigs, yielding the primary and alternate assemblies. Then, duplicated and erroneously assigned contigs will be removed by using purge_dups. Finally, Bionano optical maps and HiC data are used to generate a scaffolded primary assembly.*
 
