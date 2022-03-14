@@ -111,7 +111,7 @@ fetch('{{ site.baseurl }}/search.json')
 		paramQuery = params.get('query');
 		if(paramQuery){
 			document.getElementById('search-input').value = paramQuery;
-			search(idx, paramQuery);
+			searchWrap(idx);
 		}
 
 		$("#search-input").on("change keyup paste", function(){
