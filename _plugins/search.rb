@@ -37,7 +37,7 @@ module Jekyll
               site.data['contributors'].fetch(c, {}).fetch('name', c)
             }.join(', '),
             "tags" => getlist(tutorial, 'tags').map{|tag|
-              %Q(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
+              %Q(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?query=#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
             },
             "url" => site.baseurl + tutorial['url'],
           }
