@@ -23,8 +23,9 @@ contributors:
 ---
 
 # Pre-requisites
-This tutorial belongs to *Day 3: Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission* of the workshop [Mycobacterium tuberculosis NGS made easy: data analysis step-by-step](https://gallantries.github.io/video-library/events/mtb-ngs/program.html). It assumes you went through the materials
-of *Day 2*, and you have watched the respective webinars and completed the tutorial on [MTB variant analysis](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html).
+This tutorial assumes that you have watched the respective webinars about ([Drug resistance prediction](https://youtu.be/Ddwt-_gQR2M), [Phylogenetic mutations](https://youtu.be/1ps_o5rpnmw), [The concept of clustering](https://youtu.be/l4cPUECJ7VU) and
+  [Genetic distance thresholds](https://youtu.be/kKNgmpy1N94)) and therefore you understand 1) How genotypic drug susceptibility is determined
+based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on [MTB variant analysis](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html).
 
 # Introduction
 {:.no_toc}
@@ -51,14 +52,12 @@ the 20 samples that we want to analyze. Thus, we now have 20 VCF files that desc
 mutations found for each of the samples. **These 20 VCFs files will be the starting point of this tutorial.**
  If you want to perform the mapping and variant calling for
 all of the samples, feel free to do it. You can find the respective [FASTQ files here](https://zenodo.org/record/5911437), and
-the [Galaxy workflow that was used to analyze the samples here](https://usegalaxy.eu/u/galo_a_goig/w/from-fastqs-to-vcfs-and-bams).
+the Galaxy workflows used to analyze the samples in the workflows folder of this tutorial in the Galaxy Training Network.
 However this is completely optional, and we suggest you to do it after you have finished all the
 tutorials of this workshop.
 
 Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
-this lesson ([Drug resistance prediction](https://youtu.be/Ddwt-_gQR2M), [Phylogenetic mutations](https://youtu.be/1ps_o5rpnmw), [The concept of clustering](https://youtu.be/l4cPUECJ7VU) and
-  [Genetic distance thresholds](https://youtu.be/kKNgmpy1N94)) and therefore you understand 1) How genotypic drug susceptibility is determined
-based on WGS analysis 2) The concept of clustering.
+this lesson 
 
 > ### Agenda
 >
@@ -139,7 +138,7 @@ To do such calculation we need to first build an alignment of all the genomes (m
 
 ## Generate complete genomes
 The first step to generate the genomes MSA will be... to get the complete genomes of our samples!
-In the [MTB Variant Analysis tutorial](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html) we have analyzed short-read high-throughput sequencing data (Illumina) to
+In the [MTB Variant Analysis tutorial]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}) we have analyzed short-read high-throughput sequencing data (Illumina) to
 obtain the respective VCF files that describe the mutations found in each of our samples, as compared
 to the reference genome. We can now use these VCF files to build the complete genome of each of our
 samples.
@@ -578,19 +577,19 @@ for example in a spreadsheet. However this is not feasible when analyzing hundre
 We are here to learn bioinformatics, so let's generate this table using Linux commands.
 
 The process will consist on three steps:
-* 1) Select the line containing the drug resistance profile with **grep**:
+1. Select the line containing the drug resistance profile with **grep**:
 
 ```
 Drug-resistance: MDR
 ```
 
-* 2) Prepend the name of the sample with **Add input name as column**:
+2. Prepend the name of the sample with **Add input name as column**:
 
 ```
 ERR6362653.txt Drug-resistance: MDR
 ```
 
-* 3) Concatenate results from all samples in a single file with **Concatenate datasets**:
+3. Concatenate results from all samples in a single file with **Concatenate datasets**:
 
 ```
 ERR6362653.txt Drug-resistance: MDR
@@ -599,7 +598,7 @@ ERR5987300.txt Drug-resistance: Pre-XDR
 .... etc
 ```
 
-* 4) As an optional step, we can reformat the table with **sed** to get rid of the `.txt` and `Drug-resistance:`
+4. As an optional step, we can reformat the table with **sed** to get rid of the `.txt` and `Drug-resistance:`
 so the table looks like:
 
 ```
@@ -608,7 +607,7 @@ ERR313115 Sensitive
 ERR5987300 Pre-XDR
 ```
 
-#### 1. Select the line containing the drug resistance profile with `grep`
+#### Select the line containing the drug resistance profile with `grep`
 
 **grep** is used to search patterns of text within text files. Each time **grep** finds that
 pattern, it will print as a result **the complete line** containing such pattern.
@@ -626,7 +625,7 @@ as output the complete line, for example `Drug-resistance: MDR`
 {: .hands_on}
 
 
-#### 2. Prepend the sample name
+#### Prepend the sample name
 We will add the name of the input file, to know to which sample the DR line refers to.
 We will *prepend* the column with the sample name so it appears as the first column.
  This is arbitrary and just a matter of personal taste:
@@ -642,7 +641,7 @@ We will *prepend* the column with the sample name so it appears as the first col
 >
 {: .hands_on}
 
-#### 3. Concatenate results
+#### Concatenate results
 
 #### *Concatenate datasets*
 
@@ -653,7 +652,7 @@ We will *prepend* the column with the sample name so it appears as the first col
 >
 {: .hands_on}
 
-#### 4. Cleanup the table (optional)
+#### Cleanup the table (optional)
 In this step we will use a simple tool that searches and replaces text. We want to remove the ".txt"
 at the end of sample names, and the string "Drug-resistance:". So we will tell the tool to search
 for these two *patterns* and to replace them with "*nothing*"
