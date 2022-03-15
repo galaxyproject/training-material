@@ -52,9 +52,8 @@ the 20 samples that we want to analyze. Thus, we now have 20 VCF files that desc
 mutations found for each of the samples. **These 20 VCFs files will be the starting point of this tutorial.**
  If you want to perform the mapping and variant calling for
 all of the samples, feel free to do it. You can find the respective [FASTQ files here](https://zenodo.org/record/5911437), and
-the Galaxy workflows used to analyze the samples in the workflows folder of this tutorial in the Galaxy Training Network.
-However this is completely optional, and we suggest you to do it after you have finished all the
-tutorials of this workshop.
+the [Galaxy workflows used here](./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga). However this is completely optional, 
+and we suggest you to do it after you have finished all the tutorials of this workshop.
 
 Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
 this lesson 
