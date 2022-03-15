@@ -600,6 +600,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon comment %} Error: `postgresql_version is version_compare('9.3', '>=')' failed`
+>    > You might see an error like this, if you're running with `--check` mode. Unfortunately here `--check` mode meets real life: not all modules support it because some rely on running command line tools to obtain version numbers, something that cannot be mocked with check mode. You can solve this by running it without `--check`.
+>    >
+>    > ```
+>    > fatal: [gat-34.us.galaxy.training]: FAILED! => {"msg": "The conditional check 'postgresql_version is version_compare('9.3', '>=')' failed. The error was: Input version value cannot be empty\n\nThe error appears to be in '/home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/main.yml': line 42, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n# etc.). So check for a match first and then add if there's no match.\n- name: Check for conf.d include in postgresql.conf\n ^ here\n"}
+>    > ```
+>    {: .comment}
+>
 >    > ### {% icon comment %} Comment: When running Ansible
 >    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
 >    {: .comment}
