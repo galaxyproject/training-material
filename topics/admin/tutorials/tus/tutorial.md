@@ -44,7 +44,7 @@ To allow your user to upload via TUS, you will need to:
 
 > ### {% icon hands_on %} Hands-on: Setting up ftp upload with Ansible
 >
-> 1. In your playbook directory, add the `galaxyproject.proftpd` role to your `requirements.yml`
+> 1. In your playbook directory, add the `galaxyproject.tusd` role to your `requirements.yml`
 >
 >    {% raw %}
 >    ```diff
