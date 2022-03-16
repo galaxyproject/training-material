@@ -2,14 +2,14 @@
 layout: tutorial_hands_on
 
 title: 'Identifying tuberculosis transmission links: from SNPs to transmission clusters'
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/6010176'
 objectives:
 - Create a SNP alignment
 - Calculate pairwise SNP distances between MTB samples
 - Identify transmission clusters based on SNP distances
 - Study the emergence and spread of drug resistance based on transmission analysis.
 time_estimation: 2H
-enable: true
+enable: false
 level : Intermediate
 key_points:
 - Clustering is a useful tool to detect transmission links between patients and oubreak investigation.
@@ -52,11 +52,11 @@ the 20 samples that we want to analyze. Thus, we now have 20 VCF files that desc
 mutations found for each of the samples. **These 20 VCFs files will be the starting point of this tutorial.**
  If you want to perform the mapping and variant calling for
 all of the samples, feel free to do it. You can find the respective [FASTQ files here](https://zenodo.org/record/5911437), and
-the [Galaxy workflows used here](./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga). However this is completely optional, 
+the [Galaxy workflows used here](./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga). However this is completely optional,
 and we suggest you to do it after you have finished all the tutorials of this workshop.
 
 Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
-this lesson 
+this lesson
 
 > ### Agenda
 >
@@ -78,37 +78,40 @@ into Galaxy:
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
-> Import the VCF files containing the variants of each sample
+>    Import the VCF files containing the variants of each sample
+>
 >    ```
-> https://zenodo.org/record/6010176/files/ERR1203059.vcf
-> https://zenodo.org/record/6010176/files/ERR181435.vcf
-> https://zenodo.org/record/6010176/files/ERR2659153.vcf
-> https://zenodo.org/record/6010176/files/ERR2704678.vcf
-> https://zenodo.org/record/6010176/files/ERR2704679.vcf
-> https://zenodo.org/record/6010176/files/ERR2704687.vcf
-> https://zenodo.org/record/6010176/files/ERR313115.vcf
-> https://zenodo.org/record/6010176/files/ERR551620.vcf
-> https://zenodo.org/record/6010176/files/ERR5987300.vcf
-> https://zenodo.org/record/6010176/files/ERR5987352.vcf
-> https://zenodo.org/record/6010176/files/ERR6362078.vcf
-> https://zenodo.org/record/6010176/files/ERR6362138.vcf
-> https://zenodo.org/record/6010176/files/ERR6362139.vcf
-> https://zenodo.org/record/6010176/files/ERR6362156.vcf
-> https://zenodo.org/record/6010176/files/ERR6362253.vcf
-> https://zenodo.org/record/6010176/files/ERR6362333.vcf
-> https://zenodo.org/record/6010176/files/ERR6362484.vcf
-> https://zenodo.org/record/6010176/files/ERR6362653.vcf
-> https://zenodo.org/record/6010176/files/SRR13046689.vcf
-> https://zenodo.org/record/6010176/files/SRR998584.vcf
->    ```
-> We will also need the reference genome that was used for SNP calling
->    ```
-> https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
+>    https://zenodo.org/record/6010176/files/ERR1203059.vcf
+>    https://zenodo.org/record/6010176/files/ERR181435.vcf
+>    https://zenodo.org/record/6010176/files/ERR2659153.vcf
+>    https://zenodo.org/record/6010176/files/ERR2704678.vcf
+>    https://zenodo.org/record/6010176/files/ERR2704679.vcf
+>    https://zenodo.org/record/6010176/files/ERR2704687.vcf
+>    https://zenodo.org/record/6010176/files/ERR313115.vcf
+>    https://zenodo.org/record/6010176/files/ERR551620.vcf
+>    https://zenodo.org/record/6010176/files/ERR5987300.vcf
+>    https://zenodo.org/record/6010176/files/ERR5987352.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362078.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362138.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362139.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362156.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362253.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362333.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362484.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362653.vcf
+>    https://zenodo.org/record/6010176/files/SRR13046689.vcf
+>    https://zenodo.org/record/6010176/files/SRR998584.vcf
 >    ```
 >
-> Finally  Create a **Dataset List (Collection)** for all the VCFs.
+>    We will also need the reference genome that was used for SNP calling
 >
-> Use a meaningful name, for example **MTB VCFs**.
+>    ```
+>    https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
+>    ```
+>
+> 3. Finally  Create a **Dataset List (Collection)** for all the VCFs.
+>
+>    Use a meaningful name, for example **MTB VCFs**.
 {: .hands_on}
 
 > ### {% icon tip %} Tip
@@ -165,12 +168,12 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 
 > ### {% icon question %} Questions
 >
-> 1.**`TB Variant Filter`** reads the VCF and output only SNPs that have, at least, 90% frequency.
+> **`TB Variant Filter`** reads the VCF and output only SNPs that have, at least, 90% frequency.
 > How can this sofware extract such information from the VCF files?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. That information is contained, for each mutation, in the VCF:
+> > That information is contained, for each mutation, in the VCF:
 > > - The `TYPE` field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)
 > > - You can look for other types of mutations like insertions (TYPE=ins)
 > > - The `AF` field within the INFO string describes the estimated **A**llele **F**requency
@@ -203,28 +206,28 @@ https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_cons
 
 > ### {% icon question %} Questions
 >
-> 1. Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
+> Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
 > SNPs with frequencies, of 15%, 30%, or 56.78%. Which allele do you think bcftools consensus would
 > insert in the genome?
 >
 > > ### {% icon solution %} Solution
-> > 1. The behaviour of bcftools consensus in this case can be specified with the option `--haplotype`
+> > The behaviour of bcftools consensus in this case can be specified with the option `--haplotype`
 > > For example, we can set `haplotype=2` so the second allele will be used... wait... what?
 > {: .solution}
 {: .question}
 
 > ### {% icon question %} Second allelle!?
 >
-> 1. What do you think that things like "second allele" or "*The* alterntive allele" mean here?
+> What do you think that things like "second allele" or "*The* alterntive allele" mean here?
 >
 > > ### {% icon solution %} Solution
-> >  1. Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
-> >  human genomes. That means that these programs have in mind that the genomes
-> >  are diploid and thus each posible position in the genome has two possible alleles. In
-> >  bacterial genomics, in contrast, we are **always sequencing a population** of cells with
-> >  potential genetic diversity (with the exception of single-cell sequencing).
-> >  That does not mean that we cannot use this type of software, we can (and we do!) but it is
-> >  good to know what they are ment for, and their possible limitations
+> > Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
+> > human genomes. That means that these programs have in mind that the genomes
+> > are diploid and thus each posible position in the genome has two possible alleles. In
+> > bacterial genomics, in contrast, we are **always sequencing a population** of cells with
+> > potential genetic diversity (with the exception of single-cell sequencing).
+> > That does not mean that we cannot use this type of software, we can (and we do!) but it is
+> > good to know what they are ment for, and their possible limitations
 > {: .solution}
 {: .question}
 
@@ -262,8 +265,9 @@ However we can do the same with a specific command that *concatenates* files.
 >
 > 1. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `Dataset collection` (output of **bcftools consensus** {% icon tool %})
+>
 > 2. The output of **concatenate datasets** may be of type tabular. Make sure Galaxy sees this file as
-> a fasta file by editing its attributes. Click in the pencil icon, select "Datatypes" and then select fasta.
+>    a fasta file by editing its attributes. Click in the pencil icon, select "Datatypes" and then select fasta.
 >
 {: .hands_on}
 
@@ -273,7 +277,7 @@ all of our genomes! However, it is important that you understand the following q
 
 > ### {% icon question %} Question
 >
-> 1. Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
+> Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
 > many software packages to perform such task. How is then possible that we were able to build a MSA by just
 > stacking genomes one on top of each other? Can you think about what makes our case special, so we can
 > just use this "trick"?
@@ -292,6 +296,7 @@ all of our genomes! However, it is important that you understand the following q
 {: .question}
 
 ### Remove invariant positions with **Finds SNP sites**
+
 We have generated a MSA that is the basis for the transmission (clustering) and phylogenetic
 analysis. Although we could already use this MSA for such analysis, it is common practice to remove
 the invariant sites from the alignment. Think that our file now contains 20 genomes of 4.4 Mb each.
@@ -337,8 +342,7 @@ easy. We will use **SNP distance matrix**, that will generate a matrix with pair
 > ### {% icon hands_on %} Hands-on: Distance matrix from SNP alignment.
 >
 > 1. {% tool [SNP distance matrix](toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"FASTA multiple sequence alignment"*: `Single dataset`
-> (output of **Finds SNP sites** {% icon tool %})
+>    - {% icon param-file %} *"FASTA multiple sequence alignment"*: `Single dataset` (output of **Finds SNP sites** {% icon tool %})
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -385,6 +389,7 @@ linking them in between as exemplified in the picture below.
 
 
 ## Determine transmission clusters using Rscript
+
 Currently there is not tool in Galaxy to perform the exact task that we need (although we plan to
 include it!).  So far, we can use `R` and the library `cluster` within Galaxy to perform such task.
 Again, don't worry about this, programming in `R` is beyong the scope of this workshop, but if you
@@ -415,7 +420,7 @@ library(cluster)
 # Get the SNP distance matrix object from Galaxy
 distance <- gx_get(198)
 # Read the SNP distance matrix
-distance <- read.table(distance, header=T, sep="\t", row.names = 1)  
+distance <- read.table(distance, header=T, sep="\t", row.names = 1)
 distance <- as.dist(distance)
 
 # Perform clustering based on SNP distances and a SNP threshold of 10 (h=10)
@@ -449,10 +454,10 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 
 > ### {% icon question %} Questions
 >
-> 1. How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?
+> How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?
 >
 > > ### {% icon solution %} Answer
-> > 1. We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
+> > We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
 > > is composed by two samples linked by recent transmission and transmission cluster 12 by three samples
 > > linked by recent transmission. For example samples ERR6362484 and ERR5987352 are linked by
 > > recent transmission.
@@ -461,12 +466,12 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 
 > ### {% icon question %} Question
 >
-> 1. Let's assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
+> Let's assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
 > belong to the same transmission cluster. Sample ERR6362484 was isolated on January 2021, while sample
 >  ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?
 >
 > > ### {% icon solution %} Solution
-> > 1. **NO**
+> > **NO**
 > >
 > >  Isolation dates have been used traditionally to define **index cases** within transmission clusters
 > > under the assumption that the most likely scenario is the first isolated sample to be the
@@ -502,32 +507,33 @@ all of them.
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
-> Import the TB profiler report of each sample
->    ```
-> https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR181435.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2659153.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2704678.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2704679.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2704687.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR313115.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR551620.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR5987300.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR5987352.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362078.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362138.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362139.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362156.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362253.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362333.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362484.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362653.TBprof.txt
-> https://zenodo.org/record/6010176/files/SRR13046689.TBprof.txt
-> https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
->    ```
-> Create a **Dataset List (Collection)** for all the report files.
+>    Import the TB profiler report of each sample
 >
-> Use a meaningful name, for example **TBprofiler reports**.
+>    ```
+>    https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR181435.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2659153.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2704678.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2704679.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2704687.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR313115.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR551620.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR5987300.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR5987352.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362078.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362138.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362139.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362156.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362253.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362333.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362484.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362653.TBprof.txt
+>    https://zenodo.org/record/6010176/files/SRR13046689.TBprof.txt
+>    https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
+>    ```
+> 2. Create a **Dataset List (Collection)** for all the report files.
+>
+>    Use a meaningful name, for example **TBprofiler reports**.
 {: .hands_on}
 
 ## Summarize the data
@@ -575,36 +581,37 @@ for example in a spreadsheet. However this is not feasible when analyzing hundre
 
 We are here to learn bioinformatics, so let's generate this table using Linux commands.
 
-The process will consist on three steps:
+The process will consist of three steps:
+
 1. Select the line containing the drug resistance profile with **grep**:
 
-```
-Drug-resistance: MDR
-```
+   ```
+   Drug-resistance: MDR
+   ```
 
 2. Prepend the name of the sample with **Add input name as column**:
 
-```
-ERR6362653.txt Drug-resistance: MDR
-```
+   ```
+   ERR6362653.txt Drug-resistance: MDR
+   ```
 
 3. Concatenate results from all samples in a single file with **Concatenate datasets**:
 
-```
-ERR6362653.txt Drug-resistance: MDR
-ERR313115.txt Drug-resistance: Sensitive
-ERR5987300.txt Drug-resistance: Pre-XDR
-.... etc
-```
+   ```
+   ERR6362653.txt Drug-resistance: MDR
+   ERR313115.txt Drug-resistance: Sensitive
+   ERR5987300.txt Drug-resistance: Pre-XDR
+   .... etc
+   ```
 
 4. As an optional step, we can reformat the table with **sed** to get rid of the `.txt` and `Drug-resistance:`
-so the table looks like:
+   so the table looks like:
 
-```
-ERR6362653 MDR
-ERR313115 Sensitive
-ERR5987300 Pre-XDR
-```
+   ```
+   ERR6362653 MDR
+   ERR313115 Sensitive
+   ERR5987300 Pre-XDR
+   ```
 
 #### Select the line containing the drug resistance profile with `grep`
 
@@ -629,8 +636,6 @@ We will add the name of the input file, to know to which sample the DR line refe
 We will *prepend* the column with the sample name so it appears as the first column.
  This is arbitrary and just a matter of personal taste:
 
-#### *Add input name as column*
-
 > ### {% icon hands_on %} Prepend the sample name to the DR profile
 >
 > 1. {% tool [Add input name as column](toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0) %} with the following parameters:
@@ -638,15 +643,7 @@ We will *prepend* the column with the sample name so it appears as the first col
 >    - *"input contains a header line?"*: `No`
 >    - *"Prepend the colum"*: `Yes`
 >
-{: .hands_on}
-
-#### Concatenate results
-
-#### *Concatenate datasets*
-
-> ### {% icon hands_on %}
->
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
+> 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `Dataset collection` (output of **Add input name as column** {% icon tool %})
 >
 {: .hands_on}
@@ -745,28 +742,28 @@ We will be supporting our findings in the results of our analysis, and the conce
 > ### {% icon question %} Question
 >
 > 1. The same principles than those explained above apply to the three MDR strains that are
-> within the same transmission cluster. However in this case there is one strain that shows clear
-> evidence of *de-novo* evolution of DR. Do you know which strain and why?
+>    within the same transmission cluster. However in this case there is one strain that shows clear
+>    evidence of *de-novo* evolution of DR. Do you know which strain and why?
 > 2. Are there possible scenarios other than *de-novo* evolution of DR for this strain?
 >
 > > ### {% icon solution %} Solution
 > > 1. Within this cluster of MDR strains, there is one tagged as Pre-XDR by TB-profiler. If we have
-> > a look at the TB profiler report, we can see that this strain carries an additional mutation in
-> > *gyrA* that confers resistance to fluorioquinolones. This is compatible with an scenario in which
-> > fluoroquinolone resistance evolved independently within this patient after being infected with
-> > the MDR strain.
+> >    a look at the TB profiler report, we can see that this strain carries an additional mutation in
+> >    *gyrA* that confers resistance to fluorioquinolones. This is compatible with an scenario in which
+> >    fluoroquinolone resistance evolved independently within this patient after being infected with
+> >    the MDR strain.
 > {: .solution}
 {: .question}
 
 
 > ### {% icon question %} Question
 >
-> 1.  There is one strain with a DR profile "other", because it is only resistant to pyrazinamide. This
+> There is one strain with a DR profile "other", because it is only resistant to pyrazinamide. This
 > strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
 > most likely evolved *de-novo* in this patient due to antibiotic treatment. But we are wrong. Do you know why?
 >
 > > ### {% icon solution %} Solution
-> > 1. The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
+> > The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
 > > within our population. However, if we have a look at the TB-profiler report, we observe that this
 > > is a *M. bovis* strain, which are known to be intrinsically resistant to PZA.
 > {: .solution}
@@ -775,17 +772,17 @@ We will be supporting our findings in the results of our analysis, and the conce
 > ### {% icon question %} Question
 >
 > 1. Is it possible to find in the same transmission cluster two RIF-monoresistant strains that
-> carry different rpoB mutations?
+>    carry different rpoB mutations?
 > 2. Is it possible to find in the same transmission cluster strains of different MTB sublineages?
 >
 > > ### {% icon solution %} Solution
 > > 1. Yes, it is **possible**. In that scenario, both patiens were **recently**
-> > transmitted with the **same susceptible strain**, and RIF resistance evolved **independently** in both.
+> >    transmitted with the **same susceptible strain**, and RIF resistance evolved **independently** in both.
 > > 2. No, by definition. Remember that clustering is based on a threshold that we set of genetic
-> > distance measured in SNPs. We want to cluster samples that are genetically so similar that we
-> > can consider them as the same genotype, that is to say, as the same strain. Two different
-> > sublineages, by definition, do not belong to the same genotype and will have a distance in SNPs
-> > between them well beyond any SNP threshold we could use.
+> >    distance measured in SNPs. We want to cluster samples that are genetically so similar that we
+> >    can consider them as the same genotype, that is to say, as the same strain. Two different
+> >    sublineages, by definition, do not belong to the same genotype and will have a distance in SNPs
+> >    between them well beyond any SNP threshold we could use.
 > {: .solution}
 {: .question}
 
@@ -807,4 +804,4 @@ In the following tutorial you will perform a phylogenetic analysis of these same
 You might have noticed that one of the strains analyzed presents thousands of differences (SNPs) to
 the reference genome, standing out from the rest of strains. This strain is a *M. canettii* strain,
 that was actually not part of the outbreak investigated. However we decided to include it here. Why? Let's find out
-in the next tutorial. 
+in the next tutorial.
