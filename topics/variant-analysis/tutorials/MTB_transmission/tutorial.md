@@ -454,10 +454,10 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 
 > ### {% icon question %} Questions
 >
-> 1. How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?
+> How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?
 >
 > > ### {% icon solution %} Answer
-> > 1. We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
+> > We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
 > > is composed by two samples linked by recent transmission and transmission cluster 12 by three samples
 > > linked by recent transmission. For example samples ERR6362484 and ERR5987352 are linked by
 > > recent transmission.
