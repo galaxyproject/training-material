@@ -52,11 +52,11 @@ the 20 samples that we want to analyze. Thus, we now have 20 VCF files that desc
 mutations found for each of the samples. **These 20 VCFs files will be the starting point of this tutorial.**
  If you want to perform the mapping and variant calling for
 all of the samples, feel free to do it. You can find the respective [FASTQ files here](https://zenodo.org/record/5911437), and
-the [Galaxy workflows used here](./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga). However this is completely optional, 
+the [Galaxy workflows used here](./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga). However this is completely optional,
 and we suggest you to do it after you have finished all the tutorials of this workshop.
 
 Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
-this lesson 
+this lesson
 
 > ### Agenda
 >
@@ -168,12 +168,12 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 
 > ### {% icon question %} Questions
 >
-> 1.**`TB Variant Filter`** reads the VCF and output only SNPs that have, at least, 90% frequency.
+> **`TB Variant Filter`** reads the VCF and output only SNPs that have, at least, 90% frequency.
 > How can this sofware extract such information from the VCF files?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. That information is contained, for each mutation, in the VCF:
+> > That information is contained, for each mutation, in the VCF:
 > > - The `TYPE` field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)
 > > - You can look for other types of mutations like insertions (TYPE=ins)
 > > - The `AF` field within the INFO string describes the estimated **A**llele **F**requency
@@ -206,28 +206,28 @@ https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_cons
 
 > ### {% icon question %} Questions
 >
-> 1. Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
+> Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
 > SNPs with frequencies, of 15%, 30%, or 56.78%. Which allele do you think bcftools consensus would
 > insert in the genome?
 >
 > > ### {% icon solution %} Solution
-> > 1. The behaviour of bcftools consensus in this case can be specified with the option `--haplotype`
+> > The behaviour of bcftools consensus in this case can be specified with the option `--haplotype`
 > > For example, we can set `haplotype=2` so the second allele will be used... wait... what?
 > {: .solution}
 {: .question}
 
 > ### {% icon question %} Second allelle!?
 >
-> 1. What do you think that things like "second allele" or "*The* alterntive allele" mean here?
+> What do you think that things like "second allele" or "*The* alterntive allele" mean here?
 >
 > > ### {% icon solution %} Solution
-> >  1. Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
-> >  human genomes. That means that these programs have in mind that the genomes
-> >  are diploid and thus each posible position in the genome has two possible alleles. In
-> >  bacterial genomics, in contrast, we are **always sequencing a population** of cells with
-> >  potential genetic diversity (with the exception of single-cell sequencing).
-> >  That does not mean that we cannot use this type of software, we can (and we do!) but it is
-> >  good to know what they are ment for, and their possible limitations
+> > Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
+> > human genomes. That means that these programs have in mind that the genomes
+> > are diploid and thus each posible position in the genome has two possible alleles. In
+> > bacterial genomics, in contrast, we are **always sequencing a population** of cells with
+> > potential genetic diversity (with the exception of single-cell sequencing).
+> > That does not mean that we cannot use this type of software, we can (and we do!) but it is
+> > good to know what they are ment for, and their possible limitations
 > {: .solution}
 {: .question}
 
@@ -265,8 +265,9 @@ However we can do the same with a specific command that *concatenates* files.
 >
 > 1. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `Dataset collection` (output of **bcftools consensus** {% icon tool %})
+>
 > 2. The output of **concatenate datasets** may be of type tabular. Make sure Galaxy sees this file as
-> a fasta file by editing its attributes. Click in the pencil icon, select "Datatypes" and then select fasta.
+>    a fasta file by editing its attributes. Click in the pencil icon, select "Datatypes" and then select fasta.
 >
 {: .hands_on}
 
@@ -276,7 +277,7 @@ all of our genomes! However, it is important that you understand the following q
 
 > ### {% icon question %} Question
 >
-> 1. Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
+> Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
 > many software packages to perform such task. How is then possible that we were able to build a MSA by just
 > stacking genomes one on top of each other? Can you think about what makes our case special, so we can
 > just use this "trick"?
@@ -295,6 +296,7 @@ all of our genomes! However, it is important that you understand the following q
 {: .question}
 
 ### Remove invariant positions with **Finds SNP sites**
+
 We have generated a MSA that is the basis for the transmission (clustering) and phylogenetic
 analysis. Although we could already use this MSA for such analysis, it is common practice to remove
 the invariant sites from the alignment. Think that our file now contains 20 genomes of 4.4 Mb each.
@@ -387,6 +389,7 @@ linking them in between as exemplified in the picture below.
 
 
 ## Determine transmission clusters using Rscript
+
 Currently there is not tool in Galaxy to perform the exact task that we need (although we plan to
 include it!).  So far, we can use `R` and the library `cluster` within Galaxy to perform such task.
 Again, don't worry about this, programming in `R` is beyong the scope of this workshop, but if you
@@ -417,7 +420,7 @@ library(cluster)
 # Get the SNP distance matrix object from Galaxy
 distance <- gx_get(198)
 # Read the SNP distance matrix
-distance <- read.table(distance, header=T, sep="\t", row.names = 1)  
+distance <- read.table(distance, header=T, sep="\t", row.names = 1)
 distance <- as.dist(distance)
 
 # Perform clustering based on SNP distances and a SNP threshold of 10 (h=10)
@@ -463,12 +466,12 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 
 > ### {% icon question %} Question
 >
-> 1. Let's assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
+> Let's assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
 > belong to the same transmission cluster. Sample ERR6362484 was isolated on January 2021, while sample
 >  ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?
 >
 > > ### {% icon solution %} Solution
-> > 1. **NO**
+> > **NO**
 > >
 > >  Isolation dates have been used traditionally to define **index cases** within transmission clusters
 > > under the assumption that the most likely scenario is the first isolated sample to be the
@@ -748,28 +751,28 @@ We will be supporting our findings in the results of our analysis, and the conce
 > ### {% icon question %} Question
 >
 > 1. The same principles than those explained above apply to the three MDR strains that are
-> within the same transmission cluster. However in this case there is one strain that shows clear
-> evidence of *de-novo* evolution of DR. Do you know which strain and why?
+>    within the same transmission cluster. However in this case there is one strain that shows clear
+>    evidence of *de-novo* evolution of DR. Do you know which strain and why?
 > 2. Are there possible scenarios other than *de-novo* evolution of DR for this strain?
 >
 > > ### {% icon solution %} Solution
 > > 1. Within this cluster of MDR strains, there is one tagged as Pre-XDR by TB-profiler. If we have
-> > a look at the TB profiler report, we can see that this strain carries an additional mutation in
-> > *gyrA* that confers resistance to fluorioquinolones. This is compatible with an scenario in which
-> > fluoroquinolone resistance evolved independently within this patient after being infected with
-> > the MDR strain.
+> >    a look at the TB profiler report, we can see that this strain carries an additional mutation in
+> >    *gyrA* that confers resistance to fluorioquinolones. This is compatible with an scenario in which
+> >    fluoroquinolone resistance evolved independently within this patient after being infected with
+> >    the MDR strain.
 > {: .solution}
 {: .question}
 
 
 > ### {% icon question %} Question
 >
-> 1.  There is one strain with a DR profile "other", because it is only resistant to pyrazinamide. This
+> There is one strain with a DR profile "other", because it is only resistant to pyrazinamide. This
 > strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
 > most likely evolved *de-novo* in this patient due to antibiotic treatment. But we are wrong. Do you know why?
 >
 > > ### {% icon solution %} Solution
-> > 1. The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
+> > The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
 > > within our population. However, if we have a look at the TB-profiler report, we observe that this
 > > is a *M. bovis* strain, which are known to be intrinsically resistant to PZA.
 > {: .solution}
@@ -810,4 +813,4 @@ In the following tutorial you will perform a phylogenetic analysis of these same
 You might have noticed that one of the strains analyzed presents thousands of differences (SNPs) to
 the reference genome, standing out from the rest of strains. This strain is a *M. canettii* strain,
 that was actually not part of the outbreak investigated. However we decided to include it here. Why? Let's find out
-in the next tutorial. 
+in the next tutorial.
