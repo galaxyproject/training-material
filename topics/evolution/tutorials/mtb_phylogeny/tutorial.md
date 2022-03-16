@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 title: Tree thinking for tuberculosis evolution and epidemiology
 zenodo_link: 'https://zenodo.org/record/6010176'
+enable: false
 tags:
   - prokaryotes
   - phylogenetics
@@ -74,7 +75,7 @@ Below we will see that this has implications for the interpretation of a tree.
 
 
 # The alignment
-Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous tutorial on [transmission clusters]({% link topics/variant-analysis/tutorials/MTB_transmission/tutorial.md %}), reflecting the diversity of 19 MTBC strains and 1 strain of **M. canettii**. The latter is included as outgroup, allowing us to root the phylogeny.
+Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous tutorial on [transmission clusters]({% link topics/evolution/tutorials/mtb_transmission/tutorial.md %}), reflecting the diversity of 19 MTBC strains and 1 strain of **M. canettii**. The latter is included as outgroup, allowing us to root the phylogeny.
 
 Recall that the alignment here was generated using SNPs called from reference-aligned short reads. Below is a snapshot of a SNP alignment. Each row is a different strain, each column a position in the reference genome. Because this alignment is based on SNPs, it contains *only variable positions*. This is important to keep in mind. Genetic distances between strains will be hugely overestimated if we leave out all the positions which show no variation. In exercise 6 below, we will see a way to correct for this.
 
@@ -433,7 +434,7 @@ axisPhylo()
 > >
 > > 1. About 5 % of the MTB reference genome consists of repetitive or otherwise complicated regions where mapping and SNP calling cannot be done reliably. Most SNP calling pipelines exclude such regions, also the one used in this course. Rather than to assume that these regions are invariant, we should substract them from our calculations. By not doint this, genomes seem more similar than they are; we underestimate phylogenetic distances.
 > >
-> > 2. A rate 10 times higher implies that there will be 10 times more mutations observed in the same time span or, the other way around, that it will take a time span 10 times shorter to observe the same number of mutations. The timescale of the phylogeny would thus shift one order of magnitude, to hundreds rather than thousands of years. As this example shows, there are considerable uncertainties associated with molecular dating. This is also true for more sophisticated methods (see {% cite Menardo2019 %} for a recent discussion of molecular dating with MTB).  
+> > 2. A rate 10 times higher implies that there will be 10 times more mutations observed in the same time span or, the other way around, that it will take a time span 10 times shorter to observe the same number of mutations. The timescale of the phylogeny would thus shift one order of magnitude, to hundreds rather than thousands of years. As this example shows, there are considerable uncertainties associated with molecular dating. This is also true for more sophisticated methods (see {% cite Menardo2019 %} for a recent discussion of molecular dating with MTB).
 > >
 > {: .solution}
 >
