@@ -197,7 +197,7 @@ You can choose to use the tools one by one as described above, or alternatively 
 
 # Further analysis
 
-Further analyses are available; try out the [MDAnalysis workflow](https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.ga), which includes a Ramachandran plot and various timeseries.
+Further analyses are available; try out the [MDAnalysis workflow]({% link topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.ga %}), which includes a Ramachandran plot and various timeseries.
 
 ![MDAnalysis workflow]({% link topics/computational-chemistry/images/workflow_mdanalysis.png %} "MD analysis workflow")
 

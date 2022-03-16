@@ -275,6 +275,8 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```
 >    {: data-commit="Add requirements"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 >    > ### {% icon details %} What do each of these roles do?
 >    > We'll cover it in more detail as we use each of the roles but briefly:
 >    >
@@ -598,6 +600,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon comment %} Error: `postgresql_version is version_compare('9.3', '>=')' failed`
+>    > You might see an error like this, if you're running with `--check` mode. Unfortunately here `--check` mode meets real life: not all modules support it because some rely on running command line tools to obtain version numbers, something that cannot be mocked with check mode. You can solve this by running it without `--check`.
+>    >
+>    > ```
+>    > fatal: [gat-34.us.galaxy.training]: FAILED! => {"msg": "The conditional check 'postgresql_version is version_compare('9.3', '>=')' failed. The error was: Input version value cannot be empty\n\nThe error appears to be in '/home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/main.yml': line 42, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n# etc.). So check for a match first and then add if there's no match.\n- name: Check for conf.d include in postgresql.conf\n ^ here\n"}
+>    > ```
+>    {: .comment}
+>
 >    > ### {% icon comment %} Comment: When running Ansible
 >    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
 >    {: .comment}
@@ -779,7 +789,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`                 | `root-dir`                                                       | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                                                    | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`                               | The user that Galaxy will run as.
->    `galaxy_commit_id`              | `release_20.09`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 20.09
+>    `galaxy_commit_id`              | `release_22.01`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 22.01
 >    `galaxy_force_checkout`         | `true`                                                           | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    `miniconda_version`             | `4.7.12`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
@@ -809,7 +819,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
->    +galaxy_commit_id: release_20.09
+>    +galaxy_commit_id: release_22.01
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    +miniconda_version: 4.7.12
@@ -2353,7 +2363,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_20.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_22.01`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 

@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -215,6 +215,15 @@ telegraf_plugins_extra:
+>    @@ -217,6 +217,15 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -172,7 +172,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -34,3 +34,4 @@
+>    @@ -35,3 +35,4 @@
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
 >         - dj-wasabi.telegraf
@@ -353,7 +353,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -140,6 +140,7 @@ galaxy_local_tools:
+>    @@ -142,6 +142,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
@@ -427,3 +427,5 @@ Congratulations! you have now set up TIaaS on your Galaxy server.
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/missed-something.md step=12 %}

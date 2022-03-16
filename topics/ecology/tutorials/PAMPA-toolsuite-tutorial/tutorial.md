@@ -25,6 +25,7 @@ key_points:
 contributors:
 - colineroyaux
 - yvanlebras
+- jbmihoub
 
 ---
 

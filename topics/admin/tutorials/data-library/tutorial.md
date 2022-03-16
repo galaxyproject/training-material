@@ -162,7 +162,7 @@ This will enable the option for everyone, any unprivileged user with a folder in
 > ### {% icon tip %} Tip: Do you not see a directory here?
 > We pre-created a directory for someone registered as `admin@example.org`, but if you are logged in with an account registered with a different email, you'll see nothing.
 >
-> You can fix this by going into /libraries/user and `ln -s admin@example.org whatever-email-you-used`
+> You can fix this by going into /libraries/user and `cp -Rv admin@example.org whatever-email-you-used`
 > Then it should appear in Galaxy.
 {: .tip}
 
@@ -271,7 +271,7 @@ That's it! You should be able to see your newly created data library in your Gal
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=5 %}
+{% snippet topics/admin/faqs/missed-something.md step=6 %}
 
 Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
 
