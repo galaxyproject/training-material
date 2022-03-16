@@ -450,7 +450,7 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 - *Phylogenetics in the genomics era*, 2020. An [open access book](https://hal.inria.fr/PGE) covering a variety of contemporary topics.
 
 ## Useful links
-https://megasoftware.net/
-https://artic.network/how-to-read-a-tree.html
-http://tolweb.org
-https://plato.stanford.edu/entries/phylogenetic-inference/
+- [MEGA Software](https://megasoftware.net/)
+- [How to read a tree](https://artic.network/how-to-read-a-tree.html)
+- [Tree Of Life web project](http://tolweb.org)
+- [Phylogenetic Inference](https://plato.stanford.edu/entries/phylogenetic-inference/)
