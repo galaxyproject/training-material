@@ -81,35 +81,37 @@ into Galaxy:
 >    Import the VCF files containing the variants of each sample
 >
 >    ```
-> https://zenodo.org/record/6010176/files/ERR1203059.vcf
-> https://zenodo.org/record/6010176/files/ERR181435.vcf
-> https://zenodo.org/record/6010176/files/ERR2659153.vcf
-> https://zenodo.org/record/6010176/files/ERR2704678.vcf
-> https://zenodo.org/record/6010176/files/ERR2704679.vcf
-> https://zenodo.org/record/6010176/files/ERR2704687.vcf
-> https://zenodo.org/record/6010176/files/ERR313115.vcf
-> https://zenodo.org/record/6010176/files/ERR551620.vcf
-> https://zenodo.org/record/6010176/files/ERR5987300.vcf
-> https://zenodo.org/record/6010176/files/ERR5987352.vcf
-> https://zenodo.org/record/6010176/files/ERR6362078.vcf
-> https://zenodo.org/record/6010176/files/ERR6362138.vcf
-> https://zenodo.org/record/6010176/files/ERR6362139.vcf
-> https://zenodo.org/record/6010176/files/ERR6362156.vcf
-> https://zenodo.org/record/6010176/files/ERR6362253.vcf
-> https://zenodo.org/record/6010176/files/ERR6362333.vcf
-> https://zenodo.org/record/6010176/files/ERR6362484.vcf
-> https://zenodo.org/record/6010176/files/ERR6362653.vcf
-> https://zenodo.org/record/6010176/files/SRR13046689.vcf
-> https://zenodo.org/record/6010176/files/SRR998584.vcf
->    ```
-> We will also need the reference genome that was used for SNP calling
->    ```
-> https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
+>    https://zenodo.org/record/6010176/files/ERR1203059.vcf
+>    https://zenodo.org/record/6010176/files/ERR181435.vcf
+>    https://zenodo.org/record/6010176/files/ERR2659153.vcf
+>    https://zenodo.org/record/6010176/files/ERR2704678.vcf
+>    https://zenodo.org/record/6010176/files/ERR2704679.vcf
+>    https://zenodo.org/record/6010176/files/ERR2704687.vcf
+>    https://zenodo.org/record/6010176/files/ERR313115.vcf
+>    https://zenodo.org/record/6010176/files/ERR551620.vcf
+>    https://zenodo.org/record/6010176/files/ERR5987300.vcf
+>    https://zenodo.org/record/6010176/files/ERR5987352.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362078.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362138.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362139.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362156.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362253.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362333.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362484.vcf
+>    https://zenodo.org/record/6010176/files/ERR6362653.vcf
+>    https://zenodo.org/record/6010176/files/SRR13046689.vcf
+>    https://zenodo.org/record/6010176/files/SRR998584.vcf
 >    ```
 >
-> Finally  Create a **Dataset List (Collection)** for all the VCFs.
+>    We will also need the reference genome that was used for SNP calling
 >
-> Use a meaningful name, for example **MTB VCFs**.
+>    ```
+>    https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
+>    ```
+>
+> 3. Finally  Create a **Dataset List (Collection)** for all the VCFs.
+>
+>    Use a meaningful name, for example **MTB VCFs**.
 {: .hands_on}
 
 > ### {% icon tip %} Tip
@@ -338,8 +340,7 @@ easy. We will use **SNP distance matrix**, that will generate a matrix with pair
 > ### {% icon hands_on %} Hands-on: Distance matrix from SNP alignment.
 >
 > 1. {% tool [SNP distance matrix](toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"FASTA multiple sequence alignment"*: `Single dataset`
-> (output of **Finds SNP sites** {% icon tool %})
+>    - {% icon param-file %} *"FASTA multiple sequence alignment"*: `Single dataset` (output of **Finds SNP sites** {% icon tool %})
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -503,32 +504,33 @@ all of them.
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
-> Import the TB profiler report of each sample
->    ```
-> https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR181435.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2659153.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2704678.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2704679.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR2704687.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR313115.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR551620.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR5987300.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR5987352.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362078.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362138.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362139.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362156.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362253.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362333.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362484.TBprof.txt
-> https://zenodo.org/record/6010176/files/ERR6362653.TBprof.txt
-> https://zenodo.org/record/6010176/files/SRR13046689.TBprof.txt
-> https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
->    ```
-> Create a **Dataset List (Collection)** for all the report files.
+>    Import the TB profiler report of each sample
 >
-> Use a meaningful name, for example **TBprofiler reports**.
+>    ```
+>    https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR181435.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2659153.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2704678.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2704679.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR2704687.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR313115.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR551620.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR5987300.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR5987352.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362078.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362138.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362139.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362156.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362253.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362333.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362484.TBprof.txt
+>    https://zenodo.org/record/6010176/files/ERR6362653.TBprof.txt
+>    https://zenodo.org/record/6010176/files/SRR13046689.TBprof.txt
+>    https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
+>    ```
+> 2. Create a **Dataset List (Collection)** for all the report files.
+>
+>    Use a meaningful name, for example **TBprofiler reports**.
 {: .hands_on}
 
 ## Summarize the data
@@ -776,17 +778,17 @@ We will be supporting our findings in the results of our analysis, and the conce
 > ### {% icon question %} Question
 >
 > 1. Is it possible to find in the same transmission cluster two RIF-monoresistant strains that
-> carry different rpoB mutations?
+>    carry different rpoB mutations?
 > 2. Is it possible to find in the same transmission cluster strains of different MTB sublineages?
 >
 > > ### {% icon solution %} Solution
 > > 1. Yes, it is **possible**. In that scenario, both patiens were **recently**
-> > transmitted with the **same susceptible strain**, and RIF resistance evolved **independently** in both.
+> >    transmitted with the **same susceptible strain**, and RIF resistance evolved **independently** in both.
 > > 2. No, by definition. Remember that clustering is based on a threshold that we set of genetic
-> > distance measured in SNPs. We want to cluster samples that are genetically so similar that we
-> > can consider them as the same genotype, that is to say, as the same strain. Two different
-> > sublineages, by definition, do not belong to the same genotype and will have a distance in SNPs
-> > between them well beyond any SNP threshold we could use.
+> >    distance measured in SNPs. We want to cluster samples that are genetically so similar that we
+> >    can consider them as the same genotype, that is to say, as the same strain. Two different
+> >    sublineages, by definition, do not belong to the same genotype and will have a distance in SNPs
+> >    between them well beyond any SNP threshold we could use.
 > {: .solution}
 {: .question}
 
