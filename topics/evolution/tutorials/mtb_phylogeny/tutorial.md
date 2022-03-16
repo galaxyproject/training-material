@@ -145,8 +145,9 @@ We will use R to plot and manipulate the phylogeny obtained from RAxML. The code
 > 3. Copy the files we need into our workspace so we can see them in the Files pane.
 >
 >    ```R
->    treefile <- gx_get(1)  # Use the correct ID for your differentially expressed results dataset.
+>    treefile <- gx_get(1)
 >    ```
+>    **Note:** the `1` in this command refers to dataset 1 in your active Galaxy history. If this dataset has a different number in your history, please change it in the command.
 >
 > 4. Install the [ape R package](https://cran.r-project.org/web/packages/ape/index.html)
 >    - Click on the **Terminal** tab (top of the Rstudio window)
