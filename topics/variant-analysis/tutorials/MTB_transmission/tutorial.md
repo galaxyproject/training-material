@@ -636,8 +636,6 @@ We will add the name of the input file, to know to which sample the DR line refe
 We will *prepend* the column with the sample name so it appears as the first column.
  This is arbitrary and just a matter of personal taste:
 
-#### *Add input name as column*
-
 > ### {% icon hands_on %} Prepend the sample name to the DR profile
 >
 > 1. {% tool [Add input name as column](toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0) %} with the following parameters:
@@ -645,15 +643,7 @@ We will *prepend* the column with the sample name so it appears as the first col
 >    - *"input contains a header line?"*: `No`
 >    - *"Prepend the colum"*: `Yes`
 >
-{: .hands_on}
-
-#### Concatenate results
-
-#### *Concatenate datasets*
-
-> ### {% icon hands_on %}
->
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
+> 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `Dataset collection` (output of **Add input name as column** {% icon tool %})
 >
 {: .hands_on}
