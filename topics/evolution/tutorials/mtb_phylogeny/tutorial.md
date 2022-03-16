@@ -148,6 +148,13 @@ We will use R to plot and manipulate the phylogeny obtained from RAxML. The code
 >    treefile <- gx_get(1)  # Use the correct ID for your differentially expressed results dataset.
 >    ```
 >
+> 4. Install the [ape R package](https://cran.r-project.org/web/packages/ape/index.html)
+>    - Click on the **Terminal** tab (top of the Rstudio window)
+>         - Execute the command: `conda install r-ape`
+>    - Once done, switch back to the **Console** tab
+>         - Type: `library("ape")`
+>         - You might get a warning about R versions, we can ignore that in our case.
+>
 {: .hands_on}
 
 ## Plot the RAxML output
