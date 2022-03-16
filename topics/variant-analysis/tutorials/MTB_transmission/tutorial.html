@@ -441,6 +441,12 @@
 <section class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Identifying tuberculosis transmission links: from SNPs to transmission clusters</h1>
     
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
 
 
     <div class="contributors-line">Authors: 
@@ -586,6 +592,15 @@
                 </a></li>
             
 
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6010176">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
             
 
             
@@ -814,7 +829,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 15, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 16, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -860,7 +875,7 @@ the 20 samples that we want to analyze. Thus, we now have 20 VCF files that desc
 mutations found for each of the samples. <strong>These 20 VCFs files will be the starting point of this tutorial.</strong>
  If you want to perform the <span class="notranslate">mapping</span> and variant calling for
 all of the samples, feel free to do it. You can find the respective <a href="https://zenodo.org/record/5911437">FASTQ files here</a>, and
-the <a href="./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga"><span class="notranslate">Galaxy</span> workflows used here</a>. However this is completely optional, 
+the <a href="./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga"><span class="notranslate">Galaxy</span> workflows used here</a>. However this is completely optional,
 and we suggest you to do it after you have finished all the tutorials of this workshop.</p>
 
 <p>Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
@@ -906,10 +921,12 @@ into <span class="notranslate">Galaxy</span>:</p>
 
   <ol>
     <li>Create a new history for this tutorial</li>
-    <li>Import the files from <a href="">Zenodo</a> or from
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/6010176">Zenodo</a> or from
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">variant-analysis</code>
  -&gt; <code class="language-plaintext highlighter-rouge">Identifying tuberculosis transmission links: from SNPs to transmission clusters</code>):
-Import the VCF files containing the variants of each sample
+Import the VCF files containing the variants of each sample</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6010176/files/ERR1203059.vcf
 https://zenodo.org/record/6010176/files/ERR181435.vcf
 https://zenodo.org/record/6010176/files/ERR2659153.vcf
@@ -931,15 +948,18 @@ https://zenodo.org/record/6010176/files/ERR6362653.vcf
 https://zenodo.org/record/6010176/files/SRR13046689.vcf
 https://zenodo.org/record/6010176/files/SRR998584.vcf
 </code></pre></div>      </div>
+
       <p>We will also need the reference genome that was used for SNP calling</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
 </code></pre></div>      </div>
     </li>
+    <li>
+      <p>Finally  Create a <strong>Dataset List (Collection)</strong> for all the VCFs.</p>
+
+      <p>Use a meaningful name, for example <strong>MTB VCFs</strong>.</p>
+    </li>
   </ol>
-
-  <p>Finally  Create a <strong>Dataset List (Collection)</strong> for all the VCFs.</p>
-
-  <p>Use a meaningful name, for example <strong>MTB VCFs</strong>.</p>
 </blockquote>
 
 <blockquote class="tip">
@@ -1005,23 +1025,20 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 <blockquote class="question">
   <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>1.<strong><code class="language-plaintext highlighter-rouge">TB Variant Filter</code></strong> <span class="notranslate">reads</span> the VCF and output only SNPs that have, at least, 90% frequency.
+  <p><strong><code class="language-plaintext highlighter-rouge">TB Variant Filter</code></strong> <span class="notranslate">reads</span> the VCF and output only SNPs that have, at least, 90% frequency.
 How can this sofware extract such information from the VCF files?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <ol>
-      <li>That information is contained, for each mutation, in the VCF:
-        <ul>
-          <li>The <code class="language-plaintext highlighter-rouge">TYPE</code> field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)</li>
-          <li>You can look for other types of mutations like insertions (TYPE=ins)</li>
-          <li>The <code class="language-plaintext highlighter-rouge">AF</code> field within the INFO string describes the estimated <strong>A</strong>llele <strong>F</strong>requency</li>
-          <li>An alterntive way to calculate it, would be to divide the number of observations of the
+    <p>That information is contained, for each mutation, in the VCF:</p>
+    <ul>
+      <li>The <code class="language-plaintext highlighter-rouge">TYPE</code> field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)</li>
+      <li>You can look for other types of mutations like insertions (TYPE=ins)</li>
+      <li>The <code class="language-plaintext highlighter-rouge">AF</code> field within the INFO string describes the estimated <strong>A</strong>llele <strong>F</strong>requency</li>
+      <li>An alterntive way to calculate it, would be to divide the number of observations of the
 alte<span class="notranslate">rna</span>te allele (<code class="language-plaintext highlighter-rouge">AO</code>) by the total depth at that position (<code class="language-plaintext highlighter-rouge">DP</code>)</li>
-        </ul>
-      </li>
-    </ol>
+    </ul>
   </blockquote>
 
 </blockquote>
@@ -1059,39 +1076,31 @@ given the reference genome and the VCF of the strain we want to reconstruct the 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <ol>
-    <li>Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
+  <p>Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
 SNPs with frequencies, of 15%, 30%, or 56.78%. Which allele do you think bcftools consensus would
-insert in the genome?</li>
-  </ol>
+insert in the genome?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <ol>
-      <li>The behaviour of bcftools consensus in this case can be specified with the option <code class="language-plaintext highlighter-rouge">--haplotype</code>
-For example, we can set <code class="language-plaintext highlighter-rouge">haplotype=2</code> so the second allele will be used… wait… what?</li>
-    </ol>
+    <p>The behaviour of bcftools consensus in this case can be specified with the option <code class="language-plaintext highlighter-rouge">--haplotype</code>
+For example, we can set <code class="language-plaintext highlighter-rouge">haplotype=2</code> so the second allele will be used… wait… what?</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="question">
   <h3 id="question-second-allelle"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Second allelle!?</h3>
 
-  <ol>
-    <li>What do you think that things like “second allele” or “<em>The</em> alterntive allele” mean here?</li>
-  </ol>
+  <p>What do you think that things like “second allele” or “<em>The</em> alterntive allele” mean here?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <ol>
-      <li>Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
- human genomes. That means that these programs have in mind that the genomes
- are diploid and thus each posible position in the genome has two possible alleles. In
- bacterial genomics, in contrast, we are <strong>always sequencing a population</strong> of cells with
- potential genetic diversity (with the exception of <span class="notranslate">single-cell</span> sequencing).
- That does not mean that we cannot use this type of software, we can (and we do!) but it is
- good to know what they are ment for, and their possible limitations</li>
-    </ol>
+    <p>Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
+human genomes. That means that these programs have in mind that the genomes
+are diploid and thus each posible position in the genome has two possible alleles. In
+bacterial genomics, in contrast, we are <strong>always sequencing a population</strong> of cells with
+potential genetic diversity (with the exception of <span class="notranslate">single-cell</span> sequencing).
+That does not mean that we cannot use this type of software, we can (and we do!) but it is
+good to know what they are ment for, and their possible limitations</p>
   </blockquote>
 </blockquote>
 
@@ -1146,12 +1155,10 @@ all of our genomes! However, it is important that you understand the following q
 <blockquote class="question">
   <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <ol>
-    <li>Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
+  <p>Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
 many software packages to perform such task. How is then possible that we were able to build a MSA by just
 stacking genomes one on top of each other? Can you think about what makes our case special, so we can
-just use this “trick”?</li>
-  </ol>
+just use this “trick”?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -1168,6 +1175,7 @@ can build a MSA by just stacking genomes that <strong>are the same length »AND
 </blockquote>
 
 <h3 id="remove-invariant-positions-with-finds-snp-sites">Remove invariant positions with <strong>Finds SNP sites</strong></h3>
+
 <p>We have generated a MSA that is the basis for the transmission (clustering) and phylogenetic
 analysis. Although we could already use this MSA for such analysis, it is common practice to remove
 the invariant sites from the alignment. Think that our file now contains 20 genomes of 4.4 Mb each.
@@ -1225,8 +1233,7 @@ easy. We will use <strong>SNP distance matrix</strong>, that will generate a mat
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0"><strong>SNP distance matrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA multiple sequence alignment”</em>: <code class="language-plaintext highlighter-rouge">Single dataset</code>
-(output of <strong>Finds SNP sites</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA multiple sequence alignment”</em>: <code class="language-plaintext highlighter-rouge">Single dataset</code> (output of <strong>Finds SNP sites</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
 
       <blockquote class="comment">
@@ -1280,6 +1287,7 @@ same SNP distances, another possible (yet still oversimplified) scenario could b
 </blockquote>
 
 <h2 id="determine-transmission-clusters-using-rscript">Determine transmission clusters using Rscript</h2>
+
 <p>Currently there is not tool in <span class="notranslate">Galaxy</span> to perform the exact task that we need (although we plan to
 include it!).  So far, we can use <code class="language-plaintext highlighter-rouge">R</code> and the library <code class="language-plaintext highlighter-rouge">cluster</code> within <span class="notranslate">Galaxy</span> to perform such task.
 Again, don’t worry about this, programming in <code class="language-plaintext highlighter-rouge">R</code> is beyong the scope of this workshop, but if you
@@ -1309,7 +1317,7 @@ matrix. For example, imagine that in our story says <em>198: SNP distance matrix
 </span><span class="c1"># Get the SNP distance matrix object from <span class="notranslate">Galaxy</span></span><span class="w">
 </span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gx_get</span><span class="p">(</span><span class="m">198</span><span class="p">)</span><span class="w">
 </span><span class="c1"># Read the SNP distance matrix</span><span class="w">
-</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.table</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">  
+</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.table</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 </span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.dist</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># Perform clustering based on SNP distances and a SNP threshold of 10 (h=10)</span><span class="w">
@@ -1367,35 +1375,27 @@ their respective names and the cluster id (an arbitrary number) they belong to:<
 <blockquote class="question">
   <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <ol>
-    <li>How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?</li>
-  </ol>
+  <p>How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?</p>
 
   <blockquote class="solution">
     <h3 id="solution-answer"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Answer</h3>
-    <ol>
-      <li>We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
+    <p>We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
 is composed by two samples linked by recent transmission and transmission cluster 12 by three samples
 linked by recent transmission. For example samples ERR6362484 and ERR5987352 are linked by
-recent transmission.</li>
-    </ol>
+recent transmission.</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="question">
   <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <ol>
-    <li>Let’s assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
+  <p>Let’s assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
 belong to the same transmission cluster. Sample ERR6362484 was isolated on January 2021, while sample
- ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?</li>
-  </ol>
+ ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <ol>
-      <li><strong>NO</strong></li>
-    </ol>
+    <p><strong>NO</strong></p>
 
     <p>Isolation dates have been used traditionally to define <strong>index cases</strong> within transmission clusters
 under the assumption that the most likely scenario is the first isolated sample to be the
@@ -1429,13 +1429,14 @@ all of them.</p>
   <h3 id="hands_on-hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Import the files from <a href="">Zenodo</a> or from
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/6010176">Zenodo</a> or from
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">variant-analysis</code>
- -&gt; <code class="language-plaintext highlighter-rouge">Identifying tuberculosis transmission links: from SNPs to transmission clusters</code>):</li>
-  </ol>
+ -&gt; <code class="language-plaintext highlighter-rouge">Identifying tuberculosis transmission links: from SNPs to transmission clusters</code>):</p>
 
-  <p>Import the TB profiler report of each sample</p>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
+      <p>Import the TB profiler report of each sample</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
 https://zenodo.org/record/6010176/files/ERR181435.TBprof.txt
 https://zenodo.org/record/6010176/files/ERR2659153.TBprof.txt
 https://zenodo.org/record/6010176/files/ERR2704678.TBprof.txt
@@ -1455,10 +1456,14 @@ https://zenodo.org/record/6010176/files/ERR6362484.TBprof.txt
 https://zenodo.org/record/6010176/files/ERR6362653.TBprof.txt
 https://zenodo.org/record/6010176/files/SRR13046689.TBprof.txt
 https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
-</code></pre></div>  </div>
-  <p>Create a <strong>Dataset List (Collection)</strong> for all the report files.</p>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create a <strong>Dataset List (Collection)</strong> for all the report files.</p>
 
-  <p>Use a meaningful name, for example <strong>TBprofiler reports</strong>.</p>
+      <p>Use a meaningful name, for example <strong>TBprofiler reports</strong>.</p>
+    </li>
+  </ol>
 </blockquote>
 
 <h2 id="summarize-the-data">Summarize the data</h2>
@@ -1525,40 +1530,40 @@ for example in a sp<span class="notranslate">reads</span>heet. However this is n
 
 <p>We are here to learn bioinformatics, so let’s generate this table using Linux commands.</p>
 
-<p>The process will consist on three steps:</p>
-<ol>
-  <li>Select the line containing the drug resistance profile with <strong>grep</strong>:</li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Drug-resistance: MDR
-</code></pre></div></div>
+<p>The process will consist of three steps:</p>
 
 <ol>
-  <li>Prepend the name of the sample with <strong>Add input name as column</strong>:</li>
-</ol>
+  <li>
+    <p>Select the line containing the drug resistance profile with <strong>grep</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653.txt Drug-resistance: MDR
-</code></pre></div></div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Drug-resistance: MDR
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Prepend the name of the sample with <strong>Add input name as column</strong>:</p>
 
-<ol>
-  <li>Concatenate results from all samples in a single file with <strong>Concatenate datasets</strong>:</li>
-</ol>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653.txt Drug-resistance: MDR
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Concatenate results from all samples in a single file with <strong>Concatenate datasets</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653.txt Drug-resistance: MDR
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653.txt Drug-resistance: MDR
 ERR313115.txt Drug-resistance: Sensitive
 ERR5987300.txt Drug-resistance: Pre-XDR
 .... etc
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>As an optional step, we can reformat the table with <strong>sed</strong> to get rid of the <code class="language-plaintext highlighter-rouge">.txt</code> and <code class="language-plaintext highlighter-rouge">Drug-resistance:</code>
+so the table looks like:</p>
 
-<ol>
-  <li>As an optional step, we can reformat the table with <strong>sed</strong> to get rid of the <code class="language-plaintext highlighter-rouge">.txt</code> and <code class="language-plaintext highlighter-rouge">Drug-resistance:</code>
-so the table looks like:</li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653 MDR
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653 MDR
 ERR313115 Sensitive
 ERR5987300 Pre-XDR
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <h4 id="select-the-line-containing-the-drug-resistance-profile-with-grep">Select the line containing the drug resistance profile with <code class="language-plaintext highlighter-rouge">grep</code></h4>
 
@@ -1588,8 +1593,6 @@ as output the complete line, for example <code class="language-plaintext highlig
 We will <em>prepend</em> the column with the sample name so it appears as the first column.
  This is arbitrary and just a matter of personal taste:</p>
 
-<h4 id="add-input-name-as-column"><em>Add input name as column</em></h4>
-
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-prepend-the-sample-name-to-the-dr-profile"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Prepend the sample name to the DR profile</h3>
 
@@ -1601,18 +1604,6 @@ We will <em>prepend</em> the column with the sample name so it appears as the fi
         <li><em>“Prepend the colum”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-  </ol>
-
-</blockquote>
-
-<h4 id="concatenate-results">Concatenate results</h4>
-
-<h4 id="concatenate-datasets"><em>Concatenate datasets</em></h4>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span></h3>
-
-  <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">Dataset collection</code> (output of <strong>Add input name as column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1866,19 +1857,15 @@ the MDR strain.</li>
 <blockquote class="question">
   <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <ol>
-    <li>There is one strain with a DR profile “other”, because it is only resistant to pyrazinamide. This
+  <p>There is one strain with a DR profile “other”, because it is only resistant to pyrazinamide. This
 strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
-most likely evolved <em>de-novo</em> in this patient due to antibiotic treatment. But we are wrong. Do you know why?</li>
-  </ol>
+most likely evolved <em>de-novo</em> in this patient due to antibiotic treatment. But we are wrong. Do you know why?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <ol>
-      <li>The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
+    <p>The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
 within our population. However, if we have a look at the TB-profiler report, we observe that this
-is a <em>M. bovis</em> strain, which are known to be intrinsically resistant to PZA.</li>
-    </ol>
+is a <em>M. bovis</em> strain, which are known to be intrinsically resistant to PZA.</p>
   </blockquote>
 </blockquote>
 
@@ -2016,7 +2003,7 @@ author = "Galo A. Goig and Daniela Brites and Christoph Stritt",
 title = "Identifying tuberculosis transmission links: from SNPs to transmission clusters (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "15"
+day = "16"
 url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/MTB_transmission/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
