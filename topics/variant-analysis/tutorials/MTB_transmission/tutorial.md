@@ -581,36 +581,37 @@ for example in a spreadsheet. However this is not feasible when analyzing hundre
 
 We are here to learn bioinformatics, so let's generate this table using Linux commands.
 
-The process will consist on three steps:
+The process will consist of three steps:
+
 1. Select the line containing the drug resistance profile with **grep**:
 
-```
-Drug-resistance: MDR
-```
+   ```
+   Drug-resistance: MDR
+   ```
 
 2. Prepend the name of the sample with **Add input name as column**:
 
-```
-ERR6362653.txt Drug-resistance: MDR
-```
+   ```
+   ERR6362653.txt Drug-resistance: MDR
+   ```
 
 3. Concatenate results from all samples in a single file with **Concatenate datasets**:
 
-```
-ERR6362653.txt Drug-resistance: MDR
-ERR313115.txt Drug-resistance: Sensitive
-ERR5987300.txt Drug-resistance: Pre-XDR
-.... etc
-```
+   ```
+   ERR6362653.txt Drug-resistance: MDR
+   ERR313115.txt Drug-resistance: Sensitive
+   ERR5987300.txt Drug-resistance: Pre-XDR
+   .... etc
+   ```
 
 4. As an optional step, we can reformat the table with **sed** to get rid of the `.txt` and `Drug-resistance:`
-so the table looks like:
+   so the table looks like:
 
-```
-ERR6362653 MDR
-ERR313115 Sensitive
-ERR5987300 Pre-XDR
-```
+   ```
+   ERR6362653 MDR
+   ERR313115 Sensitive
+   ERR5987300 Pre-XDR
+   ```
 
 #### Select the line containing the drug resistance profile with `grep`
 
