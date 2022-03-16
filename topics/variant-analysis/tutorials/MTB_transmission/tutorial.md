@@ -2,14 +2,14 @@
 layout: tutorial_hands_on
 
 title: 'Identifying tuberculosis transmission links: from SNPs to transmission clusters'
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/6010176'
 objectives:
 - Create a SNP alignment
 - Calculate pairwise SNP distances between MTB samples
 - Identify transmission clusters based on SNP distances
 - Study the emergence and spread of drug resistance based on transmission analysis.
 time_estimation: 2H
-enable: true
+enable: false
 level : Intermediate
 key_points:
 - Clustering is a useful tool to detect transmission links between patients and oubreak investigation.
@@ -78,7 +78,8 @@ into Galaxy:
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
-> Import the VCF files containing the variants of each sample
+>    Import the VCF files containing the variants of each sample
+>
 >    ```
 > https://zenodo.org/record/6010176/files/ERR1203059.vcf
 > https://zenodo.org/record/6010176/files/ERR181435.vcf
