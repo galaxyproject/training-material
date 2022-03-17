@@ -204,9 +204,6 @@ Before starting a *de novo* genome assembly project, it is useful to collect met
 {: .comment}
 
 
-
-In this section we will use two basic tools to computationally estimate the genome features: Meryl and GenomeScope.
-
 ## Generation of k-mer spectra with **Meryl**
 
 Meryl will allow us to generate the *k*-mer profile by decomposing the sequencing data into *k*-length substrings, counting the occurrence of each *k*-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version comprises three main modules: one for generating *k*-mer databases, one for filtering and combining databases, and one for searching databases. *K*-mers are stored in lexicographical order in the database, similar to words in a dictionary ({% cite Rhie2020 %}).
@@ -224,11 +221,11 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >        - *"Count operations"*: `Count: count the occurrences of canonical k-mers`
 >        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
 >        - *"k-mer size selector"*: `Set a k-mer size`
->            - "*k-mer size*": `21`
+>            - "*k-mer size*": `32`
 >
 >    > ### {% icon comment %} Selection of *k*-mer size
 >    >
->    > We used 21 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
+>    > We used 32 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
 >    {: .comment}
 >
 > 2. Rename it `Collection meryldb`
@@ -257,7 +254,7 @@ The next step is to infer the genome properties from the *k*-mer histogram gener
 >
 > 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input histogram file"*: `Meryldb histogram`
->    - *"k-mer length used to calculate k-mer spectra"*: `21`
+>    - *"k-mer length used to calculate k-mer spectra"*: `32`
 >
 >   - In "*Output options*": mark `Summary of the analysis`
 >   - In "*Advanced options*":
@@ -279,9 +276,9 @@ Genomescope will generate six outputs:
 
 Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters (fig. 3).
 
-![Figure 3: Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 21-mer profile. The first peak located at coverage 21x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.637%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
+![Figure 3: Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 32-mer profile. The first peak located at coverage 32x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
 
-This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.69%.
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%.
     
 Before proceeding to the next section, we need to carry out some operations on the output generated by GenomeScope2. The goal is to extract some parameters which at a later stage will be used by purge_dups.
 
@@ -322,7 +319,7 @@ The first relevant parameter is the `estimated genome size`.
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > The estimated genome size is 11.748.793 bp.
+> > > The estimated genome size is 11.747.076 bp.
 > > >
 > > {: .solution}
 > >
@@ -421,6 +418,7 @@ One of the key advantages of hifiasm is that it allows us to resolve near-identi
 >    - *"Assembly mode"*: `Standard`
 >        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
 >    - *"Options for purging duplicates"*: `Specify`
+>       - *"Purge level*": `Light`
 >       - *"Coverage upper bound"*: `114` (maximum depth previously obtained)
 >    - *"Options for Hi-C partition"*: `Specify`
 >       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
@@ -484,7 +482,7 @@ QUAST default pipeline utilizes Minimap2. Functional elements prediction modules
 >        - {% icon param-collection %} *"FASTQ file"*: `HiFi collection (trim)`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11748793` (previously estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11747076` (previously estimated)
 >        - *"Type of organism"*: `Eukaryote: use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding (--eukaryote)`
 >    - *"Is genome large (>100Mpb)?"*: `No`
 >
@@ -502,7 +500,7 @@ Let's have a look at the HTML report generated by QUAST.
 
 ![Figure 5: QUAST initial plot](../../images/vgp_assembly/QUAST_initial.png "QUAST HTML report. Statistics of the primary and alternate assembly (a). Cumulative length plot (b).")
 
-According to the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose cumulative length is around 23.5Mbp. On the other hand, the second alternate assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 5b, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.
+According to the report, both assemblies are quite similar; the primary assembly includes 18 contigs, whose cumulative length is around 12.1Mbp. On the other hand, the second alternate assembly includes 17 contigs, whose total lenght is 11.3Mbp. As we can see in the figure 5b, the alternate assembly is slighly smaller than the primary assembly.
 
 > ### {% icon question %} Questions
 >
@@ -512,9 +510,9 @@ According to the report, both assemblies are quite similar; the primary assembly
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The longest contig in the primary assembly is 1.532.843 bp, and 1.532.843 bp in the alternate assembly.
-> > 2. The N50 of the primary assembly is 922.430 bp.
-> > 3. According to the report, 100% of reads mapped to both the primary assembly and the alternate assembly.
+> > 1. The longest contig in the primary assembly is 1.531.728 bp, and 1.532.843 bp in the alternate assembly.
+> > 2. The N50 of the primary assembly is 813.039 bp.
+> > 3. According to the report, 100% of reads mapped to both the primary assembly and 97.98% to the alternate assembly.
 > >
 > {: .solution}
 >
@@ -554,8 +552,8 @@ As we can see in the report, the results are simplified into four categories: *c
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. According to the report, our assembly contains the complete sequence of 2080 complete BUSCO genes (97.3%).
-> > 2. 19 BUSCO genes are missing.
+> > 1. According to the report, our assembly contains the complete sequence of 2046 complete BUSCO genes (95.7%).
+> > 2. 29 BUSCO genes are missing.
 > >
 > {: .solution}
 >
@@ -577,9 +575,9 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 
 By default, Merqury generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the primary assembly copy number (CN) spectrum plot, known as the *spectra-cn* plot (fig. 7).
 
-![Figure 7: Merqury plot](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot corresponding to the primary assembly. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="80%"}
+![Figure 7: Merqury plot](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="80%"}
 
-As suggested previously by the report generated by QUAST (fig. 5), the assemblies contain a large proportion of duplicated reads. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers, originating from haplotype-specific duplications. The fact that the primary haplotype shows a diploid genetic endowment can be explained as a result of the high divergence between the artificially generated haplotypes. In addition, from that figure, we can state that the sequencing coverage is around 50x.
+The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The read area represents one-copy k-mers in the genome, while blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.
 
 # Post-assembly processing
 
@@ -803,7 +801,7 @@ Once we have run purge_dups, we can evaluate the assembly again, and compare the
 >        - {% icon param-collection %} *"FASTQ file"*: `HiFi reads collapsed`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11748793` (previously estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11747076` (previously estimated)
 >        - *"Type of organism"*: `Eukaryote: use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding (--eukaryote)`
 >    - *"Is genome large (>100Mpb)?"*: `No`
 >
@@ -814,7 +812,6 @@ Once we have run purge_dups, we can evaluate the assembly again, and compare the
 
 In the figure 9 we can see the cumulative length plot corresponding to the primary assembly after being processed.
 
-![Figure 9: QUAST plot post-processing](../../images/vgp_assembly/QUAST_cummulative.png "QUAST cumulative plot after runnig purge_dups.")
 
 As can be appreciated, both the number of contigs and the total length have been reduced significantly after running purge_dups. It indicates that purge_dups has been able to improve genome assemblies by removing overlaps and haplotigs caused by sequence divergence in heterozygous regions. 
     
@@ -922,22 +919,27 @@ Now, let's evaluate the effect of Bionano in our assembly.
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `Primary assembly bionano`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11748793` (previously estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11747076` (previously estimated)
 >        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - In *"Genes"*:
 >        - *"Tool for gene prediction"*: `Don't predict genes`
 >
 {: .hands_on}
 
+![Figure 9: QUAST plot post-processing](../../images/vgp_assembly/QUAST_cummulative.png "QUAST cumulative plot after runnig Bionano.")
+
+
 > ### {% icon question %} Questions
 >
 > 1. How many scaffolds are in the primary assembly after the hybrid scaffolding?
 > 2. What is the size of the largest scaffold?
+> 3. What is the values of the NG50 statistic? Has it improved compared to the previous evaluation?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. The number of contigs is 17.
-> > 2. The largest contig is 1.532.843 bp long.
+> > 2. The largest contig is 1.531.728 bp long.
+> > 3. The NG50 value is 922.430. Yes, since the previous value was 813.039
 > >
 > {: .solution}
 >
@@ -970,7 +972,7 @@ Despite Hi-C generating paired-end reads, we need to map each read separately. T
 
 > ### {% icon hands_on %} Hands-on: Mapping Hi-C reads
 >
-> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 1. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Primary assembly bionano`
 >    - *"Single or Paired-end reads"*: `Single`
@@ -981,7 +983,7 @@ Despite Hi-C generating paired-end reads, we need to map each read separately. T
 >
 > 2. Rename the output as `BAM forward`
 >
-> 3. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 3. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: Primary assembly bionano`
 >    - *"Single or Paired-end reads"*: `Single`
@@ -1108,7 +1110,7 @@ In order to analyze how the information provided by the HiC read has contributed
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `SALSA2 scaffold FASTA`
 >    - *"Type of assembly"*: `Genome`
 >        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11748793` (previously estimated)
+>            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11747076` (previously estimated)
 >        - *"Type of organism"*: `Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding`
 >    - *"Is genome large (> 100 Mbp)?"*: `No`
 >
@@ -1145,7 +1147,7 @@ Finally, we should repeat the procedure described previously for generating the 
 
 > ### {% icon hands_on %} Hands-on: Mapping reads against the scaffold
 >
-> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 1. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >    - *"Single or Paired-end reads"*: `Single`
@@ -1156,7 +1158,7 @@ Finally, we should repeat the procedure described previously for generating the 
 >
 > 2. Rename the output as `BAM forward SALSA2`
 >
-> 3. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+> 3. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `SALSA2 scaffold FASTA`
 >    - *"Single or Paired-end reads"*: `Single`
