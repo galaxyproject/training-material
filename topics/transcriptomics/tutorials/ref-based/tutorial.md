@@ -724,11 +724,12 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >    - *"Create gene-length file"*: `Yes`
 >    - In *"Options for paired-end reads"*:
 >       - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
+>    - In *"Read filtering options"*:
+>       - *"Minimum mapping quality per read"*: `10`
 >    - In *"Advanced options"*:
 >       - *"GFF feature type filter"*: `exon`
 >       - *"GFF gene identifier"*: `gene_id`
 >       - *"Allow reads to map to multiple features"*: `Disabled; reads that align to multiple features or overlapping features are excluded`
->       - *"Minimum mapping quality per read"*: `10`
 >
 > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the report:
 >     - In *"Results"*:
