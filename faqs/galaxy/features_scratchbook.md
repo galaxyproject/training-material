@@ -3,6 +3,7 @@ title: Using the Scratchbook to view multiple datasets
 area: features
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena]
 ---
 
 If you would like to view two or more datasets at once, you can use the **Scratchbook** feature in Galaxy:

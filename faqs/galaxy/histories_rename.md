@@ -3,6 +3,7 @@ title: Renaming a history
 area: histories
 box_type: tip
 layout: faq
+contributors: [bebatut,wm75,shiltemann,hexylena]
 ---
 
 

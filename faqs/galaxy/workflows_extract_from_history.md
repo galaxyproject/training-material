@@ -4,6 +4,7 @@ description: Galaxy can automatically create a workflow based on the analysis yo
 area: workflows
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena,nsoranzo]
 ---
 
 

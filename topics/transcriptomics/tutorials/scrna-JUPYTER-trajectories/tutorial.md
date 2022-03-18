@@ -90,6 +90,8 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 
 One problem with our current dataset is that it's not just T-cells: we found in the previous tutorial that it also contains macrophages and red blood cells. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 > ### {% icon hands_on %} Hands-on: Removing macrophages and RBCs
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:

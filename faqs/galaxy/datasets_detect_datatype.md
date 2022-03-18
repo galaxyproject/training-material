@@ -3,6 +3,7 @@ title: Detecting the datatype (file format)
 area: datasets
 box_type: tip
 layout: faq
+contributors: [bebatut,nsoranzo,hexylena,annefou,shiltemann]
 ---
 
 * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
