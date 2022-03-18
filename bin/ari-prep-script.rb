@@ -80,7 +80,7 @@ editly['clips'] = script['blocks'].map.with_index{ |phrases, idx|
     voice = script['voice']
 
     mp3, json, duration = synthesize(subtitle, engine, 'voice': voice['id'], 'lang': voice['lang'], neural: voice['neural'])
-    puts "\tSynthesizing: #{subtitle}"
+    puts "\tSynthesizing: #{mp3} #{subtitle}"
     FileUtils.cp(mp3, File.join(dir, digest + '.mp3'))
     FileUtils.cp(json, File.join(dir, digest + '.json'))
 

@@ -29,7 +29,14 @@ module Jekyll
         file = render_variable(context) || @file
         validate_file_name(file)
 
-        @site.inclusions[file] ||= locate_include_file(file)
+        # This doesn't feel right, we should've been able to figure it out in
+        # render_variable(context) but it's not clear why that doesn't work.
+        begin
+          @site.inclusions[file] ||= locate_include_file(file)
+        rescue
+          @site.inclusions[file] ||= locate_include_file(context[file])
+        end
+
         inclusion = @site.inclusions[file]
 
         add_include_to_dependency(inclusion, context) if @site.config["incremental"]
@@ -75,6 +82,11 @@ module Jekyll
                 box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
                 box_end   = "\n{: .comment}"
             end
+            if box_type == 'question'
+                icon_text = icons['question']
+                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
+                box_end   = "\n{: .question}"
+            end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
           #if y =~ /contribute/
@@ -94,7 +106,10 @@ module Jekyll
             #puts "=== RENDERED ===\n#{markdownify(box_start+z+box_end)}\n\n"
           #end
 
-          '<!--SNIPPET-->' + markdownify(box_start+z+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
+          '<!--SNIPPET-->' + markdownify(box_start+z+box_end)
+            .gsub(/<(pre)[^>]*>(.*?)<\/\1>/m){|m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
+            .gsub(/\R+/, '') # Strip out spaces or the boxes break
+            .gsub('<h3','<h3 data-toc-skip')
         end
       end
 

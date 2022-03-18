@@ -3,6 +3,7 @@ title: Annotate a workflow
 area: workflows
 box_type: tip
 layout: faq
+contributors: [bebatut]
 ---
 
 - Open the workflow editor for the workflow

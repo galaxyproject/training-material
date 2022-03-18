@@ -23,7 +23,7 @@ module GTNNotebooks
   }
   COLORS_EXTRA = {
     'agenda' => 'display: none',
-    'solution' => 'color: white',
+    'solution' => 'color: transparent !important',
   }
 
   ICONS = {
@@ -48,28 +48,29 @@ module GTNNotebooks
     inside_block = false
     val = []
     data = content.split("\n")
-    data.each{|line|
+    data.each.with_index{|line, i|
       if line == "```#{language}"
         if inside_block
-          raise "[GTN/Notebook] Error! we're already in a block"
+          puts data[i-2..i+2]
+          raise "[GTN/Notebook] L#{i} Error! we're already in a block:"
         end
         # End the previous block
-        out.append([val, inside_block])
+        out.push([val, inside_block])
         val = []
 
         inside_block = true
       elsif inside_block && line == '```'
         # End of code block
-        out.append([val, inside_block])
+        out.push([val, inside_block])
         val = []
         inside_block = false
       else
-        val.append(line)
+        val.push(line)
       end
     }
     # final flush
     if ! val.nil?
-      out.append([val, inside_block])
+      out.push([val, inside_block])
     end
 
     notebook = {
@@ -81,12 +82,16 @@ module GTNNotebooks
     notebook['cells'] = out.map.with_index{|data, index|
       res = {
         'id' => "cell-#{index}",
-        'source' => data[0].map{|x| x.strip + "\n"}
+        'source' => data[0].map{|x| x.rstrip + "\n"}
       }
       # Strip the trailing newline in the last cell.
       if res['source'].length > 0
-        res['source'][-1] = res['source'][-1].strip
+        res['source'][-1] = res['source'][-1].rstrip
       end
+
+      # Remove any remaining language tagged code blocks, e.g. in
+      # tip/solution/etc boxes. These do not render well.
+      res['source'] = res['source'].map{|x| x.gsub(/```#{language}/, '```')}
 
       if data[1]
         res = res.update({
@@ -123,12 +128,12 @@ module GTNNotebooks
         val = [line]
       else
         if line[0] == first_char
-          val.append(line)
+          val.push(line)
         elsif line[0..1] == '{:' && first_char == '>'
-          val.append(line)
+          val.push(line)
         else
           # flush
-          out.append(val)
+          out.push(val)
           if line.size > 0
             first_char = line[0]
           else
@@ -139,7 +144,7 @@ module GTNNotebooks
       end
     }
     # final flush
-    out.append(val)
+    out.push(val)
 
     out.select!{|v|
       !(v[0][0] == '>' && v[-1][0..1] == '{:' && v[-1].match(/.agenda/))
@@ -377,8 +382,6 @@ module GTNNotebooks
     # can't setup a style block, so we really need to render the markdown
     # to html.
     notebook = self.renderMarkdownCells(site, notebook, data, url, dir)
-    #require 'pp'
-    #pp notebook
 
     # Here we add a close to the notebook
     notebook['cells'] = notebook['cells'] + [{
@@ -482,8 +485,9 @@ module GTNNotebooks
         end
 
         # Strip out the highlighting as it is bad on some platforms.
-        cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: white">')
+        cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: transparent">')
         cell['source'].gsub!(/<div class="highlight">/, '<div>')
+        cell['source'].gsub!(/<code>/, '<code style="color: inherit">')
 
         # add a 'hint' to the solution boxes which have blanked out text.
         cell['source'].gsub!(/(<h3 id="-icon-solution--solution">)/, '<div style="color: #555; font-size: 95%;">Hint: Select the text with your mouse to see the answer</div>\1')
