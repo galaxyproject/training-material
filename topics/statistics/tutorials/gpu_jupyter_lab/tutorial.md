@@ -71,7 +71,7 @@ Segmenting lung CT scans task to locate infected regions has been actively propo
 
 
 ## CT scans and masks
-Figure 4 shows CT scans of infected lungs (top row) and borders around the infected regions have been drawn with red color (middle row). In the last row respective masks, from the CT scans, have been taken out denoting the infected regions. These masks are the "segmented" regions from the corresponding CT scans. While creating the dataset for training the deep learning model (Unet), the CT scans are the data points and its "known" respective masks of infected regions become their labels [https://www.sciencedirect.com/science/article/pii/S2666990021000069]. 
+Figure 4 shows CT scans of infected lungs (top row) and borders around the infected regions have been drawn with red color (middle row). In the last row respective masks, from the CT scans, have been taken out denoting the infected regions. These masks are the "segmented" regions from the corresponding CT scans. While creating the dataset for training the deep learning model (Unet), the CT scans are the data points and its "known" respective masks of infected regions become their [labels](https://www.sciencedirect.com/science/article/pii/S2666990021000069). 
 
 ![Masks](../../images/covid_ct_scan_masks.png "Picture shows CT scans and their masks of infected regions that are drawn with red color in middle row plots")
 
@@ -107,7 +107,7 @@ To use Git version control for cloning any codebase from GitHub, the following s
 > 2. Inside the created folder, clone a code repository by clicking on "Git" icon as shown in Figure 6
 > 3. In the shown popup, provide the repository path as "https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation" and then, click on "clone"
 > 4. The repository "anuprulez/gpu_jupyterlab_ct_image_segmentation" gets immediately cloned
-> 5. Move inside the created folder `gpu_jupyterlab_ct_image_segmentation`. A few notebooks can be found inside that are numbered.
+> 5. Move inside the created folder `gpu_jupyterlab_ct_image_segmentation`. A few notebooks can be found inside that are numbered
 >    ![Clone repository](../../images/git_clone.png "Clone a code repository using Git").
 >
 {: .hands_on}
@@ -118,7 +118,6 @@ Now, we have all the notebooks available for performing image segmentation. The 
 ### Run notebooks in Jupyterlab
 
 > ### {% icon hands_on %} Hands-on: Run notebooks in Jupyterlab
->
 > 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook. It will also create all the necessary folders. It downloads two datasets, one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. These sub-datasets are stored in different variables after reading the original "h5" file once. For training, we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used for prediction. We use "h5" format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on, therefore, to converge all these different forms of datasets to one format, we use "h5" to store matrices. In any AI analysis, different forms of datasets can be stored as `h5` files. For image segmentation task, we also saved all the input datasets/matrices to the deep learning model as sub-datasets in one "h5" file so that it can be easily created, stored, downloaded and used. This step may take a few minutes as it downloads around 450 MB of data from Zenodo. Once datasets are downloaded to the notebook, we can move to the next step of creating a deep learning model and start training it.
 >  
 > 2. Create and train a deep learning Unet model using **"2_create_model_and_train.ipynb"** notebook. This will read the input "h5" datasets containing all images and train the model after creating deep learning model architecture. This notebook first creates a deep learning architecture based on Unet including custom loss functions such as total variation and binary cross-entropy losses. After creating the deep learning architecture, all training datasets such as training data, training labels, validation data, validation labels are loaded from the combined "h5" file. In the next step, all the datasets and deep learning architecture are compiled together and training starts for 10 epochs (10 iterations over the entire training dataset). The training is fast as it runs of GPU and finishes in a few minutes and creates a trained model. In the last step, the trained model containing several files are converted to one "onnx" file. Once a trained model is ready, we can move to the next step to make predictions on unseen CT scan masks.
@@ -137,13 +136,10 @@ Now, we have all the notebooks available for performing image segmentation. The 
 The training task completed in the notebook above can also be sent to a Galaxy cluster by executing a Galaxy tool in the notebook itself. Using [Bioblend](https://bioblend.readthedocs.io/) APIs, datasets in the form of `h5` files and notebook are uploaded to a Galaxy history and then a Galaxy tool `run_jupyter_job` executes the notebook using the uploaded dataset on a Galaxy cluster and creates a trained model in the Galaxy history. Let's look at how to execute a notebook remotely on a Galaxy cluster.
 
 > ### {% icon hands_on %} Hands-on: Run Jupyterlab notebooks remotely on a Galaxy cluster
->
 > 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook in the same way as before. Ignore this step if this notebook has already been executed.
->  
 > 2. Execute **"5_run_remote_training.ipynb"** notebook to dynamically execute code inside **"4_create_model_and_train_remote.ipynb"** notebook on a remote cluster using a different Galaxy tool (`run_jupyter_job`). The notebook **"5_run_remote_training.ipynb"** provides the path of a notebook to be executed remotely along with the datasets to the Galaxy tool by calling a custom function `run_script_job` which is part of the Jupyterlab notebook. Executing **"5_run_remote_training.ipynb"** uploads datasets and dynamic Python script, extracted from the **"4_create_model_and_train_remote.ipynb"** notebook, to a newly created Galaxy history. When the task of uploading dataset and dynamic code is finished, the Galaxy tool (`run_jupyter_job`) executes the dynamically uploaded script with the uploaded dataset on a remote Galaxy cluster which is similar to running any other Galaxy tool. When the Galaxy tool (`run_jupyter_job`) finishes its execution, the resulting models and other datasets appear in the created Galaxy history. While the job is running on the Galaxy cluster, the Jupyter notebook can be closed as the model training task gets decoupled from the notebook and is entirely transferred to the Galaxy cluster. Specific history running this job can be accessed in Galaxy. The name of the Galaxy history created by (`run_jupyter_job`) method can be changed by passing a new history name (parameter `new_history_name`). 
 
 **Note**: the training may take longer depending on how busy Galaxy's queueing is as it sends the training task to be done on a Galaxy cluster. Therefore, this feature should be used when the training task is expected to run for at least a couple of hours. The training time is higher because a large Docker container is downloaded on the assigned cluster and only then, the training task can proceed.
-> 
 >
 {: .hands_on}
 
