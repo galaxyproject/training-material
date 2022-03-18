@@ -140,7 +140,7 @@ The forward and reverse reads of the same fragment are at the same line position
 
 > ### {% icon hands_on %} Hands-on: Recover consensus sequences from overlapping forward and reverse reads.
 >
-> 1. {% tool [illuminapairedend](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_illuminapairedend/1.2.13) %} with the following parameters:
+> 1. {% tool [illuminapairedend](toolshed.g2.bx.psu.edu/repos/iuc/obi_illumina_pairend/obi_illumina_pairend/1.2.13) %} with the following parameters:
 >    - *"Read from file"*: `wolf_F` for the 3p file
 >    - *"Read from file"*: `wolf_R` for the 5p file
 >    - *"minimum score for keeping aligment"*: `40.0`
