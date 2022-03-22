@@ -45,7 +45,6 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
 >https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
 >https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_ancestral_reference.gbk
->https://zenodo.org/record/3960260/files/MTB_ancestor_reference.fasta
 >https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3
 >```
 >
@@ -176,7 +175,7 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. 91.18% of the reads here have been positively identified as *Mycobacterium*. The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.
+>    > > 1. Over 85% of the reads here have been positively identified as *Mycobacterium* (the precise % will different depending on which version of the Kraken database you are using). The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -226,7 +225,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > >
 >    > > 2. According to SnpEff, it's a Synonymous change in Rv0002.
 >    > >
->    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or hw many lines (excluding the header) there are in This is quite typical for *M. tuberculosis*
+>    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or how many lines (excluding the header) there are in the VCF file. This is quite typical for *M. tuberculosis*
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
@@ -296,7 +295,7 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >    > >
 >    > > 1. `4`
 >    > >
->    > > 2. Yes, resistance to isoniazid, rifampicin, ethambutol, pyrazinamide and streptomycin is predicted from mutations in the katG, rpoB, embB, pncA and rpsL genes respectively.
+>    > > 2. Yes, resistance to isoniazid, rifampicin, ethambutol, pyrazinamide and streptomycin as well as to the flouroquinolines (amikacin, capreomycin and kanamycin) is predicted from mutations in the katG, rpoB, embB, pncA, rpsL and rrs (ribosomal RNA) genes respectively.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -308,13 +307,18 @@ We could go through all of the variants in the VCF files and read them out of a 
 
 > ### {% icon hands_on %} Hands-on: Run JBrowse
 >
-> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} {% icon tool %} with the following parameters
+> 1. Use {% tool [seqret](tool_id=toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: seqret84/5.0.0) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
+>    - *"Sequences"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
+>    - *"Use feature information"*: `No`
+>    - *"Read one sequence and stop"*: `Yes`
+>    - *"Output sequence file format"*: `FASTA (m)`
+>
+> 2. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} {% icon tool %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
->       - *"Select the reference genome"*: `https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta`
+>       - *"Select the reference genome"*: `seqret output from the previous step`
 >
 >       This sequence will be the reference against which annotations are displayed
 >
->    - *"Produce Standalone Instance"*: `Yes`
 >    - *"Genetic Code"*: `11: The Bacterial, Archaeal and Plant Plastid Code`
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - *"Track Group"*
@@ -378,7 +382,7 @@ far.
 >    > >
 >    > > 1. The quality of the sequence drops sharply towards the end of the sequences. Even more concerning, the sequence content changes across the length of the sample, which is not what we would expect at all. Finally, the sample seems to contain sequencing adapters, an artefact of the sequencing process that should be trimmed out before any sequence analysis.
 >    > >
->    > > 2. Only 55% of the sequence reads are associated with the genus *Mycobacterium*. Perhaps the quality problems in the sequence reads contribute to this poor classification? They certainly will make variant calling less reliable.
+>    > > 2. Less than 60% of the sequence reads are associated with the genus *Mycobacterium*. Perhaps the quality problems in the sequence reads contribute to this poor classification? They certainly will make variant calling less reliable. You might get too many (false positive) or too few (false negative) variants reported compared to what is actually present in the sample.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -428,7 +432,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Only 107351 out of 7297618, that is 1.5%, of the reads mapped to the reference genome.
+>    > > 1. Less than 110000 out of 7297618, that is 1.5%, of the reads mapped to the reference genome.
 >    > >
 >    > > 2. The image from the **BAM Coverage Plotter** tool shows just a few vertical bars, suggestion that almost no reads mapped to the reference genome.
 >    > >
