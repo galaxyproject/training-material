@@ -89,7 +89,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >
 {: .hands_on}
 
-While one could examine the quality control report for each set of reads (forward and reverse) independently but it is quite useful to example them side by side using the **MultiQC** tool.
+While one could examine the quality control report for each set of reads (forward and reverse) independently it can be quite useful to inspect them side by side using the **MultiQC** tool.
 
 > ### {% icon hands_on %} Hands-on: Combining QC results
 >
@@ -129,8 +129,9 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 >       - *"Single-end or paired-end reads?"*: `Paired End (two separate input files)`
 >       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `004-2_1.fastq.gz`
 >       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `004-2_2.fastq.gz`
->       - *Select Trimmomatic operation to perform*
->           - Keep the default value of **Sliding window trimming** and adjust the average quality required to 30
+>       - *"Select Trimmomatic operation to perform"*
+>           - Keep the default value of `Sliding window trimming` but set
+            - *"Average quality required"*: `30`
 >       - *"+Insert Trimmomatic Operation"*
 >           - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
 >           - *"Minimum length of reads to be kept"*: `20`
@@ -143,7 +144,7 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction. While un-paired reads might sometimes be useful, paired reads are more useful because they both the sequence and the gap between reads ("insert size") can be used for further analysis. In a typical analysis, only paired reads are used.
+>    > > 1. There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction. While un-paired reads might sometimes be useful, paired reads are more useful because both their sequence and the gap between them (the "insert size") can be used for further analysis. In a typical analysis, only the paired reads are used.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -153,7 +154,7 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 
 # Look for contamination with Kraken2 (optional)
 
-We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our snp analysis. **Kraken 2** is an effective way of looking and which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately **kraken2** uses a lot of RAM (typically 50GB when used with the *Standard* database), so you might want to skip this step if your environment doesn't have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use **kraken2** as part of its analysis, see the optional section on analysing *SRR12416842* at the end of this tutorial.
+We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our SNP analysis. **Kraken2** is an effective way of looking at which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately the tool uses a lot of RAM (typically 50GB when used with the *Standard* database), so you might want to skip this step if your environment doesn't have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use **Kraken2** as part of its analysis, see the optional section on analysing *SRR12416842* at the end of this tutorial.
 
 > ### {% icon hands_on %} Hands-on: Run Kraken2
 >
@@ -164,7 +165,7 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 >
 >   - *"Print scientific names instead of just taxids"*: `Yes`
 >   - *"Enable quick operation"*: `Yes`
->   - Under *"Create reports"*:
+>   - Under *"Create report"*:
 >       - *"Print a report with aggregrate counts/clade to file"*: `Yes`
 >   - *"Select a Kraken2 database"*: `Standard`
 >
@@ -184,9 +185,9 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 
 # Find variants with Snippy
 
-We will now run the Snippy tool on our reads, comparing it to the reference.
+We will now run the Snippy tool on our reads, comparing them to the reference.
 
-Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).
+Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (SNPs) and insertions/deletions (indels).
 
 If we give Snippy an annotated reference in Genbank format, it will run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
 
@@ -226,7 +227,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > >
 >    > > 2. According to SnpEff, it's a Synonymous change in Rv0002.
 >    > >
->    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or hw many lines (excluding the header) there are in This is quite typical for *M. tuberculosis*
+>    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or how many lines (excluding the header) there are in. The number is quite typical for *M. tuberculosis* samples.
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
