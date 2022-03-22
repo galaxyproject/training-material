@@ -174,7 +174,7 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 2. Check the active status of tusd by `systemctl status tusd-main`.
 >
-> 3. Upload a file! (Or paste text, even a small file will go via TUS)
+> 3. Upload a small file! (Pasted text will not pass via TUS)
 >
 > 4. Check the directory `/data/uploads/` has been created and it's contents
 >
