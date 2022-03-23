@@ -309,7 +309,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 
 > ### {% icon hands_on %} Hands-on: Run JBrowse
 >
-> 1. Use {% tool [seqret](toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:+seqret84/5.0.0) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
+> 1. Use {% tool [seqret](toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:%20seqret84/5.0.0) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
 >    - *"Sequences"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >    - *"Use feature information"*: `No`
 >    - *"Read one sequence and stop"*: `Yes`
