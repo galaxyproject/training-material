@@ -176,7 +176,7 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Over 85% of the reads here have been positively identified as *Mycobacterium* (the precise % will different depending on which version of the Kraken database you are using). The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.
+>    > > 1. Over 85% of the reads here have been positively identified as *Mycobacterium* (the precise % will differ depending on which version of the Kraken database you are using). The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -235,7 +235,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 **RECAP**: So far we have taken our sample reads, cleaned them up a bit, checked for taxonomic assocation, compared the reads with our reference sequence and then called variants (SNPs and indels) between our sample and the reference genome. We have tried to mitigate a few errors along the way:
 
 1. Sequencing errors: these were addressed by the quality trimming step
-2. Sample contamination: we used `kraken2` to assess the extent of this problem in our sample
+2. Sample contamination: we used **Kraken2** to assess the extent of this problem in our sample
 3. Appropriate choice of a reference genome: we used a genome that is inferred to be ancestral to all *M. tuberculosis* for our analysis and the diversity within Mtb is limited enough for us to rely on a single reference genome for the entire species.
 4. Quality filtering in the mapping and variant calling stage: Internally `snippy` uses tools like `bwa-mem` and `freebayes` that judge the quality of their predictions. `snippy` then uses this information to perform some filtering on variant calling predictions.
 
@@ -309,7 +309,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 
 > ### {% icon hands_on %} Hands-on: Run JBrowse
 >
-> 1. Use {% tool [seqret](tool_id=toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: seqret84/5.0.0) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
+> 1. Use {% tool [seqret](toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:+seqret84/5.0.0) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
 >    - *"Sequences"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >    - *"Use feature information"*: `No`
 >    - *"Read one sequence and stop"*: `Yes`
@@ -378,7 +378,7 @@ far.
 >    >
 >    > 1. What problems were discovered with sequence quality?
 >    >
->    > 2. What did the kraken2 report show? How does this impact your assessment of variants discovered from this sample?
+>    > 2. What did the **Kraken2** report show? How does this impact your assessment of variants discovered from this sample?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -390,7 +390,7 @@ far.
 >    {: .question}
 {: .hands_on}
 
-As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using **Trimmomatic**, **fastp** or **cutadapt**) and perhaps use the Kraken2 output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.
+As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using **Trimmomatic**, **fastp** or **cutadapt**) and perhaps use the **Kraken2** output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.
 
 The next example is *SRR12416842* from an Indonesia [study](https://www.microbiologyresearch.org/content/journal/jmm/10.1099/jmm.0.001221) of multi-drug resistant (MDR) tuberculosis.
 
@@ -444,7 +444,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > >
 >    > > ![BAM Coverage Plot of 004-02 showing reads mapped evenly](../../images/mtb_good_mapping.png)
 >    > >
->    > > If you wish to investigate further, analyse the SRR12416842 sample with **kraken2**.
+>    > > If you wish to investigate further, analyse the SRR12416842 sample with **Kraken2**.
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
