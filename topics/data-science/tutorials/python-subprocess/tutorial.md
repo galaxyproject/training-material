@@ -15,11 +15,11 @@ objectives:
 
 time_estimation:  45M
 key_points:
-- **DO NOT USE `os.system`**.
-- **DO NOT USE shell=True**
+- "**DO NOT USE `os.system`**"
+- "**DO NOT USE shell=True**"
 - 👍Use `subprocess.check_call()` if you don't care about the output, just that it succeeds.
 - 👍Use `subprocess.check_output()` if you want the output
-- `.decode('utf-8')` let's you read the output of `check_output()`
+- Use `.decode('utf-8')` to read the output of `check_output()`
 enable: false
 subtopic: python-modular
 contributors:

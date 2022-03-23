@@ -64,6 +64,7 @@ Now we should have a pretty full folder!
 We can use the glob module to find files:
 
 ```python
+import glob
 print(glob.glob('*.csv'))
 print(glob.glob('*.txt'))
 ```

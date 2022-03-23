@@ -38,7 +38,7 @@ module Jekyll
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map{|x|
           q = x.dup
-          q['contributors'] = q['contributors'].dup.map{|c| mapContributor(site, c)}
+          q['contributors'] = q.fetch('contributors', []).dup.map{|c| mapContributor(site, c)}
 
           q['urls'] = Hash.new
 
