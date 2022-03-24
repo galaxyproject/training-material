@@ -1689,7 +1689,7 @@ For example, the pathway `dme00010` represents the glycolysis process (conversio
 >
 {: .hands_on}
 
-As for the GO terms, 2 files are generated:
+**goseq** generates with these parameters 2 outputs:
 
 1. A large table with the KEGG terms and some statistics
 
