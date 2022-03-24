@@ -84,6 +84,13 @@ subprocess.check_call(['wget', url, '-O', genome])
 subprocess.check_call(['gzip', '-d', genome])
 ```
 
+> ### {% icon tip %} Tip: What do these commands look like on the CLI?
+> ```
+> wget https://ftp.ncbi.nlm.nih.gov/.... -O "Escherichia virus T4.fna.gz"
+> gzip -d "Escherichia virus T4.fna.gz"
+> ```
+{: .tip}
+
 The above segment
 - sets a url variable
 - sets an output filename, `Escherichia virus T4.fna.gz`
@@ -137,6 +144,12 @@ gff3 = subprocess.check_output([
 gff3 = gff3.decode('utf-8')
 gff3 = gff3.split('\n')
 ```
+
+> ### {% icon tip %} Tip: What does this commands look like on the CLI?
+> ```
+> augustus --species=E_coli_K12 'Escherichia virus T4.fna' --gff3=on
+> ```
+{: .tip}
 
 If you're using `subprocess.check_output()` python doesn't return plain text `str` to you, instead it returns a `bytes` object. We can decode that into text with `.decode('utf-8')`, a phrase you should memorise as going next to `check_output()`, for 99% of use cases.
 
@@ -207,6 +220,12 @@ with open('E. Coli CDSs.fna', 'r') as handle:
     subprocess.check_call(['build-icm', 'test.icm'], stdin=handle)
 ```
 
+> ### {% icon tip %} Tip: What does this commands look like on the CLI?
+> ```
+> build-icm test.icm < 'E. Coli CDSs.fna'
+> ```
+{: .tip}
+
 Here we build a model, based on the sequences of *E. Coli* K-12, that Glimmer3 can use.
 
 ```python
@@ -219,6 +238,12 @@ output = subprocess.check_output([
 
 print(output)
 ```
+
+> ### {% icon tip %} Tip: What does this commands look like on the CLI?
+> ```
+> glimmer3 'Escherichia virus T4.fna' test.icm t4-genes
+> ```
+{: .tip}
 
 *What happened here?* The output of the program was written to `stderr`, not `stdout`, so Python may print that out to your screen, but `output` will be empty. To solve this common problem we can re-run the program and collect both `stdout` and `stderr`.
 
