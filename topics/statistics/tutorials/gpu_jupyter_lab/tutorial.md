@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: An accessible artificial intelligence infrastructure using a Docker-based Jupyterlab in Galaxy
+title: A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy
 zenodo_link: https://zenodo.org/record/6091361#.Ygu4gIzMI5k
 questions:
 - How to use Jupyterlab and it several features?
