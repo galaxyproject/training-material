@@ -292,12 +292,14 @@ The first relevant parameter is the `estimated genome size`.
 > 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `summary` (output of **GenomeScope** {% icon tool %})
 >    - *"Find pattern"*: `bp`
+>    - *"Replace with*": leave this field empty (as it is)
 >    - *"Replace all occurrences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
 > 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output file of **Replace** {% icon tool %}
 >    - *"Find pattern"*: `,`
+>    - *"Replace with*": leave this field empty (as it is)
 >    - *"Replace all occurrences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
