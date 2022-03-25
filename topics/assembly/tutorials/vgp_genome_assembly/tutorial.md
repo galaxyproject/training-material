@@ -426,8 +426,9 @@ One of the key advantages of hifiasm is that it allows us to resolve near-identi
 >       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
 >       - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
-> 2. Rename the `Hi-C hap1 balanced contig graph` as `Primary contigs graph` and add a `#primary` tag
-> 3. Rename the `Hi-C hap2 balanced contig graph` as `Alternate contigs graph` and  add a `#alternate` tag
+> 2. After the tool has finiished running rename its outputs as follows:
+>   - Rename the `Hi-C hap1 balanced contig graph` as `Primary contigs graph` and add a `#primary` tag
+>   - Rename the `Hi-C hap2 balanced contig graph` as `Alternate contigs graph` and  add a `#alternate` tag
 >
 {: .hands_on}
 
