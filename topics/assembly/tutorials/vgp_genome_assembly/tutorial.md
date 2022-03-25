@@ -219,7 +219,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 > ### {% icon hands_on %} Hands-on: Generate *k*-mers count distribution
 >
-> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
+> 1. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
 >        - *"Count operations"*: `Count: count the occurrences of canonical k-mers`
 >        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
@@ -233,14 +233,14 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 > 2. Rename it `Collection meryldb`
 >
-> 3. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1) %} with the following parameters:
+> 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1) %} again with the following parameters:
 >    - *"Operation type selector"*: `Operations on sets of k-mers`
 >        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
 >        - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
 > 4. Rename it as `Merged meryldb`    
 >
-> 5. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0) %} with the following parameters:
+> 5. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0) %} for the third time with the following parameters:
 >    - *"Operation type selector"*: `Generate histogram dataset`
 >        - {% icon param-file %} *"Input meryldb"*: `Merged meryldb`
 >
