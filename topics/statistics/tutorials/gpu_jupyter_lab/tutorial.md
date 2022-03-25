@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Image segmentation of COVID CT scans using Unet neural network in a GPU-powered Jupyterlab
+title: An accessible artificial intelligence infrastructure using a Docker-based Jupyterlab in Galaxy
 zenodo_link: https://zenodo.org/record/6091361#.Ygu4gIzMI5k
 questions:
 - How to use Jupyterlab and it several features?
@@ -11,6 +11,7 @@ objectives:
 - Explore several of its features such as Git integration, workflow of jupyter notebook, integration to Galaxy
 - Develop AI algorithms using scikit-learn and tensorflow
 - Send long-running jobs to Galaxy's cluster and save results in its history
+- Reproduce results from recent scientific papers - COVID CT scan segmentation and 3D protein structure prediction
 requirements:
   -
     type: internal
@@ -82,8 +83,8 @@ Figure 4 shows CT scans of infected lungs (top row) and borders around the infec
 
 In this tutorial, we will use the dataset of CTs scans and their respective masks to train an Unet neural network model. The model learns to map the infected regions in the CT scans to their masks. For prediction, the trained model is given unseen CT scans and for each CT scan, it predicts infected regions or masks. For this experiment, we will use Jupyterlab for cloning the notebooks from Github that contain scripts for downloading data, creating and training Unet model and prediction tasks. Data (CT scans and also the trained model) required for the notebooks can be downloaded from [Zenodo](https://zenodo.org/record/6091361#.Ygu4gIzMI5k. The model can either be trained in the Jupyterlab or can be sent to Galaxy's cluster for remote processing. After remote processing, the created datasets such as the trained model become available in the new Galaxy history.
 
-# Image segmentation in Jupyterlab notebook
-In this tutorial, we will a few features of Jupyterlab to create and train a Unet deep learning model and then, predict segmented regions in COVID CT scans using the Unet trained model.
+# Reproduce results from recent publications using Jupyterlab infrastructure in Galaxy
+In this tutorial, we will a few features of Jupyterlab to create and train a Unet deep learning model and then, predict segmented regions in COVID CT scans using the Unet trained model. In addition, we will predict 3D structure of protein sequence using ColabFold, a faster implementation of AlphaFold2.
 
 ## Open Jupyterlab editor
 
