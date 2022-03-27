@@ -33,9 +33,17 @@ tags:
   - assembly
 ---
 
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 ## Introduction
-
+{:.no_toc}
 
 ### Global context 
 
@@ -1026,5 +1034,52 @@ We launched a Jupyter notebook to analyse results we got and reproduce graphs fr
 
 # Conclusion
 {:.no_toc}
+
+In this tutorial we analysed all CAMI2 challenges and reproduced the assembly challenge on a marine dataset to demonstrate that Galaxy is a viable solution for such challenges.
+
+After reviewing all CAMI2 datasets, we selected the marine dataset, which is the most suitable for our purposes.
+
+In Galaxy, we used the dataset collection function and the FASTQ splitter tool to preprocess the data.
+
+The FASTQ splitter tool has been updated to improve its output names. 
+
+Among the assembly tools used in CAMI2, we selected Flye, Megahit, MetaSPAdes, and Abyss as being the most relevant for our needs. With these tools, you can perform short, long, or hybrid reads, which is ideal for this demonstration.
+
+The versions of tools used in CAMI2 were compared with those in Galaxy.
+
+We updated tools of outdated versions and with lack of some functions we needed to reproduce CAMI2.
+
+Different sets of parameters were used for each tool to analyse outputs and draw conclusions about the most appropriate parameters.
+
+We analysed benchmarking statistics from CAMI2 and chose the most appropriate for our goal.
+
+Quast tool was used to analyse results from assembly tools. Additionally, we used bowtie2 tool and Map with minimap2 and Samtools Stat tool to obtain information about the percentage of reads mapped in assembly.
+
+MultiQC and Jupiter notebook were used to create final reports and visualise results.
+
+The datasets were uploaded to Galaxy using an FTP server.
+
+During the project, we created galaxy histories that are available to the public. They are slightly different from those we suggest in this tutorial. We created them according to the principle of one history per:
+* Long reads or short reads as input
+* Co-assembly or individual assembly
+* one unique tool version
+* one unique set of parameters
+
+> ### {% icon details %} Details of Galaxy histories
+>
+> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=915388998&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+>
+{: .details}
+
+Furthermore, we have created this tutorial for those who are interested in such a topic and would like to reproduce CAMI2 assembly challenge on marine datasets. This tutorial could be undoubtedly useful for further improvement.
+
+The further improvement of this tutorial could be:
+
+1. Galaxy workflows could be shared via IWC or Dockstore for the reproducibility
+2. Data could be formatted and submitted directly CAMI benchmarking portal via Galaxy
+3. Other CAMI datasets could be used similarly 
+4. Other CAMI challenges could be run similarly
+
+Ultimately, the project demonstrated that Galaxy could be used for CAMI and similar challenges. Aside from its impressive features, user-friendly interface, and ample resources, the platform has significant potential for future advancement.
 
 Well done! {% icon trophy %}
