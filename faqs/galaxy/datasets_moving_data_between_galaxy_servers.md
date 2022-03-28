@@ -1,5 +1,5 @@
 title: Moving data between Galaxy servers
-area: data upload
+area: datasets
 box_type: tip
 layout: faq
 contributors: [Melkeb]
