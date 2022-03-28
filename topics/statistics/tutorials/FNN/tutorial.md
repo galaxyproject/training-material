@@ -339,7 +339,7 @@ dataset has 723 training examples, and our test dataset has 242 test examples. I
 
 > ### {% icon hands_on %} Hands-on: Model config
 >
-> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.4.2) %}
+> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
 >    - *"input_shape"*: `(5,)`
 >    - In *"LAYER"*:
@@ -366,7 +366,7 @@ layers use ReLU activation function. The model config can be downloaded as a JSO
 
 > ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
 >
-> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.4.2) %}
+> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
 >    - *"Do classification or regression?"*: `KerasGRegressor`
@@ -391,7 +391,7 @@ batch_size decides the size of this subset (which we set to 50). The model build
 
 > ### {% icon hands_on %} Hands-on: Training the model
 >
-> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
@@ -413,7 +413,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 > ### {% icon hands_on %} Hands-on: Testing the model
 >
-> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
