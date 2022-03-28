@@ -882,7 +882,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 10, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1153,13 +1153,14 @@
 
       <div data-commit="Setup nginx location for grafana" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -72,4 +72,9 @@</span> server {
+</span><span class="p">@@ -72,4 +72,10 @@</span> server {
      location /training-material/ {
          proxy_pass https://training.<span class="notranslate">galaxy</span>project.org/training-material/;
      }
 <span class="gi">+
 +    location /grafana/ {
 +        proxy_pass http://127.0.0.1:3000/;
++        proxy_set_header Host $http_host;
 +    }
 +
 </span> }
@@ -1978,7 +1979,7 @@ author = "Helena Rasche",
 title = "Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "10"
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
