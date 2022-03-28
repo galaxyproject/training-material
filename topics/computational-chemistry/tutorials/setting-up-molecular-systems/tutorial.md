@@ -30,6 +30,7 @@ follow_up_training:
 contributors:
   - chrisbarnettster
   - simonbray
+  - nagoue
 
 ---
 

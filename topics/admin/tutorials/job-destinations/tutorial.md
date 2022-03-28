@@ -58,12 +58,12 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 
 > ### {% icon hands_on %} Hands-on: Deploying a Tool
 >
-> 1. Create the directory `templates/galaxy/tools/` if it doesn't exist and edit a new file in `templates/galaxy/tools/testing.xml` with the following contents:
+> 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/tools/testing.xml
+>    +++ b/files/galaxy/tools/testing.xml
 >    @@ -0,0 +1,11 @@
 >    +<tool id="testing" name="Testing Tool">
 >    +    <command>
@@ -213,12 +213,12 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
 >
-> 1. Create and open `templates/galaxy/dynamic_job_rules/my_rules.py`
+> 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/my_rules.py
+>    +++ b/files/galaxy/dynamic_job_rules/my_rules.py
 >    @@ -0,0 +1,10 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -569,12 +569,12 @@ Lastly, we need to write the rule that will read the value of the job resource p
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic destination
 >
-> 1. Create and edit `templates/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
+> 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/map_resources.py
+>    +++ b/files/galaxy/dynamic_job_rules/map_resources.py
 >    @@ -0,0 +1,42 @@
 >    +import logging
 >    +from galaxy.jobs.mapper import JobMappingException
