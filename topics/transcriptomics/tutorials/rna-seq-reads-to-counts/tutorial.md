@@ -225,7 +225,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 > ### {% icon hands_on %} Hands-on: Check raw reads with **FastQC**
 >
-> 1. **FastQC** {% icon tool %} with the following parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
 >
@@ -255,7 +255,7 @@ The FastQC report contains a lot of information and we can look at the report fo
 
 > ### {% icon hands_on %} Hands-on: Aggregate FastQC reports with **MultiQC**
 >
-> 1. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports
+> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the FastQC reports
 >      - In *"Results"*
 >        - {% icon param-select %}*"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -305,7 +305,7 @@ The Cutadapt tool Help section provides the sequence we can use to trim this sta
 
 > ### {% icon hands_on %} Hands-on: Trim reads with **Cutadapt**
 >
-> 1. **Cutadapt** {% icon tool %} with the following parameters:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0) %}
 >    - {% icon param-select %} *"Single-end or Paired-end reads?"*: `Single-end`
 >        - {% icon param-collection %} *"FASTQ/A file"*: `fastqs` (Input dataset collection)
 >        - In *"Read 1 Options"*:
@@ -329,9 +329,9 @@ We can take a look at the reads again now that they've been trimmed.
 
 > ### {% icon hands_on %} Hands-on: QC of trimmed reads with **FastQC**
 >
-> 1. **FastQC** {% icon tool %} with the following parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
 >    - {% icon param-collection %} *"Short read data from your current history"*: `RawData` (output of **Cutadapt** {% icon tool %})
-> 2. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the FastQC reports
 >    - In *"Results"*
 >        - {% icon param-select %} *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -358,7 +358,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 
 > ### {% icon hands_on %} Hands-on: Map reads to reference with **HISAT2**
 >
-> 1. **HISAT2** {% icon tool %} with the following parameters:
+> 1. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0) %} with the following parameters:
 >    - {% icon param-select %} *"Source for the reference genome"*: `Use a built-in genome`
 >        - {% icon param-select %} *"Select a reference genome"*: `mm10`
 >    - {% icon param-select %} *"Is this a single or paired library?"*: `Single-end`
@@ -366,7 +366,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 >    - In *"Summary Options"*:
 >        - {% icon param-check %} *"Output alignment summary in a more machine-friendly style."*: `Yes`
 >        - {% icon param-check %} *"Print alignment summary to a file."*: `Yes`
-> 2. **MultiQC** {% icon tool %} with the following parameters to aggregate the HISAT2 summary files
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the HISAT2 summary files
 >    - In *"Results"*
 >        - {% icon param-select %} *"Which tool was used generate logs?"*: `HISAT2`
 >        - {% icon param-collection %} *"Output of HISAT2"*: `Mapping summary` (output of **HISAT2** {% icon tool %})
@@ -415,12 +415,12 @@ The alignment produces a set of BAM files, where each file contains the read ali
 
 > ### {% icon hands_on %} Hands-on: Count reads mapped to genes with **featureCounts**
 >
-> 1. **featureCounts** {% icon tool %} with the following parameters:
+> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"Alignment file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-select %} *"Gene annotation file"*: `featureCounts built-in`
 >        - {% icon param-select %} *"Select built-in genome"*: `mm10`
 >
-> 2. **MultiQC** {% icon tool %} with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
 >    - {% icon param-select %} *"Which tool was used generate logs?"*: `featureCounts`
 >        - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts summary` (output of **featureCounts** {% icon tool %})
 > 3. Add a tag `#featurecounts` to the `Webpage` output from MultiQC and inspect the webpage
@@ -512,10 +512,10 @@ As far as we know this data is unstranded, but as a sanity check you can check t
 
 > ### {% icon hands_on %} Hands-on: Check strandness with **Infer Experiment**
 >
-> 1. **Infer Experiment** {% icon tool %} with the following parameters:
+> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Reference BED file)
-> 2. **MultiQC** {% icon tool %} with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `infer_experiment`
@@ -546,9 +546,9 @@ Duplicate reads are usually kept in RNA-seq differential expression analysis as 
 
 > ### {% icon hands_on %} Hands-on: Check duplicate reads with **MarkDuplicates**
 >
-> 1. **MarkDuplicates** {% icon tool %} with the following parameters:
+> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
-> 2. **MultiQC** {% icon tool %} with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `Picard`
 >               - {% icon param-select %} *"Type of Picard output?"*: `Markdups`
@@ -578,9 +578,9 @@ You can check the numbers of reads mapped to each chromosome with the **Samtools
 
 > ### {% icon hands_on %} Hands-on: Count reads mapping to each chromosome with **IdxStats**
 >
-> 1. **IdxStats** {% icon tool %} with the following parameters:
+> 1. {% tool [IdxStats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
-> 2. **MultiQC** {% icon tool %} with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `Samtools`
 >               - {% icon param-select %} *"Type of Samtools output?"*: `idxstats`
@@ -613,11 +613,11 @@ The coverage of reads along gene bodies can be assessed to check if there is any
 
 > ### {% icon hands_on %} Hands-on: Check coverage of genes with **Gene Body Coverage (BAM)**
 >
-> 1. **Gene Body Coverage (BAM)** {% icon tool %} with the following parameters:
+> 1. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
 >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
 >        - {% icon param-collection %} *"Input .bam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
-> 2. **MultiQC** {% icon tool %} with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `gene_body_coverage`
@@ -653,10 +653,10 @@ We can also check the distribution of reads across known gene features, such as 
 
 > ### {% icon hands_on %} Hands-on: Check distribution of reads with **Read Distribution**
 >
-> 1. **Read Distribution** {% icon tool %} with the following parameters:
+> 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam/.sam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
-> 2. **MultiQC** {% icon tool %} with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `read_distribution`
