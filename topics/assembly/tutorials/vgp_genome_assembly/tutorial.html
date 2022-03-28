@@ -770,6 +770,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -825,7 +827,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 25, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1718,12 +1720,12 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 </blockquote>
 
-<p>Finally, we will use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> mapped to contigs</code> pairwise <span class="notranslate">mapping</span> format (PAF) file for calculating some statistics required in a later stage. In this step, purge_dups initially produces a read-depth histogram from base-level coverages. This information is used for estimating the coverage cutoffs, taking into account that collapsed haplotype contigs will lead to <span class="notranslate">reads</span> from both alleles <span class="notranslate">mapping</span> to those contigs, whereas if the alleles have assembled as separate contigs, then the <span class="notranslate">reads</span> will be split over the two contigs, resulting in half the read-depth (<span class="citation"><a href="#Roach2018">Roach <i>et al.</i> 2018</a></span>).</p>
+<p>Finally, we will use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> mapped to contigs</code> pairwise <span class="notranslate">mapping</span> format (PAF) file for calculating some statistics required in a later stage. In this step, purge_dups (listed as <strong>Purge overlaps</strong> in <span class="notranslate">Galaxy</span> tool panel) initially produces a read-depth histogram from base-level coverages. This information is used for estimating the coverage cutoffs, taking into account that collapsed haplotype contigs will lead to <span class="notranslate">reads</span> from both alleles <span class="notranslate">mapping</span> to those contigs, whereas if the alleles have assembled as separate contigs, then the <span class="notranslate">reads</span> will be split over the two contigs, resulting in half the read-depth (<span class="citation"><a href="#Roach2018">Roach <i>et al.</i> 2018</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-read-depth-analisys"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Read-depth analisys</h3>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3"><strong>purge_dups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3"><strong>Purge overlaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
       <ul>
         <li><em>“Function mode”</em>: <code class="language-plaintext highlighter-rouge">Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)</code>
           <ul>
@@ -1743,7 +1745,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 </blockquote>
 
-<p>Purge_dups generates three outputs:</p>
+<p>Purge overlaps (purge_dups) generates three outputs:</p>
 
 <ul>
   <li>PBCSTAT base coverage: it contains the base-level coverage information.</li>
@@ -2711,7 +2713,7 @@ author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo and Anna
 title = "VGP assembly pipeline (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "25"
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
