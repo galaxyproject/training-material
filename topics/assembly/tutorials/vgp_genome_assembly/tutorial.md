@@ -649,7 +649,7 @@ Purge overlaps (purge_dups) generates three outputs:
 Now, we will segment the draft assembly into contigs by cutting at blocks of *N*s, and use minimap2 to generate an all by all self-alignment.
 
 > ### {% icon hands_on %} Hands-on: purge_dups pipeline    
-> 1. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
 >    - *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
 >        - {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
 >
@@ -672,7 +672,7 @@ Now, we will segment the draft assembly into contigs by cutting at blocks of *N*
 
 During the final step of the purge_dups pipeline, it will use the self alignments and the cutoffs for identifying the haplotypic duplications.
 
-> ### {% icon comment %} Purge_dups algorithm details
+> ### {% icon comment %} Purge overlaps (purge_dups) algorithm details
 >
 > In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according the following criteria:
 > - If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is discarded.
@@ -691,7 +691,7 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 
 > ### {% icon hands_on %} Hands-on: Resolution of haplotigs and overlaps
 >    
-> 1. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
 >        - {% icon param-file %} *"PAF input file"*: `Self-homology map primary`
 >        - {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage primary`
@@ -699,7 +699,7 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 >
 > 2. Rename the output as `purge_dups BED`
 >
-> 3. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+> 3. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
 >        - {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
 >        - {% icon param-file %} *"BED input file"*: `purge_dups BED` (output of the previous step)
@@ -739,22 +739,22 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Alternate contigs full`
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-collection %} *"Select fastq dataset"*: `HiFi reads collapsed`
->        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
+>        - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)` (**Note** `asm5` at the end!)
 >    - In *"Set advanced output options"*:
 >        - *"Select an output format"*: `paf`
 >
 > 2. Rename the output as `Reads mapped to contigs alternate`
 >
-> 3. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+> 3. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
 >    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
 >        - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs alternate`
 >        - In *"Calcuts options"*:
 >            - *"Upper bound for read depth"*: `114`
 >            - *"Ploidity"*: `Diploid`
 >
-> 3. Rename the outputs as ` PBCSTAT base coverage alternate`, `Histogram plot alternate` and `Calcuts cutoff alternate`.
+> 3. Rename the outputs as `PBCSTAT base coverage alternate`, `Histogram plot alternate` and `Calcuts cutoff alternate`.
 >
-> 4. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+> 4. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
 >    - *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
 >        - {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
 >
@@ -771,25 +771,28 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 >
 > 7. Rename the output as `Self-homology map alternate`
 >        
-> 8. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
+> 8. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
 >        - {% icon param-file %} *"PAF input file"*: `Self-homology map alternate`
 >        - {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage alternate`
 >        - {% icon param-file %} *"Cutoffs file"*: `calcuts cutoff alternate`
 >
-> 9. {% tool [purge_dups](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>
+> 9. Rename the output as `purge_dups BED alternate`
+> 
+> 10. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
 >        - {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
 >        - {% icon param-file %} *"BED input file"*: `purge_dups BED alternate`
 >
-> 10. Rename the outputs as `Alternate contigs purged` and `Alternate haplotype contigs`.
+> 11. Rename the outputs as `Alternate contigs purged` and `Alternate haplotype contigs`.
 >
 {: .hands_on}
 
 
 ## Second round of assembly evaluation
 
-Once we have run purge_dups, we can evaluate the assembly again, and compare the results before and after purging.
+Once we have run Purge overlaps, we can evaluate the assembly again, and compare the results before and after purging.
 
 > ### {% icon hands_on %} Hands-on: assembly evaluation with QUAST
 >
