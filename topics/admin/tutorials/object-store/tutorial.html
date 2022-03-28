@@ -733,7 +733,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 1, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 18, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -790,7 +790,7 @@
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml.j2"</span>
+    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -969,7 +969,7 @@ minio_secret_key: "my-super-extra-top-secret-key"
       <p><span class="notranslate">Galaxy</span> will need to use the bucket, and will want it to be there when it boots, so we need to setup the object store first.</p>
     </li>
     <li>
-      <p>Edit the <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code>, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.</p>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</code>, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -1,13 +1,21 @@</span>
  &lt;?xml version="1.0"?&gt;
@@ -1220,7 +1220,7 @@ author = "Nate Coraor and Helena Rasche and Gianmauro Cuccuru",
 title = "Distributed Object Storage (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "01"
+day = "18"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
