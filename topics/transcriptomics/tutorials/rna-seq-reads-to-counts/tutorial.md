@@ -316,11 +316,10 @@ The Cutadapt tool Help section provides the sequence we can use to trim this sta
 >                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional)"*: `Illumina`
 >                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`
 >    - In *"Filter Options"*:
->        - {% icon param-text %} *"Minimum length"*: `20`
+>        - {% icon param-text %} *"Minimum length (R1)"*: `20`
 >    - In *"Read Modification Options"*:
 >        - {% icon param-text %} *"Quality cutoff"*: `20`
->    - In *"Output Options"*:
->        - {% icon param-check %} *"Report"*: `Yes`
+>    - {% icon param-check %} *"Outputs selector"*: `Report`
 >
 {: .hands_on}
 
