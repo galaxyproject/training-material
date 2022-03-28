@@ -160,7 +160,7 @@ id  |        update-time         | user-id | email |           name           | 
 315 | 2013-02-22 15:50:51.398894 |     xxx | xxxx  | day5 practical           | f         | f       | f      |          90
 314 | 2013-02-22 15:45:47.75967  |     xxx | xxxx  | 5. Tag Galaxy-Kurs       | f         | f       | f      |          78
 
-**@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be. The query can
+**@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be.
 
 hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted | d-purged | object-store-id
 -------- | --------- | ----------- | ---------- | ------- | ------- | --------- | -------- | ----------------
