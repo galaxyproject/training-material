@@ -187,8 +187,8 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -77,4 +77,19 @@ server {
->             proxy_pass http://127.0.0.1:3000/;
+>    @@ -78,4 +78,19 @@ server {
+>             proxy_set_header Host $http_host;
 >         }
 >     
 >    +    location /tiaas {
