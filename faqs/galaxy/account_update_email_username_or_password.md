@@ -1,5 +1,5 @@
 ---
-title: Update email, username or password
+title: Update email, username, or password
 area: account
 box_type: tip
 layout: faq
