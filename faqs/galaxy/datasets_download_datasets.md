@@ -1,10 +1,11 @@
+---
 title: Download datasets
 area: datasets
 box_type: tip
 layout: faq
-contributors: [Melkeb]
+contributors: [jennaj, Melkeb]
+---
 
-Download datasets
 
 1. Opening the datasets found under history
-2. Clicking on the disk icon inside the dataset
+2. Clicking on the save icon {% icon galaxy-save %} inside the dataset
