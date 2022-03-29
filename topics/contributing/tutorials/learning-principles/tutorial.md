@@ -39,37 +39,39 @@ contributors:
 
 This quotation from Herbert A. Simon clearly indicates that we cannot talk about teaching, teaching practices or effective teaching techniques if we don't understand first how people learn.
 
-Here, we want to share with you what we learnt about how learning works. Our knowledge in the field of cognition and learning comes from diving into pedagogical and cognitive research results, reading books such as ["How Learning Works"](https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101) or ["Small Teaching"](http://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118944496.html) and many others, studying research articles published in the field of cognitive science and educational psychology, attending instructor training courses (like this one), and - last but not least - from our own experience as both instructors/teachers, learners, and passionate observers of learning processes and teaching practices.
+In this lesson, we want to share with you what we have collectively learnt about how learning works. Our knowledge in the field of cognition and learning comes from diving into pedagogical and cognitive research results, reading books such as ["How Learning Works"](https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101) ({% cite ambrose2010learning %}) or ["Small Teaching"](https://www.wiley.com/en-gb/Small+Teaching%3A+Everyday+Lessons+from+the+Science+of+Learning%2C+2nd+Edition-p-9781119755555) ({% cite smallTeaching2021 %}) and many others, studying research articles published in the field of cognitive science and educational psychology, attending instructor training courses (like this one), and - last but not least - from our own experience as both instructors/teachers, learners, and passionate observers of learning processes and teaching practices.
 
-Since this material cannot cover the broad literature on the subject of learning we strongly invite you to commit to read at least one book on how learning works (for example: ["How Learning Works"](https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101) or ["Small Teaching"](http://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118944496.html)), have a look at the [Software Carpentry Instructor training materials](http://swcarpentry.github.io/instructor-training/) and explore the material available through the [ELIXIR Train-the-Trainer course]().
-
-
+Since this material cannot cover the broad literature on the subject of learning we strongly invite you to commit to read at least one book on how learning works ({% cite ambrose2010learning %}) cite smallTeaching2021 %}), have a look at the [Software Carpentry Instructor training materials](http://swcarpentry.github.io/instructor-training/) and explore the material available through the [ELIXIR Train-the-Trainer course]().
 
 # Learning outcomes and instructional design
 
-Important for any instructional design and the 1st starting point
+The first starting point in this road is a discussion about the learning outcomes; what they are, and why these are important for any instructional design. In this context, and by the end of this session, learners will be able to:
+- Describe some learning perspectives and models
+- Explain how they can help you improve your teaching
+- List learning strategies and principles suggested by evidence-based research results
+
+The "Learning outcomes" (LOs) are essentially statements that tell what the learners will be to do at the end of the session. For this reason, every well-designed training should start with LOs.
 
 ## Knowledge, Skills, Abilities (KSAs)
 
-The first step of good instructional design consists in identifying the set of KSAs that learners are expected to acquire by the end of instruction.
+The first step of good instructional design consists is identifying the set of Knowledge, Skills, Abilities (KSAs) that learners are expected to acquire by the end of instruction.
 
 ## Teaching objectives and Learning Outcomes
 
-> ### {% icon comment %} Sources
->
-> [Atherton J S (2013) Learning and Teaching; Objectives](http://www.learningandteaching.info/teaching/objectives.htm#ixzz4DtSAL2pi)
-- Under Creative Commons License: Attribution Non-Commercial No Derivatives
->
-{: .comment}
-
+% > ### {% icon comment %} Sources
+% >
+% > [Atherton J S (2013) Learning and Teaching; Objectives](http://www.learningandteaching.info/teaching/objectives.%htm#ixzz4DtSAL2pi)
+% - Under Creative Commons License: Attribution Non-Commercial No Derivatives
+% >
+% {: .comment}
 
 **Objectives** are statements of what you are setting out to teach, although expressed as if the students were going to learn it. Despite Aims are usually intended to be more general and encompassing than Objectives, they are essential the same.
 
 **Outcomes** (more accurately “desired outcomes”) are statements of what you might (in principle) assess. You may not end up assessing all of them, but they are statements of what a student will know or be able to do, if she or he has learned everything in the course or session.
 
-**See also** the [PDF](docs/Objectives_vs_Outcomes.pdf) document from the [Rensselaer Polytechnic Institute Office of the Provost](http://provost.rpi.edu/institutional-research)
-
 ### Learning objectives and learning outcomes
+
+(_the following is adapted from the webpage [http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes](http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes) and the [Operational definitions:](https://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf) document from the [Rensselaer Polytechnic Institute Office of the Provost](http://provost.rpi.edu/institutional-research)_)
 
 These two terms are often used interchangeably by the community. Even worse, they are often abbreviated by the acronym (LO), thus introducing even more ambiguity. In our opinion there is no need. Objectives (aims or goals) and Outcomes (results) may overlap, but are not genuinely the same.
 
@@ -92,19 +94,12 @@ course.
 * Outcomes are exactly what assessments are intended to show – specifically what the student will be able to do upon completing the course.
 * An assessable outcome can be displayed or observed and evaluated against criteria.
 * Outcomes are clear and measurable criteria for guiding the teaching, learning, and assessment process in the course.
-
-Adapted from [http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes](http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes)
-
-[Operational definitions:](https://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf)
-
 * Statements expressing which KSAs learners will be able to demonstrate upon completion of a learning experience or a sequence of learning experiences
 * What learners will be able to do for the end of instruction and the teacher / instructor can in principle evaluate
 
-Learning outcome:
-* Need observable actions to let teacher assess them
+Going beyond the definition however, a learning outcome needs to be also practical, i.e. there is a need to assign observable actions in order to let teacher assess them.
 
 ### How to write learning outcomes using OBSERVABLE verbs
-
 
 In order to write learning outcomes, you can use the following scheme:
 
@@ -163,7 +158,7 @@ So how can we now use the knowledge we have gathered during this time in the cou
 
 # How do people learn?
 
-So let's start with How do people learn and how does learning work
+So let's start with "How do people learn and how does learning work"
 
 ## General definition of learning
 
@@ -730,7 +725,7 @@ In practice, you can use the Bloom’s levels of cognitive complexity (and the [
 * design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc
 * assess learning (taking place during curricula or course and after)
 
-![[Via et al, Course design: Considerations for trainers – a Professional Guide, 2020](https://f1000research.com/documents/9-1377)](images/image3.jpg "[Via et al, Course design: Considerations for trainers – a Professional Guide, 2020](https://f1000research.com/documents/9-1377)")
+![[Via et al, Course design: Considerations for trainers – a Professional Guide, 2020](https://f1000research.com/documents/9-1377)](images/image3.jpg "[Via et al, Course design: Considerations for trainers – a Professional Guide, 2020](https://f1000research.com/documents/9-1377)") ({% cite via2020course %})
 
 By simplified I mean that here you only see the arrows going from one box to the following in line. However, usually we need to revise and go back one or several boxes if we have failed to specify or articulated Learning outcomes from the beginning. This is what we mean by Learning Outcomes drives the whole process.
 
