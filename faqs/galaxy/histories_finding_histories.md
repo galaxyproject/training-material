@@ -1,11 +1,11 @@
+---
 title: Finding Histories
 area: histories
 box_type: tip
 layout: faq
-contributors: [Melkeb]
+contributors: [jennaj, Melkeb]
+---
 
-
-Finding Histories (My History is missing!)
 
 1. To review all Histories in your account, look under User > Histories.
 2. At the top of the History list in the middle panel, click into Advanced Search.
