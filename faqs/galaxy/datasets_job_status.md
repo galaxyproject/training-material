@@ -4,7 +4,7 @@ description: Job statuses will help you understand the stage of your working.
 area: datasets
 layout: faq
 box_type: tip
-contributors: [garima]
+contributors: [garimavs, jennaj]
 ---
 
 The following job statuses will help you better understand the working stage of the process.
@@ -14,7 +14,7 @@ The following job statuses will help you better understand the working stage of 
 - **Grey**: The job is being evaluated to run (new dataset) or is queued. Allow this to complete.
 - **Red**: The job has failed.
 - **Light Blue**: The job is paused. This indicates either an input has a problem or that you have [exceeded the disk quota](https://galaxyproject.org/main/#user-data-and-job-quotas) set by the administrator of the Galaxy instance you are working on.
-- **Grey, Yellow, Grey again**: The job is waiting to run due to admin re-run or an automatic fall-over to a longer-running cluster.
+- **Grey, Yellow, Grey again**: The job is waiting to run due to admin re-run or an automatic fail-over to a longer-running cluster.
 - **Bright blue with moving arrow**: May be found in earlier Galaxy versions. Applies to the "Get Data → Upload File" tool only - the upload job is queuing or running.
 
 **It is _essential_ to allow queued jobs to remain queued and not delete/re-run them.**
