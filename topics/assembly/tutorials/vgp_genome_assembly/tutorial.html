@@ -756,13 +756,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
-        
-    
         
     
         
@@ -804,15 +800,7 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
-            UseGalaxy.org (Main)
-        </a>
-        
     
-        
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
         
     
         
@@ -831,7 +819,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 29, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -881,11 +869,11 @@
   </li>
   <li><a href="#post-assembly-processing" id="markdown-toc-post-assembly-processing">Post-assembly processing</a>    <ol>
       <li><a href="#remove-haplotypic-duplication-with-purge_dups" id="markdown-toc-remove-haplotypic-duplication-with-purge_dups">Remove haplotypic duplication with <strong>purge_dups</strong></a></li>
-      <li><a href="#second-round-of-assembly-evaluation" id="markdown-toc-second-round-of-assembly-evaluation">Second round of assembly evaluation</a></li>
     </ol>
   </li>
   <li><a href="#hybrid-scaffolding" id="markdown-toc-hybrid-scaffolding">Hybrid scaffolding</a>    <ol>
       <li><a href="#hybrid-scaffolding-using-bionano-data" id="markdown-toc-hybrid-scaffolding-using-bionano-data">Hybrid scaffolding using Bionano data</a></li>
+      <li><a href="#second-round-of-assembly-evaluation" id="markdown-toc-second-round-of-assembly-evaluation">Second round of assembly evaluation</a></li>
       <li><a href="#hybrid-scaffolding-based-on-hi-c-mapping-data" id="markdown-toc-hybrid-scaffolding-based-on-hi-c-mapping-data">Hybrid scaffolding based on Hi-C <span class="notranslate">mapping</span> data</a></li>
     </ol>
   </li>
@@ -1122,8 +1110,6 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   <p>Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.</p>
 </blockquote>
 
-<p>In this section we will use two basic tools to computationally estimate the genome features: Meryl and GenomeScope.</p>
-
 <h2 id="generation-of-k-mer-spectra-with-meryl">Generation of k-mer spectra with <strong>Meryl</strong></h2>
 
 <p>Meryl will allow us to generate the <em>k</em>-mer profile by decomposing the sequencing data into <em>k</em>-length substrings, counting the occurrence of each <em>k</em>-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version comprises three main modules: one for generating <em>k</em>-mer databases, one for filtering and combining databases, and one for searching databases. <em>K</em>-mers are stored in lexicographical order in the database, similar to words in a dictionary (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>).</p>
@@ -1147,7 +1133,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input sequences”</em>: <code class="language-plaintext highlighter-rouge">HiFi_collection (trim)</code></li>
             <li><em>“k-mer size selector”</em>: <code class="language-plaintext highlighter-rouge">Set a k-mer size</code>
               <ul>
-                <li>“<em>k-mer size</em>”: <code class="language-plaintext highlighter-rouge">21</code></li>
+                <li>“<em>k-mer size</em>”: <code class="language-plaintext highlighter-rouge">32</code></li>
               </ul>
             </li>
           </ul>
@@ -1157,7 +1143,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
       <blockquote class="comment">
         <h3 id="comment-selection-of-k-mer-size"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Selection of <em>k</em>-mer size</h3>
 
-        <p>We used 21 as <em>k</em>-mer size, as this length has demonstrated to be sufficiently long that most <em>k</em>-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size &gt; 10 Gb) and/or very repetitive genomes, larger <em>k</em>-mer length is recommended to increase the number of unique <em>k</em>-mers.</p>
+        <p>We used 32 as <em>k</em>-mer size, as this length has demonstrated to be sufficiently long that most <em>k</em>-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size &gt; 10 Gb) and/or very repetitive genomes, larger <em>k</em>-mer length is recommended to increase the number of unique <em>k</em>-mers.</p>
       </blockquote>
     </li>
     <li>
@@ -1201,7 +1187,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0"><strong>GenomeScope</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input histogram file”</em>: <code class="language-plaintext highlighter-rouge">Meryldb histogram</code></li>
-        <li><em>“k-mer length used to calculate k-mer spectra”</em>: <code class="language-plaintext highlighter-rouge">21</code></li>
+        <li><em>“k-mer length used to calculate k-mer spectra”</em>: <code class="language-plaintext highlighter-rouge">32</code></li>
       </ul>
     </li>
   </ol>
@@ -1234,9 +1220,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>Now, let’s analyze the <em>k</em>-mer profiles, fitted models and estimated parameters (fig. 3).</p>
 
-<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 21-mer profile. The first peak located at coverage 21x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.637%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 32-mer profile. The first peak located at coverage 32x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
 
-<p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to <em>Saccharomyces</em> genome size. Additionally, it revealed that the variation across the genomic sequences is 0.69%.</p>
+<p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to <em>Saccharomyces</em> genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%.</p>
 
 <p>Before proceeding to the next section, we need to carry out some text manipulation operations on the output generated by GenomeScope2 to make it compatible with <span class="notranslate">downstream</span> tools. The goal is to extract some parameters which at a later stage will be used by purge_dups.</p>
 
@@ -1297,7 +1283,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <blockquote class="solution">
       <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-      <p>The estimated genome size is 11.748.793 bp.</p>
+      <p>The estimated genome size is 11.747.076 bp.</p>
 
     </blockquote>
 
@@ -1431,6 +1417,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
         </li>
         <li><em>“Options for purging duplicates”</em>: <code class="language-plaintext highlighter-rouge">Specify</code>
           <ul>
+            <li><em>“Purge level</em>”: <code class="language-plaintext highlighter-rouge">Light</code></li>
             <li><em>“Coverage upper bound”</em>: <code class="language-plaintext highlighter-rouge">114</code> (maximum depth previously obtained)</li>
           </ul>
         </li>
@@ -1480,7 +1467,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h2 id="initial-assembly-evaluation">Initial assembly evaluation</h2>
 
-<p>The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO, Merqury, and Pretext. QUAST will generate summary statistics, BUSCO will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using <em>k</em>-mers, and Pretext will be used to evaluate the assembly contiguity.</p>
+<p>The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO (Benchmarking Universal Single-Copy Orthologs), Merqury, and Pretext. QUAST will generate summary statistics, BUSCO will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using <em>k</em>-mers, and Pretext will be used to evaluate the assembly contiguity.</p>
 
 <blockquote class="comment">
   <h3 id="comment-quast-statistics"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> QUAST statistics</h3>
@@ -1529,7 +1516,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
           <ul>
             <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">11748793</code> (previously estimated)</li>
+                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">11747076</code> (previously estimated)</li>
               </ul>
             </li>
             <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote: use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding (--eukaryote)</code></li>
@@ -1551,9 +1538,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>Let’s have a look at the HTML report generated by QUAST.</p>
 
-<figure id="figure-5"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="Figure 5: QUAST initial plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> QUAST HTML report. Statistics of the primary and alte<span class="notranslate">rna</span>te assembly (a). Cumulative length plot (b).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="Figure 5: QUAST initial plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> QUAST HTML report. Statistics of the primary and alte<span class="notranslate">rna</span>te assembly (a). Cumulative length plot. It shows the growth of contig lengths. On the x-axis, contigs are ordered from the largest to smallest. The y-axis gives the size of the x largest contigs in the assembly (b).</figcaption></figure>
 
-<p>According to the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose cumulative length is around 23.5Mbp. On the other hand, the second alte<span class="notranslate">rna</span>te assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 5b, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.</p>
+<p>According to the report, both assemblies are quite similar; the primary assembly includes 18 contigs, whose cumulative length is around 12.1Mbp. On the other hand, the second alte<span class="notranslate">rna</span>te assembly includes 17 contigs, whose total lenght is 11.3Mbp. As we can see in the figure 5b, the alte<span class="notranslate">rna</span>te assembly is slighly smaller than the primary assembly.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1568,9 +1555,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>The longest contig in the primary assembly is 1.532.843 bp, and 1.532.843 bp in the alte<span class="notranslate">rna</span>te assembly.</li>
-      <li>The N50 of the primary assembly is 922.430 bp.</li>
-      <li>According to the report, 100% of <span class="notranslate">reads</span> mapped to both the primary assembly and the alte<span class="notranslate">rna</span>te assembly.</li>
+      <li>The longest contig in the primary assembly is 1.531.728 bp, and 1.532.843 bp in the alte<span class="notranslate">rna</span>te assembly.</li>
+      <li>The N50 of the primary assembly is 813.039 bp.</li>
+      <li>According to the report, 100% of <span class="notranslate">reads</span> mapped to both the primary assembly and 97.98% to the alte<span class="notranslate">rna</span>te assembly.</li>
     </ol>
 
   </blockquote>
@@ -1610,17 +1597,17 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<p>BUSCO generates two outputs by default, a tabular file which contains the complete results (<em>e.g.</em>, scores, descriptions, lengths and coordinates of matches) for each BUSCO gene (fig. 6), and a short summary.</p>
+<p>BUSCO generates two outputs by default: a complete report for each BUSCO gene (fig. 6), and a short summary.</p>
 
 <figure id="figure-6"><img src="../../images/vgp_assembly/BUSCO_full_table.png" alt="Figure 6 : BUSCO. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> BUSCO full table. It contains the complete results in a tabular format with scores and lengths of BUSCO matches, and coordinates.</figcaption></figure>
 
-<p>As we can see in the report, the results are simplified into four categories: <em>complete and single-copy</em>, <em>complete and duplicated</em>, <em>fragmented</em> and  <em>Missing BUSCOs</em>.</p>
+<p>As we can see in the figure, the detailed report includes valuable information, such as the status of the gene identified in the input sequence, its position (start/end coordinates and strand), the BUSCO score, the gene length and a keyword description.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>How many complete BUSCO genes have been identified in the primary assembly?</li>
+    <li>How many complete BUSCO genes have been identified in the primary assembly? You can find that information in the short summary.</li>
     <li>How many BUSCOs genes are absent?</li>
   </ol>
 
@@ -1628,8 +1615,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>According to the report, our assembly contains the complete sequence of 2080 complete BUSCO genes (97.3%).</li>
-      <li>19 BUSCO genes are missing.</li>
+      <li>According to the report, our assembly contains the complete sequence of 2046 complete BUSCO genes (95.7%).</li>
+      <li>29 BUSCO genes are missing.</li>
     </ol>
 
   </blockquote>
@@ -1663,9 +1650,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>By default, Merqury generates three collections as output: stats, plots and QV stats. The “stats” collection contains the completeness statistics, while the “QV stats” collection contains the quality value statistics. Let’s have a look at the primary assembly copy number (CN) spectrum plot, known as the <em>spectra-cn</em> plot (fig. 7).</p>
 
-<figure id="figure-7"><img src="../../images/vgp_assembly/merqury_cn_plot.png" alt="Figure 7: Merqury plot. " width="80%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Merqury CN plot corresponding to the primary assembly. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve.</figcaption></figure>
+<figure id="figure-7"><img src="../../images/vgp_assembly/merqury_cn_plot.png" alt="Figure 7: Merqury plot. " width="80%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve.</figcaption></figure>
 
-<p>As suggested previously by the report generated by QUAST (fig. 5), the assemblies contain a large proportion of duplicated <span class="notranslate">reads</span>. The red area represents one-copy <em>k</em>-mers in the genome, while the blue area represents two-copy <em>k</em>-mers, originating from haplotype-specific duplications. The fact that the primary haplotype shows a diploid genetic endowment can be explained as a result of the high divergence between the artificially generated haplotypes. In addition, from that figure, we can state that the sequencing coverage is around 50x.</p>
+<p>The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The read area represents one-copy k-mers in the genome, while blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.</p>
 
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
 
@@ -2005,126 +1992,6 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<h2 id="second-round-of-assembly-evaluation">Second round of assembly evaluation</h2>
-
-<p>Once we have run Purge overlaps, we can evaluate the assembly again, and compare the results before and after purging.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assembly-evaluation-with-quast-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assembly evaluation with QUAST</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">Yes, specify custom names</code></li>
-        <li>In <em>“1. Contigs/scaffolds”</em>:
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Primary contigs purged</code></li>
-            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">Primary assembly</code></li>
-          </ul>
-        </li>
-        <li>Click in <em>“Insert Contigs/scaffolds”</em></li>
-        <li>In <em>“2. Contigs/scaffolds”</em>:
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contigs purged</code></li>
-            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te assembly</code></li>
-          </ul>
-        </li>
-        <li><em>“<span class="notranslate">Reads</span> options”</em>: <code class="language-plaintext highlighter-rouge">Pacbio SMRT <span class="notranslate">reads</span></code>
-          <ul>
-            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file”</em>: <code class="language-plaintext highlighter-rouge">HiFi <span class="notranslate">reads</span> collapsed</code></li>
-          </ul>
-        </li>
-        <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
-          <ul>
-            <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
-              <ul>
-                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">11748793</code> (previously estimated)</li>
-              </ul>
-            </li>
-            <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote: use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding (--eukaryote)</code></li>
-          </ul>
-        </li>
-        <li><em>“Is genome large (&gt;100Mpb)?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-      </ul>
-    </li>
-    <li>Rename the HTML report as <code class="language-plaintext highlighter-rouge">QUAST second report</code></li>
-  </ol>
-
-</blockquote>
-
-<p>In the figure 9 we can see the cumulative length plot corresponding to the primary assembly after being processed.</p>
-
-<figure id="figure-9"><img src="../../images/vgp_assembly/QUAST_cummulative.png" alt="Figure 9: QUAST plot post-processing. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> QUAST cumulative plot after runnig purge_dups.</figcaption></figure>
-
-<p>As can be appreciated, both the number of contigs and the total length have been reduced significantly after running purge_dups. It indicates that purge_dups has been able to improve genome assemblies by removing overlaps and haplotigs caused by sequence divergence in heterozygous regions.</p>
-
-<blockquote class="question">
-  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <ol>
-    <li>How many contigs includes the primary assembly after being processed with purge_dups? What about before purge_dups?</li>
-    <li>How many contigs include the alte<span class="notranslate">rna</span>te assembly after being processed with purge_dups?</li>
-    <li>Which percentage of <span class="notranslate">reads</span> mapped to the primary assembly?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <ol>
-      <li>The primary assembly includes 17 contigs after being processed. The initial assembly included 33 contigs.</li>
-      <li>The alte<span class="notranslate">rna</span>te includes 17 contigs after being processed.</li>
-      <li>According to the report, 100% of <span class="notranslate">reads</span> mapped to the primary assembly.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<p>Now, let’s evaluate the assembly with BUSCO.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assessing-assembly-completeness-with-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: assessing assembly completeness with BUSCO</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyze”</em>: <code class="language-plaintext highlighter-rouge">Primary contigs purged</code> and <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te contigs purged</code></li>
-        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (<span class="notranslate">DNA</span>)</code>
-          <ul>
-            <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
-          </ul>
-        </li>
-        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
-          <ul>
-            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Saccharomycetes</code></li>
-          </ul>
-        </li>
-        <li>In <em>“Advanced Options”</em>:
-          <ul>
-            <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">short summary text</code> and <code class="language-plaintext highlighter-rouge">summary image</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>Rename the summary as <code class="language-plaintext highlighter-rouge">BUSCO second report</code></li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="question">
-  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <p>How many complete BUSCO genes have been identified?</p>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <p>According to the report, the primary assembly contains 2021 complete BUSCO genes.</p>
-
-  </blockquote>
-
-</blockquote>
-
 <h1 id="hybrid-scaffolding">Hybrid scaffolding</h1>
 
 <p>At this point, we have obtained the primary and alte<span class="notranslate">rna</span>te assemblies, each of which consists in a collection of contigs (contiguous sequences assembled from overlapping <span class="notranslate">reads</span>). Next, the contigs will be assembled into scaffolds, i.e., sequences of contigs interspaced with gaps. For this purpose, we will carry out a hybrid scaffolding by taking advantage of two additional technologies: Bionano optical maps and Hi-C data.</p>
@@ -2138,7 +2005,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
   <p>Bionano technology relies on the isolation of kilobase-long <span class="notranslate">DNA</span> fragments, which are labeled at specific sequence motifs with a fluorescent dye, resulting in a unique fluorescent pattern for each genome. <span class="notranslate">DNA</span> molecules are stretched into nanoscale channels and imaged with a high-resolution camera, allowing us to build optical maps that include the physical locations of labels rather than base-level information (<span class="citation"><a href="#Lam2012">Lam <i>et al.</i> 2012</a></span>, <span class="citation"><a href="#Giani2020">Giani <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>).</p>
 
-  <figure id="figure-10"><img src="../../images/vgp_assembly/bionano.png" alt="Figure 10: Bionano optical maps. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Bionano optical maps. Source: https://bionanogenomics.com</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/vgp_assembly/bionano.png" alt="Figure 9: Bionano optical maps. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Bionano optical maps. Source: https://bionanogenomics.com</figcaption></figure>
 
   <p>The average optical map molecule length, around 225 kbp, is substantially larger than the PacBio HiFi <span class="notranslate">reads</span>, with read lengths averaging 10-25 kbp.</p>
 
@@ -2191,24 +2058,32 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 </blockquote>
 
-<p>Now, let’s evaluate the effect of Bionano in our assembly.</p>
+<h2 id="second-round-of-assembly-evaluation">Second round of assembly evaluation</h2>
+
+<p>Once we have run purge_dups and Bionano, we can evaluate the assembly again, and compare the results.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-bionano-assembly-evaluation-with-quast"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bionano assembly evaluation with QUAST</h3>
+  <h3 id="hands_on-hands-on-bionano-assembly-evaluation-with-quast-and-busco"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bionano assembly evaluation with QUAST and BUSCO</h3>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">Yes, specify custom names</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Primary assembly bionano</code></li>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">Primary assembly bionano</code></li>
+          </ul>
+        </li>
+        <li><em>“<span class="notranslate">Reads</span> options”</em>: <code class="language-plaintext highlighter-rouge">Pacbio SMRT <span class="notranslate">reads</span></code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file”</em>: <code class="language-plaintext highlighter-rouge">HiFi <span class="notranslate">reads</span> collapsed</code></li>
           </ul>
         </li>
         <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
           <ul>
             <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">11748793</code> (previously estimated)</li>
+                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">11747076</code> (previously estimated)</li>
               </ul>
             </li>
             <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding</code></li>
@@ -2221,34 +2096,59 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
         </li>
       </ul>
     </li>
+    <li>
+      <p>Rename the HTML report as <code class="language-plaintext highlighter-rouge">QUAST second report</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyze”</em>: <code class="language-plaintext highlighter-rouge">Primary assembly Bionano</code></li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (<span class="notranslate">DNA</span>)</code>
+          <ul>
+            <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
+          </ul>
+        </li>
+        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
+          <ul>
+            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Saccharomycetes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">short summary text</code> and <code class="language-plaintext highlighter-rouge">summary image</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the summary as <code class="language-plaintext highlighter-rouge">BUSCO second report</code></li>
   </ol>
 
 </blockquote>
 
+<p>As we can observe in the cumulative plot (fig. 10a), the total length of the assembly (12.160.926 bp) is slightly larger than the expected genome size. With respect to the NG50 statistic (fig. 10b), the value is 922.430 bp, which is significantly higher than the value obtained during the first evaluation stage (813.039 bp).</p>
+
+<figure id="figure-10"><img src="../../images/vgp_assembly/QUAST_cummulative.png" alt="Figure 10: QUAST and BUSCO plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> . Cumulative length plot (a). NGx plot. The y-axis represents the NGx values in Mbp, and the x-axis is the percentage of the genome (b). Assembly evaluation after runnig Bionano. BUSCO genes are defined as "Complete (C) and single copy (S)" when are found once in the single-copy ortholog database, "Complete (C) and duplicated (D)" when single-copy ortholog genes which were found more than once, "Fragmented (F)" when genes are matching just partially to a single-copy ortholog DB, and "Missing (M)" when genes which are expected but were not detected (c).</figcaption></figure>
+
+<p>Finally, the BUSCO’s summary image (fig. 10c) shows that most of the universal single-copy orthologs are present in our assembly.</p>
+
 <blockquote class="question">
-  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How many scaffolds are in the primary assembly after the hybrid scaffolding?</li>
-    <li>What is the size of the largest scaffold?</li>
+    <li>What is the size of the largest scaffold? Has improved with respect to the previous evaluation?</li>
+    <li>What is the percertage of completeness on the core set genes in BUSCO? Has increased the completeness?</li>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>The number of contigs is 17.</li>
-      <li>The largest contig is 1.532.843 bp long.</li>
+      <li>The largest contig is 1.531.728 bp long. This value hasn’t changed.</li>
+      <li>The percentage of complete BUSCOs is 95.7%. Yes, it has increased, since in the previous evaluation the completeness percentage was 88.7%.</li>
     </ol>
 
   </blockquote>
-
-</blockquote>
-
-<blockquote class="comment">
-  <h3 id="comment-note-on-bionano-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note on Bionano results</h3>
-
-  <p>In that case, Bionano hasn’t improved the genome assembly at all; the reason is that we are assembling a very simple genome, so at this point the assembly is almost perfect. Nevertheless, it is important to know how optimal maps can contribute to improving the scaffolding of our genomes, since in most cases this will be necessary.</p>
 
 </blockquote>
 
@@ -2275,7 +2175,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   <h3 id="hands_on-hands-on-mapping-hi-c-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <span class="notranslate">Mapping</span> Hi-C <span class="notranslate">reads</span></h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0"><strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
           <ul>
@@ -2295,7 +2195,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <li>
       <p>Rename the output as <code class="language-plaintext highlighter-rouge">BAM forward</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0"><strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
           <ul>
@@ -2446,82 +2346,19 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<h3 id="evaluate-salsa2-scaffolding-with-quast">Evaluate SALSA2 scaffolding with QUAST</h3>
-
-<p>In order to analyze how the information provided by the HiC read has contributed to the improvement of our assembly, we are going to run QUAST again.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-evaluation-with-quast"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Evaluation with QUAST</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">SALSA2 scaffold FASTA</code></li>
-          </ul>
-        </li>
-        <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
-          <ul>
-            <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
-              <ul>
-                <li><em>“Estimated reference genome size (in bp) for computing NGx statistics”</em>: <code class="language-plaintext highlighter-rouge">11748793</code> (previously estimated)</li>
-              </ul>
-            </li>
-            <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Eukaryote (--eukaryote): use of GeneMark-ES for gene finding, Bar<span class="notranslate">rna</span>p for ribosomal <span class="notranslate">RNA</span> genes prediction, BUSCO for conserved orthologs finding</code></li>
-          </ul>
-        </li>
-        <li><em>“Is genome large (&gt; 100 Mbp)?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-      </ul>
-    </li>
-    <li>Rename the HTML report as <code class="language-plaintext highlighter-rouge">QUAST final report</code></li>
-  </ol>
-</blockquote>
-
-<p>We will analyze the results generated by QUAST to assess the extent to which SALSA2 has improved our genome assembly.</p>
-
-<blockquote class="question">
-  <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <ol>
-    <li>What is the size of the largest scaffold?</li>
-    <li>How many scaffolds are in the final assembly?</li>
-    <li>What is the N50 statistic?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <ol>
-      <li>The largest contig has 1.532.843 bp.</li>
-      <li>The final assembly includes 16 scaffolds.</li>
-      <li>The N50 value is 923.452 bp.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h3 id="evaluate-the-final-genome-assembly-with-pretext-optional">Evaluate the final genome assembly with Pretext: optional</h3>
+<h3 id="evaluate-the-final-genome-assembly-with-pretext">Evaluate the final genome assembly with Pretext</h3>
 
 <p>Finally, we should repeat the procedure described previously for generating the contact maps, but in that case, we will use the scaffold generated by SALSA2.</p>
-
-<blockquote class="comment">
-  <h3 id="comment-comment-on-this-evaluation-step"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment on this evaluation step</h3>
-
-  <p>This step is essential when working with complex genomes in order to be able to evaluate the resolution of possible errors in our assembly. However, in the case of this tutorial, given the simplicity of the genome we are working on, you can go directly to the final evaluation if you wish.</p>
-
-</blockquote>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-mapping-reads-against-the-scaffold"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <span class="notranslate">Mapping</span> <span class="notranslate">reads</span> against the scaffold</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0"><strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">scaffolds_fasta</code> (output of <strong>SALSA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">SALSA2 scaffold FASTA</code></li>
           </ul>
         </li>
         <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
@@ -2537,7 +2374,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <li>
       <p>Rename the output as <code class="language-plaintext highlighter-rouge">BAM forward SALSA2</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0"><strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
           <ul>
@@ -2590,7 +2427,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <figure id="figure-15"><img src="../../images/vgp_assembly/hi-c_pretext_final.png" alt="Figure 15: Pretext final contact map. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Hi-C map generated by Pretext after the hybrid scaffolding based on Hi-C data. The red circles indicate the  differences between the contact map generated after (a) and before (b) Hi-C hybrid scaffolding.</figcaption></figure>
 
-<p>Among the most notable differences that can be identified between the contact maps, it can be highlighted the region under the circle in the upper left corner, where an inversion can be identified.</p>
+<p>Among the most notable differences that can be identified between the contact maps, it can be highlighted the regions marked with red circles, where inversion can be identified.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -2598,7 +2435,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <figure id="figure-16"><img src="../../images/vgp_assembly/stats_conclusion.png" alt="Table 1: Final stats. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Comparison between the final assembly generating in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).</figcaption></figure>
 
-<p>With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.16a,b). It is conspicuous that the reference genome consists of 17 sequences, while in our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial <span class="notranslate">DNA</span>, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 16b).</p>
+<p>With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.16a,b). Regarding the number of scaffolds, the obtained value is similar to the reference assembly, which consist in 16 chromosomes plus the mitochondrial <span class="notranslate">DNA</span>, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 16b).</p>
 
 <figure id="figure-17"><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Figure 16: Comparison reference genome. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Comparison between contact maps generated by using the final assembly (a) and the reference genome (b).</figcaption></figure>
 
@@ -2719,7 +2556,7 @@ author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo and Anna
 title = "VGP assembly pipeline (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "28"
+day = "29"
 url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
