@@ -1,6 +1,6 @@
 ---
 title: Update email, username or password
-area: datasets
+area: account
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]
