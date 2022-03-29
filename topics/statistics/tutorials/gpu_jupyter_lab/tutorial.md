@@ -85,7 +85,7 @@ In this tutorial, we will use the dataset of CTs scans and their respective mask
 Understanding the structure of proteins provides insights into their functions. But, only a few proteins have known structures out of billions of known proteins. To advance into the direction of predicting their 3D structures only from their sequences, AlphaFold2 ({% cite AlphaFold2 %}) has made a breakthrough to predict their structures with high accuracy. However, the database that it uses are large, approximately 2 TBs, and are hard to manage. Therefore, to make it more accessible, a few approaches such as ColabFold ({% Mirdita2021.08.15.456425 %}), has been developed that consumes significantly less memory, much faster and produces 3D structures with similar accuracy. We will look at, in later sections, how we can use ColabFold to predict 3D structure of a protein sequence using the Jupyterlab infrastructure in Galaxy.
 
 # Reproduce results from recent publications using Jupyterlab infrastructure in Galaxy
-In this tutorial, we will a few features of Jupyterlab to create and train a Unet deep learning model and then, predict segmented regions in COVID CT scans using the Unet trained model. In addition, we will predict 3D structure of protein sequence using ColabFold, a faster implementation of AlphaFold2.
+In this tutorial, we will discuss a few features of Jupyterlab to create and train a Unet deep learning model and then, predict segmented regions in COVID CT scans using the Unet trained model. In addition, we will predict 3D structure of protein sequence using ColabFold, a faster implementation of AlphaFold2.
 
 ## Open Jupyterlab editor
 
@@ -146,7 +146,7 @@ The training task completed in the notebook above can also be sent to a Galaxy c
 > 
 > ![Galaxy history](../../images/finished_history_remote_ai.png "Galaxy history showing finished datasets after remote training on a Galaxy cluster")
 > 
-> **Note**: the training may take longer depending on how busy Galaxy's queueing is as it sends the training task to be done on a Galaxy cluster. Therefore, this feature should be used when the training task is expected to run for at least a couple of hours. The training time is higher because a large Docker container is downloaded on the assigned cluster and only then, the training task can proceed.
+> **Note**: The training may take longer depending on how busy Galaxy's queueing is as it sends the training task to be done on a Galaxy cluster. Therefore, this feature should be used when the training task is expected to run for at least a couple of hours. The training time is higher because a large Docker container is downloaded on the assigned cluster and only then, the training task can proceed.
 >
 {: .hands_on}
 
