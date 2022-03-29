@@ -1,9 +1,10 @@
+---
 title: Moving data between Galaxy servers
 area: datasets
 box_type: tip
 layout: faq
 contributors: [Melkeb]
-
+---
 
 Moving data between Galaxy servers
 
