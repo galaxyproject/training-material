@@ -928,7 +928,7 @@ Despite Hi-C generating paired-end reads, we need to map each read separately. T
 >
 > 3. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: Primary assembly bionano`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Primary assembly bionano`
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_R`
 >    - *"Set read groups information?"*: `Do not set`
