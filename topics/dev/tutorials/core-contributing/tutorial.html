@@ -816,21 +816,30 @@ called <code class="language-plaintext highlighter-rouge">UserFavoriteExtension<
 
   <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/__init__.py</code>:</p>
 
-  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 2c0b8a4dc4..69a74b0ad2 100644
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 35e9ac1ba1..36a3ea9cc5 100644
 </span><span class="gd">--- a/lib/<span class="notranslate">galaxy</span>/model/__init__.py
 </span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/model/__init__.py
-</span><span class="p">@@ -6617,6 +6617,11 @@</span> class UserPreference(RepresentById):
+</span><span class="p">@@ -512,6 +512,7 @@</span> class User(Base, Dictifiable, RepresentById):
+         cascade='all, delete-orphan',
+         collection_class=ordering_list('order_index'))
+     _preferences = relationship('UserPreference', collection_class=attribute_mapped_collection('name'))
+<span class="gi">+    favorite_extensions=relationship('UserFavoriteExtension')
+</span>     values = relationship('FormValues',
+         primaryjoin=(lambda: User.form_values_id == FormValues.id))  # type: ignore
+     # Add type hint (will this work w/SA?)
+<span class="p">@@ -8557,6 +8558,12 @@</span> class UserPreference(Base, RepresentById):
+         self.name = name
          self.value = value
  
- 
-<span class="gi">+class UserFavoriteExtension(RepresentById):
-+    def __init__(self, value=None):
-+        self.value = value
+<span class="gi">+class UserFavoriteExtension(Base, RepresentById):
++    __tablename__ = 'user_favorite_extension'
 +
-+
-</span> class UserAction(RepresentById):
-     def __init__(self, id=None, create_time=None, user_id=None, session_id=None, action=None, params=None, context=None):
-         self.id = id
++    id = Column(Integer, primary_key=True)
++    user_id = Column(Integer, ForeignKey("<span class="notranslate">galaxy</span>_user.id"), index=True)
++    value = Column(Text)
+</span> 
+ class UserAction(Base, RepresentById):
+     __tablename__ = 'user_action'
 </code></pre></div>  </div>
 </blockquote>
 
