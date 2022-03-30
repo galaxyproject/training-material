@@ -82,6 +82,8 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```
 >    {: data-commit="Setup reports config file"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. In your `galaxyservers` group variables file, tell the playbook to deploy the reports configuration file:
 >
 >    {% raw %}

@@ -61,6 +61,8 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    ```
 >    {: data-commit="Add requirement"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Install the role with:
 >
 >    > ### {% icon code-in %} Input: Bash

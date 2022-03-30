@@ -80,6 +80,8 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```
 >    {: data-commit="Add golang and singulary ansible roles"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Install the requirements with `ansible-galaxy`:
 >
 >    > ### {% icon code-in %} Input: Bash

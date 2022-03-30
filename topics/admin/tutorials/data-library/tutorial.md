@@ -73,6 +73,8 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Take a minute to explore the [folders in our sample library.](https://github.com/usegalaxy-eu/libraries-training-repo). These will be important when we start loading data.
 >
 > 4. Edit the file `group_vars/galaxyservers.yml` and set the following variables:

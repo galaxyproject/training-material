@@ -51,12 +51,24 @@ $("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:
 
 
 <!--  For admin training -->
-$("section.tutorial.topic-admin div.language-diff pre code .gi,section.tutorial.topic-admin div.language-diff pre code .gd").each((x, e) => {
-  var fixed = $(e).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-  $(e).text(fixed);
-})
-$("section.tutorial.topic-data-science div.language-diff pre code .gi,section.tutorial.topic-data-science div.language-diff pre code .gd").each((x, e) => {
-  var fixed = $(e).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-  $(e).text(fixed);
+document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => {
+	codeBlock.childNodes.forEach(x => {
+		if(x.nodeName == '#text'){
+			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
+		} else {
+			var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+			$(x).text(fixed);
+		}
+	})
 })
 
+document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => {
+	codeBlock.childNodes.forEach(x => {
+		if(x.nodeName == '#text'){
+			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
+		} else {
+			var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+			$(x).text(fixed);
+		}
+	})
+})
