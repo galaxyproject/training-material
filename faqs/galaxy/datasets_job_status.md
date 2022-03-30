@@ -13,7 +13,7 @@ The following job statuses will help you better understand the working stage of 
 - **Yellow**: The job is executing. Allow this to complete! Should they run longer, they will fail with a "wall-time" error and turn _red_.
 - **Grey**: The job is being evaluated to run (new dataset) or is queued. Allow this to complete.
 - **Red**: The job has failed.
-- **Light Blue**: The job is paused. This indicates either an input has a problem or that you have [exceeded the disk quota](https://galaxyproject.org/main/#user-data-and-job-quotas) set by the administrator of the Galaxy instance you are working on.
+- **Light Blue**: The job is paused. This indicates either an input has a problem or that you have exceeded the disk quota set by the administrator of the Galaxy instance you are working on.
 - **Grey, Yellow, Grey again**: The job is waiting to run due to admin re-run or an automatic fail-over to a longer-running cluster.
 - **Bright blue with moving arrow**: May be found in earlier Galaxy versions. Applies to the "Get Data → Upload File" tool only - the upload job is queuing or running.
 
