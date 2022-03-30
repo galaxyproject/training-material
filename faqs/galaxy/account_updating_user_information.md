@@ -1,5 +1,5 @@
 ---
-title: Update user information
+title: Updating user information
 area: account
 box_type: tip
 layout: faq
