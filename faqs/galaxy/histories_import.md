@@ -1,5 +1,5 @@
 ---
-title: Import an history
+title: Importing history
 area: histories
 box_type: tip
 layout: faq
