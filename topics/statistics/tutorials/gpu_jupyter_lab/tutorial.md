@@ -123,22 +123,29 @@ Now, we have all the notebooks available for performing image segmentation. The 
 
 > ### {% icon hands_on %} Hands-on: Run notebooks in Jupyterlab
 >
-> 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook. 
+> 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook. It creates all the necessary folders and then, downloads two datasets - one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. 
 >
-> It will also create all the necessary folders. It downloads two datasets, one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. These sub-datasets are stored in different variables after reading the original "h5" file once. For training, we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used for prediction. We use "h5" format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on, therefore, to converge all these different forms of datasets to one format, we use "h5" to store matrices. In any AI analysis, different forms of datasets can be stored as `h5` files. 
-
-> For image segmentation task, we also saved all the input datasets/matrices to the deep learning model as sub-datasets in one "h5" file so that it can be easily created, stored, downloaded and used. This step may take a few minutes as it downloads around 450 MB of data from Zenodo. Once datasets are downloaded to the notebook, we can move to the next step of creating a deep learning model and start training it.
-> 
-> 2. Create and train a deep learning Unet model using **"2_create_model_and_train.ipynb"** notebook. 
-> 
->This will read the input "h5" datasets containing all images and train the model after creating deep learning model architecture. This notebook first creates a deep learning architecture based on Unet including custom loss functions such as total variation and binary cross-entropy losses. After creating the deep learning architecture, all training datasets such as training data, training labels, validation data, validation labels are loaded from the combined "h5" file. In the next step, all the datasets and deep learning architecture are compiled together and training starts for 10 epochs (10 iterations over the entire training dataset).
-> 
-> The training is fast as it runs on GPU and finishes in a few minutes and creates a trained model. In the last step, the trained model containing several files are converted to one "onnx" file. Once a trained model is ready, we can move to the next step to make predictions on unseen CT scan masks.
-> 
-> 3. Predict unseen masks using the trained model in **"3_predict_masks.ipynb"** notebook. First, it reads test datasets from the combined "h5" file and then, loads the "onnx" model. Using this model, it predicts masks of unseen CT scans and then plots the ground truth and predicted masks in one plot (see Figure 7).
-> 
+>    > ### {% icon comment %} Details
+>    >  Sub-datasets are stored in different variables after reading the original "h5" file once. For training, we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used for prediction. We use "h5" format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on, therefore, to converge all these different forms of datasets to one format, we use "h5" to store matrices. In any AI analysis, different forms of datasets can be stored as `h5` files. For image segmentation task, we also saved all the input datasets/matrices to the deep learning model as sub-datasets in one "h5" file so that it can be easily created, stored, downloaded and used. This step may take a few minutes as it downloads around 450 MB of data from Zenodo. Once datasets are downloaded to the notebook, we can move to the next step of creating a deep learning model and start training it.
+>    >
+>    {: .comment}
+>
+> 2. Create and train a deep learning Unet model using **"2_create_model_and_train.ipynb"** notebook. This will read the input "h5" datasets containing all images and train the model after creating deep learning model architecture.
+>
+>    > ### {% icon comment %} Details
+>    > This notebook first creates a deep learning architecture based on Unet including custom loss functions such as total variation and binary cross-entropy losses. After creating the deep learning architecture, all training datasets such as training data, training labels, validation data, validation labels are loaded from the combined "h5" file. In the next step, all the datasets and deep learning architecture are compiled together and training starts for 10 epochs (10 iterations over the entire training dataset). The training is fast as it runs on GPU and finishes in a few minutes and creates a trained model. In the last step, the trained model containing several files are converted to one "onnx" file. Once a trained model is ready, we can move to the next step to make predictions on unseen CT scan masks.
+>    >
+>    {: .comment}
+>
+> 3. Predict unseen masks using the trained model in **"3_predict_masks.ipynb"** notebook.
+>
+>    > ### {% icon comment %} Details
+>    > First, it reads test datasets from the combined "h5" file and then, loads the "onnx" model. Using this model, it predicts masks of unseen CT scans and then plots the ground truth and predicted masks in one plot (see Figure 7)
+>    >
+>    {: .comment}
+>
 > ![True and predicted masks of CTs scans](../../images/true_pred_masks.png "Ground truth and predicted masks of COVID CT scans. Predicted masks in the third and fourth columns (computed using slightly different loss functions) are very close to the corresponding original masks in the second column")
-> The above picture shows origin lungs CT scans in the first column. The second column shows the corresponding true infected regions in white. The third and fourth columns show the infected regions predicted with different loss functions, one is the binary cross-entropy loss and another is the combination of binary cross-entropy loss and total variation loss. Binary cross-entropy calculates loss between two corresponding pixels of true and predicted images. It measures how close two corresponding pixels are. But, total variation loss measures the amount of noise in predicted images as noisy regions usually show large variations in their neighbourhood. The noise in the predicted images gets minimized and the connectivity of predicted masks improves as well when minimizing this loss.   
+> The above picture shows origin lungs CT scans in the first column. The second column shows the corresponding true infected regions in white. The third and fourth columns show the infected regions predicted with different loss functions, one is the binary cross-entropy loss and another is the combination of binary cross-entropy loss and total variation loss. Binary cross-entropy calculates loss between two corresponding pixels of true and predicted images. It measures how close two corresponding pixels are. But, total variation loss measures the amount of noise in predicted images as noisy regions usually show large variations in their neighbourhood. The noise in the predicted images gets minimized and the connectivity of predicted masks improves as well when minimizing this loss.
 >
 {: .hands_on}
 
