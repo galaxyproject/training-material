@@ -4,7 +4,7 @@ description: Job statuses will help you understand the stage of your working.
 area: datasets
 layout: faq
 box_type: tip
-contributors: [garimavs, jennaj]
+contributors: [jennaj, garimavs]
 ---
 
 The following job statuses will help you better understand the working stage of the process.
