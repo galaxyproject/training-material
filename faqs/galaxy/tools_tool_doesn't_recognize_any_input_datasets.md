@@ -12,4 +12,5 @@ Expected input datatype format is explained on the Tool form itself on the "Plea
 
 1. Click on the pencil icon {% icon galaxy-pencil %} found on the dataset to reach the **Edit Dataset Attributes** form.
 2. Click on the datatypes tab to convert the format.
-3. Click on the **Save** button.
+3. Choose the datatype from the drop-down list.
+4. Click on the **Save** button.
