@@ -7,7 +7,7 @@ contributors: [jennaj, Melkeb]
 ---
 
 
-1. To review all Histories in your account, look under User > Histories.
+1. To review all histories in your account, look under **User > Histories** in the top menu bar.
 2. At the top of the History list in the middle panel, click into Advanced Search.
 3. Select status: all to review all of your active, deleted, and permanently deleted (purged) histories.
 4. Histories in all states are listed for registered accounts. Meaning one will always find their data here if it ever appears to be "lost".
