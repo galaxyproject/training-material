@@ -86,6 +86,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```
 >    {: data-commit="Add requirements"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
 >
 > 2. In the same directory, run:

@@ -88,6 +88,8 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```
 >    {: data-commit="Add requirement"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Install the role
 >
 >    > ### {% icon code-in %} Input: Bash

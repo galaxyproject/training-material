@@ -220,6 +220,8 @@ Once you've made sure of these things, it's time to do it!
 >    ```
 >    {% endraw %}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Now run the playbook!
 >
 >    > ### {% icon code-in %} Input: Bash
