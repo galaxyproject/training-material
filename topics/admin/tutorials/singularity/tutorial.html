@@ -761,7 +761,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 10, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 24, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1123,6 +1123,20 @@ uwsgi[1190010]: cd working; SINGULARITYENV_<span class="notranslate">GALAXY</spa
   <p>Yes and no. Singularity images are built from conda environments. Only now you are no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The <span class="notranslate">Galaxy</span> project uses a system called “mulling” to bring together multiple conda dependencies together in a single environment, and Singularity images are produced for these dependencies as well. That said, complex or unresolvable conda environments are not solved by Singularity, because Singularity is really just packaging conda’s environment into a single binary file.</p>
 </blockquote>
 
+<blockquote class="tip">
+  <h3 id="tip-gateway-time-out-504-in-dependencies-view"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Gateway Time-out (504) in Dependencies view</h3>
+  <p>When you open “Admin -&gt; Tool Management -&gt; Manage Dependencies -&gt; Containers”, it sometimes shows “Gateway Time-out (504)”</p>
+
+  <p>Resolving all dependencies for all tools can take a bit, you can increase your timeout with the <code class="language-plaintext highlighter-rouge">uwsgi_read_timeout</code> setting in <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code></p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-resolution-is-unresolved"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Resolution is “unresolved”</h3>
+  <p>In “Admin -&gt; Tool Management -&gt; Manage Dependencies -&gt; Dependencies”, the Resolution for minimap2 @ 2.24 (as well as samtools @1.14) is “unresolved”. How can I resolve this issue?</p>
+
+  <p>Because our training uses containers for resolution it is expected that the non-container dependencies show as “unresolved”. There is not currently a view which indicates if the containers have been resolved.</p>
+</blockquote>
+
 <!--
 ## Use Singularity containers from CVMFS
 
@@ -1250,7 +1264,7 @@ author = "Torfinn Nome and Marius van den Beek and Matthias Bernt and Helena Ras
 title = "Use Singularity containers for running Galaxy jobs (Galaxy Training Materials)",
 year = "2022",
 month = "03",
-day = "10"
+day = "24"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/singularity/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
