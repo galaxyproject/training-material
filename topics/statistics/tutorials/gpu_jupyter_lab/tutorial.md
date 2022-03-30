@@ -67,7 +67,7 @@ In an image classification task, a label is assigned to each image. For example,
 
 
 ## COVID CT scan
-Segmenting lung CT scans task to locate infected regions has been actively proposed to augment the RT-PCR testing for initial screening of COVID infection in humans. Deep learning has been used to predict these regions with high accuracy in studies such as {% cite InfNet %}, {% cite JCSWu2021 %} and many more. In Figure 3, the differences between the CT scans of a normal person and a person suffering from COVID-19 can be seen. The regions of lungs marked by white patches are infected by {% cite SaeedizadehTVUnet %}.
+Segmenting lung CT scans task to locate infected regions has been actively proposed to augment the RT-PCR testing for initial screening of COVID infection in humans. Deep learning has been used to predict these regions with high accuracy in studies such as {% cite InfNet %}, {% cite JCSWu2021 %} and many more. In Figure 3, the differences between the CT scans of a normal person and a person suffering from COVID-19 can be seen. The regions of lungs marked by white patches are infected as discussed in {% cite SaeedizadehTVUnet %}.
 
 ![Normal and Covid CT scans](../../images/normal_covid_ct_scans.jpg "(Left) Lungs CT scan for a normal person and (right) lungs CT scan for a person having COVID-19")
 
@@ -82,13 +82,13 @@ Unet neural network is widely used for segmentation tasks in images ({% cite Ron
 
 ![Unet architecture](../../images/Unet.jpg "Architecture of Unet neural network for image segmentation. The name "Unet" resembles the shape of its architecture as 'U'")
 
-In this tutorial, we will use the dataset of CTs scans and their respective masks to train an Unet neural network model. The model learns to map the infected regions in the CT scans to their masks. For prediction, the trained model is given unseen CT scans and for each CT scan, it predicts infected regions or masks. For this experiment, we will use Jupyterlab for cloning the notebooks from Github that contain scripts for downloading data, creating and training Unet model and prediction tasks. Data (CT scans and also the trained model) required for the notebooks can be downloaded from Zenodo ({% cite anupkumar20226091361 %}). The model can either be trained in the Jupyterlab or can be sent to Galaxy's cluster for remote processing. After remote processing, the created datasets such as the trained model become available in the new Galaxy history.
+In this tutorial, we will use the dataset of CTs scans and their respective masks to train an Unet neural network model. The model learns to map the infected regions in the CT scans to their masks. For prediction, the trained model is given unseen CT scans and for each CT scan, it predicts infected regions or masks. For this experiment, we will use Jupyterlab for cloning the notebooks from Github that contain scripts for downloading data, creating and training Unet model and prediction tasks. Data (CT scans and also the trained model) required for the notebooks can be downloaded from Zenodo ({% cite anupkumar20226091361 %}). The model can either be trained in the Jupyterlab or can be sent to Galaxy's cluster for remote processing. After remote processing, the created datasets such as the trained model become available in a new Galaxy history.
 
 ## Protein 3D structure
-Understanding the structure of proteins provides insights into their functions. But, only a few proteins have known structures out of billions of known proteins. To advance into the direction of predicting their 3D structures only from their sequences, AlphaFold2 ({% cite AlphaFold2 %}) has made a breakthrough to predict their structures with high accuracy. However, the database that it uses are large, approximately 2 TBs, and are hard to manage. Therefore, to make it more accessible, a few approaches such as ColabFold ({% cite Mirdita2021 %}), has been developed that consumes significantly less memory, much faster and produces 3D structures with similar accuracy. We will look at, in later sections, how we can use ColabFold to predict 3D structure of a protein sequence using the Jupyterlab infrastructure in Galaxy.
+Understanding the structure of proteins provides insights into their functions. But, only a few proteins have known structures out of billions of known proteins. To advance into the direction of predicting their 3D structures only from their sequences, AlphaFold2 ({% cite AlphaFold2 %}) has made a breakthrough to predict their structures with high accuracy. However, the databases that it uses are large, approximately 2 terabytes (TBs), and are hard to store and manage. Therefore, to make it more accessible, a few approaches such as ColabFold ({% cite Mirdita2021 %}), have been developed that consumes significantly less memory, much faster and produces 3D structures with similar accuracy. We will look at, in later sections, how we can use ColabFold to predict 3D structure of a protein sequence using the Jupyterlab infrastructure in Galaxy.
 
-# Reproduce results from recent publications using Jupyterlab infrastructure in Galaxy
-In this tutorial, we will discuss a few features of Jupyterlab to create and train a Unet deep learning model and then, predict segmented regions in COVID CT scans using the Unet trained model. In addition, we will predict 3D structure of protein sequence using ColabFold, a faster implementation of AlphaFold2.
+# Reproduce results from recent publications
+First, we will discuss a few features of Jupyterlab to create and train a Unet deep learning model and then, predict segmented regions in COVID CT scans using the trained Unet model. In addition, we will predict 3D structure of protein sequence using ColabFold, a faster implementation of AlphaFold2. First, let's start the Jupyterlab instance on Galaxy Europe. The interactive tool can be found by searching "GPU enabled Interactive Jupyter Notebook for Machine Learning" name in the tool search.
 
 ## Open Jupyterlab editor
 
@@ -100,27 +100,26 @@ In this tutorial, we will discuss a few features of Jupyterlab to create and tra
 >
 {: .hands_on}
 
-Now, we should wait for a few minutes until Galaxy creates the required compute environment for opening a new Jupyterlab. Usually, this task takes around 10-15 minutes. The progress can be checked by clicking on the "User>Active Interactive tools". On "Active Interactive Tools" page, there is a list of all open interactive tools. The interactive tool can be found by "GPU enabled Interactive Jupyter Notebook for Machine Learning" name. When the job info starts showing "running" on the "Active Interactive Tools" page, then the name of the interactive tool gets associated with a URL to the running Jupyterlab. On clicking this URL, the running Jupyterlab can be opened. Several features of Jupyterlab editor running in Galaxy can be learned by going through the "home_page.ipynb" notebook. The folder "notebooks" contain several notebooks that show multiple use-cases of features and packages. In the following sections, we will look at two use-cases of reproducing results from recent papers - one is COVID CT scan segmentation using deep learning and another one is prediction 3D structure of protein sequences using ColabFold.
+Now, we should wait for a few minutes until Galaxy creates the required compute environment for opening a new Jupyterlab. Usually, this task takes around 10-15 minutes. The progress can be checked by clicking on the "User>Active Interactive tools". On "Active Interactive Tools" page, there is a list of all open interactive tools. When the job info shows "running" on the "Active Interactive Tools" page, then the name of the interactive tool gets associated with a URL to the running Jupyterlab. On clicking this URL, the running Jupyterlab can be opened. Several features of Jupyterlab running in Galaxy can be learned by going through the "home_page.ipynb" notebook. The folder "notebooks" contain several notebooks that show multiple use-cases of features and packages. In the following sections, we will look at two use-cases that reproduce results from recent publications - one is COVID CT scan segmentation using deep learning and another one is prediction 3D structure of protein sequences using ColabFold. Let's download the necessary notebooks from Github for performing these analyses.
 
-
-## Use-case 1: Run image segmentation analysis
-
-### Clone Github repository
+## Clone Github repository
 To use Git version control for cloning any codebase from GitHub, the following steps should be performed.
 
 > ### {% icon hands_on %} Hands-on: Pull code
 >
-> 1. Create a new folder named "covid_ct_segmentation" alongside other folders such as "data", "outputs", "elyra"
-> 2. Inside the created folder, clone a code repository by clicking on "Git" icon as shown in Figure 6
-> 3. In the shown popup, provide the repository path as "https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation" and then, click on "clone"
-> 4. The repository "anuprulez/gpu_jupyterlab_ct_image_segmentation" gets immediately cloned
-> 5. Move inside the created folder `gpu_jupyterlab_ct_image_segmentation`. A few notebooks can be found inside that are numbered
+> 1. Create a new folder named "covid_ct_segmentation" alongside other folders such as "data", "outputs", "elyra" or you can use your favourite folder name.
+> 2. Inside the created folder, clone a code repository by clicking on "Git" icon as shown in Figure 6.
+> 3. In the shown popup, provide the repository path as "https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation" and then, click on "clone".
+> 4. The repository "anuprulez/gpu_jupyterlab_ct_image_segmentation" gets immediately cloned.
+> 5. Move inside the created folder `gpu_jupyterlab_ct_image_segmentation`. A few notebooks can be found inside that are numbered.
 >    ![Clone repository](../../images/git_clone.png "Clone a code repository using Git")
 >
 {: .hands_on}
 
-Now, we have all the notebooks available for performing image segmentation. The entire analysis can be completed in two ways - one by running all the notebooks in the Jupyterlab itself and another by sending the notebook for training to a remote Galaxy cluster invoking another Galaxy tool from the notebook. First, let's look at how we can run this analysis in the notebook itself.
+Now, we have all the notebooks available for performing image segmentation and predicting 3D structures of protein sequences. The entire analysis of image segmentation can be completed in two ways - one by running all the notebooks in the Jupyterlab itself and another by sending the notebook for training to a remote Galaxy cluster invoking another Galaxy tool from the notebook. First, let's look at how we can run this analysis in the notebook itself.
 
+
+## Use-case 1: Run image segmentation analysis
 
 ### Run notebooks in Jupyterlab
 
