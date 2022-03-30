@@ -51,33 +51,24 @@ The current comparative genomics workflow is set up to perform TaxID-restricted 
 > To instead compare only to sequenced (though not necessarily annotated) prophage, change the BLAST job TaxID restriction to 2 (the NCBI TaxID for Bacteria). 
 {: .tip}
 
-> * Open CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), and find the history that contains the results of the [functional workflow](https://cpt.tamu.edu/training-material/topics/phage-annotation-pipeline/tutorials/functional-annotation-workflow/tutorial.html) for the desired phage genome.
-> * Locate the genome FASTA file and the protein multi-FASTA file (likely called Fasta translate). 
-> * Create a new history by clicking on Create New (top right).
-> * Locate the two datasets needed (Translated proteins and your FASTA sequence) that you need, then click and drag them over to your new history to copy the datasets there. As you are dragging toward the active history (the new one that you just created), a box will appear that says "Drag datasets here to copy them into the current history". Drop the datasets in that box and soon a green box with your new dataset should appear.
-> * After copying all necessary datasets, return to the main Galaxy analysis interface by clicking *Done* in the top left.
-
-> ### {% icon details %} Can't find the input dataset?
-> When workflows are run in Galaxy, they often hide the output of their tools to give a clean and readable history with only relevant datasets shown. Sometimes a later analysis will require that dataset and it must be unhidden so that it can be used as input for a tool. 
->At the top of the history, click on the “hidden” hyperlink to see all workflow outputs that have been hidden. Scroll down and find the desired dataset. Click “Unhide it” on this dataset and it will become available for analysis. If preferred, click “hide hidden” at the top of the history to re-hide the other datasets to prevent clutter.
-{: .details}
+> * Open CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), and run **Retrieve Data** to bring the desired phage genome and annotations into your Galaxy history. You may want to create a new history to hold the results of this workflow.
 
 > * At the top of the web page, click on the Shared Data drop-down menu and select workflows.
 
 ![](../../images/phage-comparative-genomics-screenshots/1_go_to_workflows.png)
 
-> * Find the most recent version of the “Phage comparative genomics (v#) workflow,” where # indicates the most recent version of this workflow. Click on the drop-down menu for that workflow and select “Import.” After this, a green box containing a message will appear to inform the user of a successful import. ALternatively, the workflow can be run directly from here, without importing, by clicking on "Run".
+> * Find the most recent version of the “Phage comparative genomics (v#) workflow,” where # indicates the most recent version of this workflow. Click on the drop-down menu for that workflow and select “Import.” After this, a green box containing a message will appear to inform the user of a successful import. Alternatively, the workflow can be run directly from here, without importing, by clicking on "Run".
 
 ![](../../images/phage-comparative-genomics-screenshots/2_import_workflow.png)
 
 > * Once imported, one can click on “start using this workflow” within the message box to be brought to the page containing all of the user’s imported workflows. Find the Phage comparative genomics workflow, click the drop-down menu, and select “Run.”
 
-> * The parameters for the workflow will then load in the center Galaxy panel. The inputs that the user needs to adjust are as follows:
->    > * Step 1. The **Input phage DNA sequence (FASTA)** will be the FASTA dataset (raw nucleotide for genome)
->    > * Step 2. The **Export protein-coding genes for comparison (Galaxy Version 19.1.0.0)** will be the GFF3 file
+> * The parameters for the workflow will then load in the center Galaxy panel. Starting with version 2021.xx, the only input that the user needs to provide is the **Input Phage GFF3+Sequence**, which is the combined GFF3+FASTA file retrieved from Apollo. This file contains both the genome annotations (in GFF3 format) and the appended DNA sequence (in FASTA format).
+> * By default, the workflow is set to return only the top ten results. This number can be changed by expanding the **Related phage genomes by protein identity** and **Related phage genomes by nucleotide identity** tabs in the center panel and editing the **Number of results to return** value as desired.
+> * Under the **Related phage genomes by protein identity** tab, the **TaxIDs to filter out of results** can be used to filter out undesired TaxIDs. The workflow is pre-configured to exclude TaxID 2100421, which contains a large number of uncultured phage metagenome sequences.
 
 > ### {% icon tip %} When Retrieving Data from Apollo into Galaxy
->When the **Retrieve Data** tool is used to import data from Apollo into a Galaxy history, the resulting file is a combined GFF3 + FATSA which must be split into separate files before the Comparative Genomics workflow is run. Search for the **Split GFF3 + FASTA into separate parts** tool in the Tools pane, then run this tool on the combined file to generate the seprated files. When running the workflow, make sure that the input GFF3 and FASTA files are the split GFF3 and FASTA files and not the "Annotations and Sequence from Apollo" file.  
+>Starting with the 2021 update, when the **Retrieve Data** tool is used to import data from Apollo into a Galaxy history, the resulting file is a combined GFF3 + FASTA file. Most of our tools and workflows have been updated to use this file format. If needed, the file can be split into the "classic" separate GFF3 and FASTA files using the **Split GFF3 + FASTA into separate parts** tool in the Tools pane.  
 {: .tip}
 
 > ### {% icon tip %} Note that…
@@ -100,7 +91,7 @@ Look at the *Top BLASTn hits* data by clicking the eye {% icon solution %} symbo
 
 The results of a dot plot analysis can be seen by clicking on the eye {% icon solution %} symbol in the *MIST v3* dataset. This will be the results of pairwise dot plots of the phage in question against the 5 closest-matching genomes. Phages that are related and syntenic will produce a discrete diagonal line in the dot plot. As DNA sequence similarity decreases, the line will become fainter and patchier until it is no longer visible.
 
-Utilizing relationships and similarity at the protein level, the *Top BLASTp hits* dataset displays a table of the top 20 most related organisms based on the number of similar proteins found by BLASTp. This tool searched through your BLASTp results against the NCBI nr database and retrieved the organisms that matched the highest number of proteins in your phage (an E-value < 1e-3). This number can be found in the last column of the table. Note that this table shows **only** the top 20 results. If the phage in question is part of a large cluster of similar phages (E.G.: T4-like phages), then T4 itself may not appear in the list; 20 other T4-like phages may be more closely related to the phage in question, and T4 may be only the 30th most related phage. The does *not* mean the phage in question is not T4-like, and it is up to the annotator to determine how the phage in question relates to other phages. See the box below for more additional investigations that may help.
+Utilizing relationships and similarity at the protein level, the *Top BLASTp hits* dataset displays a table of the top related organisms based on the number of similar proteins found by BLASTp. This tool searched through your BLASTp results against the NCBI nr database and retrieved the organisms that matched the highest number of proteins in your phage (an E-value < 1e-3). This number can be found in the last column of the table. Note that this table shows **only** the top results as specified in the workflow (default 10). If the phage in question is part of a large cluster of similar phages (E.G.: T4-like phages), then T4 itself may not appear in the list;  other T4-like phages may be more closely related to the phage in question, and T4 may be only the 30th most related phage. The does *not* mean the phage in question is not T4-like, and it is up to the annotator to determine how the phage in question relates to other phages. See the box below for more additional investigations that may help.
 
 > ### {% icon details %} Further sleuthing...
 > There are several ways that the annotator can use the output of these analyses to determine the closest type phage. Note that these will all be under the classification Caudovirales.
