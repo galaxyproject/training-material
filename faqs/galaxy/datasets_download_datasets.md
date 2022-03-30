@@ -7,5 +7,5 @@ contributors: [jennaj, Melkeb]
 ---
 
 
-1. Open the datasets found under history
-2. Click on the save icon {% icon galaxy-save %} inside the dataset
+1. Open the datasets found under history.
+2. Click on the save icon {% icon galaxy-save %} inside the dataset.
