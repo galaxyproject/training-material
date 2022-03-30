@@ -10,8 +10,11 @@ Registering for a Galaxy account
 
 -Having your own account on the public Test and/or Main server means that you can save histories, work with more data, and get the most out of Galaxy's functionality.
 
--Accounts are created under the User masthead menu. This same menu is also where you will log in and out of Galaxy.
 -To create an account on the galaxy plateform visit the official website via (https://usegalaxy.org)
+
+-Accounts are created under the User masthead menu. This same menu is also where you will log in and out of Galaxy.
+
+
 -Be sure to note that the public Test and Main instance usage policies are one account per user, as stated in our Terms and Conditions. Also, make sure your email address is valid so that you can confirm your new account (emails are case sensitive) and so that our administrator can contact you if needed (rare, but you'll want the email!).
 
 -The activation email will include a link and an abbreviated terms of usage explaination:
