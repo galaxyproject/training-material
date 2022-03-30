@@ -153,6 +153,8 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >    ```
 >    {: data-commit="Add requirements"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Now install it with:
 >
 >    > ### {% icon code-in %} Input: Bash

@@ -189,6 +189,8 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 >    > Okay, so the first thing I'm going to do is I'm going to add the CVMFS
 >    > role to the requirements.yml.
 >    > Edit requirements.yml and we need to add this to the bottom of that file. Copy. Paste. And save it.

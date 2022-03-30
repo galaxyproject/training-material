@@ -60,6 +60,8 @@ To allow your user to upload via TUS, you will need to:
 >    ```
 >    {: data-commit="Add requirement"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Install the role with:
 >
 >    > ### {% icon code-in %} Input: Bash

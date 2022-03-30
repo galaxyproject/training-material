@@ -84,6 +84,8 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. In your `galaxyservers` group variables file, add the following:
 >
 >    {% raw %}

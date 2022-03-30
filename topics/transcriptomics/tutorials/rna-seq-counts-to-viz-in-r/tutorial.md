@@ -425,7 +425,7 @@ We would like now to make a barplot showing the number of differentially express
 
 > ### {% icon question %} Create a R script with plots
 >
-> Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the [RStudio `ggplot2` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) for inspiration).
+> Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the [RStudio `ggplot2` cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization-2.1.pdf) for inspiration).
 >
 > Here are some ideas:
 > 1. Change the size or shape of the plotting symbol
