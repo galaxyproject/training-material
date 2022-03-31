@@ -1,5 +1,5 @@
 ---
-title: Download datasets
+title: Downloading datasets
 area: datasets
 box_type: tip
 layout: faq
