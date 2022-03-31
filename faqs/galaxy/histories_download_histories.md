@@ -1,5 +1,5 @@
 ---
-title: Download entire histories
+title: Downloading histories
 area: histories
 box_type: tip
 layout: faq
