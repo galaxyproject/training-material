@@ -80,6 +80,8 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```
 >    {: data-commit="Add golang and singulary ansible roles"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Install the requirements with `ansible-galaxy`:
 >
 >    > ### {% icon code-in %} Input: Bash
@@ -356,6 +358,17 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 {: .tip}
 
 
+> ### {% icon tip %} Gateway Time-out (504) in Dependencies view
+> When you open "Admin -> Tool Management -> Manage Dependencies -> Containers", it sometimes shows "Gateway Time-out (504)"
+>
+> Resolving all dependencies for all tools can take a bit, you can increase your timeout with the `uwsgi_read_timeout` setting in `templates/nginx/galaxy.j2`
+{:.tip}
+
+> ### {% icon tip %} Resolution is "unresolved"
+> In "Admin -> Tool Management -> Manage Dependencies -> Dependencies", the Resolution for minimap2 @ 2.24 (as well as samtools @1.14) is "unresolved". How can I resolve this issue?
+>
+> Because our training uses containers for resolution it is expected that the non-container dependencies show as "unresolved". There is not currently a view which indicates if the containers have been resolved.
+{: .tip}
 
 
 

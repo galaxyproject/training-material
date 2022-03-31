@@ -249,6 +249,8 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >    ```
 >    {% endraw %}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 6. Run the playbook.
 >
 > 7. Galaxy should now be configure to use the object store!
