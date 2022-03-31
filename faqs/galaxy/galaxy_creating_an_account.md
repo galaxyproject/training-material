@@ -20,7 +20,8 @@ Registering for a Galaxy account
 -The activation email will include a link and an abbreviated terms of usage explaination:
 
 By clicking on the above link and opening a Galaxy account, you are also confirming that you have read and agreed to Galaxy's Terms and Conditions for the use of this service (https://usegalaxy.org/static/terms.html). 
--Terms include a quota limit of one account per user. Attempts to subvert this limit by creating multiple accounts or through any other method may result in termination of all associated accounts and data.
+
+Terms include a quota limit of one account per user. Attempts to subvert this limit by creating multiple accounts or through any other method may result in termination of all associated accounts and data.
 
 -Most other public Galaxy servers have similar usage terms. Ask them if this is not clear, before multiple accounts are problems. Contact information for Galaxy servers is usually on the home page of the server and/or on that server's directory page.
 
