@@ -8,4 +8,4 @@ contributors: [jennaj, Melkeb]
 
 
 1. Open the datasets found under history.
-2. Click on the save icon {% icon galaxy-save %} inside the dataset.
+2. Click on the Download icon {% icon galaxy-save %} to save the dataset to your computer.
