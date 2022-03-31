@@ -7,5 +7,5 @@ contributors: [jennaj, Melkeb]
 ---
 
 
-1. Open the datasets found under history.
+1. Click on the dataset in your history to expand it
 2. Click on the Download icon {% icon galaxy-save %} to save the dataset to your computer.
