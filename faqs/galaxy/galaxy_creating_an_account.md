@@ -3,7 +3,7 @@ title: How to create an account on UseGalaxy.org?
 area: UseGalaxy.org
 layout: faq
 box_type: tip
-contributors:  [jennaj, bernandez]
+contributors: [jennaj, bernandez]
 ---
 
 
