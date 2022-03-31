@@ -4,6 +4,7 @@ area: histories
 description: Puedes compartir tu trabajo en Galaxy. Hay varias formas de dar acceso a tus historiales a otros usuarios.
 box_type: tip
 layout: faq
+contributors: [nomadscientist]
 ---
 
 Compartir tu historial permite a otros importar y acceder a los conjuntos de datos, parámetros y pasos de tu historial.

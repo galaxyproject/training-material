@@ -4,6 +4,7 @@ description: Galaxy will try to autodetect the datatype of your files, but you m
 area: datasets
 box_type: tip
 layout: faq
+contributors: [bebatut,nsoranzo,hexylena,shiltemann,ajadi-abiola]
 ---
 
 * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes

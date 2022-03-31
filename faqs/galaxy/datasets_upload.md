@@ -3,6 +3,7 @@ title: Upload few files (1-10)
 area: datasets
 box_type: tip
 layout: faq
+contributors: [bebatut]
 ---
 
 1. Click on **Upload Data** on the top of the left panel

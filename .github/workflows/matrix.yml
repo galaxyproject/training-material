@@ -20,17 +20,15 @@ jobs:
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.5"
+          ruby-version: "2.7"
       - uses: actions/cache@v2
         with:
           path: |
             vendor/bundle
-            ~/.cache/pip
             ~/.npm
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py--node-
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |

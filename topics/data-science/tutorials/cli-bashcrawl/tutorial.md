@@ -32,7 +32,6 @@ contributors:
 - erasmusplus
 tags:
 - game
-- jupyter-notebook
 - bash
 ---
 

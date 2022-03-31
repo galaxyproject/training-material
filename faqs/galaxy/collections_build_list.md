@@ -3,6 +3,7 @@ title: Creating a dataset collection
 area: collections
 box_type: tip
 layout: faq
+contributors: [shiltemann, hexylena]
 ---
 
 * Click on **Operations on multiple datasets** (check box icon) at the top of the history panel ![Operations on multiple datasets button]({% link topics/galaxy-interface/images/historyItemControls.png %})

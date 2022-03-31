@@ -2,6 +2,8 @@
 title: How can I get started with contributing?
 area: contributors
 layout: faq
+box_type: tip
+contributors: [bebatut,shiltemann]
 ---
 
 If you would like to get involved in the project but are unsure where to start, there are some easy ways to contribute which will also help you familiarize yourself with the project.

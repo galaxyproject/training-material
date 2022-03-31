@@ -33,6 +33,7 @@ requirements:
       - ansible-galaxy
       - connect-to-compute-cluster
       - job-destinations
+subtopic: features
 ---
 
 > ### {% icon warning %} Evolving Topic
@@ -242,7 +243,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    {% raw %}
 >    ```yaml
 >    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
->    gie_proxy_git_version: master
+>    gie_proxy_git_version: main
 >    gie_proxy_setup_nodejs: nodeenv
 >    gie_proxy_virtualenv_command: "{{ pip_virtualenv_command }}"
 >    gie_proxy_nodejs_version: "10.13.0"
@@ -482,6 +483,8 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >         - geerlingguy.docker
 >         - usegalaxy_eu.gie_proxy
 >    ```
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 4. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >

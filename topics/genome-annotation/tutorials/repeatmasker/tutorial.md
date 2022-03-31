@@ -132,6 +132,6 @@ As we have used a generic species (Human), we only identified the most common re
 # Conclusion
 {:.no_toc}
 
-By following this tutorial you have learn how to mask an eukaryotic genome using RepeatMasker, after assembling ([Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %})) an before annotating it ([Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %})).
+By following this tutorial you have learn how to mask an eukaryotic genome using RepeatMasker, after assembling ([Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %})) and before annotating it ([Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %})).
 
 Often times, annotation tools prefer to use soft masked genomes, as they primarily search for genes in non repeated regions, but tolerate that some genes overlap partially with these regions.

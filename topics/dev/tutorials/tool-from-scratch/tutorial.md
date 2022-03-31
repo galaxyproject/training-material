@@ -475,7 +475,7 @@ The tool ID and name are defined here as well as which minimum version of Galaxy
 > when complete, the line should appear as follows:
 >
 > ```xml
-> <tool ID="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+> <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
 > ```
 {: .hands_on}
 
