@@ -94,6 +94,64 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 > ### {% icon hands_on %} Hands-On: Peptide and Protein Identification
 >
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
+> #### SearchGUI
+
+> ### {% icon hands_on %} Hands-on: SearchGUI
+> To run SearchGUI, we need to add a decoy database to the FASTA file. The tool we use will be FASTA CLI
+> 1. {% tool [FASTACLI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/fasta_cli/4.0.41+galaxy1) %} with the following parameters:
+> 
+> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
+>    - **Protein Database**: `Human_database_cRAP_and_Mycoplasma_added.fasta`(or however you named the `FASTA` file)
+>    - **Input Peak lists (mgf)**: `MGF` dataset .
+>
+>    > ### {% icon tip %} Tip: Select dataset collections as input
+>    >
+>    > * Click the **Dataset collection** icon on the left of the input field:
+>    >
+>    >      ![Dataset collection button](../../images/dataset_button.png)
+>    > * Select the appropriate dataset collection from the list
+>    {: .tip}
+>
+>    Section **Search Engine Options**:
+>
+>    - **Search Engines**: `X!Tandem`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > The section **Search Engine Options** contains a selection of sequence database searching
+>    > algorithms that are available in SearchGUI. Any combination of these programs can be used for
+>    > generating PSMs from MS/MS data. For the purpose of this tutorial, **X!Tandem** we will be used.
+>    {: .comment}
+>
+>    Section **Precursor Options**:
+>
+>    - **Fragment Tolerance Units**: `Daltons`
+>    - **Fragment Tolerance**: `0.2`- this is high resolution MS/MS data
+>    - **Maximum Charge**: `6`
+>
+>    Section **Protein Modification Options**:
+>
+>    - **Fixed Modifications**: `Carbamidomethylation of C`
+>    - **Variable modifications**: `Oxidation of M`
+>
+>    > ### {% icon tip %} Tip: Search for options
+>    >
+>    > * For selection lists, typing the first few letters in the window will filter the available options.
+>    {: .tip}
+>
+>    Section **Advanced Options**:
+>    - **X!Tandem Options**: `Advanced`
+>    - **X!Tandem: Quick Acetyl**: `No`
+>    - **X!Tandem: Quick Pyrolidone**: `No`
+>    - **X!Tandem: Protein stP Bias**: `No`
+>    - **X!Tandem: Maximum Valid Expectation Value**: `100`
+>
+>    - leave everything else as default
+>
+> 2. Click **Execute**.
+>
+{: .hands_on}
+
 > 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. In the **`Search Engine Options`** select `X!Tandem` and `MS-GF+`. In the **`Protein Modification Options`** add the **`Fixed Modifications`**: `Carbamidomethylation of C` and the **`Variable Modifications`**: `Oxidation of M`.
 > 3. Run ***Peptide Shaker*** {% icon tool %} on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`.
 >
