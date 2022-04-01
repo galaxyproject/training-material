@@ -1,6 +1,6 @@
 ---
-title: Loading data?
-area: Account
+title: How can i load data?
+area: introduction
 layout: faq
 box_type: tip
 contributors: [jennaj, bernandez]
