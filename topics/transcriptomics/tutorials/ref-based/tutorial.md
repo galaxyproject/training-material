@@ -48,6 +48,7 @@ contributors:
     - mblue9
     - nsoranzo
     - pvanheus
+    - lldelisle
 ---
 
 # Introduction
@@ -116,18 +117,14 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    > ```
 >    {: .comment}
 >
-> 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
->
->    {% snippet faqs/galaxy/datasets_rename.md %}
->
-> 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`). If it is not, please change the datatype to `fastqsanger`.
+> 3. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`). If it is not, please change the datatype to `fastqsanger`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
-> 5. Add to each dataset a tag corresponding to the name of the sample (`#GSM461177` or `#GSM461180`)
+> 4. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+
 {: .hands_on}
 
 {% include topics/sequence-analysis/tutorials/quality-control/fastq_question.md %}
@@ -142,12 +139,15 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
+> 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>     - *"Input Collection"*: `2 PE fastqs`
 >
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73) %} with the following parameters:
+>    - {% icon param-collection %} *"Short read data from your current history"*: The output of **Flatten collection** selected with **Dataset collection**
 >
-> 2. Inspect the webpage output of **FastQC** for the `GSM461177` sample
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
+>
+> 2. Inspect the webpage output of **FastQC** for the `GSM461177_untreat_paired` sample (forward and reverse)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -155,20 +155,20 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > The read length is 37 bp.
+>    > > The read length of both pairs is 37 bp.
 >    > >
 >    > {: .solution}
 >    >
 >    {: .question}
 >
-> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} with the following parameters to aggregate the FastQC reports:
+> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the FastQC reports:
 >     - In *"Results"*
 >       - *"Which tool was used generate logs?"*: `FastQC`
 >       - In *"FastQC output"*
 >         - *"Type of FastQC output?"*: `Raw data`
->         - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC**)
+>         - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC**)
 >
-> 4. Inspect the webpage output from MultiQC for each FASTQ
+> 5. Inspect the webpage output from MultiQC for each FASTQ
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -177,21 +177,21 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
+>    > > 1. Everything seems good for 3 of the files. The `GSM461177_untreat_paired` have 10.6 millions of pairs of sequences and `GSM461180_treat_paired` 12.3 millions of pairs of sequences. But in `GSM461180_treat_paired_reverse` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
 >    > >
->    > >    All files except `GSM461180_2` have a high proportion of duplicated reads (expected in RNA-Seq data).
+>    > >    All files except `GSM461180_treat_paired_reverse` have a high proportion of duplicated reads (expected in RNA-Seq data).
 >    > >
 >    > >    ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")
 >    > >
->    > >    The "Per base sequence quality" is globally good with a slight decrease at the end of the sequences. For `GSM461180_2`, the decrease is quite large.
+>    > >    The "Per base sequence quality" is globally good with a slight decrease at the end of the sequences. For `GSM461180_treat_paired_reverse`, the decrease is quite large.
 >    > >
 >    > >    ![Sequence Quality](../../images/ref-based/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
 >    > >
->    > >    The mean quality score over the reads is quite high, but the distribution is slightly different for `GSM461180_2`.
+>    > >    The mean quality score over the reads is quite high, but the distribution is slightly different for `GSM461180_treat_paired_reverse`.
 >    > >
 >    > >    ![Per Sequence Quality Scores](../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png "Per Sequence Quality Scores")
 >    > >
->    > >    Reads do not really follow a normal distribution of GC content, except for `GSM461180_2`.
+>    > >    Reads do not really follow a normal distribution of GC content, except for `GSM461180_treat_paired_reverse`.
 >    > >
 >    > >    ![Per Sequence GC Content](../../images/ref-based/fastqc_per_sequence_gc_content_plot.png "Per Sequence GC Content")
 >    > >
@@ -206,7 +206,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >    There are almost no known adapters and overrepresented sequences.
 >    > >
 >    > > 2. If the quality of the reads is poor, we should:
->    > >    1. Check what is wrong and think about possible reasons for the poor read quality: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data)
+>    > >    1. Check what is wrong and think about possible reasons for the poor read quality: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in Hi-C data)
 >    > >    2. Ask the sequencing facility about it
 >    > >    3. Perform some quality treatment (taking care not to lose too much information) with some trimming or removal of bad reads
 >    > >
@@ -217,27 +217,23 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 We should trim the reads to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends, and also remove the reads of overall bad quality.
 
-{% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="GSM461177_1" reverse="GSM461177_2" %}
+{% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="GSM461177_untreat_paired_forward" reverse="GSM461177_untreat_paired_reverse" %}
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters to trim low quality sequences:
->    - *"Single-end or Paired-end reads?"*: `Paired-end`
->       - {% icon param-files %} *"FASTQ/A file #1"*: both `_1` fastqsanger datasets (multiple datasets)
->       - {% icon param-files %} *"FASTQ/A file #2"*: both `_2` fastqsanger datasets (multiple datasets)
->
->      The order is important here!
->
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0) %} with the following parameters to trim low quality sequences:
+>    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
+>       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
 >    - In *"Filter Options"*
 >       - *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*
 >       - *"Quality cutoff"*: `20`
->    - In *"Output Options"*
->       - *"Report"*: `Yes`
+>    - In *"Outputs selector"*
+>       - Select: `Report: Cutadapt's per-adapter statistics. You can use this file with MultiQC.`
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
-> 2. Inspect the generated txt files (`Report`)
+> 2. Inspect the generated txt files (`Cutadapt on collection N: Report`)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -245,8 +241,8 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. For `GSM461177`, 5,072,810 bp have been trimmed from the forward reads (read 1) and 8,648,619 bp from the reverse reads (read 2) because of quality. For `GSM461180`, 10,224,537 bp from the forward reads and 51,746,850 bp from the reverse reads. This is not a surprise; we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, especially for `GSM461180`.
->    > > 2. 147,810 (1.4%) reads were too short for `GSM461177` and 1,101,875 (9%) for `GSM461180`.
+>    > > 1. For `GSM461177_untreat_paired`, 5,072,810 bp have been trimmed from the forward reads (Read 1) and 8,648,619 bp from the reverse reads (Read 2) because of quality. For `GSM461180_treat_paired`, 10,224,537 bp from the forward reads and 51,746,850 bp from the reverse reads. This is not a surprise; we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, especially for `GSM461180_treat_paired`.
+>    > > 2. 147,810 (1.4%) reads were too short for `GSM461177_untreat_paired` and 1,101,875 (9%) for `GSM461180_treat_paired`.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -319,13 +315,13 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    >
 >    > Annotation files from model organisms may be available on the Shared Data library (the path to them will change from one Galaxy server to the other). You could also retrieve the annotation file from UCSC (using **UCSC Main** tool).
 >    >
+>    > To generate this specific file, the annotation file was downloaded from Ensembl which provides a more comprehensive database of transcripts and was further adapted to make it work with the dm6 genome which is installed on compatible Galaxy servers.
 >    >
 >    {: .comment}
 >
 > 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %} with the following parameters to map your reads on the reference genome:
->    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
->       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: the `Read 1 Output` (outputs of **Cutadapt**)
->       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the `Read 2 Output` (outputs of **Cutadapt**)
+>    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
+>       - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: the `Cutadapt on collection N: Reads` (output of **Cutadapt**)
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >       - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >           - *"Select reference genome"*: `Fly (Drosophila Melanogaster): dm6 Full`
@@ -334,12 +330,12 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >
 >               This parameter should be length of reads - 1
 >
-> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the STAR logs:
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs:
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `STAR`
 >        - In *"STAR output"*
 >           - *"Type of STAR output?"*: `Log`
->           - {% icon param-files %} *"STAR output"*: `log` files (output of **RNA STAR**)
+>           - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: log` (output of **RNA STAR**)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -348,7 +344,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. More than 83% for GSM461177 and more than 79% for GSM461180. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.
+>    > > 1. More than 83% for `GSM461177_untreat_paired` and more than 79% for `GSM461180_treat_paired`. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.
 >    > > 2. We also have access to the number and percentage of reads that are mapped at several location, mapped at too many different location, not mapped because too short.
 >    > >
 >    > >    ![STAR Alignment Scores](../../images/ref-based/star_alignment_plot.png "Alignment scores")
@@ -359,7 +355,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    {: .question}
 {: .hands_on}
 
-According to the **MultiQC** report, more than 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome.
+According to the **MultiQC** report, about 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome.
 
 The main output of **STAR** is a BAM file.
 
@@ -373,7 +369,8 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > 1. Install [**IGV**](https://software.broadinstitute.org/software/igv/download) (if not already installed)
 > 2. Start IGV locally
-> 3. Expand the {% icon param-file %} `mapped.bam` file (output of **RNA STAR**) for `GSM461177`
+> 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
+> 3. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
 > 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
 >
 >    > ### {% icon comment %} Comments
@@ -452,22 +449,22 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > ### {% icon hands_on %} Hands-on: Check duplicate reads
 > >
-> > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %}:
-> >    - {% icon param-files %} *"Select SAM/BAM dataset or dataset collection"*: `mapped.bam` files (outputs of **RNA STAR**)
+> > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %}:
+> >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the MarkDuplicates logs:
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the MarkDuplicates logs:
 > >    - In *"Results"*
 > >      - *"Which tool was used generate logs?"*: `Picard`
 > >      - In *"Picard output"*
 > >         - *"Type of Picard output?"*: `Markdups`
-> >         - {% icon param-files %} *"Picard output"*: `MarkDuplicate metrics` files (output of **MarkDuplicates**)
+> >         - {% icon param-collection %} *"Picard output"*: `MarkDuplicate on collection 60: MarkDuplicate metrics` (output of **MarkDuplicates**)
 > >
 > >    > ### {% icon question %} Question
 > >    >
 > >    > What are the percentages of duplicate reads for each sample?
 > >    >
 > >    > > ### {% icon solution %} Solution
-> >    > > The sample `GSM461177` has 27.8% of duplicated reads while `GSM461180` has 25.9%.
+> >    > > The sample `GSM461177_untreat_paired` has 27.8% of duplicated reads while `GSM461180_treat_paired` has 25.9%.
 > >    > {: .solution}
 > >    {: .question}
 > {: .hands_on}
@@ -480,15 +477,15 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
 > >
-> > 1. **Samtools idxstats** {% icon tool %}:
-> >    - {% icon param-files %} *"BAM file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
+> > 1. {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4) %}:
+> >    - {% icon param-collection %} *"BAM file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the idxstats logs:
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the idxstats logs:
 > >    - In *"Results"*
 > >      - *"Which tool was used generate logs?"*: `Samtools`
 > >      - In *"Samtools output"*
 > >         - *"Type of Samtools output?"*: `idxstats`
-> >         - {% icon param-files %} *"Samtools output"*: `Samtools idxstats` files
+> >         - {% icon param-collection %} *"Samtools idxstats output"*: `Samtools idxstats on collection N`
 > >
 > >    > ### {% icon question %} Questions
 > >    >
@@ -519,15 +516,15 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >
 > > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %}:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
-> >      - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR**)
+> >      - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
 > >    - *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12**)
 > >
-> > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the idxstats logs:
+> > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results:
 > >    - In *"Results"*
 > >      - *"Which tool was used generate logs?"*: `RSeQC`
 > >      - In *"RSeQC output"*
 > >         - *"Type of RSeQC output?"*: `gene_body_coverage`
-> >         - {% icon param-files %} *"RSeQC gene_body_coverage output"*: `(text)` files (outputs of **Gene Body Coverage (BAM)**)
+> >         - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) on collection N (text)` (output of **Gene Body Coverage (BAM)**)
 > >
 > >    > ### {% icon question %} Question
 > >    >
@@ -551,19 +548,19 @@ The BAM file contains information for all our reads, making it difficult to insp
 > > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
 > >
 > > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %}:
-> >    - {% icon param-files %} *"Input .bam/.sam file"*: `mapped.bam` files (outputs of **RNA STAR**)
+> >    - {% icon param-collection %} *"Input .bam/.sam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
 > >    - *"Reference gene model"*: BED12 file (output **Convert GTF to BED12**)
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the idxstats logs:
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the Read Distribution results:
 > >    - In *"Results"*
 > >      - *"Which tool was used generate logs?"*: `RSeQC`
 > >      - In *"RSeQC output"*
 > >         - *"Type of RSeQC output?"*: `read_distribution`
-> >         - {% icon param-files %} *"RSeQC read_distribution output"*: outputs of **Read Distribution**
+> >         - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution on collection N` (output of **Read Distribution**)
 > >
 > >    > ### {% icon question %} Question
 > >    >
-> >    > ![Samtools idxstats](../../images/ref-based/rseqc_read_distribution_plot.png)
+> >    > ![Read Distribution](../../images/ref-based/rseqc_read_distribution_plot.png)
 > >    >
 > >    > What do you think of the read distribution?
 > >    >
@@ -652,9 +649,18 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 > ### {% icon hands_on %} Hands-on: Determining the library strandness
 >
 > We use the `BED12` file which we already converted from the `Drosophila_melanogaster.BDGP6.87.gtf` dataset earlier.
+> > ### {% icon details %} If you don't have it:
+> > No problem, it was into a detailed part on quality checks
+> > To generate it, just follow this:
+> > > ### {% icon hands_on %} Hands-on: Get a BED12 from the gtf
+> > > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
+> > >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+> > >
+> > {: .hands_on}
+> {: .details}
 >
 > 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with:
->    - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR**)
+>    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
 >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of the **Convert GTF to BED12** tool)
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 >
@@ -676,12 +682,14 @@ If the two "Fraction of reads explained by" numbers are close to each other, we 
 
 > ### {% icon question %} Question
 >
-> 1. What are the "Fraction of the reads explained by" results for `GSM461177`?
+> 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
 > 2. Do you think the library type of the 2 samples is stranded or unstranded?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Results for `GSM46177`:
+> > 1. Results for `GSM461177_untreat_paired`:
+> > 
+> > {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 > >
 > >    ```
 > >    This is PairEnd Data
@@ -692,7 +700,7 @@ If the two "Fraction of reads explained by" numbers are close to each other, we 
 > >
 > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
 > >
-> > 2. Similar statistics are found for `GSM461180`, so the library seems to be of the type unstranded for both samples.
+> > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
 > {: .solution}
 {: .question}
 
@@ -715,8 +723,8 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per annotated gene
 >
-> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %} to count the number of reads per gene:
->    - {% icon param-files %} *"Alignment file"*: `mapped.bam` files (outputs of **RNA STAR**)
+> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2) %} to count the number of reads per gene:
+>    - {% icon param-collection %} *"Alignment file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
 >    - *"Specify strand information"*: `Unstranded`
 >    - *"Gene annotation file"*: `in your history`
 >       - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
@@ -731,10 +739,10 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >       - *"GFF gene identifier"*: `gene_id`
 >       - *"Allow reads to map to multiple features"*: `Disabled; reads that align to multiple features or overlapping features are excluded`
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the report:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the report:
 >     - In *"Results"*:
 >       - *"Which tool was used generate logs?"*: `featureCounts`
->           - {% icon param-files %} *"Output of FeatureCounts"*: `summary` files (outputs of **featureCounts**)
+>           - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts on collection N: Summary` (output of **featureCounts**)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -765,7 +773,7 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 > > ### {% icon solution %} Solution
 > >
 > > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} tool:
-> >    - {% icon param-file %} *"Sort Query"*: count file, output of by **featureCounts**
+> >    - {% icon param-collection %} *"Sort Query"*: featureCounts on collection N: Counts (output of **featureCounts**)
 > >    - *"Number of header"*: `1`
 > >    - In *"1: Column selections"*:
 > >      - *"on column"*: `2`
@@ -774,7 +782,7 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 > >
 > >      - *"in"*: `Descending order`
 > >
-> >    The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177` and 127,416 in `GSM461180`).
+> >    The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177_untreat_paired` and 127,416 in `GSM461180_treat_paired`).
 > >
 > >    Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.
 > >
@@ -816,12 +824,12 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }}) and on the data library.
 >
 > - Paired-end data
->     - `GSM461178_1` and `GSM461178_2`
->     - `GSM461181_1` and `GSM461181_2`
+>     - `GSM461178_1` and `GSM461178_2` that you can label `GSM461178_untreat_paired`
+>     - `GSM461181_1` and `GSM461181_2` that you can label `GSM461181_treat_paired`
 > - Single-end data
->     - `GSM461176`
->     - `GSM461179`
->     - `GSM461182`
+>     - `GSM461176` that you can label `GSM461176_untreat_single`
+>     - `GSM461179` that you can label `GSM461179_treat_single`
+>     - `GSM461182` that you can label `GSM461182_untreat_single`
 >
 > The links to these files are below:
 >
