@@ -7,19 +7,18 @@ contributors: [jennaj, bernandez]
 ---
 
 
-- Having your own account on the public Test and/or Main server means that you can save histories, work with more data, and get the most out of Galaxy's functionality.
+- Having your own account at the public Galaxy server UseGalaxy.org means that you can save histories and workflows, work with more stored data (up to 250 GB), and get the most out of Galaxy's functionality.
 
-- To create an account on the Galaxy platform visit the official website via (https://usegalaxy.org)
+- To create an account at UseGalaxy.org, direct your web browser to https://usegalaxy.org.
 
-- Accounts are created under the User masthead menu. This same menu is also where you will log in and out of Galaxy.
+- Accounts are created under Register or Login (top masthead). When logged in, a User menu becomes available that is specific to your account.
 
+- Please make sure your registered account email address is valid so you can confirm your new account, and our administrative support team can contact/reply to you when needed. Account email addresses are case sensitive. 
 
-- Be sure to note that the public Test and Main instance usage policies are one account per user, as stated in our Terms and Conditions. Also, make sure your email address is valid so that you can confirm your new account (emails are case sensitive) and so that our administrator can contact you if needed (rare, but you'll want the email!).
+- Watch for your account creation confirmation email to arrive (missing? check trash/spam). It will include an activation link along with an abbreviated terms of service explanation:
 
-- The activation email will include a link and an abbreviated terms of usage explanation:
+  By clicking on the above link and opening a Galaxy account, you are also confirming that you have read and agreed to Galaxy's Terms and Conditions for the use of this service (https://usegalaxy.org/static/terms.html). This includes a quota limit of one account per user. Attempts to subvert this limit by creating multiple accounts or through any other method may result in termination of all associated accounts and data.
 
-  By clicking on the above link and opening a Galaxy account, you are also confirming that you have read and agreed to Galaxy's Terms and Conditions for the use   of this service (https://usegalaxy.org/static/terms.html). 
+- Your account at each different public Galaxy server is distinct. Servers host tools and reference data appropriate for their configuration. Create and use an account at any (or all!) to maximise your access to the publically available Galaxy community resources.
 
-
-- Most other public Galaxy servers have similar usage terms. Ask them if this is not clear, before multiple accounts are problems. Contact information for Galaxy servers is usually on the home page of the server and/or on that [server's directory page](https://galaxyproject.org/use/).
-
+- Most public Galaxy servers have similar service terms and account creation methods. Details, including contact information and account data storage allocations, are usually on the home page of a server and/or on that [server's directory page](https://galaxyproject.org/use/).
