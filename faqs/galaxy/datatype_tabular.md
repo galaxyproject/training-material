@@ -2,7 +2,7 @@
 title: Datatype Tabular
 area: Getting inputs right    # FAQs will be grouped by these areas on the FAQ page
 description: Format help for Tabular/BED/Interval Datasets
-layout: faq          # if you set this the snippet will get its own page and be included in the FAQs page
+layout: faq          
 contributors: [beachyesh] 
 ---
 
