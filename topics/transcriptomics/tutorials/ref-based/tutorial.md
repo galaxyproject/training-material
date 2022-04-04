@@ -142,7 +142,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73) %} with the following parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: The output of **Flatten collection** selected with **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
@@ -161,12 +161,13 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    {: .question}
 >
-> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the FastQC reports:
->     - In *"Results"*
->       - *"Which tool was used generate logs?"*: `FastQC`
->       - In *"FastQC output"*
->         - *"Type of FastQC output?"*: `Raw data`
->         - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC**)
+> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `FastQC`
+>                - In *"FastQC output"*:
+>                    - {% icon param-repeat %} *"Insert FastQC output"*
+>                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
 >
 > 5. Inspect the webpage output from MultiQC for each FASTQ
 >
@@ -225,7 +226,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
 >    - In *"Filter Options"*
->       - *"Minimum length"*: `20`
+>       - *"Minimum length (R1)"*: `20`
 >    - In *"Read Modification Options"*
 >       - *"Quality cutoff"*: `20`
 >    - In *"Outputs selector"*
@@ -324,18 +325,20 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >       - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: the `Cutadapt on collection N: Reads` (output of **Cutadapt**)
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >       - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
->           - *"Select reference genome"*: `Fly (Drosophila Melanogaster): dm6 Full`
+>           - *"Select reference genome"*: `Fly (Drosophila melanogaster): dm6 Full`
 >           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.87.gtf`
 >           - *"Length of the genomic sequence around annotated junctions"*: `36`
 >
 >               This parameter should be length of reads - 1
 >
-> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs:
->      - In *"Results"*
->        - *"Which tool was used generate logs?"*: `STAR`
->        - In *"STAR output"*
->           - *"Type of STAR output?"*: `Log`
->           - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: log` (output of **RNA STAR**)
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `STAR`
+>                - In *"STAR output"*:
+>                    - {% icon param-repeat %} *"Insert STAR output"*
+>                        - *"Type of STAR output?"*: `Log`
+>                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: log` (output of **RNA STAR** {% icon tool %})
 >
 >    > ### {% icon question %} Question
 >    >
@@ -449,15 +452,17 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > ### {% icon hands_on %} Hands-on: Check duplicate reads
 > >
-> > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %}:
-> >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
+> > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
+> >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the MarkDuplicates logs:
-> >    - In *"Results"*
-> >      - *"Which tool was used generate logs?"*: `Picard`
-> >      - In *"Picard output"*
-> >         - *"Type of Picard output?"*: `Markdups`
-> >         - {% icon param-collection %} *"Picard output"*: `MarkDuplicate on collection 60: MarkDuplicate metrics` (output of **MarkDuplicates**)
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the MarkDuplicates logs with the following parameters:
+> >    - In *"Results"*:
+> >        - {% icon param-repeat %} *"Insert Results"*
+> >            - *"Which tool was used generate logs?"*: `Picard`
+> >                - In *"Picard output"*:
+> >                    - {% icon param-repeat %} *"Insert Picard output"*
+> >                        - *"Type of Picard output?"*: `Markdups`
+> >                        - {% icon param-collection %} *"Picard output"*: `MarkDuplicate on collection N: MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
 > >
 > >    > ### {% icon question %} Question
 > >    >
@@ -477,15 +482,17 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
 > >
-> > 1. {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4) %}:
-> >    - {% icon param-collection %} *"BAM file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
+> > 1. {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4) %} with the following parameters:
+> >    - {% icon param-collection %} *"BAM file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the idxstats logs:
-> >    - In *"Results"*
-> >      - *"Which tool was used generate logs?"*: `Samtools`
-> >      - In *"Samtools output"*
-> >         - *"Type of Samtools output?"*: `idxstats`
-> >         - {% icon param-collection %} *"Samtools idxstats output"*: `Samtools idxstats on collection N`
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the idxstats logs with the following parameters:
+> >    - In *"Results"*:
+> >        - {% icon param-repeat %} *"Insert Results"*
+> >            - *"Which tool was used generate logs?"*: `Samtools`
+> >                - In *"Samtools output"*:
+> >                    - {% icon param-repeat %} *"Insert Samtools output"*
+> >                        - *"Type of Samtools output?"*: `idxstats`
+> >                            - {% icon param-collection %} *"Samtools idxstats output"*: `Samtools idxstats on collection N` (output of **Samtools idxstats** {% icon tool %})
 > >
 > >    > ### {% icon question %} Questions
 > >    >
@@ -507,24 +514,26 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > #### Gene body coverage
 >
-> The gene body is the different regions of a gene. It is important to check if read coverage is uniform over gene body or if there is any 5'/3' bias. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each nucleotide position.
+> The gene body is the different regions of a gene. It is important to check if read coverage is uniform over gene body or if there is any 5'/3' bias. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each nucleotide position (this is very long).
 >
 > > ### {% icon hands_on %} Hands-on: Check gene body coverage
 > >
 > > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
 > >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 > >
-> > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %}:
+> > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
-> >      - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
-> >    - *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12**)
+> >        - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+> >    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
 > >
-> > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results:
-> >    - In *"Results"*
-> >      - *"Which tool was used generate logs?"*: `RSeQC`
-> >      - In *"RSeQC output"*
-> >         - *"Type of RSeQC output?"*: `gene_body_coverage`
-> >         - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) on collection N (text)` (output of **Gene Body Coverage (BAM)**)
+> > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
+> >    - In *"Results"*:
+> >        - {% icon param-repeat %} *"Insert Results"*
+> >            - *"Which tool was used generate logs?"*: `RSeQC`
+> >                - In *"RSeQC output"*:
+> >                    - {% icon param-repeat %} *"Insert RSeQC output"*
+> >                        - *"Type of RSeQC output?"*: `gene_body_coverage`
+> >                            - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) on collection N (text)` (output of **Gene Body Coverage (BAM)** {% icon tool %})
 > >
 > >    > ### {% icon question %} Question
 > >    >
@@ -547,16 +556,18 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
 > >
-> > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %}:
-> >    - {% icon param-collection %} *"Input .bam/.sam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
-> >    - *"Reference gene model"*: BED12 file (output **Convert GTF to BED12**)
+> > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %} with the following parameters:
+> >    - {% icon param-collection %} *"Input .bam/.sam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+> >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the Read Distribution results:
-> >    - In *"Results"*
-> >      - *"Which tool was used generate logs?"*: `RSeQC`
-> >      - In *"RSeQC output"*
-> >         - *"Type of RSeQC output?"*: `read_distribution`
-> >         - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution on collection N` (output of **Read Distribution**)
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the Read Distribution results with the following parameters:
+> >    - In *"Results"*:
+> >        - {% icon param-repeat %} *"Insert Results"*
+> >            - *"Which tool was used generate logs?"*: `RSeQC`
+> >                - In *"RSeQC output"*:
+> >                    - {% icon param-repeat %} *"Insert RSeQC output"*
+> >                        - *"Type of RSeQC output?"*: `read_distribution`
+> >                            - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution on collection N` (output of **Read Distribution** {% icon tool %})
 > >
 > >    > ### {% icon question %} Question
 > >    >
@@ -659,9 +670,9 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 > > {: .hands_on}
 > {: .details}
 >
-> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with:
->    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
->    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of the **Convert GTF to BED12** tool)
+> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with the following parameters:
+>    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 >
 {: .hands_on}
@@ -723,26 +734,27 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per annotated gene
 >
-> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2) %} to count the number of reads per gene:
->    - {% icon param-collection %} *"Alignment file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
+> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2) %} with the following parameters to count the number of reads per gene:
+>    - {% icon param-collection %} *"Alignment file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 >    - *"Specify strand information"*: `Unstranded`
 >    - *"Gene annotation file"*: `in your history`
->       - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+>        - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >    - *"Output format"*: `Gene-ID "\t" read-count (MultiQC/DESeq2/edgeR/limma-voom compatible)`
 >    - *"Create gene-length file"*: `Yes`
 >    - In *"Options for paired-end reads"*:
->       - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
+>        - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
 >    - In *"Read filtering options"*:
->       - *"Minimum mapping quality per read"*: `10`
+>        - *"Minimum mapping quality per read"*: `10`
 >    - In *"Advanced options"*:
 >       - *"GFF feature type filter"*: `exon`
 >       - *"GFF gene identifier"*: `gene_id`
 >       - *"Allow reads to map to multiple features"*: `Disabled; reads that align to multiple features or overlapping features are excluded`
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the report:
->     - In *"Results"*:
->       - *"Which tool was used generate logs?"*: `featureCounts`
->           - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts on collection N: Summary` (output of **featureCounts**)
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the reports with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `featureCounts`
+>                - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts on collection N: Summary` (output of **featureCounts** {% icon tool %})
 >
 >    > ### {% icon question %} Question
 >    >
