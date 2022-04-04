@@ -7,7 +7,7 @@ contributors: [jennaj, bernandez]
 ---
 
 
-* *There are several options to preserve data/work while also reducing your quota usage.* Some examples are below.
+
 * **Download** Datasets as individual files or entire Histories as an archive. Then *purge* them from the public server.
 * **Copy** Datasets or Histories to another Galaxy server, including your own Galaxy. Then purge.
 * **Copy** your most important Datasets into a new/other History (inputs, results), then purge the original full History. This can be a quicker alternative if the orignal History is very large or complex to review/purge dataset-by-dataset.
