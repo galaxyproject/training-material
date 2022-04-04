@@ -1,6 +1,6 @@
 ---
 title: Changing user preferences
-area: account
+area: user preferences
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]
