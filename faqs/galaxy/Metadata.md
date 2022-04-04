@@ -3,11 +3,8 @@ title: Metadata
 area: Getting inputs right    # FAQs will be grouped by these areas on the FAQ page
 description:  How do I find, adjust, and/or correct metadata?
 layout: faq         
-contributors: [beachyesh] 
+
 ---
-
-
-[Back to Support Hub](https://galaxyproject.org/support/)
 
 ### When and how are metadata assigned?
 - During **Upload** on new datasets, either autodetected (default) or directly assigned by the user
