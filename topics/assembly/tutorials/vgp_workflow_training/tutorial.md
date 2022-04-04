@@ -29,9 +29,27 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The Galaxy workflow system facilitates analysis repeatability and, like Galaxy's accessibility model, in a way that is usable even to users that have little programming experience. A Galaxy workflow is a reusable template analysis that a user can run repeatedly on different data; each time a workflow is run, the same tools with the same parameters are executed (NEEDS TO BE MODIFIED) ({% cite Goecks2010 %}).
+The Vertebrate Genome Project (VGP), emerged from the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatine interaction maps.
 
-    
+As a result of the collaboration with the VGP team, a training including a step-by-step detailed description was developed for the Galaxy Training Network ({% cite Lariviere2022 %}). However, due to its complexy, it can be too time consuming for those who are not interested in understanding each of the analysis stages in depth. For this reason, we decided to make available to the community a workflow-centered version of the training.
+
+The Galaxy Workflow System (GWS) facilitates analysis repeatability, allowing to minimize the number of manual steps required to execute an analysis workflow and automatizing the process of input parameter and software tool version tracking. The objetive of this training is to explain how to run the VGP workflow, focusing on what are the required inputs and which outputs are generated and delegating how the steps re executed to the GWS.
+
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+# VGP assembly workflow structure
+
+The VGP assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data (e.g. not to include the module corresponding to bionano when the data corresponding to this technology is not available).
+
+> ![Figure 1: VGP pipeline modules](../../images/vgp_assembly/VGP_workflow_modules.png "VGP assembly pipelie. The implemented version of the VGP workflow is modular, consisting in five main independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to Genome Ark.")
+
 ## Get data
 
 In order to reduce computation time, we will assemble samples from the yeast _Saccharomyces cerevisiae_ S288C, a widely used laboratory strain isolated in the 1950s by Robert Mortimer. Using _S. cerevisae_, one of the most intensively studied eukaryotic model organisms, has the additional advantage of allowing us to evaluate the final result of our assembly with great precision. For this tutorial, we generated a set of synthetic HiFi reads corresponding to a theoretical diploid genome.
