@@ -11,5 +11,5 @@ contributors: [jennaj, bernandez]
 
 2. If you instead want to start over with a new account, delete your old account(s) first under User > Preferences, then create a new account.
 
-Note: Updating a registered account email address will not prevent ongoing multiple/duplicate account detection. If you have more than one, existing or new or older, review below about how to clear that up. Use just one account and problems are avoided. Share data, not accounts.
+Note: Updating a registered account email address will not prevent ongoing multiple/duplicate account detection. 
 
