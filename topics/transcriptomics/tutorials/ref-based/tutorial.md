@@ -874,7 +874,10 @@ To be able to identify differential gene expression induced by PS depletion, all
 >    {{ page.zenodo_link }}/files/GSM461182_untreat_single.counts
 >    ```
 >
-> 3. As before, rename the datasets according to the name of the sample, e.g. `GSM461182_untreat_single`, check the datatype (`tabular`) and add a different tag for each sample (e.g. `GSM461182_untreat_single`).
+> 3. Create a collection list with all these counts that you label `all counts`. Rename each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
+>
+> {% snippet faqs/galaxy/collections_build_list.md %}
+>
 {: .hands_on}
 
 You might think We can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
@@ -1138,32 +1141,70 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > We recommend that you add all factors you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc...
 {: .comment}
 
+DESeq2 requires to provide for each factor, counts of samples in each category. We will thus create small collections for each of the categories.
+
+> ### {% icon hands_on %} Hands-on: Split your collection for each of these factors.
+> 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+>    - {% icon param-collection %} *"Dataset collection"*: `all counts`
+>
+> 2. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output file of the previous step).
+>    - *"Regular Expression"*: `untreat`
+>
+> 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output file of the Extract element identifiers step).
+>    - *"Regular Expression"*: `single`
+>
+> 4. {% tool [Filter collection](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - {% icon param-collection %} *"Input collection"*: `all counts`
+>    - *"How should the elements to remove be determined?"*: `Remove if identifiers are ABSENT from file`
+>    - {% icon param-files %} *"Filter out identifiers absent from"*: Select both datasets output of **Search in text files (grep)**.
+>
+> 5. Rename each of the 4 new collections with the four categories: `paired`, `single`, `treat`, `untreat`.
+>
+> {% snippet faqs/galaxy/collections_rename.md %}
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How many samples do you have for each category.
+>
+> 2. Why did we use 'untreat' instead of 'treat' into the **Search in textfiles (grep)** ?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. You should have 4 samples 'paired', 3 samples 'single', 3 samples 'treat' and 4 samples 'untreat'.
+> > ![Collections](../../images/ref-based/collection_counts.png "Collection containing counts per category")
+> >
+> > 2. The 'treat' expression is present both in 'treat' and in 'untreat', thus all counts would have been selected. However, one could have used '_treat' which would have worked as it is not present in '_untreat'.
+> {: .solution}
+{: .question}
+
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
-> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %} with the following parameters:
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1) %} with the following parameters:
 >    - *"how"*: `Select datasets per level`
 >      - In "1: Factor"
 >        - *"Specify a factor name"*: `Treatment`
 >        - In *"1: Factor level"*:
 >          - *"Specify a factor level"*: `treated`
->          - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
+>          - {% icon param-collection %} *"Counts file(s)"*: the collection `treat`.
 >        - In *"2: Factor level"*:
 >          - *"Specify a factor level"*: `untreated`
->          - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>          - {% icon param-collection %} *"Counts file(s)"*: the collection `untreat`.
 >      - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
 >      - In "2: Factor"
 >        - "Specify a factor name" to `Sequencing`
 >        - In *"1: Factor level"*:
 >          - *"Specify a factor level"*: `PE`
->          - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>          - {% icon param-collection %} *"Counts file(s)"*: the collection `paired`.
 >        - In *"2: Factor level"*:
 >          - *"Specify a factor level"*: `SE`
->          - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>          - {% icon param-collection %} *"Counts file(s)"*: the collection `single`.
 >    - *"Files have header?"*: `No`
->    - *"Visualising the analysis results"*: `Yes`
->    - *"Output normalized counts table"*: `Yes`
->
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+>    - In *"Output options"*:
+>      - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >
 >    > ### {% icon comment %} Comment: Using group tags for large sample sets
 >    >
@@ -1288,7 +1329,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 ## Extraction and annotation of differentially expressed genes
 
-Now we would like to extract the most differentially expressed genes due to the treatment and with an absolute fold change > 2.
+Now we would like to extract the most differentially expressed genes due to the treatment and with a fold change > 2 (or < 1/2).
 
 > ### {% icon hands_on %} Hands-on: Extract the most differentially expressed genes
 >
@@ -1314,7 +1355,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >    > The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.
 >    {: .comment}
 >
->    We will now select only the genes with an absolute fold change (FC) > 2. Note that the DESeq2 output file contains $$log_{2} FC$$, rather than FC itself, so we filter for $$abs(log_{2} FC) > 1$$ (which implies FC > 2).
+>    We will now select only the genes with a fold change (FC) > 2 or FC < 0.5. Note that the DESeq2 output file contains $$log_{2} FC$$, rather than FC itself, so we filter for $$abs(log_{2} FC) > 1$$ (which implies FC > 2 or FC < 0.5).
 >
 > 3. {% tool [Filter](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
 >    - {% icon param-file %} *"Filter"*: `Genes with significant adj p-value`
@@ -1372,11 +1413,13 @@ The generated output is an extension of the previous file:
 >
 > 1. Where is the most over-expressed gene located?
 > 2. What is the name of the gene?
+> 3. Is the *Pasilla* gene (ps) downregulated by the RNAi treatment?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.
 > > 2. From the table, we got the gene symbol: Ant2. After some search on the [online biological databases](https://www.ncbi.nlm.nih.gov/gene/32008), we find that Ant2 corresponds to adenine nucleotide translocase 2.
+> > 3. You can manually check for it or use the **Filter** tool with `c13 == "ps"`. It is indeed part of this last dataset (significant p-value and abs(log2(FC)) > 1). The fold-change is negative so it is indeed downregulated.
 > {: .solution}
 {: .question}
 
@@ -1384,21 +1427,21 @@ The annotated table contains no column names, which makes it difficult to read. 
 
 > ### {% icon hands_on %} Hands-on: Add column names
 >
-> 1. Create a new file from the following (header line of the DESeq2 output)
+> 1. Create a new file (`header`) from the following (header line of the DESeq2 output)
 >
 >    ```
 >    GeneID	Base mean	log2(FC)	StdErr	Wald-Stats	P-value	P-adj	Chromosome	Start	End	Strand	Feature	Gene name
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md name="header" format="tabular" %}
 >
 > 2. {% tool [Concatenate datasets](cat1) %} to add this header line to the **Annotate** output:
->    - {% icon param-file %} *"Concatenate Dataset"*: the `Pasted entry` dataset
+>    - {% icon param-file %} *"Concatenate Dataset"*: the `header` dataset
 >    - *"Dataset"*
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*
 >         - {% icon param-file %} *"select"*: output of **Annotate**
 >
-> 3. Rename the output to `Genes with significant adj p-value & abs(FC) > 2`
+> 3. Rename the output to `Genes with significant adj p-value & abs(log2(FC)) > 1`
 {: .hands_on}
 
 
@@ -1426,7 +1469,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 > 1. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2**)
 >    - *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(FC) > 2`
+>    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(log2(FC)) > 2`
 >    - *"and column"*: `Column: 1`
 >    - *"Keep lines of first input that do not join with second input"*: `No`
 >    - *"Keep the header lines"*: `Yes`
