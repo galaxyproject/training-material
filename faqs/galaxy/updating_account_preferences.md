@@ -11,5 +11,11 @@ contributors: [jennaj, bernandez]
 
 2. If you instead want to start over with a new account, delete your old account(s) first under User > Preferences, then create a new account.
 
-Note: Updating a registered account email address will not prevent ongoing multiple/duplicate account detection. 
+Note: Updating a registered account email address will not prevent ongoing multiple/duplicate account detection.If you have more than one, existing or new or older, review below about how to clear that up. Use just one account and problems are avoided. Share data, not accounts.
+
+* [Manage your own data](/support/account-quotas/) and delete old/extra accounts under *User > Preferences*.
+
+* Multiple accounts that are detected, suspended, and administratively managed, without followup on your part, result in data loss. Creating another account is not the solution -- the new account will also be detected up as a duplicate and removed.
+
+* You will not receive a special notification when accounts are administratively managed due to a breach of the terms of service. The original terms of service included directly on the account registration form and in the account activation emails are your notice.  
 
