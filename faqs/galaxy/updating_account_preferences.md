@@ -7,7 +7,7 @@ contributors: [jennaj, bernandez]
 ---
 
 
-1. Log into your existing account and update the email address under User > Preferences. DO NOT create another new account or it will be detected as a duplicate account. Any use of multiple accounts can result in data loss.
+1. Log into your existing account and update the email address under **User > Preferences**. DO NOT create another new account or it will be detected as a duplicate account. Any use of multiple accounts can result in data loss.
 
 2. If you instead want to start over with a new account, delete your old account(s) first under User > Preferences, then create a new account.
 
