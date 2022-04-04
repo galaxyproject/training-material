@@ -3,17 +3,8 @@ title: Datatype Tabular
 area: Getting inputs right    # FAQs will be grouped by these areas on the FAQ page
 description: Format help for Tabular/BED/Interval Datasets
 layout: faq          
-contributors: [beachyesh] 
+
 ---
-
-[Back to Support Hub](https://galaxyproject.org/support/)
-
-Related Topics 
-- [Fastq Manipulation and Quality Control](https://galaxyproject.org/tutorials/ngs/#fastq-manipulation-and-quality-control)  
-- [How to format fastq data for tools that require .fastqsanger format?](https://galaxyproject.org/support/fastqsanger/)
-- [Understanding compressed fastq data (fastq.gz)](https://galaxyproject.org/support/compressed-fastq/)
-- [Common datatypes explained](https://galaxyproject.org/learn/datatypes/)
-- [Input datatype misassignment and errors](https://galaxyproject.org/support/tool-error/)
  
 ### Help for Tabular Datasets
 
