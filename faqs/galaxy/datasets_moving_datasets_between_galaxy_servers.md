@@ -6,8 +6,8 @@ layout: faq
 contributors: [jennaj, Melkeb]
 ---
 
-For individual datasets:
-1. Click on name of file (dataset) to expand the info.
+On the origin server:
+1. Click on name of the dataset to expand the info.
 2. Click on the **Copy link icon**{% icon galaxy-link %}.
 On the destination Galaxy server:
 3. Click on **Upload data > Paste / Fetch Data** and paste the link. Select attributes, such as genome assembly, if required. Hit the **Start** button.
