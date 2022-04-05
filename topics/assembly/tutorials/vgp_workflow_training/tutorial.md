@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: VGP workflow tutorial
+title: VGP assembly pipeline - short version
 zenodo_link: 'https://zenodo.org/record/5887339'
 enable: false
 level: Intermediate
@@ -9,12 +9,12 @@ tags:
  - eukaryote
  - VGP
 questions:
-- "Question 1"
-- "Question 2"
+- "what combination of tools can produce the highest quality assembly of vertebrate genomes?"
+- "How can we evaluate how good it is?"
 objectives:
-- "Objetive 1"
-- "Objetive 2"
-time_estimation: '3h'
+- "Learn the tools necessary to perform a de novo assembly of a vertebrate genome"
+- "Evaluate the quality of the assembly"
+time_estimation: '1h'
 key_points:
 - "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies"
 - "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
