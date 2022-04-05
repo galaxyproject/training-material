@@ -46,7 +46,7 @@ The Galaxy Workflow System (GWS) facilitates analysis repeatability, allowing to
 
 # Getting Started on Galaxy
 
-Before running the assembly pipeline, you must create an account and be familiar with Galaxy. This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you to visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
+This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you to visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
 - [Introduction to Galaxy](https://training.galaxyproject.org/training-material/topics/introduction/slides/introduction.html)
 - [Galaxy 101](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)
 - [Getting Data into Galaxy](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html)
@@ -119,6 +119,23 @@ The first step is to get the datasets from Zenodo. The VGP assembly pipeline use
 {: .hands_on}
 
 
+> ### {% icon details %} Working with your own data
+>
+> If working on a genome other than the example yeast genome, you upload the VGP data from the [VGP/Genome Ark AWS S3 bucket](https://genomeark.s3.amazonaws.com/index.html) as following:
+>
+> > ### {% icon hands_on %} Hands-on: Import data from Genome Ark
+> >
+> > 1. Open the file {% icon galaxy-upload %} __upload__ menu
+> > 2. Click on **Choose remote files** tab
+> > 3. Click in the **Genome Ark** buttom and then click in **species**
+> {: .hands_on}
+>
+> You can find the VGP data following this path: `/species/${Genus}_${species}/${speciman_code}/genomic_data`. Inside a given datatype directory (e.g. `pacbio`), select all the relevant files individually until all the desired files are highlighted and click the <kbd>Ok</kbd> buttom. Note that there may be multiple pages of files listed. Also note that you may not want every file listed.
+>
+> {% snippet faqs/galaxy/collections_build_list.md %}
+>
+{: .details}
+
 ## Import workflows from WorkflowHub
     
 Once we have imported the datasets, the next step is to import the VGP workflows from the [Workflowhub server](https://workflowhub.eu/). WorkflowHub is a workflow management system which allows workflows to be FAIR, citable, have managed metadata profiles, and be openly available for review and analytics.
@@ -127,14 +144,14 @@ Once we have imported the datasets, the next step is to import the VGP workflows
 >
 > 1. Click in the **Workflow** menu, located in the top bar.
 >   ![Workflow menu](../../images/vgp_assembly/top_bar.png)
-> 2. Click in the <kbd>Import</kbd> buttomm, located in the right corner.
+> 2. Click in the <kbd>Import</kbd> buttom, located in the right corner.
 > 3. In the section **Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)**, click in *Search form*.
 > 4. In the **TRS Server: *workflowhub.eu*** menu you should type `name:vgp`
 >    ![Figure 3: Workflow menu](../../images/vgp_assembly/workflow_list.png)
 > 5. Click in the desired workflow, and finally select the last available version.
 {: .hands_on}
 
-After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the **Run workflow** icon, marked with a red square in the figure 2.
+After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the {% icon workflow-run %} **Run workflow** icon, marked with a red square in the figure 2.
 
 ![Figure 2: Workflow menu](../../images/vgp_assembly/imported_workflows.png  "Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.")
 
@@ -148,10 +165,12 @@ Once we have imported the datasets and the workflows, we can start with the geno
 
 # Genome profile analsysis
 
+Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size. The present pipeline uses **Meryl** for generating the k-mer database and **Genomescope** for determing the genome size based on a k-mer analysis.
+
 > ### {% icon hands_on %} Hands-on: VGP genome profile analysis workflow
 >
 > 1. Click in the **Workflow** menu, located in the top bar
-> 2. Click in the **Run workflow** buttom corresponding to `VGP genome profile analysis`
+> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `VGP genome profile analysis`
 > 3. In the **Workflow: VGP genome profile analysis** menu:
 >   - {% icon param-collection %} "*Collection of Pacbio Data*": `7: HiFi_collection`
 >   - "*K-mer length*": `32`
@@ -160,20 +179,29 @@ Once we have imported the datasets and the workflows, we can start with the geno
 >
 {: .hands_on}
 
+Once the workflow have finished, we can evaluate the linear plot generated by **Genomescope** (fig. 3), which includes valuable information such as k-mer profiles, fitted models and estimated parameters. This file corresponds to the dataset `26: GenomeScope on data 21 Linear plot`.
+
+![Figure 3: Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 21-mer profile. The first peak located at coverage 21x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.637%. The plot also includes informatin about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
+
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.69%.
+
+
 # HiFi phased assembly with hifiasm
+
+This workflow creates contig-level assemblies by **Hifiasm** to generate initial primary and alternate pseudohaplotype assemblies. In addition, this workflow includes four tools involved in the evaluation of the assembly: **QUAST**, **BUSCO** and **Merqury**.
 
 > ### {% icon hands_on %} Hands-on: VGP HiFi phased assembly with hifiasm and HiC data workflow
 > 1. Click in the **Workflow** menu, located in the top bar
-> 2. Click in the **Run workflow** buttom corresponding to `VGP HiFi phased assembly with hifiasm and HiC data`
+> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `VGP HiFi phased assembly with hifiasm and HiC data`
 > 3. In the **Workflow: VGP HiFi phased assembly with hifiasm and HiC data** menu:
->   - {% icon param-file %} "*Meryl database*": `12: Meryl on data 11, data 10, data 9: read-db.meryldb`
->   - {% icon param-file %} "*HiC forward reads*": `3. Hi-C_dataset_F`
->   - {% icon param-file %} "*HiC reverse reads*": `2. Hi-C_dataset_R`
 >   - {% icon param-collection %} "*Pacbio Reads Collection*": `7. HiFi_collection`
+>   - {% icon param-file %} "*Meryl database*": `12: Meryl on data 11, data 10, data 9: read-db.meryldb`
+>   - {% icon param-file %} "*HiC forward reads*": `3: Hi-C_dataset_F`
+>   - {% icon param-file %} "*HiC reverse reads*": `2: Hi-C_dataset_R`
+>   - {% icon param-file %} "*Genomescope summary dataset*": `19: Genomescope on data 13 Summary`
 >   - "*K-mer length*": `32`
 >   - "*Ploidy*": `2`
 >   - "*Is genome large (>100Mb)?*": `No`
->   - "*Purge level*": `Ligth (1)`
 > 4. Click in the <kbd>Run workflow</kbd> buttom
 >
 > > ### {% icon comment %} Input option order
@@ -182,30 +210,116 @@ Once we have imported the datasets and the workflows, we can start with the geno
 >
 {: .hands_on}
 
+Let's have a look at the HTML report generated by **QUAST** (fig. 4), which corresponds with the dataset  `52: Quast on data 24, data 23, and others: HTML report`. It summarizes the main statistics related with the assembly completeness.
+
+![Figure 5: QUAST initial plot](../../images/vgp_assembly/QUAST_initial.png "QUAST report. Statistics of the primary and alternate assembly (a). Cumulative length plot (b).")
+
+According to the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose cumulative length is around 23.5Mbp. On the other hand, the second alternate assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 4a, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.
+
+> ### {% icon question %} Questions
+>
+> 1. What is the longest contig in the primary assembly? And in the alternate one?
+> 2. What is the N50 of the primary assembly?
+> 3. Which percentage of reads mapped to each assembly?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The longest contig in the primary assembly is 1.532.843 bp, and 1.532.843 bp in the alternate assembly.
+> > 2. The N50 of the primary assembly is 922.430 bp.
+> > 3. According to the report, 100% of reads mapped to both the primary assembly and the alternate assembly.
+> >
+> {: .solution}
+>
+{: .question}
+
+Next, we will use BUSCO, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+
+> ### {% icon hands_on %} Hands-on: assessing assembly completeness with BUSCO
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>       - *"Lineage"*: `Saccharomycetes`
+>    - *"Which outputs should be generated"*: `short summary text`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Remember to modify the lineage option if you are working with vertebrate genomes.
+>    {: .comment}
+>
+> 2. Rename the summary as `BUSCO initial report primary` and `BUSCO initial report alternate`.
+>
+{: .hands_on}
+
+BUSCO generates two outputs by default, a tabular file which contains the complete results (*e.g.*, scores, descriptions, lengths and coordinates of matches) for each BUSCO gene (fig. 6), and a short summary.
+
+![Figure 6 : BUSCO](../../images/vgp_assembly/BUSCO_full_table.png "BUSCO full table. It contains the complete results in a tabular format with scores and lengths of BUSCO matches, and coordinates.")
+
+As we can see in the report, the results are simplified into four categories: *complete and single-copy*, *complete and duplicated*, *fragmented* and  *Missing BUSCOs*.
+
+> ### {% icon question %} Questions
+>
+> 1. How many complete BUSCO genes have been identified in the primary assembly?
+> 2. How many BUSCOs genes are absent?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. According to the report, our assembly contains the complete sequence of 2080 complete BUSCO genes (97.3%).
+> > 2. 19 BUSCO genes are missing.
+> >
+> {: .solution}
+>
+{: .question}
+
+Despite BUSCO being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis.
+
+> ### {% icon hands_on %} Hands-on: *k*-mer based evaluation with Merqury
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
+>        - *"Number of assemblies"*: `Two assemblies
+>            - {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
+>            - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`    
+>
+{: .hands_on}
+
+
+By default, Merqury generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the compy number (CN) spectrum plot, known as the *spectra-cn* plot (fig. 6).
+
+![Figure 7: Merqury plot](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot corresponding to the primary assembly. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="80%"}
+
+As suggested previously by the report generated by QUAST (fig. 5), the assemblies contain a large proportion of duplicated reads. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers, originating from haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.
+
 # Post-assembly processing
+
+An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to run the *VGP purge assembly with purge_dups workflow*, which will allow to identify and reassign allelic contigs.
 
 > ### {% icon hands_on %} Hands-on: VGP purge assembly with purge_dups pipeline  workflow
 >
 > 1. Click in the **Workflow** menu, located in the top bar
-> 2. Click in the **Run workflow** buttom corresponding to `VGP purge assembly with purge_dups pipeline`
+> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `VGP purge assembly with purge_dups pipeline`
 > 3. In the **Workflow: VGP purge assembly with purge_dups pipeline** menu:
->   - {% icon param-file %} "*Genomescope model parameters*": `20: Genomescope on data 13 Model parameters`
->   - {% icon param-file %} "*Meryl database*": `12: Meryl on data 11, data 10, and data 9: read-db.meryldb`
 >   - {% icon param-file %} "*Hifiasm Primary assembly*": `39: Hifiasm HiC hap1`
 >   - {% icon param-file %} "*Hifiasm Alternate assembly*": `40: Hifiasm HiC hap2`
 >   - {% icon param-collection %} "*Pacbio Reads Collection - Trimmed*": `22: Cutadapt`
->   - {% icon param-file %} "*Estimated genome size - Parameter File*": `60: Estimated Genome Size`
->   - "*Is genome large (>100Mb)?*": `No`
+>   - {% icon param-file %} "*Genomescope model parameters*": `20: Genomescope on data 13 Model parameters`
 > 4. Click in the <kbd>Run workflow</kbd> buttom
 >
 {: .hands_on}
 
+This workflow generates a large number of outputs, including datasets `74` and `91`, which correspond to the purged primary and alternative assemblies respectively.
+
 # Hybrid scaffolding with Bionano optical maps
+
+Once the assemblies generated by **hifiasm** has been purged, the next step is to run the *VGP hybrid scaffolding with Bionano optical maps workflow*. It will allow to integrate the information provided by optical maps with primary assembly sequences in order to detect and correct structural variants, such as chimeric joins and misoriented contigs. In addition, this workflow includes some additonal steps from evaluating the outputs. 
 
 > ### {% icon hands_on %} Hands-on: VGP hybrid scaffolding with Bionano optical maps workflow
 >
 > 1. Click in the **Workflow** menu, located in the top bar
-> 2. Click in the **Run workflow** buttom corresponding to `VGP hybrid scaffolding with Bionano optical maps`
+> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `VGP hybrid scaffolding with Bionano optical maps`
 > 3. In the **Workflow: VGP hybrid scaffolding with Bionano optical maps** menu:
 >   - {% icon param-file %} "*Bionano data*": `1: Bionano_dataset`
 >   - {% icon param-file %} "*Hifiasm Purged Assembly*": `TO DO`
@@ -214,324 +328,54 @@ Once we have imported the datasets and the workflows, we can start with the geno
 > 4. Click in the <kbd>Run workflow</kbd> buttom
 {: .hands_on}
 
+Once the workfow have finished, let's have a look at the assembly reports.
+
+As we can observe in the cumulative plot of the file `119` (fig. 7a), the total length of the assembly (12.160.926 bp) is slightly larger than the expected genome size. With respect to the NG50 statistic (fig. 10b), the value is 922.430 bp, which is significantly higher than the value obtained during the first evaluation stage (813.039 bp).
+        
+![Figure 10: QUAST and BUSCO plots](../../images/vgp_assembly/QUAST_cummulative.png ". Cumulative length plot (a). NGx plot. The y-axis represents the NGx values in Mbp, and the x-axis is the percentage of the genome (b). Assembly evaluation after runnig Bionano. BUSCO genes are defined as "Complete (C) and single copy (S)" when are found once in the single-copy ortholog database, "Complete (C) and duplicated (D)" when single-copy ortholog genes which were found more than once, "Fragmented (F)" when genes are matching just partially to a single-copy ortholog DB, and "Missing (M)" when genes which are expected but were not detected (c).")
+    
+Finally, the BUSCO's summary image (fig. 7c), which can be found in the daset `117`, shows that most of the universal single-copy orthologs are present in our assembly.
+
+> ### {% icon question %} Questions
+>
+> 1. How many scaffolds are in the primary assembly after the hybrid scaffolding?
+> 2. What is the size of the largest scaffold? Has improved with respect to the previous evaluation?
+> 3. What is the percertage of completeness on the core set genes in BUSCO? Has increased the completeness?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The number of contigs is 17.
+> > 2. The largest contig is 1.531.728 bp long. This value hasn't changed.
+> > 3. The percentage of complete BUSCOs is 95.7%. Yes, it has increased, since in the previous evaluation the completeness percentage was 88.7%.
+> >
+> {: .solution}
+>
+{: .question}
+    
+
 # Hybrid scaffolding with Hi-C data
+
+ In this final stage, we will run the *VGP hybrid scaffolding with HiC data*, which exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.
 
 > ### {% icon hands_on %} Hands-on: VGP hybrid scaffolding with HiC data
 >
 > 1. Click in the **Workflow** menu, located in the top bar
-> 2. Click in the **Run workflow** buttom corresponding to `VGP hybrid scaffolding with HiC data`
+> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `VGP hybrid scaffolding with HiC data`
 > 3. In the **Workflow: VGP hybrid scaffolding with HiC data** menu:
->   - {% icon param-file %} "*Scaffolded Assembly*": `TO DO`
+>   - {% icon param-file %} "*Scaffolded Assembly*": `114: Concatenate datasets on data 110 and data 109`
 >   - {% icon param-file %} "*HiC Forward reads*": `3: Hi-C_dataset_F (as fastqsanger)`
 >   - {% icon param-file %} "*HiC Reverse reads*": `2: Hi-C_dataset_R (as fastqsanger)`
->   - {% icon param-file %} "*Estimated genome size - Parameter File*": `60: Estimated Genome size`
+>   - {% icon param-file %} "*Estimated genome size - Parameter File*": `50: Estimated Genome size`
 >   - "*Is genome large (>100Mb)?*": `No`
->   - "*Restriction enzyme sequences*": `TO DO`
 > 4. Click in the <kbd>Run workflow</kbd> buttom
 {: .hands_on}
 
-<!--
-Interesting -> https://academic.oup.com/gigascience/article/5/1/s13742-016-0115-8/2720972?login=true
+In order to evaluate the Hi-C hybrid scaffolding, we are going to compare the contact maps before and after running the HiC hybrid scaffolding workflow (fig. 8), corresponding to the datasets `130` and `141` respectively.
+  
+![Figure 8: Pretext final contact map](../../images/vgp_assembly/hi-c_pretext_final.png "Hi-C map generated by Pretext after the hybrid scaffolding based on Hi-C data. The red circles indicate the  differences between the contact map generated after (a) and before (b) Hi-C hybrid scaffolding.")
 
-Interesting -> https://www.nature.com/articles/s41592-021-01254-9
-
-Interesting -> https://academic.oup.com/bioinformatics/article/28/19/2520/290322?login=true
-
-Interesting -> https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008622
-
-Interesting -> https://www.nature.com/articles/s41592-021-01254-9
-
-
- While the pipeline is being developed, the only publicly accessible compute resource where the assembly pipeline can be run is the [European Galaxy instance](https://assembly.usegalaxy.eu). This tutorial assumes you will be using this resource.
-
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# VGP assembly pipeline overview
-
-A high-level view of the pipeline can be seen in **Figure 1**. Briefly, [Meryl](https://github.com/marbl/meryl) is used to create a k-mer database which is used for assembly validation and as input to [GenomeScope](https://github.com/tbenavi1/genomescope2.0){% cite Vurture_2017 Ranallo_Benavidez_2020 %}, which is used to assess genome size before assembly begins. A contig-level assembly is generated using [PacBio](https://pacb.com) HiFi data and [Hifiasm](https://github.com/chhylp123/hifiasm){% cite Cheng_2021 %}. In combination with [purge_dups](https://github.com/dfguan/purge_dups){% cite Guan_2020 %}, primary and alternate pseudohaplotype contig-level assemblies can be separated. Scaffolding can be done with Hi-C data using [SALSA](https://github.com/marbl/salsa){% cite Ghurye_2019 %} and with [BioNano](https://bionanogenomics.com) optical maps (if available). Assembly quality is assessed at every stage using [BUSCO](https://busco.ezlab.org){% cite Sim_o_2015 Manni_2021 %}, [Merqury](https://github.com/marbl/merqury){% cite Rhie_2020 %}, and [Quast](http://quast.sourceforge.net/quast){% cite Gurevish_2013 %}. Contact matrices are visualized with [PretextView](https://github.com/wtsi-hpag/PretextView) after scaffolding steps.
-
-![Figure 1: VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0. The pipeline starts with assembly of the HiFi reads into contigs, yielding the primary and alternate assemblies. Then, duplicated and erroneously assigned contigs will be removed by using purge_dups. Finally, Bionano optical maps and HiC data are used to generate a scaffolded primary assembly.")
-
-# Getting Started on Galaxy
-Before running the assembly pipeline, you must create an account and be familiar with Galaxy. This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, visit the [Galaxy Training Network (GTN)](https://training.galaxyproject.org) to learn about Galaxy. Suggested trainings to begin your Galaxy journey are listed below.
-
-## Account Creation
-To create an account, visit the Galaxy instance that you will perform the analysis on (presumably the [European Galaxy instance](https://assembly.usegalaxy.eu)). In the navigation bar at the top of the screen, click "Login or register". At the bottom of the new page, observe the text "Don't have an account? Register here". Click "Register here" and follow the instructions.
-
-## GTN Key Trainings
-The GTN has many trainings 
-# Brief Tutorial
-This will be a brief tutorial using Yeast (_Saccharomyces cerevisiae_). You can follow this tutorial using the test data set or subsitute names and files for data of your own. This tutorial assumes you are starting from an empty history. With the aim of making it easier to understand, the training has been organized into four main sections: genome profile analysis, HiFi phased assembly with hifiasm, post-assembly processing and hybrid scaffolding. First, we must get the data and workflows into Galaxy.
-
-<!-- This is my old content for getting data into galaxy, but I see a new "hands-on" thing is set up with Zenodo, which looks much better.
-### Get Data into Galaxy
-On the left-hand side of the galaxy page, you should see a "Tools" title, a search bar, a button labelled "Upload Data", and a list of items, mostly tools. Click the "Upload Data" button. A sub-window (not the same as a true pop-up window) will appear with the title "Download from web or upload from disk". There are four tabs. In the "Regular" tab, you will see several buttons along the bottom. Choose the button labelled "Choose remote files". This will open a second sub-window. Search through the list of connected remote data sources for "Genome Ark" and select it. The connected data source is the [VGP/Genome Ark AWS S3 bucket](https://genomeark.s3.amazonaws.com/index.html). In short, you will navigate to the data you need to import and select the "Ok" button on the bottom right, followed by the blue "Start" button. This will be described in more detail below.
-
-If working on a genome other than the example yeast genome, you can find the VGP data following this path: `/species/${Genus}_${species}/${speciman_code}/genomic_data`. If you were looking for data for _Bos taurus_ speciman #1 (in this case, there is only one speciman anyway, but the structure is the same regardless). The value of `${Genus}` would be "Bos", `${species}` would be "taurus", and `${speciman_code}` would be "mBosTau1". The `${speciman_code}` is comprised of 4 component parts: (1) the class abbreviation (e.g., m for mammal, r for reptile, etc.), (2) the first three letters of genus with the first letter capitalized, (3) the first three letters of the species with the first letter capitalized, and (4) the speciman number (e.g., 1, 2, etc.). Each of the datatypes (e.g., Illumina) will have their own subdirectory under the `genomic_data` directory. You'll have to upload files for each datatype separately. Inside a given datatype directory (e.g., `pacbio`), select all the relevant files individually until all the desired files are highlighted and click the "Ok" button. Note that there may be multiple pages of files listed. Also note that you may not want every file listed. As an example, for a PacBio dataset, you may want only the HiFi/CCS data, not the CLR data. Also, sometimes files are included in more than one format (e.g., BAM and FASTQ), but you probably want only one version (probably the FASTQ version). Consider the case of _Vipera latastei_: `/species/Vipera_latastei/rVipLat1/genomic_data/pacbio`. Here are the available files:
-```txt
-m54306U_210506_190607.hifi_reads.bam
-m54306U_210506_190607.hifi_reads.fastq.gz
-m54306U_210506_190607.subreads.bam
-m54306U_210506_190607.subreads.bam.pbi
-m54306U_210513_174500.hifi_reads.bam
-m54306U_210513_174500.hifi_reads.fastq.gz
-m54306U_210513_174500.subreads.bam
-m54306U_210513_174500.subreads.bam.pbi
-m54306U_210609_193127.hifi_reads.bam
-m54306U_210609_193127.hifi_reads.fastq.gz
-m54306U_210609_193127.subreads.bam
-m54306U_210609_193127.subreads.bam.pbi
-m64055_210306_041111.Q20.fastq
-m64055_210306_041111.ccs.bam
-m64055_210306_041111.subreads.bam
-m64055_210306_041111.subreads.bam.pbi
-m64055_210314_042118.Q20.fastq
-m64055_210314_042118.ccs.bam
-m64055_210314_042118.subreads.bam
-m64055_210314_042118.subreads.bam.pbi
-m64055_210317_140301.Q20.fastq
-m64055_210317_140301.ccs.bam
-m64055_210317_140301.subreads.bam
-m64055_210317_140301.subreads.bam.pbi
-m64055_210430_160602.Q20.fastq
-m64055_210430_160602.ccs.bam
-m64055_210430_160602.subreads.bam
-m64055_210430_160602.subreads.bam.pbi
-```
-Assuming we want to do a HiFi-based assembly, we don't need the CLR data (i.e., all the files matching \*subreads\*). We also do not need the HiFi/CCS BAM files (i.e., \*.ccs.bam). Thus you would select only the following files:
-```txt
-m54306U_210506_190607.hifi_reads.fastq.gz
-m54306U_210513_174500.hifi_reads.fastq.gz
-m54306U_210609_193127.hifi_reads.fastq.gz
-m64055_210306_041111.Q20.fastq
-m64055_210314_042118.Q20.fastq
-m64055_210317_140301.Q20.fastq
-m64055_210430_160602.Q20.fastq
-```
-Note that you can use the search bar to make it easier to find the files you are looking for. Items selected when a particular search is active will remain selected when removing the search or starting a different search.
-
-For the sake of our tutorial, we'll grab the yeat data from a different location (still inside the Genome Ark AWS S3 bucket): `/galaxy/yeast/genomic_data`. Enter the `hifi` directory, select only the file `SRR13577846.30x.wgaps.fastq`, and click "Back". Enter the `hic` directory, select all three files (including `re_bases.txt`) and click "Back". Enter the `bionano` directory, select only the `.cmap` file (`EXP_REFINEFINAL1.cmap` for yeast) and click "Ok". Having returned to the first sub-window again, click the blue "Start" button. The datasets may take a while to import, which makes sense considering you're transferring up to hundreds of gigabytes of data from an S3 bucket in the USA to a Galaxy server in Germany.
-
-
-
-###### A Note about Data QC
-The VGPAPv2.0 assumes the input datasets are high-quality. QC on raw read data should be performed before it is used. QC on raw read data is outside the scope of this tutorial.
-
-## Finding the Right Workflows
-While you're waiting for the data to import, we can import the VGPAPv2.0 workflows. Workflows can be created by anyone, and many workflows are shared by other users. You can import a copy of any shared workflow to your account to edit, if desired, and run. There are two ways to find shared workflows. First, shared workflows can be found from the "Shared Data" dropdown in the center of the navigation bar on the top of the page. Selecting the "Workflows" options will enable you to search through many workflows. Second, you can upload a `.ga` file that you have shared with you directly or find elsewhere on the internet (e.g., on GitHub). Since the official workflows for the VGPAPv2.0 are available on GitHub, we will use the second method. Galaxy has a GitHub repo called the [Intergalactic Workflow Commission (IWC)](https://github.com/galaxyproject/iwc). Navigate through the files following this path: `/workflows/VGP-assembly-v2`. You'll see 4 directories, one for each of the available workflows, each with a `.ga` file in it. You'll need to upload each `.ga` file individually.
-```txt
-workflows
-└── VGP-assembly-v2
-    ├── VGP-Bionano
-    │   └── Galaxy-Workflow-VGP_Bionano.ga
-    ├── VGP-HiC
-    │   └── Galaxy-Workflow-VGP_HiC.ga
-    ├── VGP-Hifiasm
-    │   └── Galaxy-Workflow-VGP_Hifiasm.ga
-    └── VGP-Meryldb-creation
-        └── Galaxy-Workflow-Meryl_Database_Creation.ga
-```
-For each file, visit the page for the file and click the "Raw" button in the upper, right-hand corner of the file. Copy the URL from the address bar in your browser. Back in Galaxy, click the the "Workflows" button from the navigation bar at the top of the webpage. Select the "Import" button at the top-right of the center panel. Paste the URL into the the "Archived Workflow URL" box and click the "Import workflow" button. Repeat this process for each of the 4 `.ga` files.
-
-## Preparing Imported Datasets
-Many workflows require [dataset collections](https://galaxyproject.org/tutorials/collections) as input instead of "regular" datasets. For our yeast dataset, it will feel silly to create a collection of HiFi files containing only a single file, but we'll do it anyway. There is more than one way to do this, but we'll do this using the history section of Galaxy on the right panel of the page. You should see 5 history entries if doing the yeast dataset (probably more if doing a different VGP sample). Select the check box next to the symbol of a tag and a speech bubble. This will reveal empty check boxes next to each history item. First, we'll create a HiFi reads collection. Select all the HiFi read datasets (for yeast, this is only a single file: `SRR13577846.30x.wgaps.fastq` (history entry #1).) Then, open the drop-down list labelled "For all selected..." and select "Build Dataset List". A new sub-window will appear. In this case it is reasonable to have the "Hide original elements?" checkbox checked, but it is up to you. Enter a name for the collection, e.g., "Hifi Reads", and click "Create collection". This will create a new history entry containing your new collection (#6 "Hifi Reads" for yeast).
-
-We'll do something similar for the Hi-C data. This time select the Hi-C reads (` SRR7126301_1.fastq` and ` SRR7126301_1.fastq` (history entries #2-3) for yeast) and select "Build List of Dataset Pairs" from the "For all selected..." dropdown. A different sub-window will appear. Assuming all your pairs of files share the same naming scheme, it should be straightforward for Galaxy to autodetect which files belong in pairs. If not, you may have to "Build Dataset Pair" first for each pair of files before trying the "Build List of Dataset Pairs" option. Assuming it worked though, you should see an indication that your pair(s) of files will be condensed into dataset pairs. Enter a name for your dataset, e.g., "Hi-C Reads", and click "Create collection". This will create a new history entry containing your new collection (#7 "Hi-C Reads" for yeast).
-
-## Meryl & GenomeScope
-Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to run [GenomeScope](https://github.com/tbenavi1/genomescope2.0){% cite Vurture_2017 Ranallo_Benavidez_2020 %}  and create k-mer databases. Genomescope is used in the present pipeline primarily for determing the genome size based on a k-mer analysis. Viewing the plots produced by Genomescope is also useful. They k-mers provided to Genomescope could be generated by a number of tools, but this pipeline uses [Meryl](https://github.com/marbl/meryl), primarily because Merqury uses Meryl databases for assembly validation later in the pipeline. Genome size could be determined by a different method, namely _a priori_ knowledge either personal or from literature (e.g., as found in the [Animal Genome Size Database](http://genomesize.com)). In some places in the pipeline, you can specify a genome size other than what is reported by GenomeScope if you wish. In some places, the GenomeScope will be used regardless unless you edit the workflow, which is beyond the scope of this tutorial.
-
-To run this workflow, click on "Workflow" in the upper navigation bar. Find the imported workflow "Meryl Database Creation (imported from uploaded file)" in the central panel. This row in the table will have a blue "Run Workflow" button, which has a "play" (right-pointing triangle) symbol in it, on the right-hand side; the text "Run Workflow" does not appear in the button, but it will appear as the tooltip upon mouse hover. Click this button. A new workflow page will appear in the central panel containing eight numbered subsections. You will be able to leave some of these alone, but must provide input in others. Each section will be listed below with instructions for each. Some of these sections will be unexpanded by default; click the eye symbol on the right-hand side to expand each.
-
-1. Collection of PacBio Data
-    Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select your "Hifi Reads" collection created previously. There should be only one option available from the dropdown, but there could be more if you weren't starting from an empty history. For the yeast dataset, this will be "6: Hifi Reads".
-2. species\_full\_name
-    This is used for file naming, which will become particularly important when exporting the assembly back to the AWS S3 bucket. This should be the full name of the species with an underline between the genus and species; e.g., "Callithrix\_jacchus" for the common marmoset (_Callithrix jacchus_) and "Calypte\_anna" for Anna's hummingbird (_Calypte anna_). You will be required to specify this value for each workflow in the pipeline. Be sure to specify the same value each time. We will use "Saccharomyces\_cerevisiae" for yeast (_Saccharomyces cerevisiae_).
-3. species\_id
-    This is the ID for the specimen you are working on. It is the same value referred to by the `${specimen_code}` variable from the "Get Data into Galaxy" section of this tutorial. For the common marmoset and Anna's hummingbird, the appropriate values would be "mCalJac1" and "bCalAnn1", respectively. For the yeast assembly, we'll use the value "sSacCer1", though this is not a formal name in the VGP (which makes sense since yeast is not in Vertebrata).
-4. Version
-    This is an arbitrary string used to identify which version of the assembly this is. Some form of semantic versioning is a good idea, but the key here is to have a unique identifier to show which version of the assembly this is. It may be a good idea to include an abbreviation for the institution generating the assembly in the version value. The following are reasonable examples: "1.0", "3.1", "NHGRI-1.2", and "Rock-2.0". For the purpose of this demonstration, "test-1.0" will be used.
-5. Meryl
-    Here you will need to specify a k-mer size (i.e., the value of k). To avoid palindromes, odd values of k are recommended. "21" is recommended for human genomes (3.1 gigabases) and most other genomes with a haploid genome size larger than 3.1 gigabases unless it is _much_ larger. "19" is a reasonable choice for species with haploid genome sizes around smaller than human. We'll use 17 for the yeast genome. To make a more informated choice, you can learn about and use the formula described in the [Quake](http://www.cbcb.umd.edu/software/quake/index.html) [paper](https://doi.org/10.1186/gb-2010-11-11-r116) {% cite Kelley_2010 %} and [Quake FAQs](http://www.cbcb.umd.edu/software/quake/faq.html).
-6. Meryl
-    No input required.
-7. Meryl
-    No input required.
-8. GenomeScope
-    No input required.
-
-Once all the inputs are provided, click the blue "Run Workflow" button. This will actually launch jobs to run the workflow. Once all the jobs are completed successfully, move on to the next workflow. Note that history steps are green when successful, yellow while running, grey while submitting, and red when failed. History steps #8-9,11  will be hidden automatically. #10 is the Meryl database (you can ignore this for now). #12-15 are the GenomeScope plots. You will also be able to view these plots or, if you wish, save any of them. Now is good time to download them before they get buried in the history. To download any dataset/output file from the history, click the item in the history to expand the section and click the floppy disk icon.
-
-## Contig-level Assemblies (a.k.a., "Hifiasm" workflow)
-This workflow creates contig-level assemblies. More specifically, it uses Hifiasm to generate initial primary and alternate pseudohaplotype assemblies. These assemblies are further refined using purge_dups. This workflow is submitted in much the same way as the previous workflow. To run this workflow, click on "Workflow" in the upper navigation bar. Find the imported workflow "VGP Hifiasm (imported from uploaded file)" in the central panel. This row in the table will have a blue "Run Workflow" button, which has a "play" (right-pointing triangle) symbol in it, on the right-hand side; the text "Run Workflow" does not appear in the button, but it will appear as the tooltip upon mouse hover. Click this button. A new workflow page will appear in the central panel containing 45 numbered subsections. You will be able to leave most of these alone, but you must provide input in some. Only section requiring input will be listed below with instructions. Some of these sections may be unexpanded by default; click the eye symbol on the right-hand side to expand each.
-
-<ol>
-    <li value=1>
-        <p>
-            species_full_name<br />
-            Use the same value that you supplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "Saccharomyces_cerevisiae").
-        </p>
-    </li>
-    <li value=2>
-        <p>
-            Version<br />
-            Use the same value that you spplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "test-1.0").
-        </p>
-    </li>
-    <li value=3>
-        <p>
-            Meryl Database<br />
-            Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select your Meryl database output from the previous workflow. For the yeast dataset, this will be "10: species/Saccharomyces_cerevisiae/sSacCer1/assembly_vgp_standard_2.0/intermediates/meryl/sSacCer1.meryldb".
-        </p>
-    </li>
-    <li value=4>
-        <p>
-            species_id<br />
-            Use the same value that you spplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "sSacCer1").
-        </p>
-    </li>
-    <li value=5>
-        <p>
-            PacBio Reads Collection<br />
-            Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select your "Hifi Reads" collection created previously. For the yeast dataset, this will be "6: Hifi Reads".
-        </p>
-    </li>
-    <li value=8>
-        <p>
-            GenomeScope<br />
-            Here you must provide 2 values. First, specify the "Ploidy for model to use". For diploid organisms, provide a value of 2. Note that the VGPAPv2.0 does not explicitely support organisms with higher ploidy. Second, specify the "K-mer length used to calculate k-mer spectra". Simply provide the same k value used when choosing a k value for Meryl (17 for yeast).
-        </p>
-    </li>
-    <li value=17>
-        <p>
-            BUSCO<br />
-            You will need to set the lineage using the dropdown menu. It will default to the first item in the list (i.e., Acidobacteria), so you must change it as that would not be appropriate for vertebrates. In many cases, you can simply set it to "Vertebrata", but you can choose something more specific if you wish (recommended), e.g., "Actinopterygii" for the Atlantic horse mackerel (<i>Trachurus trachurus</i>). For yeast, we will select "Saccharomycetes". Subsequent BUSCO steps will default to "Vertebrata" so you may choose to leave them alone, but it will provide better results to make it more specific if a more specific option exists. We will change them in this tutorial (we must because yeast is not a vertebrate).
-        </p>
-    </li>
-    <li value=35>
-        <p>
-            BUSCO<br />
-            Changing the default value is not as simple as with step #17 because the dropdown menu will not automatically be available. If you wish to change this from the default value of "Vertebrata", you must click the "Edit" button (square icon with a pencil in it) next to the text "Lineage". This will enable the dropdown menu, allowing you to select the desired lineage: "Saccharomycetes" for yeast.
-        </p>
-    </li>
-    <li value=43>
-        <p>
-            BUSCO<br />
-            If the lineage dropdown menu is not available, follow the same steps described in #35. Regardless, select the desired lineage from the dropdown: "Saccharomycetes" for yeast.
-        </p>
-    </li>
-</ol>
-
-Once all the inputs are provided, click the blue "Run Workflow" button. This will actually launch jobs to run the workflow. Once all the jobs are completed successfully, move on to the next workflow.
-
-## Scaffold-level Assembly
-There are two workflows to generate scaffolds from the contig level assemblies generated from the previous workflow. If you have only Hi-C data, use the Hi-C workflow. If you have both Hi-C data and BioNano data, use the BioNano workflow first, followed by the Hi-C workflow. We have both for the yeast dataset, so we'll start with the BioNano workflow.
-
-### Assembly Scaffolding with BioNano
-This workflow creates a scaffold-level primary assembly. This workflow is submitted in much the same way as the previous workflows. To run this workflow, click on "Workflow" in the upper navigation bar. Find the imported workflow "VGP Bionano (imported from uploaded file)" in the central panel. This row in the table will have a blue "Run Workflow" button, which has a "play" (right-pointing triangle) symbol in it, on the right-hand side; the text "Run Workflow" does not appear in the button, but it will appear as the tooltip upon mouse hover. Click this button. A new workflow page will appear in the central panel containing nine numbered subsections. You will be able to leave some of these alone, but must provide input in others. Some of these sections may be unexpanded by default; click the eye symbol on the right-hand side to expand each.
-
-1. Hifiasm Purged Assembly
-    Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select the primary assembly from the Hifiasm workflow. There are many outputs from the Hifiasm workflow, but you're looking for a file matching this pattern: `species/${Genus}_${species}/${speciman_code}/assembly_vgp_standard_2.0/intermediates/${species_id}_p1.fasta`. For the yeast dataset, this will be "67: species/Saccharomyces\_cerevisiae/sSacCer1/assembly\_vgp\_standard\_2.0/intermediates/sSacCer1\_p1.fasta".
-2. BioNano Data
-    Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select the CMAP file you imported at the beginning. If the dropdown menu does not work or provides a message that no CMAP file is available, you'll need to click the "Browse Datasets" button (symbol of an open folder) on the right side of the dropdown menu. From sub-window that opens, find the CMAP file and select it. For the yeast dataset, the dataset is "5: EXP_REFINEFINAL1.cmap".
-3. species\_full\_name
-    Use the same value that you supplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "Saccharomyces_cerevisiae").
-4. Version
-    Use the same value that you spplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "test-1.0").
-5. species\_id
-    Use the same value that you spplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "sSacCer1").
-6. Estimated Genome Size
-    This is the genome size calculated by GenomeScope. You can view this value on any of the GenomeScope plots, e.g., "15: species/Saccharomyces\_cerevisiae/sSacCer1/assembly\_vgp\_standard\_2.0/evaluation/genomescope/sSacCer1\_genomescope\_transformed\_log\_plot.png" It is the value after the label "len:". Alternately, you can look at the "Genome Haploid Length" in the summary file, e.g., "24: species/Saccharomyces\_cerevisiae/sSacCer1/assembly\_vgp\_standard\_2.0/evaluation/genomescope/sSacCer1\_Summary". For the yeast dataset, this value is 12,661,893 bp.
-7. BioNano Hybrid Scaffold
-    You may not need to do anything here. If the "Restriction enzyme" for your dataset is not "CTTAAG", you can change it by clicking the "Edit" icon (square symbol with a pencil). If you are not sure what restriction enzyme is used in your dataset, open the CMAP file and search for it in the header lines (hint: search for lines starting with this string "# Nickase Recognition Site").
-8. Concatenate Datasets
-    No input required.
-9. Quast
-    No input required.
-
-### Assembly Scaffolding with Hi-C
-This workflow creates a scaffold-level primary assembly. This workflow is submitted in much the same way as the previous workflows. To run this workflow, click on "Workflow" in the upper navigation bar. Find the imported workflow "VGP HiC (imported from uploaded file)" in the central panel. This row in the table will have a blue "Run Workflow" button, which has a "play" (right-pointing triangle) symbol in it, on the right-hand side; the text "Run Workflow" does not appear in the button, but it will appear as the tooltip upon mouse hover. Click this button. A new workflow page will appear in the central panel containing 25 numbered subsections. You will be able to leave some of these alone, but must provide input in others. Only sections requiring input will be listed below with instructions. Some of these sections may be unexpanded by default; click the eye symbol on the right-hand side to expand each.
-
-<ol>
-    <li value=1>
-        <p>
-            species_full_name<br />
-            Use the same value that you supplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "Saccharomyces_cerevisiae").
-        </p>
-    </li>
-    <li value=2>
-        <p>
-            Version<br />
-            Use the same value that you spplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "test-1.0").
-        </p>
-    </li>
-    <li value=3>
-        <p>
-            species_id<br />
-            Use the same value that you spplied to the step with the same name from the Meryl+GenomeScope workflow (i.e., "sSacCer1").
-        </p>
-    </li>
-    <li value=4>
-        <p>
-            Hi-C Forward Reads<br />
-            Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select the forward reads FASTQ file imported at the beginning. For the yeast dataset, this will be "2: SRR7126301_1.fastq". If the dropdown menu does not work, provides a message that no FASTQ file is available, or the needed file is not among the options inside the dropdown menu, you'll need to click the "Browse Datasets" button (symbol of an open folder) on the right side of the dropdown menu. From sub-window that opens, find the correct file and select it.
-        </p>
-    </li>
-    <li value=5>
-        <p>
-            Scaffolded Assembly<br />
-            Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select scaffolded assembly from the BioNano workflow. If you skipped the BioNano workflow because you did not have this datatype, provide the primary assembly resulting from the Hifiasm workflow. If using the BioNano workflow results as input, you're looking for a file/dataset/history item matching this pattern: `species/${Genus}_${species}/${specimen_code}/assembly_vgp_standard_2.0/intermediates/${specimen_code}_s1.fasta`. For the yeast dataset, this will be "145: species/Saccharomyces_cerevisiae/sSacCer1/assembly_vgp_standard_2.0/intermediates/sSacCer1_s1.fasta".
-        </p>
-    </li>
-    <li value=6>
-        <p>
-            Hi-C Reverse Reads<br />
-            Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select the reverse reads FASTQ file imported at the beginning. For the yeast dataset, this will be "3: SRR7126301_2.fastq". If the dropdown menu does not work, provides a message that no FASTQ file is available, or the needed file is not among the options inside the dropdown menu, you'll need to click the "Browse Datasets" button (symbol of an open folder) on the right side of the dropdown menu. From sub-window that opens, find the correct file and select it.
-        </p>
-    </li>
-    <li value=7>
-        <p>
-            Restriction Enzyme Sequences<br />
-            Here you must ensure the left "Dataset Collection" button (symbol of a folder outline) is toggled instead of the right "Multiple Collections" button (symbol of a folder filled-in). From the dropdown menu, select your restriction enzymes text file imported previously with the Hi-C reads. For the yeast dataset, this will be "4: re_bases.txt".
-        </p>
-    </li>
-    <li value=8>
-        <p>
-            Estimated Genome Size<br />
-            This is the genome size calculated by GenomeScope. You can view this value on any of the GenomeScope plots, e.g., "15: species/Saccharomyces\_cerevisiae/sSacCer1/assembly\_vgp\_standard\_2.0/evaluation/genomescope/sSacCer1\_genomescope\_transformed\_log\_plot.png" It is the value after the label "len:". Alternately, you can look at the "Genome Haploid Length" in the summary file, e.g., "24: species/Saccharomyces\_cerevisiae/sSacCer1/assembly\_vgp\_standard\_2.0/evaluation/genomescope/sSacCer1\_Summary". For the yeast dataset, this value is 12,661,893 bp.
-        </p>
-    </li>
-    <li value=18>
-        <p>
-            SALSA<br />
-            If using the BioNano scaffolds as input to this workflow, ignore this section. If using this workflow directly from the Hifiasm/purge_dups contigs, you will probably want to select the "Sequence graphs" from the dropdown menu. The one you want is the dataset/file/history item ending in "primary_assembly_contig_graph". For the yeast dataset, this would be history item #28; however, we won't use it because we're using the BioNano scaffolds as input.
-        </p>
-    </li>
-    <li value=20>
-        <p>
-            BUSCO<br />
-            You will need to set the lineage using the dropdown menu. It will default to the first item in the list (i.e., Acidobacteria), so you must change it as that would not be appropriate for vertebrates. In many cases, you can simply set it to "Vertebrata", but you can choose something more specific if you wish (recommended), e.g., "Actinopterygii" for the Atlantic horse mackerel (<i>Trachurus trachurus</i>). For yeast, we will select "Saccharomycetes". Subsequent BUSCO steps will default to "Vertebrata" so you may choose to leave them alone, but it will provide better results to make it more specific if a more specific option exists. We will change them in this tutorial (we must because yeast is not a vertebrate).
-        </p>
-    </li>
-</ol>
-
-# Assembly Validation
-Assembly validation is carried out at different stages by the following software packages: BUSCO, Merqury, Pretext, and Quast. How they are used to assess assembly quality is outside the scope of this tutorial, however, we will show you how to access the results for each. BUSCO .... Merqury .... Pretext .... Quast .... **TODO**
-
-# Getting Help
-Genome assembly is not a trivial task, and there is not a one-size-fits-all approach. The VGPAPv2.0 provides a strong basis for vertebrate genome assembly, and making it available on Galaxy will hopefully reduce the barrier to entry for many individuals and labs. If you have issues following this tutorial, you feel that your assembly is unique, and/or you experience errors while running the pipeline, please reach out for assistance. General Galaxy questions can be answered via the [Galaxy Community Hub](https://galaxyproject.org), [Galaxy Help Forum](https://help.galaxyproject.org), or on the [Galaxy Gitter](https://gitter.im/galaxyproject/Lobby). Specific questions about results, tools, etc. can be asked to the community via **TODO**.
-
-# Acknowledgements
-The VGPAPv2.0 would not exist without the hurculean efforts of many people over the past several years. We are particularly indebted to the team that carried out [Phase 1 of the VGP](https://www.nature.com/immersive/d42859-021-00001-6/index.html) {% cite Rhie_2021 %}, which included putting together VGPAPv1.0 on DNAnexus.
-
--->
+Among the most notable differences that can be identified between the contact maps, it can be highlighted the regions marked with red circles, where inversion can be identified.
+        
 
 # Conclusion
 
