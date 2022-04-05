@@ -1223,8 +1223,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 >    > ### {% icon comment %} Comment: Using group tags for large sample sets
 >    >
->    > If you have a large number of samples, or a complex experimental design, manually selecting files for each factor level
->    > may be a lot of work. In these situations, **group tags** can make your life a lot easier.
+>    > If you have a large number of samples, or a complex experimental design, an alternative to collections is **group tags**.
 >    >
 >    > For more information about setting and using group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %}).
 >    {: .comment}
@@ -1313,16 +1312,18 @@ For more information about **DESeq2** and its outputs, you can have a look at th
 
 > ### {% icon question %} Questions
 >
-> 1. Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?
-> 2. We could also hypothetically be interested in the effect of the sequencing (or other secondary factors in other cases). How would we know the differentially expressed genes because of sequencing type?
-> 3. We would like to analyze the interaction between the treatment and the sequencing.
+> 1. Is the *Pasilla* gene (ps, FBgn0261552) downregulated by the RNAi treatment?
+> 2. Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?
+> 3. We could also hypothetically be interested in the effect of the sequencing (or other secondary factors in other cases). How would we know the differentially expressed genes because of sequencing type?
+> 4. We would like to analyze the interaction between the treatment and the sequencing.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
-> > 2. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after
+> > 1. You can manually check for the `FBgn0261552` in the first column or use the **Filter** tool with `c1 == "FBgn0261552"`. The fold-change is negative so it is indeed downregulated and the adjusted p-value is below 0.05 so it is part of the significantly changed genes.
+> > 2. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
+> > 3. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after
 correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
-> > 3. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
+> > 4. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
 > >    - treated-PE
 > >    - untreated-PE
 > >    - treated-SE
@@ -1428,13 +1429,11 @@ The generated output is an extension of the previous file:
 >
 > 1. Where is the most over-expressed gene located?
 > 2. What is the name of the gene?
-> 3. Is the *Pasilla* gene (ps) downregulated by the RNAi treatment?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.
 > > 2. From the table, we got the gene symbol: Ant2. After some search on the [online biological databases](https://www.ncbi.nlm.nih.gov/gene/32008), we find that Ant2 corresponds to adenine nucleotide translocase 2.
-> > 3. You can manually check for it or use the **Filter** tool with `c13 == "ps"`. It is indeed part of this last dataset (significant p-value and abs(log2(FC)) > 1). The fold-change is negative so it is indeed downregulated.
 > {: .solution}
 {: .question}
 
