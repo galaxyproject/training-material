@@ -143,11 +143,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >     - *"Input Collection"*: `2 PE fastqs`
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: The output of **Flatten collection** selected with **Dataset collection**
+>    - {% icon param-collection %} *"Short read data from your current history"*: The output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
-> 2. Inspect the webpage output of **FastQC** for the `GSM461177_untreat_paired` sample (forward and reverse)
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -322,7 +322,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >
 > 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %} with the following parameters to map your reads on the reference genome:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
->       - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: the `Cutadapt on collection N: Reads` (output of **Cutadapt**)
+>       - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: the `Cutadapt on collection N: Reads` (output of **Cutadapt** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >       - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >           - *"Select reference genome"*: `Fly (Drosophila melanogaster): dm6 Full`
@@ -372,7 +372,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > 1. Install [**IGV**](https://software.broadinstitute.org/software/igv/download) (if not already installed)
 > 2. Start IGV locally
-> 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR**)
+> 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > 3. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
 > 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
 >
@@ -785,7 +785,7 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 > > ### {% icon solution %} Solution
 > >
 > > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} tool:
-> >    - {% icon param-collection %} *"Sort Query"*: featureCounts on collection N: Counts (output of **featureCounts**)
+> >    - {% icon param-collection %} *"Sort Query"*: featureCounts on collection N: Counts (output of **featureCounts** {% icon tool %})
 > >    - *"Number of header"*: `1`
 > >    - In *"1: Column selections"*:
 > >      - *"on column"*: `2`
@@ -1160,17 +1160,17 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >    - {% icon param-collection %} *"Dataset collection"*: `all counts`
 >
 > 2. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output file of the previous step).
+>    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output of **Extract element identifiers** {% icon tool %})
 >    - *"Regular Expression"*: `untreat`
 >
 > 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output file of the Extract element identifiers step).
+>    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output of **Extract element identifiers** {% icon tool %})
 >    - *"Regular Expression"*: `single`
 >
 > 4. {% tool [Filter collection](__FILTER_FROM_FILE__) %} with the following parameters:
->    - {% icon param-collection %} *"Input collection"*: `all counts`
+>    - {% icon param-collection %} *"Input Collection"*: `all counts`
 >    - *"How should the elements to remove be determined?"*: `Remove if identifiers are ABSENT from file`
->    - {% icon param-files %} *"Filter out identifiers absent from"*: Select both datasets output of **Search in text files (grep)**.
+>        - {% icon param-files %} *"Filter out identifiers absent from"*: Select both datasets outputs of **Search in textfiles (grep)** {% icon tool %}.
 >
 > 5. Rename each of the 4 new collections with the four categories: `paired`, `single`, `treat`, `untreat`.
 >
@@ -1197,26 +1197,29 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1) %} with the following parameters:
 >    - *"how"*: `Select datasets per level`
->      - In "1: Factor"
->        - *"Specify a factor name"*: `Treatment`
->        - In *"1: Factor level"*:
->          - *"Specify a factor level"*: `treated`
->          - {% icon param-collection %} *"Counts file(s)"*: the collection `treat`.
->        - In *"2: Factor level"*:
->          - *"Specify a factor level"*: `untreated`
->          - {% icon param-collection %} *"Counts file(s)"*: the collection `untreat`.
->      - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
->      - In "2: Factor"
->        - "Specify a factor name" to `Sequencing`
->        - In *"1: Factor level"*:
->          - *"Specify a factor level"*: `PE`
->          - {% icon param-collection %} *"Counts file(s)"*: the collection `paired`.
->        - In *"2: Factor level"*:
->          - *"Specify a factor level"*: `SE`
+>        - In *"Factor"*:
+>            - {% icon param-repeat %} *"Insert Factor"*
+>                - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
+>                - In *"Factor level"*:
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
+>                        - {% icon param-collection %} *"Counts file(s)"*: the collection `treat`.
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
+>                        - {% icon param-collection %} *"Counts file(s)"*: the collection `untreat`.
+>            - {% icon param-repeat %} *"Insert Factor"*
+>                - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
+>                - In *"Factor level"*:
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
+>                        - {% icon param-collection %} *"Counts file(s)"*: the collection `paired`.
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                                      - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SR`
 >          - {% icon param-collection %} *"Counts file(s)"*: the collection `single`.
 >    - *"Files have header?"*: `No`
+>    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
->      - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
+>        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >
 >    > ### {% icon comment %} Comment: Using group tags for large sample sets
 >    >
@@ -1346,7 +1349,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 > ### {% icon hands_on %} Hands-on: Extract the most differentially expressed genes
 >
 > 1. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples:
->    - {% icon param-file %} *"Filter"*: the `DESeq2 result file`
+>    - {% icon param-file %} *"Filter"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
 >    - *"With following condition"*: `c7<0.05`
 >
 > 2. Rename the output `Genes with significant adj p-value`.
@@ -1399,9 +1402,9 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 >    ```
 >
 > 2. {% tool [Annotate DESeq2/DEXSeq output tables](toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0) %} with:
->    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: output of the last **Filter**
+>    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: output of the last **Filter** {% icon tool %}
 >    - *"Input file type"*: `DESeq2/edgeR/limma`
->    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported GTF file
+>    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported gtf `Drosophila_melanogaster.BDGP6.87.gtf`
 >
 {: .hands_on}
 
@@ -1451,7 +1454,7 @@ The annotated table contains no column names, which makes it difficult to read. 
 >    - {% icon param-file %} *"Concatenate Dataset"*: the `header` dataset
 >    - *"Dataset"*
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*
->         - {% icon param-file %} *"select"*: output of **Annotate**
+>         - {% icon param-file %} *"select"*: output of **Annotate** {% icon tool %}
 >
 > 3. Rename the output to `Genes with significant adj p-value & abs(log2(FC)) > 1`
 {: .hands_on}
@@ -1479,7 +1482,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
 > 1. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
->    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2**)
+>    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
 >    - *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(log2(FC)) > 2`
 >    - *"and column"*: `Column: 1`
@@ -1491,7 +1494,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters to extract the columns with the gene IDs and normalized counts:
 >    - *"Cut columns"*: `c1-c8`
 >    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets**)
+>    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
 > 5. Rename the output to `Normalized counts for the most differentially expressed genes`.
 {: .hands_on}
@@ -1563,7 +1566,7 @@ To compute the Z-score, we break the process into 2 steps:
 >        - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
 >      - Click on {% icon param-repeat %} *"Insert Tables"*
 >      - In *"2: Tables"*:
->        - {% icon param-file %} *"Table"*: output of the first **Table Compute**
+>        - {% icon param-file %} *"Table"*: output of the first **Table Compute** {% icon tool %}
 >      - *"Custom expression on 'tableN'"*: `table2.div(table1.std(1),0)`
 >
 >        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` divides the values of 2nd table (previously computed) by these standard deviations.
@@ -1627,17 +1630,17 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 
 > ### {% icon hands_on %} Hands-on: Prepare the datasets for goseq
 >
-> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with
+> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
 >    - *"Add expression"*: `bool(c7<0.05)`
->    - {% icon param-file %} *"as a new column to"*: the `DESeq2 result file`
+>    - {% icon param-file %} *"as a new column to"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
 >
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c1,c8`
 >    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of the **Compute**
+>    - {% icon param-file %} *"From"*: the output of the **Compute** {% icon tool %}
 >
 > 3. {% tool [Change Case](ChangeCase) %} with
->    - {% icon param-file %} *"From"*: the output of the previous **Cut**
+>    - {% icon param-file %} *"From"*: the output of the previous **Cut** {% icon tool %}
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
@@ -1652,8 +1655,9 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 >   - {% icon param-collection %} *"Input List"*: `featureCounts on collection N: Feature lengths`
 >   - *"How should a dataset be selected?"*: `The first dataset`
 >
-> 7. {% tool [Change Case](ChangeCase) %} with
->    - {% icon param-file %} *"From"*: the `GSM461177_untreat_paired` (output of **Extract Dataset**)
+> 7. {% tool [Change Case](ChangeCase) %} with the following parameters:
+>    - {% icon param-file %} *"From"*: `GSM461177_untreat_paired` (output of **Extract Dataset** {% icon tool %})
+>
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
