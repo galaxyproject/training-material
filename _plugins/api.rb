@@ -50,6 +50,12 @@ module Jekyll
             q['urls']['slides'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][7..-6]}.json"
           end
 
+          # Write out the individual page
+          page6 = PageWithoutAFile.new(site, "", "api/topics/", "#{q['url'][7..-6]}.json")
+          page6.content = JSON.pretty_generate(q)
+          page6.data["layout"] = nil
+          site.pages << page6
+
           q
         }
         out['maintainers'] = out['maintainers'].map{|c| mapContributor(site, c)}
@@ -81,22 +87,6 @@ module Jekyll
       page2.content = JSON.pretty_generate(topics)
       page2.data["layout"] = nil
       site.pages << page2
-
-      def filterInteresting(layout)
-        layout == 'tutorial_slides' or layout == 'base_slides' or layout == 'rdmbites_slides' or layout == 'tutorial_hands_on'
-      end
-
-      puts "[GTN/API] Tutorial and Slide pages"
-      site.pages.select{|page| filterInteresting(page.data['layout']) }
-        .each{|page|
-
-        page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{page.url[7..-6]}.json")
-        p = page.data.dup
-        p['contributors'] = p['contributors'].dup.map{|c| mapContributor(site, c)}
-        page5.content = JSON.pretty_generate(p)
-        page5.data["layout"] = nil
-        site.pages << page5
-      }
 
     end
   end

@@ -4,27 +4,27 @@ layout: tutorial_hands_on
 title: Pangeo Notebook in Galaxy - Introduction to Xarray
 zenodo_link: 'https://doi.org/10.5281/zenodo.5805953'
 requirements:
-- 
+-
   type: internal
   topic_name: data-science
   tutorials:
     - python-basics
-- 
+-
   type: internal
   topic_name: data-science
   tutorials:
     - python-plotting
     - python-advanced-np-pd
-- 
+-
   type: "external"
   title: Data Carpentry Geospatial Workshop
   link: https://datacarpentry.org/geospatial-workshop/
 follow_up_training:
-- 
+-
   type: "external"
   title: Pangeo Tutorial Gallery
   link: http://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/index.html
-- 
+-
   type: "external"
   title: Pangeo Gallery
   link: http://gallery.pangeo.io/index.html
@@ -37,7 +37,7 @@ questions:
 - How to print metadata information?
 - How to make a selection?
 - How to visualize?
-- How to filter? 
+- How to filter?
 - How to make reduction operations (mean, max, min)?
 - How to resample my data?
 - Where to go next?
@@ -51,7 +51,7 @@ objectives:
 time_estimation: 1H
 key_points:
 - Pangeo ecosystem enables big data analysis in geosciences
-- Xarray is an important Python package for big data analysis in geosciences 
+- Xarray is an important Python package for big data analysis in geosciences
 - Xarray can be used to read, select, mask and plot netCDF data
 - Xarray can also be used to perform global operations such as mean, max, min or resampling data
 tags:
@@ -69,10 +69,10 @@ notebook:
 # Introduction
 {:.no_toc}
 
-In this tutorial, we will learn about [Xarray](https://xarray.pydata.org/), one of the most used Python library from the [Pangeo](https://pangeo.io/) ecosystem. 
+In this tutorial, we will learn about [Xarray](https://xarray.pydata.org/), one of the most used Python library from the [Pangeo](https://pangeo.io/) ecosystem.
 
 We will be using data from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/)
-and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter)) 4 days forecast from December, 22 2021. Parallel data analysis with Pangeo is not covered in this tutorial. 
+and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter)) 4 days forecast from December, 22 2021. Parallel data analysis with Pangeo is not covered in this tutorial.
 
 > ### {% icon comment %} Remark
 >
@@ -160,7 +160,7 @@ We can identify 4 different sections:
 1. **Dimensions**: name of dimensions and corresponding number of elements;
 2. **Coordinates**: contains coordinate arrays (longitude, latitude, level and time) with their values.
 3. **Data variables**: contains all the variables available in the dataset. Here, we only have one variable. For each variable, we get information on its shape and values.
-4. **Attributes**: at this level, we get all the attributes of the dataset. 
+4. **Attributes**: at this level, we get all the attributes of the dataset.
 
 We can also get metadata information for each coordinate and data variables using "." followed by the coordinate or data variable name.
 
@@ -182,7 +182,7 @@ print(dset.time)
 > > > print(dset.pm2p5_conc)
 > > > ```
 > > {: .code-in}
-> > 
+> >
 > > > ### {% icon code-out %} Output
 > > > ```bash
 > > >    <xarray.DataArray 'pm2p5_conc' (time: 97, level: 1, latitude: 400, longitude: 700)>
@@ -211,7 +211,7 @@ print(dset.time)
 > # or alternatively
 > print(dset.pm2p5_conc)
 > ```
-> 
+>
 > When we print a variable or coordinate, we do not get all the individual values but a `DataArray` that contains a lot of very useful metadata such as coordinates (if they have some), all the attributes such as the name, the physical units, etc.
 >
 {: .comment}
@@ -254,7 +254,7 @@ The output will be very similar to what we did previously when selecting from co
 > > > print(dset.sel(time=(np.timedelta64(2,'D')+ np.timedelta64(12,'h'))))
 > > > ```
 > > {: .code-in}
-> > 
+> >
 > > > ### {% icon code-out %} Output
 > > > ```bash
 > > > <xarray.Dataset>
@@ -282,7 +282,7 @@ The output will be very similar to what we did previously when selecting from co
 
 ## Plotting
 
-To plot a map, you need to select a variable with data on geographical coordinates (latitude, longitude). In addition, coordinates need to be sorted, and preferably in increasing order. This is not the case for the coordinate "longitude" which is given between 360 and 0. 
+To plot a map, you need to select a variable with data on geographical coordinates (latitude, longitude). In addition, coordinates need to be sorted, and preferably in increasing order. This is not the case for the coordinate "longitude" which is given between 360 and 0.
 
 Let's shift the longitudes by 180 degrees so that they come in the range of -180 to 180.
 
@@ -331,17 +331,17 @@ There are many ways to customize your plots and we will only detail what we thin
 - Add a title, change colorbar title
 - Save figure into png
 
- ```python
+```python
 fig = plt.figure(1, figsize=[15,10])
- 
+
 # We're using cartopy to project our data.
 # (see documentation on cartopy)
 ax = plt.subplot(1, 1, 1, projection=ccrs.Mercator())
 ax.coastlines(resolution='10m')
-  
+
 # We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-dset.sel(time=(np.timedelta64(2,'D') + np.timedelta64(12,'h')))['pm2p5_conc'].plot(ax=ax, 
+dset.sel(time=(np.timedelta64(2,'D') + np.timedelta64(12,'h')))['pm2p5_conc'].plot(ax=ax,
                                                                                     transform=ccrs.PlateCarree(),
                                                                                     vmin = 0, vmax = 35,
                                                                                     cmap=cmc.roma_r)
@@ -360,14 +360,14 @@ And you should get the following plot:
 Now, we will plot several times on the same figure in different sub-plots; we will not plot all the times (too many) but the first 24 forecasted values.
 
 Firstly, we need to create a list of times and convert it to `pandas datetime` in order to make it easier to format times when plotting:
- 
+
 ```python
 list_times = np.datetime64('2021-12-22') + dset.time.sel(time=slice(np.timedelta64(0),np.timedelta64(1,'D')))
 print(pd.to_datetime(list_times).strftime("%d %b %H:%S UTC"))
 ```
 
 Secondly, we need to use the same plotting method as earlier, but we pass additional parameters:
-        
+
 - `vmin = 0`and `vmax = 35` to set the minimum and maximum values when plotting (this is useful to highlight features in your plot)
 - `subplot_kws={"projection": proj_plot}` to project data on a non-default projection. See [cartopy projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for more information about projections.
 - `col='time'` because we will plot several `time`;
@@ -378,11 +378,11 @@ Secondly, we need to use the same plotting method as earlier, but we pass additi
 
 ```python
 fig = plt.figure(1, figsize=[10,10])
-  
+
 # We're using cartopy to project our data.
 # (see documentation on cartopy)
 proj_plot = ccrs.Mercator()
-  
+
 # We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
 p = dset.sel(time=slice(np.timedelta64(1,'h'),np.timedelta64(1,'D')))['pm2p5_conc'].plot(transform=ccrs.PlateCarree(),
@@ -403,7 +403,7 @@ In the second part of our plot, we are going to customize each subplot (this is 
 
 -  `coastlines`: we pass a parameter `10m` to get coastlines with a high resolution (non-default);
 - `set_title` to set a title for each subplot.
-    
+
 ![Customized multi-plot](../../images/CAMS-PM2_5-fc-multi.png)
 
 
@@ -414,17 +414,17 @@ In the second part of our plot, we are going to customize each subplot (this is 
 > > ### {% icon solution %} Solution
 > > We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N. PM2.5 will increase and reach values close to 35 μm.m-3.
 > > We will use `slice` to select the area and we slice latitudes with `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`.
-> > The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
+> > The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in
 > > decreasing order for CAMS.
 > >
 > > > ### {% icon code-in %} Input: Python
 > > > ```python
 > > > fig = plt.figure(1, figsize=[10,10])
-> > > 
+> > >
 > > > # We're using cartopy to project our data.
 > > > # (see documentation on cartopy)
 > > > proj_plot = ccrs.Mercator()
-> > > 
+> > >
 > > > # We need to project our data to the new projection and for this we use `transform`.
 > > > # we set the original data projection in transform (here PlateCarree)
 > > > p = dset.sel(time=slice(np.timedelta64(1,'h'),np.timedelta64(1,'D'))).sel(latitude=slice(43., 40.),
@@ -443,14 +443,14 @@ In the second part of our plot, we are going to customize each subplot (this is 
 > > > plt.savefig("CAMS-PM2_5-fc-multi-Italy.png")
 > > > ```
 > > {: .code-in}
-> > 
+> >
 > >  ![PM2.5 over Italy](../../images/CAMS-PM2_5-fc-multi-Italy.png)
-> > 
+> >
 > {: .solution }
 {: .question }
 
 
-## How to use the **where** method 
+## How to use the **where** method
 
 Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this purpose,  we use the `where` method. For instance, we may want to only keep PM2.5 if values are greater than 25 μm.m-3 (or any threshold you would like to choose).
 
@@ -461,7 +461,7 @@ print(dset.where(dset['pm2p5_conc'] > 25))
 ```
 
 > ### {% icon comment %} What happened?
-> Each element of the dataset where the criteria within the `where` statement is not met, e.g. when PM2.5 <= 25, will be set to `nan`. 
+> Each element of the dataset where the criteria within the `where` statement is not met, e.g. when PM2.5 <= 25, will be set to `nan`.
 > You may not see any changes when printing the dataset but if you look carefuly at `pm2p5_conc` values, you will see many `nan`.
 >
 {: .comment}
@@ -474,12 +474,12 @@ Let's plot one time to better see what happened:
 ######################
 
 fig = plt.figure(1, figsize=[15,10])
- 
+
 # We're using cartopy to project our data.
 # (see documentation on cartopy)
 ax = plt.subplot(1, 1, 1, projection=ccrs.Mercator())
 ax.coastlines(resolution='10m')
-  
+
 # We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
 dset.where(dset['pm2p5_conc'] > 25).isel(time=0)['pm2p5_conc'].plot(ax=ax,
@@ -496,14 +496,14 @@ plt.savefig("CAMS-PM2_5-fc-20211224-25.png")
 We can then make the same multi-plot as earlier (over Italy) but with a `where` statement to mask values lower than 25 μm.m-3:
 
 ### Multi-plot over Italy using a mask
- 
+
 ```python
 fig = plt.figure(1, figsize=[10,10])
- 
+
 # We're using cartopy to project our data.
 # (see documentation on cartopy)
 proj_plot = ccrs.Mercator()
-  
+
 # We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
 p = dset.where(dset['pm2p5_conc'] > 25).sel(time=slice(np.timedelta64(1,'h'),np.timedelta64(1,'D'))).sel(latitude=slice(43., 40.),
@@ -557,7 +557,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 > > > dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).max()
 > > > ```
 > > {: .code-in}
-> > 
+> >
 > > > ### {% icon code-out %} Output
 > > > ```bash
 > > > xarray.Dataset
@@ -589,7 +589,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 > > > print(dset_tmean_max)
 > > > ```
 > > {: .code-in}
-> > 
+> >
 > > > ### {% icon code-out %} Output
 > > > ```bash
 > > > <xarray.Dataset>
@@ -613,7 +613,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 ## Details on the **resample** method
 
 ### 1 day Resampling
- 
+
  The resampling frequency is lower than our original data, so we would need to apply a global operation on the data we group together such as mean, min, max:
 
 ```python
@@ -636,7 +636,7 @@ print(dset.resample(time='1D').mean())
 
 
 ### 30 minute resampling
- 
+
 When the resampling frequency is higher than the original data, we need to indicate how to fill the gaps, for instance, interpolate and indicate which interpolation method to apply or select nearest values, etc.:
 
 ```python
@@ -645,7 +645,7 @@ print(dset.resample(time='30min').interpolate('linear'))
 
 > ### {% icon comment %} Be careful when sub-sampling!
 > Increasing the frequency of your data e.g. artificially creating data may not be scientifically relevant. Please use it carefully! Interpolating is not always scientifically relevant and sometimes you may prefer to choose a different method, like taking the nearest value for instance:
-> 
+>
 >    > ### {% icon code-in %} Input: Python
 >    >  ```python
 >    >  dset.resample(time='30min').nearest()
@@ -666,15 +666,15 @@ print(dset.resample(time='30min').interpolate('linear'))
 > > > ### {% icon code-in %} Input: Python
 > > > ```python
 > > > fig = plt.figure(1, figsize=[10,10])
-> > > 
+> > >
 > > > # We're using cartopy to project our data.
 > > > # (see documentation on cartopy)
 > > > proj_plot = ccrs.Mercator()
-> > > 
+> > >
 > > > sub_dset = dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).resample(time='1D').mean()
 > > > # We need to project our data to the new projection and for this we use `transform`.
 > > > # we set the original data projection in transform (here PlateCarree)
-> > > p = sub_dset['pm2p5_conc'].plot(transform=ccrs.PlateCarree(), 
+> > > p = sub_dset['pm2p5_conc'].plot(transform=ccrs.PlateCarree(),
 > > >                                 vmin = 0, vmax = 35,
 > > >                                 subplot_kws={"projection": proj_plot},
 > > >                                 col='time', col_wrap=5,
@@ -689,7 +689,7 @@ print(dset.resample(time='30min').interpolate('linear'))
 > > > plt.savefig("CAMS-PM2_5-fc-multi-Italy-mean-per-day.png")
 > > > ```
 > > {: .code-in}
-> > 
+> >
 > > >  ![Daily mean for PM2.5 over Italy](../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png)
 > {: .solution }
 {: .question }
@@ -699,7 +699,7 @@ print(dset.resample(time='30min').interpolate('linear'))
 
 > ### {% icon comment %} `Grouby` versus `resample`
 >
-> Use `groupby` instead of `resample` when you wish to group over a dimension that is not `time`. `groupby` is very similar to resample but can be applied to any coordinates and not only to time. 
+> Use `groupby` instead of `resample` when you wish to group over a dimension that is not `time`. `groupby` is very similar to resample but can be applied to any coordinates and not only to time.
 >
 {: .comment}
 
@@ -707,6 +707,6 @@ print(dset.resample(time='30min').interpolate('linear'))
 # Conclusion
 {:.no_toc}
 
-{% icon trophy %} Well done! [Pangeo](https://pangeo.io/) is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo {% cite Abernathey2017 %}, {% cite Abernathey2021 %}, {% cite Gentemann2021 %} and {% cite Sambasivan2021 %}!
+Well done! [Pangeo](https://pangeo.io/) is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo {% cite Abernathey2017 %}, {% cite Abernathey2021 %}, {% cite Gentemann2021 %} and {% cite Sambasivan2021 %}!
 
 Have a look at the [Pangeo Tutorial Gallery](https://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/) to pick up your next Pangeo training material!

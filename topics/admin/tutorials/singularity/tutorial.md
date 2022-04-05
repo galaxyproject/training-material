@@ -13,9 +13,11 @@ contributors:
   - mvdbeek
   - bernt-matthias
   - hexylena
-subtopic: features
+subtopic: jobs
 tags:
   - jobs
+  - ansible
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin
@@ -66,10 +68,10 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -12,3 +12,7 @@
->       version: 0.3.0
->     - src: usegalaxy_eu.certbot
+>    @@ -14,3 +14,7 @@
 >       version: 0.1.5
+>     - name: galaxyproject.tusd
+>       version: 0.0.1
 >    +- src: cyverse-ansible.singularity
 >    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >    +- src: gantsign.golang
@@ -77,6 +79,8 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add golang and singulary ansible roles"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
@@ -93,16 +97,19 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -122,3 +122,9 @@ nginx_conf_http:
->     nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -125,6 +125,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
->    +
+>     
 >    +# Golang
 >    +golang_gopath: '/opt/workspace-go'
 >    +# Singularity target version
 >    +singularity_version: "3.7.4"
 >    +singularity_go_path: "{{ golang_install_dir }}"
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure golang and singularity"}
@@ -186,7 +193,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    @@ -89,6 +91,10 @@ galaxy_config:
+>    @@ -91,6 +93,10 @@ galaxy_config:
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
@@ -351,6 +358,17 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 {: .tip}
 
 
+> ### {% icon tip %} Gateway Time-out (504) in Dependencies view
+> When you open "Admin -> Tool Management -> Manage Dependencies -> Containers", it sometimes shows "Gateway Time-out (504)"
+>
+> Resolving all dependencies for all tools can take a bit, you can increase your timeout with the `uwsgi_read_timeout` setting in `templates/nginx/galaxy.j2`
+{:.tip}
+
+> ### {% icon tip %} Resolution is "unresolved"
+> In "Admin -> Tool Management -> Manage Dependencies -> Dependencies", the Resolution for minimap2 @ 2.24 (as well as samtools @1.14) is "unresolved". How can I resolve this issue?
+>
+> Because our training uses containers for resolution it is expected that the non-container dependencies show as "unresolved". There is not currently a view which indicates if the containers have been resolved.
+{: .tip}
 
 
 
@@ -409,4 +427,4 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 
 -->
 
-{% snippet topics/admin/faqs/missed-something.md step=2 %}
+{% snippet topics/admin/faqs/missed-something.md step=3 %}

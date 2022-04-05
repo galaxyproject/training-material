@@ -64,7 +64,9 @@ For this exercise we will use a basic password file method for authenticating - 
 >     
 >         # Static files can be more efficiently served by Nginx. Why send the
 >    ```
-
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 >    > ### {% icon tip %} Running this tutorial *just* for Reports?
 >    > Add the `auth_basic` and `auth_basic_user_file` lines to your `location /reports/`
 >    {: .tip}
