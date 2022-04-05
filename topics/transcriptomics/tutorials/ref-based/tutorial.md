@@ -155,7 +155,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > The read length of both pairs is 37 bp.
+>    > > The read length of both mates is 37 bp.
 >    > >
 >    > {: .solution}
 >    >
