@@ -624,9 +624,9 @@ To compare the expression of single genes between different conditions (*e.g.* w
 > {: .solution}
 {: .question}
 
-Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **STAR** allows to count reads while mapping. Its results are identical to **HTSeq-count**. While this output is sufficient for most of analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.)
+Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **STAR** allows to count reads while mapping. Its results are identical to **HTSeq-count**. While this output is sufficient for most of analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).
 
-Therefore we offer a parallel tutorial for the 2 methods
+Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
 <!-- , click here on the method you would like to use.
 
 <div class="count-method-select">
