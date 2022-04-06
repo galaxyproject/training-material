@@ -7,8 +7,8 @@ layout: faq
 ---
 
 How to notice missing Dataset Metadata:
-- Dataset will not download when using the disk icon
-- Tools error when using a specific previously successfully dataset
+- Dataset will not be downloaded when using the disk icon
+- Tools error when using a previously successfully used specific dataset
 - Tools error with a message that ends with: ``OSError: [Errno 2] No such file or directory.``
 
 Solution:
