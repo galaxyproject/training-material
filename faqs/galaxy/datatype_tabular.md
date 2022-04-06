@@ -17,4 +17,5 @@ layout: faq
 #### Tips
 - Some tools require that BED format is followed, even if the datatype Interval (with less strict column ordering) is accepted on the tool form.
 - These tools will fail if run with malformed BED datasets or non-specific column assignments.
-- Solution: Reorganize the data to be in BED format and rerun. [More error troubleshooting help here](https://galaxyproject.org/support/tool-error/).
+
+**Solution**: Reorganize the data to be in BED format and rerun. 
