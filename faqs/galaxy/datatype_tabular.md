@@ -13,7 +13,7 @@ layout: faq
 3. Click the {% icon galaxy-pencil %} ✏️ icon to reach the **_Edit Attributes_** form. 
    - Change the datatype (3rd tab) and save
    - Label columns (1st tab) and save
-   -  Metadata will be assigned, then the dataset can be used.
+   - Metadata will be assigned, then the dataset can be used.
 4. If the required input is a BED or Interval datatype, adjusting (``.tab`` → ``.bed``, ``.tab`` → ``.interval``) maybe possible using a combination of **_Text Manipulation_** tools, to create a dataset that matches required specifications.
 5. Some tools require that BED format be followed, even if the datatype Interval (with less strict column ordering) is accepted on the tool form.
    - These tools will fail, if they are run with malformed BED datasets or non-specific column assignments.
