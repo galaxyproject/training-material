@@ -3,7 +3,6 @@ title: Missing or Incomplete Dataset metadata
 area: datasets   
 description:  Finding and Correcting Metadata
 layout: faq         
-
 ---
 
 How to notice missing Dataset Metadata:
