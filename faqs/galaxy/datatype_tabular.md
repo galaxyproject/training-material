@@ -8,7 +8,7 @@ layout: faq
 
 - A Tabular datatype is human readable and has tabs separating data columns.
   - Note: tabular data is different from comma seperated data (.csv)
-- Common tabular datatypes are .bed, .gtf, .interval, or .txt.
+- Common tabular datatypes are `.bed`, `.gtf`, `.interval`, or `.txt`.
 - The datatype metadata attribute can be directly reassigned to tabular format data.
 - Click the {% icon galaxy-pencil %} icon to reach the **_Edit Attributes_** form. 
   - Change the datatype (3rd tab) and save, then label columns (1st tab) and save.  Metadata will be assigned, then the dataset can be used.
