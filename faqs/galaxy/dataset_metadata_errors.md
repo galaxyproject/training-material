@@ -1,6 +1,6 @@
 ---
 title: Dataset Metadata Errors
-area: Getting inputs right    
+area: datasets   
 description:  Finding, Adjusting and Correcting Metadata
 layout: faq         
 
