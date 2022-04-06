@@ -720,7 +720,7 @@ You don't need to do the three.
 >
 >    > ### {% icon question %} Question
 >    >
->    > ![Screenshot of the IGV view on ps](../../images/group_strand_igv_screenshot.png "Screenshot of IGV on ps")
+>    > ![Screenshot of the IGV view on ps](../../images/ref-based/group_strand_igv_screenshot.png "Screenshot of IGV on ps")
 >    >
 >    > 1. Are the reads evenly distributed between the 2 groups (NEGATIVE and POSITIVE)?
 >    > 2. What is the type of library strandness?
