@@ -6,7 +6,7 @@ layout: faq
 ---
  
 
-- A Tabluar datatype is human readable and has tabs seperating data columns.
+- A Tabular datatype is human readable and has tabs separating data columns.
   - Note: tabular data is different from comma seperated data (.csv)
 - Common tabular datatypes are .bed, .gtf, .interval, or .txt.
 - The datatype metadata attribute can be directly reassigned to tabular format data.
