@@ -1,7 +1,7 @@
 ---
-title: Transfer entire historiesfrom one Galaxy instance to another
+title: Transfer entire histories from one Galaxy instance to another
 area: histories 
-box_type: tipfr
+box_type: tip
 layout: faq
 contributors: [AnomalyCodes]
 ---
