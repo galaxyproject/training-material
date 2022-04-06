@@ -736,6 +736,7 @@ You don't need to do the three.
 >    > ### {% icon comment %} How would it be if the library was stranded?
 >    >
 >    > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
+>    > Note thare there is no read on the POSITIVE group for the reverse strand-specific.
 >    {: .comment}
 >
 {: .hands_on}
