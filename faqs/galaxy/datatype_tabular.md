@@ -10,7 +10,7 @@ layout: faq
   - Note: tabular data is different from comma seperated data (.csv)
 1. Common tabular datatypes are `.bed`, `.gtf`, `.interval`, or `.txt`.
 2. The datatype metadata attribute can be directly reassigned to tabular format data.
-3. Click the {% icon galaxy-pencil %} ✏️ icon to reach the **_Edit Attributes_** form. 
+3. Click the pencil icon {% icon galaxy-pencil %} to reach the **_Edit Attributes_** form. 
    - Change the datatype (3rd tab) and save
    - Label columns (1st tab) and save
    - Metadata will be assigned, then the dataset can be used.
