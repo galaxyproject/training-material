@@ -330,6 +330,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >           - *"Length of the genomic sequence around annotated junctions"*: `36`
 >
 >               This parameter should be length of reads - 1
+>    - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
 >
 > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs with the following parameters:
 >    - In *"Results"*:
@@ -623,9 +624,53 @@ To compare the expression of single genes between different conditions (*e.g.* w
 > {: .solution}
 {: .question}
 
-Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **featureCounts** is considerably faster and requires far less computational resources, so we will use it here.
+Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **STAR** allows to count reads while mapping. Its results are identical to **HTSeq-count**. While this output is sufficient for most of analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.)
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts**, e.g. the strandness.
+Therefore we offer a parallel tutorial for the 2 methods
+<!-- , click here on the method you would like to use.
+
+<div class="count-method-select">
+	<input id="count-star" type="radio" name="count-method" value="star" onclick="showSTAR()">
+	<label for="count-star" class="select">Count with STAR</label>
+	<input id="count-FeatCounts" type="radio" name="count-method" value="featureCounts" onclick="showFeatCounts()">
+	<label for="count-FeatCounts" class="select">Count with FeatureCounts</label>
+</div>
+
+<style type="text/css">
+.count-method-select input[type="radio"] {
+  display: none;
+}
+
+.count-method-select label {
+  padding: 1em;
+  border: 1px solid blue;
+  display: inline-block;
+}
+
+.count-method-select input[type="radio"]:checked+label {
+	background: blue;
+	color: white;
+}
+
+.count-method-hidden {
+	height: 0px;
+	visibility: hidden;
+	display: none;
+	padding: 0rem;
+}
+
+/*
+Maybe something like this for the case where they do not select anything?
+.star {
+	border-left: 2px solid red;
+}
+.featureCounts {
+	border-left: 2px solid blue;
+}
+*/
+</style> -->
+
+In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts** or to the output of **STAR**, e.g. the strandness.
 
 ## Estimation of the strandness
 
@@ -644,7 +689,7 @@ Some library preparation protocols create so-called *stranded* RNA-Seq libraries
 >
 > The implication of stranded RNA-Seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts. In the following example, the counts for the gene Mrpl43 can only be efficiently estimated in a stranded library as most of it overlap the gene Peo1 in the reverse orientation:
 >
-> ![Stranded RNA-Seq data look like this](../../images/ref-based/igv_stranded_screenshot.png "Non-stranded (top) vs. strand-specific (bottom) RNA-Seq read alignment (using IGV)")
+> ![Stranded RNA-Seq data look like this](../../images/ref-based/igv_stranded_screenshot.png "Non-stranded (top) vs. reverse strand-specific (bottom) RNA-Seq read alignment (using IGV, forward mapping reads are red and reverse mapping reads are blue )")
 >
 > Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the mapping of these reads to the genome:
 >
@@ -653,11 +698,77 @@ Some library preparation protocols create so-called *stranded* RNA-Seq libraries
 
 This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
 
-Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse):
-
 ![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as genes. With stranded reverse library, reads map mostly on the reverse strand of genes. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
 
-> ### {% icon hands_on %} Hands-on: Determining the library strandness
+There are 3 ways to estimate strandness from **STAR** results:
+First, we can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful). Second, you can use the output of **STAR** with the counts. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).
+
+You don't need to do the three.
+
+> ### {% icon hands_on %} Hands-on: Estimate strandness with IGV for a paired-end library
+>
+> 1. Go back to your IGV session with the `GSM461177_untreat_paired` BAM opened.
+> > ### {% icon details %} If you don't have it:
+> > No problem, you just need to redo the previous steps:
+> > 2. Start IGV locally
+> > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+> > 3. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
+> > 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
+> {: .details}
+>
+> 2. **IGV** {% icon tool %}: Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track, right click and select `Group Aligments by` -> `first-in-pair strand` and `Squished`.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > ![Screenshot of the IGV view on ps](../../images/group_strand_igv_screenshot.png "Screenshot of IGV on ps")
+>    >
+>    > 1. Are the reads evenly distributed between the 2 groups (NEGATIVE and POSITIVE)?
+>    > 2. What is the type of library strandness?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. Yes we see the same number of reads on both groups.
+>    > > 2. This means that the library was unstreanded.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+>    > ### {% icon comment %} How would it be if the library was stranded?
+>    >
+>    > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
+>    {: .comment}
+>
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Estimate strandness with STAR
+>
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `STAR`
+>                - In *"STAR output"*:
+>                    - {% icon param-repeat %} *"Insert STAR output"*
+>                        - *"Type of STAR output?"*: `Gene counts`
+>                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. What percentage of reads are asigned to genes if the library is unstranded/same stranded/reverse stranded?
+>    > 2. What is the strandness of the library?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
+>    > > ![STAR Gene counts same stranded](../../images/ref-based/star_gene_counts_same.png "Gene counts same stranded")
+>    > > ![STAR Gene counts reverse stranded](../../images/ref-based/star_gene_counts_reverse.png "Gene counts reverse stranded")
+>    > >
+>    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.
+>    > > 2. This suggests that the library is unstranded.
+>    > {: .solution}
+>    >
+>    {: .question}
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Determining the library strandness using Infer Experiment
 >
 > We use the `BED12` file which we already converted from the `Drosophila_melanogaster.BDGP6.87.gtf` dataset earlier.
 > > ### {% icon details %} If you don't have it:
@@ -675,45 +786,47 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 >
+>    > ### {% icon comment %} Interprete the output of Infer Experiment
+>    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with > in   > formation on:
+>    > 
+>    > - Paired-end or single-end library
+>    > - Fraction of reads failed to determine
+>    > - 2 lines
+>    >     - For single-end
+>    >         - `Fraction of reads explained by "++,--"`: the fraction of reads that assigned to forward strand
+>    >         - `Fraction of reads explained by "+-,-+"`: the fraction of reads that assigned to reverse strand
+>    >     - For paired-end
+>    >         - `Fraction of reads explained by "1++,1--,2+-,2-+"`: the fraction of reads that assigned to forward strand
+>    >         - `Fraction of reads explained by "1+-,1-+,2++,2--"`: the fraction of reads that assigned to reverse strand
+>    > 
+>    > If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
+>    {: .comment}
+>
+> > ### {% icon question %} Question
+> >
+> > 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
+> > 2. Do you think the library type of the 2 samples is stranded or unstranded?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. Results for `GSM461177_untreat_paired`:
+> > > 
+> > > {% snippet faqs/galaxy/analysis_results_may_vary.md %}
+> > >
+> > >    ```
+> > >    This is PairEnd Data
+> > >    Fraction of reads failed to determine: 0.0963
+> > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
+> > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+> > >    ```
+> > >
+> > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
+> > >
+> > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
+> > {: .solution}
+> {: .question}
 {: .hands_on}
 
-{% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
-
-- Paired-end or single-end library
-- Fraction of reads failed to determine
-- 2 lines
-    - For single-end
-        - `Fraction of reads explained by "++,--"`: the fraction of reads that assigned to forward strand
-        - `Fraction of reads explained by "+-,-+"`: the fraction of reads that assigned to reverse strand
-    - For paired-end
-        - `Fraction of reads explained by "1++,1--,2+-,2-+"`: the fraction of reads that assigned to forward strand
-        - `Fraction of reads explained by "1+-,1-+,2++,2--"`: the fraction of reads that assigned to reverse strand
-
-If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
-
-> ### {% icon question %} Question
->
-> 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
-> 2. Do you think the library type of the 2 samples is stranded or unstranded?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Results for `GSM461177_untreat_paired`:
-> > 
-> > {% snippet faqs/galaxy/analysis_results_may_vary.md %}
-> >
-> >    ```
-> >    This is PairEnd Data
-> >    Fraction of reads failed to determine: 0.0963
-> >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
-> >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
-> >    ```
-> >
-> >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
-> >
-> > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
-> {: .solution}
-{: .question}
 
 > ### {% icon details %} Strandness and software settings
 > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
@@ -729,6 +842,8 @@ If the two "Fraction of reads explained by" numbers are close to each other, we 
 {: .details}
 
 ## Counting reads per genes
+
+### Option 1: Use featureCounts
 
 We now run **featureCounts** to count the number of reads per annotated gene.
 
@@ -778,6 +893,61 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 
 The main output of **featureCounts** is a table with the counts, i.e. the number of reads (or fragments in the case of paired-end reads) mapped to each gene (in rows, with their ID in the first column) in the provided annotation. **FeatureCount** generates also the **feature length** output datasets. We will need this file later on when we will run the **goseq** tool.
 
+### Option 2: Use STAR output
+
+As written above, during mapping, **STAR** counted reads for each gene provided in the gene annotation file (this was achieved by the option `Per gene read counts (GeneCounts)`). However, this output provides some statistics at the beginning and the counts for each gene depending on the library (unstranded is column 2, stranded forward is column 3 and stranded reverse is column 4).
+
+> ### {% icon hands_on %} Hands-on: Reformatting STAR output
+>
+> 1. Inspect the counts from `GSM461177_untreat_paired` in the collection `RNA STAR on collection N: reads per gene`.
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How many reads are unmapped/multi-mapped?
+> 2. At which line starts gene counts?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. There are 1'190'029 unmapped reads and 571'324 unmapped reads.
+> > 2. It starts at line 5 with the gene `FBgn0085804`.
+> >
+> {: .solution}
+>
+{: .question}
+
+We will reformat the output of **STAR** to be similar to the output of **featureCounts** (or other counting softwares) which is only 2 columns, one with IDs and the other one with counts.
+
+> ### {% icon hands_on %} Hands-on: Reformatting STAR output
+>
+> 1. {% tool [Select last](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} to remove the first 4 lines with the following parameters:
+>    - *"Text file"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
+>    - *"Operation"*: `Keep everything from this line on`
+>    - *"Number of lines"*: `5`
+>
+> 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
+>    - *"Cut columns"*: `c1,c2`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-collection %} *"From"*: `Select last on collection N` (output of the **Select last** {% icon tool %})
+>
+> 3. Rename the collection `FeatureCount-like files`
+{: .hands_on}
+
+Later on the tutorial we will need to get the size of each gene. This is one of the output of **FeatureCounts** but we can also obtain it directly from the gene annotation file. As this is quite long, we recommand to launch it now.
+
+> ### {% icon hands_on %} Hands-on: Getting gene length
+> > ### {% icon warning %} Check the version of the tool below.
+> > This will only work with version 0.1.2 or above.
+> {: .warning}
+> 1. {% tool [Gene length and GC content](toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2) %} with the following parameters:
+>    - *"Select a built-in GTF file or one from your history"*: `Use a GTF from history`
+>      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+>    - *"Analysis to perform"*: `gene lengths only`
+>
+> 
+{: .hands_on}
+
+### For Both options
 > ### {% icon question %} Question
 >
 > Which feature has the most counts for both samples? (Hint: Use the Sort tool)
@@ -785,8 +955,8 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 > > ### {% icon solution %} Solution
 > >
 > > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} tool:
-> >    - {% icon param-collection %} *"Sort Query"*: featureCounts on collection N: Counts (output of **featureCounts** {% icon tool %})
-> >    - *"Number of header"*: `1`
+> >    - {% icon param-collection %} *"Sort Query"*: `featureCounts on collection N: Counts` (output of **featureCounts** {% icon tool %}) if you used the featureCounts option or `FeatureCount-like files` if you used STAR
+> >    - *"Number of header"*: `1` if you used featureCounts and 0 if you used STAR.
 > >    - In *"1: Column selections"*:
 > >      - *"on column"*: `2`
 > >
@@ -794,11 +964,11 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 > >
 > >      - *"in"*: `Descending order`
 > >
-> >    The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177_untreat_paired` and 127,416 in `GSM461180_treat_paired`).
+> >    The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,740 in `GSM461177_untreat_paired` and 127,400 in `GSM461180_treat_paired`).
 > >
 > >    Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.
 > >
-> >    > ### {% icon hands_on %} (Optional) View the sorted featureCounts using the Scratchbook
+> >    > ### {% icon hands_on %} (Optional) View the sorted counts using the Scratchbook
 > >    >
 > >    > 1. The **Scratchbook** is enabled by clicking the nine-blocks icon seen on the right of the Galaxy top menubar:
 > >    >
@@ -808,7 +978,7 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 > >    >
 > >    >    ![Scratchbook icon enabled](../../images/ref-based/menubarWithScratchbookEnabled.png "Menu bar with Scratchbook icon enabled")
 > >    >
-> >    > 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted featureCounts** files. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
+> >    > 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted counts** files. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
 > >    >
 > >    >    ![Scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png "Scratchbook showing one dataset overlay")
 > >    >
@@ -816,7 +986,7 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 > >    >
 > >    >    ![scratchbook one saved view](../../images/ref-based/scratchbookOneSavedView.png "Menu bar with one saved dataset view in Scratchbook")
 > >    >
-> >    > 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted featureCounts** file. The two datasets can now be seen side by side:
+> >    > 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted counts** file. The two datasets can now be seen side by side:
 > >    >
 > >    >    ![Scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png "Scratchbook showing two side by side datasets")
 > >    >
@@ -1651,17 +1821,17 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 >
 > 4. Rename the output to `Gene IDs and differential expression`.
 >
->    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts** and format the gene IDs.
+>    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts**  or **Gene length and GC content** and format the gene IDs.
 >
-> 5. Drag and drop the feature length collection generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**.
+> 5. Drag and drop the feature length collection generated by **featureCounts** {% icon tool %} or the output of **Gene length and GC content** {% icon tool %} (`gene length`) into this history using the {% icon galaxy-columns %} **View all histories**.
 >
-> 6. {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
+> 6. If you used featureCounts: {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
 >   - {% icon param-collection %} *"Input List"*: `featureCounts on collection N: Feature lengths`
 >   - *"How should a dataset be selected?"*: `The first dataset`
 >
 > 7. {% tool [Change Case](ChangeCase) %} with the following parameters:
->    - {% icon param-file %} *"From"*: `GSM461177_untreat_paired` (output of **Extract Dataset** {% icon tool %})
 >
+>    - {% icon param-file %} *"From"*: `GSM461177_untreat_paired` (output of **Extract Dataset** {% icon tool %}) if you used featureCounts or `gene length` if you used STAR
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
