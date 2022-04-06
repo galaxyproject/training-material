@@ -797,7 +797,7 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 
 At this point, we have obtained the primary and alternate assemblies, each of which consists in a collection of contigs (contiguous sequences assembled from overlapping reads). Next, the contigs will be assembled into scaffolds, i.e., sequences of contigs interspaced with gaps. For this purpose, we will carry out a hybrid scaffolding by taking advantage of two additional technologies: Bionano optical maps and Hi-C data. 
 
-## Hybrid scaffolding with Bionano data
+## Hybrid scaffolding using Bionano data
 
 [{% icon exchange %} Switch to short version](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html#hybrid-scaffolding-with-bionano-optical-maps)
 
