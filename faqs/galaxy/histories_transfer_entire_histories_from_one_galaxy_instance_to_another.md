@@ -3,7 +3,7 @@ title: Transfer entire histories from one Galaxy instance to another
 area: histories 
 box_type: tip
 layout: faq
-contributors: [AnomalyCodes]
+contributors: [jennaj, AnomalyCodes]
 ---
 1. Click on {% icon galaxy-gear %} in the history panel of the *sender* Galaxy instance
 2. Click on **Export to File**
