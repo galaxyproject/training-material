@@ -8,7 +8,7 @@ priority: 2
 tags:
     - bulk
     - rna-seq
-zenodo_link: "https://zenodo.org/record/4541751"
+zenodo_link: "https://zenodo.org/record/TODO"
 questions:
     - What are the steps to process RNA-Seq data?
     - How to identify differentially expressed genes across multiple experimental conditions?
@@ -1062,11 +1062,6 @@ To be able to identify differential gene expression induced by PS depletion, all
 >
 {: .hands_on}
 
-> ### {% icon details %} The counts obtained in the previous part may be different from the one imported
->
-> The featureCounts tables you download from zenodo (or from the Data Library) were generated with the option "Count fragments instead of reads" set to "Disabled". This way you roughly get twice the number of counts as each each read (from a pair) is counted individually.
-{: .details}
-
 You might think We can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
 
 Let's imagine we have RNA-Seq counts from 3 samples for a genome with 4 genes:
@@ -1391,7 +1386,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                                      - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SR`
 >          - {% icon param-collection %} *"Counts file(s)"*: the collection `single`.
->    - *"Files have header?"*: `No`
+>    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
