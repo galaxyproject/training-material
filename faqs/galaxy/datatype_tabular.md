@@ -11,7 +11,7 @@ layout: faq
 - Common tabular datatypes are .bed, .gtf, .interval, or .txt.
 - The datatype metadata attribute can be directly reassigned to tabular format data.
 - Click the {% icon galaxy-pencil %} icon to reach the **_Edit Attributes_** form. 
-  - Change the datatype (3rd tab) and save, then label columns (1st tab) and save.  Metadata will assign, then the dataset can be used.
+  - Change the datatype (3rd tab) and save, then label columns (1st tab) and save.  Metadata will be assigned, then the dataset can be used.
 - If the required input is a BED or Interval datatype, adjusting (.tab → .bed, .tab → .interval) maybe possible using a combination of **_Text Manipulation_** tools, to create a dataset that matches the BED or Interval datatype specifications.
 
 #### Tips
