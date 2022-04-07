@@ -672,8 +672,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -697,8 +695,6 @@
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
-        
-    
         
     
         
@@ -786,12 +782,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
-        
-    
-        
     
         
     
@@ -869,7 +859,7 @@
 
 <h1 id="vgp-assembly-workflow-structure">VGP assembly <span class="notranslate">workflow</span> structure</h1>
 
-<p>The VGP assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the <span class="notranslate">workflow</span> to the available data (e.g. not to include the module corresponding to bionano when the data corresponding to this technology is not available).</p>
+<p>The VGP assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the <span class="notranslate">workflow</span> to the available data.</p>
 
 <blockquote>
   <figure id="figure-1"><img src="../../images/vgp_assembly/VGP_workflow_modules.png" alt="Figure 1: VGP pipeline modules. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> VGP assembly pipelie. The implemented version of the VGP <span class="notranslate">workflow</span> is modular, consisting in five main independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to Genome Ark.</figcaption></figure>
@@ -1003,6 +993,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h1 id="genome-profile-analsysis">Genome profile analsysis</h1>
 
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#genome-profile-analysis"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
+
 <p>Now that our data and workflows are imported, we can run our first <span class="notranslate">workflow</span>. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size. The present pipeline uses <strong>Meryl</strong> for generating the k-mer database and <strong>Genomescope</strong> for determing the genome size based on a k-mer analysis.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1030,6 +1022,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to <em>Saccharomyces</em> genome size. Additionally, it revealed that the variation across the genomic sequences is 0.69%.</p>
 
 <h1 id="hifi-phased-assembly-with-hifiasm">HiFi phased assembly with hifiasm</h1>
+
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hifi-phased-assembly-with-hifiasm"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
 
 <p>After the genome profiling, the next step is to run the <strong>VGP HiFi phased assembly with hifiasm and HiC data <span class="notranslate">workflow</span></strong>. This <span class="notranslate">workflow</span> uses <strong>hifiasm</strong> to generate initial primary and alte<span class="notranslate">rna</span>te pseudohaplotype assemblies. In addition, this <span class="notranslate">workflow</span> includes three tools for evaluating the assembly completeness: <strong>QUAST</strong>, <strong>BUSCO</strong> and <strong>Merqury</strong>.</p>
 
@@ -1147,6 +1141,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
 
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#post-assembly-processing"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
+
 <p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in <span class="notranslate">downstream</span> analysis, we are going to run the <strong>VGP purge assembly with purge_dups <span class="notranslate">workflow</span></strong>, which will allow to identify and reassign allelic contigs.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1171,6 +1167,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>This <span class="notranslate">workflow</span> generates a large number of outputs, among which we should highlight the datasets <code class="language-plaintext highlighter-rouge">74</code> and <code class="language-plaintext highlighter-rouge">91</code>, which correspond to the purged primary and alte<span class="notranslate">rna</span>tive assemblies respectively.</p>
 
 <h1 id="hybrid-scaffolding-with-bionano-optical-maps">Hybrid scaffolding with Bionano optical maps</h1>
+
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hybrid-scaffolding-using-bionano-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
 
 <p>Once the assemblies generated by <strong>hifiasm</strong> has been purged, the next step is to run the <strong>VGP hybrid scaffolding with Bionano optical maps <span class="notranslate">workflow</span></strong>. It will allow to integrate the information provided by optical maps with primary assembly sequences in order to detect and correct structural variants, such as chimeric joins and misoriented contigs. In addition, this <span class="notranslate">workflow</span> includes some additonal steps from evaluating the outputs.</p>
 
@@ -1223,6 +1221,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 </blockquote>
 
 <h1 id="hybrid-scaffolding-with-hi-c-data">Hybrid scaffolding with Hi-C data</h1>
+
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hybrid-scaffolding-based-on-hi-c-mapping-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
 
 <p>In this final stage, we will run the <strong>VGP hybrid scaffolding with HiC data</strong>, which exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale by using <strong>SALSA2</strong>.</p>
 

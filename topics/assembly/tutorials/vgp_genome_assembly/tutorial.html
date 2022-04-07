@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:29 +0000",
+  "dateModified": "1970-01-01 00:00:06 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "VGP assembly pipeline",
   "interactivityType": "mixed",
@@ -710,8 +710,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -735,8 +733,6 @@
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
-        
-    
         
     
         
@@ -825,8 +821,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -835,7 +829,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 29, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 6, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1076,6 +1070,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 </blockquote>
 
 <h1 id="genome-profile-analysis">Genome profile analysis</h1>
+
+<p><a href="/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html#genome-profile-analsysis"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short version</a></p>
 
 <p>Before starting a <em>de novo</em> genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally, <span class="notranslate">DNA</span> flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches (<span class="citation"><a href="#wang2020estimation">Wang <i>et al.</i> 2020</a></span>). One of the widely used genome profiling methods is based on the analysis of k-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.</p>
 
@@ -1403,6 +1399,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h1 id="hifi-phased-assembly-with-hifiasm">HiFi phased assembly with hifiasm</h1>
 
+<p><a href="/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html#hifi-phased-assembly-with-hifiasm"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short version</a></p>
+
 <p>Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source <em>de novo</em> assembler specifically developed for PacBio HiFi <span class="notranslate">reads</span>.</p>
 
 <h2 id="genome-assembly-with-hifiasm">Genome assembly with <strong>hifiasm</strong></h2>
@@ -1671,6 +1669,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The read area represents one-copy k-mers in the genome, while blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.</p>
 
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
+
+<p><a href="/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html#post-assembly-processing"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short version</a></p>
 
 <p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in <span class="notranslate">downstream</span> analysis, such as scaffolding, gene annotation and read <span class="notranslate">mapping</span> in general (<span class="citation"><a href="#Small2007">Small <i>et al.</i> 2007</a></span>, <span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>, <span class="citation"><a href="#Roach2018">Roach <i>et al.</i> 2018</a></span>). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.</p>
 
@@ -2014,6 +2014,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h2 id="hybrid-scaffolding-using-bionano-data">Hybrid scaffolding using Bionano data</h2>
 
+<p><a href="/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html#hybrid-scaffolding-with-bionano-optical-maps"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short version</a></p>
+
 <p>In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantages of optical maps is that they can easily span genomic regions that are difficult to resolve using <span class="notranslate">DNA</span> sequencing technologies (<span class="citation"><a href="#Savara2021">Savara <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Yuan2020">Yuan <i>et al.</i> 2020</a></span>).</p>
 
 <blockquote class="comment">
@@ -2169,6 +2171,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 </blockquote>
 
 <h2 id="hybrid-scaffolding-based-on-hi-c-mapping-data">Hybrid scaffolding based on Hi-C <span class="notranslate">mapping</span> data</h2>
+
+<p><a href="/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html#hybrid-scaffolding-with-hi-c-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short version</a></p>
 
 <p>Hi-C is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing us to provide an insight into the three-dimensional organization of a genome  (<span class="citation"><a href="#Dixon2012">Dixon <i>et al.</i> 2012</a></span>, <span class="citation"><a href="#LiebermanAiden2009">Lieberman-Aiden <i>et al.</i> 2009</a></span>). In this final stage, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.</p>
 
@@ -2571,8 +2575,8 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo and Anna Syme and Linelle Abueg and Brandon Pickett and Giulio Formenti and Marcella Sozzoni",
 title = "VGP assembly pipeline (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "29"
+month = "04",
+day = "06"
 url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
