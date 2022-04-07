@@ -220,7 +220,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 {% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="GSM461177_untreat_paired_forward" reverse="GSM461177_untreat_paired_reverse" %}
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Cleaning fastqs
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
