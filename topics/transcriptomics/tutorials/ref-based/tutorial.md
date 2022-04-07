@@ -722,6 +722,15 @@ You don't need to do the three.
 >    > >
 >    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.
 >    > > 2. This suggests that the library is unstranded.
+>    > >
+>    > > > ### {% icon comment %} How would it be if the library was stranded?
+>    > > >
+>    > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
+>    > > > ![STAR Gene counts same stranded USvsRS](../../images/ref-based/star_gene_counts_same_USvsRS.png "Gene counts same stranded for unstranded and reverse stranded library")
+>    > > > ![STAR Gene counts reverse stranded USvsRS](../../images/ref-based/star_gene_counts_reverse_USvsRS.png "Gene counts reverse stranded for unstranded and reverse stranded library")
+>    > > > Note thare there is very few reads attributed to genes for same stranded.
+>    >  > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
+>    > > {: .comment}
 >    > {: .solution}
 >    >
 >    {: .question}
