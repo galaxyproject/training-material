@@ -791,6 +791,23 @@ You don't need to do the three.
 > > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
 > > >
 > > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
+> > >
+> > > > ### {% icon comment %} How would it be if the library was stranded?
+> > > > Still taking the 2 BAM as example, We get for the unstranded:
+> > > >    ```
+> > > >    This is PairEnd Data
+> > > >    Fraction of reads failed to determine: 0.0382
+> > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4847
+> > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4771
+> > > >    ```
+> > > > And for the reverse stranded:
+> > > >    ```
+> > > >    This is PairEnd Data
+> > > >    Fraction of reads failed to determine: 0.0504
+> > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.0061
+> > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
+> > > >    ```
+> > > {: .comment}
 > > {: .solution}
 > {: .question}
 {: .hands_on}
