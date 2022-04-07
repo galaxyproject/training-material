@@ -8,7 +8,7 @@ priority: 2
 tags:
     - bulk
     - rna-seq
-zenodo_link: "https://zenodo.org/record/TODO"
+zenodo_link: "https://zenodo.org/record/4541751"
 questions:
     - What are the steps to process RNA-Seq data?
     - How to identify differentially expressed genes across multiple experimental conditions?
