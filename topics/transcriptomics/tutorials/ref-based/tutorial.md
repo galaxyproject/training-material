@@ -1352,7 +1352,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
 >                        - {% icon param-collection %} *"Counts file(s)"*: the collection `paired`.
 >                    - {% icon param-repeat %} *"Insert Factor level"*
->                                      - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SR`
+>                                      - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
 >          - {% icon param-collection %} *"Counts file(s)"*: the collection `single`.
 >    - *"Files have header?"*: `Yes` if you used featureCounts and `No` if you used STAR
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
