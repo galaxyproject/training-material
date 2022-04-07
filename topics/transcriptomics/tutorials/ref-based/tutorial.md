@@ -515,7 +515,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > #### Gene body coverage
 >
-> The gene body is the different regions of a gene. It is important to check if read coverage is uniform over gene body or if there is any 5'/3' bias. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each nucleotide position (this is very long).
+> The different regions of a gene make up the gene body. It is important to check if read coverage is uniform across the gene body. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each (scaled) nucleotide position.
 >
 > > ### {% icon hands_on %} Hands-on: Check gene body coverage
 > >
@@ -624,7 +624,7 @@ To compare the expression of single genes between different conditions (*e.g.* w
 > {: .solution}
 {: .question}
 
-Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **STAR** allows to count reads while mapping. Its results are identical to **HTSeq-count**. While this output is sufficient for most of analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).
+Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **STAR** allows to count reads while mapping. Its results are identical to **HTSeq-count**. While this output is sufficient for most analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).
 
 Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
 
@@ -656,7 +656,7 @@ Some library preparation protocols create so-called *stranded* RNA-Seq libraries
 
 This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
 
-![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as genes. With stranded reverse library, reads map mostly on the reverse strand of genes. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
+![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
 
 There are 3 ways to estimate strandness from **STAR** results:
 First, we can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful). Second, you can use the output of **STAR** with the counts. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).
@@ -1483,7 +1483,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 ## Extraction and annotation of differentially expressed genes
 
-Now we would like to extract the most differentially expressed genes due to the treatment and with a fold change > 2 (or < 1/2).
+Now we would like to extract the most differentially expressed genes due to the treatment with a fold change > 2 (or < 1/2).
 
 > ### {% icon hands_on %} Hands-on: Extract the most differentially expressed genes
 >
