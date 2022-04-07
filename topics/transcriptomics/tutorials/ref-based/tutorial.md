@@ -627,48 +627,6 @@ To compare the expression of single genes between different conditions (*e.g.* w
 Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **STAR** allows to count reads while mapping. Its results are identical to **HTSeq-count**. While this output is sufficient for most of analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).
 
 Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
-<!-- , click here on the method you would like to use.
-
-<div class="count-method-select">
-	<input id="count-star" type="radio" name="count-method" value="star" onclick="showSTAR()">
-	<label for="count-star" class="select">Count with STAR</label>
-	<input id="count-FeatCounts" type="radio" name="count-method" value="featureCounts" onclick="showFeatCounts()">
-	<label for="count-FeatCounts" class="select">Count with FeatureCounts</label>
-</div>
-
-<style type="text/css">
-.count-method-select input[type="radio"] {
-  display: none;
-}
-
-.count-method-select label {
-  padding: 1em;
-  border: 1px solid blue;
-  display: inline-block;
-}
-
-.count-method-select input[type="radio"]:checked+label {
-	background: blue;
-	color: white;
-}
-
-.count-method-hidden {
-	height: 0px;
-	visibility: hidden;
-	display: none;
-	padding: 0rem;
-}
-
-/*
-Maybe something like this for the case where they do not select anything?
-.star {
-	border-left: 2px solid red;
-}
-.featureCounts {
-	border-left: 2px solid blue;
-}
-*/
-</style> -->
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts** or to the output of **STAR**, e.g. the strandness.
 
