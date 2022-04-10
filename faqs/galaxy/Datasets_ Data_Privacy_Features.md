@@ -3,7 +3,7 @@ title: Data Privacy Features
 area: History
 box_type: tip
 layout: faq
-contributors: [Melkeb, desmond-jasper]
+contributors: [desmond-jasper]
 ---
 
 Privacy controls are only enabled if desired. Otherwise, datasets remain public but unlisted. 
