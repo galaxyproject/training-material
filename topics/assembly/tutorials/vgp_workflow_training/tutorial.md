@@ -341,7 +341,7 @@ It is also recommended to examine **BUSCO** outputs. In the summary image (fig. 
 {: .question}
     
 
-# Scaffolding with HiC data
+# Hybrid scaffolding with Hi-C data
 
 [{% icon exchange %} Switch to long version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hybrid-scaffolding-based-on-hi-c-mapping-data)
 
