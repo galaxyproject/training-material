@@ -197,7 +197,7 @@ This distribution is the result of the Poisson process underlying the generation
 
 [{% icon exchange %} Switch to long version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hifi-phased-assembly-with-hifiasm)
 
-After genome profiling, the next step is to run the **VGP HiC-phased assembly with hifiasm and HiC data workflow**. This workflow uses **hifiasm** (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: **QUAST**, **BUSCO** and **Merqury**.
+After genome profiling, the next step is to run the **VGP HiFi phased assembly with hifiasm and HiC data workflow**. This workflow uses **hifiasm** (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: **QUAST**, **BUSCO** and **Merqury**.
 
 > ### {% icon hands_on %} Hands-on: VGP HiFi phased assembly with hifiasm and HiC data workflow
 > 1. Click in the **Workflow** menu, located in the top bar
