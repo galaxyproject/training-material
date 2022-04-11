@@ -142,12 +142,12 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: The output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
-> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
+> 3. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -178,7 +178,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Everything seems good for 3 of the files. The `GSM461177_untreat_paired` have 10.6 millions of pairs of sequences and `GSM461180_treat_paired` 12.3 millions of pairs of sequences. But in `GSM461180_treat_paired_reverse` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
+>    > > 1. Everything seems good for 3 of the files. The `GSM461177_untreat_paired` have 10.6 millions of paired sequences and `GSM461180_treat_paired` 12.3 millions of paired sequences. But in `GSM461180_treat_paired_reverse` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
 >    > >
 >    > >    All files except `GSM461180_treat_paired_reverse` have a high proportion of duplicated reads (expected in RNA-Seq data).
 >    > >
@@ -220,7 +220,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 {% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="GSM461177_untreat_paired_forward" reverse="GSM461177_untreat_paired_reverse" %}
 
-> ### {% icon hands_on %} Hands-on: Cleaning fastqs
+> ### {% icon hands_on %} Hands-on: Trimming FASTQs
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
@@ -624,7 +624,7 @@ To compare the expression of single genes between different conditions (*e.g.* w
 > {: .solution}
 {: .question}
 
-Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **STAR** allows to count reads while mapping. Its results are identical to **HTSeq-count**. While this output is sufficient for most analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).
+Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). Additionally, **STAR** allows to count reads while mapping: its results are identical to those from **HTSeq-count**. While this output is sufficient for most analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).
 
 Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
 
@@ -754,7 +754,7 @@ You don't need to do the three.
 >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 >
->    > ### {% icon comment %} Interprete the output of Infer Experiment
+>    > ### {% icon comment %} Interpret the output of Infer Experiment
 >    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with > in   > formation on:
 >    > 
 >    > - Paired-end or single-end library
