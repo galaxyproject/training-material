@@ -661,7 +661,7 @@ This information should be provided with your FASTQ files, ask your sequencing f
 There are 3 ways to estimate strandness from **STAR** results:
 First, we can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful). Second, you can use the output of **STAR** with the counts. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).
 
-You don't need to do the three.
+You can choose between the three following hands-on.
 
 > ### {% icon hands_on %} Hands-on: Estimate strandness with IGV for a paired-end library
 >
