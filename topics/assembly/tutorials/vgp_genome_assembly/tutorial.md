@@ -180,7 +180,7 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 # Genome profile analysis
 
-[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#genome-profile-analsysis)
+[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#genome-profile-analysis)
 
 Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of k-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
 

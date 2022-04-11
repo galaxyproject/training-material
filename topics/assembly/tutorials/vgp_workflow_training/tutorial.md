@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: VGP assembly pipeline - short version
 zenodo_link: 'https://zenodo.org/record/5887339'
-enable: false
 level: Intermediate
 tags:
  - pacbio
