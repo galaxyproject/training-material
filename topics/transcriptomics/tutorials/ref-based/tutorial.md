@@ -463,14 +463,14 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >                - In *"Picard output"*:
 > >                    - {% icon param-repeat %} *"Insert Picard output"*
 > >                        - *"Type of Picard output?"*: `Markdups`
-> >                        - {% icon param-collection %} *"Picard output"*: `MarkDuplicate on collection N: MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
+> >                        - {% icon param-collection %} *"Picard output"*: `MarkDuplicates on collection N: MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
 > >
 > >    > ### {% icon question %} Question
 > >    >
 > >    > What are the percentages of duplicate reads for each sample?
 > >    >
 > >    > > ### {% icon solution %} Solution
-> >    > > The sample `GSM461177_untreat_paired` has 27.8% of duplicated reads while `GSM461180_treat_paired` has 25.9%.
+> >    > > The sample `GSM461177_untreat_paired` has 25.9% of duplicated reads while `GSM461180_treat_paired` has 27.8%.
 > >    > {: .solution}
 > >    {: .question}
 > {: .hands_on}
@@ -501,7 +501,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >    >
 > >    > 1. How many chromosomes does the *Drosophila* genome have?
 > >    > 2. Where did the reads mostly map?
-> >    > 3. Can we determine the sex of the sample?
+> >    > 3. Can we determine the sex of the samples?
 > >    >
 > >    > > ### {% icon solution %} Solution
 > >    > > 1. The genome of *Drosophila* has 4 pairs of chromosomes: X/Y, 2, 3, and 4.
@@ -525,7 +525,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
 > >        - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
-> >    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
+> >    - {% icon param-file %} *"Reference gene model"*: `Convert GTF to BED12 on data N: BED12` (output of **Convert GTF to BED12** {% icon tool %})
 > >
 > > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
 > >    - In *"Results"*:
@@ -755,7 +755,7 @@ You can choose between the three following hands-on.
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 >
 >    > ### {% icon comment %} Interpret the output of Infer Experiment
->    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with > in   > formation on:
+>    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
 >    > 
 >    > - Paired-end or single-end library
 >    > - Fraction of reads failed to determine
@@ -905,8 +905,8 @@ We will reformat the output of **STAR** to be similar to the output of **feature
 
 > ### {% icon hands_on %} Hands-on: Reformatting STAR output
 >
-> 1. {% tool [Select last](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} to remove the first 4 lines with the following parameters:
->    - *"Text file"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
+> 1. {% tool [Select last](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} lines from a dataset (tail) to remove the first 4 lines with the following parameters:
+>    - {% icon param-collection %} *"Text file"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
 >    - *"Operation"*: `Keep everything from this line on`
 >    - *"Number of lines"*: `5`
 >
@@ -941,9 +941,9 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 > >
 > > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} tool:
 > >    - {% icon param-collection %} *"Sort Query"*: `featureCounts on collection N: Counts` (output of **featureCounts** {% icon tool %}) if you used the featureCounts option or `FeatureCount-like files` if you used STAR
-> >    - *"Number of header"*: `1` if you used featureCounts and 0 if you used STAR.
+> >    - *"Number of header"*: `1` if you used featureCounts and `0` if you used STAR.
 > >    - In *"1: Column selections"*:
-> >      - *"on column"*: `2`
+> >      - *"on column"*: `Column: 2`
 > >
 > >        This column contains the number of reads = counts
 > >
