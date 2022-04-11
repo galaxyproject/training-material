@@ -3,7 +3,7 @@ title: Downloading datasets using command line
 area: datasets
 box_type: tip
 layout: faq
-contributors: [jennaj, beachyesh, Melkeb]
+contributors: [jennaj, beachyesh]
 ---
 
 From the terminal window on your computer, you can use **wget** or **curl**.
