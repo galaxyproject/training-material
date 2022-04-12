@@ -8,7 +8,7 @@ layout: faq
 Tools can error when the wrong dataset attributes (metadata) are assigned. Some of these wrong assignments may be: 
  - Tool outputs, which are automatically assigned without user action
  - Incorrect autodetection of datatypes, which need manual modification
- - Undectected attributes, which require user action (example: assigning database to newly uploaded data)
+ - Undetected attributes, which require user action (example: assigning database to newly uploaded data)
 
 How to notice missing Dataset Metadata:
 - Dataset will not be downloaded when using the disk icon.
