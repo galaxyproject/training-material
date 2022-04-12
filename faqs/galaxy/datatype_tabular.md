@@ -14,4 +14,4 @@ A Tabular datatype is human readable and has tabs separating data columns. Pleas
 2. If the required input is a BED or Interval datatype, adjusting (``.tab`` → ``.bed``, ``.tab`` → ``.interval``) maybe possible using a combination of **_Text Manipulation_** tools, to create a dataset that matches required specifications.
 3. Some tools require that BED format be followed, even if the datatype Interval (with less strict column ordering) is accepted on the tool form.
    - These tools will fail, if they are run with malformed BED datasets or non-specific column assignments.
-   - **Solution** is to reorganize the data to be in BED format and rerun. 
+   - **Solution**: reorganize the data to be in BED format and rerun. 
