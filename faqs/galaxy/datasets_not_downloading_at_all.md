@@ -16,7 +16,7 @@ contributors: [Nurzhamalyrys, Melkeb, jennaj]
 Notes:
 - If the data was shared with you by someone else from a Shared History, or was copied from a Published History, be aware that there are multiple levels of data sharing permissions.
 - All data are set to **not shared** by default.
-- Datasets sharing permissions for a new history can be set before creating a new hisotry. Go to **User > Preferences > Set Dataset Permissions for New Histories.**
+- Datasets sharing permissions for a new history can be set before creating a new history. Go to **User > Preferences > Set Dataset Permissions for New Histories.**
 - **User > Preferences > Make all data private is a "one click" option to unshare ALL data (Datasets, Histories).** Note that once confirmed and all data is unshared, the action cannot be "undone" in batch, even by an administrator. You will need to re-share data again and/or reset your global sharing preferences as wanted.
 - Only the data owner has control over sharing/permissions.
 - Any data you upload or create yourself is automatically owned by you with full access.
