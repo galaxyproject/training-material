@@ -6,7 +6,7 @@ layout: faq
 ---
  
 
-A Tabular datatype is human readable and has tabs separating data columns. Please note that tabular data is different from comma seperated data (.csv) and the common datatypes are: `.bed`, `.gtf`, `.interval`, or `.txt`.
+A Tabular datatype is human readable and has tabs separating data columns. Please note that tabular data is different from comma separated data (.csv) and the common datatypes are: `.bed`, `.gtf`, `.interval`, or `.txt`.
 1. Click the pencil icon {% icon galaxy-pencil %} to reach the **_Edit Attributes_** form. 
    1. Change the datatype (3rd tab) and save.
    2. Label columns (1st tab) and save.
