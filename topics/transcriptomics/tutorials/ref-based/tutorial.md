@@ -628,6 +628,8 @@ Two main tools are available for read counting: [**HTSeq-count**](http://htseq.r
 
 Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
 
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" %}
+
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts** or to the output of **STAR**, e.g. the strandness.
 
 ## Estimation of the strandness
@@ -828,13 +830,9 @@ You can choose between the three following hands-on.
 
 ## Counting reads per genes
 
-{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" %}
-
 <div class="featureCounts" markdown="1">
 
-### Use featureCounts
-
-We now run **featureCounts** to count the number of reads per annotated gene.
+As you chose to use the featureCounts flavor of the tutorial, we now run **featureCounts** to count the number of reads per annotated gene.
 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per annotated gene
 >
@@ -884,7 +882,8 @@ The main output of **featureCounts** is a table with the counts, i.e. the number
 </div>
 
 <div class="STAR" markdown="1">
-### Use STAR output
+
+As you chose to use the STAR flavor of the tutorial, we will use **STAR** to count reads.
 
 As written above, during mapping, **STAR** counted reads for each gene provided in the gene annotation file (this was achieved by the option `Per gene read counts (GeneCounts)`). However, this output provides some statistics at the beginning and the counts for each gene depending on the library (unstranded is column 2, stranded forward is column 3 and stranded reverse is column 4).
 
@@ -940,7 +939,6 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 
 </div>
 
-### For Both options
 > ### {% icon question %} Question
 >
 > Which feature has the most counts for both samples? (Hint: Use the Sort tool)
@@ -948,8 +946,8 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 > > ### {% icon solution %} Solution
 > >
 > > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} tool:
-> >    - {% icon param-collection %} *"Sort Query"*: `featureCounts on collection N: Counts` (output of **featureCounts** {% icon tool %}) if you used the featureCounts option or `FeatureCount-like files` if you used STAR
-> >    - *"Number of header"*: `1` if you used featureCounts and `0` if you used STAR.
+> >    - {% icon param-collection %} *"Sort Query"*: <span class="featureCounts" markdown="1">`featureCounts on collection N: Counts` (output of **featureCounts** {% icon tool %})</span><span class="STAR" markdown="1">Use the collection `FeatureCount-like files`</span>
+> >    - *"Number of header"*: <span class="featureCounts" markdown="1">`1`</span><span class="STAR" markdown="1">`0`</span>
 > >    - In *"1: Column selections"*:
 > >      - *"on column"*: `Column: 2`
 > >
@@ -1379,7 +1377,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                                      - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
 >          - {% icon param-collection %} *"Counts file(s)"*: the collection `single`.
->    - *"Files have header?"*: `Yes` if you used featureCounts and `No` if you used STAR
+>    - *"Files have header?"*: <span class="featureCounts" markdown="1">`Yes`</span><span class="STAR" markdown="1">`No`</span>
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
@@ -1790,7 +1788,7 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
     - a boolean indicating whether the gene is differentially expressed or not (`True` if differentially expressed or `False` if not)
 - A file with information about the length of a gene to correct for potential length bias in differentially expressed genes
 
-> ### {% icon hands_on %} Hands-on: Prepare the datasets for goseq
+> ### {% icon hands_on %} Hands-on: Prepare the first dataset for goseq
 >
 > 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
 >    - *"Add expression"*: `bool(c7<0.05)`
@@ -1808,18 +1806,30 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 >    - *"To"*: `Upper case`
 >
 > 4. Rename the output to `Gene IDs and differential expression`.
+{: .hands_on}
+
+We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts**  or **Gene length and GC content** and format the gene IDs.
+
+> ### {% icon hands_on %} Hands-on: Get the gene length from previous history
 >
->    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts**  or **Gene length and GC content** and format the gene IDs.
+> <div class="featureCounts" markdown="1">
+> 1. Drag and drop the feature length collection generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**.
 >
-> 5. Drag and drop the feature length collection generated by **featureCounts** {% icon tool %} or the output of **Gene length and GC content** {% icon tool %} (`gene length`) into this history using the {% icon galaxy-columns %} **View all histories**.
->
-> 6. If you used featureCounts: {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
+> 2. If you used featureCounts: {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
 >   - {% icon param-collection %} *"Input List"*: `featureCounts on collection N: Feature lengths`
 >   - *"How should a dataset be selected?"*: `The first dataset`
+> </div>
 >
-> 7. {% tool [Change Case](ChangeCase) %} with the following parameters:
+> <div class="STAR" markdown="1">
+> 1. Drag and drop the output of **Gene length and GC content** {% icon tool %} (`gene length`) into this history using the {% icon galaxy-columns %} **View all histories**.
+> </div>
 >
->    - {% icon param-file %} *"From"*: `GSM461177_untreat_paired` (output of **Extract Dataset** {% icon tool %}) if you used featureCounts or `gene length` if you used STAR
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Adapt the gene length to goseq
+> 1. {% tool [Change Case](ChangeCase) %} with the following parameters:
+>
+>    - {% icon param-file %} *"From"*: <span class="featureCounts" markdown="1">`GSM461177_untreat_paired` (output of **Extract Dataset** {% icon tool %})</span><span class="STAR" markdown="1">`gene length`</span>
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
