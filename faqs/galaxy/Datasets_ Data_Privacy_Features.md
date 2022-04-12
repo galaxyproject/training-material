@@ -1,15 +1,15 @@
 ---
 title: Data Privacy Features 
-area: History
+area: histories
 box_type: tip
 layout: faq
 contributors: [desmond-jasper]
 ---
 
-Privacy controls are only enabled if desired. Otherwise, datasets remain public but unlisted. 
+Privacy controls are only enabled if desired. Otherwise, datasets by defaults remain private and unlisted in Galaxy.. 
 This means that a dataset you've created is virtually invisible until you publish a link to it. 
 
-below are steps to setting private Histories
+Below are three optional steps to setting private Histories, a user can make use of any of the options belowdepending on what the user want to achive:
 
 1. Changing the privacy settings of individual dataset.
 -  click on the **dataset** name for a dropdown.
