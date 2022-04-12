@@ -1021,6 +1021,8 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 > {: .code-out}
 {: .code-2col}
 
+This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 
