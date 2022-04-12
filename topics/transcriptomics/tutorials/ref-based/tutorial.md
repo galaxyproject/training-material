@@ -756,7 +756,7 @@ You can choose between the three following hands-on.
 >
 >    > ### {% icon comment %} Interpret the output of Infer Experiment
 >    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
->    > 
+>    >
 >    > - Paired-end or single-end library
 >    > - Fraction of reads failed to determine
 >    > - 2 lines
@@ -766,7 +766,7 @@ You can choose between the three following hands-on.
 >    >     - For paired-end
 >    >         - `Fraction of reads explained by "1++,1--,2+-,2-+"`: the fraction of reads that assigned to forward strand
 >    >         - `Fraction of reads explained by "1+-,1-+,2++,2--"`: the fraction of reads that assigned to reverse strand
->    > 
+>    >
 >    > If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
 >    {: .comment}
 >
@@ -778,7 +778,7 @@ You can choose between the three following hands-on.
 > > > ### {% icon solution %} Solution
 > > >
 > > > 1. Results for `GSM461177_untreat_paired`:
-> > > 
+> > >
 > > > {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 > > >
 > > >    ```
@@ -828,7 +828,11 @@ You can choose between the three following hands-on.
 
 ## Counting reads per genes
 
-### Option 1: Use featureCounts
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" %}
+
+<div class="featureCounts" markdown="1">
+
+### Use featureCounts
 
 We now run **featureCounts** to count the number of reads per annotated gene.
 
@@ -877,15 +881,17 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 {: .hands_on}
 
 The main output of **featureCounts** is a table with the counts, i.e. the number of reads (or fragments in the case of paired-end reads) mapped to each gene (in rows, with their ID in the first column) in the provided annotation. **FeatureCount** generates also the **feature length** output datasets. We will need this file later on when we will run the **goseq** tool.
+</div>
 
-### Option 2: Use STAR output
+<div class="STAR" markdown="1">
+### Use STAR output
 
 As written above, during mapping, **STAR** counted reads for each gene provided in the gene annotation file (this was achieved by the option `Per gene read counts (GeneCounts)`). However, this output provides some statistics at the beginning and the counts for each gene depending on the library (unstranded is column 2, stranded forward is column 3 and stranded reverse is column 4).
 
 > ### {% icon hands_on %} Hands-on: Reformatting STAR output
 >
 > 1. Inspect the counts from `GSM461177_untreat_paired` in the collection `RNA STAR on collection N: reads per gene`.
-{: .hands_on}
+{: .hands_on.STAR}
 
 > ### {% icon question %} Questions
 >
@@ -929,8 +935,10 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 >      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >    - *"Analysis to perform"*: `gene lengths only`
 >
-> 
+>
 {: .hands_on}
+
+</div>
 
 ### For Both options
 > ### {% icon question %} Question

@@ -19,6 +19,21 @@ $(".question,.hands_on,.comment").each(function() {
 
 $("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
 
+// CYOA Support
+function cyoaChoice(text){
+	if(text !== undefined && text !== null){
+		var inputs = document.querySelectorAll(".gtn-cyoa input"),
+			options = [...inputs].map(x => x.value),
+			nonMatchingOptions = options.filter(x => x !== text);
+
+		nonMatchingOptions.forEach(value => {
+			document.querySelectorAll(`.${value}`).forEach(el => el.classList.add("gtn-cyoa-hidden"));
+		})
+
+		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
+	}
+}
+
 (function (window, document) {
     function onDocumentReady(fn) {
         if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
@@ -45,6 +60,9 @@ $("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:
         if (window.location.href.indexOf("faqs") > -1) {
             $(".hands_on>h3,.question>h3,.comment>h3").click();
         }
+
+		// CYOA support
+		cyoaChoice(document.querySelector("input[type='radio']:checked").value);
     });
 
 })(window, document);
