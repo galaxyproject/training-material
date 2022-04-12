@@ -23,6 +23,26 @@ contributors:
   - slugger70
 ---
 
+> These words come from a transcript of Anthony Bretaudeau teaching this tutorial.
+>
+> Hello, my name is Anthony Bretaudeau, i'm from
+> Rennes, France, and today we're going to see
+> together how we can use Galaxy to annotate
+> the genome of a bacteria.
+{: .spoken data-visual="gtn" data-target="#top-navbar" }
+
+> Okay, so I will run this tutorial on https://usegalaxy.eu instance, which is
+> the european instance of galaxy, this tutorial should also work on other
+> instances like the australian one or the main one at https://usegalaxy.org.
+{: .spoken data-visual="galaxy" data-target="/" data-action="goto"}
+
+> So, as you can see the title of the tutorial is general annotation with
+> Prokka. So Prokka is the software, the main software we will use that will
+> take the sequence of the genome we want to annotate, and look into the
+> sequence to find all the features it can find, which means mostly genes, but
+> also things less common like tRNAs or ribosomal RNAs if it founds some.
+{: .spoken data-visual="gtn" data-target="#top-navbar" }
+
 # Introduction
 {:.no_toc}
 
@@ -38,6 +58,14 @@ Prokka finds and annotates features (both protein coding regions and RNA genes, 
 > {:toc}
 >
 {: .agenda}
+
+> Okay so it runs in two steps, Prokka, the first step is running another tool
+> which is Prodigal which will try to find, to identify, in the sequence all
+> the genes that are coding for protein and then the second step is to use all
+> these predicted genes to add functional annotation to them by comparing them
+> to known sequences from other organisms that are available in international
+> databases.
+{: .spoken data-visual="gtn" data-target="#agenda" }
 
 ## Import the data
 
@@ -59,6 +87,35 @@ Prokka requires assembled contigs.
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
+
+> So the first step for this tutorial is to import the data. So as you can see
+> we will use this file which is available on Zenodo. So you just have to copy
+> the url of this file and then go into Galaxy
+{: .spoken data-visual="gtn" data-target="#hands_on-hands-on-obtaining-our-data"}
+
+> create a new history if you haven't done so before
+{: .spoken data-visual="galaxy" data-target="#history-new-button" data-action="click"}
+
+> and just upload this new file
+{: .spoken data-visual="galaxy" data-target="#tool-panel-upload-button" data-action="click"}
+
+> by clicking here
+{: .spoken data-visual="galaxy" data-target="#btn-new" data-action="click"}
+
+> and pasting the url
+{: .spoken data-visual="galaxy" data-target="#upload-row-0 textarea" data-action="fill" data-value="https://zenodo.org/record/1156405/files/contigs.fasta"}
+
+> You can say that it's a fasta file here and click on Start.
+{: .spoken data-visual="galaxy" data-target="#btn-start" data-action="click"}
+
+> Okay so now the file is uploaded to Galaxy, it’s green.
+{: .spoken data-visual="galaxy" data-target="contigs.fasta" data-action="waitForDataset"}
+
+> You can have a look at it by clicking on the eye.
+> As you can see there are several sequences which are DNA of course and each one
+> is one of the scaffold that was assembled from short reads probably so it's the
+> genome of Staphylococcus aureus bacteria, and that's it.
+{: .spoken data-visual="galaxy" data-target="contigs.fasta" data-action="viewDataset"}
 
 ## Annotate the genome
 

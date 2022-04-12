@@ -35,6 +35,23 @@ requirements:
 # Overview
 {:.no_toc}
 
+> These words come from a transcript of Nate Coraor teaching this course.
+>
+> Hi, welcome to Galaxy Installation with Ansible, the tutorial. My name is
+> Nate Coraor, I work for the Galaxy Project at Penn State and I administrate
+> the UseGalaxy.org public server. So we're going to be covering today the
+> installation process of Galaxy using Ansible and you should have already
+> watched the Ansible tutorial to learn a little bit about what it is and how
+> it works, and what its configuration and setup is structured like. So we use
+> Ansible to install Galaxy to ensure consistency, make it easy, and because
+> the folks who administrate the large Galaxy servers who've put this course
+> together for you all use Ansible to deploy their servers. So when you deploy
+> your Galaxy server using Ansible, you're getting a lot of reused and best
+> practice workflows for (not Galaxy workflows but administration workflows)
+> for assembling your Galaxy server and running it in a best practice
+> production manner.
+{: .spoken data-visual="gtn" data-target="#top-navbar" }
+
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
@@ -274,6 +291,11 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
+>
+>    > Okay, so the first thing I'm going to do is I'm going to add the basic
+>    > requirements.
+>    > Edit requirements.yml and we need to add this to the bottom of that file. Copy. Paste. And save it.
+>    {: .spoken data-visual="terminal" data-ref="add-req"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
@@ -1763,7 +1785,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -65,3 +65,33 @@ galaxy_config:
->     
+>
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    +
@@ -2144,14 +2166,14 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,10 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->     
+>
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
 >     galaxy_manage_systemd: yes
->     
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job conf to config dir"}
@@ -2373,7 +2395,7 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
- 
+
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
 +galaxy_commit_id: 'release_19.09'
