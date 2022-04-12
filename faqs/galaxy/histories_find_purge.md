@@ -3,7 +3,7 @@ title: Find all Histories and purge (aka permanently delete)
 area: Histories      
 box_type: tip
 layout: faq          
-contributors: [Samantha anjei, annefou]
+contributors: [jennaj, samanthaanjei, annefou]
 ---
 1. Login to your Galaxy account.
 2. On the top navigation bar Click on **User**. 
