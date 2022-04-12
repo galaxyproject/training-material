@@ -7,7 +7,7 @@ contributors: [nurzhamalyrys]
 ---
 
 1. All account Histories owned by others, but shared with you, can be reviewed under User > Histories shared with me.
-2. "Histories shared with me" is part of your own quota usage, and unsharing will not significantly reduce quota usage for most end-users. However, if there are hundreds (or more!), clearing these up periodically (unsharing) could be worth it.
+2. Only a small fraction of the data content in "Histories shared with me" are  part of your own quota usage, and unsharing will not significantly reduce quota usage for most end-users. However, if there are hundreds (or more!), or many large histories shared with you,clearing these up periodically (unsharing) could be worth it.
 3. Unshare histories on this page using the pull-down menu per-history.
 
 Notes:
