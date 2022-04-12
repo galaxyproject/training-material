@@ -1,5 +1,5 @@
 ---
-title: How can I  upload data using EBI-SRA ?
+title: How can I  upload data using EBI-SRA?
 area: Data upload
 layout: faq
 box_type: tip
