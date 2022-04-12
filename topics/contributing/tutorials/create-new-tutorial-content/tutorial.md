@@ -965,6 +965,61 @@ And in your text you can use braces to refer to the term
 > {: .code-out}
 {: .code-2col}
 
+## Choose Your Own Tutorial
+
+Sometimes you're writing a large tutorial and at one small step there are multiple paths or multiple ways to get the data you want, and you'd like to showcase them all! You could write them all out in order, Option 1...2...etc, however maybe you want it to be a bit more interactive and focus only on one option at a time, so a user doesn't get distracted by the other options.
+
+Include this markdown where you want your user to choose between the multiple paths:
+
+> ### {% icon code-in %} Input: Markdown
+> {% raw %}
+> ```
+> {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados"
+>        text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}{% endraw %}
+> ```
+{: .code-in}
+
+{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+
+And then they can wrap the relevant sections with a `div` block with the relevant class. You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
+
+**NB**: on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
+
+> > ### {% icon code-in %} Input: Markdown
+> > ```
+> > <div class="Ananas" markdown="1">
+> > - 🍍 are fantastic
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > <div class="Avocados" markdown="1">
+> > - 🥑 are amazing
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > ```
+> >
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> >
+> > <div class="Ananas" markdown="1">
+> > - 🍍 are fantastic
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > <div class="Avocados" markdown="1">
+> > - 🥑 are amazing
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> >
+> {: .code-out}
+{: .code-2col}
 
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
