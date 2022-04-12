@@ -899,7 +899,7 @@ As written above, during mapping, **STAR** counted reads for each gene provided 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. There are 1'190'029 unmapped reads and 571'324 unmapped reads.
+> > 1. There are 1'190'029 unmapped reads and 571'324 multi-mapped reads.
 > > 2. It starts at line 5 with the gene `FBgn0085804`.
 > >
 > {: .solution}
