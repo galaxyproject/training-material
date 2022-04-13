@@ -201,7 +201,7 @@ In this section, you can run the Genetic Design - BASIC Assembly Workflow more e
 
 > ### {% icon hands_on %} Hands-on: Execute the entire workflow in one go.
 >
-> 1. Import your **Genetic Design - Basic Assembly Workflow** by uploading the workflow file using the following **URL link** : https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga.
+> 1. Import your **Genetic Design - Basic Assembly Workflow** by uploading the workflow file [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga).
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
