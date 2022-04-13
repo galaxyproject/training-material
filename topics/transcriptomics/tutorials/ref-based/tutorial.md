@@ -238,16 +238,17 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
->               - {% icon param-collection %} *"Output of Cutadapt"*: Output of last **Flatten collection** {% icon tool %} selected as **Dataset collection**
+>               - {% icon param-collection %} *"Output of Cutadapt"*: `Cutadapt on collection N: Report` (output of **Cutadapt** {% icon tool %}) selected as **Dataset collection**
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How many basepairs have been removed from the forward reads because of bad quality? And from the reverse reads?
->    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
+>    > 1. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
+>    > 2. How many basepairs have been removed from the forward reads because of bad quality? And from the reverse reads?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. For `GSM461177_untreat_paired`, 5,072,810 bp have been trimmed from the forward reads (Read 1) and 8,648,619 bp from the reverse reads (Read 2) because of quality. For `GSM461180_treat_paired`, 10,224,537 bp from the forward reads and 51,746,850 bp from the reverse reads. This is not a surprise; we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, especially for `GSM461180_treat_paired`.
->    > > 2. 147,810 (1.4%) reads were too short for `GSM461177_untreat_paired` and 1,101,875 (9%) for `GSM461180_treat_paired`.
+>    > > 1. 147,810 (1.4%) reads were too short for `GSM461177_untreat_paired` and 1,101,875 (9%) for `GSM461180_treat_paired`.
+>    > >    ![Cutadapt Filtered reads](../../images/ref-based/cutadapt_filtered_reads_plot.png "Cutadapt Filtered reads")
+>    > > 2. The MultiQC output only provides the proportion of bp trimmed in total, not for each Read. To get this information, you need to go back to the individual reports. For `GSM461177_untreat_paired`, 5,072,810 bp have been trimmed from the forward reads (Read 1) and 8,648,619 bp from the reverse reads (Read 2) because of quality. For `GSM461180_treat_paired`, 10,224,537 bp from the forward reads and 51,746,850 bp from the reverse reads. This is not a surprise; we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, especially for `GSM461180_treat_paired`.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
