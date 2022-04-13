@@ -2,8 +2,8 @@
 title: Tool Errors related to Metadata
 area: datasets   
 description:  Finding and Correcting Metadata
+layout: faq    
 contributors: [jennaj, beachyesh]
-layout: faq         
 ---
 
 Tools can error when the wrong dataset attributes (metadata) are assigned. Some of these wrong assignments may be: 
