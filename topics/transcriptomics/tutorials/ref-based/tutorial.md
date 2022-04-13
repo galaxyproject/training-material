@@ -124,7 +124,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 > 4. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
-
+>
 {: .hands_on}
 
 {% include topics/sequence-analysis/tutorials/quality-control/fastq_question.md %}
@@ -143,7 +143,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >     - *"Input Collection"*: `2 PE fastqs`
 >
 > 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: The output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
+>    - {% icon param-collection %} *"Short read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -234,7 +234,11 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
-> 2. Inspect the generated txt files (`Cutadapt on collection N: Report`)
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
+>               - {% icon param-collection %} *"Output of Cutadapt"*: Output of last **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -660,162 +664,167 @@ This information should be provided with your FASTQ files, ask your sequencing f
 
 ![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
 
-There are 3 ways to estimate strandness from **STAR** results:
-First, we can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful). Second, you can use the output of **STAR** with the counts. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).
+There are 3 ways to estimate strandness from **STAR** results (choose the one you prefer)
+1. We can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful).
 
-You can choose between the three following hands-on.
+    > ### {% icon hands_on %} Hands-on: Estimate strandness with IGV for a paired-end library
+    >
+    > 1. Go back to your IGV session with the `GSM461177_untreat_paired` BAM opened.
+    >
+    >    > ### {% icon tip %} If you don't have it
+    >    > No problem, you just need to redo the previous steps:
+    >    > 1. Start IGV locally
+    >    > 2. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+    >    > 3. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
+    >    > 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
+    >    {: .tip}
+    >
+    > 2. **IGV** {% icon tool %}
+    >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track
+    >    2. Right click
+    >    3. Select `Group Aligments by` -> `first-in-pair strand` and `Squished`.
+    >
+    >    > ### {% icon question %} Question
+    >    >
+    >    > ![Screenshot of the IGV view on ps](../../images/ref-based/group_strand_igv_screenshot.png "Screenshot of IGV on ps")
+    >    >
+    >    > 1. Are the reads evenly distributed between the 2 groups (NEGATIVE and POSITIVE)?
+    >    > 2. What is the type of library strandness?
+    >    >
+    >    > > ### {% icon solution %} Solution
+    >    > >
+    >    > > 1. Yes we see the same number of reads on both groups.
+    >    > > 2. This means that the library was unstreanded.
+    >    > >
+    >    >  > > ### {% icon comment %} How would it be if the library was stranded?
+    >    >  > >
+    >    >  > > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
+    >    >  > >
+    >    >  > > Note thare there is no read on the POSITIVE group for the reverse strand-specific.
+    >    >  > {: .comment}
+    >    > {: .solution}
+    >    {: .question}
+    >
+    >
+    {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Estimate strandness with IGV for a paired-end library
->
-> 1. Go back to your IGV session with the `GSM461177_untreat_paired` BAM opened.
-> > ### {% icon details %} If you don't have it:
-> > No problem, you just need to redo the previous steps:
-> > 2. Start IGV locally
-> > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
-> > 3. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
-> > 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
-> {: .details}
->
-> 2. **IGV** {% icon tool %}: Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track, right click and select `Group Aligments by` -> `first-in-pair strand` and `Squished`.
->
->    > ### {% icon question %} Question
->    >
->    > ![Screenshot of the IGV view on ps](../../images/ref-based/group_strand_igv_screenshot.png "Screenshot of IGV on ps")
->    >
->    > 1. Are the reads evenly distributed between the 2 groups (NEGATIVE and POSITIVE)?
->    > 2. What is the type of library strandness?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. Yes we see the same number of reads on both groups.
->    > > 2. This means that the library was unstreanded.
->    > >
->    >  > > ### {% icon comment %} How would it be if the library was stranded?
->    >  > >
->    >  > > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
->    >  > > Note thare there is no read on the POSITIVE group for the reverse strand-specific.
->    >  > {: .comment}
->    > {: .solution}
->    {: .question}
->
->
-{: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Estimate strandness with STAR
->
-> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `STAR`
->                - In *"STAR output"*:
->                    - {% icon param-repeat %} *"Insert STAR output"*
->                        - *"Type of STAR output?"*: `Gene counts`
->                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
->
->    > ### {% icon question %} Question
->    >
->    > 1. What percentage of reads are asigned to genes if the library is unstranded/same stranded/reverse stranded?
->    > 2. What is the strandness of the library?
->    >
->    > > ### {% icon solution %} Solution
->    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
->    > > ![STAR Gene counts same stranded](../../images/ref-based/star_gene_counts_same.png "Gene counts same stranded")
->    > > ![STAR Gene counts reverse stranded](../../images/ref-based/star_gene_counts_reverse.png "Gene counts reverse stranded")
->    > >
->    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.
->    > > 2. This suggests that the library is unstranded.
->    > >
->    > > > ### {% icon comment %} How would it be if the library was stranded?
->    > > >
->    > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
->    > > > ![STAR Gene counts same stranded USvsRS](../../images/ref-based/star_gene_counts_same_USvsRS.png "Gene counts same stranded for unstranded and reverse stranded library")
->    > > > ![STAR Gene counts reverse stranded USvsRS](../../images/ref-based/star_gene_counts_reverse_USvsRS.png "Gene counts reverse stranded for unstranded and reverse stranded library")
->    > > > Note thare there is very few reads attributed to genes for same stranded.
->    > > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
->    > > {: .comment}
->    > {: .solution}
->    >
->    {: .question}
-{: .hands_on}
+2. You can use the output of **STAR** with the counts.
 
-> ### {% icon hands_on %} Hands-on: Determining the library strandness using Infer Experiment
->
-> We use the `BED12` file which we already converted from the `Drosophila_melanogaster.BDGP6.87.gtf` dataset earlier.
-> > ### {% icon details %} If you don't have it:
-> > No problem, it was into a detailed part on quality checks
-> > To generate it, just follow this:
-> > > ### {% icon hands_on %} Hands-on: Get a BED12 from the gtf
-> > > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
-> > >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
-> > >
-> > {: .hands_on}
-> {: .details}
->
-> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with the following parameters:
->    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
->    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
->
->    > ### {% icon comment %} Interpret the output of Infer Experiment
->    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
->    >
->    > - Paired-end or single-end library
->    > - Fraction of reads failed to determine
->    > - 2 lines
->    >     - For single-end
->    >         - `Fraction of reads explained by "++,--"`: the fraction of reads that assigned to forward strand
->    >         - `Fraction of reads explained by "+-,-+"`: the fraction of reads that assigned to reverse strand
->    >     - For paired-end
->    >         - `Fraction of reads explained by "1++,1--,2+-,2-+"`: the fraction of reads that assigned to forward strand
->    >         - `Fraction of reads explained by "1+-,1-+,2++,2--"`: the fraction of reads that assigned to reverse strand
->    >
->    > If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
->    {: .comment}
->
-> > ### {% icon question %} Question
-> >
-> > 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
-> > 2. Do you think the library type of the 2 samples is stranded or unstranded?
-> >
-> > > ### {% icon solution %} Solution
-> > >
-> > > 1. Results for `GSM461177_untreat_paired`:
-> > >
-> > > {% snippet faqs/galaxy/analysis_results_may_vary.md %}
-> > >
-> > >    ```
-> > >    This is PairEnd Data
-> > >    Fraction of reads failed to determine: 0.0963
-> > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
-> > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
-> > >    ```
-> > >
-> > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
-> > >
-> > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
-> > >
-> > > > ### {% icon comment %} How would it be if the library was stranded?
-> > > > Still taking the 2 BAM as example, We get for the unstranded:
-> > > >    ```
-> > > >    This is PairEnd Data
-> > > >    Fraction of reads failed to determine: 0.0382
-> > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4847
-> > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4771
-> > > >    ```
-> > > > And for the reverse stranded:
-> > > >    ```
-> > > >    This is PairEnd Data
-> > > >    Fraction of reads failed to determine: 0.0504
-> > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.0061
-> > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
-> > > >    ```
-> > > {: .comment}
-> > {: .solution}
-> {: .question}
-{: .hands_on}
+    > ### {% icon hands_on %} Hands-on: Estimate strandness with STAR
+    >
+    > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs with the following parameters:
+    >    - In *"Results"*:
+    >        - {% icon param-repeat %} *"Insert Results"*
+    >            - *"Which tool was used generate logs?"*: `STAR`
+    >                - In *"STAR output"*:
+    >                    - {% icon param-repeat %} *"Insert STAR output"*
+    >                        - *"Type of STAR output?"*: `Gene counts`
+    >                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
+    >
+    >    > ### {% icon question %} Question
+    >    >
+    >    > 1. What percentage of reads are asigned to genes if the library is unstranded/same stranded/reverse stranded?
+    >    > 2. What is the strandness of the library?
+    >    >
+    >    > > ### {% icon solution %} Solution
+    >    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
+    >    > > ![STAR Gene counts same stranded](../../images/ref-based/star_gene_counts_same.png "Gene counts same stranded")
+    >    > > ![STAR Gene counts reverse stranded](../../images/ref-based/star_gene_counts_reverse.png "Gene counts reverse stranded")
+    >    > >
+    >    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.
+    >    > > 2. This suggests that the library is unstranded.
+    >    > >
+    >    > > > ### {% icon comment %} How would it be if the library was stranded?
+    >    > > >
+    >    > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
+    >    > > > ![STAR Gene counts same stranded USvsRS](../../images/ref-based/star_gene_counts_same_USvsRS.png "Gene counts same stranded for unstranded and reverse stranded library")
+    >    > > > ![STAR Gene counts reverse stranded USvsRS](../../images/ref-based/star_gene_counts_reverse_USvsRS.png "Gene counts reverse stranded for unstranded and reverse stranded library")
+    >    > > > Note thare there is very few reads attributed to genes for same stranded.
+    >    > > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
+    >    > > {: .comment}
+    >    > {: .solution}
+    >    >
+    >    {: .question}
+    {: .hands_on}
+
+3. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite.
+
+    This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).
+
+    > ### {% icon hands_on %} Hands-on: Determining the library strandness using Infer Experiment
+    >
+    > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
+    >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+    >
+    >    You may already have converted this `BED12` file from the `Drosophila_melanogaster.BDGP6.87.gtf` dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time
+    >
+    > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with the following parameters:
+    >    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+    >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
+    >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
+    >
+    >    > ### {% icon comment %} Interpret the output of Infer Experiment
+    >    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
+    >    >
+    >    > - Paired-end or single-end library
+    >    > - Fraction of reads failed to determine
+    >    > - 2 lines
+    >    >     - For single-end
+    >    >         - `Fraction of reads explained by "++,--"`: the fraction of reads that assigned to forward strand
+    >    >         - `Fraction of reads explained by "+-,-+"`: the fraction of reads that assigned to reverse strand
+    >    >     - For paired-end
+    >    >         - `Fraction of reads explained by "1++,1--,2+-,2-+"`: the fraction of reads that assigned to forward strand
+    >    >         - `Fraction of reads explained by "1+-,1-+,2++,2--"`: the fraction of reads that assigned to reverse strand
+    >    >
+    >    > If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
+    >    {: .comment}
+    >
+    > > ### {% icon question %} Question
+    > >
+    > > 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
+    > > 2. Do you think the library type of the 2 samples is stranded or unstranded?
+    > >
+    > > > ### {% icon solution %} Solution
+    > > >
+    > > > 1. Results for `GSM461177_untreat_paired`:
+    > > >
+    > > > {% snippet faqs/galaxy/analysis_results_may_vary.md %}
+    > > >
+    > > >    ```
+    > > >    This is PairEnd Data
+    > > >    Fraction of reads failed to determine: 0.0963
+    > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
+    > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+    > > >    ```
+    > > >
+    > > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
+    > > >
+    > > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
+    > > >
+    > > > > ### {% icon comment %} How would it be if the library was stranded?
+    > > > > Still taking the 2 BAM as example, We get for the unstranded:
+    > > > >    ```
+    > > > >    This is PairEnd Data
+    > > > >    Fraction of reads failed to determine: 0.0382
+    > > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4847
+    > > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4771
+    > > > >    ```
+    > > > > And for the reverse stranded:
+    > > > >    ```
+    > > > >    This is PairEnd Data
+    > > > >    Fraction of reads failed to determine: 0.0504
+    > > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.0061
+    > > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
+    > > > >    ```
+    > > > {: .comment}
+    > > {: .solution}
+    > {: .question}
+    {: .hands_on}
 
 
 > ### {% icon details %} Strandness and software settings
+>
 > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >
 > Library type | **Infer Experiment** | **TopHat** | **HISAT2** | **HTSeq-count** | **featureCounts**
@@ -889,18 +898,26 @@ As written above, during mapping, **STAR** counted reads for each gene provided 
 
 > ### {% icon hands_on %} Hands-on: Reformatting STAR output
 >
-> 1. Inspect the counts from `GSM461177_untreat_paired` in the collection `RNA STAR on collection N: reads per gene`.
-{: .hands_on.STAR}
+> 1. Inspect the counts from `GSM461177_untreat_paired` in the collection `RNA STAR on collection N: reads per gene`
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
 > 1. How many reads are unmapped/multi-mapped?
 > 2. At which line starts gene counts?
+> 3. What are the different columns?
+> 4. Which columns are the most interesting for our dataset?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. There are 1'190'029 unmapped reads and 571'324 multi-mapped reads.
+> > 1. There are 1,190,029 unmapped reads and 571,324 multi-mapped reads.
 > > 2. It starts at line 5 with the gene `FBgn0085804`.
+> > 3. There are 4 columns:
+> >    1. Gene ID
+> >    2. Counts for unstranded RNA-seq
+> >    3. Counts for the 1st read strand aligned with RNA
+> >    4. Counts for the 2nd read strand aligned with RNA
+> > 4. We need the Gene ID column and the 2nd column because of the unstrandness of our data
 > >
 > {: .solution}
 >
@@ -926,15 +943,18 @@ We will reformat the output of **STAR** to be similar to the output of **feature
 Later on the tutorial we will need to get the size of each gene. This is one of the output of **FeatureCounts** but we can also obtain it directly from the gene annotation file. As this is quite long, we recommand to launch it now.
 
 > ### {% icon hands_on %} Hands-on: Getting gene length
-> > ### {% icon warning %} Check the version of the tool below.
-> > This will only work with version 0.1.2 or above.
-> {: .warning}
+>
 > 1. {% tool [Gene length and GC content](toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2) %} with the following parameters:
 >    - *"Select a built-in GTF file or one from your history"*: `Use a GTF from history`
 >      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >    - *"Analysis to perform"*: `gene lengths only`
 >
->
+>    > > ### {% icon warning %} Check the version of the tool below.
+>    > This will only work with version 0.1.2 or above
+>    >
+>    > {% snippet faqs/galaxy/tools_change_version.md %}
+>    >
+>    {: .warning}
 {: .hands_on}
 
 </div>
@@ -1049,7 +1069,7 @@ To be able to identify differential gene expression induced by PS depletion, all
 >
 > 3. Create a collection list with all these counts that you label `all counts`. Rename each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
 >
-> {% snippet faqs/galaxy/collections_build_list.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -1316,16 +1336,17 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
 DESeq2 requires to provide for each factor, counts of samples in each category. We will thus create small collections for each of the categories.
 
-> ### {% icon hands_on %} Hands-on: Split your collection for each of these factors.
+> ### {% icon hands_on %} Hands-on: Split your collection for each of these factors
+>
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `all counts`
 >
 > 2. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output of **Extract element identifiers** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: output of **Extract element identifiers** {% icon tool %}
 >    - *"Regular Expression"*: `untreat`
 >
 > 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `Extract element identifiers on data ...` (output of **Extract element identifiers** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: output of **Extract element identifiers** {% icon tool %}
 >    - *"Regular Expression"*: `single`
 >
 > 4. {% tool [Filter collection](__FILTER_FROM_FILE__) %} with the following parameters:
@@ -1335,7 +1356,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 > 5. Rename each of the 4 new collections with the four categories: `paired`, `single`, `treat`, `untreat`.
 >
-> {% snippet faqs/galaxy/collections_rename.md %}
+>    {% snippet faqs/galaxy/collections_rename.md %}
 >
 {: .hands_on}
 
@@ -1348,7 +1369,8 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 > > ### {% icon solution %} Solution
 > >
 > > 1. You should have 4 samples 'paired', 3 samples 'single', 3 samples 'treat' and 4 samples 'untreat'.
-> > ![Collections](../../images/ref-based/collection_counts.png "Collection containing counts per category")
+> >
+> >    ![Collections](../../images/ref-based/collection_counts.png "Collection containing counts per category")
 > >
 > > 2. The 'treat' expression is present both in 'treat' and in 'untreat', thus all counts would have been selected. However, one could have used '_treat' which would have worked as it is not present in '_untreat'.
 > {: .solution}
@@ -1364,19 +1386,19 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >                - In *"Factor level"*:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
->                        - {% icon param-collection %} *"Counts file(s)"*: the collection `treat`.
+>                        - {% icon param-collection %} *"Counts file(s)"*: the collection `treat`
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
->                        - {% icon param-collection %} *"Counts file(s)"*: the collection `untreat`.
+>                        - {% icon param-collection %} *"Counts file(s)"*: the collection `untreat`
 >            - {% icon param-repeat %} *"Insert Factor"*
 >                - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
 >                - In *"Factor level"*:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
->                        - {% icon param-collection %} *"Counts file(s)"*: the collection `paired`.
+>                        - {% icon param-collection %} *"Counts file(s)"*: the collection `paired`
 >                    - {% icon param-repeat %} *"Insert Factor level"*
->                                      - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
->          - {% icon param-collection %} *"Counts file(s)"*: the collection `single`.
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
+>                        - {% icon param-collection %} *"Counts file(s)"*: the collection `single`
 >    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
@@ -1476,7 +1498,7 @@ For more information about **DESeq2** and its outputs, you can have a look at th
 > 1. Is the *Pasilla* gene (ps, FBgn0261552) downregulated by the RNAi treatment?
 > 2. Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?
 > 3. We could also hypothetically be interested in the effect of the sequencing (or other secondary factors in other cases). How would we know the differentially expressed genes because of sequencing type?
-> 4. We would like to analyze the interaction between the treatment and the sequencing.
+> 4. We would like to analyze the interaction between the treatment and the sequencing. How could we do that?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -1496,6 +1518,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 {: .question}
 
 > ### {% icon tip %} Tip: What are p-values and what are they used for?
+>
 > The p-value is a measure often used to determine whether or not a particular observation possesses statistical significance. Strictly speaking, the p-value is the probability that the data could have arisen randomly, assuming that the null hypothesis is correct. In the concrete case of RNA-Seq, the null hypothesis is that there is no differential gene expression. So a p-value of 0.13 for a particular gene indicates that, for that gene, assuming it is not differentially expressed, there is a 13% chance that any apparent differential expression could simply be produced by random variation in the experimental data.
 >
 > 13% is still quite high, so we cannot really be confident differential gene expression is taking place. The most common way that scientists use p-values is to set a threshold (commonly 0.05, sometimes other values such as 0.01) and reject the null hypothesis only for p-values below this value. Thus, for genes with p-values less than 0.05, we can feel safe stating that differential gene expression plays a role. It should be noted that any such threshold is arbitrary and there is no meaningful difference between a p-value of 0.049 and 0.051, even if we only reject the null hypothesis in the first case.
@@ -1702,12 +1725,11 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 
 > ### {% icon details %} Compute the Z-score for all genes
 >
->  To save time in this tutorial, we will just plot the Z-score of the normalized count of the most differentially expressed genes. In a standard analysis, we may be interested in computing the Z-score on all the genes (`Normalized count` file from **DESeq**).
->  To compute the Z-score, we break the process into 2 steps:
->  
->  1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
->  2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the  previous step)
->  
+> We often need the Z-score for some visualisations. To compute the Z-score, we break the process into 2 steps:
+>
+> 1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
+> 2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the  previous step)
+>
 >  > ### {% icon hands_on %} Hands-on: Compute the Z-score of all genes
 >  > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters to >  first substract the mean values per row
 >  >    - *"Input Single or Multiple Tables"*: `Single Table`
@@ -1732,7 +1754,7 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 >  > 3. Rename the output to `Z-scores`
 >  > 4. Inspect the output file
 >  {: .hands_on}
->  
+>
 >  We now have a table with the Z-score for all genes in the 7 samples.
 >
 >  > ### {% icon question %} Questions
@@ -1815,20 +1837,25 @@ We just generated the first input for **goseq**. As second input for **goseq** w
 > ### {% icon hands_on %} Hands-on: Get the gene length from previous history
 >
 > <div class="featureCounts" markdown="1">
-> 1. Drag and drop the feature length collection generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**.
+> 1. Copy the feature length collection previously generated by **featureCounts** {% icon tool %} into this history
 >
-> 2. If you used featureCounts: {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
+>    {% snippet faqs/galaxy/histories_copy_dataset.md %}
+>
+> 2. {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
 >   - {% icon param-collection %} *"Input List"*: `featureCounts on collection N: Feature lengths`
 >   - *"How should a dataset be selected?"*: `The first dataset`
 > </div>
 >
 > <div class="STAR" markdown="1">
-> 1. Drag and drop the output of **Gene length and GC content** {% icon tool %} (`Gene length`) into this history using the {% icon galaxy-columns %} **View all histories**.
+> 1. Copy the output of **Gene length and GC content** {% icon tool %} (`Gene length`) into this history
+>
+>   {% snippet faqs/galaxy/histories_copy_dataset.md %}
 > </div>
 >
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Adapt the gene length to goseq
+>
 > 1. {% tool [Change Case](ChangeCase) %} with the following parameters:
 >
 >    - {% icon param-file %} *"From"*: <span class="featureCounts" markdown="1">`GSM461177_untreat_paired` (output of **Extract Dataset** {% icon tool %})</span><span class="STAR" markdown="1">`Gene length`</span>
