@@ -11,4 +11,4 @@ contributors: [jennaj, bernandez]
 * [Extract](https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_extract_from_history.html) a **Workflow** from the History, then purge it. 
 * **Back-up your work**. It is a best practice to download an archive of your FULL original Histories periodically, even those still in use, as a backup.
 
-**Resources** Much discussion about all of the above options can be found at the Galaxy Help forum https://help.galaxyproject.org/
+**Resources** Much discussion about all of the above options can be found at the [Galaxy Help forum](https://help.galaxyproject.org/).
