@@ -1375,14 +1375,22 @@ $btn-pink:$keypoints-color;
 .gtn-cyoa {
     input[type="radio"] {
         display: none;
+        &:checked+label {
+            background-color: $question-color;
+        }
     }
-    input[type="radio"]:checked+label {
-        background: blue;
-        color: white;
+
+    .btn-secondary {
+        color: $text-color;
+        background-color: $handson-color;
+        border-color: transparent;
+        &:hover {
+            background-color: $solution-color;
+        }
     }
+
     label {
         padding: 1em;
-        border: 1px solid blue;
         display: inline-block;
     }
 }
