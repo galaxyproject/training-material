@@ -1,11 +1,15 @@
 ---
-title: How to check the current format of your FASTQ dataset and convert if needed
+title:  How to format fastq data for tools that require .fastqsanger format?
 area: datatypes
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]
 ---
 
+
+- Most tools that accept FASTQ data expect it to be in a specific FASTQ version: .fastqsanger. The .fastqsanger datatype must be assigned to each FASTQ dataset.
+
+Inorder to do that:
 
 - Watch the **[FASTQ Prep Illumina](http://vimeo.com/galaxyproject/fastqprep)** video for a complete walk-through.
 - Run **FastQC** first to assess the type.
