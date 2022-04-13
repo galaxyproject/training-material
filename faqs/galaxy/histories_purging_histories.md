@@ -1,5 +1,5 @@
 ---
-title: purging unneeded histories
+title: Purging unneeded histories
 area: histories     
 box_type: tip        
 layout: faq        
