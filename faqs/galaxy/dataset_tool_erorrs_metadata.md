@@ -2,6 +2,7 @@
 title: Tool Errors related to Metadata
 area: datasets   
 description:  Finding and Correcting Metadata
+contributors: [jennaj, beachyesh]
 layout: faq         
 ---
 
