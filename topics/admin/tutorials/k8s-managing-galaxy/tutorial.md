@@ -26,11 +26,13 @@ contributors:
   - ic4f
 tags:
   - kubernetes
+subtopic: cloud
 requirements:
   - type: "internal"
     topic_name: admin
     tutorials:
       - k8s-deploying-galaxy
+priority: 1
 ---
 
 # Managing Galaxy on Kubernetes

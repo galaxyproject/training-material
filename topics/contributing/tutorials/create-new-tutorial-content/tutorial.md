@@ -862,8 +862,9 @@ Each snippet (question) is a separate file, with some metadata, residing in one 
 ---
 title: How do I run a workflow?
 area: workflows      # FAQs will be grouped by these areas on the FAQ page
-box_type: tip        # tip/comment/hands_on; optional, if you want the content to be in a box
+box_type: tip        # tip/comment/hands_on/question; optional, if you want the content to be in a box
 layout: faq          # if you set this the snippet will get its own page and be included in the FAQs page
+contributors: [annefou,nomadscientist] # anybody who has contributed to the FAQ over time
 ---
 
 Here you can write the snippet / answer to the FAQ in Markdown
@@ -970,7 +971,7 @@ If you would like to cite any articles, books or websites in your tutorial, you 
 
 {% raw %}
 ```
-@article{batut2018community,
+@article{bebatut2018community,
   title={Community-driven data analysis training for biology},
   author={Batut, B{\'e}r{\'e}nice and Hiltemann, Saskia and Bagnacani, Andrea and Baker, Dannon and Bhardwaj, Vivek and Blank, Clemens and Bretaudeau, Anthony and Brillet-Gu{\'e}guen, Loraine and {\v{C}}ech, Martin and Chilton, John and others},
   journal={Cell systems},
@@ -1008,7 +1009,7 @@ and the corresponding website {% cite galaxy-training-materials %}
 
 Rendered:
 
-For more information please look at this great article {% cite batut2018community %}, and the corresponding website {% cite galaxy-training-materials %}
+For more information please look at this great article {% cite bebatut2018community %}, and the corresponding website {% cite galaxy-training-materials %}
 
 
 A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or [jump there directly](#bibliography))
@@ -1018,36 +1019,50 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 {: .tip}
 
 
-# Automatic Jupyter Notebooks
+# Automatic Jupyter Notebooks & RMarkdown
 
-If your tutorial is primarily focused on teaching students how to write code (Bash, Python, SQL, etc) you can take advantage of the GTN's ability to automatically export Jupyter Notebooks from the tutorial content. In this system, you pick a single language for your tutorial, and then all code blocks tagged with that language become runnable. E.g.
+If your tutorial is primarily focused on teaching students how to write code (Bash, Python, SQL, etc) you can take advantage of the GTN's ability to automatically export notebooks from the tutorial content! In this system, you pick a *single* language for your tutorial, and then all code blocks tagged with that language become runnable. E.g.
 
     Here is some explanation
 
-    ```bash
-    some code that students should execute
+    ```python
+    some_code += f"that students {should execute}"
     ```
+
+## Currently Supported Languages
+
+Language | Jupyter | RMarkdown
+---      | ---     | ---
+Bash     | Yes     | No
+SQL      | Yes     | No
+R        | Yes     | Yes
+Python   | Yes     | No
+
+Every cell that you wish to be executable, needs to be annotated with the language like above. Then if a compatible notebook can be produced, it will be.
+
+## Restrictions
 
 To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
-- Do not use snippets
-- Do not use the built in citation system
-- Do not use a terminal or prompt character
+- Do **not** use snippets
+- Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 
-And be aware that the output will look a little bit different than the GTN, e.g. solution boxes cannot be hidden by default.
+And be aware that the output will look a little bit different than the GTN, e.g. solution boxes cannot be hidden by default, so in Jupyter notebook we format the text with a colour of `white` so it does not appear in the notebook and requires selection to view the answer.
+
+*However there are things that are possible!* You can still use question/solution boxes, or otherwise nested boxes. Just not `includes` or `snippets`
 
 ## Enabling the system
 
 Add metadata to your `tutorial.md` header like:
-
 
 ```
 notebook:
   language: python
 ```
 
+Supported values are python, sql, r, and bash. The notebook will be generated automatically as part of the site build process.
 
 
 # Spanish Translation Project

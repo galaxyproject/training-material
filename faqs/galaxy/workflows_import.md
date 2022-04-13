@@ -3,6 +3,7 @@ title: Importing a workflow
 area: workflows
 box_type: tip
 layout: faq
+contributors: [shiltemann,mblue9,hexylena]
 ---
 
 - Click on *Workflow* on the top menu bar of Galaxy. You will see a list of all your workflows.

@@ -70,7 +70,6 @@ contributors:
   - erasmusplus
   - avans-atgm
 tags:
-- jupyter-notebook
 - bash
 ---
 

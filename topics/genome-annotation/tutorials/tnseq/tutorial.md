@@ -196,9 +196,10 @@ We would like now to split our Tnseq reads in `Tnseq-Tutorial-reads` given the b
 >     - In *"Adapter Options"*
 >       - *"Maximum error rate"*: `0.15` (to allow 1 mismatch)
 >       - *"Match times"*: `3` (to cover cases where barcodes are attached several times)
->     - In *"Output Options"*
->       -  *"Report"*: `Yes`
->       -  *"Multiple output"*: `Yes` (to separate the reads into one file per condition)
+>     - In *"Output Selector"*, select 
+>       -  *"Report"*
+>       -  *"Multiple output"* (to separate the reads into one file per condition)
+>       -  *"Untrimmed reads"* (to write reads that do not contain the adapter to a separate file)
 >
 >     The output is a collection of the different conditions datasets, here control and condition, and a report text file.
 >
@@ -237,8 +238,8 @@ Our reads are now divided by condition. We need to trim their tail containing th
 >              - *"Enter custom 3' adapter sequence"*: `CGTTATGGCACGC`
 >    - In *"Adapter Options"*
 >      - *"Match times"*: `3` (to cover cases where barcodes are attached several times)
->    - In *"Output Options"*
->      -  *"Report"*: `Yes`
+>    - In *"Output Selector"*, select 
+>      -  *"Report"*
 >
 >    > ### {% icon question %} Questions
 >    > What are the outputs at this step?
@@ -262,8 +263,8 @@ Our reads are now divided by condition. We need to trim their tail containing th
 >    - In *"Filter Options"*
 >      - *"Minimum length"* : `64`
 >      - *"Maximum length"* : `70`
->    - In *"Output Options"*
->      -  *"Report"*: `Yes`
+>    - In *"Output Selector"*, select 
+>      -  *"Report"*
 >
 > 4. Inspect the generated report files
 >
@@ -312,9 +313,9 @@ The constructs used in this experiment contain different strengths and direction
 >               - {% icon param-file %} *"Choose file containing 5' adapters"*: `construct_barcodes` file
 >    - In *"Adapter Options"*
 >       - *"Match times"*: `3` (to cover cases where barcodes are attached several times)
->    - In *"Output Options"*
->       -  *"Report"*: `Yes`
->       - *"Multiple output"* : `Yes` (to separate the reads into one file per condition)
+>    - In *"Output Selector"*, select 
+>       -  *"Report"*
+>       - *"Multiple output"* (to separate the reads into one file per condition)
 >
 > 2. Inspect the report files
 >
@@ -347,8 +348,8 @@ The last remaining transposon sequence in the reads is the linker with the MmeI 
 >              - *"Enter custom 3' adapter sequence"*: `ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT`
 >    - In *"Adapter Options"*
 >      - *"Maximum error rate"*: `0.15`
->    - In *"Output Options"*
->      -  *"Report"*: `Yes`
+>    - In *"Output Selector"*, select 
+>      -  *"Report"*
 >
 > 2. Inspect the report files and check that the majority of the read have been trimmed
 {: .hands_on}

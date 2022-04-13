@@ -182,7 +182,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 >    > > 4. The insert size is the distance between the two reads in the pairs.
 >    > > 5. To get the info:
 >    > >      1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with a filter to keep only the reads with a mapping quality >= 20
->    > >      2. **Stats generate statistics for BAM dataset** {% icon tool %} on the output of **Filter**
+>    > >      2. **Samtools Stats** {% icon tool %} on the output of **Filter**
 >    > >
 >    > >    Before filtering: 95,412 reads and after filtering: 89,664 reads.
 >    >  {: .solution }
