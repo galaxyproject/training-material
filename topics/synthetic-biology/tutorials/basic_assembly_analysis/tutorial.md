@@ -38,7 +38,7 @@ Lycopene is a potent antioxidant and has been widely used in the fields of pharm
 
 To address this demand, synthetic biology and metabolic engineering have been employed to develop microbial cell factories (e.g. _E.coli_ strains) for lycopene production.
 
-To design plasmids encoding lycopene bioproducing pathways, we will use the BASIC assembly method (as described in {% cite Storch2015 %}) which relies on orthogonal linkers and type IIs restriction enzyme cleavage to provide a robust and accurate assembly of DNA parts into plasmid constructs. From these construct definition, the workflow will generate scripts enabling the automatic build of the plasmids as well as  the transformation of strains using an Opentrons liquid handler robot. After downloading these scripts onto a computer connected to an Opentrons, one can perform the automated construction of the plasmids at the bench.
+To design plasmids encoding lycopene bioproducing pathways, we will use the BASIC assembly method (as described in {% cite Storch2015 %}) which relies on orthogonal linkers and type IIs restriction enzyme cleavage to provide a robust and accurate assembly of DNA parts into plasmid constructs. From these construct definition, the workflow will generate scripts enabling the automatic build of the plasmids as well as the transformation of strains using an Opentrons liquid handler robot. After downloading these scripts onto a computer connected to an Opentrons, one can perform the automated construction of the plasmids at the bench.
 
 The workflow scheme we will use is shown below. First, we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps as well. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.
 
@@ -218,8 +218,6 @@ In this section, you can run the Genetic Design - BASIC Assembly Workflow more e
 >    >
 >    > All the outputs will be automatically generated and identical to the previous ones. 
 >    {: .comment}
->
-
 {: .hands_on}
 
 {:.no_toc}
