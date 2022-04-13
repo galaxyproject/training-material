@@ -1,5 +1,5 @@
 ---
-title:  How to format fastq data for tools that require .fastqsanger format?
+title: How to format fastq data for tools that require .fastqsanger format?
 area: datatypes
 box_type: tip
 layout: faq
