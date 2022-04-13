@@ -1663,12 +1663,12 @@ We now have a table with 131 lines (the 130 most differentially expressed genes 
 
 > ### {% icon hands_on %} Hands-on: Plot the heatmap of the normalized counts of these genes for the samples
 >
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1) %} to plot the heatmap:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
->    - *"Advanced - log transformation"*/*"Data transformation"*: `Log2(value) transform my data`
+>    - *"Data transformation"*: `Log2(value) transform my data`
 >    - *"Enable data clustering"*: `Yes`
 >    - *"Labeling columns and rows"*: `Label columns and not rows`
->    - *"Coloring groups"*: `White to red`
+>    - *"Type of colormap to use"*: `Gradient with 2 colors`
 >
 {: .hands_on}
 
@@ -1692,7 +1692,7 @@ You should obtain something similar to:
 > {: .solution}
 {: .question}
 
-### Computation and visualization of the Z-score
+### Visualization of the Z-score
 
 To compare the gene expression over samples, we could also use the Z-score, which is often represented in publications.
 
@@ -1700,75 +1700,76 @@ The Z-score gives the number of standard-deviations that a value is away from th
 
 The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized count $$x_{i,j}$$ is computed as $$z_{i,j} = \frac{x_{i,j}- \overline{x_i}}{s_i}$$ with $$\overline{x_i}$$ the mean and $$s_i$$ the standard deviation of the normalized counts for the gene $$i$$ over all samples.
 
-> ### {% icon comment %} Compute the Z-score for all genes
+> ### {% icon details %} Compute the Z-score for all genes
 >
-> To save time in this tutorial, we will compute the Z-score directly on the normalized count of the most differentially expressed genes. In a standard analysis, we would compute the Z-score on all the genes (`Normalized count` file from **DESeq**) and then filter for the interesting genes as we did in the previous step.
-{: .comment}
-
-To compute the Z-score, we break the process into 2 steps:
-
-1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
-2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the previous step)
-
-> ### {% icon hands_on %} Hands-on: Compute and extract the Z-score of the most differentially expressed genes
-> 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters to first substract the mean values per row
->    - *"Input Single or Multiple Tables"*: `Single Table`
->      - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
->      - *"Type of table operation"*: `Perform a full table operation`
->        - *"Operation"*: `Custom`
->          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
+>  To save time in this tutorial, we will just plot the Z-score of the normalized count of the most differentially expressed genes. In a standard analysis, we may be interested in computing the Z-score on all the genes (`Normalized count` file from **DESeq**).
+>  We describe here how to compute the Z-scores on the most differentially expressed genes but the principle is the same for all genes:
+>  To compute the Z-score, we break the process into 2 steps:
+>  
+>  1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
+>  2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the >  previous step)
+>  
+>  > ### {% icon hands_on %} Hands-on: Compute and extract the Z-score of the most differentially expressed genes
+>  > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters to >  first substract the mean values per row
+>  >    - *"Input Single or Multiple Tables"*: `Single Table`
+>  >      - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
+>  >      - *"Type of table operation"*: `Perform a full table operation`
+>  >        - *"Operation"*: `Custom`
+>  >          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
+>  >
+>  >            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each >  value by the mean of the row (computed with `table.mean(1)`)
+>  >
+>  > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
+>  >    - *"Input Single or Multiple Tables"*: `Multiple Table`
+>  >      - In *"1: Tables"*:
+>  >        - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
+>  >      - Click on {% icon param-repeat %} *"Insert Tables"*
+>  >      - In *"2: Tables"*:
+>  >        - {% icon param-file %} *"Table"*: output of the first **Table Compute** {% icon tool %}
+>  >      - *"Custom expression on 'tableN'"*: `table2.div(table1.std(1),0)`
+>  >
+>  >        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` >  divides the values of 2nd table (previously computed) by these standard deviations.
+>  >
+>  > 2. Rename the output to `Z-scores for the most differentially expressed genes`
+>  > 3. Inspect the output file
+>  {: .hands_on}
+>  
+>  We now have a table with the Z-score for the most differentially expressed genes in the 7 samples.
 >
->            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each value by the mean of the row (computed with `table.mean(1)`)
->
-> 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
->    - *"Input Single or Multiple Tables"*: `Multiple Table`
->      - In *"1: Tables"*:
->        - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
->      - Click on {% icon param-repeat %} *"Insert Tables"*
->      - In *"2: Tables"*:
->        - {% icon param-file %} *"Table"*: output of the first **Table Compute** {% icon tool %}
->      - *"Custom expression on 'tableN'"*: `table2.div(table1.std(1),0)`
->
->        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` divides the values of 2nd table (previously computed) by these standard deviations.
->
-> 2. Rename the output to `Z-scores for the most differentially expressed genes`
-> 3. Inspect the output file
-{: .hands_on}
-
-We now have a table with the Z-score for the most differentially expressed genes in the 7 samples.
-
-> ### {% icon question %} Questions
->
-> 1. What is the range for the Z-score?
-> 2. What can we say about the Z-scores for the differentially expressed genes?
-> 3. Can we use the Z-score to estimate the strength of the differential expression of a gene?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 the far right of the normal distribution curve
-> > 2. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) positive for the samples in one group and (mostly) negative for the samples in the other group.
-> > 3. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
-> >    - with large noise: a very large effect
-> >    - with some noise: a rather large effect
-> >    - with only little noise: a rather small effect
-> >    - with almost no noise: a tiny effect
-> >
-> >    The problem is that "noise" here is not only noise from the measure. It can also be linked to the "tightness" of the gene regulation control. Not tightly controlled genes, i.e. whose expression may vary in a wide range over samples, can be considerably induced or repressed. Their absolute Z-score will be small as the variations over samples is big. In contrast, genes that are tightly controlled may have only very small changes in their expression, without any biological impact. The absolute Z-score will be large for these genes.
-> >
-> {: .solution}
-{: .question}
+>  > ### {% icon question %} Questions
+>  >
+>  > 1. What is the range for the Z-score?
+>  > 2. What can we say about the Z-scores for the differentially expressed genes?
+>  > 3. Can we use the Z-score to estimate the strength of the differential expression of a gene?
+>  >
+>  > > ### {% icon solution %} Solution
+>  > >
+>  > > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being >  the far left of the normal distribution curve and +3 the far right of the normal distribution curve
+>  > > 2. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) >  positive for the samples in one group and (mostly) negative for the samples in the other group.
+>  > > 3. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of >  the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
+>  > >    - with large noise: a very large effect
+>  > >    - with some noise: a rather large effect
+>  > >    - with only little noise: a rather small effect
+>  > >    - with almost no noise: a tiny effect
+>  > >
+>  > >    The problem is that "noise" here is not only noise from the measure. It can also be linked to the "tightness" of the gene regulation control. Not tightly controlled genes, i.e. whose expression may vary in a wide range over samples, can be considerably induced or repressed. Their absolute Z-score will be small as the variations over samples is big. In contrast, genes that are tightly controlled may have only very small changes in their expression, without any biological impact. The absolute Z-score will be large for these genes.
+>  > >
+>  > {: .solution}
+>  {: .question}
+{: .details}
 
 We would like now to plot a heatmap for the Z-scores:
 
 ![Heatmap with the Z-score counts for the most differentially expressed genes](../../images/ref-based/z-score-heatmap.png "Z-scores for the most differentially expressed genes")
 
 > ### {% icon hands_on %} Hands-on: Plot the Z-score of the most differentially expressed genes
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1) %} to plot the heatmap:
->    - {% icon param-file %} *"Input should have column headers"*: `Z-scores for the most differentially expressed genes`
->    - *"Advanced - log transformation"*/*"Data transformation"*: `Plot the data as it is`
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1) %} to plot the heatmap:
+>    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
+>    - *"Data transformation"*: `Plot the data as it is`
+>    - *"Compute z-scores prior to clustering"*: `Compute on rows`
 >    - *"Enable data clustering"*: `Yes`
 >    - *"Labeling columns and rows"*: `Label columns and not rows`
->    - *"Coloring groups"*: `Blue to white to red`
+>    - *"Type of colormap to use"*: `Gradient with 3 colors`
 {: .hands_on}
 
 # Functional enrichment analysis of the DE genes
