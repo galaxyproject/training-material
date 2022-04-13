@@ -816,11 +816,11 @@
 
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>The Vertebrate Genome Project (VGP), which emerged from the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2021</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatin interaction data.</p>
+<p>The Vertebrate Genome Project (VGP), a project of the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2021</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatin interaction data.</p>
 
-<p>As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the <span class="notranslate">Galaxy</span> Training Network (<span class="citation"><a href="#Lariviere2022">Lariviere <i>et al.</i> 2022</a></span>). However, due to its thorough nature, it can be too time-consuming for those who are not interested in understanding each of the analysis steps in-depth. For this reason, we decided to make available to the community a <span class="notranslate">workflow</span>-centered version of the training.</p>
+<p>As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the <span class="notranslate">Galaxy</span> Training Network (<span class="citation"><a href="#Lariviere2022">Lariviere <i>et al.</i> 2022</a></span>). This tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the <span class="notranslate">Galaxy</span> <span class="notranslate">Workflow</span> System (GWS).</p>
 
-<p>The <span class="notranslate">Galaxy</span> <span class="notranslate">Workflow</span> System (GWS) facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis <span class="notranslate">workflow</span>, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP <span class="notranslate">workflow</span>, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.</p>
+<p>GWS facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis <span class="notranslate">workflow</span>, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP <span class="notranslate">workflow</span>, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -994,9 +994,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h1 id="genome-profile-analysis">Genome profile analysis</h1>
 
-<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#genome-profile-analysis"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#genome-profile-analysis"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>Now that our data and workflows are imported, we can run our first <span class="notranslate">workflow</span>. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses <strong>Meryl</strong> for generating the k-mer database and <strong>Genomescope</strong> for determining genome characteristics based on a k-mer analysis.</p>
+<p>Now that our data and workflows are imported, we can run our first <span class="notranslate">workflow</span>. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses <strong>Meryl</strong> for generating the k-mer database and <strong>Genomescope2</strong> for determining genome characteristics based on a k-mer analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-vgp-genome-profile-analysis-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: VGP genome profile analysis <span class="notranslate">workflow</span></h3>
@@ -1007,7 +1007,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <li>In the <strong><span class="notranslate">Workflow</span>: VGP genome profile analysis</strong> menu:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Collection of Pacbio Data</em>”: <code class="language-plaintext highlighter-rouge">7: HiFi_collection</code></li>
-        <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">32</code></li>
+        <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">31</code></li>
         <li>“<em>Ploidy</em>”: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
@@ -1016,20 +1016,20 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
   <blockquote class="comment">
     <h3 id="comment-k-mer-length"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> K-mer length</h3>
-    <p>In this tutorial, we are using a k-mer length of 32. This can vary, but the VGP pipeline tends to use a k-mer length of 21. There is more discussion about k-mer length trade-offs in the extended VGP pipeline tutorial.</p>
+    <p>In this tutorial, we are using a k-mer length of 31. This can vary, but the VGP pipeline tends to use a k-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about k-mer length trade-offs in the extended VGP pipeline tutorial.</p>
   </blockquote>
 
 </blockquote>
 
 <p>Once the <span class="notranslate">workflow</span> has finished, we can evaluate the linear plot generated by <strong>Genomescope</strong> (fig. 3), which includes valuable information such as the observed k-mer profile, fitted models and estimated parameters. This file corresponds to the dataset <code class="language-plaintext highlighter-rouge">26</code>.</p>
 
-<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 k-mer profile. The first peak located at coverage 21x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 k-mer profile. The first peak located at about 25x corresponds to the heterozygous peak. The second peak at 50x, corresponds to the homozygous peak. The plot also includes information about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
 
 <p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors, and are indicated by the red line. GenomeScope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the <em>Saccharomyces</em> genome size.</p>
 
 <h1 id="hifi-phased-assembly-with-hifiasm">HiFi phased assembly with hifiasm</h1>
 
-<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hifi-phased-assembly-with-hifiasm"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hifi-phased-assembly-with-hifiasm"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
 <p>After genome profiling, the next step is to run the <strong>VGP HiFi phased assembly with hifiasm and HiC data <span class="notranslate">workflow</span></strong>. This <span class="notranslate">workflow</span> uses <strong>hifiasm</strong> (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alte<span class="notranslate">rna</span>te pseudohaplotype assemblies. This <span class="notranslate">workflow</span> includes three tools for evaluating assembly quality: <strong>QUAST</strong>, <strong>BUSCO</strong> and <strong>Merqury</strong>.</p>
 
@@ -1045,7 +1045,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC forward <span class="notranslate">reads</span></em>”: <code class="language-plaintext highlighter-rouge">3: Hi-C_dataset_F</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC reverse <span class="notranslate">reads</span></em>”: <code class="language-plaintext highlighter-rouge">2: Hi-C_dataset_R</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Genomescope summary dataset</em>”: <code class="language-plaintext highlighter-rouge">19: Genomescope on data 13 Summary</code></li>
-        <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">32</code></li>
+        <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">31</code></li>
         <li>“<em>Ploidy</em>”: <code class="language-plaintext highlighter-rouge">2</code></li>
         <li>“<em>Is genome large (&gt;100Mb)?</em>”: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
@@ -1131,9 +1131,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
 
-<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#post-assembly-processing"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#post-assembly-processing"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in <span class="notranslate">downstream</span> analysis, we are going to run the <strong>VGP purge assembly with purge_dups <span class="notranslate">workflow</span></strong>, which will allow to identify and reassign allelic contigs.</p>
+<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in <span class="notranslate">downstream</span> analysis, we are going to run the <strong>VGP purge assembly with purge_dups <span class="notranslate">workflow</span></strong>, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-vgp-purge-assembly-with-purge_dups-pipeline--workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: VGP purge assembly with purge_dups pipeline  <span class="notranslate">workflow</span></h3>
@@ -1158,9 +1158,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h1 id="hybrid-scaffolding-with-bionano-optical-maps">Hybrid scaffolding with Bionano optical maps</h1>
 
-<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hybrid-scaffolding-using-bionano-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hybrid-scaffolding-using-bionano-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>Once the assemblies generated by <strong>hifiasm</strong> have been purged, the next step is to run the <strong>VGP hybrid scaffolding with Bionano optical maps <span class="notranslate">workflow</span></strong>. It will integrate the information provided by optical maps with primary assembly sequences in order to detect and correct structural variants, such as chimeric joins and misoriented contigs. In addition, this <span class="notranslate">workflow</span> includes some additonal steps for evaluating the outputs.</p>
+<p>Once the assemblies generated by <strong>hifiasm</strong> have been purged, the next step is to run the <strong>VGP hybrid scaffolding with Bionano optical maps <span class="notranslate">workflow</span></strong>. It will integrate the information provided by optical maps with primary assembly sequences in order to detect and correct chimeric joins and misoriented contigs. In addition, this <span class="notranslate">workflow</span> includes some additonal steps for evaluating the outputs.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-vgp-hybrid-scaffolding-with-bionano-optical-maps-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: VGP hybrid scaffolding with Bionano optical maps <span class="notranslate">workflow</span></h3>
@@ -1212,9 +1212,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h1 id="hybrid-scaffolding-with-hi-c-data">Hybrid scaffolding with Hi-C data</h1>
 
-<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hybrid-scaffolding-based-on-hi-c-mapping-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to long version</a></p>
+<p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hybrid-scaffolding-based-on-hi-c-mapping-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>In this final stage, we will run the <strong>VGP hybrid scaffolding with HiC data</strong>, which exploits the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds on a chromosome scale by using <strong>SALSA2</strong>.</p>
+<p>In this final stage, we will run the <strong>VGP hybrid scaffolding with HiC data</strong>, which exploits the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them. This information allows further scaffolding the Bionano scaffolds using <strong>SALSA2</strong>, usually generating chromosome-level scaffolds.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-vgp-hybrid-scaffolding-with-hic-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: VGP hybrid scaffolding with HiC data</h3>
@@ -1251,7 +1251,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <figure id="figure-10"><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Figure 10: Comparison reference genome. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Comparison between contact maps generated using the final assembly (a) and the reference genome (b).</figcaption></figure>
 
-<p>If we compare the contact map of our assembled genome (fig. 10a) with the reference assembly (fig. 10b), we can see that the two are essentially identical. This means that we have achieved an almost perfect assembly at the chromosome level.</p>
+<p>If we compare the contact map of our assembled genome (fig. 10a) with the reference assembly (fig. 10b), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.</p>
 
 <h1 id="references">References</h1>
 <ol class="bibliography"><li id="Simo2015">Simão, F. A., R. M. Waterhouse, P. Ioannidis, E. V. Kriventseva, and E. M. Zdobnov, 2015 <b>BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs</b>. Bioinformatics 31: 3210–3212. <a href="https://doi.org/10.1093/bioinformatics/btv351">10.1093/bioinformatics/btv351</a></li>
