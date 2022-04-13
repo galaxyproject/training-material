@@ -6,7 +6,7 @@ layout: faq
 contributors: [nurzhamalyrys] 
 ---
 
-1. All account Histories can be reviewed under User > Histories.
+1. All account Histories can be reviewed under **User > Histories**.
 2. Locate deleted but not permanently deleted histories and purge them.
 
 Notes:
