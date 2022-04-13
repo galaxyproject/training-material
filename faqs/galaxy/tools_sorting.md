@@ -6,7 +6,7 @@ layout: faq
 contributors: [jennaj, garimavs]
 ---
 
-Sometimes input errors are caused because of non-sorted inputs. Try using these: -
+Sometimes input errors are caused because of non-sorted inputs. Try using these:
 - **Picard SortSam:** Sort SAM/BAM by coordinate or queryname.
 - **Samtools Sort:** Alternate for SAM/BAM, best when used for coordinate sorting only.
 - **SortBED order the intervals:** Best choice for BED/Interval.
