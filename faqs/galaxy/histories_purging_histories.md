@@ -7,7 +7,7 @@ contributors: [nurzhamalyrys]
 ---
 
 1. All account Histories can be reviewed under User > Histories.
-2. Locate deleted but not permemently deleted histories and purge them.
+2. Locate deleted but not permanently deleted histories and purge them.
 
 Notes:
 - Download any datasets or entire histories you want to keep first. The history will need to be in an active state. Histories that are deleted can be undeleted, but once a history is purged (aka permenently deleted) it cannot be recovered, even by an administrator.
