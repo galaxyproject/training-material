@@ -14,7 +14,7 @@ In order to do that:
 - Watch the **[FASTQ Prep Illumina](http://vimeo.com/galaxyproject/fastqprep)** video for a complete walk-through.
 - Run **FastQC** first to assess the type.
     - Run **FASTQ Groomer** if the data needs to have the quality scores rescaled.
-    - If you are certain that the quality scores are already scaled to Sanger Phred+33 (the result of an Illumina 1.8+ pipeline), the datatype ".fastqsanger" can be directly assinged. Click on the pencil icon {% icon galaxy-pencil %} to reach the **Edit Attributes** form. In the center panel, click on the "Datatype" tab, enter the datatype ".fastqsanger", and save. Metadata will assign, then the dataset can be used.
+    - If you are certain that the quality scores are already scaled to Sanger Phred+33 (the result of an Illumina 1.8+ pipeline), the datatype ".fastqsanger" can be directly assigned. Click on the pencil icon {% icon galaxy-pencil %} to reach the **Edit Attributes** form. In the center panel, click on the "Datatype" tab, enter the datatype ".fastqsanger", and save. Metadata will assign, then the dataset can be used.
 - Run **FastQC** again on the entire dataset *if any changes were made to the quality scores* for QA.
 
 **Other tips**
