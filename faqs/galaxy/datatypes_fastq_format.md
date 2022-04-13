@@ -9,7 +9,7 @@ contributors: [jennaj, Melkeb]
 
 - Most tools that accept FASTQ data expect it to be in a specific FASTQ version: .fastqsanger. The .fastqsanger datatype must be assigned to each FASTQ dataset.
 
-Inorder to do that:
+In order to do that:
 
 - Watch the **[FASTQ Prep Illumina](http://vimeo.com/galaxyproject/fastqprep)** video for a complete walk-through.
 - Run **FastQC** first to assess the type.
