@@ -731,7 +731,7 @@ You can choose between the three following hands-on.
 >    > > > ![STAR Gene counts same stranded USvsRS](../../images/ref-based/star_gene_counts_same_USvsRS.png "Gene counts same stranded for unstranded and reverse stranded library")
 >    > > > ![STAR Gene counts reverse stranded USvsRS](../../images/ref-based/star_gene_counts_reverse_USvsRS.png "Gene counts reverse stranded for unstranded and reverse stranded library")
 >    > > > Note thare there is very few reads attributed to genes for same stranded.
->    >  > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
+>    > > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
 >    > > {: .comment}
 >    > {: .solution}
 >    >
@@ -1703,50 +1703,51 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 > ### {% icon details %} Compute the Z-score for all genes
 >
 >  To save time in this tutorial, we will just plot the Z-score of the normalized count of the most differentially expressed genes. In a standard analysis, we may be interested in computing the Z-score on all the genes (`Normalized count` file from **DESeq**).
->  We describe here how to compute the Z-scores on the most differentially expressed genes but the principle is the same for all genes:
 >  To compute the Z-score, we break the process into 2 steps:
 >  
 >  1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
->  2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the >  previous step)
+>  2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the  previous step)
 >  
->  > ### {% icon hands_on %} Hands-on: Compute and extract the Z-score of the most differentially expressed genes
+>  > ### {% icon hands_on %} Hands-on: Compute the Z-score of all genes
 >  > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters to >  first substract the mean values per row
 >  >    - *"Input Single or Multiple Tables"*: `Single Table`
->  >      - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
+>  >      - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
 >  >      - *"Type of table operation"*: `Perform a full table operation`
 >  >        - *"Operation"*: `Custom`
 >  >          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
 >  >
->  >            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each >  value by the mean of the row (computed with `table.mean(1)`)
+>  >            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each value by the mean of the row (computed with `table.mean(1)`)
 >  >
->  > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
+>  > 2. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
 >  >    - *"Input Single or Multiple Tables"*: `Multiple Table`
 >  >      - In *"1: Tables"*:
->  >        - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
+>  >        - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
 >  >      - Click on {% icon param-repeat %} *"Insert Tables"*
 >  >      - In *"2: Tables"*:
 >  >        - {% icon param-file %} *"Table"*: output of the first **Table Compute** {% icon tool %}
 >  >      - *"Custom expression on 'tableN'"*: `table2.div(table1.std(1),0)`
 >  >
->  >        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` >  divides the values of 2nd table (previously computed) by these standard deviations.
+>  >        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` divides the values of 2nd table (previously computed) by these standard deviations.
 >  >
->  > 2. Rename the output to `Z-scores for the most differentially expressed genes`
->  > 3. Inspect the output file
+>  > 3. Rename the output to `Z-scores`
+>  > 4. Inspect the output file
 >  {: .hands_on}
 >  
->  We now have a table with the Z-score for the most differentially expressed genes in the 7 samples.
+>  We now have a table with the Z-score for all genes in the 7 samples.
 >
 >  > ### {% icon question %} Questions
 >  >
 >  > 1. What is the range for the Z-score?
->  > 2. What can we say about the Z-scores for the differentially expressed genes?
+>  > 2. Why some rows are empty?
+>  > 2. What can we say about the Z-scores for the differentially expressed genes (for example, `FBgn0037223`)?
 >  > 3. Can we use the Z-score to estimate the strength of the differential expression of a gene?
 >  >
 >  > > ### {% icon solution %} Solution
 >  > >
->  > > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being >  the far left of the normal distribution curve and +3 the far right of the normal distribution curve
->  > > 2. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) >  positive for the samples in one group and (mostly) negative for the samples in the other group.
->  > > 3. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of >  the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
+>  > > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 the far right of the normal distribution curve
+>  > > 2. If all counts are identicals (usually to 0), the standard deviation is 0, Z-score cannot be computed for these genes.
+>  > > 3. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) positive for the samples in one group and (mostly) negative for the samples in the other group.
+>  > > 4. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
 >  > >    - with large noise: a very large effect
 >  > >    - with some noise: a rather large effect
 >  > >    - with only little noise: a rather small effect
