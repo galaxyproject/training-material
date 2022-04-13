@@ -2,6 +2,7 @@
 title: Tool Errors related to Metadata
 area: datasets   
 description:  Finding and Correcting Metadata
+contributors: jennaj,
 layout: faq         
 ---
 
@@ -11,7 +12,7 @@ Tools can error when the wrong dataset attributes (metadata) are assigned. Some 
  - Undetected attributes, which require user action (example: assigning database to newly uploaded data)
 
 How to notice missing Dataset Metadata:
-- Dataset will not be downloaded when using the disk icon.
+- Dataset will not be downloaded when using the disk icon {% icon galaxy-save %}. 
 - Tools error when using a previously successfully used specific dataset.
 - Tools error with a message that ends with: ``OSError: [Errno 2] No such file or directory``.
 
