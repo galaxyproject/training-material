@@ -238,37 +238,6 @@ To get a better picture of the quality of the result, we will run BUSCO in the n
 
 Before moving on, have a quick look at the `tbl2asn error summary report` output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identified potential problems in the `tbl2asn genome validation report` dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to manually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.
 
-## Evaluation with **Busco**
-
-[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
-
-> ### {% icon hands_on %} Hands-on
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
->    - *"Mode"*: `annotated gene sets (protein)`
->    - *"Auto-detect or select lineage?"*: `Select lineage`
->        - *"Lineage"*: `Mucorales`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: `shortsummary text` and `summary image`
->
-{: .hands_on}
-
-> ### {% icon question %} Question
->
-> How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?
->
-> > ### {% icon solution %} Solution
-> >
-> > On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.
-> >
-> > That's a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
-> >
-> > To improve the result you can consider using more RNASeq data, and using the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"* option.
-> {: .solution}
->
-{: .question}
-
 # Functional annotation
 
 The aim of the previous step is to predict the position of the genes on the genome (structural annotation). Now we want to assign names and functions to the predicted genes. We can do this automatically using specialised tools: **EggNOG Mapper** and **InterProScan**.
@@ -301,7 +270,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy1) %} with the following parameters:
+> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"InterProScan database"*: select the latest version available
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
@@ -385,6 +354,37 @@ This tool produces several output dataset, in particular:
 - Some statistics and reports
 
 If you display the GFF3 output, you will notice that the functional information, including gene names, is now stored in this file.
+
+## Evaluation with **Busco**
+
+We now have a complete annotation, including functional annotation, but it's time to evaluate the quality of this annotation. [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
+
+> ### {% icon hands_on %} Hands-on
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
+>    - *"Mode"*: `annotated gene sets (protein)`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>        - *"Lineage"*: `Mucorales`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: `shortsummary text` and `summary image`
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?
+>
+> > ### {% icon solution %} Solution
+> >
+> > On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.
+> >
+> > That's a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
+> >
+> > To improve the result you can consider using more RNASeq data, and using the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"* option.
+> {: .solution}
+>
+{: .question}
 
 # Visualisation with a genome browser
 

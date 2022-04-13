@@ -3,6 +3,7 @@ title: Learning with RMarkdown in RStudio
 area: interactive tools
 box_type: hands_on
 layout: faq
+contributors: [hexylena]
 ---
 
 Learning with RMarkdown is a bit different than you might be used to. Instead of copying and pasting code from the GTN into a document you'll instead be able to run the code directly as it was written, inside RStudio! You can now focus just on the code and reading within RStudio.

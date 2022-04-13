@@ -862,8 +862,9 @@ Each snippet (question) is a separate file, with some metadata, residing in one 
 ---
 title: How do I run a workflow?
 area: workflows      # FAQs will be grouped by these areas on the FAQ page
-box_type: tip        # tip/comment/hands_on; optional, if you want the content to be in a box
+box_type: tip        # tip/comment/hands_on/question; optional, if you want the content to be in a box
 layout: faq          # if you set this the snippet will get its own page and be included in the FAQs page
+contributors: [annefou,nomadscientist] # anybody who has contributed to the FAQ over time
 ---
 
 Here you can write the snippet / answer to the FAQ in Markdown

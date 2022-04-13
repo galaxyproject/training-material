@@ -4,7 +4,9 @@ description: Galaxy puede crear automáticamente un flujo de trabajo basado en u
 area: workflows
 box_type: tip
 layout: faq
+contributors: [nomadscientist]
 ---
+
 1. Elimina cualquier trabajo fallido o no deseado de tu historial.
 2. Haz clic en **Opciones de historial** (icono de engranaje {% icon galaxy-gear%}) en la parte superior del panel de historial.
 3. Selecciona **Extraer flujo de trabajo**
