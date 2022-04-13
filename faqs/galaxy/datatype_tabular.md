@@ -2,6 +2,7 @@
 title: Identifying and formatting Tabular Datasets 
 area: Datatypes
 description: Format help for Tabular/BED/Interval Datasets
+contributors: [jennaj, beachyesh]
 layout: faq          
 ---
  
