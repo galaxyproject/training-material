@@ -1,5 +1,5 @@
 ---
-title: Downloading datasets using command line
+title: Incomplete Dataset Download
 area: datasets
 box_type: tip
 layout: faq
