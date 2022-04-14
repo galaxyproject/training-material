@@ -6,7 +6,7 @@ layout: faq
 contributors: [jennaj, nurzhamalyrys] 
 ---
 
-1. All account Datasets can be reviewed under User > Datasets.
+1. All account Datasets can be reviewed under **User > Datasets**.
 2. To permenently delete: use the link from within the dataset, or use the Operations on Multiple Datasets functions, or use the Purge Deleted Datasets option in the History menu.
 
 Notes:
