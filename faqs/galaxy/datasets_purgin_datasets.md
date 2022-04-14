@@ -1,5 +1,5 @@
 ---
-title: purging datasets
+title: Purging datasets
 area: datasets     
 box_type: tip        
 layout: faq        
