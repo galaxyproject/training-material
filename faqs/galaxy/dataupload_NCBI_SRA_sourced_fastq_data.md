@@ -31,11 +31,11 @@ Note: If the quality score line is named like "+ERR" instead (or other valid opt
 
 **Solution 2 (reads named /1 and /2)**
 
-- Create distinct datasets from an interlaced fastq dataset by running the tool **Manipulate FASTQ reads on various attributes** on the original dataset. It will be run twice.
+- Create distinct datasets from an interlaced fastq dataset by running the tool **Manipulate FASTQ reads on various attributes** on the original dataset. It will run twice.
 
-Note: The solution is does NOT use the **FASTQ Splitter** tool. The data to be manipulated are interlaced sequences. This is different in format from data that are joined into a single sequence.
+Note: The solution does NOT use the **FASTQ Splitter** tool. The data to be manipulated are interlaced sequences. This is different in format from data that are joined into a single sequence.
 
--Use these Manipulate FASTQ settings to produce a dataset that contains the `/1` reads**
+- Use these Manipulate FASTQ settings to produce a dataset that contains the `/1` reads**
 
 *Match Reads*
 
