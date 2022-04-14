@@ -552,7 +552,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > Okay let's go and have a look at our Galaxy server and see if bwa can
 > suddenly see all of those - that stuff. All right so we're back on our Galaxy
 > server. I'll click on Analyze Data to just to reload the page.
-{: .spoken data-visual="galaxy" data-target="/" data-action="goto" data-value="Upload Data"}
+{: .spoken data-visual="galaxy" data-target="#analysis a" data-action="click"}
 
 > I'll go back to Mapping
 {: .spoken data-visual="galaxy" data-target=".search-input input" data-action="click"}
