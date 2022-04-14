@@ -1335,82 +1335,74 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > We recommend that you add all factors you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc...
 {: .comment}
 
-DESeq2 requires to provide for each factor, counts of samples in each category. We will thus create small collections for each of the categories.
+DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use tags on our collection of counts to easily select all samples belonging to the same category. For more information about alternative ways to set group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %}).
 
-> ### {% icon hands_on %} Hands-on: Split your collection for each of these factors
+> ### {% icon hands_on %} Hands-on: Add tags to your collection for each of these factors
 >
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `all counts`
 >
-> 2. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: output of **Extract element identifiers** {% icon tool %}
->    - *"Regular Expression"*: `untreat`
+>    We will now extract from the names the factors:
 >
-> 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: output of **Extract element identifiers** {% icon tool %}
->    - *"Regular Expression"*: `single`
+> 2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}
+>      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
+>      - In *"Replacement"*:
+>         - In *"1: Replacement"*
+>            - *"Find pattern"*: `(.*)_(.*)_(.*)`
+>            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
 >
-> 4. {% tool [Filter collection](__FILTER_FROM_FILE__) %} with the following parameters:
->    - {% icon param-collection %} *"Input Collection"*: `all counts`
->    - *"How should the elements to remove be determined?"*: `Remove if identifiers are ABSENT from file`
->        - {% icon param-files %} *"Filter out identifiers absent from"*: Select both datasets outputs of **Search in textfiles (grep)** {% icon tool %}.
+>     This step adds an additional columns that can be used with the ``Tag elements from file`` tool
 >
-> 5. Rename each of the 4 new collections with the four categories: `paired`, `single`, `treat`, `untreat`.
+> 3. Change the datatype to `tabular`
 >
->    {% snippet faqs/galaxy/collections_rename.md %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+> 4. {% tool [Tag elements](__TAG_FROM_FILE__) %}
+>      - {% icon param-collection %} *"Input Collection"*: `all counts`
+>      - {% icon param-file %} *"Tag collection elements according to this file"*: output of **Replace Text** {% icon tool %}
+>
+> 5. Inspect the new collection
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. How many samples do you have for each category.
->
-> 2. Why did we use 'untreat' instead of 'treat' into the **Search in textfiles (grep)** ?
+> 1. Can you see the changes?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. You should have 4 samples 'paired', 3 samples 'single', 3 samples 'treat' and 4 samples 'untreat'.
-> >
-> >    ![Collections](../../images/ref-based/collection_counts.png "Collection containing counts per category")
-> >
-> > 2. The 'treat' expression is present both in 'treat' and in 'untreat', thus all counts would have been selected. However, one could have used '_treat' which would have worked as it is not present in '_untreat'.
+> > 1. You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in DESeq2.
 > {: .solution}
 {: .question}
 
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1) %} with the following parameters:
->    - *"how"*: `Select datasets per level`
+>    - *"how"*: `Select group tags corresponding to levels`
+>       - {% icon param-collection %} *"Count file(s) collection"*: output of **Tag elements** {% icon tool %}
 >        - In *"Factor"*:
 >            - {% icon param-repeat %} *"Insert Factor"*
 >                - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
 >                - In *"Factor level"*:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
->                        - {% icon param-collection %} *"Counts file(s)"*: the collection `treat`
+>                      - *"Select groups that correspond to this factor level"*: `Tags: treat`
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
->                        - {% icon param-collection %} *"Counts file(s)"*: the collection `untreat`
+>                      - *"Select groups that correspond to this factor level"*: `Tags: untreat`
 >            - {% icon param-repeat %} *"Insert Factor"*
 >                - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
 >                - In *"Factor level"*:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
->                        - {% icon param-collection %} *"Counts file(s)"*: the collection `paired`
+>                      - *"Select groups that correspond to this factor level"*: `Tags: paired`
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
->                        - {% icon param-collection %} *"Counts file(s)"*: the collection `single`
->    - *"Files have header?"*: `Yes`
+>                      - *"Select groups that correspond to this factor level"*: `Tags: single`
+>    - *"Files have header?"*: `No`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
->
->    > ### {% icon comment %} Comment: Using group tags for large sample sets
->    >
->    > If you have a large number of samples, or a complex experimental design, an alternative to collections is **group tags**.
->    >
->    > For more information about setting and using group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %}).
->    {: .comment}
 >
 {: .hands_on}
 
