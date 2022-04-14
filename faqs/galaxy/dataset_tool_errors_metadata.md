@@ -1,5 +1,5 @@
 ---
-title: Tool Errors related to Metadata
+title: How to find and correct tool Errors related to Metadata?
 area: datasets   
 description:  Finding and Correcting Metadata
 layout: faq    
