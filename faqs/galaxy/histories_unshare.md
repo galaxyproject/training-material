@@ -3,7 +3,7 @@ title: Find Histories that have been shared with you, and unshare those not need
 area: histories     
 box_type: tip        
 layout: faq        
-contributors: [nurzhamalyrys] 
+contributors: [jennaj, nurzhamalyrys] 
 ---
 
 1. All account Histories owned by others, but shared with you, can be reviewed under **User > Histories** shared with me.
