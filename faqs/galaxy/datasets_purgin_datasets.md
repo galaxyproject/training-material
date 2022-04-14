@@ -3,7 +3,7 @@ title: Purging datasets
 area: datasets     
 box_type: tip        
 layout: faq        
-contributors: [jennaj, nurzhamalyrys] 
+contributors: [jennaj, Nurzhamalyrys] 
 ---
 
 1. All account Datasets can be reviewed under **User > Datasets**.
