@@ -56,11 +56,11 @@ It is usually difficult for microbiome data analysts to know which tools to use 
 
 Essentially, the critical assessment concept involves evaluating a theory, situation, statement, or something else with the goal of supporting its dominant paradigms or disproving them as well as suggesting a better alternative plan. Any view or conclusion needs to be backed up by credible evidence in order to be considered critical. In metagenomic research, critical assessment of the data interpretation is especially important, because merely accepting the data as truth would not suffice.
 
-{%cite Sczyrba2017%} (CAMI) was established in 2012. The objective of CAMI is to evaluate metagenomics methods independently, comprehensively, and without bias. The initiative provides users with comprehensive information about the performance of methods in all relevant scenarios. Therefore, it assists users in the selection and application of methods as well as their proper interpretation.
+CAMI ({%cite Sczyrba2017%}) was established in 2012. The objective of CAMI is to evaluate metagenomics methods independently, comprehensively, and without bias. The initiative provides users with comprehensive information about the performance of methods in all relevant scenarios. Therefore, it assists users in the selection and application of methods as well as their proper interpretation.
 
 During the 1st CAMI challenge, extensive metagenome benchmark data sets were generated from newly sequenced genomes of around 700 microbial isolates and approximately 600 circular elements that were distinct from strains, species, genera or orders represented by public genomes. Four challenges were suggested (assembly, binning, taxonomic profiling, taxonomic binning). Overall, 16 teams worldwide submitted 215 submissions to the CAMI1 challenge, consisting of 25 programs and 36 biobox implementations, with permission to publish.
 
-{%cite Meyer2021%} (CAMI2) started in 2019. It includes 4 different challenges: 
+CAMI2 ({%cite Meyer2021%}, {%cite 2022%}) started in 2019. It includes 4 different challenges: 
 
 
 
@@ -135,7 +135,7 @@ Participants provided 155 submissions and 20 assembler versions of 10 assembling
 
 
 
-Overall, GATB ({%cite Drezen2014%}) ranked best on the strain madness data across most metrics (mismatches, misassemblies, strain recall, and strain precision), while HipMer ({%cite Georganas2018%}, {%cite Georganas2015%}, {%cite Hofmeyr2020%}) on the plant-associated data. Compared to the first CAMI challenge [A-STAR](https://www.a-star.edu.sg/) considerably improved in genome fraction for the strain madness data. The other leader SPAdes ({%cite Bankevich2012%}, {%cite Nurk2017%}) was not introduced in {%cite Sczyrba2017%} and performed well in {%cite Meyer2021%}. For the type of assembly, the different tools performed differently. Single-sample assembly was done well by all assemblers. HipMer performed better on single samples as well as for pooled samples.
+Overall, GATB ({%cite Drezen2014%}) ranked best on the strain madness data across most metrics (mismatches, misassemblies, strain recall, and strain precision), while HipMer ({%cite Georganas2018%}, {%cite Georganas2015%}, {%cite Hofmeyr2020%}) on the plant-associated data. Compared to the first CAMI challenge [A-STAR](https://www.a-star.edu.sg/) considerably improved in genome fraction for the strain madness data. The other leader SPAdes ({%cite Bankevich2012%}, {%cite Nurk2017%}) was not introduced in CAMI1 ({%cite Sczyrba2017%}) and performed well in CAMI2 ({%cite Meyer2021%}, {%cite 2022%}). For the type of assembly, the different tools performed differently. Single-sample assembly was done well by all assemblers. HipMer performed better on single samples as well as for pooled samples.
 
 #### Genome binning challenge
 
@@ -408,19 +408,58 @@ It is possible to download datasets using DOI links from Table 2 in {%cite tutor
 
 #### Upload data into Galaxy
 
-There are different ways to upload data into the Galaxy. In case of a not very large dataset it’s more convenient to upload data directly from your computer to Galaxy. In this tutorial we use a large dataset, thus, we use FTP server for this purpose.
+There are different ways to upload data into the Galaxy. In case of a not very large dataset it’s more convenient to upload data directly from your computer to Galaxy. In case of large dataset, we can use FTP server or the [Galaxy Rule-based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
+Before we start to upload datasets we have to create a text table with the information we need to import the samples for this tutorial (sample ID and link to the FASTQ file (URL) using the pattern in the grey box below.
 
-> ### {% icon hands_on %} Hands-on: Upload data into Galaxy with FTP
+```
+SampleID	URL
+marmgCAMI2_short_read_sample_7	https://openstack.cebitec.uni-bielefeld.de:8080/swift/v1/CAMI_2_MARINE/reads/marmgCAMI2_short_read_sample_7_reads.fq.gz?temp_url_sig=2de6f78ba6ab07ae82a0188eed1f8c84783597f3&temp_url_expires=1650042056#735f34f4d7c7822dd6b5d55570870d19e648cd83
+marmgCAMI2_short_read_sample_6	https://openstack.cebitec.uni-bielefeld.de:8080/swift/v1/CAMI_2_MARINE/reads/marmgCAMI2_short_read_sample_6_reads.fq.gz?temp_url_sig=5c50eb49e257404c0b500c89c7c17757b0bfed86&temp_url_expires=1650042056#c94649222d0c6926688ec0eef41e0343091eb7e9
+```
+
+In this text table SampleID field is for the name of the sample which should include all usefull information about sample: the type of dataset (marine, plant-associated, or strain-madness); short or long reads; the number of sample. This name will be displayed in Galaxy history. So that is important to choose a meaningful name for sample in oreder to not get lost afterwards. URL field is for the link in text-file from [CAMI portal](https://data.cami-challenge.org/) (you can download this file with links in the section “2nd CAMI Challenge Marine Dataset”).
+
+In order to get these files into Galaxy, we will want to do a few things:
+
+* Strip the *header* out of the sample information (it doesn’t contain a URL Galaxy can download).
+* Define the file **Identifier** column (`SampleID`).
+* Define the **URL** column (`URL`) (this is the location Galaxy can download the data from).
+
+> ### {% icon hands_on %} Hands-on: Upload data into Galaxy with Rule Builder
 >
 > 1. Create new history
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Upload datasets into FTP Galaxy server
+> 2. Import the files using Galaxy's Rule-based Uploader.
+>    - Open the Galaxy Upload Manager
+>    - Click the tab **Rule-based**
+>        - *"Upload data as"*: `Dataset(s)`
+>        - *"Load tabular data from"*: `Pasted Table`
+>    - Paste the table you created using the pattern from grey box above and links from [CAMI portal](https://data.cami-challenge.org/).
+>    - Click **Build**
 >
->    {% snippet faqs/galaxy/datasets_upload_ftp.md %}
+>    - In the `rules editor` that pops up:
 >
-> 3. Press “upload data” -> “choose remote files” -> “FTP directory” and upload your data to your history from FTP server
+>        - **Remove the header**. From the **Filter** menu select `First or Last N Rows`
+>            - *"Filter which rows?"*: `first`
+>            - *"Filter how many rows?"*: `1`
+>            - Click `Apply`
+>
+>        - **Define the Identifier and URL columns**. From the **Rules** menu select `Add / Modify Column Definitions`
+>            - Click `Add Definition` button and select List Identifier(s)
+>                - *"List Identifier(s)"*: `A`
+>            - Click `Add Definition` button again and select URL instead
+>                - *"URL"*: `B`
+>            - Click `Apply`, and you should see your new column definitions listed
+>        - Click `Upload`
+>
+> > ### {% icon details %} FTP is the other way to upload dataset 
+> > 
+> > {% snippet faqs/galaxy/datasets_upload_ftp.md %}
+> > 
+> {: .details}
+>
 {: .hands_on}
 
 
@@ -442,7 +481,7 @@ We got the marine data in our history, with one file per sample (10 samples for 
 > 
 >      We can now split forward and reverse reads into 2 files
 > 
-> 4. {% tool [FASTQ splitter](https://toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_splitter/1.1.5+galaxy1) %} with following parameters:
+> 4. {% tool [FASTQ splitter](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_splitter/1.1.5+galaxy1) %} with following parameters:
 >     - {% icon param-file %} *"FASTQ reads"*: output of Collapse collection tool
 > 5. Check if the names of the output generated by Fastq splitter include the information about forward and reverse, rename them otherwise
 > 6. Repeat 1-5 steps for long reads. Eventually we have 2 collections (one for short reads, one for long reads)
@@ -456,7 +495,7 @@ We got the marine data in our history, with one file per sample (10 samples for 
 
 ## Select and prepare the tools to run
 
-Based on {%cite Meyer2021%} and {%cite tutorialMeyer2021%}, we can compare tools on a set of metrics to select the one to use for an analysis but also here to run the challenge. Tools performance ranking.
+Based on {%cite 2022%}, {%cite Meyer2021%} and {%cite tutorialMeyer2021%}, we can compare tools on a set of metrics to select the one to use for an analysis but also here to run the challenge. Tools performance ranking.
 
 **_Performance of assembly tools on the marine dataset_**:
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=1873156403&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
@@ -614,7 +653,7 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Run {% tool [Flye](https://toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
+> 2. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Input reads"*: the collection of long reads from all samples
 >     - {% icon param-file %} *"Mode"*:	--nano-raw
 >     - {% icon param-file %} *"Perform metagenomic assembly"*: True
@@ -633,7 +672,7 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Run {% tool [Flye](https://toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
+> 2. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Input reads"*: long reads from sample1
 >     - {% icon param-file %} *"Mode"*:	--nano-raw 
 >     - {% icon param-file %} *"Perform metagenomic assembly"*: True
@@ -656,11 +695,11 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 > > In the next steps we use the **Megahit** assembler. MEGAHIT is an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph ({%cite Li2015%}). As input it uses metagenomics samples as paired-end fastq files. As metagenomics input data short reads should be used.
 > {: .comment} 
 > 
-> 2. Run {% tool [MEGAHIT](https://toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 2. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: interleaved
 >     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: the collection of short reads from all samples
 > 3. Rename output to “Output - CAMI2 MEGAHIT v129 pooled interleaved short collection”
-> 4. Run {% tool [MEGAHIT](https://toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 4. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: paired
 >     - {% icon param-file %} *"Mate 1 input reads"*: Output of FASTQ splitter: Forward
 >     - {% icon param-file %} *"Mate 2 input reads"*: Output of FASTQ splitter: Reverse
@@ -669,7 +708,7 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 >     - {% icon param-file %} *"Maximum kmer size"*: 91
 >     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 12
 > 5. Rename output to “Output - CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 pooled deinterleaved short collapsed”
-> 6. Run {% tool [MEGAHIT](https://toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 6. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: interleaved
 >     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Output of FASTQ splitter: the collection of short reads from all samples
 >     - {% icon param-file %} *"K-mer specification method"*: klim_method
@@ -683,12 +722,12 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 > > In the next steps we use **Abyss** assembler. ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
 > {: .comment} 
 > 
-> 8. Run {% tool [ABYSS](https://toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+> 8. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 41
 > 9. Rename output to “Output - CAMI2 Abyss v234 k41 pooled interleaved short collapsed”
-> 10. Run {% tool [ABYSS](https://toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+> 10. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 96
@@ -699,13 +738,13 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 > > In the next steps we use **metaSPAdes** assembler. MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
 > {: .comment} 
 > 
-> 12. Run {% tool [MetaSPAdes](https://toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 12. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"Select k-mer detection option"*: manual
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
 > 13. Rename output to “Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed”
-> 14. Run {% tool [MetaSPAdes](https://toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 14. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"Arf - Nanopore reads"*: collapsed collection of long reads from all samples
@@ -726,11 +765,11 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 > > In the next steps we use the **Megahit** assembler. MEGAHIT is an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph ({%cite Li2015%}). As input it uses metagenomics samples as paired-end fastq files. As metagenomics input data short reads should be used.
 > {: .comment} 
 > 
-> 2. Run {% tool [MEGAHIT](https://toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 2. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: interleaved
 >     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: dataset of short reads from sample1
 > 3. Rename output to “Output - CAMI2 MEGAHIT v129 interleaved short sample1”
-> 4. Run {% tool [MEGAHIT](https://toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 4. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: paired
 >     - {% icon param-file %} *"Mate 1 input reads"*: Output of FASTQ splitter: Forward
 >     - {% icon param-file %} *"Mate 2 input reads"*: Output of FASTQ splitter: Reverse
@@ -739,7 +778,7 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 >     - {% icon param-file %} *"Maximum kmer size"*: 91
 >     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 12
 > 5. Rename output to “Output - CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 deinterleaved short sample1”
-> 6. Run {% tool [MEGAHIT](https://toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 6. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: interleaved
 >     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Output of FASTQ splitter: dataset of short reads from sample1
 >     - {% icon param-file %} *"K-mer specification method"*: klim_method
@@ -753,12 +792,12 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 > > In the next steps we use **Abyss** assembler. ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
 > {: .comment} 
 > 
-> 8. Run {% tool [ABYSS](https://toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+> 8. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 41
 > 9. Rename output to “Output - CAMI2 Abyss v234 k41 interleaved short sample1”
-> 10. Run {% tool [ABYSS](https://toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+> 10. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 96
@@ -769,13 +808,13 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 > > In the next steps we use **metaSPAdes** assembler. MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
 > {: .comment} 
 > 
-> 12. Run {% tool [MetaSPAdes](https://toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 12. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"Select k-mer detection option"*: manual
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
 > 13. Rename output to “Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1”
-> 14. Run {% tool [MetaSPAdes](https://toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 14. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"Arf - Nanopore reads"*: dataset of long reads from sample1
@@ -849,7 +888,7 @@ We use Bowtie2 for mapping short-reads raw data to the assembly we got after usa
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Drag and drop /results from the different reshistories with short read co-assemblies
-> 3. Run {% tool [Bowtie2](https://toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/2.4.5+galaxy0) %} with parameters:
+> 3. Run {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/2.4.5+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Is this single or paired library"*: paired_interleaved
 >     - {% icon param-file %} *"Interleaved FASTQ file"*: raw dataset collection
 >     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index"*: history
@@ -866,7 +905,7 @@ We use Bowtie2 for mapping short-reads raw data to the assembly we got after usa
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Drag and drop /results from the different reshistories with short read individual assemblies
-> 3. Run {% tool [Bowtie2](https://toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/2.4.5+galaxy0) %} with parameters:
+> 3. Run {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/2.4.5+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Is this single or paired library"*: paired_interleaved
 >     - {% icon param-file %} *"Interleaved FASTQ file"*: raw dataset collection
 >     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index"*: history
@@ -889,13 +928,13 @@ For long-reads instead, _Minimap2_ aligner can be used for mapping the Nanopore-
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Drag and drop /results from the different reshistories with short read co-assemblies
-> 3. Run {% tool [Map with minimap2](https://toolshed.g2.bx.psu.edu/repos/iuc/minimap2/2.24+galaxy0) %} with parameters:
+> 3. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/2.24+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index?"*: Use a genome from history and build index
 >     - {% icon param-file %} *"Use the following dataset as the reference sequence"*: output of Flye
 >     - {% icon param-file %} *"Single or Paired-end reads"*: paired interleaved
 >     - {% icon param-file %} *"Select fastq dataset"*: raw dataset collection
 > This tool run produces one collection with the actual mapped reads for each Nanopore-sequenced sample. Unlike Bowtie2 it does not have an option to output mapping statistics directly. However, we can generate that information through an extra step.
-> 4. Run {% tool [Samtools stats](https://toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/2.0.3) %} with parameters:
+> 4. Run {% tool [Samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/2.0.3) %} with parameters:
 >     - {% icon param-file %} *"BAM file"*: the collection of mapped Nanopore-sequenced reads, output of Map with minimap2 tool
 >     - {% icon param-file %} *"Output"*: One single summary file
 > 5. Inspect the generated output 
@@ -908,12 +947,12 @@ For long-reads instead, _Minimap2_ aligner can be used for mapping the Nanopore-
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Drag and drop /results from the different reshistories with short read co-assemblies
-> 3. Run {% tool [Map with minimap2](https://toolshed.g2.bx.psu.edu/repos/iuc/minimap2/2.24+galaxy0) %} with parameters:
+> 3. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/2.24+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index?"*: Use a genome from history and build index
 >     - {% icon param-file %} *"Use the following dataset as the reference sequence"*: output of Flye
 >     - {% icon param-file %} *"Single or Paired-end reads"*: paired interleaved
 >     - {% icon param-file %} *"Select fastq dataset"*: raw dataset collection
-> 4. Run {% tool [Samtools stats](https://toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/2.0.3) %} with parameters:
+> 4. Run {% tool [Samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/2.0.3) %} with parameters:
 >     - {% icon param-file %} *"BAM file"*: the collection of mapped Nanopore-sequenced reads, output of Map with minimap2 tool
 >     - {% icon param-file %} *"Output"*: One single summary file
 > 5. Inspect the generated output 
@@ -932,22 +971,22 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 > ### {% icon hands_on %} Hands-on: Metaquast without provided reference genome
 > 
 > 1. Move to "Short reads co-assemblies" history
-> 2. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 2. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
 > 3. Move to "Short reads individual assemblies" history
-> 4. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 4. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
 > 5. Move to "Long reads co-assemblies" history
-> 6. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 6. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
 > 7. Move to "Long reads individual assemblies" history
-> 8. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 8. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
@@ -958,7 +997,7 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 > ### {% icon hands_on %} Hands-on: Metaquast with provided reference genome
 > 
 > 1. Move to "Short reads co-assemblies" history
-> 2. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 2. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
@@ -970,19 +1009,19 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 > {: .comment} 
 > 
 > 3. Move to "Short reads individual assemblies" history
-> 4. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 4. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
 >     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
 > 5. Move to "Long reads co-assemblies" history
-> 6. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 6. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
 >     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
 > 7. Move to "Long reads individual assemblies" history
-> 8. Run {% tool [Quast](https://toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+> 8. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
 >     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
 >     - {% icon param-file %} *"Type of assembly"*: metagenome
 >     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
@@ -1008,7 +1047,7 @@ To generate a nice report with all metrics combined we use MultiQC. This tool is
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Drag&drop Quast, bowtie2 and Samtools stat outputs from all histories for different assemblers
-> 3. Run {% tool [MultiQC](https://toolshed.g2.bx.psu.edu/repos/iuc/multiqc/1.11+galaxy0) %} with parameters:
+> 3. Run {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/1.11+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Which tool used to generate report"*: Quast
 > 3. (for long reads) **Add report**
 >     - {% icon param-file %} *"Which tool used to generate report"*: samtools
