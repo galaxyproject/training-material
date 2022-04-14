@@ -146,7 +146,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > Here is mine. And on it I am an admin user and I have access to the admin
 > page. This was done as part of the installation of Galaxy um and hopefully
 > you've installed a tool.
-{: .spoken data-visual="galaxy" data-target="/" data-action="goto"}
+{: .spoken data-visual="galaxy" data-target="/" data-action="goto" data-value="Upload Data"}
 
 > I have bwa and bwa-mem installed under Mapping.
 {: .spoken data-visual="galaxy" data-target=".search-input input" data-action="fill" data-value="bwa-mem"}
@@ -157,7 +157,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > pre-built references and so we're going to use Galaxy's CVMFS system to let
 > our own Galaxies connect and get access to all the pre-built caches and
 > everything we already have.
-{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto"}
+{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto" data-value="Map with BWA-MEM"}
 
 > Okay, so let's get started. If we go back to our
 > tutorial here, it says that we need to install a CVMFS role into our
@@ -562,7 +562,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 > And then suddenly, instead of
 > having no options available, you can see here we've got the Bee genome.
-{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto"}
+{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto" data-value="Map with BWA-MEM"}
 
 >  Now click on that. Oh look at that, there are lots and lots and lots of
 >  available genomes now including: lots of human, mouse, rat, yeast, all sorts
@@ -581,7 +581,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  server has access to all the uh the data the reference data and the tool
 >  indices that the community have built over a number of years and it's super
 >  simple.
-{: .spoken data-visual="galaxy" data-target="s2id_field-uid-12_select a" data-action="click"}
+{: .spoken data-visual="galaxy" data-target="$('div[tour_id=\\'genomeSource|indices\\'] div.ui-form-field div.select2-container').select2('open')" data-action="custom"}
 
 > ```bash
 > 1.sh
