@@ -1,13 +1,12 @@
 ---
 title: Best practices for loading fastq data into Galaxy
 area: datatypes
-
+layout: faq
+box_type: tip
+contributors: [jennaj, Melkeb]
 ---
 
-- As of release `17.09`, fastq data will have the datatype `fastqsanger` auto-detected when that qualtity score scaling is detected and "autodetect" is used within the Upload tool. Compressed fastq data will be converted to uncompressed in the history.
-- To preserve fastq compression, directly assign the approrpriate datatype (eg: `fastqsanger.gz`).
+- As of release `17.09`, `fastq` data will have the datatype `fastqsanger` auto-detected when that qualtity score scaling is detected and "autodetect" is used within the Upload tool. Compressed `fastq` data will be converted to uncompressed in the history.
+- To preserve `fastq` compression, directly assign the approrpriate datatype (eg: `fastqsanger.gz`).
 - If the data is close to or over 2 GB in size, be sure to use FTP
-- If the data was already loaded as `fastq.gz`, don't worry! Just test the data for correct format (as needed) and assign the metadata type as explained above. This is currently a one-dataset-at-a-time edit post-Upload, but future plans include making these assignments a batch operation.
-
-
-
+- If the data was already loaded as `fastq.gz`, don't worry! Just test the data for correct format (as needed) and assign the [metadata type](
