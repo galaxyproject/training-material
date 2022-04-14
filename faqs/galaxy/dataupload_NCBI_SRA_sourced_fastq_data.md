@@ -37,16 +37,16 @@ Note: The solution does NOT use the **FASTQ Splitter** tool. The data to be mani
 
 - Use the Manipulate FASTQ settings to produce a dataset that contains the `/1` reads**
 
-*Match Reads*
+  *Match Reads*
 
-  - Match Reads by `Name/Indentifier`
-  - Identifier Match Type `Regular Expression`
-  - Match by `.+/2`
+    - Match Reads by `Name/Indentifier`
+    - Identifier Match Type `Regular Expression`
+    - Match by `.+/2`
 
-*Manipulate Reads*
+  *Manipulate Reads*
 
-  - Manipulate Reads by `Miscellaneous Actions`
-  - Miscellaneous Manipulation Type `Remove Read`
+    - Manipulate Reads by `Miscellaneous Actions`
+    - Miscellaneous Manipulation Type `Remove Read`
 
 - Use these Manipulate FASTQ settings to produce a dataset that contains the `/2` reads**
 
