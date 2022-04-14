@@ -1864,7 +1864,7 @@ We just generated the first input for **goseq**. As second input for **goseq** w
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
 >
-> 8. Rename the output to `Gene IDs and length`
+> 2. Rename the output to `Gene IDs and length`
 {: .hands_on}
 
 We have now the two required input files for goseq.
@@ -2016,7 +2016,7 @@ Here we would like to visualize the 2 KEGG pathways: the over-represented `00010
 >    03040
 >    ```
 >
-> 5. {% tool [Pathview](toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.24.0+galaxy0) %} with
+> 4. {% tool [Pathview](toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.24.0+galaxy0) %} with
 >    - *"Number of pathways to plot"*: `Multiple`
 >      - {% icon param-file %} *"KEGG pathways"*: `KEGG pathways to plot`
 >      - *"Does the file have header (a first line with column names)?"*: `No`
