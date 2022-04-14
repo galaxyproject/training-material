@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:02 +0000",
+  "dateModified": "1970-01-01 00:00:14 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Creating content in Markdown",
   "interactivityType": "mixed",
@@ -502,7 +502,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 2, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -554,6 +554,7 @@
       <li><a href="#footnotes" id="markdown-toc-footnotes">Footnotes</a></li>
       <li><a href="#icons" id="markdown-toc-icons">Icons</a></li>
       <li><a href="#abbreviations" id="markdown-toc-abbreviations">Abbreviations</a></li>
+      <li><a href="#choose-your-own-tutorial" id="markdown-toc-choose-your-own-tutorial">Choose Your Own Tutorial</a></li>
     </ol>
   </li>
   <li><a href="#citations" id="markdown-toc-citations">Citations</a></li>
@@ -2087,6 +2088,88 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   </blockquote>
 </blockquote>
 
+<h2 id="choose-your-own-tutorial">Choose Your Own Tutorial</h2>
+
+<p>Sometimes you’re writing a large tutorial and at one small step there are multiple paths or multiple ways to get the data you want, and you’d like to showcase them all! You could write them all out in order, Option 1…2…etc, however maybe you want it to be a bit more interactive and focus only on one option at a time, so a user doesn’t get distracted by the other options.</p>
+
+<p>Include this markdown where you want your user to choose between the multiple paths:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-markdown-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Markdown</h3>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados"
+       text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa">
+  <h3><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Choose Your Own Tutorial</h3>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Ananas" onclick="cyoaChoice('Ananas')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Ananas</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Avocados" onclick="cyoaChoice('Avocados')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Avocados</label>
+	
+	
+	
+</blockquote>
+
+<p>And then they can wrap the relevant sections with a <code class="language-plaintext highlighter-rouge">div</code> block with the relevant class. You <strong>must</strong> set <code class="language-plaintext highlighter-rouge">markdown="1"</code> as well to have the inner contents rendered corretly.</p>
+
+<p><strong>NB</strong>: on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user’s browser generally will remember which button was selected across navigation and page reloads.</p>
+
+<blockquote class="code-2col">
+  <blockquote class="code-in">
+    <h3 id="code-in-input-markdown-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Markdown</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="Ananas" markdown="1"&gt;
+- 🍍 are fantastic
+- hands on!
+- questions!
+- solutions!
+&lt;/div&gt;
+&lt;div class="Avocados" markdown="1"&gt;
+- 🥑 are amazing
+- hands on!
+- questions!
+- solutions!
+&lt;/div&gt;
+</code></pre></div>    </div>
+
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+
+    <div class="Ananas">
+      <ul>
+        <li>🍍 are fantastic</li>
+        <li>hands on!</li>
+        <li>questions!</li>
+        <li>solutions!</li>
+      </ul>
+    </div>
+    <div class="Avocados">
+      <ul>
+        <li>🥑 are amazing</li>
+        <li>hands on!</li>
+        <li>questions!</li>
+        <li>solutions!</li>
+      </ul>
+    </div>
+
+  </blockquote>
+</blockquote>
+
+<p>This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.</p>
+
 <h1 id="citations">Citations</h1>
 <p>If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called <code class="language-plaintext highlighter-rouge">tutorial.bib</code> next to your <code class="language-plaintext highlighter-rouge">tutorial.md</code> file. In this file you may enter <a href="http://www.bibtex.org/Using/">bibtex</a> formatted citations. An example is given below:</p>
 
@@ -2352,8 +2435,8 @@ some_code += f"that students {should execute}"
 author = "Bérénice Batut and Björn Grüning and Saskia Hiltemann and Helena Rasche",
 title = "Creating content in Markdown (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "02"
+month = "04",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
