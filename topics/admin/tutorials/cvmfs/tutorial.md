@@ -552,7 +552,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > Okay let's go and have a look at our Galaxy server and see if bwa can
 > suddenly see all of those - that stuff. All right so we're back on our Galaxy
 > server. I'll click on Analyze Data to just to reload the page.
-{: .spoken data-visual="galaxy" data-target="#analysis a" data-action="click"}
+{: .spoken data-visual="galaxy" data-target="/" data-action="goto" data-value="Upload Data"}
 
 > I'll go back to Mapping
 {: .spoken data-visual="galaxy" data-target=".search-input input" data-action="click"}
@@ -562,7 +562,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 > And then suddenly, instead of
 > having no options available, you can see here we've got the Bee genome.
-{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto" data-value="Map with BWA-MEM"}
+{: .spoken data-visual="galaxy" data-target="bwa_mem" data-action="loadTool" data-value="Map with BWA-MEM"}
 
 >  Now click on that. Oh look at that, there are lots and lots and lots of
 >  available genomes now including: lots of human, mouse, rat, yeast, all sorts
