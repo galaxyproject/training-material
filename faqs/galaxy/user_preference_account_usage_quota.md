@@ -3,7 +3,7 @@ title: Does your account usage quota seem incorrect?
 area: user preference
 box_type: tip
 layout: faq
-contributors: [Nurzhamalyrys]
+contributors: [jennaj, Nurzhamalyrys]
 ---
 
 Log out of Galaxy, then back in again. This refreshes the disk usage calculation dislayed in the Masthead usage (summary) and under User > Preferences (exact).
