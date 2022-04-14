@@ -35,7 +35,7 @@ Note: If the quality score line is named like "+ERR" instead (or other valid opt
 
 Note: The solution does NOT use the **FASTQ Splitter** tool. The data to be manipulated are interlaced sequences. This is different in format from data that are joined into a single sequence.
 
-- Use these Manipulate FASTQ settings to produce a dataset that contains the `/1` reads**
+- Use the Manipulate FASTQ settings to produce a dataset that contains the `/1` reads**
 
 *Match Reads*
 
