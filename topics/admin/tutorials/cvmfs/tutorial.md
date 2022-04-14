@@ -554,14 +554,11 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > server. I'll click on Analyze Data to just to reload the page.
 {: .spoken data-visual="galaxy" data-target="#analysis a" data-action="click"}
 
-> I'll go back to Mapping
-{: .spoken data-visual="galaxy" data-target=".search-input input" data-action="click"}
+> I'll go back and search for bwa-mem in the tool panel, hopefully it finds it and we can click on it.
+{: .spoken data-visual="galaxy" data-target="#left .search-input input" data-action="fill" data-value="bwa-mem"}
 
->  and load bwa-mem.
-{: .spoken data-visual="galaxy" data-target=".search-input input" data-action="fill" data-value="bwa-mem"}
-
-> And then suddenly, instead of
-> having no options available, you can see here we've got the Bee genome.
+> Once it loads, suddenly, instead of having no options available, you can see
+> here we've got a genome!
 {: .spoken data-visual="galaxy" data-target="bwa_mem" data-action="loadTool" data-value="Map with BWA-MEM"}
 
 >  Now click on that. Oh look at that, there are lots and lots and lots of
@@ -569,15 +566,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  of things. And in fact if you want to see the list of all the different
 >  available genomes now, that we have available to us.
 >
->  If you go to admin. We go to data tables over here. You can see here that we
->  have um a couple of data tables for managed and for all fasta. So if we
->  click on that one, you can see that we have a lot of genomes available now
->  in the all fasta data table that Galaxy can get access to. If we go back to
->  the data tables again, and go down to bwa indexes or bwa mem indexes here.
->  You can see we have access to a lot of pre-built indexes for bwa for all of
->  these different genomes. That is pretty powerful.
->
->  So what did that take us? Maybe 30 minutes? And uh suddenly our Galaxy
+>  So what did that take us? Maybe 30 minutes? And suddenly our Galaxy
 >  server has access to all the uh the data the reference data and the tool
 >  indices that the community have built over a number of years and it's super
 >  simple.
