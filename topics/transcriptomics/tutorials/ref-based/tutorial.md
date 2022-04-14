@@ -8,7 +8,7 @@ priority: 2
 tags:
     - bulk
     - rna-seq
-level: Intermediate
+level: Introductory
 zenodo_link: "https://zenodo.org/record/4541751"
 questions:
     - What are the steps to process RNA-Seq data?
