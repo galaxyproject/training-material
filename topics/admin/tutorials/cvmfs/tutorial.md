@@ -581,7 +581,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  server has access to all the uh the data the reference data and the tool
 >  indices that the community have built over a number of years and it's super
 >  simple.
-{: .spoken data-visual="galaxy" data-target="$('div[tour_id=\\'genomeSource|indices\\'] div.ui-form-field div.select2-container').select2('open')" data-action="custom"}
+{: .spoken data-visual="galaxy" data-target="$(%%sq%%div[tour_id=%%dq%%genomeSource|indices%%dq%%]%%sp%%div.ui-form-field div.select2-container%%sq%%).select2('open')" data-action="custom"}
 
 > ```bash
 > 1.sh
