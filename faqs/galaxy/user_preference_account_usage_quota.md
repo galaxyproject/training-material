@@ -9,4 +9,4 @@ contributors: [jennaj, Nurzhamalyrys]
 1. Log out of Galaxy, then back in again. This refreshes the disk usage calculation dislayed in the Masthead usage (summary) and under *User > Preferences* (exact).
 
 Note: 
-Your account usage quota can be found at the bottom of your user preferences page.
+- Your account usage quota can be found at the bottom of your user preferences page.
