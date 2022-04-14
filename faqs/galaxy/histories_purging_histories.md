@@ -3,7 +3,7 @@ title: Purging unneeded histories
 area: histories     
 box_type: tip        
 layout: faq        
-contributors: [nurzhamalyrys] 
+contributors: [jennaj, nurzhamalyrys] 
 ---
 
 1. All account Histories can be reviewed under **User > Histories**.
