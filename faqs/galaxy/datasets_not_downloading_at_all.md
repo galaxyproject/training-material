@@ -8,9 +8,9 @@ contributors: [Nurzhamalyrys, Melkeb, jennaj]
 
 
 
-1.Check to see if pop-ups are blocked by your web browser. Where to check can vary by browser and extensions.
-2.Double check your API key, if used. Go to **User > Preferences > Manage API key.**
-3.Check the sharing/permission status of the Datasets. Go to **Dataset > Pencil icon {% icon galaxy-pencil %} > Edit attributes > Permissions.** If you do not see a "Permissions" tab, then you are not the owner of the data.
+1. Check to see if pop-ups are blocked by your web browser. Where to check can vary by browser and extensions.
+2. Double check your API key, if used. Go to **User > Preferences > Manage API key.**
+3. Check the sharing/permission status of the Datasets. Go to **Dataset > Pencil icon {% icon galaxy-pencil %} > Edit attributes > Permissions.** If you do not see a "Permissions" tab, then you are not the owner of the data.
 
 
 Notes:
