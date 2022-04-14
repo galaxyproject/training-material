@@ -1850,7 +1850,7 @@ We just generated the first input for **goseq**. As second input for **goseq** w
 > <div class="STAR" markdown="1">
 > 1. Copy the output of **Gene length and GC content** {% icon tool %} (`Gene length`) into this history
 >
->   {% snippet faqs/galaxy/histories_copy_dataset.md %}
+>    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 > </div>
 >
 {: .hands_on}
