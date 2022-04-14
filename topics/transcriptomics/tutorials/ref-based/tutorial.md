@@ -950,7 +950,7 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 >      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >    - *"Analysis to perform"*: `gene lengths only`
 >
->    > > ### {% icon warning %} Check the version of the tool below.
+>    > ### {% icon warning %} Check the version of the tool below.
 >    > This will only work with version 0.1.2 or above
 >    >
 >    > {% snippet faqs/galaxy/tools_change_version.md %}
