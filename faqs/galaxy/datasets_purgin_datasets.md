@@ -14,4 +14,4 @@ Notes:
 - Both active (shown by default) and hidden (the other toggle link, next to the deleted link) datasets can be reviewed the same way.
 - Click on the far right "X" to delete a dataset.
 - Datasets in a deleted state are still part of your quota usage.
-- Datasets must be purged (permenently deleted) to not count toward quota.
+- Datasets must be purged (permanently deleted) to not count toward quota.
