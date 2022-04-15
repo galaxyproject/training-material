@@ -1816,7 +1816,7 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 
 > ### {% icon hands_on %} Hands-on: Prepare the first dataset for goseq
 >
-> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
+> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} an expression on every row with the following parameters:
 >    - *"Add expression"*: `bool(c7<0.05)`
 >    - {% icon param-file %} *"as a new column to"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
 >
