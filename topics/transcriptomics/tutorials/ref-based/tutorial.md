@@ -1504,7 +1504,7 @@ For more information about **DESeq2** and its outputs, you can have a look at th
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. You can manually check for the `FBgn0261552` in the first column or use the **Filter** tool with `c1 == "FBgn0261552"`. The fold-change is negative so it is indeed downregulated and the adjusted p-value is below 0.05 so it is part of the significantly changed genes.
+> > 1. You can manually check for the `FBgn0261552` in the first column or use the **Filter** tool with `c1 == "FBgn0261552"`. The log2 fold-change is negative so it is indeed downregulated and the adjusted p-value is below 0.05 so it is part of the significantly changed genes.
 > > 2. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
 > > 3. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after
 correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
