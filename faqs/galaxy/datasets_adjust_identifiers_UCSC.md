@@ -1,5 +1,5 @@
 ---
-title: UCSC sourced data used with other sourced data to adjust identifiers
+title: Adjusting identifiers for UCSC sourced data used with other sourced data
 area: datasets
 box_type: tip
 layout: faq
@@ -9,8 +9,7 @@ contributors: [jennaj, Melkeb]
 
 - A GTF formatted dataset (potentially a "reference annotation dataset"), with Ensembl/UCSC/Other based chromosome identifiers, is to be used with a tool that also makes use of a different sourced reference genome or the reverse may be true, Ensembl/UCSC/Other sourced reference genome and a differnt sourced reference annotation.
 
-- The underlying genome sequence content is otherwise identical. If not, see
-
+- The underlying genome sequence content is otherwise identical. If not, see [Adjusting Identifiers or Input source for any mixed sourced data]({% link faqs/galaxy/datasets_adjusting_identifiers_mixed_data.md %})
 
 - To adjust the Ensembl/Other reference annotation to match a UCSC-sourced reference genome (or another source that uses UCSC-style chromosome names), add a "chr" to the chromosome name, so that "N" becomes "chrN". Using tools from the group "Text Manipulation".
 
