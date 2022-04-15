@@ -18,7 +18,7 @@ For **bed** data:
 1. Tool **Add column**: add "chr" to the original dataset as a new column.
 2. Tool **Merge Columns**: merge "c7" with "c1".
 3. Tool **Cut**: cut "c8,c2,c3,c4,c5,c6" (replace c1 & c7 - with merged c8 - the new chrom identifier).
-4. Click on the pencil icon for the result dataset, then the tab for "Datatype". Assign "bed" and save. Allow the metadata to complete assignment (the "yellow" dataset state).
+4. Click on the pencil icon {% icon galaxy-pencil %} for the result dataset, then the tab for "Datatype". Assign "bed" and save. Allow the metadata to complete assignment (the "yellow" dataset state).
 5. Now click on the tab for "Attributes" and assign the remaining columns. Strand = 6, name = 4, and score = 5. Save. For best results with certain downstream tools, allow the metadata to complete assignment.
 
 For **wig/wiggle** data (NOT compressed bigWig):
