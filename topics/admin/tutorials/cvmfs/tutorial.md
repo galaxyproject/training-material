@@ -559,7 +559,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 > Once it loads, suddenly, instead of having no options available, you can see
 > here we've got a genome!
-{: .spoken data-visual="galaxy" data-target="bwa_mem" data-action="loadTool" data-value="Map with BWA-MEM"}
+{: .spoken data-visual="galaxy" data-target="bwa_mem" data-action="loadTool" data-value="#center >> text=Map with BWA-MEM"}
 
 >  Now click on that. Oh look at that, there are lots and lots and lots of
 >  available genomes now including: lots of human, mouse, rat, yeast, all sorts
