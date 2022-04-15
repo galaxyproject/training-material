@@ -17,7 +17,7 @@ Method 2: [Directly obtaining UCSC sourced *genome* identifiers]({% link faqs/ga
 
 Method 3: [Adjusting identifiers for UCSC sourced data used with other sourced data]({% link faqs/galaxy/datasets_adjust_identifiers_UCSC.md %})
 
-Method 4: [Adjusting Identifiers or Input source for any mixed sourced data]({% link faqs/galaxy/datasets_adjusting_identifiers_mixed_data.md %})
+Method 4: [Adjusting identifiers or input source for any mixed sourced data]({% link faqs/galaxy/datasets_adjusting_identifiers_mixed_data.md %})
 
 **A Note on Built-in Reference Genomes**
 
