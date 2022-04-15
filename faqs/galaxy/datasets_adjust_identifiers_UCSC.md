@@ -9,7 +9,7 @@ contributors: [jennaj, Melkeb]
 
 - A GTF formatted dataset (potentially a "reference annotation dataset"), with Ensembl/UCSC/Other based chromosome identifiers, is to be used with a tool that also makes use of a different sourced reference genome or the reverse may be true, Ensembl/UCSC/Other sourced reference genome and a differnt sourced reference annotation.
 
-- The underlying genome sequence content is otherwise identical.* If not, see the next section for alternative methods.
+- The underlying genome sequence content is otherwise identical. If not, see
 
 
 - To adjust the Ensembl/Other reference annotation to match a UCSC-sourced reference genome (or another source that uses UCSC-style chromosome names), add a "chr" to the chromosome name, so that "N" becomes "chrN". Using tools from the group "Text Manipulation".
