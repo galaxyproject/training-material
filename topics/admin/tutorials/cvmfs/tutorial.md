@@ -146,10 +146,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > Here is mine. And on it I am an admin user and I have access to the admin
 > page. This was done as part of the installation of Galaxy um and hopefully
 > you've installed a tool.
-{: .spoken data-visual="galaxy" data-target="/" data-action="goto" data-value="Upload Data"}
+{: .spoken data-visual="galaxy" data-target="#analysis a" data-action="click"}
 
 > I have bwa and bwa-mem installed under Mapping.
-{: .spoken data-visual="galaxy" data-target=".search-input input" data-action="fill" data-value="bwa-mem"}
+{: .spoken data-visual="galaxy" data-target="#left .search-input input" data-action="fill" data-value="bwa-mem"}
 
 > So if I click on that you can see
 > here that I have bwa-mem but there are no options available for reference
@@ -157,7 +157,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > pre-built references and so we're going to use Galaxy's CVMFS system to let
 > our own Galaxies connect and get access to all the pre-built caches and
 > everything we already have.
-{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto" data-value="Map with BWA-MEM"}
+{: .spoken data-visual="galaxy" data-target="bwa_mem" data-action="loadTool" data-value="#center >> text=Map with BWA-MEM"}
 
 > Okay, so let's get started. If we go back to our
 > tutorial here, it says that we need to install a CVMFS role into our
