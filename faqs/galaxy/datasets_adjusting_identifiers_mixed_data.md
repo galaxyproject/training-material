@@ -1,5 +1,5 @@
 ---
-title: Adjusting Identifiers or Input source for any mixed sourced data
+title: Adjusting identifiers or input source for any mixed sourced data
 area: datasets
 box_type: tip
 layout: faq
