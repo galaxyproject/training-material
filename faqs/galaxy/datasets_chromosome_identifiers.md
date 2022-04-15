@@ -19,4 +19,13 @@ Method 3: [UCSC sourced data used with other sourced data to adjust identifiers]
 
 Method 4: [Adjusting Identifiers or Input source for any mixed sourced data]({% link faqs/galaxy/datasets_adjusting_identifiers_mixed_data.md %})
 
-Method 5: [A Note on Built-in Reference Genomes]({% link faqs/galaxy/datasets_builtin_genomes.md %})
+**A Note on Built-in Reference Genomes**
+
+- The default variant for all genomes is "Full", defined as all primary chromosomes (or scaffolds/contigs) including mitochondrial plus associated unmapped, plasmid, and other segments.
+
+- When only one version of a genome is available for a tool, it represents the default "Full" variant.
+
+- Some genomes will have more than one variant available.
+
+  - The "Canonical Male" or sometimes simply "Canonical" variant contains the primary chromosomes for a genome. For example a human "Canonical" variant contains chr1-chr22, chrX, chrY, and chrM.
+  - The "Canonical Female" variant contains the primary chromosomes excluding chrY.
