@@ -15,10 +15,10 @@ contributors: [jennaj, Melkeb]
 
 **Option 2**
 
-1. Use the tool **Get Data -> UCSC Main**
-2. In the Table Browser, choose the target genome and build
-3. For "group" choose the last option "All Tables"
-4. For "table" choose "chromInfo"
-5. Leave all other options at default and send the output to Galaxy
-6. This new dataset will load as a tabular dataset into your history
-7. It will list out the contents of the genome build, including the chromosome identifiers (in the first column)
+1. Use the tool **Get Data -> UCSC Main**.
+2. In the Table Browser, choose the target genome and build.
+3. For "group" choose the last option "All Tables".
+4. For "table" choose "chromInfo".
+5. Leave all other options at default and send the output to Galaxy.
+6. This new dataset will load as a tabular dataset into your history.
+7. It will list out the contents of the genome build, including the chromosome identifiers (in the first column).
