@@ -1038,6 +1038,7 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > {{ page.zenodo_link }}/files/GSM461182.fastqsanger
 > ```
 >
+> For the Single-end data, there is no need to flatten the collection before **FastQC**. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp).
 {: .hands_on}
 
 # Analysis of the differential gene expression
@@ -1074,6 +1075,13 @@ To be able to identify differential gene expression induced by PS depletion, all
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
+
+> ### {% icon details %} The counts obtained in the previous part may be different from the one imported
+>
+> The featureCounts tables you download from zenodo (or from the Data Library) were generated with the option "Count fragments instead of reads" set to "Disabled". This way you roughly get twice the number of counts as each each read (from a pair) is counted individually.
+> In addition, the single reads dataset were run with the option `Length of the genomic sequence around annotated junctions` to 36 instead of 74.
+> Finally the header was removed from the featureCounts tables available on zenodo.
+{: .details}
 
 You might think We can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
 
