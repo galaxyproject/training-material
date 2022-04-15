@@ -1,5 +1,5 @@
 ---
-title: Find BAM dataset identifiers
+title: Finding BAM dataset identifiers
 area: datasets
 box_type: tip
 layout: faq
