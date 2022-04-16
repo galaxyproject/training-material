@@ -1,5 +1,5 @@
 ---
-title: What is a "Custom Reference Genome" ?
+title: How to use Custom Reference Genome?
 area: datasets
 box_type: tip
 layout: faq
