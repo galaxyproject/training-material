@@ -6,7 +6,7 @@ box_type: tip
 layout: faq    
 contributors: [jennaj, beachyesh]
 ---
-There is documentation available on the tool form itself which mentions the following:
+There is documentation available on the tool form itself which mentions the following information:
 - Parameters
 - Expected format for input dataset(s)
 - Links to publications and ToolShed source repositories
