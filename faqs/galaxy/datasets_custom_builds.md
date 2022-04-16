@@ -16,4 +16,5 @@ Once Custom Build is created, it is added to the list Database/Build: on the dat
 3. Enter in the labels (no spaces and no special characters other than "_").
 4. Select the fasta Custom Reference Genome.
 5. Submit and wait for the build to finish loading before assigning to a dataset or using to start a new Visualization.
-6. Note: It is fine to navigate away from this form and come back to it later to check for status. The larger the fasta file and busier the Galaxy instance is, the longer the processing will take.
+
+Note: It is fine to navigate away from this form and come back to it later to check for status. The larger the fasta file and busier the Galaxy instance is, the longer the processing will take.
