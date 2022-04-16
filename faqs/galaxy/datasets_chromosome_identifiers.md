@@ -7,7 +7,7 @@ contributors: [jennaj, Melkeb]
 ---
 
 
-- The methods listed help to identify and correct errors or unexpected results linked to inputs having non-identical chromosome identifiers and/or different chromosome sequence content.
+- The methods listed here help to identify and correct errors or unexpected results linked to inputs having non-identical chromosome identifiers and/or different chromosome sequence content.
 
 - **If using a Custom Reference genome**, the methods below also apply, but the first step is to make certain that the Custom Genome is formatted correctly. Improper formating is the most common root cause of CG related errors.
 
@@ -22,9 +22,7 @@ Method 4: [Adjusting identifiers or input source for any mixed sourced data]({% 
 **A Note on Built-in Reference Genomes**
 
 - The default variant for all genomes is "Full", defined as all primary chromosomes (or scaffolds/contigs) including mitochondrial plus associated unmapped, plasmid, and other segments.
-
 - When only one version of a genome is available for a tool, it represents the default "Full" variant.
-
 - Some genomes will have more than one variant available.
 
   - The "Canonical Male" or sometimes simply "Canonical" variant contains the primary chromosomes for a genome. For example a human "Canonical" variant contains chr1-chr22, chrX, chrY, and chrM.
