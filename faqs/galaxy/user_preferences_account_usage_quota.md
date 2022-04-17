@@ -1,6 +1,6 @@
 ---
 title: Does your account usage quota seem incorrect?
-area: user preference
+area: user preferences
 box_type: tip
 layout: faq
 contributors: [jennaj, Nurzhamalyrys]
