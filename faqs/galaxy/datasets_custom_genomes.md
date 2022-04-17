@@ -1,6 +1,6 @@
 ---
 title: How to use Custom Reference Genomes?
-area: datasets
+area: reference genomes
 box_type: tip
 layout: faq
 contributors: [jennaj, Nurzhamalyrys]
