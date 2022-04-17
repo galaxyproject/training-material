@@ -7,7 +7,7 @@ contributors: [jennaj, Melkeb]
 ---
 
 
-- A GTF formatted dataset (potentially a "reference annotation dataset"), with Ensembl/UCSC/Other based chromosome identifiers, is to be used with a tool that also makes use of a different sourced reference genome or the reverse may be true, Ensembl/UCSC/Other sourced reference genome and a differnt sourced reference annotation.
+- A GTF formatted dataset (potentially a "reference annotation dataset"), with Ensembl/UCSC/Other based chromosome identifiers, is to be used with a tool that also makes use of a different sourced reference genome or the reverse may be true, Ensembl/UCSC/Other sourced reference genome and a different sourced reference annotation.
 
 - The underlying genome sequence content is otherwise identical. If not, see [Adjusting Identifiers or Input source for any mixed sourced data]({% link faqs/galaxy/datasets_adjusting_identifiers_mixed_data.md %})
 
