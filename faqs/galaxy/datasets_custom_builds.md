@@ -11,7 +11,7 @@ Some tools and functions require that the 'database' attribute that is assigned.
 
 Once Custom Build is created, it is added to the list Database/Build: on the dataset 'Edit Attributes' and 'Upload File' tool forms and is available for 'Visualizations'. These can be assigned or used just like any other reference genome.
 
-1. Start with an existing fasta Custom Reference Genome in your history. It is very important make sure the format is correct.
+1. Start with an existing FASTA Custom Reference Genome in your history. It is very important make sure the format is correct.
 2. Go to the top "User" menu and select "Custom Builds".
 3. Enter in the labels (no spaces and no special characters other than "_").
 4. Select the fasta Custom Reference Genome.
