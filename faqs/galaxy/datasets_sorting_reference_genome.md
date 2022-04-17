@@ -11,7 +11,7 @@ Certain tools expect that reference genomes are sorted in [lexicographical order
 How to avoid? Always sort your FASTA reference genome dataset at the beginning of a project. Many sources only provide sorted genomes, but double checking is your own responsibility, and super easy in Galaxy. So easy that there isn't even a shared workflow, just a recipe (but feel free to make your own):
 
 Quick lexicographical sort recipe:
-1. Convert Formats -> FASTA-to-Tabular
+1. Convert **Formats** -> **FASTA-to-Tabular**
 2. Filter and Sort -> Sort
        on column: c1 
        with flavor: Alphabetical
