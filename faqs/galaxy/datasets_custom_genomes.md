@@ -7,8 +7,12 @@ contributors: [jennaj, Nurzhamalyrys]
 ---
 
 
-- In Galaxy, a custom reference genome, which is a dataset from the history loaded by users, is a FASTA formatted dataset. It can be used in place of a native reference genome, that is local or cached by administrators, with most tools.
+-   There are two options to use reference genomes in Galaxy: native that is provided by the server administrators and used by most of the tools and custom that is uploaded by users in FASTA format. 
 - A reference genome contains the nucleotide sequence of the chromosomes, scaffolds, transcripts, or contigs for single species. It is representative of a specific genome build or release.
+
+
+
+
 
 
 There are five basic steps to using a Custom Reference Genome:
