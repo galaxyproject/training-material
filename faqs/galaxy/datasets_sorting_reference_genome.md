@@ -7,7 +7,6 @@ layout: faq
 contributors: [jennaj, nurzhamalyrys] 
 ---
 
-Quick lexicographical sort recipe:
 1. Convert **Formats** -> **FASTA-to-Tabular**
 2. Filter and Sort -> Sort
        on column: c1 
