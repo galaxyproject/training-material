@@ -6,6 +6,7 @@ box_type: tip
 layout: faq    
 contributors: [jennaj, beachyesh]
 ---
+
 There is documentation available on the tool form itself which mentions the following information:
 - Parameters
 - Expected format for input dataset(s)
@@ -13,9 +14,9 @@ There is documentation available on the tool form itself which mentions the foll
 - Tool and wrapper version(s)
 - 3rd party author web sites and documentation
 
-Many tools include "most common" and "full parameter" run-time options. Scroll down on the tool form to locate:
-- Information about expected inputs/outputs
-- Expanded definitions
-- Sample data
-- Example use cases
-- Graphics
+**Scroll down on the tool form** to locate:
+ - Information about expected inputs/outputs
+ - Expanded definitions
+ - Sample data
+ - Example use cases
+ - Graphics
