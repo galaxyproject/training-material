@@ -1,13 +1,12 @@
 ---
 title: Adding Custom Builds to database
 area: datasets
+description: Some tools and functions require that the 'database' attribute that is assigned. A Custom Reference Genome is set up as a Custom Build prior to use. Examples are the tools Featurecounts, Extract Genomic DNA, certain Picard tools, and the functions under Visualization.
 box_type: tip
 layout: faq
 contributors: [jennaj, Nurzhamalyrys]
 ---
 
-
-Some tools and functions require that the 'database' attribute that is assigned. A Custom Reference Genome is set up as a Custom Build prior to use. Examples are the tools Featurecounts, Extract Genomic DNA, certain Picard tools, and the functions under Visualization.
 
 Once Custom Build is created, it is added to the list Database/Build: on the dataset 'Edit Attributes' and 'Upload File' tool forms and is available for 'Visualizations'. These can be assigned or used just like any other reference genome.
 
