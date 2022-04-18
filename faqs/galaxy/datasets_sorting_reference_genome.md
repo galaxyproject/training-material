@@ -1,6 +1,6 @@
 ---
 title: Sorting Reference Genome
-area: datasets  
+area: reference genome 
 box_type: tip        
 layout: faq        
 contributors: [jennaj, nurzhamalyrys] 
