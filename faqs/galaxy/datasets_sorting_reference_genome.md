@@ -7,7 +7,7 @@ layout: faq
 contributors: [jennaj, nurzhamalyrys] 
 ---
 
-1. Convert **Formats** -> **FASTA-to-Tabular**
+1. Convert Formats -> **FASTA-to-Tabular**
 2. Filter and Sort -> **Sort**
        on column: c1 
        with flavor: Alphabetical
