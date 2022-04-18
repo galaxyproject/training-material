@@ -1,5 +1,5 @@
 ---
-title: Managing Hidden Datasets
+title: How to unhide "hidden datasets"?
 area: datasets
 box_type: tip
 layout: faq
