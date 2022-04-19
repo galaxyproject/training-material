@@ -1,1 +1,599 @@
-{"a_galaxy_workflow": "true", "annotation": "", "format-version": "0.1", "name": "Workflow constructed from history 'HTSGET (case 5 - chr17)'", "steps": {"0": {"annotation": "", "content_id": null, "errors": null, "id": 0, "input_connections": {}, "inputs": [{"description": "", "name": "case5M_chr17.vcf"}], "label": "case5M_chr17.vcf", "name": "Input dataset", "outputs": [], "position": {"left": 10, "top": 10}, "tool_id": null, "tool_state": "{\"optional\": false}", "tool_version": null, "type": "data_input", "uuid": "223e343c-a2f5-47dc-8049-2a3ee9767180", "workflow_outputs": []}, "1": {"annotation": "", "content_id": null, "errors": null, "id": 1, "input_connections": {}, "inputs": [{"description": "", "name": "case5C_chr17.vcf"}], "label": "case5C_chr17.vcf", "name": "Input dataset", "outputs": [], "position": {"left": 10, "top": 130}, "tool_id": null, "tool_state": "{\"optional\": false}", "tool_version": null, "type": "data_input", "uuid": "f2fed036-50ca-4872-bf82-cd7eac83c5b5", "workflow_outputs": []}, "2": {"annotation": "", "content_id": null, "errors": null, "id": 2, "input_connections": {}, "inputs": [{"description": "", "name": "case5F_chr17.vcf"}], "label": "case5F_chr17.vcf", "name": "Input dataset", "outputs": [], "position": {"left": 10, "top": 250}, "tool_id": null, "tool_state": "{\"optional\": false}", "tool_version": null, "type": "data_input", "uuid": "7bf9069d-7273-4daf-a809-e875898fa612", "workflow_outputs": []}, "3": {"annotation": "", "content_id": null, "errors": null, "id": 3, "input_connections": {}, "inputs": [{"description": "", "name": "case5.ped"}], "label": "case5.ped", "name": "Input dataset", "outputs": [], "position": {"left": 10, "top": 370}, "tool_id": null, "tool_state": "{\"optional\": false}", "tool_version": null, "type": "data_input", "uuid": "9ddfefba-2fb8-4969-91b4-4407a21078f1", "workflow_outputs": []}, "4": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10", "errors": null, "id": 4, "input_connections": {"input_files": [{"id": 0, "output_name": "output"}, {"id": 1, "output_name": "output"}, {"id": 2, "output_name": "output"}]}, "inputs": [], "label": null, "name": "bcftools merge", "outputs": [{"name": "output_file", "type": "vcf"}], "position": {"left": 230, "top": 10}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10", "tool_shed_repository": {"changeset_revision": "798c063f8fc9", "name": "bcftools_merge", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"__input_ext\": \"vcf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_files\": null, \"output_type\": \"v\", \"sec_header\": {\"use_header\": null, \"print_header\": \"false\"}, \"sec_merge\": {\"force_samples\": \"false\", \"info_rules\": \"\", \"merge\": \"none\"}, \"sec_restrict\": {\"apply_filters\": \"\", \"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.10", "type": "tool", "uuid": "7057334d-d66e-42c5-80fb-e4ff881e6262", "workflow_outputs": []}, "5": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2", "errors": null, "id": 5, "input_connections": {"infile": {"id": 4, "output_name": "output_file"}}, "inputs": [], "label": null, "name": "Text reformatting", "outputs": [{"name": "outfile", "type": "input"}], "position": {"left": 450, "top": 10}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2", "tool_shed_repository": {"changeset_revision": "ddf54b12c295", "name": "text_processing", "owner": "bgruening", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"__input_ext\": \"vcf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"code\": \"{ \\n    if($1 ~ /^([0-9]|[0-9][0-9]|Y|X|MT)$/ ) \\n        print \\\"chr\\\"$0;\\n    else if(match($0,/(##contig=<ID=)(.*)/,m) && $0 ~ /##contig=<ID=([0-9]|[0-9][0-9]|Y|X|MT),/)\\n        print m[1]\\\"chr\\\"m[2];\\n    else\\n        print $0\\n}\", \"infile\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.1.2", "type": "tool", "uuid": "962e4a06-1ba6-4418-9712-63a41353240b", "workflow_outputs": []}, "6": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1", "errors": null, "id": 6, "input_connections": {"input_file": {"id": 5, "output_name": "outfile"}}, "inputs": [], "label": null, "name": "bcftools norm", "outputs": [{"name": "output_file", "type": "vcf"}], "position": {"left": 670, "top": 10}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1", "tool_shed_repository": {"changeset_revision": "da6fc9f4a367", "name": "bcftools_norm", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"__input_ext\": \"vcf\", \"check_ref\": \"w\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": null, \"multiallelics\": {\"mode\": \"-\", \"__current_case__\": 1, \"multiallelic_types\": \"both\"}, \"normalize_indels\": \"true\", \"output_type\": \"v\", \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"fasta_ref\": \"hg19\"}, \"rm_dup\": \"\", \"sec_default\": {\"site_win\": \"1000\"}, \"sec_restrict\": {\"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.9+galaxy1", "type": "tool", "uuid": "bd3cd12a-e3d9-4278-b342-4c955a95b27f", "workflow_outputs": []}, "7": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1", "errors": null, "id": 7, "input_connections": {"input": {"id": 6, "output_name": "output_file"}}, "inputs": [], "label": null, "name": "SnpEff eff:", "outputs": [{"name": "snpeff_output", "type": "vcf"}, {"name": "statsFile", "type": "html"}, {"name": "csvFile", "type": "csv"}], "position": {"left": 890, "top": 10}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1", "tool_shed_repository": {"changeset_revision": "cfcf33df7fc0", "name": "snpeff", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"__input_ext\": \"vcf\", \"annotations\": null, \"chr\": \"\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"csvStats\": \"true\", \"filter\": {\"specificEffects\": \"no\", \"__current_case__\": 0}, \"filterOut\": null, \"generate_stats\": \"true\", \"input\": null, \"inputFormat\": \"vcf\", \"intervals\": null, \"noLog\": \"true\", \"offset\": \"default\", \"outputConditional\": {\"outputFormat\": \"vcf\", \"__current_case__\": 0}, \"snpDb\": {\"genomeSrc\": \"cached\", \"__current_case__\": 0, \"genomeVersion\": \"hg19\", \"reg_section\": {\"regulation\": null}}, \"spliceRegion\": {\"setSpliceRegions\": \"no\", \"__current_case__\": 0}, \"spliceSiteSize\": \"2\", \"transcripts\": null, \"udLength\": \"5000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "4.3+T.galaxy1", "type": "tool", "uuid": "effd6c05-9fa2-48a4-8516-ae31caa4ac12", "workflow_outputs": []}, "8": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2", "errors": null, "id": 8, "input_connections": {"infile": {"id": 7, "output_name": "snpeff_output"}, "ped": {"id": 3, "output_name": "output"}}, "inputs": [], "label": null, "name": "GEMINI load", "outputs": [{"name": "outfile", "type": "gemini.sqlite"}], "position": {"left": 1110, "top": 10}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2", "tool_shed_repository": {"changeset_revision": "45296e47d565", "name": "gemini_load", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"__input_ext\": \"vcf\", \"annotation_databases\": \"2019-01-12\", \"annotation_type\": \"snpEff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"has_genotypes\": \"true\", \"infile\": null, \"opt_content\": [\"gerp_bp\", \"cadd\", \"gene_tables\", \"genotypes\", \"gt_pl\", \"info_string\"], \"ped\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.20.1+galaxy2", "type": "tool", "uuid": "d11c3f48-ff0c-4589-8d7a-e5ce6e461997", "workflow_outputs": []}, "9": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1", "errors": null, "id": 9, "input_connections": {"infile": {"id": 8, "output_name": "outfile"}}, "inputs": [], "label": null, "name": "GEMINI inheritance pattern", "outputs": [{"name": "outfile", "type": "tabular"}], "position": {"left": 1330, "top": 10}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1", "tool_shed_repository": {"changeset_revision": "18d13111692b", "name": "gemini_inheritance", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"__input_ext\": \"gemini.sqlite\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"family_wise\": {\"min_kindreds\": \"1\", \"families\": \"\", \"per_variant_selection\": {\"enabled\": \"no\", \"__current_case__\": 0, \"min_dp\": \"0\", \"min_gq\": \"0\", \"max_pl\": \"-1\"}}, \"infile\": null, \"inheritance\": {\"pattern_type\": \"autosomal_dominant\", \"__current_case__\": 3, \"constraint\": [], \"lenient\": \"false\", \"allow_unaffected\": \"false\"}, \"oformat\": {\"report\": {\"report_selector\": \"full\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.20.1", "type": "tool", "uuid": "03d7e0e4-a234-4ef6-8ac9-38cfbea4992b", "workflow_outputs": []}}, "tags": [], "uuid": "c433593d-d4bf-4f7d-b5ca-c115481fa540", "version": 0}
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Trio Analysis Tutorial",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "EGA Download Client",
+            "outputs": [
+                {
+                    "name": "authorized_datasets",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 292.0625,
+                "height": 102.5625,
+                "left": 336,
+                "right": 536,
+                "top": 189.5,
+                "width": 200,
+                "x": 336,
+                "y": 189.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1162bfd9f782",
+                "name": "ega_download_client",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_type\": \"list_datasets\", \"__current_case__\": 1}, \"output_log\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.0+galaxy0",
+            "type": "tool",
+            "uuid": "5f03b99a-3f46-47d8-a5b1-31b6d3ae39ee",
+            "workflow_outputs": [
+                {
+                    "label": "EGA Download Client: authorized datasets",
+                    "output_name": "authorized_datasets",
+                    "uuid": "f8e90c77-5f05-49f8-8e4a-5d61ac653df6"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "EGA Download Client",
+            "outputs": [
+                {
+                    "name": "dataset_file_list",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 521.453125,
+                "height": 122.953125,
+                "left": 226,
+                "right": 426,
+                "top": 398.5,
+                "width": 200,
+                "x": 226,
+                "y": 398.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1162bfd9f782",
+                "name": "ega_download_client",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_type\": \"list_dataset_files\", \"__current_case__\": 0, \"dataset_id\": \"EGAD00001008392\"}, \"output_log\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.0+galaxy0",
+            "type": "tool",
+            "uuid": "265bf049-ac9f-4a59-bba3-311c6c818121",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "dataset_file_list",
+                    "uuid": "ff0b9850-f623-463b-8adb-3595aec509fa"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "pedigree"
+                }
+            ],
+            "label": "pedigree",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 267.78125,
+                "height": 61.78125,
+                "left": 1876,
+                "right": 2076,
+                "top": 206,
+                "width": 200,
+                "x": 1876,
+                "y": 206
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e0eb82fb-bfa7-43fe-b5c7-690fc2e9ed95",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 1,
+                    "output_name": "dataset_file_list"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Search in textfiles",
+                    "name": "infile"
+                }
+            ],
+            "label": "Case5 VCF IDs",
+            "name": "Search in textfiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 509.5625,
+                "height": 113.5625,
+                "left": 489,
+                "right": 689,
+                "top": 396,
+                "width": 200,
+                "x": 489,
+                "y": 396
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Case5 VCF IDs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"case_sensitive\": \"\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-E\", \"url_paste\": \"Case5.+17.+vcf.gz$\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "d55be511-416e-416b-99c5-da3023124c85",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "42e4ca7f-0440-4897-9745-de56bca55fb5"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "action|id_table": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool EGA Download Client",
+                    "name": "action"
+                }
+            ],
+            "label": "Case5 VCFs",
+            "name": "EGA Download Client",
+            "outputs": [
+                {
+                    "name": "downloaded_file_collection",
+                    "type": "input"
+                },
+                {
+                    "name": "logfile",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 593.125,
+                "height": 205.125,
+                "left": 792,
+                "right": 992,
+                "top": 388,
+                "width": 200,
+                "x": 792,
+                "y": 388
+            },
+            "post_job_actions": {
+                "HideDatasetActionlogfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "logfile"
+                },
+                "RenameDatasetActiondownloaded_file_collection": {
+                    "action_arguments": {
+                        "newname": "Case5 VCFs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "downloaded_file_collection"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1162bfd9f782",
+                "name": "ega_download_client",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_type\": \"download_files\", \"__current_case__\": 3, \"id_table\": {\"__class__\": \"RuntimeValue\"}, \"id_column\": \"1\", \"range\": {\"reference_name\": \"\", \"start\": null, \"end\": null}}, \"output_log\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.0+galaxy0",
+            "type": "tool",
+            "uuid": "ef007b32-8cf5-455f-bdad-89350f775513",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "downloaded_file_collection",
+                    "uuid": "d51cbfa8-59fc-4c9e-b228-fa728544aecb"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_files": {
+                    "id": 4,
+                    "output_name": "downloaded_file_collection"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools merge",
+                    "name": "input_files"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools merge",
+                    "name": "sec_header"
+                }
+            ],
+            "label": null,
+            "name": "bcftools merge",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "bottom": 555.34375,
+                "height": 164.34375,
+                "left": 1053,
+                "right": 1253,
+                "top": 391,
+                "width": 200,
+                "x": 1053,
+                "y": 391
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10",
+            "tool_shed_repository": {
+                "changeset_revision": "798c063f8fc9",
+                "name": "bcftools_merge",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_files\": {\"__class__\": \"RuntimeValue\"}, \"output_type\": \"v\", \"sec_header\": {\"use_header\": {\"__class__\": \"RuntimeValue\"}, \"print_header\": \"false\"}, \"sec_merge\": {\"force_samples\": \"false\", \"info_rules\": \"\", \"merge\": \"none\"}, \"sec_restrict\": {\"apply_filters\": \"\", \"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.10",
+            "type": "tool",
+            "uuid": "3471d534-2877-4989-b13b-b7bb3aa20efc",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_file",
+                    "uuid": "69e1fef7-bfa9-4768-b1a5-f7b15b0fd195"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 521.5625,
+                "height": 113.5625,
+                "left": 1336,
+                "right": 1536,
+                "top": 408,
+                "width": 200,
+                "x": 1336,
+                "y": 408
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"{ \\n    if($1 ~ /^([0-9]|[0-9][0-9]|Y|X|MT)$/ ) \\n        print \\\"chr\\\"$0;\\n    else if(match($0,/(##contig=<ID=)(.*)/,m) && $0 ~ /##contig=<ID=([0-9]|[0-9][0-9]|Y|X|MT),/)\\n        print m[1]\\\"chr\\\"m[2];\\n    else\\n        print $0\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "b02a1038-f6c2-46a5-9023-474dd17c4d4e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "90075a35-3867-47f0-9f00-93685fd176f1"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 6,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "bcftools norm",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "bottom": 422.953125,
+                "height": 133.953125,
+                "left": 1598,
+                "right": 1798,
+                "top": 289,
+                "width": 200,
+                "x": 1598,
+                "y": 289
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "da6fc9f4a367",
+                "name": "bcftools_norm",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"check_ref\": \"w\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"multiallelics\": {\"mode\": \"-\", \"__current_case__\": 1, \"multiallelic_types\": \"both\"}, \"normalize_indels\": \"true\", \"output_type\": \"v\", \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"fasta_ref\": \"hg19\"}, \"rm_dup\": \"\", \"sec_default\": {\"site_win\": \"1000\"}, \"sec_restrict\": {\"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9+galaxy1",
+            "type": "tool",
+            "uuid": "5dbde914-89fe-443b-b1f5-28182e971fca",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_file",
+                    "uuid": "36511567-b1eb-409e-bc26-a9486f535343"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpEff eff:",
+            "outputs": [
+                {
+                    "name": "snpeff_output",
+                    "type": "vcf"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                },
+                {
+                    "name": "csvFile",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "bottom": 643.078125,
+                "height": 337.078125,
+                "left": 1876,
+                "right": 2076,
+                "top": 306,
+                "width": 200,
+                "x": 1876,
+                "y": 306
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "cfcf33df7fc0",
+                "name": "snpeff",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"vcf\", \"__workflow_invocation_uuid__\": \"d38a64eebcd011ecb8cb001e67d2ec02\", \"annotations\": null, \"chr\": \"\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"csvStats\": \"true\", \"filter\": {\"specificEffects\": \"no\", \"__current_case__\": 0}, \"filterOut\": null, \"generate_stats\": \"true\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inputFormat\": \"vcf\", \"intervals\": null, \"noLog\": \"true\", \"offset\": \"default\", \"outputConditional\": {\"outputFormat\": \"vcf\", \"__current_case__\": 0}, \"snpDb\": {\"genomeSrc\": \"cached\", \"__current_case__\": 0, \"genomeVersion\": \"hg19\", \"reg_section\": {\"regulation\": null}}, \"spliceRegion\": {\"setSpliceRegions\": \"no\", \"__current_case__\": 0}, \"spliceSiteSize\": \"2\", \"transcripts\": null, \"udLength\": \"5000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.3+T.galaxy1",
+            "type": "tool",
+            "uuid": "73d85553-fe49-4a78-9a5c-ac90bc2a1e12",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "snpeff_output",
+                    "uuid": "038be9ed-20f7-4065-8330-8de350ae50da"
+                },
+                {
+                    "label": null,
+                    "output_name": "statsFile",
+                    "uuid": "b778566d-9d0b-4f22-8e4d-f7d943b9483b"
+                },
+                {
+                    "label": null,
+                    "output_name": "csvFile",
+                    "uuid": "930cab0e-c945-475c-9382-21db498fb744"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 8,
+                    "output_name": "snpeff_output"
+                },
+                "ped": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GEMINI load",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "gemini.sqlite"
+                }
+            ],
+            "position": {
+                "bottom": 527.34375,
+                "height": 164.34375,
+                "left": 2154,
+                "right": 2354,
+                "top": 363,
+                "width": 200,
+                "x": 2154,
+                "y": 363
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "45296e47d565",
+                "name": "gemini_load",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"vcf\", \"__workflow_invocation_uuid__\": \"d38a64eebcd011ecb8cb001e67d2ec02\", \"annotation_databases\": \"2019-01-12\", \"annotation_type\": \"snpEff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"has_genotypes\": \"true\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"opt_content\": [\"gerp_bp\", \"cadd\", \"gene_tables\", \"genotypes\", \"gt_pl\", \"info_string\"], \"ped\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.20.1+galaxy2",
+            "type": "tool",
+            "uuid": "f8d4a15e-b99a-455c-a788-2cbd8c7cb4cc",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "70fc3163-2de6-468e-bda5-395e3bd9f7aa"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 9,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GEMINI inheritance pattern",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 564.734375,
+                "height": 174.734375,
+                "left": 2432,
+                "right": 2632,
+                "top": 390,
+                "width": 200,
+                "x": 2432,
+                "y": 390
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
+            "tool_shed_repository": {
+                "changeset_revision": "18d13111692b",
+                "name": "gemini_inheritance",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"gemini.sqlite\", \"__workflow_invocation_uuid__\": \"d38a64eebcd011ecb8cb001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"family_wise\": {\"min_kindreds\": \"1\", \"families\": \"\", \"per_variant_selection\": {\"enabled\": \"no\", \"__current_case__\": 0, \"min_dp\": \"0\", \"min_gq\": \"0\", \"max_pl\": \"-1\"}}, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"inheritance\": {\"pattern_type\": \"autosomal_dominant\", \"__current_case__\": 3, \"constraint\": [{\"__index__\": 0, \"filter\": \"impact_severity != 'LOW'\"}], \"lenient\": \"false\", \"allow_unaffected\": \"false\"}, \"oformat\": {\"report\": {\"report_selector\": \"custom\", \"__current_case__\": 2, \"columns\": null, \"extra_cols\": \"chrom, start, ref, alt, impact, gene, clinvar_sig, clinvar_disease_name, clinvar_gene_phenotype, rs_ids\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.20.1",
+            "type": "tool",
+            "uuid": "11a2ec8f-6c18-4000-ba5d-468dc896f866",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "34f54658-6157-42d0-840d-b1835c0efde5"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "8b1b29f7-206e-4443-a16a-e53bf87205d2",
+    "version": 12
+}
