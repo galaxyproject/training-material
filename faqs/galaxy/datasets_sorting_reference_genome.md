@@ -4,7 +4,7 @@ area: reference genomes
 description: Certain tools expect that reference genomes are sorted in [lexicographical order](https://en.wikipedia.org/wiki/Lexicographic_order). These tools are often downstream of the initial mapping tools, which means that a large investment in a project has already been made, before a problem with sorting pops up in conclusion layer tools. How to avoid? Always sort your FASTA reference genome dataset at the beginning of a project. Many sources only provide sorted genomes, but double checking is your own responsibility, and super easy in Galaxy!
 box_type: tip        
 layout: faq        
-contributors: [jennaj, nurzhamalyrys] 
+contributors: [jennaj, Nurzhamalyrys] 
 ---
 
 1. Convert Formats -> **FASTA-to-Tabular**
