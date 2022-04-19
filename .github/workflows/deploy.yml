@@ -69,7 +69,7 @@ jobs:
 
           # Collect all notebooks into a tmp dir
           mkdir /tmp/notebook/
-          find _site -name 'data-science-python-*.ipynb' -exec cp '{}' /tmp/notebook/ \;
+          ruby bin/filter-pyolite-safe | xargs -I{} -n1 cp '{}' /tmp/notebook
 
           # Build the notebook site and add to deployment.
           pip install jupyterlab==3.3.4 jupyterlite==0.1.0b5
