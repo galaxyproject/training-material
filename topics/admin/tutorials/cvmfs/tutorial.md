@@ -157,7 +157,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > pre-built references and so we're going to use Galaxy's CVMFS system to let
 > our own Galaxies connect and get access to all the pre-built caches and
 > everything we already have.
-{: .spoken data-visual="galaxy" data-target="bwa_mem" data-action="loadTool" data-value="#center >> text=Map with BWA-MEM"}
+{: .spoken data-visual="galaxy" data-target="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" data-action="loadTool" data-value="#center >> text=Map with BWA-MEM"}
 
 > Okay, so let's get started. If we go back to our
 > tutorial here, it says that we need to install a CVMFS role into our
@@ -559,7 +559,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 > Once it loads, suddenly, instead of having no options available, you can see
 > here we've got a genome!
-{: .spoken data-visual="galaxy" data-target="bwa_mem" data-action="loadTool" data-value="#center >> text=Map with BWA-MEM"}
+{: .spoken data-visual="galaxy" data-target="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" data-action="loadTool" data-value="#center >> text=Map with BWA-MEM"}
 
 >  Now click on that. Oh look at that, there are lots and lots and lots of
 >  available genomes now including: lots of human, mouse, rat, yeast, all sorts
@@ -570,7 +570,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  server has access to all the uh the data the reference data and the tool
 >  indices that the community have built over a number of years and it's super
 >  simple.
-{: .spoken data-visual="galaxy" data-target="$(%%sq%%div[tour_id=%%dq%%genomeSource|indices%%dq%%]%%sp%%div.ui-form-field div.select2-container%%sq%%).select2('open')" data-action="custom"}
+{: .spoken data-visual="galaxy" data-target="$(document.getElementById('reference_source|ref_file').querySelector('div.select2-container')).select2('open')" data-action="custom"}
+
+
 
 > ```bash
 > 1.sh
