@@ -1,0 +1,23 @@
+---
+title: Understanding ValueError in job failure
+area: analysis
+box_type: tip
+layout: faq
+contributors: [jennaj, garimavs]
+---
+
+The full error is usually a longer message seen only after clicking on the bug icon:
+`stderr`
+`...`
+`Many lines of text, may include parameters`
+`...`
+`...`
+`ValueError: invalid literal for int() with base 10: 'some-read-identifier-name'`
+
+- Causes: 
+    - MACS2 produces this error the first time it is run. MACS is not the only tool that can produce this issue, but it is the most common.
+- Solutions: 
+    - Try at least one rerun.
+    - MACS/2 is not capable of interpreting sequence read names with spaces included. Try following these two: 
+        - Remove unmapped reads from the SAM dataset. There are several filtering tools in the groups **SAMTools** and **Picard** that can do this.
+        - Convert the SAM input to BAM format with the tool **SAMtools: SAM-to-BAM**. When compressed input is given to MACS, the spaces are no longer an issue.
