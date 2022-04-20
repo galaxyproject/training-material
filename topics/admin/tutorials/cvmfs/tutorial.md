@@ -143,12 +143,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > access to a Galaxy server.
 {: .spoken data-visual="gtn" data-target="#installing-and-configuring"}
 
-> Here is mine. And on it I am an admin user and I have access to the admin
-> page. This was done as part of the installation of Galaxy um and hopefully
-> you've installed a tool.
+> Here is mine. This was done as part of the installation of Galaxy um and
+> hopefully you've installed a tool.
 {: .spoken data-visual="galaxy" data-target="#analysis a" data-action="click"}
 
-> I have bwa and bwa-mem installed under Mapping.
+> I have bwa and bwa-mem installed under Mapping, I'll search for them now.
 {: .spoken data-visual="galaxy" data-target="#left .search-input input" data-action="fill" data-value="bwa-mem"}
 
 > So if I click on that you can see
@@ -167,10 +166,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > ### {% icon hands_on %} Hands-on: Installing CVMFS with Ansible
 >
 > 1. In your working directory, add the CVMFS role to your `requirements.yml`
->
->    > Well the first thing I need to do is log into my Galaxy machine in the
->    > terminal.
->    {: .spoken data-visual="terminal" data-cmd="whoami; hostname -f"}
 >
 >    > Have a look at he contents of this directory and I'll go into galaxy and here we have all of the Ansible scripts that hopefully everybody already has.
 >    {: .spoken data-visual="terminal" data-cmd="ls -al"}
