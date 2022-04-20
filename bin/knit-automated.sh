@@ -21,6 +21,12 @@ if [[ "$op" == "export" ]]; then
 
 
 		--- /dev/null
+		+++ b/.env
+		@@ -0,0 +1,3 @@
+		+GHA_RUN_ID=$GITHUB_RUN_ID
+		+GTN_COMMIT=$GITHUB_SHA
+		+GITGATDATE=$(date +%s)
+		--- /dev/null
 		+++ b/readme.md
 		@@ -0,0 +1,11 @@
 		+# GIT-GAT
