@@ -307,7 +307,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    > And now we need to add the role - we need to add the role to our Galaxy
 >    > playbook. So we edit galaxy.yml which is our playbook and we just need to
->    > add the galaxyproject.cvmfs to the bottom of this. galaxyproject.cvmfs.
+>    > add the galaxyproject.cvmfs to the bottom of this.
 >    > And that's pretty much it.
 >    {: .spoken data-visual="terminal" data-ref="pb"}
 >
@@ -322,11 +322,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 {: .hands_on}
 
 > Okay now we just run the playbook. ansible-playbook. We want to run the
-> Galaxy one. So. All right, we're about to get to the CVMFS repo here. We are
-> now it's installing the um the apt package of CVMFS. It's going to get
-> that out of this special um Cern apt repository. Okay, it's installing
-> it. Hopefully it won't take too long. Okay, now setting up the
-> repositories. And it's done.
+> Galaxy one. At the end we'll get to the CVMFS repo here. It will
+> instal it via the the apt package of CVMFS. It's going to get
+> that out of this special Cern apt repository. Hopefully it won't take too
+> long. Then it'll set up the repositories. And it's done.
 {: .spoken data-visual="terminal" data-ref="run-pb1"}
 
 Congratulations, you've set up CVMFS.
@@ -336,13 +335,13 @@ Congratulations, you've set up CVMFS.
 
 > Okay, that was completed. We've now installed CVMFS client onto our machine
 > and we've told it to go looking for certain repositories. Now to get access
-> to them. We'll see what's in them. uh They'll be located at slash cvmfs. So
+> to them. We'll see what's in them. They'll be located at slash cvmfs. So
 > under the cvmfs directory in your root directory. So, we can go to that. cd
 > /
 {: .spoken data-visual="terminal" data-cmd="cd /"}
 
-> Do an ll. You can see here there's a directory here called cvmfs.
-{: .spoken data-visual="terminal" data-cmd="ls -al"}
+> Do an ls. You can see here there's a directory here called cvmfs.
+{: .spoken data-visual="terminal" data-cmd="ls"}
 
 >  So we'll go in there and have a look and see what's in there.
 {: .spoken data-visual="terminal" data-cmd="cd /cvmfs"}
@@ -363,9 +362,11 @@ Congratulations, you've set up CVMFS.
 > things in here now. I've got byhand and managed.
 {: .spoken data-visual="terminal" data-cmd="ls -al"}
 
->  If I go into byhand you can see here that I have quite a lot of different
->  genomes and their tool indices.
-{: .spoken data-visual="terminal" data-cmd="cd byhand; ls"}
+>  If I go into byhand
+{: .spoken data-visual="terminal" data-cmd="cd byhand"}
+
+> you can see here that I have quite a lot of different genomes and their tool indices.
+{: .spoken data-visual="terminal" data-cmd="ls"}
 
 > So if I'm going to, say, sacCer2, I can see in here there are bowtie index,
 > the bwa index, the uh the picard index, the sam index; a whole bunch of
@@ -472,12 +473,12 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > you can see in here, are all the lock files, but you'll also see there's an
 > xml file here called tool_data_table_conf xml and we're going to point Galaxy
 > at this file and there's another one in the same position in managed.
-{: .spoken data-visual="terminal" data-cmd="cd /cvmfs/data.galaxyproject.org/byhand;  ls location;"}
+{: .spoken data-visual="terminal" data-cmd="ls /cvmfs/data.galaxyproject.org/byhand/location"}
 
 > And you can see here there's another one in managed there. And so we're going to
 > add both of these files to our Galaxy configuration and then Galaxy will be
 > able to use all of the data contained within this repository.
-{: .spoken data-visual="terminal" data-cmd="cd ../; ls managed/location"}
+{: .spoken data-visual="terminal" data-cmd="ls /cvmfs/data.galaxyproject.org/managed/location"}
 
 > Okay, so we'll go back to our Ansible directory.
 {: .spoken data-visual="terminal" data-cmd="cd ~/galaxy/"}
@@ -505,7 +506,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    > This time I'm going to edit the groupvars galaxyservers.yml file. And in
 >    > our Galaxy section. Which is here. Which is here. At the bottom of that
 >    > I'm going to add a variable called tool_data_table_config_path. And I'm
->    > going to point it to the locations that we um I showed you before. um I
+>    > going to point it to the locations that I showed you before. I
 >    > can't remember what they are off the top of my head but luckily they're
 >    > inside this solution box and so I will just copy them. And paste. And as
 >    > you can see pointing to /cvmfs/data.galaxyproject.org/byhand/location
@@ -568,7 +569,6 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 {: .spoken data-visual="galaxy" data-target="$(document.getElementById('reference_source|ref_file').querySelector('div.select2-container')).select2('open')" data-action="custom"}
 
 
-
 > ```bash
 > 1.sh
 > ```
@@ -597,10 +597,10 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 # Other Aspects
 
-> Right, we'll go back to our tutorial. um Yeah. Just finally, just before we
-> finish up. um If we are developing a new tool and you want to add a reference
+> Right, we'll go back to our tutorial. Yeah. Just finally, just before we
+> finish up.  If we are developing a new tool and you want to add a reference
 > genome or a different index just give us - drop us a line on Gitter and we'll
-> be able to add it into our - into the reference data for the community. um
+> be able to add it into our - into the reference data for the community.
 > We're looking at automating the process of building all of this material
 > using data managers and ephemeris. And we're working with a group of people
 > called the IDC, which is the Intergalactic Data Commission, which is a funny
@@ -638,10 +638,13 @@ If you are working with plants, you can find separate reference data here: [fred
 
 > And finally if you could please click on this link here and give us some
 > feedback on how you think the tutorial went, whether it was useful, if you
-> enjoyed it or um if you have any criticisms, could you please put them in
-> here as well. And if you end up using this to build a Galaxy server and you
-> publish that Galaxy server um could you cite the tutorial for us please. That
+> enjoyed it or if you have any criticisms, could you please put them in
+> here as well.
+{: .spoken data-visual="gtn" data-target="#feedback"}
+
+> And if you end up using this to build a Galaxy server and you
+> publish that Galaxy server could you cite the tutorial for us please. That
 > would be make a big difference to us. All right, thank you very much and I
 > hope you enjoyed it and hopefully I'll get to meet some of you in person one
 > day soon at a Galaxy conference. Thank you and goodbye.
-{: .spoken data-visual="gtn" data-target="#feedback"}
+{: .spoken data-visual="gtn" data-target="#citing-this-tutorial"}
