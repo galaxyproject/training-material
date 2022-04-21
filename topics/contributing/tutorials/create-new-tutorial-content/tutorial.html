@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:14 +0000",
+  "dateModified": "1970-01-01 00:00:21 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Creating content in Markdown",
   "interactivityType": "mixed",
@@ -502,7 +502,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 14, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 21, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -562,6 +562,7 @@
       <li><a href="#currently-supported-languages" id="markdown-toc-currently-supported-languages">Currently Supported Languages</a></li>
       <li><a href="#restrictions" id="markdown-toc-restrictions">Restrictions</a></li>
       <li><a href="#enabling-the-system" id="markdown-toc-enabling-the-system">Enabling the system</a></li>
+      <li><a href="#jupyterlite--pyodide" id="markdown-toc-jupyterlite--pyodide">JupyterLite &amp; Pyodide</a></li>
     </ol>
   </li>
   <li><a href="#spanish-translation-project" id="markdown-toc-spanish-translation-project">Spanish Translation Project</a>    <ol>
@@ -2288,6 +2289,25 @@ some_code += f"that students {should execute}"
 
 <p>Supported values are python, sql, r, and bash. The notebook will be generated automatically as part of the site build process.</p>
 
+<h2 id="jupyterlite--pyodide">JupyterLite &amp; Pyodide</h2>
+
+<p>The GTN has support for JupyterLite and the Pyodide kernel which runs <a href="https://pyodide.org/en/stable/">Python in the browser via webassembly/javascript</a>. This comes with some restrictions:</p>
+
+<ul>
+  <li>Python only<sup id="fnref:pyonly" role="doc-noteref"><a href="#fn:pyonly" class="footnote" rel="footnote">2</a></sup></li>
+  <li>No filesystem access (so no <code class="language-plaintext highlighter-rouge">wget</code> prep steps)</li>
+  <li>Little to no cell magic</li>
+</ul>
+
+<p>However, it means we can run a lot of our Python training directly in the GTN! And in the future, hopefully, we will be able to embed individual cells of the notebook directly in the Python training, so the user doesn’t even need to switch pages.</p>
+
+<p>To enable this feature, set:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>notebook:
+  language: python
+  pyolite: true
+</code></pre></div></div>
+
 <h1 id="spanish-translation-project">Spanish Translation Project</h1>
 
 <p>We have started <a href="/training-material/news/2021/05/20/spanish_project_begins.html">a trial for translating tutorials into Spanish</a>. Below are instructions on how to add translations of slides and/or hands-on tutorials in Spanish.</p>
@@ -2332,6 +2352,9 @@ some_code += f"that students {should execute}"
   <ol>
     <li id="fn:1" role="doc-endnote">
       <p>The wikipedia definition of a footnote is: “A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author’s comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes.” <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:pyonly" role="doc-endnote">
+      <p>Not entirely true, other kernels are supported, see their <a href="https://github.com/jupyterlite/demo">demo repo</a>, but e.g. the SQLite kernel comes with severe restrictions like no downloading databases or connecting to ones online. <a href="#fnref:pyonly" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -2436,7 +2459,7 @@ author = "Bérénice Batut and Björn Grüning and Saskia Hiltemann and Helena R
 title = "Creating content in Markdown (Galaxy Training Materials)",
 year = "2022",
 month = "04",
-day = "14"
+day = "21"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
