@@ -1121,6 +1121,25 @@ notebook:
 
 Supported values are python, sql, r, and bash. The notebook will be generated automatically as part of the site build process.
 
+## JupyterLite & Pyodide
+
+The GTN has support for JupyterLite and the Pyodide kernel which runs [Python in the browser via webassembly/javascript](https://pyodide.org/en/stable/). This comes with some restrictions:
+
+- Python only[^pyonly]
+- No filesystem access (so no `wget` prep steps)
+- Little to no cell magic
+
+However, it means we can run a lot of our Python training directly in the GTN! And in the future, hopefully, we will be able to embed individual cells of the notebook directly in the Python training, so the user doesn't even need to switch pages.
+
+To enable this feature, set:
+
+```
+notebook:
+  language: python
+  pyolite: true
+```
+
+[^pyonly]: Not entirely true, other kernels are supported, see their [demo repo](https://github.com/jupyterlite/demo), but e.g. the SQLite kernel comes with severe restrictions like no downloading databases or connecting to ones online.
 
 # Spanish Translation Project
 

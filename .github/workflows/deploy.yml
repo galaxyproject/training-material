@@ -62,6 +62,20 @@ jobs:
         env:
           GTN_FORK: ${{ github.repository_owner }}
 
+      - name: Add jupyter notebooks
+        run: |
+          # Remove our existing directory which was a placeholder
+          rm -rf _site/training-material/jupyter/
+
+          # Collect all notebooks into a tmp dir
+          mkdir /tmp/notebook/
+          ruby bin/filter-pyolite-safe | xargs -I{} -n1 cp '{}' /tmp/notebook
+
+          # Build the notebook site and add to deployment.
+          pip install jupyterlab==3.3.4 jupyterlite==0.1.0b5
+          jupyter lite build --contents /tmp/notebook
+          mv _output _site/training-material/jupyter/
+
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
