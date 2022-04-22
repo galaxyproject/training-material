@@ -53,4 +53,4 @@ If a custom genome/transcriptome/exome dataset is producing errors, double check
 
    - **Symptoms include**: Tools report that no build is available for the assigned reference genome.
    - **Solution**: This occurs with tools that require an assigned database metadata attribute. **SAMTools and Picard** often require this assignment.
-   - **How**: Create a [Custom Build]({% link faqs/galaxy/datasets_custom_builds.md %}) and assign it to the dataset.
+   - **How**: Create a [Custom Build]({% link faqs/galaxy/analysis_add_custom_build.md %}) and assign it to the dataset.
