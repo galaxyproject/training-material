@@ -43,4 +43,4 @@ Memory Error
 - Solutions:
     - Try at least one rerun to execute the job on a different cluster node.
     - Review the Solutions section of the Understanding input error messages(link) FAQ.
-    - Your data may actually be too large to process at a public Galaxy server. Alternatives include setting up a private Galaxy server(link).
+    - Your data may actually be too large to process at a public Galaxy server. Alternatives include setting up a [private Galaxy server](https://training.galaxyproject.org/training-material/faqs/gtn/galaxy_usage.html).
