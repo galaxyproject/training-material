@@ -1,5 +1,5 @@
 ---
-title: Understanding walltime in job failure
+title: Understanding walltime in job error
 area: analysis
 box_type: tip
 layout: faq
