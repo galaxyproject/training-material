@@ -6,14 +6,17 @@ layout: faq
 contributors: [jennaj, garimavs]
 ---
 
-The full error is usually a longer message seen only after clicking on the bug icon:
+The full error is usually a longer message seen only after clicking on the bug icon or by reviewing the job details `stderr`. 
+
+How to do both is covered in the Troubleshooting errors [FAQ]({% link faqs/galaxy/analysis_troubleshooting.md %}).
+
 <pre>
 stderr
 ...
 Many lines of text, may include parameters
 ...
 ...
-ValueError: invalid literal for int() with base 10: 'some-read-identifier-name'
+ValueError: invalid literal for int() with base 10: some-sequence-read-name
 </pre>
 
 - Causes: 
