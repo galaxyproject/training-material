@@ -3,7 +3,7 @@ title: Troubleshooting Custom Genome
 area: datasets    
 box_type: tip        
 layout: faq        
-contributors: [jennaj, nurzhamalyrys] 
+contributors: [jennaj, Nurzhamalyrys] 
 ---
 
 
