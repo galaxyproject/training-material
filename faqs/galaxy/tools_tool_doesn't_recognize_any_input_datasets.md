@@ -12,7 +12,7 @@ Understanding datatypes [FAQ]({% link faqs/galaxy/datatypes_understanding_dataty
 
 No datasets or collections available? Solutions:
 1. Upload or Copy an appropriate dataset for the input into the active history.
-* To review options for getting data into Galaxy see [this FAQ]({% link faqs/galaxy/#data%20upload %}).
+* To review options for getting data into Galaxy see [this FAQ]({% link faqs/galaxy/dataupload.md %}).
 * To copy datasets from a different history into the active history see [this FAQ]({% link faqs/galaxy/histories_copy_dataset.md %})
 2. Resolve a datatype assignment incompatibility between the dataset and the tool. 
 * To redetect a datatype see [this FAQ]({% link faqs/galaxy/datasets_detect_datatype.md %}).
