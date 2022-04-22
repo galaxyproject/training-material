@@ -25,10 +25,10 @@ If a custom genome dataset is producing errors, double check the format and that
 
    - **Symptoms include: RNA-seq tools (Cufflinks, Cuffcompare, Cuffmerge, Cuffdiff)** fails with error `Error: sequence lines in a FASTA record must have the same length!.`
    - **Solution**: File tested and corrected locally then re-upload or test/fix within Galaxy, then re-run.
-    **How**:
-   - **Quick re-formatting** Run the tool through the tool **NormalizeFasta** using the options to wrap sequence lines at 80 bases and to trim the title line at the first whitespace.
-   - **Optional Detailed re-formatting** Start with **FASTA manipulation → FASTA Width formatter** with a value between 40-80 (60 is common) to reformat wrapping. Next, use Filter and Sort → Select with ">" to examine identifiers. Use a combination of **Convert Formats → FASTA-to-Tabular, Text Manipulation** tools, then **Tabular-to-FASTA** to correct.
-   - **With either of the above**, finish by using **Filter and Sort → Select** with `^\w*$` to search for empty lines (use "NOT matching" to remove these lines and output a properly format fasta dataset).
+   - **How**:
+     - **Quick re-formatting** Run the tool through the tool **NormalizeFasta** using the options to wrap sequence lines at 80 bases and to trim the title line at the first whitespace.
+     - **Optional Detailed re-formatting** Start with **FASTA manipulation → FASTA Width formatter** with a value between 40-80 (60 is common) to reformat wrapping. Next, use Filter and Sort → Select with ">" to examine identifiers. Use a combination of **Convert Formats → FASTA-to-Tabular, Text Manipulation** tools, then **Tabular-to-FASTA** to correct.
+     - **With either of the above**, finish by using **Filter and Sort → Select** with `^\w*$` to search for empty lines (use "NOT matching" to remove these lines and output a properly format fasta dataset).
    
 - Inconsistent line wrapping, common if merging chromosomes from various Genbank records (e.g. primary chroms with mito)
 
