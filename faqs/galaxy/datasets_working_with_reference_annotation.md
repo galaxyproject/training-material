@@ -1,6 +1,6 @@
 ---
 title: Working with GFF GFT GTF2 GFF3 reference annotation
-area: datatsets
+area: datasets
 layout: faq
 box_type: tip
 contributors: [jennaj, garimavs]
