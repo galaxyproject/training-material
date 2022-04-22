@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Custom Genome
-area: datasets    
+area: reference genomes    
 box_type: tip        
 layout: faq        
 contributors: [jennaj, Nurzhamalyrys] 
