@@ -1,5 +1,5 @@
 ---
-title: Understanding 'canceled by admin' or a cluster failure in job failure
+title: Understanding 'canceled by admin' or cluster failure error messages
 area: analysis
 box_type: tip
 layout: faq
@@ -7,11 +7,16 @@ contributors: [jennaj, garimavs]
 ---
 
 The initial error message could be: 
-`This job failed because it was cancelled by an administrator.`
-`Please click the bug icon to report this problem if you need help.`
+<pre>
+This job failed because it was cancelled by an administrator.
+Please click the bug icon to report this problem if you need help.
+</pre>
+
 Or
-`job info:`
-`Remote job server indicated a problem running or monitoring this job.`
+<pre>
+job info:
+Remote job server indicated a problem running or monitoring this job.
+</pre>
 
 - Causes:
     - Server or cluster error.
@@ -19,5 +24,5 @@ Or
 
 - Solutions:
     - Try at least one rerun. Server/cluster errors like this are usually transient. 
-    - Review the Solution section for the Input problems above.
+    - Review the Solutions section of the Understanding input error messages(link) FAQ.
     - If after any corrections, the job still fails, please report the technical issue [following the extended issue guidelines](https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_reporting_issues.html).
