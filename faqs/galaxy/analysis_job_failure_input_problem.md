@@ -1,5 +1,5 @@
 ---
-title: Understanding input problems in job failure
+title: Understanding input error messages
 area: analysis
 box_type: tip
 layout: faq
