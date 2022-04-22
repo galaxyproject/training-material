@@ -7,12 +7,14 @@ contributors: [jennaj, garimavs]
 ---
 
 The full error is usually a longer message seen only after clicking on the bug icon:
-`stderr`
-`...`
-`Many lines of text, may include parameters`
-`...`
-`...`
-`ValueError: invalid literal for int() with base 10: 'some-read-identifier-name'`
+<pre>
+stderr
+...
+Many lines of text, may include parameters
+...
+...
+ValueError: invalid literal for int() with base 10: 'some-read-identifier-name'
+</pre>
 
 - Causes: 
     - MACS2 produces this error the first time it is run. MACS is not the only tool that can produce this issue, but it is the most common.
