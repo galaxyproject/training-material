@@ -13,11 +13,11 @@ contributors: [jennaj, Melkeb]
 
 Method 1: [Finding BAM dataset identifiers]({% link faqs/galaxy/datasets_BAM_dataset_identifiers.md %})
 
-Method 2: [Directly obtaining UCSC sourced *genome* identifiers]({% link faqs/galaxy/datasets_UCSC_sourced_genome.md %})
+Method 2: [Directly obtaining UCSC sourced *genome* identifiers](https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_UCSC_sourced_genome.html)
 
-Method 3: [Adjusting identifiers for UCSC sourced data used with other sourced data]({% link faqs/galaxy/datasets_adjust_identifiers_UCSC.md %})
+Method 3: [Adjusting identifiers for UCSC sourced data used with other sourced data](https://galaxyproject.org/support/chrom-identifiers/#adjusting-identifiers-or-input-source)
 
-Method 4: [Adjusting identifiers or input source for any mixed sourced data]({% link faqs/galaxy/datasets_adjusting_identifiers_mixed_data.md %})
+Method 4: [Adjusting identifiers or input source for any mixed sourced data](https://galaxyproject.org/support/chrom-identifiers/#any-mixed-sourced-data)
 
 **A Note on Built-in Reference Genomes**
 
