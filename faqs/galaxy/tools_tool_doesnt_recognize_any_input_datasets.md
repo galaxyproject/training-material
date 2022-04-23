@@ -11,9 +11,11 @@ The expected input datatype assignment is explained on the tool form. Review the
 Understanding datatypes [FAQ]({% link faqs/galaxy/datatypes_understanding_datatypes.md %}).
 
 No datasets or collections available? Solutions:
+
 1. Upload or Copy an appropriate dataset for the input into the active history.
-* To review options for getting data into Galaxy see [this FAQ](https://training.galaxyproject.org/training-material/faqs/galaxy/#data%20upload).
+* To load new datasets, review the **Upload** tool and more choices under **Get Data** within Galaxy.
 * To copy datasets from a different history into the active history see [this FAQ]({% link faqs/galaxy/histories_copy_dataset.md %})
+* To use datasets loaded into a shared Data Library see [this FAQ](% link faqs/galaxy/datasets_import_from_data_library.md %})
 2. Resolve a datatype assignment incompatibility between the dataset and the tool. 
 * To redetect a datatype see [this FAQ]({% link faqs/galaxy/datasets_detect_datatype.md %}).
 * To convert a datatpe see [this FAQ]({% link faqs/galaxy/datasets_change_datatype.md %}).
