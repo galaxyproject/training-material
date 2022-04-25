@@ -33,7 +33,7 @@ contributors:
   - dirowa
   - bazante1
 
-priority: 1
+priority: 2
 notebook:
   language: python
 

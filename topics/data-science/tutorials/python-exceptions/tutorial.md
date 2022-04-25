@@ -26,7 +26,7 @@ contributors:
   - hexylena
   - dirowa
   - bazante1
-priority: 1
+priority: 8
 notebook:
   language: python
 ---

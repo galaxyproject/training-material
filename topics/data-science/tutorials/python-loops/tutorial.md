@@ -36,7 +36,7 @@ contributors:
   - dirowa
   - bazante1
 
-priority: 1
+priority: 6
 notebook:
   language: python
 ---
