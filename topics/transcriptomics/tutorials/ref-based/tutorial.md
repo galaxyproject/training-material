@@ -239,7 +239,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the Cutadapt reports with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
