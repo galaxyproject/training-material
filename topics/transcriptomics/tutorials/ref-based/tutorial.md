@@ -53,6 +53,7 @@ contributors:
 ---
 
 # Introduction
+
 {:.no_toc}
 
 In recent years, RNA sequencing (in short RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is the profiling of gene expression by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling *Drosophila* cells after the depletion of a regulatory gene.
@@ -67,9 +68,10 @@ In this tutorial, we illustrate the analysis of the gene expression data step by
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
 > ### {% icon comment %} Full data
+>
 > The original data are available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). The raw RNA-Seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files.
 {: .comment}
-
+>
 > ### Agenda
 >
 > In this tutorial, we will deal with:
@@ -95,7 +97,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
 >    - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
->    ```
+>    ```text
 >    {{ page.zenodo_link }}/files/GSM461177_1.fastqsanger
 >    {{ page.zenodo_link }}/files/GSM461177_2.fastqsanger
 >    {{ page.zenodo_link }}/files/GSM461180_1.fastqsanger
@@ -106,16 +108,18 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > ### {% icon comment %} Comment
+>    >
 >    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
 >    >
 >    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }}):
 >    >
->    > ```
+>    > ```text
 >    > {{ page.zenodo_link }}/files/GSM461177_1_subsampled.fastqsanger
 >    > {{ page.zenodo_link }}/files/GSM461177_2_subsampled.fastqsanger
 >    > {{ page.zenodo_link }}/files/GSM461180_1_subsampled.fastqsanger
 >    > {{ page.zenodo_link }}/files/GSM461180_2_subsampled.fastqsanger
 >    > ```
+>    >
 >    {: .comment}
 >
 > 3. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`). If it is not, please change the datatype to `fastqsanger`.
@@ -247,6 +251,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >    > 2. How many basepairs have been removed from the forward reads because of bad quality? And from the reverse reads?
 >    >
 >    > > ### {% icon solution %} Solution
+>    > >
 >    > > 1. 147,810 (1.4%) reads were too short for `GSM461177_untreat_paired` and 1,101,875 (9%) for `GSM461180_treat_paired`.
 >    > >    ![Cutadapt Filtered reads](../../images/ref-based/cutadapt_filtered_reads_plot.png "Cutadapt Filtered reads")
 >    > > 2. The MultiQC output only provides the proportion of bp trimmed in total, not for each Read. To get this information, you need to go back to the individual reports. For `GSM461177_untreat_paired`, 5,072,810 bp have been trimmed from the forward reads (Read 1) and 8,648,619 bp from the reverse reads (Read 2) because of quality. For `GSM461180_treat_paired`, 10,224,537 bp from the forward reads and 51,746,850 bp from the reverse reads. This is not a surprise; we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, especially for `GSM461180_treat_paired`.
@@ -281,23 +286,23 @@ Therefore they cannot be simply mapped back to the genome as we normally do for 
 >
 > [**TopHat**](https://ccb.jhu.edu/software/tophat/index.shtml) ({% cite trapnell2009tophat %}) was one of the first tools designed specifically to address this problem. In **TopHat** reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
 >
->    ![TopHat](../../images/tophat.png "TopHat (Figure 1 from {% cite trapnell2009tophat %})")
+> ![TopHat](../../images/tophat.png "TopHat (Figure 1 from {% cite trapnell2009tophat %})")
 >
 > **TopHat** has been subsequently improved with the development of **TopHat2** ({% cite kim2013tophat2 %}):
 >
->    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Figure 6 from {% cite kim2013tophat2 %})")
+> ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Figure 6 from {% cite kim2013tophat2 %})")
 >
 > To further optimize and speed up spliced read alignment, [**HISAT2**](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2019graph %}) was developed. It uses a hierarchical graph [FM](https://en.wikipedia.org/wiki/FM-index) (HGFM) index, representing the entire genome and eventual variants, together with overlapping local indexes (each spanning ~57 kb) that collectively cover the genome and its variants. This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
->    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from {% cite kim2015hisat %})")
+> ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from {% cite kim2015hisat %})")
 >
 > A part of the read (blue arrow) is first mapped to the genome using the global FM index. **HISAT2** then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now **HISAT2** takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
 >
 > [**STAR** aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-Seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs a seed search:
 >
->    ![STAR's seed search](../../images/star.png "STAR's seed search (Figure 1 from {% cite dobin2013star %})")
+> ![STAR's seed search](../../images/star.png "STAR's seed search (Figure 1 from {% cite dobin2013star %})")
 >
-> Here a read is split between two consecutive exons. **STAR** starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments.
+> Here a read is split between two consecutive exons. **STAR** starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it starts to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments.
 >
 > At the second stage **STAR** stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. **STAR** is extremely fast but requires a substantial amount of RAM to run efficiently.
 >
@@ -311,7 +316,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >
 > 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo]({{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
 >
->    ```
+>    ```text
 >    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf
 >    ```
 >
@@ -380,8 +385,8 @@ The BAM file contains information for all our reads, making it difficult to insp
 > 1. Install [**IGV**](https://software.broadinstitute.org/software/igv/download) (if not already installed)
 > 2. Start IGV locally
 > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
-> 3. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
-> 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
+> 4. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
+> 5. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
 >
 >    > ### {% icon comment %} Comments
 >    >
@@ -392,7 +397,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >    >
 >    {: .comment}
 >
-> 2. **IGV** {% icon tool %}: Zoom to `chr4:540,000-560,000` (Chromosome 4 between 540 kb to 560 kb)
+> 6. **IGV** {% icon tool %}: Zoom to `chr4:540,000-560,000` (Chromosome 4 between 540 kb to 560 kb)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -409,14 +414,15 @@ The BAM file contains information for all our reads, making it difficult to insp
 >    > {: .solution}
 >    {: .question}
 >
-> 3. **IGV** {% icon tool %}: Inspect the splice junctions using a **Sashimi plot**
+> 7. **IGV** {% icon tool %}: Inspect the splice junctions using a **Sashimi plot**
 >
 >    > ### {% icon comment %} Creation of a Sashimi plot
 >    >
->    > * Right click on the BAM file (in IGV)
->    > * Select **Sashimi Plot** from the menu
+>    > - Right click on the BAM file (in IGV)
+>    > - Select **Sashimi Plot** from the menu
+>    >
 >    {: .comment}
->
+>    >
 >    > ### {% icon question %} Question
 >    >
 >    > ![Screenshot of a Sashimi plot of Chromosome 4](../../images/star_igv_sashimi.png "Screenshot of a Sashimi plot of Chromosome 4")
@@ -433,7 +439,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >    > >
 >    > {: .solution}
 >    {: .question}
->
+>    >
 >    > ### {% icon comment %} Comment
 >    >
 >    > Check the [IGV documentation on Sashimi plots](https://software.broadinstitute.org/software/igv/Sashimi) to find some clues
@@ -476,6 +482,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >    > What are the percentages of duplicate reads for each sample?
 > >    >
 > >    > > ### {% icon solution %} Solution
+> >    > >
 > >    > > The sample `GSM461177_untreat_paired` has 25.9% of duplicated reads while `GSM461180_treat_paired` has 27.8%.
 > >    > {: .solution}
 > >    {: .question}
@@ -510,6 +517,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >    > 3. Can we determine the sex of the samples?
 > >    >
 > >    > > ### {% icon solution %} Solution
+> >    > >
 > >    > > 1. The genome of *Drosophila* has 4 pairs of chromosomes: X/Y, 2, 3, and 4.
 > >    > > 2. The reads mapped mostly to chromosome 2 (chr2L and chr2R), 3 (chr3L and chr3R) and X. Only a few reads mapped to chromosome 4, which is expected given that this chromosome is very small.
 > >    > > 3. Judging from the percentage of X+Y reads, most of the reads map to X and only a few to Y. This indicates there are probably not many genes on Y, so the samples are probably both female.
@@ -667,6 +675,7 @@ This information should be provided with your FASTQ files, ask your sequencing f
 ![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
 
 There are 3 ways to estimate strandness from **STAR** results (choose the one you prefer)
+
 1. We can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful).
 
     > ### {% icon hands_on %} Hands-on: Estimate strandness with IGV for a paired-end library
@@ -674,11 +683,14 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     > 1. Go back to your IGV session with the `GSM461177_untreat_paired` BAM opened.
     >
     >    > ### {% icon tip %} If you don't have it
+    >    >
     >    > No problem, you just need to redo the previous steps:
+    >    >
     >    > 1. Start IGV locally
     >    > 2. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
     >    > 3. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
     >    > 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
+    >    >
     >    {: .tip}
     >
     > 2. **IGV** {% icon tool %}
@@ -698,18 +710,16 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     >    > > 1. Yes we see the same number of reads on both groups.
     >    > > 2. This means that the library was unstreanded.
     >    > >
-    >    >  > > ### {% icon comment %} How would it be if the library was stranded?
-    >    >  > >
-    >    >  > > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
-    >    >  > >
-    >    >  > > Note thare there is no read on the POSITIVE group for the reverse strand-specific.
-    >    >  > {: .comment}
+    >    > > > ### {% icon comment %} How would it be if the library was stranded?
+    >    > > >
+    >    > > > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
+    >    > > >
+    >    > > > Note thare there is no read on the POSITIVE group for the reverse strand-specific.
+    >    > > {: .comment}
     >    > {: .solution}
     >    {: .question}
     >
-    >
     {: .hands_on}
-
 
 2. You can use the output of **STAR** with the counts.
 
@@ -730,6 +740,7 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     >    > 2. What is the strandness of the library?
     >    >
     >    > > ### {% icon solution %} Solution
+    >    > >
     >    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
     >    > > ![STAR Gene counts same stranded](../../images/ref-based/star_gene_counts_same.png "Gene counts same stranded")
     >    > > ![STAR Gene counts reverse stranded](../../images/ref-based/star_gene_counts_reverse.png "Gene counts reverse stranded")
@@ -767,6 +778,7 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
     >
     >    > ### {% icon comment %} Interpret the output of Infer Experiment
+    >    >
     >    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
     >    >
     >    > - Paired-end or single-end library
@@ -781,49 +793,53 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     >    >
     >    > If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
     >    {: .comment}
-    >
-    > > ### {% icon question %} Question
-    > >
-    > > 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
-    > > 2. Do you think the library type of the 2 samples is stranded or unstranded?
-    > >
-    > > > ### {% icon solution %} Solution
-    > > >
-    > > > 1. Results for `GSM461177_untreat_paired`:
-    > > >
-    > > > {% snippet faqs/galaxy/analysis_results_may_vary.md %}
-    > > >
-    > > >    ```
-    > > >    This is PairEnd Data
-    > > >    Fraction of reads failed to determine: 0.0963
-    > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
-    > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
-    > > >    ```
-    > > >
-    > > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
-    > > >
-    > > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
-    > > >
-    > > > > ### {% icon comment %} How would it be if the library was stranded?
-    > > > > Still taking the 2 BAM as example, We get for the unstranded:
-    > > > >    ```
-    > > > >    This is PairEnd Data
-    > > > >    Fraction of reads failed to determine: 0.0382
-    > > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4847
-    > > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4771
-    > > > >    ```
-    > > > > And for the reverse stranded:
-    > > > >    ```
-    > > > >    This is PairEnd Data
-    > > > >    Fraction of reads failed to determine: 0.0504
-    > > > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.0061
-    > > > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
-    > > > >    ```
-    > > > {: .comment}
-    > > {: .solution}
-    > {: .question}
+    >    >
+    >    > ### {% icon question %} Question
+    >    >
+    >    > 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
+    >    > 2. Do you think the library type of the 2 samples is stranded or unstranded?
+    >    >
+    >    > > ### {% icon solution %} Solution
+    >    > >
+    >    > > 1. Results for `GSM461177_untreat_paired`:
+    >    > >
+    >    > >    {% snippet faqs/galaxy/analysis_results_may_vary.md %}
+    >    > >
+    >    > >    ```text
+    >    > >    This is PairEnd Data
+    >    > >    Fraction of reads failed to determine: 0.0963
+    >    > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
+    >    > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+    >    > >    ```
+    >    > >
+    >    > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
+    >    > >
+    >    > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
+    >    > >
+    >    > > > ### {% icon comment %} How would it be if the library was stranded?
+    >    > > >
+    >    > > > Still taking the 2 BAM as example, We get for the unstranded:
+    >    > > >
+    >    > > > ```text
+    >    > > > This is PairEnd Data
+    >    > > > Fraction of reads failed to determine: 0.0382
+    >    > > > Fraction of reads explained by "1++,1--,2+-,2-+": 0.4847
+    >    > > > Fraction of reads explained by "1+-,1-+,2++,2--": 0.4771
+    >    > > > ```
+    >    > > >
+    >    > > > And for the reverse stranded:
+    >    > > >
+    >    > > > ```text
+    >    > > > This is PairEnd Data
+    >    > > > Fraction of reads failed to determine: 0.0504
+    >    > > > Fraction of reads explained by "1++,1--,2+-,2-+": 0.0061
+    >    > > > Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
+    >    > > > ```
+    >    > > >
+    >    > > {: .comment}
+    >    > {: .solution}
+    >    {: .question}
     {: .hands_on}
-
 
 > ### {% icon details %} Strandness and software settings
 >
@@ -902,7 +918,7 @@ As written above, during mapping, **STAR** counted reads for each gene provided 
 >
 > 1. Inspect the counts from `GSM461177_untreat_paired` in the collection `RNA STAR on collection N: reads per gene`
 {: .hands_on}
-
+>
 > ### {% icon question %} Questions
 >
 > 1. How many reads are unmapped/multi-mapped?
@@ -951,7 +967,8 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 >      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >    - *"Analysis to perform"*: `gene lengths only`
 >
->    > ### {% icon warning %} Check the version of the tool below.
+>    > ### {% icon warning %} Check the version of the tool below
+>    >
 >    > This will only work with version 0.1.2 or above
 >    >
 >    > {% snippet faqs/galaxy/tools_change_version.md %}
@@ -967,7 +984,9 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 >
 > > ### {% icon solution %} Solution
 > >
-> > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} tool:
+> > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the following:
+> >
+> > 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} with the following parameters:
 > >    - {% icon param-collection %} *"Sort Query"*: <span class="featureCounts" markdown="1">`featureCounts on collection N: Counts` (output of **featureCounts** {% icon tool %})</span><span class="STAR" markdown="1">Use the collection `FeatureCount-like files`</span>
 > >    - *"Number of header"*: <span class="featureCounts" markdown="1">`1`</span><span class="STAR" markdown="1">`0`</span>
 > >    - In *"1: Column selections"*:
@@ -976,6 +995,8 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 > >        This column contains the number of reads = counts
 > >
 > >      - *"in"*: `Descending order`
+> >
+> > 2. Inspect the result
 > >
 > >    The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,740 in `GSM461177_untreat_paired` and 127,400 in `GSM461180_treat_paired`).
 > >
@@ -1019,16 +1040,16 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }}) and on the data library.
 >
 > - Paired-end data
->     - `GSM461178_1` and `GSM461178_2` that you can label `GSM461178_untreat_paired`
->     - `GSM461181_1` and `GSM461181_2` that you can label `GSM461181_treat_paired`
+>   - `GSM461178_1` and `GSM461178_2` that you can label `GSM461178_untreat_paired`
+>   - `GSM461181_1` and `GSM461181_2` that you can label `GSM461181_treat_paired`
 > - Single-end data
->     - `GSM461176` that you can label `GSM461176_untreat_single`
->     - `GSM461179` that you can label `GSM461179_treat_single`
->     - `GSM461182` that you can label `GSM461182_untreat_single`
+>   - `GSM461176` that you can label `GSM461176_untreat_single`
+>   - `GSM461179` that you can label `GSM461179_treat_single`
+>   - `GSM461182` that you can label `GSM461182_untreat_single`
 >
 > The links to these files are below:
 >
-> ```
+> ```text
 > {{ page.zenodo_link }}/files/GSM461178_1.fastqsanger
 > {{ page.zenodo_link }}/files/GSM461178_2.fastqsanger
 > {{ page.zenodo_link }}/files/GSM461181_1.fastqsanger
@@ -1060,7 +1081,7 @@ To be able to identify differential gene expression induced by PS depletion, all
 >    - `GSM461181_treat_paired.counts`
 >    - `GSM461182_untreat_single.counts`
 >
->    ```
+>    ```text
 >    {{ page.zenodo_link }}/files/GSM461176_untreat_single.counts
 >    {{ page.zenodo_link }}/files/GSM461177_untreat_paired.counts
 >    {{ page.zenodo_link }}/files/GSM461178_untreat_paired.counts
@@ -1111,12 +1132,14 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 > ### {% icon details %} RPKM, FPKM and TPM?
 >
 > These three metrics are used to normalize count tables for:
+>
 > - sequencing depth (the "Million" part)
 > - gene length (the "Kilobase" part)
 >
 > Let's use the previous example to explain RPK, FPKM and TPM.
 >
 > For **RPKM** (Reads Per Kilobase Million),
+>
 > 1. Compute the "per million" scaling factor: sum up the total reads in a sample and divide that number by 1,000,000.
 >
 >    Gene | Sample 1 Counts | Sample 2 Counts | Sample 3 Counts
@@ -1193,6 +1216,8 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >
 > The sums of each column are very different:
 >
+> 1. RPKM
+>
 >    Gene | Sample 1 RPKM | Sample 2 RPKM | Sample 3 RPKM
 >    --- | --- | --- | ---
 >    A (2kb) | 1.43 | 1.33 | 1.42
@@ -1200,6 +1225,8 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    C (1kb) | 1.43 | 1.78 | 1.42
 >    D (10kb) | 0 | 0 | 0.009
 >    **Total** | 4.29 | 4.5 | 4.25
+>
+> 2. TPM
 >
 >    Gene | Sample 1 TPM | Sample 2 TPM | Sample 3 TPM
 >    --- | --- | --- | ---
@@ -1383,31 +1410,31 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 > > 1. You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in DESeq2.
 > {: .solution}
 {: .question}
-
+>
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1) %} with the following parameters:
 >    - *"how"*: `Select group tags corresponding to levels`
->       - {% icon param-collection %} *"Count file(s) collection"*: output of **Tag elements** {% icon tool %}
+>        - {% icon param-collection %} *"Count file(s) collection"*: output of **Tag elements** {% icon tool %}
 >        - In *"Factor"*:
 >            - {% icon param-repeat %} *"Insert Factor"*
 >                - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
 >                - In *"Factor level"*:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
->                      - *"Select groups that correspond to this factor level"*: `Tags: treat`
+>                        - *"Select groups that correspond to this factor level"*: `Tags: treat`
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
->                      - *"Select groups that correspond to this factor level"*: `Tags: untreat`
+>                        - *"Select groups that correspond to this factor level"*: `Tags: untreat`
 >            - {% icon param-repeat %} *"Insert Factor"*
 >                - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
 >                - In *"Factor level"*:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
->                      - *"Select groups that correspond to this factor level"*: `Tags: paired`
+>                        - *"Select groups that correspond to this factor level"*: `Tags: paired`
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
->                      - *"Select groups that correspond to this factor level"*: `Tags: single`
+>                        - *"Select groups that correspond to this factor level"*: `Tags: single`
 >    - *"Files have header?"*: `No`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
@@ -1465,6 +1492,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
         > How are the samples grouped?
         >
         > > ### {% icon solution %} Solution
+        > >
         > > They are first grouped by the treatment (the first factor) and secondly by the sequencing type (the second factor), as in the PCA plot.
         > >
         > {: .solution}
@@ -1482,16 +1510,16 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 
 - A summary file with the following values for each gene:
 
-    1.  Gene identifiers
-    2.  Mean normalized counts, averaged over all samples from both conditions
-    3.  Fold change in log2 (logarithm base 2)
+    1. Gene identifiers
+    2. Mean normalized counts, averaged over all samples from both conditions
+    3. Fold change in log2 (logarithm base 2)
 
-        The log2 fold changes are based on the primary factor level 1 vs factor level 2, hence the input order of factor levels is important. Here, DESeq2 computes fold changes of 'treated' samples against 'untreated' from the first factor 'Treatment', *i.e.* the values correspond to up- or downregulation of genes in treated samples.
+       The log2 fold changes are based on the primary factor level 1 vs factor level 2, hence the input order of factor levels is important. Here, DESeq2 computes fold changes of 'treated' samples against 'untreated' from the first factor 'Treatment', *i.e.* the values correspond to up- or downregulation of genes in treated samples.
 
-    4.  Standard error estimate for the log2 fold change estimate
-    5.  [Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
-    6.  *p*-value for the statistical significance of this change
-    7.  *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure, which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
+    4. Standard error estimate for the log2 fold change estimate
+    5. [Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
+    6. *p*-value for the statistical significance of this change
+    7. *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure, which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
 For more information about **DESeq2** and its outputs, you can have a look at the [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
@@ -1518,7 +1546,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 > >
 > {: .solution}
 {: .question}
-
+>
 > ### {% icon tip %} Tip: What are p-values and what are they used for?
 >
 > The p-value is a measure often used to determine whether or not a particular observation possesses statistical significance. Strictly speaking, the p-value is the probability that the data could have arisen randomly, assuming that the null hypothesis is correct. In the concrete case of RNA-Seq, the null hypothesis is that there is no differential gene expression. So a p-value of 0.13 for a particular gene indicates that, for that gene, assuming it is not differentially expressed, there is a 13% chance that any apparent differential expression could simply be produced by random variation in the experimental data.
@@ -1527,7 +1555,6 @@ correction for the variability due to the 2nd factor. In our current case, treat
 >
 > Unfortunately, p-values are often heavily misused in scientific research, enough so that Wikipedia provides a [dedicated article](https://en.wikipedia.org/wiki/Misuse_of_p-values) on the subject. See also [this article](https://fivethirtyeight.com/features/not-even-scientists-can-easily-explain-p-values/) (aimed at a general, non-scientific audience).
 {: .tip}
-
 
 ## Extraction and annotation of differentially expressed genes
 
@@ -1551,7 +1578,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >    > >
 >    > {: .solution}
 >    {: .question}
->
+>    >
 >    > ### {% icon comment %} Comment
 >    >
 >    > The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.
@@ -1584,7 +1611,7 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 >
 > 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the previous history, or from the Shared Data library or from Zenodo:
 >
->    ```
+>    ```text
 >    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf
 >    ```
 >
@@ -1629,7 +1656,7 @@ The annotated table contains no column names, which makes it difficult to read. 
 >
 > 1. Create a new file (`header`) from the following (header line of the DESeq2 output)
 >
->    ```
+>    ```text
 >    GeneID	Base mean	log2(FC)	StdErr	Wald-Stats	P-value	P-adj	Chromosome	Start	End	Strand	Feature	Gene name
 >    ```
 >
@@ -1644,7 +1671,6 @@ The annotated table contains no column names, which makes it difficult to read. 
 > 3. Rename the output to `Genes with significant adj p-value & abs(log2(FC)) > 1`
 {: .hands_on}
 
-
 ## Visualization of the expression of the differentially expressed genes
 
 We could plot the $$log_{2} FC$$ for the extracted genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.
@@ -1657,8 +1683,10 @@ We proceed in several steps:
 > ### {% icon comment %} Advanced tutorials on visualization
 >
 > In this tutorial, we will quickly explain some possible visualization. For more details, please have a look in the extra tutorials on visualization of RNA-Seq results:
+>
 > - [Visualization of RNA-Seq results with heatmap2]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
 > - [Visualization of RNA-Seq results with Volcano Plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
+>
 {: .comment}
 
 ### Visualization of the normalized counts
@@ -1666,6 +1694,7 @@ We proceed in several steps:
 To extract the normalized counts for the interesting genes, we join the normalized count table generated by DESeq2 with the table we just generated. We will then keep only the columns corresponding to the normalized counts.
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
+>
 > 1. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
 >    - *"using column"*: `Column: 1`
@@ -1681,7 +1710,8 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
-> 5. Rename the output to `Normalized counts for the most differentially expressed genes`.
+> 3. Rename the output to `Normalized counts for the most differentially expressed genes`.
+>
 {: .hands_on}
 
 We now have a table with 131 lines (the 130 most differentially expressed genes and a header) and the normalized counts for these genes across the 7 samples.
@@ -1732,55 +1762,56 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 > 1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
 > 2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the  previous step)
 >
->  > ### {% icon hands_on %} Hands-on: Compute the Z-score of all genes
->  > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters to >  first substract the mean values per row
->  >    - *"Input Single or Multiple Tables"*: `Single Table`
->  >      - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
->  >      - *"Type of table operation"*: `Perform a full table operation`
->  >        - *"Operation"*: `Custom`
->  >          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
->  >
->  >            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each value by the mean of the row (computed with `table.mean(1)`)
->  >
->  > 2. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
->  >    - *"Input Single or Multiple Tables"*: `Multiple Table`
->  >      - In *"1: Tables"*:
->  >        - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
->  >      - Click on {% icon param-repeat %} *"Insert Tables"*
->  >      - In *"2: Tables"*:
->  >        - {% icon param-file %} *"Table"*: output of the first **Table Compute** {% icon tool %}
->  >      - *"Custom expression on 'tableN'"*: `table2.div(table1.std(1),0)`
->  >
->  >        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` divides the values of 2nd table (previously computed) by these standard deviations.
->  >
->  > 3. Rename the output to `Z-scores`
->  > 4. Inspect the output file
->  {: .hands_on}
+> > ### {% icon hands_on %} Hands-on: Compute the Z-score of all genes
+> >
+> > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters to >  first substract the mean values per row
+> >    - *"Input Single or Multiple Tables"*: `Single Table`
+> >      - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
+> >      - *"Type of table operation"*: `Perform a full table operation`
+> >        - *"Operation"*: `Custom`
+> >          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
+> >
+> >            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each value by the mean of the row (computed with `table.mean(1)`)
+> >
+> > 2. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
+> >    - *"Input Single or Multiple Tables"*: `Multiple Table`
+> >      - In *"1: Tables"*:
+> >        - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
+> >      - Click on {% icon param-repeat %} *"Insert Tables"*
+> >      - In *"2: Tables"*:
+> >        - {% icon param-file %} *"Table"*: output of the first **Table Compute** {% icon tool %}
+> >      - *"Custom expression on 'tableN'"*: `table2.div(table1.std(1),0)`
+> >
+> >        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` divides the values of 2nd table (previously computed) by these standard deviations.
+> >
+> > 3. Rename the output to `Z-scores`
+> > 4. Inspect the output file
+> {: .hands_on}
 >
->  We now have a table with the Z-score for all genes in the 7 samples.
+> We now have a table with the Z-score for all genes in the 7 samples.
 >
->  > ### {% icon question %} Questions
->  >
->  > 1. What is the range for the Z-score?
->  > 2. Why some rows are empty?
->  > 2. What can we say about the Z-scores for the differentially expressed genes (for example, `FBgn0037223`)?
->  > 3. Can we use the Z-score to estimate the strength of the differential expression of a gene?
->  >
->  > > ### {% icon solution %} Solution
->  > >
->  > > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 the far right of the normal distribution curve
->  > > 2. If all counts are identicals (usually to 0), the standard deviation is 0, Z-score cannot be computed for these genes.
->  > > 3. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) positive for the samples in one group and (mostly) negative for the samples in the other group.
->  > > 4. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
->  > >    - with large noise: a very large effect
->  > >    - with some noise: a rather large effect
->  > >    - with only little noise: a rather small effect
->  > >    - with almost no noise: a tiny effect
->  > >
->  > >    The problem is that "noise" here is not only noise from the measure. It can also be linked to the "tightness" of the gene regulation control. Not tightly controlled genes, i.e. whose expression may vary in a wide range over samples, can be considerably induced or repressed. Their absolute Z-score will be small as the variations over samples is big. In contrast, genes that are tightly controlled may have only very small changes in their expression, without any biological impact. The absolute Z-score will be large for these genes.
->  > >
->  > {: .solution}
->  {: .question}
+> > ### {% icon question %} Questions
+> >
+> > 1. What is the range for the Z-score?
+> > 2. Why some rows are empty?
+> > 3. What can we say about the Z-scores for the differentially expressed genes (for example, `FBgn0037223`)?
+> > 4. Can we use the Z-score to estimate the strength of the differential expression of a gene?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 the far right of the normal distribution curve
+> > > 2. If all counts are identicals (usually to 0), the standard deviation is 0, Z-score cannot be computed for these genes.
+> > > 3. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) positive for the samples in one group and (mostly) negative for the samples in the other group.
+> > > 4. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
+> > >    - with large noise: a very large effect
+> > >    - with some noise: a rather large effect
+> > >    - with only little noise: a rather small effect
+> > >    - with almost no noise: a tiny effect
+> > >
+> > >    The problem is that "noise" here is not only noise from the measure. It can also be linked to the "tightness" of the gene regulation control. Not tightly controlled genes, i.e. whose expression may vary in a wide range over samples, can be considerably induced or repressed. Their absolute Z-score will be small as the variations over samples is big. In contrast, genes that are tightly controlled may have only very small changes in their expression, without any biological impact. The absolute Z-score will be large for these genes.
+> > >
+> > {: .solution}
+> {: .question}
 {: .details}
 
 We would like now to plot a heatmap for the Z-scores:
@@ -1788,6 +1819,7 @@ We would like now to plot a heatmap for the Z-scores:
 ![Heatmap with the Z-score counts for the most differentially expressed genes](../../images/ref-based/z-score-heatmap.png "Z-scores for the most differentially expressed genes")
 
 > ### {% icon hands_on %} Hands-on: Plot the Z-score of the most differentially expressed genes
+>
 > 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
 >    - *"Data transformation"*: `Plot the data as it is`
@@ -1810,8 +1842,8 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 **goseq** needs 2 files as inputs:
 
 - A tabular file with the differentially expressed genes from all genes assayed in the RNA-Seq experiment with 2 columns:
-    - the Gene IDs (unique within the file), in uppercase letters
-    - a boolean indicating whether the gene is differentially expressed or not (`True` if differentially expressed or `False` if not)
+  - the Gene IDs (unique within the file), in uppercase letters
+  - a boolean indicating whether the gene is differentially expressed or not (`True` if differentially expressed or `False` if not)
 - A file with information about the length of a gene to correct for potential length bias in differentially expressed genes
 
 > ### {% icon hands_on %} Hands-on: Prepare the first dataset for goseq
@@ -1844,8 +1876,9 @@ We just generated the first input for **goseq**. As second input for **goseq** w
 >    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 >
 > 2. {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
->   - {% icon param-collection %} *"Input List"*: `featureCounts on collection N: Feature lengths`
->   - *"How should a dataset be selected?"*: `The first dataset`
+>    - {% icon param-collection %} *"Input List"*: `featureCounts on collection N: Feature lengths`
+>    - *"How should a dataset be selected?"*: `The first dataset`
+>
 > </div>
 >
 > <div class="STAR" markdown="1">
@@ -1929,7 +1962,7 @@ We have now the two required input files for goseq.
     >
     > > ### {% icon solution %} Solution
     > >
-    > > The x-axis is the percentage of genes in the category that have been identified as differentially expressed: $$100 x \frac{numDEInCat}{numInCat}$$
+    > > The x-axis is the percentage of genes in the category that have been identified as differentially expressed: $$100 \times \frac{numDEInCat}{numInCat}$$
     > >
     > {: .solution}
     {: .question}
@@ -1992,10 +2025,10 @@ This tool needs 2 main inputs:
 
 - Pathway ID(s) to plot, either as just one ID or as a file with one column with the pathway IDs
 - A tabular file with the genes in the RNA-Seq experiment with 2 (or more) columns:
-    - the gene IDs (unique within the file)
-    - some information about the genes
+  - the gene IDs (unique within the file)
+  - some information about the genes
 
-      This can be for example a p-value or a fold change. This information will be added to the pathway plot: the node of the corresponding gene will be colored given the value. If there are different columns, the different information will be plotted side by side on the node.
+    This can be for example a p-value or a fold change. This information will be added to the pathway plot: the node of the corresponding gene will be colored given the value. If there are different columns, the different information will be plotted side by side on the node.
 
 Here we would like to visualize the 2 KEGG pathways: the over-represented `00010` (Glycolysis / Gluconeogenesis) and the under-represented `03040` (Spliceosome). We would like the gene nodes to be colored by Log2 Fold Change for the differentially expressed genes because of the treatment.
 
@@ -2012,7 +2045,7 @@ Here we would like to visualize the 2 KEGG pathways: the over-represented `00010
 >
 > 3. Create a new tabular file from the following (IDs of the pathways to plot) named `KEGG pathways to plot`
 >
->    ```
+>    ```text
 >    00010
 >    03040
 >    ```
@@ -2051,8 +2084,8 @@ Here we would like to visualize the 2 KEGG pathways: the over-represented `00010
 > {: .solution}
 {: .question}
 
-
 {% comment %}
+
 # Inference of the differential exon usage
 
 Next, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-Seq exon counts. We will rework the mapping results we generated previously.
@@ -2106,7 +2139,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 - The results of running DEXSeq-count in 'Prepare annotation' mode
 - Seven count files generated in 'Count reads' mode
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
@@ -2120,7 +2153,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 >    - `GSM461181_treat_paired.exon.counts`
 >    - `GSM461182_untreat_single.exon.counts`
 >
->    ```
+>    ```text
 >    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.dexseq.gtf
 >    {{ page.zenodo_link }}/files/GSM461176_untreat_single.exon.counts
 >    {{ page.zenodo_link }}/files/GSM461177_untreat_paired.exon.counts
@@ -2162,37 +2195,38 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 
 Similarly to DESeq2, DEXSeq generates a table with:
 
-1.  Exon identifiers
-2.  Gene identifiers
-3.  Exon identifiers in the Gene
-4.  Mean normalized counts, averaged over all samples from both conditions
-5.  Logarithm (to basis 2) of the fold change
+1. Exon identifiers
+2. Gene identifiers
+3. Exon identifiers in the Gene
+4. Mean normalized counts, averaged over all samples from both conditions
+5. Logarithm (to basis 2) of the fold change
 
-    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulations of genes in treated samples.
+   The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulations of genes in treated samples.
 
-6.  Standard error estimate for the log2 fold change estimate
-7.  *p*-value for the statistical significance of this change
-8.  *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
+6. Standard error estimate for the log2 fold change estimate
+7. *p*-value for the statistical significance of this change
+8. *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [Filter](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
->    > ### {% icon question %} Question
->    >
->    > How many exons show a significant change in usage between these conditions?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > We get 38 exons (12.38%) with a significant usage change between treated and untreated samples.
->    > >
->    > {: .solution}
->    {: .question}
+> > ### {% icon question %} Question
+> >
+> > How many exons show a significant change in usage between these conditions?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > We get 38 exons (12.38%) with a significant usage change between treated and untreated samples.
+> > >
+> > {: .solution}
+> {: .question}
 {: .hands_on}
 
 {% endcomment %}
 
 # Conclusion
+
 {:.no_toc}
 
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up or downregulated by depletion of the *Pasilla* gene, but also which GO terms or KEGG pathways they are involved in. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-Seq data analysis approach. This approach can be summarized with the following scheme:
