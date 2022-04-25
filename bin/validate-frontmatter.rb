@@ -168,6 +168,10 @@ def lint_file(fn)
     #errs.push("No validation available for this type of file")
   end
 
+  # Check contributors OR contributions
+  if not (data.has_key?('contributors') or data.has_key?('contributions'))
+    errs.push("Document lacks EITHER contributors OR contributions key")
+  end
 
   # If we had no errors, validated successfully
   if errs.length == 0 then
