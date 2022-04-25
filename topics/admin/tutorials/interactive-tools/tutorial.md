@@ -33,6 +33,7 @@ requirements:
       - ansible-galaxy
       - connect-to-compute-cluster
       - job-destinations
+subtopic: features
 ---
 
 > ### {% icon warning %} Evolving Topic
@@ -482,6 +483,8 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >         - geerlingguy.docker
 >         - usegalaxy_eu.gie_proxy
 >    ```
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 4. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >

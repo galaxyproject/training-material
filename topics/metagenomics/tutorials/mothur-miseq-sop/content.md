@@ -209,22 +209,25 @@ convention, so that our tools will know which files belong together. We do this 
 >    - Change `_2` to `_R2` om the text field on the top right
 >
 >    You should now see a list of pairs suggested by Galaxy:
->    ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
+>    ![List of suggested paired datasets](../../images/create_collection.png)
 >
-> 4. Click on **auto-pair** to create the suggested pairs.
->
->      ![The result of pairing](../../images/create_collection2.png) <br><br>
+> 4. Click on **Auto-pair** to create the suggested pairs.
+>   - Or click on "Pair these datasets" manually for every pair that looks correct.
 >
 > 5. **Name the pairs**
 >    - The middle segment is the name for each pair.
 >    - These names will be used as sample names in the downstream analysis, so always make sure they are informative!
+>    - Make sure that {% icon param-check %} `Remove file extensions` is checked
 >    - **Check** that the pairs are named `F3D0`-`F3D9`, `F3D141`-`F3D150` and `Mock`.
->      - If needed, the names can be edited by clicking on them
->      - **Important:** On older Galaxy versions, if the files were imported via URL, they may have the full URL as sample name;
->        please remove everything except the sample name for each pair!
+>      - Note: The names should **not** have the .fastq extension
+>      - If needed, the names can be edited manually by clicking on them
+>
+>    ![The result of pairing](../../images/create_collection2.png)
 >
 > 6. **Name your collection** at the bottom right of the screen
-> 7. Click the **Create List** button. A new dataset collection item will now appear in your history
+>   - You can pick whatever name makes sense to you
+> 7. Click the **Create Collection** button.
+>    - A new dataset collection item will now appear in your history
 {: .hands_on}
 
 

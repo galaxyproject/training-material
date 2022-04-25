@@ -17,10 +17,12 @@ key_points:
   - It can drastically simplify management of large numbers of VMs
 contributors:
   - hexylena
+subtopic: cloud
 tags:
   - terraform
   - deploying
   - cloud
+priority: 3
 ---
 
 # Overview

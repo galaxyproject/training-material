@@ -44,7 +44,7 @@ To allow your user to upload via TUS, you will need to:
 
 > ### {% icon hands_on %} Hands-on: Setting up ftp upload with Ansible
 >
-> 1. In your playbook directory, add the `galaxyproject.proftpd` role to your `requirements.yml`
+> 1. In your playbook directory, add the `galaxyproject.tusd` role to your `requirements.yml`
 >
 >    {% raw %}
 >    ```diff
@@ -59,6 +59,8 @@ To allow your user to upload via TUS, you will need to:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. Install the role with:
 >
@@ -75,7 +77,16 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -122,3 +122,16 @@ nginx_conf_http:
+>    @@ -60,6 +60,8 @@ galaxy_config:
+>         allow_user_impersonation: true
+>         # Tool security
+>         outputs_to_working_directory: true
+>    +    # TUS
+>    +    tus_upload_store: /data/tus
+>       uwsgi:
+>         socket: 127.0.0.1:5000
+>         buffer-size: 16384
+>    @@ -122,3 +124,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -85,11 +96,11 @@ To allow your user to upload via TUS, you will need to:
 >    +tusd_instances:
 >    +  - name: main
 >    +    user: "{{ galaxy_user.name }}"
->    +    group: "{{ galaxy_user.group }}"
+>    +    group: "galaxy"
 >    +    args:
 >    +      - "-host=localhost"
 >    +      - "-port={{ galaxy_tusd_port }}"
->    +      - "-upload-dir=/data/tus/"
+>    +      - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
 >    +      - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
 >    +      - "-hooks-http-forward-headers=X-Api-Key,Cookie"
 >    {% endraw %}
@@ -129,7 +140,22 @@ To allow your user to upload via TUS, you will need to:
 >    ```
 >    {: data-commit="Proxy it via NGINX"}
 >
-> 5. Run the playbook
+> 5. Add to the end of your Galaxy playbook
+>
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -19,3 +19,4 @@
+>           become: true
+>           become_user: "{{ galaxy_user.name }}"
+>         - galaxyproject.nginx
+>    +    - galaxyproject.tusd
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add the role to the playbook"}
+>
+> 6. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
@@ -148,15 +174,19 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 1. SSH into your machine
 >
-> 2. Check the active status of tusd by `systemctl status tusd`.
+> 2. Check the active status of tusd by `systemctl status tusd-main`.
 >
-> 3. Check the directory `/data/uploads/` has been created and is empty.
+> 3. Upload a small file! (Pasted text will not pass via TUS)
+>
+> 4. Check the directory `/data/tus/` has been created and it's contents
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
->    > sudo tree /data/uploads/
+>    > sudo tree /data/tus/
 >    > ```
 >    {: .code-in}
+>
+> 5. You'll see files in that directory, a file that's been uploaded and an 'info' file which contains metadata about the upload.
 >
 {: .hands_on}
 
@@ -165,3 +195,5 @@ Congratulations, you've set up TUS for Galaxy.
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/missed-something.md step=2 %}

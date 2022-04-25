@@ -39,9 +39,7 @@
           {% endif %}
           {% if material.tags %}
             {% for tag in material.tags %}
-              <form method="GET" action="{{site.baseurl}}/search" style="display:inline"><input type="hidden" name="query" value="{{tag}}">
-              <button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials with this tag">{{ tag  }}</button>
-               </form>
+            <a href="{{site.baseurl}}/search?query={{ tag }}" class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials tagged {{tag}}">{{ tag }}</a>
             {% endfor %}
           {% endif %}
           </div>

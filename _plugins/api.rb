@@ -58,6 +58,12 @@ module Jekyll
             q['urls']['slides'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][7..-6]}.json"
           end
 
+          # Write out the individual page
+          page6 = PageWithoutAFile.new(site, "", "api/topics/", "#{q['url'][7..-6]}.json")
+          page6.content = JSON.pretty_generate(q)
+          page6.data["layout"] = nil
+          site.pages << page6
+
           q
         }
         out['maintainers'] = out['maintainers'].map{|c| mapContributor(site, c)}
@@ -105,6 +111,11 @@ module Jekyll
         page5.data["layout"] = nil
         site.pages << page5
       }
+      # Deploy the feedback file as well
+      page2 = PageWithoutAFile.new(site, "", "api/", "feedback.json")
+      page2.content = JSON.pretty_generate(site.data['feedback'])
+      page2.data["layout"] = nil
+      site.pages << page2
 
     end
   end

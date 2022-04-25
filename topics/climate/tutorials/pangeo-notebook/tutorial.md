@@ -331,7 +331,7 @@ There are many ways to customize your plots and we will only detail what we thin
 - Add a title, change colorbar title
 - Save figure into png
 
- ```python
+```python
 fig = plt.figure(1, figsize=[15,10])
 
 # We're using cartopy to project our data.

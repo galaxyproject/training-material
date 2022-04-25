@@ -1,3 +1,6 @@
+require 'json'
+
+
 module TopicFilter
   def self.list_topics(site)
     site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('type')}.map{|k, v| k}
@@ -144,7 +147,34 @@ module TopicFilter
       end
 
       # Similar as above.
-      page_obj['workflows'] = resources.include?('workflows')
+      if resources.include?('workflows')
+        workflow_files = Dir.glob("#{folder}/workflows/*.ga").map{ |a| a.split('/')[-1] }
+        page_obj['workflows'] = workflow_files.map{|wf|
+          x = {
+            "workflow" => wf,
+            "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
+          }
+          x
+        }
+      end
+
+      # Tool List
+      page_obj['tools'] = []
+      if page_obj['hands_on']
+        page_obj['tools'] += page.content.scan(/{% tool \[[^\]]*\]\(([^)]*)\)\s*%}/)
+      end
+
+      if page_obj['workflows']
+        page_obj['workflows'].each{|wf|
+          wf_path = "#{folder}/workflows/#{wf['workflow']}"
+
+          wf_data = JSON.parse(File.open(wf_path).read)
+          page_obj['tools'] += wf_data['steps'].map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
+        }
+      end
+      page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
+
+
       page_obj['tours'] = resources.include?('tours')
       page_obj['video'] = slide_has_video
       page_obj['translations'] = Hash.new
@@ -170,7 +200,7 @@ module TopicFilter
 
     # The complete resources we'll return is the introduction slides first
     # (regardless of alphabetisation), and then the rest of the pages.
-    resource_pages = resource_intro + resource_pages.sort_by{ |k| k["title"].downcase}
+    resource_pages = resource_intro + resource_pages.sort_by{ |k| k.fetch('title', '').downcase}
 
     if resource_pages.length == 0 then
       puts "Error? Could not find any relevant pages for #{topic_name}"
