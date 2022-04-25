@@ -27,10 +27,34 @@ module Jekyll
 
         # Write it out!
         page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}.ipynb")
-        page2.content = notebook
+        page2.content = JSON.pretty_generate(notebook)
         page2.data['layout'] = nil
         page2.data['citation_target'] = 'jupyter'
         site.pages << page2
+
+        # Create a no-solutions version:
+        no_solutions = notebook.clone
+
+        if page.url.match(/python-math/)
+          require 'pp'
+          pp no_solutions
+        end
+
+        no_solutions['cells'] = no_solutions['cells'].map{|cell|
+          if cell.fetch('cell_type') == 'markdown'
+            if cell['source'].is_a? String
+              cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, "<blockquote class=\"solution\" style=\"display:none\">")
+            end
+          end
+          cell
+        }
+
+        page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}-course.ipynb")
+        page2.content = JSON.pretty_generate(no_solutions)
+        page2.data['layout'] = nil
+        page2.data['citation_target'] = 'jupyter'
+        site.pages << page2
+
       end
     end
   end
