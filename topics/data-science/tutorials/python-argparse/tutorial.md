@@ -29,7 +29,7 @@ contributors:
   - dirowa
   - bazante1
 
-priority: 2
+priority: 3
 ---
 
 [`argparse`](https://docs.python.org/3/library/argparse.html) is an argument parsing library for Python that's part of the stdlib. It lets you make command line tools significantly nicer to work with.
