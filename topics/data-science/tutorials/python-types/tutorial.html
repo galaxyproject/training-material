@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Python - Basic Types & Type Conversion</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: Python - Basic Types & Type Conversion" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-types/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-types/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-types/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-types/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-types/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-types/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/python-types/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/python-types/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-04-01/topics/data-science/tutorials/python-types/tutorial.html" title="Version 2022-04-01">2022-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-03-01/topics/data-science/tutorials/python-types/tutorial.html" title="Version 2022-03-01">2022-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/data-science/tutorials/python-types/tutorial.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:25 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Python - Basic Types & Type Conversion",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / python-types / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Python - Basic Types & Type Conversion' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/python-types/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "jupyter-notebook",
+  "description": "The questions this  addresses are:\n - What kinds of data do programs store?\n - How can I convert one type to another?\n\n\\nThe objectives are:\n - Explain key differences between integers and floating point numbers.\n - Explain key differences between numbers and character strings.\n - Use built-in functions to convert between integers, floating point numbers, and strings.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Donny Vrins"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Donny Vrins"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Python - Basic Types & Type Conversion</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=27" alt="Avatar">The Carpentries</a>
+
+
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+<a href="/training-material/hall-of-fame/dirowa/" class="contributor-badge contributor-dirowa"><img src="https://avatars.githubusercontent.com/dirowa?s=27" alt="Avatar">Donny Vrins</a>
+
+
+<a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=27" alt="Avatar">Bazante Sanders</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What kinds of data do programs store?</p>
+</li>
+        
+        <li><p>How can I convert one type to another?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Explain key differences between integers and floating point numbers.</p>
+</li>
+        
+        <li><p>Explain key differences between numbers and character strings.</p>
+</li>
+        
+        <li><p>Use built-in functions to convert between integers, floating point numbers, and strings.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-types/data-science-python-types.ipynb" title="Jupyter Notebook" alt="Python - Basic Types & Type Conversion Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fpython-types%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-types/data-science-python-types.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-types/data-science-python-types.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-types/data-science-python-types-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                 
+
+                <p>Python is a typed language, data has a type, and different types of data cannot always be connected immediately and might need some conversion step before they can be used together. For instance if you add a number to a number, what should happen? If you add a number to a message, what do you expect will happen?</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#types" id="markdown-toc-types">Types</a></li>
+  <li><a href="#can-mix-integers-and-floats-freely-in-operations" id="markdown-toc-can-mix-integers-and-floats-freely-in-operations">Can mix integers and floats freely in operations.</a></li>
+  <li><a href="#variables-only-change-value-when-something-is-assigned-to-them" id="markdown-toc-variables-only-change-value-when-something-is-assigned-to-them">Variables only change value when something is assigned to them.</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="types">Types</h2>
+
+<p>Every value in a program has a specific type.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Python Code</th>
+      <th>Represents</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Integer</td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>represents positive or negative whole numbers like 3 or -512.</td>
+    </tr>
+    <tr>
+      <td>Floating point number</td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>represents real numbers like 3.14159 or -2.5.</td>
+    </tr>
+    <tr>
+      <td>Character string</td>
+      <td><code class="language-plaintext highlighter-rouge">str</code></td>
+      <td>text, written with either <code class="language-plaintext highlighter-rouge">'</code> or <code class="language-plaintext highlighter-rouge">"</code> quotes (they must match)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="checking-the-type">Checking the Type</h3>
+
+<p>Use the built-in function <code class="language-plaintext highlighter-rouge">type</code> to find out what type a value has. This works on values as well as variables. But remember: the <em>value</em> has the type — the <em>variable</em> is just a label.</p>
+
+<p>Check the type of values with the <a href="https://docs.python.org/3.8/library/functions.html#type"><code class="language-plaintext highlighter-rouge">type()</code></a> function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>You can also check the types of variables</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fitness</span> <span class="o">=</span> <span class="s">'average'</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">fitness</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="methods">Methods</h3>
+
+<p>A value’s type determines what the program can do to it. Some operations may work</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And some operations may not work:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'hello'</span> <span class="o">-</span> <span class="s">'h'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>For instance, you can use the <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">*</code> operators on strings.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_name</span> <span class="o">=</span> <span class="s">'Ahmed'</span> <span class="o">+</span> <span class="s">' '</span> <span class="o">+</span> <span class="s">'Walsh'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
+<span class="n">separator</span> <span class="o">=</span> <span class="s">'='</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="k">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Some methods only accept specific types, or only work on specific types.</p>
+
+<p>The built-in function <code class="language-plaintext highlighter-rouge">len</code> returns the length of your data. Which of the following would you expect to work? <code class="language-plaintext highlighter-rouge">len(string)</code>? <code class="language-plaintext highlighter-rouge">len(int)</code>?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">full_name</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="matching-types">Matching Types</h3>
+
+<p>Not all types support all operations, adding an integer to a string doesn’t make much sense:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This does not work because it’s ambiguous: should <code class="language-plaintext highlighter-rouge">1 + '2'</code> be <code class="language-plaintext highlighter-rouge">3</code> (a number) or <code class="language-plaintext highlighter-rouge">'12'</code> (a string)? Some types can be converted to other types by using the type name as a function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="s">'2'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="operation-support">Operation Support</h3>
+
+<p>Here is a quick chart showing which operations are allowed for each pair:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Left\Right</th>
+      <th><code class="language-plaintext highlighter-rouge">int</code></th>
+      <th><code class="language-plaintext highlighter-rouge">float</code></th>
+      <th><code class="language-plaintext highlighter-rouge">str</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td><code class="language-plaintext highlighter-rouge">+-*/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">+-*/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">*</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td><code class="language-plaintext highlighter-rouge">+-*/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">+-*/</code></td>
+      <td>``</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">str</code></td>
+      <td><code class="language-plaintext highlighter-rouge">*</code></td>
+      <td>``</td>
+      <td><code class="language-plaintext highlighter-rouge">+</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As you can see you can do <code class="language-plaintext highlighter-rouge">3 * "test"</code> and <code class="language-plaintext highlighter-rouge">"test" * 3</code>, but it doesn’t work with floats.</p>
+
+<h2 id="can-mix-integers-and-floats-freely-in-operations">Can mix integers and floats freely in operations.</h2>
+
+<p>Integers and floating-point numbers can be mixed in arithmetic. Python 3 (which we use) automatically converts integers to floats as needed.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'half is </span><span class="si">{</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'three squared is </span><span class="si">{</span><span class="mf">3.0</span> <span class="o">**</span> <span class="mi">2</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="variables-only-change-value-when-something-is-assigned-to-them">Variables only change value when something is assigned to them.</h2>
+
+<p>If we make one cell in a sp<span class="notranslate">reads</span>heet depend on another, and update the latter,
+the former updates automatically. However, this does <strong>not</strong> happen in programming languages.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">variable_one</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">variable_two</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">variable_one</span>
+<span class="n">variable_one</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'first is </span><span class="si">{</span><span class="n">variable_one</span><span class="si">}</span><span class="s"> and second is </span><span class="si">{</span><span class="n">variable_two</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The computer <span class="notranslate">reads</span> the value of <code class="language-plaintext highlighter-rouge">first</code> when doing the multiplication, creates
+a new value, and assigns it to <code class="language-plaintext highlighter-rouge">second</code>. After that, <code class="language-plaintext highlighter-rouge">second</code> does not remember
+where it came from. Every computation happens line-by-line.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-fractions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Fractions</h3>
+
+  <p>What type of value is 3.14159?
+How can you find out?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>It is a floating-point number (often abbreviated “float”).
+It is possible to find out by using the built-in function <code class="language-plaintext highlighter-rouge">type()</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print(type(3.14159))
+&lt;class 'float'&gt;
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test out solutions here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-automatic-type-conversion"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Automatic Type Conversion</h3>
+
+  <p>What type of value is the result of (3.25 + 4)?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>It is a float:
+integers are automatically converted to floats as necessary.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>result = 3.25 + 4
+print(f'result is {type(result)}')
+</code></pre></div>    </div>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7.25 is &lt;class 'float'&gt;
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test out solutions here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-choose-a-type"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Choose a Type</h3>
+
+  <p>What type of value (integer, floating point number, or character string)
+would you use to represent each of the following?  Try to come up with more than one good answer for each problem.  For example, in  # 1, when would counting days with a floating point variable make more sense than using an integer?</p>
+
+  <ol>
+    <li>Number of days since the start of the year.</li>
+    <li>Time elapsed from the start of the year until now in days.</li>
+    <li>Serial number of a piece of lab equipment.</li>
+    <li>A lab specimen’s age</li>
+    <li>Current population of a city.</li>
+    <li>Average population of a city over time.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The answers to the questions are:</p>
+    <ol>
+      <li>Integer, since the number of days would lie between 1 and 365.</li>
+      <li>Floating point, since fractional days are required</li>
+      <li>Character string if serial number contains letters and numbers, otherwise integer if the serial number consists only of numerals</li>
+      <li>This will vary! How do you define a specimen’s age? whole days since collection (integer)? date and time (string)?</li>
+      <li>Choose floating point to represent population as large aggregates (eg millions), or integer to represent population in units of individuals.</li>
+      <li>Floating point number, since an average is likely to have a fractional part.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-division-types"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Division Types</h3>
+
+  <p>In Python 3, the <code class="language-plaintext highlighter-rouge">//</code> operator performs integer (whole-number) floor division, the <code class="language-plaintext highlighter-rouge">/</code> operator performs floating-point
+division, and the <code class="language-plaintext highlighter-rouge">%</code> (or <em>modulo</em>) operator calculates and returns the remainder from integer division:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 // 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">//</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 / 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 % 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 // 3: 1
+5 / 3: 1.6666666666666667
+5 % 3: 2
+</code></pre></div>  </div>
+
+  <p>If <code class="language-plaintext highlighter-rouge">num_subjects</code> is the number of subjects taking part in a study,
+and <code class="language-plaintext highlighter-rouge">num_per_survey</code> is the number that can take part in a single survey,
+write an <span class="notranslate">expression</span> that calculates the number of surveys needed
+to reach everyone once.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>We want the minimum number of surveys that reaches everyone once, which is
+the rounded up value of <code class="language-plaintext highlighter-rouge">num_subjects/ num_per_survey</code>. This is
+equivalent to performing a floor division with <code class="language-plaintext highlighter-rouge">//</code> and adding 1. Before
+the division we need to subtract 1 from the number of subjects to deal with
+the case where <code class="language-plaintext highlighter-rouge">num_subjects</code> is evenly divisible by <code class="language-plaintext highlighter-rouge">num_per_survey</code>.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>num_subjects = 600
+num_per_survey = 42
+num_surveys = (num_subjects - 1) // num_per_survey + 1
+
+print(num_subjects, 'subjects,', num_per_survey, 'per survey:', num_surveys)
+</code></pre></div>    </div>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>600 subjects, 42 per survey: 15
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test out solutions here!
+</span></code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-strings-to-numbers"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Strings to Numbers</h3>
+
+  <p>Where reasonable, <code class="language-plaintext highlighter-rouge">float()</code> will convert a string to a floating point number,
+and <code class="language-plaintext highlighter-rouge">int()</code> will convert a floating point number to an integer:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print("string to float:", float("3.4"))
+print("float to int:", int(3.4))
+</code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string to float: 3.4
+float to int: 3
+</code></pre></div>  </div>
+
+  <p>If the conversion doesn’t make sense, however, an error message will occur.</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-python"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Python</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print("string to float:", float("Hello world!"))
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ValueError: could not convert string to float: 'Hello world!'
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>Given this information, what do you expect the following program to do?</p>
+
+  <p>What does it actually do?</p>
+
+  <p>Why do you think it does that?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print("fractional string to int:", int("3.4"))
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>What do you expect this program to do? It would not be so unreasonable to expect the Python 3 <code class="language-plaintext highlighter-rouge">int</code> command to
+convert the string “3.4” to 3.4 and an additional type conversion to 3. After all, Python 3 performs a lot of other
+magic - isn’t that part of its charm?</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int("3.4")
+</code></pre></div>    </div>
+    <p>However, Python 3 throws an error.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ValueError: invalid literal for int() with base 10: '3.4'
+</code></pre></div>    </div>
+
+    <p>Why? To be consistent, possibly. If you ask Python to perform two consecutive
+typecasts, you must convert it explicitly in code.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int(float("3.4"))
+</code></pre></div>    </div>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test out solutions here!
+</span></code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-arithmetic-with-different-types"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Arithmetic with Different Types</h3>
+
+  <p>Which of the following will return the floating point number <code class="language-plaintext highlighter-rouge">2.0</code>?
+Note: there may be more than one right answer.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first = 1.0
+second = "1"
+third = "1.1"
+</code></pre></div>  </div>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">first + float(second)</code></li>
+    <li><code class="language-plaintext highlighter-rouge">float(second) + float(third)</code></li>
+    <li><code class="language-plaintext highlighter-rouge">first + int(third)</code></li>
+    <li><code class="language-plaintext highlighter-rouge">first + int(float(third))</code></li>
+    <li><code class="language-plaintext highlighter-rouge">int(first) + int(float(third))</code></li>
+    <li><code class="language-plaintext highlighter-rouge">2.0 * second</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Answer: 1 and 4 give exactly 2.0.
+Answer 5 gives the value <code class="language-plaintext highlighter-rouge">2</code> which may be considered equivalent, but is not returning a float specifically.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test out solutions here!
+</span></code></pre></div></div>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Every value has a type.</p>
+</li>
+                        
+                        <li><p>Use the built-in function <code class="language-plaintext highlighter-rouge">type</code> to find the type of a value.</p>
+</li>
+                        
+                        <li><p>Types control what operations can be done on values.</p>
+</li>
+                        
+                        <li><p>Strings can be added and multiplied.</p>
+</li>
+                        
+                        <li><p>Strings have a length (but numbers don’t).</p>
+</li>
+                        
+                        <li><p>Must convert numbers to strings or vice versa when operating on them.</p>
+</li>
+                        
+                        <li><p>Can mix integers and floats freely in operations.</p>
+</li>
+                        
+                        <li><p>Variables only change value when something is assigned to them.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Python - Basic Types & Type Conversion (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">The Carpentries, Helena Rasche, Donny Vrins, Bazante Sanders, 2022 <b>Python - Basic Types & Type Conversion (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-types/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-types/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-python-types,
+author = "The Carpentries and Helena Rasche and Donny Vrins and Bazante Sanders",
+title = "Python - Basic Types & Type Conversion (Galaxy Training Materials)",
+year = "2022",
+month = "04",
+day = "25"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-types/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

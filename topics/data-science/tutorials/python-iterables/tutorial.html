@@ -1,0 +1,1663 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Python - Lists & Strings & Dictionaries</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:title" content="Galaxy Training: Python - Lists & Strings & Dictionaries" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-iterables/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-iterables/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-iterables/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-iterables/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-iterables/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-iterables/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/python-iterables/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/python-iterables/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-04-01/topics/data-science/tutorials/python-iterables/tutorial.html" title="Version 2022-04-01">2022-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-03-01/topics/data-science/tutorials/python-iterables/tutorial.html" title="Version 2022-03-01">2022-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-02-01/topics/data-science/tutorials/python-iterables/tutorial.html" title="Version 2022-02-01">2022-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:25 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Python - Lists & Strings & Dictionaries",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "courseCode": "data-science / python-iterables / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Python - Lists & Strings & Dictionaries' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/python-iterables/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "jupyter-notebook",
+  "description": "The questions this  addresses are:\n - How can I store multiple values?\n\n\\nThe objectives are:\n - Explain why programs need collections of values.\n - Write programs that create flat lists, index them, slice them, and modify them through assignment and method calls.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Donny Vrins"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "The Carpentries"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Donny Vrins"
+    },
+    {
+      "@type": "Person",
+      "name": "Bazante Sanders"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Python - Lists & Strings & Dictionaries</h1>
+    
+
+
+    <div class="contributors-line">Authors: 
+<a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=27" alt="Avatar">The Carpentries</a>
+
+
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+<a href="/training-material/hall-of-fame/dirowa/" class="contributor-badge contributor-dirowa"><img src="https://avatars.githubusercontent.com/dirowa?s=27" alt="Avatar">Donny Vrins</a>
+
+
+<a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=27" alt="Avatar">Bazante Sanders</a>
+
+
+<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I store multiple values?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Explain why programs need collections of values.</p>
+</li>
+        
+        <li><p>Write programs that create flat lists, index them, slice them, and modify them through assignment and method calls.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-iterables/data-science-python-iterables.ipynb" title="Jupyter Notebook" alt="Python - Lists & Strings & Dictionaries Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fpython-iterables%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-iterables/data-science-python-iterables.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-iterables/data-science-python-iterables.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-iterables/data-science-python-iterables-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                 
+
+                <blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#lists" id="markdown-toc-lists">Lists</a>    <ol>
+      <li><a href="#indexing" id="markdown-toc-indexing">Indexing</a></li>
+      <li><a href="#replacement" id="markdown-toc-replacement">Replacement</a></li>
+      <li><a href="#appending" id="markdown-toc-appending">Appending</a></li>
+      <li><a href="#list-indices" id="markdown-toc-list-indices">List Indices</a></li>
+      <li><a href="#removing-items" id="markdown-toc-removing-items">Removing Items.</a></li>
+      <li><a href="#empty-lists" id="markdown-toc-empty-lists">Empty Lists</a></li>
+      <li><a href="#heterogeneous-lists" id="markdown-toc-heterogeneous-lists">Heterogeneous Lists</a></li>
+      <li><a href="#strings-are-like-lists" id="markdown-toc-strings-are-like-lists">Strings are like Lists</a></li>
+      <li><a href="#bounds" id="markdown-toc-bounds">Bounds</a></li>
+      <li><a href="#exercises" id="markdown-toc-exercises">Exercises</a></li>
+    </ol>
+  </li>
+  <li><a href="#slicing--dicing" id="markdown-toc-slicing--dicing">Slicing &amp; Dicing</a>    <ol>
+      <li><a href="#stride" id="markdown-toc-stride">Stride</a></li>
+      <li><a href="#sorting" id="markdown-toc-sorting">Sorting</a></li>
+      <li><a href="#type-conversion" id="markdown-toc-type-conversion">Type Conversion</a></li>
+    </ol>
+  </li>
+  <li><a href="#exercise-time" id="markdown-toc-exercise-time">Exercise Time</a>    <ol>
+      <li><a href="#how-large-is-a-slice" id="markdown-toc-how-large-is-a-slice">How Large is a Slice?</a></li>
+      <li><a href="#solution" id="markdown-toc-solution">Solution</a></li>
+      <li><a href="#from-strings-to-lists-and-back" id="markdown-toc-from-strings-to-lists-and-back">From Strings to Lists and Back</a></li>
+      <li><a href="#solution-1" id="markdown-toc-solution-1">Solution</a></li>
+      <li><a href="#working-with-the-end" id="markdown-toc-working-with-the-end">Working With the End</a></li>
+      <li><a href="#solution-2" id="markdown-toc-solution-2">Solution</a></li>
+      <li><a href="#stepping-through-a-list" id="markdown-toc-stepping-through-a-list">Stepping Through a List</a></li>
+      <li><a href="#solution-3" id="markdown-toc-solution-3">Solution</a></li>
+      <li><a href="#slice-bounds" id="markdown-toc-slice-bounds">Slice Bounds</a></li>
+      <li><a href="#solution-4" id="markdown-toc-solution-4">Solution</a></li>
+    </ol>
+  </li>
+  <li><a href="#dictionaries" id="markdown-toc-dictionaries">Dictionaries</a>    <ol>
+      <li><a href="#methods" id="markdown-toc-methods">Methods</a></li>
+      <li><a href="#accessing-values" id="markdown-toc-accessing-values">Accessing Values</a></li>
+      <li><a href="#modifying-dictionaries" id="markdown-toc-modifying-dictionaries">Modifying Dictionaries</a></li>
+      <li><a href="#exercises-1" id="markdown-toc-exercises-1">Exercises</a></li>
+    </ol>
+  </li>
+  <li><a href="#maybe-weve-exterminated-b117-and-b1351-remove-their-numbers" id="markdown-toc-maybe-weve-exterminated-b117-and-b1351-remove-their-numbers">Maybe we’ve exterminated B.1.1.7 and B.1.351, remove their numbers.</a></li>
+  <li><a href="#choosing-the-right-data-type" id="markdown-toc-choosing-the-right-data-type">Choosing the Right Data Type</a>    <ol>
+      <li><a href="#exercises-2" id="markdown-toc-exercises-2">Exercises</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="lists">Lists</h1>
+
+<p>Doing calculations with a hundred variables called <code class="language-plaintext highlighter-rouge">pressure_001</code>, <code class="language-plaintext highlighter-rouge">pressure_002</code>, etc. would be at least as slow as doing them by hand. Using a <em>list</em> to store many values together solves that problems. Lists are surrounded by square brackets: <code class="language-plaintext highlighter-rouge">[</code>, <code class="language-plaintext highlighter-rouge">]</code>, with values separated by commas:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pressures</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.273</span><span class="p">,</span> <span class="mf">0.275</span><span class="p">,</span> <span class="mf">0.277</span><span class="p">,</span> <span class="mf">0.275</span><span class="p">,</span> <span class="mf">0.276</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pressures</span><span class="p">)</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="indexing">Indexing</h2>
+
+<p>You can use an item’s index to fetch it from a list.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'zeroth item of pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'fourth item of pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="replacement">Replacement</h2>
+
+<p>Lists’ values can be changed or replaced by assigning a new value to the position in the list.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pressures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.265</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'pressures is now: </span><span class="si">{</span><span class="n">pressures</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Note how the first item has changed from <code class="language-plaintext highlighter-rouge">0.273</code></p>
+
+<h2 id="appending">Appending</h2>
+
+<p>Appending items to a list lengthens it. You can do <code class="language-plaintext highlighter-rouge">list_name.append()</code> to add items to the end of a list.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes is initially: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.append()</code> is a <em>method</em> of lists. It’s like a function, but tied to a particular object. You use <code class="language-plaintext highlighter-rouge">object_name.method_name</code> to call methods, which deliberately resembles the way we refer to things in a library.</p>
+
+<p>We will meet other methods of lists as we go along. Use <code class="language-plaintext highlighter-rouge">help(list)</code> for a preview. <code class="language-plaintext highlighter-rouge">extend</code> is similar to <code class="language-plaintext highlighter-rouge">append</code>, but it allows you to combine two lists.  For example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">teen_primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
+<span class="n">middle_aged_primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">37</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">47</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes is currently: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">primes</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">teen_primes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has now become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">middle_aged_primes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has finally become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Note that while <code class="language-plaintext highlighter-rouge">extend</code> maintains the “flat” structure of the list, appending a list to a list makes the result two-dimensional - the last element in <code class="language-plaintext highlighter-rouge">primes</code> is a list, not an integer.</p>
+
+<p>This starts to become a more complicated data structure, and we’ll use more of these later. A list containing both integers and a list can be called a “hetereogenous” list, since it has multiple different data types. This is relatively uncommon, most of the lists you’ll encounter will have a single data type inside of them. Sometimes you’ll see a list of lists, which can be used to store positions, like a chessboard.</p>
+
+<h2 id="list-indices">List Indices</h2>
+
+<p>In computer science and programming we number the positions within a list starting from <code class="language-plaintext highlighter-rouge">0</code>, rather than from <code class="language-plaintext highlighter-rouge">1</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Position  0         1          2            3           4
+</span><span class="n">weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Monday'</span><span class="p">,</span> <span class="s">'Tuesday'</span><span class="p">,</span> <span class="s">'Wednesday'</span><span class="p">,</span> <span class="s">'Thursday'</span><span class="p">,</span> <span class="s">'Friday'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>But if you try an access a position that is outside of the list, you’ll get an error</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>returns a <code class="language-plaintext highlighter-rouge">IndexError: list index out of range</code>.</p>
+
+<blockquote class="question">
+  <h3 id="tip-tip-reading-error-messages"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Reading Error Messages</h3>
+  <p>So how do you read this?</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 | ---------------------------------------------------------------------------
+2 | IndexError                                Traceback (most recent call last)
+3 | /tmp/ipykernel_648319/137030145.py in &lt;module&gt;
+4 | ----&gt; 1 print(weekdays[9])
+5 |
+6 | IndexError: list index out of range
+</code></pre></div>  </div>
+
+  <ol>
+    <li>This is just a line of <code class="language-plaintext highlighter-rouge">-</code>s as a separator</li>
+    <li><code class="language-plaintext highlighter-rouge">IndexError</code>, here Jupyter/CoCalc/etc are trying to be helpful and highlight the error for us. This is the important bit of information!</li>
+    <li>This is the path to where the code is, Jupyter/CoCalc/etc create temporary files to execute your code.</li>
+    <li>Here an arrow points to the line number where something has broken. 1 shows that it’s the first line within the cell, and it points to the print statement. Really it’s pointing at the <code class="language-plaintext highlighter-rouge">weekdays[9]</code> within the print statement.</li>
+    <li>Blank</li>
+    <li>This is where we normally look for the <strong>most important part of the Traceback</strong>. The error message. An <code class="language-plaintext highlighter-rouge">IndexError</code>, namely that the list index (9) is out of the range of possible values (the length of the list.)</li>
+  </ol>
+</blockquote>
+
+<p>However, sometimes you want to access the very end of a list! You can either start at the beginning and count along to find the last item or second to last item, or you can use Negative Indices</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Position  0         1          2            3           4
+</span><span class="n">weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Monday'</span><span class="p">,</span> <span class="s">'Tuesday'</span><span class="p">,</span> <span class="s">'Wednesday'</span><span class="p">,</span> <span class="s">'Thursday'</span><span class="p">,</span> <span class="s">'Friday'</span><span class="p">]</span>
+<span class="c1"># Position  -5        -4         -3           -2          -1
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>If you wanted to find the last value in a list, you could also use <code class="language-plaintext highlighter-rouge">len(elements)</code> and then subtract back to find the index you want</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">elements</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>This is essentially how negative indexes work, except you don’t have to use <code class="language-plaintext highlighter-rouge">len(elements)</code>, that’s done for you automatically.</p>
+
+<h2 id="removing-items">Removing Items.</h2>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">del</code> to remove items from a list entirely. We use <code class="language-plaintext highlighter-rouge">del list_name[index]</code> to remove an element from a list (in the example, 9 is not a prime number) and thus shorten it. <code class="language-plaintext highlighter-rouge">del</code> is not a function or a method, but a statement in the language.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes before removing last item: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">primes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes after removing last item: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="empty-lists">Empty Lists</h2>
+
+<p>The empty list contains no values. When you want to make a new list, use <code class="language-plaintext highlighter-rouge">[]</code> on its own to represent a list that doesn’t contain any values. This is helpful as a starting point for collecting values, which we’ll see soon.</p>
+
+<h2 id="heterogeneous-lists">Heterogeneous Lists</h2>
+
+<p>Lists may contain values of different types. A single list may contain numbers, strings, and anything else.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">goals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s">'Create lists.'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'Extract items from lists.'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'Modify lists.'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="strings-are-like-lists">Strings are like Lists</h2>
+
+<p>Text is often called a “string” in the programming world. Strings of text like <code class="language-plaintext highlighter-rouge">name = "Helena"</code> or <code class="language-plaintext highlighter-rouge">patient_id = "19237zud830"</code> are very similar conceptually to lists. Except instead of being a list of numbers, they’re a lists of characters.</p>
+
+<p>In a number of older programming languages, strings are indeed arrays of numbers inte<span class="notranslate">rna</span>lly. However python hides a lot of that complexity from us, so we can just work with text.</p>
+
+<p>Still, many of the operations you use on lists, can also be used on strings as well! Strings can be indexed like lists so you can get single elements from lists.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">element</span> <span class="o">=</span> <span class="s">'carbon'</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'zeroth character: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'third character: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Strings, however, cannot be modified, you can’t change a single letter in a string. Things that cannot be modified after creation are called <em>immutable</em> or sometimes <em>frozen</em>, compared to things which can be modified which are called <em>mutable</em>.
+Python considers the string to be a single value with parts, not a collection of values.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'C'</span>
+</code></pre></div></div>
+
+<h2 id="bounds">Bounds</h2>
+
+<p>You cannot access values beyond the end of the list, this will result in an error. Python reports an <code class="language-plaintext highlighter-rouge">IndexError</code> if we attempt to access a value that doesn’t exist. This is a kind of <strong>runtime error</strong>, as it cannot be detected as the code is parsed. Imagine if you had a script which let you read in a file, depending on how many lines were in the file, whether index 90 was valid or invalid, would depend on how big your file was.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'99th element of element is: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">99</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="exercises">Exercises</h2>
+
+<blockquote class="question">
+  <h3 id="question-question-checking-suffixes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Checking suffixes</h3>
+
+  <ol>
+    <li>How could you check that the extension of a filename is <code class="language-plaintext highlighter-rouge">.csv</code></li>
+    <li>Can you find another way? Maybe check the help page for <code class="language-plaintext highlighter-rouge">str</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">a[-4:] == "csv"</code> (Here we use <code class="language-plaintext highlighter-rouge">==</code> for comparing two values)</li>
+      <li><code class="language-plaintext highlighter-rouge">a.endswith('.csv')</code></li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test code here!
+</span><span class="n">a</span> <span class="o">=</span> <span class="s">"1234.csv"</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">"1273.tsv"</span>
+<span class="n">c</span> <span class="o">=</span> <span class="s">"9382.csv"</span>
+<span class="n">d</span> <span class="o">=</span> <span class="s">"1239.csv"</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-say-it-loud"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Say it loud!</h3>
+
+  <ol>
+    <li>Can you find a method in the <code class="language-plaintext highlighter-rouge">str</code>’s help that converts the string to upper case</li>
+    <li>or lower case?</li>
+    <li>Can you use it to fix mixed case <span class="notranslate">DNA</span> sequence?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">"shout it out".upper()</code></li>
+      <li><code class="language-plaintext highlighter-rouge">"WHISPER THIS".lower()</code></li>
+      <li><code class="language-plaintext highlighter-rouge">terrible_sequence.upper()</code></li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test answers here!
+</span><span class="k">print</span><span class="p">(</span><span class="s">"shout it out"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"WHISPER THIS"</span><span class="p">)</span>
+<span class="c1"># Fix this mess to be all capital
+</span><span class="n">terrible_sequence</span> <span class="o">=</span> <span class="s">"AcTGAGccGGTt"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">terrible_sequence</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-splitting"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Splitting</h3>
+  <ol>
+    <li>We use <code class="language-plaintext highlighter-rouge">.split()</code> to split a string by some character. Here we have a comma separated list of values, try splitting that up by a comma, but we actually wanted it separated by <code class="language-plaintext highlighter-rouge">|</code> characters. Can you split it up, and then re-join it with that new character?</li>
+    <li>Does <code class="language-plaintext highlighter-rouge">help(str)</code> give you another option for replacing a character like that.</li>
+    <li>What happens if you split by another value like <code class="language-plaintext highlighter-rouge">3</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">data.split(",")</code></li>
+      <li><code class="language-plaintext highlighter-rouge">data.replace(",", "|")</code></li>
+      <li>Those characters will disappear! If you want to reconstruct the same string</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Split me
+</span><span class="n">data</span> <span class="o">=</span> <span class="s">"0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0"</span>
+</code></pre></div></div>
+
+<h1 id="slicing--dicing">Slicing &amp; Dicing</h1>
+
+<p>All of the data types we’ve talked about today can be sliced, and this will be a key part of using lists.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s">'H'</span><span class="p">,</span> <span class="s">'He'</span><span class="p">,</span> <span class="s">'Li'</span><span class="p">,</span> <span class="s">'Be'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">,</span> <span class="s">'C'</span><span class="p">,</span> <span class="s">'N'</span><span class="p">,</span> <span class="s">'O'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">]</span>
+<span class="c1"># Instead of accessing a single element
+</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># We'll access a range
+</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Accessing only a portion of a list is commonly used, say if you have a list of FastQ files from paired end sequencing, perhaps you want two of them at a time. You could access those with <code class="language-plaintext highlighter-rouge">[0:2]</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># You don't need to start at 0
+</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># But your end should be bigger than your start.
+# What do you think this will return?
+# Make a guess before you run it
+</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>If you don’t supply an end value, Python will default to going to the end of the list. Likewise, if you don’t provide a start value, Python will use <code class="language-plaintext highlighter-rouge">0</code> as the start by default, until whatever end value you provide.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-valid-and-invalid-slices"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Valid and Invalid Slices</h3>
+  <p>Which of these do you think will be valid? Which are invalid? Predict what they will return:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 1
+elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F']
+# 2
+elements[0:3]
+# 3
+elements[:3]
+# 4
+elements[-3:3]
+# 5
+elements[-8:-3]
+# 6
+elements[:]
+# 7
+elements[0:20]
+# 8
+elements['H':'Li']
+# 9
+elements[1.5:]
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>All of these are valid except the last two.</p>
+    <ol>
+      <li>If you dont’ fill in a position, Python will use the default. 0 for the left hand side of the <code class="language-plaintext highlighter-rouge">:</code>, and <code class="language-plaintext highlighter-rouge">len(elements)</code> for the right hand side.</li>
+      <li>You can request a slice longer than your list (e.g. up to 20), but Python may not give you that many items back.</li>
+      <li>List slicing can only be done with integers, not floats.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Check your answers here!
+</span></code></pre></div></div>
+
+<h2 id="stride">Stride</h2>
+
+<p>However, list slicing can be more complicated. You can additionally use a ‘stride’ parameter, which is how Python should strep through the list. To take every other element from a list:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># every other value
+</span><span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># every other value from the second value
+</span><span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># the start and end are optional
+</span><span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[::</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># every third value in the list.
+</span></code></pre></div></div>
+
+<p>So list slicing together is either <code class="language-plaintext highlighter-rouge">list[low:high]</code> or <code class="language-plaintext highlighter-rouge">list[low:high:stride]</code>, where low and high are optional if you just want to go to the end of the list.</p>
+
+<h2 id="sorting">Sorting</h2>
+
+<p>Lists occasionally need to be sorted. For example, you have a list of students you might want to alphabetise, and here you can use the function <code class="language-plaintext highlighter-rouge">sorted</code> to help you.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">students</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'Koos Christabella'</span><span class="p">,</span>
+    <span class="s">'Zackary Habiba'</span><span class="p">,</span>
+    <span class="s">'Jumana Rostam'</span><span class="p">,</span>
+    <span class="s">'Sorina Gaia'</span><span class="p">,</span>
+    <span class="s">'Kalyani Bessarion'</span><span class="p">,</span>
+    <span class="s">'Enéas Nirmala'</span><span class="p">,</span>
+    <span class="s">'王奕辰'</span><span class="p">,</span>
+    <span class="s">'刘依诺'</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">students</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-sorting-names-is-hard"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Sorting names is hard!</h3>
+  <p>Some people have 1 name, some have 4 or more! Some cultures have su<span class="notranslate">rna</span>mes first, some not. Sorting names is a complex situation, so be sure you consider your data before sorting and assuming it’s correct. Test with multiple values to make sure your code works!</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-results-can-be-dependent-on-analysis-order"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Results can be dependent on analysis order!</h3>
+  <p>Some analyses (especially simultaions) can be dependent on data input order or data sorting. This was recently seen in <span class="citation"><a href="#Bhandari_Neupane_2019">Neupane <i>et al.</i> 2019</a></span> where the data files used were sorted one way on Windows, and another on Linux, resulting in different results for the same code and the same datasets! Yikes!</p>
+
+  <p>If you know your analyses are dependent on file ordering, then you can use <code class="language-plaintext highlighter-rouge">sorted()</code> to make sure the data is provided in a uniform way every time.</p>
+
+  <p>If you’re not sure if your results will be dependent, you can try sorting anyway. Or better yet, randomising the list of inputs to make sure your code behaves properly in any scenario.</p>
+</blockquote>
+
+<h2 id="type-conversion">Type Conversion</h2>
+
+<p>Just list with converting <code class="language-plaintext highlighter-rouge">"1.5"</code> to an float with the <code class="language-plaintext highlighter-rouge">float()</code> function, or <code class="language-plaintext highlighter-rouge">3.1</code> to a string with <code class="language-plaintext highlighter-rouge">str()</code>, we can do the same with lists using the <code class="language-plaintext highlighter-rouge">list()</code> function, and sets with <code class="language-plaintext highlighter-rouge">set()</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convert text to a list
+</span><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s">"sometext"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Converting a list back into text is likewise possible, but you need to use the special function <code class="language-plaintext highlighter-rouge">join</code>. Join is a function of a <code class="language-plaintext highlighter-rouge">str</code>, which accepts a list</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">word</span> <span class="o">=</span> <span class="p">[</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"-"</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>It takes the string you called it on, and uses that as a separator. Then for the list that you provide, it joins that together with the separator.</p>
+
+<h1 id="exercise-time">Exercise Time</h1>
+
+<blockquote class="question">
+  <h3 id="question-question-fill-in-the-blanks"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Fill in the Blanks</h3>
+
+  <p>Fill in the blanks so that the program below produces the output shown.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>values = ____
+values.____(1)
+values.____(3)
+values.____(5)
+print(f'first time: {values}')
+values = values[____]
+print(f'second time: {values}')
+</code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first time: [1, 3, 5]
+second time: [3, 5]
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>values = []
+values.append(1)
+values.append(3)
+values.append(5)
+print(f'first time: {values}')
+values = values[1:]
+print(f'second time: {values}')
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fill in the blanks here!
+</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">____</span>
+<span class="n">values</span><span class="p">.</span><span class="n">____</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">values</span><span class="p">.</span><span class="n">____</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">values</span><span class="p">.</span><span class="n">____</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'first time: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s">'</span><span class="p">)</span> <span class="c1"># Should print [1, 3, 5]
+</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">____</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'second time: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s">'</span><span class="p">)</span> <span class="c1"># should print [3, 5]
+</span></code></pre></div></div>
+
+<blockquote class="question">
+  <h2 id="how-large-is-a-slice">How Large is a Slice?</h2>
+
+  <p>If <code class="language-plaintext highlighter-rouge">start</code> and <code class="language-plaintext highlighter-rouge">stop</code> are both non-negative integers,
+how long is the list <code class="language-plaintext highlighter-rouge">values[start:stop]</code>?</p>
+
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+    <p>The list <code class="language-plaintext highlighter-rouge">values[start:stop]</code> has up to <code class="language-plaintext highlighter-rouge">stop - start</code> elements.  For example,
+<code class="language-plaintext highlighter-rouge">values[1:4]</code> has the 3 elements <code class="language-plaintext highlighter-rouge">values[1]</code>, <code class="language-plaintext highlighter-rouge">values[2]</code>, and <code class="language-plaintext highlighter-rouge">values[3]</code>.
+Why ‘up to’?
+If <code class="language-plaintext highlighter-rouge">stop</code> is greater than the total length of the list <code class="language-plaintext highlighter-rouge">values</code>,
+we will still get a list back but it will be shorter than expected.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h2 id="from-strings-to-lists-and-back">From Strings to Lists and Back</h2>
+
+  <p>Given this:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print(f'string to list: {list('tin')}')
+print(f'list to string: {''.join(['g', 'o', 'l', 'd'])}')
+</code></pre></div>  </div>
+
+  <ol>
+    <li>What does <code class="language-plaintext highlighter-rouge">list('some string')</code> do?</li>
+    <li>What does <code class="language-plaintext highlighter-rouge">'-'.join(['x', 'y', 'z'])</code> generate?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h2 id="solution-1">Solution</h2>
+    <ol>
+      <li><a href="https://docs.python.org/3/library/stdtypes.html#list"><code class="language-plaintext highlighter-rouge">list('some string')</code></a> converts a string into a list containing all of its characters.</li>
+      <li><a href="https://docs.python.org/3/library/stdtypes.html#str.join"><code class="language-plaintext highlighter-rouge">join</code></a> returns a string that is the <em>concatenation</em>
+of each string element in the list and adds the separator between each element in the list. This results in
+<code class="language-plaintext highlighter-rouge">x-y-z</code>. The separator between the elements is the string that provides this method.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test code here
+</span></code></pre></div></div>
+
+<blockquote class="question">
+  <h2 id="working-with-the-end">Working With the End</h2>
+
+  <p>What does the following program print?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>element = 'helium'
+print(element[-1])
+</code></pre></div>  </div>
+
+  <ol>
+    <li>How does Python interpret a negative index?</li>
+    <li>If a list or string has N elements,
+what is the most negative index that can safely be used with it,
+and what location does that index represent?</li>
+    <li>If <code class="language-plaintext highlighter-rouge">values</code> is a list, what does <code class="language-plaintext highlighter-rouge">del values[-1]</code> do?</li>
+    <li>How can you display all elements but the last one without changing <code class="language-plaintext highlighter-rouge">values</code>?
+(Hint: you will need to combine slicing and negative indexing.)</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h2 id="solution-2">Solution</h2>
+    <p>The program prints <code class="language-plaintext highlighter-rouge">m</code>.</p>
+    <ol>
+      <li>Python interprets a negative index as starting from the end (as opposed to
+starting from the beginning).  The last element is <code class="language-plaintext highlighter-rouge">-1</code>.</li>
+      <li>The last index that can safely be used with a list of N elements is element
+<code class="language-plaintext highlighter-rouge">-N</code>, which represents the first element.</li>
+      <li><code class="language-plaintext highlighter-rouge">del values[-1]</code> removes the last element from the list.</li>
+      <li><code class="language-plaintext highlighter-rouge">values[:-1]</code></li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test code here
+</span></code></pre></div></div>
+
+<blockquote class="question">
+  <h2 id="stepping-through-a-list">Stepping Through a List</h2>
+
+  <p>What does the following program print?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>element = 'fluorine'
+print(element[::2])
+print(element[::-1])
+</code></pre></div>  </div>
+
+  <ol>
+    <li>If we write a slice as <code class="language-plaintext highlighter-rouge">low:high:stride</code>, what does <code class="language-plaintext highlighter-rouge">stride</code> do?</li>
+    <li>What <span class="notranslate">expression</span> would select all of the even-numbered items from a collection?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h2 id="solution-3">Solution</h2>
+    <p>The program prints</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>furn
+eniroulf
+</code></pre></div>    </div>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">stride</code> is the step size of the slice.</li>
+      <li>The slice <code class="language-plaintext highlighter-rouge">1::2</code> selects all even-numbered items from a collection: it starts
+with element <code class="language-plaintext highlighter-rouge">1</code> (which is the second element, since indexing starts at <code class="language-plaintext highlighter-rouge">0</code>),
+goes on until the end (since no <code class="language-plaintext highlighter-rouge">end</code> is given), and uses a step size of <code class="language-plaintext highlighter-rouge">2</code>
+(i.e., selects every second element).</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test code here
+</span></code></pre></div></div>
+
+<blockquote class="question">
+  <h2 id="slice-bounds">Slice Bounds</h2>
+
+  <p>What does the following program print?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>element = 'lithium'
+print(element[0:20])
+print(element[-1:3])
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h2 id="solution-4">Solution</h2>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lithium
+
+</code></pre></div>    </div>
+    <p>The first statement prints the whole string, since the slice goes beyond the total length of the string.
+The second statement returns an empty string, because the slice goes “out of bounds” of the string.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test code here
+</span></code></pre></div></div>
+
+<h1 id="dictionaries">Dictionaries</h1>
+
+<p>When you think of a Dictionary, you should think of a real life Dictionary, they map some key to a value. Like a term to it’s definition</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Eichhörnchen</code></td>
+      <td>Squirrel</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">火锅</code></td>
+      <td>Hot Pot</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Or a Country to it’s population</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>South Sudan</td>
+      <td>492,970</td>
+    </tr>
+    <tr>
+      <td>Australia</td>
+      <td>411,667</td>
+    </tr>
+    <tr>
+      <td>Guinea</td>
+      <td>1,660,973</td>
+    </tr>
+    <tr>
+      <td>Morocco</td>
+      <td>573,895</td>
+    </tr>
+    <tr>
+      <td>Maldives</td>
+      <td>221,678</td>
+    </tr>
+    <tr>
+      <td>Wallis and Futuna</td>
+      <td>1,126</td>
+    </tr>
+    <tr>
+      <td>Eswatini</td>
+      <td>94,874</td>
+    </tr>
+    <tr>
+      <td>Namibia</td>
+      <td>325,858</td>
+    </tr>
+    <tr>
+      <td>Turkmenistan</td>
+      <td>1,031,992</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In Python we create a dictionary with <code class="language-plaintext highlighter-rouge">{}</code> and use <code class="language-plaintext highlighter-rouge">:</code> to separate keys and values. Turning the above list into a Python dictionary, it would look like:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">populations</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">"South Sudan"</span><span class="p">:</span> <span class="mi">492970</span><span class="p">,</span>
+  <span class="s">"Australia"</span><span class="p">:</span> <span class="mi">411667</span><span class="p">,</span>
+  <span class="s">"Guinea"</span><span class="p">:</span> <span class="mi">1660973</span><span class="p">,</span>
+  <span class="s">"Morocco"</span><span class="p">:</span> <span class="mi">573895</span><span class="p">,</span>
+  <span class="s">"Maldives"</span><span class="p">:</span> <span class="mi">221678</span><span class="p">,</span>
+  <span class="s">"Wallis and Futuna"</span><span class="p">:</span> <span class="mi">1126</span><span class="p">,</span>
+  <span class="s">"Eswatini"</span><span class="p">:</span> <span class="mi">94874</span><span class="p">,</span>
+  <span class="s">"Namibia"</span><span class="p">:</span> <span class="mi">325858</span><span class="p">,</span>
+  <span class="s">"Turkmenistan"</span><span class="p">:</span> <span class="mi">1031992</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can see a string (the country name) being used for the key, and then the number (an integer) as the value. (Would a float make sense? Why or why not?)</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-other-names"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Other Names</h3>
+  <p>They’re also sometimes called associative arrays (because they’re an array or list of values that associate a key to a value) or maps (because they map a key to a value), depending on what you’re reading.</p>
+</blockquote>
+
+<h2 id="methods">Methods</h2>
+
+<p>You can access both the keys, and the values</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">.</span><span class="n">values</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>These will print out two list-like objects. They will become more useful in the future when we talk about looping over dictionaries and processing all of the values within.</p>
+
+<h2 id="accessing-values">Accessing Values</h2>
+
+<p>Just like lists where you access by the position in the list</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">[</span><span class="s">"Namibia"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>And just like lists, if you try an access a key that isn’t there or an index outside of the range of the list:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">[</span><span class="s">"Mars"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-dictionaries-are-faster-than-lists-for-looking-up-values"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Dictionaries are faster than lists for looking up values</h3>
+  <p>Just like in real life, searching a dictionary for a specific term is quite fast. Often a lot faster than searching a list for a specific value.</p>
+
+  <p>For those of you old enough to remember the paper version of a dictionary, you knew that As would be at the start and Zs at the end, and probably Ms around the middle. And if you were looking for a word like “Squirrel”, you’d open the dictionary in the middle, maybe decide it was in the second half of the book, randomly choose a page in the second half, and you could keep deciding if it was “before” or “after” the current page, never even bothering to search the first half.</p>
+
+  <p>Conceptually, compared with a list, you can’t make this guess of if the item is in the first or second half. You need to search item by item, it would be like reading page by page until you get to Squirrel in the dictionary.</p>
+</blockquote>
+
+<h2 id="modifying-dictionaries">Modifying Dictionaries</h2>
+
+<p>Adding new values to a dictionary is easy, it’s very similar to replacing a value in a list.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># For lists we did
+</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'z'</span><span class="p">]</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'a'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>For dictionaries, it’s essentially the same, we access the ‘place’ in the dictionary just like we did with a list, and set it to a value</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">populations</span><span class="p">[</span><span class="s">"Mars"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># robots
+</span><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And similarly, removing items is the same as it was for lists:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Removes the first item
+</span><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And with dictionaries you delete by specifying which position/key you want to remove</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">del</span> <span class="n">populations</span><span class="p">[</span><span class="s">'Australia'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="exercises-1">Exercises</h2>
+
+<blockquote class="question">
+  <h3 id="question-question-dna-complement"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: <span class="notranslate">DNA</span> Complement</h3>
+
+  <p><span class="notranslate">DNA</span> is usually in the form of ds<span class="notranslate">DNA</span>, a paired strand, where A maps to T and C maps to G and vice versa.
+But when we’re working with <span class="notranslate">DNA</span> sequences in bioinformatics, we often only store one strand, because we can calculate the <em>complement</em> on the fly, when we need.</p>
+
+  <p>Write a dictionary that lets you look up the letters A, C, T, and G and find their complements.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>You need to have the complements of every base. If you just defined ‘A’ and ‘C’, how would you look up the complement when you want to translate a ‘T’ or a ‘G’? It’s not easily possible to look up a key by a value, only to search a key and find a value.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>translation = {
+'A': 'T',
+'T': 'A',
+'C': 'G',
+'G': 'C',
+}
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test code here!
+</span><span class="n">translation</span> <span class="o">=</span> <span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-modifying-an-array"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Modifying an array</h3>
+
+  <p>Fill in the blanks to make the execution correct:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>variants = {
+  'B.1.1.7': 26267,
+  'B.1.351': 439,
+}
+variants[_____] =  _____
+print(variants) # Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384}
+__________
+print(variants) # Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384, 'B.1.617.2': 43486}
+# Maybe we've exterminated B.1.1.7 and B.1.351, remove their numbers.
+del _______
+del _______
+print(variants[______]) # Should print 384
+print(variants[______]) # Should print 43486
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>variants = {
+  ‘B.1.1.7’: 26267,
+  ‘B.1.351’: 439,
+}
+variants[‘P.1’] = 384
+print(variants) # Should print {‘B.1.1.7’: 26267, ‘B.1.351’: 439, ‘P.1’: 384}
+variants[‘B.1.617.2’] = 43486
+print(variants) # Should print {‘B.1.1.7’: 26267, ‘B.1.351’: 439, ‘P.1’: 384, ‘B.1.617.2’: 43486}</p>
+    <h1 id="maybe-weve-exterminated-b117-and-b1351-remove-their-numbers">Maybe we’ve exterminated B.1.1.7 and B.1.351, remove their numbers.</h1>
+    <p>del variants[‘B.1.1.7’]
+del variants[‘B.1.351’]
+print(variants[‘P.1’]) # Should print 384
+print(variants[‘B.1.617.2’]) # Should print 43486
+```</p>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test code here!
+</span><span class="n">variants</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'B.1.1.7'</span><span class="p">:</span> <span class="mi">26267</span><span class="p">,</span>
+  <span class="s">'B.1.351'</span><span class="p">:</span> <span class="mi">439</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">variants</span><span class="p">[</span><span class="n">_____</span><span class="p">]</span> <span class="o">=</span>  <span class="n">_____</span>
+<span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span> <span class="c1"># Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384}
+</span><span class="n">__________</span>
+<span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span> <span class="c1"># Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384, 'B.1.617.2': 43486}
+# Maybe we've exterminated B.1.1.7 and B.1.351, remove their numbers.
+</span><span class="k">del</span> <span class="n">_______</span>
+<span class="k">del</span> <span class="n">_______</span>
+<span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">[</span><span class="n">______</span><span class="p">])</span> <span class="c1"># Should print 384
+</span><span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">[</span><span class="n">______</span><span class="p">])</span> <span class="c1"># Should print 43486
+</span></code></pre></div></div>
+
+<h1 id="choosing-the-right-data-type">Choosing the Right Data Type</h1>
+
+<p>Choosing the correct data type can sometimes require some thought, and even discussion with colleagues. And don’t be afraid to search the internet for how other people have done it!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data type</th>
+      <th>Examples</th>
+      <th>When to use it</th>
+      <th>When <strong>not</strong> to use it</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Boolean (<code class="language-plaintext highlighter-rouge">bool</code>)</td>
+      <td><code class="language-plaintext highlighter-rouge">True</code>, <code class="language-plaintext highlighter-rouge">False</code></td>
+      <td>If there are only two possible states, true or false</td>
+      <td>If your data is not binary</td>
+    </tr>
+    <tr>
+      <td>Integer (<code class="language-plaintext highlighter-rouge">int</code>)</td>
+      <td>1, 0, -1023, 42</td>
+      <td>Countable, singular items. How many patients are there, how many events did you record, how many variants are there in the sequence</td>
+      <td>If doubling or halving the value would not make sense: do not use for e.g. patient IDs, or phone numbers. If these are integers you might accidentally do math on the value.</td>
+    </tr>
+    <tr>
+      <td>Float (<code class="language-plaintext highlighter-rouge">float</code>)</td>
+      <td>123.49, 3.14159, -3.33334</td>
+      <td>If you need more precision or partial values. Recording distance between places, height, mass, etc.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Strings (<code class="language-plaintext highlighter-rouge">str</code>)</td>
+      <td>‘patient_12312’, ‘Jane Doe’, ‘火锅’</td>
+      <td>To store free text, identifiers, sequence IDs, etc.</td>
+      <td>If it’s truly a numeric value you can do calculations with, like adding or subtracting or doing statistics.</td>
+    </tr>
+    <tr>
+      <td>List / Array (<code class="language-plaintext highlighter-rouge">list</code>)</td>
+      <td><code class="language-plaintext highlighter-rouge">['A', 1, 3.4, ['Nested']]</code></td>
+      <td>If you need to store a list of items, like sequences from a file. Especially if you’re reading in a table of data from a file.</td>
+      <td>If you want to retrieve individual values, and there are clear identifiers it might be better as a dict.</td>
+    </tr>
+    <tr>
+      <td>Dictionary / Associative Array / map (<code class="language-plaintext highlighter-rouge">dict</code>)</td>
+      <td><code class="language-plaintext highlighter-rouge">{"weight": 3.4, "age": 12, "name": "Fluffy"}</code></td>
+      <td>When you have identifiers for your data, and want to look them up by that value. E.g. looking up sequences by an identifier, or data about students based on their name. Counting values.</td>
+      <td>If you just have a list of items without identifiers, it makes more sense to just use a list.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="exercises-2">Exercises</h2>
+
+<blockquote class="question">
+  <h3 id="question-question-which-datatype"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Which Datatype</h3>
+
+  <ol>
+    <li>Chromosome Length</li>
+    <li>Name</li>
+    <li>Weight</li>
+    <li>Sex</li>
+    <li>Hair Colour</li>
+    <li>Money/Currency</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Here you need to use an integer, a fractional or float value would not make sense. You cannot have half an A/C/T/G.</li>
+      <li>Here a string would be a good choice. (And probably just a single <code class="language-plaintext highlighter-rouge">name</code> string, rather than a <code class="language-plaintext highlighter-rouge">first</code> and <code class="language-plaintext highlighter-rouge">last</code> name, as not all humans have two names! And some have more than two.)</li>
+      <li>An integer is good type for storing weight, if you are using a small unit (e.g. grams). Otherwise you might consider a float, but you’d need to be careful to format it properly (e.g. <code class="language-plaintext highlighter-rouge">{value:0.2f}</code>) when printing it out. It depends on the application.</li>
+      <li>This is a case where you should consider carefully the application, but <code class="language-plaintext highlighter-rouge">bool</code> is usally the <em>wrong answer</em>. Are you recording patient data? Is their expressed gender the correct variable or did you need sex? <span class="citation"><a href="#Miyagi_2021">Miyagi <i>et al.</i> 2021</a></span> goes into detail on this multifaceted issue in a medical research context. For example chromosomal sex is also more complicated and cannot be stored with a true/false value, as people with <a href="https://en.wikipedia.org/wiki/Klinefelter_syndrome">Kleinfelters</a> exist. A string can be an ok choice here.</li>
+      <li>There is a limited vocabulary humans use to describe hair colour, so a string can be used, or a data type we haven’t discussed! An <code class="language-plaintext highlighter-rouge">enum</code> is an <code class="language-plaintext highlighter-rouge">enumeration</code>, and when you have a limited set of values that are possible, you can use a <code class="language-plaintext highlighter-rouge">enum</code> to double check that whatever value is being used (or read from a file, or entered by a user) matches one of the “approved” values.</li>
+      <li>A float is a good guess, but with floats come weird rounding issues. Often times people choose to use an integer storing the value in cents (or fractional cents, to whatever the desired precision is).</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>A list stores many values in a single structure.</p>
+</li>
+                        
+                        <li><p>Use an item’s index to fetch it from a list.</p>
+</li>
+                        
+                        <li><p>Lists’ values can be replaced by assigning to them.</p>
+</li>
+                        
+                        <li><p>Appending items to a list lengthens it.</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">del</code> to remove items from a list entirely.</p>
+</li>
+                        
+                        <li><p>The empty list contains no values.</p>
+</li>
+                        
+                        <li><p>Lists may contain values of different types.</p>
+</li>
+                        
+                        <li><p>Character strings can be indexed like lists.</p>
+</li>
+                        
+                        <li><p>Character strings are immutable.</p>
+</li>
+                        
+                        <li><p>Indexing beyond the end of the collection is an error.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Bhandari_Neupane_2019">Neupane, J. B., R. P. Neupane, Y. Luo, W. Y. Yoshida, R. Sun <i>et al.</i>, 2019 <b>Characterization of Leptazolines A–D, Polar Oxazolines from the Cyanobacterium Leptolyngbya sp., Reveals a Glitch with the “Willoughby–Hoye” Scripts for Calculating NMR Chemical Shifts</b>. Organic Letters 21: 8449–8453. <a href="https://doi.org/10.1021/acs.orglett.9b03216">10.1021/acs.orglett.9b03216</a></li>
+<li id="Miyagi_2021">Miyagi, M., E. M. Guthman, and S. D.-K. Sun, 2021 <b>Transgender rights rely on inclusive language</b>. Science 374: 1568–1569. <a href="https://doi.org/10.1126/science.abn3759">10.1126/science.abn3759</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Python - Lists & Strings & Dictionaries (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">The Carpentries, Helena Rasche, Donny Vrins, Bazante Sanders, 2022 <b>Python - Lists & Strings & Dictionaries (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-iterables/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-iterables/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-python-iterables,
+author = "The Carpentries and Helena Rasche and Donny Vrins and Bazante Sanders",
+title = "Python - Lists & Strings & Dictionaries (Galaxy Training Materials)",
+year = "2022",
+month = "04",
+day = "25"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-iterables/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
