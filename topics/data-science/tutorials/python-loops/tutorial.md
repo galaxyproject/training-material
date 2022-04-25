@@ -29,7 +29,6 @@ key_points:
 - "Use `range` to iterate over a sequence of numbers."
 - "The Accumulator pattern turns many values into one."
 
-enable: false
 subtopic: python-modular
 contributors:
   - carpentries

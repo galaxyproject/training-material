@@ -21,7 +21,6 @@ key_points:
 - Use `try`/`except` to catch expected errors and work around them (if possible)
 - finally lets you cleanup your temporary files, if you created some.
 
-enable: false
 subtopic: python-modular
 contributors:
   - hexylena

@@ -23,7 +23,6 @@ key_points:
 - do NOT attempt to do it yourself, it will encounter edge cases that the CSV module handles for you
 - Use a `with` block to open a file.
 
-enable: false
 subtopic: python-modular
 contributors:
   - hexylena

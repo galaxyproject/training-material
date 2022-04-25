@@ -26,7 +26,6 @@ key_points:
 - Functions are foundational in Python
 - Everything you do will require functions
 
-enable: false
 subtopic: python-modular
 contributors:
   - carpentries

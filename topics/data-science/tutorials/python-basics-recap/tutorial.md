@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Python - Introductory "Graduation"
+title: Python - Introductory Graduation
 level: Introductory
 requirements:
  - type: internal
@@ -27,7 +27,6 @@ objectives:
 time_estimation:  1H30M
 key_points: []
 
-enable: false
 subtopic: python-modular
 contributors:
   - hexylena

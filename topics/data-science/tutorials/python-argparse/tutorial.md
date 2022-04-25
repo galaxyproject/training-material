@@ -23,7 +23,6 @@ key_points:
 - "It produces a nice `--help` text that can help you if you've forgotten what your tool does"
 - "It's nice for users of your scripts! They don't have to read the code to know how it behaves if you document it well."
 
-enable: false
 subtopic: python-modular
 contributors:
   - hexylena

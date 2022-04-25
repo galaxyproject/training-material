@@ -25,7 +25,6 @@ key_points:
 - "Can mix integers and floats freely in operations."
 - "Variables only change value when something is assigned to them."
 
-enable: false
 subtopic: python-modular
 contributors:
   - carpentries

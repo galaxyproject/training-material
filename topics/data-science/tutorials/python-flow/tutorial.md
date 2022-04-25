@@ -26,7 +26,6 @@ key_points:
 - "`True` and `False` represent truth values."
 - "`not` can be used to invert the condition"
 
-enable: false
 subtopic: python-modular
 contributors:
   - carpentries

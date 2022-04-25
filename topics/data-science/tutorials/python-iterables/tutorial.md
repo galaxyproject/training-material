@@ -25,7 +25,6 @@ key_points:
 - "Character strings are immutable."
 - "Indexing beyond the end of the collection is an error."
 
-enable: false
 subtopic: python-modular
 contributors:
   - carpentries

@@ -15,7 +15,6 @@ objectives:
 time_estimation:  15M
 key_points:
 - If your data is ordering dependent, sort your globs!
-enable: false
 subtopic: python-modular
 contributors:
   - hexylena

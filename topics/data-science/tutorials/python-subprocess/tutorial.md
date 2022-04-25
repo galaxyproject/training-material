@@ -20,7 +20,6 @@ key_points:
 - 👍Use `subprocess.check_call()` if you don't care about the output, just that it succeeds.
 - 👍Use `subprocess.check_output()` if you want the output
 - Use `.decode('utf-8')` to read the output of `check_output()`
-enable: false
 subtopic: python-modular
 contributors:
   - hexylena

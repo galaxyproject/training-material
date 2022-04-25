@@ -18,7 +18,6 @@ key_points:
 - In real life you'll occasionally need to do this, either converting from a formula you read in a paper, or a description of an algorithm, into code that you'll re-use.
 - Did you forget how a particular module or function works? Try `help()`
 
-enable: false
 subtopic: python-modular
 contributors:
   - hexylena
