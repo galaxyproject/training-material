@@ -1,6 +1,6 @@
 {% if include.contributions.funding %}
 <div markdown="1">
-<h1 id="funding">{{locale['references']| default: "Funding" }}</h1>
+<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
 <p>These individuals or organisations provided funding support for the development of this resource</p>
 
 <div class="row">

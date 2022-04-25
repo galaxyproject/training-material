@@ -315,10 +315,6 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     })(window, document);
                 </script>
 
-                {% if page.contributions %}
-                {% include _includes/funding-statement.md contributions=page.contributions %}
-                {% endif %}
-
                 <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                 <p>
                     <ol>
@@ -362,6 +358,10 @@ note = "[Online; accessed TODAY]"
                 </pre></div></div>
                 </p>
                 </blockquote>
+
+                {% if page.contributions %}
+                {% include _includes/funding-statement.md contributions=page.contributions %}
+                {% endif %}
 
 
 <script type="text/javascript">
