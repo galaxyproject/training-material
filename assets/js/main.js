@@ -31,6 +31,28 @@ function cyoaChoice(text){
 		})
 
 		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
+
+		// Just in case we mark it as checked (e.g. if default/from URL)
+		document.querySelector(`input[value="${text}"]`).checked = true
+	}
+}
+
+function cyoaDefault(defaultOption){
+	var currentlySelected = [...document.querySelectorAll("input[name='cyoa']")].filter(x => x.checked)[0];
+	var urlOption = (new URL(document.location)).searchParams.get("gtn-cyoa");
+
+	// If there's a URL parameter, use that over other options
+	if(urlOption !== null){
+		cyoaChoice(urlOption)
+		return
+	}
+
+	// Chrome forgets
+	if(currentlySelected === undefined) {
+		cyoaChoice(defaultOption)
+	} else {
+		// Firefox doesn't.
+		cyoaChoice(currentlySelected.value)
 	}
 }
 
@@ -60,9 +82,6 @@ function cyoaChoice(text){
         if (window.location.href.indexOf("faqs") > -1) {
             $(".hands_on>h3,.question>h3,.comment>h3").click();
         }
-
-		// CYOA support
-		cyoaChoice(document.querySelector("input[type='radio']:checked").value);
     });
 
 })(window, document);
