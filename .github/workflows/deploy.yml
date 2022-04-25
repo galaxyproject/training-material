@@ -61,6 +61,7 @@ jobs:
           curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
           curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+          cp metadata/feedback.csv _site/training-material/api/feedback.csv
         env:
           GTN_FORK: ${{ github.repository_owner }}
 
