@@ -395,7 +395,7 @@ module GTNNotebooks
           "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{url}#feedback) and check there for further resources!\n"
       ]
     }]
-    JSON.pretty_generate(notebook)
+    notebook
   end
 
   def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
