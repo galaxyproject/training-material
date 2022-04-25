@@ -127,6 +127,7 @@ Useful when presenting."
 
 {% include _includes/contributors-line.html page=page %}
 
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
 {% else %}
@@ -136,6 +137,10 @@ Useful when presenting."
 <img src="{{ site.baseurl }}/{{ page.logo }}" alt="page logo" style="height: 100px;"/>
   {% endif %}
 {% endif %}
+{% if page.contributions %}
+	{% include _includes/funding-statement-short.md contributions=page.contributions %}
+{% endif %}
+</div>
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 {{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.

@@ -2,7 +2,7 @@
 	{% if include.contributors.authorship %}
 	<tr>
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
-		<td>
+		<td style="display: flex">
 			{% for id in include.contributors.authorship %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
 			{%- if include.newcontributors -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='newcontributors' %}{% endif %}{% endif %}
 		</td>
