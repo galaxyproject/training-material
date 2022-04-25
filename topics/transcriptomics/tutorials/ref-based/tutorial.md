@@ -642,7 +642,7 @@ Two main tools are available for read counting: [**HTSeq-count**](http://htseq.r
 
 Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
 
-{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" %}
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts** or to the output of **STAR**, e.g. the strandness.
 
