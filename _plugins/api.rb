@@ -88,6 +88,12 @@ module Jekyll
       page2.data["layout"] = nil
       site.pages << page2
 
+      # Deploy the feedback file as well
+      page2 = PageWithoutAFile.new(site, "", "api/", "feedback.json")
+      page2.content = JSON.pretty_generate(site.data['feedback'])
+      page2.data["layout"] = nil
+      site.pages << page2
+
     end
   end
 end
