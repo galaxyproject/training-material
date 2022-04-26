@@ -8,6 +8,9 @@ priority: 2
 tags:
     - bulk
     - rna-seq
+    - collections
+    - drosophila
+    - QC
 level: Introductory
 zenodo_link: "https://zenodo.org/record/4541751"
 questions:
@@ -1387,7 +1390,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >            - *"Find pattern"*: `(.*)_(.*)_(.*)`
 >            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
 >
->     This step adds an additional columns that can be used with the ``Tag elements from file`` tool
+>     This step adds an additional columns that can be used with the {% tool [Tag elements from file](__TAG_FROM_FILE__) %} tool
 >
 > 3. Change the datatype to `tabular`
 >
@@ -1698,7 +1701,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 > 1. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
 >    - *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(log2(FC)) > 2`
+>    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(log2(FC)) > 1`
 >    - *"and column"*: `Column: 1`
 >    - *"Keep lines of first input that do not join with second input"*: `No`
 >    - *"Keep the header lines"*: `Yes`
