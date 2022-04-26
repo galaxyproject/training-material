@@ -8,6 +8,9 @@ priority: 2
 tags:
     - bulk
     - rna-seq
+    - collections
+    - drosophila
+    - QC
 level: Introductory
 zenodo_link: "https://zenodo.org/record/4541751"
 questions:
