@@ -1,16 +1,16 @@
 ---
 layout: tutorial_hands_on
 
-title: "2: Principles of learning and how they apply to training and teaching"
+title: "1. Principles of learning and how they apply to training and teaching"
 subtopic: pedagogy
 enable: false
 time_estimation: 2h
 questions:
-  - What are the main principles the drive learning?
+  - What are the main principles that drive learning?
   - How can these principles be applied to training and teaching?
 objectives:
-  - Describe some learning perspectives and models
-  - Explain how they can help you improve your teaching
+  - Describe how learning works according to a few learning models
+  - Explain how learning models can help you improve your teaching in the classroom 
   - List learning strategies and principles suggested by evidence-based research results
 key_points:
   - Teaching and training is not only a matter of knowledge
@@ -43,11 +43,17 @@ In this lesson, we want to share with you what we have collectively learnt about
 
 Since this material cannot cover the broad literature on the subject of learning we strongly invite you to commit to read at least one book on how learning works ({% cite ambrose2010learning %}) cite smallTeaching2021 %}), have a look at the [Software Carpentry Instructor training materials](http://swcarpentry.github.io/instructor-training/) and explore the material available through the [ELIXIR Train-the-Trainer course]().
 
+> ### {% icon comment %} Sources
+>
+> This tutorial is significantly based on {% cite via2020course %}, session one
+> of ELIXIR-GOBLET Train the Trainer curriculum.
+{: .comment}
+
 # Learning outcomes and instructional design
 
 The first starting point in this road is a discussion about the learning outcomes; what they are, and why these are important for any instructional design. In this context, and by the end of this session, learners will be able to:
-- Describe some learning perspectives and models
-- Explain how they can help you improve your teaching
+- Describe how learning works according to a few learning models
+- Explain how learning models can help you improve your teaching in the classroom 
 - List learning strategies and principles suggested by evidence-based research results
 
 The "Learning outcomes" (LOs) are essentially statements that tell what the learners will be to do at the end of the session. For this reason, every well-designed training should start with LOs.
@@ -58,22 +64,18 @@ The first step of good instructional design consists is identifying the set of K
 
 ## Teaching objectives and Learning Outcomes
 
-% > ### {% icon comment %} Sources
-% >
-% > [Atherton J S (2013) Learning and Teaching; Objectives](http://www.learningandteaching.info/teaching/objectives.%htm#ixzz4DtSAL2pi)
-% - Under Creative Commons License: Attribution Non-Commercial No Derivatives
-% >
-% {: .comment}
-
 **Objectives** are statements of what you are setting out to teach, although expressed as if the students were going to learn it. Despite Aims are usually intended to be more general and encompassing than Objectives, they are essential the same.
 
 **Outcomes** (more accurately “desired outcomes”) are statements of what you might (in principle) assess. You may not end up assessing all of them, but they are statements of what a student will know or be able to do, if she or he has learned everything in the course or session.
 
 ### Learning objectives and learning outcomes
 
-(_the following is adapted from the webpage [http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes](http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes) and the [Operational definitions:](https://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf) document from the [Rensselaer Polytechnic Institute Office of the Provost](http://provost.rpi.edu/institutional-research)_)
+> ### {% icon comment %} Sources
+>
+> The following section is adapted from the webpage [http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes](http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes) and the [Operational definitions:](https://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf) document from the [Rensselaer Polytechnic Institute Office of the Provost](http://provost.rpi.edu/institutional-research).
+{: .comment}
 
-These two terms are often used interchangeably by the community. Even worse, they are often abbreviated by the acronym (LO), thus introducing even more ambiguity. In our opinion there is no need. Objectives (aims or goals) and Outcomes (results) may overlap, but are not genuinely the same.
+The terms Learning Objectives and Learning Outcomes are often used interchangeably by the community. Even worse, they are often abbreviated by the acronym (LO), thus introducing even more ambiguity. In our opinion there is no need. Objectives (aims or goals) and Outcomes (results) may overlap, but are not genuinely the same.
 
 Furthermore, American educational psychologists tend to use "Learning Objectives" to mean "Learning Outcomes" and "Teaching aims, goals or objectives" to mean "Learning Objectives".
 
@@ -134,22 +136,22 @@ Identify observable and non observable actions (verbs)
 > Good example of feedback: We will stress the importance of feedback on last day
 {: .hands_on}
 
-### Instruction design in 5 steps
+### Instruction design in 5 Phases
 
-So how can we now use the knowledge we have gathered during this time in the course? Here we will go through the Instructional design in 5 steps and explain why learning outcomes (to articulate and specify these) is so important for the curricula and the course design process.
+So how can we now use the knowledge we have gathered during this time in the course? Here we will go through the Instructional design in 5 phases and explain why learning outcomes (to articulate and specify these) is so important for the curricula and the course design process.
 
-![5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. Pp 51-75](images/image8.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. Pp 51-75")
+![A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process.](images/image8.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75")
 
-* Writing LOs
+1. Writing LOs
 	* Important to build the training
-* Selection learning experiences
+2. Selection learning experiences
     * Focus on LOs
-* Selection of content relevant to LOs
+3. Selection of content relevant to LOs
     * Usually (traditionally) starting by the content
     * But here only 3
-* Develop assessment
+4. Develop assessment
     * Example: formative assessment as the previous challenge
-* Evaluation
+5. Evaluation
     * Evaluation of your training
     * Example
         * Final exams at university
@@ -209,10 +211,10 @@ Think about the mind-as-a-vessel-to-be-filled metaphor.
 
 > ### {% icon hands_on %} Challenge- *{% icon time %} 5 min*
 >
-> Think about the following metaphors:
+> - Think about the following metaphors:
 >	* A mind is a fire to be kindled
 >	* Teaching is growing a garden
-> Write the shared notes how these metaphors may affect your way of teaching
+> - Write on the shared notes how these metaphors may affect your way of teaching
 {: .hands_on}
 
 
@@ -231,19 +233,13 @@ Think about the mind-as-a-vessel-to-be-filled metaphor.
 
 Learning theories describes how students receive, process, and retain knowledge during learning. However, there is no single one theory (as in physics for example). There is a massive catalogue of learning theories out there and there is no universal theory of learning.
 
-Landscape of the best known learning theories available.
-
 There is no universal theory of learning but evidence-based research results supporting some learning principles, which are today accepted and applied
 
-![This is a diagram representing the landscape of many known learning theories available.](images/image11.png "This is a diagram representing the landscape of many known learning theories available.")
+![The figure shows a dendrogram of the main learning theories that are currently available. The information is organized across four main levels; the Scientific Discipline (such as Organization, Education, Philosophy, etc), the Learning Theorists (such as Montessori and Bloom), the Learning Paradigms (such as Behaviourism, Constructivism), and the key concepts.](images/image11.png "This is a diagram representing the landscape of many known learning theories available.")
 
-Researchers in the fields of cognitive science and educational psychology have proposed a large number of learning theories: a flavour of the diversity of approaches and philosophies can be gained, for example, from the [HoTEL](http://cmapspublic3.ihmc.us/rid=1LNV3H2J9-HWSVMQ-13LH/Learning%20Theory.cmap) (Holistic approach to Technology-Enhanced Learning) website10. But which should we rely on? Which should we learn, teach and apply?
+Researchers in the fields of cognitive science and educational psychology have proposed a large number of learning theories: a flavour of the diversity of approaches and philosophies can be gained, for example, from the [HoTEL](http://cmapspublic3.ihmc.us/rid=1LNV3H2J9-HWSVMQ-13LH/Learning%20Theory.cmap) (Holistic approach to Technology-Enhanced Learning) website. But which should we rely on? Which should we learn, teach and apply?
 
-There is no universal theory of learning… but there are interesting elements for classroom teaching in many different theories
-
-There are no universal theories of learning that, like the laws of physics, describe in a rigorous manner how learning works. There are elements of truth in different theories.
-
-There is no universal theory of learning, but **evidence-based** research results that support learning principles recognized and applied today
+There is no universal theory of learning, but there are interesting elements for classroom teaching in many different theories There are elements of truth in different theories, and **evidence-based** research results that support learning principles recognized and applied today.
 
 In this sense there are interesting elements for a teacher in many different theories.
 
@@ -251,62 +247,56 @@ Existing theories can be grouped according to whether they focus on changes in b
 
 The distinction is rough and inexact, but a good place to begin. Let’s consider two perspectives about learning, called **behaviorism**, **connectivism** and **constructivism**. This latter can be further divided into **psychological constructivism** and **social constructivism**.
 
-We will briefly describe the key ideas from each of these perspectives and explain how you can use them in your classroom to support learners’ learning.
+> ### {% icon details %} More details on the key ideas from each of these perspectives
+>
+> We will briefly describe the key ideas from each of these perspectives and explain how you can use them in your classroom to support learners’ learning.
+> 
+> ## Behaviourism
+> In Behaviourism, Learning is viewed as changes in overt behavior. In this cntext, learning is acquiring new behaviours by > conditioning, reflex response to stimuli, reward/punishment / (learning as changes in overt behavior → perspective on learning > that focusesfouses on changes in individuals’ observable behaviours)
+> 
+> **Operant conditioning**: a variety of behaviourism that focuses on how the consequences of a behaviour affect the behaviour over time.
+> 
+> It is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen > more or less frequently.
+> 
+> * learning and behaviour changes are acquired by linking stimuli and responses
+> * Learner is passive; they learn via external processes, i.e., positive reinforcement.
+> * Behaviorists look at learning as an aspect of conditioning (looking at the environment of the learner).
+> * Cognitivism
+>     * Learning is internal and is the result of a student processing and organising new information (short and long term memory)
+>     * Educators who embrace cognitive theory believe that the definition of learning as a change in behaviour is too narrow, and study the learner (complexities of the memory) rather than their environment.
+> 
+> ## Constructivism
+> 
+> Under Constructivism, Learning is viewed as changes in thinking, that is how learners actively create (or “construct”) knowledge out of experience.
+> 
+> Behaviorist models of learning may be helpful in understanding and influencing what students do, but teachers usually also want to know what students are thinking, and how to enrich what students are thinking. For this goal of teaching, some of the best help comes from constructivism, which is a perspective on learning focused on how students actively create (or "construct") knowledge out of experiences. Constructivist models of learning differ about how much a learner constructs knowledge independently, compared to how much he or she takes cues from people who may be more of an expert and who help the learner’s efforts (Fosnot, 2005; Rockmore, 2005).
+> 
+> * Knowledge is constructed by adapting new information based on previous individual experience
+> * Learners build on personal experience, active & social in the learning process
+> * Constructivists believe that a learner's ability to learn relies largely on what they already know and understand, and the acquisition of knowledge should be an individually tailored process of construction.
+> 
+> **Psychological constructivism**: changes in thinking resulting from individual experiences. A person learns by mentally organising and reorganising new information or experiences.
+> 
+> **Social constructivism**: changes in thinking due to assistance from / interaction with others
+> 
+> For convenience these are called psychological constructivism and social constructivism (or sometimes sociocultural theory). As explained in the next section, both focus on individuals’ thinking rather than their behavior, but they have distinctly different implications for teaching.
+> 
+> ## The socio-constructivist perspective
+> 
+> Learning is an active process that essentially takes place within an interaction with others and with objects belonging to the culture in which we live (Bruner, Vygotskij, Dewey ......)
+>
+{: .details}
 
-
-## Behaviourism
-
-Learning as changes in overt behavior
-
-learning is acquiring new behaviours by conditioning, reflex response to stimuli, reward/punishment / (learning as changes in overt behavior → perspective on learning that focusesfouses on changes in individuals’ observable behaviours)
-
-**Operant conditioning**: a variety of behaviourism that focuses on how the consequences of a behaviour affect the behaviour over time.
-
-It is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen more or less frequently.
-
-* learning and behaviour changes are acquired by linking stimuli and responses
-* Learner is passive; they learn via external processes, i.e., positive reinforcement.
-* Behaviorists look at learning as an aspect of conditioning (looking at the environment of the learner).
-* Cognitivism
-    * Learning is internal and is the result of a student processing and organising new information (short and long term memory)
-    * Educators who embrace cognitive theory believe that the definition of learning as a change in behaviour is too narrow, and study the learner (complexities of the memory) rather than their environment.
-
-## Constructivism
-
-Learning as changes in thinking
-
-How learners actively create (or “construct”) knowledge out of experience
-
-Behaviorist models of learning may be helpful in understanding and influencing what students do, but teachers usually also want to know what students are thinking, and how to enrich what students are thinking. For this goal of teaching, some of the best help comes from constructivism, which is a perspective on learning focused on how students actively create (or "construct") knowledge out of experiences. Constructivist models of learning differ about how much a learner constructs knowledge independently, compared to how much he or she takes cues from people who may be more of an expert and who help the learner’s efforts (Fosnot, 2005; Rockmore, 2005).
-
-* Knowledge is constructed by adapting new information based on previous individual experience
-* Learners build on personal experience [internal], active & social in the learning process
-* Constructivists believe that a learner's ability to learn relies largely on what they already know and understand, and the acquisition of knowledge should be an individually tailored process of construction.
-
-
-**Psychological constructivism**: changes in thinking resulting from individual experiences. A person learns by mentally organising and reorganising new information or experiences.
-
-**Social constructivism**: changes in thinking due to assistance from / interaction with others
-
-For convenience these are called psychological constructivism and social constructivism (or sometimes sociocultural theory). As explained in the next section, both focus on individuals’ thinking rather than their behavior, but they have distinctly different implications for teaching.
-
-
-## The socio-constructivist perspective
-
-Learning is an active process that essentially takes place within an interaction with others and with objects belonging to the culture in which we live (Bruner, Vygotskij, Dewey ......)
 
 > ### {% icon hands_on %} How do you go about learning something new? / How do you approach learning new things? - *{% icon time %} 5 min*
 >
-> Think which is the most effective approach for you to learn?
+> - Think which is the most effective approach for you to learn?
 >	* Read about it
 >   * Attend a training session !
 >   * Have a go ?
 >   * Do, reflect, process, further understand?
-> Write in the shared document an approach that works for you when you want to learn something new (from the most to the less effective one)
-> Write if you recognise elements of one of more learning perspectives (constructivism / behaviourism)  in your way of learning
-> > {% icon tip %} Requirements
-> > The instructor discusses  what participants have written in the GDoc
-> > {: .tip}
+> - Write in the shared document an approach that works for you when you want to learn something new (from the most to the less effective one)
+> - Write if you recognise elements of one of more learning perspectives (constructivism / behaviourism) in your way of learning
 {: .hands_on}
 
 ## Implications for classroom teaching
@@ -349,7 +339,7 @@ Tool important to develop training, but not only
 
 Hierarchy because need to go from bottom to top
 
-![](images/image18.png "Source: https://tips.uark.edu/blooms-taxonomy-verb-chart/")
+![The pyramid of Blooms Taxonomy of verbs. Starting from the bottom layer, the corresponding aspects are: remembering, understanding, applying, analyzing, evaluating and creating.](images/image18.png "Source: https://tips.uark.edu/blooms-taxonomy-verb-chart/")
 
 
 * **Remembering (original Knowledge):** involves recognizing or remembering facts, terms, basic concepts, or answers without necessarily understanding what they mean.
@@ -359,12 +349,9 @@ Hierarchy because need to go from bottom to top
 * **Evaluate:** involves presenting and defending opinions by making judgments about information, the validity of ideas, or quality of work based on a set of criteria
 * **Create (original synthesize): **involves building a structure or pattern from diverse elements; it also refers to the act of putting parts together to form a whole.
 
-Analyze / Evaluate / Create : critical thinking
+It is important to higlhight that critical thinking is mostly a combination of Analyzing, Evaluating and Creating, i.e. the top three layers of the taxonomy. Blooms taxonomy levels are very useful to align instruction with learners' level of complexity of thinking as well as experience.
 
-Blooms taxonomy levels are very useful to align instruction with learners' level of complexity of thinking as well as experience.
-
-How to use this tool?
-
+What are the uses of this tool?
 * Help learner to structure their knowledge
 * Knowing at which level of cognitive complexity you want to teach
 * write Learning Outcomes
@@ -375,14 +362,14 @@ We can use Bloom’s taxonomy to align instruction with learners' level of compl
 
 Connection of set of verbs to the different levels to help writing LOs and assessing
 
-![ACTION verbs express levels of cognitive complexity](images/image1.png "ACTION verbs express levels of cognitive complexity")
+![6 levels of Bloom's taxonomy (and their verbs) from bottom (lower-order thinking skills) to top (higher-order 'critical' thinking skills): Remember (recall or reiterate information) with memorize, recognise, identify, describe, reproduce, list, define, label, name, state, outline, order, arrange; Understand (demonstrate understanding of facts) with distinguish, classify, select, review, discuss, indicate, explain, estimate, locate, summarise; Apply (apply knowledge to real situations) with operate, manipulate, experiment, choose, modify, prepare, produce; Analyze (resolve ideas into simple parts, identify patterns) with calculate, examine, model, test, break down, infer, predict, solve; Synthesise (pull ideas into a coherent whole, create new ideas) with combine, formulate, illustrate, imagine, design, invent, compose; Evaluate (make & defend judgements, assess theories & outcomes) with critique, compare ideas, solve, recommend, rate](images/image1.png "ACTION verbs express levels of cognitive complexity")
 
 
 # Working memory, long term memory and learning
 
 From cognitive science, quite involved in constructivism
 
-![Simple model (brain is much more complex)](images/image16.png "Simple model (brain is much more complex)")
+![A figure showning a simple representation of how memory works. The main interaction is between the two central boxes, representing the working memory and the long-term memory. The working memory maintain the active consiousness, when paying attention to the envnironment, and is extremely fast but rather limited in capacity (experiments have shown that it can keep track of 7+/-2 items). The long-term memory is much larger in capacity, but it's significantly slower to access - using a process called "remembering". At the same time, the process of depositing information from the working memory into the long-term memory, is the learning process.)](images/image16.png "Simple model (brain is much more complex)")
 
 1. Environment
 2. Working memory
@@ -392,15 +379,16 @@ From cognitive science, quite involved in constructivism
 5. Long term: slow
 	* How much effort to remember a full poem
 
-How it works?
-
 > ### {% icon hands_on %} How short is your short term memory? - *{% icon time %} 10 min*
 >
-> Challenge (from Willingham, 2009)
+> Based on {% cite Willingham2009 %}.
 >
-> 1. Read the following letter combination
->
->    ![first sequence](images/image36.png "first sequence")
+> 1. Read the following letter combination:
+>    > ### Hide
+>    >
+>    >    ```APH D BDN A CKG B DCI A```
+>    >
+>    {: .solution}
 >
 > 2. Hide them after 10 secondes
 > 3. Take a piece of paper
@@ -408,8 +396,11 @@ How it works?
 > 5. Unhide them after 2 minutes
 > 6. Thnik how can we take advantage of this model?
 > 7. Now read the following letter combination
->
->    ![second sequence](images/image19.png "second sequence")
+>    > ### Hide
+>    >
+>    >    ```A   PHD   B   DNA   C   KGB   D   CIA```
+>    >
+>    {: .solution}
 >
 > 8. Hide them after 2 minutes
 > 9. Take a piece of paper
@@ -419,7 +410,6 @@ How it works?
 > The amount of space in working memory does not depend on the number of letters.
 > It depends on the **number of meaningful objects**.
 {: .hands_on}
-
 
 Round #2: meaning of the words (long-term memory) helps to remember. It make room in working memory
 
@@ -434,8 +424,8 @@ Connecting words with a story would help to remember
 
 > ### {% icon hands_on %} How can you avoid to overload learners working memory?  - *{% icon time %} 5 min - Groups of 2/3 persons*
 >
-> * Discuss one thing a teacher could do to avoid overloading their students' working memory.
-> * Write your proposal in the shared notes
+> - Discuss one thing a teacher could do to avoid overloading their students' working memory.
+> - Write your proposal in the shared notes
 {: .hands_on}
 
 
@@ -448,7 +438,7 @@ Connecting words with a story would help to remember
 
 ## Cognitive load
 
-3 cognitive loads recognize by cognitive science
+There are 3 cognitive loads recognized by cognitive science:
 
 * **Intrinsic cognitive load**: effort associated with a specific topic.
 * **Germane cognitive load**: the (desirable) mental effort required to create linkages between new information and old.
@@ -458,9 +448,6 @@ Connecting words with a story would help to remember
 ## Attention split effect
 
 Split-attention occurs when learners are required to split their attention between at least two sources of information that have been separated either spatially or temporally
-
-![Brain regions](images/image29.png "Brain regions")
-
 
 > ### {% icon hands_on %} Extraneous cognitive load - *{% icon time %} 10 min - Groups of 2/3 persons*
 >
@@ -483,15 +470,13 @@ Split-attention occurs when learners are required to split their attention betwe
 
 It is how people organize their knowledge
 
-You can think of a graph with nodes (facts, concepts) and edges (connections)
+You can think of a graph with nodes (facts, concepts) and edges (connections), as seen in the figure of the mental model of animals below.
 
-![mental model of animals](images/image35.png "mental model of animals")
-
-![(mental) model of DNA](images/image17.png "(mental) model of DNA")
+![A dendrogram showing the various descriptors of an animal, and the relationships between them. For example, the box "animal" is connected to the entities "eats", "breathes" and "can move", as well as sub-entities, such as "bird" and "fish". Each one of these, in turn, is connected to even more specific sub-entities (such as "penguin" for "bird" and "salmon" for "fish").](images/image35.png "mental model of animals")
 
 ### Dreyfuss model
 
-![Dreyfuss model](images/image7.jpg "Dreyfuss model")
+![A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition.](images/image7.jpg "Dreyfuss model")
 
 The Dreyfus model of skills acquisition by brothers Stuart and Huber Dreyfus uses a 5 stage from novice to expert.
 
@@ -509,7 +494,7 @@ Carpentries was started by Greg Wilson and Brent Gorda and they coined the term 
 
 The Style of the Carpentries are that teachers are where the learners are e.g. by doing live-coding together.
 
-![Carpentries build on the Dreyfus model.](images/image28.jpg "Carpentries build on the Dreyfus model.")
+![A simplified version of the Dreyfus model, as built by the Carpentries. There are three levels; the Novice, the Competent Practicioner and the Expert.](images/image28.jpg "Carpentries build on the Dreyfus model.")
 
 * **Novice**: someone who doesn’t even know what questions to ask.
 * **Competent practitioner**: someone who has enough understanding for everyday purposes
@@ -523,9 +508,7 @@ The Style of the Carpentries are that teachers are where the learners are e.g. b
 * A **competent practitioner **has a mental model that works for many purposes, but will not be very accurate.
 * **Experts’** mental models are much more densely connected. Therefore they can jump directly from a problem to its solution because there is a direct link between the two in their mind
 
-
-## How can we take advantage of these models?
-
+How can we take advantage of these models?
 * It is not only a matter of knowledge (concepts and facts)
 * Help novices build a mental model
 * When a mental model exists, a good teacher will
@@ -535,7 +518,7 @@ The Style of the Carpentries are that teachers are where the learners are e.g. b
 * Be aware of the limitations of expertise (expert blind spot)
 
 
-## 3 main classes of misconceptions
+## Three main classes of misconceptions
 
 * **Simple factual errors**: These are the easiest to correct.
 * **Broken models**: We can address these by having learners reason through examples to see contradictions.
@@ -550,10 +533,6 @@ The Style of the Carpentries are that teachers are where the learners are e.g. b
 > | Mental model | Help learners to build and enrich them    |
 > | Dreyfuss model for skill acquisition | Differences between novices and experts. Expert blind spot    |
 {: .matrix}
-
-There is no universal theory of learning, but **evidence-based** research results that support learning principles recognized and applied today
-
-(_**Evidence-based**_: an approach that emphasizes the practical applications of the results of the best research available at the moment)
 
 # Evidence-based research on learning
 
@@ -612,11 +591,11 @@ The idea is that we should be very flexible as for learning theories, and rather
 
 Our learning model is based on such evidence-based learning principles and strategies
 
-## 6 strategies for effective learning
+## Six strategies for effective learning
 
 **Six strategies for effective learning** based on evidence from cognitive research:
 
-Extracted from _Understanding how we learn_, Weinstein & Sumeracki,  2018
+Extracted from _Understanding how we learn_, {% cite weinstein2018understanding %}
 
 * **Spaced practice** - Spread study activities out over time (no cramming)
 * **Interleaving** - Switching between topics while studying
@@ -625,10 +604,7 @@ Extracted from _Understanding how we learn_, Weinstein & Sumeracki,  2018
 * **Dual coding** - Combining worlds with visuals
 * **Retrieval practice** - Bringing learned information to mind from long term memory
 
-![Six Strategies for Effective Learning](images/image6.png "Six Strategies for Effective Learning")
-
-Six Strategies for Effective Learning by [Yana Weinstein, Megan Smith, & Oliver Caviglioli](http://www.learningscientists.org/downloadable-materials/) /
-[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/), based on a work at[http://www.learningscientists.org](http://www.learningscientists.org/), [teachinghow2s.com/cogsci](http://teachinghow2s.com/cogsci).
+![Six circles representing the six Strategies for Effective Learning.](images/image6.png "Six Strategies for Effective Learning {% cite weinstein2018understanding %} Six Strategies for Effective Learning by [Yana Weinstein, Megan Smith, & Oliver Caviglioli](http://www.learningscientists.org/downloadable-materials/) / [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/), based on a work at[http://www.learningscientists.org](http://www.learningscientists.org/), [teachinghow2s.com/cogsci](http://teachinghow2s.com/cogsci).")
 
 The materials, which are both a book and a website and blog all which are highly recommended, are intended to teach about principles of learning and to provide teachers and students with flexible guiding principles to guide learning and studying.
 
@@ -645,16 +621,19 @@ We will see in session 3 a number of teaching practices. You should try to recon
 
 > ### {% icon hands_on %} How do you understand the 6 strategies for effective learning? - *{% icon time %} 15 min - Groups of 2 persons*
 >
-> We follow the first challenge with another one. Now IN PAIRS in breakout rooms (Zoom). Here the reflection is on LEARNING and what learning is in your experience. Write your thoughts, one or more sentences, in the shared Google Doc.
+> - We follow the first challenge with another one. Now IN PAIRS in breakout rooms (Zoom). Here the reflection is on LEARNING and what learning is in your experience. Write your thoughts, one or more sentences, in the shared Google Doc.
 >	* Discuss the learning strategy: did you understand it the same way? Do you have any questions?
 >	* Find out an example on how you would implement it as a teacher/instructor (what would you do as a teacher in order to facilitate learning based on the strategy at hand)
 >	* Write here any insights/thoughts/comments to share from your breakout room
 {: .hands_on}
 
 
-## 7 evidence-based learning principles
+## Seven evidence-based learning principles
 
-Extracted from _[How Learning works, Ambrose et al, 2010](https://www.academia.edu/6743627/How_Learning_Works_Seven_Research_Based_Principles_for_Smart_Teaching_Susan_A_Ambrose_Michael_W_Bridges_Michele_DiPietro_Marsha_C_Lovett_Marie_K_Norman_with_a_Foreword_by_Richard_E_Mayer)_
+> ### {% icon comment %} Sources
+>
+> The following section is extracted from {% cite ambrose2010learning %} [How Learning works, Ambrose et al, 2010](https://www.academia.edu/6743627/How_Learning_Works_Seven_Research_Based_Principles_for_Smart_Teaching_Susan_A_Ambrose_Michael_W_Bridges_Michele_DiPietro_Marsha_C_Lovett_Marie_K_Norman_with_a_Foreword_by_Richard_E_Mayer)
+{: .comment}
 
 * **Principle P1: **Students' **prior knowledge** can help or hinder learning.
     * Hindrances include prior knowledge which may be accurate but insufficient to support learning new material
@@ -701,7 +680,7 @@ Extracted from _[How Learning works, Ambrose et al, 2010](https://www.academia.e
 > Identify and write 2 main differences between Teaching and training
 {: .hands_on}
 
-![A cartoon showing one of the differences between teaching and training.](images/image37.png "A cartoon showing one of the differences between teaching and training.")
+![A cartoon showing one of the differences between teaching and training. One the left side, the teacher is showing the information on a blackboards - in training, the instructor is showing, in practice, how this can be applied.](images/image37.png "A cartoon showing one of the differences between teaching and training.")
 
 Cartoon from the [Open Science Training Handbook](https://www.fosteropenscience.eu/content/open-science-training-handbook)
 
@@ -725,7 +704,7 @@ In practice, you can use the Bloom’s levels of cognitive complexity (and the [
 * design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc
 * assess learning (taking place during curricula or course and after)
 
-![[Via et al, Course design: Considerations for trainers – a Professional Guide, 2020](https://f1000research.com/documents/9-1377)](images/image3.jpg "[Via et al, Course design: Considerations for trainers – a Professional Guide, 2020](https://f1000research.com/documents/9-1377)") ({% cite via2020course %})
+![(in a clockwise direction) Phase 1: Learning Outcomes (Los) --> Simple, measurable, achievable, realistic, time-bound? --> Phase 2: Learning Experiences (LEs) --> LEs aligned with LOs? --> Phase 3: Content --> Support LEs? Promote LOs? --> Phase 4: Assessment --> Aligned with LEs? Support progress towards LOs? --> Phase 5: Evaluation --> LOs achievable by most learners? Content, LEs & assessments support LOs?](images/image3.jpg "Nicholls’ phases of curriculum design & their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). Source: {% cite via2020course %}")
 
 By simplified I mean that here you only see the arrows going from one box to the following in line. However, usually we need to revise and go back one or several boxes if we have failed to specify or articulated Learning outcomes from the beginning. This is what we mean by Learning Outcomes drives the whole process.
 
