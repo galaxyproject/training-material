@@ -649,6 +649,15 @@ Therefore we offer a parallel tutorial for the 2 methods which give very similar
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts** or to the output of **STAR**, e.g. the strandness.
 
+<div class="STAR" markdown="1">
+> ### {% icon comment %} If you are displaying this tutorial within galaxy
+> Please, click on the link below so you will always come back to the **STAR** flavour of the tutorial.
+>
+> [CLICK HERE](?gtn-cyoa=STAR#estimation-of-the-strandness)
+>
+{: .comment}
+</div>
+
 ## Estimation of the strandness
 
 RNAs that are typically targeted in RNA-Seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct). During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for reads located on the overlap of 2 genes that are on different strands.
