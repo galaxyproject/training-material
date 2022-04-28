@@ -1,6 +1,6 @@
 ---
 title: Find all Histories and purge (aka permanently delete)
-area: Histories      
+area: histories      
 box_type: tip
 layout: faq          
 contributors: [jennaj, samanthaanjei, annefou]
