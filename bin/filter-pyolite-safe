@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require 'yaml'
+require 'find'
+
+
+Find.find("topics/").each{|fn|
+  if File.basename(fn) == 'tutorial.md'
+    data = YAML.load_file(fn)
+    if data.has_key? 'notebook'
+      if data['notebook'].has_key? 'pyolite'
+        parts = fn.split('/')
+        puts "_site/training-material/#{parts[0..-2].join('/')}/#{parts[1]}-#{parts[3]}.ipynb"
+      end
+    end
+  end
+}

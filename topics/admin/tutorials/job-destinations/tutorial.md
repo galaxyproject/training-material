@@ -80,6 +80,8 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```
 >    {: data-commit="Add testing tool"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Add the tool to the Galaxy group variables under the new item `galaxy_local_tools` :
 >
 >    {% raw %}

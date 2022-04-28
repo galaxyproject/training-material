@@ -484,6 +484,8 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >         - usegalaxy_eu.gie_proxy
 >    ```
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 4. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >
 >    The relevant variables to set for this role are:

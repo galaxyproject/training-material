@@ -48,9 +48,11 @@ layout: base
         {% endunless %}
         {% if topic.subtopics %}
           {% for subtopic in topic.subtopics %}
-            <h3 id="st-{{ subtopic.title | slugify }}">{{ subtopic.title}}</h3>
-            {{ subtopic.description }} </br></br>
-            {% include _includes/tutorial_list.html sub=subtopic %}
+            {% if subtopic.enable != false or jekyll.environment != "production" %}
+              <h3 id="st-{{ subtopic.title | slugify }}">{{ subtopic.title}}</h3>
+              {% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}{{ subtopic.description }} </br></br>
+              {% include _includes/tutorial_list.html sub=subtopic %}
+            {% endif %}
           {% endfor %}
 
           {% assign other_tutorials = topic_material | where: "subtopic",

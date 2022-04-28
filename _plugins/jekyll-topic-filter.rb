@@ -200,7 +200,7 @@ module TopicFilter
 
     # The complete resources we'll return is the introduction slides first
     # (regardless of alphabetisation), and then the rest of the pages.
-    resource_pages = resource_intro + resource_pages.sort_by{ |k| k["title"].downcase}
+    resource_pages = resource_intro + resource_pages.sort_by{ |k| k.fetch('title', '').downcase}
 
     if resource_pages.length == 0 then
       puts "Error? Could not find any relevant pages for #{topic_name}"

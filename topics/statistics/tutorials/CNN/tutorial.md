@@ -235,7 +235,7 @@ to compare various Machine Learning techniques.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. Check that the datatype of all the three datasets is `tabular`.
+> 5. Check that the datatype of all four datasets is `tabular`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >

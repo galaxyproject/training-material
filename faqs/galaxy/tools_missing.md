@@ -3,8 +3,14 @@ title: If a Tool is Missing
 area: tools
 box_type: tip
 layout: faq
-contributors: [shiltemann]
+contributors: [shiltemann, garimavs]
 ---
+
+To use the tools installed and available on the Galaxy server:
+
+1. At the top of the left tool panel, type in a tool name or datatype into the tool search box.
+2. Shorter keywords find more choices.
+3. Tools can also be directly browsed by category in the tool panel.
 
 If you can't find a tool you need for a tutorial on Galaxy, please:
 
