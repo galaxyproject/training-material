@@ -144,15 +144,12 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
->     - *"Input Collection"*: `2 PE fastqs`
->
-> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Short read data from your current history"*: `2 PE fastqs` selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
-> 3. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -166,13 +163,42 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    {: .question}
 >
+>    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %}.
+>    However, the current version of the wrapper of **MultiQC** does not accept list of pairs collections.
+>    Thus we will transform the list of pairs to a simple list.
+>
+>    > ### {% icon details %} What does this mean exactly?
+>    > ```text
+>    > Current organisation:
+>    >                                      FastQC results
+>    >                                      /            \
+>    >                   GSM461177_untreat_paired    GSM461180_treat_paired
+>    >                      /           \                   /      \
+>    >                 forward        reverse         forward     reverse
+>    > 
+>    > 
+>    > 
+>    > Desired organisation
+>    >                                       FastQC results
+>    >                                     /     /    \    \
+>    >                                 /       /        \      \
+>    >                             /         /            \        \  
+>    >                         /           /                \          \  
+>    >                     /             /                    \            \
+>    > GSM461177_.._forward   GSM461177_.._reverse   GSM461180_.._forward   GSM461180_.._reverse 
+>    > ```
+>    {: .details}
+>
+> 3. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>     - *"Input Collection"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>
 > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >                - In *"FastQC output"*:
 >                    - {% icon param-repeat %} *"Insert FastQC output"*
->                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>                        - {% icon param-collection %} *"FastQC output"*: (output of **Flatten collection** {% icon tool %}) 
 >
 > 5. Inspect the webpage output from MultiQC for each FASTQ
 >
