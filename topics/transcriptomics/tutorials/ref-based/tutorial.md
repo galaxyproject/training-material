@@ -182,7 +182,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >                - In *"FastQC output"*:
 >                    - {% icon param-repeat %} *"Insert FastQC output"*
->                        - {% icon param-collection %} *"FastQC output"*: (output of **Flatten collection** {% icon tool %}) 
+>                        - {% icon param-collection %} *"FastQC output"*: (output of **Flatten collection** {% icon tool %})
 >
 > 5. Inspect the webpage output from MultiQC for each FASTQ
 >
@@ -562,7 +562,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >        - {% icon param-collection %} *"Input .bam file"*: output of **Samtools view** {% icon tool %}
 > >    - {% icon param-file %} *"Reference gene model"*: `Convert GTF to BED12 on data N: BED12` (output of **Convert GTF to BED12** {% icon tool %})
 > >
-> > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
+> > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
 > >    - In *"Results"*:
 > >        - {% icon param-repeat %} *"Insert Results"*
 > >            - *"Which tool was used generate logs?"*: `RSeQC`
