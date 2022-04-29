@@ -166,27 +166,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %}.
 >    However, the current version of the wrapper of **MultiQC** does not accept list of pairs collections.
 >    Thus we will transform the list of pairs to a simple list.
->
+>    >
 >    > ### {% icon details %} What does this mean exactly?
->    > ```text
->    > Current organisation:
->    >                                      FastQC results
->    >                                      /            \
->    >                   GSM461177_untreat_paired    GSM461180_treat_paired
->    >                      /           \                   /      \
->    >                 forward        reverse         forward     reverse
->    > 
->    > 
->    > 
->    > Desired organisation
->    >                                       FastQC results
->    >                                     /     /    \    \
->    >                                 /       /        \      \
->    >                             /         /            \        \  
->    >                         /           /                \          \  
->    >                     /             /                    \            \
->    > GSM461177_.._forward   GSM461177_.._reverse   GSM461180_.._forward   GSM461180_.._reverse 
->    > ```
+>    >
+>    > The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
+>    > ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
 >    {: .details}
 >
 > 3. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
