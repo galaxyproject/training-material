@@ -23,9 +23,9 @@
         
         
         
-        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
         <meta property="og:title" content="Galaxy Training: De Bruijn Graph Assembly" />
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
@@ -100,6 +100,10 @@
 
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/assembly/faqs/" title="Check our FAQs for the Assembly topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -276,7 +280,7 @@
     <p>Sequences can be reconstructed by moving between nodes in graph
 ]
 .pull-right[
-.image-50[<img src="../../images/debruijn.png" alt="black and white image of a man wearing glasses" />]
+.image-50[<img src="../../images/debruijn.png" alt="black and white image of a man wearing glasses. " loading="lazy" />]
 ]
 —
 .enlarge120[# <strong>de Bruijn Graphs</strong></p>
@@ -287,18 +291,18 @@
     <p>Edges represent consecutive k-mers (which overlap by k-1 symbols)
 ]
 Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
-<img src="../../images/debruijn01.png" alt="every permutation of 3 0s and/or 1s is shown, each is a node. Lines connect ones that share at least 2 overlap." />
+<img src="../../images/debruijn01.png" alt="every permutation of 3 0s and/or 1s is shown, each is a node. Lines connect ones that share at least 2 overlap." loading="lazy" />
 —
 .enlarge120[# <strong>Producing sequences</strong></p>
   </li>
   <li>Sequences of symbols are produced by moving through the graph
 ]
-<img src="../../images/debruijn02.png" alt="Same graph as before with arrows listing a path through the graph. Nodes 111, 110, 100, and 000 combine into 111000." /></li>
+<img src="../../images/debruijn02.png" alt="Same graph as before with arrows listing a path through the graph. Nodes 111, 110, 100, and 000 combine into 111000." loading="lazy" /></li>
 </ul>
 
 <hr />
 <p>.enlarge120[</p>
-<h1 id="k-mers-------pull-rightimage-25"><strong>K-mers?</strong>       .pull-right[.image-25[<img src="../../images/specialk.png" alt="Special K Logo" />]]</h1>
+<h1 id="k-mers-------pull-rightimage-25"><strong>K-mers?</strong>       .pull-right[.image-25[<img src="../../images/specialk.png" alt="Special K Logo. " loading="lazy" />]]</h1>
 
 <hr />
 
@@ -317,62 +321,62 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 ]
 —
 .enlarge120[</p>
-<h1 id="what-are-k-mers-------pull-rightimage-25"><strong>What are K-mers?</strong>       .pull-right[.image-25[<img src="../../images/specialk.png" alt="Special K Logo" />]]]</h1>
-<p><img src="../../images/kmers01.png" alt="k=12 kmers show three sequences with length 12 overlapping. For k=5 10 different shorter sequences are shown." /></p>
+<h1 id="what-are-k-mers-------pull-rightimage-25"><strong>What are K-mers?</strong>       .pull-right[.image-25[<img src="../../images/specialk.png" alt="Special K Logo. " loading="lazy" />]]]</h1>
+<p><img src="../../images/kmers01.png" alt="k=12 kmers show three sequences with length 12 overlapping. For k=5 10 different shorter sequences are shown." loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
-<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
-<p><img src="../../images/ex1-1.png" alt="An example of happiness is given with 4 fragments, happi, pine, iness, appin." />
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." loading="lazy" />]]]</h1>
+<p><img src="../../images/ex1-1.png" alt="An example of happiness is given with 4 fragments, happi, pine, iness, appin." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-1"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
-<p><img src="../../images/ex1-2.png" alt="all 4-mers are shown from those 5-mers, so happi becomes happ and appi. These are then uniqued." />
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-1"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." loading="lazy" />]]]</h1>
+<p><img src="../../images/ex1-2.png" alt="all 4-mers are shown from those 5-mers, so happi becomes happ and appi. These are then uniqued." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-2"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
-<p><img src="../../images/ex1-3.png" alt="A graph is drawn based on overlaps between those 4-mers." />
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-2"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." loading="lazy" />]]]</h1>
+<p><img src="../../images/ex1-3.png" alt="A graph is drawn based on overlaps between those 4-mers." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-3"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
-<p><img src="../../images/ex1-4.png" alt="The graph is collapsed into the word happiness, success." /></p>
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-3"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." loading="lazy" />]]]</h1>
+<p><img src="../../images/ex1-4.png" alt="The graph is collapsed into the word happiness, success." loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
-<h1 id="the-problem-of-repeats-------pull-rightimage-25"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
-<p><img src="../../images/ex2-1.png" alt="A second example with the word mississippi is shown. The fragments are now missis, ssissi, ssippi." />
+<h1 id="the-problem-of-repeats-------pull-rightimage-25"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2-1.png" alt="A second example with the word mississippi is shown. The fragments are now missis, ssissi, ssippi." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="the-problem-of-repeats-------pull-rightimage-25-1"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
-<p><img src="../../images/ex2-2.png" alt="All 4-mers are generated so missis becomes miss, issi, and ssis. These are then uniqued to get 7 unique 4-mers." />
+<h1 id="the-problem-of-repeats-------pull-rightimage-25-1"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2-2.png" alt="All 4-mers are generated so missis becomes miss, issi, and ssis. These are then uniqued to get 7 unique 4-mers." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="the-problem-of-repeats-------pull-rightimage-25-2"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
-<p><img src="../../images/ex2-3.png" alt="A graph is generated but this graph is more complex and has a loop." />
+<h1 id="the-problem-of-repeats-------pull-rightimage-25-2"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2-3.png" alt="A graph is generated but this graph is more complex and has a loop." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="the-problem-of-repeats-------pull-rightimage-25-3"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
-<p><img src="../../images/ex2-4.png" alt="This graph is walked and now the results are shown, mississippi, mississississippi, or more could be found by following the loop repeatedly." />
+<h1 id="the-problem-of-repeats-------pull-rightimage-25-3"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2-4.png" alt="This graph is walked and now the results are shown, mississippi, mississississippi, or more could be found by following the loop repeatedly." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="different-k-------pull-rightimage-25"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
-<p><img src="../../images/ex2a-1.png" alt="The same mississippi example from the start." />
+<h1 id="different-k-------pull-rightimage-25"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2a-1.png" alt="The same mississippi example from the start." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="different-k-------pull-rightimage-25-1"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
-<p><img src="../../images/ex2a-2.png" alt="Instead of 4-mers, we now produce 5-mers." />
+<h1 id="different-k-------pull-rightimage-25-1"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2a-2.png" alt="Instead of 4-mers, we now produce 5-mers." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="different-k-------pull-rightimage-25-2"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
-<p><img src="../../images/ex2a-3.png" alt="The graph is produced, and now there are two disconnected sets of nodes." />
+<h1 id="different-k-------pull-rightimage-25-2"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2a-3.png" alt="The graph is produced, and now there are two disconnected sets of nodes." loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="different-k-------pull-rightimage-25-3"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
-<p><img src="../../images/ex2a-4.png" alt="When collapsing this graph we see two results, MISSISSIS and SSIPPI." /></p>
+<h1 id="different-k-------pull-rightimage-25-3"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex2a-4.png" alt="When collapsing this graph we see two results, MISSISSIS and SSIPPI." loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
-<h1 id="choose-k-wisely-------pull-rightimage-25"><strong>Choose k wisely</strong>       .pull-right[.image-25[<img src="../../images/wisely.png" alt="An old man from some movie." />]]]</h1>
+<h1 id="choose-k-wisely-------pull-rightimage-25"><strong>Choose k wisely</strong>       .pull-right[.image-25[<img src="../../images/wisely.png" alt="An old man from some movie." loading="lazy" />]]]</h1>
 
 <p>.enlarge120[</p>
 <ul>
@@ -396,28 +400,28 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 
 <h2>]</h2>
 <p>.enlarge120[</p>
-<h1 id="read-errors-------pull-rightimage-25"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
-<p>.image-75[<img src="../../images/ex3-head.png" alt="Example 3, happiness again, with fragments happi, iness, aplin, pinet" />]
-<img src="../../images/blank.png" alt="Blank image" />
+<h1 id="read-errors-------pull-rightimage-25"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol. " loading="lazy" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Example 3, happiness again, with fragments happi, iness, aplin, pinet. " loading="lazy" />]
+<img src="../../images/blank.png" alt="Blank image. " loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="read-errors-------pull-rightimage-25-1"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
-<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers" />]
-<img src="../../images/ex3-2.png" alt="all 3-mers are produced" />
+<h1 id="read-errors-------pull-rightimage-25-1"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol. " loading="lazy" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers. " loading="lazy" />]
+<img src="../../images/ex3-2.png" alt="all 3-mers are produced. " loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="read-errors-------pull-rightimage-25-2"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
-<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers" />]
-<img src="../../images/ex3-3.png" alt="The three mers are collapsed into an overlap graph" />
+<h1 id="read-errors-------pull-rightimage-25-2"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol. " loading="lazy" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers. " loading="lazy" />]
+<img src="../../images/ex3-3.png" alt="The three mers are collapsed into an overlap graph. " loading="lazy" />
 —
 .enlarge120[</p>
-<h1 id="read-errors-------pull-rightimage-25-3"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
-<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers" />]
-<img src="../../images/ex3-4.png" alt="The graph is coloured and six contigs are produced based on overlaps." /></p>
+<h1 id="read-errors-------pull-rightimage-25-3"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol. " loading="lazy" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers. " loading="lazy" />]
+<img src="../../images/ex3-4.png" alt="The graph is coloured and six contigs are produced based on overlaps." loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
-<h1 id="more-coverage-------pull-rightimage-50"><strong>More coverage</strong>       .pull-right[.image-50[<img src="../../images/depthlogo.png" alt="hazard symbol" />]]]</h1>
+<h1 id="more-coverage-------pull-rightimage-50"><strong>More coverage</strong>       .pull-right[.image-50[<img src="../../images/depthlogo.png" alt="hazard symbol. " loading="lazy" />]]]</h1>
 
 <p>.enlarge120[</p>
 <ul>
@@ -432,8 +436,8 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 ]
 —
 .enlarge120[</p>
-<h1 id="read-errors-revisited-------pull-rightimage-50"><strong>Read errors revisited</strong>       .pull-right[.image-50[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
-<p><img src="../../images/ex3a.png" alt="Same happiness example, all three mers are present, but now the counts are shown. One path has many more counts than the other. Text asks which path looks most valid? why?" /></p>
+<h1 id="read-errors-revisited-------pull-rightimage-50"><strong>Read errors revisited</strong>       .pull-right[.image-50[<img src="../../images/hazardsymbol.png" alt="hazard symbol. " loading="lazy" />]]]</h1>
+<p><img src="../../images/ex3a.png" alt="Same happiness example, all three mers are present, but now the counts are shown. One path has many more counts than the other. Text asks which path looks most valid? why?" loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
@@ -471,7 +475,7 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 
 <h2 id="step-1-chain-merging">Step 1: Chain merging</h2>
 
-<p><img src="../../images/tipclipping.png" alt="Looking at a doubly connected graph with forward/reverse sequences and piles of overlaps. Nodes are connected with lines. One node is labelled as already merged, and two nodes sharing a prefix are labelled as further merging possible." /></p>
+<p><img src="../../images/tipclipping.png" alt="Looking at a doubly connected graph with forward/reverse sequences and piles of overlaps. Nodes are connected with lines. One node is labelled as already merged, and two nodes sharing a prefix are labelled as further merging possible." loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
@@ -479,14 +483,14 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 
 <h2 id="step-2-tip-clipping">Step 2: Tip clipping</h2>
 
-<p><img src="../../images/shortnodes.png" alt="a graph with every node doubled for forward/reverse strands is shown, clip tips if the length of the tip of the node is less than 2 times k." /></p>
+<p><img src="../../images/shortnodes.png" alt="a graph with every node doubled for forward/reverse strands is shown, clip tips if the length of the tip of the node is less than 2 times k." loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
 <h1 id="graph-simplification-2"><strong>Graph simplification</strong>]</h1>
 
 <p>.pull-left[
-<img src="../../images/bubblemerging.png" alt="Three graphs are shown, B, C, and D. B is the most complex, C combines two nodes B and B prime, while D collapses even more nodes to further simplify the graph." />
+<img src="../../images/bubblemerging.png" alt="Three graphs are shown, B, C, and D. B is the most complex, C combines two nodes B and B prime, while D collapses even more nodes to further simplify the graph." loading="lazy" />
 ]
 .pull-right[</p>
 <h2 id="step-3-bubble-collapsing">Step 3: Bubble collapsing</h2>
@@ -560,7 +564,7 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 ]</li>
 </ul>
 
-<p><img src="../../images/breadcrumb.png" alt="Two boxes A and B are at opposite ends, there are many nodes along a line between them, and some sitting outside of the graph or otherwise weirdly connected." /></p>
+<p><img src="../../images/breadcrumb.png" alt="Two boxes A and B are at opposite ends, there are many nodes along a line between them, and some sitting outside of the graph or otherwise weirdly connected." loading="lazy" /></p>
 
 <hr />
 <p>.enlarge120[</p>
@@ -568,7 +572,7 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 <p>]
 —
 .enlarge120[</p>
-<h1 id="spades-----pull-rightimage-50"><strong>SPAdes</strong>     .pull-right[.image-50[<img src="../../images/spades.png" alt="spades logo" />]]]</h1>
+<h1 id="spades-----pull-rightimage-50"><strong>SPAdes</strong>     .pull-right[.image-50[<img src="../../images/spades.png" alt="spades logo. " loading="lazy" />]]]</h1>
 
 <p>.enlarge120[</p>
 <ul>
@@ -617,7 +621,7 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
 </ul>
 
 <p>.pull-right[
-<img src="../../images/minionpacbio.png" alt="image of a minion connected to a computer via a cable. Below a man stands next to a very large machine." />
+<img src="../../images/minionpacbio.png" alt="image of a minion connected to a computer via a cable. Below a man stands next to a very large machine." loading="lazy" />
 ]
 —
 .enlarge120[# <strong>Bandage</strong></p>
@@ -626,7 +630,7 @@ Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
   <li>Assembly graph viewer and manipulator</li>
   <li>Written by Ryan Wick of Centre for Systems Genomics - Uni. Melbourne, Australia
 ]
-<img src="../../images/bandage.png" alt="A screenshot of the bandage gui showning drawing options on left and a middle window with a close up of a genome assembly graph." /></li>
+<img src="../../images/bandage.png" alt="A screenshot of the bandage gui showning drawing options on left and a middle window with a close up of a genome assembly graph." loading="lazy" /></li>
 </ul>
 
 

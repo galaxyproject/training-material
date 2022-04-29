@@ -23,9 +23,9 @@
         
         
         
-        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta name="description" content="Analyses of sequences" />
         <meta property="og:title" content="Galaxy Training: Mapping" />
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:description" content="Analyses of sequences" />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
@@ -100,6 +100,10 @@
 
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/sequence-analysis/faqs/" title="Check our FAQs for the Sequence analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -272,7 +276,7 @@
 
 	<h1 id="example-ngs-pipeline">Example NGS pipeline</h1>
 
-<p><img src="../../images/mapping/variant_calling_workflow.png" alt="High level view of a typical NGS workflow" /></p>
+<p><img src="../../images/mapping/variant_calling_workflow.png" alt="High level view of a typical NGS workflow. " loading="lazy" /></p>
 
 <p>A high level view of a typical NGS bioinformatics workflow</p>
 
@@ -298,7 +302,7 @@
 <h1 id="what-is-mapping">What is mapping?</h1>
 
 <p>.pull-left[
-<img src="../../images/mapping/mapping_assembly.png" alt="Mapping vs assembly" />
+<img src="../../images/mapping/mapping_assembly.png" alt="Mapping vs assembly. " loading="lazy" />
 ]</p>
 
 <p>.pull-right[</p>
@@ -377,7 +381,7 @@ up pretty well..</p>
 <ul>
   <li>
     <p>Read could align to multiple places
-.center[.image-50[<img src="../../images/mapping/multimap.png" alt="Illustration of multi-mapped read" />]]</p>
+.center[.image-50[<img src="../../images/mapping/multimap.png" alt="Illustration of multi-mapped read. " loading="lazy" />]]</p>
   </li>
   <li>How to handle multi-mapped reads? Depends on tool:
     <ul>
@@ -420,7 +424,7 @@ up pretty well..</p>
 </ul>
 
 <p>.center[
-.image-25[<img src="../../images/mapping/scoring_example.png" alt="Screenshot of a sequence scoring game where two sequences are being aligned across the top (GGCTGG and GAGG) and the per-base and cumulative scores from left to right." />]</p>
+.image-25[<img src="../../images/mapping/scoring_example.png" alt="Screenshot of a sequence scoring game where two sequences are being aligned across the top (GGCTGG and GAGG) and the per-base and cumulative scores from left to right." loading="lazy" />]</p>
 
 <p><strong>Example</strong> (with affine gap penalty)
 ]</p>
@@ -455,8 +459,8 @@ up pretty well..</p>
 </ul>
 
 <p>.center[
-.image-50[ <img src="../../images/mapping/ti_tv.png" alt="Transitions vs transversions" /> ]
-.image-25[ <img src="../../images/mapping/ti_tv_scoring.png" alt="Example scoring matrix" /> ]
+.image-50[ <img src="../../images/mapping/ti_tv.png" alt="Transitions vs transversions. " loading="lazy" /> ]
+.image-25[ <img src="../../images/mapping/ti_tv_scoring.png" alt="Example scoring matrix. " loading="lazy" /> ]
 ]</p>
 
 <ul>
@@ -478,7 +482,7 @@ Many more complexities may be considered, different tools make different choices
 
 <p><strong>Transversions</strong> are interchanges of purine for pyrimidine bases, which therefore involve exchange of one-ring and two-ring structures.</p>
 
-<p><img src="../../images/mapping/transition_transversion.gif" alt="Transitions and transversions" /></p>
+<p><img src="../../images/mapping/transition_transversion.gif" alt="Transitions and transversions. " loading="lazy" /></p>
 
 <hr />
 
@@ -780,7 +784,7 @@ ins TCTCT
   </li>
 </ul>
 
-<p>.image-75[<img src="../../images/mapping/alignment.gif" alt="Recording of alignment game" />]</p>
+<p>.image-75[<img src="../../images/mapping/alignment.gif" alt="Recording of alignment game. " loading="lazy" />]</p>
 
 <p>.footnote[https://tinyurl.com/sequence-alignment]</p>
 
@@ -797,12 +801,12 @@ Can have learners play around with this alignment game now</p>
   <li>
     <p><strong>Sequencing:</strong> Cut longer fragments of DNA, sequence only the ends</p>
 
-    <p>.center[.image-90[<img src="../../images/mapping/pairedend_read.png" alt="Paired-end reads" />]]</p>
+    <p>.center[.image-90[<img src="../../images/mapping/pairedend_read.png" alt="Paired-end reads. " loading="lazy" />]]</p>
   </li>
   <li>
     <p><strong>Mapping:</strong> known distance between reads improves accuracy</p>
 
-    <p>.center[.image-75[<img src="../../images/mapping/pairedend_mapping.png" alt="Mapping of paired-end reads" />]]</p>
+    <p>.center[.image-75[<img src="../../images/mapping/pairedend_mapping.png" alt="Mapping of paired-end reads. " loading="lazy" />]]</p>
   </li>
 </ul>
 
@@ -830,7 +834,7 @@ the ends.</li>
   <li>
     <p><strong>Single-end:</strong></p>
 
-    <p><img src="../../images/mapping/repeats_se.png" alt="Cartoon with a reference genome and two repeats marked. Two blue boxes representing a single-ended read map equally well to both repeats." /></p>
+    <p><img src="../../images/mapping/repeats_se.png" alt="Cartoon with a reference genome and two repeats marked. Two blue boxes representing a single-ended read map equally well to both repeats." loading="lazy" /></p>
   </li>
 </ul>
 
@@ -844,7 +848,7 @@ for unique mapping..</p>
   <li>
     <p><strong>Paired-end:</strong></p>
 
-    <p><img src="../../images/mapping/repeats_pe.png" alt="Cartoon with a reference genome and two repeats marked. Now the two blue boxes are linked and one of them is red, representing a forward/reverse pair of a paired-end read. The mapping is no longer ambiguous and you can know which repeat the blue box belongs to, as the red box maps upstream." /></p>
+    <p><img src="../../images/mapping/repeats_pe.png" alt="Cartoon with a reference genome and two repeats marked. Now the two blue boxes are linked and one of them is red, representing a forward/reverse pair of a paired-end read. The mapping is no longer ambiguous and you can know which repeat the blue box belongs to, as the red box maps upstream." loading="lazy" /></p>
   </li>
 </ul>
 
@@ -864,7 +868,7 @@ paired-end protocol (distance to mate), this can now be resolved..</p>
   <li>
     <p><strong>Deletions:</strong> Longer mapping distance than expected</p>
 
-    <p>.image-75[<img src="../../images/mapping/pairedend_deletion.png" alt="Deletion between two paired reads" />]</p>
+    <p>.image-75[<img src="../../images/mapping/pairedend_deletion.png" alt="Deletion between two paired reads. " loading="lazy" />]</p>
   </li>
 </ul>
 
@@ -874,7 +878,7 @@ paired-end protocol (distance to mate), this can now be resolved..</p>
   <li>
     <p><strong>Insertions:</strong> Shorter mapping distance than expected</p>
 
-    <p>.image-75[<img src="../../images/mapping/pairedend_insertion.png" alt="Insertions beteween two paired reads" />]</p>
+    <p>.image-75[<img src="../../images/mapping/pairedend_insertion.png" alt="Insertions beteween two paired reads. " loading="lazy" />]</p>
   </li>
 </ul>
 
@@ -918,7 +922,7 @@ paired-end protocol (distance to mate), this can now be resolved..</p>
       <li><strong>Reverse</strong> reads (usually <strong><code class="language-plaintext highlighter-rouge">_2</code></strong> or <strong><code class="language-plaintext highlighter-rouge">_R2</code></strong> in file name)</li>
     </ul>
 
-    <p><img src="../../images/mapping/pairedend_fastq.png" alt="Paired-end reads as two separate FASTQ files" /></p>
+    <p><img src="../../images/mapping/pairedend_fastq.png" alt="Paired-end reads as two separate FASTQ files. " loading="lazy" /></p>
   </li>
 </ul>
 
@@ -1229,7 +1233,7 @@ By cutting the yellow read only from the forward reads file, but leaving the oth
 </ul>
 
 <p>.center[
-.image-40[<img src="../../images/mapping/spliced_mapper.png" alt="Mapping RNA" />]
+.image-40[<img src="../../images/mapping/spliced_mapper.png" alt="Mapping RNA. " loading="lazy" />]
 ]
 .footnote[<strong>Figure:</strong> mapping of RNA-seq reads is different than DNA-seq]</p>
 
@@ -1285,7 +1289,7 @@ provides the best results.”</em> - Hatem et al BMC Bioinformatics 2013, 14:184
 
 <h2 id="mapping-tools">Mapping tools</h2>
 
-<p><img src="../../images/mapping/ngs_read_mappers_timeline.jpeg" alt="Timeline of mapping tools" /></p>
+<p><img src="../../images/mapping/ngs_read_mappers_timeline.jpeg" alt="Timeline of mapping tools. " loading="lazy" /></p>
 
 <p>.footnote[60+ different mappers, many comparison papers. Figure from <a href="https://doi.org/10.1093/bioinformatics/bts605">10.1093/bioinformatics/bts605</a> ]</p>
 
@@ -1360,7 +1364,7 @@ provides the best results.”</em> - Hatem et al BMC Bioinformatics 2013, 14:184
 
 <h1 id="sambam-file-format">SAM/BAM file format</h1>
 
-<p><img src="../../images/bam_file.png" alt="Example of SAM file format" title="SAM/BAM file" /></p>
+<figure id="figure-1"><img src="../../images/bam_file.png" alt="Example of SAM file format. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> SAM/BAM file</figcaption></figure>
 
 <p><strong>SAM:</strong> <strong>S</strong>equence <strong>A</strong>lignment <strong>M</strong>ap</p>
 
@@ -1370,7 +1374,7 @@ provides the best results.”</em> - Hatem et al BMC Bioinformatics 2013, 14:184
 
 <h1 id="sambam-file-format-1">SAM/BAM file format</h1>
 
-<p><img src="../../images/bam_file_explained.png" alt="More detailed view of SAM format" title="SAM/BAM file detail" /></p>
+<figure id="figure-2"><img src="../../images/bam_file_explained.png" alt="More detailed view of SAM format. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> SAM/BAM file detail</figcaption></figure>
 
 <ul>
   <li>Original read information (from FASTQ) plus mapping information
@@ -1396,7 +1400,7 @@ Alignment given in CIGAR string.</p>
   <li>Visualise aligned reads (BAM files)</li>
 </ul>
 
-<p><img src="../../images/mapping/igv_animation.gif" alt="IGV Genome Browser" /></p>
+<p><img src="../../images/mapping/igv_animation.gif" alt="IGV Genome Browser. " loading="lazy" /></p>
 
 <p>.footnote[This is <a href="https://software.broadinstitute.org/software/igv/">IGV (Integrative Genome Browser)</a> DOI: <a href="https://doi.org/10.1038/nbt.1754">10.1038/nbt.1754</a>]</p>
 
@@ -1416,7 +1420,7 @@ Alignment given in CIGAR string.</p>
   <li><a href="https://jbrowse.org/">JBrowse</a> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Genome Browser as Galaxy tool</li>
 </ul>
 
-<p>.image-90[<img src="../../images/mapping/jbrowse.png" alt="Screenshot of JBrowse in the Galaxy Interface showing transcripts, various box plots, heatmaps, sequencing depth and variation plots." />]</p>
+<p>.image-90[<img src="../../images/mapping/jbrowse.png" alt="Screenshot of JBrowse in the Galaxy Interface showing transcripts, various box plots, heatmaps, sequencing depth and variation plots." loading="lazy" />]</p>
 
 <p>.footnote[<a href="https://jbrowse.org">JBrowse.org</a> DOI: <a href="https://doi.org/10.1186/s13059-016-0924-1">10.1186/s13059-016-0924-1</a>]</p>
 
@@ -1436,7 +1440,7 @@ Alignment given in CIGAR string.</p>
       <li><a href="https://genome-euro.ucsc.edu/cgi-bin/hgTracks">UCSC Genome Browser</a>, <a href="https://www.ensembl.org">Ensemble</a>, <a href="https://software.broadinstitute.org/software/igv/">IGV</a>, <a href="https://bioviz.org/">IGB</a>, <a href="https://bam.iobio.io/home">BAM.iobo</a></li>
     </ul>
 
-    <p><img src="../../images/mapping/igv_link.png" alt="Display application links in Galaxy" /></p>
+    <p><img src="../../images/mapping/igv_link.png" alt="Display application links in Galaxy. " loading="lazy" /></p>
   </li>
   <li>Two different links for <strong>IGV</strong>
     <ul>

@@ -23,9 +23,9 @@
         
         
         
-        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
         <meta property="og:title" content="Galaxy Training: Unicycler Assembly" />
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
@@ -100,6 +100,10 @@
 
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/assembly/faqs/" title="Check our FAQs for the Assembly topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -284,7 +288,7 @@
 
 <p>]</p>
 
-<p><a href="https://github.com/rrwick/Unicycler"><img src="../../images/illumina_graph_comparison.png" alt="Graphic shown three different assemblies, all tangled knots of sequences that will be very difficult to resolve." /></a></p>
+<p><a href="https://github.com/rrwick/Unicycler"><img src="../../images/illumina_graph_comparison.png" alt="Graphic shown three different assemblies, all tangled knots of sequences that will be very difficult to resolve." loading="lazy" /></a></p>
 
 <p>Genome assembly is a difficult task. In trying to explain it we will be relying on two highly regarded sources:</p>
 
@@ -520,7 +524,7 @@ GGCGTCTATATCT
 <h2 id="directed-graphs">Directed graphs</h2>
 
 <p>Finding overlaps is identical to building a <em>directed graph</em> where directed <em>edges</em> connect <em>nodes</em> representing overlapping reads:
-<img src="../../images/dag.png" alt="Cartoons of two sequences aligned with nearly perfect matches. On the right are a list of nodes representing sequences. The two from the alignment are linked with an arrow and the text reads Suffix of source is similar to prefix of sink." /></p>
+<img src="../../images/dag.png" alt="Cartoons of two sequences aligned with nearly perfect matches. On the right are a list of nodes representing sequences. The two from the alignment are linked with an arrow and the text reads Suffix of source is similar to prefix of sink." loading="lazy" /></p>
 
 <blockquote>
   <p><strong>Directed graph</strong> representing overlapping reads. (Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>).</p>
@@ -551,7 +555,7 @@ GGCGTCTATATCT
 
 <p>can be represented as a following directed graph (or genome path):</p>
 
-<p><img src="../../images/4.6.png" alt="Graph where each of the above 3-mers is a single node in a graph and they are linked together from left to right most 3-mer." /></p>
+<p><img src="../../images/4.6.png" alt="Graph where each of the above 3-mers is a single node in a graph and they are linked together from left to right most 3-mer." loading="lazy" /></p>
 
 <p><strong>Genome path</strong>. Trimers composing the <code>TAATGCCATGGGATGTT</code> sequence represented as the “genome” path. (Fig. 4.6 from <a href="http://bioinformaticsalgorithms.com/">CP</a>). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer.</p>
 
@@ -560,7 +564,7 @@ GGCGTCTATATCT
 <p><strong>However</strong>, we do not know the actual genome! All we have in real life is a collection of reads. Let’s first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:</p>
 
 <blockquote>
-  <p><img src="../../images/4.7.png" alt="Th above graph is expanded to include a lot more connections between any nodes that share 2 base overlap." /></p>
+  <p><img src="../../images/4.7.png" alt="Th above graph is expanded to include a lot more connections between any nodes that share 2 base overlap." loading="lazy" /></p>
 
   <p><strong>Overlap graph</strong>. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from <a href="http://bioinformaticsalgorithms.com/">CP</a>)</p>
 </blockquote>
@@ -571,8 +575,8 @@ GGCGTCTATATCT
 
 <p>For example for our 3-mer collection there are two possible Hamiltonian paths:</p>
 
-<p><img src="../../images/4.9a.png" alt="The above graph is re-used but a single path is highlighted" />
-<img src="../../images/4.9b.png" alt="The same graph with a different path highlighted." /></p>
+<p><img src="../../images/4.9a.png" alt="The above graph is re-used but a single path is highlighted. " loading="lazy" />
+<img src="../../images/4.9b.png" alt="The same graph with a different path highlighted." loading="lazy" /></p>
 
 <p><strong>Two Hamiltonian paths for the 15 3-mers</strong>. Edges spelling “genomes” <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from <a href="http://bioinformaticsalgorithms.com/">[CP](http://bioinformaticsalgorithms.com/)</a>).</p>
 
@@ -596,7 +600,7 @@ Read Y TAGGCCCTC
 <p>We will start with some minimal match of length $k$. Once a match is found it will be extended to the left to verify that the entire prefix of Read Y matches:</p>
 
 <blockquote>
-  <p><img src="../../images/find_overlap.png" alt="Two sequences are shown X and Y. The X sequence ends with the string GCC. In Y they start looking from the end until they find a GCC. In this case we confirm a length-6 prefix of Y matches a suffix of X." /></p>
+  <p><img src="../../images/find_overlap.png" alt="Two sequences are shown X and Y. The X sequence ends with the string GCC. In Y they start looking from the end until they find a GCC. In this case we confirm a length-6 prefix of Y matches a suffix of X." loading="lazy" /></p>
 
   <p><strong>Finding overlaps</strong> between Read X and Read Y (Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>).</p>
 </blockquote>
@@ -606,7 +610,7 @@ Read Y TAGGCCCTC
 <p>As a result we represent two reads are connected nodes:</p>
 <blockquote>
 
-  <p><img src="../../images/og1.png" alt="Node labelled with one sequence points to another. The sequences are the ones from above with the number 6 on the arrow between them." /></p>
+  <p><img src="../../images/og1.png" alt="Node labelled with one sequence points to another. The sequences are the ones from above with the number 6 on the arrow between them." loading="lazy" /></p>
 
   <p>Number above the edge shows the length of the overlap.</p>
 </blockquote>
@@ -626,11 +630,11 @@ TACGAT
 <p>Building an overlap graph with overlap of <code>length &gt;= 4</code> will give us the following:</p>
 
 <blockquote>
-  <p><img src="../../images/og2.png" alt="The overlap graph now has longer sequences and numbers annotating the length of the overlap" /></p>
+  <p><img src="../../images/og2.png" alt="The overlap graph now has longer sequences and numbers annotating the length of the overlap. " loading="lazy" /></p>
 
   <p>You can see that there is a path through this graph that would spell out the original genome sequence <code>GTACGTACGAT</code> :</p>
 
-  <p><img src="../../images/og3.png" alt="The optimal, highest scoring path is represented through this graph" /></p>
+  <p><img src="../../images/og3.png" alt="The optimal, highest scoring path is represented through this graph. " loading="lazy" /></p>
 
   <p>Here we are lucky enough to have all nodes having a single outgoing edge with the highest number (the length of overlap).</p>
 </blockquote>
@@ -664,21 +668,21 @@ SCS(S):: AAABBBABAA (length = 10)
 <p>It looks like finding SCS for a set of sequencing reads may just be what we need to produce a genome assembly. But how can this work in practice? One potential idea is to order the strings in some way and “reduce” them into a superstring (following examples are from Ben Langmead):</p>
 
 <blockquote>
-  <p><img src="../../images/scs1.png" alt="A sequence of As and Bs in groups of 3s is labelled order 1. Below the sequence is written AAA, the current superstring." /></p>
+  <p><img src="../../images/scs1.png" alt="A sequence of As and Bs in groups of 3s is labelled order 1. Below the sequence is written AAA, the current superstring." loading="lazy" /></p>
 </blockquote>
 
 <blockquote>
   <p>Let’s look at the first two strings. They can be “reduced” to <code class="language-plaintext highlighter-rouge">AAAB</code>:</p>
 
-  <p><img src="../../images/scs2.png" alt="Now AAAB is written below the sequence because of the overlap in the first two groups." /></p>
+  <p><img src="../../images/scs2.png" alt="Now AAAB is written below the sequence because of the overlap in the first two groups." loading="lazy" /></p>
 
   <p>The next two add an <code class="language-plaintext highlighter-rouge">A</code>:</p>
 
-  <p><img src="../../images/scs3.png" alt="Now AAABA is written, due to overlap in the second and third groups" /></p>
+  <p><img src="../../images/scs3.png" alt="Now AAABA is written, due to overlap in the second and third groups. " loading="lazy" /></p>
 
   <p>Third and fourth add <code class="language-plaintext highlighter-rouge">BB</code>:</p>
 
-  <p><img src="../../images/scs4.png" alt="The extension process continues with another overlapping component extending it further." /></p>
+  <p><img src="../../images/scs4.png" alt="The extension process continues with another overlapping component extending it further." loading="lazy" /></p>
 </blockquote>
 
 <hr />
@@ -686,11 +690,11 @@ SCS(S):: AAABBBABAA (length = 10)
 <blockquote>
   <p>Continuing this we will eventually get <code class="language-plaintext highlighter-rouge">AAABABBAABABBABB</code>:</p>
 
-  <p><img src="../../images/scs5.png" alt="Order 1 produces a longish superstring" /></p>
+  <p><img src="../../images/scs5.png" alt="Order 1 produces a longish superstring. " loading="lazy" /></p>
 
   <p>But <code class="language-plaintext highlighter-rouge">AAABABBAABABBABB</code> is the shortest only for this particular ordering. So let’s reorder and try again:</p>
 
-  <p><img src="../../images/scs6.png" alt="Order 2, a new ordering of the same sequences, produces a shorter superstring." /></p>
+  <p><img src="../../images/scs6.png" alt="Order 2, a new ordering of the same sequences, produces a shorter superstring." loading="lazy" /></p>
 
   <p>Now we did better, but maybe we can do even better.</p>
 </blockquote>
@@ -711,7 +715,7 @@ AAA AAB ABB BBA BBB
 <p>and first build an overlap graph:</p>
 
 <blockquote>
-  <p><img src="../../images/greedy1.png" alt="Graph showing 5 nodes with various scores between them." /></p>
+  <p><img src="../../images/greedy1.png" alt="Graph showing 5 nodes with various scores between them." loading="lazy" /></p>
 
   <p><strong>An overlap graph</strong> for set <code>S: AAA AAB ABB BBA BBB</code>.</p>
 </blockquote>
@@ -725,7 +729,7 @@ AAA AAB ABB BBA BBB
 </blockquote>
 
 <blockquote>
-  <p><img src="../../images/greedy2.png" alt="The above graph however the node AAA -&gt; 2 -&gt; AAB is highlighted in red." /></p>
+  <p><img src="../../images/greedy2.png" alt="The above graph however the node AAA -&gt; 2 -&gt; AAB is highlighted in red." loading="lazy" /></p>
 </blockquote>
 
 <hr />
@@ -734,7 +738,7 @@ AAA AAB ABB BBA BBB
 <blockquote>
   <p>We then merge <code class="language-plaintext highlighter-rouge">AAA</code> and <code class="language-plaintext highlighter-rouge">AAB</code> into an SCS containing both, which will be <code class="language-plaintext highlighter-rouge">AAAB</code>:</p>
 
-  <p><img src="../../images/greedy3.png" alt="The above graph however with 4 nodes, as AAA and AAB are merged" />
+  <p><img src="../../images/greedy3.png" alt="The above graph however with 4 nodes, as AAA and AAB are merged. " loading="lazy" />
 ]
 –
 .pull-right[
@@ -742,7 +746,7 @@ Now let’s pick edge <font color="red">`ABB` &#8594; `BBB`</font>:</p>
 </blockquote>
 
 <blockquote>
-  <p><img src="../../images/greedy4.png" alt="Another edge scoring 2 is highlighted, ABB to BBB (2)" />
+  <p><img src="../../images/greedy4.png" alt="Another edge scoring 2 is highlighted, ABB to BBB (2). " loading="lazy" />
 ]
 —</p>
 </blockquote>
@@ -751,25 +755,25 @@ Now let’s pick edge <font color="red">`ABB` &#8594; `BBB`</font>:</p>
 <blockquote>
   <p>Collapse the nodes:</p>
 
-  <p><img src="../../images/greedy5.png" alt="They're collapsed, now with 3 nodes in the graph" />
+  <p><img src="../../images/greedy5.png" alt="They're collapsed, now with 3 nodes in the graph. " loading="lazy" />
 ]
 –
 .pull-right[
 Pick <font color="red">`ABBB` &#8594; `BBA`</font>:</p>
 
-  <p><img src="../../images/greedy6.png" alt="Same as before, another highlighted" />
+  <p><img src="../../images/greedy6.png" alt="Same as before, another highlighted. " loading="lazy" />
 ]
 —
 .pull-left[
 Collapse the nodes:</p>
 
-  <p><img src="../../images/greedy7.png" alt="Same as before, down to 2 nodes with arrows going both directions between them. One scores 2, one scores 1." />
+  <p><img src="../../images/greedy7.png" alt="Same as before, down to 2 nodes with arrows going both directions between them. One scores 2, one scores 1." loading="lazy" />
 ]
 –
 .pull-right[
 Pick <font color="red">`AAAB` &#8594; `ABBBA`</font>:</p>
 
-  <p><img src="../../images/greedy8.png" alt="The AAAB to ABBBA is highlighted, scoring 2." />
+  <p><img src="../../images/greedy8.png" alt="The AAAB to ABBBA is highlighted, scoring 2." loading="lazy" />
 ]
 —</p>
 </blockquote>
@@ -777,7 +781,7 @@ Pick <font color="red">`AAAB` &#8594; `ABBBA`</font>:</p>
 <blockquote>
   <p>Collapse again and now we are left with a superstring of length 7:</p>
 
-  <p><img src="../../images/greedy9.png" alt="A single node is left producing AAABBBA" /></p>
+  <p><img src="../../images/greedy9.png" alt="A single node is left producing AAABBBA. " loading="lazy" /></p>
 </blockquote>
 
 <p>The above procedure can be computed <em>very</em> quickly. But there is a catch: it does not guarantee that it will give us truly the shortest superstring. It really depends on how we choose edges.</p>
@@ -790,13 +794,13 @@ Pick <font color="red">`AAAB` &#8594; `ABBBA`</font>:</p>
 <blockquote>
   <p>We start the same way as before by choosing <font color="red">`AAA` &#8594; `AAB`</font>:</p>
 
-  <p><img src="../../images/greedy2.png" alt="THe graph resets to 5 nodes" />
+  <p><img src="../../images/greedy2.png" alt="THe graph resets to 5 nodes. " loading="lazy" />
 ]
 –
 .pull-right[
 Merge <code class="language-plaintext highlighter-rouge">AAA</code> and <code class="language-plaintext highlighter-rouge">AAB</code>:</p>
 
-  <p><img src="../../images/greedy3.png" alt="The same initial step" />
+  <p><img src="../../images/greedy3.png" alt="The same initial step. " loading="lazy" />
 ]</p>
 </blockquote>
 
@@ -805,13 +809,13 @@ Merge <code class="language-plaintext highlighter-rouge">AAA</code> and <code cl
 <blockquote>
   <p>But now we pick a different edge <font color="red">`ABB` &#8594; `BBA`</font>:</p>
 
-  <p><img src="../../images/greedy4_alt.png" alt="Now a different edge scoring 2 is picked, ABB to BBA" />
+  <p><img src="../../images/greedy4_alt.png" alt="Now a different edge scoring 2 is picked, ABB to BBA. " loading="lazy" />
 ]
 –
 .pull-right[
 Collapsing these nodes dramatically changes the graph:</p>
 
-  <p><img src="../../images/greedy5_alt.png" alt="these are collapsed producing a three node graph. AAAB and ABBA have a score of 2, BBB is only connected to AAAB with a score of 1." />
+  <p><img src="../../images/greedy5_alt.png" alt="these are collapsed producing a three node graph. AAAB and ABBA have a score of 2, BBB is only connected to AAAB with a score of 1." loading="lazy" />
 ]</p>
 </blockquote>
 
@@ -820,13 +824,13 @@ Collapsing these nodes dramatically changes the graph:</p>
 <blockquote>
   <p>Now we pick <font color="red">`AAAB` &#8594; `ABBA`</font> as this is the edge with the highest weight:</p>
 
-  <p><img src="../../images/greedy6_alt.png" alt="The highest scoring edge is picked" />
+  <p><img src="../../images/greedy6_alt.png" alt="The highest scoring edge is picked. " loading="lazy" />
 ]
 –
 .pull-right[
 Collapsing it produces two nodes that are not connected to each other:</p>
 
-  <p><img src="../../images/greedy7_alt.png" alt="AAABBA and BBB are left, unconnected." />
+  <p><img src="../../images/greedy7_alt.png" alt="AAABBA and BBB are left, unconnected." loading="lazy" />
 ]
 —</p>
 </blockquote>
@@ -854,7 +858,7 @@ g_long      g_time      ng_tim
 <p>An overlap graph will look like this:</p>
 
 <blockquote>
-  <p><img src="../../images/long.png" alt="A large, messy graph with various portions fo the above sentence." /></p>
+  <p><img src="../../images/long.png" alt="A large, messy graph with various portions fo the above sentence." loading="lazy" /></p>
 
   <p><small><strong>An overlap graph</strong> for with overlap length <code> &gt;= 3<code>.&lt;/small&gt;</code></code></small></p>
 </blockquote>
@@ -864,14 +868,14 @@ g_long      g_time      ng_tim
 <p>If we proceed with Greedy SCS we will follow the following trajectory through the graph:</p>
 
 <blockquote>
-  <p><img src="../../images/long_opt.png" alt="A greedy path is highlighted, all scoring 5." /></p>
+  <p><img src="../../images/long_opt.png" alt="A greedy path is highlighted, all scoring 5." loading="lazy" /></p>
 </blockquote>
 
 <hr />
 
 <p>To make things even clearer let’s isolate the path:</p>
 
-<p><img src="../../images/long_opt_focus.png" alt="Irrelevant edges are removed." /></p>
+<p><img src="../../images/long_opt_focus.png" alt="Irrelevant edges are removed." loading="lazy" /></p>
 
 <hr />
 
@@ -896,7 +900,7 @@ a_long_long_time
 <p>We are missing one instance of ‘long’ in this string. The following graph shows the path that would return the <em>correct</em> string:</p>
 
 <blockquote>
-  <p><img src="../../images/long_corr.png" alt="A less optimal path is shown that recovers the duplicated long" /></p>
+  <p><img src="../../images/long_corr.png" alt="A less optimal path is shown that recovers the duplicated long. " loading="lazy" /></p>
 </blockquote>
 
 <hr />
@@ -941,7 +945,7 @@ a_long_long_long_time
 <p><a href="https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn">Nicolaas de Bruijn</a> had a purely theoretical interest of constructing <em>k</em>-universal strings for an arbitrary value of <em>k</em>. A <em>k</em>-universal string contains every possible <em>k</em>-mer only once:</p>
 
 <blockquote>
-  <p><a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html"><img src="../../images/deBruijn_txt.png" alt="Screenshot of a box from a textbook with illegible text and a similar graph to the ABBA ones shown above." /></a></p>
+  <p><a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html"><img src="../../images/deBruijn_txt.png" alt="Screenshot of a box from a textbook with illegible text and a similar graph to the ABBA ones shown above." loading="lazy" /></a></p>
 
   <p><strong>de Bruijn graph</strong>. From <a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html">Compeau:2011</a></p>
 </blockquote>
@@ -958,31 +962,31 @@ TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
 
 <p>We will assign 3-mers to <em>edges</em> instead of <em>nodes</em>:</p>
 
-<p><img src="../../images/4.12.png" alt="A long string of 2-mer nodes linked together with 3-mers on edges." /></p>
+<p><img src="../../images/4.12.png" alt="A long string of 2-mer nodes linked together with 3-mers on edges." loading="lazy" /></p>
 
 <p><strong><em>k</em>-mers as edges</strong>. Edges represented by 3-mers connect nodes representing the overlaps. (Fig. 4.12 from <a href="http://bioinformaticsalgorithms.com/">CP</a>)</p>
 
 <p>This graph can be simplified by gluing identical nodes together:</p>
 
-<p><img src="../../images/4.13a.png" alt="The same graph" /></p>
+<p><img src="../../images/4.13a.png" alt="The same graph. " loading="lazy" /></p>
 
-<p><img src="../../images/4.13b.png" alt="Re-organised to collapse identical nodes, first the AT node is collapsed from three into one." /></p>
+<p><img src="../../images/4.13b.png" alt="Re-organised to collapse identical nodes, first the AT node is collapsed from three into one." loading="lazy" /></p>
 
 <hr />
 
 <p>Here the complexity of the graph is reduced by first gluing redundant <font color="red">`AT`</font> nodes</p>
 
-<p><img src="../../images/4.13c.png" alt="Now the 3 TG nodes are highlighted" /></p>
+<p><img src="../../images/4.13c.png" alt="Now the 3 TG nodes are highlighted. " loading="lazy" /></p>
 
-<p><img src="../../images/4.13d.png" alt="and collapsed into a single one, sharing the original's connections." /></p>
+<p><img src="../../images/4.13d.png" alt="and collapsed into a single one, sharing the original's connections." loading="lazy" /></p>
 
 <hr />
 
 <p>Next, <font color="blue">`TG`</font> nodes are merged</p>
 
-<p><img src="../../images/4.13e.png" alt="2 GG nodes are highlighted" /></p>
+<p><img src="../../images/4.13e.png" alt="2 GG nodes are highlighted. " loading="lazy" /></p>
 
-<p><img src="../../images/4.13f.png" alt="and merged, including a self-link." /></p>
+<p><img src="../../images/4.13f.png" alt="and merged, including a self-link." loading="lazy" /></p>
 
 <hr />
 
@@ -990,7 +994,7 @@ TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
 
 <p>Because we now represent <em>k</em>-mers as edges (rather than nodes), our problem has morphed into finding a path that visits every <em>edge</em> once, or an <a href="https://en.wikipedia.org/wiki/Eulerian_path">Eulerian Path</a>:</p>
 
-<p><img src="../../images/4.15.png" alt="The final graph, same as previous image but now edges are numbered as well." /></p>
+<p><img src="../../images/4.15.png" alt="The final graph, same as previous image but now edges are numbered as well." loading="lazy" /></p>
 
 <p><strong>Eulerian paths for the 15 3-mers</strong>. Numbering of edges provides a way to reconstruct the original “genome”. (Fig. 4.15 from <a href="http://bioinformaticsalgorithms.com/">CP</a>)</p>
 
@@ -1017,7 +1021,7 @@ TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
 <p>Let’s apply Euler’s Theorem to a classical problem: The bridges of Königsberg problem. Here the question is: <em>Can you walk through all of Königsberg traversing every bridge exactly one time?</em> In other words: <em>Is there a Eulerian path through the city of Königsberg?</em></p>
 
 <blockquote>
-  <p><img src="../../images/koninsberg.png" alt="Old map of Königsberg with dots on land portions and links between them. This is reduced into the same coloured nodes and bridges representing edges." /></p>
+  <p><img src="../../images/koninsberg.png" alt="Old map of Königsberg with dots on land portions and links between them. This is reduced into the same coloured nodes and bridges representing edges." loading="lazy" /></p>
 
   <p><strong>Königsberg and Euler’s Theorem</strong>. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city’s seven bridges as an edge. (From <a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close">Campeau:2011</a>)</p>
 </blockquote>
@@ -1031,7 +1035,7 @@ TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
 <p>Let’s look at the de Bruijn graph from above again. But this time let’s drop edge numbering and pretend that the genome is now really known to us (as is usually the case in real life):</p>
 
 <blockquote>
-  <p><img src="../../images/dg1.png" alt="Similar graph as above but now edges are only labelled by sequences, no more numbers." /></p>
+  <p><img src="../../images/dg1.png" alt="Similar graph as above but now edges are only labelled by sequences, no more numbers." loading="lazy" /></p>
 
   <p><strong>Eulerian paths for the 15 3-mers</strong>.</p>
 </blockquote>
@@ -1041,7 +1045,7 @@ TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
 <p>In the original sequence <code class="language-plaintext highlighter-rouge">TAATGCCATGGGATGTT</code> <em>k</em>-mer <font color="red">`AT`</font> is present 3 times and <em>k</em>-mer <font color="blue">`TG`</font> is found twice. Thus <em>multiple</em> Eulerian walks are now possible like this:</p>
 
 <blockquote>
-  <p><img src="../../images/dg2.png" alt="Following a direct path from the one node without incoming connections, to TG node, choosing one of the three outgoing connections we go 'up'" /></p>
+  <p><img src="../../images/dg2.png" alt="Following a direct path from the one node without incoming connections, to TG node, choosing one of the three outgoing connections we go 'up'. " loading="lazy" /></p>
 
   <p><strong>Possible path #1</strong>. Here after we reach <font color="blue">`TG`</font> node we turn <strong>up</strong>.</p>
 </blockquote>
@@ -1074,7 +1078,7 @@ TAATGCCATGGGATGTT
 <p>Yet there is an alternative:</p>
 
 <blockquote>
-  <p><img src="../../images/dg3.png" alt="The same as above but this time going down to follow a different path" /></p>
+  <p><img src="../../images/dg3.png" alt="The same as above but this time going down to follow a different path. " loading="lazy" /></p>
 
   <p><strong>Possible path #2</strong>. Here after we reach <font color="blue">`TG`</font> node we turn <strong>dow</strong>.</p>
 </blockquote>
@@ -1119,7 +1123,7 @@ TAATGGATGCCATGTTT
 <h4 id="k--3"><em>k</em> = 3</h4>
 
 <blockquote>
-  <p><img src="../../images/k2.png" alt="The same graph as above, now in a different orientation. There are many connections" /></p>
+  <p><img src="../../images/k2.png" alt="The same graph as above, now in a different orientation. There are many connections. " loading="lazy" /></p>
 </blockquote>
 
 <hr />
@@ -1131,7 +1135,7 @@ TAATGGATGCCATGTTT
 <h4 id="k--4"><em>k</em> = 4</h4>
 
 <blockquote>
-  <p><img src="../../images/k3.png" alt="There are now significantly fewer connections." /></p>
+  <p><img src="../../images/k3.png" alt="There are now significantly fewer connections." loading="lazy" /></p>
 
   <p>Here complexity is decreasing, but we still have the problem with having <code class="language-plaintext highlighter-rouge">ATG</code> twice.</p>
 </blockquote>
@@ -1145,7 +1149,7 @@ TAATGGATGCCATGTTT
 <p>This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes.
 ]
 .pull-right[
-<img src="../../images/k4.png" alt="Graph with only a single route through the sequence." />
+<img src="../../images/k4.png" alt="Graph with only a single route through the sequence." loading="lazy" />
 ]</p>
 
 <hr />
@@ -1160,14 +1164,14 @@ TAATGGATGCCATGTTT
 </ol>
 
 <blockquote>
-  <p><img src="../../images/4.7.png" alt="Overlap: graph from before, nodes are 3-mers, unlabelled connections." /></p>
+  <p><img src="../../images/4.7.png" alt="Overlap: graph from before, nodes are 3-mers, unlabelled connections." loading="lazy" /></p>
 </blockquote>
 
 <hr />
 
 <p><strong>A</strong>.</p>
 
-<p><img src="../../images/4.13f.png" alt="De Bruijn: The 2-mer graph with 3-mer connections again." /></p>
+<p><img src="../../images/4.13f.png" alt="De Bruijn: The 2-mer graph with 3-mer connections again." loading="lazy" /></p>
 
 <hr />
 
@@ -1176,7 +1180,7 @@ An overlap (A) and De Bruijn (B) graphs for the same string.</p>
 
 <p>Whatever the representation will be it will be messy:</p>
 
-<p><img src="../../images/t12_mess.png" alt="A hypothetical real life graph with a huge number of nodes snaking all over the screen, and many many isolaed single and pairs of nodes unconnected to anything." /></p>
+<p><img src="../../images/t12_mess.png" alt="A hypothetical real life graph with a huge number of nodes snaking all over the screen, and many many isolaed single and pairs of nodes unconnected to anything." loading="lazy" /></p>
 
 <p>A fragment of a very large De Bruijn graph (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
 
@@ -1189,7 +1193,7 @@ An overlap (A) and De Bruijn (B) graphs for the same string.</p>
 <p>Sequencing machines do not give perfect data. This results in spurious deviations on the graph. Some sequencing technologies such as Oxford Nanopore have very high error rate of ~15%.</p>
 
 <blockquote>
-  <p><img src="../../images/t12_errors.png" alt="An inset from the above. A red box highlights pairs of 2 and 3 node groups." /></p>
+  <p><img src="../../images/t12_errors.png" alt="An inset from the above. A red box highlights pairs of 2 and 3 node groups." loading="lazy" /></p>
 
   <p>Graph components resulting from sequencing errors (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
 </blockquote>
@@ -1201,7 +1205,7 @@ An overlap (A) and De Bruijn (B) graphs for the same string.</p>
 <p>As we discussed earlier humans are diploid and there are multiple differences between maternal and paternal genomes. This creates “bubbles” on assembly graphs:</p>
 
 <blockquote>
-  <p><img src="../../images/t12_bubble.png" alt="A bubble in the graph. there are a series of nodes which have 5-8 connections pointing from one to the next. Halfway through there is a single base deviation and the 5-mer nodes highlight this single base change. The change results in a split into two strands which shortly reconnect. One strand is labelled Maternal, the other Paternal." /></p>
+  <p><img src="../../images/t12_bubble.png" alt="A bubble in the graph. there are a series of nodes which have 5-8 connections pointing from one to the next. Halfway through there is a single base deviation and the 5-mer nodes highlight this single base change. The change results in a split into two strands which shortly reconnect. One strand is labelled Maternal, the other Paternal." loading="lazy" /></p>
 
   <p>Bubbles due to a heterozygous site  (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
 </blockquote>
@@ -1213,7 +1217,7 @@ An overlap (A) and De Bruijn (B) graphs for the same string.</p>
 <p>As we’ve seen the third law of assembly is unbeatable. As a result some regions of the genome simply cannot be resolved and are reported in segments called <em>contigs</em>:</p>
 
 <blockquote>
-  <p><img src="../../images/t12_contigs.png" alt="A sentence is represented &quot;to everything turn&quot;, &quot;turn&quot; (a repeat) and &quot;turn there is a season&quot;. The repeat makes the graph hard to solve into a single path." /></p>
+  <p><img src="../../images/t12_contigs.png" alt="A sentence is represented &quot;to everything turn&quot;, &quot;turn&quot; (a repeat) and &quot;turn there is a season&quot;. The repeat makes the graph hard to solve into a single path." loading="lazy" /></p>
 
   <p>The following “genomic” segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
 </blockquote>

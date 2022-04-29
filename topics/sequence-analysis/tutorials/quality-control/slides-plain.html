@@ -23,9 +23,9 @@
         
         
         
-        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta name="description" content="Analyses of sequences" />
         <meta property="og:title" content="Galaxy Training: Quality Control" />
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:description" content="Analyses of sequences" />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
@@ -100,6 +100,10 @@
 
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/sequence-analysis/faqs/" title="Check our FAQs for the Sequence analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -304,7 +308,7 @@
 
 <h3 id="where-is-my-data-coming-from">Where is my data coming from?</h3>
 
-<p><img src="../../images/ecker_2012.png" alt="Cartoon of different types of sequencing and where they appear in the genome. Bisulfite and ChIP-Seq have arrows pointing to nucleosomes. DNaseq-seq points to the region between nucleosomes. Hi-C and ChIA-PET point to the long range chromatin interactions. RNA-Seq points to a subset of the genome showing a promoter and transcribed region." /></p>
+<p><img src="../../images/ecker_2012.png" alt="Cartoon of different types of sequencing and where they appear in the genome. Bisulfite and ChIP-Seq have arrows pointing to nucleosomes. DNaseq-seq points to the region between nucleosomes. Hi-C and ChIA-PET point to the long range chromatin interactions. RNA-Seq points to a subset of the genome showing a promoter and transcribed region." loading="lazy" /></p>
 
 <p><small><a href="https://www.ncbi.nlm.nih.gov/pubmed/22955614"><em>Ecker et al, Nature, 2012</em></a></small></p>
 
@@ -323,7 +327,7 @@
 
 <h3 id="from-experiments-to-data">From experiments to data</h3>
 
-<p><img src="../../images/from_exp_to_data.png" alt="RNA Seq, Exome Seq, ChIP-Seq, and DNA-Seq all point to a large sequencing box and produce files. Then come bioinformatic analysis, namely quality control, on all of the different types." /></p>
+<p><img src="../../images/from_exp_to_data.png" alt="RNA Seq, Exome Seq, ChIP-Seq, and DNA-Seq all point to a large sequencing box and produce files. Then come bioinformatic analysis, namely quality control, on all of the different types." loading="lazy" /></p>
 
 <p>Quality control = First step of the bioinformatics analyses</p>
 
@@ -453,7 +457,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="quality-score-1">Quality score</h3>
 
-<p><img src="../../images/quality_score.png" alt="Graph of quality score vs probability of misidentification. There are two lines, red shows -10log(p) while solexa has a different formula" /></p>
+<p><img src="../../images/quality_score.png" alt="Graph of quality score vs probability of misidentification. There are two lines, red shows -10log(p) while solexa has a different formula. " loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -465,7 +469,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="quality-score-encoding">Quality score encoding</h3>
 
-<p><img src="../../../sequence-analysis/images/fastq-quality-encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina" /></p>
+<p><img src="../../../sequence-analysis/images/fastq-quality-encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina. " loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -481,7 +485,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h2 id="pacbio-hifi-vs-clr">PacBio HiFi <em>vs</em> CLR</h2>
 
-<p><img src="../../images/quality-control/pacbio_hifi_vs_clr.png" alt="Comparison between PacBio HiFi and CLR sequencing methods" /></p>
+<p><img src="../../images/quality-control/pacbio_hifi_vs_clr.png" alt="Comparison between PacBio HiFi and CLR sequencing methods. " loading="lazy" /></p>
 
 <ul>
   <li><strong>HiFi (CCS)</strong>: 99%+ accurate read achieved by multiple passes of the polymerase over a <strong>single molecule</strong></li>
@@ -509,7 +513,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="fastqc-1">FastQC</h3>
 
-<p><img src="../../../sequence-analysis/images/fastqc-report.png" alt="Screenshot of FastQC report, showing the table of contents with green checks on nearly every result, and the base statistics and per-base sequence quality graphs shown." /></p>
+<p><img src="../../../sequence-analysis/images/fastqc-report.png" alt="Screenshot of FastQC report, showing the table of contents with green checks on nearly every result, and the base statistics and per-base sequence quality graphs shown." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -540,7 +544,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="quality-score-per-base">Quality score: Per-base</h3>
 
-<p><img src="../../../sequence-analysis/images/per_base_sequence_quality_good.png" alt="Fastqc quality score plot, most results are in the green region but the box portion of the box and whisker plot start to dip into the yellow, medium quality (less than 30) region near 34+ base position in read. The whiskers begin extending to the red region (less than 20) by base 31 and get progressively worse." /></p>
+<p><img src="../../../sequence-analysis/images/per_base_sequence_quality_good.png" alt="Fastqc quality score plot, most results are in the green region but the box portion of the box and whisker plot start to dip into the yellow, medium quality (less than 30) region near 34+ base position in read. The whiskers begin extending to the red region (less than 20) by base 31 and get progressively worse." loading="lazy" /></p>
 
 <p><i class="fa fa-thumbs-up"></i> Good quality score</p>
 
@@ -548,7 +552,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="per-base-quality">Per-base Quality</h3>
 
-<p><img src="../../images/per_base_sequence_quality_bad.png" alt="Fastqc quality score plot, most results are in the green region up until 30. The whiskers extend to the yellow region from the start, and after base 30 get progressively worse, goign to the worst possible score by the end. The boxes cover the yellow region by base 40." /></p>
+<p><img src="../../images/per_base_sequence_quality_bad.png" alt="Fastqc quality score plot, most results are in the green region up until 30. The whiskers extend to the yellow region from the start, and after base 30 get progressively worse, goign to the worst possible score by the end. The boxes cover the yellow region by base 40." loading="lazy" /></p>
 
 <p><i class="fa fa-thumbs-down"></i> Bad quality score</p>
 
@@ -556,7 +560,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="per-base-quality---nanopore">Per-base Quality - Nanopore</h3>
 
-<p><img src="../../images/per_base_sequence_quality_nanopore.png" alt="A graph for Nanopore reads (R9.4) basecalled with guppy. Almost all bases are in the red region below 20." /></p>
+<p><img src="../../images/per_base_sequence_quality_nanopore.png" alt="A graph for Nanopore reads (R9.4) basecalled with guppy. Almost all bases are in the red region below 20." loading="lazy" /></p>
 
 <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good quality score</p>
 
@@ -572,7 +576,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="per-base-quality---pacbio-hifi">Per-base Quality - PacBio HiFi</h3>
 
-<p><img src="../../images/per_base_sequence_quality_pacbio_hifi_good.png" alt="A graph for PacBio HiFi reads. All reads are in the green region and quality score are encoded up to 92." /></p>
+<p><img src="../../images/per_base_sequence_quality_pacbio_hifi_good.png" alt="A graph for PacBio HiFi reads. All reads are in the green region and quality score are encoded up to 92." loading="lazy" /></p>
 
 <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good quality score</p>
 
@@ -586,7 +590,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="per-base-quality---pacbio-clr">Per-base Quality - PacBio CLR</h3>
 
-<p><img src="../../images/per_base_sequence_quality_pacbio_clr.png" alt="A graph for PacBio CLR reads. It's empty as quality is set to 0 for all bases!" /></p>
+<p><img src="../../images/per_base_sequence_quality_pacbio_clr.png" alt="A graph for PacBio CLR reads. It's empty as quality is set to 0 for all bases!" loading="lazy" /></p>
 
 <p>Quality information is “absent” for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. “!”)!</p>
 
@@ -594,7 +598,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="per-sequence-quality">Per-sequence Quality</h3>
 
-<p><img src="../../images/per_sequence_quality.png" alt="A per-sequence quality showing quality score distribution histogram with average quality per read plotted. Most reads pile up around quality 30, but another peak appears at 17. very few reads have quality less than 10." /></p>
+<p><img src="../../images/per_sequence_quality.png" alt="A per-sequence quality showing quality score distribution histogram with average quality per read plotted. Most reads pile up around quality 30, but another peak appears at 17. very few reads have quality less than 10." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -608,7 +612,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 <h3 id="per-tile-quality">Per-tile Quality</h3>
 
-<p><img src="../../images/per_tile_quality.png" alt="A heatmap with several red and green squares, but overall largely blue." /></p>
+<p><img src="../../images/per_tile_quality.png" alt="A heatmap with several red and green squares, but overall largely blue." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 In Illumina libraries, the original sequence identifier is retained. Encoded in these is the flowcell tile from which each read came.</p>
@@ -621,7 +625,7 @@ In Illumina libraries, the original sequence identifier is retained. Encoded in 
 
 <h3 id="per-base-sequence-content">Per-base Sequence Content</h3>
 
-<p><img src="../../images/per_base_sequence_content.png" alt="A line chart mapping sequence content across all bases with % of the four nucleotides plotted. The graph starts off very jagged and stabilises by base 12." /></p>
+<p><img src="../../images/per_base_sequence_content.png" alt="A line chart mapping sequence content across all bases with % of the four nucleotides plotted. The graph starts off very jagged and stabilises by base 12." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 The per-base sequence content highlights the proportion of each base in each position of a sequence for which each of the four DNA bases have been called. In a random library there would be little to no difference between the different bases of a sequence run. The relative amount of each base should reflect the overall amount of these bases, but in any case they should not be hugely imbalanced from one another. It is worth noting that some types of libraries will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming with random hexamers (including nearly all RNA-Seq libraries) and those which were fragmented using transposases, inherit an intrinsic bias in the positions at which the reads start. This bias does not concern an absolute sequence, but instead provides an enrichment of a number of different K-mers at the 5’ end of the reads. Whilst this is a true technical bias, it isn’t something which can be corrected by trimming and in most cases doesn’t seem to adversely affect the downstream analysis. It will however produce a warning or error in this module.</p>
@@ -639,7 +643,7 @@ The per-base sequence content highlights the proportion of each base in each pos
 
 <h3 id="per-sequence-gc-content">Per-sequence GC content</h3>
 
-<p><img src="../../images/per_sequence_GC_content.png" alt="A line chart showing mean GC content and threoretical distribution as largely overlapping peaks." /></p>
+<p><img src="../../images/per_sequence_GC_content.png" alt="A line chart showing mean GC content and threoretical distribution as largely overlapping peaks." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 The GC content distribution of most samples should follow a normal distribution. In some cases, a bi-modal distribution can be observed, especially for metagenomic data sets. An unusually shaped distribution could indicate a contaminated library or some other kinds of biased subset. A normal distribution which is shifted indicates some systematic bias which is independent of base position. Such a systematic bias creating a shifted normal distribution won’t be flagged as an error, since the tool cannot guess what the provided genome’s GC content should be.</p>
@@ -650,7 +654,7 @@ The GC content distribution of most samples should follow a normal distribution.
 
 <h3 id="per-base-n-content">Per-base N content</h3>
 
-<p><img src="../../images/per_base_N_content.png" alt="A line graph of N content across all bases. It shows several peaks to 65 at specific positions and goes to 100 near the end." /></p>
+<p><img src="../../images/per_base_N_content.png" alt="A line graph of N content across all bases. It shows several peaks to 65 at specific positions and goes to 100 near the end." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 Sequences can contain the ambiguous base N for positions that could not be identified as a particular base. A high number of Ns can be a sign for a low quality sequence or even dataset. If no quality scores are available, the sequence quality can be inferred from the percent of Ns found in a sequence or dataset.</p>
@@ -661,7 +665,7 @@ Sequences can contain the ambiguous base N for positions that could not be ident
 
 <h3 id="sequence-length-distribution">Sequence length distribution</h3>
 
-<p><img src="../../images/sequence_length_distribution.png" alt="A graph with a single peak at 75, and 0 outside of this region." /></p>
+<p><img src="../../images/sequence_length_distribution.png" alt="A graph with a single peak at 75, and 0 outside of this region." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 Some high throughput sequencers generate sequence fragments of uniform length, while others can output reads of wildly varying lengths. The length distribution can be then used as quality measure. You would expect a normal distribution for the best result. However, most sequencing results show a slowly increasing and then a steep falling distribution.</p>
@@ -674,7 +678,7 @@ Some high throughput sequencers generate sequence fragments of uniform length, w
 
 <h3 id="sequence-length-distribution---pacbio--nanopore">Sequence length distribution - PacBio / Nanopore</h3>
 
-<p><img src="../../images/sequence_length_distribution_long-reads.png" alt="A graph with a main peak around 15,000bp for PacBio HiFi run." /></p>
+<p><img src="../../images/sequence_length_distribution_long-reads.png" alt="A graph with a main peak around 15,000bp for PacBio HiFi run." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -684,7 +688,7 @@ Some high throughput sequencers generate sequence fragments of uniform length, w
 
 <h3 id="duplicated-sequences">Duplicated sequences</h3>
 
-<p><img src="../../images/sequence_duplication_levels.png" alt="Two line graphs, deduplicated sequences in red, and total sequences in blue. They start off near 100 and go rapidly to zero by sequence duplication level 2 and 3." /></p>
+<p><img src="../../images/sequence_duplication_levels.png" alt="Two line graphs, deduplicated sequences in red, and total sequences in blue. They start off near 100 and go rapidly to zero by sequence duplication level 2 and 3." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 This quality check module counts the degree of duplication for every sequence in the library, and creates a plot showing the relative number of sequences with different degrees of duplication:</p>
@@ -701,7 +705,7 @@ This quality check module counts the degree of duplication for every sequence in
 
 <h3 id="tag-sequences-adapter-contamination">Tag sequences: Adapter contamination</h3>
 
-<p><img src="../../images/adapter_content.png" alt="The graph shows a line at zero for the five possible datasets." /></p>
+<p><img src="../../images/adapter_content.png" alt="The graph shows a line at zero for the five possible datasets." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 Tag sequences are artifacts at the ends of sequence reads such as multiplex identifiers, adapters, and primer sequences that were introduced during pre-amplification with primer-based methods. The base frequencies across the reads present an easy way to check for tag sequences. If the distribution seems uneven (high frequencies for certain bases over several positions), it could indicate some residual tag sequences. This doesn’t indicate a problem as such - just that the sequences will need to be adapter trimmed before proceeding with any downstream analysis.</p>
@@ -712,7 +716,7 @@ Tag sequences are artifacts at the ends of sequence reads such as multiplex iden
 
 <h3 id="tag-sequences-k-mer-content">Tag sequences: K-mer content</h3>
 
-<p><img src="../../images/kmer_content.png" alt="several peaks are visible on the log2 obs/exp graph of different k-mers at different positions in the read." /></p>
+<p><img src="../../images/kmer_content.png" alt="several peaks are visible on the log2 obs/exp graph of different k-mers at different positions in the read." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span>
 Another way to find tag sequences is to look at the K-mer content, and find those which do not have even coverage through the length of your reads and could correspond to tag sequences.</p>
@@ -731,7 +735,7 @@ Another way to find tag sequences is to look at the K-mer content, and find thos
 
 <h3 id="nanoplot-report">NanoPlot report</h3>
 
-<p><img src="../../images/nanoplot_report.png" alt="Header of a NanoPlot html report " /></p>
+<p><img src="../../images/nanoplot_report.png" alt="Header of a NanoPlot html report . " loading="lazy" /></p>
 
 <p>Qscores (Qx): it is the average per-base error probability, expressed on the log (Phred) scale</p>
 
@@ -767,7 +771,7 @@ Another way to find tag sequences is to look at the K-mer content, and find thos
 
 <h3 id="read-length-vs-read-quality-score-qscores">Read length <em>vs</em> Read quality score (Qscores)</h3>
 
-<p><img src="../../images/LengthvsQualityScatterPlot_dot.png" alt="Distribution for HiFi reads with a default filter &gt;= Q20 " /></p>
+<p><img src="../../images/LengthvsQualityScatterPlot_dot.png" alt="Distribution for HiFi reads with a default filter &gt;= Q20 . " loading="lazy" /></p>
 
 <p>Each dot represents a read. In the case of PacBio HiFi, the minimum Qscore is fixed to 20 which explains the absence of any dot under this score.</p>
 
@@ -779,7 +783,7 @@ Another way to find tag sequences is to look at the K-mer content, and find thos
 
 <h3 id="histogram-of-read-length">Histogram of read length</h3>
 
-<p><img src="../../images/HistogramReadlength.png" alt="Distribution around 15 / 20kb in HiFi mode " /></p>
+<p><img src="../../images/HistogramReadlength.png" alt="Distribution around 15 / 20kb in HiFi mode . " loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -791,7 +795,7 @@ Also, at least for PacBio HiFi, the pic should be centered near 15kb.</p>
 
 <h3 id="run-yield-by-length">Run yield by Length</h3>
 
-<p><img src="../../images/Yield_By_Length.png" alt="Yield for HiFi run " /></p>
+<p><img src="../../images/Yield_By_Length.png" alt="Yield for HiFi run . " loading="lazy" /></p>
 
 <p>This plot shows the total number of bases read in the run, as a function of the length of the read that contained them. The Y-axis is scaled based on the quantity of data in the fastq/a that was analyzed (20Gbp in this example).</p>
 
@@ -837,8 +841,8 @@ Also, at least for PacBio HiFi, the pic should be centered near 15kb.</p>
 
 <h3 id="general-and-basecalled-summary">General and basecalled summary</h3>
 
-<p><img src="../../images/general_run_summary-pycoqc.png" alt="General summary about a Nanopore run from PycoQC. It includes general information about the run itself (duration, channels, run ids and barcode in case of barcoded runs)." />
-<img src="../../images/basecall_summary-pycoqc.png" alt="General summary about the reads." /></p>
+<p><img src="../../images/general_run_summary-pycoqc.png" alt="General summary about a Nanopore run from PycoQC. It includes general information about the run itself (duration, channels, run ids and barcode in case of barcoded runs)." loading="lazy" />
+<img src="../../images/basecall_summary-pycoqc.png" alt="General summary about the reads." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -850,13 +854,13 @@ Reads with a Qscore &gt;= 7 (default with Guppy) are marked as “Pass”</p>
 
 <h3 id="basecalled-reads-length">Basecalled reads length</h3>
 
-<p><img src="../../images/basecalled_reads_length-pycoqc.png" alt="A graph with a read length distribution between 200bp and 150kbp." /></p>
+<p><img src="../../images/basecalled_reads_length-pycoqc.png" alt="A graph with a read length distribution between 200bp and 150kbp." loading="lazy" /></p>
 
 <hr />
 
 <h3 id="basecalled-reads-phred-quality-qscores">Basecalled reads PHRED quality (Qscores)</h3>
 
-<p><img src="../../images/basecalled_reads_PHRED_quality-pycoqc.png" alt="A graph of PHRED quality (Qscore) with a distribution centered around 10." /></p>
+<p><img src="../../images/basecalled_reads_PHRED_quality-pycoqc.png" alt="A graph of PHRED quality (Qscore) with a distribution centered around 10." loading="lazy" /></p>
 
 <p>Reminder: Qscores is the average per-base error probability, expressed on the log (Phred) scale</p>
 
@@ -864,7 +868,7 @@ Reads with a Qscore &gt;= 7 (default with Guppy) are marked as “Pass”</p>
 
 <h3 id="basecalled-reads-length-vs-reads-phred-quality-qscores">Basecalled reads length <em>vs</em> reads PHRED quality (Qscores)</h3>
 
-<p><img src="../../images/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" alt="Standard distribution for Nanopore reads." /></p>
+<p><img src="../../images/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" alt="Standard distribution for Nanopore reads." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -875,7 +879,7 @@ It allows to detect bias quickly and easily.</p>
 
 <h3 id="output-over-experiment-time">Output over experiment time</h3>
 
-<p><img src="../../images/output_over_experiment_time-pycoqc.png" alt="Sequenced reads over time for a single run." /></p>
+<p><img src="../../images/output_over_experiment_time-pycoqc.png" alt="Sequenced reads over time for a single run." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -900,7 +904,7 @@ It allows to detect bias quickly and easily.</p>
 
 <h3 id="read-length-over-experiment-time">Read length over experiment time</h3>
 
-<p><img src="../../images/read_length_over_experiment_time-pycoqc.png" alt="Read length during an experiment." /></p>
+<p><img src="../../images/read_length_over_experiment_time-pycoqc.png" alt="Read length during an experiment." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -911,7 +915,7 @@ It can slightly increase over the time as short fragments tend to be over-sequen
 
 <h3 id="read-quality-over-experiment-time">Read quality over experiment time</h3>
 
-<p><img src="../../images/read_quality_over_experiment_time-pycoqc.png" alt="Read quality over the time." /></p>
+<p><img src="../../images/read_quality_over_experiment_time-pycoqc.png" alt="Read quality over the time." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -921,7 +925,7 @@ It can slightly increase over the time as short fragments tend to be over-sequen
 
 <h3 id="channel-activity-over-time">Channel activity over time</h3>
 
-<p><img src="../../images/channel_activity_over_time-pycoqc.png" alt="View of the activity of each pore from the flow cell over the time." /></p>
+<p><img src="../../images/channel_activity_over_time-pycoqc.png" alt="View of the activity of each pore from the flow cell over the time." loading="lazy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
