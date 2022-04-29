@@ -1,13 +1,14 @@
 ---
 layout: tutorial_hands_on
 
-title: "2: Assessment and feedback in training and teachings"
+title: "Assessment and feedback in training and teachings"
 subtopic: pedagogy
 enable: false
 time_estimation: 3h30m
 questions:
-  - What are the main strategies for active learning?
-  -
+  - What are the different types of feedback?
+  - When do get and receive feedback?
+  - For which purpose do we need feedback?
 objectives:
   - Describe the differences between formative and summative assessment
   - Tell why frequent feedback is important
@@ -34,6 +35,7 @@ contributors:
   - fpsom
   - ppalagi
   - allegravia
+#- elixir_ttt
 ---
 
 # Introduction
@@ -50,57 +52,40 @@ By the end of this session, you will be able to:
 * **List** and **describe** a few techniques for formative feedback
 
 
-### Assessment and feedback in the Nicholls process
+The flowchart below highlights where the assessment and feedback phase falls in the overall Nicholls process. Additional information can be found in {% cite via2020course %} and {% cite nicholls2002developing %}.
 
-![5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. Pp 51-75](images/image8.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. Pp 51-75")
-
-
-![Course design: Considerations for trainers – a Professional Guide,](images/image3.jpg "Course design: Considerations for trainers – a Professional Guide,")
+![A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process.](images/image8.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75")
 
 
-[Via et al, Course design: Considerations for trainers – a Professional Guide, 2020](https://f1000research.com/documents/9-1377)
+# Assessments
 
+There are different types of assessment and different ways that we can categorise them.
 
-## Assessments
-
-
-### Categorizing assessment
-
-There are different types of assessment and different ways that we can categorize them.
 1. **Pre-course assessment** (before the course) - verify the target audience of the course
 2. **Preventive assessment** (beginning of the course) - final adjustments of the course to the reality of the participants
 3. **Formative assessment** (during the course) - pilot in real time if learning is taking place
 4. **Summative assessment** (right after the course) - measure and evaluate the knowledge and skills acquired
 5. **Strategic evaluation** (after the course, long time after the course) - measure the adequacy, quality and impact of the course
 
+![A representation of the mental model for assessment, as a tree. It shows the various categories of assessment, as well as the optimal placement of them during the teaching process.](images/assessment-categories.png "Categorizing assessment")
 
-![Categorizing assessment](images/image28.png "Categorizing assessment")
 
-
-### Diagnostic Assessment
-
-> ### {% icon hands_on %} Break-out room discussion  (15 min)
+> ### {% icon hands_on %} Diagnostic Assessment - Break-out room discussion  - *{% icon time %} 15 min*
 >
-> Split into groups of 4, depending on the number of participants.
->
-> Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it.
->	* Write it in a notebook and discuss with the rest of the group.
+> - Split into groups of 4, depending on the number of participants.
+> - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it.
+> - Write it in a notebook and discuss with the rest of the group.
 {: .hands_on}
 
-**Anonymous questionnaires **allow to have an idea of the level of knowledge of the whole group of learners.
 
-**Non-anonymous **and personal questionnaires allow to find out if the learner has a necessary pre-required knowledge. in the negative case indicate an appropriate teaching choice to palliate this lack.
+## Formative vs summative assessment
 
+![A cartoon figure showing the main difference between formative and summative assessment, when making soup. When the chef tastes the soup while preparing, it's formative assessment. When the guests taste the soup after its done, it's summative asssessment.](images/image20.png "Formative and summative assessment")
 
-### Formative and summative assessment, when to use, purpose
-
-![Formative and summative assessment](images/image20.png "Formative and summative assessment")
+Formative assessment takes place **during** teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to **improve the quality of student learning**, _not_ to provide evidence for evaluating or grading students.
 
 
-Formative assessment takes place **during** teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to **improve the quality of student learning**, _<span style="text-decoration:underline;">not</span>_ to provide evidence for evaluating or grading students.
-
-
-#### Summative assessment
+### Summative assessment
 
 1. Aligned to LOs
     * to levels of complexity
@@ -110,7 +95,7 @@ Formative assessment takes place **during** teaching and learning. Its purpose i
 3. Feasible
 
 
-#### Formative assessment
+### Formative assessment
 
 Formative assessment / feedback can be used to collect information about learners':
 
@@ -124,25 +109,36 @@ Formative assessment / feedback can be used to collect information about learner
     * which types of mistakes need special attention
 
 
-### Collecting formative assessment
-
-
-> ### {% icon hands_on %} Break-out room discussion  (10 min)
+> ### {% icon hands_on %} Collecting formative assessment - Break-out room discussion  - *{% icon time %} 10 min*
 >
-> Split into groups of 4, depending on the number of participants.
+> - Split into groups of 4, depending on the number of participants.
 >
-> Discuss how you could collect information on learners’
+> - Discuss how you could collect information on learners’
 >	* mental models
 >   * goals and objectives
 >   * frequent mistakes
-> For each, write an example.
+> - For each, write an example.
 {: .hands_on}
 
+It should be highlighted that the best practice for teaching is to constantly monitor what is happening to students 
+as they set about learning and investigate when things do not proceed as planned or expected.
 
-### Examples of formative assessment to collect data from learners
+## Collecting data from learners through formative assessment
 
-* Type of assessments used during this course
+Formative assessment can allow for:
+- Asking questions to learners and getting responses orally
+- Asking them to describe the strategy they would adopt to solve a problem
+- Asking them to solve a problem in groups, or individually but in front of the class
+- Using brainstorming and discussions
+- Providing diagnostic questionnaires
+
+
+In this course, we used the following types of assessments and the corresponding tools:
+* Types
     * Questionnaires
+
+        **Anonymous questionnaires** allow to have an idea of the level of knowledge of the whole group of learners.**Non-anonymous** and personal questionnaires allow to find out if the learner has a necessary pre-required knowledge. in the negative case indicate an appropriate teaching choice to palliate this lack.
+
     * Instant feedbacks or minute cards
     * Multiple Choice Question (MCQ)
 * Tools
@@ -155,10 +151,7 @@ Formative assessment / feedback can be used to collect information about learner
     * [Socrative](https://www.socrative.com/)
 
 
-#### Multiple Choice Questions and mental models
-
-
-> ### {% icon hands_on %} Multiple Choice Questions and mental models  (5 min)
+> ### {% icon hands_on %} Multiple Choice Questions and mental models - *{% icon time %} 5 min*
 >
 >   * Look at this example of a MCQ
 >       * Q: What is 27+15 ?
@@ -167,18 +160,14 @@ Formative assessment / feedback can be used to collect information about learner
 >           * 32
 >           * 312
 >           * 33
->       * Correct answer:42, but each of the other answers provides valuable insights
+>       * Correct answer: 42, but each of the other answers provides valuable insights
 >   * Choose one wrong answer
 >   * Write which misconception is associated with that wrong answer
-> > {% icon tip %} Discussion
-> > Have a more in-depth discussion on the challenges and advantages in constructive effective MCQ exercises.
-> > {: .tip}
+>   * Have a more in-depth discussion on the challenges and advantages in constructive effective MCQ exercises.
 {: .hands_on}
 
 
-
-### Many possible ways for the formative assessments
-
+There are many possible ways for the formative assessments:
 * Instant feedback
     * Hand / Fist of five
     * Minute cards
@@ -224,34 +213,33 @@ Formative assessment / feedback can be used to collect information about learner
 * Self-evaluation & peer-evaluation
 
 
-#### How frequent should be formative feedback
+## How frequent should be formative feedback
 
 
 > ### {% icon hands_on %} Self-reflect  (5 min)
 >
-> Think about this session: how many feedback opportunities have you had so far?
+> - Think about this session: how many feedback opportunities have you had so far?
 >
 > > {% icon tip %} Get feedback often
 > > In this tutorial so far, there were at least 3 feedback opportunities
 > > {: .tip}
 {: .hands_on}
 
-![Attention Curve](images/image22.jpg "Attention Curve")
 
-Formative assessment should be frequent
+![A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes.](images/image22.jpg "Attention Curve")
+
+Formative assessment should be frequent:
 * Ideally every 5 min
 * At least every 10-15 min
 * Attention span: 10-15 min
 * Refocus attention
 
 
-## Dealing with feedback
+# Dealing with feedback
 
+Feedback is hard.
 
-#### Feedback is hard
-
-
-![Getting feedback](images/image4.jpg "Getting feedback")
+![A cartoon showing that a single negative feedback among a lot of positive can still be the only one that one remembers eventually.](images/image4.jpg "Getting feedback")
 
 * Humans focus more on negative feedback than on positive (you are not alone)
 * Breath deeply
@@ -267,22 +255,23 @@ Trainees feedback should be considered along other forms of quality evidence:
 * Look at the counter examples (contradictions)
 * Look at the repetitive patterns (not at only one single answer)
 
+## Learn and teach others how to give good feedback
 
-#### Learn and teach others how to give good feedback
-
-![Learn and teach others to give good feedback](images/image23.jpg "Learn and teach others to give good feedback")
+![A humorous cartoon showing a parent teaching a child on how to provide constructive feedback when playing with other children.](images/image23.jpg "Learn and teach others to give good feedback")
 
 * One positive / One negative
 * One up / one down
 
+# Conclusions
 
-## Combining the 4 sessions
-
-⏰ 10 min
+ToDo
 
 
-#### Six strategies for effective learning
+% # Move to a dedicated tutorial
 
+# Combining the 4 sessions
+
+## Six strategies for effective learning
 
 1. Spaced practice: Creating a study schedule that spreads study activities out over time
 2. Interleaving: Switching between topics while studying
@@ -292,7 +281,7 @@ Trainees feedback should be considered along other forms of quality evidence:
 6. Retrieval practice: Bringing learned information to mind from long term memory
 
 
-#### 7 evidence-based learning principles
+## 7 evidence-based learning principles
 
 * **Principle P1: **Students' **prior knowledge** can help or hinder learning.
 * **Principle P2: **How students **organise knowledge** influences how they learn and apply what they know.
