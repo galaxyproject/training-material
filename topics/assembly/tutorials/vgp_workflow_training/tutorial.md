@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: VGP assembly pipeline - short version
 zenodo_link: 'https://zenodo.org/record/5887339'
-enable: false
 level: Intermediate
 tags:
  - pacbio
@@ -23,17 +22,18 @@ contributors:
 - astrovsky01
 - gallardoalba
 - pickettbd
+- abueg
 ---
 
 
 # Introduction
 {:.no_toc}
 
-The Vertebrate Genome Project (VGP), emerged from the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatine interaction maps.
+The Vertebrate Genome Project (VGP), a project of the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatin interaction data.
 
-As a result of the collaboration with the VGP team, a training including a step-by-step detailed description was developed for the Galaxy Training Network ({% cite Lariviere2022 %}). However, due to its complexy, it can be too time consuming for those who are not interested in understanding each of the analysis stages in depth. For this reason, we decided to make available to the community a workflow-centered version of the training.
+As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the Galaxy Training Network ({% cite Lariviere2022 %}). This tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the Galaxy Workflow System (GWS).
 
-The Galaxy Workflow System (GWS) facilitates analysis repeatability, allowing to minimize the number of manual steps required to execute an analysis workflow and automatizing the process of input parameter and software tool version tracking. The objetive of this training is to explain how to run the VGP workflow, focusing on what are the required inputs and which outputs are generated and delegating how the steps re executed to the GWS.
+GWS facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis workflow, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP workflow, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.
 
 > ### Agenda
 >
@@ -60,9 +60,9 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 
 The VGP assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.
 
-> ![Figure 1: VGP pipeline modules](../../images/vgp_assembly/VGP_workflow_modules.png "VGP assembly pipelie. The implemented version of the VGP workflow is modular, consisting in five main independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to Genome Ark.")
+> ![Figure 1: VGP pipeline modules](../../images/vgp_assembly/VGP_workflow_modules.png "VGP assembly pipeline. The VGP workflow is implemented in a modular fashion: it consists of five independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to GenomeArk.")
 
-The VGP pipeline integrates two workflows to generate scaffolds from the contig level assemblies generated from the HiFi reads. When Hi-C data and Bionano data are available, the default pipeline will run the Bionano workflow first, followed by the Hi-C workflow. However, it is possible that Bionano data may not be available, in which case the HiC workflow can be used directly on the initial assembly, taking advantage of the modular characteristics of the pipeline.
+The VGP pipeline integrates two workflows to generate scaffolds from the contig level assemblies generated from the HiFi reads. When Hi-C data and Bionano data are available, the default pipeline is running the Bionano workflow first, followed by the Hi-C workflow. However, it is possible that Bionano data may not be available, in which case the HiC workflow can be used directly on the initial purged assembly.
 
 > ### {% icon comment %} Input option order
 > This tutorial assumes the input datasets are high-quality. QC on raw read data should be performed before it is used. QC on raw read data is outside the scope of this tutorial.
@@ -70,7 +70,7 @@ The VGP pipeline integrates two workflows to generate scaffolds from the contig 
 
 ## Get data
 
-The first step is to get the datasets from Zenodo. The VGP assembly pipeline uses data generated by a variety of technologies, including PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
+For this tutorial, the first step is to get the datasets from Zenodo. The VGP assembly pipeline uses data generated by a variety of technologies, including PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
     
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -121,16 +121,16 @@ The first step is to get the datasets from Zenodo. The VGP assembly pipeline use
 
 > ### {% icon details %} Working with your own data
 >
-> If working on a genome other than the example yeast genome, you upload the VGP data from the [VGP/Genome Ark AWS S3 bucket](https://genomeark.s3.amazonaws.com/index.html) as following:
+> If working on a genome other than the example yeast genome, you can upload the VGP data from the [VGP/Genome Ark AWS S3 bucket](https://genomeark.s3.amazonaws.com/index.html) as follows:
 >
-> > ### {% icon hands_on %} Hands-on: Import data from Genome Ark
+> > ### {% icon hands_on %} Hands-on: Import data from GenomeArk
 > >
 > > 1. Open the file {% icon galaxy-upload %} __upload__ menu
 > > 2. Click on **Choose remote files** tab
-> > 3. Click in the **Genome Ark** buttom and then click in **species**
+> > 3. Click on the **Genome Ark** button and then click on **species**
 > {: .hands_on}
 >
-> You can find the VGP data following this path: `/species/${Genus}_${species}/${speciman_code}/genomic_data`. Inside a given datatype directory (e.g. `pacbio`), select all the relevant files individually until all the desired files are highlighted and click the <kbd>Ok</kbd> buttom. Note that there may be multiple pages of files listed. Also note that you may not want every file listed.
+> You can find the VGP data following this path: `/species/${Genus}_${species}/${specimen_code}/genomic_data`. Inside a given datatype directory (*e.g.* `pacbio`), select all the relevant files individually until all the desired files are highlighted and click the <kbd>Ok</kbd> button. Note that there may be multiple pages of files listed. Also note that you may not want every file listed.
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -138,20 +138,20 @@ The first step is to get the datasets from Zenodo. The VGP assembly pipeline use
 
 ## Import workflows from WorkflowHub
     
-Once we have imported the datasets, the next step is to import the VGP workflows from the [Workflowhub server](https://workflowhub.eu/). WorkflowHub is a workflow management system which allows workflows to be FAIR, citable, have managed metadata profiles, and be openly available for review and analytics.
+Once we have imported the datasets, the next step is to import the VGP workflows from the [WorkflowHub server](https://workflowhub.eu/). WorkflowHub is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.
 
 > ### {% icon hands_on %} Hands-on: Import a workflow
 >
-> 1. Click in the **Workflow** menu, located in the top bar.
+> 1. Click on the **Workflow** menu, located in the top bar.
 >   ![Workflow menu](../../images/vgp_assembly/top_bar.png)
-> 2. Click in the <kbd>Import</kbd> buttom, located in the right corner.
-> 3. In the section **Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)**, click in *Search form*.
+> 2. Click on the <kbd>Import</kbd> button, located in the right corner.
+> 3. In the section **Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)**, click on *Search form*.
 > 4. In the **TRS Server: *workflowhub.eu*** menu you should type `name:vgp`
 >    ![Figure 3: Workflow menu](../../images/vgp_assembly/workflow_list.png)
-> 5. Click in the desired workflow, and finally select the last available version.
+> 5. Click on the desired workflow, and finally select the latest available version.
 {: .hands_on}
 
-After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the {% icon workflow-run %} **Run workflow** icon, marked with a red square in the figure 2.
+After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the {% icon workflow-run %} **Run workflow** icon, marked with a red square in figure 2.
 
 ![Figure 2: Workflow menu](../../images/vgp_assembly/imported_workflows.png  "Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.")
 
@@ -159,15 +159,15 @@ Once we have imported the datasets and the workflows, we can start with the geno
 
 > ### {% icon comment %} Workflow-centric Research Objects
 >
-> In WorkfloHub, workflows are packaged, registered, downloaded and exchanged as Research Objects using the RO-Crate specification, with test and example data, managed metadata profiles, citations and more.
+> In WorkflowHub, workflows are packaged, registered, downloaded and exchanged as Research Objects using the RO-Crate specification, with test and example data, managed metadata profiles, citations and more.
 >
 {: .comment}
 
-# Genome profile analsysis
+# Genome profile analysis
 
-[{% icon exchange %} Switch to long version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#genome-profile-analysis)
+[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#genome-profile-analysis)
 
-Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size. The present pipeline uses **Meryl** for generating the k-mer database and **Genomescope** for determing the genome size based on a k-mer analysis.
+Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses **Meryl** for generating the k-mer database and **Genomescope2** for determining genome characteristics based on a k-mer analysis.
 
 > ### {% icon hands_on %} Hands-on: VGP genome profile analysis workflow
 >
@@ -175,24 +175,28 @@ Now that our data and workflows are imported, we can run our first workflow. Bef
 > 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `VGP genome profile analysis`
 > 3. In the **Workflow: VGP genome profile analysis** menu:
 >   - {% icon param-collection %} "*Collection of Pacbio Data*": `7: HiFi_collection`
->   - "*K-mer length*": `32`
+>   - "*K-mer length*": `31`
 >   - "*Ploidy*": `2`
-> 4. Click in the <kbd>Run workflow</kbd> buttom
+> 4. Click on the <kbd>Run workflow</kbd> buttom
 >
+> > ### {% icon comment %} K-mer length
+> > In this tutorial, we are using a k-mer length of 31. This can vary, but the VGP pipeline tends to use a k-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about k-mer length trade-offs in the extended VGP pipeline tutorial.
+> {: .comment}
+> 
 {: .hands_on}
 
-Once the workflow have finished, we can evaluate the linear plot generated by **Genomescope** (fig. 3), which includes valuable information such as k-mer profiles, fitted models and estimated parameters. This file corresponds to the dataset `26`.
+Once the workflow has finished, we can evaluate the linear plot generated by **Genomescope** (fig. 3), which includes valuable information such as the observed k-mer profile, fitted models and estimated parameters. This file corresponds to the dataset `26`.
 
-![Figure 3: Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 21-mer profile. The first peak located at coverage 21x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.637%. The plot also includes informatin about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
+![Figure 3: Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 k-mer profile. The first peak located at about 25x corresponds to the heterozygous peak. The second peak at 50x, corresponds to the homozygous peak. The plot also includes information about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
 
-This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.69%.
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors, and are indicated by the red line. GenomeScope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the *Saccharomyces* genome size. 
 
 
 # HiFi phased assembly with hifiasm
 
-[{% icon exchange %} Switch to long version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hifi-phased-assembly-with-hifiasm)
+[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hifi-phased-assembly-with-hifiasm)
 
-After the genome profiling, the next step is to run the **VGP HiFi phased assembly with hifiasm and HiC data workflow**. This workflow uses **hifiasm** to generate initial primary and alternate pseudohaplotype assemblies. In addition, this workflow includes three tools for evaluating the assembly completeness: **QUAST**, **BUSCO** and **Merqury**.
+After genome profiling, the next step is to run the **VGP HiFi phased assembly with hifiasm and HiC data workflow**. This workflow uses **hifiasm** (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: **QUAST**, **BUSCO** and **Merqury**.
 
 > ### {% icon hands_on %} Hands-on: VGP HiFi phased assembly with hifiasm and HiC data workflow
 > 1. Click in the **Workflow** menu, located in the top bar
@@ -203,22 +207,26 @@ After the genome profiling, the next step is to run the **VGP HiFi phased assemb
 >   - {% icon param-file %} "*HiC forward reads*": `3: Hi-C_dataset_F`
 >   - {% icon param-file %} "*HiC reverse reads*": `2: Hi-C_dataset_R`
 >   - {% icon param-file %} "*Genomescope summary dataset*": `19: Genomescope on data 13 Summary`
->   - "*K-mer length*": `32`
+>   - "*K-mer length*": `31`
 >   - "*Ploidy*": `2`
 >   - "*Is genome large (>100Mb)?*": `No`
-> 4. Click in the <kbd>Run workflow</kbd> buttom
+> 4. Click on the <kbd>Run workflow</kbd> button
 >
 > > ### {% icon comment %} Input option order
-> > Note that the order of the input may differ slightly.
+> > Note that the order of the inputs may differ slightly.
 > {: .comment}
 >
 {: .hands_on}
 
-Let's have a look at the HTML report generated by **QUAST** (fig. 4), which corresponds with the dataset  `52`. It summarizes the main statistics related with the assembly completeness.
+Let's have a look at the HTML report generated by **QUAST** (fig. 4), which corresponds with the dataset  `52`. It summarizes some main assembly statistics, such as contig number, N50, assembly length, etc.
 
-![Figure 5: QUAST initial plot](../../images/vgp_assembly/QUAST_initial.png "QUAST report. Statistics of the primary and alternate assembly (a). Cumulative length plot (b).")
+![Figure 4: QUAST initial plot](../../images/vgp_assembly/QUAST_initial.png "QUAST report. Statistics of the primary and alternate assembly (a). Cumulative length plot (b).")
 
-According to the report, both assemblies are quite similar; the primary assembly includes 33 contigs, whose cumulative length is around 23.5Mbp. On the other hand, the second alternate assembly includes 35 contigs, whose total lenght is 25.5Mbp. As we can see in the figure 4a, the assemblies are much larger than the estimated genome sizes (dotted line), which means that both include duplicated sequences.
+According to the report, both assemblies are quite similar; the primary assembly includes 18 contigs, whose cumulative length is around 12.2Mbp. The alternate assembly includes 17 contigs, whose total length is 11.3Mbp. As we can see in figure 4a, both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies which lowers the chance of false duplications that can inflate assembly size. 
+
+> ### {% icon comment %} Are you working with pri/alt assemblies?
+> This tutorial uses the hifiasm-HiC workflow, which generates phased hap1 and hap2 assemblies. The phasing helps lower the chance of false duplications, since the phasing information helps the assembler know which genomic variation is heterozygosity at the same locus versus being two different loci entirely. If you are working with primary/alternate assemblies (especially if there is no internal purging in the initial assembly), you can expect higher false duplication rates than we observe here with the yeast HiC hap1/hap2. 
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -238,9 +246,9 @@ According to the report, both assemblies are quite similar; the primary assembly
 
 Next, we are going to evaluate the outputs generated by **BUSCO**. This tool provides quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
-![Figure 6 : BUSCO](../../images/vgp_assembly/BUSCO_full_table.png "BUSCO full table. It contains the complete results in a tabular format with scores and lengths of BUSCO matches, and coordinates.")
+![Figure 5 : BUSCO](../../images/vgp_assembly/BUSCO_full_table.png "BUSCO full table. It contains the complete results in a tabular format with scores and lengths of BUSCO matches, and coordinates.")
 
-As we can see in the report, the results are simplified into four categories: *complete and single-copy*, *complete and duplicated*, *fragmented* and  *Missing BUSCOs*.
+As we can see in the report, the results are simplified into four categories: *complete and single-copy*, *complete and duplicated*, *fragmented* and *missing*.
 
 > ### {% icon question %} Questions
 >
@@ -256,31 +264,21 @@ As we can see in the report, the results are simplified into four categories: *c
 >
 {: .question}
 
-Despite **BUSCO** being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis.
+Despite **BUSCO** being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously for k-mer counts. Like the other QC metrics we have been looking at, the VGP Hifiasm-HiC workflow will automatically generate the Merqury analysis.
 
-> ### {% icon hands_on %} Hands-on: *k*-mer based evaluation with Merqury
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
->        - *"Number of assemblies"*: `Two assemblies
->            - {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
->            - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`    
->
-{: .hands_on}
+By default, **Merqury** generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the copy number (CN) spectrum plot, known as the *spectra-cn* plot. The spectra-cn plot looks at both of your assemblies (here, your haplotypes) taken *together* (fig. 6a).  We can see a small amount of false duplications here: at the 50 mark on the x-axis, there is a small amount of k-mers present at 3-copy across the two assemblies (the green bump). 
 
+![Figure 6: Merqury spectra-cn plot for initial yeast contigs](../../images/vgp_assembly/yeast_c_merqury_cn.png "Merqury CN plot for these yeast haplotypes. The plot tracks the multiplicity of each k-mer found in the read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve. K-mer distribution of both haplotypes (a). K-mer distribution of an individual haplotype (b)"){:width="100%"}
 
-By default, **Merqury** generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the compy number (CN) spectrum plot, known as the *spectra-cn* plot (fig. 6).
+ Thus, we know there is some false duplication (the 3-copy green bump) present as 2-copy in one of our assemblies, but we don't know which one. We can look at the individual copy number spectrum for each haplotype in order to figure out which one contains the 2-copy k-mers (*i.e.*, the false duplications). In the Merqury spectra-CN plot for hap2 we can see the small bump of 2-copy k-mers at around the 50 mark on the x-axis (fig. 6b).
 
-![Figure 7: Merqury plot](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot corresponding to the primary assembly. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="80%"}
-
-As suggested previously by the report generated by **QUAST** (fig. 5), the assemblies contain a large proportion of duplicated reads. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers, originating from haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.
+Now that we know which haplotype contains the false duplications, we can run the purging workflow to try to get rid of these duplicates. 
 
 # Post-assembly processing
 
-[{% icon exchange %} Switch to long version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#post-assembly-processing)
+[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#post-assembly-processing)
 
-An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the **VGP purge assembly with purge_dups workflow**, which will allow to identify and reassign allelic contigs.
+An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the **VGP purge assembly with purge_dups workflow**, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.
 
 > ### {% icon hands_on %} Hands-on: VGP purge assembly with purge_dups pipeline  workflow
 >
@@ -299,9 +297,9 @@ This workflow generates a large number of outputs, among which we should highlig
 
 # Hybrid scaffolding with Bionano optical maps
 
-[{% icon exchange %} Switch to long version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hybrid-scaffolding-using-bionano-data)
+[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hybrid-scaffolding-using-bionano-data)
 
-Once the assemblies generated by **hifiasm** has been purged, the next step is to run the **VGP hybrid scaffolding with Bionano optical maps workflow**. It will allow to integrate the information provided by optical maps with primary assembly sequences in order to detect and correct structural variants, such as chimeric joins and misoriented contigs. In addition, this workflow includes some additonal steps from evaluating the outputs. 
+Once the assemblies generated by **hifiasm** have been purged, the next step is to run the **VGP hybrid scaffolding with Bionano optical maps workflow**. It will integrate the information provided by optical maps with primary assembly sequences in order to detect and correct chimeric joins and misoriented contigs. In addition, this workflow includes some additonal steps for evaluating the outputs. 
 
 > ### {% icon hands_on %} Hands-on: VGP hybrid scaffolding with Bionano optical maps workflow
 >
@@ -312,27 +310,27 @@ Once the assemblies generated by **hifiasm** has been purged, the next step is t
 >   - {% icon param-file %} "*Hifiasm Purged Assembly*": `TO DO`
 >   - {% icon param-file %} "*Estimated genome size - Parameter File*": `60: Estimated Genome size`
 >   - "*Is genome large (>100Mb)?*": `No`
-> 4. Click in the <kbd>Run workflow</kbd> buttom
+> 4. Click on the <kbd>Run workflow</kbd> buttom
 {: .hands_on}
 
-Once the workfow have finished, let's have a look at the assembly reports.
+Once the workfow has finished, let's have a look at the assembly reports.
 
-As we can observe in the cumulative plot of the file `119` (fig. 7a), the total length of the assembly (12.160.926 bp) is slightly larger than the expected genome size. With respect to the NG50 statistic (fig. 10b), the value is 922.430 bp, which is significantly higher than the value obtained during the first evaluation stage (813.039 bp).
+As we can observe in the cumulative plot of the file `119` (fig. 7a), the total length of the assembly (12.160.926 bp) is slightly larger than the expected genome size. With respect to the NG50 statistic (fig. 7b), the value is 922.430 bp, which is significantly higher than the value obtained during the first evaluation stage (813.039 bp). This increase in NG50 means this scaffolded assembly is more contiguous compared to the non-scaffolded contigs. 
         
-![Figure 10: QUAST and BUSCO plots](../../images/vgp_assembly/QUAST_cummulative.png ". Cumulative length plot (a). NGx plot. The y-axis represents the NGx values in Mbp, and the x-axis is the percentage of the genome (b). Assembly evaluation after runnig Bionano. BUSCO genes are defined as "Complete (C) and single copy (S)" when are found once in the single-copy ortholog database, "Complete (C) and duplicated (D)" when single-copy ortholog genes which were found more than once, "Fragmented (F)" when genes are matching just partially to a single-copy ortholog DB, and "Missing (M)" when genes which are expected but were not detected (c).")
+![Figure 7: QUAST and BUSCO plots](../../images/vgp_assembly/QUAST_cummulative.png ". Cumulative length plot (a). NGx plot. The y-axis represents the NGx values in Mbp, and the x-axis is the percentage of the genome (b). Assembly evaluation after runnig Bionano. BUSCO genes are defined as "Complete (C) and single copy (S)" when found once in the single-copy ortholog database, "Complete (C) and duplicated (D)" when found more than once, "Fragmented (F)" when genes are matching just partially, and "Missing (M)" when genes were expected but not detected (c).")
     
-It is also recommended to examine **BUSCO** outputs. In the summary image (fig. 7c), which can be found in the daset `117`, we can appreciate that most of the universal single-copy orthologs are present in our assembly.
+It is also recommended to examine **BUSCO** outputs. In the summary image (fig. 7c), which can be found in the daset `117`, we can appreciate that most of the universal single-copy orthologs are present in our assembly at the expected single-copy.
 
 > ### {% icon question %} Questions
 >
 > 1. How many scaffolds are in the primary assembly after the hybrid scaffolding?
-> 2. What is the size of the largest scaffold? Has improved with respect to the previous evaluation?
-> 3. What is the percertage of completeness on the core set genes in BUSCO? Has increased the completeness?
+> 2. What is the size of the largest scaffold? Has this changed with respect to the previous evaluation?
+> 3. What is the percentage of completeness on the core set genes in BUSCO? Has Bionano scaffolding increased the completeness?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. The number of contigs is 17.
-> > 2. The largest contig is 1.531.728 bp long. This value hasn't changed.
+> > 2. The largest contig is 1.531.728 bp long. This value hasn't changed. This is expected, as the VGP pipeline implementation of Bionano scaffolding does not allow for breaking contigs.
 > > 3. The percentage of complete BUSCOs is 95.7%. Yes, it has increased, since in the previous evaluation the completeness percentage was 88.7%.
 > >
 > {: .solution}
@@ -342,9 +340,10 @@ It is also recommended to examine **BUSCO** outputs. In the summary image (fig. 
 
 # Hybrid scaffolding with Hi-C data
 
-[{% icon exchange %} Switch to long version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hybrid-scaffolding-based-on-hi-c-mapping-data)
+[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hybrid-scaffolding-based-on-hi-c-mapping-data)
 
- In this final stage, we will run the **VGP hybrid scaffolding with HiC data**, which exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale by using **SALSA2**.
+In this final stage, we will run the **VGP hybrid scaffolding with HiC data**, which exploits the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them. This information allows further scaffolding the Bionano scaffolds using **SALSA2**, usually generating chromosome-level scaffolds.
+
 
 > ### {% icon hands_on %} Hands-on: VGP hybrid scaffolding with HiC data
 >
@@ -361,22 +360,23 @@ It is also recommended to examine **BUSCO** outputs. In the summary image (fig. 
 
 In order to evaluate the Hi-C hybrid scaffolding, we are going to compare the contact maps before and after running the HiC hybrid scaffolding workflow (fig. 8), corresponding to the datasets `130` and `141` respectively.
   
-![Figure 8: Pretext final contact map](../../images/vgp_assembly/hi-c_pretext_final.png "Hi-C map generated by Pretext after the hybrid scaffolding based on Hi-C data. The red circles indicate the  differences between the contact map generated after (a) and before (b) Hi-C hybrid scaffolding.")
+![Figure 8: Pretext final contact map](../../images/vgp_assembly/hi-c_pretext_final.png "Hi-C maps generated by Pretext using Hi-C data. The red circles indicate the  differences between the contact maps generated after (a) and before (b) Hi-C hybrid scaffolding.")
 
-Among the most notable differences that can be identified between the contact maps, it can be highlighted the regions marked with red circles, where inversion can be identified.
-        
+
+The regions marked with red circles highlight the most notable difference between the two contact maps, where inversion has been fixed.
+
 
 # Conclusion
 
 To sum up, it is worthwhile to compare the final assembly with the [_S. cerevisiae_ S288C reference genome](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt).
 
-![Table 1: Final stats](../../images/vgp_assembly/stats_conclusion.png "Comparison between the final assembly generating in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).")
+![Figure 9: Final stats](../../images/vgp_assembly/stats_conclusion.png "Comparison between the final assembly generated in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).")
 
-With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.16a,b). It is conspicuous that the reference genome consists of 17 sequences, while in our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 16b).
+With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.9a,b). It is noteworthy that the reference genome consists of 17 sequences, while our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 9b).
 
-![Figure 16: Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison bwetween contact maps generated by using the final assembly (a) and the reference genome (b).")
+![Figure 10: Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison between contact maps generated using the final assembly (a) and the reference genome (b).")
 
-If we compare the contact map of our assembled genome (fig. 17a) with the reference assembly (fig. 17b), we can see that the two are essentially identical. This means that we have achieved an almost perfect assembly at the chromosome level.
+If we compare the contact map of our assembled genome (fig. 10a) with the reference assembly (fig. 10b), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.
 
 # References
 {% bibliography %}
