@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "CLIP-Seq data analysis from pre-processing to motif detection",
   "interactivityType": "mixed",
@@ -861,7 +861,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 12, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1621,7 +1621,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     <li><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">tabular</code> (output of <strong>PEAKachu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">NR&gt;1{\nif ($3 &lt; $4) {\n   print $1,$3,$4,\"clip_peak_\"NR-1,$9,$5;\n}\nelse {\n   print $1,$4,$3,\"clip_peak_\"NR-1,$9,$5;\n}\n}</code></li>
+        <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">NR&gt;1{if($3 &lt; $4) {print $1,$3,$4,"clip_peak_"NR-1,$9,$5;}else {print $1,$4,$3,"clip_peak_"NR-1,$9,$5;}}</code></li>
       </ul>
     </li>
     <li><strong>SlopBed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1955,7 +1955,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Florian Heyl, Daniel Maticzka, Bérénice Batut, 2021 <b>CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Florian Heyl, Daniel Maticzka, Bérénice Batut, 2022 <b>CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1972,9 +1972,9 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
 <code id="citation-code">@misc{transcriptomics-clipseq,
 author = "Florian Heyl and Daniel Maticzka and Bérénice Batut",
 title = "CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)",
-year = "2021",
-month = "03",
-day = "12"
+year = "2022",
+month = "04",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
