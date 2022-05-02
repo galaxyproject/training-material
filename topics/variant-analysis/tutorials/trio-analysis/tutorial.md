@@ -32,6 +32,8 @@ To discover these mutations either whole exome sequencing (WES) or whole genome 
 
 In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} tool, so we don't have to leave galaxy to retrieve our data.
 
+We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol and to find the causative variant. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the [Exome sequencing data analysis for diagnosing a genetic disease](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html) tutorial. 
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
