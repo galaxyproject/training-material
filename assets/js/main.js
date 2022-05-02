@@ -19,6 +19,43 @@ $(".question,.hands_on,.comment").each(function() {
 
 $("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
 
+// CYOA Support
+function cyoaChoice(text){
+	if(text !== undefined && text !== null){
+		var inputs = document.querySelectorAll(".gtn-cyoa input"),
+			options = [...inputs].map(x => x.value),
+			nonMatchingOptions = options.filter(x => x !== text);
+
+		nonMatchingOptions.forEach(value => {
+			document.querySelectorAll(`.${value}`).forEach(el => el.classList.add("gtn-cyoa-hidden"));
+		})
+
+		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
+
+		// Just in case we mark it as checked (e.g. if default/from URL)
+		document.querySelector(`input[value="${text}"]`).checked = true
+	}
+}
+
+function cyoaDefault(defaultOption){
+	var currentlySelected = [...document.querySelectorAll("input[name='cyoa']")].filter(x => x.checked)[0];
+	var urlOption = (new URL(document.location)).searchParams.get("gtn-cyoa");
+
+	// If there's a URL parameter, use that over other options
+	if(urlOption !== null){
+		cyoaChoice(urlOption)
+		return
+	}
+
+	// Chrome forgets
+	if(currentlySelected === undefined) {
+		cyoaChoice(defaultOption)
+	} else {
+		// Firefox doesn't.
+		cyoaChoice(currentlySelected.value)
+	}
+}
+
 (function (window, document) {
     function onDocumentReady(fn) {
         if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
