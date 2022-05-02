@@ -147,15 +147,12 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
->     - *"Input Collection"*: `2 PE fastqs`
->
-> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Short read data from your current history"*: `2 PE fastqs` selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
-> 3. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -169,13 +166,26 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    {: .question}
 >
+>    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %}.
+>    However, the current version of the wrapper of **MultiQC** does not accept list of pairs collections.
+>    Thus we will transform the list of pairs to a simple list.
+>    >
+>    > ### {% icon details %} What does this mean exactly?
+>    >
+>    > The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
+>    > ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
+>    {: .details}
+>
+> 3. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>     - *"Input Collection"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>
 > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >                - In *"FastQC output"*:
 >                    - {% icon param-repeat %} *"Insert FastQC output"*
->                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>                        - {% icon param-collection %} *"FastQC output"*: (output of **Flatten collection** {% icon tool %})
 >
 > 5. Inspect the webpage output from MultiQC for each FASTQ
 >
@@ -532,19 +542,30 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > #### Gene body coverage
 >
-> The different regions of a gene make up the gene body. It is important to check if read coverage is uniform across the gene body. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each (scaled) nucleotide position.
+> The different regions of a gene make up the gene body. It is important to check if read coverage is uniform across the gene body. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each (scaled) nucleotide position. As this tool is really slow, we will compute the coverage only on 200,000 random reads.
 >
 > > ### {% icon hands_on %} Hands-on: Check gene body coverage
 > >
-> > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
+> > 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2) %} with the following parameters:
+> >    - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+> >    - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+> >        - In *"Configure subsampling"*:
+> >            - *"Subsample alignment"*: `Specify a target # of reads`
+> >                - *"Target # of reads"*: `200000`
+> >                - *"Seed for random number generator"*: `1`
+> >        - *"What would you like to have reported?"*: `All reads retained after filtering and subsampling`
+> >            - *"Output format"*: `BAM (-b)`
+> >    - *"Use a reference sequence"*: `No`
+> >
+> > 2. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
 > >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 > >
-> > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
+> > 3. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
-> >        - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+> >        - {% icon param-collection %} *"Input .bam file"*: output of **Samtools view** {% icon tool %}
 > >    - {% icon param-file %} *"Reference gene model"*: `Convert GTF to BED12 on data N: BED12` (output of **Convert GTF to BED12** {% icon tool %})
 > >
-> > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
+> > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
 > >    - In *"Results"*:
 > >        - {% icon param-repeat %} *"Insert Results"*
 > >            - *"Which tool was used generate logs?"*: `RSeQC`
