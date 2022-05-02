@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Trio Analysis using Synthetic Datasets from RD-Connect GPAP
-zenodo_link: 'https://sandbox.zenodo.org/record/1055250'
+zenodo_link: 'https://zenodo.org/record/6483454'
 questions:
 - How do you import data from the EGA?
 - How to download files with HTSGET in Galaxy?
@@ -243,18 +243,11 @@ After normalizing the VCFs we will filter out the variants with a NON_REF tag in
 
 > ### {% icon hands_on %} Hands-on: Filter out NON_REF sites with AWK
 >
-> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `Normalized VCFs` (output of **bcftools norm** {% icon tool %})
->    - *"AWK Program"*: `{if(substr($1,1,1)==# || $5!=<NON_REF>){print $0}}`
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `Normalized VCFs` (output of **bcftools norm** {% icon tool %})
+>    - *"With following condition"*: `c5!='<NON_REF>'`
+>    - *"Number of header lines to skip"*: `143` This has to be set manually since the tool skips lines starting with '#' automatically.
 >
-> > ### {% icon comment %} Comment: The AWK code explained.
-> >
-> > AWK is a very simple language that allows us to parse through each line of a textfile and change them based on the columns within the textfile. This specific awk command is explained below.
-> > > 1. The first component are the curly brackets `{ }`. These simply mean that we loop through the text file line by line.
-> > > 2. The second component is the if statement `if(condition){do something}`. Here `do something` is executed when the condition is met.
-> > >    - Here the condition is met if the first character of the first column `substr($1, 1, 1)` is equal to a hashtag `#` or `||` if the ALT/fifth column `$5` does not equal `!=` the `<NON_REF>` tag.
-> > >    - The executed code `do something`/`print $0` is simply printing all the columns `$0`, i.e. the whole line.
->    {: .comment}
 >
 {: .hands_on}
 
@@ -264,7 +257,7 @@ After normalizing the VCFs we will filter out the variants with a NON_REF tag in
 > 2. Could we have filtered out the NON_REF sites earlier with a different AWK program?
 >
 > > ### {% icon solution %} Solution
-> > 1. The `<NON_REF>` sites were sometimes also represented as a multi allelic variant e.g., `chr17	302	.	T	TA,<NON_REF>` which would not be filtered out with our current AWK program.
+> > 1. The `<NON_REF>` sites were sometimes also represented as a multi allelic variant e.g., `chr17	302	.	T	TA,<NON_REF>` which would not be filtered out with the {% tool [Filter](Filter1) %} tool.
 > > 2. Possibly, if the `<NON_REF>` variants were filtered out and if the `<NON_REF>` tag was removed from multi-allelic variants. However, the last task (splitting multi-allelic sites) can already be handled by {% tool [bcftools norm](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1) %} and it might involve more sophisticated steps to properly split these variants. 
 > {: .solution}
 >
