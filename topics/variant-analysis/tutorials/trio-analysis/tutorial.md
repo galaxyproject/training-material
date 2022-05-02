@@ -10,15 +10,16 @@ questions:
 - How do you identify causative variants?
 objectives:
 - Requesting DAC access and importing data from the EGA.
-- Pre-process VCFs using regular expressions and AWK.
+- Pre-process VCFs using regular expressions.
 - Use annotations and phenotype information to find the causative variant(s).
 time_estimation: 2H
 key_points:
 - Downloading whole datasets with HTSGET is safe and easy with galaxy.
-- AWK and regex are usefull tools for pre-processing VCF files.
+- Regex is a usefull tool for pre-processing VCF files.
 - Variant annotations allows us to strictly filter VCFs to find the causative variant.
 contributors:
-- Jasper Ouwerkerk
+- JasperO98
+- wm75
 
 ---
 
@@ -45,9 +46,7 @@ We will not start our analysis from scratch, since the main goal of this tutoria
 
 
 # Data preperation
-In this tutorial we will use case 5 from the RD-Connect GPAP synthetic datasets. This data was built using the same three public genomic datasets from HapMap samples NA12877, NA12878, and NA12882, click [here](https://www.genome.gov/10001688/international-hapmap-project) for more info. In these datasets real causative variants which correlate with the phenotypic data are manually spiked-in. 
-
-The dataset consists of WGS from a family trio, in which both the mother and daughter are affected by breast cancer. Our goal is to identify the genetic variation that is responsible for the disease. 
+In this tutorial we will use case 5 from the RD-Connect GPAP synthetic datasets. The dataset that we will use consists of WGS VCFs from a healthy family trio, which originates from the Illumina Platinum initiative {% cite Eberle2017 %} and was made available by the [HapMap project](https://www.genome.gov/10001688/international-hapmap-project). In our dataset a real causative variant was manually spiked-in. The spike-in has been introduced in the mother and daughter which causes breast cancer. Here our goal is to identify the genetic variation that is responsible for the disease.
 
 We offer two ways to download the files. Firstly, you can download the files directly from the EGA-archive by requesting DAC access. This will take only 1 workday and gives you access to all of the RD-Connect GPAP synthetic datasets. However if you don't have the time you can also download the data from zenodo.
 
@@ -241,9 +240,9 @@ One of the normalization steps is splitting multiallelic variants, 2 variants de
 {: .hands_on}
 
 ## Filter NON_REF sites
-After normalizing the VCFs we will filter out the variants with a NON_REF tag in the ALT column, the column which represents the mutated nucleotide(s). According to the header, these sites correspond to: "any possible alternative allele at this location". So these sites are a sort of placeholders for potential variants. However we are not interested in this kind of variants and they slow our analysis down quite a lot, so we will filter them out using AWK.
+After normalizing the VCFs we will filter out the variants with a NON_REF tag in the ALT column, the column which represents the mutated nucleotide(s). According to the header, these sites correspond to: "any possible alternative allele at this location". So these sites are a sort of placeholders for potential variants. However we are not interested in this kind of variants and they slow our analysis down quite a lot, so we will filter them out.
 
-> ### {% icon hands_on %} Hands-on: Filter out NON_REF sites with AWK
+> ### {% icon hands_on %} Hands-on: Filter out NON_REF sites
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Normalized VCFs` (output of **bcftools norm** {% icon tool %})
@@ -256,7 +255,7 @@ After normalizing the VCFs we will filter out the variants with a NON_REF tag in
 > ### {% icon question %} Question
 >
 > 1. Why didn't we filter out the NON_REF site directly after filtering? Have a look at the VCFs before and after normalization.
-> 2. Could we have filtered out the NON_REF sites earlier with a different AWK program?
+> 2. Could we have filtered out the NON_REF sites earlier with a different program?
 >
 > > ### {% icon solution %} Solution
 > > 1. The `<NON_REF>` sites were sometimes also represented as a multi allelic variant e.g., `chr17	302	.	T	TA,<NON_REF>` which would not be filtered out with the {% tool [Filter](Filter1) %} tool.
@@ -425,6 +424,6 @@ In this tutorial we have illustrated how to easily download a dataset of interes
 # Workflow
 Here is the final layout of the workflow. For more details you can download the workflow from the overview at the top of the page.
 
-![Image showing the whole workflow of the tutorial. Each seperate step is represented by a rectangular block with the tool name in the upper part in blue and the lower part shows the output in white. In the top left the workflow starts with the EGA Download Client which ouputs the authorized datasets (txt), below that again the EGA Download Client is shown which outputs the list of files in the ega dataset, which is connected to the search in textfiles tool. That tool is connected again to an EGA Download Client step where the VCFs are downloaded using the list of files from the previous tool. This step is connected to a decompress step to change the bgzipped VCFs to regular VCFs. That step is connected to a Column Regex Find and Replace step which outputs a VCF. The next connected step is the bcftools norm tool which outputs a normalized VCF. Then the normalized VCFs are processed using the Text reformatting tool. Using the output from that step the bcftools megre step is used to output a single VCF and connect it to the SnpEff eff tool. This tool annotates the VCF and that step is connected to the GEMINI load tool which is also connected to step block with the title pedigree. Then the GEMINI load tool connects to the GEMINI inheritance pattern block which outputs an tabular file called GEMINI autosomal_dominant pattern](../../images/trio-analysis/workflow.png "The workflow to download the VCFs and find the causative variant. If you skipped the EGA download step then the workflow starts at the second column. Here each column represents a seperate step, from left to right the steps are: Data preparation, Pre-Processing, Annotation, and GEMINI analysis.")
+![Image showing the whole workflow of the tutorial. Each seperate step is represented by a rectangular block with the tool name in the upper part in blue and the lower part shows the output in white. In the top left the workflow starts with the EGA Download Client which ouputs the authorized datasets (txt), below that again the EGA Download Client is shown which outputs the list of files in the ega dataset, which is connected to the search in textfiles tool. That tool is connected again to an EGA Download Client step where the VCFs are downloaded using the list of files from the previous tool. This step is connected to a decompress step to change the bgzipped VCFs to regular VCFs. That step is connected to a Filter step which outputs a VCF. The next connected step is the bcftools norm tool which outputs a normalized VCF. Then the normalized VCFs are processed using the Text reformatting tool. Using the output from that step the bcftools megre step is used to output a single VCF and connect it to the SnpEff eff tool. This tool annotates the VCF and that step is connected to the GEMINI load tool which is also connected to step block with the title pedigree. Then the GEMINI load tool connects to the GEMINI inheritance pattern block which outputs an tabular file called GEMINI autosomal_dominant pattern](../../images/trio-analysis/workflow.png "The workflow to download the VCFs and find the causative variant. If you skipped the EGA download step then the workflow starts at the second column. Here each column represents a seperate step, from left to right the steps are: Data preparation, Pre-Processing, Annotation, and GEMINI analysis.")
 
 {:.no_toc}
