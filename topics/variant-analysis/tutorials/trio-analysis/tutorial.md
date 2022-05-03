@@ -196,17 +196,23 @@ Firstly, our next tool has some assumptions about our input VCFs. The tool expec
 >    - *"using column"*: `Column: 1`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `(?=^[0-9MYX])`
->            - *"Replacement"*: `chr`
+>            - *"Find Regex"*: `^([0-9MYX])`
+>            - *"Replacement"*: `chr\1`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `^(##contig=<.*ID=)([0-9MYX].+)`
+>            - *"Replacement"*: `\1chr\2`
 >
 > > ### {% icon comment %} Comment: Explaining the regex.
 > >
-> > The regex pattern might look complicated but it's quite simple if you break it down in components.
-> >  - The first component is a positive lookahead `q(?=p)`. Here q is the matched part and p is the pattern. So what it does is to match everything (q) that comes before pattern (p).
-> > - The pattern here is `^[0-9MYX]`, which can again be broken down into different components
-> >      - `^` means that the pattern has to start at the beginning of the line not somewhere randomly in the line. This way our prefix `chr` will be inserted at the start of the line.
+> > The two regex patterns might look complicated but they are quite simple if you break them down in components.
+> > - The first check `^([0-9MYX])` > `chr\1` adds the `chr` prefix to all the non-header line. The check can be broken down into the following elements:
+> >      - `^` means that the pattern has to start at the beginning of the line not somewhere randomly in the line.
 > >      - `[0-9MYX]` means that at this position there should be a character from the list `[]`, namely either a number from `0-9` or the character `M`, `Y`, or `X`.
-> > 
+> >      - The replacement pattern `chr\1` means that the prefix `chr` has to be inserted before the first match `\1`. Here the first match refers to the pattern in the first brackets `()` around the list `[0-9MXY]`.
+> > - The second check `(##contig=<.*ID=)([0-9MYX].+)` > `\1chr\2` adds the `chr` prefix to the contig ids in the header lines. The check can be broken down into the following elements:
+> >     - The first match, the pattern in the first brackets `##contig=<.*ID=`, matches the contig header lines, which start with `##contig=<`. It is followed by a match anything `.` for zero-or-more times `*` until it finds `ID=`.
+> >     - The second match, the pattern in the second brackets `[0-9MYX].+`, matches the chromosome numbers and characters `[0-9MYX]` followed by a matching anything `.` for one-or-more times `+`.
+> >     - The replacement pattern `\1chr\2` means that the prefix `chr` has to be inserted between the first match `\1` or `##contig=<.*ID=` and the second match `\2` or `[0-9MYX].+`.
 > {: .comment}
 >
 {: .hands_on}
