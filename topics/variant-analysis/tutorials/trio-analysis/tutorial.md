@@ -378,7 +378,7 @@ With the GEMINI database it is now possible to identify the causative variant th
 >
 > > ### {% icon solution %} Solution
 > >
-> >    - Since both the daughter and mother are affected and the father unaffected and it also being very unlikely that a men has breast cancer, the mutation is most probably dominant. The disease could still be recessive if the father has one copy of the faulty gene, however this is less likely. 
+> >    - Since both the daughter and mother are affected, and the father likely unaffected[^1], the mutation is most probably dominant. The disease could still be recessive if the father has one copy of the faulty gene, however this is less likely. 
 > >    - The mutation is most likely not de-novo, since both the daughter and mother are affected. 
 > >    - The mutation could be X-linked, however since the VCF only contain mutations on chromosome 17 it would practically be impossible.  
 > >    - The disease could be compound heterozygous, however in that case the disease should be recessive which is less likely. 
