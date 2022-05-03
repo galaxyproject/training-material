@@ -46,7 +46,7 @@ We will not start our analysis from scratch, since the main goal of this tutoria
 
 
 # Data preperation
-In this tutorial we will use case 5 from the RD-Connect GPAP synthetic datasets. The dataset that we will use consists of WGS VCFs from a healthy family trio, which originates from the Illumina Platinum initiative {% cite Eberle2017 %} and was made available by the [HapMap project](https://www.genome.gov/10001688/international-hapmap-project). In our dataset a real causative variant was manually spiked-in. The spike-in has been introduced in the mother and daughter which causes breast cancer. Here our goal is to identify the genetic variation that is responsible for the disease.
+In this tutorial we will use case 5 from the RD-Connect GPAP synthetic datasets. The dataset that we will use consists of WGS VCFs from a real healthy family trio, which originates from the Illumina Platinum initiative {% cite Eberle2017 %} and was made available by the [HapMap project](https://www.genome.gov/10001688/international-hapmap-project). In our dataset a real causative variant was manually spiked-in that should cause breast cancer. The spike-in has been synthetically introduced in the mother and daughter. Here our goal is to identify the genetic variation that is responsible for the disease.
 
 We offer two ways to download the files. Firstly, you can download the files directly from the EGA-archive by requesting DAC access. This will take only 1 workday and gives you access to all of the RD-Connect GPAP synthetic datasets. However if you don't have the time you can also download the data from zenodo.
 
@@ -65,7 +65,7 @@ We offer two ways to download the files. Firstly, you can download the files dir
 > >
 > > {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > > 
-> > 2. Set the datatype to **vcf_bgzip**.
+> > 2. Set the datatype to **vcf**.
 > >
 > > 3. Click on **Start**
 > >
@@ -155,11 +155,8 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 >
 {: .hands_on}
 
-# Pre-Processing
-Before starting the analysis, the VCF files have to be pre-processed in order to meet input requirements of the tools which we will use for the downstream analysis. 
-
 ## Decompress VCFs
-First, we need to decompress our bgzipped VCFs, since we will use a text manipulation tool as a next step to process the VCFs. To decompress the vcf we will use a built-in tool from galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.
+Finally, we need to decompress our bgzipped VCFs, since we will use a text manipulation tool as a next step to process the VCFs. To decompress the vcf we will use a built-in tool from galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.
 
 > ### {% icon hands_on %} Hands-on: Convert compressed vcf to uncompressed.
 >
@@ -186,13 +183,16 @@ First, we need to decompress our bgzipped VCFs, since we will use a text manipul
 >
 {: .hands_on}
 
+# Pre-Processing
+Before starting the analysis, the VCF files have to be pre-processed in order to meet input requirements of the tools which we will use for the downstream analysis. 
+
 ## Add chromosome prefix to vcf
-Again, our next tool has some assumptions about our input VCFs. This time the tool expects the chromosome numbers to start with a prefix `chr`. Our VCFs only use the chromosome numbers however, the VCFs just use the chromosome numbers. This is due to a difference in reference genome used when creating the VCFs. To change the prefix in the VCFs we will use regex again.
+Firstly, our next tool has some assumptions about our input VCFs. The tool expects the chromosome numbers to start with a prefix `chr`. Our VCFs only use the chromosome numbers however, the VCFs just use the chromosome numbers. This is due to a difference in reference genome used when creating the VCFs. To change the prefix in the VCFs we will use regex again.
 
 > ### {% icon hands_on %} Hands-on: Add chr prefix using regex
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `Decompressed VCFs` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>    - {% icon param-file %} *"Select cells from"*: `VCFs` (output of **Convert compressed file to uncompressed.** {% icon tool %})
 >    - *"using column"*: `Column: 1`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
@@ -212,7 +212,7 @@ Again, our next tool has some assumptions about our input VCFs. This time the to
 {: .hands_on}
 
 ## Normalizing VCF
-After decompressing and adding the prefixes to the VCFs we need to normalize the variants in the VCF to standardize how the variants are represented within the VCF. This is a very important step, since the variants in the mother and daughter might be represented differently, which would mean that the causative variant might be overlooked!
+After adding the prefixes to the VCFs we need to normalize the variants in the VCF to standardize how the variants are represented within the VCF. This is a very important step, since the variants in the mother and daughter might be represented differently, which would mean that the causative variant might be overlooked!
 
 One of the normalization steps is splitting multiallelic variants, 2 variants detected on the same position but on a different allele. Splitting these records will put the 2 variants on a separate line, that way the impact of the individual mutations can be evaluated. In addition, indels need to be left-aligned and normalized because that’s how they are stored in the annotation databases. An indel is left-aligned and normalized, according to {% cite Tan2015 %}, "if and only if it is no longer possible to shift its position to the left while keeping the length of all its alleles constant" and "if it is represented in as few nucleotides as possible".
 
