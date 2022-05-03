@@ -388,6 +388,8 @@ With the GEMINI database it is now possible to identify the causative variant th
 >
 {: .question}
 
+[^1]:  It is unlikely that the father has breast cancer, "For men, the lifetime risk of getting breast cancer is about 1 in 833" [via cancer.org](https://www.cancer.org/cancer/breast-cancer-in-men/about/key-statistics.html)
+
 Based on these findings it would make sense to start looking for inherited autosomal dominant variants as a first step. If there are no convincing candidate mutations it would always be possible to look at the other less likely inheritance patterns, namely de-novo, compound heterozygous, and LOH events. 
 
 To find the most plausible causative variant we will use the {% tool [GEMINI inheritance pattern](toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1) %} tool. This tool allows us to select the most likely inheritance pattern (autosomal dominant). Below it is explained how to run the tool for this specific pattern, but you can always try other inheritence patterns if you are curious.
