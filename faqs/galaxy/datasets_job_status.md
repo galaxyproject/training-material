@@ -1,6 +1,6 @@
 ---
 title: Understanding job statuses
-description: Job statuses will help you understand the stage of your working.
+description: Job statuses will help you understand the stages of your work.
 area: datasets
 layout: faq
 box_type: tip
