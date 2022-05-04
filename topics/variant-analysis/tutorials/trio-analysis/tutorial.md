@@ -51,34 +51,36 @@ In this tutorial we will use case 5 from the RD-Connect GPAP synthetic datasets.
 
 We offer two ways to download the files. Firstly, you can download the files directly from the EGA-archive by requesting DAC access. This will take only 1 workday and gives you access to all of the RD-Connect GPAP synthetic datasets. However if you don't have the time you can also download the data from zenodo.
 
-> ### {% icon comment %} Shortcut: Downloading files from zenodo
->
-> If you can't wait to get DAC access you can also download the data from zenodo for this tutorial. How to do that is described below.
->
-> > ### {% icon hands_on %} Hands-on: Retrieve data from zenodo
-> >
-> > 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy.
-> >   ```
-> >   https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
-> >   https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
-> >   https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
-> >   ```
-> >
-> > {% snippet faqs/galaxy/datasets_import_via_link.md %}
-> > 
-> > 2. Set the datatype to **vcf**.
-> >
-> > 3. Click on **Start**
-> >
-> > 4. Put all the VCFs into one collection when they are uploaded.
-> > 
-> > {% snippet faqs/galaxy/collections_build_list.md %}
-> >
-> {: .hands_on}
-> 
-{: .comment}
+{% include _includes/cyoa-choices.html option1="EGA-Archive" option2="Zenodo" default="EGA-Archive"
+       text="Here you can choose to either follow the data preperation for the data from the EGA-archive or Zenodo." %}
 
-From here you can go to [pre-processing](#pre-processing) if you donwloaded the files from zenodo, otherwise continue with the tutorial from here.
+<div class="Zenodo" markdown="1">
+I see, you can't wait to get DAC access. To download the data from zenodo for this tutorial you can follow the step below.
+
+> ### {% icon hands_on %} Hands-on: Retrieve data from zenodo
+>
+> 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy.
+>   ```
+>   https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
+>   https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
+>   https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
+>   ```
+>
+> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> 
+> 2. Set the datatype to **vcf**.
+>
+> 3. Click on **Start**
+>
+> 4. Put all the VCFs into one collection when they are uploaded.
+> 
+> {% snippet faqs/galaxy/collections_build_list.md %}
+>
+{: .hands_on}
+ 
+</div>
+
+<div class="EGA-Archive" markdown="1">
 
 ## Getting DAC access
 Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: "EGAD00001008392". However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <helpdesk@ega-archive.org>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don't have it already. Next, you should link your account to your Galaxy account by going to the homepage on Galaxy and at the top bar click **User > Preferences > Manage Information**. Now add your email and password of your (new) EGA account under: **Your EGA (european Genome Archive) account**. After that you can check if you can log in and see if you have access to the dataset. 
@@ -172,6 +174,8 @@ Finally, we need to decompress our bgzipped VCFs, since we will use a text manip
 > {: .tip}
 >
 {: .hands_on}
+
+</div>
 
 # Pre-Processing
 Before starting the analysis, the VCF files have to be pre-processed in order to meet input requirements of the tools which we will use for the downstream analysis. 
