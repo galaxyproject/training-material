@@ -14,7 +14,7 @@ objectives:
 - Use annotations and phenotype information to find the causative variant(s).
 time_estimation: 2H
 key_points:
-- Downloading whole datasets with HTSGET is safe and easy with galaxy.
+- Downloading whole datasets with HTSGET is safe and easy with Galaxy.
 - Regex is a usefull tool for pre-processing VCF files.
 - Variant annotations allows us to strictly filter VCFs to find the causative variant.
 contributors:
@@ -32,7 +32,7 @@ To discover causal mutations of inherited diseases it’s common practice to do 
 
 To discover these mutations either whole exome sequencing (WES) or whole genome sequencing (WGS) can be used. With these technologies it is possible to uncover the DNA of the parents and offspring to find (shared) mutations in the DNA. These mutations can include insertions/deletions (indels), loss of heterozygosity (LOH), single nucleotide variants (SNVs), copy number variations (CNVs), and fusion genes. 
 
-In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} tool, so we don't have to leave galaxy to retrieve our data.
+In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} tool, so we don't have to leave Galaxy to retrieve our data.
 
 We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the [Exome sequencing data analysis for diagnosing a genetic disease](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html) tutorial. 
 
@@ -57,7 +57,7 @@ We offer two ways to download the files. Firstly, you can download the files dir
 >
 > > ### {% icon hands_on %} Hands-on: Retrieve data from zenodo
 > >
-> > 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to galaxy.
+> > 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy.
 > >   ```
 > >   https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
 > >   https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
@@ -81,7 +81,7 @@ We offer two ways to download the files. Firstly, you can download the files dir
 From here you can go to [pre-processing](#pre-processing) if you donwloaded the files from zenodo, otherwise continue with the tutorial from here.
 
 ## Getting DAC access
-Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: "EGAD00001008392". However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <helpdesk@ega-archive.org>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don't have it already. Next, you should link your account to your galaxy account by going to the homepage on galaxy and at the top bar click **User > Preferences > Manage Information**. Now add your email and password of your (new) EGA account under: **Your EGA (european Genome Archive) account**. After that you can check if you can log in and see if you have access to the dataset. 
+Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: "EGAD00001008392". However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <helpdesk@ega-archive.org>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don't have it already. Next, you should link your account to your Galaxy account by going to the homepage on Galaxy and at the top bar click **User > Preferences > Manage Information**. Now add your email and password of your (new) EGA account under: **Your EGA (european Genome Archive) account**. After that you can check if you can log in and see if you have access to the dataset. 
 
 > ### {% icon hands_on %} Hands-on: Check log-in and authorized datasets
 >
@@ -146,7 +146,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 {: .hands_on}
 
 ## Decompress VCFs
-Finally, we need to decompress our bgzipped VCFs, since we will use a text manipulation tool as a next step to process the VCFs. To decompress the vcf we will use a built-in tool from galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.
+Finally, we need to decompress our bgzipped VCFs, since we will use a text manipulation tool as a next step to process the VCFs. To decompress the vcf we will use a built-in tool from Galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.
 
 > ### {% icon hands_on %} Hands-on: Convert compressed vcf to uncompressed.
 >
