@@ -104,11 +104,7 @@ When you have access to the EGA dataset, you can download all the needed files. 
 >    - *"What would you like to do?"*: `List files in a datasets`
 >    - *"EGA Dataset Accession ID?"*: `EGAD00001008392`
 >
-> > ### {% icon tip %} Tip: Changing tool version.
-> > 1. First open the tool in galaxy of which you want to change the version.
-> > 2. Open the **versions tab** {% icon tool-versions %} in the top right corner, next to the **star icon** {% icon galaxy-star %}.
-> > 3. Choose your preffered version of the tool.
-> {: .tip}
+> {% snippet faqs/galaxy/tools_change_version.md %}
 > 
 > {: .comment}
 {: .hands_on}
