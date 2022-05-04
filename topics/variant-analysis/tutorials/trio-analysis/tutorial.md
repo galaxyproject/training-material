@@ -66,7 +66,7 @@ I see, you can't wait to get DAC access. To download the data from zenodo for th
 >   https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
 >   ```
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>   {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > 
 > 2. Set the datatype to **vcf**.
 >
