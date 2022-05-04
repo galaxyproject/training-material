@@ -72,14 +72,7 @@ We offer two ways to download the files. Firstly, you can download the files dir
 > >
 > > 4. Put all the VCFs into one collection when they are uploaded.
 > > 
-> > > ### {% icon tip %} Tip: Adding files to collection
-> > >
-> > > 1. Click on the dataset **selector icon** {% icon param-check %} in your history.
-> > > 2. Select the 3 vcf files.
-> > > 3. Click on the button **For all selected...** and select **Build Dataset List**
-> > > 4. Give the new collection a name and click on **Create collection**.
-> > >
-> > {: .tip}
+> > {% snippet faqs/galaxy/collections_build_list.md %}
 > >
 > {: .hands_on}
 > 
