@@ -61,19 +61,19 @@ I see, you can't wait to get DAC access. To download the data from zenodo for th
 > ### {% icon hands_on %} Hands-on: Retrieve data from zenodo
 >
 > 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy.
->   ```
->   https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
->   https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
->   https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
->   ```
+>    ```
+>    https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
+>    https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
+>    https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
+>    ```
 >
->   {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > 
 > 2. Set the datatype to **vcf**.
 >
 > 3. Click on **Start**
 >
-> 4. Put all the VCFs into one collection when they are uploaded.
+> 4. Put all the VCFs into one **collection** when they are uploaded.
 > 
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
