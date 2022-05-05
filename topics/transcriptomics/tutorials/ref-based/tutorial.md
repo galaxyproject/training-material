@@ -153,7 +153,7 @@ We will first need to transform our the list of pairs to a simple list.
 > The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
 > ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
 {: .details}
-
+>
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
@@ -165,6 +165,18 @@ We will first need to transform our the list of pairs to a simple list.
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 > 3. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What is the read length?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The read length of both mates is 37 bp.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 >    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %}.
 >
