@@ -145,16 +145,28 @@ During sequencing, errors are introduced, such as incorrect nucleotides being ca
 
 Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to create a report of sequence quality, [MultiQC](https://multiqc.info/) ({% cite ewels2016multiqc %}) to aggregate generated reports and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) to improve the quality of sequences via trimming and filtering.
 
+Unfortunately the current version of multiQC (the tool we use to combine reports) does not support list of pairs collections.
+We will first need to transform our the list of pairs to a simple list.
+
+> ### {% icon details %} What does this mean exactly?
+>
+> The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
+> ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
+{: .details}
+>
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: `2 PE fastqs` selected as **Dataset collection**
+> 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>     - *"Input Collection"*: `2 PE fastqs`
+>
+> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Short read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
-> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
+> 3. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
 >
->    > ### {% icon question %} Questions
+>    > ### {% icon question %} Question
 >    >
 >    > What is the read length?
 >    >
@@ -167,17 +179,6 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    {: .question}
 >
 >    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %}.
->    However, the current version of the wrapper of **MultiQC** does not accept list of pairs collections.
->    Thus we will transform the list of pairs to a simple list.
->    >
->    > ### {% icon details %} What does this mean exactly?
->    >
->    > The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
->    > ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
->    {: .details}
->
-> 3. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
->     - *"Input Collection"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
 >
 > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
@@ -185,7 +186,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >                - In *"FastQC output"*:
 >                    - {% icon param-repeat %} *"Insert FastQC output"*
->                        - {% icon param-collection %} *"FastQC output"*: (output of **Flatten collection** {% icon tool %})
+>                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
 >
 > 5. Inspect the webpage output from MultiQC for each FASTQ
 >
