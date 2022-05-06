@@ -7,8 +7,8 @@ contributors: [jennaj, Melkeb]
 ---
 
 On the origin Galaxy server:
-1. Click on name of the dataset to expand the info.
-2. Click on the **Copy link icon**{% icon galaxy-link %}.
+1. Click on the name of the dataset to expand the info.
+2. Click on the **Copy link icon** {% icon galaxy-link %}.
 
 On the destination Galaxy server:
 
