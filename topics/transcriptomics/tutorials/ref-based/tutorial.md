@@ -1409,7 +1409,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >            - *"Find pattern"*: `(.*)_(.*)_(.*)`
 >            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
 >
->     This step create 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements from file](__TAG_FROM_FILE__) %} tool
+>     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements from file](__TAG_FROM_FILE__) %} tool
 >
 > 3. Change the datatype to `tabular`
 >
