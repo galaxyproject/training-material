@@ -986,7 +986,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 2, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 5, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1149,13 +1149,28 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
 <p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> to create a report of sequence quality, <a href="https://multiqc.info/">MultiQC</a> (<span class="citation"><a href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a></span>) to aggregate generated reports and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>) to improve the quality of sequences via trimming and filtering.</p>
 
+<p>Unfortunately the current version of multiQC (the tool we use to combine reports) does not support list of pairs collections.
+We will first need to transform our the list of pairs to a simple list.</p>
+
+<blockquote class="details">
+  <h3 id="details-what-does-this-mean-exactly"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What does this mean exactly?</h3>
+
+  <p>The current situation is on top and the <strong>Flatten collection</strong> tool will transform it to the situation displayed on bottom:</p>
+  <figure id="figure-1"><img src="../../images/ref-based/flatten.png" alt="Flatten. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Flatten the list of pairs to list</figcaption></figure>
+</blockquote>
 <blockquote class="notranslate hands_on">
+
   <h3 id="hands_on-hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
 
   <ol>
+    <li><span class="tool" data-tool="__FLATTEN__" title="Tested with __FLATTEN__"><strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>FLATTEN</strong></span></span>  with the following parameters convert the list of pairs into a simple list:
+      <ul>
+        <li><em>“Input Collection”</em>: <code class="language-plaintext highlighter-rouge">2 PE fastqs</code></li>
+      </ul>
+    </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">2 PE fastqs</code> selected as <strong>Dataset collection</strong></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: Output of <strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> selected as <strong>Dataset collection</strong></li>
       </ul>
 
       <!--SNIPPET-->
@@ -1165,7 +1180,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
       <p>Inspect the webpage output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> sample (forward and reverse)</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>What is the read length?</p>
 
@@ -1178,21 +1193,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
       </blockquote>
 
-      <p>As it is tidious to inspect all these reports individually we will combine them with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+<span class="notranslate">galaxy</span>0</span></span> .
-However, the current version of the wrapper of <strong>MultiQC</strong> does not accept list of pairs collections.
-Thus we will transform the list of pairs to a simple list.</p>
-      <blockquote class="details">
-
-        <h3 id="details-what-does-this-mean-exactly"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What does this mean exactly?</h3>
-
-        <p>The current situation is on top and the <strong>Flatten collection</strong> tool will transform it to the situation displayed on bottom:</p>
-        <figure id="figure-1"><img src="../../images/ref-based/flatten.png" alt="Flatten. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Flatten the list of pairs to list</figcaption></figure>
-      </blockquote>
-    </li>
-    <li><span class="tool" data-tool="__FLATTEN__" title="Tested with __FLATTEN__"><strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>FLATTEN</strong></span></span>  with the following parameters convert the list of pairs into a simple list:
-      <ul>
-        <li><em>“Input Collection”</em>: <code class="language-plaintext highlighter-rouge">FastQC on collection N: Raw data</code> (output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-      </ul>
+      <p>As it is tidious to inspect all these reports individually we will combine them with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+<span class="notranslate">galaxy</span>0</span></span> .</p>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+<span class="notranslate">galaxy</span>0</span></span>  to aggregate the FastQC reports with the following parameters:
       <ul>
@@ -1206,7 +1207,7 @@ Thus we will transform the list of pairs to a simple list.</p>
                       <ul>
                         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert FastQC output”</em>
                           <ul>
-                            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: (output of <strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="language-plaintext highlighter-rouge">FastQC on collection N: Raw data</code> (output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                           </ul>
                         </li>
                       </ul>
@@ -1223,7 +1224,7 @@ Thus we will transform the list of pairs to a simple list.</p>
       <p>Inspect the webpage output from MultiQC for each FASTQ</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <ol>
           <li>What do you think of the quality of the sequences?</li>
@@ -1283,7 +1284,7 @@ Thus we will transform the list of pairs to a simple list.</p>
 <p>We should trim the <span class="notranslate">reads</span> to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends, and also remove the <span class="notranslate">reads</span> of overall bad quality.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>What is the relation between <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_forward</code> and <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_reverse</code> ?</p>
 
@@ -1346,7 +1347,7 @@ Thus we will transform the list of pairs to a simple list.</p>
 
           <blockquote class="question">
 
-            <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+            <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
             <p>Why do we run the trimming tool only once on a paired-end dataset and not twice, once for each dataset?</p>
 
@@ -1378,7 +1379,7 @@ Thus we will transform the list of pairs to a simple list.</p>
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <ol>
           <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
@@ -1413,7 +1414,7 @@ Thus we will transform the list of pairs to a simple list.</p>
 <p>In this study, the authors used <em>Drosophila melanogaster</em> cells. We should therefore map the quality-controlled sequences to the reference genome of <em>Drosophila melanogaster</em>.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What is a reference genome?</li>
@@ -1551,7 +1552,7 @@ Thus we will transform the list of pairs to a simple list.</p>
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <ol>
           <li>What percentage of <span class="notranslate">reads</span> are mapped exactly once for both samples?</li>
@@ -1682,7 +1683,7 @@ Thus we will transform the list of pairs to a simple list.</p>
 </ul>
 
 <blockquote class="question">
-  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file?</li>
@@ -1727,7 +1728,7 @@ installed on your machine. However, the questions in this section can also be an
       <p><strong>IGV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Zoom to <code class="language-plaintext highlighter-rouge">chr4:540,000-560,000</code> (Chromosome 4 between 540 kb to 560 kb)</p>
 
       <blockquote class="question">
-        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <figure id="figure-16"><img src="../../images/junction_igv_screenshot.png" alt="Screenshot of the IGV view on Chromosome 4. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
 
@@ -1761,7 +1762,7 @@ installed on your machine. However, the questions in this section can also be an
       </blockquote>
       <blockquote class="question">
 
-        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <figure id="figure-17"><img src="../../images/star_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
 
@@ -1846,7 +1847,7 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+          <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
           <p>What are the percentages of duplicate <span class="notranslate">reads</span> for each sample?</p>
 
@@ -1905,7 +1906,7 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+          <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
           <p><img src="../../images/ref-based/samtools-idxstats-mapped-reads-plot.png" alt="Samtools idxstats. " loading="lazy" /></p>
 
@@ -2011,7 +2012,7 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+          <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
           <p><img src="../../images/ref-based/rseqc_gene_body_coverage_plot.png" alt="Gene body coverage. " loading="lazy" /></p>
 
@@ -2073,7 +2074,7 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+          <h3 id="question-question-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
           <p><img src="../../images/ref-based/rseqc_read_distribution_plot.png" alt="Read Distribution. " loading="lazy" /></p>
 
@@ -2109,7 +2110,7 @@ installed on your machine. However, the questions in this section can also be an
 <figure id="figure-19"><img src="../../images/gene_counting.png" alt="Counting the number of reads per annotated gene. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Counting the number of <span class="notranslate">reads</span> per annotated gene</figcaption></figure>
 
 <blockquote class="question">
-  <h3 id="question-question-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>In the previous image,</p>
 
@@ -2267,7 +2268,7 @@ installed on your machine. However, the questions in this section can also be an
           </ol>
 
           <blockquote class="question">
-            <h3 id="question-question-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+            <h3 id="question-question-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
             <figure id="figure-25"><img src="../../images/ref-based/group_strand_igv_screenshot.png" alt="Screenshot of the IGV view on ps. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Screenshot of IGV on ps</figcaption></figure>
 
@@ -2335,7 +2336,7 @@ installed on your machine. However, the questions in this section can also be an
           </ul>
 
           <blockquote class="question">
-            <h3 id="question-question-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+            <h3 id="question-question-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
             <ol>
               <li>What percentage of <span class="notranslate">reads</span> are asigned to genes if the library is unstranded/same stranded/reverse stranded?</li>
@@ -2423,7 +2424,7 @@ The numbers are comparable between unstranded and reverse stranded because reall
           </blockquote>
           <blockquote class="question">
 
-            <h3 id="question-question-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+            <h3 id="question-question-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
             <ol>
               <li>What are the “Fraction of the <span class="notranslate">reads</span> explained by” results for <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code>?</li>
@@ -2735,7 +2736,7 @@ Fraction of <span class="notranslate">reads</span> explained by "1+-,1-+,2++,2--
 </div>
 
 <blockquote class="question">
-  <h3 id="question-question-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>Which feature has the most counts for both samples? (Hint: Use the Sort tool)</p>
 
@@ -3769,7 +3770,7 @@ Finally the header was removed from the featureCounts tables available on zenodo
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Can you see the changes?</li>
@@ -3883,7 +3884,7 @@ Finally the header was removed from the featureCounts tables available on zenodo
         <p>It shows the samples in the 2D plane spanned by their first two principal components. Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.</p>
 
         <blockquote class="question">
-          <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+          <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
           <figure id="figure-40"><img src="../../images/ref-based/deseq2_pca.png" alt="DESeq PCA. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 40:</span> Principal component plot of the samples</figcaption></figure>
 
@@ -3910,7 +3911,7 @@ Finally the header was removed from the featureCounts tables available on zenodo
         <p>The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts.</p>
 
         <blockquote class="question">
-          <h3 id="question-questions-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+          <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
           <figure id="figure-41"><img src="../../images/ref-based/deseq2_sample_sample_distance_heatmap.png" alt="Heatmap of the sample-to-sample distances. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 41:</span> Heatmap of the sample-to-sample distances</figcaption></figure>
 
@@ -3961,7 +3962,7 @@ Finally the header was removed from the featureCounts tables available on zenodo
 <p>For more information about <strong>DESeq2</strong> and its outputs, you can have a look at the <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf"><strong>DESeq2</strong> documentation</a>.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Is the <em>Pasilla</em> gene (ps, FBgn0261552) downregulated by the <span class="notranslate">RNA</span>i treatment?</li>
@@ -4021,7 +4022,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code>.</p>
 
       <blockquote class="question">
-        <h3 id="question-question-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How many genes have a significant change in gene <span class="notranslate">expression</span> between these conditions?</p>
 
@@ -4048,7 +4049,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How many genes have been conserved?</p>
 
@@ -4109,7 +4110,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 </ol>
 
 <blockquote class="question">
-  <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Where is the most over-expressed gene located?</li>
@@ -4238,7 +4239,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <figure id="figure-42"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 42:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="question">
-  <h3 id="question-questions-14"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What does the X-axis of the heatmap represent? What about the Y axis?</li>
@@ -4335,7 +4336,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <p>We now have a table with the Z-score for all genes in the 7 samples.</p>
 
   <blockquote class="question">
-    <h3 id="question-questions-15"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+    <h3 id="question-questions-14"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
     <ol>
       <li>What is the range for the Z-score?</li>
@@ -4546,7 +4547,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted <em>p</em>-value.</p>
 
     <blockquote class="question">
-      <h3 id="question-questions-16"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+      <h3 id="question-questions-15"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
       <ol>
         <li>How many GO terms are over-represented with an adjusted P-value &lt; 0.05? How many are under-represented?</li>
@@ -4576,7 +4577,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>A graph with the top 10 over-represented GO terms</p>
 
     <blockquote class="question">
-      <h3 id="question-questions-17"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+      <h3 id="question-questions-16"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
       <p><img src="../../images/ref-based/top_over-represented_go_terms.png" alt="Top over-represented GO terms. " loading="lazy" /></p>
 
@@ -4643,7 +4644,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>A large table with the KEGG terms and some statistics</p>
 
     <blockquote class="question">
-      <h3 id="question-questions-18"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+      <h3 id="question-questions-17"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
       <ol>
         <li>How many KEGG pathways terms have been identified?</li>
@@ -4746,7 +4747,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p><strong>Pathview</strong> generates a collection with the KEGG visualization: one file per pathway.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-19"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-18"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p><code class="language-plaintext highlighter-rouge">dme00010</code> KEGG pathway from <strong>Pathview</strong></p>
 
@@ -4880,7 +4881,7 @@ author = "Bérénice Batut and Mallory Freeberg and Mo Heydarian and Anika Erxle
 title = "Reference-based RNA-Seq data analysis (Galaxy Training Materials)",
 year = "2022",
 month = "05",
-day = "02"
+day = "05"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
