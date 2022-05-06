@@ -13,7 +13,7 @@ If a custom genome/transcriptome/exome dataset is producing errors, double check
 
    - **Symptoms include**: Dataset not included in custom genome "From history" pull down menu on tool forms.
    - **Solution**: Check datatype assigned to dataset and assign **fasta** format.
-   - **How**: Click on the dataset's pencil icon {% icon galaxy-pencil %} to reach the "Edit Attributes" form, and in the Datatypes tab >redetect the datatype<(link to FAQ).
+   - **How**: Click on the dataset's pencil icon {% icon galaxy-pencil %} to reach the "Edit Attributes" form, and in the Datatypes tab > [redetect the datatype]({% link faqs/galaxy/datasets_detect_datatype.md %}).
    - If `fasta` is not assigned, there is a format problem to correct.
   
  - Incomplete Custom genome file load
