@@ -1,25 +1,22 @@
 ---
 layout: tutorial_hands_on
 
-title: ''
+title: 'Beer data analysis'
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What can be observed from the final chart?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- To finds yeast strains contained in a sequenced beer sample.
+- Learn how to fill parameters for Kraken2, 
+- Create visualizations using Krona pie chart
+
+time_estimation: 1H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Inputing correct values for the parameters of proper tools are important
+
 contributors:
-- contributor1
-- contributor2
+- Polina
+- Siyu
 
 ---
 
@@ -29,27 +26,14 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+What is a beer microbiome? There are collections of small living
+creatures. These small creatures are called bacteria and they are
+everywhere. In our gut, in the soil, even on vending machines. Some of these bacteria are actually very good for us. And some others can make us very ill. Bacteria come in different shapes and sizes but they have the same components. One crucial component is the DNA, the blueprint of life. The DNA encodes the shape and size and many other things unique for a bacterial species. Because of the encoding information the DNA can be used to identify what kind of bacteria the DNA is from. Therefore, within a sample form soil, our gut or beer one can specify what kind of species are inside the sample. Follow this tour to learn more about this kind of analysis.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+### {% icon comment %} Background
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+>   ![The beerDeCoded process](../../images/beerprocess.png "The beerDeCoded process contains 3 consistent steps. The first step is DNA extraction from beer. Then, this DNA can be sequenced. That means that we can obtain the sequence of nucleotides for this specific DNA. Finally, we have to analyze received data in order to know which organisms this DNA is from.")
+{: .comment}
 
 > ### Agenda
 >
@@ -60,26 +44,9 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Getting started
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+First of all, we need to create a history and upload our prepared dataset into Galaxy.
 
 ## Get data
 
@@ -112,25 +79,7 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
+# Working with the dataset
 
 ## Sub-step with **Kraken2**
 
