@@ -105,7 +105,7 @@ To perform the taxonomic classification we will use Kraken2.
 > Leave the rest parameters as defaults.
 >    > ### {% icon comment %} About Kraken2
 >    >
-![Kraken2](../../images/kraken2.png "This tool uses the minimizer method to sample the k-mers (all the read’s subsequences of length k) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using dustmasker.")
+![Kraken2](../../images/kraken2.jpg "This tool uses the minimizer method to sample the k-mers (all the read’s subsequences of length k) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using dustmasker.")
 {: .comment}
 >
 {: .hands_on}
