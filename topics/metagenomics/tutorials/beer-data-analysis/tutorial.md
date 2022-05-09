@@ -32,8 +32,9 @@ everywhere. In our gut, in the soil, even on vending machines. Some of these bac
 
 ### {% icon comment %} Background
 
->   ![The beerDeCoded process](../../images/beerprocess.png "The beerDeCoded process contains 3 consistent steps. The first step is DNA extraction from beer. Then, this DNA can be sequenced. That means that we can obtain the sequence of nucleotides for this specific DNA. Finally, we have to analyze received data in order to know which organisms this DNA is from.")
-{: .comment}
+>   ![The beerDeCoded process](../../images/beerprocess.png "The beerDeCoded process contains 3 consistent steps. The first step is DNA extraction from beer. Then, this DNA can be sequenced. That means that we can obtain the sequence of nucleotides for this specific DNA. Finally, we have to analyze received data in order to know which organisms this DNA is from")
+
+
 
 > ### Agenda
 >
