@@ -41,7 +41,7 @@ If a custom genome/transcriptome/exome dataset is producing errors, double check
 
    - **Symptoms include**: Tools such as **Extract Genomic DNA** report problems with sequence lengths.
    - **Solution**: First try sorting and re-formatting in Galaxy then re-run.
-   - **How**: To sort, follow instructions for [Sorting]({% link faqs/galaxy/datasets_sorting_reference_genome.md %}) a Custom Genome.
+   - **How**: To sort, follow instructions for [Sorting]({% link faqs/galaxy/reference_genomes_sorting_reference_genome.md %}) a Custom Genome.
 
 - Identifier and Description in ">" title lines used inconsistently by tools in the same analysis
 
