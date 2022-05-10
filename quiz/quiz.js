@@ -606,18 +606,15 @@ function showDebug(){
 }
 
 function loadQuiz(url){
-	fetch(url)
-		.then(response => YAML.parse(response.text))
-		.then(data => {
-			slides = data.questions.map(x => {
-				x.results = {};
-				return x
-			});
+	data = YAML.load(url);
+	slides = data.questions.map(x => {
+		x.results = {};
+		return x
+	});
 
-			quiz_title = data.title;
-			document.getElementById("title").innerHTML = data.title;
-			document.getElementsByTagName("title")[0].innerHTML = data.title;
-		})
+	quiz_title = data.title;
+	document.getElementById("title").innerHTML = data.title;
+	document.getElementsByTagName("title")[0].innerHTML = data.title;
 }
 
 function showRoomCode(){
@@ -641,7 +638,7 @@ function showRoomCode(){
 		var roomId;
 
 		if(mode === 'self' || mode === 'teacher'){
-			loadQuiz(docurl.origin + docurl.pathname.replace('quiz.html', '') + docurl.searchParams.get('q') + '.json')
+			loadQuiz(docurl.searchParams.get('quiz'))
 			var [roomNumber, roomId] = generateRoomId();
 		}
 
@@ -654,9 +651,9 @@ function showRoomCode(){
 
 		peer = new Peer(roomId, {
 			debug: 2,
-			host: 'localhost',
-			port: 9000,
-			path: '/'
+			//host: 'localhost',
+			//port: 9000,
+			//path: '/'
 		});
 
 		if(mode === 'teacher'){
