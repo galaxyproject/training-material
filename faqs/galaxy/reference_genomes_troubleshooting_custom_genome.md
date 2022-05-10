@@ -13,7 +13,7 @@ If a custom genome/transcriptome/exome dataset is producing errors, double check
 
    - **Symptoms include**: Dataset not included in custom genome "From history" pull down menu on tool forms.
    - **Solution**: Check datatype assigned to dataset and assign **fasta** format.
-   - **How**: Click on the dataset's pencil icon {% icon galaxy-pencil %} to reach the "Edit Attributes" form, and in the Datatypes tab >redetect the datatype<(link to FAQ).
+   - **How**: Click on the dataset's pencil icon {% icon galaxy-pencil %} to reach the "Edit Attributes" form, and in the Datatypes tab > [redetect the datatype]({% link faqs/galaxy/datasets_detect_datatype.md %}).
    - If `fasta` is not assigned, there is a format problem to correct.
   
  - Incomplete Custom genome file load
@@ -41,7 +41,7 @@ If a custom genome/transcriptome/exome dataset is producing errors, double check
 
    - **Symptoms include**: Tools such as **Extract Genomic DNA** report problems with sequence lengths.
    - **Solution**: First try sorting and re-formatting in Galaxy then re-run.
-   - **How**: To sort, follow instructions for [Sorting]({% link faqs/galaxy/datasets_sorting_reference_genome.md %}) a Custom Genome.
+   - **How**: To sort, follow instructions for [Sorting]({% link faqs/galaxy/reference_genomes_sorting_reference_genome.md %}) a Custom Genome.
 
 - Identifier and Description in ">" title lines used inconsistently by tools in the same analysis
 

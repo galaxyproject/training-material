@@ -9,7 +9,7 @@ contributors: [jennaj, Melkeb]
 In these FASTQ data:
 
 - The quality score identifier (+) is sometimes not a match for the sequence identifier (@).
-- The forward and reverse reads may be interlaced and need to be seperated into distinct datasets.
+- The forward and reverse reads may be interlaced and need to be separated into distinct datasets.
 - Both may be present in a dataset. Correct the first, then the second, as explained below.
 - Format problems of any kind can cause tool failures and/or unexpected results.
 - Fix the problems before running any other tools (including **FastQC**, **Fastq Groomer**, or other QA tools)
@@ -39,7 +39,7 @@ Note: The solution does NOT use the **FASTQ Splitter** tool. The data to be mani
 
   *Match Reads*
 
-    - Match Reads by `Name/Indentifier`
+    - Match Reads by `Name/Identifier`
     - Identifier Match Type `Regular Expression`
     - Match by `.+/2`
 

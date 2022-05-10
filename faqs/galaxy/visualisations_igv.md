@@ -10,7 +10,7 @@ You can send data from your Galaxy history to IGV for viewing as follows:
 
 1. Install IGV on your computer ([IGV download page](https://software.broadinstitute.org/software/igv/download))
 2. Start IGV
-3. In recent verions of IGV, you will have to enable the port:
+3. In recent versions of IGV, you will have to enable the port:
    - In IGV, go to `View > Preferences > Advanced`
    - Check the box `Enable Port`
 
