@@ -217,8 +217,9 @@ function join(evt, joinId) {
 	});
 	// Handle incoming data (messages only since this is the signal sender)
 	conn.on('data', function (data) {
-		console.log(data)
 		if(data.type === "choose-1"){
+			showQuestion(data);
+		} else if(data.type === "choose-many"){
 			showQuestion(data);
 		} else if (data.type === "poll") {
 			showQuestion(data);
@@ -228,15 +229,28 @@ function join(evt, joinId) {
 		} else if (data.type === "clear") {
 			questionArea.innerHTML = `<h2>Question ${data.question + 1}</h2>`;
 		} else if (data.type === "answer") {
-			if(data.answer === answersGiven[data.question]){
-				// correct!
+			if(Array.isArray(data.answer)){
+				numCorrect = 0;
+				data.answer.forEach(correctAnswer => {
+					if(answersGiven[data.question].indexOf(correctAnswer) > -1){
+						numCorrect = numCorrect + 1;
+					}
+				})
+
 				questionArea.innerHTML = `
-					<h2>Congratulations</h2>
+					<h2>You got ${numCorrect}/${data.answer.length} Correct</h2>
 				`
 			} else {
-				questionArea.innerHTML = `
-					<h2>Too bad :(</h2>
-				`
+				if(data.answer === answersGiven[data.question]){
+					// correct!
+					questionArea.innerHTML = `
+						<h2>Congratulations</h2>
+					`
+				} else {
+					questionArea.innerHTML = `
+						<h2>Too bad :(</h2>
+					`
+				}
 			}
 		} else {
 			console.log("Unknown message")
@@ -289,7 +303,70 @@ function showResult(result, score){
 }
 
 function showQuestion(data){
-	var show = `<h2>${data.title}</h2><div class="answer-group">`;
+	if(data.type === "choose-many"){
+		showQuestionMany(data)
+	} else {
+		showQuestionOne(data);
+	}
+}
+
+function showQuestionMany(data){
+	var show = '';
+	if(data.image){
+		show += `<div style="display: flex;flex-direction: column"><h2>${data.title}</h2><img src="${data.image}" /></div>`
+		questionArea.style['flex-wrap'] = 'unset';
+	} else {
+		show += `<h2>${data.title}</h2>`
+		questionArea.style['flex-wrap'] = 'wrap';
+	}
+
+	show += '<p>Choose as many as you think are applicable</p>'
+	show += `<div class="answer-group">`;
+	show += data.answers.map((q, idx) => {
+		return `
+			<label for="answer-${data.id}-${idx}-r" class="btn answer-button">
+			<div id="answer-${data.id}-${idx}">
+			<input type="checkbox" id="answer-${data.id}-${idx}-r" name="radio-answer" value="${q}">
+				${q}
+			</div>
+			</label>
+		`
+	}).join("");
+	show += '</div>';
+	show += `<div><button id="answer-${data.id}-submit" class="btn btn-primary">Submit</button></div>`
+	questionArea.innerHTML = show;
+
+	// Only the teacher doesn't need them to be clickable.
+	if(mode !== 'teacher'){
+		var e = document.getElementById(`answer-${data.id}-submit`);
+		console.log(e)
+		e.addEventListener('click', function () {
+			var answers = Array.from(document.querySelectorAll("input[name='radio-answer']")).filter(x => x.checked).map(x => x.value);
+			safeSend({
+				"event": "answer",
+				"question": data.id,
+				"result": answers,
+			})
+			answersGiven[data.id] = answers
+			console.log(data);
+			if(data.type !== "poll" || ! data.live) {
+				Array.from(document.getElementsByClassName("answer-button")).forEach(x => x.style.display = 'none')
+			}
+		})
+	}
+}
+
+function showQuestionOne(data){
+	var show = '';
+	if(data.image){
+		show += `<div style="display: flex;flex-direction: column"><h2>${data.title}</h2><img src="${data.image}" /></div>`
+		questionArea.style['flex-wrap'] = 'unset';
+	} else {
+		show += `<h2>${data.title}</h2>`
+		questionArea.style['flex-wrap'] = 'wrap';
+	}
+
+	show += `<div class="answer-group">`;
 	show += data.answers.map((q, idx) => {
 		return `
 			<button id="answer-${data.id}-${idx}" value="${q}" class="btn answer-button">${q}</button>
@@ -341,8 +418,12 @@ function processStudentMessage(connId, message){
 			return
 		}
 
-		slides[currentSlide].results[connId] =
-			slides[currentSlide].answers.indexOf(message.result)
+		if(slides[currentSlide].type === "choose-many"){
+			slides[currentSlide].results[connId] = message.result.map(ans => slides[currentSlide].answers.indexOf(ans))
+		} else {
+			slides[currentSlide].results[connId] =
+				slides[currentSlide].answers.indexOf(message.result)
+		}
 
 		if(slides[currentSlide].live){
 			showResults(slides[currentSlide])
@@ -376,21 +457,34 @@ function showResults(){
 	var counts = {}
 	var final_count = 0;
 	Object.keys(slide.results).forEach(connId => {
-		var theirAnswer = slide.results[connId];
-		var answerKey = "";
-		if(theirAnswer < 0){
-			answerKey = "SOMETHING ODD";
+		var tmp = slide.results[connId];
+
+		// I'm sorry.
+		var asdf = [];
+		if(Array.isArray(tmp)){
+			asdf = tmp
 		} else {
-			answerKey = slide.answers[theirAnswer]
-			final_count += 1;
+			asdf = [tmp]
 		}
 
-		if(answerKey === slide.correct){
-			console.log(players[connId])
-			players[connId]['score'] = 1 + (players[connId]['score'] || 0);
-		}
+		asdf.forEach(theirAnswer => {
+			var answerKey = "";
+			if(theirAnswer < 0){
+				answerKey = "SOMETHING ODD";
+			} else {
+				answerKey = slide.answers[theirAnswer]
+				final_count += 1;
+			}
 
-		counts[answerKey] = 1 + (counts[answerKey] || 0)
+			console.log(theirAnswer, answerKey, slide.correct)
+			if(answerKey === slide.correct){
+				console.log(players[connId])
+				players[connId]['score'] = 1 + (players[connId]['score'] || 0);
+			}
+
+			counts[answerKey] = 1 + (counts[answerKey] || 0)
+		})
+
 	})
 	slide.final_results = counts;
 	slide.final_count = final_count;
@@ -399,10 +493,18 @@ function showResults(){
 
 	show += '<table class="table table-striped">'
 	slide.answers.forEach(x => {
-		show += `<tr ${slide.correct ===  x ? 'class="correct-answer"' : ''}><td>${x}</td> <td><div class="bar-chart" style="width: ${25 * (counts[x] || 0) / final_count}em">${counts[x] || 0}</div></td></tr>`
+		show += `<tr ${isCorrectAnswer(x) ? 'class="correct-answer"' : ''}><td>${x}</td> <td><div class="bar-chart" style="width: ${25 * (counts[x] || 0) / final_count}em">${counts[x] || 0}</div></td></tr>`
 	})
 	show += '</table>'
 	questionArea.innerHTML = show;
+}
+
+function isCorrectAnswer(x){
+	if( Array.isArray(slides[currentSlide].correct)){
+		return slides[currentSlide].correct.indexOf(x) >= 0
+	} else {
+		return slides[currentSlide].correct === x
+	}
 }
 
 function renderTable(arr, headers){
@@ -500,8 +602,9 @@ function handleCurrentSlide(){
 		type: slides[currentSlide].type,
 		title: slides[currentSlide].title,
 		answers: slides[currentSlide].answers,
+		image: slides[currentSlide].image,
 		started: new Date().getTime(),
-		timeout: slides[currentSlide].timeout,
+		timeout: mode === 'self' ? 600 : slides[currentSlide].timeout,
 		live: slides[currentSlide].live,
 	}
 
