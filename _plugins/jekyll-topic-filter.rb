@@ -1,4 +1,5 @@
 require 'json'
+require 'yaml'
 
 
 module TopicFilter
@@ -144,6 +145,18 @@ module TopicFilter
       # automatically set `slides: true`
       if not page_obj.has_key?("slides") then
         page_obj['slides'] = resources.include?('slides.html')
+      end
+
+      if resources.include?("quiz") then
+        quizzes = Dir.glob("#{folder}/quiz/*.yml").map{ |a| a.split('/')[-1] }
+        page_obj['quiz'] = quizzes.map{|q|
+          quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
+          {
+            "path" => "#{folder}/quiz/#{q}",
+            "title" => quiz_data['title'],
+            "contributors" => quiz_data['contributors'],
+          }
+        }
       end
 
       # Similar as above.
