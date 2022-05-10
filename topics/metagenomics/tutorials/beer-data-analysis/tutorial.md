@@ -117,7 +117,7 @@ To perform the taxonomic classification we will use Kraken2.
 
  Once we have assigned the corresponding taxa to the sequence, the next step is to properly visualize the data, for which we will use the Krona pie chart tool (<a href="https://doi.org/10.1186/1471-2105-12-385">Ondov et al. 2011</a>).
 
-##Adjust dataset format
+## Adjust dataset format
 
 But before that, we need to adjust the format of the data output from Kraken2.
 
