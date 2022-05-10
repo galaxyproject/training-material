@@ -248,7 +248,7 @@ After normalizing the VCFs we will filter out the variants with a NON_REF tag in
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Normalized VCFs` (output of **bcftools norm** {% icon tool %})
 >    - *"With following condition"*: `c5!='<NON_REF>'`
->    - *"Number of header lines to skip"*: `143` This has to be set manually since the tool skips lines starting with '#' automatically.
+>    - *"Number of header lines to skip"*: `142` This has to be set manually since the tool skips lines starting with '#' automatically.
 >
 >
 {: .hands_on}
