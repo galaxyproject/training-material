@@ -44,8 +44,6 @@ The workflow scheme we will use is shown below. First, we will run the steps of 
 
 ![Genetic Design - BASIC Assembly Workflow](../../images/basic_assembly_workflow.png)
 
-Note that a video tutorial is also available for this workflow : [Galaxy BASIC Assembly Workflow Tutorial ](https://youtu.be/it_JTVdvaRo)
-
 > ### Agenda
 >
 > In this tutorial, we will cover:
