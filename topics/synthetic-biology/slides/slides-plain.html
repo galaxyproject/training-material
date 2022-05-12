@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to Synthetic Biology</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:title" content="Galaxy Training: Introduction to Synthetic Biology" />
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/slides/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/slides/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/slides/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/slides/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/slides/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/slides/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/synthetic-biology/slides/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/synthetic-biology/slides/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-05-01/topics/synthetic-biology/slides/slides-plain.html" title="Version 2022-05-01">2022-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-04-01/topics/synthetic-biology/slides/slides-plain.html" title="Version 2022-04-01">2022-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-03-01/topics/synthetic-biology/slides/slides-plain.html" title="Version 2022-03-01">2022-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/synthetic-biology/slides/slides.html">View markdown source on GitHub</a>
+	<h1>Introduction to Synthetic Biology</h1>
+		<h2>Contributors</h2>
+		
+<a href="/training-material/hall-of-fame/kenza12/" class="contributor-badge contributor-kenza12"><img src="https://avatars.githubusercontent.com/kenza12?s=27" alt="Avatar">Kenza Bazi-Kabbaj</a>
+
+ 
+<a href="/training-material/hall-of-fame/tduigou/" class="contributor-badge contributor-tduigou"><img src="https://avatars.githubusercontent.com/tduigou?s=27" alt="Avatar">Thomas Duigou</a>
+
+ 
+<a href="/training-material/hall-of-fame/breakthewall/" class="contributor-badge contributor-breakthewall"><img src="https://avatars.githubusercontent.com/breakthewall?s=27" alt="Avatar">Joan Hérisson</a>
+
+ 
+<a href="/training-material/hall-of-fame/guillaume-gricourt/" class="contributor-badge contributor-guillaume-gricourt"><img src="https://avatars.githubusercontent.com/guillaume-gricourt?s=27" alt="Avatar">Guillaume Gricourt</a>
+
+ 
+<a href="/training-material/hall-of-fame/ioanagry/" class="contributor-badge contributor-ioanagry"><img src="https://avatars.githubusercontent.com/ioanagry?s=27" alt="Avatar">Ioana Popescu</a>
+
+ 
+<a href="/training-material/hall-of-fame/jfaulon/" class="contributor-badge contributor-jfaulon"><img src="https://avatars.githubusercontent.com/jfaulon?s=27" alt="Avatar">Jean-Loup Faulon</a>
+
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 11, 2022 </div>
+
+	<hr />
+
+
+	<h1 id="what-is-the-goal-of-synthetic-biology">What is the goal of synthetic biology?</h1>
+
+<p>The goal of <strong>synthetic biology</strong> is to <strong>extend</strong> or <strong>modify</strong> the behavior of organisms and <strong>engineer</strong> them to perform new tasks.</p>
+
+<p>.center[<em>LIFE AS IT SHOULD BE or AS WE WANT IT TO BE</em>]</p>
+
+<hr />
+
+<h2 id="what-is-engineering">What is engineering?</h2>
+
+<p>.left[The branch of science and technology concerned with the design, building, and use of engines, machines, and structures.]</p>
+
+<p>.left[Engineering is not usually considered a science:]
+.left[    - Science is about discovering the natural]
+.left[    - Engineering is creating the artificial]</p>
+
+<p>.left[Engineers apply the principles of science and mathematics to develop solutions to problems.]</p>
+
+<p>.left.image-40[<img src="../images/design_process.png" alt="Left-aligned image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="types-of-engineering">Types of Engineering</h2>
+
+<ul>
+  <li>Civil</li>
+  <li>Mechanical</li>
+  <li>Chemical</li>
+  <li>Electrical</li>
+  <li>Electronic</li>
+  <li>Computer</li>
+  <li><span style="color:red"><strong>Biological</strong></span></li>
+</ul>
+
+<hr />
+
+<h2 id="hierarchy-for-synthetic-biology-inspired-by-computer-engineering">Hierarchy for synthetic biology inspired by computer engineering</h2>
+
+<p>.center[<img src="../images/hierarchy_computer_eng.jpg" alt="Centered image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="synergy-between-systems-and-synthetic-biology">Synergy between Systems and Synthetic Biology</h2>
+
+<p>.left[<strong>Systems biology</strong> catalogs novel parts, metabolic networks, and regulatory strategies from a variety of organisms that can be exploited by synthetic biology to elicit novel cellular function.]</p>
+
+<p>.left[<strong>Synthetic biology</strong> provides novel strategies to perturb endogenous networks, enabling systems-level data to be obtained under a myriad of otherwise inaccessible cellular states.]</p>
+
+<p>.center[<img src="../images/system_synthetic_biology.jpg" alt="Centered image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="what-do-biological-engineers-engineer---dna">What do biological engineers engineer?  … DNA</h2>
+
+<h2 id="bottom-up-approach">Bottom-up approach</h2>
+
+<p>.center[<img src="../images/bottom-up-approach.png" alt="Centered image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="synthetic-biology-concepts">Synthetic biology: Concepts</h2>
+
+<p>.left[- Break down the DNA into biological <strong>parts</strong> (e.g. promoters, terminators, ribosome binding sites, genes) that we can study in a living organism in the particular way that they appear.]</p>
+
+<p>.left[- Define <strong>rules</strong> and <strong>models</strong> which tries to predict how a particular stretch of DNA such as promoters, terminators and binding sites, are working for the cell.]</p>
+
+<p>.left[- Use <strong>Standard</strong> parts so that biologists from different laboratories can work together on the same parts.]</p>
+
+<hr />
+
+<h3 id="parts-registry">Parts Registry</h3>
+
+<p>.left[To design new systems, synthetic biologists will look to natural biological systems to find functional units of DNA <strong>or</strong> synthesize new ones that do not naturally exist. These functional units are tested and characterized and may become components in a biological device or system. We refer to them as <strong>parts</strong>.]</p>
+
+<p>.left[By simplifying and <strong>standardizing</strong> biology, the engineer can go on to use <strong>parts</strong> to create their biological systems without spending time researching each individual component or worrying about how to assemble them together.]</p>
+
+<p>.left[The goal of the <a href="http://parts.igem.org/Main_Page">Registry</a> is to aid in this process by creating a library of <strong>standard parts</strong> that have been tested, characterized, and organized so that users can find what they need when developing new biological systems.]</p>
+
+<p>.left[Parts are <strong>centralized</strong> in repositories like <a href="https://synbiohub.org/">SynbioHub</a> where DNA and protein designs can be uploaded. It also facilitates searching for information about existing useful parts and designs by combining data from a variety of sources.]</p>
+
+<hr />
+
+<h3 id="parts-registry-1">Parts Registry</h3>
+
+<p>.left[The <strong>Registry</strong> divides a plasmid into two separate components:]</p>
+
+<p>.pull-left[<img src="../images/part_backbone.png" width="200" alt="A plasmid composed of a part and a backbone" />]
+.pull-left[</p>
+<ul>
+  <li><strong>the part</strong>
+    <ul>
+      <li>A <em>biological part</em>: a natural nucleic acid sequence that encodes a definable biological function</li>
+      <li>A <em>standard biological part</em>: a biological part that has been refined in order to conform to one or more defined technical standards
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-right[<img src="../images/biobricks_logo.png" width="200" alt="BioBricks Foundation Logo" />]
+.pull-left[</p>
+<ul>
+  <li><strong>the plasmid backbone</strong>
+    <ul>
+      <li>All plasmids in Parts Registry are in a standard <strong>BioBricks</strong> format which is a standard for interchangable parts, developed with a view to building biological systems in living cells
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="synthetic-biology-approaches">Synthetic biology approaches</h2>
+
+<p>.pull-right[<img src="../images/circuit.png" width="120" alt="Biological Circuit illustrating a gene driven by a promotor and ribosoms for protein translation" />]
+.pull-left[- <strong>New circuits building (bottom-up)</strong> : Parts and devices, regulators, to make biology easier to engineer.]</p>
+
+<p>.pull-right[<img src="../images/synthetic_genomes.png" width="70" alt="Minimal reconstructed genome where only necessary genes are kept" />]
+.pull-left[- <strong>Minimal genomes, synthetic genomes</strong> : Simplify genomes, add and control the new functions.]</p>
+
+<p>.pull-right[<img src="../images/metabolic_engineering.png" width="80" alt="Host production Cell carrying a plasmid with the gene of interest" />]
+.pull-left[- <strong>Metabolic engineering</strong> : Cell factories: New metabolic pathways.]</p>
+
+<p>.pull-right[<img src="../images/xenobiology.png" width="110" alt="Xeno DNA, synthetic nucleic acid analogues that have a different sugar backbone than the natural nucleic acids DNA." />]
+.pull-left[- <strong>Xenobiology</strong> : Artificial genetic information (ex. XNA).]</p>
+
+<p>.pull-right[<img src="../images/protocells.png" width="40" alt="Self-assembled vesicles that have a cell-like structure which mimicks various aspects of biological behaviour" />]
+.pull-left[- <strong>Protocells</strong> : Synthetic cell-like vesicles, without DNA.]</p>
+
+<hr />
+
+<h2 id="synthetic-biology--the-engineering-cycle-dbtl">Synthetic biology : the engineering cycle (DBTL)</h2>
+
+<p>The <strong>Design-Build-Test-Learn (DBTL)</strong> framework aims to fulfill particular design criteria for a synthetic biology application, which might for example be the production of a specific product at an optimal titer or the detection of a specific clinical biomarker using an engineered gut microbiome.</p>
+
+<p>.center[<img src="../images/DBTL_Cycle.png" alt="Centered image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="synthetic-biology--the-engineering-cycle-dbtl-1">Synthetic biology : the engineering cycle (DBTL)</h2>
+
+<p>.left[- <strong>Design</strong>: Design principles are used to specify a biological system with an intended function. Following these principles, algorithms and models are used to design systems able to perform the desired behavior.]
+.left[- <strong>Build</strong>: The desired DNA sequence encoding the biological system is constructed and implemented into a <strong>chassis</strong>, for example an organism that will be used as a living platform hosting the engineered parts.]
+.left[- <strong>Test</strong>: The function of the engineered biological system is assayed at the bench.]
+.left[- <strong>Learn</strong>: The discrepancies between the desired and observed function are analysed to develop improved models and design heuristics.]</p>
+
+<p>.left[These steps form a loop that is iterated until the engineered biological system fulfils the desired function and properties.]</p>
+
+<hr />
+
+<h2 id="synthetic-biology--bioinformatic-tools">Synthetic biology : Bioinformatic tools</h2>
+
+<p>.left[Synthetic biology tools are essential and widely used in the engineering process and the bioproduction of chemicals.
+Here an overview of the current Synthetic Biology toolbox:]</p>
+
+<p>.center[<img src="../images/synthetic_biology_toolbox.png" alt="Centered image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="synthetic-biology-engineering-metabolic-pathways-dedicated-to-bio-production">Synthetic biology: engineering metabolic pathways dedicated to bio-production</h2>
+
+<p>.left[Once a compound has been identified with a given antimicrobial or biological activity, it needs to be produced for purification, characterization and future use.]</p>
+
+<p>.left[Genetic engineering here aims to rewire the bacterial metabolism in order to enable the production of the target compound within a chassis strain. If the strain turns out to be non-genetically editable, compound biosynthesis pathways are transferred in organisms specialized in bio-production, called <strong>chassis</strong>.]</p>
+
+<p>.center.image-50[<img src="../images/bioproduction_drugs_e_coli.png" alt="Centered image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="chassis">Chassis</h2>
+
+<p>.left[In synthetic biology in most cases one uses the concept of <strong>chassis</strong> :]
+.left[“<em>A chassis refers to the organism that serves as a foundation to physically house genetic components and supports them by providing the resources to function, such as transcription and translation machinery</em>”]
+.left[They are required to propagate the genetic information and to express the genes encoded in it.]</p>
+
+<p>.pull-right.image-30[<img src="../images/chassis_target.png" alt="Centered image. " loading="lazy" />]</p>
+
+<p>.left[Commonly used chassis in synthetic biology:]
+.left[- Prokaryotes: 
+    - Gram - : <em>Escherichia coli</em> (most commonly used cell host in academia), <em>Pseudomonas putida</em>, … 
+    - Gram + : <em>Bacillus subtilis</em>, …</p>
+<ul>
+  <li>Eukaryotes:
+    <ul>
+      <li>Yeast (<em>Saccharomyces cerevisiae</em>, <em>Yarrowia lipolytica</em>, …)</li>
+      <li>Algae (<em>Chlamydomonas reinhardtii</em>, …)</li>
+      <li>Mammalian cell lines</li>
+      <li>
+        <h2 id="plants">Plants]</h2>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="galaxy-synbiocad-tools">Galaxy SynbioCAD tools</h2>
+
+<p>.left[The tools and workflows used in these tutorials are currently available in the <a href="https://toolshed.g2.bx.psu.edu/">toolshed</a> in the <em>Synthetic Biology</em> category and on the <a href="https://galaxy-synbiocad.org/">Galaxy SynBioCAD Portal</a>. They cover an end-to-end metabolic pathway design process from the selection of <strong>chassis</strong> to the design of DNA parts to be assembled to build libraries of strains producing desired chemical <strong>targets</strong>.]</p>
+
+<p>.center[<img src="../images/synbiocad_tools.png" alt="Centered image. " loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="galaxy-synbiocad-workflows">Galaxy SynbioCAD workflows</h2>
+
+<p>.left[- <strong>RetroSynthesis Galaxy workflow</strong>: The workflow generates theoretical possible pathways for the production of a target molecule in an organism of choice.]</p>
+
+<p>.left[- <strong>Pathway Analysis Galaxy workflow</strong>: Given a set of pathways generated by RetroPath2.0 tool, this workflow informs the user as to the theoretically best performing ones based on the four criteria (target product flux, thermodynamic feasibility, pathway length, and enzyme availability).]</p>
+
+<p>.left[- <strong>Genetic Design Galaxy workflow (Gibson, Golden Gate, LCR)</strong>: This workflow encodes the top-ranking predicted pathways from the previous workflow into plasmids intended to be expressed in the specified organism. Assembly methods are Gibson, Golden or Ligation Chain Reaction.]</p>
+
+<p>.left[- <strong>Genetic Design Galaxy workflow (BASIC)</strong>: This workflow encodes the top-ranking predicted pathways from the previous workflow into plasmids intended to be expressed in the specified organism. BASIC is used as assembly method.]</p>
+
+<hr />
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/cbf03d41dc95aabcf650511a7e4b9122a19d1fbd">cbf03d41dc95aabcf650511a7e4b9122a19d1fbd</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
