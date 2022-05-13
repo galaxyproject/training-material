@@ -1,7 +1,7 @@
 ---
 title: Finding and working with "Histories shared with me"
 description: How to find and work on histories shared with you
-area: datasets
+area: histories
 layout: faq
 box_type: tip
 contributors: [jennaj, garimavs]

@@ -1,6 +1,6 @@
 ---
 title: Using compressed fastq data as tool inputs
-area: datasets
+area: datatypes
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]
