@@ -122,7 +122,7 @@ $ diff -U2 /dev/null old
 +🥑
 ```
 
-And removed files are similar, except with the the new file being /dev/null
+And removed files are similar, except with the new file being /dev/null
 
 ```bash
 --- old	2022-02-16 14:06:19.697132568 +0100

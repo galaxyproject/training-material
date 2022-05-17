@@ -14,4 +14,4 @@ Dataset icons and their usage:
 - {% icon galaxy-cross %} **"'X' icon"**: Delete the job.
 - {% icon galaxy-info %} **"Info icon"**: Job details and run information.
 - {% icon galaxy-refresh %} **"Refresh/Rerun icon"**: Run this (selected) job again or examine original submitted form (filled in).
-- {% icon galaxy-bug %} **"Green bug icon"**: Review and optionally submit a bug report.
+- {% icon galaxy-bug %} **"Bug icon"**: Review and optionally submit a bug report.

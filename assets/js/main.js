@@ -22,6 +22,8 @@ $("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:
 // CYOA Support
 function cyoaChoice(text){
 	if(text !== undefined && text !== null){
+		localStorage.setItem('gtn-cyoa', text);
+
 		var inputs = document.querySelectorAll(".gtn-cyoa input"),
 			options = [...inputs].map(x => x.value),
 			nonMatchingOptions = options.filter(x => x !== text);
@@ -31,7 +33,36 @@ function cyoaChoice(text){
 		})
 
 		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
+
+		// Just in case we mark it as checked (e.g. if default/from URL)
+		document.querySelector(`input[value="${text}"]`).checked = true
 	}
+}
+
+function cyoaDefault(defaultOption){
+	// Start with the URL parameter
+	var urlOption = (new URL(document.location)).searchParams.get("gtn-cyoa");
+	if(urlOption){
+		cyoaChoice(urlOption);
+		return;
+	}
+
+	// Otherwise fall back to local storage (survives refreshes)
+	var lsOption = localStorage.getItem('gtn-cyoa');
+	if(lsOption !== null){
+		cyoaChoice(lsOption);
+		return;
+	}
+
+	// Otherwise if the browser is remembering for us, use that.
+	var currentlySelected = [...document.querySelectorAll("input[name='cyoa']")].filter(x => x.checked)[0];
+	if(currentlySelected){
+		cyoaChoice(currentlySelected);
+		return;
+	}
+
+	// And failing that, use the default.
+	cyoaChoice(defaultOption);
 }
 
 (function (window, document) {
@@ -60,9 +91,6 @@ function cyoaChoice(text){
         if (window.location.href.indexOf("faqs") > -1) {
             $(".hands_on>h3,.question>h3,.comment>h3").click();
         }
-
-		// CYOA support
-		cyoaChoice(document.querySelector("input[type='radio']:checked").value);
     });
 
 })(window, document);
@@ -74,8 +102,11 @@ document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre co
 		if(x.nodeName == '#text'){
 			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
 		} else {
-			var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-			$(x).text(fixed);
+			console.log(x.nodeName, x.classList[0])
+			if(!(x.nodeName.toLowerCase() === 'span' && x.classList[0] === 'notranslate')){
+				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+				$(x).text(fixed);
+			}
 		}
 	})
 })
@@ -85,8 +116,10 @@ document.querySelectorAll("section.tutorial.topic-data-science div.language-diff
 		if(x.nodeName == '#text'){
 			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
 		} else {
-			var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-			$(x).text(fixed);
+			if(!(x.nodeName === 'span' && x.classList[0] === 'notranslate')){
+				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+				$(x).text(fixed);
+			}
 		}
 	})
 })

@@ -9,7 +9,7 @@ contributors: [jennaj, Melkeb]
 
 - The methods listed here help to identify and correct errors or unexpected results linked to inputs having non-identical chromosome identifiers and/or different chromosome sequence content.
 
-- **If using a Custom Reference genome**, the methods below also apply, but the first step is to make certain that the Custom Genome is formatted correctly. Improper formating is the most common root cause of CG related errors.
+- **If using a Custom Reference genome**, the methods below also apply, but the first step is to make certain that the Custom Genome is formatted correctly. Improper formatting is the most common root cause of CG related errors.
 
 Method 1: [Finding BAM dataset identifiers](https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_BAM_dataset_identifiers.html)
 

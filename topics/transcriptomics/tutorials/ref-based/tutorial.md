@@ -8,6 +8,9 @@ priority: 2
 tags:
     - bulk
     - rna-seq
+    - collections
+    - drosophila
+    - QC
 level: Introductory
 zenodo_link: "https://zenodo.org/record/4541751"
 questions:
@@ -142,6 +145,15 @@ During sequencing, errors are introduced, such as incorrect nucleotides being ca
 
 Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to create a report of sequence quality, [MultiQC](https://multiqc.info/) ({% cite ewels2016multiqc %}) to aggregate generated reports and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) to improve the quality of sequences via trimming and filtering.
 
+Unfortunately the current version of multiQC (the tool we use to combine reports) does not support list of pairs collections.
+We will first need to transform our the list of pairs to a simple list.
+
+> ### {% icon details %} What does this mean exactly?
+>
+> The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
+> ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
+{: .details}
+>
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
@@ -154,7 +166,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > 3. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177_untreat_paired` sample (forward and reverse)
 >
->    > ### {% icon question %} Questions
+>    > ### {% icon question %} Question
 >    >
 >    > What is the read length?
 >    >
@@ -165,6 +177,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > {: .solution}
 >    >
 >    {: .question}
+>
+>    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %}.
 >
 > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
@@ -239,7 +253,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the Cutadapt reports with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
@@ -529,19 +543,30 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > #### Gene body coverage
 >
-> The different regions of a gene make up the gene body. It is important to check if read coverage is uniform across the gene body. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each (scaled) nucleotide position.
+> The different regions of a gene make up the gene body. It is important to check if read coverage is uniform across the gene body. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each (scaled) nucleotide position. As this tool is really slow, we will compute the coverage only on 200,000 random reads.
 >
 > > ### {% icon hands_on %} Hands-on: Check gene body coverage
 > >
-> > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
+> > 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2) %} with the following parameters:
+> >    - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+> >    - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+> >        - In *"Configure subsampling"*:
+> >            - *"Subsample alignment"*: `Specify a target # of reads`
+> >                - *"Target # of reads"*: `200000`
+> >                - *"Seed for random number generator"*: `1`
+> >        - *"What would you like to have reported?"*: `All reads retained after filtering and subsampling`
+> >            - *"Output format"*: `BAM (-b)`
+> >    - *"Use a reference sequence"*: `No`
+> >
+> > 2. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
 > >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 > >
-> > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
+> > 3. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
-> >        - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
+> >        - {% icon param-collection %} *"Input .bam file"*: output of **Samtools view** {% icon tool %}
 > >    - {% icon param-file %} *"Reference gene model"*: `Convert GTF to BED12 on data N: BED12` (output of **Convert GTF to BED12** {% icon tool %})
 > >
-> > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
+> > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
 > >    - In *"Results"*:
 > >        - {% icon param-repeat %} *"Insert Results"*
 > >            - *"Which tool was used generate logs?"*: `RSeQC`
@@ -642,7 +667,7 @@ Two main tools are available for read counting: [**HTSeq-count**](http://htseq.r
 
 Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
 
-{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" %}
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts** or to the output of **STAR**, e.g. the strandness.
 
@@ -695,31 +720,32 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     >
     > 2. **IGV** {% icon tool %}
     >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track
-    >    2. Right click
-    >    3. Select `Group Aligments by` -> `first-in-pair strand` and `Squished`.
-    >
-    >    > ### {% icon question %} Question
-    >    >
-    >    > ![Screenshot of the IGV view on ps](../../images/ref-based/group_strand_igv_screenshot.png "Screenshot of IGV on ps")
-    >    >
-    >    > 1. Are the reads evenly distributed between the 2 groups (NEGATIVE and POSITIVE)?
-    >    > 2. What is the type of library strandness?
-    >    >
-    >    > > ### {% icon solution %} Solution
-    >    > >
-    >    > > 1. Yes we see the same number of reads on both groups.
-    >    > > 2. This means that the library was unstreanded.
-    >    > >
-    >    > > > ### {% icon comment %} How would it be if the library was stranded?
-    >    > > >
-    >    > > > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
-    >    > > >
-    >    > > > Note thare there is no read on the POSITIVE group for the reverse strand-specific.
-    >    > > {: .comment}
-    >    > {: .solution}
-    >    {: .question}
+    >    2. Right click and then select `Group Aligments by` -> `first-in-pair strand`
+    >    3. Right click and select `Squished`
     >
     {: .hands_on}
+
+    > ### {% icon question %} Question
+    >
+    > ![Screenshot of the IGV view on ps](../../images/ref-based/group_strand_igv_screenshot.png "Screenshot of IGV on ps")
+    >
+    > 1. Are the reads evenly distributed between the 2 groups (NEGATIVE and POSITIVE)?
+    > 2. What is the type of library strandness?
+    >
+    > > ### {% icon solution %} Solution
+    > >
+    > > 1. Yes we see the same number of reads on both groups.
+    > > 2. This means that the library was unstreanded.
+    > >
+    > > > ### {% icon comment %} How would it be if the library was stranded?
+    > > >
+    > > > ![Screenshot of the IGV for stranded vs non-stranded](../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png "Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)")
+    > > >
+    > > > Note thare there is no read on the POSITIVE group for the reverse strand-specific.
+    > > {: .comment}
+    > {: .solution}
+    {: .question}
+
 
 2. You can use the output of **STAR** with the counts.
 
@@ -734,32 +760,33 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     >                        - *"Type of STAR output?"*: `Gene counts`
     >                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
     >
-    >    > ### {% icon question %} Question
-    >    >
-    >    > 1. What percentage of reads are asigned to genes if the library is unstranded/same stranded/reverse stranded?
-    >    > 2. What is the strandness of the library?
-    >    >
-    >    > > ### {% icon solution %} Solution
-    >    > >
-    >    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
-    >    > > ![STAR Gene counts same stranded](../../images/ref-based/star_gene_counts_same.png "Gene counts same stranded")
-    >    > > ![STAR Gene counts reverse stranded](../../images/ref-based/star_gene_counts_reverse.png "Gene counts reverse stranded")
-    >    > >
-    >    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.
-    >    > > 2. This suggests that the library is unstranded.
-    >    > >
-    >    > > > ### {% icon comment %} How would it be if the library was stranded?
-    >    > > >
-    >    > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
-    >    > > > ![STAR Gene counts same stranded USvsRS](../../images/ref-based/star_gene_counts_same_USvsRS.png "Gene counts same stranded for unstranded and reverse stranded library")
-    >    > > > ![STAR Gene counts reverse stranded USvsRS](../../images/ref-based/star_gene_counts_reverse_USvsRS.png "Gene counts reverse stranded for unstranded and reverse stranded library")
-    >    > > > Note thare there is very few reads attributed to genes for same stranded.
-    >    > > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
-    >    > > {: .comment}
-    >    > {: .solution}
-    >    >
-    >    {: .question}
     {: .hands_on}
+
+    > ### {% icon question %} Question
+    >
+    > 1. What percentage of reads are asigned to genes if the library is unstranded/same stranded/reverse stranded?
+    > 2. What is the strandness of the library?
+    >
+    > > ### {% icon solution %} Solution
+    > >
+    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
+    > > ![STAR Gene counts same stranded](../../images/ref-based/star_gene_counts_same.png "Gene counts same stranded")
+    > > ![STAR Gene counts reverse stranded](../../images/ref-based/star_gene_counts_reverse.png "Gene counts reverse stranded")
+    > >
+    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.
+    > > 2. This suggests that the library is unstranded.
+    > >
+    > > > ### {% icon comment %} How would it be if the library was stranded?
+    > > >
+    > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
+    > > > ![STAR Gene counts same stranded USvsRS](../../images/ref-based/star_gene_counts_same_USvsRS.png "Gene counts same stranded for unstranded and reverse stranded library")
+    > > > ![STAR Gene counts reverse stranded USvsRS](../../images/ref-based/star_gene_counts_reverse_USvsRS.png "Gene counts reverse stranded for unstranded and reverse stranded library")
+    > > > Note thare there is very few reads attributed to genes for same stranded.
+    > > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
+    > > {: .comment}
+    > {: .solution}
+    >
+    {: .question}
 
 3. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite.
 
@@ -776,70 +803,66 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     >    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
     >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
     >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
-    >
-    >    > ### {% icon comment %} Interpret the output of Infer Experiment
-    >    >
-    >    > {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
-    >    >
-    >    > - Paired-end or single-end library
-    >    > - Fraction of reads failed to determine
-    >    > - 2 lines
-    >    >     - For single-end
-    >    >         - `Fraction of reads explained by "++,--"`: the fraction of reads that assigned to forward strand
-    >    >         - `Fraction of reads explained by "+-,-+"`: the fraction of reads that assigned to reverse strand
-    >    >     - For paired-end
-    >    >         - `Fraction of reads explained by "1++,1--,2+-,2-+"`: the fraction of reads that assigned to forward strand
-    >    >         - `Fraction of reads explained by "1+-,1-+,2++,2--"`: the fraction of reads that assigned to reverse strand
-    >    >
-    >    > If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
-    >    {: .comment}
-    >    >
-    >    > ### {% icon question %} Question
-    >    >
-    >    > 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
-    >    > 2. Do you think the library type of the 2 samples is stranded or unstranded?
-    >    >
-    >    > > ### {% icon solution %} Solution
-    >    > >
-    >    > > 1. Results for `GSM461177_untreat_paired`:
-    >    > >
-    >    > >    {% snippet faqs/galaxy/analysis_results_may_vary.md %}
-    >    > >
-    >    > >    ```text
-    >    > >    This is PairEnd Data
-    >    > >    Fraction of reads failed to determine: 0.0963
-    >    > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
-    >    > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
-    >    > >    ```
-    >    > >
-    >    > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
-    >    > >
-    >    > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
-    >    > >
-    >    > > > ### {% icon comment %} How would it be if the library was stranded?
-    >    > > >
-    >    > > > Still taking the 2 BAM as example, We get for the unstranded:
-    >    > > >
-    >    > > > ```text
-    >    > > > This is PairEnd Data
-    >    > > > Fraction of reads failed to determine: 0.0382
-    >    > > > Fraction of reads explained by "1++,1--,2+-,2-+": 0.4847
-    >    > > > Fraction of reads explained by "1+-,1-+,2++,2--": 0.4771
-    >    > > > ```
-    >    > > >
-    >    > > > And for the reverse stranded:
-    >    > > >
-    >    > > > ```text
-    >    > > > This is PairEnd Data
-    >    > > > Fraction of reads failed to determine: 0.0504
-    >    > > > Fraction of reads explained by "1++,1--,2+-,2-+": 0.0061
-    >    > > > Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
-    >    > > > ```
-    >    > > >
-    >    > > {: .comment}
-    >    > {: .solution}
-    >    {: .question}
     {: .hands_on}
+
+    {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
+    - Paired-end or single-end library
+    - Fraction of reads failed to determine
+    - 2 lines
+        - For single-end
+            - `Fraction of reads explained by "++,--"`: the fraction of reads that assigned to forward strand
+            - `Fraction of reads explained by "+-,-+"`: the fraction of reads that assigned to reverse strand
+        - For paired-end
+            - `Fraction of reads explained by "1++,1--,2+-,2-+"`: the fraction of reads that assigned to forward strand
+            - `Fraction of reads explained by "1+-,1-+,2++,2--"`: the fraction of reads that assigned to reverse strand
+
+    If the two "Fraction of reads explained by" numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).
+
+    > ### {% icon question %} Question
+    >
+    > 1. What are the "Fraction of the reads explained by" results for `GSM461177_untreat_paired`?
+    > 2. Do you think the library type of the 2 samples is stranded or unstranded?
+    >
+    > > ### {% icon solution %} Solution
+    > >
+    > > 1. Results for `GSM461177_untreat_paired`:
+    > >
+    > >    {% snippet faqs/galaxy/analysis_results_may_vary.md %}
+    > >
+    > >    ```text
+    > >    This is PairEnd Data
+    > >    Fraction of reads failed to determine: 0.0963
+    > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
+    > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+    > >    ```
+    > >
+    > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
+    > >
+    > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
+    > >
+    > > > ### {% icon comment %} How would it be if the library was stranded?
+    > > >
+    > > > Still taking the 2 BAM as example, We get for the unstranded:
+    > > >
+    > > > ```text
+    > > > This is PairEnd Data
+    > > > Fraction of reads failed to determine: 0.0382
+    > > > Fraction of reads explained by "1++,1--,2+-,2-+": 0.4847
+    > > > Fraction of reads explained by "1+-,1-+,2++,2--": 0.4771
+    > > > ```
+    > > >
+    > > > And for the reverse stranded:
+    > > >
+    > > > ```text
+    > > > This is PairEnd Data
+    > > > Fraction of reads failed to determine: 0.0504
+    > > > Fraction of reads explained by "1++,1--,2+-,2-+": 0.0061
+    > > > Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
+    > > > ```
+    > > >
+    > > {: .comment}
+    > {: .solution}
+    {: .question}
 
 > ### {% icon details %} Strandness and software settings
 >
@@ -1059,7 +1082,7 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > {{ page.zenodo_link }}/files/GSM461182.fastqsanger
 > ```
 >
-> For the Single-end data, there is no need to flatten the collection before **FastQC**. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp).
+> For the single-end data, there is no need to flatten the collection before **FastQC**. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp).
 {: .hands_on}
 
 # Analysis of the differential gene expression
@@ -1101,10 +1124,10 @@ To be able to identify differential gene expression induced by PS depletion, all
 >
 > The featureCounts tables you download from zenodo (or from the Data Library) were generated with the option "Count fragments instead of reads" set to "Disabled". This way you roughly get twice the number of counts as each each read (from a pair) is counted individually.
 > In addition, the single reads dataset were run with the option `Length of the genomic sequence around annotated junctions` to 36 instead of 74.
-> Finally the header was removed from the featureCounts tables available on zenodo.
+> Finally the header was removed from the featureCounts tables available on Zenodo.
 {: .details}
 
-You might think We can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
+You might think we can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
 
 Let's imagine we have RNA-Seq counts from 3 samples for a genome with 4 genes:
 
@@ -1387,7 +1410,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >            - *"Find pattern"*: `(.*)_(.*)_(.*)`
 >            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
 >
->     This step adds an additional columns that can be used with the ``Tag elements from file`` tool
+>     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements from file](__TAG_FROM_FILE__) %} tool
 >
 > 3. Change the datatype to `tabular`
 >
@@ -1399,17 +1422,16 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 > 5. Inspect the new collection
 >
+>    > ### {% icon tip %} You cannot see the changes?
+>    >
+>    > You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in DESeq2.
+>     >
+>     {: .tip}
+>
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. Can you see the changes?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in DESeq2.
-> {: .solution}
-{: .question}
+We can now run DESeq2:
+
 >
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
@@ -1521,19 +1543,34 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
     6. *p*-value for the statistical significance of this change
     7. *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure, which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
+    > ### {% icon tip %} Tip: What are p-values and what are they used for?
+    >
+    > The p-value is a measure often used to determine whether or not a particular observation possesses statistical significance. Strictly speaking, the p-value is the probability that the data could have arisen randomly, assuming that the null hypothesis is correct. In the concrete case of RNA-Seq, the null hypothesis is that there is no differential gene expression. So a p-value of 0.13 for a particular gene indicates that, for that gene, assuming it is not differentially expressed, there is a 13% chance that any apparent differential expression could simply be produced by random variation in the experimental data.
+    >
+    > 13% is still quite high, so we cannot really be confident differential gene expression is taking place. The most common way that scientists use p-values is to set a threshold (commonly 0.05, sometimes other values such as 0.01) and reject the null hypothesis only for p-values below this value. Thus, for genes with p-values less than 0.05, we can feel safe stating that differential gene expression plays a role. It should be noted that any such threshold is arbitrary and there is no meaningful difference between a p-value of 0.049 and 0.051, even if we only reject the null hypothesis in the first case.
+    >
+    > Unfortunately, p-values are often heavily misused in scientific research, enough so that Wikipedia provides a [dedicated article](https://en.wikipedia.org/wiki/Misuse_of_p-values) on the subject. See also [this article](https://fivethirtyeight.com/features/not-even-scientists-can-easily-explain-p-values/) (aimed at a general, non-scientific audience).
+    {: .tip}
+
 For more information about **DESeq2** and its outputs, you can have a look at the [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
 > ### {% icon question %} Questions
 >
-> 1. Is the *Pasilla* gene (ps, FBgn0261552) downregulated by the RNAi treatment?
-> 2. Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?
+> 1. Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?
+> 2. Is the *Pasilla* gene (ps, FBgn0261552) downregulated by the RNAi treatment?
 > 3. We could also hypothetically be interested in the effect of the sequencing (or other secondary factors in other cases). How would we know the differentially expressed genes because of sequencing type?
 > 4. We would like to analyze the interaction between the treatment and the sequencing. How could we do that?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. You can manually check for the `FBgn0261552` in the first column or use the **Filter** tool with `c1 == "FBgn0261552"`. The log2 fold-change is negative so it is indeed downregulated and the adjusted p-value is below 0.05 so it is part of the significantly changed genes.
-> > 2. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
+> > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
+> >
+> > 2. You can manually check for the `FBgn0261552` in the first column or run {% tool [Filter data on any column using simple expressions](Filter1) %}
+> >   - {% icon param-file %} *"Filter"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
+> >   - *"With following condition"*: `c1 == "FBgn0261552"`
+> >
+> >    The log2 fold-change is negative so it is indeed downregulated and the adjusted p-value is below 0.05 so it is part of the significantly changed genes.
+> >
 > > 3. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after
 correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
 > > 4. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
@@ -1546,15 +1583,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 > >
 > {: .solution}
 {: .question}
->
-> ### {% icon tip %} Tip: What are p-values and what are they used for?
->
-> The p-value is a measure often used to determine whether or not a particular observation possesses statistical significance. Strictly speaking, the p-value is the probability that the data could have arisen randomly, assuming that the null hypothesis is correct. In the concrete case of RNA-Seq, the null hypothesis is that there is no differential gene expression. So a p-value of 0.13 for a particular gene indicates that, for that gene, assuming it is not differentially expressed, there is a 13% chance that any apparent differential expression could simply be produced by random variation in the experimental data.
->
-> 13% is still quite high, so we cannot really be confident differential gene expression is taking place. The most common way that scientists use p-values is to set a threshold (commonly 0.05, sometimes other values such as 0.01) and reject the null hypothesis only for p-values below this value. Thus, for genes with p-values less than 0.05, we can feel safe stating that differential gene expression plays a role. It should be noted that any such threshold is arbitrary and there is no meaningful difference between a p-value of 0.049 and 0.051, even if we only reject the null hypothesis in the first case.
->
-> Unfortunately, p-values are often heavily misused in scientific research, enough so that Wikipedia provides a [dedicated article](https://en.wikipedia.org/wiki/Misuse_of_p-values) on the subject. See also [this article](https://fivethirtyeight.com/features/not-even-scientists-can-easily-explain-p-values/) (aimed at a general, non-scientific audience).
-{: .tip}
+
 
 ## Extraction and annotation of differentially expressed genes
 
@@ -1592,12 +1621,13 @@ Now we would like to extract the most differentially expressed genes due to the 
 >
 >    > ### {% icon question %} Question
 >    >
->    > How many genes have been conserved?
+>    > 1. How many genes have been conserved?
+>    > 2. Can the *Pasilla* gene (ps, FBgn0261552) be found in this table?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 130, or 11.92% of the significantly differentially expressed genes.
->    > >
+>    > > 1. 130, or 11.92% of the significantly differentially expressed genes.
+>    > > 2. The *Pasilla* gene can be found with a quick Search (or even using  {% tool [Filter data on any column using simple expressions](Filter1) %} )
 >    > {: .solution}
 >    {: .question}
 >
@@ -1642,11 +1672,13 @@ The generated output is an extension of the previous file:
 >
 > 1. Where is the most over-expressed gene located?
 > 2. What is the name of the gene?
+> 3. Where is the *Pasilla* gene located (FBgn0261552)?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.
 > > 2. From the table, we got the gene symbol: Ant2. After some search on the [online biological databases](https://www.ncbi.nlm.nih.gov/gene/32008), we find that Ant2 corresponds to adenine nucleotide translocase 2.
+> > 3. The *Pasilla* gene is located on the forward strand of chromosome 3, between 9,417,939 bp and 9,455,500 bp.
 > {: .solution}
 {: .question}
 
@@ -1698,7 +1730,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 > 1. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
 >    - *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(log2(FC)) > 2`
+>    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(log2(FC)) > 1`
 >    - *"and column"*: `Column: 1`
 >    - *"Keep lines of first input that do not join with second input"*: `No`
 >    - *"Keep the header lines"*: `Yes`
@@ -1710,7 +1742,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
-> 3. Rename the output to `Normalized counts for the most differentially expressed genes`.
+> 3. Rename the output to `Normalized counts for the most differentially expressed genes`
 >
 {: .hands_on}
 
@@ -1863,12 +1895,12 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
 >
-> 4. Rename the output to `Gene IDs and differential expression`.
+> 4. Rename the output to `Gene IDs and differential expression`
 {: .hands_on}
 
 We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts**  or **Gene length and GC content** and format the gene IDs.
 
-> ### {% icon hands_on %} Hands-on: Get the gene length from previous history
+> ### {% icon hands_on %} Hands-on: Prepare the gene length file
 >
 > <div class="featureCounts" markdown="1">
 > 1. Copy the feature length collection previously generated by **featureCounts** {% icon tool %} into this history
@@ -1887,18 +1919,14 @@ We just generated the first input for **goseq**. As second input for **goseq** w
 >    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 > </div>
 >
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on: Adapt the gene length to goseq
->
-> 1. {% tool [Change Case](ChangeCase) %} with the following parameters:
+> 2. {% tool [Change Case](ChangeCase) %} with the following parameters:
 >
 >    - {% icon param-file %} *"From"*: <span class="featureCounts" markdown="1">`GSM461177_untreat_paired` (output of **Extract Dataset** {% icon tool %})</span><span class="STAR" markdown="1">`Gene length`</span>
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
 >
-> 2. Rename the output to `Gene IDs and length`
+> 3. Rename the output to `Gene IDs and length`
 {: .hands_on}
 
 We have now the two required input files for goseq.
