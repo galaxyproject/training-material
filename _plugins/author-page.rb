@@ -7,11 +7,12 @@ module Jekyll
         if flat
           t.data['contributors'].each{|c| datastructure[c].push(t) }
         else
-          t.data['contributors'].each{|c| datastructure[c].push([t]) }
+          t.data['contributors'].each{|c| datastructure[c].push([t, nil]) }
         end
       elsif t.data.has_key?('contributions')
         t.data['contributions'].each{|contribution_type, contributor|
           contributor.each{|c|
+
             if flat
               datastructure[c].push(t)
             else
@@ -51,6 +52,9 @@ module Jekyll
             has_philosophy[t.data['username']] = true
           end
         }
+
+
+        puts "#{slides_by_author['lleroi']}"
 
         site.posts.docs.each {|t|
           # News
