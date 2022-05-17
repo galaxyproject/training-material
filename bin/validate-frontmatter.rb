@@ -50,6 +50,14 @@ def validate_non_empty_key_value(map, key)
     return []
 end
 
+def is_tutorial(fn)
+  fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/
+end
+
+def is_slide(fn)
+  fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/
+end
+
 def validate_requirements(requirements)
   errs = []
   # Exit early if no requirements
@@ -158,19 +166,21 @@ def lint_file(fn)
   end
 
   # Custom error handling:
-  if fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/ then
+  if is_tutorial(fn) then
     errs.push(*validate_document(data, $tutorial_validator))
   elsif fn.include?('metadata.yaml') then
     errs.push(*validate_document(data, $topic_validator))
-  elsif fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/ then
+  elsif is_slide(fn) then
     errs.push(*validate_document(data, $slides_validator))
   else
     #errs.push("No validation available for this type of file")
   end
 
   # Check contributors OR contributions
-  if not (data.has_key?('contributors') or data.has_key?('contributions'))
-    errs.push("Document lacks EITHER contributors OR contributions key")
+  if is_slide(fn) || is_tutorial(fn) then
+    if not (data.has_key?('contributors') or data.has_key?('contributions'))
+      errs.push("Document lacks EITHER contributors OR contributions key")
+    end
   end
 
   # If we had no errors, validated successfully
