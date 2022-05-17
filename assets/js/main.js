@@ -102,8 +102,11 @@ document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre co
 		if(x.nodeName == '#text'){
 			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
 		} else {
-			var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-			$(x).text(fixed);
+			console.log(x.nodeName, x.classList[0])
+			if(!(x.nodeName.toLowerCase() === 'span' && x.classList[0] === 'notranslate')){
+				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+				$(x).text(fixed);
+			}
 		}
 	})
 })
@@ -113,8 +116,10 @@ document.querySelectorAll("section.tutorial.topic-data-science div.language-diff
 		if(x.nodeName == '#text'){
 			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
 		} else {
-			var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-			$(x).text(fixed);
+			if(!(x.nodeName === 'span' && x.classList[0] === 'notranslate')){
+				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+				$(x).text(fixed);
+			}
 		}
 	})
 })

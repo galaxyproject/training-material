@@ -1,6 +1,6 @@
 ---
 title: How to Contribute to Galaxy
-description: Contributing to Galaxy is a multi-step proces, this will guide you through it.
+description: Contributing to Galaxy is a multi-step process, this will guide you through it.
 area: contributing
 box_type: tip
 layout: faq
