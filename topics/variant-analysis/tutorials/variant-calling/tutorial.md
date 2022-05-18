@@ -567,6 +567,7 @@ We are going to use the down-right panel of RStudio which presents our files. We
 > ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai
 > ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 > ~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf
+
 After finding them, we check the boxes left to there name. Then, after clicking the gear icon on the same panel, we choose the option "Export" and confirm it.
 Now our files should have been downloaded locally.
 
