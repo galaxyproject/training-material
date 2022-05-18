@@ -98,7 +98,8 @@ The alignment process consists of two steps:
 >
 >>###  {% icon code-in %} Input: Bash
 >>```bash
->>$ cd ~/dc_workshop
+>>$ mkdir ~/galaxy_tutorial
+>>$ cd ~/galaxy_tutorial
 >>$ mkdir -p data/ref_genome
 >>$ curl -L -o data/ref_genome/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
 >>$ gunzip data/ref_genome/ecoli_rel606.fasta.gz
@@ -129,7 +130,7 @@ The alignment process consists of two steps:
 >>```bash
 >>$ curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
 >>$ tar xvf sub.tar.gz
->>$ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
+>>$ mv sub/ ~/galaxy_tutorial/data/trimmed_fastq_small
 >>```
 >>
 >>
@@ -560,29 +561,14 @@ this box, type the name of the "chromosome" followed by a colon and the position
 
 [IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
-In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`. 
-Open a new tab in your terminal window and create a new folder. We will put this folder on our Desktop for 
-demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and 
-instead organize files within a directory structure like we have been using in our `dc_workshop` directory.
-
-```bash
-$ mkdir ~/Desktop/files_for_igv
-$ cd ~/Desktop/files_for_igv
-```
-
-Now we will transfer our files to that new directory. Remember to replace the text between the `@` and the `:` 
-with your AWS instance number. The commands to `scp` always go in the terminal window that is connected to your
-local computer (not your AWS instance).
-
-~~~
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv
-~~~
-
-
-You will need to type the password for your AWS instance each time you call `scp`. 
+In order to use IGV, we will need to export some files to our local machine. We know how to do this through RStudio's UI. 
+We are going to use the down-right panel of RStudio which presents our files. We are going to need these four files:
+> ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam
+> ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai
+> ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+> ~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf
+After finding them, we check the boxes left to there name. Then, after clicking the gear icon on the same panel, we choose the option "Export" and confirm it.
+Now our files should have been downloaded locally.
 
 Next, we need to open the IGV software. If you have not done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
 to unzip it, and then drag the program into your Applications folder. 
