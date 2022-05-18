@@ -310,7 +310,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 >>$ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam 
 >>```
 >{: .icon code-in}
->> ### {% icon cod_out%} Output
+>> ### {% icon code-out%} Output
 >>```bash
 >>[mpileup] 1 samples in 1 input files
 >>```
@@ -355,7 +355,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 created, the version of bcftools that was used, the command line parameters used, and 
 some additional information:
 >
->{% icon cod_out%} Output
+>{% icon code-out%} Output
 >~~~
 >##fileformat=VCFv4.2
 >##FILTER=<ID=PASS,Description="All filters passed">
@@ -455,7 +455,7 @@ to learn more about the VCF file format.
 >>> $ grep -v "#" results/vcf/SRR2584866_final_variants.vcf | wc -l
 >>> ~~~
 >> {: .icon code-in}
->>> {% icon cod_out%}
+>>> {% icon code-out%}
 >>> ~~~ 
 >>> 766
 >>> ~~~
@@ -497,7 +497,7 @@ $ samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli
 ```
 {: .icon code-in}
 
-### {% icon cod_out%} Output
+### {% icon code-out%} Output
 ~~~
 1         11        21        31        41        51        61        71        81        91        101       111       121
 AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATAC
