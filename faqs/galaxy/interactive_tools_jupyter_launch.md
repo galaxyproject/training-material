@@ -3,6 +3,7 @@ title: Launch JupyterLab
 area: interactive tools
 box_type: hands_on
 layout: faq
+contributors: [annefou,shiltemann,nomadscientist]
 ---
 
 

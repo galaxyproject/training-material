@@ -1,0 +1,50 @@
+{% assign n = include.news %}
+
+{% if n.cover %}
+ {% assign coverimage = n.cover %}
+ {% assign coverimagealt = n.coveralt %}
+{% elsif n.tags contains "cofest" %}
+ {% assign coverimage = "/assets/images/cofest.png" %}
+ {% assign coverimagealt = "CoFest logo with two generic people shapes conversing next to the GTN logo and text 'gtn cofest'" %}
+{% elsif n.tags contains "galaxy" %}
+ {% assign coverimage = "/assets/images/GalaxyNews.png" %}
+ {% assign coverimagealt = "Galaxy News logo on dark blue background with Galaxy logo and words 'Galaxy News'" %}
+{% elsif n.tags contains "gat" %}
+ {% assign coverimage = "/assets/images/gat.png" %}
+ {% assign coverimagealt = "GTN Logo on a spiral galaxy background with text 'galaxy admin training'" %}
+{% else %}
+ {% assign coverimage = "/assets/images/GTN.png" %}
+ {% assign coverimagealt = "GTN logo with a multi-coloured star and the words Galaxy Training Network" %}
+{% endif %}
+
+<div class="card newsitem">
+ <div class="card-header">
+     <a href="{% if n.external %}{{ n.link }}{% else %}{{site.baseurl}}{{n.url}}{% endif %}"><h3 class="card-title">{{n.title}}</h3></a>
+  </div>
+ <div class="row no-gutters">
+  <div class="col-sm-5">
+   <img class="card-img newscover" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" alt="{{ coverimagealt }}">
+  </div>
+  <div class="col-sm-7">
+   <div class="card-body">
+        <!--<a href="{{site.baseurl}}{{n.url}}"><h4 class="card-title">{{n.title}}</h4></a>-->
+        {% if n.contributors %}
+        <div class="contributors-line"> {% include _includes/contributor-list.html contributors=n.contributors badge=true %}</div>
+        {% endif %}
+        {% for tag in n.tags %}
+<button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials with this tag">{{ tag  }}</button>
+{% endfor %}
+    <hr/>
+    <p class="card-text">
+      {% if n.external %}
+        This is an external post, please follow the link to read it.
+      {% else %}
+        {{ n.excerpt | strip_html }}
+      {% endif %}
+    </p>
+    <a href="{% if n.external %}{{ n.link }}{% else %}{{site.baseurl}}{{n.url}}{% endif %}" class="btn btn-primary">Full Story</a>
+   </div>
+  </div>
+ </div>
+</div>
+

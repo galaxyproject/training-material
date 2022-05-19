@@ -30,6 +30,7 @@ contributors:
 - miaomiaozhou88
 - shiltemann
 - hexylena
+- avans-atgm
 
 follow_up_training:
 - type: "internal"

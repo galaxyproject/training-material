@@ -479,7 +479,7 @@ Lets first find out which sequence motifs RBFOX2 might preferentially bind to.
 >
 > 1. **Text reformatting** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `tabular` (output of **PEAKachu** {% icon tool %})
->    - *"AWK Program"*: `NR>1{\nif ($3 < $4) {\n   print $1,$3,$4,\"clip_peak_\"NR-1,$9,$5;\n}\nelse {\n   print $1,$4,$3,\"clip_peak_\"NR-1,$9,$5;\n}\n}`
+>    - *"AWK Program"*: `NR>1{if($3 < $4) {print $1,$3,$4,"clip_peak_"NR-1,$9,$5;}else {print $1,$4,$3,"clip_peak_"NR-1,$9,$5;}}`
 > 2. **SlopBed** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BED/VCF/GFF file"*: `bed` (output of **Text reformatting** {% icon tool %})
 >    - *"Genome file"*: `hg38_chr_sizes.txt` (file from your history)

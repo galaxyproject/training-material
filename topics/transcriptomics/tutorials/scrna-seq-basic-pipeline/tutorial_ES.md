@@ -36,6 +36,7 @@ contributors:
 - pclo
 - beatrizserrano
 - npalopoli
+- lgallegovillar
 
 lang: es
 
@@ -593,7 +594,7 @@ Dos visualizaciones importantes en estos datos son tSNE y UMAP. Debemos calcular
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1) %} utilizando los siguientes parámetros:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (salida de **Scanpy FindTSNE** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (salida de **Scanpy RunTSNE** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `Yes`
 {: .hands_on}
 
@@ -729,7 +730,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
 > ### {% icon question %} Pregunta - La apariencia lo es todo
 >
 > ¿Qué visualización es la más útil para obtener una visión general de nuestros datos, *pca*, *tsne* o *umap*?
-
+>
 > ![PCA-tSNE-UMAP](../../images/wab-3visualisations.png "Agrupamiento de Louvain por reducción de dimensión")
 >
 > > ### {% icon solution %} Solución
@@ -906,7 +907,7 @@ Estás advertido: esta herramienta de visualización es una poderosa opción par
 # Conclusión
 {:.no_toc}
 
-> ### {% icon details %} %} ¿Trabajando en grupo? ¡El final!
+> ### {% icon details %} ¿Trabajando en grupo? ¡El final!
 > Es de esperar que, independientemente de la vía de análisis que hayas tomado, hayas encontrado las mismas interpretaciones generales. Si no es así, este es un buen momento para hablar y considerar con tu grupo por qué puede ser así: ¿qué decisión fue "errónea" o "desacertada", y cómo te asegurarias de interpretar correctamente tus datos en el futuro? El mejor consejo: probar y equivocarse es una buena idea, lo creas o no, y cuantas más formas encuentres de la misma manera, más seguro estarás. Pero no hay nada mejor que la validación experimental...
 > Para aquellos que no tomaron las opciones de "control", por favor haced lo siguiente:
 > > 1. **Cambia de nombre** de tu historial (haciendo clic en el título del historial) a “DECISIÓN-Filtrado y representación visual de datos de ARN seq de célula única”

@@ -3,6 +3,7 @@ title: Add Mapped reads track to IGV from Galaxy
 area: igv
 box_type: tip
 layout: faq
+contributors: [delphine-l,bebatut,shiltemann]
 ---
 
 1. Install [IGV](https://software.broadinstitute.org/software/igv/download) (if not already installed)

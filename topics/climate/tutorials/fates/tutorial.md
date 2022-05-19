@@ -261,7 +261,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. We can clearly see a seasonal cycle.
->    > > ![Panoply LEAFC timeserie](../../images/panoply_LEAFC_ALP1_exp.png "LEAFC")
+>    > > ![Panoply LEAFC timeseries](../../images/panoply_LEAFC_ALP1_exp.png "LEAFC")
 >    > {: .solution}
 >    {: .question}
 >
@@ -331,7 +331,7 @@ so that we can reuse it for any simulations.
 >
 > 6. **View** {% icon galaxy-eye%} the resulting plot:
 >
->    ![LEAFC](../../images/LEAFC_ALP1_exp_ggplot.png)
+>    ![Snapshot of LEAFC resulting plot](../../images/LEAFC_ALP1_exp_ggplot.png)
 >
 {: .hands_on}
 
@@ -373,7 +373,7 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 >      - Generate the corresponding plot.
 >    The final workflow would be similar to the one shown below:
 >
->    ![FATES workflow](../../images/fates_workflow.png "FATES workflow")
+>    ![Snapshot of FATES workflow](../../images/fates_workflow.png "FATES workflow")
 >
 >    > ### {% icon question %} Question
 >    > 1. Is the model response to this significant increase of atmospheric CO2 what you expected?
