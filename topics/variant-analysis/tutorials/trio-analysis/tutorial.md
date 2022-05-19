@@ -31,18 +31,17 @@ To discover causal mutations of inherited diseases it’s common practice to do 
 
 ![Image of three family trees representing a different inheritance pattern each, from left to right the trees have a title on top with: autosomal dominant, autosomal recessive, and De-Novo. The families consists of a father, mother, and son. Under the trees there is a legend which shows, from left to right, a red diagonal line with the text 'Affected', a white square with a black border with the text 'Male Variant Absent', a white circle with a black border with the text 'Female Variant Absent', a half-blackened white square with a black border with the text 'Male Variant Present', and a half-blackened circle with a black border with the text 'Female Variant Present'.](../../images/trio-analysis/pedigree.svg "Three family trees representing autosomal dominant (left), autosomal recessive (center), and a de-novo inheritence pattern (right) from parents to son.")
 
-To discover these mutations either whole exome sequencing (WES) or whole genome sequencing (WGS) can be used. With these technologies it is possible to uncover the DNA of the parents and offspring to find (shared) mutations in the DNA. These mutations can include insertions/deletions (indels), loss of heterozygosity (LOH), single nucleotide variants (SNVs), copy number variations (CNVs), and fusion genes. 
+To discover these mutations either whole exome sequencing (WES) or whole genome sequencing (WGS) can be used. With these technologies it is possible to uncover the DNA of the parents and offspring to find (shared) mutations in the DNA. These mutations can include insertions/deletions (indels), loss of heterozygosity (LOH), single nucleotide variants (SNVs), copy number variations (CNVs), and fusion genes.
 
 In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} tool, so we don't have to leave Galaxy to retrieve our data.
 
-We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the [Exome sequencing data analysis for diagnosing a genetic disease](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html) tutorial. 
+We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the [Exome sequencing data analysis for diagnosing a genetic disease](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html) tutorial.
 
 > ### Agenda
 >
 > In this tutorial, we will cover:
-> 
+>
 > 1. TOC
-
 > {:toc}
 >
 {: .agenda}
@@ -61,31 +60,31 @@ I see, you can't wait to get DAC access. To download the data from zenodo for th
 
 > ### {% icon hands_on %} Hands-on: Retrieve data from zenodo
 >
-> 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy.
+> 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy **as a collection**.
 >    ```
 >    https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
 >    https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
 >    https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
-> 
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true %}
+>
 > 2. Set the datatype to **vcf**.
 >
 > 3. Click on **Start**
 >
-> 4. Put all the VCFs into one **collection** when they are uploaded.
-> 
-> {% snippet faqs/galaxy/collections_build_list.md %}
+> 4. If you forgot to select the *"Collections"* tab during upload, please put the file in a collection now.
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
- 
+
 </div>
 
 <div class="EGA-Archive" markdown="1">
 
 ## Getting DAC access
-Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: "EGAD00001008392". However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <helpdesk@ega-archive.org>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don't have it already. Next, you should link your account to your Galaxy account by going to the homepage on Galaxy and at the top bar click **User > Preferences > Manage Information**. Now add your email and password of your (new) EGA account under: **Your EGA (european Genome Archive) account**. After that you can check if you can log in and see if you have access to the dataset. 
+Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: "EGAD00001008392". However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <helpdesk@ega-archive.org>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don't have it already. Next, you should link your account to your Galaxy account by going to the homepage on Galaxy and at the top bar click **User > Preferences > Manage Information**. Now add your email and password of your (new) EGA account under: **Your EGA (european Genome Archive) account**. After that you can check if you can log in and see if you have access to the dataset.
 
 > ### {% icon hands_on %} Hands-on: Check log-in and authorized datasets
 >
@@ -93,7 +92,7 @@ Our test data is stored in EGA, which can be easily accessed using the EGA Downl
 >    - *"What would you like to do?"*: `List my authorized datasets`
 >
 > > ### {% icon comment %} Comment: Check if the dataset is listed.
-> > 
+> >
 > > Check if your dataset is listed in the output of the tool. If not you can look at the header of the output to find out why it is not listed. When the header does not provide any information you could have a look at the error message by clicking on the **eye** {% icon galaxy-eye %} of the output dataset and then click on the icon **view details** {% icon details %}. The error should be listed at **Tool Standard Error**.
 > {: .comment}
 >
@@ -109,7 +108,7 @@ When you have access to the EGA dataset, you can download all the needed files. 
 >    - *"EGA Dataset Accession ID?"*: `EGAD00001008392`
 >
 > {% snippet faqs/galaxy/tools_change_version.md %}
-> 
+>
 > {: .comment}
 {: .hands_on}
 
@@ -145,7 +144,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 >
 > After the download you should have a collection with one file for each family member, i.e. mother (M), father (F), and case (IC). Make sure the files are recognized as the **vcf_bgzip** format.
 >
-> {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %} 
+> {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
@@ -180,7 +179,7 @@ Finally, we need to decompress our bgzipped VCFs, since we will use a text manip
 </div>
 
 # Pre-Processing
-Before starting the analysis, the VCF files have to be pre-processed in order to meet input requirements of the tools which we will use for the downstream analysis. 
+Before starting the analysis, the VCF files have to be pre-processed in order to meet input requirements of the tools which we will use for the downstream analysis.
 
 ## Add chromosome prefix to vcf
 Firstly, our next tool has some assumptions about our input VCFs. The tool expects the chromosome numbers to start with a prefix `chr`. Our VCFs only use the chromosome numbers however, the VCFs just use the chromosome numbers. This is due to a difference in reference genome used when creating the VCFs. To change the prefix in the VCFs we will use regex again.
@@ -210,7 +209,6 @@ Firstly, our next tool has some assumptions about our input VCFs. The tool expec
 > >     - The second match, the pattern in the second brackets `[0-9MYX].+`, matches the chromosome numbers and characters `[0-9MYX]` followed by a matching anything `.` for one-or-more times `+`.
 > >     - The replacement pattern `\1chr\2` means that the prefix `chr` has to be inserted between the first match `\1` or `##contig=<.*ID=` and the second match `\2` or `[0-9MYX].+`.
 > {: .tip}
-
 >
 {: .hands_on}
 
@@ -262,7 +260,7 @@ After normalizing the VCFs we will filter out the variants with a NON_REF tag in
 >
 > > ### {% icon solution %} Solution
 > > 1. The `<NON_REF>` sites were sometimes also represented as a multi allelic variant e.g., `chr17	302	.	T	TA,<NON_REF>` which would not be filtered out with the {% tool [Filter](Filter1) %} tool.
-> > 2. Possibly, if the `<NON_REF>` variants were filtered out and if the `<NON_REF>` tag was removed from multi-allelic variants. However, the last task (splitting multi-allelic sites) can already be handled by {% tool [bcftools norm](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1) %} and it might involve more sophisticated steps to properly split these variants. 
+> > 2. Possibly, if the `<NON_REF>` variants were filtered out and if the `<NON_REF>` tag was removed from multi-allelic variants. However, the last task (splitting multi-allelic sites) can already be handled by {% tool [bcftools norm](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1) %} and it might involve more sophisticated steps to properly split these variants.
 > {: .solution}
 >
 {: .question}
@@ -282,17 +280,17 @@ Finally, we can merge the 3 separate files of the parents and patient into a sin
 >
 >    > ### {% icon comment %} Comment: Checking the merged VCF.
 >    >
->    > Check the merged VCF, now each line should contain 3 sample columns, namely `Case6F`, `Case6M`, and `Case6C`. These columns represent the presence of the variant for the mother, father, and offspring. 
+>    > Check the merged VCF, now each line should contain 3 sample columns, namely `Case6F`, `Case6M`, and `Case6C`. These columns represent the presence of the variant for the mother, father, and offspring.
 >    {: .comment}
 >
 {: .hands_on}
 
 # Annotation
-To understand what the effect of our variants are, we need to annotate our variants. We will use the tool {% tool [SnpEff eff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1) %}, which will compare our variants to a database of variants with known effects.  
+To understand what the effect of our variants are, we need to annotate our variants. We will use the tool {% tool [SnpEff eff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1) %}, which will compare our variants to a database of variants with known effects.
 
 
 ## Annotate with SNPeff
-Running SnpEff will produce the annotated VCF and an HTML summary file. The annotations are added to the INFO column in the VCF and the added INFO IDs (`ANN`, `LOF`, and `NMD`) are explained in the header. The summary files include the HTML stats file which contains general metrics, such as the number of annotated variants, the impact of all the variants, and much more.  
+Running SnpEff will produce the annotated VCF and an HTML summary file. The annotations are added to the INFO column in the VCF and the added INFO IDs (`ANN`, `LOF`, and `NMD`) are explained in the header. The summary files include the HTML stats file which contains general metrics, such as the number of annotated variants, the impact of all the variants, and much more.
 
 > ### {% icon hands_on %} Hands-on: Annotation with SnpEff
 >
@@ -313,7 +311,7 @@ Running SnpEff will produce the annotated VCF and an HTML summary file. The anno
 >
 > > ### {% icon solution %} Solution
 > > 1. The number of variants processed is 209,143.
-> > 2. Most variants are found in the intronic regions. However, this is to be expected since the mutations in intonic regions generally do not affect the gene. 
+> > 2. Most variants are found in the intronic regions. However, this is to be expected since the mutations in intonic regions generally do not affect the gene.
 > {: .solution}
 >
 {: .question}
@@ -342,7 +340,7 @@ A pedigree file is a file that informs GEMINI which family members are affected 
 > FAM0001822	Case6F	0	0	1	1
 > FAM0001822	Case6C	Case6F	Case6M	2	2
 > ```
-> 
+>
 > {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
@@ -363,7 +361,7 @@ Now we can transform the subsampled VCF and PED file into a GEMINI database. Not
 
 
 ## Find inheritance pattern
-With the GEMINI database it is now possible to identify the causative variant that could explain the breast cancer in the mother and daughter. The inheritance information makes it a bit easier to determine which tool to run to find the causative variant, instead of finding it by trying all the different inheritance patterns. 
+With the GEMINI database it is now possible to identify the causative variant that could explain the breast cancer in the mother and daughter. The inheritance information makes it a bit easier to determine which tool to run to find the causative variant, instead of finding it by trying all the different inheritance patterns.
 
 > ### {% icon question %} Question
 >
@@ -375,11 +373,11 @@ With the GEMINI database it is now possible to identify the causative variant th
 >
 > > ### {% icon solution %} Solution
 > >
-> >    - Since both the daughter and mother are affected, and the father likely unaffected[^1], the mutation is most probably dominant. The disease could still be recessive if the father has one copy of the faulty gene, however this is less likely. 
-> >    - The mutation is most likely not de-novo, since both the daughter and mother are affected. 
-> >    - The mutation could be X-linked, however since the VCF only contain mutations on chromosome 17 it would practically be impossible.  
-> >    - The disease could be compound heterozygous, however in that case the disease should be recessive which is less likely. 
-> >    - A loss of heterozygosity (LOH) is also possible, since it is a common occurrence in cancer so this could be a viable inheritance pattern. 
+> >    - Since both the daughter and mother are affected, and the father likely unaffected[^1], the mutation is most probably dominant. The disease could still be recessive if the father has one copy of the faulty gene, however this is less likely.
+> >    - The mutation is most likely not de-novo, since both the daughter and mother are affected.
+> >    - The mutation could be X-linked, however since the VCF only contain mutations on chromosome 17 it would practically be impossible.
+> >    - The disease could be compound heterozygous, however in that case the disease should be recessive which is less likely.
+> >    - A loss of heterozygosity (LOH) is also possible, since it is a common occurrence in cancer so this could be a viable inheritance pattern.
 > >
 > {: .solution}
 >
@@ -387,7 +385,7 @@ With the GEMINI database it is now possible to identify the causative variant th
 
 [^1]:  It is unlikely that the father has breast cancer, "For men, the lifetime risk of getting breast cancer is about 1 in 833" [via cancer.org](https://www.cancer.org/cancer/breast-cancer-in-men/about/key-statistics.html)
 
-Based on these findings it would make sense to start looking for inherited autosomal dominant variants as a first step. If there are no convincing candidate mutations it would always be possible to look at the other less likely inheritance patterns, namely de-novo, compound heterozygous, and LOH events. 
+Based on these findings it would make sense to start looking for inherited autosomal dominant variants as a first step. If there are no convincing candidate mutations it would always be possible to look at the other less likely inheritance patterns, namely de-novo, compound heterozygous, and LOH events.
 
 To find the most plausible causative variant we will use the {% tool [GEMINI inheritance pattern](toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1) %} tool. This tool allows us to select the most likely inheritance pattern (autosomal dominant). Below it is explained how to run the tool for this specific pattern, but you can always try other inheritence patterns if you are curious.
 
@@ -410,14 +408,14 @@ To find the most plausible causative variant we will use the {% tool [GEMINI inh
 
 > ### {% icon question %} Question
 >
-> Did you find the causative variant in the output of the GEMINI inheritance pattern tool? 
+> Did you find the causative variant in the output of the GEMINI inheritance pattern tool?
 >
 > > ### {% icon solution %} Solution
 > > The only pathogenic variant related to breast cancer in the output, according to clinvar, is a SNP at chr17 at position 41215919 on the BRCA1 gene which transforms a G into a T, which is shown below.
 > > ```
 > > chr17	41215919	G	T	missense_variant	BRCA1	pathogenic,other
 > > ```
-> > This missense mutation transforms an alanine amino acid into a glutamine amino acid. Even though this variant has an unknown clinical significance in BRCA1 it was found to be among the top 10 SNPs which likely leads to breast cancer, according to {% cite Easton2007 %}. You can find more info on this mutation by googling it's rs_ID rs28897696. 
+> > This missense mutation transforms an alanine amino acid into a glutamine amino acid. Even though this variant has an unknown clinical significance in BRCA1 it was found to be among the top 10 SNPs which likely leads to breast cancer, according to {% cite Easton2007 %}. You can find more info on this mutation by googling it's rs_ID rs28897696.
 > {: .solution}
 >
 {: .question}
