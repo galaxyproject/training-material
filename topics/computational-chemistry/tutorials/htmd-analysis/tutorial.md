@@ -41,6 +41,7 @@ This tutorial provides an introduction to using high-throughput molecular dynami
 >
 {: .agenda}
 
+
 # Background
 
 ## What is high-throughput molecular dynamics?
@@ -54,7 +55,7 @@ Due to its vital biochemical role as a chaperone protein involved in facilitatin
 
 In the structure which will be examined during this tutorial, the ligand of concern is a resorcinol, a common class of compounds with affinity for the Hsp90 N-terminal domain. It is registered in the PubChem database under the compound ID 135508238 ({% cite ligand_resorcinol %}). As can be seen by viewing the PDB structure, the resorcinol part of the structure is embedded in the binding site, bound by a hydrogen bond to residue aspartate-93. The ligand structure also contains a triazole and a fluorophenyl ring, which lie nearer to the surface of the protein.
 
-![Hsp90 structure, with a ligand bound]({% link topics/computational-chemistry/images/hsp90lig.png %} "Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. ({% cite ngl %})")
+![Image showing Hsp90 structure, with a ligand bound]({% link topics/computational-chemistry/images/hsp90lig.png %} "Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. ({% cite ngl %})")
 
 
 ## Get data
@@ -117,6 +118,8 @@ Parameterization needs to be done separately for the ligand and protein. Therefo
 
 Here, we simply filter the original PDB twice: once for lines which do not match `HETATM`, which returns a PDB file containing only protein, not ligand and solvent; and once for lines which match the ligand's identity code `AG5E`, which returns a PDB file containing only the ligand.
 
+If you inspect the PDB file, you will see that two different ligands are listed: `AG5E` and `BG5E`. These are the same compound (`G5E`); they refer to two possible conformations it could adopt, both of which would be compatible with the crystallographic data. We choose to take the coordinates from `AG5E` for our simulations, though you could just as well enter `BG5E` instead. For the purpose of this tutorial, you should consider this as a minor technical detail arising from the nature of protein crystallography.
+
 ### Set up protein topology
 
 Firstly, we need to calculate the topology for the protein file. We will use the **GROMACS initial setup** {% icon tool %} tool.
@@ -142,7 +145,6 @@ The tool produces four outputs: a GRO file (containing the coordinates of the pr
 
 Please note all GROMACS tools output a log. Generally, you only need to look at this when a job fails. These provide useful information for debugging if we encounter any problems.
 
- <!-- ({% cite  %}) -->
 
 ### Generate a topology for the ligand
 
@@ -284,7 +286,7 @@ As an aside, we can use the `Extract energy components` tool to plot the converg
 
 The resulting plot should resemble the figure below. The system first drops rapidly in energy, before slowly converging on the minimized state.
 
-![Energy potential during the EM simulation]({% link topics/computational-chemistry/images/empot.png %} "Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a Galaxy visualization")
+![Snapshot of Energy potential during the EM simulation]({% link topics/computational-chemistry/images/empot.png %} "Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a Galaxy visualization")
 
 ## Equilibration
 
@@ -368,7 +370,7 @@ After the NPT equilibration is complete, **Extract energy components** {% icon t
 
 We can now remove the restraints and continue with the production simulation. The simulation will run for 1 million steps, with a step size of 1 fs, so will have a total length of 1 ns. This is rather short compared to the state-of-the-art, but sufficient for the purposes of a tutorial. For longer-scale simulations, the tool can be used multiple times (with the checkpoint file) to continue the existing simulation.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: Output of **GROMACS simulation** {% icon tool %} (NPT equilibration)
@@ -663,3 +665,39 @@ If you now return to the web-browser, you should see a new history should have b
 This tutorial provides a guide on how to study protein-ligand interaction using molecular dynamics in Galaxy. Performing such analyses in Galaxy makes it straightforward to set up, schedule and run workflows, removing much of the difficulty from MD simulation. Thus, the technical barrier to performing high-throughput studies is greatly reduced. Results are structured in the form of Galaxy histories or collections, and include ready-plotted diagrams, which ensure data can be easily understood and reproduced if necessary. Apart from streamlining the process for existing MD users, this tutorial should also prove useful as a pedagogical guide for educating students or newcomers to the field.
 
 After completing the tutorial, the user will be familiar at a basic level with a range of MD analysis techniques, and understand the steps required for a typical MD simulation. Thus, they will be equipped to apply these tools to their own problems.
+
+
+# Glossary and abbreviations
+
+* Concepts:
+  * **MD** - molecular dynamics simulation.
+  * **NVT** - isothermal-isochoric ensemble, in which number of atoms (N), volume (V) and temperature (T) are kept constant. 
+  * **NPT** - isothermal-isobaric ensemble, in which number of atoms (N), pressure (P) and temperature (T) are kept constant. 
+  * **RMSD** - Root Mean Square Deviation
+  * **RMSF** - Root Mean Square Fluctuation
+  * **PCA** - Principal Component Analysis
+* Software:
+  * **GROMACS** (Groningen Machine for Chemical Simulation) - a molecular dynamics package mainly designed for simulations of proteins, lipids and nucleic acids. 
+  * **NAMD** (Nanoscale Molecular Dynamics) - a molecular dynamics software designed for high-performance simulation of large biomolecular systems.
+  * **CHARMM** (Chemistry at Harvard Macromolecular Mechanics) - a molecular modeling and simulation program for many-particle systems. It includes a comprehensive set of force fields to simulate biomolecules.
+  * **VMD** (Visual Molecular Dynamics) - a molecular visualisation program. 
+  * **ACPYPE** (AnteChamber Python Parser interface) - a tool that simplifies the generation of small molecule topologies and parameters for a variety of molecular dynamics programs, like GROMACS and CHARMM. It is based on the Antechamber software provided by AmberTools.
+* Filetypes:
+  * **PDB** - a commonly used filetype for storing 3-dimensional structural data of large biomolecules such as proteins and nucleic acids. Also stands for the Protein Data Bank, an online repository for such data.
+  * **GRO** - a filetype similar to PDB, which contains a molecular structure in a format supported by GROMACS.
+  * **DCD** - a trajectory file format supported by CHARMM and NAMD.
+  * **TOP** - a GROMACS filetype for representing molecular topologies.
+  * **ITP** - another GROMACS filetype for representing molecular topologies.
+  * **TRR** - a lossless GROMACS trajectory file, storing coordinates, forces and velocity. 
+  * **XTC** - a compressed GROMACS trajectory file, storing coordinates. 
+* Force fields and water molecules:
+  * **GROMOS** (GROningen Molecular Simulation) - the name of a force field for molecular dynamics simulation.
+  * **AMBER** (Assisted Model building with Energy Refinement) - a set of molecular mechanical force fields for the simulation of biomolecules.
+  * **OpenFF** (Open Force Field) - a Python toolkit used for the development and application of modern molecular mechanics force fields.
+  * **GAFF** (General AMBER Force Field) - a force field developed to augment the other AMBER force fields, allowing augmentation of most pharmaceutical molecules. 
+  * **TIP3P** - a water model that specifies rigid water molecules with charges and Lennard-Jones parameters assigned to each of the 3 atoms.
+* Biological concepts:
+  * **Hsp90** - Heat shock protein 90, a chaperone protein.
+  * **ATP** - Adenosine triphosphate, the primary carrier of energy in cells.
+  * **NTD** - N-Terminal Domain, the start of a protein or polypeptide chain where the free amine group is located.
+  * **NMR** (Nuclear Magnetic Resonance) - an experimental technique for determining 3D molecular structure.

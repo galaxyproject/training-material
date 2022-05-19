@@ -158,7 +158,7 @@ We will do the latter.
 >            - *"Find pattern"*: `(.*)_(.*)_(.*).counts`
 >            - *"Replace with"*: `\1_\2_\3.counts\tgroup:\2\tgroup:\3`
 >
->     This step add an additional columns that can be used with the ``Tag elements from file`` tool
+>     This step adds an additional columns that can be used with the ``Tag elements from file`` tool
 >
 > 3. Change the datatype to `tabular`
 >
@@ -175,7 +175,7 @@ You should now have a properly tagged collection of tabular files that can be us
 
 DESeq2 has two modes for specifying factors. One can either
 select datasets corresponding to factors, or use group tags
-to specify factors. We will use the grop tags present in
+to specify factors. We will use the group tags present in
 our collection to specify factors.
 
 The tool interface will prompt you with the group tags that are available for your inputs:
@@ -197,7 +197,7 @@ The tool interface will prompt you with the group tags that are available for yo
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `untreat`
 >                      - *"Select groups that correspond to this factor level"*: `Tags: untreat`
->          - {% icon param-repeat %} Click on *"Insert Factor"* (not on "Insert Factor level")
+>          - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
 >          - In "2: Factor"
 >              - "Specify a factor name" to `Sequencing`
 >              - In *"Factor level"*:

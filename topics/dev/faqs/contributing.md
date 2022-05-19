@@ -1,9 +1,10 @@
 ---
 title: How to Contribute to Galaxy
-description: Contributing to Galaxy is a multi-step proces, this will guide you through it.
+description: Contributing to Galaxy is a multi-step process, this will guide you through it.
 area: contributing
 box_type: tip
 layout: faq
+contributors: [jmchilton,hexylena]
 ---
 
 To contribute to galaxy, a GitHub account is required. Changes are proposed via a [pull request](https://docs.github.com/en/github/collaborating-with-pull-requests). This allows the project maintainers to review the changes and suggest improvements.

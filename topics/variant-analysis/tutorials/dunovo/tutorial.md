@@ -120,7 +120,7 @@ We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/article
 > `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
 {: .hands_on}
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
 
 This gave us the following plots:
 

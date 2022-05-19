@@ -132,7 +132,7 @@ Multiple pieces of evidence
 
 ---
 
-### *ab initio* Gene Calling
+### *Ab initio* Gene Calling
 
 .pull-left[
 Predictions using:
@@ -140,7 +140,10 @@ Predictions using:
 - Statistical model (specific to organism)
 
 Models:
-- Built from training on evidence-based gene calls (2-3 iterations)
+- Training on the best evidence-based gene calls
+- "Best" = strong evidence, highly conserved
+- Training can be iterative:
+  - train, predict, select best genes, retrain, etc
 ]
 
 .pull-right.image-90[
@@ -155,30 +158,33 @@ Models:
 
 - Integration of evidence and *ab initio* predictions
 - "Consensus" of multiple sources
-- Automated pipelines: Maker, Braker, Pasa, Prokka
+- Automated pipelines
+  - [**Maker**]({% link topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.md %}), **Braker**, [**Funannotate**]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}), **Pasa**, **Prokka**, ...
+  - Align evidences (or use pre-aligned)
+  - Run *ab initio* predictors
+  - Reconciliate gene models
 ]
 
 .pull-right.image-90[
 ![Multiple gene models are shown labelled current evidence, which is complemented by three more gene models from ab initio prediction. Below a final gene model is constructed and labelled current assembly.](../images/intro-consensus.png)
-]
-
 <small>
-Source: [Maker tutorial](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018)
+Source: [Maker documentation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018)
 </small>
-
+]
 
 ---
 
-### Evaluation of Evidence: metrics
+### Evaluation of annotation: metrics
 
 - Number of genes
 - Average number of exons
 - Average gene length
+- Average protein length
 - ...
 
 ---
 
-### Evaluation of Evidence: BUSCO
+### Evaluation of annotation: BUSCO
 
 #### Benchmarking Universal Single-Copy Orthologs
 
@@ -198,16 +204,24 @@ Genome Browsers (JBrowse, UCSC, ...)
 
 ![Screenshot of Apollo showing a track list on left, and then several rows of evidence like maker annotation and blastn showing gene models, followed by my bam file.](../images/intro-viz.png)
 
+<small>
+**JBrowse**: [Slides]({% link topics/visualisation/tutorials/jbrowse/slides.html %}) - [Tutorial]({% link topics/visualisation/tutorials/jbrowse/tutorial.md %})
+</small>
+
 ---
 
-### Repeat Elements
+### Repeated Elements
 
-- Transposons, low complexity regions
+- Transposons, Retrotransposons, low complexity regions
 - Disrupt gene calling
 - Prediction pipelines:
-  - RepeatMasker
+  - [RepeatMasker]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %})
+  - RepeatModeler
   - REPET
-  - RepBase
+- Databases of repeated elements
+  - Can be used by pipelines
+  - Dfam
+  - RepBase (non free)
 
 ---
 
@@ -223,7 +237,9 @@ Genome Browsers (JBrowse, UCSC, ...)
 
 ### Summary
 
-- Difficult
+- Difficult problem
+- Automated pipelines
+- Need for evidences
 - Never perfect
   - Missing/incomplete genes
   - Split/fused genes
@@ -275,31 +291,31 @@ Annotations steps
 ## Functional Annotation
 
 Collection of information on the function of identified genes
-- biological function
-- regulations, expressions, ...
+- Biological function
+- Regulation, expression, ...
 
 Data Sources
-- wet lab experiments (reliable but long and expensive)
-- manual assignment (cf Apollo)
-- **automatic assignment**
+- Wet lab experiments (reliable but long and expensive)
+- Manual assignment (cf Apollo)
+- **Automatic assignment**
 
 ---
 
 ### Methods
 
-- similarity search / homology
-- pattern search
-- orthologies
-- synteny to related organisms
+- Similarity search / homology
+- Pattern search
+- Orthologies
 - Comparison against databases:
-  - GenBank, NR: sequence bank
-  - InterPro: pattern library (active sites, protein families, peptide signal ...)
+  - GenBank, NR: sequence databanks
+  - InterPro: pattern databank (active sites, protein families, peptide signal ...)
+  - EggNOG: databank of orthology relationships + functional annotation
 
 ---
 
 ### Blast
 
-- Blast against NR
+- Blast/Diamond against NR
   - For each protein (or CDS) of the annotation
   - Find the best xx hits
 - Huge database, good chances to have a match
@@ -316,6 +332,16 @@ Data Sources
 - Many motifs
 - Some of them manually curated
 - Gene Ontology Terms available for domains
+
+---
+
+### EggNOG
+
+- EggNOG: >4M known orthology groups in >5000 organisms
+- Tool using it: **EggNOG-mapper**
+- For each protein of the annotation
+  - Search for matches with known orthology groups
+- Assign corresponding gene name and functional annotation
 
 ---
 
@@ -337,11 +363,17 @@ Controlled vocabulary to describe:
 
 ---
 
-### Blast2GO
+### Gene Ontology
 
+Various sources
+
+- InterProScan
+  - Assigned from matches with annotated motifs
+- EggNOG-mapper
+  - Assigned from matches with annotated orthology groups
 - Blast2GO
+  - Based on Blast (and InterProScan) results
   - For each protein (or CDS) of the annotation, tag with GO terms
-  - Based on Blast and InterProScan results
 
 ---
 
@@ -367,21 +399,38 @@ Controlled vocabulary to describe:
 - Other sites (Tripal sites)
   - reference data (assembly, annotation, ...)
   - interfaces to visualize this data
-  - interfaces for querying
-e.g. [bipaa.genouest.org](https://bipaa.genouest.org)
+  - interfaces for querying (e.g. [bipaa.genouest.org](https://bipaa.genouest.org))
+
+---
+
+### Comparing annotations
+
+- Needed to choose between different results on a same genome sequence
+- Compare general statistics
+  - Number of genes
+  - Average number of exons
+  - Average gene length
+  - Average protein length
+  - ...
+- Compare gene content
+  - Alignment of gene structures
+  - Functional annotation
+    - over/underrepresentation of functions
+- Tools: **AEGeAN**, **Funannotate compare**
 
 ---
 
 ## Genome Annotation
 
-- Very difficult
+- Difficult problem
 - Automatic:
 	- Structural:
+    - EST/RNA-Seq data provides good evidence
 	  - *Ab initio* methods are improving
-	  - EST/RNA-Seq data provides good evidence
 	- Functional:
 	  - Concrete evidence cost-prohibitive to obtain
+    - Various sources of automatic assignment
 	  - Risks of automatically spreading "putative" annotations
 - Manual:
 	- Slow
-	- No expert or evidence available
+	- Requires experts and evidences

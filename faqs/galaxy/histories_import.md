@@ -1,8 +1,9 @@
 ---
-title: Import an history
+title: Importing a history
 area: histories
 box_type: tip
 layout: faq
+contributors: [bebatut]
 ---
 
 1. Open the link to the shared history

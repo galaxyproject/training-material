@@ -207,7 +207,7 @@ We will now add tags to step outputs and label one of the 2 output datasets.
 > ### {% icon hands_on %} Hands-on: Editing our simple workflow
 >
 > 1. Open our simple workflow in the Workflow Editor
-> 2. Remove the input dataset called `A simple text input dataset` using the `x` icon
+> 2. Remove the input dataset called `A simple text input dataset` using the white {% icon galaxy-cross %} icon
 > 3. Add an input dataset collection and label it
 >    - *Label*: `A text dataset collection`
 > 4. Disconnect the exisiting connections and reconnect

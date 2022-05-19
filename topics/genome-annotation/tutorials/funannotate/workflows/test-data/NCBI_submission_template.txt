@@ -1,0 +1,88 @@
+Submit-block ::= {
+  contact {
+    contact {
+      name name {
+        last "Doe",
+        first "John",
+        middle "",
+        initials "",
+        suffix "",
+        title ""
+      },
+      affil std {
+        affil "Foo",
+        div "Bar",
+        city "Paris",
+        country "France",
+        street "FooBar street",
+        email "john.doe@example.org",
+        postal-code "75000"
+      }
+    }
+  },
+  cit {
+    authors {
+      names std {
+        {
+          name name {
+            last "Doe",
+            first "John",
+            middle "",
+            initials "",
+            suffix "",
+            title ""
+          }
+        }
+      },
+      affil std {
+        affil "Foo",
+        div "Bar",
+        city "Paris",
+        country "France",
+        street "FooBar street",
+        postal-code "75000"
+      }
+    }
+  },
+  subtype new
+}
+Seqdesc ::= pub {
+  pub {
+    gen {
+      cit "unpublished",
+      authors {
+        names std {
+          {
+            name name {
+              last "Doe",
+              first "John",
+              middle "",
+              initials "",
+              suffix "",
+              title ""
+            }
+          }
+        }
+      },
+      title "New genome assembly for Mucor mucedo"
+    }
+  }
+}
+Seqdesc ::= user {
+  type str "Submission",
+  data {
+    {
+      label str "AdditionalComment",
+      data str "ALT EMAIL:john.doe@example.org"
+    }
+  }
+}
+Seqdesc ::= user {
+  type str "Submission",
+  data {
+    {
+      label str "AdditionalComment",
+      data str "Submission Title:None"
+    }
+  }
+}

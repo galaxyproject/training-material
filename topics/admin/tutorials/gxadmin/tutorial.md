@@ -16,9 +16,11 @@ key_points:
   - new queries are welcome and easy to contribute
 contributors:
   - hexylena
-subtopic: features
+subtopic: monitoring
 tags:
   - monitoring
+  - ansible
+  - git-gat
 ---
 
 # Overview
@@ -49,7 +51,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -26,3 +26,5 @@
+>    @@ -28,3 +28,5 @@
 >       version: 0.1.0
 >     - src: galaxyproject.pulsar
 >       version: 1.0.8
@@ -58,6 +60,8 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. Install the role with:
 >
@@ -74,9 +78,9 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -32,3 +32,4 @@
->         - usegalaxy_eu.rabbitmq
+>    @@ -33,3 +33,4 @@
 >         - galaxyproject.nginx
+>         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
 >    +    - galaxyproject.gxadmin
 >    {% endraw %}
@@ -158,7 +162,7 @@ id  |        update-time         | user-id | email |           name           | 
 315 | 2013-02-22 15:50:51.398894 |     xxx | xxxx  | day5 practical           | f         | f       | f      |          90
 314 | 2013-02-22 15:45:47.75967  |     xxx | xxxx  | 5. Tag Galaxy-Kurs       | f         | f       | f      |          78
 
-**@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be. The query can
+**@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be.
 
 hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted | d-purged | object-store-id
 -------- | --------- | ----------- | ---------- | ------- | ------- | --------- | -------- | ----------------
@@ -479,3 +483,5 @@ The bulk of gxadmin is not functions calling shell commands though, it's mostly 
 # Summary
 
 There are a lot of queries, all tailored to specific use cases, some of these may be interesting for you, some may not. These are [all documented](https://github.com/usegalaxy-eu/gxadmin#commands) with example inputs and outputs in the gxadmin readme, and help is likewise available from the command line.
+
+{% snippet topics/admin/faqs/missed-something.md step=10 %}

@@ -7,6 +7,13 @@ title: Search Tutorials
 
 <div id="search-container">
 	<input type="text" id="search-input" placeholder=" search..." class="nicer">{% icon search %}
+
+	<input type="checkbox" id="search-faqs" name="search-faqs" checked>
+	<label for="search-faqs">Search FAQs</label>
+
+	<input type="checkbox" id="search-tutorials" name="search-tutorials" checked>
+	<label for="search-tutorials">Search Tutorials</label>
+
 	<div class="search-results row" id="results-container"></div>
 </div>
 
@@ -14,9 +21,9 @@ title: Search Tutorials
 <!-- Configuration -->
 <script>
 
-var tutorials = {% dump_search_view testing %};
+var resources = {% dump_search_view testing %};
 
-function search(idx, q){
+function search(idx, q, includeFaqs, includeTutorials){
 	if(q.length > 2){
         var results_partial = idx.search(`*${q}*`),
             results_exact = idx.search(`${q}`),
@@ -55,8 +62,15 @@ function search(idx, q){
         });
 
 		var results_final = combined_results.map(x => {
-			return tutorials['/' + x.replaceAll(".md", ".html")];
+			return resources['/' + x.replaceAll(".md", ".html")];
 		}).filter(x => x !== undefined);
+
+		if(! includeFaqs) {
+			results_final = results_final.filter(x => x.type != 'FAQ')
+		}
+		if(! includeTutorials) {
+			results_final = results_final.filter(x => x.type != 'Tutorial')
+		}
 
         $("#results-container").html(results_final.map(x => `
         <div class='col-sm-6'>
@@ -66,12 +80,26 @@ function search(idx, q){
           <h6 class='card-subtitle text-muted'>${x.topic}</h6>
           <p>${x.tags.join(' ')}</p>
           <p>${x.contributors}</p>
-          <a class='btn btn-primary' href='${x.url}'>View Tutorial</a>
+          <a class='btn btn-primary' href='${x.url}'>View ${x.type}</a>
           </div>
           </div>
           </div>
                     `));
 	}
+}
+
+function searchWrap(idx) {
+	console.log(
+	'search',
+		$("#search-input").val(),
+		$("input[name='search-faqs']").is(':checked'),
+		$("input[name='search-tutorials']").is(':checked')
+	)
+	search(idx,
+		$("#search-input").val(),
+		$("input[name='search-faqs']").is(':checked'),
+		$("input[name='search-tutorials']").is(':checked')
+	);
 }
 
 fetch('{{ site.baseurl }}/search.json')
@@ -83,11 +111,24 @@ fetch('{{ site.baseurl }}/search.json')
 		paramQuery = params.get('query');
 		if(paramQuery){
 			document.getElementById('search-input').value = paramQuery;
-			search(idx, paramQuery);
+			searchWrap(idx);
 		}
 
 		$("#search-input").on("change keyup paste", function(){
-			search(idx, $("#search-input").val());
+			searchWrap(idx);
 		})
+
+		$("input[name='search-faqs']:checkbox").change(
+			function(){
+				searchWrap(idx);
+			}
+		);
+
+		$("input[name='search-tutorials']:checkbox").change(
+			function(){
+				searchWrap(idx);
+			}
+		);
+
 });
 </script>
