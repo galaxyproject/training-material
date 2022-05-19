@@ -41,7 +41,8 @@ We will not start our analysis from scratch, since the main goal of this tutoria
 >
 > In this tutorial, we will cover:
 > 
-> 1. 
+> 1. TOC
+
 > {:toc}
 >
 {: .agenda}
