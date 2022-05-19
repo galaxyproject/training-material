@@ -61,9 +61,7 @@ footer: no
     </div>
     {% endif %}
 
-
-    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true newcontributors=true %}</div>
-
+    {% include _includes/contributors-line.html page=page %}
 
     <blockquote class="overview">
         <h3>{{ locale['overview'] | default: "Overview"}}</h3>
@@ -277,6 +275,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
                 {% endif %}
 
+
                 {% if material.cited %}
                 <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
                 {% bibliography --cited %}
@@ -326,8 +325,6 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     })(window, document);
                 </script>
 
-
-
                 <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                 <p>
                     <ol>
@@ -371,6 +368,10 @@ note = "[Online; accessed TODAY]"
                 </pre></div></div>
                 </p>
                 </blockquote>
+
+                {% if page.contributions %}
+                {% include _includes/funding-statement.md contributions=page.contributions %}
+                {% endif %}
 
 
 <script type="text/javascript">

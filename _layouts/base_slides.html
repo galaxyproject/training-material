@@ -81,11 +81,7 @@ class: center, middle, inverse
 
 # {{ title }}
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true newcontributors=true %}
-</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page authorsonly=true %}
 
 <div class="footnote" style="bottom: {% if page.video%}5.5em;{% else %}4 em;{% endif %}">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
 {% if page.video %}
@@ -129,12 +125,9 @@ Useful when presenting."
 
 {{ locale['collaborative-effort'] | default: "This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!" }}
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}
-</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page %}
 
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
 {% else %}
@@ -144,6 +137,10 @@ Useful when presenting."
 <img src="{{ site.baseurl }}/{{ page.logo }}" alt="page logo" style="height: 100px;"/>
   {% endif %}
 {% endif %}
+{% if page.contributions %}
+	{% include _includes/funding-statement-short.md contributions=page.contributions %}
+{% endif %}
+</div>
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 {{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.
