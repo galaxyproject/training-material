@@ -1,0 +1,521 @@
+﻿---
+id: peptide-protein-id-oms
+name: Peptide and Protein ID using OpenMS tools
+description: >-
+  Identifying the proteins contained in a sample is an important step in any
+  proteomic experiment. However, in most settings, proteins are digested to
+  peptides before the LC-MS/MS analysis, which will be done in this tour.
+title_default: peptide-protein-id
+steps:
+  - title: Introduction
+    content: >-
+      Identifying the proteins contained in a sample is an important step in any
+      proteomic experiment. This tour deals with protein identification from
+      peptides ("bottom-up proteomics").
+    backdrop: true
+  - title: Introduction
+    content: >-
+      Protein identification is a multi-step process:
+      <ul>
+        <li>Raw data preparations</li>
+        <li>Peptide-to-Spectrum matching</li>
+        <li>Peptide inference</li>
+        <li>Protein inference</li>
+      </ul> A plethora of different software solutions exists for each step. In
+      this tour, we will use tools from the
+      <a href="https://openms.de/">OpenMS software suite</a> for all steps.
+      Protein inference will be performed with the Fido algorithm (<a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Serang et al, JPR,
+      (2010)</a>).
+    backdrop: true
+  - title: Input data
+    content: >-
+      As an example dataset, we will use an LC-MS/MS analysis of HeLa cell
+      lysate published in <a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/24678044">Vaudel et al., 2014,
+      Proteomics</a>. Detailed information about the dataset can be found on <a
+      href="https://www.ebi.ac.uk/pride/archive/projects/PXD000674">PRIDE</a>.<br><br>
+      For step 2 we will use a validated human Uniprot FASTA database with
+      appended decoys. You can find a prepared database, as well as the input
+      proteomics data in different file formats on <a
+      href="https://zenodo.org/record/796184">Zenodo</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analysis by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Preparing raw data
+    content: >-
+      Raw data conversion is the first step of any proteomic data analysis. The
+      most common converter is MSConvert, the format to convert to is mzML.
+      Due to licensing reasons, MSConvert runs only on windows systems and will
+      not work on most Galaxy servers. We will omit the data conversion step here
+      and start directly with the mzML file format.
+    backdrop: true
+  - title: Preparing raw data
+    content: >-
+      Depending on your machine settings, raw data will be generated either in
+      profile mode or centroid mode. For most peptide search engines, the MS2
+      data have to be converted to centroid mode, a process called “peak
+      picking” or “centroiding”. Machine vendors offer algorithms to extract
+      peaks from profile raw data. This is implemented in <b>msconvert</b>  and
+      can be run in parallel to the mzML conversion. However, the OpenMS tool
+      <b>PeakPickerHiRes</b>  is reported to generate slightly better results
+      (<a href="https://www.ncbi.nlm.nih.gov/pubmed/17094243">Lange et al.,
+      2006, Pac Symp Biocomput</a>).
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Load the example dataset into your history from
+      <a
+      href="https://zenodo.org/record/892005/files/qExactive01819_profile.mzml">Zenodo</a>
+    placement: right
+    textinsert: 'https://zenodo.org/record/892005/files/qExactive01819_profile.mzml'
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them it to "Test data". <br><br>
+      <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" to "Test data".</li>
+        <li>Click "Save".</li>
+      </ul>
+    position: left
+  - title: Preparing raw data
+    element: '#tool-search-query'
+    content: Search for PeakPickerHiRes tool.
+    placement: right
+    textinsert: PeakPickerHiRes
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: Click on the "PeakPickerHiRes" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_peakpickerhires%2FPeakPickerHiRes%2F2.2.0"]
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the input data with
+      <ul>
+        <li>Click <b>+ Insert param.algorithm_ms_levels</b>
+        and change the entry to “2”.</li>
+        <li>Click "Execute".
+      </ul>
+    position: right
+  - title: Uploading the protein database
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: >-
+      For spectrum-to-sequence matching, we need to upload a protein database.
+      Open the Galaxy Upload Manager.
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the protein database
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the protein database
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Load the example dataset into your history from
+      Zenodo: <a
+      href="https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta">Zenodo</a>
+    placement: right
+    textinsert: 'https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta'
+  - title: Uploading the protein database
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the protein database
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the protein database
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them it to "Protein database". <br><br>
+      <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" to "Protein database".</li>
+        <li>Click "Save".</li>
+      </ul>
+    position: left
+  - title: Peptide and Protein Identification
+    element: '#tool-search-query'
+    content: >-
+      Search for the XTandemAdapter tool.
+    placement: right
+    textinsert: XTandemAdapter
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: Click on the "XTandemAdapter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_xtandemadapter%2FXTandemAdapter%2F2.2.0.1"]
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: >-
+      Execute the tool with
+      <ul>
+        <li>Click <b>+ Insert param_fixed_modifications</b> and choose <b>Carbamidomethyl (C)</b>.</li>
+        <li>Click <b>+ Insert param_variable_modifications</b> and choose <b>Oxidation (M)</b>.</li>
+        <li>Click "Execute".</li>
+      </ul>
+    position: right
+  - title: Peptide and Protein Identification
+    element: '#tool-search-query'
+    content: Look for FileInfo tool
+    placement: right
+    textinsert: FileInfo
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: Click on the "FileInfo" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fileinfo%2FFileInfo%2F2.2.0"]
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: Execute the tool on the XTandem output.
+    position: left
+  - title: Peptide FDR filtering
+    content: >-
+      The next step of peptide identification is to decide which PSMs will be
+      used for protein inference.
+      To calculate "false discovery rates" (FDRs), we first have to annotate the identified peptides to
+      determine which of them are decoys. This is done with the tool
+      <b>PeptideIndexer</b>. Additionally, we will calculate peptide posterior
+      error probabilities (PEPs), because they are needed for the protein
+      inference algorithm used by OpenMS. We will then filter for 1 % FDR and
+      set the score back to PEP.
+    backdrop: true
+  - title: Peptide FDR filtering
+    content: >-
+      To calculate FDRs, we first have to annotate the identified peptides to
+      determine which of them are decoys. This is done with the tool
+      <b>PeptideIndexer</b>. Prior to FDR calculation and filtering, we will calculate peptide posterior
+      error probabilities (PEPs), because they are needed for the protein
+      inference algorithm used by OpenMS. We will then calculate FDRs, filter for 1 % FDR and
+      set the score back to PEP.
+    backdrop: true
+  - title: Peptide FDR filtering
+    element: '#tool-search-query'
+    content: Look for IDPosteriorErrorProbability tool.
+    placement: right
+    textinsert: IDPosteriorErrorProbability
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: Click on the "IDPosteriorErrorProbability" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idposteriorerrorprobability%2FIDPosteriorErrorProbability%2F2.2.0"]
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: >-
+      Execute the tool with
+      <ul>
+        <li><b>-prob_correct</b> set to <b>Yes</b>.</li>
+      </ul>
+    position: left
+  - title: Peptide FDR filtering
+    element: '#tool-search-query'
+    content: Look for PeptideIndexer tool.
+    placement: right
+    textinsert: PeptideIndexer
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: Click on the "PeptideIndexer" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_peptideindexer%2FPeptideIndexer%2F2.2.0"]
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: >-
+      Execute the tool with
+      <ul>
+        <li><b>Specificity of the enzyme</b> set to <b>none</b>.</li>
+      </ul>
+    position: left
+  - title: Peptide FDR filtering
+    element: '#tool-search-query'
+    content: Look for FalseDiscoveryRate tool.
+    placement: right
+    textinsert: FalseDiscoveryRate
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: Click on the "FalseDiscoveryRate" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_falsediscoveryrate%2FFalseDiscoveryRate%2F2.2.0"]
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: >-
+      Execute the tool with
+      <ul>
+        <li><b>Perform FDR calculation on protein level</b> set to <b>false</b></li>
+        <li><b>Filter PSMs based on q-value</b> set to <b>0.01</b></li>
+        <li><b>add_decoy_peptides</b> set to <b>Yes</b></li>
+      </ul>
+      Decoy peptides are not filtered out, because they are needed for correct protein inference by Fido.
+    position: left
+  - title: Peptide FDR filtering
+    element: '#tool-search-query'
+    content: Look for IDScoreSwitcher tool.
+    placement: right
+    textinsert: IDScoreSwitcher
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: Click on the "IDScoreSwitcher" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idscoreswitcher%2FIDScoreSwitcher%2F2.2.0"]
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: >-
+      Execute the tool with
+      <ul>
+        <li><b>Name of the meta value to use as the new score</b> set to "Posterior Probability_score"</li>
+        <li><b>Orientation of the new score</b> set to <b>higher_better</b></li>
+      </ul>
+    position: left
+  - title: Peptide FDR filtering
+    element: '#tool-search-query'
+    content: Look for FileInfo tool.
+    placement: right
+    textinsert: FileInfo
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: Click on the "FileInfo" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fileinfo%2FFileInfo%2F2.2.0"]
+  - title: Peptide FDR filtering
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the output to get basic information about the
+      identified peptides.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many peptides were identified?</li>
+        <li>How many peptides with oxidized methionine were identified?</li>
+      </ul>
+    backdrop: false
+  - title: Protein Inference
+    content: >-
+      In bottom-up proteomics, it is necessary to combine the identified
+      peptides to proteins. This is not a trivial task, as proteins are
+      redundant to some degree. Thus, not every peptide can be assigned to only
+      one protein. The OpenMS suite implemented the <a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Fido</a> algorithm for
+      protein inference. Fido uses a Bayesian probabilistic model to group and
+      score proteins based on peptide-spectrum matches.
+    backdrop: true
+  - title: Protein inference
+    element: '#tool-search-query'
+    content: Look for FidoAdapter tool.
+    placement: right
+    textinsert: FidoAdapter
+  - title: Protein inference
+    element: '#tool-search'
+    content: Click on the "FidoAdapter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fidoadapter%2FFidoAdapter%2F2.2.0.1"]
+  - title: Protein inference
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+        <ul>
+          <li><b>-greedy_group_resolution</b> set to <b>Yes</b.></li>
+        </ul>
+    position: left
+  - title: Protein inference
+    element: '#tool-search-query'
+    content: Look for FalseDiscoveryRate tool.
+    placement: right
+    textinsert: FalseDiscoveryRate
+  - title: Protein inference
+    element: '#tool-search'
+    content: Click on the "FalseDiscoveryRate" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_falsediscoveryrate%2FFalseDiscoveryRate%2F2.2.0"]
+  - title: Protein inference
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+        <ul>
+            <li><b>Perform FDR calculation on PSM level</b> set to <b>false</b>.</li>
+        </ul>
+    position: left
+  - title: Protein inference
+    element: '#tool-search-query'
+    content: Look for IDFilter tool.
+    placement: right
+    textinsert: IDFilter
+  - title: Protein inference
+    element: '#tool-search'
+    content: Click on the "IDFilter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idfilter%2FIDFilter%2F2.2.0"]
+  - title: Protein inference
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+        <ul>
+          <li><b>-prot</b> set to <b>0.01</b>.</li>
+        </ul>
+    position: left
+  - title: Protein inference
+    element: '#tool-search-query'
+    content: Look for FileInfo tool.
+    placement: right
+    textinsert: FileInfo
+  - title: Protein inference
+    element: '#tool-search'
+    content: Click on the "FileInfo" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fileinfo%2FFileInfo%2F2.2.0"]
+  - title: Protein FDR filtering
+    element: '#tool-search'
+    content: >-
+      Execute the tool.
+    position: left
+  - title: Analysis of Contaminants
+    content: >-
+      The FASTA database used for the peptide to spectrum matching contained
+      some entries that were not expected to stem from the HeLa cell lysate, but
+      are common contaminations in LC-MS/MS samples. The main reason to add
+      those is to avoid false assignment of contaminant spectra to other proteins.
+      It also enables you to check for contaminations in your samples.
+      <br><br>
+      <b>CAVE</b>: When analyzing human samples, many proteins that are common contaminants may also stem from the sample.
+      Therefore, human contaminants do not have to be excluded from further analysis,
+      but you should keep in mind that the source of these proteins is unclear.
+    backdrop: true
+  - title: Analysis of Contaminants
+    element: '#tool-search-query'
+    content: >-
+      Look for TextExporter tool to convert the idXML output to a human-readable
+      tabular file.
+    placement: right
+    textinsert: TextExporter
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: Click on the "TextExporter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_textexporter%2FTextExporter%2F2.2.0"]
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: Execute the tool with default settings.
+    position: left
+  - title: Analysis of Contaminants
+    element: '#tool-search-query'
+    content: Look for Select tool.
+    placement: right
+    textinsert: Select
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: Click on the "Select" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Grep1"]'
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: >-
+      Execute the tool to select all lines <b>Matching</b> the pattern
+      “CONTAMINANT”.
+    position: left
+  - title: Analysis of Contaminants
+    content: >-
+      Remove all bovine and mycoplasma proteins from your list by running Select
+      tool again.
+    backdrop: true
+    textinsert: Select
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: Click on the "Select" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Grep1"]'
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: >-
+      Execute the tool to select all lines <b>NOT Matching</b> the pattern
+      “HUMAN”.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Which contaminants did you identify? Where do these contaminations likely come from?</li>
+        <li>What other sources of contaminants exist?</li>
+        <li>How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?</li>
+        <li>How many false positives do we expect in our list?</li>
+      </ul>
+    backdrop: false
+  - title: Key points
+    content: |-
+      <ul>
+        <li>LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers.</li>
+        <li>OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats.</li>
+        <li>OpenMS provides several thirdparty search engines and Fido for protein inference.</li>
+      </ul>
+    backdrop: true

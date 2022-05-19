@@ -1,0 +1,16 @@
+---
+- doc: "Test sample data for Sequence analysis:Mapping"
+  job: mapping-job.yml
+  outputs:
+    bowtie2_mapping_stats:
+      asserts:
+        has_text:
+          text: '43652 (90.26%) aligned concordantly exactly 1 time'
+    bam_stats_1:
+      asserts:
+        has_text:
+          text: '4819009'
+    bam_stats_2:
+      asserts:
+        has_text:
+          text: '4466767'

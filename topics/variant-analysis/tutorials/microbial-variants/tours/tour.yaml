@@ -1,0 +1,326 @@
+---
+id: microbial-variants
+name: RAD-Seq to construct genetic maps
+description: >-
+  In this tutorial, we will use the tool <a
+  href="https://github.com/tseemann/snippy">Snippy</a>to find high confidence
+  differences (indels or SNPs) between our known genome and our reads.
+title_default: peptide-protein-id
+steps:
+  - title: Introduction
+    content: >-
+      In this tutorial, we will use the tool “Snippy” (link to Snippy is <a
+      href="https://github.com/tseemann/snippy">here</a>) to find high
+      confidence differences (indels or SNPs) between our known genome and our
+      reads.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      Variant calling is the process of identifying differences between two
+      genome samples. Usually differences are limited to single nucleotide
+      polymorphisms (SNPs) and small insertions and deletions (indels). Larger
+      structural variation such as inversions, duplications and large deletions
+      are not typically covered by “variant calling”. <br><br>Imagine that you
+      have been asked to find the differences between a sample that has been
+      sequenced and a known genome. For example: You have a new sample from a
+      patient and you want to see if it has any differences from a well known
+      reference genome of the same species. Typically, you would have a couple
+      of fastq read files sent back to you from the sequencing provider and
+      either an annotated or non annotated reference genome.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In this tutorial, we will use the tool “Snippy” (link to Snippy is <a
+      href="https://github.com/tseemann/snippy">Snippy</a>)
+      to find high confidence differences (indels or SNPs) between our known
+      genome and our reads. Snippy uses one tool to align the reads to the
+      reference genome, and another tool to decide (“call”) if any of the
+      resulting discrepancies are real variants or technical artifacts that can
+      be ignored. Finally, Snippy uses another tool to check what effect these
+      differences have on the predicted genes - truncation, frame shift or if
+      the changes are synonomous.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      For the read alignment (read mapping) step, Snippy uses BWA MEM with a
+      custom set of settings which are very suitable to aligning reads for
+      microbial type data. For the variant calling step, Snippy uses Freebayes
+      with a custom set of settings. snpeff is then used to describe what the
+      predicted changes do in terms of the genes themselves. <br><br>The Galaxy
+      wrapper for Snippy has the ability to change some of the underlying tool
+      settings in the advanced section but it is not recommended.
+    backdrop: true
+  - title: Data upload
+    content: >-
+      The data for today is a subset of a real dataset from a Staphylococcus
+      aureus bacteria. We have a closed genome sequence and an annotation for
+      our “wildtype” strain. We have used a whole genome shotgun approach to
+      produce a set of short sequence reads on an Illumina DNA sequencing
+      instrument for our mutant strain.<ul>
+        <li>The reads are paired-end</li>
+        <li>Each read is on average 150 bases</li>
+        <li>The reads would cover the original wildtype genome to a depth of 19x</li></ul>
+    backdrop: true
+  - title: Data upload
+    content: >-
+      The files we will be using are:<ul>
+        <li>'mutant_R1.fastq' & 'mutant_R2.fastq' - the read files in fastq format.</li>
+        <li>'wildtype.fna' - The sequence of the reference strain in fasta format.</li>
+        <li>'wildtype.gbk' - The reference strain with gene and other annotations in genbank format.</li>
+        <li>wildtype.gff - The reference strain with gene and other annotations in gff3 format.</li></ul>
+      <br>This data is available at Zenodo using the following <a
+      href="https://doi.org/10.5281/zenodo.582600">link</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analysis by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Importing data via links
+    content: >-
+      Import files from <a
+      href="https://doi.org/10.5281/zenodo.582600">zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      The loading of the data into your history is achieved by providing the
+      links
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/582600/files/mutant_R1.fastq
+      https://zenodo.org/record/582600/files/mutant_R2.fastq
+      https://zenodo.org/record/582600/files/wildtype.fna
+      https://zenodo.org/record/582600/files/wildtype.gbk
+      https://zenodo.org/record/582600/files/wildtype.gff
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them it to something more meaningful<br><br>  <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+      </ul>
+    position: left
+  - title: Find variants with Snippy
+    content: >-
+      We will now run the Snippy tool on our reads, comparing it to the
+      reference.<br><br>
+
+      Snippy is a tool for rapid bacterial SNP calling and core genome
+      alignments. Snippy finds SNPs between a haploid reference genome and your
+      NGS sequence reads. It will find both substitutions (snps) and
+      insertions/deletions (indels).<br><br>
+
+      If we give Snippy an annotated reference, it will silently run a tool
+      called SnpEff which will figure out the effect of any changes on the genes
+      and other features. If we just give Snippy the reference sequence alone
+      without the annotations, it will not run SnpEff.<br><br>
+
+      We have an annotated reference and so will use it in this case.
+    backdrop: true
+  - title: Find variants with Snippy
+    element: '#tool-search-query'
+    content: Search for 'Snippy' tool.
+    placement: right
+    textinsert: Snippy
+  - title: Find variants with Snippy
+    element: '#tool-search'
+    content: Click on the 'Snippy' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnippy%2Fsnippy%2F3.2"]
+        .tool-old-link
+  - title: Find variants with Snippy
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+      <li>“Reference File” to the `wildtype.gbk` file</li>
+      <li>“Single or Paired-end reads” to `Paired`</li>
+      <li>“Select first set of reads” to `mutant_R1.fastq`</li>
+      <li>“Select second set of reads” to `mutant_R2.fastq`</li>
+      <li>Select all outputs</li>
+      </ul>
+    position: right
+  - title: Examine Snippy output
+    content: >-
+      Snippy has taken the reads, mapped them against the reference using BWA
+      MEM, looked through the resulting BAM file and found differences using
+      some fancy Bayesian statistics (Freebayes), filtered the differences for
+      sensibility and finally checked what effect these differences will have on
+      the predicted genes and other features in the genome.
+    backdrop: true
+  - title: Examine Snippy output
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      It produces quite a bit of output, there can be up to 10 output files.
+
+      <br><br>Have a closer look at the contents of the SNP table file (snippy
+      on data XX, data XX and data XX table).
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Which types of variants have been found?</li>
+        <li>What is the third variant called?</li>
+        <li>What is the product of the mutation?</li>
+        <li>What might be the result of such a mutation?</li>
+      </ul>
+    backdrop: false
+  - title: View Snippy output in JBrowse
+    content: >-
+      We could go through all of the variants like this and read them out of a
+      text table, but this is onerous and doesn’t really give the context of the
+      changes very well. It would be much nicer to have a visualisation of the
+      SNPs and the other relevant data. In Galaxy we can use a tool called
+      JBrowse.
+    backdrop: true
+  - title: View Snippy output in JBrowse
+    element: '#tool-search-query'
+    content: Search for 'JBrowse' tool.
+    placement: right
+    textinsert: JBrowse
+  - title: View Snippy output in JBrowse
+    element: '#tool-search'
+    content: Click on the 'JBrowse' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fjbrowse%2Fjbrowse%2F0.7.0.3"]
+        .tool-old-link
+  - title: View Snippy output in JBrowse 1/4
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>“Reference genome to display” to `Use a genome from history`</li>
+
+      <li>“Select the reference genome” to `wildtype.fna`</li>
+
+      <li>“Produce Standalone Instance” to `Yes`</li>
+
+      <li>“Genetic Code” to `11: The Bacterial, Archaeal and Plant Plastid
+      Code`</li>
+
+      <li>“JBrowse-in-Galaxy Action” to `New JBrowse Instance`</li>
+
+      </ul>
+    position: right
+  - title: View Snippy output in JBrowse 2/4
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>We will now set up three different tracks - these are datasets
+      displayed underneath the reference sequence (which is displayed as
+      nucleotides in FASTA format)<ul>
+        <li>Click on `Insert Track Group` and fill it with</li>
+        <li>“Track Category” to `sequence reads`</li>
+        <li>Click on `Insert Annotation Track` and fill it with<ul>
+          <li>“Track Type” to `BAM Pileups`</li>
+          <li>“BAM Track Data” to `snippy bam file`</li>
+          <li>“Autogenerate SNP Track” to `Yes`</li>
+          <li>“Track Visibility” to On for new users</li></ul></li></ul></li>
+      </ul>
+    position: right
+  - title: View Snippy output in JBrowse 3/4
+    element: '#tool-search'
+    content: |-
+      <ul>
+        <li>Click on `Insert Track Group` and fill it with</li>
+        <li>“Track Category” to `variants`</li>
+        <li>Click on `Insert Annotation Track` and fill it with<ul>
+          <li>“Track Type” to `GFF/GFF3/BED Features`</li>
+          <li>“GFF/GFF3/BED Track Data” to `snippy snps gff file`</li>
+          <li>“Track Visibility” to On for new users</li></ul></li>
+        <li>Click on `Insert Track Group` and fill it with</li>
+        <li>“Track Category” to `variants`</li>
+      </ul>
+    position: right
+  - title: View Snippy output in JBrowse 4/4
+    element: '#tool-search'
+    content: |-
+      <ul>
+        <li>Click on `Insert Annotation Track` and fill it with<ul>
+          <li>“Track Type” to `GFF/GFF3/BED Features`</li>
+          <li>“GFF/GFF3/BED Track Data” to `wildtype.gff`</li>
+          <li>“JBrowse Track Type [Advanced]” to `Canvas Features`</li>
+          <li>Click on “JBrowse Styling Options [Advanced]”</li>
+          <li>“JBrowse style.label” to `product`</li>
+          <li>“JBrowse style.description” to `product`</li>
+          <li>“Track Visibility” to On for new users</li></ul></li>
+      </ul>
+    position: right
+  - title: View Snippy output in JBrowse
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      A new file will be created in your history, this contains the JBrowse
+      interactive visualisation. We will now view its contents and play with it
+      by inspecting the `JBrowse on data XX and data XX - Complete` file (eye
+      icon). The JBrowse window will appear in the centre Galaxy panel.
+    position: left
+  - title: Inspecting the SNPs using JBrowse
+    content: |-
+      Display all the tracks and practice maneuvering around
+      <ul>
+        <li>Click on the tick boxes on the left to display the tracks</li>
+        <li>Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)</li>
+        <li>Zoom in by clicking on the `plus` button to see<ul>
+          <li>probable real variants (a whole column of SNPs)</li>
+          <li>probable errors (single one here and there)</li></ul></li>
+      </ul>
+    backdrop: false
+  - title: Inspecting the SNPs using JBrowse
+    content: |-
+      Look at the stop SNP
+      <ul>
+        <li>Type `47299` in the coordinates box</li>
+        <li>Click on `Go` to see the position of the SNP discussed above</li>
+      </ul>
+    backdrop: false
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the correct codon at this position?</li>
+        <li>What is the mutation found here?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      By running a tool such as Snippy on your read files and reference genome,
+      we can find where the biologically important changes between genomes of
+      different strains occur and perhaps what they mean to the phenotype.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>We used a tool called Snippy to call variants between our reads and our reference genome.</li>
+        <li>As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype.</li>
+        <li>We used the JBrowse genome browser to visualise what these changes look like.</li>
+      </ul>
+    backdrop: true

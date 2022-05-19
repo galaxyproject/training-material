@@ -766,11 +766,11 @@ nav input.nicer:focus, nav input.nicer:active { color: white; background: #fff2;
 
 .tutorial > h1:first-child { margin-bottom: 1rem; }
 
-.tutorial table { display: block; width: 100%; overflow-x: auto; max-width: 100%; margin-bottom: 1rem; }
+.tutorial table:not(.contributions) { display: block; width: 100%; overflow-x: auto; max-width: 100%; margin-bottom: 1rem; }
 
-.tutorial table th, .tutorial table td { padding: .75rem; vertical-align: top; border-top: 1px solid #eceeef; }
+.tutorial table:not(.contributions) th, .tutorial table:not(.contributions) td { padding: .75rem; vertical-align: top; border-top: 1px solid #eceeef; }
 
-.tutorial table thead th { vertical-align: bottom; border-bottom: 2px solid #eceeef; }
+.tutorial table:not(.contributions) thead th { vertical-align: bottom; border-bottom: 2px solid #eceeef; }
 
 .tutorial div.container blockquote ul, .tutorial div.container blockquote p, .tutorial div.container blockquote li > p:last-child { margin-bottom: 0.5rem; }
 
@@ -986,13 +986,15 @@ nav[data-toggle='toc'] .nav-link.active:hover { padding-left: 0px; color: #00459
 
 .contributors-line { color: #555; font-size: 1.2em; display: flex; flex-wrap: wrap; align-content: baseline; line-height: 1.5em; }
 
-.contributors-line .contributor-badge img { height: 1.5em; }
+.contributors-line .contributor-badge img { height: 1.5em; line-height: 1.5em; }
 
-.contributors-line .contributor-badge i { margin-left: 0.5em; margin-right: 0.5em; }
+.contributors-line .contributor-badge i { height: 1.5em; line-height: 1.5em; margin-left: 0.5em; margin-right: 0.5em; }
 
-.contributor-badge { /* prevent breaking across lines */ white-space: nowrap; display: inline-flex; flex-direction: row; align-items: center; border-radius: 1em; border: 1px solid #b7daff; padding-right: 0.5em; margin: 0.2em; line-height: 1em; }
+.contributor-badge { /* prevent breaking across lines */ white-space: nowrap; display: inline-flex; flex-direction: row; align-items: center; border-radius: 1em; border: 1px solid #b7daff; padding-right: 0.5em; margin: 0.2em; line-height: 1em; flex-shrink: 0; }
 
 .contributor-badge img { height: 1em; border-radius: 50%; margin: 0 0.25em 0 0; }
+
+table.contributions tr td:nth-child(1) { display: flex; flex-wrap: wrap; }
 
 div.highlight { position: relative; }
 
@@ -1056,6 +1058,12 @@ abbr { text-decoration: underline dotted; cursor: help; font-variant: none; }
 
 .fdbk .accordion .accordion-card .mb-0 { margin-top: 0px; }
 
+div.contributors-line dl { display: flex; flex-wrap: wrap; margin-bottom: 0; }
+
+div.contributors-line dt { width: 8em; text-align: right; font-weight: initial; }
+
+div.contributors-line dd { margin-left: auto; width: calc(100% - 9em); display: flex; }
+
 a.btn { display: inline-flex; align-items: center; white-space: normal; }
 
 a.btn div { width: 100%; font-size: 1rem; }
@@ -1096,6 +1104,10 @@ a.btn div { width: 100%; font-size: 1rem; }
 .gtn-cyoa-hidden { height: 0px; visibility: hidden; display: none; padding: 0rem; }
 
 /* Maybe something like this for the case where they do not select anything? .openstack { border-left: 2px solid red; } .digitalocean { border-left: 2px solid blue; } */
+ul.text-list, ol.text-list { list-style: none; padding-left: 0; }
+
+ul.text-list li, ol.text-list li { display: inline; }
+
 .gtn-card { border-radius: 10px; }
 
 .gtn-card .card-title { font-size: 500%; font-weight: 900; margin-bottom: 0; }

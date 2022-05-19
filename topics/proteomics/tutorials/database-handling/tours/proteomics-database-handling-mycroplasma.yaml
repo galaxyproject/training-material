@@ -1,0 +1,289 @@
+---
+id: proteomics-database-handling-mycroplasma
+name: Galaxy Tour
+description: In this tour we will see how to handle databases, such as contaminant, mycroplasma, decoy ones.
+title_default: proteomics-database-handling-mycroplasma
+steps:
+  - title: Loading a Search Database
+    content: >-
+      In this tour we will see how to handle databases, such as contaminant, mycroplasma, decoy ones.
+    backdrop: true
+  - title: Loading a Search Database
+    content: >-
+      There are many ways how you can upload your search database (FASTA file with protein sequences). In this tutorial, we will explore Protein Database Downloader.
+    backdrop: false
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Step 1. Loading a search database
+    element: '#tool-search'
+    content: 'Open Protein Database Downloader'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fdbbuilder%2Fdbbuilder%2F0.3.0"]
+  - title: Step 2. Loading a search database
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Taxonomy: “Homo sapiens (Human)”</li>
+        <li>reviewed: “UniprotKB/Swiss-Prot (reviewed only)”</li>
+      </ul>
+    position: left
+  - title: Step 3. Rename the search database
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the Protein database to Main database.
+    position: left
+  - title: Types of uniprot databases
+    content: >-
+      Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.
+      <br>You may also include protein isoforms by setting the tick box Include isoform data to Yes.
+    backdrop: true
+  - title: Question
+    content: |-
+      What is the difference between a “reference proteome set” and a “complete proteome set”?
+    backdrop: true
+  - title: Types of uniprot databases
+    content: >-
+      In proteomic samples, some protein contaminants are very common, stemming from the experimenter or contaminated cell culture. Common contaminants are therefore added to the database. A widely used database for common contaminants is the Common Repository of Adventitious Proteins (cRAP).
+    backdrop: true
+  - title: Step 4. Contaminant databases
+    element: '#tool-search'
+    content: 'Open Protein Database Downloader'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fdbbuilder%2Fdbbuilder%2F0.3.0"]
+  - title: Step 5. Contaminant databases
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Download from: “cRAP (contaminants)”</li>
+      </ul>
+    position: left
+  - title: Step 6. Contaminant databases
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the new database to crap database.
+  - title: Further step
+    content: To be able to distinguish contaminants from proteins of interest, you should add a tag to each contaminant protein.
+    backdrop: true
+  - title: Step 7. cRAP database to tabular
+    element: '#tool-search-query'
+    content: 'Search for FASTA-to-Tabular tool'
+    placement: right
+    textinsert: 'FASTA-to-Tabular'
+  - title: Step 8. cRAP database to tabular
+    element: '#tool-search'
+    content: Click on the "FASTA-to-Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_to_tabular%2Ffasta2tab%2F1.1.0"]
+  - title: Step 9. cRAP database to tabular
+    element: '#tool-search'
+    content: Execute the tool on the cRAP database.
+    position: left
+  - title: Step 10. Adding a column
+    element: '#tool-search-query'
+    content: 'Search for Add column tool'
+    placement: right
+    textinsert: 'Add column'
+  - title: Step 11. Adding a column
+    element: '#tool-search'
+    content: Click on the "Add column" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fadd_value%2FaddValue%2F1.0.0"]
+  - title: Step 12. Adding a column
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the cRAP database in a tabular form with  <ul>
+        <li>Add this value: “CONTAMINANT (contaminants)”</li>
+      </ul>
+    position: left
+  - title: Step 13. Tabular-to-FASTA
+    element: '#tool-search-query'
+    content: 'Search for Tabular-to-FASTA tool'
+    placement: right
+    textinsert: 'Tabular-to-FASTA'
+  - title: Step 14. Tabular-to-FASTA
+    element: '#tool-search'
+    content: Click on the "Tabular-to-FASTA" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ftabular_to_fasta%2Ftab2fasta%2F1.1.0"]
+  - title: Step 15. Tabular-to-FASTA
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the output from step 12 with<ul>
+        <li>Title columns: column 1 and column 3</li>
+        <li>Sequence column: column 2</li>
+      </ul>
+    position: left
+  - title: Step 16. Rename the output database
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the output database to "Tagged cRAP database".
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>1. The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample?</li>
+        <li>2. What does it mean in a non-human sample?</li>
+      </ul>
+    backdrop:
+  - title: Mycoplasma databases
+    content: >-
+      90-95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii
+    backdrop: true
+  - title: Step 17. Mycoplasma databases
+    element: '#tool-search'
+    content: 'Open Protein Database Downloader'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fdbbuilder%2Fdbbuilder%2F0.3.0"]
+  - title: Step 18. Mycoplasma databases
+    element: '#tool-search'
+    content: |-
+      Download with the tool <ul>
+        <li>six mycroplasma databases.</li>
+      </ul>
+    position: left
+  - title: Further step
+    content: Now we need to merge these 6 databases in one.
+    backdrop: true
+  - title: Step 19. Merging databases
+    element: '#tool-search-query'
+    content: 'Search for FASTA Merge Files and Filter Unique Sequences tool'
+    placement: right
+    textinsert: 'FASTA Merge Files and Filter Unique Sequences'
+  - title: Step 20. Merging databases
+    element: '#tool-search'
+    content: Click on the "FASTA Merge Files and Filter Unique Sequences" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Ffasta_merge_files_and_filter_unique_sequences%2Ffasta_merge_files_and_filter_unique_sequences%2F1.1"]
+  - title: Further step
+    content: To be able to distinguish contaminants from proteins of interest, you should add a tag to each contaminant protein.
+    backdrop: true
+  - title: Step 21. Mycroplasma database to tabular
+    element: '#tool-search-query'
+    content: 'Search for FASTA-to-Tabular tool'
+    placement: right
+    textinsert: 'FASTA-to-Tabular'
+  - title: Step 22. Mycroplasma database to tabular
+    element: '#tool-search'
+    content: Click on the "FASTA-to-Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_to_tabular%2Ffasta2tab%2F1.1.0"]
+  - title: Step 23. Mycroplasma database to tabular
+    element: '#tool-search'
+    content: Execute the tool on the cRAP database.
+    position: left
+  - title: Step 24. Adding a column
+    element: '#tool-search-query'
+    content: 'Search for Add column tool'
+    placement: right
+    textinsert: 'Add column'
+  - title: Step 25. Adding a column
+    element: '#tool-search'
+    content: Click on the "Add column" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fadd_value%2FaddValue%2F1.0.0"]
+  - title: Step 26. Adding a column
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the Mycroplasma database in a tabular form with  <ul>
+        <li>Add this value: “CONTAMINANT (contaminants)”</li>
+      </ul>
+    position: left
+  - title: Step 27. Tabular-to-FASTA
+    element: '#tool-search-query'
+    content: 'Search for Tabular-to-FASTA tool'
+    placement: right
+    textinsert: 'Tabular-to-FASTA'
+  - title: Step 28. Tabular-to-FASTA
+    element: '#tool-search'
+    content: Click on the "Tabular-to-FASTA" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ftabular_to_fasta%2Ftab2fasta%2F1.1.0"]
+  - title: Step 29. Tabular-to-FASTA
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the output from step 26 with<ul>
+        <li>Title columns: column 1 and column 3</li>
+        <li>Sequence column: column 2</li>
+      </ul>
+    position: left
+  - title: Step 30. Rename the output database
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the output database to "Tagged Mycroplasma database".
+    position: left
+  - title: Merging databases
+    content: |-
+      Depending on the search engine you are using you might need to merge all fasta entries (i.e. proteins of interest and contaminants) in a single database. <br>Make sure to merge the tagged versions of your contaminant databases.
+    backdrop: true
+  - title: Step 31. Merging databases
+    element: '#tool-search-query'
+    content: 'Search for FASTA Merge Files and Filter Unique Sequences tool'
+    placement: right
+    textinsert: 'FASTA Merge Files and Filter Unique Sequences'
+  - title: Step 32. Merging databases
+    element: '#tool-search'
+    content: Click on the "FASTA Merge Files and Filter Unique Sequences" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Ffasta_merge_files_and_filter_unique_sequences%2Ffasta_merge_files_and_filter_unique_sequences%2F1.1"]
+  - title: Step 33. Merging databases
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the main database, tagged cRAP database and mycroplasma one.
+    position: left
+  - title: Decoy databases
+    content: |-
+      The most common method of peptide and protein FDR calculation is by adding known non-existing proteins, so-called “decoys” to the database. This can be done by reverting or shuffling the real protein entries and adding those fake entries to the database.
+    backdrop: true
+  - title: Step 34. Creating a Decoy database
+    element: '#tool-search-query'
+    content: 'Search for DecoyDatabase tool'
+    placement: right
+    textinsert: 'DecoyDatabase'
+  - title: Step 35. Creating a Decoy database
+    element: '#tool-search'
+    content: Click on the "DecoyDatabase" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=DecoyDatabase"]
+  - title: Tip
+    content: |-
+      The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the real database the decoy was computed.
+    backdrop: true
+  - title: Step 36. Creating a Decoy database
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the merged database with<ul>
+         <li>Set the flag (-append) to "Yes"</li>
+      </ul>
+    position: left
+  - title: Concluding remarks
+    content: |-
+      To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On section. <br>Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.
+    backdrop: true

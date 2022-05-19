@@ -1,0 +1,203 @@
+﻿---
+id: annotation-with-prokka
+name: Genome annotation with Prokka
+description: >-
+  The goal of this tutorial is to use a software tool called Prokka to annotate
+  a draft genome sequence.
+title_default: ''
+steps:
+  - title: Introduction
+    content: >-
+      The goal of this tutorial is to use a software tool called Prokka to
+      annotate a draft genome sequence.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      Prokka is a "wrapper"; it collects together several pieces of software
+      (from various authors), and so avoids “re-inventing the wheel”. Prokka
+      finds and annotates features (both protein coding regions and RNA genes,
+      i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step
+      process for the annotation of protein coding regions: first, protein
+      coding regions on the genome are identified using <a
+      href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2848648/">Prodigal</a>;
+      second, the function of the encoded protein is predicted by similarity to
+      proteins in one of many protein or protein domain databases. Prokka is a
+      software tool that can be used to annotate bacterial, archaeal and viral
+      genomes quickly, generating standard output files in GenBank, EMBL and gff
+      formats. More information about Prokka can be found <a
+      href="https://github.com/tseemann/prokka">here</a>.
+    backdrop: true
+  - title: Create a new history
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New". Rename it to "Genome annotation with Prokka"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here: https://zenodo.org/record/1156405/files/contigs.fasta
+    placement: right
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history. <br>
+      It will Load the file into your history from <a
+      href="https://zenodo.org/record/1156405/files/contigs.fasta">zenodo</a>.
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded data is in the history, but its name corresponds to the link.
+      We want to rename them it to something meaningful, e.g.
+      contigs.fasta<br><br>
+      <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+        <li>Click on "Save"</li>
+      </ul>
+    position: left
+  - title: Annotate the genome
+    content: Now we will run the tool called Prokka.
+    backdrop: true
+  - title: Annotate the genome
+    element: '#tool-search-query'
+    content: >-
+      Search for "Prokka" tool:
+      <ul>
+        <li>Type in "Prokka"</li>
+        <li>Press "Enter"</li>
+        <li>Click on the tool "Prokka" in the tool list</li>
+      </ul>
+    placement: right
+    textinsert: Prokka
+  - title: Annotate the genome
+    element: '#tool-search'
+    content: Click on the "Prokka" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fcrs4%2Fprokka%2Fprokka%2F1.13"]
+        .tool-old-link
+  - title: Annotate the genome
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"contigs to annotate" to `contigs.fasta`</li>
+        <li>"Locus tag prefix (–locustag)" to `P`</li>
+        <li>"Force GenBank/ENA/DDJB compliance (–compliant)" to `No`</li>
+        <li>"Sequencing Centre ID (–centre)" to `V`</li>
+        <li>"Genus Name" to `Staphylococcus`</li>
+        <li>"Species Name" to `aureus`</li>
+        <li>"Use genus-specific BLAST database" to `No`</li>
+      </ul>
+    position: left
+  - title: Examine the output
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once Prokka has finished, examine each of its output files.<ul> <li>The
+      GFF and GBK files contain all of the information about the features
+      annotated (in different formats.)</li> <li>The .txt file contains a
+      summary of the number of features annotated.</li> <li>The .faa file
+      contains the protein sequences of the genes annotated.</li> <li>The .ffn
+      file contains the nucleotide sequences of the genes annotated. </li></ul>
+    position: left
+  - title: View annotated features in JBrowse
+    content: >-
+      Now that we have annotated the draft genome sequence, we would like to
+      view the sequence in the JBrowse genome viewer. First, we have to make a
+      JBrowse file. Then, we can view it within Galaxy.
+    backdrop: true
+  - title: Visualize the annotation
+    element: '#tool-search-query'
+    content: Search for "JBrowse" tool
+    placement: right
+    textinsert: JBrowse
+  - title: Visualize the annotation
+    element: '#tool-search'
+    content: Click on the "JBrowse" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fjbrowse%2Fjbrowse%2F0.7.0.3"]
+        .tool-old-link
+  - title: Visualize the annotation
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>“Reference genome to display” to `Use a genome from history`</li>
+        <li>Select the reference genome” to `Prokka on data XX.fna`</li>
+        <li>“Produce Standalone Instance” to `Yes`</li>
+        <li>“Genetic Code” to `11: The Bacterial, Archaeal and Plant Plastid Code`</li>
+        <li>“JBrowse-in-Galaxy Action” to `New JBrowse Instance`</li>
+        <li>Click on "Insert track group"<ul>
+          <li>“Track Type” to `GFF/GFF3/BED Features`</li>
+          <li>“GFF/GFF3/BED Track Data” to `Prokka on data XX:gff`</li>
+          <li>“Track Visibility” to `On for new users`</li>
+          <li>“JBrowse Track Type [Advanced]” to `Canvas Features`</li>
+          <li>Click on “JBrowse Styling Options [Advanced]”</li>
+          <li>“JBrowse style.label” to `product,name,id`</li>
+          <li>“Track Visibility” to `On for new users`</li></ul>
+        </li>
+        <li>Click "Execute" button below</li>
+      </ul>
+    position: left
+  - title: View annotated features in JBrowse
+    content: >-
+      A new file will be created in your history (it may take a few minutes), this contains the JBrowse
+      interactive visualisation. We will now view its contents and play with it
+    backdrop: true
+  - title: View annotated features in JBrowse
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Inspect the JBrowse on data XX and data XX - Complete file by clicking on
+      the eye icon. The JBrowse window will appear in the centre Galaxy panel.
+    position: left
+  - title: View annotated features in JBrowse
+    content: |-
+      Display all the tracks and practice maneuvering around
+      <ul>
+        <li>Click on the tick boxes on the left to display the tracks</li>
+        <li>Select contig 1 in the drop down box. You can only see one contig displayed at a time.</li>
+        <li>Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)</li>
+        <li>Zoom in by clicking on the `plus` button to see annotations.</li>
+        <li>JBrowse displays the sequence and a 6-frame amino acid translation.</li>
+        <li>Right click on a gene/feature annotation (the bars on the annotation track), then select View Details to see more information.<ul>
+          <li>gene name</li>
+          <li>product name</li>
+          <li>you can download the FASTA sequence by clicking on the disk icon. </li></ul>
+        </li>
+      </ul>
+      To get a larger view, you can collapse the history panel and tool panel by clicking on the arrow symbols in each panel corner.
+    backdrop: false
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Prokka is a useful tool to annotate a bacterial genome.</li>
+        <li>JBrowse can be used to inspect the annotation of a genome.</li>
+      </ul>
+    backdrop: true

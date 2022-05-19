@@ -372,21 +372,27 @@
     <h1 data-toc-skip>Creating content in Markdown</h1>
     
 
+    <div markdown="0">
 
-    <div class="contributors-line">Authors: 
+	<div class="contributors-line">
+		Authors: 
 <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
 
 
 <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar">Björn Grüning</a>
 
 
+
 <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=27" alt="Avatar">Saskia Hiltemann</a>
+
 
 
 <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
 
 
-<a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a>
+
+	</div>
 
 </div>
 
@@ -504,7 +510,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 19, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -532,7 +538,10 @@
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#metadata" id="markdown-toc-metadata">Metadata</a></li>
+  <li><a href="#metadata" id="markdown-toc-metadata">Metadata</a>    <ol>
+      <li><a href="#listing-contributors" id="markdown-toc-listing-contributors">Listing contributors</a></li>
+    </ol>
+  </li>
   <li><a href="#content" id="markdown-toc-content">Content</a>    <ol>
       <li><a href="#adding-images-with-captions" id="markdown-toc-adding-images-with-captions">Adding images with captions</a></li>
       <li><a href="#writing-mathematical-expressions" id="markdown-toc-writing-mathematical-expressions">Writing mathematical <span class="notranslate">expression</span>s</a></li>
@@ -638,6 +647,7 @@ blabla
   <li><code class="language-plaintext highlighter-rouge">level</code>: <code class="language-plaintext highlighter-rouge">Introductory</code>, <code class="language-plaintext highlighter-rouge">Intermediate</code> or <code class="language-plaintext highlighter-rouge">Advanced</code></li>
   <li><code class="language-plaintext highlighter-rouge">enable</code>: <code class="language-plaintext highlighter-rouge">false</code> to hide your tutorial from the topic page (optional)</li>
   <li><code class="language-plaintext highlighter-rouge">zenodo_link</code>: link on Zenodo to the input data for the tutorial</li>
+  <li><code class="language-plaintext highlighter-rouge">contribuors</code>: eveybody who has contributed to this tutorial (use<span class="notranslate">rna</span>mes must match those in <code class="language-plaintext highlighter-rouge">CONTRIBUTORS.yaml</code> file)</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -732,6 +742,76 @@ blabla
 
   <p>For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.</p>
 </blockquote>
+
+<h2 id="listing-contributors">Listing contributors</h2>
+
+<p>All tutorials and slides must give credit to all contributors. This can be any type of contribution, adding them in GitHub, creating images for it, etc.</p>
+
+<ol>
+  <li>
+    <p>Make sure all contributors are listed in the <a href="https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTORS.yaml"><code class="language-plaintext highlighter-rouge">CONTRIBUTORS.yaml</code></a> file.
+Each contributor is defined in this file like:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">contributor-use<span class="notranslate">rna</span>me</span><span class="pi">:</span>                 <span class="c1"># GitHub use<span class="notranslate">rna</span>me (if the contributor has one)</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Full Name</span>                     <span class="c1"># mandatory</span>
+  <span class="na">joined</span><span class="pi">:</span> <span class="s">2020-06</span>                     <span class="c1"># mandatory</span>
+  <span class="na">email</span><span class="pi">:</span> <span class="s">saskia.hiltemann@gmail.com</span>   <span class="c1"># optional</span>
+  <span class="na">twitter</span><span class="pi">:</span> <span class="s">shiltemann</span>                 <span class="c1"># optional</span>
+  <span class="na">linkedin</span><span class="pi">:</span> <span class="s">shiltemann</span>                <span class="c1"># optional</span>
+  <span class="na">gitter</span><span class="pi">:</span> <span class="s">shiltemann</span>                  <span class="c1"># optional</span>
+  <span class="na">orcid</span><span class="pi">:</span> <span class="s">0000-0003-3803-468X</span>          <span class="c1"># optional</span>
+  <span class="na">bio</span><span class="pi">:</span> <span class="s">Researcher at EMC</span>              <span class="c1"># optional</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add all contributors to the metadata of the tutorial or slide deck:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">contributors</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">contributor-use<span class="notranslate">rna</span>me</span>
+  <span class="pi">-</span> <span class="s">shiltemann</span>
+  <span class="pi">-</span> <span class="s">hexylena</span>
+</code></pre></div>    </div>
+
+    <p>Make sure these names match the use<span class="notranslate">rna</span>mes you used in the <code class="language-plaintext highlighter-rouge">CONTRIBUTORS.yaml</code> file.</p>
+  </li>
+  <li>
+    <p><strong>Optional:</strong> Specifying types of contributions. If you want to give more detailed credit for conributions, you can do the following (instead of step 2 above)</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">contributions</span><span class="pi">:</span>
+  <span class="na">authorship</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">shiltemann</span>
+  <span class="na">editing</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">bebatut</span>
+    <span class="pi">-</span> <span class="s">hexylena</span>
+  <span class="na">funding</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">carpentries</span>
+  <span class="na">testing</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">userX</span>
+  <span class="na">ux</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">userY</span>
+  <span class="na">infrastructure</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">userZ</span>
+</code></pre></div>    </div>
+
+    <p>To define a funding body in the <code class="language-plaintext highlighter-rouge">CONTRIBUTORS.yaml</code> there are a few extra fields available:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">erasmusplus</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Erasmus+ Programme</span>
+  <span class="na">joined</span><span class="pi">:</span> <span class="s">2020-09</span>
+  <span class="na">avatar</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://www.erasmusplus.nl/assets/images/logo.png"</span>
+  <span class="na">github</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">funder</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">funding_id</span><span class="pi">:</span> <span class="s">2020-1-NL01-KA203-064717</span>
+  <span class="na">funding_statement</span><span class="pi">:</span> <span class="pi">|</span>
+     <span class="s">This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.</span>
+     <span class="s">&lt;img src="https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg" alt="eu flag with the text: with the support of the erasmus programme of the european union. "  loading="lazy"&gt;</span>
+</code></pre></div>    </div>
+
+    <p>Funding bodies will be credited at the bottom of the tutorial with the appropriate funding statement, and will get a page in the hall of fame listing all tutorials that list them as a funder.</p>
+
+    <p>For an example of how this all looks, see the <a href="/training-material/topics/data-science/tutorials/r-basics/tutorial.html">R basics tutorial</a> (top and bottom of the tutorial).</p>
+  </li>
+</ol>
 
 <h1 id="content">Content</h1>
 
@@ -2409,6 +2489,9 @@ some_code += f"that students {should execute}"
                 
 
                 
+
+
+                
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="galaxy-training-materials"><b>Galaxy Training materials website</b>. Accessed 2019-04-08. <a href="https://training.galaxyproject.org">https://training.galaxyproject.org</a></li>
 <li id="bebatut2018community">Batut, B., S. Hiltemann, A. Bagnacani, D. Baker, V. Bhardwaj <i>et al.</i>, 2018 <b>Community-driven data analysis training for biology</b>. Cell systems 6: 752–758. <a href="https://doi.org/10.1016/j.cels.2018.05.012">10.1016/j.cels.2018.05.012</a></li></ol>
@@ -2461,8 +2544,6 @@ some_code += f"that students {should execute}"
                     })(window, document);
                 </script>
 
-
-
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
@@ -2484,8 +2565,8 @@ some_code += f"that students {should execute}"
 author = "Bérénice Batut and Björn Grüning and Saskia Hiltemann and Helena Rasche",
 title = "Creating content in Markdown (Galaxy Training Materials)",
 year = "2022",
-month = "04",
-day = "25"
+month = "05",
+day = "19"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -2505,6 +2586,8 @@ note = "[Online; accessed TODAY]"
                 </pre></div></div>
                 </p>
                 </blockquote>
+
+                
 
 
 <script type="text/javascript">
@@ -2533,6 +2616,14 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                             
                                 
                     <li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
                                 
                             
                         

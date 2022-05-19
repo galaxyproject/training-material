@@ -1,0 +1,627 @@
+﻿---
+id: hicexplorer
+name: Hi-C analysis of Drosophila melanogaster cells using HiCExplorer
+description: >-
+  The goal of this tutorial is to perform Hi-C analysis of Drosophila
+  melanogaster cells with the help of HiCExplorer.
+title_default: ''
+steps:
+  - title: Introduction
+    content: >-
+      The goal of this tutorial is to perform Hi-C analysis of Drosophila
+      melanogaster cells with the help of HiCExplorer.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In this HiCExplorer tutorial we will generate and plot a Hi-C contact
+      matrix. For this the following steps are necessary to be performed:<ul>
+        <li>1. Map the Hi-C reads to the reference genome</li>
+        <li>2. Creation of a Hi-C matrix</li>
+        <li>3. Plotting the Hi-C matrix</li>
+        <li>4. Correction of Hi-C matrix</li>
+        <li>5. TAD Calling</li></ul>
+      After a corrected Hi-C matrix is created other tools can be used to
+      visualize it, call TADS or compare it with other matrices.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    content: >-
+      We provide the input data on <a target="_blank"
+      href="https://zenodo.org/record/1183661">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here.<br> Load the example dataset into your history from
+      <a target="_blank" href="https://zenodo.org/record/1183661">Zenodo</a>
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
+      https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data and edit datatype
+    content: >-
+      The uploaded dataset is in the history, but its names corresponds to the
+      link. We want to rename the histroy item to something meaningful, e.g.
+      HiC_S2_1p_10min_lowU_R1.<br><br> <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+        <li>Click on "Datatypes" in the central panel and set to <b>fastqsanger</b></li>
+      </ul>
+    backdrop: false
+  - title: Reads mapping
+    content: >-
+      Mates have to be mapped individually to avoid mapper specific heuristics
+      designed for standard paired-end libraries.
+
+      <br>In this tutorial we will be using Map with BWA-MEM tool.
+    backdrop: true
+  - title: Reads mapping
+    element: '#tool-search-query'
+    content: Search for BWA-MEM 0.8.0 tool
+    placement: right
+    textinsert: BWA-MEM
+  - title: Reads mapping
+    element: '#tool-search'
+    content: Click on the "BWA-MEM" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fcrs4%2Fbwa_mem%2Fbwa_mem%2F0.8.0"]
+        .tool-old-link
+  - title: Reads mapping
+    element: '#tool-search'
+    content: |-
+      Execute the tool on both strands with parameters:
+      <ul>
+        <li>“Will you select a reference genome from your history or use a built-in index?” to <b>Use a built-in index</b></li>
+        <li>“Select a reference genome” to <b>dm3</b></li>
+        <li>“Is this library mate-paired?” to <b>Single-end or interleaved paired-end</b></li>
+        <li>Set multiple datasets. To select multiple datasets, use ctrl-key.</li>
+        <li>“FASTQ file” to <b>HiC_S2_1p_10min_lowU_R1</b> and <b>HiC_S2_1p_10min_lowU_R2</b></li>
+        <li>“BWA settings to use” to <b>Full parameter List</b></li>
+        <li>“Gap extension penalty (-E)” to <b>50</b></li>
+        <li>“Penalty for clipping (-L)” to <b>0</b></li>
+      </ul>
+      Click on 'Execute'.
+    position: left
+  - title: Rename the result
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the output of the tool according to the corresponding files: R1.sam
+      and R2.sam
+    position: left
+  - title: Creation of a Hi-C matrix
+    content: >-
+      Once the reads have been mapped the Hi-C matrix can be built.<br><br>
+
+      For this step we will use <a target="_blank"
+      href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicBuildMatrix.html#hicbuildmatrix">hicBuildMatrix</a>
+      tool, which builds the matrix of read counts over the bins in the genome,
+      considering the sites around the given restriction site.
+    backdrop: true
+  - title: Creation of a Hi-C matrix
+    element: '#tool-search-query'
+    content: Search for hicBuildMatrix tool
+    placement: right
+    textinsert: hicBuildMatrix
+  - title: Creation of a Hi-C matrix
+    element: '#tool-search'
+    content: Click on the "hicBuildMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hicbuildmatrix%2Fhicexplorer_hicbuildmatrix%2F2.0.2"]
+        .tool-old-link
+  - title: Creation of a Hi-C matrix
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the R1.sam and R2.sam with
+      <ul>
+        <li>“1: Sam/Bam files to process” to <b>R1.sam</b></li>
+        <li>“2: Sam/Bam files to process” to <b>R2.sam</b></li>
+        <li>“Choose to use a restriction cut file or a bin size” to <b>Bin size</b></li>
+        <li>“Bin size in bp” to <b>10000</b></li>
+        <li>“Sequence of the restriction site” to <b>GATC</b></li>
+      </ul>
+    position: left
+  - title: Creation of a Hi-C matrix
+    content: >-
+      <i>hicBuildMatrix</i> creates two files, a bam file containing only the
+      valid Hi-C read pairs and a matrix containing the Hi-C contacts at the
+      given resolution. The bam file is useful to check the quality of the Hi-C
+      library on the genome browser. A good Hi-C library should contain piles of
+      reads near the restriction fragment sites. In the QCfolder a html file is
+      saved with plots containing useful information for the quality control of
+      the Hi-C sample like the number of valid pairs, duplicated pairs,
+      self-ligations etc. Usually, only 25%-40% of the reads are valid and used
+      to build the Hi-C matrix mostly because of the reads that are on
+      repetitive regions that need to be discarded.<br><br>
+
+      Normally 25% of the total reads are selected. The output matrices have
+      counts for the genomic regions. The extension of output matrix files is
+      .h5 or .cool. A quality report is created have a look at the history item <b>hicBuildMatrix QC on data X</b>.
+    backdrop: false
+  - title: Rename the output
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the output <i>hicBuildMatrix MATRIX on data X and data Y</i> to
+      <i>10 kb contact matrix</i>
+    position: left
+  - title: Plotting the Hi-C matrix
+    content: >-
+      A 10kb bin matrix is too large to plot, it’s better to reduce the
+      resolution. We usually run out of memory for a 1 kb or a 10 kb bin matrix
+      and the time to plot it is very long (minutes instead of seconds). In
+      order to reduce the resolution we use the tool <a target="_blank"
+      href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins">hicMergeMatrixBins</a>.<br><br>
+
+      <a target="_blank" href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins">hicMergeMatrixBins</a>
+      merges the bins into larger bins of given number (specified by –numBins).
+      We will merge 100 bins in the original matrix to get the desired new bin size: 10.000 bp * 100 = 1.000.000 bp = 1 Mbp
+    backdrop: true
+  - title: hicMergeMatrixBins
+    element: '#tool-search-query'
+    content: Search for hicMergeMatrixBins tool
+    placement: right
+    textinsert: hicMergeMatrixBins
+  - title: hicMergeMatrixBins
+    element: '#tool-search'
+    content: Click on the "hicMergeMatrixBins" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hicmergematrixbins%2Fhicexplorer_hicmergematrixbins%2F2.0.1"]
+        .tool-old-link
+  - title: hicMergeMatrixBins
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the 10kb contact matrix:
+      <ul>
+        <li>“Number of bins to merge” to <b>100</b></li>
+      </ul>
+      Click on 'Execute'.
+    position: left
+  - title: Rename the output
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the output to <i>1 MB contact matrix</i>
+    position: left
+  - title: hicPlotMatrix
+    element: '#tool-search-query'
+    content: Search for hicPlotMatrix tool
+    placement: right
+    textinsert: hicPlotMatrix
+  - title: hicPlotMatrix
+    element: '#tool-search'
+    content: Click on the "hicPlotMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hicplotmatrix%2Fhicexplorer_hicplotmatrix%2F2.0.0"]
+        .tool-old-link
+  - title: hicPlotMatrix
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the <i>1 MB contact matrix</i> from previous step
+      with:
+
+      <ul>
+        <li>“Plot title” to <b>Hi-C matrix for dm3</b></li>
+        <li>“Plot the log1p of the matrix values" to <b>Yes</b></li>
+        <li>“Chromosomes to include (and order to plot in)” to <b>chr2L</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr2R</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr3L</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr3R</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chrX</b></li>
+      </ul>
+    position: left
+  - title: Correction of Hi-C matrix
+    content: >-
+      <a target="_blank"
+      href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix">hicCorrectMatrix</a>
+      corrects the matrix counts in an iterative manner. For correcting the
+      matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and
+      keep only chromosomes, as scaffolds create problems with matrix
+      correction. Therefore we use the chromosome names (chr2R, chr2L, chr3R,
+      chr3L, chrX) here.<br><br>
+
+      Matrix correction works in two steps: first a histogram containing the sum
+      of contact per bin (row sum) is produced. This plot needs to be inspected
+      to decide the best threshold for removing bins with lower number of reads.
+      The second steps removes the low scoring bins and does the correction.
+    backdrop: true
+  - title: Matrix diagnostic
+    element: '#tool-search-query'
+    content: Search for hicCorrectMatrix tool
+    placement: right
+    textinsert: hicCorrectMatrix
+  - title: Matrix diagnostic
+    element: '#tool-search'
+    content: Click on the "hicCorrectMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hiccorrectmatrix%2Fhicexplorer_hiccorrectmatrix%2F2.0.1"]
+        .tool-old-link
+  - title: Matrix diagnostic
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the <i>10 kb contact matrix</i> with:
+      <ul>
+        <li>“Mode” to <b>Diagnostic plot</b></li>
+        <li>“Chromosomes to include (and order to plot in)” to <b>chr2L</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr2R</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr3L</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr3R</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chrX</b></li>
+      </ul>
+    position: left
+  - title: Matrix diagnostic
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The output of the program prints a threshold suggestion that is usually
+      accurate but is better to revise the histogram plot. The threshold is
+      visualized in the plot as a black vertical line.
+    position: left
+  - title: Matrix diagnostic
+    content: >-
+      In our case the distribution describes the counts per bin of a genomic
+      distance. To remove all bins with a z-score threshold less / more than X
+      means to remove all bins which have less / more counts than X of mean of
+      their specific distribution in units of the standard deviation. Looking at
+      the distribution, we can select the value of -1.6 (lower end) and 1.8
+      (upper end) to remove. This is given by the –filterThreshold option in
+      hicCorrectMatrix set to ‘correct matrix’ mode.
+    backdrop: true
+  - title: Matrix correction
+    element: '#tool-search-query'
+    content: Search for hicCorrectMatrix tool
+    placement: right
+    textinsert: hicCorrectMatrix
+  - title: Matrix correction
+    element: '#tool-search'
+    content: Click on the "hicCorrectMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hiccorrectmatrix%2Fhicexplorer_hiccorrectmatrix%2F2.0.1"]
+        .tool-old-link
+  - title: Matrix correction
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the original matrix <i>10 kb contact matrix</i> with:
+      <ul>
+        <li>“Range restriction (in bp)” to <b>Correct matrix</b></li>
+        <li>“Normalize each chromosome separately” to <b>Yes</b></li>
+        <li>“Remove bins of low coverage” to <b>-1.6</b></li>
+        <li>“Remove bins of large coverage” to <b>1.8</b></li>
+        <li>“Chromosomes to include (and order to plot in)” to <b>chr2L</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr2R</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr3L</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr3R</b></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chrX</b></li>
+      </ul>
+    position: left
+  - title: Matrix diagnostic
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the corrected matrix to <i>10 kb corrected contact matrix</i>
+    position: left
+  - title: Plotting the corrected Hi-C matrix
+    content: >-
+      In the next step we will plot the contact matrix only for chromosome 2L with the corrected matrix.
+      Therefore we can use the <i>10kb contact matrix</i> instead of the <i>1 MB contact matrix</i>.
+    backdrop: true
+  - title: Plotting the corrected Hi-C matrix
+    element: '#tool-search-query'
+    content: Search for hicPlotMatrix tool
+    placement: right
+    textinsert: hicPlotMatrix
+  - title: Plotting the corrected Hi-C matrix
+    element: '#tool-search'
+    content: Click on the "hicPlotMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hicplotmatrix%2Fhicexplorer_hicplotmatrix%2F2.0.0"]
+        .tool-old-link
+  - title: Plotting the corrected Hi-C matrix
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the <i>10 kb corrected contact matrix</i> with:
+      <ul>
+        <li>“Plot title” to Hi-C matrix for <b>dm3</b></li>
+        <li>“Plot per chromosome” to <b>No</b></li>
+        <li>“Plot only this region” to <b>chr2L</b></li>
+        <li>“Plot the log1p of the matrix values” to <b>Yes</b></li>
+      </ul>
+      Click on 'Execute'.
+    position: left
+  - title: Load new data
+    content: >-
+      The steps so far would have led to long run times if real data would have
+      been used. We therefore prepared a new matrix for you, <i>corrected
+      contact matrix dm3 large</i>. Please load it into your history.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the new data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+  - title: Uploading the new data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here.<br> Load <a target="_blank"
+      href="https://zenodo.org/record/1183661/files/corrected%20contact%20matrix%20dm3%20large.h5">the
+      matrix</a> into your history from <a target="_blank"
+      href="https://zenodo.org/record/1183661">Zenodo</a>
+    placement: right
+    textinsert: >-
+      https://zenodo.org/record/1183661/files/corrected%20contact%20matrix%20dm3%20large.h5
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: TAD calling
+    content: >-
+      “The partitioning of chromosomes into topologically associating domains
+      (TADs) is an emerging concept that is reshaping our understanding of gene
+      regulation in the context of physical organization of the genome” <a
+      href="https://www.biorxiv.org/content/early/2017/03/08/115063">Ramirez et
+      al. 2017</a>.
+
+      <br><br>TAD calling works in two steps: First HiCExplorer computes a
+      TAD-separation score based on a z-score matrix for all bins. Then those
+      bins having a local minimum of the TAD-separation score are evaluated with
+      respect to the surrounding bins to assign a p-value. Then a cutoff is
+      applied to select the bins more likely to be TAD boundaries.<br><br>
+
+      <a target="_blank"
+      href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicFindTADs.html#hicfindtads">hicFindTADs</a>
+      tries to identify sensible parameters but those can be change to identify
+      more stringent set of boundaries.
+    backdrop: true
+  - title: Finding TADs
+    element: '#tool-search-query'
+    content: Search for hicFindTADs tool
+    placement: right
+    textinsert: hicFindTADs
+  - title: Finding TADs
+    element: '#tool-search'
+    content: Click on the "hicFindTADs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hicfindtads%2Fhicexplorer_hicfindtads%2F2.0.0"]
+  - title: Finding TADs
+    element: '#tool-search'
+    content: |-
+      Execute the tool on <i>corrected contact matrix dm3 large</i> with:
+      <ul>
+        <li>“Minimum window length (in bp) to be considered to the left and to the right of each Hi-C bin.” to <b>30000</b></li>
+        <li>“Maximum window length (in bp) to be considered to the left and to the right of each Hi-C bin.” to <b>100000</b></li>
+        <li>“Step size when moving from minDepth to maxDepth” to <b>10000</b></li>
+        <li>“Multiple Testing Corrections” to <b>False discovery rate</b></li>
+        <li>“q-value” to <b>0.05</b></li>
+        <li>“Minimum threshold of the difference between the TAD-separation score of a putative boundary and the mean of the TAD-sep. score of surrounding bins.” to <b>0.001</b></li>
+      </ul>
+    position: left
+  - title: Finding TADs
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      As an output we get the boundaries, domains and scores separated files. We
+      will use in the plot later only the TAD-score file.
+    position: left
+  - title: Computing A / B compartments
+    element: '#tool-search-query'
+    content: Search for hicPCA tool
+    placement: right
+    textinsert: hicPCA
+  - title: Computing A / B compartments
+    element: '#tool-search'
+    content: Click on the "hicPCA" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hicpca%2Fhicexplorer_hicpca%2F2.0.1"]
+        .tool-old-link
+  - title: Computing A / B compartments
+    element: '#tool-search'
+    content: |-
+      Execute the tool with:
+      <ul>
+        <li>“Matrix to compute on” to <b>corrected contact matrix dm3 large</b></li>
+        <li>“Output file format” to <b>bigwig</b></li>
+      </ul>
+    position: left
+  - title: Integrating Hi-C and other data
+    content: >-
+      We can plot the TADs for a given chromosomal region. For this we will use
+      <a
+      href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>.
+      But before make sure you have imported <a
+      href="https://zenodo.org/record/1176070/files/dm6_genes.bed">gene track
+      file</a> in .bed format,as well as <a
+      href="https://zenodo.org/record/1183661/files/H3K27me3.bw">H3K27me3.bw</a>,
+      <a
+      href="https://zenodo.org/record/1183661/files/H3K36me3.bw">H3K36me3.bw</a>
+      and <a
+      href="https://zenodo.org/record/1183661/files/H4K16ac.bw">H4K16ac.bw<a/>
+      from <a href="https://doi.org/10.5281/zenodo.1176070">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the new data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+  - title: Uploading the new data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here.<br> Load data into your history from <a
+      target="_blank"  href="https://zenodo.org/record/1183661">Zenodo</a>
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1183661/files/dm3_genes.bed
+      https://zenodo.org/record/1183661/files/H3K27me3.bw
+      https://zenodo.org/record/1183661/files/H3K36me3.bw
+      https://zenodo.org/record/1183661/files/H4K16ac.bw
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Plotting TADs
+    element: '#tool-search-query'
+    content: Search for hicPlotTADs tool
+    placement: right
+    textinsert: hicPlotTADs
+  - title: Plotting TADs
+    element: '#tool-search'
+    content: Click on the "hicPlotTADs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhicexplorer_hicplottads%2Fhicexplorer_hicplottads%2F2.0.0"]
+        .tool-old-link
+  - title: Plotting TADs 1/3
+    element: '#tool-search'
+    content: |-
+      Execute the tool with (settings written in three parts):
+      <ul>
+        <li>“Region of the genome to limit the operation” to <b>chr2L:14500000-16500000</b></li>
+        <li>“Choose style of the track” to <b>TAD visualization</b><ul>
+          <li>“Plot title” to <b>HiC dm3 chr2L:14500000-16500000</b></li>
+          <li>“Matrix to compute on.” to the corrected matrix from hicCorrectMatrix step</li>
+          <li>“Depth” to <b>750000</b></li>
+          <li>“Boundaries file” to <b>hicFindTads on data XX: TAD domains</b></li>
+          <li>“Show x labels” to <b>Yes</b></li></ul></li>
+        <li>“+Insert Include tracks in your plot”<ul>
+          <li>“Choose style of the track” to <b>Bedgraph matrix track</b></li>
+          <li>“Plot title” to <b>TAD separation score</b></li>
+          <li>“Track file bedgraph format” to <b>hicFindTads on data XX: TAD information in bm file</b></li>
+          <li>“Width” to <b>4</b></li>
+          <li>“Set type to lines” to <b>Yes</b></li></ul></li>
+      </ul>
+    position: left
+  - title: Plotting TADs 2/3
+    element: '#tool-search'
+    content: |-
+      <ul>
+        <li>“+Insert Include tracks in your plot”<ul>
+          <li>“Choose style of the track” to <b>Bigwig track</b></li>
+          <li>“Plot title” to <b>PC1</b></li>
+          <li>“Track file bigwig format” to the first computed hicPCA result</li>
+          <li>“Minimum value” to <b>-0.03</b></li>
+          <li>“Maximum value” to <b>0.03</b></li>
+          <li>“Width” to <b>1.5</b></li></ul></li>
+        <li>“+Insert Include tracks in your plot”<ul>
+          <li>“Choose style of the track” to <b>Bigwig track</b></li>
+          <li>“Plot title” to <b>PC2</b></li>
+          <li>“Track file bigwig format” to the second computed hicPCA result</li>
+          <li>“Minimum value” to <b>-0.03</b></li>
+          <li>“Maximum value” to <b>0.03</b></li>
+          <li>“Width” to <b>1.5</b></li></ul></li>
+        <li>“+Insert Include tracks in your plot”<ul>
+          <li>“Choose style of the track” to <b>Bigwig track</b></li>
+          <li>“Plot title” to <b>H3K36me3</b></li>
+          <li>“Track file bigwig format” to H3K36me3</li>
+          <li>“Width” to <b>1.5</b></li></ul></li>
+      </ul>
+    position: left
+  - title: Plotting TADs 3/3
+    element: '#tool-search'
+    content: |-
+      <ul>
+        <li>“+Insert Include tracks in your plot”<ul>
+          <li>“Choose style of the track” to <b>Bigwig track</b></li>
+          <li>“Plot title” to <b>H3K27me3</b></li>
+          <li>“Track file bigwig format” to H3K27me3</li>
+          <li>“Width” to <b>1.5</b></li></ul></li>
+        <li>“+Insert Include tracks in your plot”<ul>
+          <li>“Choose style of the track” to <b>Bigwig track</b></li>
+          <li>“Plot title” to <b>H4K16ac</b></li>
+          <li>“Track file bigwig format” to H4K16ac</li>
+          <li>“Width” to <b>1.5</b></li></ul></li>
+        <li>“+Insert Include tracks in your plot”<ul>
+          <li>“Choose style of the track” to <b>Gene track</b></li>
+          <li>“Plot title” to <b>dm3 genes</b></li>
+          <li>“Track file bedgraph format” to the imported .bed file</li>
+          <li>“Width” to <b>3</b></li>
+          <li>“Type” to <b>genes</b></li>
+          <li>“Gene rows” to <b>15</b></li></ul></li>
+    position: left
+  - title: Conclusion
+    content: >-
+      In this tutorial we used HiCExplorer to analyze drosophila melanogaster
+      cells. We mapped the chimeric reads and created a contact matrix, to
+      reduce noise this contact matrix was normalized. We showed how to
+      visualize a contact matrix and how we can investigate topological
+      associating domains and relate them to additional data like gene tracks.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Hi-C helps to investigate the 3D structure of the genome and to uncover folding principles of chromatin.</li>
+        <li>In order to build a Hi-C contact matrix the reads have to be mapped to the reference genome.</li>
+        <li>Based on a contact matrix open and closed chromatin (A/B compartments) and topological associating domains (TADs) can be computed.</li>
+      </ul>
+    backdrop: true

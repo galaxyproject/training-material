@@ -1,0 +1,177 @@
+---
+id: sequence-analysis-quality-control
+name: Galaxy Tour
+description: In this tour we will perform the quality control of the sequences to ensure that the raw data looks good before processing them.
+title_default: sequence-analysis-quality-control
+steps:
+  - title: Quality control
+    content: >-
+      In this tour we will perform the quality control of the sequences to ensure that the raw data looks good before processing them.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Step 1. Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload new data first. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Step 2. Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Step 3. Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: Insert the link here.<br> The input is available on <a
+      href="https://zenodo.org/record/61771">Zenodo</a>. Right click on the GSM461178_untreat_paired_subset_1.fastq and then "Copy Link Address"
+    placement: right
+    textinsert: >-
+      https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+  - title: Step 4. Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Step 5. Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Step 6. Rename the input data and adjust the datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets are in the history, but their names correspond to
+      the link. We want to rename them<br><br> For each dataset: <ol>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+        <li>Go to datatypes and change current one to "fastqsanger"</li>
+      </ol>
+    position: left
+  - title: Step 7. Preparing the datasets
+    content: >-
+      To estimate sequence quality and treatments to do on the data we will use FastQC open-source tool.
+      For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
+    backdrop: true
+  - title: Step 8. Estimating quality with FastQC
+    element: '#tool-search-query'
+    content: 'Search for FastQC tool'
+    placement: right
+    textinsert: 'fastQC'
+  - title: Step 9. Estimating quality with FastQC
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+  - title: Step 10. Estimating quality with FastQC
+    element: '#tool-search'
+    content: Execute the tool on the input data with default settings.
+    position: left
+  - title: Step 11. Estimating quality with FastQC
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      Inspect the FastQC report on the webpage <ul>
+        <li>Click on the eye ("View data") on the right of the file name in the history</li>
+        <li>Inspect the content of the file on the middle</li>
+      </ul>
+    position: left
+  - title: Questions. Estimating quality with FastQC
+    content: |-
+      Inspect the FastQC report on the webpage  <ul>
+        <li>How good are the quality scores?</li>
+        <li>Why is there warning for the per base sequence content and the per sequence GC content graphs?</li>
+        <li>What must be done to improve the sequences?</li>
+      </ul>
+    backdrop: true
+  - title: Improvement of the quality of the sequences
+    content: To improve the quality of the sequences, we use Trim Galore! tool. It automates quality and adapter trimming as well as quality control.
+    backdrop: true
+  - title: Step 12. Improvement of the quality of the sequences
+    element: '#tool-search-query'
+    content: 'Search for Trim Galore! tool'
+    placement: right
+    textinsert: 'Trim Galore'
+  - title: Step 13. Improvement of the quality of the sequences
+    element: '#tool-search'
+    content: Click on the "Trim Galore!" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftrim_galore%2Ftrim_galore%2F0.4.2"]
+  - title: Step 14. Improvement of the quality of the sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>"trim low-quality reads" to "20"</li>
+        <li>"overlap with adapter sequence" to "5"</li>
+        <li>"discard reads shorter" than "20"</li>
+      </ul>
+    position: left
+  - title: Improvement of the quality of the sequences
+    content: Now we need to re-run FastQC on the quality controlled data file and inspect the new FastQC report.
+    backdrop: true
+  - title: Step 15. Estimating quality with FastQC
+    element: '#tool-search-query'
+    content: 'Search for FastQC tool'
+    placement: right
+    textinsert: 'fastQC'
+  - title: Step 16. Estimating quality with FastQC
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+  - title: Step 17. Estimating quality with FastQC
+    element: '#center-panel'
+    content: |-
+      Execute the tool on the input data with default settings.
+    position: left
+  - title: Step 18. Estimating quality with FastQC
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      Inspect the FastQC report on the webpage  <ul>
+        <li>Click on the eye ("View data") on the right of the file name in the history</li>
+        <li>Inspect the content of the file on the middle</li>
+      </ul>
+    position: left
+  - title: Questions. Estimating quality with FastQC
+    content: |-
+      Inspect the FastQC report on the webpage  <ul>
+        <li>How many sequences have been removed?</li>
+        <li>Has the quality of the sequences been improved?</li>
+        <li>Can you explain why the per base sequence content is not good now?</li>
+      </ul>
+    backdrop: true
+  - title: Estimating quality with FastQC
+    content: |-
+      The quality of the previous dataset was pretty good from beginning. The quality treatment improved the quality score but to the cost of other parameters.
+    backdrop: true
+  - title: Estimating quality with FastQC with second dataset
+    content: |-
+      Now, we would like to see the impact to quality control and treatment on a bad dataset.
+      <br>In order to do that you should perform exactly same steps on the new dataset, which can be downloaded following this link on <a
+      href="https://zenodo.org/record/61771">Zenodo</a>. Search for GSM461182_untreat_single_subset.fastq file.
+    backdrop: true
+  - title: Questions. Estimating quality with FastQC with second dataset
+    content: |-
+      Answer the following questions after examining the second datatset <ul>
+        <li>How good is this dataset?</li>
+        <li>What must be done to improve the sequences?</li>
+        <li>How many sequences have been removed with Trim Galore?</li>
+        <li>Has the quality of the sequences been improved?</li>
+        <li>Can you explain why the per base sequence content is not good now?</li>
+      </ul>
+    backdrop: true

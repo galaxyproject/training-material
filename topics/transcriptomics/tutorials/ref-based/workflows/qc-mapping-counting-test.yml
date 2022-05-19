@@ -1,0 +1,72 @@
+---
+- doc: "Test sample data for Transcriptomics:Refence-based"
+  job:
+    Paired list collection with PE fastqs:
+      class: Collection
+      collection_type: 'list:paired'
+      elements:
+        - class: Collection
+          type: paired
+          identifier: GSM461177
+          elements:
+          - identifier: forward
+            class: File
+            location: https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
+            filetype: fastqsanger
+          - identifier: reverse
+            class: File
+            location: https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
+            filetype: fastqsanger
+        - class: Collection
+          type: paired
+          identifier: GSM461180
+          elements:
+          - identifier: forward
+            class: File
+            location: https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
+            filetype: fastqsanger
+          - identifier: reverse
+            class: File
+            location: https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
+            filetype: fastqsanger
+    Drosophila_melanogaster.BDGP6.87.gtf:
+      class: File
+      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+      filetype: gtf
+  outputs:
+    multiqc_fastqc_html:
+      asserts:
+        has_text:
+          text: 'All samples have sequences of a single length (37bp).'
+    multiqc_cutadapt_html:
+      asserts:
+        has_text:
+          text: '<span class="val">12.4%</span>'
+        has_text:
+          text: '<span class="val">2.5%</span>'
+    multiqc_star_html:
+      asserts:
+        has_text:
+          text: '<span class="val">79.0%</span>'
+        has_text:
+          text: '<span class="val">83.1%</span>'
+    inferexperiment:
+      element_tests:
+        GSM461177:
+          asserts:
+            has_text:
+              text: '0.4649'
+        GSM461180:
+          asserts:
+            has_text:
+              text: '0.4524'
+    featurecounts_summary:
+      element_tests:
+        GSM461177:
+          asserts:
+            has_text:
+              text: '8234664'
+        GSM461180:
+          asserts:
+            has_text:
+              text: '8412167'

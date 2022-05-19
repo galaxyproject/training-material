@@ -1,0 +1,1994 @@
+---
+id: mothur-miseq-sop
+name: Mothur MiSeq SOP
+description: >-
+  In this tour we will perform the Standard Operating Procedure (SOP) for MiSeq
+  data
+title_default: mothur-miseq-sop
+steps:
+  - title: 16S Microbial Analysis with Mothur
+    content: >-
+      In this tour we will perform the Standard Operating Procedure (SOP) for
+      MiSeq data.
+    backdrop: true
+  - title: 16S Microbial Analysis with Mothur
+    content: >-
+      In this tutorial we use 16S rRNA data, but similar pipelines can be used
+      for WGS data.<br><br> The 16S rRNA gene has several properties that make
+      it ideally suited for our purposes: <ol>
+        <li>Present in all living organisms</li>
+        <li>Single copy (no recombination)</li>
+        <li>Highly conserved + highly variable regions</li>
+        <li>Huge reference databases</li>
+      </ol> The highly conserved regions make it easy to target the gene across
+      different organisms, while the highly variable regions allow us to
+      distinguish between different species.
+    backdrop: true
+  - title: Understanding our input data
+    content: >-
+      In this tutorial we are interested in understanding the effect of normal
+      variation in the gut microbiome on host health. To that end, fresh feces
+      from mice were collected on a daily basis for 365 days post weaning.
+      During the first 150 days post weaning (dpw), nothing was done to our mice
+      except allow them to eat, get fat, and be merry. We were curious whether
+      the rapid change in weight observed during the first 10 dpw affected the
+      stability microbiome compared to the microbiome observed between days 140
+      and 150. We will address this question in this tutorial using a
+      combination of OTU, phylotype, and phylogenetic methods. <br><br>To make
+      this tutorial easier to execute, we are providing only part of the data -
+      you are given the flow files for one animal at 10 time points (5 early and
+      5 late). In order to assess the error rate of our analysis pipeline and
+      experimental setup, we additionally resequenced a mock community composed
+      of genomic DNA from 21 bacterial strains.
+    backdrop: true
+  - title: Dataset details
+    content: >-
+      Because of the large size of the original dataset (3.9 GB) you are given
+      20 of the 362 pairs of fastq files. For example, you will see two files:
+      F3D0_S188_L001_R1_001.fastq, and F3D0_S188_L001_R2_001.fastq These two
+      files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning).
+      The first file (and all those with R1 in the name) correspond to the
+      forward reads, while the second (and all those with R2 in the name)
+      correspond to the reverse reads. <br>These sequences are 250 bp and
+      overlap in the V4 region of the 16S rRNA gene; this region is about 253 bp
+      long. Looking at the datasets, you will see 22 fastq files, representing
+      10 time points from Female 3 and 1 mock community. <br>You will also see
+      HMP_MOCK.v35.fasta which contains the sequences used in the mock community
+      that were sequenced in fasta format.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New". Give it a name.
+    placement: left
+    backdrop: false
+  - title: Import Sample Data
+    element: '#shared .dropdown a[href$="/library/index"]'
+    content: >-
+      The data for this course may be available from a shared library in Galaxy
+      (ask your instructor). If this is not the case, you can upload it
+      yourself.
+    placement: right
+  - title: Load  data from shared library
+    element: 'li a[href$="/library/list"]'
+    content: >-
+      In the dropdown menu click on Data Libraries. Navigate to the shared data
+      library, you should find 20 pairs of fastq files; 19 from the mice, and
+      one pair from the mock community.
+    placement: right
+  - title: Import Sample Data.
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: >-
+      Otherwise you can upload the data directly from your computer. Obtain the
+      data from <a
+      href="https://zenodo.org/record/165147#.Wa_FXsgjHIU">zenodo</a>. Unzip it
+      on your computer and upload with a help of Upload manager.
+    placement: right
+  - title: Import Sample Data
+    element: '#shared .dropdown a[href$="/library/index"]'
+    content: >-
+      Go back to the data library and import the following reference datasets,
+      or download them from Zenodo (reference_data.zip) and upload them to your
+      history:<ol>
+        <li>silva.v4.fasta</li>
+        <li>HMP_MOCK.v35.fasta</li>
+        <li>trainset9_032012.pds.fasta</li>
+        <li>trainset9_032012.pds.tax</li>
+      </ol>
+    placement: right
+  - title: Dataset collections
+    content: >-
+      Now that’s a lot of files to manage. Luckily Galaxy can make life a bit
+      easier by allowing us to create dataset collections. This enables us to
+      easily run tools on multiple datasets at once. Let’s create a collection
+      now. <br><br>Since we have paired-end data, each sample consist of two
+      separate fastq files, one containing the forward reads, and one containing
+      the reverse reads. We can recognize the pairing from the file names, which
+      will differ only by _R1 or _R2 in the filename. We can tell Galaxy about
+      this paired naming convention, so that our tools will know which files
+      belong together.
+    backdrop: true
+  - title: Organizing our data into a collection
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Click on the <b>checkmark icon</b> at top of your history. Select all the
+      fastq files (40 in total), then click on for <b>all selected</b> and
+      select <b>Build List of Dataset Pairs</b> from the dropdown menu.
+    placement: left
+  - title: Organizing our data into a collection
+    content: >-
+      In the next dialog window you can create the list of pairs. By default
+      Galaxy will look for pairs of files that differ only by a <br>_1 and
+      _2</b> part in their names. In our case however, these should be <b>_R1
+      and _R2</b>. Please change these values accordingly. You should now see a
+      list of pairs suggested by Galaxy. <br><br> Examine the pairings, if it
+      looks good, you can click on <b>auto-pair</b> to create the suggested
+      pairs.<br> <br><br>The middle segment is the name for each pair. You can
+      change these names by clicking on them. These names will be used as sample
+      names in the downstream analysis so always make sure they are informative.
+    backdrop: false
+  - title: Organizing our data into a collection
+    content: >-
+      Once you are happy with your pairings, enter a name for your new
+      collection at the bottom right of the screen. Then click the <b>Create
+      List</b> button. A new dataset collection item will now appear in your
+      history.
+    backdrop: false
+  - title: Reducing sequencing and PCR errors
+    content: >-
+      The first thing we want to do is combine our forward and reverse reads for
+      each sample. This is done using the <b>make.contigs</b> command, which
+      requires the paired collection as input. This command will extract the
+      sequence and quality score data from your fastq files, create the reverse
+      complement of the reverse read and then join the reads into contigs. Then
+      we will combine all samples into a single fasta file, remembering which
+      reads came from which samples using a group file.
+    backdrop: true
+  - title: Reducing sequencing and PCR errors
+    content: >-
+      We have a very simple algorithm to do this. First, we align the pairs of
+      sequences. Next, we look across the alignment and identify any positions
+      where the two reads disagree. If one sequence has a base and the other has
+      a gap, the quality score of the base must be over 25 to be considered
+      real. If both sequences have a base at that position, then we require one
+      of the bases to have a quality score 6 or more points better than the
+      other. If it is less than 6 points better, then we set the consensus base
+      to an N. <br><br>In this experiment we used paired-end sequencing, this
+      means sequencing was done from from both ends of each fragment, resulting
+      in an overlap in the middle. We will now combine these pairs of reads into
+      contigs.
+    backdrop: true
+  - title: Combine forward and reverse reads into contigs
+    element: '#tool-search-query'
+    content: Search for Make.contigs tool
+    placement: right
+    textinsert: Make.contigs
+  - title: Combine forward and reverse reads into contigs
+    element: '#tool-search'
+    content: Click on the "Make.contigs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_contigs%2Fmothur_make_contigs%2F1.36.1.0"]
+  - title: Combine forward and reverse reads into contigs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Way to provide files” to the "Multiple pairs - Combo mode"</li>
+        <li>“Fastq pairs” to the collection you just created</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Combine forward and reverse reads into contigs
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Observe the output. This step merged the forward and reverse reads into
+      contigs for each pair, and then combines the results into a single fasta
+      file. To retain information about which reads originated from which
+      samples, it also made a group file.<br>
+
+      The first column contains the read name, and the second column contains
+      the sample name.
+    position: left
+  - title: Summarize data
+    content: >-
+      Before starting to work on the quality of the imported data, let's get a
+      feel of it.
+    backdrop: true
+  - title: Summarize data
+    element: '#tool-search-query'
+    content: Search for Summary.seqs tool
+    placement: right
+    textinsert: Summary.seqs
+  - title: Summarize data
+    element: '#tool-search'
+    content: Click on the "Summary.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_seqs%2Fmothur_summary_seqs%2F1.36.1.0"]
+  - title: Summarize data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” parameter to the <b>trim.contigs.fasta</b> file created by the make.contigs tool</li>
+        <li>We do not need to supply a names or count file</li>
+      </ul>
+    position: left
+  - title: Summarize data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Observe the output. The summary output files give information per read.
+      The logfile outputs also contain some summary statistics.<br>
+
+      This tells us that we have 152,360 sequences that for the most part vary
+      between 248 and 253 bases. Interestingly, the longest read in the dataset
+      is 502 bp. Be suspicious of this. Recall that the reads are supposed to be
+      251 bp each. This read clearly didn’t assemble well (or at all). Also,
+      note that at least 2.5% of our sequences had some ambiguous base calls.
+      <br>We’ll take care of these issues in the next step when we run
+      <b>screen.seqs.</b>
+    position: left
+  - title: Filter reads based on quality and length
+    element: '#tool-search-query'
+    content: >-
+      Search for Screen.seqs tool. It will remove any sequences with ambiguous
+      bases and anything longer than 275 bp.
+    placement: right
+    textinsert: Screen.seqs
+  - title: Filter reads based on quality and length
+    element: '#tool-search'
+    content: Click on the "Screen.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_screen_seqs%2Fmothur_screen_seqs%2F1.36.1.0"]
+  - title: Filter reads based on quality and length
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the <b>trim.contigs.fasta</b> file created by the make.contigs tool</li>
+        <li>“group” the group file created in the make.contigs step</li>
+        <li>“maxlength” parameter to <b>275</b></li>
+        <li>“maxambig” parameter to <b>0</b></li>
+      </ul>
+    position: left
+  - title: Question. Filter reads based on quality and length
+    content: |-
+      Inspect the output <ul>
+        <li>How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)</li>
+      </ul>
+    backdrop: false
+  - title: Optimize files for computation
+    content: >-
+      Because we are sequencing many of the same organisms, we anticipate that
+      many of our sequences are duplicates of each other. Because it’s
+      computationally wasteful to align the same thing a bazillion times, we’ll
+      unique our sequences using the <b>unique.seqs</b> command.
+    backdrop: true
+  - title: Remove duplicate sequences
+    element: '#tool-search-query'
+    content: Search for Unique.seqs tool
+    placement: right
+    textinsert: Unique.seqs
+  - title: Remove duplicate sequences
+    element: '#tool-search'
+    content: Click on the "Unique.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_unique_seqs%2Fmothur_unique_seqs%2F1.36.1.0"]
+  - title: Remove duplicate sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the <b>good.fasta</b> output from Screen.seqs</li>
+      </ul>
+    position: left
+  - title: Question. Remove duplicate sequences
+    content: |-
+      Inspect the output <ul>
+        <li>How many sequences were unique?</li>
+        <li>how many duplicates were removed?</li>
+      </ul>
+    backdrop: false
+  - title: Remove duplicate sequences
+    content: >-
+      Inspect the output. This tool outputed two files, one is a fasta file
+      containing only the unique sequences, and a names files. The names file
+      consists of two columns, the first contains the sequence names for each of
+      the unique sequences, and the second column contains all other sequence
+      names that are identical to the representative sequence in the first
+      column. <br>To reduce file sizes further and streamline analysis, we can
+      now summarize the data in a count table.
+    backdrop: true
+  - title: Generate count table
+    element: '#tool-search-query'
+    content: Search for Count.seqs tool
+    placement: right
+    textinsert: Count.seqs
+  - title: Generate count table
+    element: '#tool-search'
+    content: Click on the "Count.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_count_seqs%2Fmothur_count_seqs%2F1.36.1.0"]
+  - title: Generate count table
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“name” to the <b>names</b> output from Unique.seqs</li>
+        <li>“Use a Group file” to <b>yes</b></li>
+        <li>“group” to the group file we created using the Screen.seqs tool</li>
+      </ul>
+    position: left
+  - title: Generate count table
+    content: >-
+      Inspect the output. The first column contains the read names of the
+      representative sequence, and the subsequent columns contain the number of
+      duplicates of this sequence observed in each sample.
+    backdrop: true
+  - title: Align sequences
+    content: >-
+      We are now ready to align our sequences to the reference. This step is an
+      important step to perform to improve the clustering of your OTUs
+    backdrop: true
+  - title: Align sequences
+    element: '#tool-search-query'
+    content: Search for Align.seqs tool
+    placement: right
+    textinsert: Align.seqs
+  - title: Align sequences
+    element: '#tool-search'
+    content: Click on the "Align.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_align_seqs%2Fmothur_align_seqs%2F1.36.1.0"]
+  - title: Align sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the fasta output from Unique.seqs</li>
+        <li>“reference” to the <b>silva.v4.fasta</b> reference file</li>
+      </ul>
+    position: left
+  - title: Align sequences
+    element: '#tool-search-query'
+    content: Search for Summary.seqs tool
+    placement: right
+    textinsert: Summary.seqs
+  - title: Align sequences
+    element: '#tool-search'
+    content: Click on the "Summary.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_seqs%2Fmothur_summary_seqs%2F1.36.1.0"]
+  - title: Align sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” parameter to the aligned output from align.seqs</li>
+        <li>“count” parameter to <b>count_table</b> output from Count.seqs</li>
+      </ul>
+    position: left
+  - title: Align sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Observe the output. So what does this mean? You’ll see that the bulk of
+      the sequences start at position 1968 and end at position 11550. Some
+      sequences start at position 1250 or 1982 and end at 10693 or 13400. These
+      deviants from the mode positions are likely due to an insertion or
+      deletion at the terminal ends of the alignments. Sometimes you’ll see
+      sequences that start and end at the same position indicating a very poor
+      alignment, which is generally due to non-specific amplification.
+    position: left
+  - title: More Data Cleaning
+    content: >-
+      To make sure that everything overlaps the same region we’ll re-run
+      screen.seqs to get sequences that start at or before position 1968 and end
+      at or after position 11550. We’ll also set the maximum homopolymer length
+      to 8 since there’s nothing in the database with a stretch of 9 or more of
+      the same base in a row (this also could have been done in the first
+      execution of screen.seqs before).
+    backdrop: true
+  - title: Remove poorly aligned sequences
+    element: '#tool-search-query'
+    content: Search for Screen.seqs tool
+    placement: right
+    textinsert: Screen.seqs
+  - title: Remove poorly aligned sequences
+    element: '#tool-search'
+    content: Click on the "Screen.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_screen_seqs%2Fmothur_screen_seqs%2F1.36.1.0"]
+  - title: Remove poorly aligned sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the aligned fasta file</b>
+        <li>“start” to <b>1968</b></li>
+        <li>“end” to <b>11550</b></li>
+        <li>“maxhomop” to <b>8</b></li>
+        <li>“count” to our most recent count_table</li>
+      </ul>
+    position: left
+  - title: Question. Remove poorly aligned sequences
+    content: |-
+      Inspect the output <ul>
+        <li>How many sequences were removed in this step?</li>
+      </ul>
+    backdrop: false
+  - title: Filter sequences
+    content: >-
+      Now we know our sequences overlap the same alignment coordinates, we want
+      to make sure they only overlap that region.<br>So we’ll filter the
+      sequences to remove the overhangs at both ends. Since we’ve done
+      paired-end sequencing, this shouldn’t be much of an issue. In addition,
+      there are many columns in the alignment that only contain gap characters
+      (i.e. “.”). These can be pulled out without losing any information. We’ll
+      do all this with <b>filter.seqs</b>.
+    backdrop: true
+  - title: Filter sequences
+    element: '#tool-search-query'
+    content: Search for Filter.seqs tool
+    placement: right
+    textinsert: Filter.seqs
+  - title: Filter sequences
+    element: '#tool-search'
+    content: Click on the "Filter.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_filter_seqs%2Fmothur_filter_seqs%2F1.36.1.0"]
+  - title: Filter sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>"fasta” to good.fasta output from Sreen.seqs</li>
+        <li>“vertical” to <b>Yes</b></li>
+        <li>“trump” to <b>.</b></li>
+      </ul>
+    position: left
+  - title: Filter sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Observe the output. Our initial alignment was 13425 columns wide and that
+      we were able to remove 13049 terminal gap characters using trump=. and
+      vertical gap characters using vertical=yes. The final alignment length is
+      376 columns. Because we’ve perhaps created some redundancy across our
+      sequences by trimming the ends, we can re-run unique.seqs
+    position: left
+  - title: Re-obtain unique sequences
+    element: '#tool-search-query'
+    content: Search for Unique.seqs tool
+    placement: right
+    textinsert: Unique.seqs
+  - title: Re-obtain unique sequences
+    element: '#tool-search'
+    content: Click on the "Unique.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_unique_seqs%2Fmothur_unique_seqs%2F1.36.1.0"]
+  - title: Re-obtain unique sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the <b>filtered fasta</b> output from Filter.seqs</li>
+        <li>“name file or count table” to the count table from the last Screen.seqs</li>
+      </ul>
+    position: left
+  - title: Question. Re-obtain unique sequences
+    content: |-
+      Inspect the output <ul>
+        <li>How many duplicate sequences did our filter step produce?</li>
+      </ul>
+    backdrop: false
+  - title: Pre-clustering
+    content: >-
+      The next thing we want to do to further de-noise our sequences, is to
+      pre-cluster the sequences using the pre.cluster command, allowing for up
+      to 2 differences between sequences.<br><br>This command will split the
+      sequences by group and then sort them by abundance and go from most
+      abundant to least and identify sequences that differ no more than 2
+      nucleotides from on another. If this is the case, then they get merged. We
+      generally recommend allowing 1 difference for every 100 basepairs of
+      sequence
+    backdrop: true
+  - title: Perform preliminary clustering of sequences
+    element: '#tool-search-query'
+    content: Search for Pre.cluster tool
+    placement: right
+    textinsert: Pre.cluster
+  - title: Perform preliminary clustering of sequences
+    element: '#tool-search'
+    content: Click on the "Pre.cluster" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_pre_cluster%2Fmothur_pre_cluster%2F1.36.1.0"]
+  - title: Perform preliminary clustering of sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the fasta output from the last Unique.seqs run</li>
+        <li>“name file or count table” to the count table from the last Unique.seqs</li>
+        <li>“diffs” to <b>2</b></li>
+      </ul>
+    position: left
+  - title: Question. Perform preliminary clustering of sequences
+    content: |-
+      Inspect the output <ul>
+        <li>How many unique sequences are we left with after this clustering of highly similar sequences?</li>
+      </ul>
+    backdrop: false
+  - title: Chimera Removal
+    content: >-
+      At this point we have removed as much sequencing error as we can, and it
+      is time to turn our attention to removing sequencing artefacts known as
+      chimeras. <br>
+    backdrop: true
+  - title: What is Chimera sequence?
+    content: The combination of multiple sequences during PCR to create a hybrid
+    backdrop: true
+  - title: Chimera Removal
+    content: >-
+      We’ll do this chimera removal using the UCHIME algorithm that is called
+      within Mothur, using the <b>chimera.uchime</b> command. This command will
+      split the data by sample and check for chimeras.
+
+      <br>Our preferred way of doing this is to use the abundant sequences as
+      our reference. In addition, if a sequence is flagged as chimeric in one
+      sample, the default (dereplicate=No) is to remove it from all samples. Our
+      experience suggests that this is a bit aggressive since we’ve seen rare
+      sequences get flagged as chimeric when they’re the most abundant sequence
+      in another sample
+    backdrop: true
+  - title: Remove chimeric sequences
+    element: '#tool-search-query'
+    content: Search for Chimera.uchime tool
+    placement: right
+    textinsert: Chimera.uchime
+  - title: Remove chimeric sequences
+    element: '#tool-search'
+    content: Click on the "Chimera.uchime" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_chimera_uchime%2Fmothur_chimera_uchime%2F1.36.1.0"]
+  - title: Remove chimeric sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the fasta output from Pre.cluster</li>
+        <li>“Select Reference Template from” to <b>Self</b></li>
+        <li>“count” to the count table from the last Pre.cluster</li>
+        <li>“dereplicate” to Yes</li>
+      </ul>
+    position: left
+  - title: Remove chimeric sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Running chimera.uchime with the count file will remove the chimeric
+      sequences from the count table, but we still need to remove those
+      sequences from the fasta file as well    position: left
+    position: left
+  - title: Remove chimeric sequences
+    element: '#tool-search-query'
+    content: Search for Remove.seqs tool
+    placement: right
+    textinsert: Remove.seqs
+  - title: Remove chimeric sequences
+    element: '#tool-search'
+    content: Click on the "Remove.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_seqs%2Fmothur_remove_seqs%2F1.36.1.0"]
+  - title: Remove chimeric sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“accnos” to the uchime.accnos file from Chimera.uchime</li>
+        <li>“fasta” to the fasta output from Pre.cluster</li>
+        <li>“count” to the count table from Chimera.uchime</li>
+      </ul>
+    position: left
+  - title: Question. Remove chimeric sequences
+    content: |-
+      Inspect the output <ul>
+        <li>How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)</li>
+      </ul>
+    backdrop: false
+  - title: Remove chimeric sequences
+    element: '#tool-search'
+    content: Click on the "Remove.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_seqs%2Fmothur_remove_seqs%2F1.36.1.0"]
+  - title: Remove chimeric sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“accnos” to the uchime.accnos file from Chimera.uchime</li>
+        <li>“fasta” to the fasta output from Pre.cluster</li>
+        <li>“count” to the count table from Chimera.uchime</li>
+      </ul>
+    position: left
+  - title: Removal of non-bacterial sequences 1
+    content: >-
+      As a final quality control step, we need to see if there are any
+      “undesirables” in our dataset. Sometimes when we pick a primer set they
+      will amplify other stuff that survives to this point in the pipeline, such
+      as 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and
+      mitochondria. There’s also just the random stuff that we want to get rid
+      of.<br>Now you may say, “But wait I want that stuff”. Fine. But, the
+      primers we use, are only supposed to amplify members of the Bacteria and
+      if they’re hitting Eukaryota or Archaea, then it is a mistake. Also,
+      mitochondria and chloroplasts have no functional role in microbial
+      community.
+    backdrop: true
+  - title: Remove undesired sequences
+    element: '#tool-search-query'
+    content: Search for Classify.seqs tool
+    placement: right
+    textinsert: Classify.seqs
+  - title: Remove undesired sequences
+    element: '#tool-search'
+    content: Click on the "Classify.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_seqs%2Fmothur_classify_seqs%2F1.36.1.0"]
+  - title: Remove undesired sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the fasta output from Remove.seqs</li>
+        <li>“reference” to trainset9032012.pds.fasta from your history</li>
+        <li>“taxonomy” to trainset9032012.pds.tax from your history</li>
+        <li>“count” to the count table file from Remove.seqs</li>
+        <li>“cutoff” to <b>80</b></li>
+      </ul>
+    position: left
+  - title: Remove undesired sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Have a look at the taxonomy output. You will see that every read now has a
+      classification. <br><br>Now that everything is classified we want to
+      remove our undesirables. We do this with the remove.lineage
+    position: left
+  - title: Remove undesired sequences
+    element: '#tool-search-query'
+    content: Search for Remove.lineage tool
+    placement: right
+    textinsert: Remove.lineage
+  - title: Remove undesired sequences
+    element: '#tool-search'
+    content: Click on the "Remove.lineage" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_lineage%2Fmothur_remove_lineage%2F1.36.1.0"]
+  - title: Remove undesired sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“taxonomy” to the taxonomy output from Classify.seqs</li>
+        <li>“taxon” to <b>Chloroplast-Mitochondria-unknown-Archaea-Eukaryota</b> in the text box under Manually select taxons for filtering</li>
+        <li>“fasta” to the fasta output from Remove.seqs</li>
+        <li>“count” to the count table from Remove.seqs</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      Inspect the output <ul>
+        <li>How many unique (representative) sequences were removed in this step?</li>
+        <li>How many sequences in total?</li>
+      </ul>
+    backdrop: false
+  - title: Assessing error rates based on our mock community
+    content: >-
+      Measuring the error rate of your sequences is something you can only do if
+      you have co-sequenced a mock community, that is, a sample of which you
+      know the exact composition. This is something we include for every 95
+      samples we sequence. You should too because it will help you gauge your
+      error rates and allow you to see how well your curation is going, and
+      whether something is wrong with your sequencing setup.
+    backdrop: true
+  - title: Mock community
+    content: >-
+      A defined mixture of microbial cells and/or viruses or nucleic acid
+      molecules created in vitro to simulate the composition of a microbiome
+      sample or the nucleic acid isolated therefrom.
+
+      <br>Our mock community is composed of genomic DNA from 21 bacterial
+      strains. So in a perfect world, this is exactly what we would expect the
+      analysis to produce as a result.
+
+      <br>First, let’s extract the sequences belonging to our mock samples from
+      our data
+    backdrop: true
+  - title: Extract mock sample from our dataset
+    element: '#tool-search-query'
+    content: Search for Get.groups tool
+    placement: right
+    textinsert: Get.groups
+  - title: Extract mock sample from our dataset
+    element: '#tool-search'
+    content: Click on the "Get.groups" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_get_groups%2Fmothur_get_groups%2F1.36.1.0"]
+  - title: Extract mock sample from our dataset
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“group file or count table” to the count table from Remove.lineage</li>
+        <li>“groups” to <b>Mock</b></li>
+        <li>“fasta” to fasta output from Remove.lineage</li>
+      </ul>
+    position: left
+  - title: Extract mock sample from our dataset
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Have a look at the taxonomy output. It should tell you that we had 67
+      unique sequences and a total of 4,060 total sequences in our Mock sample.
+      <br>We can now use the seq.error command to measure the error rates based
+      on our mock reference. Here we align the reads from our mock sample back
+      to their known sequences, to see how many fail to match.
+    position: left
+  - title: Assess error rates based on a mock community
+    element: '#tool-search-query'
+    content: Search for Seq.error tool
+    placement: right
+    textinsert: Seq.error
+  - title: Assess error rates based on a mock community
+    element: '#tool-search'
+    content: Click on the "Seq.error" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_seq_error%2Fmothur_seq_error%2F1.36.1.0"]
+  - title: Assess error rates based on a mock community
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the fasta from Get.groups</li>
+        <li>“reference” to <b>HMP_MOCK.v35.fasta</b> file from your history</li>
+        <li>“count” to the count table from Get.groups</li>
+      </ul>
+    position: left
+  - title: Assess error rates based on a mock community
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the output. The error rate should be 0.0065%!
+    position: left
+  - title: Cluster mock sequences into OTUs
+    content: >-
+      In 16S metagenomics approaches, OTUs are clusters of similar sequence
+      variants of the 16S rDNA marker gene sequence. Each of these clusters is
+      intended to represent a taxonomic unit of a bacteria species or genus
+      depending on the sequence similarity threshold. Typically, OTU cluster are
+      defined by a 97% identity threshold of the 16S gene sequence variants at
+      genus level. 98% or 99% identity is suggested for species separation.
+    backdrop: true
+  - title: Cluster mock sequences into OTUs
+    content: First we calculate the pairwise distances between our sequences
+    backdrop: true
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search-query'
+    content: Search for Dist.seqs tool
+    placement: right
+    textinsert: Dist.seqs
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: Click on the "Dist.seqs" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_dist_seqs%2Fmothur_dist_seqs%2F1.36.1.0"]
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“fasta” to the fasta from Get.groups</li>
+        <li>“cutoff” to <b>0.20</b></li>
+      </ul>
+    position: left
+  - title: Cluster mock sequences into OTUs
+    content: Next we group sequences into OTUs
+    backdrop: true
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search-query'
+    content: Search for Cluster tool
+    placement: right
+    textinsert: Cluster
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: Click on the "Cluster" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.36.1.0"]
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“column” to the dist output from Dist.seqs</li>
+        <li>“count” to the count table from Get.groups</li>
+      </ul>
+    position: left
+  - title: Cluster mock sequences into OTUs
+    content: >-
+      Now we make a shared file that summarizes all our data into one handy
+      table
+    backdrop: true
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search-query'
+    content: Search for Make.shared tool
+    placement: right
+    textinsert: Make.shared
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: Click on the "Make.shared" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_shared%2Fmothur_make_shared%2F1.36.1.0"]
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“list” to the OTU list from Cluster</li>
+        <li>“count” to the count table from Get.groups</li>
+        <li>“label” to <b>0.03</b> (this indicates we are interested in the clustering at a 97% identity threshold)</li>
+      </ul>
+    position: left
+  - title: Cluster mock sequences into OTUs
+    content: And now we generate intra-sample rarefaction curves
+    backdrop: true
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search-query'
+    content: Search for Rarefaction.single tool
+    placement: right
+    textinsert: Rarefaction.single
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: Click on the "Rarefaction.single" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_rarefaction_single%2Fmothur_rarefaction_single%2F1.36.1.0"]
+  - title: Cluster mock sequences into OTUs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to the shared file from Make.shared</li>
+      </ul>
+    position: left
+  - title: Question
+    content: <ul><li>How many OTUs were identified in our mock community?</li></ul>
+    backdrop: false
+  - title: Cluster mock sequences into OTUs
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Open the rarefaction output (dataset named sobs inside the rarefaction
+      curves output collection). You’ll see that for 4060 sequences, we’d have
+      34 OTUs from the Mock community. This number of course includes some
+      stealthy chimeras that escaped our detection methods. If we used 3000
+      sequences, we would have about 31 OTUs. In a perfect world with no
+      chimeras and no sequencing errors, we’d have 21 OTUs. This is not a
+      perfect world. But this is pretty darn good!
+    placement: left
+  - title: Rarefaction
+    content: >-
+      To estimate the fraction of species sequenced, rarefaction curves are
+      typically used. A rarefaction curve plots the number of species as a
+      function of the number of individuals sampled. The curve usually begins
+      with a steep slope, which at some point begins to flatten as fewer species
+      are being discovered per sample: the gentler the slope, the less
+      contribution of the sampling to the total number of operational taxonomic
+      units or OTUs.<br>Now that we have assessed our error rates we are ready
+      for some real analysis.
+    backdrop: true
+  - title: Removing Mock sample
+    content: >-
+      We’re almost to the point where you can have some fun with your data (I’m
+      already having fun, aren’t you?). Next, we would assign sequences to OTUs,
+      but first, we should remove the Mock sample from our dataset, it has
+      served its purpose by allowing us to estimate our error rate, but in
+      subsequent steps we only want to use our real samples.
+    backdrop: true
+  - title: Remove Mock community from our dataset
+    element: '#tool-search-query'
+    content: Search for Remove.groups tool
+    placement: right
+    textinsert: Remove.groups
+  - title: Remove Mock community from our dataset
+    element: '#tool-search'
+    content: Click on the "Remove.groups" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_groups%2Fmothur_remove_groups%2F1.36.1.0"]
+  - title: Remove Mock community from our dataset
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Select input type” to <b>fasta , name, taxonomy, or list with a group file or count table</b></li>
+        <li>“count table”, “fasta”, and “taxonomy” to the respective outputs from Remove.lineage</li>
+        <li>“groups” to <b>Mock</b></li>
+      </ul>
+    position: left
+  - title: Clustering sequences into OTUs
+    content: >-
+      Now, we have a couple of options for clustering sequences into OTUs. For a
+      small dataset like this, we could do the traditional approach using
+      dist.seqs and cluster as we did with the Mock sample.<br>
+
+      The alternative is to use the cluster.split command. In this approach, we
+      use the taxonomic information to split the sequences into bins and then
+      cluster within each bin. The Schloss lab have published results showing
+      that if you split at the level of Order or Family, and cluster to a 0.03
+      cutoff, you’ll get just as good of clustering as you would with the
+      “traditional” approach.<br>
+
+      The advantage of the cluster.split approach is that it should be faster,
+      use less memory, and can be run on multiple processors. In an ideal world
+      we would prefer the traditional route because “Trad is rad”, but we also
+      think that kind of humor is funny…. In this command we use taxlevel=4,
+      which corresponds to the level of Order. This is the approach that we
+      generally use in the Schloss lab.
+    backdrop: true
+  - title: Cluster our data into OTUs
+    element: '#tool-search-query'
+    content: Search for Cluster.split tool
+    placement: right
+    textinsert: Cluster.split
+  - title: Cluster our data into OTUs
+    element: '#tool-search'
+    content: Click on the "Cluster.split" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster_split%2Fmothur_cluster_split%2F1.36.1.0"]
+  - title: Cluster our data into OTUs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Split by” to <b>Classification using fasta</b></li>
+        <li>“fasta” to the fasta output from Remove.groups</li>
+        <li>“taxonomy” to the taxonomy output from Remove.groups</li>
+        <li>“taxlevel” to <b>4</b></li>
+        <li>“count” to the count table output from Remove.groups</li>
+        <li>“cutoff” to <b>0.15</b></li>
+      </ul>
+    position: left
+  - title: Cluster our data into OTUs
+    content: >-
+      Next we want to know how many sequences are in each OTU from each group
+      and we can do this using the Make.shared command. Here we tell Mothur that
+      we’re really only interested in the 0.03 cutoff level
+    backdrop: true
+  - title: Cluster our data into OTUs
+    element: '#tool-search-query'
+    content: Search for Make.shared tool
+    placement: right
+    textinsert: Make.shared
+  - title: Cluster our data into OTUs
+    element: '#tool-search'
+    content: Click on the "Make.shared" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_shared%2Fmothur_make_shared%2F1.36.1.0"]
+  - title: Cluster our data into OTUs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Select input type” to OTU list</li>
+        <li>“list” to list output from Cluster.split</li>
+        <li>“count” to the count table from Remove.groups</li>
+        <li>“label” to 0.03</li>
+      </ul>
+    position: left
+  - title: Cluster our data into OTUs
+    content: >-
+      We probably also want to know the taxonomy for each of our OTUs. We can
+      get the consensus taxonomy for each OTU using the Classify.otu command
+    backdrop: true
+  - title: Cluster our data into OTUs
+    element: '#tool-search-query'
+    content: Search for Classify.otu tool
+    placement: right
+    textinsert: Classify.otu
+  - title: Cluster our data into OTUs
+    element: '#tool-search'
+    content: Click on the "Classify.otu" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_otu%2Fmothur_classify_otu%2F1.36.1.0"]
+  - title: Cluster our data into OTUs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“list” to output from Cluster.split</li>
+        <li>“count” to the count table from Remove.groups</li>
+        <li>“taxonomy” to the taxonomy output from Remove.groups</li>
+        <li>“label” to 0.03</li>
+      </ul>
+    position: left
+  - title: Cluster our data into OTUs
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Check the output file. This file tells you that Otu008 was observed 5377
+      times in your samples and that all of the sequences (100%) were classified
+      as being members of the Alistipes. <br>In this tutorial we will continue
+      with this otu-based approach.
+    placement: left
+  - title: OTU-based Analysis
+    content: >-
+      Let’s do something more interesting and actually analyze our data. We’ll
+      focus on the OTU-based dataset. The phylotype-based analysis is
+      essentially the same. Also, remember that our initial question had to do
+      with the stability and change in community structure in these samples when
+      comparing early and late samples.
+
+      <br>Keep in mind that the group names have either a F or M (sex of animal)
+      followed by a number (number of animal) followed by a D and a three digit
+      number (number of days post weaning).
+    backdrop: true
+  - title: Subsampling
+    content: >-
+      What we now want to do is see how many sequences we have in each sample.
+      We’ll do this with the Count.groups command
+    backdrop: true
+  - title: Subsampling
+    element: '#tool-search-query'
+    content: Search for Count.groups tool
+    placement: right
+    textinsert: Count.groups
+  - title: Subsampling
+    element: '#tool-search'
+    content: Click on the "Count.groups" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_count_groups%2Fmothur_count_groups%2F1.36.1.0"]
+  - title: Subsampling
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to the shared file from Make.shared</li>
+      </ul>
+    position: left
+  - title: Subsampling
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Take a look at the output. We see that our smallest sample had 2440
+      sequences in it. That is a reasonable number. Despite what some say,
+      subsampling and rarefying your data is an important thing to do. <br>We’ll
+      generate a subsampled file for our analyses with the Sub.sample command
+    placement: left
+  - title: Subsampling
+    element: '#tool-search-query'
+    content: Search for Sub.sample tool
+    placement: right
+    textinsert: Sub.sample
+  - title: Subsampling
+    element: '#tool-search'
+    content: Click on the "Sub.sample" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_sub_sample%2Fmothur_sub_sample%2F1.36.1.0"]
+  - title: Subsampling
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Select type of data to subsample” to OTU Shared</li>
+        <li>“shared” to output from Make.shared</li>
+        <li>“size” to 2440</li>
+      </ul>
+    position: left
+  - title: Question
+    content: |-
+      Inspect the output <ul>
+        <li>What would you exect the result of count.groups on this new shared file output to be?</li>
+        <br>Note: since subsampling is a stochastic process, your results from any tools using this subsampled data will deviate from the ones presented in the tutorial.
+      </ul>
+    backdrop: false
+  - title: Calculate Species Diversity
+    content: >-
+      Diversity indices provide valuable mathematical tools to describe the
+      ecological complexity of a single sample (alpha diversity) or to detect
+      species differences between samples (beta diversity). However, diversity
+      is not a determined physical quantity for which a consensus definition and
+      unit of measure have been established, and several diversity indices are
+      currently available<br><br>Let’s start our analysis by analyzing the alpha
+      diversity of the samples. First we will generate rarefaction curves
+      describing the number of OTUs observed as a function of sampling effort.
+      We’ll do this with the Rarefaction.single command
+    backdrop: true
+  - title: Calculate Rarefaction
+    element: '#tool-search-query'
+    content: Search for Rarefaction.single tool
+    placement: right
+    textinsert: Rarefaction.single
+  - title: Calculate Rarefaction
+    element: '#tool-search'
+    content: Click on the "Rarefaction.single" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_rarefaction_single%2Fmothur_rarefaction_single%2F1.36.1.0"]
+  - title: Calculate Rarefaction
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to the shared file from Make.shared</li>
+      </ul>
+    position: left
+  - title: Calculate Rarefaction
+    content: >-
+      Take a look at the output. The file displays the number of OTUs identified
+      per amount of sequences used (numsampled). What we would like to see is
+      the number of additional OTUs identified when adding more sequences
+      reaching a plateau. Then we know we have covered our full diversity. This
+      information would be easier to interpret in the form of a graph.<br>Let’s
+      plot the rarefaction curve for a couple of our sequence
+    backdrop: false
+  - title: Plot Rarefaction
+    content: >-
+      First let’s make our life a little bit easier. As we only have one dataset
+      in our collection anyways, we can collapse it into a single file
+    backdrop: true
+  - title: Plot Rarefaction
+    element: '#tool-search-query'
+    content: Search for Collapse Collection tool
+    placement: right
+    textinsert: Collapse Collection
+  - title: Plot Rarefaction
+    element: '#tool-search'
+    content: Click on the "Collapse Collection" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
+  - title: Plot Rarefaction
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Collection of files to collapse to a single dataset” to the rarefaction curve collection</li>
+      </ul>
+    position: left
+  - title: Plot Rarefaction
+    element: '#tool-search-query'
+    content: Search for 'Plotting tool'
+    placement: right
+    textinsert: Plotting tool
+  - title: Plot Rarefaction
+    element: '#tool-search'
+    content: Click on the "Plotting tool" to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fxy_plot%2FXY_Plot_1%2F1.0.2"]
+  - title: Plot Rarefaction
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Plot Title” to Rarefaction</li>
+        <li>“Label for x axis” to Number of Sequences</li>
+        <li>“Label for y axis” to Number of OTUs</li>
+        <li>“Output File Type” to PNG</li>
+        <li>Click on Insert Series</li><ul>
+          <li>Dataset” to the collapsed rarefaction curve collection</li>
+          <li>Set Header in first line? to Yes</li>
+          <li>“Column for x axis” to Column 1</li>
+          <li>“Column for y-axis” to Column 2 and Column 5 and every third column until the end (we are skipping the low confidence and high confidence interval columns)</li>
+        </ul>
+      </ul>
+    position: left
+  - title: Plot Rarefaction
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Observe the output. From the resulting image we can see that the
+      rarefaction curves for all samples have started to level off so we are
+      confident we cover a large part of our sample diversity placement: left
+  - title: Plot Rarefaction
+    content: >-
+      Alas, rarefaction is not a measure of richness, but a measure of
+      diversity. If you consider two communities with the same richness, but
+      different evenness then after sampling a large number of individuals their
+      rarefaction curves will asymptote to the same value. Since they have
+      different evennesses the shapes of the curves will differ. Therefore,
+      selecting a number of individuals to cutoff the rarefaction curve isn’t
+      allowing a researcher to compare samples based on richness, but their
+      diversity.
+
+      <br>Finally, let’s get a table containing the number of sequences, the
+      sample coverage, the number of observed OTUs, and the Inverse Simpson
+      diversity estimate using the Summary.single command. To standardize
+      everything, let’s randomly select 2440 sequences from each sample 1000
+      times and calculate the average
+    backdrop: true
+  - title: Summary.single
+    element: '#tool-search-query'
+    content: Search for Summary.single tool
+    placement: right
+    textinsert: Summary.single
+  - title: Summary.single
+    element: '#tool-search'
+    content: Click on the "Summary.single" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_single%2Fmothur_summary_single%2F1.36.1.0"]
+  - title: Summary.single
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“share” to shared file from Make.shared</li>
+        <li>“calc” to nseqs,coverage,sobs,invsimpson</li>
+        <li>“size” to 2440</li>
+      </ul>
+    position: left
+  - title: Summary.single
+    content: >-
+      Observe the output. Interestingly, the sample coverages were all above
+      97%, indicating that we did a pretty good job of sampling the communities.
+      Plotting the richness or diversity of the samples would show that there
+      was little difference between the different animals or between the early
+      and late time points. You could follow this up with a repeated-measures
+      ANOVA and find that there was no significant difference based on sex or
+      early vs. late.
+    backdrop: false
+  - title: Beta diversity
+    content: >-
+      Beta diversity is a measure of the similarity of the membership and
+      structure found between different samples. The default calculator in the
+      following section is thetaYC.
+
+      <br>We’ll do this with the Dist.shared command that will allow us to
+      rarefy our data to a common number of sequences.
+    backdrop: true
+  - title: Beta diversity
+    element: '#tool-search-query'
+    content: Search for Dist.shared tool
+    placement: right
+    textinsert: Dist.shared
+  - title: Beta diversity
+    element: '#tool-search'
+    content: Click on the "Dist.shared" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_dist_shared%2Fmothur_dist_shared%2F1.36.1.0"]
+  - title: Beta diversity
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to the shared file from Make.shared</li>
+        <li>“calc” to thetayc,jclass</li>
+        <li>“subsample” to 2440</li>
+      </ul>
+    position: left
+  - title: Beta diversity
+    element: '#tool-search-query'
+    content: Search for Heatmap.sim tool
+    placement: right
+    textinsert: Heatmap.sim
+  - title: Beta diversity
+    element: '#tool-search'
+    content: Click on the "Heatmap.sim" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_heatmap_sim%2Fmothur_heatmap_sim%2F1.36.1.0"]
+  - title: Beta diversity
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Generate Heatmap for” to phylip</li>
+        <li>“phylip” to output by Dist.shared (this is a collection input)</li>
+      </ul>
+    position: left
+  - title: Beta diversity
+    content: >-
+      Look at some of the resulting heatmaps (you may have to download the SVG
+      images first). In all of these heatmaps the red colors indicate
+      communities that are more similar than those with black colors. <br>When
+      generating Venn diagrams we are limited by the number of samples that we
+      can analyze simultaneously.<br>Let’s take a look at the Venn diagrams for
+      the first 4 time points of female 3 using the venn
+    backdrop: false
+  - title: Venn diagram
+    element: '#tool-search-query'
+    content: Search for Collapse Collection tool
+    placement: right
+    textinsert: Collapse Collection
+  - title: Venn diagram
+    element: '#tool-search'
+    content: Click on the "Collapse Collection" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
+  - title: Venn diagram
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Collection” to Subsample.shared output collection from Sub.sample step</li>
+      </ul>
+    position: left
+  - title: Venn diagram
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      After the tool has finished, rename the output to Subsample.shared to make
+      it easier to recognize in further analysis
+  - title: Venn diagram
+    element: '#tool-search-query'
+    content: Search for Venn tool
+    placement: right
+    textinsert: Venn
+  - title: Venn diagram
+    element: '#tool-search'
+    content: Click on the "Venn" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_venn%2Fmothur_venn%2F1.36.1.0"]
+  - title: Venn diagram
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Set OTU Shared to Subsample.shared file from previous step</li>
+        <li>Set groups to F3D0,F3D1,F3D2,F3D3</li>
+      </ul>
+    position: left
+  - title: Venn diagram
+    content: >-
+      Observe the result. You should see that  there were a total of 180 OTUs
+      observed between the 4 time points. Only 76 of those OTUs were shared by
+      all four time points. We could look deeper at the shared file to see
+      whether those OTUs were umerically rare or just had a low incidence.
+    backdrop: false
+  - title: Tree
+    content: >-
+      Next, let’s generate a dendrogram to describe the similarity of the
+      samples to each other. We will generate a dendrogram using the jclass and
+      thetayc calculators within the tree.shared command
+    backdrop: true
+  - title: Tree
+    element: '#tool-search-query'
+    content: Search for Tree.shared tool
+    placement: right
+    textinsert: Tree.shared
+  - title: Tree
+    element: '#tool-search'
+    content: Click on the "Tree.shared" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_tree_shared%2Fmothur_tree_shared%2F1.36.1.0"]
+  - title: Tree
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Select input format” to Phylip Distance Matrix</li>
+        <li>“phylip” to dist files from Dist.shared (collection)</li>
+      </ul>
+    position: left
+  - title: Tree
+    element: '#tool-search-query'
+    content: Search for Newick display tool
+    placement: right
+    textinsert: Newick display
+  - title: Tree
+    element: '#tool-search'
+    content: Click on the "Newick display" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdcorreia%2Fnewick_display%2Fnwdisplay%2F1"]
+  - title: Tree
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Newick file” to output from Tree.shared (collection)</li>
+      </ul>
+    position: left
+  - title: Tree
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Inspect the output. It shows that the early and late communities cluster
+      with themselves to the exclusion of the others
+    placement: left
+  - title: Determine statistical significance of clusterings
+    content: >-
+      We can perform a test to determine whether the clustering within the tree
+      is statistically significant or not using by choosing from the parsimony,
+      unifrac.unweighted, or unifrac.weighted commands. To run these we will
+      first need to create a design file that indicates which treatment each
+      sample belongs to.
+    backdrop: true
+  - title: Obtain design file
+    content: |-
+      Import the file called mouse.time.design to your history.<ul>
+        <li>Go to the shared data library or the files you downloaded from Zenodo.</li>
+      </ul>
+    backdrop: true
+  - title: Changing the datatype
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: |-
+      Make sure the datatype is set to mothur.design. <ul>
+        <li>Click on the pencil icon of the dataset</li>
+        <li>Click on the Datatype tab</li>
+        <li>Select the new datatype from dropdown menu</li>
+        <li>Click Save</li>
+      </ul>
+    placement: left
+  - title: Obtain design file
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Observe the output.<br>Using the parsimony command let’s look at the
+      pairwise comparisons. Specifically, let’s focus on the early vs. late
+      comparisons for each mouse
+    placement: left
+  - title: Compare Early-vs-Late
+    element: '#tool-search-query'
+    content: Search for Parsimony tool
+    placement: right
+    textinsert: Parsimony
+  - title: Compare Early-vs-Late
+    element: '#tool-search'
+    content: Click on the "Parsimony" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_parsimony%2Fmothur_parsimony%2F1.36.1.0"]
+  - title: Compare Early-vs-Late
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“tree” to the tre output from Tree.Shared (collection)</li>
+        <li>“group” to the design file described before</li>
+      </ul>
+    position: left
+  - title: Compare Early-vs-Late
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Inspect the output. There is clearly a significant difference between the
+      clustering of the early and late time points. Recall that this method
+      ignores the branch length.
+    placement: left
+  - title: PCoA
+    content: >-
+      The two distance matrices that we generated earlier (i.e.
+      jclass.0.03.lt.ave.dist and thetayc.0.03.lt.ave.dist) can then be
+      visualized using the pcoa or nmds plots.<br>
+
+      Principal Coordinates (PCoA) uses an eigenvector-based approach to
+      represent multidimensional data in as few dimensions as possible. Our data
+      is highly dimensional (~9 dimensions).
+    backdrop: true
+  - title: PCoA
+    element: '#tool-search-query'
+    content: Search for Pcoa tool
+    placement: right
+    textinsert: Pcoa
+  - title: PCoA
+    element: '#tool-search'
+    content: Click on the "Pcoa" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_pcoa%2Fmothur_pcoa%2F1.36.1.0"]
+  - title: PCoA
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“phylip” to dist files from Dist.shared (collection)</li>
+      </ul>
+    position: left
+  - title: PCoA
+    content: >-
+      Observe the result. The loadings files will tell you what fraction of the
+      total variance in the data are represented by each of the axes. <br>For
+      instance the loading file for thetayc.0.03.lt.ave shows that the first and
+      second axis represent about 45 and 14% of the variation (59% of the total)
+      for the thetaYC distances. The output to the logfile indicates that the
+      R-squared between the original distance matrix and the distance between
+      the points in 2D PCoA space was 0.88, but that if you add a third
+      dimension the R-squared value increases to 0.98. All in all, not bad.
+    backdrop: false
+  - title: Nmds
+    content: >-
+      Alternatively, non-metric multidimensional scaling (NMDS) tries to
+      preserve the distance between samples using a user defined number of
+      dimensions. We can run our data through NMDS with 2 dimensions
+    backdrop: true
+  - title: Nmds
+    element: '#tool-search-query'
+    content: Search for Nmds tool
+    placement: right
+    textinsert: Nmds
+  - title: Nmds
+    element: '#tool-search'
+    content: Click on the "Nmds" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_nmds%2Fmothur_nmds%2F1.36.1.0"]
+  - title: Nmds
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“phylip” to dist files from Dist.shared (collection)</li>
+      </ul>
+    position: left
+  - title: Nmds
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Opening the stress file for thetayc.0.03.lt.ave we can inspect the stress
+      and R^2 values, which describe the quality of the ordination. Each line in
+      this file represents a different iteration and the configuration obtained
+      in the iteration with the lowest stress is reported in the axes file.<br>
+      In the logfile we find that the lowest stress value was 0.11 with an
+      R-squared value of 0.95; that stress level is actually pretty good.
+    placement: left
+  - title: Nmds
+    content: You can test what happens with three dimensions now.
+    backdrop: true
+  - title: Nmds
+    element: '#tool-search-query'
+    content: Search for Nmds tool
+    placement: right
+    textinsert: Nmds
+  - title: Nmds
+    element: '#tool-search'
+    content: Click on the "Nmds" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_nmds%2Fmothur_nmds%2F1.36.1.0"]
+  - title: Nmds
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“phylip” to dist files collection from Dist.shared</li>
+        <li>“mindim” to 3</li>
+        <li>“maxdim” to 3</li>
+      </ul>
+    position: left
+  - title: Question
+    content: |-
+      Inspect the output <ul>
+        <li>What are stress and R-squared values when using 3 dimensions?</li>
+      </ul>
+    backdrop: false
+  - title: Nmds vs. Pcoa
+    content: >-
+      In general, we would like a stress value below 0.20 and a value below 0.10
+      is even better. Thus, we can conclude that, NMDS is better than PCoA. We
+      can plot the three dimensions of the NMDS data by plotting the contents of
+      the axes file.<br>
+
+      Again, it is clear that the early and late samples cluster separately from
+      each other. Ultimately, ordination is a data visualization tool. We might
+      ask if the spatial separation that we see between the early and late plots
+      in the NMDS plot is statistically significant. To do this we have two
+      statistical tools at our disposal. The first analysis of molecular
+      variance (AMOVA), tests whether the centers of the clouds representing a
+      group are more separated than the variation among samples of the same
+      treatment. This is done using the distance matrices we created earlier and
+      does not actually use ordination.
+    backdrop: true
+  - title: Amova
+    element: '#tool-search-query'
+    content: Search for Amova tool
+    placement: right
+    textinsert: Amova
+  - title: Amova
+    element: '#tool-search'
+    content: Click on the "Amova" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_amova%2Fmothur_amova%2F1.36.1.0"]
+  - title: Amova
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“phylip” to dist files from Dist.shared (collection)</li>
+        <li>“design” to mouse.time.design file from your history</li>
+      </ul>
+    position: left
+  - title: Amova
+    content: >-
+      Inspect the output logfile. Here we see from the AMOVA that the “cloud”
+      early and late time points has a significantly different centroid for this
+      mouse. Thus, the observed separation in early and late samples is
+      statistically significant. We can also see whether the variation in the
+      early samples is significantly different from the variation in the late
+      samples using the Homova.
+    backdrop: false
+  - title: Homova
+    element: '#tool-search-query'
+    content: Search for Homova tool
+    placement: right
+    textinsert: Homova
+  - title: Homova
+    element: '#tool-search'
+    content: Click on the "Homova" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_homova%2Fmothur_homova%2F1.36.1.0"]
+  - title: Homova
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“phylip” to dist files from Dist.shared (collection)</li>
+        <li>“design” to mouse.time.design file from your history</li>
+      </ul>
+    position: left
+  - title: Homova
+    content: >-
+      Observe the output. We can see that there is a significant difference in
+      the variation with the early samples having a larger amount of variation
+      (0.061) than the late samples (0.008). This was what we found in the
+      original study - the early samples were less stable than the late samples.
+    backdrop: false
+  - title: Correlation
+    content: >-
+      Next, we might ask which OTUs are responsible for shifting the samples
+      along the two axes. We can determine this by measuring the correlation of
+      the relative abundance of each OTU with the two axes in the NMDS dataset.
+      We do this with the corr.axes tool
+    backdrop: true
+  - title: Correlation
+    element: '#tool-search-query'
+    content: Search for Corr.axes tool
+    placement: right
+    textinsert: Corr.axes
+  - title: Correlation
+    element: '#tool-search'
+    content: Click on the "Corr.axes" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_corr_axes%2Fmothur_corr_axes%2F1.36.1.0"]
+  - title: Correlation
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“axes” to axes output from Nmds in 3 dimension (collection)</li>
+        <li>“shared” to shared output from collapse collection on Sub.sample</li>
+        <li>“method” to Spearman</li>
+        <li>“numaxes” to 3</li>
+      </ul>
+    position: left
+  - title: Correlation
+    content: >-
+      Examining the axes output, we can see that OTUs 1 and 2 are responsible
+      for moving points in a negative direction along axis 2. Recalling that we
+      classified each OTU earlier (see taxonomy output from Classify.otu), we
+      can see that these first five OTUs are mainly members of the
+      Porphyromonadaceae. <br>This helps to illustrate the power of OTUs over
+      phylotypes since each of these OTUs is behaving differently. These data
+      can be plotted in what’s known as a biplot where lines radiating from the
+      origin (axis1=0, axis2=0, axis3=0) to the correlation values with each
+      axis are mapped on top of the PCoA or NMDS plots.
+    backdrop: false
+  - title: Correlation. Remarks
+    content: >-
+      Later, using the metastats command, we will see another method for
+      describing which populations are responsible for differences seen between
+      specific treatments.
+
+      <br>An alternative approach to building a biplot would be to provide data
+      indicating metadata about each sample. For example, we may know the
+      weight, height, blood pressure, etc. of the subjects in these samples.
+    backdrop: true
+  - title: Correlation
+    element: '#tool-search-query'
+    content: Search for Corr.axes tool
+    placement: right
+    textinsert: Corr.axes
+  - title: Correlation
+    element: '#tool-search'
+    content: Click on the "Corr.axes" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_corr_axes%2Fmothur_corr_axes%2F1.36.1.0"]
+  - title: Correlation
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“axes” to axes output from Nmds in 3 dimension</li>
+        <li>“Generate Collector Curvers for” to Metadata table</li>
+        <li>“metadata table” to mouse.dpw.metadata</li>
+        <li>“method” to Spearman</li>
+        <li>“numaxes” to 3</li>
+      </ul>
+    position: left
+  - title: Correlation
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Observe the output. It indicates that as the dpw increases, the
+      communities shift to in the positive direction along axis 3. Another tool
+      we can use is get.communitytype to see whether our data can be partitioned
+      in to separate community types.
+    placement: left
+  - title: Get.communitytype
+    element: '#tool-search-query'
+    content: Search for Get.communitytype tool
+    placement: right
+    textinsert: Get.communitytype
+  - title: Get.communitytype
+    element: '#tool-search'
+    content: Click on the "Get.communitytype" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_get_communitytype%2Fmothur_get_communitytype%2F1.36.1.0"]
+  - title: Get.communitytype
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to Subsample.shared file</li>
+      </ul>
+    position: left
+  - title: Get.communitytype
+    content: >-
+      Check the output file. We see that the minimum Laplace value is for a K
+      value of 2 (9348.28). This indicates that our samples belonged to two
+      community types. Opening the design output we see that all of the late
+      samples and the Day 0 sample belonged to Partition_1 and the other early
+      samples belonged to Partition_2. We can look at the summary output to see
+      which OTUs were most responsible for separating the communities. <br>Again
+      we can cross reference these OTU labels with the consensus classifications
+      in the taxonomy file to get the names of these organisms
+    backdrop: false
+  - title: Question
+    content: |-
+      <ul>
+        <li>What organisms were the top 5 contributing OTUs classified as?</li>
+      </ul>
+    backdrop: false
+  - title: Population-level Analysis
+    content: >-
+      In addition to the use of corr.axes and get.communitytype we have several
+      tools to differentiate between different groupings of samples. The first
+      we’ll demonstrate is metastats, which is a non-parametric T-test that
+      determines whether there are any OTUs that are differentially represented
+      between the samples from men and women in this study.
+    backdrop: true
+  - title: T-test
+    element: '#tool-search-query'
+    content: Search for Metastats tool
+    placement: right
+    textinsert: Metastats
+  - title: T-test
+    element: '#tool-search'
+    content: Click on the "Metastats" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_metastats%2Fmothur_metastats%2F1.36.1.0"]
+  - title: T-test
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to Subsample.shared</li>
+        <li>“design” to mouse.time.design</li>
+      </ul>
+    position: left
+  - title: T-test
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Look at the first 5 OTUs from Late-Early output file. These data tell us
+      that OTUs 1, 2, and 3 was significantly different between the early and
+      late samples.
+    placement: left
+  - title: Question
+    content: |-
+      <ul>
+        <li>Which of the top 10 OTUs in your output were significantly different between early and late samples?</li>
+      </ul>
+    backdrop: false
+  - title: Lefse
+    content: >-
+      Another non-parametric tool we can use as an alternative to metastats is
+      lefse
+    backdrop: true
+  - title: Lefse
+    element: '#tool-search-query'
+    content: Search for Lefse tool
+    placement: right
+    textinsert: Lefse
+  - title: Lefse
+    element: '#tool-search'
+    content: Click on the "Lefse" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_lefse%2Fmothur_lefse%2F1.36.1.0"]
+  - title: Lefse
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to Subsample.shared</li>
+        <li>“design” to mouse.time.design</li>
+      </ul>
+    position: left
+  - title: Lefse
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Look at the first 5 OTUs again. Again, OTUs 1, 2, and 3 are significantly
+      different between the two groups and are significantly elevated in the
+      late samples
+    placement: left
+  - title: Lefse
+    content: >-
+      Finally, Mothur has an implementation of the random forest algorithm build
+      into her as classify.rf. This will tell us which features (i.e. OTUs) are
+      useful in discriminating between the two groups of samples
+    backdrop: true
+  - title: Classify.rf
+    element: '#tool-search-query'
+    content: Search for Classify.rf tool
+    placement: right
+    textinsert: Classify.rf
+  - title: Classify.rf
+    element: '#tool-search'
+    content: Click on the "Classify.rf" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_rf%2Fmothur_classify_rf%2F1.36.1.0"]
+  - title: Classify.rf
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to Subsample.shared</li>
+        <li>“design” to mouse.time.design</li>
+      </ul>
+    position: left
+  - title: Classify.rf
+    content: >-
+      Check the logfile.
+
+      We can see that our samples were all correctly assigned to the proper
+      groups. Looking at summary output, we see the top 10 OTUs that resulted in
+      the greatest mean decrease in activity
+    backdrop: false
+  - title: Visualisations
+    content: >-
+      Mothur does not have a lot of visualization tools built in, but external
+      tools may be used for this. For instance we can convert our shared file to
+      the more widely used biom format and view it in a platform like Phinch.
+    backdrop: true
+  - title: Phinch
+    element: '#tool-search-query'
+    content: Search for Make.biom tool
+    placement: right
+    textinsert: Make.biom
+  - title: Phinch
+    element: '#tool-search'
+    content: Click on the "Make.biom" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_biom%2Fmothur_make_biom%2F1.36.1.0"]
+  - title: Phinch
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“shared” to Subsample.shared</li>
+        <li>“constaxonomy” to taxonomy output from Classify.otu (collection)</li>
+        <li>“metadata” to mouse.dpw.metadata</li>
+      </ul>
+    position: left
+  - title: Phinch
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      The Galaxy project runs an instance of Phinch, and if you look at the
+      output biom file, you will see a link to view the file at Phinch.
+
+      Clicking on this link will lead you to the Phinch website, which will
+      automatically load in your file, and where you can several interactive
+      visualisations
+    placement: left
+  - title: Krona
+    content: 'A second tool we can use to visualize our data, is Krona'
+    backdrop: true
+  - title: Krona
+    element: '#tool-search-query'
+    content: Search for Krona tool
+    placement: right
+    textinsert: Krona
+  - title: Krona
+    element: '#tool-search'
+    content: Click on the "Krona" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fsaskia-hiltemann%2Fkrona_text%2Fkrona-text%2F1"]
+  - title: Krona
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“input file” to taxonomy output from Classify.otu (collection)</li>
+        <li>Set Is this output from mothur? to yes</li>
+      </ul>
+    position: left
+  - title: Krona
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      The resulting file is an HTML file containing an interactive
+      visualization. For instance try double-clicking the innermost ring labeled
+      “Bacteria”
+    placement: left
+  - title: Question
+    content: |-
+      <ul>
+        <li>what percentage of your sample was labelled Lactobacillus?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      You have now seen how to perform the Schloss lab’s Standard Operating
+      Procedure (SOP) for MiSeq data.
+
+      <br><b>Key points:</b><ul>
+        <li>16S rRNA gene sequencing analysis results depend on the many algorithms used and their settings</li>
+        <li>Quality control and cleaning of your data is a crucial step in order to obtain optimal results</li>
+        <li>Adding a mock community to serve as a control sample can help you asses the error rate of your experimental setup</li>
+        <li>We can explore alpha and beta diversities using Krona and Phinch for dynamic visualizations</li>
+      </ul>
+    backdrop: true
