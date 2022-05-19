@@ -209,7 +209,8 @@ Firstly, our next tool has some assumptions about our input VCFs. The tool expec
 > >     - The first match, the pattern in the first brackets `##contig=<.*ID=`, matches the contig header lines, which start with `##contig=<`. It is followed by a match anything `.` for zero-or-more times `*` until it finds `ID=`.
 > >     - The second match, the pattern in the second brackets `[0-9MYX].+`, matches the chromosome numbers and characters `[0-9MYX]` followed by a matching anything `.` for one-or-more times `+`.
 > >     - The replacement pattern `\1chr\2` means that the prefix `chr` has to be inserted between the first match `\1` or `##contig=<.*ID=` and the second match `\2` or `[0-9MYX].+`.
-> {: .comment}
+> {: .tip}
+
 >
 {: .hands_on}
 
