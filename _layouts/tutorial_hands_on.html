@@ -270,6 +270,23 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
                 <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
+                {% if own_material.quiz %}
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    {% for q in own_material.quiz %}
+                    <h2>{{ q.title }}</h2>
+                    <div class="contributors-line">{% include _includes/contributor-list.html contributors=q.contributors badge=true %}</div>
+                    <ul>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=self&quiz={{ site.baseurl }}/{{ q.path }}">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=teacher&quiz={{ site.baseurl }}/{{ q.path }}">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+
                 {% if topic.references %}
                 <h1 data-toc-skip>Useful literature</h1>
                 <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
