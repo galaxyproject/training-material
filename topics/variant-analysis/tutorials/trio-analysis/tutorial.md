@@ -341,7 +341,7 @@ A pedigree file is a file that informs GEMINI which family members are affected 
 > FAM0001822	Case6C	Case6F	Case6M	2	2
 > ```
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> {% snippet faqs/galaxy/datasets_create_new_file.md %}
 >
 {: .hands_on}
 
