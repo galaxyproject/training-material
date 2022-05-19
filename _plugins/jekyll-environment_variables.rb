@@ -3,6 +3,7 @@ require 'find'
 require 'bibtex'
 require 'citeproc/ruby'
 require 'csl/styles'
+require 'time'
 
 module Jekyll
 
@@ -25,10 +26,6 @@ module Jekyll
       end
 
       # Add other environment variables to `site.config` here...
-      #
-      #
-      #
-      #
 
       puts "[GTN/scholar] Creating global bib cache"
       global_bib = BibTeX::Bibliography.new
@@ -56,6 +53,12 @@ module Jekyll
                                    format: 'html', locale: 'en'
       cp.import global_bib.to_citeproc
       site.config['cached_citeproc'] = cp
+
+      # Get site age.
+      first_commit = Date.parse("2015-06-29")
+      today = Date.today()
+
+      site.config['age'] = (today - first_commit).to_f / 365
     end
   end
 end
