@@ -162,7 +162,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 > ### {% icon hands_on %} Hands-on: Summary of mapping quality
 > 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
->    - *"Use reference sequence"*: `Locally cached`
+>    - *"Use reference sequence"*: `Locally cached/Use a built-in genome`
 >      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
 >
 > 2. Inspect the {% icon param-file %} `Stats` file
@@ -182,7 +182,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 >    > > 4. The insert size is the distance between the two reads in the pairs.
 >    > > 5. To get the info:
 >    > >      1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with a filter to keep only the reads with a mapping quality >= 20
->    > >      2. **Stats generate statistics for BAM dataset** {% icon tool %} on the output of **Filter**
+>    > >      2. **Samtools Stats** {% icon tool %} on the output of **Filter**
 >    > >
 >    > >    Before filtering: 95,412 reads and after filtering: 89,664 reads.
 >    >  {: .solution }

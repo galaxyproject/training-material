@@ -7,28 +7,40 @@ module Jekyll
     end
 
     def render(context)
+      page = context.registers[:page]
+      site = context.registers[:site]
+
+      # Mark this page as having citations
+      page['cited'] = true
+
+      if page['citation_target'] == 'R'
+        return "@#{@text}"
+      end
+
       # Which page is rendering this tag?
-      source_page = context.registers[:page]['path']
+      source_page = page['path']
       # If the overall cache is nil, create it
-      if context.registers[:site].config['citation_cache'].nil?
-        context.registers[:site].config['citation_cache'] = Hash.new
+      if site.config['citation_cache'].nil?
+        site.config['citation_cache'] = Hash.new
       end
       # If the individual page in the chace is nil, create it.
-      if context.registers[:site].config['citation_cache'][source_page].nil?
-        context.registers[:site].config['citation_cache'][source_page] = Array.new
+      if site.config['citation_cache'][source_page].nil?
+        site.config['citation_cache'][source_page] = Array.new
       end
 
-      # Push it to our cache.
-      context.registers[:site].config['citation_cache'][source_page].push(@text)
-      # Mark this page as having citations
-      context.registers[:page]['cited'] = true
+       # Push it to our cache.
+      site.config['citation_cache'][source_page].push(@text)
 
       begin
-        citation_text = context.registers[:site].config['cached_citeproc'].render(:citation, id: @text)
+        citation_text = site.config['cached_citeproc'].render(:citation, id: @text)
         res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
       rescue
         puts "[GTN/scholar] Could not render #{@text} from #{source_page}"
         res = %Q(<span>ERROR INVALID CITATION #{@text}</span>)
+      end
+
+      if page['citation_target'] == 'jupyter'
+        res.gsub!(/"/, '\"')
       end
 
       res

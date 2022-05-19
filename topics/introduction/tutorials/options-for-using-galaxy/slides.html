@@ -1,6 +1,7 @@
 ---
 layout: tutorial_slides
 logo: GTN
+video: true
 
 title: "Options for using Galaxy"
 zenodo_link: ""
@@ -15,6 +16,7 @@ contributors:
   - abretaud
   - pajanne
   - nsoranzo
+  - alaaelghamry
 ---
 
 # Options for using Galaxy
@@ -47,6 +49,12 @@ This deck lists options for using Galaxy outside of a training context.
   - Averages 250,000 jobs *per month* in 2016
   - A single resource cannot scale to meet the demand of the entire world, nor can it support all wanted tools, genomes, ...
 
+???
+- usegalaxy.org is the public server, it's hosted at the Texas Advanced Computing Center.
+- It has lots of tools, reference genomes, computer power, and free storage also.
+- But it's also very busy, in 2016 it had an average of 250,000 jobs per month, that sometimes could slow down the process
+- The world of data analysis is huge and full of tools , genomes , and resources
+-  A single resource cannot scale to meet the demand of the entire world
 ---
 
 ### Public Galaxy Servers
@@ -56,6 +64,12 @@ This deck lists options for using Galaxy outside of a training context.
 [.image-25[![GigaGalaxy's logo mentioning integrated publishing of workflows](../../images/public_server_gigagalaxy.png)]](https://galaxyproject.org/public-galaxy-servers/#gigagalaxy)
 [.image-25[![Prove your point, genome statistics made simple with the Genomic Hyperbrowser](../../images/public_server_genomichyperbrowser.png)]](https://hyperbrowser.uio.no/hb/)
 [.image-25[![Unreadable tiny text with a head the Lanuage Application Grid](../../images/public_server_lappsgrid.png)]](https://galaxy.lappsgrid.org/)
+
+??? 
+- There are currently more than 80 public Galaxy servers, and the number keeps growing.
+- for example, GalaxyEast, an open and powerful galaxy instance for integrative omics data analysis
+- the Genomic Hyperbrowser to Manage and Analyze collections of genome-wide datasets.
+- Galaxy Platform Directory which  lists platforms where you can use or deploy your own Galaxy Server with minimal effort.
 
 ---
 
@@ -72,6 +86,13 @@ This deck lists options for using Galaxy outside of a training context.
 
 Complete list: [bit.ly/gxyServers ](https://bit.ly/gxyServers)
 
+???
+
+- There are three types of servers
+- First is general-purpose genomics servers.
+- The second is domain-specific servers, which can be specific to: Research methods, Organisms or Non-genomic domains
+- the third type is Tool servers , the tool servers host specific tools to make them easy to access and run
+
 ---
 
 ### Semi-public Galaxy services
@@ -86,6 +107,13 @@ Access based on geography or community membership
 | US | [Jetstream](https://galaxyproject.org/cloud/jetstream/) |
 
 Complete list: [bit.ly/gxysemipublic ](https://bit.ly/gxysemipublic)
+
+???
+- There are some semi-public galaxy servers for which access is restricted according to the user's geographic location or community membership
+- In Australia there is the Genomics Virtual Lab
+- In Canada there is GenAP
+- In Norway there is Norwegian e-Infrastructure for Life Sciences
+- In the US there is Jetstream
 
 ---
 
@@ -103,6 +131,13 @@ Complete list: [bit.ly/gxysemipublic ](https://bit.ly/gxysemipublic)
 .pull-right[
 [.image-75[![Illegible screenshot of Galaxy Cloud Launch with a form for entering data.](../../images/cloudlaunch_empty.png)]](https://launch.usegalaxy.org/)
 ]
+
+???
+- In addition to servers there is also Public clouds via Galaxy CloudLaunch
+- Unfortunetly it currently only supports Jetstream and Amazon Web Services
+- You first need to create an Amazon Web Services account (which requires a credit card) and then provide your
+ public and secret keys to CloudLaunch
+
 ---
 
 .pull-left[
@@ -116,6 +151,11 @@ Complete list: [bit.ly/gxysemipublic ](https://bit.ly/gxysemipublic)
 .pull-right[
 [.image-75[![Screenshot of a Galaxy Cloud Man instance](../../../../shared/images/cloudman_based_server_landing_page.png)]](https://wiki.galaxyproject.org/CloudMan)
 ]
+
+???
+- CloudLaunch Comes with hundredss of tools and many pre-defined reference genomes.
+- CloudLaunch starts a Galaxy instance called CloudMan.
+- CloudMan is a cloud management tool that moves so much of the cloud management work into a Graphical user interface.
 ---
 
 ### CloudMan
@@ -129,12 +169,19 @@ CloudMan enables you to statically or dynamically scale compute power
   - Paying to have a cloud instance up for two weeks that you only use for 8 hours is not cost effective
 - **It is very important to shut down and remove everything when you are done**
 
+???
+- CloudMan enables you to statically or dynamically scale compute power
+- Cloud instances can be incredibly cost effective only if you are actually using them when they are up.
+- you can't have a cloud instance up for two weeks when you only use for 8 hours 
+- It is very important to shut down and remove everything when you are done
 ---
 
 ### Docker (and maybe other appliances?)
 
 Stuff about docker...
 
+???
+- Galaxy could be running in Docker 
 ---
 
 ### Run your own Galaxy locally
@@ -147,6 +194,14 @@ Stuff about docker...
   - Installing tools and genomes has become much easier in recent years, and can now often be done with the Galaxy Admin GUI
   - Authentication and connecting to institutional compute resources is still heavy lifting
 
+???
+- Galaxy is open source software which means it's free to use locally 
+- it can be installed on local compute infrastructure, from lab servers to institutional compute clusters.
+- Installing Galaxy locally is relatively easy, but you have to consider this
+- the initial install does not include reference genomes and only has a few tools
+- installing tools and genomes, setting up authentication, and connecting to institutional compute resources all takes work
+- installing has become much easier and can now be done with the Galaxy Admin GUI
+- Authentication and connecting to institutional compute resources is still heavy lifting
 ---
 
 ### Commercial support
@@ -155,6 +210,10 @@ Stuff about docker...
 - [Globus Genomics](http://globusgenomics.org/) provides cloud-based Galaxy servers
 - [Commercially provided consulting and training](https://galaxyproject.org/support/commercial/) are also available
 
+???
+- Commercial solutions are also available, for example:
+- You can buy a preconfigured Galaxy server from BioTeam
+- Globus Genomics also provides cloud-based Galaxy servers
 ---
 
 ### Which Galaxy instance to use?
@@ -164,3 +223,7 @@ Stuff about docker...
   - data security
   - computational requirements
   - tools installed
+???
+- In conclusion, choosing which Galaxy instance to use depends on multiple factors like: size of datasets, available storage, backup
+- you also need to consider data security, computational requirements, and the tools installed
+

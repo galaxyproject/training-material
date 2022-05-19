@@ -91,7 +91,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >
 > 4. Rename Datasets
 >
->    As "`https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull.
+>    As "`https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningful.
 >    For example by removing `https://zenodo.org/record/3776500/files/` to obtain `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` and `ts_cities.csv`, respectively.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
@@ -122,7 +122,7 @@ if you focus your attention on the dog, you can see that it is all over the plac
 variability. The dog (weather) is not following a fully random pattern and varies around a main direction (trend) that is given by the woman: the woman is representing
 the climate and gives us an indication of where both the woman and dog are likely to be in the future.
 
- ![Illustrate the difference between weather and climate](../../images/weather_versus_climate.png "Weather versus Climate")
+ ![Illustration of the difference between weather and climate](../../images/weather_versus_climate.png "Weather versus Climate")
 
 *Source: [Animated short introduction to statistics in climate research](https://youtu.be/e0vj-0imOLw) from Norwegian infotainment program Siffer. Produced by TeddyTV for NRK. Animation by Ole Christoffer Haga*
 
@@ -301,7 +301,7 @@ To get some information about the (past and current) climate in Paris, we will f
 >
 >    4. **View** {% icon galaxy-eye%} the resulting plot:
 >
->    ![Yearly mean temperature in Paris](../../images/yearly_mean_temperature_Paris.png)
+>    ![Resulting plot showing Yearly mean temperature in Paris](../../images/yearly_mean_temperature_Paris.png)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -331,7 +331,7 @@ temperature. The baseline temperature is typically computed by averaging 30 or m
 >
 >    **View** {% icon galaxy-eye%} the resulting plot:
 >
->    ![Climate stripes in Paris](../../images/climate_stripes_temperature_Paris.png)
+>    ![Resulting plot showing Climate stripes in Paris](../../images/climate_stripes_temperature_Paris.png)
 >
 >    > ### {% icon question %} Question: do you observe a warming or cooling between 1950 and 2019?
 >    >
@@ -389,7 +389,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 >            - *"colormap"*: PiYG
 >    3. **View** {% icon galaxy-eye%} the resulting plot:
 >
->    ![Relative humidity in July 1980 and July 2018](../../images/rh_ecv_july_1980_2018.png)
+>    ![Resulting plot showing Relative humidity in July 1980 and July 2018](../../images/rh_ecv_july_1980_2018.png)
 >
 >
 >    > ### {% icon question %} Relative humidity

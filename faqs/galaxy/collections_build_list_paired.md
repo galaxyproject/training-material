@@ -3,6 +3,7 @@ title: Creating a paired collection
 area: collections
 box_type: tip
 layout: faq
+contributors: [shiltemann, hexylena]
 ---
 
 

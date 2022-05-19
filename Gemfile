@@ -9,6 +9,7 @@ gem 'awesome_bot'
 gem 'html-proofer'
 gem 'pkg-config'
 gem 'kwalify'
+
 # Citations
 gem 'bibtex-ruby'
 gem 'citeproc-ruby'

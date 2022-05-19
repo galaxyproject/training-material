@@ -20,8 +20,43 @@
                         <a class="nav-link" href="{{ site.baseurl }}/hall-of-fame" title="Hall of Fame">
                            {% icon hall-of-fame %} Contributors
                         </a>
+
                         {% endif %}
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            {% icon language %} Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            {% if page.translations %}
+                              <strong class="dropdown-header">Curated Translations</strong>
+                              {% for lang in page.translations %}
+                                  {% if lang == "en" %}
+                                      {% capture fixed_final %}_{{ page.lang | upcase }}.html{% endcapture %}
+                                      <a class="dropdown-item" href="{{ site.baseurl }}{{ page.url | replace: fixed_final,".html"}}">
+                                        {{site.other_languages[lang]}}
+                                      </a>
+                                  {% else %}
+                                      {% capture fixed_final %}_{{ lang | upcase }}.html{% endcapture %}
+                                      <a class="dropdown-item" href="{{ site.baseurl }}{{ page.url | replace: '_ES', '' | replace: ".html",fixed_final}}">
+                                        {{site.other_languages[lang]}}
+                                      </a>
+                                  {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            {% for lang in site.other_languages %}{% unless lang[0]=='en' %}
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{lang[0]}}&u=https%3A%2F%2Ftraining.galaxyproject.org{{page.url}}&edit-text=&act=url">
+                            {{lang[1]}}
+                            </a>
+                            {% endunless %}{% endfor %}
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org{{ page.url }}&edit-text=&act=url" title="{{ inst[0] }}">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
                     {% include _includes/help.html %}
 
                     {% include _includes/extras.html %}

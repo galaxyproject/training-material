@@ -22,8 +22,10 @@ contributors:
   - bgruening
   - hexylena
 tags:
+  - ansible
   - jobs
-subtopic: features
+  - git-gat
+subtopic: jobs
 requirements:
   - type: "internal"
     topic_name: admin
@@ -56,12 +58,12 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 
 > ### {% icon hands_on %} Hands-on: Deploying a Tool
 >
-> 1. Create the directory `templates/galaxy/tools/` if it doesn't exist and edit a new file in `templates/galaxy/tools/testing.xml` with the following contents:
+> 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/tools/testing.xml
+>    +++ b/files/galaxy/tools/testing.xml
 >    @@ -0,0 +1,11 @@
 >    +<tool id="testing" name="Testing Tool">
 >    +    <command>
@@ -78,13 +80,15 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```
 >    {: data-commit="Add testing tool"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Add the tool to the Galaxy group variables under the new item `galaxy_local_tools` :
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -99,6 +99,9 @@ galaxy_config_templates:
+>    @@ -101,6 +101,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -211,12 +215,12 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
 >
-> 1. Create and open `templates/galaxy/dynamic_job_rules/my_rules.py`
+> 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/my_rules.py
+>    +++ b/files/galaxy/dynamic_job_rules/my_rules.py
 >    @@ -0,0 +1,10 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -246,7 +250,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -101,6 +101,8 @@ galaxy_config_templates:
+>    @@ -103,6 +103,8 @@ galaxy_config_templates:
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -368,7 +372,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->    @@ -98,6 +99,8 @@ galaxy_config_templates:
+>    @@ -100,6 +101,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -472,7 +476,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -93,6 +93,8 @@ galaxy_config:
+>    @@ -95,6 +95,8 @@ galaxy_config:
 >         farm: job-handlers:1,2
 >     
 >     galaxy_config_templates:
@@ -567,12 +571,12 @@ Lastly, we need to write the rule that will read the value of the job resource p
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic destination
 >
-> 1. Create and edit `templates/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
+> 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/map_resources.py
+>    +++ b/files/galaxy/dynamic_job_rules/map_resources.py
 >    @@ -0,0 +1,42 @@
 >    +import logging
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -637,7 +641,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->    @@ -108,6 +109,7 @@ galaxy_local_tools:
+>    @@ -110,6 +111,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
@@ -708,7 +712,7 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 > ```
 {: .code-out}
 
-{% snippet topics/admin/faqs/missed-something.md step=7 %}
+{% snippet topics/admin/faqs/missed-something.md step=8 %}
 
 ## Further Reading
 

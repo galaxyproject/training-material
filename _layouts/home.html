@@ -33,12 +33,14 @@ layout: base
                 </thead>
                 <tbody>
                 {% for topic in sorted_topics %}
-                    {% if topic[1].type == "use" and topic[1].enable != false %}
+                    {% if topic[1].type == "use" %}
+                    {% if topic[1].enable != false or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
                     {% endif %}
                 {% endfor %}
                 </tbody>
@@ -54,12 +56,14 @@ layout: base
                 </thead>
                 <tbody>
                 {% for topic in sorted_topics %}
-                    {% if topic[1].type == "basics" and topic[1].enable != false  %}
+                    {% if topic[1].type == "basics" %}
+                    {% if topic[1].enable != false or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
                     {% endif %}
                 {% endfor %}
                 </tbody>
@@ -75,12 +79,14 @@ layout: base
                 </thead>
                 <tbody>
                 {% for topic in sorted_topics %}
-                    {% if topic[1].type == "data-science" and topic[1].enable != false  %}
+                    {% if topic[1].type == "data-science" %}
+                    {% if topic[1].enable != false or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
                     {% endif %}
                 {% endfor %}
                 </tbody>
@@ -96,12 +102,14 @@ layout: base
                 </thead>
                 <tbody>
                 {% for topic in sorted_topics %}
-                    {% if topic[1].type == "admin-dev" and topic[1].enable != false  %}
+                    {% if topic[1].type == "admin-dev" %}
+                    {% if topic[1].enable != false or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
                     {% endif %}
                 {% endfor %}
                 </tbody>
@@ -125,12 +133,14 @@ layout: base
                 </thead>
                 <tbody>
                 {% for topic in sorted_topics %}
-                    {% if topic[1].type == "instructors" and topic[1].enable != false %}
+                    {% if topic[1].type == "instructors" %}
+                    {% if topic[1].enable != false or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
                     {% endif %}
                 {% endfor %}
                 </tbody>
@@ -203,7 +213,7 @@ layout: base
                               {% assign fullname = contributor.name %}
                               <div class="hall-of-fame-hero">
                                   <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame/{{ username }}/">
-                                      <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ fullname | default: username }}" {% if count > 8 %}loading="lazy"{% endif %} title="Click to see contributions"/>
+                                      <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="{{ fullname | default: username }}" {% if count > 8 %}loading="lazy"{% endif %} title="Click to see contributions"/>
                                   </a>
                                 <p class="name">{{ fullname | default: username }}</p>
                               </div>
