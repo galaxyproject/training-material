@@ -80,7 +80,7 @@ You can include images in the main area, if you need some context for a question
 
 Poll's let you check in with students, how they're feeling, or take their opinion on what they think.
 
-```
+```yaml
 - title: How are you feeling?
   answers:
     - Great
@@ -88,7 +88,7 @@ Poll's let you check in with students, how they're feeling, or take their opinio
   timeout: 20
   type: poll
   live: true
-```yaml
+```
 
 The `live` key there allows polls to show the results "live" and let students change answers while the time runs.
 
@@ -96,7 +96,7 @@ The `live` key there allows polls to show the results "live" and let students ch
 
 You place quizzes in a `quiz` subdirectory of your tutorial
 
-```
+```console
 .
 ├── quiz
 │   └── a.yaml

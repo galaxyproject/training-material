@@ -161,7 +161,8 @@ module TopicFilter
       end
 
       if resources.include?("quiz") then
-        quizzes = Dir.glob("#{folder}/quiz/*.yml").map{ |a| a.split('/')[-1] }
+        ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
+        quizzes = ymls.map{ |a| a.split('/')[-1] }
         page_obj['quiz'] = quizzes.map{|q|
           quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
           {
