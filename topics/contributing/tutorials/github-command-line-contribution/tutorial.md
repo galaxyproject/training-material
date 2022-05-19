@@ -355,6 +355,29 @@ You now want to work on a new tutorial or make some other new changes. However s
 
 You can now restart the GitHub flow to propose new changes: start by [creating a new branch](#create-a-new-branch).
 
+
+# Close the Pull Request
+
+Great! You now know how to make pull request on GitHub, and how to make changes after a review.
+Reviewers can now approve and merge your pull request.
+
+Because this was just a practice pull request, let's close it again.
+
+
+> ### {% icon hands_on %} Hands-on: Close the Pull Request
+>
+> Once you have run through all these steps, please close the pull request again.
+>
+> 1. Go to the [list of pull request tab on GitHub](https://github.com/galaxyproject/training-material/pulls)
+> 2. Click on your pull request
+> 3. Scroll to the bottom of the page
+> 3. Click on "Close pull request" button
+>
+> Whenever you add your first real contribution, you can add yourself to the `CONTRIBUTORS.yaml` file in that PR.
+>
+{: .hands_on}
+
+
 # Conclusion
 {:.no_toc}
 
