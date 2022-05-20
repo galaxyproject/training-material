@@ -277,6 +277,21 @@ module Jekyll
       TopicFilter.topic_filter(site, topic_name)
     end
 
+    def humanize_types(type)
+      data = {
+        "seq" => "List of Items",
+        "str" => "Free Text",
+        "map" => "A dictionary/map",
+        "float" => "Decimal Number",
+        "int" => "Integer Number",
+        "bool" => "Boolean"
+      }
+      data[type]
+    end
+
+    def replace_newline_doublespace(text)
+      text.gsub(/\n/, "\n  ")
+    end
   end
 end
 
