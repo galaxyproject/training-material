@@ -1,6 +1,6 @@
 ---
 title: How to update account preferences?
-area: Account
+area: account
 layout: faq
 box_type: tip
 contributors: [jennaj, bernandez]
@@ -17,5 +17,5 @@ Note: Updating a registered account email address will not prevent multiple/dupl
 
 * Multiple accounts that are detected, suspended, and administratively managed, without followup on your part, result in data loss. Creating another account is not the solution -- the new account will also be detected up as a duplicate and removed.
 
-* You will not receive a special notification when accounts are administratively managed due to a breach of the terms of service. The original terms of service included directly on the account registration form and in the account activation emails are your notice.  
+* You will not receive a special notification when accounts are administratively managed due to a breach of the terms of service. The original terms of service included directly on the account registration form and in the account activation emails are your notice.
 

@@ -1,6 +1,6 @@
 ---
 title: How to create an account on a public Galaxy instance?
-area: Account
+area: account
 layout: faq
 box_type: tip
 contributors: [jennaj, bernandez, samanthaanjei]
@@ -14,6 +14,6 @@ contributors: [jennaj, bernandez, samanthaanjei]
 4. Click on the **Create** button, your account is successfully created.
 5. Check for a **Confirmation Email** in the email you used for account creation.
 6. Click on the **Email confirmation link** to fully activate your account.
- 
+
 
 
