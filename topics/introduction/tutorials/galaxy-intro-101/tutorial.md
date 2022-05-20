@@ -71,7 +71,7 @@ But even with your data in hand, you still have the question: "how do I actually
 
 Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
 
-{% snippet faqs/galaxy/creating_account.md %}
+{% snippet faqs/galaxy/account_create.md %}
 
 The Galaxy interface consists of three main parts:
 
