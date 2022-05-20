@@ -19,7 +19,6 @@ mapping:
             - Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools
     questions:
         type: seq
-        required: false
         sequence:
             - type: str
               required: true
@@ -32,7 +31,6 @@ mapping:
             - What kinds of data do programs store?
     objectives:
         type: seq
-        required: false
         sequence:
             - type: str
               required: true
@@ -50,7 +48,6 @@ mapping:
             - Generate a DotPlot emulating the original paper using a different analysis tool
     key_points:
         type: seq
-        required: false
         sequence:
             - type: str
               required: true
@@ -65,7 +62,6 @@ mapping:
             - It can drastically simplify management of large numbers of VMs
     edam_ontology:
         type: str
-        required: false
         pattern: /^topic_[0-9]+$/
         description: |
             An edam ontology id that describes the topic or tutorial.
@@ -73,7 +69,6 @@ mapping:
             - topic_3173
     gitter:
         type: str
-        required: false
         description: |
             Link to a gitter channel that is more relevant for the tutorial than the default. E.g. a single cell tutorial could use `Galaxy-Training-Network/galaxy-single-cell` to link to their specific chat room.
         examples:
@@ -81,7 +76,6 @@ mapping:
             - galaxy-genome-annotation/Lobby
     contributors:
         type: seq
-        required: false
         sequence:
             - type: str
               required: true
@@ -93,55 +87,87 @@ mapping:
             - hexylena
             - shiltemann
     contributions:
+        required: true
+        description: |
+            List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
+        examples: |
+            contributions:
+                authorship:
+                    - shiltemann
+                    - bebatut
+                editing:
+                    - hexylena
+                    - bebatut
+                    - natefoo
+                testing:
+                    - bebatut
+                infrastructure:
+                    - natefoo
+                funding:
+                    - erasmusplus
         type: map
         mapping:
             authorship:
+                description: These entities wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.
                 type: seq
                 sequence:
                 - type: str
+                  enum:
+                  - CONTRIBUTORS
             editing:
                 type: seq
+                description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
                 sequence:
                 - type: str
+                  enum:
+                  - CONTRIBUTORS
             testing:
                 type: seq
+                description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
                 sequence:
                 - type: str
+                  enum:
+                  - CONTRIBUTORS
             ux:
                 type: seq
+                description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
                 sequence:
                 - type: str
+                  enum:
+                  - CONTRIBUTORS
             infrastructure:
                 type: seq
+                description: These entities managed and provided infrastructure to the GTN or for training purposes
                 sequence:
                 - type: str
+                  enum:
+                  - CONTRIBUTORS
             funding:
                 type: seq
+                description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
+                  enum:
+                  - CONTRIBUTORS
     subtopic:
         type: str
-        required: false
         description: |
             if the topic has [multiple subtopics defined](/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
         examples:
             - single-cell
     priority:
         type: int
-        required: false
         description: |
             This field allows ordering tutorials within the tutorial list. Tutorials with lower numbered priority come before tutorials with higher numbers.
         examples: 1
     zenodo_link:
         type: str
-        required: false
         description: |
             link on Zenodo to the input data for the tutorial
         examples:
             - "https://zenodo.org/record/3706539"
     tags:
         type: seq
-        required: false
         sequence:
             - type: str
               required: true
@@ -152,7 +178,6 @@ mapping:
             - git-gat
     translations:
         type: seq
-        required: false
         sequence:
             - type: str
               required: true
@@ -175,7 +200,6 @@ mapping:
                 API: Application Programming Interface
     galaxy_version:
         type: float
-        required: false
         description: |
             Currently unused.
     level:
@@ -191,19 +215,20 @@ mapping:
         required: true
         pattern: /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/
         description: |
-            An estimation of the time needed to complete the hands-on. It should look like 10M or 1H30M
+            An estimation of the time needed to complete the hands-on.
+        examples:
+            - 10M
+            - 1H30M
     redirect_from:
         type: seq
         sequence:
             - type: str
-        required: false
         description: |
             If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
         examples:
         - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
     notebook:
         type: map
-        required: false
         examples: |
             notebook:
                 language: python
@@ -215,7 +240,6 @@ mapping:
         mapping:
             snippet:
                 type: str
-                required: false
                 description: |
                     If you have an alternative preamble for your notebook that students should know before following (e.g. they must load X datasets in their history), it can be listed here.
 
@@ -224,7 +248,6 @@ mapping:
                     - topics/climate/tutorials/pangeo-notebook/preamble.md
             pyolite:
                 type: bool
-                required: false
                 description: |
                     The GTN has support for JupyterLite and the Pyodide kernel which runs [Python in the browser via webassembly/javascript](https://pyodide.org/en/stable/). This comes with some restrictions:
 
@@ -249,7 +272,6 @@ mapping:
                     - sql
     lang:
         type: str
-        required: false
         enum:
             - es
             - en
@@ -257,7 +279,6 @@ mapping:
             The document language.
     voice:
         type: map
-        required: false
         description: |
             For materials which are automatically converted into videos via the available mechanisms, this field declares which voice should be used. If this field is not declared, a random voice will be chosen from a list of the best available voices from AWS Polly.
         mapping:
@@ -277,7 +298,6 @@ mapping:
                 neural: true
     follow_up_training:
         type: seq
-        required: false
         description: list of resources that the reader of the material could follow at the end of the tutorial
         examples:
             - |
@@ -307,29 +327,24 @@ mapping:
                         the type of link
                   topic_name:
                       type: str
-                      required: false
                       description: |
                         [Internal Only] The name of the topic
                   tutorials:
                       type: seq
-                      required: false
                       sequence:
                           - type: str
                       description: |
                           [Internal Only] List of required tutorials inside that topic
                   title:
                       type: str
-                      required: false
                       description: |
                         Title of the external resource
                   link:
                       type: str
-                      required: false
                       description: |
                         URL of the external resource
     requirements:
         type: seq
-        required: false
         description: List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to `follow_up_training`.
         examples:
             - |
@@ -359,35 +374,29 @@ mapping:
                         the type of link
                   topic_name:
                       type: str
-                      required: false
                       description: |
                         [Internal Only] The name of the topic
                   tutorials:
                       type: seq
-                      required: false
                       sequence:
                           - type: str
                       description: |
                           [Internal Only] List of required tutorials inside that topic
                   title:
                       type: str
-                      required: false
                       description: |
                         Title of the external resource
                   link:
                       type: str
-                      required: false
                       description: |
                         URL of the external resource
     license:
         type: str
-        required: false
         description: |
             An [SPDX](https://spdx.org/) identifier for the alternative license that is used for that particular material. This is **only** relevant for materials which have been imported from an external source and were originally licensed under another license. For new materials we strongly encourage contributors to not use this key as materials are CC-BY, by default.
         examples:
             - MIT
     enable:
         type: bool
-        required: false
         description: |
             `false` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.

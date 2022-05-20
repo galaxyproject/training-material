@@ -63,6 +63,11 @@ mapping:
             - Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
     edam_ontology:
         type: str
+        pattern: /^topic_[0-9]+$/
+        description: |
+            An edam ontology id that describes the tutorial.
+        examples:
+            - topic_3173
     video:
         type: bool
         description: |
@@ -70,7 +75,6 @@ mapping:
             If enabled, you must provide good speaker notes for every single slide.
     contributors:
         type: seq
-        required: false
         sequence:
             - type: str
               required: true
@@ -82,9 +86,28 @@ mapping:
             - hexylena
             - shiltemann
     contributions:
+        required: true
+        description: |
+            List of slide contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
+        examples: |
+            contributions:
+                authorship:
+                    - shiltemann
+                    - bebatut
+                editing:
+                    - hexylena
+                    - bebatut
+                    - natefoo
+                testing:
+                    - bebatut
+                infrastructure:
+                    - natefoo
+                funding:
+                    - erasmusplus
         type: map
         mapping:
             authorship:
+                description: These entities wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.
                 type: seq
                 sequence:
                 - type: str
@@ -92,30 +115,35 @@ mapping:
                   - CONTRIBUTORS
             editing:
                 type: seq
+                description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
                 sequence:
                 - type: str
                   enum:
                   - CONTRIBUTORS
             testing:
                 type: seq
+                description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
                 sequence:
                 - type: str
                   enum:
                   - CONTRIBUTORS
             ux:
                 type: seq
+                description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
                 sequence:
                 - type: str
                   enum:
                   - CONTRIBUTORS
             infrastructure:
                 type: seq
+                description: These entities managed and provided infrastructure to the GTN or for training purposes
                 sequence:
                 - type: str
                   enum:
                   - CONTRIBUTORS
             funding:
                 type: seq
+                description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
@@ -146,13 +174,24 @@ mapping:
     logo:
         type: str
         required: true
+        description: |
+            A logo identifier (e.g. GTN) should be used by default, but may be swapped out for special logos from the assets folder.
+        examples:
+            - GTN
+            - assets/images/gat.png
     class:
         type: str
+        description: A default CSS class applied to slides
     tags:
         type: seq
         sequence:
             - type: str
               required: true
+        description: |
+            A free form list of tags that are relevant for your tutorial.
+        examples:
+            - covid-19
+            - git-gat
     translations:
         type: seq
         sequence:

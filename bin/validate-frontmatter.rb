@@ -39,6 +39,9 @@ SLIDES_SCHEMA = automagic_loading(SLIDES_SCHEMA_UNSAFE)
 TOPIC_SCHEMA = automagic_loading(TOPIC_SCHEMA_UNSAFE)
 FAQ_SCHEMA = automagic_loading(FAQ_SCHEMA_UNSAFE)
 
+TUTORIAL_SCHEMA['mapping']['contributions']['required'] = false
+SLIDES_SCHEMA['mapping']['contributions']['required'] = false
+
 
 # Build validators now that we've filled out the subtopic enum
 $topic_validator = Kwalify::Validator.new(TOPIC_SCHEMA)
