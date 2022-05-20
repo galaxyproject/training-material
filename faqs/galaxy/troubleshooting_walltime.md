@@ -1,6 +1,6 @@
 ---
 title: Understanding walltime error messages
-area: analysis
+area: troubleshooting
 box_type: tip
 layout: faq
 contributors: [jennaj, garimavs]
@@ -22,10 +22,10 @@ Remote job server indicated a problem running or monitoring this job.
 </pre>
 
 - Causes:
-    - The job execution time exceeded the "wall-time" on the cluster node that ran the job. 
-    - The server may be undergoing maintenance. 
+    - The job execution time exceeded the "wall-time" on the cluster node that ran the job.
+    - The server may be undergoing maintenance.
     - Very often input problems also cause this same error.
-- Solutions: 
+- Solutions:
     - Try at least one rerun.
     - Check the server homepage for banners or notices. Selected servers also post status [here](https://status.galaxyproject.org/).
     - Review the Solutions section of the [Understanding input error messages](https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_job_failure_input_problem.html) FAQ.
