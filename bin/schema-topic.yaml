@@ -4,7 +4,7 @@ mapping:
     name:
         type: str
         required: true
-        pattern: /^[a-z0-9_-]$/
+        pattern: /^[a-z0-9_-]+$/
         description: |
             The internal identifier for a topic, it should be the same as the folder name.
         examples:
@@ -69,7 +69,7 @@ mapping:
                   id:
                       type: str
                       required: true
-                      pattern: /^[a-z0-9_-]$/
+                      pattern: /^[A-Za-z0-9_-]+$/
                       description: |
                           Subtopic ID, this should match what is used in tutorials.
                       examples:
@@ -169,6 +169,7 @@ mapping:
                       type: str
     gitter:
         type: str
+        description: |
             Link to a gitter channel that is more relevant for this topic than the default. E.g. a single cell topic, you could use `Galaxy-Training-Network/galaxy-single-cell` to link to their specific chat room in all of the child tutorials by default.
         examples:
             - Galaxy-Training-Network/galaxy-single-cell
