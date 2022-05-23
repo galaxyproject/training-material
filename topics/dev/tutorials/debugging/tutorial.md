@@ -23,7 +23,7 @@ key_points:
   - "Pdb is your friend."
 contributors:
   - assuntad23
-  - ic4f
+  - jdavcs
   - jmchilton
 requirements:
   - type: none
