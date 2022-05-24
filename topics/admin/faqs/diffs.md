@@ -47,7 +47,7 @@ $ diff old new
 > 🍍
 ```
 
-Here we see that 'pears' is only in a, and 'ananas' is only in b. But otherwise the files are identical.
+Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.
 
 There are a couple different formats to diffs, one is the 'unified diff'
 
