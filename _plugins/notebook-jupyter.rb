@@ -34,6 +34,7 @@ module Jekyll
 
         # Create a no-solutions version:
         no_solutions = notebook.clone
+
         no_solutions['cells'] = no_solutions['cells'].map{|cell|
           if cell.fetch('cell_type') == 'markdown'
             if cell['source'].is_a? String

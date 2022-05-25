@@ -40,6 +40,21 @@ $feedback-color: #86D486;
 $code-color: #86D486;
 $code-out-color: #fb99d0;
 
+.color-overview { background: $overview-color; }
+.color-agenda { background: $agenda-color; }
+.color-keypoints { background: $keypoints-color; }
+.color-tip { background: $tip-color; }
+.color-warning { background: $warning-color; }
+.color-comment { background: $comment-color; }
+.color-handson { background: $handson-color; }
+.color-question { background: $question-color; }
+.color-solution { background: $solution-color; }
+.color-details { background: $details-color; }
+.color-feedback { background: $feedback-color; }
+.color-code { background: $code-color; }
+.color-code-out { background: $code-out-color; }
+
+
 
 $hyperlink: #0067d6;
 
@@ -538,7 +553,7 @@ footer {
 
 
 nav input.nicer {
-	@include input-nicer(black);
+	@include input-nicer(white);
 }
 
 #search-container input.nicer {
@@ -588,7 +603,7 @@ nav input.nicer {
         margin-bottom: 1rem;
     }
 
-    table {
+    table:not(.contributions) {
         display: block;
         width: 100%;
         overflow-x: auto;
@@ -1065,8 +1080,11 @@ nav[data-toggle='toc'] {
     .contributor-badge {
         img {
             height: 1.5em;
+            line-height: 1.5em;
         }
         i {
+            height: 1.5em;
+            line-height: 1.5em;
             margin-left: 0.5em;
             margin-right: 0.5em;
         }
@@ -1085,11 +1103,19 @@ nav[data-toggle='toc'] {
     padding-right: 0.5em;
     margin: 0.2em;
     line-height: 1em;
+    flex-shrink: 0;
 
     img {
         height: 1em;
         border-radius: 50%;
         margin: 0 0.25em 0 0;
+    }
+}
+
+table.contributions{
+    tr td:nth-child(1) {
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
@@ -1268,8 +1294,26 @@ abbr {
     }
 }
 
-// big buttons
+// Style definition lists a bit more nicely
+div.contributors-line {
+    dl {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+    dt {
+      width: 8em;
+      text-align: right;
+      font-weight: initial;
+    }
+    dd {
+      margin-left: auto;
+      width: calc(100% - 9em);
+      display: flex;
+    }
+}
 
+// big buttons
 a.btn {
   display: inline-flex;
   align-items: center;
@@ -1411,3 +1455,27 @@ Maybe something like this for the case where they do not select anything?
 	border-left: 2px solid blue;
 }
 */
+
+ul.text-list, ol.text-list {
+    list-style: none;
+	  padding-left: 0;
+
+    li {
+        display: inline;
+    }
+}
+
+.gtn-card {
+    border-radius: 10px;
+
+    .card-title {
+        font-size: 500%;
+        font-weight: 900;
+        margin-bottom: 0
+    }
+    .card-text {
+        text-align: center;
+        font-size: 150%;
+        padding: 0.3em;
+    }
+}
