@@ -89,6 +89,8 @@ tags:
 - SQL
 ---
 
+{% include _includes/quiz.html id="recap.yml" %}
+
 > ### {% icon comment %} Comment
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.

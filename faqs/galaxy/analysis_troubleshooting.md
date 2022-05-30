@@ -7,10 +7,10 @@ layout: faq
 contributors: [shiltemann]
 ---
 
-When someting goes wrong in Galaxy, there are a number of things you can do to find out what it was. Error messages can help you figure out whether it was a problem with one of the settings of the tool, or with the input data, or maybe there is a bug in the tool itself and the problem should be reported. Below are the steps you can follow to troubleshoot your Galaxy errors.
+When something goes wrong in Galaxy, there are a number of things you can do to find out what it was. Error messages can help you figure out whether it was a problem with one of the settings of the tool, or with the input data, or maybe there is a bug in the tool itself and the problem should be reported. Below are the steps you can follow to troubleshoot your Galaxy errors.
 
 1. **Expand** the red history dataset by clicking on it.
-   - Sometime you can already see an error message here
+   - Sometimes you can already see an error message here
 
 
 2. **View the error message** by clicking on the **bug icon** {% icon galaxy-bug %}

@@ -35,10 +35,37 @@ mapping:
         required: false
     contributors:
         type: seq
-        required: true
+        required: false
         sequence:
             - type: str
               required: true
+    contributions:
+        type: map
+        mapping:
+            authorship:
+                type: seq
+                sequence:
+                - type: str
+            editing:
+                type: seq
+                sequence:
+                - type: str
+            testing:
+                type: seq
+                sequence:
+                - type: str
+            ux:
+                type: seq
+                sequence:
+                - type: str
+            infrastructure:
+                type: seq
+                sequence:
+                - type: str
+            funding:
+                type: seq
+                sequence:
+                - type: str
     subtopic:
         type: str
         required: false

@@ -19,7 +19,7 @@ How to notice missing Dataset Metadata:
 
 Solution:
 
-Click on the the dataset's pencil icon {% icon galaxy-pencil %} to reach the _Edit Attributes_ forms and do one of the following as applies:
+Click on the dataset's pencil icon {% icon galaxy-pencil %} to reach the _Edit Attributes_ forms and do one of the following as applies:
 - **Directly reset metadata**
   - Find the tab for the metadata you want to change, make the change, and save.
 - **Autodetect metadata**

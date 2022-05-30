@@ -1,4 +1,5 @@
 require 'json'
+require 'yaml'
 
 
 module TopicFilter
@@ -17,6 +18,19 @@ module TopicFilter
     end
 
     site.data['cache_topic_filter'][topic_name]
+  end
+
+  def self.fetch_tutorial_material(site, topic_name, tutorial_name)
+    if not site.data.has_key?('cache_topic_filter')
+      site.data['cache_topic_filter'] = Hash.new
+
+      # For each topic
+      self.list_topics(site).each{|topic|
+        site.data['cache_topic_filter'][topic] = self.run_topic_filter(site.pages, topic)
+      }
+    end
+
+    site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
   end
 
   def self.run_topic_filter(pages, topic_name)
@@ -146,6 +160,20 @@ module TopicFilter
         page_obj['slides'] = resources.include?('slides.html')
       end
 
+      if resources.include?("quiz") then
+        ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
+        quizzes = ymls.map{ |a| a.split('/')[-1] }
+        page_obj['quiz'] = quizzes.map{|q|
+          quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
+          {
+            "id" => q,
+            "path" => "#{folder}/quiz/#{q}",
+            "title" => quiz_data['title'],
+            "contributors" => quiz_data['contributors'],
+          }
+        }
+      end
+
       # Similar as above.
       if resources.include?('workflows')
         workflow_files = Dir.glob("#{folder}/workflows/*.ga").map{ |a| a.split('/')[-1] }
@@ -239,6 +267,10 @@ module Jekyll
     def topic_count(resources)
       # Count lines in the table except introduction slides
       resources.select{ |a| a['type'] != 'introduction' }.length
+    end
+
+    def fetch_tutorial_material(site, topic_name, page_name)
+      TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
     end
 
     def topic_filter(site, topic_name)

@@ -100,6 +100,7 @@ The `tutorial.md` needs to start with some metadata at the top:
 - `level`: `Introductory`, `Intermediate` or `Advanced`
 - `enable`: `false` to hide your tutorial from the topic page (optional)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
+- `contribuors`: eveybody who has contributed to this tutorial (usernames must match those in `CONTRIBUTORS.yaml` file)
 
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
@@ -164,6 +165,75 @@ For this category of metadata, we have taken inspiration from what Software Carp
 >
 > For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
 {: .comment}
+
+
+## Listing contributors
+
+All tutorials and slides must give credit to all contributors. This can be any type of contribution, adding them in GitHub, creating images for it, etc.
+
+1. Make sure all contributors are listed in the [`CONTRIBUTORS.yaml`](https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTORS.yaml) file.
+   Each contributor is defined in this file like:
+
+   ```yaml
+   contributor-username:                 # GitHub username (if the contributor has one)
+     name: Full Name                     # mandatory
+     joined: 2020-06                     # mandatory
+     email: saskia.hiltemann@gmail.com   # optional
+     twitter: shiltemann                 # optional
+     linkedin: shiltemann                # optional
+     gitter: shiltemann                  # optional
+     orcid: 0000-0003-3803-468X          # optional
+     bio: Researcher at EMC              # optional
+   ```
+
+2. Add all contributors to the metadata of the tutorial or slide deck:
+
+   ```yaml
+   contributors:
+     - contributor-username
+     - shiltemann
+     - hexylena
+   ```
+
+   Make sure these names match the usernames you used in the `CONTRIBUTORS.yaml` file.
+
+3. **Optional:** Specifying types of contributions. If you want to give more detailed credit for conributions, you can do the following (instead of step 2 above)
+
+   ```yaml
+   contributions:
+     authorship:
+       - shiltemann
+     editing:
+       - bebatut
+       - hexylena
+     funding:
+       - carpentries
+     testing:
+       - userX
+     ux:
+       - userY
+     infrastructure:
+       - userZ
+   ```
+
+   To define a funding body in the `CONTRIBUTORS.yaml` there are a few extra fields available:
+
+   ```yaml
+   erasmusplus:
+     name: Erasmus+ Programme
+     joined: 2020-09
+     avatar: "https://www.erasmusplus.nl/assets/images/logo.png"
+     github: false
+     funder: true
+     funding_id: 2020-1-NL01-KA203-064717
+     funding_statement: |
+        This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+        ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
+   ```
+
+   Funding bodies will be credited at the bottom of the tutorial with the appropriate funding statement, and will get a page in the hall of fame listing all tutorials that list them as a funder.
+
+   For an example of how this all looks, see the [R basics tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) (top and bottom of the tutorial).
 
 
 # Content

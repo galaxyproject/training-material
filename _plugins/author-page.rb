@@ -2,6 +2,28 @@ module Jekyll
   class AuthorPageGenerator < Generator
     safe true
 
+    def pusher(t, datastructure, flat)
+      if t.data.has_key?('contributors')
+        if flat
+          t.data['contributors'].each{|c| datastructure[c].push(t) }
+        else
+          t.data['contributors'].each{|c| datastructure[c].push([t, nil]) }
+        end
+      elsif t.data.has_key?('contributions')
+        t.data['contributions'].each{|contribution_type, contributor|
+          contributor.each{|c|
+
+            if flat
+              datastructure[c].push(t)
+            else
+              datastructure[c].push([t, contribution_type])
+            end
+          }
+        }
+      end
+      datastructure
+    end
+
     def generate(site)
       if site.layouts.key? 'contributor_index'
         dir = 'hall-of-fame'
@@ -15,13 +37,13 @@ module Jekyll
 
         site.pages.each {|t|
           # Tutorials
-          if t['layout'] == 'tutorial_hands_on' && ! t.data['contributors'].nil?
-            t.data['contributors'].each{|c| tutorials_by_author[c].push(t) }
+          if t['layout'] == 'tutorial_hands_on'
+            pusher(t, tutorials_by_author, false)
           end
 
           # Slides
-          if ! ['base_slides', 'introduction_slides', 'tutorial_slides'].index(t['layout']).nil? && ! t.data['contributors'].nil?
-            t.data['contributors'].each{|c| slides_by_author[c].push(t) }
+          if ! ['base_slides', 'introduction_slides', 'tutorial_slides'].index(t['layout']).nil?
+            pusher(t, slides_by_author, false)
           end
 
 
@@ -31,10 +53,13 @@ module Jekyll
           end
         }
 
+
+        puts "#{slides_by_author['lleroi']}"
+
         site.posts.docs.each {|t|
           # News
-          if t['layout'] == 'news' && ! t.data['contributors'].nil?
-            t.data['contributors'].each{|c| news_by_author[c].push(t) }
+          if t['layout'] == 'news'
+            pusher(t, news_by_author, true)
           end
 
         }

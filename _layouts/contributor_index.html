@@ -17,6 +17,8 @@ layout: base
 			<div class="col-md-3">
 				{% if contributors[page.contributor].github != false %}
 					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
+				{% elsif contributors[page.contributor].avatar %}
+					<img src="{{ contributors[page.contributor].avatar }}" alt="avatar" >
 				{% else %}
 					<span class="thumbnail">
 						<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
@@ -121,15 +123,17 @@ layout: base
 				<ul>
 				{% for res in page.tutorials %}
 					<li>
-						{% assign topic_id = res | get_topic %}
+						{% assign topic_id = res[0] | get_topic %}
 						{% assign topic = site.data[topic_id] %}
 						<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
 							{{ topic.title }}
 						</a>
 						/
-						<a href="{{ site.baseurl }}/{{ res.url }}">
-						{{ res.title }}
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
 						</a>
+						{% assign res_activity = res[1] %}
+						{% include _includes/contributor-human-icons.html activity=res_activity %}
 					</li>
 				{% endfor %}
 				</ul>
@@ -140,15 +144,17 @@ layout: base
 				<ul>
 				{% for res in page.slides %}
 					<li>
-						{% assign topic_id = res | get_topic %}
+						{% assign topic_id = res[0] | get_topic %}
 						{% assign topic = site.data[topic_id] %}
 						<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
 							{{ topic.title }}
 						</a>
 						/
-						<a href="{{ site.baseurl }}/{{ res.url }}">
-						{{ res.title }}
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
 						</a>
+						{% assign res_activity = res[1] %}
+						{% include _includes/contributor-human-icons.html activity=res_activity %}
 					</li>
 				{% endfor %}
 				</ul>
@@ -172,12 +178,12 @@ var ctx2 = document.getElementById('slidesVsTutorials').getContext('2d');
 
 var topics = [
 {% for res in page.tutorials %}
-	{% assign topic_id = res | get_topic %}
+	{% assign topic_id = res[0] | get_topic %}
 	{% assign topic = site.data[topic_id] %}
 	"{{ topic.title }}",
 {% endfor %}
 {% for res in page.slides %}
-	{% assign topic_id = res | get_topic %}
+	{% assign topic_id = res[0] | get_topic %}
 	{% assign topic = site.data[topic_id] %}
 	"{{ topic.title }}",
 {% endfor %}
