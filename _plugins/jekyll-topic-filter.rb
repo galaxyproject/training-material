@@ -242,6 +242,7 @@ end
 
 module Jekyll
   module ImplTopicFilter
+
     def most_recent_contributors(contributors, count)
       # Remove non-hof
       hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
@@ -271,6 +272,25 @@ module Jekyll
 
     def fetch_tutorial_material(site, topic_name, page_name)
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
+    end
+
+    def list_topics(site, category)
+      q = TopicFilter.list_topics(site).map{|k|
+        [k, site.data[k]]
+      }
+
+      # Alllow filtering by a category, or return "all" otherwise.
+      if category != "all"
+        q = q.select{|k, v| v['type'] == category }
+      end
+
+      # Sort alphabetically by titles
+      q = q.sort{|a, b| a[1]['title'] <=> b[1]['title'] }
+
+      # But move introduction to the start
+      q = q.select{|k, v| k == "introduction"} + q.select{|k, v| k != "introduction"}
+
+      q
     end
 
     def topic_filter(site, topic_name)
