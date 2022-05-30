@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'yaml'
 require 'kwalify'
-require './bin/validate.rb'
+require './bin/gtn.rb'
 
 
 # Any error messages
