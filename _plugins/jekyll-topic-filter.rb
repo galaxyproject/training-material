@@ -4,7 +4,7 @@ require 'yaml'
 
 module TopicFilter
   def self.list_topics(site)
-    site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('type')}.map{|k, v| k}
+    site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('maintainers')}.map{|k, v| k}
   end
 
   def self.topic_filter(site, topic_name)
