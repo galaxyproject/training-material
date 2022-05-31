@@ -5,7 +5,10 @@ title: Preparing genomic data for phylogeny reconstruction
 zenodo_link: https://zenodo.org/record/6524847#.YnUycVxByV4
 questions:
 - Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What is the evolutionary relationship between species or strains of the same species?
+- How do I find a set of common proteins (orthologs) across related species or strains?
+- How do I organize a set of orthologs to infer evolutionary relations between species or strains (phylogenetic reconstruction)?
+-
 objectives:
 - The learning objectives are the goals of the tutorial
 - They will be informed by your audience and will communicate to them and to yourself
@@ -13,13 +16,20 @@ objectives:
 - They are single sentences describing what a learner should be able to do once they
   have completed the tutorial
 - You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- Mask repetitive elements from a genome
+- Annotate the genomes of the samples to compare
+- Find a set of common proteins across the samples (orthologs)
+- Align orthologs across samples
+- Concatenate the aligned set of orthologs  
+time_estimation: 4H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- You now are able to
+- Predict proteins in a nucleotide sequence *de-novo* using **funannotate_predict**
+- Find orthologs across different samples with **orthofinder**
+- Align orthologs with **ClustalW** and concatenate them in preparation for phylogeny reconstruction <!-- link to phylogeny reconstruction training. -->
 contributors:
-- contributor1
-- contributor2
+- roncoronimiguel
+- brigidagallone
 
 ---
 
@@ -29,27 +39,23 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
+*General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
 scheme to sum up the pipeline used during the tutorial. The idea is to
 give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+and technical) key concepts they will learn.*
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+*Intro to phylogenetics:
+- evolutionary relationship of species
+- the field changed with fast, cheap generation of DNA sequence data (NextGen data)
 
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+Molecular sequence data can be used to construct a phylogeny by comparing differences between nucleotide or amino acid sequences across species or strains, a technique called phylogenomics. {% cite Young2019 %} have written a comprehensive review on the topic of phylogenomics.
+Here we will compare protein sequences from chromosome 5 of five strains of the yeast *Saccharomyces cerevisiae*. This requires first the prediction of protein coding genes from the genome. We use Funannotate to predict proteins. Next, we find the proteins that are present in more than one genome, called orthologs, using Proteinortho, and extract a set with orthologs that are present in all samples. Each set of orthologs is aligned using ClustalW. Finally, we concatenate all alignments into one concatenation matrix that can be used by phylogeny reconstruction.
+
+
+**If you are starting from sequence reads, please follow
+[An Introduction to Genome Assembly]({{ site.baseurl }}/topics/assembly/tutorials/general-introduction/tutorial.html), and the appropriate genome assembly training for your sequencing technology from GTN's [Assembly]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html) section**
 
 > ### Agenda
 >
@@ -60,11 +66,20 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Annotating a genome
 
 Give some background about what the trainees will be doing in the section.
 Remember that many people reading your materials will likely be novices,
 so make sure to explain all the relevant concepts.
+
+In this section you will predict protein-coding genes from genomic sequences and extract the corresponding, translated amino-acid sequences. We will use [Funannotate](https://funannotate.readthedocs.io/){% cite Young2019 %}, which collects evidence from
+
+many ab-initio
+
+
+Genome annotation is a field of study in itself. The GTN has a [section]({{ site.baseurl }}/topics/genome-annotation/tutorials/funannotate/tutorial.html/topics/genome-annotation/) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({{ site.baseurl }}/topics/genome-annotation/tutorials/funannotate/tutorial.html)
+The GTN has a
+
 
 ## Title for a subsection
 Section and subsection titles will be displayed in the tutorial index on the left side of
@@ -106,16 +121,12 @@ have fun!
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 3. Rename each dataset to its accession number followed by .nucleotide or .protein accordingly.
+> 4. Group the datasets into [collections](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html). These will ease data handling and help minimize the clutter in your history. Make a collection of nucleotide sequences and another of protein sequences.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -241,7 +252,7 @@ A big step can have several subsections or sub steps:
 >    > ### {% icon comment %} Comment
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    The Galaxy Training Network has a [dedicated tutorial](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html) for Funanotate.{: .comment}
 >
 {: .hands_on}
 
