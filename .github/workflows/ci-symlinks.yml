@@ -1,4 +1,4 @@
-name: Lint for Broken Symlinks
+name: Lint for Broken Symlinks, FAQs
 
 concurrency:
   group: ci-symlinks-${{ github.head_ref }}
@@ -13,6 +13,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+
       - name: Check for broken symlinks
+        if: always()
         run: |
           bash bin/check-broken-symlinks.sh
+
+      - name: Check for broken symlinks
+        if: always()
+        run: |
+          bash bin/check-snippet-links.sh

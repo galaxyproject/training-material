@@ -1,7 +1,7 @@
 ---
 title: Customising the welcome page
 area: ansible-galaxy
-box_type: details
+box_type: tip
 layout: faq
 contributors: [hexylena]
 ---
@@ -21,7 +21,8 @@ Customising the `welcome.html` page is very easy!
 
 2. Add it to your deployed configuration
 
-   ```diff
+   {% raw %}
+   ```bash
    --- a/group_vars/galaxyservers.yml
    +++ b/group_vars/galaxyservers.yml
    @@ -83,12 +83,7 @@ certbot_agree_tos: --agree-tos
@@ -33,10 +34,12 @@ Customising the `welcome.html` page is very easy!
    +- src: templates/galaxy/config/welcome.html
    +  dest: "{{ galaxy_config_dir }}"
    ```
+   {% endraw %}
 
 3. Update the `templates/nginx/galaxy.j2` to point to the new location
 
-   ```diff
+   {% raw %}
+   ```bash
    --- a/templates/nginx/galaxy.j2
    +++ b/templates/nginx/galaxy.j2
    @@ -83,12 +83,7 @@
@@ -46,6 +49,7 @@ Customising the `welcome.html` page is very easy!
         expires 24h;
     }
    ```
+   {% endraw %}
 
 4. Run the playbook
 5. Done! You might need to refresh / clear your cache before the changes are visible.
