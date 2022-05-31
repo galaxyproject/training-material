@@ -1,5 +1,5 @@
 ---
-title: How to create an account on a public Galaxy instance?
+title: How do I create an account on a public Galaxy instance?
 area: account
 layout: faq
 box_type: tip
