@@ -53,9 +53,6 @@ module Jekyll
           end
         }
 
-
-        puts "#{slides_by_author['lleroi']}"
-
         site.posts.docs.each {|t|
           # News
           if t['layout'] == 'news'
