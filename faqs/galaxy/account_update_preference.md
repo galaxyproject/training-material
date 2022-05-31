@@ -19,7 +19,7 @@ contributors: [jennaj, bernandez]
    - {% icon pref-cloud %} Manage Cloud Authorization (add or modify the configuration that grants Galaxy to access your cloud-based resources)
    - {% icon pref-toolboxfilters %} Manage Toolbox Filters (customize your Toolbox by displaying or omitting sets of Tools)
    - {% icon pref-custombuilds %} Manage Custom Builds (add or remove custom builds using history datasets)
-   - {% icon pref-signout %} Sign out of Galxy (signs you out of all sessions)
+   - {% icon pref-signout %} Sign out of Galaxy (signs you out of all sessions)
    - {% icon pref-notifications %} Enable notifications (allow push and tab notifcations on job completion)
    - {% icon pref-delete %} Delete Account (on this Galaxy server)
 
