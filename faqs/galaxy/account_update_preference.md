@@ -7,15 +7,20 @@ contributors: [jennaj, bernandez]
 ---
 
 
-1. Log into your existing account and update the email address under **User > Preferences**. DO NOT create another new account or it will be detected as a duplicate account. Any use of multiple accounts can result in data loss.
+1. Log in to Galaxy
+2. Navigate to **User > Preferences** on the top menu bar.
+3. Here you can update various preferences, such as:
+   - {% icon pref-info %} Manage Information (edit your email addresses, custom parameters, or change your public name)
+   - {% icon pref-password %} Change Password
+   - {% icon pref-identities %} Manage Third-Party Identities (connect or disconnect access to your third-party identities)
+   - {% icon pref-permissions %} Set Dataset Permissions for New Histories (grant others default access to newly created histories. Changes made here will only affect histories created after these settings have been stored.
+   - {% icon pref-dataprivate %} Make All Data Private
+   - {% icon pref-apikey %} Manage API Key (access your current API key or create a new one)
+   - {% icon pref-cloud %} Manage Cloud Authorization (add or modify the configuration that grants Galaxy to access your cloud-based resources)
+   - {% icon pref-toolboxfilters %} Manage Toolbox Filters (customize your Toolbox by displaying or omitting sets of Tools)
+   - {% icon pref-custombuilds %} Manage Custom Builds (add or remove custom builds using history datasets)
+   - {% icon pref-signout %} Sign out of Galxy (signs you out of all sessions)
+   - {% icon pref-notifications %} Enable notifications (allow push and tab notifcations on job completion)
+   - {% icon pref-delete %} Delete Account (on this Galaxy server)
 
-2. If you instead want to start over with a new account, delete your old account(s) first under **User > Preferences**, then create a new account.
-
-Note: Updating a registered account email address will not prevent multiple/duplicate account detection. If you have more than one, existing or new or older, review below about how to clear that up. Use just one account to avoid problems. Share data, not accounts.
-
-* Manage your own data and delete old/extra accounts under **User > Preferences**.
-
-* Multiple accounts that are detected, suspended, and administratively managed, without followup on your part, result in data loss. Creating another account is not the solution -- the new account will also be detected up as a duplicate and removed.
-
-* You will not receive a special notification when accounts are administratively managed due to a breach of the terms of service. The original terms of service included directly on the account registration form and in the account activation emails are your notice.
 
