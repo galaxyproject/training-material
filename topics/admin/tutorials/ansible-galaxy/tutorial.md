@@ -1976,6 +1976,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    {: .details}
 >
+>    {% snippet topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.md %}
+>
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    > > ### {% icon code-in %} Input: Bash
