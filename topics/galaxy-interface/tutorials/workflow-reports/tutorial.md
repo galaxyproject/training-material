@@ -24,7 +24,7 @@ contributions:
   authorship:
     - shiltemann
   funding:
-    - gallantries
+    - erasmusplus
 level: Intermediate
 subtopic: workflows
 ---
