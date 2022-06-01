@@ -14,6 +14,11 @@ objectives:
 time_estimation: 30m
 key_points:
 - Workflow reports help you display the most important results of a workflow in an organized fashion.
+- Workflow reports are configured as part of the workflow definition, for every run of the workflow, a report will be automatically created
+- Workflow reports can be viewed from the top menu, **User -> Workflow Invocations**.
+- Labels must be added to workflow outputs before they can be included
+- Many different components can be added to a workflow report (datasets, images, links to datasets, job metrics, text and sections, visualisations, and much more!)
+- Workflow reports can be shared as Galaxy Pages.
 contributors:
 - shiltemann
 level: Intermediate
@@ -211,13 +216,13 @@ As you saw in the previous step, we might need to edit the workflow to add label
 >    - Let's use the png output for our report.
 >    - Also take note of the plot title, since we have 2 runs of the scatterplot tool in this workflow. One plot is about the petals of the iris, and one about the sepals (in this screenshot it is the sepal plot)
 >
->    ![](./images/workflow-add-labels1.png)
+>    ![screenshot of the workflow editor to add labels to workflow outputs](./images/workflow-add-labels1.png)
 >
 > 3. **Add an output label** for the `png` output
 >    - Click on "Configure output: output1"
 >    - Add a descriptive label (e.g. "Sepal plot (PNG)")
 >    - Notice that the label on the box changs as well
->    ![](./images/workflow-add-labels2.png)
+>    ![screenshot of menu to add labels to the workflow output](./images/workflow-add-labels2.png)
 >
 > 4. Repeat this process and **add an output label** for the other plot as well
 >    - Label it something like "Petal plot (PNG)"
@@ -227,7 +232,7 @@ As you saw in the previous step, we might need to edit the workflow to add label
 >    - Let's add this to our report as well
 >    - **Add a label** to this output (e.g. "Iris Species")
 >
-> 6. {% icon galaxy-save %} **Save** the workflow
+> 6. **Save** {% icon galaxy-save %} the workflow (**Important!**)
 >
 {: .hands_on}
 
@@ -235,8 +240,105 @@ As you saw in the previous step, we might need to edit the workflow to add label
 Now that we have added our output labels, let's go back to our report editor and add these outputs
 
 
+> ### {% icon hands_on %} Hands-on: Open the workflow report editor
+>
+> 1. Open the workflow in the **workflow editor** (if not already open)
+>
+>    {% snippet faqs/galaxy/workflows_edit.md %}
+>
+> 2. Click on **Edit Report** {% icon galaxy-wf-edit %} in the top-right of the screen
+>    - You should see the report with the changes you made earlier
+>
+> 3. Add the plots and the unique species list outputs to the report
+>    - Use "Images" in the left-hand panel for the plot outputs
+>    - Use "Dataset" for the unique species list
+>    - You should see more options now after the labels we added to the workflow outputs ("Sepal Plot (PNG)", "Petal Plot (PNG)", and "Iris Species")
+>
+>      ![the list of datasets available to add, now includes the outputs we labeled in the workflow](./images/report-add-image-options-withlabels.png)
+>
+> 4. Add some text and/or headers before each included output
+>    - Play around here, add other component you think look interesting and see what happens!
+>    - The final result may look something like this:
+>
+>      ````
+>      # Results
+>
+>      ## Species detected
+>
+>      ```galaxy
+>      history_dataset_display(output="Iris Species")
+>      ```
+>
+>      ## Sepal plot
+>
+>      ```galaxy
+>      history_dataset_as_image(output="Sepal Plot (PNG)")
+>      ```
+>
+>      ## Petal Plot
+>
+>      ```galaxy
+>      history_dataset_as_image(output="Petal Plot (PNG)")
+>      ```
+>      ````
+> 5. **Exit** {% icon galaxy-cross %} the report editor
+>
+> 6. **Save** {% icon galaxy-save %} the workflow
+>
+> 7. **Run the workflow** once more
+>    - Use `iris.csv` as input again
+>
+> 8. View the workflow report
+>
+>    {% snippet faqs/galaxy/workflows_report_view.md %}
+>
+> 9. It should look something like:
+>
+>    ![screenshot of the final workflow report, with text, 2 plots, and the table of detected species](./images/report-final.png)
+>
+{: .hands_on}
 
+
+Well done! You have created a customized workflow report with text and workflow outputs. There are a lot more options to explore, for example you can also include:
+  - links to datasets for easy downloading
+  - index files (e.g. for BAM or VCF files)
+  - visualisations
+  - job metrics
+  - peeks into dataset (useful for large files that cannot be included in their entirety in the report)
+  - ..and more!
 
 
 
 # Share or publish your workflow report
+
+If you share this workflow with others, they will get the same report every time they run the workflow.
+
+If you would like to share the workflow report of a specific run, you can do so by creating a Galaxy *page* for it. This page can then be shared (either via link or with specific users), or published for all to see under **Shared Data -> Pages** in the top menu.
+
+
+> ### {% icon hands_on %} Hands-on: Share the workflow report as a Galaxy page
+>
+> 1. Open the workflow report
+>
+>    {% snippet faqs/galaxy/workflows_report_view.md %}
+>
+> 2. Click on **Edit Markdown** {% icon galaxy-wf-edit %} button at the top right (next to **"Galaxy Report"**)
+>    - Here you can edit the title and the report itself, if desired
+>
+>      ![galaxy interface for creating a Galaxy page from a workflow report](./images/create-page.png)
+>
+>    - Click **Save** {% icon galaxy-save%}
+>
+> 3. You will see your list of Galaxy pages.
+>    - Note: this list is always accessible via top menu, **User** -> **Pages**
+>
+>      ![list of our pages, with our newly created workflow report page on top](./images/pages.png)
+>
+> 4. Click on the dropdown icon {% icon galaxy-dropdown %} next to the page title
+>    - Select **"Share or Publish"**
+>    - Here you can make the page public or share with individual users
+>    - If you make the page public, anybody will be able to see it under **Shared Data -> Pages** from the top menu bar
+>
+{: .hands_on}
+
+Great work! You have viewed, customized and shared a workflow report. This makes it easy to view the most important results of a workflow in a single view.
