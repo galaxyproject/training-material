@@ -20,8 +20,11 @@ key_points:
 - Labels must be added to workflow outputs before they can be included
 - Many different components can be added to a workflow report (datasets, images, links to datasets, job metrics, text and sections, visualisations, and much more!)
 - Workflow reports can be shared as Galaxy Pages.
-contributors:
-- shiltemann
+contributions:
+  authorship:
+    - shiltemann
+  funding:
+    - gallantries
 level: Intermediate
 subtopic: workflows
 ---
