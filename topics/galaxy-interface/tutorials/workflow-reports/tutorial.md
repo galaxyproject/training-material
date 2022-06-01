@@ -8,7 +8,8 @@ zenodo_link: ''
 questions:
 - What are workflow reports?
 - How can I view a workflow report?
-- How can I define a workflow report?
+- How can I customize a workflow report?
+- How can I share a workflow report with others?
 objectives:
 - Understanding, viewing and creating workflow reports
 time_estimation: 30m
