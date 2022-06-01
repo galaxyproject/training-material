@@ -476,7 +476,7 @@ You can think of a graph with nodes (facts, concepts) and edges (connections), a
 
 ### Dreyfuss model
 
-![A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition.](images/image7.jpg "Dreyfuss model")
+![A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition.](images/image7.png "Dreyfuss model")
 
 The Dreyfus model of skills acquisition by brothers Stuart and Huber Dreyfus uses a 5 stage from novice to expert.
 
