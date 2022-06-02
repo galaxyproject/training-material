@@ -24,11 +24,11 @@ contributors:
 
 In many organism transcription factors (TF) play an important tole in the regulation of the gene expression. In human we have up to 2,800 proteins and more than 1,600 are TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer. Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
 
-![ATAC-Seq](../../images/cut_and_run/cut_and_run.png {% cite Skene2017 %})
+![CUT_and_RUN](../../images/cut_and_run/cut_and_run.png {% cite Zhu2019 %})
 
 **C**leavage **U**nder **T**argets and **R**elease **U**sing **N**uclease (CUT&RUN){% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the protein of interest (POI). The big difference, CUT&RUN couples the antibody with a protein A-micrococcal nuclease (pA-MNase), which you can see in **Figure 1**. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) is an endo-exonuclease that cleaves and shortens the bound DNA of the selected POI *in-situ*. CUT&RUN allows to fragment the DNA in intact cells and thus allows to study protein-DNA interactions in a more natural state. The added pA-MNase thus creates shorted fragments that lead to a higher resolution for the mapping in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) fixate and make the nuceli or cells permeable, (2) add selective antibody of the POI, (3) add and activate pA-MNas, (4) release DNA complex and collect the DNA from the supernatant. Afterwards, the DNA can be PCR amplified and prepared for sequencing.
 
-In this tutorial we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we are **not** completely follow. It is important to note at this point that a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from an CUT&RUN experiment for the aforementioned TF GATA1 in human. We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment.
+In this tutorial we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we are **not** completely follow. It is important to note at this point that a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from an CUT&RUN experiment for the aforementioned TF GATA1 in human. We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment {% cite Canver2017}.
 
 ### When working with real data
 {:.no_toc}
@@ -439,6 +439,8 @@ We will check the insert sizes with **Paired-end histogram** of insert size freq
 
 This fragment size distribution is a good indication if your experiment worked or not. The CUT & RUN yield can graduately increase over the digestion time {% cite Skene2017 %}, which of course depends on the enzyme used for the cleavage of the DNA.
 
+![CUT_and_RUN_yield](../../images/cut_and_run/cut_and_run_yield.png "Fragment length distributions of a CUT&RUN experiment with uniform digestion over time. No anti-FLAG primary antibody (No Ab). The track with No_Ab is the control experiment. Data is from two biological replicates. The studied protein showed fragments of size ≤120 bp corresponding to the binding sites, as seen on the left, whereas reads with ≥150 bp fragment size are diffusely distributed in the local vicinity. The yield in the example increases from 5s to 10 minutes, which can be seen in the mapped profiles in the right." {% cite Skene2017 %} )
+
 # Peak calling
 
 ## Call Peaks
@@ -500,7 +502,7 @@ We call peaks with MACS2. In order to get the coverage centered on the 5' extend
 ## Prepare the Datasets
 
 ### Extract Robust and Positive Peaks
-MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set will contain false positives because of technical and biological noise. We can remove some noise with a positive control, that is why we have downloaded a peak set from a ChIP experiment of GATA1. 
+MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set will contain false positives because of technical and biological noise. We can remove some noise with a positive control, that is why we have downloaded a peak set from a ChIP experiment of GATA1.
 
 > ### {% icon hands_on %} Hands-on: Select CTCF peaks from chr22 in intergenic regions:
 >
@@ -518,201 +520,6 @@ MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set
 >
 > 3. Rename the datasets `intergenic CTCF peaks chr22`.
 {: .hands_on}
-
-
-### Convert bedgraph from **MACS2** to bigwig
-The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
-
-> ### {% icon tip %} Tip: Speed-up the bedgraph to bigwig conversion
->
-> In this tutorial we focus on chr22, thus we could restrict our bedgraph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.
->
-> To do so, we will use {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-> - {% icon param-file %} *"Filter"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
-> - *"With following condition"*: `c1=='chr22'`
->
-> This will decrease by half the size of the file.
-> In the next step, choose the output of **Filter** instead of the output of **MACS2**.
->
-{: .tip}
-
-> ### {% icon hands_on %} Hands-on: Convert bedgraphs to bigWig.
->
-> 1. {% tool [Wig/BedGraph-to-bigWig](wig_to_bigWig) %} with the following parameters:
->    - {% icon param-file %} *"Convert"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
->    - *"Converter settings to use"*: `Default`
->
-> 2. Rename the datasets `MACS2 bigwig`.
-{: .hands_on}
-
-
-## Create heatmap of coverage at TSS with deepTools
-
-You might be interested in checking the coverage on specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS) and another one centered on intergenic CTCF peaks. First, on the TSS:
-
-### Generate computeMatrix
-
-The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use the tool **computeMatrix** that will evaluate the coverage at each locus we are interested in.
-
-> ### {% icon hands_on %} Hands-on: Generate the matrix
->
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
->    - In *"Select regions"*:
->        - {% icon param-repeat %} *"Insert Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
->    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
->    - *"computeMatrix has two main output options"*: `reference-point`
->    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `yes`
->        - *"Convert missing values to 0?"*: `Yes`
->
-{: .hands_on}
-
-
-### Plot with **plotHeatmap**
-
-We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS. There will be one heatmap per bigwig.
-
-> ### {% icon hands_on %} Hands-on: Generate the heatmap
->
-> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `no`
-{: .hands_on}
-
-> ### {% icon comment %} plotHeatmap Results
-> This is what you get from plotHeatmap:
-> ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
-{: .comment}
-
-> ### {% icon question %} Questions
->
-> 1. Is the coverage symmetric?
-> 2. What is the mean value in genes?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
-> > 2. Around 5.5.
-> >
-> {: .solution}
->
-{: .question}
-
-Now we will repeat the procedure for CTCF peaks of chr22 in intergenic regions:
-
-> ### {% icon hands_on %} Hands-on: Generate the matrix
->
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
->    - In *"Select regions"*:
->        - {% icon param-repeat %} *"Insert Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: Select the dataset `intergenic CTCF peaks chr22`
->    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
->    - *"Would you like custom sample labels?"*: `No, use sample names in the history`
->    - *"computeMatrix has two main output options"*: `reference-point`
->        - *"The reference point for the plotting"*: `center of region`
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `yes`
->        - *"Convert missing values to 0?"*: `Yes`
->
-> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*:  Select the output of **computeMatrix** {% icon tool %}.
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `yes`
->        - In *"Colormap to use for each sample"*:
->            - {% icon param-repeat %} *"Insert Colormap to use for each sample"*
->                - *"Color map to use for the heatmap"*: `Blues` # Or what you want
->        - *"The x-axis label"*: `distance from peak center (bp)`
->        - *"The y-axis label for the top panel"*: `CTCF peaks`
->        - *"Reference point label"*: `peak center`
->        - *"Labels for the regions plotted in the heatmap"*: `CTCF_peaks`
->        - *"Did you compute the matrix with more than one groups of regions?"*: `Yes, I used multiple groups of regions`
->
-{: .hands_on}
-
-> ### {% icon comment %} plotHeatmap Results
-> This is what you get from plotHeatmap, this is much more symetric:
-> ![plotHeatmap output on CTCF](../../images/atac-seq/plotHeatmapOutput_CTCF.png "plotHeatmap output on CTCF")
-{: .comment}
-
-
-## Visualise Regions with pyGenomeTracks
-
-In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like **IGV** or **UCSC browser**, or use **pyGenomeTracks** to make publishable figures. We will use **pyGenomeTracks**.
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6) %} with the following parameters:
->    - *"Region of the genome to limit the operation"*: `chr22:37,193,000-37,252,000`
->    - In *"Include tracks in your plot"*:
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `Bigwig track`
->                - *"Plot title"*: `Coverage from MACS2 (extended +/-100bp)`
->                - {% icon param-file %} *"Track file(s) bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
->                - *"Color of track"*: Select the color of your choice
->                - *"Minimum value"*: `0`
->                - *"height"*: `5`
->                - *"Show visualization of data range"*: `Yes`
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `NarrowPeak track`
->                - *"Plot title"*: `Peaks from MACS2 (extended +/-100bp)`
->                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the output of **MACS2** {% icon tool %} (narrow Peaks).
->                - *"Color of track"*: Select the color of your choice
->                - *"display to use"*: `box: Draw a box`
->                - *"Plot labels (name, p-val, q-val)"*: `No`
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `Gene track / Bed track`
->                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file(s) bed or gtf format"*: `chr22 genes`
->                - *"Color of track"*: Select the color of your choice
->                - *"height"*: `5`
->                - *"Plot labels"*: `yes`
->                    - *"Put all labels inside the plotted region"*: `Yes`
->                    - *"Allow to put labels in the right margin"*: `Yes`
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `NarrowPeak track`
->                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the first dataset: `ENCFF933NTR.bed.gz`
->                - *"Color of track"*: Select the color of your choice
->                - *"display to use"*: `box: Draw a box`
->                - *"Plot labels (name, p-val, q-val)"*: `No`
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `X-axis`
->
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the output.
->
-{: .hands_on}
-
-> ### {% icon comment %} pyGenomeTracks Results
-> You should get similar to results to this from pyGenomeTracks:
-> ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
-{: .comment}
-
-> ### {% icon question %} Questions
-> In the ATAC-Seq sample in this selected region we see four peaks detected by MACS2.
->
-> 1. How many TSS are accessible in the sample in the displayed region?
-> 2. How many CTCF binding loci are accessible?
-> 3. Can you spot peaks with no TSS and no CTCF peak?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. In total, we can see 3 TSS for 6 transcripts for 2 genes. The TSS of RAC2 corresponds to an ATAC-Seq peak whereas there is no significant coverage on both TSS of SSTR3.
-> >
-> > 2. Only the first peak on the left overlaps with a CTCF binding site.
-> >
-> > 3. Amongst the 4 peaks in this region, the 2 in the middle do not correspond to CTCF peaks or TSS.
-> >
-> {: .solution}
->
-{: .question}
-
-As CTCF creates accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
-
 
 # Conclusion
 
