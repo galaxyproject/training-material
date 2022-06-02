@@ -140,7 +140,7 @@ Identify observable and non observable actions (verbs)
 
 So how can we now use the knowledge we have gathered during this time in the course? Here we will go through the Instructional design in 5 phases and explain why learning outcomes (to articulate and specify these) is so important for the curricula and the course design process.
 
-![A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process.](images/image8.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75")
+![A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process.](images/PhasesInstructionalDesign.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75")
 
 1. Writing LOs
 	* Important to build the training
@@ -235,7 +235,7 @@ Learning theories describes how students receive, process, and retain knowledge 
 
 There is no universal theory of learning but evidence-based research results supporting some learning principles, which are today accepted and applied
 
-![The figure shows a dendrogram of the main learning theories that are currently available. The information is organized across four main levels; the Scientific Discipline (such as Organization, Education, Philosophy, etc), the Learning Theorists (such as Montessori and Bloom), the Learning Paradigms (such as Behaviourism, Constructivism), and the key concepts.](images/image11.png "This is a diagram representing the landscape of many known learning theories available.")
+![The figure shows a dendrogram of the main learning theories that are currently available. The information is organized across four main levels; the Scientific Discipline (such as Organization, Education, Philosophy, etc), the Learning Theorists (such as Montessori and Bloom), the Learning Paradigms (such as Behaviourism, Constructivism), and the key concepts.](images/LearningTheories.png "This is a diagram representing the landscape of many known learning theories available.")
 
 Researchers in the fields of cognitive science and educational psychology have proposed a large number of learning theories: a flavour of the diversity of approaches and philosophies can be gained, for example, from the [HoTEL](http://cmapspublic3.ihmc.us/rid=1LNV3H2J9-HWSVMQ-13LH/Learning%20Theory.cmap) (Holistic approach to Technology-Enhanced Learning) website. But which should we rely on? Which should we learn, teach and apply?
 
@@ -339,7 +339,7 @@ Tool important to develop training, but not only
 
 Hierarchy because need to go from bottom to top
 
-![The pyramid of Blooms Taxonomy of verbs. Starting from the bottom layer, the corresponding aspects are: remembering, understanding, applying, analyzing, evaluating and creating.](images/image18.png "Source: https://tips.uark.edu/blooms-taxonomy-verb-chart/")
+![The pyramid of Blooms Taxonomy of verbs. Starting from the bottom layer, the corresponding aspects are: remembering, understanding, applying, analyzing, evaluating and creating.](images/bloomsTaxonomyPyramid.png "Source: https://tips.uark.edu/blooms-taxonomy-verb-chart/")
 
 
 * **Remembering (original Knowledge):** involves recognizing or remembering facts, terms, basic concepts, or answers without necessarily understanding what they mean.
@@ -362,14 +362,14 @@ We can use Bloom’s taxonomy to align instruction with learners' level of compl
 
 Connection of set of verbs to the different levels to help writing LOs and assessing
 
-![6 levels of Bloom's taxonomy (and their verbs) from bottom (lower-order thinking skills) to top (higher-order 'critical' thinking skills): Remember (recall or reiterate information) with memorize, recognise, identify, describe, reproduce, list, define, label, name, state, outline, order, arrange; Understand (demonstrate understanding of facts) with distinguish, classify, select, review, discuss, indicate, explain, estimate, locate, summarise; Apply (apply knowledge to real situations) with operate, manipulate, experiment, choose, modify, prepare, produce; Analyze (resolve ideas into simple parts, identify patterns) with calculate, examine, model, test, break down, infer, predict, solve; Synthesise (pull ideas into a coherent whole, create new ideas) with combine, formulate, illustrate, imagine, design, invent, compose; Evaluate (make & defend judgements, assess theories & outcomes) with critique, compare ideas, solve, recommend, rate](images/image1.png "ACTION verbs express levels of cognitive complexity")
+![6 levels of Bloom's taxonomy (and their verbs) from bottom (lower-order thinking skills) to top (higher-order 'critical' thinking skills): Remember (recall or reiterate information) with memorize, recognise, identify, describe, reproduce, list, define, label, name, state, outline, order, arrange; Understand (demonstrate understanding of facts) with distinguish, classify, select, review, discuss, indicate, explain, estimate, locate, summarise; Apply (apply knowledge to real situations) with operate, manipulate, experiment, choose, modify, prepare, produce; Analyze (resolve ideas into simple parts, identify patterns) with calculate, examine, model, test, break down, infer, predict, solve; Synthesise (pull ideas into a coherent whole, create new ideas) with combine, formulate, illustrate, imagine, design, invent, compose; Evaluate (make & defend judgements, assess theories & outcomes) with critique, compare ideas, solve, recommend, rate](images/bloomsTaxonomy.png "ACTION verbs express levels of cognitive complexity")
 
 
 # Working memory, long term memory and learning
 
 From cognitive science, quite involved in constructivism
 
-![A figure showning a simple representation of how memory works. The main interaction is between the two central boxes, representing the working memory and the long-term memory. The working memory maintain the active consiousness, when paying attention to the envnironment, and is extremely fast but rather limited in capacity (experiments have shown that it can keep track of 7+/-2 items). The long-term memory is much larger in capacity, but it's significantly slower to access - using a process called "remembering". At the same time, the process of depositing information from the working memory into the long-term memory, is the learning process.)](images/image16.png "Simple model (brain is much more complex)")
+![A figure showning a simple representation of how memory works. The main interaction is between the two central boxes, representing the working memory and the long-term memory. The working memory maintain the active consiousness, when paying attention to the envnironment, and is extremely fast but rather limited in capacity (experiments have shown that it can keep track of 7+/-2 items). The long-term memory is much larger in capacity, but it's significantly slower to access - using a process called "remembering". At the same time, the process of depositing information from the working memory into the long-term memory, is the learning process.)](images/HowMemoryWorks.png "Simple model (brain is much more complex)")
 
 1. Environment
 2. Working memory
@@ -415,7 +415,7 @@ Round #2: meaning of the words (long-term memory) helps to remember. It make roo
 
 To facilitate learning, we have to make room in working memory
 
-![Working memory and long-term memory](images/image27.jpg "Working memory and long-term memory")
+![Working memory and long-term memory](images/HowMemoryWorks.png "Working memory and long-term memory")
 
 Connecting words with a story would help to remember
 
@@ -472,11 +472,11 @@ It is how people organize their knowledge
 
 You can think of a graph with nodes (facts, concepts) and edges (connections), as seen in the figure of the mental model of animals below.
 
-![A dendrogram showing the various descriptors of an animal, and the relationships between them. For example, the box "animal" is connected to the entities "eats", "breathes" and "can move", as well as sub-entities, such as "bird" and "fish". Each one of these, in turn, is connected to even more specific sub-entities (such as "penguin" for "bird" and "salmon" for "fish").](images/image35.png "mental model of animals")
+![A dendrogram showing the various descriptors of an animal, and the relationships between them. For example, the box "animal" is connected to the entities "eats", "breathes" and "can move", as well as sub-entities, such as "bird" and "fish". Each one of these, in turn, is connected to even more specific sub-entities (such as "penguin" for "bird" and "salmon" for "fish").](images/animalMentalModel.png "mental model of animals")
 
 ### Dreyfuss model
 
-![A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition.](images/image7.png "Dreyfuss model")
+![A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition.](images/DreyfussModel.png "Dreyfuss model")
 
 The Dreyfus model of skills acquisition by brothers Stuart and Huber Dreyfus uses a 5 stage from novice to expert.
 
@@ -494,7 +494,7 @@ Carpentries was started by Greg Wilson and Brent Gorda and they coined the term 
 
 The Style of the Carpentries are that teachers are where the learners are e.g. by doing live-coding together.
 
-![A simplified version of the Dreyfus model, as built by the Carpentries. There are three levels; the Novice, the Competent Practicioner and the Expert.](images/image28.jpg "Carpentries build on the Dreyfus model.")
+![A simplified version of the Dreyfus model, as built by the Carpentries. There are three levels; the Novice, the Competent Practicioner and the Expert.](images/DreyfussModelCarpentries.jpg "Carpentries build on the Dreyfus model.")
 
 * **Novice**: someone who doesn’t even know what questions to ask.
 * **Competent practitioner**: someone who has enough understanding for everyday purposes
@@ -604,7 +604,7 @@ Extracted from _Understanding how we learn_, {% cite weinstein2018understanding 
 * **Dual coding** - Combining worlds with visuals
 * **Retrieval practice** - Bringing learned information to mind from long term memory
 
-![Six circles representing the six Strategies for Effective Learning.](images/image6.png "Six Strategies for Effective Learning {% cite weinstein2018understanding %} Six Strategies for Effective Learning by [Yana Weinstein, Megan Smith, & Oliver Caviglioli](http://www.learningscientists.org/downloadable-materials/) / [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/), based on a work at[http://www.learningscientists.org](http://www.learningscientists.org/), [teachinghow2s.com/cogsci](http://teachinghow2s.com/cogsci).")
+![Six circles representing the six Strategies for Effective Learning.](images/StrategiesEffectiveLearning.png "Six Strategies for Effective Learning {% cite weinstein2018understanding %} Six Strategies for Effective Learning by [Yana Weinstein, Megan Smith, & Oliver Caviglioli](http://www.learningscientists.org/downloadable-materials/) / [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/), based on a work at[http://www.learningscientists.org](http://www.learningscientists.org/), [teachinghow2s.com/cogsci](http://teachinghow2s.com/cogsci).")
 
 The materials, which are both a book and a website and blog all which are highly recommended, are intended to teach about principles of learning and to provide teachers and students with flexible guiding principles to guide learning and studying.
 
@@ -680,7 +680,7 @@ We will see in session 3 a number of teaching practices. You should try to recon
 > Identify and write 2 main differences between Teaching and training
 {: .hands_on}
 
-![A cartoon showing one of the differences between teaching and training. One the left side, the teacher is showing the information on a blackboards - in training, the instructor is showing, in practice, how this can be applied.](images/image37.png "A cartoon showing one of the differences between teaching and training.")
+![A cartoon showing one of the differences between teaching and training. One the left side, the teacher is showing the information on a blackboards - in training, the instructor is showing, in practice, how this can be applied.](images/teachingVStraining.png "A cartoon showing one of the differences between teaching and training.")
 
 Cartoon from the [Open Science Training Handbook](https://www.fosteropenscience.eu/content/open-science-training-handbook)
 
@@ -704,7 +704,7 @@ In practice, you can use the Bloom’s levels of cognitive complexity (and the [
 * design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc
 * assess learning (taking place during curricula or course and after)
 
-![(in a clockwise direction) Phase 1: Learning Outcomes (Los) --> Simple, measurable, achievable, realistic, time-bound? --> Phase 2: Learning Experiences (LEs) --> LEs aligned with LOs? --> Phase 3: Content --> Support LEs? Promote LOs? --> Phase 4: Assessment --> Aligned with LEs? Support progress towards LOs? --> Phase 5: Evaluation --> LOs achievable by most learners? Content, LEs & assessments support LOs?](images/image3.jpg "Nicholls’ phases of curriculum design & their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). Source: {% cite via2020course %}")
+![(in a clockwise direction) Phase 1: Learning Outcomes (Los) --> Simple, measurable, achievable, realistic, time-bound? --> Phase 2: Learning Experiences (LEs) --> LEs aligned with LOs? --> Phase 3: Content --> Support LEs? Promote LOs? --> Phase 4: Assessment --> Aligned with LEs? Support progress towards LOs? --> Phase 5: Evaluation --> LOs achievable by most learners? Content, LEs & assessments support LOs?](images/NichollsPhases.jpg "Nicholls’ phases of curriculum design & their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). Source: {% cite via2020course %}")
 
 By simplified I mean that here you only see the arrows going from one box to the following in line. However, usually we need to revise and go back one or several boxes if we have failed to specify or articulated Learning outcomes from the beginning. This is what we mean by Learning Outcomes drives the whole process.
 
