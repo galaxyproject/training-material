@@ -142,11 +142,11 @@ This is a great start, but we might want to customize this report to fit our nee
 >
 > 5. To **edit this report**, we can edit the markdown directly. For example, let's
 >     - change the title of the report to `# Iris Analysis`
->     - add a line of introduction text for whoever will read the report:
+>     - add a line of introduction text for whoever will read the report, something like:
 >
->        <pre class="highlight"><code><del># Workflow Execution Report </del>
+>        <pre class="highlight"><code> <del># Workflow Execution Report </del>
 >        # Iris analysis
->        Below you will find the results for the plant analysis.</code></pre>
+>        Below are the results for the Iris analysis workflow.</code></pre>
 >
 >    > ### {% icon tip %} Tip: Markdown format
 >    >
@@ -155,7 +155,9 @@ This is a great start, but we might want to customize this report to fit our nee
 >    {: .tip}
 >
 > 6. Let's play around with some components we can add via the left-hand panel
->    - Under **Miscellaneous**, select "**Galaxy version** as text" and "**Current Time** as text"
+>    - Under the **Miscellaneous** section in the left-hand menu, select
+>      - "**Galaxy version** as text" and
+>      - "**Current Time** as text"
 >    - You will see bits of Markdown are added to your report
 >    - You can add some text around these parts as well
 >    - Make sure the beginning of your report looks something like this:
@@ -178,14 +180,16 @@ This is a great start, but we might want to customize this report to fit our nee
 >      ````
 >
 > 7. Let's try to add the missing plot outputs as well:
->    - On the left-hand panel, under **Insert Objects**, in the **History** section, choose **Image**
+>    - On the left-hand panel, under the **History** section, choose **Image**
 >    - You should see a list of outputs to insert into the report:
 >      ![menu for inserting an image output into the report](./images/report-add-image-options.png)
 >    - Hmmm, no obvious options to insert the plot outputs. We will need to **label the outputs** in our workflow first, before we can use them here.
 >
 > 8. But before we do that, let's save our changes and run the workflow again to view their effects.
 >    - Click on {% icon galaxy-cross %} (**Return to Workflow**) in the top-right of the screen.
+>      ![screenshot of the cross button to return to the workflow editor](./images/report-return-to-workflow.png)
 >    - Click on {% icon galaxy-save %} (**Save Workflow**) to save our changes to the report.
+>      ![screenshot of the floppy disk button to save the workflow](./images/workflow-save.png)
 >
 > 9. **Run the workflow** again
 >    - Select `iris.csv` as the input
