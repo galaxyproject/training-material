@@ -54,7 +54,7 @@ By the end of this session, you will be able to:
 
 The flowchart below highlights where the assessment and feedback phase falls in the overall Nicholls process. Additional information can be found in {% cite via2020course %} and {% cite nicholls2002developing %}.
 
-![A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process.](images/image8.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75")
+![A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process.](images/NichollsPhases.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75")
 
 
 # Assessments
@@ -80,7 +80,7 @@ There are different types of assessment and different ways that we can categoris
 
 ## Formative vs summative assessment
 
-![A cartoon figure showing the main difference between formative and summative assessment, when making soup. When the chef tastes the soup while preparing, it's formative assessment. When the guests taste the soup after its done, it's summative asssessment.](images/image20.png "Formative and summative assessment")
+![A cartoon figure showing the main difference between formative and summative assessment, when making soup. When the chef tastes the soup while preparing, it's formative assessment. When the guests taste the soup after its done, it's summative asssessment.](images/FormativeSummativeAssessment.png "Formative and summative assessment")
 
 Formative assessment takes place **during** teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to **improve the quality of student learning**, _not_ to provide evidence for evaluating or grading students.
 
@@ -226,7 +226,7 @@ There are many possible ways for the formative assessments:
 {: .hands_on}
 
 
-![A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes.](images/image22.jpg "Attention Curve")
+![A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes.](images/AttentionCurve.jpg "Attention Curve")
 
 Formative assessment should be frequent:
 * Ideally every 5 min
@@ -239,7 +239,7 @@ Formative assessment should be frequent:
 
 Feedback is hard.
 
-![A cartoon showing that a single negative feedback among a lot of positive can still be the only one that one remembers eventually.](images/image4.jpg "Getting feedback")
+![A cartoon showing that a single negative feedback among a lot of positive can still be the only one that one remembers eventually.](images/gettingFeedback.jpg "Getting feedback")
 
 * Humans focus more on negative feedback than on positive (you are not alone)
 * Breath deeply
@@ -257,7 +257,7 @@ Trainees feedback should be considered along other forms of quality evidence:
 
 ## Learn and teach others how to give good feedback
 
-![A humorous cartoon showing a parent teaching a child on how to provide constructive feedback when playing with other children.](images/image23.jpg "Learn and teach others to give good feedback")
+![A humorous cartoon showing a parent teaching a child on how to provide constructive feedback when playing with other children.](images/givingGoodFeedback.jpg "Learn and teach others to give good feedback")
 
 * One positive / One negative
 * One up / one down
