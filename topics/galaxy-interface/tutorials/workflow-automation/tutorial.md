@@ -27,7 +27,7 @@ requirements:
 contributors:
 - simonbray
 - wm75
-subtopic: analyse
+subtopic: workflows
 ---
 
 # Introduction
