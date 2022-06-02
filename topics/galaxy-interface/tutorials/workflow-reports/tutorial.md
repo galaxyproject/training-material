@@ -130,6 +130,7 @@ This is a great start, but we might want to customize this report to fit our nee
 >    {% snippet faqs/galaxy/workflows_edit.md %}
 >
 > 2. Click on **Edit Report** {% icon galaxy-wf-edit %} in the top-right of the screen
+>    ![screenshot of the "edit report" button in the workflow editor interface](./images/report-edit-button.png)
 >
 > 3. You should see something like the image below, you will find
 >    - Text editor in the center, with the default report specified in [Markdown format](https://www.markdownguide.org/getting-started/)
@@ -345,4 +346,4 @@ If you would like to share the workflow report of a specific run, you can do so 
 >
 {: .hands_on}
 
-Great work! You have viewed, customized and shared a workflow report. This makes it easy to view the most important results of a workflow in a single view.
+Great work! You have viewed, customized and shared a workflow report. This makes it easy to view the most important results of a workflow in a single view. Here is an example of a final workflow from this tutorial
