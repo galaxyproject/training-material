@@ -23,6 +23,11 @@ key_points:
 contributions:
   authorship:
     - shiltemann
+  editing:
+    - hexylena
+  infrastructure:
+    - jmchilton
+    - mvdbeek
   funding:
     - erasmusplus
 level: Intermediate
