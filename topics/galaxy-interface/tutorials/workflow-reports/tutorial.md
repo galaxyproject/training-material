@@ -150,7 +150,7 @@ This is a great start, but we might want to customize this report to fit our nee
 >
 >    > ### {% icon tip %} Tip: Markdown format
 >    >
->    > The report is specified in [Markdown format](https://www.markdownguide.org/getting-started/), this is a simple markup language that
+>    > The report is specified in [Markdown format](https://www.markdownguide.org/getting-started/), this is a simple markup language that is commonly used.
 >    > Some basics of the Markdown syntax can be found in [this cheatsheet](https://www.markdownguide.org/cheat-sheet/)
 >    {: .tip}
 >
