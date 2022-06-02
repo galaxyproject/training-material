@@ -65,7 +65,9 @@ It will be a fun learning experience for anyone who loves visualization !
 >
 > 1. Create a new history for this tutorial. Name it as per your choice. My suggestions : *ECMWF_Reanalysis*.
 >
->  {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Import the files from
 >    the remote files
@@ -191,6 +193,7 @@ In `info file` output file, we can identify 4 different sections:
 >    - `time0`: this tabular file contains all the forecast times. In our case, these are relative to 25/05/2022, 18:00:00 UTC.;
 >    - `version`: this is a text file returning the Xarray package version. It is useful when publishing your Galaxy workflow.
 
+>
 >    > ### {% icon comment %} Comment
 >    >
 >    > This tool returns as many tabular files as the number of coordinate variables present in your input file. The values are decoded from the netCDF input file and no further processing is done. So units for instance for latitudes, longitudes, level and time may vary from one file to another depending on how it was coded in the original input file.
@@ -200,7 +203,7 @@ In `info file` output file, we can identify 4 different sections:
 
 
 > ### {% icon question %} Understanding air temperature coordinates at 2 metres
-
+>
 >
 > 1. What is the format of time coordinate?
 > 2. What is the range of values for latitude and longitude?
@@ -210,7 +213,7 @@ In `info file` output file, we can identify 4 different sections:
 > >
 > > > ### {% icon code-out %} Output
 > > > ```bash
-> > > 0 2022-05-01 00:00:00
+> > >    0 2022-05-01 00:00:00
 > > > 1	2022-05-01 01:00:00
 > > > 2	2022-05-01 02:00:00
 > > > 3	2022-05-01 03:00:00
