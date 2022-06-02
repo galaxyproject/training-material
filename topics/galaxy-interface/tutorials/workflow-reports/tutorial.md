@@ -23,7 +23,7 @@ key_points:
 contributions:
   authorship:
     - shiltemann
-  editing:
+  testing:
     - hexylena
   infrastructure:
     - jmchilton
