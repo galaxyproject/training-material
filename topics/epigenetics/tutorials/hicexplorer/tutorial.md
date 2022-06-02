@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer"
 zenodo_link: "https://doi.org/10.5281/zenodo.1183661"
-edam_ontology: ""
 questions:
   - "Why is a Hi-C analysis useful?"
   - "What is 'chromosome conformation capture'?"
@@ -298,7 +297,7 @@ As an output we get the boundaries, domains and scores separated files. We will 
 
 ![Pearson PC2](../../images/pearson_pc2.png)
 
-The first principal component correlates with the chromosome arms, while the second component correlates with A/B compartments. 
+The first principal component correlates with the chromosome arms, while the second component correlates with A/B compartments.
 
 # Integrating Hi-C and other data
 
@@ -388,7 +387,7 @@ To compute loops, we have to import a new data set from the shared library to ou
 
 This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolution. We use a new file because to detect loop structures the read coverage is required to be in the hunderts of million; this was not the case for the previous used drosophila dataset.
 
-> ### {% icon hands_on %} Hands-on: Matrix information 
+> ### {% icon hands_on %} Hands-on: Matrix information
 >
 > 1. **hicInfo** {% icon tool %}: Run hicInfo adjusting the parameters:
 >    - "Select" `Multiple datasets`

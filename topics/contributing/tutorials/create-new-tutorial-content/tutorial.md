@@ -14,8 +14,10 @@ key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
 subtopic: writing
-contributors:
+contributions:
+  authorship:
   - bebatut
+  editing:
   - bgruening
   - shiltemann
   - hexylena
@@ -98,9 +100,8 @@ The `tutorial.md` needs to start with some metadata at the top:
 - `layout: tutorial_hands_on`: keep the default
 - `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
 - `level`: `Introductory`, `Intermediate` or `Advanced`
-- `enable`: `false` to hide your tutorial from the topic page (optional)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
-- `contribuors`: eveybody who has contributed to this tutorial (usernames must match those in `CONTRIBUTORS.yaml` file)
+- `contributions`: eveybody who has contributed to this tutorial (usernames must match those in `CONTRIBUTORS.yaml` file)
 
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
@@ -117,40 +118,9 @@ This information is used to display the data from the topic and tutorial page. T
 
 We also define metadata related to the pedagogical content of the tutorial, which will appear at the top ("Overview" box) and bottom of the online tutorial:
 
-- `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
-    - `type`: the type of link (`internal` or `external`)
-
-    For internal, i.e. inside the Galaxy Training Material:
-    - `topic_name`: name of the topic
-    - `tutorials`: list of required tutorials inside of the topic
-
-    For external:
-    - `title`: title of the external resource
-    - `link`: URL to the external resource
-- `time_estimation`: an estimation of the time needed to complete the hands-on
-- `questions`: list of questions that will be addressed in the tutorial
-- `objectives`: list of learning objectives for the tutorial
-
-    A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial
-
-- `key_points`: list of take-home messages
-
-    This information will appear at the end of the tutorial
-
-- `follow_up_training`: list of resources that the reader of the material could follow at the end of the tutorial
-
-    - `type`: the type of link (`internal` or `external`)
-
-    For internal, i.e. inside the Galaxy Training Material:
-    - `topic_name`: name of the topic
-    - `tutorials`: list of required tutorials inside of the topic
-
-    For external:
-    - `title`: title of the external resource
-    - `link`: URL to the external resource
-
-    They will be displayed at the end of the tutorial.
-- `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
+{% assign kid_key = "Tutorial Schema" %}
+{% assign kid_val = site.data['schema-tutorial'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
@@ -235,6 +205,13 @@ All tutorials and slides must give credit to all contributors. This can be any t
 
    For an example of how this all looks, see the [R basics tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) (top and bottom of the tutorial).
 
+{% assign kid_key = "Contributions Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['contributions'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "CONTRIBUTORS Schema" %}
+{% assign kid_val = site.data['schema-contributors'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 # Content
 
@@ -945,6 +922,10 @@ Here you can write the snippet / answer to the FAQ in Markdown
 
 ```
 
+{% assign kid_key = "FAQ Schema" %}
+{% assign kid_val = site.data['schema-faq'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
 ### FAQ pages
 
 All FAQs will also be collected on their own page, this makes it easy for and teachers to prepare the session, and for participants to quickly find the answers to common questions.
@@ -1034,6 +1015,10 @@ And in your text you can use braces to refer to the term
 > >
 > {: .code-out}
 {: .code-2col}
+
+{% assign kid_key = "Abbreviations Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['abbreviations'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 ## Choose Your Own Tutorial
 
@@ -1162,6 +1147,12 @@ If your tutorial is primarily focused on teaching students how to write code (Ba
     ```python
     some_code += f"that students {should execute}"
     ```
+
+## Notebook Schema
+
+{% assign kid_key = "Notebook Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['notebook'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 ## Currently Supported Languages
 
