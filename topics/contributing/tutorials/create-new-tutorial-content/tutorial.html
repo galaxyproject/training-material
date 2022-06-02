@@ -321,42 +321,6 @@
   "hasPart": [
 
   ],
-  "author": [
-    {
-      "@type": "Person",
-      "name": "Bérénice Batut"
-    },
-    {
-      "@type": "Person",
-      "name": "Björn Grüning"
-    },
-    {
-      "@type": "Person",
-      "name": "Saskia Hiltemann"
-    },
-    {
-      "@type": "Person",
-      "name": "Helena Rasche"
-    }
-  ],
-  "contributor": [
-    {
-      "@type": "Person",
-      "name": "Bérénice Batut"
-    },
-    {
-      "@type": "Person",
-      "name": "Björn Grüning"
-    },
-    {
-      "@type": "Person",
-      "name": "Saskia Hiltemann"
-    },
-    {
-      "@type": "Person",
-      "name": "Helena Rasche"
-    }
-  ],
   "about": [
     {
       "@type": "CreativeWork",
@@ -375,11 +339,25 @@
     <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: 
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
 <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
 
 
 
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			
 <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar">Björn Grüning</a>
 
 
@@ -390,6 +368,17 @@
 
 <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
 
+
+</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
 
 
 	</div>
@@ -510,7 +499,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 19, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 20, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -570,6 +559,7 @@
   </li>
   <li><a href="#citations" id="markdown-toc-citations">Citations</a></li>
   <li><a href="#automatic-jupyter-notebooks--rmarkdown" id="markdown-toc-automatic-jupyter-notebooks--rmarkdown">Automatic Jupyter Notebooks &amp; RMarkdown</a>    <ol>
+      <li><a href="#notebook-schema" id="markdown-toc-notebook-schema">Notebook Schema</a></li>
       <li><a href="#currently-supported-languages" id="markdown-toc-currently-supported-languages">Currently Supported Languages</a></li>
       <li><a href="#restrictions" id="markdown-toc-restrictions">Restrictions</a></li>
       <li><a href="#enabling-the-system" id="markdown-toc-enabling-the-system">Enabling the system</a></li>
@@ -645,9 +635,8 @@ blabla
   <li><code class="language-plaintext highlighter-rouge">layout: tutorial_hands_on</code>: keep the default</li>
   <li><code class="language-plaintext highlighter-rouge">title</code>: title of the tutorial (it will appear on the tutorial page and the topic page)</li>
   <li><code class="language-plaintext highlighter-rouge">level</code>: <code class="language-plaintext highlighter-rouge">Introductory</code>, <code class="language-plaintext highlighter-rouge">Intermediate</code> or <code class="language-plaintext highlighter-rouge">Advanced</code></li>
-  <li><code class="language-plaintext highlighter-rouge">enable</code>: <code class="language-plaintext highlighter-rouge">false</code> to hide your tutorial from the topic page (optional)</li>
   <li><code class="language-plaintext highlighter-rouge">zenodo_link</code>: link on Zenodo to the input data for the tutorial</li>
-  <li><code class="language-plaintext highlighter-rouge">contribuors</code>: eveybody who has contributed to this tutorial (use<span class="notranslate">rna</span>mes must match those in <code class="language-plaintext highlighter-rouge">CONTRIBUTORS.yaml</code> file)</li>
+  <li><code class="language-plaintext highlighter-rouge">contributions</code>: eveybody who has contributed to this tutorial (use<span class="notranslate">rna</span>mes must match those in <code class="language-plaintext highlighter-rouge">CONTRIBUTORS.yaml</code> file)</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -671,59 +660,2639 @@ blabla
 
 <p>We also define metadata related to the pedagogical content of the tutorial, which will appear at the top (“Overview” box) and bottom of the online tutorial:</p>
 
+<blockquote class="tip">
+<h3>
+	
+		<code>Tutorial Schema</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>layout</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>This must be set to <code class="language-plaintext highlighter-rouge">tutorial_hands_on</code></p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">requirements</code>: list of resources that the reader of the material should be familiar with before starting this training:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">type</code>: the type of link (<code class="language-plaintext highlighter-rouge">inte<span class="notranslate">rna</span>l</code> or <code class="language-plaintext highlighter-rouge">exte<span class="notranslate">rna</span>l</code>)</li>
-    </ul>
 
-    <p>For inte<span class="notranslate">rna</span>l, i.e. inside the <span class="notranslate">Galaxy</span> Training Material:</p>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">topic_name</code>: name of the topic</li>
-      <li><code class="language-plaintext highlighter-rouge">tutorials</code>: list of required tutorials inside of the topic</li>
-    </ul>
+	<li><code>tutorial_hands_on</code></li>
 
-    <p>For exte<span class="notranslate">rna</span>l:</p>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">title</code>: title of the exte<span class="notranslate">rna</span>l resource</li>
-      <li><code class="language-plaintext highlighter-rouge">link</code>: URL to the exte<span class="notranslate">rna</span>l resource</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">time_estimation</code>: an estimation of the time needed to complete the hands-on</li>
-  <li><code class="language-plaintext highlighter-rouge">questions</code>: list of questions that will be addressed in the tutorial</li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">objectives</code>: list of learning objectives for the tutorial</p>
-
-    <p>A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">key_points</code>: list of take-home messages</p>
-
-    <p>This information will appear at the end of the tutorial</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">follow_up_training</code>: list of resources that the reader of the material could follow at the end of the tutorial</p>
-
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">type</code>: the type of link (<code class="language-plaintext highlighter-rouge">inte<span class="notranslate">rna</span>l</code> or <code class="language-plaintext highlighter-rouge">exte<span class="notranslate">rna</span>l</code>)</li>
-    </ul>
-
-    <p>For inte<span class="notranslate">rna</span>l, i.e. inside the <span class="notranslate">Galaxy</span> Training Material:</p>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">topic_name</code>: name of the topic</li>
-      <li><code class="language-plaintext highlighter-rouge">tutorials</code>: list of required tutorials inside of the topic</li>
-    </ul>
-
-    <p>For exte<span class="notranslate">rna</span>l:</p>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">title</code>: title of the exte<span class="notranslate">rna</span>l resource</li>
-      <li><code class="language-plaintext highlighter-rouge">link</code>: URL to the exte<span class="notranslate">rna</span>l resource</li>
-    </ul>
-
-    <p>They will be displayed at the end of the tutorial.</p>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">subtopic</code>: if the topic has <a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic">multiple subtopics defined</a>, you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the “Other tutorials” section on the topic page.</li>
 </ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">layout</span><span class="pi">:</span> <span class="s2">"</span><span class="s">tutorial_hands_on"</span>
+</code></pre></div>        </div>
+      </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>title</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Title of the tutorial (it will appear on the tutorial page and the topic page)</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Clustering in Machine Learning</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Breve introducción a <span class="notranslate">Galaxy</span> - en español</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Pangeo ecosystem 101 for everyone - Introduction to Xarray <span class="notranslate">Galaxy</span> Tools</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>contributions</code>
+	
+	 <b>required</b></h3>
+
+<b>A dictionary/map</b>
+
+<p>
+<p>List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">contributions</span><span class="pi">:</span>
+    <span class="na">authorship</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">shiltemann</span>
+        <span class="pi">-</span> <span class="s">bebatut</span>
+    <span class="na">editing</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">hexylena</span>
+        <span class="pi">-</span> <span class="s">bebatut</span>
+        <span class="pi">-</span> <span class="s">natefoo</span>
+    <span class="na">testing</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">bebatut</span>
+    <span class="na">infrastructure</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">natefoo</span>
+    <span class="na">funding</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">erasmusplus</span>
+
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>authorship</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities wrote the bulk of the training material, they may have done the analysis, built the <span class="notranslate">workflow</span>, and wrote the text themselves.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>editing</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>funding</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities provided funding support for the development of this resource</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>infrastructure</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities managed and provided infrastructure to the GTN or for training purposes</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>testing</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>ux</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities contributed UX or Design improvements to this tutorial or the GTN as a whole</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>time_estimation</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>An estimation of the time needed to complete the hands-on.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">time_estimation</span><span class="pi">:</span> <span class="s">10M</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">time_estimation</span><span class="pi">:</span> <span class="s">1H30M</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/</span>
+</code></pre></div>        </div>
+      </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>abbreviations</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+<p>A dictionary of abbreviations and their expansions.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">abbreviations</span><span class="pi">:</span>
+    <span class="na">SQL</span><span class="pi">:</span> <span class="s">Structured Query Language</span>
+    <span class="na">API</span><span class="pi">:</span> <span class="s">Application Programming Interface</span>
+
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		Any key permitted
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>The expansion of the abbreviated term.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+</blockquote>
+
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>contributors</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>List of tutorial contributors. Please use <code class="language-plaintext highlighter-rouge">contributions</code> instead as it provides more detailed accounting of tutorial history.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">contributors</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">hexylena</span>
+<span class="pi">-</span> <span class="s">shiltemann</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>edam_ontology</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>An edam ontology id that describes the topic or tutorial.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">edam_ontology</span><span class="pi">:</span> <span class="s">topic_3173</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/^topic_[0-9]+$/</span>
+</code></pre></div>        </div>
+      </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>enable</code>
+	
+	</h3>
+
+<b>Boolean</b>
+
+<p>
+<p><code class="language-plaintext highlighter-rouge">false</code> to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>follow_up_training</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>list of resources that the reader of the material could follow at the end of the tutorial</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">follow_up_training</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">inte<span class="notranslate">rna</span>l</span>
+  <span class="na">topic_name</span><span class="pi">:</span> <span class="s">statistics</span>
+  <span class="na">tutorials</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">age-prediction-with-ml</span>
+  
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">exte<span class="notranslate">rna</span>l</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">The Unix Shell</span>
+  <span class="na">link</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://swcarpentry.github.io/shell-novice/"</span>
+  
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">none</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">A</span><span class="nv"> </span><span class="s">VM</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">least</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">vCPUs</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">4</span><span class="nv"> </span><span class="s">GB</span><span class="nv"> </span><span class="s">RAM,</span><span class="nv"> </span><span class="s">preferably</span><span class="nv"> </span><span class="s">running</span><span class="nv"> </span><span class="s">Ubuntu</span><span class="nv"> </span><span class="s">18.04</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">20.04."</span>
+  
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+		
+		
+		
+		<blockquote class="comment">
+<h3>
+	
+		<code>Sequence Value</code>
+	
+	 <b>required</b></h3>
+
+<b>A dictionary/map</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>type</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>the type of link</p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>inte<span class="notranslate">rna</span>l</code></li>
+
+	<li><code>exte<span class="notranslate">rna</span>l</code></li>
+
+	<li><code>none</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">inte<span class="notranslate">rna</span>l"</span>
+</code></pre></div>            </div>
+          </div>
+	
+<div>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">exte<span class="notranslate">rna</span>l"</span>
+</code></pre></div>            </div>
+          </div>
+	
+<div>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">none"</span>
+</code></pre></div>            </div>
+          </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>link</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>URL of the exte<span class="notranslate">rna</span>l resource</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>title</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Title of the exte<span class="notranslate">rna</span>l resource</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>topic_name</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>[Inte<span class="notranslate">rna</span>l Only] The name of the topic</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>tutorials</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>[Inte<span class="notranslate">rna</span>l Only] List of required tutorials inside that topic</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+	
+
+</blockquote>
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code><span class="notranslate">galaxy</span>_version</code>
+	
+	</h3>
+
+<b>Decimal Number</b>
+
+<p>
+<p>Currently unused.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>gitter</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Link to a gitter channel that is more relevant for the tutorial than the default. E.g. a <span class="notranslate">single cell</span> tutorial could use <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>-Training-Network/<span class="notranslate">galaxy</span>-<span class="notranslate">single-cell</span></code> to link to their specific chat room.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gitter</span><span class="pi">:</span> <span class="s"><span class="notranslate">Galaxy</span>-Training-Network/<span class="notranslate">galaxy</span>-<span class="notranslate">single-cell</span></span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gitter</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>-genome-annotation/Lobby</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>key_points</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>List of take-home messages. This information will appear at the end
+of the tutorial. These should really be a key point, something that
+should stick in their mind; what you want them to take home from
+the tutorial.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">key_points</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Pangeo ecosystem enables big data analysis in geosciences</span>
+<span class="pi">-</span> <span class="s">The MiModD suite of tools bundles most of the functionality required to perform <span class="notranslate">mapping</span>-by-sequencing analyses with <span class="notranslate">Galaxy</span></span>
+<span class="pi">-</span> <span class="s">It can drastically simplify management of large numbers of VMs</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>lang</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>The document language.</p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>es</code></li>
+
+	<li><code>en</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">lang</span><span class="pi">:</span> <span class="s2">"</span><span class="s">es"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">lang</span><span class="pi">:</span> <span class="s2">"</span><span class="s">en"</span>
+</code></pre></div>        </div>
+      </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>level</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Here give a feeling of what level the material is at.</p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>Introductory</code></li>
+
+	<li><code>Intermediate</code></li>
+
+	<li><code>Advanced</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">level</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Introductory"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">level</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Intermediate"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">level</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Advanced"</span>
+</code></pre></div>        </div>
+      </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>license</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>An <a href="https://spdx.org/">SPDX</a> identifier for the alte<span class="notranslate">rna</span>tive license that is used for that particular material. This is <strong>only</strong> relevant for materials which have been imported from an exte<span class="notranslate">rna</span>l source and were originally licensed under another license. For new materials we strongly encourage contributors to not use this key as materials are CC-BY, by default.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">license</span><span class="pi">:</span> <span class="s">MIT</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>notebook</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">notebook</span><span class="pi">:</span>
+    <span class="na">language</span><span class="pi">:</span> <span class="s">python</span>
+    <span class="na">pyolite</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">notebook</span><span class="pi">:</span>
+    <span class="na">language</span><span class="pi">:</span> <span class="s">python</span>
+    <span class="na">snippet</span><span class="pi">:</span> <span class="s">topics/climate/tutorials/pangeo-notebook/preamble.md</span>
+
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>language</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>python</code></li>
+
+	<li><code>bash</code></li>
+
+	<li><code>r</code></li>
+
+	<li><code>sql</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">python"</span>
+</code></pre></div>          </div>
+        </div>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bash"</span>
+</code></pre></div>          </div>
+        </div>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">r"</span>
+</code></pre></div>          </div>
+        </div>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sql"</span>
+</code></pre></div>          </div>
+        </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+	
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>pyolite</code>
+	
+	</h3>
+
+<b>Boolean</b>
+
+<p>
+<p>The GTN has support for JupyterLite and the Pyodide kernel which runs <a href="https://pyodide.org/en/stable/">Python in the browser via webassembly/javascript</a>. This comes with some restrictions:</p>
+
+<ul>
+  <li>Python only</li>
+  <li>No filesystem access (so no <code class="language-plaintext highlighter-rouge">wget</code> prep steps)</li>
+  <li>Little to no cell magic</li>
+</ul>
+
+<p>However, it means we can run a lot of our Python training
+directly in the GTN! And in the future, hopefully, we will
+be able to embed individual cells of the notebook directly
+in the Python training, so the user doesn’t even need to
+switch pages.</p>
+
+<p>Enabling this field will enable pyolite links for this notebook.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>snippet</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>If you have an alte<span class="notranslate">rna</span>tive preamble for your notebook that students should know before following (e.g. they must load X datasets in their history), it can be listed here.</p>
+
+<p>This text will be shown in the GTN tutorial, but it will <strong>not</strong> be included in the notebook, giving you a bit better control over mixing setup content which is relevant for <span class="notranslate">Galaxy</span>, with notebook content that can be easy to run for students.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">snippet</span><span class="pi">:</span> <span class="s">topics/climate/tutorials/pangeo-notebook/preamble.md</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>objectives</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>list of learning objectives for the tutorial</p>
+
+<p>A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial. Generally it is best to follow a 2C or 3C learning objective such as:</p>
+
+<ul>
+  <li>Compute (Skill)</li>
+  <li>multiple whole genome assemblies (Objective)</li>
+  <li>in such a way to develop big data processing skills (Result)</li>
+</ul>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">objectives</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*</span>
+<span class="pi">-</span> <span class="s">Explore Biodiversity data with taxonomic, temporal and geographical informations</span>
+<span class="pi">-</span> <span class="s">Generate a DotPlot emulating the original paper using a different analysis tool</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>priority</code>
+	
+	</h3>
+
+<b>Integer Number</b>
+
+<p>
+<p>This field allows ordering tutorials within the tutorial list. Tutorials with lower numbered priority come before tutorials with higher numbers.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>questions</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>list of questions that will be addressed in the tutorial</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">questions</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">How does Genome assembly work?</span>
+<span class="pi">-</span> <span class="s">How do I change <span class="notranslate">Galaxy</span> configs?</span>
+<span class="pi">-</span> <span class="s">How to detect and quantify differentially abundant proteins in a HEK-Ecoli Benchmark DIA datatset?</span>
+<span class="pi">-</span> <span class="s">What kinds of data do programs store?</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>redirect_from</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">redirect_from</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">/topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>requirements</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to <code class="language-plaintext highlighter-rouge">follow_up_training</code>.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">requirements</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">inte<span class="notranslate">rna</span>l</span>
+  <span class="na">topic_name</span><span class="pi">:</span> <span class="s">statistics</span>
+  <span class="na">tutorials</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">age-prediction-with-ml</span>
+  
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">exte<span class="notranslate">rna</span>l</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">The Unix Shell</span>
+  <span class="na">link</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://swcarpentry.github.io/shell-novice/"</span>
+  
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">none</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">A</span><span class="nv"> </span><span class="s">VM</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">least</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">vCPUs</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">4</span><span class="nv"> </span><span class="s">GB</span><span class="nv"> </span><span class="s">RAM,</span><span class="nv"> </span><span class="s">preferably</span><span class="nv"> </span><span class="s">running</span><span class="nv"> </span><span class="s">Ubuntu</span><span class="nv"> </span><span class="s">18.04</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">20.04."</span>
+  
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+		
+		
+		
+		<blockquote class="comment">
+<h3>
+	
+		<code>Sequence Value</code>
+	
+	 <b>required</b></h3>
+
+<b>A dictionary/map</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>type</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>the type of link</p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>inte<span class="notranslate">rna</span>l</code></li>
+
+	<li><code>exte<span class="notranslate">rna</span>l</code></li>
+
+	<li><code>none</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">inte<span class="notranslate">rna</span>l"</span>
+</code></pre></div>            </div>
+          </div>
+	
+<div>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">exte<span class="notranslate">rna</span>l"</span>
+</code></pre></div>            </div>
+          </div>
+	
+<div>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">none"</span>
+</code></pre></div>            </div>
+          </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>link</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>URL of the exte<span class="notranslate">rna</span>l resource</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>title</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Title of the exte<span class="notranslate">rna</span>l resource</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>topic_name</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>[Inte<span class="notranslate">rna</span>l Only] The name of the topic</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>tutorials</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>[Inte<span class="notranslate">rna</span>l Only] List of required tutorials inside that topic</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+	
+
+</blockquote>
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>subtopic</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>if the topic has <a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic">multiple subtopics defined</a>, you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the “Other tutorials” section on the topic page.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">subtopic</span><span class="pi">:</span> <span class="s"><span class="notranslate">single-cell</span></span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>tags</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>A free form list of tags that are relevant for your tutorial.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tags</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">covid-19</span>
+<span class="pi">-</span> <span class="s">git-gat</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>translations</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>If alte<span class="notranslate">rna</span>tive translations of a material are available, then use this key to indicate which languages have been manually translated.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">translations</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">en</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>voice</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+<p>For materials which are automatically converted into videos via the available mechanisms, this field declares which voice should be used. If this field is not declared, a random voice will be chosen from a list of the best available voices from AWS Polly.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">voice</span><span class="pi">:</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">Lupe</span>
+    <span class="na">lang</span><span class="pi">:</span> <span class="s">es-US</span>
+    <span class="na">neural</span><span class="pi">:</span> <span class="no">true</span>
+
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>id</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>lang</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>neural</code>
+	
+	 <b>required</b></h3>
+
+<b>Boolean</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>zenodo_link</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>link on Zenodo to the input data for the tutorial</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">zenodo_link</span><span class="pi">:</span> <span class="s">https://zenodo.org/record/3706539</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+</blockquote>
 
 <p>For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their <a href="https://swcarpentry.github.io/instructor-training/">Instructor training</a>.</p>
 
@@ -812,6 +3381,1258 @@ Each contributor is defined in this file like:</p>
     <p>For an example of how this all looks, see the <a href="/training-material/topics/data-science/tutorials/r-basics/tutorial.html">R basics tutorial</a> (top and bottom of the tutorial).</p>
   </li>
 </ol>
+
+<blockquote class="comment">
+<h3>
+	
+		<code>Contributions Schema</code>
+	
+	 <b>required</b></h3>
+
+<b>A dictionary/map</b>
+
+<p>
+<p>List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">contributions</span><span class="pi">:</span>
+    <span class="na">authorship</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">shiltemann</span>
+        <span class="pi">-</span> <span class="s">bebatut</span>
+    <span class="na">editing</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">hexylena</span>
+        <span class="pi">-</span> <span class="s">bebatut</span>
+        <span class="pi">-</span> <span class="s">natefoo</span>
+    <span class="na">testing</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">bebatut</span>
+    <span class="na">infrastructure</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">natefoo</span>
+    <span class="na">funding</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">erasmusplus</span>
+
+</code></pre></div>      </div>
+    </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>authorship</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities wrote the bulk of the training material, they may have done the analysis, built the <span class="notranslate">workflow</span>, and wrote the text themselves.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>editing</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>funding</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities provided funding support for the development of this resource</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>infrastructure</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities managed and provided infrastructure to the GTN or for training purposes</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>testing</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>ux</code>
+	
+	</h3>
+
+<b>List of Items</b>
+
+<p>
+<p>These entities contributed UX or Design improvements to this tutorial or the GTN as a whole</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+
+</blockquote>
+
+<blockquote class="tip">
+<h3>
+	
+		<code>CONTRIBUTORS Schema</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hexylena</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">Helena</span>
+    <span class="na">twitter</span><span class="pi">:</span> <span class="s">hexylena</span>
+    <span class="na">bio</span><span class="pi">:</span> <span class="s">I wrote this documentation! I do super cool things.</span>
+
+</code></pre></div>      </div>
+    </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		Any key permitted
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+<p>This ideally is your GitHub handle. If you do not have, or do not wish to provide a GitHub use<span class="notranslate">rna</span>me, you may make up another identifier here, but then you must set <code class="language-plaintext highlighter-rouge">github: false</code> as described below.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>name</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Your preferred name. If you prefer an alias or another name, this is welcome, it does not need to be your legal name.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">张三</span>
+</code></pre></div>          </div>
+        </div>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Alice</span>
+</code></pre></div>          </div>
+        </div>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Jane Doe</span>
+</code></pre></div>          </div>
+        </div>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Madame Tout-le-Monde</span>
+</code></pre></div>          </div>
+        </div>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Γιάννης Παπαδόπουλος</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>joined</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>The year and month in which you joined</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">joined</span><span class="pi">:</span> <span class="s">2020-01</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/[0-9]{4,}-[0-9]{2}/</span>
+</code></pre></div>          </div>
+        </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>avatar</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>bio</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>A short biography of yourself, if you wish to add additional details or context.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">bio</span><span class="pi">:</span> <span class="s">Research at the [South African National Bioinformatics Institute](https://www.sanbi.ac.za/)</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>email</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Your email address, if you wish to provide it.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">email</span><span class="pi">:</span> <span class="s">jane.doe@gmail.com</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/@/</span>
+</code></pre></div>          </div>
+        </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>funder</code>
+	
+	</h3>
+
+<b>Boolean</b>
+
+<p>
+<p>Set this to true if this entity is a funding agency.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>funding_id</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>The short identifier for your grant.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">funding_id</span><span class="pi">:</span> <span class="s">2020-1-NL01-KA203-064717</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>funding_statement</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>A short statement about the funder, markdown is supported.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">funding_statement</span><span class="pi">:</span> <span class="s">This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>github</code>
+	
+	</h3>
+
+<b>Boolean</b>
+
+<p>
+<p>If your identifier in this file is <strong>not</strong> a GitHub account (or not your account), then this <strong>must</strong> be set to true, so we do not link to that account.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>gitter</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Your gitter</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gitter</span><span class="pi">:</span> <span class="s">hexylena</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/[0-9a-zA-Z]+/</span>
+</code></pre></div>          </div>
+        </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>halloffame</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Set this to <code class="language-plaintext highlighter-rouge">no</code> if you would like to be excluded from the hall of fame.</p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>no</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">halloffame</span><span class="pi">:</span> <span class="s2">"</span><span class="s">no"</span>
+</code></pre></div>          </div>
+        </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>linkedin</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/[0-9a-zA-Z]+/</span>
+</code></pre></div>          </div>
+        </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>maintainer_contact</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Preferred contact method</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>matrix</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Your matrix identifier</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">matrix</span><span class="pi">:</span> <span class="err">@</span><span class="s">hexylena:matrix.org</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/@[0-9a-zA-Z]+:.*/</span>
+</code></pre></div>          </div>
+        </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>orcid</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Your identifier at orcid.org</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">orcid</span><span class="pi">:</span> <span class="s">0000-0001-9760-8992</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}/</span>
+</code></pre></div>          </div>
+        </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>twitter</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Your twitter handle, without the <code class="language-plaintext highlighter-rouge">@</code></p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">twitter</span><span class="pi">:</span> <span class="s">gxytraining</span>
+</code></pre></div>          </div>
+        </div>
+	
+	</p>
+
+
+
+
+
+<p>
+<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+
+<div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/[0-9a-zA-Z]+/</span>
+</code></pre></div>          </div>
+        </div>
+
+</p>
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+</blockquote>
+
+		
+	
+
+</blockquote>
 
 <h1 id="content">Content</h1>
 
@@ -1618,6 +5439,409 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
 
 </code></pre></div></div>
 
+<blockquote class="tip">
+<h3>
+	
+		<code>FAQ Schema</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>layout</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>This must be set to <code class="language-plaintext highlighter-rouge">faq</code></p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>faq</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">layout</span><span class="pi">:</span> <span class="s2">"</span><span class="s">faq"</span>
+</code></pre></div>        </div>
+      </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>title</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>Title of the FAQ</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">How does the GTN implement the 'Ten simple rules for collaborative lesson development'</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">How can I give feedback?</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Ways to use <span class="notranslate">Galaxy</span></span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>box_type</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+<p>The type of box that should be used when rendering this FAQ.</p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>tip</code></li>
+
+	<li><code>hands_on</code></li>
+
+	<li><code>question</code></li>
+
+	<li><code>comment</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">box_type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">tip"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">box_type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">hands_on"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">box_type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">question"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">box_type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">comment"</span>
+</code></pre></div>        </div>
+      </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>contributors</code>
+	
+	 <b>required</b></h3>
+
+<b>List of Items</b>
+
+<p>
+<p>Who contributed to this FAQ</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">contributors</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">shiltemann</span>
+<span class="pi">-</span> <span class="s">hexylena</span>
+</code></pre></div>        </div>
+      </div></p>
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+</blockquote>
+
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>area</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>A text key used for sorting related FAQs together in the visual interface for users.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">area</span><span class="pi">:</span> <span class="s">contributors</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">area</span><span class="pi">:</span> <span class="s">learners</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">area</span><span class="pi">:</span> <span class="s">features</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>description</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>A short, one line description to provide additional context of the FAQ</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">description</span><span class="pi">:</span> <span class="s"><span class="notranslate">Galaxy</span> may have several reference genomes built-in, but you can also create your own.</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">description</span><span class="pi">:</span> <span class="s">Quickly learn what the identifiers are in any **BAM** dataset that is the result from <span class="notranslate">mapping</span></span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">description</span><span class="pi">:</span> <span class="s">Finding and Correcting Metadata</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+	
+		
+	
+
+</blockquote>
+
 <h3 id="faq-pages">FAQ pages</h3>
 
 <p>All FAQs will also be collected on their own page, this makes it easy for and teachers to prepare the session, and for participants to quickly find the answers to common questions.</p>
@@ -2171,6 +6395,92 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   </blockquote>
 </blockquote>
 
+<blockquote class="tip">
+<h3>
+	
+		<code>Abbreviations Schema</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+<p>A dictionary of abbreviations and their expansions.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">abbreviations</span><span class="pi">:</span>
+    <span class="na">SQL</span><span class="pi">:</span> <span class="s">Structured Query Language</span>
+    <span class="na">API</span><span class="pi">:</span> <span class="s">Application Programming Interface</span>
+
+</code></pre></div>      </div>
+    </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+
+	
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		Any key permitted
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>The expansion of the abbreviated term.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+</blockquote>
+
 <h2 id="choose-your-own-tutorial">Choose Your Own Tutorial</h2>
 
 <p>Sometimes you’re writing a large tutorial and at one small step there are multiple paths or multiple ways to get the data you want, and you’d like to showcase them all! You could write them all out in order, Option 1…2…etc, however maybe you want it to be a bit more interactive and focus only on one option at a time, so a user doesn’t get distracted by the other options.</p>
@@ -2333,6 +6643,242 @@ and the corresponding website {% cite <span class="notranslate">galaxy</span>-tr
 some_code += f"that students {should execute}"
 ```
 </code></pre></div></div>
+
+<h2 id="notebook-schema">Notebook Schema</h2>
+
+<blockquote class="tip">
+<h3>
+	
+		<code>Notebook Schema</code>
+	
+	</h3>
+
+<b>A dictionary/map</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b><div>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">notebook</span><span class="pi">:</span>
+    <span class="na">language</span><span class="pi">:</span> <span class="s">python</span>
+    <span class="na">pyolite</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">notebook</span><span class="pi">:</span>
+    <span class="na">language</span><span class="pi">:</span> <span class="s">python</span>
+    <span class="na">snippet</span><span class="pi">:</span> <span class="s">topics/climate/tutorials/pangeo-notebook/preamble.md</span>
+
+</code></pre></div>      </div>
+    </div></p>
+
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="comment">
+<h3>
+	
+		<code>language</code>
+	
+	 <b>required</b></h3>
+
+<b>Free Text</b>
+
+<p>
+
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>python</code></li>
+
+	<li><code>bash</code></li>
+
+	<li><code>r</code></li>
+
+	<li><code>sql</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">python"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bash"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">r"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sql"</span>
+</code></pre></div>        </div>
+      </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+	
+	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>pyolite</code>
+	
+	</h3>
+
+<b>Boolean</b>
+
+<p>
+<p>The GTN has support for JupyterLite and the Pyodide kernel which runs <a href="https://pyodide.org/en/stable/">Python in the browser via webassembly/javascript</a>. This comes with some restrictions:</p>
+
+<ul>
+  <li>Python only</li>
+  <li>No filesystem access (so no <code class="language-plaintext highlighter-rouge">wget</code> prep steps)</li>
+  <li>Little to no cell magic</li>
+</ul>
+
+<p>However, it means we can run a lot of our Python training
+directly in the GTN! And in the future, hopefully, we will
+be able to embed individual cells of the notebook directly
+in the Python training, so the user doesn’t even need to
+switch pages.</p>
+
+<p>Enabling this field will enable pyolite links for this notebook.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+<h3>
+	
+		<code>snippet</code>
+	
+	</h3>
+
+<b>Free Text</b>
+
+<p>
+<p>If you have an alte<span class="notranslate">rna</span>tive preamble for your notebook that students should know before following (e.g. they must load X datasets in their history), it can be listed here.</p>
+
+<p>This text will be shown in the GTN tutorial, but it will <strong>not</strong> be included in the notebook, giving you a bit better control over mixing setup content which is relevant for <span class="notranslate">Galaxy</span>, with notebook content that can be easy to run for students.</p>
+
+</p>
+
+
+
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">snippet</span><span class="pi">:</span> <span class="s">topics/climate/tutorials/pangeo-notebook/preamble.md</span>
+</code></pre></div>        </div>
+      </div>
+	
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+
+</blockquote>
 
 <h2 id="currently-supported-languages">Currently Supported Languages</h2>
 
@@ -2547,7 +7093,7 @@ some_code += f"that students {should execute}"
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Bérénice Batut, Björn Grüning, Saskia Hiltemann, Helena Rasche, 2022 <b>Creating content in Markdown (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">, 2022 <b>Creating content in Markdown (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -2562,11 +7108,11 @@ some_code += f"that students {should execute}"
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{contributing-create-new-tutorial-content,
-author = "Bérénice Batut and Björn Grüning and Saskia Hiltemann and Helena Rasche",
+author = "",
 title = "Creating content in Markdown (Galaxy Training Materials)",
 year = "2022",
 month = "05",
-day = "19"
+day = "20"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -2586,6 +7132,9 @@ note = "[Online; accessed TODAY]"
                 </pre></div></div>
                 </p>
                 </blockquote>
+
+                
+                
 
                 
 
@@ -2680,6 +7229,14 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                             
                                 
                     <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
                                 
                             
                         
