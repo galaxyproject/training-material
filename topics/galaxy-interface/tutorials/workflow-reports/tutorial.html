@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Workflow Reports</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Workflow Reports" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Saskia Hiltemann" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Workflow Reports" />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/galaxy-interface" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Using Galaxy and Managing your Data
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/workflow-reports/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-06-01/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html" title="Version 2022-06-01">2022-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-05-01/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html" title="Version 2022-05-01">2022-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-04-01/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html" title="Version 2022-04-01">2022-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Workflow Reports",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Using Galaxy and Managing your Data",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Workflow Reports' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "galaxy-interface, workflows",
+  "description": "The questions this  addresses are:\n - What are workflow reports?\n - How can I view a workflow report?\n - How can I customize a workflow report?\n - How can I share a workflow report with others?\n\n\\nThe objectives are:\n - Understanding, viewing and creating workflow reports\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Using Galaxy and Managing your Data",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-galaxy-interface">
+    <h1 data-toc-skip>Workflow Reports</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=27" alt="Avatar">Saskia Hiltemann</a>
+
+
+
+		</td>
+	</tr>
+	
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+</td>
+	</tr>
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="https://avatars.githubusercontent.com/jmchilton?s=27" alt="Avatar">John Chilton</a>
+
+
+
+<a href="/training-material/hall-of-fame/guerler/" class="contributor-badge contributor-guerler"><img src="https://avatars.githubusercontent.com/guerler?s=27" alt="Avatar">Aysam Guerler</a>
+
+
+
+<a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar">Marius van den Beek</a>
+
+
+</td>
+	</tr>
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are workflow reports?</p>
+</li>
+        
+        <li><p>How can I view a workflow report?</p>
+</li>
+        
+        <li><p>How can I customize a workflow report?</p>
+</li>
+        
+        <li><p>How can I share a workflow report with others?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understanding, viewing and creating workflow reports</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/workflows/" title="Workflows" alt="Workflow Reports workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.mesocentre.uca.fr" title="Galaxy@AuBi">
+            Galaxy@AuBi
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
+            Metagenomics
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.migale.inra.fr/" title="Migale">
+            Migale
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
+            Plant Anaylsis Workbench
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 2, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Workflows are a powerful <span class="notranslate">Galaxy</span> feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to aid interpretation of <span class="notranslate">workflow</span> results, <em><span class="notranslate">workflow</span> reports</em> may be configured to combine and display the most important analysis results in a single, customizable view.</p>
+
+<p>This is especially useful if you are configuring a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> to share with others. Not everybody is familiar with <span class="notranslate">Galaxy</span>, and having all the important results shown on a single page can be very useful.</p>
+
+<p>This tutorial will guide you through the steps of defining such a report for your <span class="notranslate">workflow</span>, and how to view <span class="notranslate">workflow</span> reports after running the <span class="notranslate">workflow</span>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#import-an-example-workflow" id="markdown-toc-import-an-example-workflow">Import an example <span class="notranslate">workflow</span></a></li>
+  <li><a href="#run-the-workflow-and-view-the-default-report" id="markdown-toc-run-the-workflow-and-view-the-default-report">Run the <span class="notranslate">workflow</span> and view the default report</a></li>
+  <li><a href="#customize-the-workflow-report" id="markdown-toc-customize-the-workflow-report">Customize the <span class="notranslate">workflow</span> report</a>    <ol>
+      <li><a href="#add-labels-to-workflow-outputs" id="markdown-toc-add-labels-to-workflow-outputs">Add labels to <span class="notranslate">workflow</span> outputs</a></li>
+    </ol>
+  </li>
+  <li><a href="#share-or-publish-your-workflow-report" id="markdown-toc-share-or-publish-your-workflow-report">Share or publish your <span class="notranslate">workflow</span> report</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="import-an-example-workflow">Import an example <span class="notranslate">workflow</span></h1>
+
+<p>For this tutorial, we will use the <span class="notranslate">workflow</span> from the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html"><span class="notranslate">Galaxy</span> 101 for everyone tutorial</a>. If you have not done this tutorial yet, the only thing you need to know is that this is a <span class="notranslate">workflow</span> that takes as input a table of data about different species of iris plants, this table is subsequently sorted and filtered, and some plots are made. The specifics of the <span class="notranslate">workflow</span> are not important for this tutorial, only that it outputs a number of different kinds of outputs (images, tables, etc).</p>
+
+<p>We will start by importing this <span class="notranslate">workflow</span> into your <span class="notranslate">Galaxy</span> account:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import the <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li><strong>Import the <span class="notranslate">workflow</span></strong> into <span class="notranslate">Galaxy</span>
+      <ul>
+        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/workflows/galaxy-101-everyone.ga">this <span class="notranslate">workflow</span></a> or download it to your computer.</li>
+        <li>Import the <span class="notranslate">workflow</span> into <span class="notranslate">Galaxy</span></li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>  <li>Provide your <span class="notranslate">workflow</span>    <ul>      <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>      <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>    </ul>  </li>  <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="run-the-workflow-and-view-the-default-report">Run the <span class="notranslate">workflow</span> and view the default report</h1>
+
+<p><span class="notranslate">Galaxy</span> will produce a default report for any <span class="notranslate">workflow</span>. This default report shows the <span class="notranslate">workflow</span> inputs, outputs, and a description of the <span class="notranslate">workflow</span> on a single web page. You will usually want to customize this report yourself, but it provides a good starting point.</p>
+
+<p>Let’s run the <span class="notranslate">workflow</span> and view the default report.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run the <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the file <code class="language-plaintext highlighter-rouge">iris.csv</code> via link</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1319069/files/iris.csv
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+    <li>Run <strong>GTN Training: <span class="notranslate">Galaxy</span> 101 For Everyone</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
+      <ul>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Iris Dataset”“</em>: the <code class="language-plaintext highlighter-rouge">iris.csv</code> file we just uploaded</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-running-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>  <li>Configure the <span class="notranslate">workflow</span> as needed</li>  <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>  <li>You may have to refresh your history to see the queued jobs</li></ul></blockquote>
+    </li>
+    <li><strong>View the <span class="notranslate">workflow</span> outputs</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> once the <span class="notranslate">workflow</span> has completed
+      <ul>
+        <li>The <span class="notranslate">workflow</span> produces several text and tabular outputs, and two plot (image) outputs</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>After the <span class="notranslate">workflow</span> has completed, we can access the <span class="notranslate">workflow</span> report. The report does not appear in your history, but can be accessed from the <strong>User -&gt; <span class="notranslate">Workflow</span> Invocations</strong> menu on the top bar. An invocation of a <span class="notranslate">workflow</span> means one run (execution) of the <span class="notranslate">workflow</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-view-the-default-workflow-report"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View the default <span class="notranslate">workflow</span> report</h3>
+
+  <ol>
+    <li>
+      <p>In the top menu bar, go to <strong>User -&gt; <span class="notranslate">Workflow</span> Invocations</strong></p>
+    </li>
+    <li>Our latest <span class="notranslate">workflow</span> run should be listed at the top.
+      <ul>
+        <li>Click on it to expand it:</li>
+      </ul>
+
+      <p><img src="./images/invocations-list.png" alt="screenshot of the workflow invocations menu, with our latest invocation at the top. " loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Click <strong>View Report</strong> in the expanded view of the <span class="notranslate">workflow</span> invocation.</p>
+    </li>
+    <li>You should see a page like this. It contains:
+      <ul>
+        <li>The input file</li>
+        <li>The (text-based) output files</li>
+        <li>A summary of the <span class="notranslate">workflow</span> itself</li>
+      </ul>
+
+      <p><img src="./images/report-default.png" alt="screenshot of the beginning of the default workflow report. " loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="customize-the-workflow-report">Customize the <span class="notranslate">workflow</span> report</h1>
+
+<p>This is a great start, but we might want to customize this report to fit our needs.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-open-the-workflow-report-editor"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Open the <span class="notranslate">workflow</span> report editor</h3>
+
+  <ol>
+    <li>
+      <p>Open the <span class="notranslate">workflow</span> in the <strong><span class="notranslate">workflow</span> editor</strong></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-opening-the-workflow-editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Opening the <span class="notranslate">workflow</span> editor</h3>  <ol>  <li>In the top menu bar, click on <strong>Workflows</strong></li>  <li>Click on the name of the <span class="notranslate">workflow</span> you want to edit<img src="/training-material/topics/galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>  <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> <strong>Edit</strong> from the dropdown menu to open the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor</li></ol></blockquote>
+    </li>
+    <li>
+      <p>Click on <strong>Edit Report</strong> <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> in the top-right of the screen
+<img src="./images/report-edit-button.png" alt="screenshot of the &quot;edit report&quot; button in the workflow editor interface. " loading="lazy" /></p>
+    </li>
+    <li>You should see something like the image below, you will find
+      <ul>
+        <li>Text editor in the center, with the default report specified in <a href="https://www.markdownguide.org/getting-started/">Markdown format</a></li>
+        <li>A list of components that can be added to the report in the left-hand panel</li>
+      </ul>
+
+      <p><img src="./images/report-edit.png" alt="screenshot of the workflow report edit interface. Markdown-formatted editor in the center, with a list of components that can be added to the report in the left-hand panel. " loading="lazy" /></p>
+    </li>
+    <li>Scroll down the report and look at all the components
+      <ul>
+        <li>notice that there is no plot image output shown, even though we know that was created, we will add this to the report later.</li>
+      </ul>
+    </li>
+    <li>To <strong>edit this report</strong>, we can edit the markdown directly. For example, let’s
+      <ul>
+        <li>change the title of the report to <code class="language-plaintext highlighter-rouge"># Iris Analysis</code></li>
+        <li>
+          <p>add a line of introduction text for whoever will read the report, something like:</p>
+
+          <pre class="highlight"><code> <del># <span class="notranslate">Workflow</span> Execution Report </del>
+ # Iris analysis
+ Below are the results for the Iris analysis <span class="notranslate">workflow</span>.</code></pre>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-markdown-format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Markdown format</h3>
+
+        <p>The report is specified in <a href="https://www.markdownguide.org/getting-started/">Markdown format</a>, this is a simple markup language that is commonly used.
+Some basics of the Markdown syntax can be found in <a href="https://www.markdownguide.org/cheat-sheet/">this cheatsheet</a></p>
+      </blockquote>
+    </li>
+    <li>Let’s play around with some components we can add via the left-hand panel
+      <ul>
+        <li>Under the <strong>Miscellaneous</strong> section in the left-hand menu, select
+          <ul>
+            <li>“<strong><span class="notranslate">Galaxy</span> version</strong> as text” and</li>
+            <li>“<strong>Current Time</strong> as text”</li>
+          </ul>
+        </li>
+        <li>You will see bits of Markdown are added to your report</li>
+        <li>You can add some text around these parts as well</li>
+        <li>
+          <p>Make sure the beginning of your report looks something like this:</p>
+
+          <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Iris Analysis</span>
+Below are the results for the Iris analysis <span class="notranslate">workflow</span>.
+
+This <span class="notranslate">workflow</span> was run on:
+
+<span class="p">```</span><span class="nl"><span class="notranslate">galaxy</span>
+</span><span class="sb">generate_time()</span>
+<span class="p">```</span>
+
+With <span class="notranslate">Galaxy</span> version:
+
+<span class="p">```</span><span class="nl"><span class="notranslate">galaxy</span>
+</span><span class="sb">generate_<span class="notranslate">galaxy</span>_version()</span>
+<span class="p">```</span>
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>Let’s try to add the missing plot outputs as well:
+      <ul>
+        <li>On the left-hand panel, under the <strong>History</strong> section, choose <strong>Image</strong></li>
+        <li>You should see a list of outputs to insert into the report:
+<img src="./images/report-add-image-options.png" alt="menu for inserting an image output into the report. " loading="lazy" /></li>
+        <li>Hmmm, no obvious options to insert the plot outputs. We will need to <strong>label the outputs</strong> in our <span class="notranslate">workflow</span> first, before we can use them here.</li>
+      </ul>
+    </li>
+    <li>But before we do that, let’s save our changes and run the <span class="notranslate">workflow</span> again to view their effects.
+      <ul>
+        <li>Click on <i class="fas fa-times" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-cross</span> (<strong>Return to <span class="notranslate">Workflow</span></strong>) in the top-right of the screen.
+<img src="./images/report-return-to-workflow.png" alt="screenshot of the cross button to return to the workflow editor. " loading="lazy" /></li>
+        <li>Click on <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> (<strong>Save <span class="notranslate">Workflow</span></strong>) to save our changes to the report.
+<img src="./images/workflow-save.png" alt="screenshot of the floppy disk button to save the workflow. " loading="lazy" /></li>
+      </ul>
+    </li>
+    <li><strong>Run the <span class="notranslate">workflow</span></strong> again
+      <ul>
+        <li>Select <code class="language-plaintext highlighter-rouge">iris.csv</code> as the input</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-running-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>  <li>Configure the <span class="notranslate">workflow</span> as needed</li>  <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>  <li>You may have to refresh your history to see the queued jobs</li></ul></blockquote>
+    </li>
+    <li>
+      <p><strong>View the new <span class="notranslate">workflow</span> report</strong>, you should see your changes, something like:</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-viewing-a-workflow-report"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Viewing a <span class="notranslate">workflow</span> report</h3>  <ul>  <li>Go to <strong>User</strong> on the top menu bar of <span class="notranslate">Galaxy</span>.</li>  <li>Click on <strong><span class="notranslate">Workflow</span> invocations</strong>    <ul>      <li>Here you will find a list of all the workflows you have run</li>    </ul>  </li>  <li>Click on the name of a <span class="notranslate">workflow</span> invocation to expand it<img src="/training-material/faqs/galaxy/images/workflow_invocations_menu.png" alt="workflow invocations list" /></li>  <li>Click on <strong>View Report</strong> to go to the <span class="notranslate">workflow</span> report page</li>  <li><strong>Note:</strong> The report can also be downloaded in PDF format by clicking on the <i class="fas fa-print" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-report-download</span> icon.</li></ul></blockquote>
+
+      <p><img src="./images/report-edit1.png" alt="screenshot of the workflow report with our edits included. " loading="lazy" /></p>
+    </li>
+  </ol>
+
+  <p>In the next section, we will add labels to our <span class="notranslate">workflow</span> outputs to more easily add them to our <span class="notranslate">workflow</span> report</p>
+
+</blockquote>
+
+<h2 id="add-labels-to-workflow-outputs">Add labels to <span class="notranslate">workflow</span> outputs</h2>
+
+<p>As you saw in the previous step, we might need to edit the <span class="notranslate">workflow</span> to add labels outputs so we can easily distinguish between the outputs when adding them to the report. This is especially useful for large workflows with many outputs.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-output-labels-to-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add output labels to the <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>
+      <p>Open the <span class="notranslate">workflow</span> in the <strong><span class="notranslate">workflow</span> editor</strong></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-opening-the-workflow-editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Opening the <span class="notranslate">workflow</span> editor</h3>  <ol>  <li>In the top menu bar, click on <strong>Workflows</strong></li>  <li>Click on the name of the <span class="notranslate">workflow</span> you want to edit<img src="/training-material/topics/galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>  <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> <strong>Edit</strong> from the dropdown menu to open the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor</li></ol></blockquote>
+    </li>
+    <li>Click on one of the <strong>Scatterplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> boxes
+      <ul>
+        <li>On the right-hand panel, you should see the settings for the tool</li>
+        <li>Scroll to the bottom and find the <strong>Configure Output: ..</strong> sections</li>
+        <li>From the box we can see that output1 (the first) is a <code class="language-plaintext highlighter-rouge">png</code> output, and output2 is a <code class="language-plaintext highlighter-rouge">pdf</code> output of the plot.</li>
+        <li>Let’s use the png output for our report.</li>
+        <li>Also take note of the plot title, since we have 2 runs of the scatterplot tool in this <span class="notranslate">workflow</span>. One plot is about the petals of the iris, and one about the sepals (in this screenshot it is the sepal plot)</li>
+      </ul>
+
+      <p><img src="./images/workflow-add-labels1.png" alt="screenshot of the workflow editor to add labels to workflow outputs. " loading="lazy" /></p>
+    </li>
+    <li><strong>Add an output label</strong> for the <code class="language-plaintext highlighter-rouge">png</code> output
+      <ul>
+        <li>Click on “Configure output: output1”</li>
+        <li>Add a descriptive label (e.g. “Sepal plot (PNG)”)</li>
+        <li>Notice that the label on the box changs as well
+<img src="./images/workflow-add-labels2.png" alt="screenshot of menu to add labels to the workflow output. " loading="lazy" /></li>
+      </ul>
+    </li>
+    <li>Repeat this process and <strong>add an output label</strong> for the other plot as well
+      <ul>
+        <li>Label it something like “Petal plot (PNG)”</li>
+      </ul>
+    </li>
+    <li>Click on the <strong>Unique</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> toolbox
+      <ul>
+        <li>This tool gives a list of all the unique Iris species found in the dataset</li>
+        <li>Let’s add this to our report as well</li>
+        <li><strong>Add a label</strong> to this output (e.g. “Iris Species”)</li>
+      </ul>
+    </li>
+    <li><strong>Save</strong> <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> the <span class="notranslate">workflow</span> (<strong>Important!</strong>)</li>
+  </ol>
+
+</blockquote>
+
+<p>Now that we have added our output labels, let’s go back to our report editor and add these outputs</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-open-the-workflow-report-editor-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Open the <span class="notranslate">workflow</span> report editor</h3>
+
+  <ol>
+    <li>
+      <p>Open the <span class="notranslate">workflow</span> in the <strong><span class="notranslate">workflow</span> editor</strong> (if not already open)</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-opening-the-workflow-editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Opening the <span class="notranslate">workflow</span> editor</h3>  <ol>  <li>In the top menu bar, click on <strong>Workflows</strong></li>  <li>Click on the name of the <span class="notranslate">workflow</span> you want to edit<img src="/training-material/topics/galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>  <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> <strong>Edit</strong> from the dropdown menu to open the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor</li></ol></blockquote>
+    </li>
+    <li>Click on <strong>Edit Report</strong> <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> in the top-right of the screen
+      <ul>
+        <li>You should see the report with the changes you made earlier</li>
+      </ul>
+    </li>
+    <li>Add the plots and the unique species list outputs to the report
+      <ul>
+        <li>Use “Images” in the left-hand panel for the plot outputs</li>
+        <li>Use “Dataset” for the unique species list</li>
+        <li>
+          <p>You should see more options now after the labels we added to the <span class="notranslate">workflow</span> outputs (“Sepal Plot (PNG)”, “Petal Plot (PNG)”, and “Iris Species”)</p>
+
+          <p><img src="./images/report-add-image-options-withlabels.png" alt="the list of datasets available to add, now includes the outputs we labeled in the workflow. " loading="lazy" /></p>
+        </li>
+      </ul>
+    </li>
+    <li>Add some text and/or headers before each included output
+      <ul>
+        <li>Play around here, add other component you think look interesting and see what happens!</li>
+        <li>
+          <p>The final result may look something like this:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Results
+
+## Species detected
+
+```<span class="notranslate">galaxy</span>
+history_dataset_display(output="Iris Species")
+```
+
+## Sepal plot
+
+```<span class="notranslate">galaxy</span>
+history_dataset_as_image(output="Sepal Plot (PNG)")
+```
+
+## Petal Plot
+
+```<span class="notranslate">galaxy</span>
+history_dataset_as_image(output="Petal Plot (PNG)")
+```
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Exit</strong> <i class="fas fa-times" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-cross</span> the report editor</p>
+    </li>
+    <li>
+      <p><strong>Save</strong> <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> the <span class="notranslate">workflow</span></p>
+    </li>
+    <li><strong>Run the <span class="notranslate">workflow</span></strong> once more
+      <ul>
+        <li>Use <code class="language-plaintext highlighter-rouge">iris.csv</code> as input again</li>
+      </ul>
+    </li>
+    <li>
+      <p>View the <span class="notranslate">workflow</span> report</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-viewing-a-workflow-report"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Viewing a <span class="notranslate">workflow</span> report</h3>  <ul>  <li>Go to <strong>User</strong> on the top menu bar of <span class="notranslate">Galaxy</span>.</li>  <li>Click on <strong><span class="notranslate">Workflow</span> invocations</strong>    <ul>      <li>Here you will find a list of all the workflows you have run</li>    </ul>  </li>  <li>Click on the name of a <span class="notranslate">workflow</span> invocation to expand it<img src="/training-material/faqs/galaxy/images/workflow_invocations_menu.png" alt="workflow invocations list" /></li>  <li>Click on <strong>View Report</strong> to go to the <span class="notranslate">workflow</span> report page</li>  <li><strong>Note:</strong> The report can also be downloaded in PDF format by clicking on the <i class="fas fa-print" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-report-download</span> icon.</li></ul></blockquote>
+    </li>
+    <li>
+      <p>It should look something like:</p>
+
+      <p><img src="./images/report-final.png" alt="screenshot of the final workflow report, with text, 2 plots, and the table of detected species. " loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Well done! You have created a customized <span class="notranslate">workflow</span> report with text and <span class="notranslate">workflow</span> outputs. There are a lot more options to explore, for example you can also include:</p>
+<ul>
+  <li>links to datasets for easy downloading</li>
+  <li>index files (e.g. for BAM or VCF files)</li>
+  <li>visualisations</li>
+  <li>job metrics</li>
+  <li>peeks into dataset (useful for large files that cannot be included in their entirety in the report)</li>
+  <li>..and more!</li>
+</ul>
+
+<h1 id="share-or-publish-your-workflow-report">Share or publish your <span class="notranslate">workflow</span> report</h1>
+
+<p>If you share this <span class="notranslate">workflow</span> with others, they will get the same report every time they run the <span class="notranslate">workflow</span>.</p>
+
+<p>If you would like to share the <span class="notranslate">workflow</span> report of a specific run, you can do so by creating a <span class="notranslate">Galaxy</span> <em>page</em> for it. This page can then be shared (either via link or with specific users), or published for all to see under <strong>Shared Data -&gt; Pages</strong> in the top menu.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-share-the-workflow-report-as-a-galaxy-page"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Share the <span class="notranslate">workflow</span> report as a <span class="notranslate">Galaxy</span> page</h3>
+
+  <ol>
+    <li>
+      <p>Open the <span class="notranslate">workflow</span> report</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-viewing-a-workflow-report"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Viewing a <span class="notranslate">workflow</span> report</h3>  <ul>  <li>Go to <strong>User</strong> on the top menu bar of <span class="notranslate">Galaxy</span>.</li>  <li>Click on <strong><span class="notranslate">Workflow</span> invocations</strong>    <ul>      <li>Here you will find a list of all the workflows you have run</li>    </ul>  </li>  <li>Click on the name of a <span class="notranslate">workflow</span> invocation to expand it<img src="/training-material/faqs/galaxy/images/workflow_invocations_menu.png" alt="workflow invocations list" /></li>  <li>Click on <strong>View Report</strong> to go to the <span class="notranslate">workflow</span> report page</li>  <li><strong>Note:</strong> The report can also be downloaded in PDF format by clicking on the <i class="fas fa-print" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-report-download</span> icon.</li></ul></blockquote>
+    </li>
+    <li>Click on <strong>Edit Markdown</strong> <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> button at the top right (next to <strong>“<span class="notranslate">Galaxy</span> Report”</strong>)
+      <ul>
+        <li>
+          <p>Here you can edit the title and the report itself, if desired</p>
+
+          <p><img src="./images/create-page.png" alt="galaxy interface for creating a Galaxy page from a workflow report. " loading="lazy" /></p>
+        </li>
+        <li>
+          <p>Click <strong>Save</strong> <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span></p>
+        </li>
+      </ul>
+    </li>
+    <li>You will see your list of <span class="notranslate">Galaxy</span> pages.
+      <ul>
+        <li>
+          <p>Note: this list is always accessible via top menu, <strong>User</strong> -&gt; <strong>Pages</strong></p>
+
+          <p><img src="./images/pages.png" alt="list of our pages, with our newly created workflow report page on top. " loading="lazy" /></p>
+        </li>
+      </ul>
+    </li>
+    <li>Click on the dropdown icon <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-dropdown</span> next to the page title
+      <ul>
+        <li>Select <strong>“Share or Publish”</strong></li>
+        <li>Here you can make the page public or share with individual users</li>
+        <li>If you make the page public, anybody will be able to see it under <strong>Shared Data -&gt; Pages</strong> from the top menu bar</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Great work! You have viewed, customized and shared a <span class="notranslate">workflow</span> report. This makes it easy to view the most important results of a <span class="notranslate">workflow</span> in a single view. Here is an example of a final <span class="notranslate">workflow</span> from this tutorial</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Workflow reports help you display the most important results of a workflow in an organized fashion.</p>
+</li>
+                        
+                        <li><p>Workflow reports are configured as part of the workflow definition, for every run of the workflow, a report will be automatically created</p>
+</li>
+                        
+                        <li><p>Workflow reports can be viewed from the top menu, <strong>User -&gt; Workflow Invocations</strong>.</p>
+</li>
+                        
+                        <li><p>Labels must be added to workflow outputs before they can be included</p>
+</li>
+                        
+                        <li><p>Many different components can be added to a workflow report (datasets, images, links to datasets, job metrics, text and sections, visualisations, and much more!)</p>
+</li>
+                        
+                        <li><p>Workflow reports can be shared as Galaxy Pages.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/galaxy-interface/faqs/">FAQ page for the Using Galaxy and Managing your Data topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Workflow Reports (Using Galaxy and Managing your Data)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>Workflow Reports (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{galaxy-interface-workflow-reports,
+author = "",
+title = "Workflow Reports (Galaxy Training Materials)",
+year = "2022",
+month = "06",
+day = "02"
+url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://www.erasmusplus.nl/assets/images/logo.png" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/erasmusplus/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>This project (<a href="https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717"><code class="language-plaintext highlighter-rouge">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+<img src="https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg" alt="eu flag with the text: with the support of the erasmus programme of the european union" /></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
