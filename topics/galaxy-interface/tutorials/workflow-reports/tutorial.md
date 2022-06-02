@@ -27,6 +27,7 @@ contributions:
     - hexylena
   infrastructure:
     - jmchilton
+    - guerler
     - mvdbeek
   funding:
     - erasmusplus
