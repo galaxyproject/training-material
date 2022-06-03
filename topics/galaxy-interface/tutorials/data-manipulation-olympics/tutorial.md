@@ -38,7 +38,7 @@ Scientific analyses often consist of a number of tools that run one after the ot
 
 Galaxy has a large collection of tools to perform such basic data manipulation tasks, and becoming familiar with these will allow to perform your analysis more easily.
 
-In this tutorial, we will use historical dataset about the Olympics to familiarize you with a large number of the most important data manipulation tools. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple ways to accomplish the goal. We will show you all of these different operations and some examples on how to perform them, and provide many exercises so you can train your skills and become a data manipulation Olympian!
+In this tutorial, we will use a file with historical data about the Olympics, to familiarize you with a large number of the most important data manipulation tools. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) to accomplish the goal. We will show you all of these different operations and some examples on how to perform them, and provide many exercises so you can train your skills and become a data manipulation Olympian!
 
 
 > ### Agenda
@@ -64,16 +64,44 @@ In this tutorial, we will use historical dataset about the Olympics to familiari
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
+> 2. **View** {% icon galaxy-eye %} the dataset
+>    - We uploaded a `csv` file, a comma-separated file. Galaxy displays this as a table, hiding the commas for convenience.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > Why are most of the values in quotation marks?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > This is a CSV file, that means a comma-separated file. It is assumed that each comma in the file signifies the start of a new column.
+>    > >
+>    > > If the data in a column contains a comma (e.g. in this file we have events such as `swimming 5,000 meters`), we put the value in quotes to signifiy that that comma is part of the data, not a column delimiter.
+>    > >
+>    > > Often, csv files put all non-numeric values in quotes for this reason.
+>    > {: .solution}
+>    {: .question}
+>
 {: .hands_on}
 
 
 # File Format Conversion
 
-CSV to TSV
+Galaxy understands the `csv` format just fine, but most tools work best with tab-separated (tabular) files. This format uses TAB characters to signify where a new column begins instead of commas. Galaxy can do the conversion between these formats for you.
+
+
+Hands-on: CSV to TSV
+
 
 # Find and Replace
 
+An added benefit of using tab-seperated files instead of comma-separated files is that it is much less likely that we need a tab character as part of the value in a column than a comma. Certainly in our dataset none of the columns contain a tab character as part of the value, so we can remove the quotation marks from our file
+
+
+
 remove quotes from TSV file
+
+
+Tip: Star your favorite tools
 
 # Summary Statistics
 
@@ -101,7 +129,7 @@ show only winter olympics
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
+>>
 {: .hands_on}
 
 IOC ID to country name
