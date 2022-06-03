@@ -225,9 +225,9 @@ In `info file` output file, we can identify 4 different sections:
 > {: .solution }
 {: .question }
 
-## Sub-step with **CDO Operations**
+## Operations on Climate data using **CDO Operations**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Defining a particular time range using seltimestep 
 >
 > 1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
 >    - In *"CDO Operators"*:
@@ -236,42 +236,64 @@ In `info file` output file, we can identify 4 different sections:
 >                - *"Timesteps for selection"*: `594/595`
 >                - {% icon param-file %} *"Additional input file"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
+>   Our main aim is to plot the last two hour data on the last day present in the dataset. The data present is in the form of daily hourly time frame. Thus we need to split the dataset into smaller part upto which we want to plot. 
 >
->    ***TODO***: *Consider adding a comment or tip box*
+>
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention is how your data entries are number: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to attain the desired result.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How will you plot the last two hours separately?
+> 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
+> >- In *"CDO Operators"*:
+>        - {% icon param-repeat %} *"Insert CDO Operators"*
+> >  - *"Select cdo operator"*: `splithour (Split hours)`
+>                - *"Timesteps for selection"*: `594/595`
+>                - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` (Input dataset) generated from the previous step.
+>
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **NetCDF xarray map plotting**
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Finding the  **NetCDF xarray Metadata Info**
+
+> ### {% icon hands_on %} Hands-on: netCDF dataset with Xarray metadata Galaxy Tool for the hourly plots
+>
+> 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
+>    - {% icon param-file %} *"Netcdf file"*: `outfile_17.nc` (Input dataset). The meta data generated from this step can be used for second file too due to same meta-data of both the datasets(which is quite obvious).
+>
+>
+> 2. View {% icon galaxy-eye%} the two generated outputs:
+>    - `Metadata infos` is a `tabular` providing the list of variables, their dimension names and number of elements per dimension. This file is used by other Xarray Tools. 
+>    - The second file `info file` provide a summary of the **Xarray Dataset** contained in your netCDF file.
+{: .hands_on}
+## Map Plotting using **NetCDF xarray map plotting**
+
+> ### {% icon hands_on %} Hands-on: Map Plotting
+> The air temperatures at the last two hours of the day are plotted here : 
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular of variables"*: `output` (output of **NetCDF xarray Metadata Info** {% icon tool %})
->    - *"Choose the variable to plot"*: ``
->    - *"Name of latitude coordinate"*: ``
->    - *"Name of longitude coordinate"*: ``
+>    - {% icon param-file %}
+*"Netcdf file"*: `outfile_17.nc`
+>    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc`
+ *"Tabular of variables"*: `output` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+>    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
+>    - *"Name of latitude coordinate"*: `lat`
+>    - *"Name of longitude coordinate"*: `lon`
 >    - *"Datetime selection"*: `No`
 >    - *"Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)"*: `220,320`
 >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
@@ -281,18 +303,15 @@ In `info file` output file, we can identify 4 different sections:
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Why shifting longitudes?
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Longitudes are coded from 0 to 360 degrees. As we do not have global data but only covering Europe, we need to shift longitudes so that `NetCDF xarray map plotting` can plot properly our dataset. 
 >    {: .comment}
 >
+> 
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > ### {% icon question %} Questions
 >
@@ -313,10 +332,13 @@ In `info file` output file, we can identify 4 different sections:
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular of variables"*: `output` (output of **NetCDF xarray Metadata Info** {% icon tool %})
->    - *"Choose the variable to plot"*: ``
->    - *"Name of latitude coordinate"*: ``
->    - *"Name of longitude coordinate"*: ``
+>    - {% icon param-file %}
+*"Netcdf file"*: `outfile_18.nc`
+>    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc`
+ *"Tabular of variables"*: `output` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+>    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
+>    - *"Name of latitude coordinate"*: `lat`
+>    - *"Name of longitude coordinate"*: `lon`
 >    - *"Datetime selection"*: `No`
 >    - *"Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)"*: `220,320`
 >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
@@ -326,9 +348,6 @@ In `info file` output file, we can identify 4 different sections:
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
