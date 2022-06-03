@@ -306,6 +306,8 @@ There are four distinct sections in the `info file` output file:
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >
+>![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 17:00:00 UTC](../../images/ECMWF_Reanalysis_17.png)
+>
 >    > ### {% icon comment %} Why shifting longitudes?
 >    >
 >    > Longitudes are measured in degrees from 0 to 360. We need to change longitudes so that `NetCDF xarray map plotting` can properly plot our dataset because we don't have worldwide data but only cover Europe.
@@ -351,7 +353,7 @@ There are four distinct sections in the `info file` output file:
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >
->
+>![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/ECMWF_Reanalysis_18.png)
 >
 {: .hands_on}
 
@@ -367,7 +369,17 @@ There are four distinct sections in the `info file` output file:
 > > 2. The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are : 
 > > > 1. It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.
 > > > 2.  You can view as well as download the generated plots to use further. 
+> > > 3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool.Refer to [this tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html) for more info.
 > >
+> > 3. If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be dne as shown below. 
+> > 
+> > {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
+> >   - {% icon param-files %} *"Images"*: `Map plots`
+> >   - {% icon param-text %} *"# of images wide"*: `2`
+> > 
+> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/ECMWF_Reanalysis_Montage.png)
+> >
+> >Not much of changes can be seen in the both plots as they are just an hour apart but one thing can be concluded that African- Saharan regions have high temperatures during the dusk.
 > {: .solution}
 >
 {: .question}
