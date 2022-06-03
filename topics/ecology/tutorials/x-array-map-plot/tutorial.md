@@ -9,7 +9,7 @@ questions:
 objectives:
 - Learn about plotting Climate Data
 - Learn about NetCDF xarray map plotting tool
-- Learn about visualzing the climate data using NetCDF xarray map plotting using the different kinds of projections aand colormap options  
+- Learn about visualizing the climate data using NetCDF xarray map plotting using the different kinds of projections and colormap options  
 time_estimation: 1H
 key_points:
 - NetCDF xarray climate data visualization
@@ -25,13 +25,13 @@ contributors:
 {:.no_toc}
 
 <!-- This is a comment. -->
->### {% icon comment %}Comment
+>### {% icon comment %} Comment
 >
-> The tutorial aims for establishing a good knowledge about meaningful visualization of climate data. It is beginner friendly and requires not much knowledge about the tool.
+> The tutorial aims for establishing a good knowledge about meaningful visualization of climate data.
 >
 {: .comment}
 
-It is beginner friendly and requires not much knowledge about the tool.
+ It is beginner friendly and does not require much knowledge about the tool.
 
 > ### Agenda
 >
@@ -44,10 +44,10 @@ It is beginner friendly and requires not much knowledge about the tool.
 
 >### {% icon comment %} Background
 >
->According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/tutorial.html) from the GTN. Due to the frequently changing nature of the weather patterns, the data collected is huge in size.
+>According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/tutorial.html) from the GTN. Due to the frequently changing nature of the weather patterns, the size of the collected data is huge.
 The climate data is mainly represented in these three categories : NetCDF (Network Common Data Form), HDF (Hierarchical Data Format) , GRIB (GRIdded Binary or General Regularly-distributed Information in Binary form).
 >
->NetCDF datasets are basically used for storing multidimensional data which generally consits variables such as temperature, precipitation , direction , etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as verticle coordinates which makes plotting of the variables such as the oocean temperatures possible.
+>NetCDF datasets are basically used for storing multidimensional data which generally consits of variables such as temperature, precipitation , direction , etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as verticle coordinates which makes plotting of the variables such as the oocean temperatures possible.
 >
 >The coordinate system, types of projections and colormaps are some of the very important considerations in achieving the most suitable visualization option.
 
@@ -99,7 +99,7 @@ Xarray uses **Cartopy** and **Matplotlib** as the two main tools for creating de
 Cartopy is a python package used for geospatial data analysis. In the Python library, matplotlib is the most used scientific plotting library.
 For a multidimensional data consisting of latitudes and longitudes along with the other variables, xarray has the capability of appling cartopy map projections.
 
-# Splitting the dataset  using  seltimestep and splithour 
+# Splitting the dataset  using  seltimestep , splithour and plotting 
 
 After loading the required data, it comes to obtaining the meta info or meta data of the file. The very purpose of these steps are to obtain the information about dimensions, variables, global attributes, etc. The coordinate info helps to know about the actual data entries present under the various variables.  
 
@@ -110,7 +110,7 @@ Follow the below steps :
 > ### {% icon hands_on %} Hands-on: netCDF dataset with Xarray metadata Galaxy Tool
 >
 > 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
->    - {% icon param-file %} *"Netcdf file"*: `air_temperature_at_2_metres.nc` (Input dataset)
+>    - {% icon param-file %} *"Netcdf file"*: `air_temperature_at_2_metres.nc` .
 >
 >
 > 2. View {% icon galaxy-eye%} the two generated outputs:
@@ -118,16 +118,16 @@ Follow the below steps :
 >    - The second file `info file` provide a summary of the **Xarray Dataset** contained in your netCDF file.
 {: .hands_on}
 
-In `info file` output file, we can identify 4 different sections:
-1. **Dimensions**: name of dimensions and corresponding number of elements;
-2. **Coordinates**: contains coordinate arrays (longitude, latitude, level and time) with their values.
-3. **Data variables**: contains all the variables available in the dataset. Here, we only have one variable. For each variable, we get information on its shape and values.
-4. **Global Attributes**: at this level, we get the global attributes of the dataset. Each attribute has a name and a value.  
+There are four distinct sections in the `info file` output file:
+1. **Dimensions**: the name of the dimension and the number of components that correspond to it;
+2. **Coordinates**:  holds the values of coordinate arrays (longitude, latitude, level, and time).
+3. **Data variables**: this section provides all of the variables in the dataset. We only have one variable here. We acquire information on the shape and values of each variable.
+4. **Global Attributes**:  At this level, we acquire the dataset's global attributes. There is a name and a value for each attribute.
 
 
 > ### {% icon question %} Questions 
 >
-> 1. What is the name of the variable for air temperature at 2 metres and its physical units?
+> 1. What is the name of the variable for air temperature at 2 metres. What are its physical units?
 >
 >
 > > ### {% icon solution %} Solution
@@ -185,8 +185,8 @@ In `info file` output file, we can identify 4 different sections:
 > ### {% icon hands_on %} Hands-on:  Get Coordinate information with Xarray Coordinate
 >
 > 1. {% tool [NetCDF xarray Coordinate Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Netcdf file"*: `air_temperature_at_2_metres.nc` (Input dataset)
->2. View {% icon galaxy-eye%} the 5 generated outputs:
+>    - {% icon param-file %} *"Netcdf file"*: `air_temperature_at_2_metres.nc`.
+>2. View {% icon galaxy-eye%} the 4 generated outputs:
 >    - `lat`: a tabular file containing all the latitude values of our Xarray dataset;
 >    - `lon`: a tabular file containing all the longitudes values;
 >    - `time0`: this tabular file contains all the forecast times. In our case, these are relative to 25/05/2022, 18:00:00 UTC.;
@@ -195,7 +195,7 @@ In `info file` output file, we can identify 4 different sections:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool returns as many tabular files as the number of coordinate variables present in your input file. The values are decoded from the netCDF input file and no further processing is done. So units for instance for latitudes, longitudes, level and time may vary from one file to another depending on how it was coded in the original input file.
+>    >The number of tabular files returned by this programme is proportional to the number of coordinate variables in your input file. No further processing is done after decoding the values from the netCDF input file. As a result, depending on how the original input file was coded, units for latitudes, longitudes, level, and time may differ from one file to the next.
 >   
 > {: .comment}
 >
@@ -209,7 +209,7 @@ In `info file` output file, we can identify 4 different sections:
 > 2. What is the range of values for latitude and longitude?
 >
 > > ### {% icon solution %} Solution
-> > 1. The `info file` tells us that `time0` is coded as `timedelta64[ns]` e.g. as differences in times (here in nanoseconds). Here the reference time is ,May, 25, 2022. If we look at the tabular file named `time0` (generated by `NetCDF xarray Coordinate Info`), we see that these times are automatically converted to human readable time format when printed:
+> > 1. The `info file` tells us that `time0` is coded as `timedelta64[ns]` i.e. the time differences are in ns (here in nanoseconds). The format of time is ` sl.no  yy-mm-dd  hh:mm:ss `. If we look at the tabular file named `time0` (generated by `NetCDF xarray Coordinate Info`), we see that these times are automatically converted to human readable time format when printed:
 > >
 > > > ### {% icon code-out %} Output
 > > > ```bash
@@ -221,8 +221,12 @@ In `info file` output file, we can identify 4 different sections:
 > > > 4	2022-05-01 04:00:00
 > > > 
 > > > ```
+> > 2.  If we look at the tabular file named `lat` and `lon` (generated by `NetCDF xarray Coordinate Info`), we see that these files are displayed with sl. nos and corresponding values. From these , we infer that the range of values for `lat` is  `90.0`  to `-90.0`and for `lon` is `0` to ` 359.75`.  
+> >
 > > {: .code-out}
 > > This tells us that we have hourly forecast data. The last forecast time is `4 days 00:00:00` which means that the last forecast is in 4 days at 00:00 UTC (from May 25, 2022).
+> > 2.  If we look at the tabular file named `lat` and `lon` (generated by `NetCDF xarray Coordinate Info`), we see that these files are displayed with sl. nos and corresponding values. From these , we infer that the range of values for `lat` is  `90.0`  to `-90.0`and for `lon` is `0` to ` 359.75`.  
+> >
 > {: .solution }
 {: .question }
 
@@ -235,7 +239,7 @@ In `info file` output file, we can identify 4 different sections:
 >        - {% icon param-repeat %} *"Insert CDO Operators"*
 >            - *"Select cdo operator"*: `seltimestep (Select timesteps)`
 >                - *"Timesteps for selection"*: `594/595`
->                - {% icon param-file %} *"Additional input file"*: `output` (Input dataset)
+>                - {% icon param-file %} *"Additional input file"*: `air_temperatures_at_2_metres.nc`
 >
 >   Our main aim is to plot the last two hour data on the last day present in the dataset. The data present is in the form of daily hourly time frame. Thus we need to split the dataset into smaller part upto which we want to plot. 
 >
@@ -244,33 +248,13 @@ In `info file` output file, we can identify 4 different sections:
 >    > ### {% icon comment %} Comment
 >    >
 >    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention is how your data entries are number: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to attain the desired result.
->   
 > {: .comment}
 >
 {: .hands_on}
-///////////////
-
-> > ### {% icon solution %} Solution
-> > 1. The `info file` tells us that `time0` is coded as `timedelta64[ns]` e.g. as differences in times (here in nanoseconds). Here the reference time is ,May, 25, 2022. If we look at the tabular file named `time0` (generated by `NetCDF xarray Coordinate Info`), we see that these times are automatically converted to human readable time format when printed:
-> >
-> > > ### {% icon code-out %} Output
-> > > ```bash
-> > > 
-> > > 0 2022-05-01 00:00:00
-> > > 1	2022-05-01 01:00:00
-> > > 2	2022-05-01 02:00:00
-> > > 3	2022-05-01 03:00:00
-> > > 4	2022-05-01 04:00:00
-> > > 
-> > > ```
-> > {: .code-out}
-> > This tells us that we have hourly forecast data. The last forecast time is `4 days 00:00:00` which means that the last forecast is in 4 days at 00:00 UTC (from May 25, 2022).
-> {: .solution }
-{: .question }
 
 
-//////////////
-### {% icon question %} Splitting the dataset into individual datasets
+
+>### {% icon question %} Splitting the dataset into individual datasets
 >
 > 1. How will you plot the last two hours separately?
 > 
@@ -281,8 +265,7 @@ In `info file` output file, we can identify 4 different sections:
 > >- In *"CDO Operators"*:
 > >       - {% icon param-repeat %} *"Insert CDO Operators"*
 > >  - *"Select cdo operator"*: `splithour (Split hours)`
-> >               - *"Timesteps for selection"*: `594/595`
-> >               - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` (Input dataset) generated from the previous step.
+> >               - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
 > >
 > >
 > {: .solution}
@@ -295,7 +278,7 @@ In `info file` output file, we can identify 4 different sections:
 > ### {% icon hands_on %} Hands-on: netCDF dataset with Xarray metadata Galaxy Tool for the hourly plots
 >
 > 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
->    - {% icon param-file %} *"Netcdf file"*: `outfile_17.nc` (Input dataset). The meta data generated from this step can be used for second file too due to same meta-data of both the datasets(which is quite obvious).
+>    - {% icon param-file %} *"Netcdf file"*: `outfile_17.nc`. The meta data generated from this step can be used for second file too due to same meta-data of both the datasets(which is quite obvious).
 >
 >
 > 2. View {% icon galaxy-eye%} the two generated outputs:
@@ -305,13 +288,12 @@ In `info file` output file, we can identify 4 different sections:
 ## Map Plotting using **NetCDF xarray map plotting**
 
 > ### {% icon hands_on %} Hands-on: Map Plotting
-> The air temperatures at the last two hours of the day are plotted here : 
+> The air temperatures in the last two hours of the day are plotted here : 
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %}
 *"Netcdf file"*: `outfile_17.nc`
->    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc`
- *"Tabular of variables"*: `output` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+>    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc` (output of **NetCDF xarray Metadata Info** >{% icon tool %})
 >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 >    - *"Name of latitude coordinate"*: `lat`
 >    - *"Name of longitude coordinate"*: `lon`
@@ -326,7 +308,7 @@ In `info file` output file, we can identify 4 different sections:
 >
 >    > ### {% icon comment %} Why shifting longitudes?
 >    >
->    > Longitudes are coded from 0 to 360 degrees. As we do not have global data but only covering Europe, we need to shift longitudes so that `NetCDF xarray map plotting` can plot properly our dataset. 
+>    > Longitudes are measured in degrees from 0 to 360. We need to change longitudes so that `NetCDF xarray map plotting` can properly plot our dataset because we don't have worldwide data but only cover Europe.
 >    {: .comment}
 >
 > 
@@ -336,14 +318,14 @@ In `info file` output file, we can identify 4 different sections:
 
 > ### {% icon question %} Questions
 >
-> 1. What are the different kind of projections that can be used?
-> 2. What are the different kind of colormaps that can be used ?
+> 1. What are the different kinds of projections that can be used?
+> 2. What are the different kinds of colormaps that are available ?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1.There are many projections which can be used in the `NetCDF xarray map plotting` tool. Find here a list of valid projections. Different projections have different purposes and need to be carefully chosen. Follow this sheet to [find the syntax for projections](https://docs.google.com/spreadsheets/d/1miU8jRALxckEYY6IZ90cS_2q8d1sJJ3FG3R3569vrto/edit?usp=sharing).
 > > 
-> > 2. When it comes to conveyig the correct information, through visualisation, colors play a major role. Suppose you want to depict a cold region, its an obvious practice of using cooler tones such as a `blue`. Thus it is important to understand the choices we have. Find the [complete documentation of ColorMaps available here](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md)
+> > 2. When it comes to conveying the correct information, through visualisation, colors play a major role. Suppose you want to display a cold region, its an obvious practice of using cooler tones such as a `blue`. Thus it is important to understand the choices we have. Find the [complete documentation of ColorMaps available here](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md)
 > >
 > {: .solution}
 >
@@ -356,8 +338,7 @@ In `info file` output file, we can identify 4 different sections:
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %}
 *"Netcdf file"*: `outfile_18.nc`
->    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc`
- *"Tabular of variables"*: `output` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+>    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
 >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 >    - *"Name of latitude coordinate"*: `lat`
 >    - *"Name of longitude coordinate"*: `lon`
@@ -371,24 +352,21 @@ In `info file` output file, we can identify 4 different sections:
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What insights can be driven from the data and how is the data important on a local level?
+> 2. What are some giveaways from the tutorial ?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Every piece of data recites a story. The air temperature at a certain height has a lot of significance in major commercial and day to day activities. Read this data-blog on the above analysis. [Click Here](https://quickbeasts51429.github.io/Outreachy_Galaxy_Community_contributor/).
+> > 2. The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are : 
+> > > 1. It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.
+> > > 2.  You can view as well as download the generated plots to use further. 
 > >
 > {: .solution}
 >
@@ -400,4 +378,4 @@ In `info file` output file, we can identify 4 different sections:
 # Conclusion
 {:.no_toc}
 
-We have learnt about the xarray map plotting tool dealing with the netcdf data set. The tutorial also discussed about the types of climate datasets. One of the tutorial is info about usage of different [colormaps](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md#color-maps) and [projections]() in xarray. 
+We have learnt about the `xarray map plotting tool` dealing with the `netcdf data set`. The tutorial also discussed about the types of climate datasets. One of the tutorial is info about usage of different [colormaps](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md#color-maps) and [projections](https://docs.google.com/spreadsheets/d/1miU8jRALxckEYY6IZ90cS_2q8d1sJJ3FG3R3569vrto/edit?usp=sharing) in xarray. 
