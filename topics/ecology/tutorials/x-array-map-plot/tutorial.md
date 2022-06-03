@@ -65,9 +65,8 @@ It will be a fun learning experience for anyone who loves visualization !
 >
 > 1. Create a new history for this tutorial. Name it as per your choice. My suggestions : *ECMWF_Reanalysis*.
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>   
+>    {% snippet faqs/galaxy/datasets_import_from_remote_files.md %}
 >
 > 2. Import the files from
 >    the remote files
@@ -315,13 +314,13 @@ In `info file` output file, we can identify 4 different sections:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What are the different kind of projections that can be used?
+> 2. What are the different kind of colormaps that can be used ?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1.There are many projections which can be used in the `NetCDF xarray map plotting` tool. Find here a list of valid projections. Different projections have different purposes and need to be carefully chosen.
+> > 2. 
 > >
 > {: .solution}
 >
