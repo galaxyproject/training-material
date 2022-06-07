@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Visualization of Climate Data using  NetCDF Xarray Map Plotting
-zenodo_link: '10.5281/zenodo.6600820'
+zenodo_link: "https://doi.org/10.5281/zenodo.6600820"
 questions:
 - What is xarray map plotting?
 - How to plot NetCDF data using xarray map plotting tool?
