@@ -109,7 +109,7 @@ Follow the below steps:
 
 > ### {% icon hands_on %} Hands-on: netCDF dataset with Xarray metadata Galaxy Tool
 >
-> 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
+> 1. In the tools search for {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameter:
 >    - {% icon param-file %} *"Netcdf file"*: `air_temperature_at_2_metres.nc` .
 >
 >
