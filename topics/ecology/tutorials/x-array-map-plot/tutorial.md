@@ -99,7 +99,7 @@ Xarray uses **Cartopy** and **Matplotlib** as the two main tools for creating de
 Cartopy is a python package used for geospatial data analysis. In the Python library, matplotlib is the most used scientific plotting library.
 For a multidimensional data consisting of latitudes and longitudes along with the other variables, xarray has the capability of appling cartopy map projections.
 
-# Splitting the dataset  using  seltimestep , splithour and plotting 
+# Splitting the dataset  using  seltimestep, splithour and plotting 
 
 After loading the required data, it comes to obtaining the meta info or meta data of the file. The very purpose of these steps are to obtain the information about dimensions, variables, global attributes, etc. The coordinate info helps to know about the actual data entries present under the various variables.  
 
