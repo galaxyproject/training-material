@@ -190,7 +190,7 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 >2. View {% icon galaxy-eye%} the 4 generated outputs:
 >    - `lat`: a tabular file containing all the latitude values of our Xarray dataset;
 >    - `lon`: a tabular file containing all the longitudes values;
->    - `time0`: this tabular file contains all the forecast times. In our case, these are relative to 25/05/2022, 18:00:00 UTC.;
+>    - `time0`: this tabular file contains all the times extracted from the netCDF file. In our case, these are relative to 01/05/2022, 00:00:00 UTC;
 >    - `version`: this is a text file returning the Xarray package version. It is useful when publishing your Galaxy workflow.
 >
 >
