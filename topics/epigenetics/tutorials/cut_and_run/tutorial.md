@@ -487,7 +487,7 @@ MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > 1. 2,812
+> > > 1. 2,812 peaks
 > > > 2. We started with 6,222 and 7,577 peaks. Thus, we could remove 3,410 and 4765 peaks.
 > > > 3. Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A have to overlap with 50 bases with the peak in file B.
 > > > 4. Overlapping peak files is a non-symmetric operation (A overlapping B ≠ B overlapping A), because the peaks of A have different sizes than the peaks in B.
@@ -524,8 +524,8 @@ We can further remove some noise with a positive control, that is why we have do
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > 1. 2,771
-> > > 2. 41
+> > > 1. 2,771 peaks
+> > > 2. 41 peaks
 > > > 3. Our precision is ~ 98.54%. A high precision is an indicator that we can predict true binding regions with a high confidence.
 > > {: .solution}
 > >
@@ -568,13 +568,25 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 > 2. View the **MEME-ChIP** html.
 >
+> > ### {% icon question %} Questions
+> >
+> > > How many oeaks support the main motif GATA?
+> > > What is the E-value of the main motif?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. 1961 peaks
+> > > 2. E-value = 1.2e-456
+> > {: .solution}
+> >
+> {: .question}
 {: .hands_on}
 
 ![MEME-ChiP motifs for GATA1](../../images/cut_and_run/GATA_motif.png "Plot of the first five sequence motifs of MEME-ChIP.")
 
 Let us first investigate the result of MEME-ChIP. **First column:** The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo). **Second column:** Defines the algorithm that found the sequence motif. MEME-ChIP uses two different approaches called MEME and DREME, which can find more complex or simpler motifs. More information about these tools can be found [here](http://meme-suite.org/). **Third column:** Defines the E-value, which represents the expected number of times we would find our sequence motif in a database (peak file), just by chance. This means, that a small E-value correspond to a very significant motif because the expected number we would find that motif in our peak file just by chance is very low. Other sequences like repeats will have a high E-value on the other hand. **Fourth column:** This graph is the result of CentriMo, a tool that shows the distribution of the best matches for that particular motif. The vertical line is the center of the motif. Therefore, if you have a long sequence motif CentriMo helps you to pinpoint a smaller sub-motif. You can find more information on CentriMo [here](https://meme-suite.org/meme/doc/centrimo.html).
 
-The results of MEME-ChIP endorse the findings about the DNA binding motif (T/A)GATA(A/G) {% cite Hasegawa2017 %}.
+The results of MEME-ChIP endorse the findings about the DNA binding motif (T/A)GATA(A/G) {% cite Hasegawa2017 %}. We also found other motifs, that might be secondary sequence motifs. This, we could test with a deeper analysis.
 
 # Conclusion    
 
