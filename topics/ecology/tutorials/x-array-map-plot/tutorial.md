@@ -55,7 +55,7 @@ The climate data is mainly represented in these three categories : NetCDF (Netwo
 
 # Plotting air temperature at 2 metres using the ECMWF Reanalysis Data
 
-The data used in this tutorial is ECMWF Reanalysis . We will be concerned with the following variables : air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool exsisting in the Galaxy Europe ( or your favourable Galaxy Instance ) server.
+The data used in this tutorial is ECMWF Reanalysis. We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favorite Galaxy Instance) server.
 
 It will be a fun learning experience for anyone who loves visualization ! 
 
