@@ -272,6 +272,20 @@
 
 
 
+
+<h3 id="ansible-galaxy"> <a href="#ansible-galaxy"> Ansible-<span class="notranslate">galaxy</span> </a></h3>
+
+<hr/>
+
+
+
+<h4 class="faq-area"> Customising the welcome page <a href="/training-material/topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-customising-the-welcome-page"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Customising the welcome page</h3>  <p>Customising the <code class="language-plaintext highlighter-rouge">welcome.html</code> page is very easy!</p>  <ol>  <li>    <p>Create a custom <code class="language-plaintext highlighter-rouge">welcome.html</code> in <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> with whatever content you want, e.g.</p>    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span><br>  <span class="nt">&lt;body&gt;</span><br>    <span class="nt">&lt;h1&gt;</span>Welcome to <span class="notranslate">Galaxy</span><span class="nt">&lt;/h1&gt;</span><br>    <span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">"https://<span class="notranslate">galaxy</span>project.org/#"</span> <span class="na">width=</span><span class="s">"100%"</span> <span class="na">height=</span><span class="s">"500px"</span> <span class="nt">/&gt;</span><br>  <span class="nt">&lt;/body&gt;</span><br><span class="nt">&lt;/html&gt;</span><br></code></pre></div>    </div>  </li>  <li>    <p>Add it to your deployed configuration</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/group_vars/<span class="notranslate">galaxy</span>servers.yml<br>+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml<br>@@ <span class="nt">-83</span>,12 +83,7 @@ certbot_agree_tos: <span class="nt">--agree-tos</span><br> <span class="notranslate">galaxy</span>_config_templates:<br> - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2<br>   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"</span><br> - src: templates/<span class="notranslate">galaxy</span>/config/reports.yml<br>   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_reports_path }}"</span><br>+- src: templates/<span class="notranslate">galaxy</span>/config/welcome.html<br>+  dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config_dir }}"</span><br></code></pre></div>    </div>  </li>  <li>    <p>Update the <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> to point to the new location</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/templates/nginx/<span class="notranslate">galaxy</span>.j2<br>+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2<br>@@ <span class="nt">-83</span>,12 +83,7 @@<br> location config/welcome.html <span class="o">{</span><br>-    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_server_dir <span class="o">}}</span>/static/welcome.html.sample<span class="p">;</span><br>+    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_config_dir <span class="o">}}</span>/welcome.html<span class="p">;</span><br>     expires 24h<span class="p">;</span><br> <span class="o">}</span><br></code></pre></div>    </div>  </li>  <li>Run the playbook</li>  <li>Done! You might need to refresh / clear your cache before the changes are visible.</li></ol></blockquote>
+
+
+
+
 <br>
 <h3 id="general-faqs"> <a href="#general-faqs"> General Questions </a></h3>
 <hr>
@@ -343,7 +357,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/6859cc02c605b68eddb7ca7f30ada4bce2325123">6859cc02c605b68eddb7ca7f30ada4bce2325123</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/94336fd14d50e5367888c333b06dd4c2231842da">94336fd14d50e5367888c333b06dd4c2231842da</a></p>
     </div>
 </footer>
 

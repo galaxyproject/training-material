@@ -284,9 +284,58 @@
 
 
 
+<h4 class="faq-area"> Variable connection <a href="/training-material/topics/admin/faqs/ansible-connection.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-variable-connection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Variable connection</h3>  <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Define once, reference many times <a href="/training-material/topics/admin/faqs/ansible_define-once.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-define-once-reference-many-times"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Define once, reference many times</h3>  <p>Using variables, either by defining them ahead of time, or simply accessing them via existing data structures that have been defined, e.g.:</p>  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># defining a variable that gets reused is great!</span><br><span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span><br><br><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span><br>  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span><br>    <span class="c1"># Re-using the <span class="notranslate">galaxy</span>_config_dir variable saves time and ensures everything</span><br>    <span class="c1"># is in sync!</span><br>    <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/datatypes_conf.xml"</span><br><br><span class="c1"># and now we can re-use ""</span><br><span class="c1"># in other places!</span><br><br><br><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span><br>  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/datatypes_conf.xml</span><br>    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span><br></code></pre></div></div>  <p>Practices like those shown above help to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as <span class="notranslate">Galaxy</span> is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> What if you forget `--diff`? <a href="/training-material/topics/admin/faqs/ansible_diff.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-what-if-you-forget---diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What if you forget <code class="language-plaintext highlighter-rouge">--diff</code>?</h3>  <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.</p>  <p>However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Error: "skipping: no hosts matched" <a href="/training-material/topics/admin/faqs/ansible_error-no-hosts-matched.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-error-skipping-no-hosts-matched"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Error: “skipping: no hosts matched”</h3>  <p>There can be multiple reasons this happens, so we’ll step through all of them.We’ll start by assuming you’re running the command</p>  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml<br></code></pre></div></div>  <p>The following things can cause issues:</p>  <ol>  <li>Within your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, you’ve referred to a host group that doesn’t exist or is misspelled. Check the <code class="language-plaintext highlighter-rouge">hosts: <span class="notranslate">galaxy</span>servers</code> to ensure it matches the host group defined in the <code class="language-plaintext highlighter-rouge">hosts</code> file.</li>  <li>Vice-versa, the group in your <code class="language-plaintext highlighter-rouge">hosts</code> file should match the hosts selected in the playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</li>  <li>If neither of these are the issue, it’s possible Ansible doesn’t know to check the <code class="language-plaintext highlighter-rouge">hosts</code> file for the inventory. Make sure you’ve specified <code class="language-plaintext highlighter-rouge">inventory = hosts</code> in your <code class="language-plaintext highlighter-rouge">ansible.cfg</code>.</li></ol></blockquote>
+
+
+
+
 <h4 class="faq-area"> Running Ansible on your remote machine <a href="/training-material/topics/admin/faqs/ansible_local.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-running-ansible-on-your-remote-machine"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running Ansible on your remote machine</h3>  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.</p>  <p>Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.</p>  <p>Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> What is the difference between the roles with `role:` prefix and without? <a href="/training-material/topics/admin/faqs/ansible_role-prefix.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-what-is-the-difference-between-the-roles-with-role-prefix-and-without"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What is the difference between the roles with <code class="language-plaintext highlighter-rouge">role:</code> prefix and without?</h3>  <p>The bare role name is just simplified syntax for the roles, you could equally specifiy <code class="language-plaintext highlighter-rouge">role: &lt;name&gt;</code> every time but it’s only necessary if you want to set additional variables like <code class="language-plaintext highlighter-rouge">become_user</code></p></blockquote>
+
+
+
+
+<h4 class="faq-area"> How do I know what I can do with a role? What variables are available? <a href="/training-material/topics/admin/faqs/ansible_role-properties.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I know what I can do with a role? What variables are available?</h3>  <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, <span class="notranslate">galaxy</span>project) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>  <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Is YAML sensitive to True/true/False/false <a href="/training-material/topics/admin/faqs/ansible_yaml.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-is-yaml-sensitive-to-truetruefalsefalse"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Is YAML sensitive to True/true/False/false</h3>  <p>By <a href="https://yaml.org/refcard.html">this reference</a>, YAML doesn’t really care:</p>  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ Y, true, Yes, ON   }    : Boolean true<br>{ n, FALSE, No, off  }    : Boolean false<br></code></pre></div></div></blockquote>
 
 
 
@@ -301,6 +350,20 @@
 <h4 class="faq-area"> How to read a Diff <a href="/training-material/topics/admin/faqs/diffs.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-how-to-read-a-diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff</h3>  <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>  <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>  <blockquote class="code-2col">  <blockquote class="code-in">    <h3 data-toc-skip id="code-in-old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Old</h3>    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br>🍎<br>🍐<br>🍊<br>🍋<br>🍒<br>🥑<br></code></pre></div>    </div>  </blockquote>  <blockquote class="code-out">    <h3 data-toc-skip id="code-out-new"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> New</h3>    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br>🍎<br>🍐<br>🍊<br>🍋<br>🍍<br>🥑<br></code></pre></div>    </div>  </blockquote></blockquote>  <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>  <p>Diff lets us compare these files</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br>5c5<br>&lt; 🍒<br><span class="nt">---</span><br><span class="o">&gt;</span> 🍍<br></code></pre></div></div>  <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>  <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br>+++ new	2022-02-16 14:06:36.340962616 +0100<br>@@ <span class="nt">-3</span>,4 +3,4 @@<br> 🍊<br> 🍋<br>-🍒<br>+🍍<br> 🥑<br></code></pre></div></div>  <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>  <ul>  <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>  <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>  <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>  <li>Lines starting with a - are removed from our ‘new’ file</li>  <li>Lines with a + have been added.</li></ul>  <p>So when you go to apply these diffs to your files in the training:</p>  <ol>  <li>Ignore the header</li>  <li>Remove lines starting with - from your file</li>  <li>Add lines starting with + to your file</li></ol>  <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>  <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>  <p>Removals are very easy to spot, we just have removed lines</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br>+++ new	2022-02-16 14:10:14.370722802 +0100<br>@@ <span class="nt">-4</span>,3 +4,2 @@<br> 🍋<br> 🍒<br>-🥑<br></code></pre></div></div>  <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br>+++ new	2022-02-16 14:11:11.422135393 +0100<br>@@ <span class="nt">-1</span>,3 +1,4 @@<br> 🍎<br>+🍍<br> 🍐<br> 🍊<br></code></pre></div></div>  <h4 id="completely-new-files">Completely new files</h4>  <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br>+++ old	2022-02-16 14:06:19.697132568 +0100<br>@@ <span class="nt">-0</span>,0 +1,6 @@<br>+🍎<br>+🍐<br>+🍊<br>+🍋<br>+🍒<br>+🥑<br></code></pre></div></div>  <p>And removed files are similar, except with the new file being /dev/null</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br>+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br>@@ <span class="nt">-1</span>,6 +0,0 @@<br>-🍎<br>-🍐<br>-🍊<br>-🍋<br>-🍒<br>-🥑<br></code></pre></div></div></blockquote>
+
+
+
+ <br> 
+
+<h3 id="galaxy"> <a href="#galaxy"> <span class="notranslate">Galaxy</span> </a></h3>
+
+<hr/>
+
+
+
+<h4 class="faq-area"> How many mules? <a href="/training-material/topics/admin/faqs/galaxy-how-many-mules.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-how-many-mules"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How many mules?</h3>  <p>Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.</p></blockquote>
 
 
 
@@ -394,7 +457,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/6859cc02c605b68eddb7ca7f30ada4bce2325123">6859cc02c605b68eddb7ca7f30ada4bce2325123</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/94336fd14d50e5367888c333b06dd4c2231842da">94336fd14d50e5367888c333b06dd4c2231842da</a></p>
     </div>
 </footer>
 

@@ -594,7 +594,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 1, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1236,10 +1236,8 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
 <span class="na">server_name</span><span class="pi">:</span> <span class="s">Dogs!</span>
 </code></pre></div>      </div>
 
-      <blockquote class="tip">
-        <h3 id="tip-variable-connection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Variable connection</h3>
-        <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-variable-connection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Variable connection</h3>  <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p></blockquote>
     </li>
     <li>
       <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="language-plaintext highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
@@ -1250,11 +1248,8 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
 </code></pre></div>        </div>
       </blockquote>
 
-      <blockquote class="tip">
-        <h3 id="tip-what-if-you-forget---diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> What if you forget <code class="language-plaintext highlighter-rouge">--diff</code>?</h3>
-        <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.
-However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-what-if-you-forget---diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What if you forget <code class="language-plaintext highlighter-rouge">--diff</code>?</h3>  <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.</p>  <p>However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p></blockquote>
 
       <blockquote class="code-out">
         <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
@@ -1409,12 +1404,8 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 
 <p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles"><span class="notranslate">galaxy</span>project</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">use<span class="notranslate">galaxy</span>.eu</a></p>
 
-<blockquote class="tip">
-  <h3 id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How do I know what I can do with a role? What variables are available?</h3>
-  <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, <span class="notranslate">galaxy</span>project) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>
-
-  <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p>
-</blockquote>
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I know what I can do with a role? What variables are available?</h3>  <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, <span class="notranslate">galaxy</span>project) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>  <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p></blockquote>
 
 <h1 id="ansible-vault">Ansible Vault</h1>
 
@@ -1681,8 +1672,8 @@ Note that for this task one would normally list multiple packages in the <code c
 author = "Helena Rasche and Saskia Hiltemann",
 title = "Ansible (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "01"
+month = "05",
+day = "31"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

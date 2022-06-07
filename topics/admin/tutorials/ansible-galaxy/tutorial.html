@@ -873,7 +873,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 15, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1033,10 +1033,8 @@
 
 <p>So the references in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> are done to ensure that the setting for e.g. “location of the datatypes config file” is the same between where we have configured <span class="notranslate">Galaxy</span> to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-define-once-reference-many-times"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Define once, reference many times</h3>
-  <p>Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as <span class="notranslate">Galaxy</span> is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.</p>
-</blockquote>
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-define-once-reference-many-times"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Define once, reference many times</h3>  <p>Using variables, either by defining them ahead of time, or simply accessing them via existing data structures that have been defined, e.g.:</p>  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># defining a variable that gets reused is great!</span><br /><span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span><br /><br /><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span><br />  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span><br />    <span class="c1"># Re-using the <span class="notranslate">galaxy</span>_config_dir variable saves time and ensures everything</span><br />    <span class="c1"># is in sync!</span><br />    <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/datatypes_conf.xml"</span><br /><br /><span class="c1"># and now we can re-use ""</span><br /><span class="c1"># in other places!</span><br /><br /><br /><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span><br />  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/datatypes_conf.xml</span><br />    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span><br /></code></pre></div></div>  <p>Practices like those shown above help to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as <span class="notranslate">Galaxy</span> is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.</p></blockquote>
 
 <h3 id="dependencies">Dependencies</h3>
 
@@ -1431,18 +1429,11 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 
       </blockquote>
 
-      <blockquote class="tip">
-        <h3 id="tip-what-is-the-difference-between-the-roles-with-role-prefix-and-without"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> What is the difference between the roles with <code class="language-plaintext highlighter-rouge">role:</code> prefix and without?</h3>
-        <p>The bare role name is just simplified syntax for the roles, you could equally specifiy <code class="language-plaintext highlighter-rouge">role: &lt;name&gt;</code> every time but it’s only necessary if you want to set additional variables like <code class="language-plaintext highlighter-rouge">become_user</code></p>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-what-is-the-difference-between-the-roles-with-role-prefix-and-without"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What is the difference between the roles with <code class="language-plaintext highlighter-rouge">role:</code> prefix and without?</h3>  <p>The bare role name is just simplified syntax for the roles, you could equally specifiy <code class="language-plaintext highlighter-rouge">role: &lt;name&gt;</code> every time but it’s only necessary if you want to set additional variables like <code class="language-plaintext highlighter-rouge">become_user</code></p></blockquote>
 
-      <blockquote class="tip">
-        <h3 id="tip-is-the-yaml-sensitive-to-truetruefalsefalse"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Is the YAML sensitive to True/true/False/false</h3>
-        <p>By <a href="https://yaml.org/refcard.html">this reference</a>, YAML doesn’t really care:</p>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ Y, true, Yes, ON   }    : Boolean true
-{ n, FALSE, No, off  }    : Boolean false
-</code></pre></div>        </div>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-is-yaml-sensitive-to-truetruefalsefalse"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Is YAML sensitive to True/true/False/false</h3>  <p>By <a href="https://yaml.org/refcard.html">this reference</a>, YAML doesn’t really care:</p>  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ Y, true, Yes, ON   }    : Boolean true<br />{ n, FALSE, No, off  }    : Boolean false<br /></code></pre></div></div></blockquote>
     </li>
     <li>
       <p>Run the playbook:</p>
@@ -1577,23 +1568,8 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 </code></pre></div>        </div>
       </blockquote>
 
-      <blockquote class="tip">
-        <h3 id="tip-error-skipping-no-hosts-matched"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Error: “skipping: no hosts matched”</h3>
-        <p>There can be multiple reasons this happens, so we’ll step through all of them.
-We’ll start by assuming you’re running the command</p>
-
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
-</code></pre></div>        </div>
-
-        <p>The following things can cause issues:</p>
-
-        <ol>
-          <li>Within your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, you’ve referred to a host group that doesn’t exist or is misspelled. Check the <code class="language-plaintext highlighter-rouge">hosts: <span class="notranslate">galaxy</span>servers</code> to ensure it matches the host group defined in the <code class="language-plaintext highlighter-rouge">hosts</code> file.</li>
-          <li>Vice-versa, the group in your <code class="language-plaintext highlighter-rouge">hosts</code> file should match the hosts selected in the playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</li>
-          <li>If neither of these are the issue, it’s possible Ansible doesn’t know to check the <code class="language-plaintext highlighter-rouge">hosts</code> file for the inventory. Make sure you’ve specified <code class="language-plaintext highlighter-rouge">inventory = hosts</code> in your <code class="language-plaintext highlighter-rouge">ansible.cfg</code>.</li>
-        </ol>
-
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-error-skipping-no-hosts-matched"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Error: “skipping: no hosts matched”</h3>  <p>There can be multiple reasons this happens, so we’ll step through all of them.We’ll start by assuming you’re running the command</p>  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml<br /></code></pre></div></div>  <p>The following things can cause issues:</p>  <ol>  <li>Within your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, you’ve referred to a host group that doesn’t exist or is misspelled. Check the <code class="language-plaintext highlighter-rouge">hosts: <span class="notranslate">galaxy</span>servers</code> to ensure it matches the host group defined in the <code class="language-plaintext highlighter-rouge">hosts</code> file.</li>  <li>Vice-versa, the group in your <code class="language-plaintext highlighter-rouge">hosts</code> file should match the hosts selected in the playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</li>  <li>If neither of these are the issue, it’s possible Ansible doesn’t know to check the <code class="language-plaintext highlighter-rouge">hosts</code> file for the inventory. Make sure you’ve specified <code class="language-plaintext highlighter-rouge">inventory = hosts</code> in your <code class="language-plaintext highlighter-rouge">ansible.cfg</code>.</li></ol></blockquote>
     </li>
     <li>
       <p>Inspect the changes that have been made on your <span class="notranslate">Galaxy</span> server. Places to look include:</p>
@@ -1819,7 +1795,7 @@ We’ll start by assuming you’re running the command</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2022-03-15), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2022-05-31), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -1970,10 +1946,8 @@ So it is not always easy to tell what variables will be set, or what their final
 </span>   
 </code></pre></div>      </div>
 
-      <blockquote class="tip">
-        <h3 id="tip-how-many-mules"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How many mules?</h3>
-        <p>Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.</p>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-how-many-mules"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How many mules?</h3>  <p>Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.</p></blockquote>
 
       <blockquote class="tip">
         <h3 id="tip-uwsgi-threads-offload-threads-mules-etc"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> uWSGI th<span class="notranslate">reads</span>, offload th<span class="notranslate">reads</span>, mules, etc.</h3>
@@ -3015,6 +2989,9 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 </span></code></pre></div>        </div>
 
       </blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-customising-the-welcome-page"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Customising the welcome page</h3>  <p>Customising the <code class="language-plaintext highlighter-rouge">welcome.html</code> page is very easy!</p>  <ol>  <li>    <p>Create a custom <code class="language-plaintext highlighter-rouge">welcome.html</code> in <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> with whatever content you want, e.g.</p>    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span><br />  <span class="nt">&lt;body&gt;</span><br />    <span class="nt">&lt;h1&gt;</span>Welcome to <span class="notranslate">Galaxy</span><span class="nt">&lt;/h1&gt;</span><br />    <span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">"https://<span class="notranslate">galaxy</span>project.org/#"</span> <span class="na">width=</span><span class="s">"100%"</span> <span class="na">height=</span><span class="s">"500px"</span> <span class="nt">/&gt;</span><br />  <span class="nt">&lt;/body&gt;</span><br /><span class="nt">&lt;/html&gt;</span><br /></code></pre></div>    </div>  </li>  <li>    <p>Add it to your deployed configuration</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/group_vars/<span class="notranslate">galaxy</span>servers.yml<br />+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml<br />@@ <span class="nt">-83</span>,12 +83,7 @@ certbot_agree_tos: <span class="nt">--agree-tos</span><br /> <span class="notranslate">galaxy</span>_config_templates:<br /> - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2<br />   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"</span><br /> - src: templates/<span class="notranslate">galaxy</span>/config/reports.yml<br />   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_reports_path }}"</span><br />+- src: templates/<span class="notranslate">galaxy</span>/config/welcome.html<br />+  dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config_dir }}"</span><br /></code></pre></div>    </div>  </li>  <li>    <p>Update the <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> to point to the new location</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/templates/nginx/<span class="notranslate">galaxy</span>.j2<br />+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2<br />@@ <span class="nt">-83</span>,12 +83,7 @@<br /> location config/welcome.html <span class="o">{</span><br />-    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_server_dir <span class="o">}}</span>/static/welcome.html.sample<span class="p">;</span><br />+    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_config_dir <span class="o">}}</span>/welcome.html<span class="p">;</span><br />     expires 24h<span class="p">;</span><br /> <span class="o">}</span><br /></code></pre></div>    </div>  </li>  <li>Run the playbook</li>  <li>Done! You might need to refresh / clear your cache before the changes are visible.</li></ol></blockquote>
     </li>
     <li>
       <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
@@ -3634,8 +3611,8 @@ Additionally you can automatically send failing job error reports, even if users
 author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann and Nicola Soranzo",
 title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "15"
+month = "05",
+day = "31"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

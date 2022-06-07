@@ -1102,9 +1102,72 @@ To get access to all features of a <span class="notranslate">Galaxy</span> insta
 
 
 
+<h4 class="faq-area"> Variable connection <a href="/training-material/topics/admin/faqs/ansible-connection.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-variable-connection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Variable connection</h3>  <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Define once, reference many times <a href="/training-material/topics/admin/faqs/ansible_define-once.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-define-once-reference-many-times"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Define once, reference many times</h3>  <p>Using variables, either by defining them ahead of time, or simply accessing them via existing data structures that have been defined, e.g.:</p>  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># defining a variable that gets reused is great!</span><br><span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span><br><br><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span><br>  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span><br>    <span class="c1"># Re-using the <span class="notranslate">galaxy</span>_config_dir variable saves time and ensures everything</span><br>    <span class="c1"># is in sync!</span><br>    <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/datatypes_conf.xml"</span><br><br><span class="c1"># and now we can re-use ""</span><br><span class="c1"># in other places!</span><br><br><br><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span><br>  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/datatypes_conf.xml</span><br>    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span><br></code></pre></div></div>  <p>Practices like those shown above help to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as <span class="notranslate">Galaxy</span> is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> What if you forget `--diff`? <a href="/training-material/topics/admin/faqs/ansible_diff.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-what-if-you-forget---diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What if you forget <code class="language-plaintext highlighter-rouge">--diff</code>?</h3>  <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.</p>  <p>However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Error: "skipping: no hosts matched" <a href="/training-material/topics/admin/faqs/ansible_error-no-hosts-matched.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-error-skipping-no-hosts-matched"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Error: “skipping: no hosts matched”</h3>  <p>There can be multiple reasons this happens, so we’ll step through all of them.We’ll start by assuming you’re running the command</p>  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml<br></code></pre></div></div>  <p>The following things can cause issues:</p>  <ol>  <li>Within your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, you’ve referred to a host group that doesn’t exist or is misspelled. Check the <code class="language-plaintext highlighter-rouge">hosts: <span class="notranslate">galaxy</span>servers</code> to ensure it matches the host group defined in the <code class="language-plaintext highlighter-rouge">hosts</code> file.</li>  <li>Vice-versa, the group in your <code class="language-plaintext highlighter-rouge">hosts</code> file should match the hosts selected in the playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</li>  <li>If neither of these are the issue, it’s possible Ansible doesn’t know to check the <code class="language-plaintext highlighter-rouge">hosts</code> file for the inventory. Make sure you’ve specified <code class="language-plaintext highlighter-rouge">inventory = hosts</code> in your <code class="language-plaintext highlighter-rouge">ansible.cfg</code>.</li></ol></blockquote>
+
+
+
+
 <h4 class="faq-area"> Running Ansible on your remote machine <a href="/training-material/topics/admin/faqs/ansible_local.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-running-ansible-on-your-remote-machine"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running Ansible on your remote machine</h3>  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.</p>  <p>Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.</p>  <p>Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> What is the difference between the roles with `role:` prefix and without? <a href="/training-material/topics/admin/faqs/ansible_role-prefix.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-what-is-the-difference-between-the-roles-with-role-prefix-and-without"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What is the difference between the roles with <code class="language-plaintext highlighter-rouge">role:</code> prefix and without?</h3>  <p>The bare role name is just simplified syntax for the roles, you could equally specifiy <code class="language-plaintext highlighter-rouge">role: &lt;name&gt;</code> every time but it’s only necessary if you want to set additional variables like <code class="language-plaintext highlighter-rouge">become_user</code></p></blockquote>
+
+
+
+
+<h4 class="faq-area"> How do I know what I can do with a role? What variables are available? <a href="/training-material/topics/admin/faqs/ansible_role-properties.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I know what I can do with a role? What variables are available?</h3>  <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, <span class="notranslate">galaxy</span>project) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>  <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Is YAML sensitive to True/true/False/false <a href="/training-material/topics/admin/faqs/ansible_yaml.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-is-yaml-sensitive-to-truetruefalsefalse"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Is YAML sensitive to True/true/False/false</h3>  <p>By <a href="https://yaml.org/refcard.html">this reference</a>, YAML doesn’t really care:</p>  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ Y, true, Yes, ON   }    : Boolean true<br>{ n, FALSE, No, off  }    : Boolean false<br></code></pre></div></div></blockquote>
+
+
+
+ <br> 
+
+<h3 id="ansible-galaxy"> <a href="#ansible-galaxy"> Ansible-<span class="notranslate">galaxy</span> </a></h3>
+
+<hr/>
+
+
+
+<h4 class="faq-area"> Customising the welcome page <a href="/training-material/topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-customising-the-welcome-page"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Customising the welcome page</h3>  <p>Customising the <code class="language-plaintext highlighter-rouge">welcome.html</code> page is very easy!</p>  <ol>  <li>    <p>Create a custom <code class="language-plaintext highlighter-rouge">welcome.html</code> in <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> with whatever content you want, e.g.</p>    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span><br>  <span class="nt">&lt;body&gt;</span><br>    <span class="nt">&lt;h1&gt;</span>Welcome to <span class="notranslate">Galaxy</span><span class="nt">&lt;/h1&gt;</span><br>    <span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">"https://<span class="notranslate">galaxy</span>project.org/#"</span> <span class="na">width=</span><span class="s">"100%"</span> <span class="na">height=</span><span class="s">"500px"</span> <span class="nt">/&gt;</span><br>  <span class="nt">&lt;/body&gt;</span><br><span class="nt">&lt;/html&gt;</span><br></code></pre></div>    </div>  </li>  <li>    <p>Add it to your deployed configuration</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/group_vars/<span class="notranslate">galaxy</span>servers.yml<br>+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml<br>@@ <span class="nt">-83</span>,12 +83,7 @@ certbot_agree_tos: <span class="nt">--agree-tos</span><br> <span class="notranslate">galaxy</span>_config_templates:<br> - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2<br>   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"</span><br> - src: templates/<span class="notranslate">galaxy</span>/config/reports.yml<br>   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_reports_path }}"</span><br>+- src: templates/<span class="notranslate">galaxy</span>/config/welcome.html<br>+  dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config_dir }}"</span><br></code></pre></div>    </div>  </li>  <li>    <p>Update the <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> to point to the new location</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/templates/nginx/<span class="notranslate">galaxy</span>.j2<br>+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2<br>@@ <span class="nt">-83</span>,12 +83,7 @@<br> location config/welcome.html <span class="o">{</span><br>-    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_server_dir <span class="o">}}</span>/static/welcome.html.sample<span class="p">;</span><br>+    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_config_dir <span class="o">}}</span>/welcome.html<span class="p">;</span><br>     expires 24h<span class="p">;</span><br> <span class="o">}</span><br></code></pre></div>    </div>  </li>  <li>Run the playbook</li>  <li>Done! You might need to refresh / clear your cache before the changes are visible.</li></ol></blockquote>
 
 
 
@@ -1679,6 +1742,20 @@ Excel is a fantastic tool and a great place to build simple analysis models, but
 <h4 class="faq-area"> Where can I read more about this analysis? <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/faqs/more_info.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="question">  <h3 data-toc-skip id="-where-can-i-read-more-about-this-analysis"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Where can I read more about this analysis?</h3>  <p>This tutorial was adapted from the <a href="https://mothur.org/wiki/miseq_sop/">mothur MiSeq SOP</a> created by the Schloss lab. Here you can find more information about the mothur tools and file formats. Their <a href="https://mothur.org/wiki/frequently_asked_questions/">FAQ page</a> and <a href="https://forum.mothur.org/">Help Forum</a> are also quite useful!</p></blockquote>
+
+
+
+ <br> 
+
+<h3 id="galaxy"> <a href="#galaxy"> <span class="notranslate">Galaxy</span> </a></h3>
+
+<hr/>
+
+
+
+<h4 class="faq-area"> How many mules? <a href="/training-material/topics/admin/faqs/galaxy-how-many-mules.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">  <h3 data-toc-skip id="-tip-how-many-mules"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How many mules?</h3>  <p>Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.</p></blockquote>
 
 
 
@@ -2952,7 +3029,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/6859cc02c605b68eddb7ca7f30ada4bce2325123">6859cc02c605b68eddb7ca7f30ada4bce2325123</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/94336fd14d50e5367888c333b06dd4c2231842da">94336fd14d50e5367888c333b06dd4c2231842da</a></p>
     </div>
 </footer>
 
