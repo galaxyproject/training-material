@@ -3,7 +3,7 @@ title: Importing data from remote files
 area: data upload
 box_type: tip
 layout: faq
-contributors: [bebatut,shiltemann,nsoranzo,hexylena,wm75,quickbeasts51429]
+contributors: [bebatut,shiltemann,nsoranzo,hexylena,wm75,Quickbeasts51429]
 ---
 
 
