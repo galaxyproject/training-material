@@ -101,7 +101,7 @@ For a multidimensional data consisting of latitudes and longitudes along with th
 
 # Splitting the dataset  using  seltimestep, splithour and plotting 
 
-After loading the required data, it comes to obtaining the meta info or meta data of the file. The very purpose of these steps are to obtain the information about dimensions, variables, global attributes, etc. The coordinate info helps to know about the actual data entries present under the various variables.  
+After loading the required data, the following stage is to obtain the meta info or meta data of the file. The very purpose of these steps are to obtain the information about dimensions, variables, global attributes, etc. The coordinate info helps to know about the actual data entries present under the various variables.  
 
 Follow the below steps :
 
