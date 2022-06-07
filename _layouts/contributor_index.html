@@ -89,7 +89,13 @@ layout: base
 					</a>
 				</div>
 				{% endif %}
-				<br/>
+
+				{% if contributors[page.contributor].elixir_node %}
+				<div class="contact-items">
+					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ contributors[page.contributor].elixir_node }}.svg">
+				</div>
+				{% endif %}
+
 				<h4>Favourite Topics</h4>
 				<canvas id="myChart" height="300px"></canvas>
 				<h4>Favourite Formats</h4>
