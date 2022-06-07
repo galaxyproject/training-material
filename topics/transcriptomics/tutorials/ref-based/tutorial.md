@@ -11,6 +11,7 @@ tags:
     - collections
     - drosophila
     - QC
+    - cyoa
 level: Introductory
 zenodo_link: "https://zenodo.org/record/4541751"
 questions:
