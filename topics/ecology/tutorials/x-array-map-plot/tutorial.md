@@ -115,7 +115,7 @@ Follow the below steps:
 >
 > 2. View {% icon galaxy-eye%} the two generated outputs:
 >    - `Metadata infos` is a `tabular` providing the list of variables, their dimension names and number of elements per dimension. This file is used by other Xarray Tools. 
->    - The second file `info file` provide a summary of the **Xarray Dataset** contained in your netCDF file.
+>    - The second file `info file` provides a summary of the **Xarray Dataset** contained in your netCDF file.
 {: .hands_on}
 
 There are four distinct sections in the `info file` output file:
