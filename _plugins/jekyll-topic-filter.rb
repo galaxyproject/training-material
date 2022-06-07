@@ -297,6 +297,35 @@ module Jekyll
       TopicFilter.topic_filter(site, topic_name)
     end
 
+    ELIXIR_NODES = {
+      "au" => "Australia",
+      "be" => "Belgium",
+      "ch" => "Switzerland",
+      "cz" => "Czechia",
+      "de" => "Germany",
+      "dk" => "Denmark",
+      "ee" => "Estonia",
+      "es" => "Spain",
+      "fi" => "Finland",
+      "fr" => "France",
+      "gr" => "Greece",
+      "hu" => "Hungary",
+      "ie" => "Ireland",
+      "il" => "Israel",
+      "it" => "Italy",
+      "lu" => "Luxembourg",
+      "nl" => "the Netherlands",
+      "no" => "Norway",
+      "pt" => "Portugal",
+      "se" => "Sweden",
+      "si" => "Slovenia",
+      "uk" => "United Kingdom",
+    }
+
+    def elixirnode2name(name)
+      ELIXIR_NODES[name]
+    end
+
     def humanize_types(type)
       data = {
         "seq" => "List of Items",
