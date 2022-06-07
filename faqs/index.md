@@ -25,17 +25,7 @@ Common questions about the Galaxy platform, or about the GTN itself, can be foun
 
 Each topic in the GTN also has a dedicated FAQ page:
 
-{% assign sorted_topics = "" | split: "," %}
-{% assign sorted_topics_pre = site.data | sort | order: "title" %}
-
-{% for topic in sorted_topics_pre %}
-    {% if topic[0] == "introduction" %}
-        {% assign sorted_topics = sorted_topics | unshift: topic %}
-    {% else %}
-        {% assign sorted_topics = sorted_topics | push: topic %}
-    {% endif %}
-{% endfor %}
-
+{% assign sorted_topics = site | list_topics: "all" %}
 
 ### Galaxy for Scientists
 

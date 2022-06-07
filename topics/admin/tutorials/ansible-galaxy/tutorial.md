@@ -140,9 +140,7 @@ galaxy_config:
 
 So the references in `galaxy_config_templates` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
 
-> ### {% icon tip %} Define once, reference many times
-> Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.
-{: .tip}
+{% snippet topics/admin/faqs/ansible_define-once.md %}
 
 ### Dependencies
 
@@ -479,17 +477,9 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    >
 >    {: .question}
 >
->    > ### {% icon tip %} What is the difference between the roles with `role:` prefix and without?
->    > The bare role name is just simplified syntax for the roles, you could equally specifiy `role: <name>` every time but it's only necessary if you want to set additional variables like `become_user`
->    {: .tip}
+>    {% snippet topics/admin/faqs/ansible_role-prefix.md %}
 >
->    > ### {% icon tip %} Is the YAML sensitive to True/true/False/false
->    > By [this reference](https://yaml.org/refcard.html), YAML doesn't really care:
->    > ```
->    > { Y, true, Yes, ON   }    : Boolean true
->    > { n, FALSE, No, off  }    : Boolean false
->    > ```
->    {: .tip}
+>    {% snippet topics/admin/faqs/ansible_yaml.md %}
 >
 > 3. Run the playbook:
 >
@@ -623,21 +613,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .tip}
 >
->    > ### {% icon tip %} Error: "skipping: no hosts matched"
->    > There can be multiple reasons this happens, so we'll step through all of them.
->    > We'll start by assuming you're running the command
->    >
->    > ```
->    > ansible-playbook galaxy.yml
->    > ```
->    >
->    > The following things can cause issues:
->    >
->    > 1. Within your `galaxy.yml`, you've referred to a host group that doesn't exist or is misspelled. Check the `hosts: galaxyservers` to ensure it matches the host group defined in the `hosts` file.
->    > 2. Vice-versa, the group in your `hosts` file should match the hosts selected in the playbook, `galaxy.yml`.
->    > 3. If neither of these are the issue, it's possible Ansible doesn't know to check the `hosts` file for the inventory. Make sure you've specified `inventory = hosts` in your `ansible.cfg`.
->    >
->    {: .tip}
+>    {% snippet topics/admin/faqs/ansible_error-no-hosts-matched.md %}
 >
 > 4. Inspect the changes that have been made on your Galaxy server. Places to look include:
 >
@@ -945,9 +921,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Configure uwsgi"}
 >
->    > ### {% icon tip %} How many mules?
->    > Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
->    {: .tip}
+>    {% snippet topics/admin/faqs/galaxy-how-many-mules.md %}
 >
 >    > ### {% icon tip %} uWSGI threads, offload threads, mules, etc.
 >    > 1. uWSGI threads = number of threads per uWSGI web worker (the value of processes in uWSGI config)
@@ -1975,6 +1949,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > {% endraw %}
 >    >
 >    {: .details}
+>
+>    {% snippet topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.md %}
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >

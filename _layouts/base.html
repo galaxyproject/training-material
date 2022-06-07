@@ -19,6 +19,8 @@
         <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
         <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}" />
 
+        {{ page | generate_dublin_core: site }}
+
         {% assign topic = site.data[page.topic_name] %}
         {% assign og_title = topic.title %}
         {% if page.title %}
@@ -29,9 +31,11 @@
           {% assign og_desc = topic.summary %}
         {% endif %}
         <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
+        <meta property="og:site_name" content="Galaxy Training Network" />
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
         <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
         <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+
     </head>
     <body data-spy="scroll" data-target="#toc">
         {% include _includes/default-header.html %}
