@@ -325,7 +325,7 @@ There are four distinct sections in the `info file` output file:
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1.There are many projections which can be used in the `NetCDF xarray map plotting` tool. Find here a list of valid projections. Different projections have different purposes and need to be carefully chosen. Follow this sheet to [find the syntax for projections](https://docs.google.com/spreadsheets/d/1miU8jRALxckEYY6IZ90cS_2q8d1sJJ3FG3R3569vrto/edit?usp=sharing). 
+> > 1.There are many projections which can be used in the `NetCDF xarray map plotting` tool. Find here a list of valid projections. Different projections have different purposes and need to be carefully chosen. Follow this sheet to [find the syntax for projections](https://github.com/Quickbeasts51429/xarray_projection). 
 > > 
 >> When it comes to conveying the correct information, through visualisation, colors play a major role. Suppose you want to display a cold region, its an obvious practice of using cooler tones such as a `blue`. Thus it is important to understand the choices we have. Find the [complete documentation of ColorMaps available here](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md)
 > >
@@ -390,4 +390,4 @@ There are four distinct sections in the `info file` output file:
 # Conclusion
 {:.no_toc}
 
-We have learnt about the `xarray map plotting tool` dealing with the `netcdf data set`. The tutorial also discussed about the types of climate datasets. One of the tutorial is info about usage of different [colormaps](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md#color-maps) and [projections](https://docs.google.com/spreadsheets/d/1miU8jRALxckEYY6IZ90cS_2q8d1sJJ3FG3R3569vrto/edit?usp=sharing) in xarray. 
+We have learnt about the `xarray map plotting tool` dealing with the `netcdf data set`. The tutorial also discussed about the types of climate datasets. One of the tutorial is info about usage of different [colormaps](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md#color-maps) and [projections](https://github.com/Quickbeasts51429/xarray_projection) in xarray. 
