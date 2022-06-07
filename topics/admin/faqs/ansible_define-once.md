@@ -6,7 +6,7 @@ layout: faq
 contributors: [natefoo, shiltemann]
 ---
 
-Using variables, either by defining them ahead of time, or simply accessing them via existing data structures that have been defined
+Using variables, either by defining them ahead of time, or simply accessing them via existing data structures that have been defined, e.g.:
 
 ```yaml
 # defining a variable that gets reused is great!
