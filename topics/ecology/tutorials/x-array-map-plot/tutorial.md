@@ -47,7 +47,7 @@ contributors:
 >According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/tutorial.html) from the GTN. Due to the frequently changing nature of the weather patterns, the size of the collected data is huge.
 The climate data is mainly represented in these three categories : NetCDF (Network Common Data Form), HDF (Hierarchical Data Format) , GRIB (GRIdded Binary or General Regularly-distributed Information in Binary form).
 >
->NetCDF datasets are basically used for storing multidimensional data which generally consits of variables such as temperature, precipitation , direction , etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as verticle coordinates which makes plotting of the variables such as the oocean temperatures possible.
+>The NetCDF file format is basically used for storing multidimensional data which generally consists of variables such as temperature, precipitation, wind direction, etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as vertical coordinates which makes plotting of the variables such as the ocean temperatures possible.
 >
 >The coordinate system, types of projections and colormaps are some of the very important considerations in achieving the most suitable visualization option.
 
