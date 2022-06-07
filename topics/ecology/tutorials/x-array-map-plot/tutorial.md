@@ -91,7 +91,7 @@ It will be a fun learning experience for anyone who loves visualization !
 {: .hands_on}
 
 # What is Xarray?
-Xarray , formerly known as xray, is a python package which enable us to play with gridded data. This package shares most of its features from numpy , but in a more convinient manner by keeping track of labels in arrays. The gridded data is mainly available in netCDF data format. Thus **xarray comes very handy while dealing with netCDF files.**
+Xarray, formerly known as xray, is a python package which enables us to play with gridded data. This package shares most of its features from numpy, but in a more convenient manner by keeping track of labels in arrays. The gridded data is mainly available in netCDF data format. Thus **xarray comes very handy while dealing with netCDF files.**
 
 
 ## What is Visualisation in Xarray?
