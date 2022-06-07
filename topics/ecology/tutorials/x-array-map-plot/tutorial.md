@@ -118,7 +118,7 @@ Follow the below steps:
 >    - The second file `info file` provides a summary of the **Xarray Dataset** contained in your netCDF file.
 {: .hands_on}
 
-There are four distinct sections in the `info file` output file:
+This particular netCDF file does not follow the [CF convention](https://cfconventions.org/) which is why here there are only three distinct sections (instead of four sections) in the `info file` output file:
 1. **Dimensions**: the name of the dimension and the number of components that correspond to it;
 2. **Coordinates**:  holds the values of coordinate arrays (longitude, latitude, level, and time).
 3. **Data variables**: this section provides all of the variables in the dataset. We only have one variable here. We acquire information on the shape and values of each variable.
