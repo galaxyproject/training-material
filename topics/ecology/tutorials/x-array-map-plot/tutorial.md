@@ -197,8 +197,8 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 >    > ### {% icon comment %} Comment
 >    >
 >    >The number of tabular files returned by this programme is proportional to the number of coordinate variables in your input file. No further processing is done after decoding the values from the netCDF input file. As a result, depending on how the original input file was coded, units for latitudes, longitudes, level, and time may differ from one file to the next.
->   
-> {: .comment}
+>    >
+>    > {: .comment}
 >
 {: .hands_on}
 
@@ -259,7 +259,8 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > > 
 > > This step generates that `N` number of `outfiles.netcdf` files where `N` is the range of selection.
 > > Suppose your selected range was `594/595` for the `seltimestep` , then it will generate `2` files which can be plotted further. 
-> {: .comment}
+> > 
+> > {: .comment}
 >
 
 
@@ -306,9 +307,8 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 >    > ### {% icon comment %} Why sometimes we shift longitudes ?
 >    >
 >    > Longitudes are measured in degrees from 0 to 360. We need to change longitudes so that `NetCDF xarray map plotting` can properly plot our dataset because we don't have worldwide data but only cover Europe.
->    {: .comment}
->
-> 
+>{: .comment}
+>  
 {: .hands_on}
 
 
