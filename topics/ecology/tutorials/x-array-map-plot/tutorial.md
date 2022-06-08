@@ -244,7 +244,7 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 >                - *"Timesteps for selection"*: `595/595`
 >                - {% icon param-file %} *"Additional input file"*: `air_temperatures_at_2_metres.nc`
 >
->
+>{: .hands_on}
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -261,7 +261,7 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > > Suppose your selected range was `594/595` for the `seltimestep` , then it will generate `2` files which can be plotted further. 
 > {: .comment}
 >
-{: .hands_on}
+
 
 
 
