@@ -17,8 +17,10 @@ key_points:
 - Several filters are applied to the reads, such as removing those mapped to mitochondria
 - Fragment distribution can help determine whether an CUT&RUN experiment has worked well
 - A robust peak detection removes noise from the data
-contributors:
+contributions:
+  authorship:
     - heylf
+  editing:
     - hexylena
 abbreviations:
   CUT&RUN: Cleavage Under Targets and Release Using Nuclease
