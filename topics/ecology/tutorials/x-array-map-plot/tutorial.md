@@ -337,25 +337,32 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > > >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Specify plot title (optional)"*: `Projection :  Mercator 18:00 UTC `
-> > >    - *"Specify which colormap to use for plotting (optional)"*: `bam`
+> > >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 > > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : CMRmap](../../images/colorselect.png)
+> > >
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : CMRmap](../../images/projselect.png)
+> > >
+> > >The final plot is shown below:
 > > >
 > > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Mercator.png)
-> > >Some other important color variants of the same map can be found below :
-> > >-*{"proj":"InterruptedGoodeHomolosine" }*
+> > >
+> > >
+> > >
+> > >Some other important types of projections can be found below :
+> > >
+> > > - *{"proj":"InterruptedGoodeHomolosine" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/InterruptedGoodeHomolosine.png)
-> > >  -*{"proj":"LambertCylindrical"}*
+> > >  - *{"proj":"LambertCylindrical"}*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/LambertCylindrical.png)
-> > >  -*{"proj":"Sinusoidal" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Sinusoidal.png)
-> > >-*{"proj":"EquidistantConic", "central_longitude": 20.0, "central_latitude": 70.0 }*
+> > >  - *{"proj":"Sinusoidal" }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/sinusoidal.png)
+> > > - *{"proj":"EquidistantConic", "central_longitude": 20.0, "central_latitude": 70.0 }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/EquidistantConic.png)
-> > >-*{"proj":"LambertConformal" }*
+> > > - *{"proj":"LambertConformal" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/LambertConformal.png)
-> > >-*{"proj":"AzimuthalEquidistant" }*
+> > > - *{"proj":"AzimuthalEquidistant" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/AzimuthalEquidistant.png)
-> > >-*{"proj":"Orthographic" }*
+> > > - *{"proj":"Orthographic" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Orthographic.png)
 > > {: .hands_on}
 > >
@@ -395,17 +402,19 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : CMRmap](../../images/colorselect.png)
 > > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
 > > >
+> > >
+> > > The final plot is shown below: 
 > > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/CMRmap.png)
 > > >Some other important color variants of the same map can be found below :
-> > >-*colormap : Accent*
+> > > - *colormap : Accent*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Accent.png)
-> > >  -*colormap : bam*
+> > >  - *colormap : bam*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bam.png)
-> > >  -*colormap : bukavu*
+> > >  - *colormap : bukavu*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bukavu.png)
-> > >-*colormap : coolwarm*
+> > > - *colormap : coolwarm*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/coolwarm.png)
-> > >-*colormap : jet*
+> > > - *colormap : jet*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/jet.png)
 > > {: .hands_on}
 > >
@@ -436,10 +445,10 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > >   - {% icon param-files %} *"Images"*: `Map plots`
 > >   - {% icon param-text %} *"# of images wide"*: `4`
 > > 
-> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/ECMWF_Reanalysis_Montage.png)
+> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/mont1.png)
 > > Here you can see that all the colormaps we plotted above have been shown in a single image using `Image Montage`.
-> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/ECMWF_Reanalysis_Montage.png)
-> > Here you can see that all the colormaps we plotted above have been shown in a single image using `Image Montage`.
+> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/mont2.png)
+> > Here you can see that all the projections we plotted above have been shown in a single image using `Image Montage`.
 > {: .solution}
 >
 {: .question}
