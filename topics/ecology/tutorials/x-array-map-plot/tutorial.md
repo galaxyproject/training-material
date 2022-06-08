@@ -193,14 +193,15 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 >    - `time0`: this tabular file contains all the times extracted from the netCDF file. In our case, these are relative to 01/05/2022, 00:00:00 UTC;
 >    - `version`: this is a text file returning the Xarray package version. It is useful when publishing your Galaxy workflow.
 >
+>{: .hands_on}
 >
->    > ### {% icon comment %} Comment
->    >
->    >The number of tabular files returned by this programme is proportional to the number of coordinate variables in your input file. No further processing is done after decoding the values from the netCDF input file. As a result, depending on how the original input file was coded, units for latitudes, longitudes, level, and time may differ from one file to the next.
->    >
->    > {: .comment}
+> > ### {% icon comment %} Comment
+> >
+> >The number of tabular files returned by this programme is proportional to the number of coordinate variables in your input file. No further processing is done after decoding the values from the netCDF input file. As a result, depending on how the original input file was coded, units for latitudes, longitudes, level, and time may differ from one file to the next.
+> >
+> > {: .comment}
 >
-{: .hands_on}
+
 
 
 > ### {% icon question %} Understanding air temperature coordinates at 2 metres
