@@ -444,11 +444,8 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > > {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
 > >   - {% icon param-files %} *"Images"*: `Map plots`
 > >   - {% icon param-text %} *"# of images wide"*: `4`
-> > 
-> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/mont1.png)
-> > Here you can see that all the colormaps we plotted above have been shown in a single image using `Image Montage`.
-> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/mont2.png)
 > > Here you can see that all the projections we plotted above have been shown in a single image using `Image Montage`.
+> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/mont2.png)
 > {: .solution}
 >
 {: .question}
