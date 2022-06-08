@@ -6,36 +6,38 @@ zenodo_link: https://zenodo.org/record/3862793
 questions:
 - Which binding motif has the transcription factor GATA1?
 - What kind of quality control do I have to do?
-- How to analyse and visualise CUT & RUN data?
+- How to analyse and visualise CUT&RUN data?
 objectives:
-- Apply appropriate analysis and quality control steps for CUT & RUN
+- Apply appropriate analysis and quality control steps for CUT&RUN
 - Apply an enrichment analysis and a robust peak detection
 - Find protein binding motifs
 time_estimation: 3h
 key_points:
-- CUT & RUN can be used to identify binding regions for
+- CUT&RUN can be used to identify binding regions for
 - Several filters are applied to the reads, such as removing those mapped to mitochondria
-- Fragment distribution can help determine whether an CUT & RUN experiment has worked well
+- Fragment distribution can help determine whether an CUT&RUN experiment has worked well
 - A robust peak detection removes noise from the data
 contributors:
-- heylf
+    - heylf
+    - hexylena
+abbreviations:
+  CUT&RUN: Cleavage Under Targets and Release Using Nuclease
+  POI: protein of interest
+  pA-MNase: protein A-micrococcal nuclease
+  TF: transcription factors
 
 ---
 
 # Introduction
-{:.no_toc}
-
-
-In many organism transcription factors (TF) play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer. Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
+In many organism {TF} play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer. Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
 
 ![CUT_and_RUN](../../images/cut_and_run/cut_and_run.png "Zhu et al. 2019 Genome Biology")
 
-**C**leavage **U**nder **T**argets and **R**elease **U**sing **N**uclease (CUT&RUN) {% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the protein of interest (POI). The big difference, CUT&RUN couples the antibody with a protein A-micrococcal nuclease (pA-MNase), which you can see in **Figure 1**. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) is an endo-exonuclease that cleaves and shortens the bound DNA of the selected POI *in-situ*. CUT&RUN allows to fragment the DNA in intact cells and thus allows to study protein-DNA interactions in a more natural state. The added pA-MNase thus creates shorted fragments that lead to a higher resolution for the mapping in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) fixate and make the nuceli or cells permeable, (2) add selective antibody of the POI, (3) add and activate pA-MNas, (4) release DNA complex and collect the DNA from the supernatant. Afterwards, the DNA can be PCR amplified and prepared for sequencing.
+{CUT&RUN} {% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the {POI}. The big difference, CUT&RUN couples the antibody with a pA-MNase, which you can see in **Figure 1**. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) is an endo-exonuclease that cleaves and shortens the bound DNA of the selected POI *in-situ*. CUT&RUN allows to fragment the DNA in intact cells and thus allows to study protein-DNA interactions in a more natural state. The added pA-MNase thus creates shorted fragments that lead to a higher resolution for the mapping in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) fixate and make the nuceli or cells permeable, (2) add selective antibody of the POI, (3) add and activate pA-MNas, (4) release DNA complex and collect the DNA from the supernatant. Afterwards, the DNA can be PCR amplified and prepared for sequencing.
 
 In this tutorial, we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we are **not** completely follow. It is important to note at this point that a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from an CUT&RUN experiment for the aforementioned TF GATA1 in human. We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment {% cite Canver2017 %}.
 
 ### When working with real data
-{:.no_toc}
 The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your data we suggest using [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong) which includes additional steps for your data analysis. Both worklfows do not support a peak calling with controls as CUT&RUN has a low background. It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to take them into consideration.    
 
 > ### Agenda
@@ -185,17 +187,17 @@ Next we map the trimmed reads to the human reference genome. Here we will use **
 > ### {% icon comment %} Dovetailing
 > We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. This occurs especially for CUT&RUN because the read length is quite short. Bowtie thus discards reads such as:
 > ```
----------------------Mate 1--------------------------------->
-<---------------------Mate 2----------------------
-```
-
-or
-
+> ---------------------Mate 1--------------------------------->
+> <---------------------Mate 2----------------------
 > ```
----------------------Mate 1--------------------------------->
-<---------------------Mate 2---------------------------------
-```
-
+>
+> or
+>
+> ```
+> ---------------------Mate 1--------------------------------->
+> <---------------------Mate 2---------------------------------
+> ```
+>
 > This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
 {: .comment}
 
@@ -570,7 +572,7 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 >
 > > ### {% icon question %} Questions
 > >
-> > > How many oeaks support the main motif GATA?
+> > > How many peaks support the main motif GATA?
 > > > What is the E-value of the main motif?
 > >
 > > > ### {% icon solution %} Solution
