@@ -2,6 +2,7 @@ require 'digest'
 require 'json'
 require 'fileutils'
 require 'yaml'
+require 'base64'
 
 
 module GTNNotebooks
@@ -22,7 +23,7 @@ module GTNNotebooks
   }
   COLORS_EXTRA = {
     'agenda' => 'display: none',
-    'solution' => 'color: white',
+    'solution' => 'color: transparent !important',
   }
 
   ICONS = {
@@ -47,28 +48,29 @@ module GTNNotebooks
     inside_block = false
     val = []
     data = content.split("\n")
-    data.each{|line|
+    data.each.with_index{|line, i|
       if line == "```#{language}"
         if inside_block
-          raise "Error! we're already in a block"
+          puts data[i-2..i+2]
+          raise "[GTN/Notebook] L#{i} Error! we're already in a block:"
         end
         # End the previous block
-        out.append([val, inside_block])
+        out.push([val, inside_block])
         val = []
 
         inside_block = true
       elsif inside_block && line == '```'
         # End of code block
-        out.append([val, inside_block])
+        out.push([val, inside_block])
         val = []
         inside_block = false
       else
-        val.append(line)
+        val.push(line)
       end
     }
     # final flush
     if ! val.nil?
-      out.append([val, inside_block])
+      out.push([val, inside_block])
     end
 
     notebook = {
@@ -80,12 +82,16 @@ module GTNNotebooks
     notebook['cells'] = out.map.with_index{|data, index|
       res = {
         'id' => "cell-#{index}",
-        'source' => data[0].map{|x| x.strip + "\n"}
+        'source' => data[0].map{|x| x.rstrip + "\n"}
       }
       # Strip the trailing newline in the last cell.
       if res['source'].length > 0
-        res['source'][-1] = res['source'][-1].strip
+        res['source'][-1] = res['source'][-1].rstrip
       end
+
+      # Remove any remaining language tagged code blocks, e.g. in
+      # tip/solution/etc boxes. These do not render well.
+      res['source'] = res['source'].map{|x| x.gsub(/```#{language}/, '```')}
 
       if data[1]
         res = res.update({
@@ -122,12 +128,12 @@ module GTNNotebooks
         val = [line]
       else
         if line[0] == first_char
-          val.append(line)
+          val.push(line)
         elsif line[0..1] == '{:' && first_char == '>'
-          val.append(line)
+          val.push(line)
         else
           # flush
-          out.append(val)
+          out.push(val)
           if line.size > 0
             first_char = line[0]
           else
@@ -138,7 +144,7 @@ module GTNNotebooks
       end
     }
     # final flush
-    out.append(val)
+    out.push(val)
 
     out.select!{|v|
       !(v[0][0] == '>' && v[-1][0..1] == '{:' && v[-1].match(/.agenda/))
@@ -351,7 +357,7 @@ module GTNNotebooks
     rmddata.to_yaml(:line_width => rmddata['author'].size + 10) + "---\n" + final_content.join("\n")
   end
 
-  def self.render_jupyter_notebook(data, content, url, last_modified, notebook_language, site)
+  def self.render_jupyter_notebook(data, content, url, last_modified, notebook_language, site, dir)
     # Here we read use internal methods to convert the tutorial to a Hash
     # representing the notebook
     notebook = self.convert_notebook_markdown(content, notebook_language)
@@ -375,9 +381,7 @@ module GTNNotebooks
     # custom CSS which only seems to work when inline on a cell, i.e. we
     # can't setup a style block, so we really need to render the markdown
     # to html.
-    notebook = self.renderMarkdownCells(site, notebook, data, url)
-    #require 'pp'
-    #pp notebook
+    notebook = self.renderMarkdownCells(site, notebook, data, url, dir)
 
     # Here we add a close to the notebook
     notebook['cells'] = notebook['cells'] + [{
@@ -391,12 +395,11 @@ module GTNNotebooks
           "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{url}#feedback) and check there for further resources!\n"
       ]
     }]
-    JSON.pretty_generate(notebook)
+    notebook
   end
 
-  def self.renderMarkdownCells(site, notebook, metadata, page_url)
+  def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
     seen_abbreviations = Hash.new
-
     notebook['cells'].map{|cell|
       if cell.fetch('cell_type') == 'markdown'
 
@@ -408,6 +411,9 @@ module GTNNotebooks
         # rendering otherwise by going through rouge
         source = source.gsub(/ `([^`]*)`([^`])/, ' <code>\1</code>\2')
           .gsub(/([^`])`([^`]*)` /, '\1<code>\2</code> ')
+
+        # Strip out includes
+        source = source.gsub(/{% include .* %}/, '')
 
         # Replace all the broken icons that can't render, because we don't
         # have access to the full render pipeline.
@@ -452,15 +458,39 @@ module GTNNotebooks
         # fab, but in a notebook this doesn't make sense as it will live
         # outside of the GTN. We need real URLs.
         #
-        # But we'll only do this if it's in "deploy" mode, in order to have
-        # the images also work locally.
-        if site.config['url'] == "https://training.galaxyproject.org"
-          cell['source'].gsub!(/<img src=\"\.\./, '<img src="' + site.config['url'] + site.config['baseurl'] + page_url.split('/')[0..-2].join('/') + '/..')
+        # So either we'll embed the images directly via base64 encoding (cool,
+        # love it) or we'll link to the production images and folks can live
+        # without their images for a bit until it's merged.
+
+        if cell['source'].match(/<img src="\.\./)
+          cell['source'].gsub!(/<img src="(\.\.[^"]*)/) { |img|
+            path = img[10..-1]
+            image_path = File.join(dir, path)
+
+            if img[-3..-1].downcase == 'png'
+              #puts "[GTN/Notebook/Images] Embedding png: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/png;base64,#{data}")
+            elsif img[-3..-1].downcase == 'jpg' or img[-4..-1].downcase == 'jpeg'
+              #puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/jpeg;base64,#{data}")
+            elsif img[-3..-1].downcase == 'svg'
+              #puts "[GTN/Notebook/Images] Embedding svg: #{img}"
+              data = Base64.encode64(File.open(image_path, "rb").read)
+              %Q(<img src="data:image/svg+xml;base64,#{data}")
+            else
+              #puts "[GTN/Notebook/Images] Fallback for #{img}"
+              # Falling back to non-embedded images
+              '<img src="https://training.galaxyproject.org/training-material/' + page_url.split('/')[0..-2].join('/') + '/..'
+            end
+          }
         end
 
         # Strip out the highlighting as it is bad on some platforms.
-        cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: white">')
+        cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: transparent">')
         cell['source'].gsub!(/<div class="highlight">/, '<div>')
+        cell['source'].gsub!(/<code>/, '<code style="color: inherit">')
 
         # add a 'hint' to the solution boxes which have blanked out text.
         cell['source'].gsub!(/(<h3 id="-icon-solution--solution">)/, '<div style="color: #555; font-size: 95%;">Hint: Select the text with your mouse to see the answer</div>\1')

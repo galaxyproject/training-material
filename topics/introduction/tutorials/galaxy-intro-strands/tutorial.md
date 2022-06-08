@@ -589,10 +589,14 @@ When you did the *History to Workflow* tutorial you created a new workflow that 
 > ### {% icon hands_on %} Run the workflow on the exon data.
 >
 > 1. *Click* the **Workflow** tab in the menu at the top of the Galaxy page.
->    - This lists all of your defined workflows, including the one you just created.
-> 2. *Click* on the newly created workflow and select **Run** from the pull-down menu.
->    - This launches the workflow run form (which you also saw when testing this workflow)
+>
+>    This lists all of your defined workflows, including the one you just created.
+> 2. *Click* on the {% icon workflow-run %} (Run workflow) button next to your workflow.
+>
+>    This launches the workflow run form (which you also saw when testing this workflow)
 > 3. *Select* **No** under **Send results to a new history**
+>
+>    If you do not see this option displayed, *click* on **Expand to full workflow form** to reveal it.
 > 4. *Set* the first (and only) input dataset to the `Exons` dataset, using the pull-down menu.
 > 5. *Click* the **Run workflow** button.
 {: .hands_on}

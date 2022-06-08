@@ -14,8 +14,10 @@ objectives:
   - Create several charts
 time_estimation: "2h"
 tags:
+  - ansible
   - monitoring
-subtopic: features
+  - git-gat
+subtopic: monitoring
 key_points:
   - Telegraf provides an easy solution to monitor servers
   - Galaxy can send metrics to Telegraf
@@ -76,7 +78,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -28,3 +28,5 @@
+>    @@ -30,3 +30,5 @@
 >       version: 1.0.8
 >     - src: galaxyproject.gxadmin
 >       version: 0.0.8
@@ -85,6 +87,8 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. Install the role
 >
@@ -199,7 +203,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -30,3 +30,5 @@
+>    @@ -32,3 +32,5 @@
 >       version: 0.0.8
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
@@ -276,13 +280,14 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -56,4 +56,9 @@ server {
+>    @@ -72,4 +72,10 @@ server {
 >         location /training-material/ {
 >             proxy_pass https://training.galaxyproject.org/training-material/;
 >         }
 >    +
 >    +    location /grafana/ {
 >    +        proxy_pass http://127.0.0.1:3000/;
+>    +        proxy_set_header Host $http_host;
 >    +    }
 >    +
 >     }
@@ -409,7 +414,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -32,3 +32,5 @@
+>    @@ -34,3 +34,5 @@
 >       version: v6.0.7
 >     - src: cloudalchemy.grafana
 >       version: 0.14.2
@@ -434,8 +439,8 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -33,3 +33,4 @@
->         - galaxyproject.nginx
+>    @@ -34,3 +34,4 @@
+>         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
 >    +    - dj-wasabi.telegraf
@@ -494,11 +499,10 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -190,3 +190,12 @@ rabbitmq_users:
->       - user: galaxy_au
+>    @@ -193,6 +193,15 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
->    +
+>     
 >    +# Telegraf
 >    +telegraf_plugins_extra:
 >    +  listen_galaxy_routes:
@@ -507,6 +511,10 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    +      - service_address = ":8125"
 >    +      - metric_separator = "."
 >    +      - allowed_pending_messages = 10000
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -784,7 +792,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -207,3 +207,10 @@ telegraf_plugins_extra:
+>    @@ -209,6 +209,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
@@ -795,6 +803,9 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    +      - timeout = "10s"
 >    +      - data_format = "influx"
 >    +      - interval = "15s"
+>     
+>     # TUS
+>     galaxy_tusd_port: 1080
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -873,6 +884,9 @@ Run some tools in Galaxy, try to generate a large number of jobs. It is relative
 
 You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}dashboard.json).
 
+{% snippet topics/admin/faqs/missed-something.md step=11 %}
+
 # Conclusion
 
 Monitoring with Telegraf, InfluxDB, and Grafana can provide an easy solution to monitor your infrastructure. The UseGalaxy.\* servers use this stack and it has proven to be effective in production situations, with large Galaxy servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by UseGalaxy.\*, and then to extend them to your own needs.
+

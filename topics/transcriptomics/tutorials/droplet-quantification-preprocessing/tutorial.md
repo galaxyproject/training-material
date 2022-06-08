@@ -147,6 +147,8 @@ In your example data you will see the murine reference annotation as retrieved f
 
 It's now time to parse the GTF file using the [rtracklayer](https://bioconductor.org/packages/release/bioc/html/rtracklayer.html) package in R. This parsing will give us a conversion table with a list of transcript identifiers and their corresponding gene identifiers for counting. Additionally, because we will be generating our own binary index (more later!), we also need to input our FASTA so that it can be filtered to only contain transcriptome information found in the GTF.
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 > ### {% icon hands_on %} Hands-on: Generate a filtered FASTA and transcript-gene map
 >
 > 1. {% tool [GTF2GeneList](toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6) %} with the following parameters:

@@ -4,6 +4,7 @@ description: Los historiales son una parte importante de Galaxy, la mayoría de 
 area: historias
 box_type: tip
 layout: faq
+contributors: [nomadscientist]
 ---
 
 Haz click sobre el icono {% icon new-history %} en la parte superior del panel de historiales.

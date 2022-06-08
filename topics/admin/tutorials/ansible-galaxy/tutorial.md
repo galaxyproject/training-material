@@ -19,7 +19,9 @@ contributors:
   - shiltemann
   - nsoranzo
 tags:
+  - ansible
   - deploying
+  - git-gat
 subtopic: core
 requirements:
   - type: "internal"
@@ -138,9 +140,7 @@ galaxy_config:
 
 So the references in `galaxy_config_templates` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
 
-> ### {% icon tip %} Define once, reference many times
-> Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.
-{: .tip}
+{% snippet topics/admin/faqs/ansible_define-once.md %}
 
 ### Dependencies
 
@@ -272,6 +272,8 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 >    > ### {% icon details %} What do each of these roles do?
 >    > We'll cover it in more detail as we use each of the roles but briefly:
@@ -475,17 +477,9 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    >
 >    {: .question}
 >
->    > ### {% icon tip %} What is the difference between the roles with `role:` prefix and without?
->    > The bare role name is just simplified syntax for the roles, you could equally specifiy `role: <name>` every time but it's only necessary if you want to set additional variables like `become_user`
->    {: .tip}
+>    {% snippet topics/admin/faqs/ansible_role-prefix.md %}
 >
->    > ### {% icon tip %} Is the YAML sensitive to True/true/False/false
->    > By [this reference](https://yaml.org/refcard.html), YAML doesn't really care:
->    > ```
->    > { Y, true, Yes, ON   }    : Boolean true
->    > { n, FALSE, No, off  }    : Boolean false
->    > ```
->    {: .tip}
+>    {% snippet topics/admin/faqs/ansible_yaml.md %}
 >
 > 3. Run the playbook:
 >
@@ -596,6 +590,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon comment %} Error: `postgresql_version is version_compare('9.3', '>=')' failed`
+>    > You might see an error like this, if you're running with `--check` mode. Unfortunately here `--check` mode meets real life: not all modules support it because some rely on running command line tools to obtain version numbers, something that cannot be mocked with check mode. You can solve this by running it without `--check`.
+>    >
+>    > ```
+>    > fatal: [gat-34.us.galaxy.training]: FAILED! => {"msg": "The conditional check 'postgresql_version is version_compare('9.3', '>=')' failed. The error was: Input version value cannot be empty\n\nThe error appears to be in '/home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/main.yml': line 42, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n# etc.). So check for a match first and then add if there's no match.\n- name: Check for conf.d include in postgresql.conf\n ^ here\n"}
+>    > ```
+>    {: .comment}
+>
 >    > ### {% icon comment %} Comment: When running Ansible
 >    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
 >    {: .comment}
@@ -611,21 +613,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .tip}
 >
->    > ### {% icon tip %} Error: "skipping: no hosts matched"
->    > There can be multiple reasons this happens, so we'll step through all of them.
->    > We'll start by assuming you're running the command
->    >
->    > ```
->    > ansible-playbook galaxy.yml
->    > ```
->    >
->    > The following things can cause issues:
->    >
->    > 1. Within your `galaxy.yml`, you've referred to a host group that doesn't exist or is misspelled. Check the `hosts: galaxyservers` to ensure it matches the host group defined in the `hosts` file.
->    > 2. Vice-versa, the group in your `hosts` file should match the hosts selected in the playbook, `galaxy.yml`.
->    > 3. If neither of these are the issue, it's possible Ansible doesn't know to check the `hosts` file for the inventory. Make sure you've specified `inventory = hosts` in your `ansible.cfg`.
->    >
->    {: .tip}
+>    {% snippet topics/admin/faqs/ansible_error-no-hosts-matched.md %}
 >
 > 4. Inspect the changes that have been made on your Galaxy server. Places to look include:
 >
@@ -777,7 +765,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`                 | `root-dir`                                                       | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                                                    | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`                               | The user that Galaxy will run as.
->    `galaxy_commit_id`              | `release_20.09`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 20.09
+>    `galaxy_commit_id`              | `release_22.01`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 22.01
 >    `galaxy_force_checkout`         | `true`                                                           | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    `miniconda_version`             | `4.7.12`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
@@ -807,7 +795,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
->    +galaxy_commit_id: release_20.09
+>    +galaxy_commit_id: release_22.01
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    +miniconda_version: 4.7.12
@@ -815,6 +803,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure miniconda and galaxy"}
+>
+>    > ### {% icon tip %} Tip: Following this training outside of a GAT course?
+>    > Consider updating the Galaxy Commit ID to the latest version of Galaxy available, this will probably give better results (given that dependencies are always updating) than using a potentially outdated version.
+>    {: .tip}
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
@@ -929,9 +921,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Configure uwsgi"}
 >
->    > ### {% icon tip %} How many mules?
->    > Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
->    {: .tip}
+>    {% snippet topics/admin/faqs/galaxy-how-many-mules.md %}
 >
 >    > ### {% icon tip %} uWSGI threads, offload threads, mules, etc.
 >    > 1. uWSGI threads = number of threads per uWSGI web worker (the value of processes in uWSGI config)
@@ -1960,6 +1950,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    {: .details}
 >
+>    {% snippet topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.md %}
+>
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    > > ### {% icon code-in %} Input: Bash
@@ -2347,7 +2339,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_20.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_22.01`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 

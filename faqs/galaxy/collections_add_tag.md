@@ -3,6 +3,7 @@ title: Adding a tag to a collection
 area: collections
 box_type: tip
 layout: faq
+contributors: [shiltemann, hexylena, delphine-l]
 ---
 
 * Click on the collection
